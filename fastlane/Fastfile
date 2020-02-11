@@ -1,0 +1,52 @@
+default_platform(:ios)
+
+platform :ios do
+
+  # Public lanes
+  
+  desc "Runs linter"
+  lane :lint do
+    swiftlint
+    notification(message: "lint finished successfully")
+  end
+
+  desc "Runs tests"
+  lane :test do
+    cocoapods
+    swiftlint
+    scan(workspace: "IVPNClient.xcworkspace", devices: ["iPhone 11 Pro"], scheme: "IVPNClient")
+    notification(message: "test finished successfully")
+  end
+
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    test_flight_beta(configuration: "Release")
+    notification(message: "TestFlight build (Release) finished successfully")
+  end
+
+  desc "Push a new staging build to TestFlight"
+  lane :staging do
+    test_flight_beta(configuration: "Staging")
+    notification(message: "TestFlight build (Staging) finished successfully")
+  end
+
+  desc "Push a new build ready for App Store release"
+  lane :release do
+    precheck
+    test_flight_beta(configuration: "Release")
+    notification(message: "App Store build (Release) finished successfully")
+  end
+
+  # Private lanes
+
+  private_lane :test_flight_beta do |options|
+    configuration = options[:configuration]
+    cocoapods
+    swiftlint
+    scan(workspace: "IVPNClient.xcworkspace", devices: ["iPhone 11 Pro"], scheme: "IVPNClient")
+    increment_build_number(xcodeproj: "IVPNClient.xcodeproj")
+    build_app(workspace: "IVPNClient.xcworkspace", configuration: configuration, scheme: "IVPNClient")
+    upload_to_testflight(skip_waiting_for_build_processing: true)
+  end
+
+end

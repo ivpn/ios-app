@@ -1,0 +1,34 @@
+us-ca.gw.ivpn.net,"Singlehop Servers",US,"Los Angeles, CA",173.254.196.58,2049/udp 53/udp 443/tcp 80/tcp
+us-tx.gw.ivpn.net,"Singlehop Servers",US,"Dallas, TX",67.228.177.194,2049/udp 53/udp 443/tcp 80/tcp
+us-ut.gw.ivpn.net,"Singlehop Servers",US,"Salt Lake City, UT",198.105.216.28,2049/udp 53/udp 443/tcp 80/tcp
+us-nj.gw.ivpn.net,"Singlehop Servers",US,"New Jersey, NJ",209.222.19.250,2049/udp 53/udp 443/tcp 80/tcp
+us-ga.gw.ivpn.net,"Singlehop Servers",US,"Atlanta, GA",104.129.24.146,2049/udp 53/udp 443/tcp 80/tcp
+us-fl.gw.ivpn.net,"Singlehop Servers",US,"Miami, FL",173.44.49.90,2049/udp 53/udp 443/tcp 80/tcp
+nl.gw.ivpn.net,"Singlehop Servers",NL,"Amsterdam",95.211.172.68 95.211.172.95 95.211.187.222 95.211.187.228,2049/udp 53/udp 443/tcp 80/tcp
+fr.gw.ivpn.net,"Singlehop Servers",FR,"Paris",159.8.125.23,2049/udp 53/udp 443/tcp 80/tcp
+is.gw.ivpn.net,"Singlehop Servers",IS,"Iceland",82.221.107.178,2049/udp 53/udp 443/tcp 80/tcp
+ca.gw.ivpn.net,"Singlehop Servers",CA,"Toronto",204.187.100.18,2049/udp 53/udp 443/tcp 80/tcp
+ch.gw.ivpn.net,"Singlehop Servers",CH,"Zurich",141.255.164.66,2049/udp 53/udp 443/tcp 80/tcp
+gb.gw.ivpn.net,"Singlehop Servers",UK,"London",109.123.101.190 46.28.49.140,2049/udp 53/udp 443/tcp 80/tcp
+de.gw.ivpn.net,"Singlehop Servers",DE,"Frankfurt",178.162.222.40,2049/udp 53/udp 443/tcp 80/tcp
+ro.gw.ivpn.net,"Singlehop Servers",RO,"Bucharest",176.126.252.2,2049/udp 53/udp 443/tcp 80/tcp
+hk.gw.ivpn.net,"Singlehop Servers",HK,"Honk Kong",119.81.177.3,2049/udp 53/udp 443/tcp 80/tcp
+se.gw.ivpn.net,"Singlehop Servers",SE,"Stockholm",80.67.10.138,2049/udp 53/udp 443/tcp 80/tcp
+it.gw.ivpn.net,"Singlehop Servers",IT,"Milan",158.58.172.73,2049/udp 53/udp 443/tcp 80/tcp
+
+
+# multi-hop servers (temporary)
+gw1.uk-nl.ivpn.net,"Multihop Servers",NL,"London, UK to Amsterdam",88.202.224.88,2049/udp
+gw1.uk-us.ivpn.net,"Multihop Servers",US,"London, UK to Texas",88.202.224.89,2049/udp
+gw1.us-nl.ivpn.net,"Multihop Servers",NL,"Texas, US to Amsterdam",67.213.212.245,2049/udp
+gw1.us-uk.ivpn.net,"Multihop Servers",UK,"Texas, US to London",67.213.212.244,2049/udp
+gw1.nl-uk.ivpn.net,"Multihop Servers",UK,"Amsterdam, NL to London",95.211.187.226,2049/udp
+gw1.nl-us.ivpn.net,"Multihop Servers",US,"Amsterdam, NL to Texas",95.211.187.225,2049/udp
+-----BEGIN SIGNATURE-----
+g3FrZIk3kd9pE2A07pXMtfa0CbLrarlZeDmm83ZEVj2hU0115Ug7Bb3LwkbwvxI/
+/xwtxLFYr+V+I48/QgBTSXgZ/95pCkUdN0rqJa32ny/8XGvVCSQjJeZ/FY7nn2bh
+Rv999g05KUqk3XuNWzlPqbdu3ZYwlOZeanD9XhYeMHAyf5iM8fa99QvPLOSZZK+v
+4IcN0P0FaDclHNPHNSre1CKyQj84Y74GrloVKu4fPnJkCJuVvftFJL+JHHd68tgW
+jJ5xh0OLRKvOPv0pZHUaq8CVpU/xeS7YOXpuXm/MOuemY0lMg8jKeUPiQgjxlcNv
+JLddJmfym35MffHnigwR4A==
+-----END SIGNATURE-----

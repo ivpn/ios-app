@@ -1,0 +1,4 @@
+#include "Pods/Target Support Files/Pods-wireguard-tunnel-provider/Pods-wireguard-tunnel-provider.release.xcconfig"
+
+ApiHostName = api.ivpn.net
+TlsHostName = ivpn.net

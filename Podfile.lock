@@ -1,0 +1,81 @@
+PODS:
+  - ActiveLabel (1.1.0)
+  - Bamboo (1.2.0)
+  - JGProgressHUD (2.0.3)
+  - KeychainAccess (3.2.0)
+  - OpenSSL-Apple (1.1.0l.4)
+  - ReachabilitySwift (5.0.0)
+  - SDCAlertView (10.0)
+  - Sentry (4.3.4):
+    - Sentry/Core (= 4.3.4)
+  - Sentry/Core (4.3.4)
+  - SwiftyBeaver (1.8.3)
+  - SwiftyStoreKit (0.15.0)
+  - TunnelKit (2.0.5):
+    - TunnelKit/Protocols/OpenVPN (= 2.0.5)
+  - TunnelKit/AppExtension (2.0.5):
+    - SwiftyBeaver
+    - TunnelKit/Core
+  - TunnelKit/Core (2.0.5):
+    - SwiftyBeaver
+  - TunnelKit/Protocols/OpenVPN (2.0.5):
+    - OpenSSL-Apple (~> 1.1.0j.4)
+    - TunnelKit/AppExtension
+    - TunnelKit/Core
+
+DEPENDENCIES:
+  - ActiveLabel (~> 1.1.0)
+  - Bamboo (~> 1.2.0)
+  - JGProgressHUD (~> 2.0.3)
+  - KeychainAccess (~> 3.2.0)
+  - ReachabilitySwift (~> 5.0.0)
+  - SDCAlertView (from `https://github.com/jurajhilje/SDCAlertView.git`, branch `ios-13-dark-mode`)
+  - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `4.3.4`)
+  - SwiftyStoreKit (~> 0.15.0)
+  - TunnelKit (~> 2.0.5)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - ActiveLabel
+    - Bamboo
+    - JGProgressHUD
+    - KeychainAccess
+    - OpenSSL-Apple
+    - SwiftyBeaver
+    - SwiftyStoreKit
+    - TunnelKit
+  trunk:
+    - ReachabilitySwift
+
+EXTERNAL SOURCES:
+  SDCAlertView:
+    :branch: ios-13-dark-mode
+    :git: https://github.com/jurajhilje/SDCAlertView.git
+  Sentry:
+    :git: https://github.com/getsentry/sentry-cocoa.git
+    :tag: 4.3.4
+
+CHECKOUT OPTIONS:
+  SDCAlertView:
+    :commit: 002afe7abd1567571db40ef968f1b8adde13949f
+    :git: https://github.com/jurajhilje/SDCAlertView.git
+  Sentry:
+    :git: https://github.com/getsentry/sentry-cocoa.git
+    :tag: 4.3.4
+
+SPEC CHECKSUMS:
+  ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
+  Bamboo: d8a9761dc8c1bfbace8eb82c6518626724f812b0
+  JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
+  KeychainAccess: 3b1bf8a77eb4c6ea1ce9404c292e48f948954c6b
+  OpenSSL-Apple: f3d1668588ea8f06b076dcfa6177cd90452e3800
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SDCAlertView: 5fbc48cae6d7bf9781097e3f27883924ef3b922c
+  Sentry: 26f0e6492b103e87434d1a5eea2d241a36f2c2a2
+  SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
+  SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
+  TunnelKit: f33216415cd9d5e37b6acf02edb0c79350598b36
+
+PODFILE CHECKSUM: 4b59c482d9ed366f2a91531515571bb80f9e2c3b
+
+COCOAPODS: 1.8.4

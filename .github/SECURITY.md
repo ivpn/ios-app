@@ -1,0 +1,61 @@
+# Security Policy
+
+## Reporting a security vulnerability to IVPN
+
+If you believe you have found a security vulnerability, **DO NOT CREATE AN ISSUE**. Instead, please send an email to security@ivpn.net. We treat all reports with the highest priority and confidentiality.
+
+## Incident resolution process
+
+After this type of report has been submitted, a security vulnerability will be privately discussed, fixed and then publicly disclosed in a security advisory, involving the following steps:
+
+* Confirm the problem and determine the affected versions.   
+* Audit code to find any potential similar problems.  
+* Prepare fixes for all releases still under maintenance. These fixes will be released as fast as possible.  
+* Publicly disclose security problem in a security advisory.
+
+## PGP Key
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+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o/fv 
+-----END PGP PUBLIC KEY BLOCK----- 
+```
