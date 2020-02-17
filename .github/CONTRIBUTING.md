@@ -44,13 +44,23 @@ Follow these steps when you want to submit a pull request:
 
 This project is using [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
 
+### Branch naming guidelines
+
+Naming for branches is made with following structure:
+
+```
+<type>/<issue ID>-<short-summary-or-description>
+```
+
+In case when there is no issue:
+
+```
+<type>/<short-summary-or-description>
+```
+
+Where <type> can be `epic`, `feature`, `task`, `bugfix`, `hotfix` or `release`.
+
 ### Branches
-
-Naming for branches is made with following structure:  
-
-```
-<issue ID>/<short-summary-or-description>
-```
 
 `master` - The production branch. Clone or fork this repository for the latest copy.  
 `develop` - The active development branch. Pull requests should be directed to this branch.  
