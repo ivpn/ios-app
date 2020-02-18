@@ -7,7 +7,7 @@ target 'IVPNClient' do
     pod 'KeychainAccess', '~> 3.2.0'
     pod 'SwiftyStoreKit', '~> 0.15.0'
     pod 'JGProgressHUD', '~> 2.0.3'
-    pod 'SDCAlertView', :git => 'https://github.com/jurajhilje/SDCAlertView.git', :branch => 'ios-13-dark-mode'
+    pod 'SDCAlertView', '~> 11.0'
     pod 'ActiveLabel', '~> 1.1.0'
     pod 'ReachabilitySwift', '~> 5.0.0'
     pod 'Sentry', :git => 'https://github.com/getsentry/sentry-cocoa.git', :tag => '4.3.4'

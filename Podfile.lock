@@ -5,7 +5,7 @@ PODS:
   - KeychainAccess (3.2.0)
   - OpenSSL-Apple (1.1.0l.4)
   - ReachabilitySwift (5.0.0)
-  - SDCAlertView (10.0)
+  - SDCAlertView (11.0)
   - Sentry (4.3.4):
     - Sentry/Core (= 4.3.4)
   - Sentry/Core (4.3.4)
@@ -29,7 +29,7 @@ DEPENDENCIES:
   - JGProgressHUD (~> 2.0.3)
   - KeychainAccess (~> 3.2.0)
   - ReachabilitySwift (~> 5.0.0)
-  - SDCAlertView (from `https://github.com/jurajhilje/SDCAlertView.git`, branch `ios-13-dark-mode`)
+  - SDCAlertView (~> 11.0)
   - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `4.3.4`)
   - SwiftyStoreKit (~> 0.15.0)
   - TunnelKit (~> 2.0.5)
@@ -46,19 +46,14 @@ SPEC REPOS:
     - TunnelKit
   trunk:
     - ReachabilitySwift
+    - SDCAlertView
 
 EXTERNAL SOURCES:
-  SDCAlertView:
-    :branch: ios-13-dark-mode
-    :git: https://github.com/jurajhilje/SDCAlertView.git
   Sentry:
     :git: https://github.com/getsentry/sentry-cocoa.git
     :tag: 4.3.4
 
 CHECKOUT OPTIONS:
-  SDCAlertView:
-    :commit: 002afe7abd1567571db40ef968f1b8adde13949f
-    :git: https://github.com/jurajhilje/SDCAlertView.git
   Sentry:
     :git: https://github.com/getsentry/sentry-cocoa.git
     :tag: 4.3.4
@@ -70,12 +65,12 @@ SPEC CHECKSUMS:
   KeychainAccess: 3b1bf8a77eb4c6ea1ce9404c292e48f948954c6b
   OpenSSL-Apple: f3d1668588ea8f06b076dcfa6177cd90452e3800
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  SDCAlertView: 5fbc48cae6d7bf9781097e3f27883924ef3b922c
+  SDCAlertView: 89514fa266623b9da9815f2248997b6772c5057d
   Sentry: 26f0e6492b103e87434d1a5eea2d241a36f2c2a2
   SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
   TunnelKit: f33216415cd9d5e37b6acf02edb0c79350598b36
 
-PODFILE CHECKSUM: 4b59c482d9ed366f2a91531515571bb80f9e2c3b
+PODFILE CHECKSUM: 38abc3fe5d0366d5d1b353015811bbcbdc0a75c4
 
 COCOAPODS: 1.8.4
