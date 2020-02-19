@@ -11,12 +11,17 @@ import FloatingPanel
 
 extension FloatingPanelController {
     
-    func setupFloatingPanel() {
+    func setup() {
         surfaceView.shadowHidden = true
         surfaceView.contentInsets = .init(top: 20, left: 0, bottom: 0, right: 0)
         
+        if #available(iOS 11, *) {
+            surfaceView.cornerRadius = 15
+        }
+        
         if UIDevice.current.userInterfaceIdiom == .pad {
             surfaceView.grabberHandle.isHidden = true
+            surfaceView.cornerRadius = 0
         }
     }
     
