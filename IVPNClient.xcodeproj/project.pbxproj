@@ -721,9 +721,10 @@
 		8208525423FD56530008C112 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */,
 				8208525723FD5EB20008C112 /* MainViewControllerV2.swift */,
 				8208525B23FD64160008C112 /* MainViewControllerV2+Ext.swift */,
+				8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */,
+				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -864,7 +865,6 @@
 				82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */,
 				82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */,
 				826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */,
-				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
