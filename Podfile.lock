@@ -1,6 +1,7 @@
 PODS:
   - ActiveLabel (1.1.0)
   - Bamboo (1.2.0)
+  - FloatingPanel (1.7.2)
   - JGProgressHUD (2.0.3)
   - KeychainAccess (3.2.0)
   - OpenSSL-Apple (1.1.0l.4)
@@ -26,6 +27,7 @@ PODS:
 DEPENDENCIES:
   - ActiveLabel (~> 1.1.0)
   - Bamboo (~> 1.2.0)
+  - FloatingPanel (~> 1.7.2)
   - JGProgressHUD (~> 2.0.3)
   - KeychainAccess (~> 3.2.0)
   - ReachabilitySwift (~> 5.0.0)
@@ -45,6 +47,7 @@ SPEC REPOS:
     - SwiftyStoreKit
     - TunnelKit
   trunk:
+    - FloatingPanel
     - ReachabilitySwift
     - SDCAlertView
 
@@ -61,6 +64,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Bamboo: d8a9761dc8c1bfbace8eb82c6518626724f812b0
+  FloatingPanel: b275a35d0a09be4bd37025e710a6a1d063bfc161
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   KeychainAccess: 3b1bf8a77eb4c6ea1ce9404c292e48f948954c6b
   OpenSSL-Apple: f3d1668588ea8f06b076dcfa6177cd90452e3800
@@ -71,6 +75,6 @@ SPEC CHECKSUMS:
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
   TunnelKit: f33216415cd9d5e37b6acf02edb0c79350598b36
 
-PODFILE CHECKSUM: 38abc3fe5d0366d5d1b353015811bbcbdc0a75c4
+PODFILE CHECKSUM: ef00a38ee3747219fe6f20ac8c0bb1f10e7de83c
 
 COCOAPODS: 1.8.4

@@ -22,6 +22,10 @@
 		82061F67238D2730009DDF4D /* PingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82061F63238D2730009DDF4D /* PingManager.swift */; };
 		8206E5D022967E37003119AF /* UserActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5CF22967E37003119AF /* UserActivityType.swift */; };
 		8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5D122967EAF003119AF /* UserActivityTitle.swift */; };
+		8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */; };
+		8208525823FD5EB20008C112 /* MainViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525723FD5EB20008C112 /* MainViewControllerV2.swift */; };
+		8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */; };
+		8208525C23FD64160008C112 /* MainViewControllerV2+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525B23FD64160008C112 /* MainViewControllerV2+Ext.swift */; };
 		820EA86823223F7900E16B2D /* InterfaceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EA86723223F7900E16B2D /* InterfaceResult.swift */; };
 		820EA8692322406000E16B2D /* InterfaceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EA86723223F7900E16B2D /* InterfaceResult.swift */; };
 		820EA86B232242F800E16B2D /* ApiRequestDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429BA22FC36100056B8FF /* ApiRequestDI.swift */; };
@@ -166,6 +170,7 @@
 		82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */; };
 		82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF27021AECC8100589766 /* UILabel+Ext.swift */; };
 		82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */; };
+		82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BB23FE78570059A915 /* MapScrollView.swift */; };
 		82C215EC23992F6900E639F8 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */; };
 		82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293BE21CCD49A000B74EC /* NavigationController.swift */; };
 		82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293C221CCDA42000B74EC /* UIColor+Ext.swift */; };
@@ -367,6 +372,10 @@
 		82061F63238D2730009DDF4D /* PingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingManager.swift; sourceTree = "<group>"; };
 		8206E5CF22967E37003119AF /* UserActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityType.swift; sourceTree = "<group>"; };
 		8206E5D122967EAF003119AF /* UserActivityTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityTitle.swift; sourceTree = "<group>"; };
+		8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelMainLayout.swift; sourceTree = "<group>"; };
+		8208525723FD5EB20008C112 /* MainViewControllerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerV2.swift; sourceTree = "<group>"; };
+		8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Ext.swift"; sourceTree = "<group>"; };
+		8208525B23FD64160008C112 /* MainViewControllerV2+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewControllerV2+Ext.swift"; sourceTree = "<group>"; };
 		820EA86723223F7900E16B2D /* InterfaceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceResult.swift; sourceTree = "<group>"; };
 		820EA86D232264EC00E16B2D /* SuccessResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResult.swift; sourceTree = "<group>"; };
 		821429B622FC2BE90056B8FF /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -474,6 +483,7 @@
 		82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		82BBF27021AECC8100589766 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
+		82C1D5BB23FE78570059A915 /* MapScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScrollView.swift; sourceTree = "<group>"; };
 		82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		82C293BE21CCD49A000B74EC /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		82C293C221CCDA42000B74EC /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
@@ -710,6 +720,18 @@
 			path = PingManager;
 			sourceTree = "<group>";
 		};
+		8208525423FD56530008C112 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				82C1D5BA23FE78330059A915 /* MapView */,
+				8208525723FD5EB20008C112 /* MainViewControllerV2.swift */,
+				8208525B23FD64160008C112 /* MainViewControllerV2+Ext.swift */,
+				8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */,
+				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
 		821F1C7C21FF541800107311 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -944,6 +966,7 @@
 		82A208B321BAA4C500C9AD44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8208525423FD56530008C112 /* MainScreen */,
 				82A208B621BAA51000C9AD44 /* Controls */,
 				82A208B521BAA4FF00C9AD44 /* Cells */,
 				82A208B421BAA4EF00C9AD44 /* ViewControllers */,
@@ -1103,6 +1126,14 @@
 				82B81E4E235F2614005986E8 /* XCUIApplication+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		82C1D5BA23FE78330059A915 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				82C1D5BB23FE78570059A915 /* MapScrollView.swift */,
+			);
+			path = MapView;
 			sourceTree = "<group>";
 		};
 		82E01647230BE667008B0AC0 /* Managers */ = {
@@ -1671,6 +1702,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-IVPNClient/Pods-IVPNClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/Bamboo/Bamboo.framework",
+				"${BUILT_PRODUCTS_DIR}/FloatingPanel/FloatingPanel.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
@@ -1685,6 +1717,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bamboo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FloatingPanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
@@ -1873,6 +1906,7 @@
 				9C2833821D9D3F2D0024C553 /* PromotionsDataSource.swift in Sources */,
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
 				9C454EB31E081E0000BD2AFA /* ConnectButton.swift in Sources */,
+				8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */,
 				82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */,
 				9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */,
 				8205963D2245264300011091 /* UITableViewController+Ext.swift in Sources */,
@@ -1883,6 +1917,7 @@
 				82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */,
 				8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */,
 				8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */,
+				8208525C23FD64160008C112 /* MainViewControllerV2+Ext.swift in Sources */,
 				8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */,
 				8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */,
 				8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */,
@@ -1919,6 +1954,7 @@
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
 				9C28337F1D9D3F060024C553 /* SignUpController.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
+				8208525823FD5EB20008C112 /* MainViewControllerV2.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */,
 				9C28337C1D9D3F060024C553 /* InitViewController.swift in Sources */,
@@ -1948,6 +1984,7 @@
 				8292E1A92174C11600123538 /* Interface.swift in Sources */,
 				82F638CC217DC25600410318 /* CIDRAddress.swift in Sources */,
 				9C454EB01E081DF700BD2AFA /* CircleProgressLayer.swift in Sources */,
+				8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */,
 				821429B722FC2BE90056B8FF /* Result.swift in Sources */,
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
 				82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */,
@@ -1970,6 +2007,7 @@
 				9C69422E1DD20FC200F9A801 /* KeyChain.swift in Sources */,
 				9C454EB61E0864AE00BD2AFA /* WaveView.swift in Sources */,
 				821429BB22FC36100056B8FF /* ApiRequestDI.swift in Sources */,
+				82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */,
 				82AA8818231E330A00E18ECB /* SessionStatus.swift in Sources */,
 				9C28337E1D9D3F060024C553 /* Config.swift in Sources */,
 				9C454EAF1E081DF700BD2AFA /* CircleConnected.swift in Sources */,
