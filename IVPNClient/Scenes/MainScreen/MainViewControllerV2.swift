@@ -11,11 +11,6 @@ import FloatingPanel
 
 class MainViewControllerV2: UIViewController {
     
-    // MARK: - @IBOutlets -
-    
-    @IBOutlet weak var scrollViewLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var scrollViewTopConstraint: NSLayoutConstraint!
-    
     // MARK: - Properties -
     
     var floatingPanel: FloatingPanelController!
@@ -25,7 +20,6 @@ class MainViewControllerV2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initFloatingPanel()
-        setupConstraints()
     }
     
     deinit {
@@ -44,13 +38,6 @@ class MainViewControllerV2: UIViewController {
     
     private func destoryFloatingPanel() {
         floatingPanel.removePanelFromParent(animated: false)
-    }
-    
-    private func setupConstraints() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            scrollViewLeadingConstraint.constant = 375
-            scrollViewTopConstraint.constant = -20
-        }
     }
     
 }
