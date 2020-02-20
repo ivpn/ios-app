@@ -23,6 +23,10 @@ extension FloatingPanelController {
             surfaceView.grabberHandle.isHidden = true
             surfaceView.cornerRadius = 0
         }
+        
+        let contentViewController = NavigationManager.getControlPanelViewController()
+        set(contentViewController: contentViewController)
+        track(scrollView: contentViewController.tableView)
     }
     
 }
