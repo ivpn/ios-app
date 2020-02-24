@@ -61,6 +61,8 @@
 	<string>$(Environment)</string>
 	<key>IAPSharedSecret</key>
 	<string>$(IAPSharedSecret)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>SentryDsn</key>
