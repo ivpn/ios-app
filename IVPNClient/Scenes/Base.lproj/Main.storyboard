@@ -2187,9 +2187,10 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
-                                                                    <real key="value" value="4"/>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="4"/>
                                                                 </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
@@ -2431,6 +2432,46 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gmi-FF-akn" id="dpg-cm-ETO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did you mention a problem with the IVPN application?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Vc-dt-Oop">
+                                                    <rect key="frame" x="30" y="10" width="194" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="NY8-bq-wRK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" name="ivpnLabel5"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRu-kO-7rC">
+                                                    <rect key="frame" x="239" y="21.666666666666671" width="106" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="37" id="BRz-zw-ZJG"/>
+                                                        <constraint firstAttribute="width" constant="106" id="S7D-cn-XXZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <state key="normal" title="Report a bug">
+                                                        <color key="titleColor" name="ivpnLabel5"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" name="ivpnLabel5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FRu-kO-7rC" firstAttribute="leading" secondItem="5Vc-dt-Oop" secondAttribute="trailing" constant="15" id="9c8-pX-PZQ"/>
+                                                <constraint firstItem="FRu-kO-7rC" firstAttribute="centerY" secondItem="dpg-cm-ETO" secondAttribute="centerY" id="L8y-tF-6Jp"/>
+                                                <constraint firstItem="5Vc-dt-Oop" firstAttribute="centerY" secondItem="dpg-cm-ETO" secondAttribute="centerY" id="Paq-tC-MQJ"/>
+                                                <constraint firstItem="5Vc-dt-Oop" firstAttribute="leading" secondItem="dpg-cm-ETO" secondAttribute="leading" constant="30" id="n48-lt-HvR"/>
+                                                <constraint firstAttribute="trailing" secondItem="FRu-kO-7rC" secondAttribute="trailing" constant="30" id="p5Y-C8-0E7"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
