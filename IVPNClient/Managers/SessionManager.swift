@@ -71,13 +71,6 @@ class SessionManager {
                         self.delegate?.createSessionTooManySessions(error: error)
                         return
                     }
-                    
-                    if error.status == 402 {
-                        Application.shared.serviceStatus = ServiceStatus()
-                        Application.shared.serviceStatus.isActive = false
-                        self.delegate?.createSessionServiceNotActive()
-                        return
-                    }
                 }
                 
                 self.delegate?.createSessionFailure(error: error)
