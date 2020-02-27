@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		08DDD46C7843193A0C8A9F4D /* Pods_openvpn_tunnel_provider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042B1F5A4F38CCA3591AD441 /* Pods_openvpn_tunnel_provider.framework */; };
 		62FD760D711D4A4507FAFE24 /* Pods_wireguard_tunnel_provider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58126B967EB9B059871FD7AB /* Pods_wireguard_tunnel_provider.framework */; };
+		820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */; };
 		8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */; };
 		8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5032356536B008C83DB /* UpgradePlanViewController.swift */; };
 		820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */; };
@@ -362,6 +363,7 @@
 		6F076EC404F769A3D7C17CF4 /* Pods-IVPNClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IVPNClient.release.xcconfig"; path = "../ios-app/Pods/Target Support Files/Pods-IVPNClient/Pods-IVPNClient.release.xcconfig"; sourceTree = "<group>"; };
 		70DFEFF11AFF9C4E3D88A443 /* Pods-IVPNClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IVPNClient.debug.xcconfig"; path = "../ios-app/Pods/Target Support Files/Pods-IVPNClient/Pods-IVPNClient.debug.xcconfig"; sourceTree = "<group>"; };
 		751AB84B8432BC3E6BEDD483 /* Pods_today_extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_today_extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoBoxView.swift; sourceTree = "<group>"; };
 		8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResultSessionNew.swift; sourceTree = "<group>"; };
 		8201A5032356536B008C83DB /* UpgradePlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradePlanViewController.swift; sourceTree = "<group>"; };
 		820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardSettingsViewController.swift; sourceTree = "<group>"; };
@@ -709,6 +711,14 @@
 			);
 			name = Pods;
 			path = ../Pods;
+			sourceTree = "<group>";
+		};
+		820079F22407D8E700EC2062 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		82061F5F238D2730009DDF4D /* PingManager */ = {
@@ -1140,6 +1150,7 @@
 		82C1D5BD23FE8BD90059A915 /* ControlPanel */ = {
 			isa = PBXGroup;
 			children = (
+				820079F22407D8E700EC2062 /* Views */,
 				82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */,
 				8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */,
 				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
@@ -2016,6 +2027,7 @@
 				828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */,
 				82E7880C22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift in Sources */,
 				82F638C2217DA89000410318 /* AddressType.swift in Sources */,
+				820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */,
 				9C69422E1DD20FC200F9A801 /* KeyChain.swift in Sources */,
 				9C454EB61E0864AE00BD2AFA /* WaveView.swift in Sources */,
 				821429BB22FC36100056B8FF /* ApiRequestDI.swift in Sources */,
