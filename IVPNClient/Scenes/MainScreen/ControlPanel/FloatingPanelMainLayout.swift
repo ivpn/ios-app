@@ -26,7 +26,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
             return [.full]
         }
         
-        return [.full, .half, .tip]
+        return [.full, .half]
     }
     
     // MARK: - Override public methods -
@@ -40,9 +40,8 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
         }
         
         switch position {
-            case .full: return 16
-            case .half: return 216
-            case .tip: return 44
+            case .full: return 10
+            case .half: return 235
             default: return nil
         }
     }
