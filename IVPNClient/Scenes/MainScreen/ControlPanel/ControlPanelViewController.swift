@@ -14,6 +14,14 @@ class ControlPanelViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+    }
+    
+    // MARK: - Private methods -
+    
+    private func setupTableView() {
+        tableView.backgroundColor = UIColor.white
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
     }
     
 }
