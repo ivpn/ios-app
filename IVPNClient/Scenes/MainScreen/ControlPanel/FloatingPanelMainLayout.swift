@@ -41,7 +41,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
         
         switch position {
             case .full: return 10
-            case .half: return 225
+            case .half: return 235
             default: return nil
         }
     }
