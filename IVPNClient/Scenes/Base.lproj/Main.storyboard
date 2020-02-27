@@ -1996,6 +1996,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                             <constraints>
                                                 <constraint firstItem="eLs-NP-9lW" firstAttribute="leading" secondItem="uS2-bD-4YS" secondAttribute="leading" constant="30" id="jbx-Ly-tkW"/>
                                                 <constraint firstItem="eLs-NP-9lW" firstAttribute="centerY" secondItem="uS2-bD-4YS" secondAttribute="centerY" id="o4B-Cd-Rwm"/>
@@ -2030,6 +2031,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                             <constraints>
                                                 <constraint firstItem="14h-zk-ohJ" firstAttribute="top" secondItem="kn8-Ls-Gdx" secondAttribute="top" id="0cF-dd-Hjy"/>
                                                 <constraint firstAttribute="bottom" secondItem="14h-zk-ohJ" secondAttribute="bottom" id="1V7-9p-1JG"/>
@@ -2075,6 +2077,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                             <constraints>
                                                 <constraint firstItem="2cS-HZ-iFx" firstAttribute="leading" secondItem="VQR-K7-xdx" secondAttribute="leading" constant="30" id="85r-74-BcS"/>
                                                 <constraint firstAttribute="trailing" secondItem="2cS-HZ-iFx" secondAttribute="trailing" constant="30" id="8mf-Bk-c9w"/>
@@ -2099,6 +2102,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                             <constraints>
                                                 <constraint firstItem="iuj-8h-q3O" firstAttribute="leading" secondItem="gfR-G3-eR1" secondAttribute="leading" constant="30" id="KUC-7l-IUf"/>
                                                 <constraint firstAttribute="bottom" secondItem="iuj-8h-q3O" secondAttribute="bottom" constant="10" id="gyJ-AU-glj"/>
@@ -2140,6 +2144,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                             <constraints>
                                                 <constraint firstItem="CRU-5b-DFa" firstAttribute="centerY" secondItem="P3v-IR-MHl" secondAttribute="centerY" id="SLX-GV-Xl0"/>
                                                 <constraint firstItem="CRU-5b-DFa" firstAttribute="leading" secondItem="P3v-IR-MHl" secondAttribute="leading" constant="30" id="jd5-Tk-cwu"/>
@@ -2196,6 +2201,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="9TV-3Q-VxA" secondAttribute="trailing" constant="15" id="Pba-UK-QEU"/>
                                                 <constraint firstItem="9TV-3Q-VxA" firstAttribute="centerY" secondItem="o51-k6-BmQ" secondAttribute="centerY" id="dhE-j8-FD4"/>
@@ -2233,6 +2239,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="NQf-pf-hBC" secondAttribute="trailing" constant="15" id="Gxa-80-QrR"/>
                                                 <constraint firstItem="NQf-pf-hBC" firstAttribute="leading" secondItem="frg-6z-9aR" secondAttribute="leading" constant="30" id="LAm-Kd-nfW"/>
@@ -2418,6 +2425,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                             <constraints>
                                                 <constraint firstItem="odK-gO-Lzu" firstAttribute="leading" secondItem="8z5-Uk-NCS" secondAttribute="leading" constant="30" id="CdF-xL-Yfb"/>
                                                 <constraint firstAttribute="trailing" secondItem="odK-gO-Lzu" secondAttribute="trailing" constant="30" id="H4h-QZ-Ivp"/>
@@ -2465,6 +2473,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                             <constraints>
                                                 <constraint firstItem="FRu-kO-7rC" firstAttribute="leading" secondItem="5Vc-dt-Oop" secondAttribute="trailing" constant="15" id="9c8-pX-PZQ"/>
                                                 <constraint firstItem="FRu-kO-7rC" firstAttribute="centerY" secondItem="dpg-cm-ETO" secondAttribute="centerY" id="L8y-tF-6Jp"/>
