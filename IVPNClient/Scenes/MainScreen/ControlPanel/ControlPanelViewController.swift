@@ -11,6 +11,10 @@ import NetworkExtension
 
 class ControlPanelViewController: UITableViewController {
     
+    // MARK: - Properties -
+    
+    var vpnStatusViewModel: VPNStatusViewModel!
+    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {
@@ -38,7 +42,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     private func updateStatus(vpnStatus: NEVPNStatus) {
-        
+        vpnStatusViewModel.status = vpnStatus
     }
     
 }

@@ -13,10 +13,10 @@ struct VPNStatusViewModel {
     
     // MARK: - Properties -
     
-    var model: NEVPNStatus
+    var status: NEVPNStatus
     
     var protectionStatusText: String {
-        switch model {
+        switch status {
         case .connecting, .reasserting:
             return "connecting"
         case .disconnecting:
@@ -29,7 +29,7 @@ struct VPNStatusViewModel {
     }
     
     var connectToServerText: String {
-        switch model {
+        switch status {
         case .connected:
             return "Connected to"
         default:
@@ -38,7 +38,7 @@ struct VPNStatusViewModel {
     }
     
     var connectToggleIsOn: Bool {
-        switch model {
+        switch status {
         case .connected, .connecting, .reasserting:
             return true
         default:
@@ -48,8 +48,8 @@ struct VPNStatusViewModel {
     
     // MARK: - Initialize -
     
-    init(model: NEVPNStatus) {
-        self.model = model
+    init(status: NEVPNStatus) {
+        self.status = status
     }
     
 }
