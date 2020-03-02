@@ -38,6 +38,7 @@
 		821AFA1323602B71001EF617 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821AFA1223602B71001EF617 /* SettingsScreenTests.swift */; };
 		821BDE02224A6EC700F592BF /* AppKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
+		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
 		8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */; };
 		82234B6721BA7F3500B082DE /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82234B6621BA7F3500B082DE /* Logging.swift */; };
 		82234B6A21BA7F5400B082DE /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82234B6621BA7F3500B082DE /* Logging.swift */; };
@@ -388,6 +389,7 @@
 		821AFA1223602B71001EF617 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
 		821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyManagerTests.swift; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
+		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
 		8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSViewController.swift; sourceTree = "<group>"; };
 		82234B6621BA7F3500B082DE /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		8223C53922325709006C4F14 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
@@ -1157,6 +1159,7 @@
 				82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */,
 				8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */,
 				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
+				821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */,
 			);
 			path = ControlPanel;
 			sourceTree = "<group>";
@@ -1954,6 +1957,7 @@
 				8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */,
 				9C3324F31DB37724003885C3 /* VPNServer.swift in Sources */,
 				9CB2CE341DAF9283007A4D2D /* Model.xcdatamodeld in Sources */,
+				821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */,
 				82FF0D442315587000440E5D /* UITextFieldPadding.swift in Sources */,
 				9CDDD5B11D9D2F9F00D39924 /* MainViewController.swift in Sources */,
 				82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */,

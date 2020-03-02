@@ -8,6 +8,7 @@
 
 import UIKit
 import NetworkExtension
+import JGProgressHUD
 
 class ControlPanelViewController: UITableViewController {
     
@@ -19,7 +20,15 @@ class ControlPanelViewController: UITableViewController {
     
     // MARK: - Properties -
     
-    var vpnStatusViewModel: VPNStatusViewModel!
+    
+    let hud = JGProgressHUD(style: .dark)
+    private var vpnStatusViewModel: VPNStatusViewModel!
+    
+    private var keyManager: AppKeyManager {
+        let keyManager = AppKeyManager()
+        keyManager.delegate = self
+        return keyManager
+    }
     
     // MARK: - @IBActions -
     
@@ -75,6 +84,11 @@ class ControlPanelViewController: UITableViewController {
     private func connect(status: NEVPNStatus) {
         guard NetworkManager.shared.isNetworkReachable else {
             showAlert(title: "Connection error", message: "Please check your Internet connection and try again.")
+            return
+        }
+        
+        if AppKeyManager.isKeyPairRequired && ExtensionKeyManager.needToRegenerate() {
+            keyManager.setNewKey()
             return
         }
         
