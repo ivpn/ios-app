@@ -82,13 +82,32 @@ class ControlPanelViewController: UITableViewController {
     }
     
     private func connect(status: NEVPNStatus) {
-        guard NetworkManager.shared.isNetworkReachable else {
-            showAlert(title: "Connection error", message: "Please check your Internet connection and try again.")
+        guard evaluateIsNetworkReachable() else {
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+            return
+        }
+        
+        guard evaluateIsLoggedIn() else {
+            NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.ServiceAuthorized, object: nil)
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+            return
+        }
+        
+        guard evaluateHasUserConsent() else {
+            NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.TermsOfServiceAgreed, object: nil)
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+            return
+        }
+        
+        guard evaluateIsServiceActive() else {
+            NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.SubscriptionActivated, object: nil)
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
         }
         
         if AppKeyManager.isKeyPairRequired && ExtensionKeyManager.needToRegenerate() {
             keyManager.setNewKey()
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
         }
         
@@ -107,6 +126,7 @@ class ControlPanelViewController: UITableViewController {
         } else {
             manager.resetRulesAndConnect()
         }
+        
         registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
     }
     

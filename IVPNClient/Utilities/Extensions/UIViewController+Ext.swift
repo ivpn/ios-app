@@ -105,3 +105,56 @@ extension UIViewController: SessionManagerDelegate {
     func sessionStatusExpired() {}
     func sessionStatusFailure() {}
 }
+
+// MARK: - Presenter -
+
+extension UIViewController {
+    
+    func evaluateIsNetworkReachable() -> Bool {
+        guard NetworkManager.shared.isNetworkReachable else {
+            showAlert(title: "Connection error", message: "Please check your Internet connection and try again.")
+            return false
+        }
+        
+        return true
+    }
+    
+    func evaluateIsLoggedIn() -> Bool {
+        guard Application.shared.authentication.isLoggedIn else {
+            if #available(iOS 13.0, *) {
+                let viewController = NavigationManager.getLoginViewController(modalPresentationStyle: .automatic)
+                presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+                present(viewController, animated: true, completion: nil)
+            } else {
+                let viewController = NavigationManager.getLoginViewController()
+                presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+                present(viewController, animated: true, completion: nil)
+            }
+            
+            return false
+        }
+        
+        return true
+    }
+    
+    func evaluateHasUserConsent() -> Bool {
+        guard UserDefaults.shared.hasUserConsent else {
+            present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
+            return false
+        }
+        
+        return true
+    }
+    
+    func evaluateIsServiceActive() -> Bool {
+        guard Application.shared.serviceStatus.isActive else {
+            let viewController = NavigationManager.getSubscriptionViewController()
+            viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+            present(viewController, animated: true, completion: nil)
+            return false
+        }
+        
+        return true
+    }
+    
+}

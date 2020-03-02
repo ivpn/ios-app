@@ -1157,9 +1157,9 @@
 			children = (
 				820079F22407D8E700EC2062 /* Views */,
 				82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */,
+				821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */,
 				8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */,
 				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
-				821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */,
 			);
 			path = ControlPanel;
 			sourceTree = "<group>";
