@@ -72,6 +72,7 @@
 		8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1D922686217006C0C08 /* IAPManager.swift */; };
 		8247E1DC2268713E006C0C08 /* SubscriptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DB2268713E006C0C08 /* SubscriptionType.swift */; };
 		8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */; };
+		824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */; };
 		824F56082233FE6F00BCDD5C /* libwg-go.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 824F56072233FE6F00BCDD5C /* libwg-go.a */; };
 		8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8252747D21F1F80400D4B8B5 /* ServerViewController.swift */; };
 		82555005220ACAAF004763A7 /* VPNServersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82555004220ACAAF004763A7 /* VPNServersTests.swift */; };
@@ -407,6 +408,7 @@
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		8247E1DB2268713E006C0C08 /* SubscriptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionType.swift; sourceTree = "<group>"; };
 		8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdentifier.swift; sourceTree = "<group>"; };
+		824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModel.swift; sourceTree = "<group>"; };
 		824F56072233FE6F00BCDD5C /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libwg-go.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8252747D21F1F80400D4B8B5 /* ServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerViewController.swift; sourceTree = "<group>"; };
 		82555004220ACAAF004763A7 /* VPNServersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServersTests.swift; sourceTree = "<group>"; };
@@ -748,6 +750,7 @@
 			children = (
 				821F1C7D21FF544200107311 /* VPNServerViewModel.swift */,
 				8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */,
+				824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2037,6 +2040,7 @@
 				9C454EAF1E081DF700BD2AFA /* CircleConnected.swift in Sources */,
 				82061F66238D2730009DDF4D /* ICMPHeader.swift in Sources */,
 				826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */,
+				824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */,
 				8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */,
 				82234B6721BA7F3500B082DE /* Logging.swift in Sources */,
 				82DB75EC239E75EB0073E846 /* NEVPNStatus+Ext.swift in Sources */,
