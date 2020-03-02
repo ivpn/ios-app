@@ -21,6 +21,12 @@ class ControlPanelViewController: UITableViewController {
     
     var vpnStatusViewModel: VPNStatusViewModel!
     
+    // MARK: - @IBActions -
+    
+    @IBAction func toggleConnect(_ sender: UISwitch) {
+        connectionExecute()
+    }
+    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {
@@ -40,6 +46,18 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    // MARK: - Methods -
+    
+    @objc func connectionExecute() {
+        Application.shared.connectionManager.getStatus { _, status in
+            if status == .disconnected || status == .invalid {
+                self.connect(status: status)
+            } else {
+                self.disconnect()
+            }
+        }
+    }
+    
     // MARK: - Private methods -
     
     private func setupTableView() {
@@ -52,6 +70,16 @@ class ControlPanelViewController: UITableViewController {
         protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
         connectToServerLabel.text = vpnStatusViewModel.connectToServerText
         connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+    }
+    
+    private func connect(status: NEVPNStatus) {
+        Application.shared.connectionManager.resetRulesAndConnect()
+        registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
+    }
+    
+    private func disconnect() {
+        Application.shared.connectionManager.resetRulesAndDisconnect()
+        registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
     }
     
 }
