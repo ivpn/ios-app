@@ -73,12 +73,38 @@ class ControlPanelViewController: UITableViewController {
     }
     
     private func connect(status: NEVPNStatus) {
-        Application.shared.connectionManager.resetRulesAndConnect()
+        guard NetworkManager.shared.isNetworkReachable else {
+            showAlert(title: "Connection error", message: "Please check your Internet connection and try again.")
+            return
+        }
+        
+        let manager = Application.shared.connectionManager
+        
+        if UserDefaults.shared.networkProtectionEnabled && !manager.canConnect(status: status) {
+            showActionSheet(title: "IVPN cannot connect to trusted network. Do you want to change Network Protection settings for the current network and connect?", actions: ["Connect"], sourceView: self.connectSwitch) { index in
+                switch index {
+                case 0:
+                    // self.networkView.resetTrustToDefault()
+                    manager.resetRulesAndConnect()
+                default:
+                    break
+                }
+            }
+        } else {
+            manager.resetRulesAndConnect()
+        }
         registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
     }
     
     private func disconnect() {
-        Application.shared.connectionManager.resetRulesAndDisconnect()
+        let manager = Application.shared.connectionManager
+        
+        if UserDefaults.shared.networkProtectionEnabled {
+            manager.resetRulesAndDisconnectShortcut()
+        } else {
+            manager.resetRulesAndDisconnect()
+        }
+        
         registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
     }
     
