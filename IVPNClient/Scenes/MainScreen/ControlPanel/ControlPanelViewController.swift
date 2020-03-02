@@ -11,6 +11,12 @@ import NetworkExtension
 
 class ControlPanelViewController: UITableViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var protectionStatusLabel: UILabel!
+    @IBOutlet weak var connectToServerLabel: UILabel!
+    @IBOutlet weak var connectSwitch: UISwitch!
+    
     // MARK: - Properties -
     
     var vpnStatusViewModel: VPNStatusViewModel!
@@ -43,6 +49,9 @@ class ControlPanelViewController: UITableViewController {
     
     private func updateStatus(vpnStatus: NEVPNStatus) {
         vpnStatusViewModel.status = vpnStatus
+        protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
+        connectToServerLabel.text = vpnStatusViewModel.connectToServerText
+        connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
     }
     
 }
