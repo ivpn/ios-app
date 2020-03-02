@@ -22,7 +22,7 @@ class ControlPanelViewController: UITableViewController {
     
     
     let hud = JGProgressHUD(style: .dark)
-    private var vpnStatusViewModel: VPNStatusViewModel!
+    private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
     
     private var keyManager: AppKeyManager {
         let keyManager = AppKeyManager()
