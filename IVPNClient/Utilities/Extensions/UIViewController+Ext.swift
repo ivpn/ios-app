@@ -194,4 +194,10 @@ extension UIViewController {
         }
     }
     
+    func presentSettingsScreen() {
+        let viewController = NavigationManager.getSettingsViewController()
+        viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+        present(viewController, animated: true, completion: nil)
+    }
+    
 }
