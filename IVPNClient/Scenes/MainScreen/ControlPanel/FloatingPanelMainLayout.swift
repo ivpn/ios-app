@@ -41,7 +41,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
         
         switch position {
             case .full: return 10
-            case .half: return 235
+        case .half: return Application.shared.settings.connectionProtocol.tunnelType() == .openvpn ? 235 : 191
             default: return nil
         }
     }
