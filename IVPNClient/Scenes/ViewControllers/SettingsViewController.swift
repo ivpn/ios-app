@@ -474,7 +474,7 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && indexPath.row == 4 {
+        if indexPath.section == 2 && indexPath.row == 6 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
