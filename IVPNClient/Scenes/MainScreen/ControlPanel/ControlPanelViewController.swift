@@ -8,6 +8,7 @@
 
 import UIKit
 import NetworkExtension
+import JGProgressHUD
 
 class ControlPanelViewController: UITableViewController {
     
@@ -19,7 +20,21 @@ class ControlPanelViewController: UITableViewController {
     
     // MARK: - Properties -
     
-    var vpnStatusViewModel: VPNStatusViewModel!
+    
+    let hud = JGProgressHUD(style: .dark)
+    private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
+    
+    private var keyManager: AppKeyManager {
+        let keyManager = AppKeyManager()
+        keyManager.delegate = self
+        return keyManager
+    }
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func toggleConnect(_ sender: UISwitch) {
+        connectionExecute()
+    }
     
     // MARK: - View lifecycle -
     
@@ -40,6 +55,18 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    // MARK: - Methods -
+    
+    @objc func connectionExecute() {
+        Application.shared.connectionManager.getStatus { _, status in
+            if status == .disconnected || status == .invalid {
+                self.connect(status: status)
+            } else {
+                self.disconnect()
+            }
+        }
+    }
+    
     // MARK: - Private methods -
     
     private func setupTableView() {
@@ -52,6 +79,67 @@ class ControlPanelViewController: UITableViewController {
         protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
         connectToServerLabel.text = vpnStatusViewModel.connectToServerText
         connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+    }
+    
+    private func connect(status: NEVPNStatus) {
+        guard evaluateIsNetworkReachable() else {
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+            return
+        }
+        
+        guard evaluateIsLoggedIn() else {
+            NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.ServiceAuthorized, object: nil)
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+            return
+        }
+        
+        guard evaluateHasUserConsent() else {
+            NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.TermsOfServiceAgreed, object: nil)
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+            return
+        }
+        
+        guard evaluateIsServiceActive() else {
+            NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.SubscriptionActivated, object: nil)
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+            return
+        }
+        
+        if AppKeyManager.isKeyPairRequired && ExtensionKeyManager.needToRegenerate() {
+            keyManager.setNewKey()
+            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+            return
+        }
+        
+        let manager = Application.shared.connectionManager
+        
+        if UserDefaults.shared.networkProtectionEnabled && !manager.canConnect(status: status) {
+            showActionSheet(title: "IVPN cannot connect to trusted network. Do you want to change Network Protection settings for the current network and connect?", actions: ["Connect"], sourceView: self.connectSwitch) { index in
+                switch index {
+                case 0:
+                    // self.networkView.resetTrustToDefault()
+                    manager.resetRulesAndConnect()
+                default:
+                    break
+                }
+            }
+        } else {
+            manager.resetRulesAndConnect()
+        }
+        
+        registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
+    }
+    
+    private func disconnect() {
+        let manager = Application.shared.connectionManager
+        
+        if UserDefaults.shared.networkProtectionEnabled {
+            manager.resetRulesAndDisconnectShortcut()
+        } else {
+            manager.resetRulesAndDisconnect()
+        }
+        
+        registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
     }
     
 }

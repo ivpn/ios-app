@@ -426,7 +426,7 @@
             <objects>
                 <tableViewController title="Settings" id="5KC-W6-t9Q" customClass="SettingsViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="vDW-Ar-ozm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1242,6 +1242,7 @@
                             <outlet property="delegate" destination="zAv-yM-Pqo" id="M2d-8W-rSb"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="q6c-uC-dyN"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Ouu-dL-f0j">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1259,7 +1260,7 @@
             <objects>
                 <tableViewController title="Network Protection" id="i5q-UB-qUI" customClass="NetworkProtectionViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="a0j-lg-grz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -1396,6 +1397,7 @@
                             <outlet property="delegate" destination="i5q-UB-qUI" id="BXJ-aV-Wns"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="fjg-hW-27s"/>
                     <connections>
                         <segue destination="KeU-1p-EOn" kind="show" identifier="NetworkProtectionRules" id="Wvs-RO-4zt"/>
                     </connections>
@@ -1409,7 +1411,7 @@
             <objects>
                 <tableViewController title="Network Protection Rules" id="KeU-1p-EOn" customClass="NetworkProtectionRulesViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="lko-nL-1NS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -1493,6 +1495,7 @@
                             <outlet property="delegate" destination="KeU-1p-EOn" id="0l4-Ve-69S"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Ksh-Tk-ybx"/>
                     <connections>
                         <outlet property="trustedDisconnectSwitch" destination="KtM-VU-Ndh" id="ojw-XK-anV"/>
                         <outlet property="untrustedConnectSwitch" destination="9TS-ou-G9P" id="SJV-JP-pMb"/>
@@ -1535,7 +1538,7 @@
             <objects>
                 <tableViewController title="Select Protocol" id="C8Y-kZ-eYV" customClass="ProtocolViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="YRl-Jj-sLY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -1637,6 +1640,7 @@
                             <outlet property="delegate" destination="C8Y-kZ-eYV" id="WKX-pb-Zge"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="fhG-b4-Oe9"/>
                     <connections>
                         <segue destination="BYK-jY-KqR" kind="show" identifier="WireGuardSettings" id="hDT-b3-Uin"/>
                     </connections>
@@ -1650,7 +1654,7 @@
             <objects>
                 <tableViewController title="WireGuard details" id="BYK-jY-KqR" customClass="WireGuardSettingsViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Dqq-IB-wUh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -1905,6 +1909,7 @@
                             <outlet property="delegate" destination="BYK-jY-KqR" id="WID-Qq-MjB"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="eDY-M3-Keu"/>
                     <connections>
                         <outlet property="ipAddressLabel" destination="qNU-D4-qVs" id="mwl-04-9Ko"/>
                         <outlet property="keyExpirationTimestampLabel" destination="CVZ-Ec-6uA" id="KwX-wQ-FJX"/>
@@ -1992,6 +1997,9 @@
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yu3-bo-38L">
                                                             <rect key="frame" x="266" y="12.666666666666664" width="51" height="31"/>
                                                             <color key="onTintColor" name="ivpnBlue"/>
+                                                            <connections>
+                                                                <action selector="toggleConnect:" destination="NB7-vL-gwX" eventType="valueChanged" id="4j1-IN-wdX"/>
+                                                            </connections>
                                                         </switch>
                                                     </subviews>
                                                 </stackView>
@@ -3017,15 +3025,29 @@
                                             <constraint firstAttribute="height" constant="1420" id="Q9A-Wa-2p0"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esH-ro-LaV" userLabel="Menu Button">
+                                        <rect key="frame" x="305" y="52" width="40" height="40"/>
+                                        <accessibility key="accessibilityConfiguration" label="Open Settings"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="6jd-8M-wZB"/>
+                                            <constraint firstAttribute="width" constant="40" id="bBk-2o-vhl"/>
+                                        </constraints>
+                                        <state key="normal" image="icon-menu"/>
+                                        <connections>
+                                            <segue destination="5KC-W6-t9Q" kind="show" id="CKm-eL-KDB"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="gIR-a7-hcm" firstAttribute="top" secondItem="rn8-hf-8bd" secondAttribute="top" id="41Z-1e-R6N"/>
                                     <constraint firstAttribute="bottom" secondItem="gIR-a7-hcm" secondAttribute="bottom" id="C33-NB-gbt"/>
                                     <constraint firstAttribute="bottom" secondItem="gIR-a7-hcm" secondAttribute="bottom" id="CSb-Bk-0Jg"/>
+                                    <constraint firstItem="esH-ro-LaV" firstAttribute="top" secondItem="iKt-h8-BW7" secondAttribute="top" constant="52" id="Juy-xN-BdD"/>
                                     <constraint firstItem="gIR-a7-hcm" firstAttribute="top" secondItem="rn8-hf-8bd" secondAttribute="top" id="KCh-fQ-UKx"/>
                                     <constraint firstAttribute="trailing" secondItem="gIR-a7-hcm" secondAttribute="trailing" id="Nn9-M9-yLk"/>
                                     <constraint firstAttribute="trailing" secondItem="gIR-a7-hcm" secondAttribute="trailing" id="WcI-kR-Gz0"/>
                                     <constraint firstItem="gIR-a7-hcm" firstAttribute="leading" secondItem="rn8-hf-8bd" secondAttribute="leading" id="e4I-ej-S68"/>
+                                    <constraint firstItem="neB-z0-wKv" firstAttribute="trailing" secondItem="esH-ro-LaV" secondAttribute="trailing" constant="30" id="saY-3T-41o"/>
                                 </constraints>
                                 <inset key="scrollIndicatorInsets" minX="395" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="iKt-h8-BW7"/>
@@ -3130,6 +3152,7 @@
                             <outlet property="delegate" destination="ELw-vc-l7K" id="zsO-CR-SCq"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="7E0-DM-zV2"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W1e-Sr-wsO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3140,7 +3163,7 @@
             <objects>
                 <tableViewController title="Custom DNS" id="veS-Vd-4Hc" customClass="CustomDNSViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="uH0-H9-6mR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -3216,6 +3239,7 @@
                             <outlet property="delegate" destination="veS-Vd-4Hc" id="fNy-Hx-PE4"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="hMU-Xj-iVs"/>
                     <connections>
                         <outlet property="customDNSSwitch" destination="oqt-Zd-omX" id="bTt-HX-EOq"/>
                         <outlet property="customDNSTextField" destination="eHv-MZ-qyH" id="VNR-ZW-fju"/>
@@ -3230,7 +3254,7 @@
             <objects>
                 <tableViewController title="AntiTracker" id="dcq-sZ-1Jx" customClass="AntiTrackerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="DRe-1W-eqP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -3316,6 +3340,7 @@
                             <outlet property="delegate" destination="dcq-sZ-1Jx" id="tel-IN-qhU"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="q6l-3A-LwN"/>
                     <connections>
                         <outlet property="antiTrackerHardcoreSwitch" destination="xlE-hr-FAs" id="fRD-Q0-aZu"/>
                         <outlet property="antiTrackerSwitch" destination="ayn-kr-8Ii" id="1yv-C5-IN0"/>
@@ -3560,5 +3585,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="boE-ZX-ofo"/>
+        <segue reference="CKm-eL-KDB"/>
     </inferredMetricsTieBreakers>
 </document>
