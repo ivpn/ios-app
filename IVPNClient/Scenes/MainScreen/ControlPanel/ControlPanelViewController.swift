@@ -86,7 +86,7 @@ class ControlPanelViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        initView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,26 +117,44 @@ class ControlPanelViewController: UITableViewController {
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
         updateServerNames()
+        updateServerLabels()
     }
     
     // MARK: - Private methods -
     
-    private func setupTableView() {
+    private func initView() {
         tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         isMultiHop = UserDefaults.shared.isMultiHop
         updateServerNames()
+        updateServerLabels()
     }
     
     private func updateStatus(vpnStatus: NEVPNStatus) {
         vpnStatusViewModel.status = vpnStatus
         protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
-        connectToServerLabel.text = vpnStatusViewModel.connectToServerText
         connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+        updateServerLabels()
         
         if vpnStatus == .disconnected {
             hud.dismiss()
         }
+    }
+    
+    private func updateServerLabels() {
+        entryServerConnectionLabel.text = vpnStatusViewModel.connectToServerText
+        exitServerConnectionLabel.text = "Exit Server"
+    }
+    
+    private func updateServerNames() {
+        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
+        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
+    }
+    
+    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
+        let serverViewModel = VPNServerViewModel(server: server)
+        label.text = serverViewModel.formattedServerNameForMainScreen
+        flag.image = serverViewModel.imageForCountryCodeForMainScreen
     }
     
     private func connect(status: NEVPNStatus) {
@@ -224,17 +242,6 @@ class ControlPanelViewController: UITableViewController {
                 }
             }
         }
-    }
-    
-    private func updateServerNames() {
-        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
-        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
-    }
-    
-    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
-        let serverViewModel = VPNServerViewModel(server: server)
-        label.text = serverViewModel.formattedServerNameForMainScreen
-        flag.image = serverViewModel.imageForCountryCodeForMainScreen
     }
     
 }

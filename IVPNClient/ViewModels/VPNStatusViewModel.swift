@@ -29,9 +29,17 @@ struct VPNStatusViewModel {
     }
     
     var connectToServerText: String {
+        if UserDefaults.shared.isMultiHop {
+            return "Entry Server"
+        }
+        
         switch status {
+        case .connecting, .reasserting:
+            return "Connecting to"
         case .connected:
             return "Connected to"
+        case .disconnecting:
+        return "Disconnecting from"
         default:
             return "Connect to"
         }
