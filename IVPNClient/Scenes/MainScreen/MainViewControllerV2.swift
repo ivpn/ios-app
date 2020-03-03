@@ -15,6 +15,12 @@ class MainViewControllerV2: UIViewController {
     
     var floatingPanel: FloatingPanelController!
     
+    // MARK: - @IBActions -
+    
+    @IBAction func openSettings(_ sender: UIButton) {
+        presentSettingsScreen()
+    }
+    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {

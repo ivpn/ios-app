@@ -8,6 +8,8 @@
 
 import FloatingPanel
 
+// MARK: - FloatingPanelControllerDelegate -
+
 extension MainViewControllerV2: FloatingPanelControllerDelegate {
     
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
@@ -16,6 +18,21 @@ extension MainViewControllerV2: FloatingPanelControllerDelegate {
     
     func floatingPanelShouldBeginDragging(_ vc: FloatingPanelController) -> Bool {
         return UIDevice.current.userInterfaceIdiom == .pad ? false : true
+    }
+    
+}
+
+
+// MARK: - UIAdaptivePresentationControllerDelegate -
+
+extension MainViewControllerV2: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        if let viewController = floatingPanel.contentViewController as? ControlPanelViewController {
+            viewController.tableView.reloadData()
+        }
+        
+        floatingPanel.updateLayout()
     }
     
 }
