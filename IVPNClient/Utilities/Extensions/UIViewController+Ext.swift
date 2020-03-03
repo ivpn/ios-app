@@ -11,6 +11,14 @@ import SafariServices
 
 extension UIViewController {
     
+    // MARK: - @IBActions -
+    
+    @IBAction func dismissViewController(_ sender: Any) {
+        navigationController?.dismiss(animated: true)
+    }
+    
+    // MARK: - Methods -
+    
     func logOut(deleteSession: Bool = true) {
         if deleteSession {
             let sessionManager = SessionManager()
