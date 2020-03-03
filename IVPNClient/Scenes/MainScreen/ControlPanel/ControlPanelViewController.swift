@@ -17,9 +17,10 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var protectionStatusLabel: UILabel!
     @IBOutlet weak var connectToServerLabel: UILabel!
     @IBOutlet weak var connectSwitch: UISwitch!
+    @IBOutlet weak var enableMultiHopButton: UIButton!
+    @IBOutlet weak var disableMultiHopButton: UIButton!
     
     // MARK: - Properties -
-    
     
     let hud = JGProgressHUD(style: .dark)
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
@@ -30,10 +31,45 @@ class ControlPanelViewController: UITableViewController {
         return keyManager
     }
     
+    private var isMultiHop: Bool = UserDefaults.shared.isMultiHop {
+        didSet {
+            UserDefaults.shared.set(isMultiHop, forKey: UserDefaults.Key.isMultiHop)
+            
+            if isMultiHop {
+                enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelPrimary), for: .normal)
+                disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabel5), for: .normal)
+            } else {
+                enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabel5), for: .normal)
+                disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelPrimary), for: .normal)
+            }
+        }
+    }
+    
     // MARK: - @IBActions -
     
     @IBAction func toggleConnect(_ sender: UISwitch) {
         connectionExecute()
+    }
+    
+    @IBAction func toggleMultiHop(_ sender: UIButton) {
+        guard evaluateIsLoggedIn() else {
+            return
+        }
+        
+        guard evaluateIsServiceActive() else {
+            return
+        }
+        
+        guard evaluateMultiHopCapability(sender) else {
+            return
+        }
+        
+        guard Application.shared.connectionManager.status.isDisconnected() else {
+            showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender)
+            return
+        }
+        
+        isMultiHop = sender == enableMultiHopButton
     }
     
     // MARK: - View lifecycle -
@@ -72,6 +108,7 @@ class ControlPanelViewController: UITableViewController {
     private func setupTableView() {
         tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
+        isMultiHop = UserDefaults.shared.isMultiHop
     }
     
     private func updateStatus(vpnStatus: NEVPNStatus) {
@@ -79,6 +116,10 @@ class ControlPanelViewController: UITableViewController {
         protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
         connectToServerLabel.text = vpnStatusViewModel.connectToServerText
         connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+        
+        if vpnStatus == .disconnected {
+            hud.dismiss()
+        }
     }
     
     private func connect(status: NEVPNStatus) {
@@ -140,6 +181,32 @@ class ControlPanelViewController: UITableViewController {
         }
         
         registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
+    }
+    
+    private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
+        if let sourceView = sender as? UIView {
+            showActionSheet(title: message, actions: ["Disconnect"], sourceView: sourceView) { index in
+                if let completion = completion {
+                    completion()
+                }
+                
+                switch index {
+                case 0:
+                    let status = Application.shared.connectionManager.status
+                    guard Application.shared.connectionManager.canDisconnect(status: status) else {
+                        self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
+                        return
+                    }
+                    NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
+                    self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+                    self.hud.detailTextLabel.text = "Disconnecting"
+                    self.hud.show(in: (self.navigationController?.view)!)
+                    self.hud.dismiss(afterDelay: 5)
+                default:
+                    break
+                }
+            }
+        }
     }
     
 }
