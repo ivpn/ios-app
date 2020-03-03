@@ -9,6 +9,23 @@
 import Foundation
 import JGProgressHUD
 
+// MARK: - UITableViewDelegate -
+
+extension ControlPanelViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 { return 100 }
+        if indexPath.row == 1 && Application.shared.settings.connectionProtocol.tunnelType() != .openvpn { return 0 }
+        if indexPath.row == 1 { return 44 }
+        if indexPath.row == 2 { return 80 }
+        if indexPath.row == 3 { return 52 }
+        if indexPath.row == 7 { return 335 }
+
+        return 90
+    }
+    
+}
+
 // MARK: - WGKeyManagerDelegate -
 
 extension ControlPanelViewController {
