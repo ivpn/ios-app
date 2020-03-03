@@ -2554,10 +2554,10 @@
                         <outlet property="enableMultiHopButton" destination="g3l-2N-46o" id="D6D-Dm-UOI"/>
                         <outlet property="entryServerConnectionLabel" destination="XmW-6n-K3I" id="qI3-kO-N9E"/>
                         <outlet property="entryServerFlagImage" destination="maa-l9-NZC" id="qaR-JE-KOy"/>
-                        <outlet property="entryServerName" destination="03A-CL-eb8" id="mKa-En-xvp"/>
+                        <outlet property="entryServerNameLabel" destination="03A-CL-eb8" id="h4V-HR-3ry"/>
                         <outlet property="exitServerConnectionLabel" destination="7tt-fV-1FL" id="agI-0H-3GX"/>
                         <outlet property="exitServerFlagImage" destination="vOo-Yi-Agw" id="aC2-Ih-J6d"/>
-                        <outlet property="exitServerName" destination="ctm-zP-IXi" id="eWr-Kk-Omf"/>
+                        <outlet property="exitServerNameLabel" destination="ctm-zP-IXi" id="I0T-vU-CHS"/>
                         <outlet property="protectionStatusLabel" destination="fZx-j5-ahl" id="v3k-fN-qnH"/>
                     </connections>
                 </tableViewController>

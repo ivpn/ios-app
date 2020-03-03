@@ -20,10 +20,10 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var enableMultiHopButton: UIButton!
     @IBOutlet weak var disableMultiHopButton: UIButton!
     @IBOutlet weak var exitServerConnectionLabel: UILabel!
-    @IBOutlet weak var exitServerName: UILabel!
+    @IBOutlet weak var exitServerNameLabel: UILabel!
     @IBOutlet weak var exitServerFlagImage: UIImageView!
     @IBOutlet weak var entryServerConnectionLabel: UILabel!
-    @IBOutlet weak var entryServerName: UILabel!
+    @IBOutlet weak var entryServerNameLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
     
     
@@ -79,6 +79,7 @@ class ControlPanelViewController: UITableViewController {
         }
         
         isMultiHop = sender == enableMultiHopButton
+        reloadView()
     }
     
     // MARK: - View lifecycle -
@@ -226,19 +227,13 @@ class ControlPanelViewController: UITableViewController {
     }
     
     private func updateServerNames() {
-        Application.shared.connectionManager.getStatus { _, status in
-            if status != .connected && status != .connecting {
-                Application.shared.connectionManager.updateSelectedServer()
-            }
-            
-            self.updateServerName(server: Application.shared.settings.selectedServer, label: self.entryServerName, flag: self.entryServerFlagImage)
-            self.updateServerName(server: Application.shared.settings.selectedExitServer, label: self.exitServerName, flag: self.exitServerFlagImage)
-        }
+        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
+        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
     }
     
     private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
         let serverViewModel = VPNServerViewModel(server: server)
-        label.iconMirror(text: serverViewModel.formattedServerNameForMainScreen, image: serverViewModel.imageForPingTimeForMainScreen)
+        label.text = serverViewModel.formattedServerNameForMainScreen
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
     }
     
