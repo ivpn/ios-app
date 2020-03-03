@@ -19,6 +19,13 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var connectSwitch: UISwitch!
     @IBOutlet weak var enableMultiHopButton: UIButton!
     @IBOutlet weak var disableMultiHopButton: UIButton!
+    @IBOutlet weak var exitServerConnectionLabel: UILabel!
+    @IBOutlet weak var exitServerName: UILabel!
+    @IBOutlet weak var exitServerFlagImage: UIImageView!
+    @IBOutlet weak var entryServerConnectionLabel: UILabel!
+    @IBOutlet weak var entryServerName: UILabel!
+    @IBOutlet weak var entryServerFlagImage: UIImageView!
+    
     
     // MARK: - Properties -
     
@@ -42,6 +49,8 @@ class ControlPanelViewController: UITableViewController {
                 enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabel5), for: .normal)
                 disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelPrimary), for: .normal)
             }
+            
+            NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
         }
     }
     
@@ -106,6 +115,7 @@ class ControlPanelViewController: UITableViewController {
     func reloadView() {
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
+        updateServerNames()
     }
     
     // MARK: - Private methods -
@@ -114,6 +124,7 @@ class ControlPanelViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         isMultiHop = UserDefaults.shared.isMultiHop
+        updateServerNames()
     }
     
     private func updateStatus(vpnStatus: NEVPNStatus) {
@@ -212,6 +223,23 @@ class ControlPanelViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    private func updateServerNames() {
+        Application.shared.connectionManager.getStatus { _, status in
+            if status != .connected && status != .connecting {
+                Application.shared.connectionManager.updateSelectedServer()
+            }
+            
+            self.updateServerName(server: Application.shared.settings.selectedServer, label: self.entryServerName, flag: self.entryServerFlagImage)
+            self.updateServerName(server: Application.shared.settings.selectedExitServer, label: self.exitServerName, flag: self.exitServerFlagImage)
+        }
+    }
+    
+    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
+        let serverViewModel = VPNServerViewModel(server: server)
+        label.iconMirror(text: serverViewModel.formattedServerNameForMainScreen, image: serverViewModel.imageForPingTimeForMainScreen)
+        flag.image = serverViewModel.imageForCountryCodeForMainScreen
     }
     
 }

@@ -431,7 +431,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1227.3333320617676" width="375" height="85"/>
+                            <rect key="frame" x="0.0" y="1301.3333320617676" width="375" height="85"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -1543,14 +1543,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="13.666666666666664" width="326" height="16"/>
+                                            <rect key="frame" x="16" y="14" width="326" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1559,7 +1559,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
+                                            <rect key="frame" x="16" y="11.000000000000002" width="324" height="21.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1581,7 +1581,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="99" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -2054,8 +2054,53 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="85" id="gB4-hN-vYJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="85" id="LUl-SD-HiX">
                                         <rect key="frame" x="0.0" y="172" width="375" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LUl-SD-HiX" id="yVO-4S-EFd">
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="85"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2Ow-Xg-y3F">
+                                                    <rect key="frame" x="30" y="24.666666666666668" width="288" height="35.666666666666657"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmW-6n-K3I">
+                                                            <rect key="frame" x="0.0" y="0.0" width="288" height="15.666666666666666"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" name="ivpnLabel5"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uWK-OJ-vJ5">
+                                                            <rect key="frame" x="0.0" y="20.666666666666668" width="288" height="15.000000000000004"/>
+                                                            <subviews>
+                                                                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nl-v" translatesAutoresizingMaskIntoConstraints="NO" id="maa-l9-NZC" customClass="FlagImageView" customModule="IVPNClient" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="20" id="PNs-c2-np1"/>
+                                                                        <constraint firstAttribute="height" constant="15" id="pOT-Vt-CWo"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amsterdam, NL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03A-CL-eb8">
+                                                                    <rect key="frame" x="28" y="0.0" width="260" height="15"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2Ow-Xg-y3F" firstAttribute="centerY" secondItem="yVO-4S-EFd" secondAttribute="centerY" id="25W-yc-lD5"/>
+                                                <constraint firstItem="2Ow-Xg-y3F" firstAttribute="leading" secondItem="yVO-4S-EFd" secondAttribute="leading" constant="30" id="DcG-63-gX4"/>
+                                                <constraint firstAttribute="trailing" secondItem="2Ow-Xg-y3F" secondAttribute="trailing" constant="30" id="boS-Ig-IJ5"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="85" id="gB4-hN-vYJ">
+                                        <rect key="frame" x="0.0" y="257" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gB4-hN-vYJ" id="VQR-K7-xdx">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="85"/>
@@ -2100,7 +2145,7 @@
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="52" id="M0H-LE-Zza">
-                                        <rect key="frame" x="0.0" y="257" width="375" height="52"/>
+                                        <rect key="frame" x="0.0" y="342" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M0H-LE-Zza" id="gfR-G3-eR1">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
@@ -2125,7 +2170,7 @@
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="85" id="wEd-NG-hu6">
-                                        <rect key="frame" x="0.0" y="309" width="375" height="85"/>
+                                        <rect key="frame" x="0.0" y="394" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wEd-NG-hu6" id="P3v-IR-MHl">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
@@ -2167,7 +2212,7 @@
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="85" id="IWY-FC-eTO">
-                                        <rect key="frame" x="0.0" y="394" width="375" height="85"/>
+                                        <rect key="frame" x="0.0" y="479" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IWY-FC-eTO" id="o51-k6-BmQ">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="85"/>
@@ -2222,7 +2267,7 @@
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="85" id="QgH-fo-HX7">
-                                        <rect key="frame" x="0.0" y="479" width="375" height="85"/>
+                                        <rect key="frame" x="0.0" y="564" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QgH-fo-HX7" id="frg-6z-9aR">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="85"/>
@@ -2260,7 +2305,7 @@
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="335" id="yXQ-dU-5Mc">
-                                        <rect key="frame" x="0.0" y="564" width="375" height="335"/>
+                                        <rect key="frame" x="0.0" y="649" width="375" height="335"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yXQ-dU-5Mc" id="8z5-Uk-NCS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="335"/>
@@ -2447,7 +2492,7 @@
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="85" id="gmi-FF-akn">
-                                        <rect key="frame" x="0.0" y="899" width="375" height="85"/>
+                                        <rect key="frame" x="0.0" y="984" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gmi-FF-akn" id="dpg-cm-ETO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
@@ -2505,9 +2550,14 @@
                     </tableView>
                     <connections>
                         <outlet property="connectSwitch" destination="yu3-bo-38L" id="iPy-Wm-JHn"/>
-                        <outlet property="connectToServerLabel" destination="7tt-fV-1FL" id="JN2-7y-auh"/>
                         <outlet property="disableMultiHopButton" destination="OqR-DO-cQW" id="zIm-Ye-U2A"/>
                         <outlet property="enableMultiHopButton" destination="g3l-2N-46o" id="D6D-Dm-UOI"/>
+                        <outlet property="entryServerConnectionLabel" destination="XmW-6n-K3I" id="qI3-kO-N9E"/>
+                        <outlet property="entryServerFlagImage" destination="maa-l9-NZC" id="qaR-JE-KOy"/>
+                        <outlet property="entryServerName" destination="03A-CL-eb8" id="mKa-En-xvp"/>
+                        <outlet property="exitServerConnectionLabel" destination="7tt-fV-1FL" id="agI-0H-3GX"/>
+                        <outlet property="exitServerFlagImage" destination="vOo-Yi-Agw" id="aC2-Ih-J6d"/>
+                        <outlet property="exitServerName" destination="ctm-zP-IXi" id="eWr-Kk-Omf"/>
                         <outlet property="protectionStatusLabel" destination="fZx-j5-ahl" id="v3k-fN-qnH"/>
                     </connections>
                 </tableViewController>
@@ -3592,6 +3642,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GUJ-Oz-Ag2"/>
+        <segue reference="xwh-y0-nVc"/>
     </inferredMetricsTieBreakers>
 </document>
