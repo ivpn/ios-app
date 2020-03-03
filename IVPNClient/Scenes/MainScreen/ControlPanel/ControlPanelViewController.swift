@@ -15,7 +15,6 @@ class ControlPanelViewController: UITableViewController {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var protectionStatusLabel: UILabel!
-    @IBOutlet weak var connectToServerLabel: UILabel!
     @IBOutlet weak var connectSwitch: UISwitch!
     @IBOutlet weak var enableMultiHopButton: UIButton!
     @IBOutlet weak var disableMultiHopButton: UIButton!
