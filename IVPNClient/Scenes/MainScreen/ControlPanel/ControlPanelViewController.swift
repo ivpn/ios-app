@@ -103,6 +103,11 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    func reloadView() {
+        tableView.reloadData()
+        isMultiHop = UserDefaults.shared.isMultiHop
+    }
+    
     // MARK: - Private methods -
     
     private func setupTableView() {

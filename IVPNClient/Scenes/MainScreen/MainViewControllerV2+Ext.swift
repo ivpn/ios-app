@@ -29,7 +29,7 @@ extension MainViewControllerV2: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
         if let viewController = floatingPanel.contentViewController as? ControlPanelViewController {
-            viewController.tableView.reloadData()
+            viewController.reloadView()
         }
         
         floatingPanel.updateLayout()
