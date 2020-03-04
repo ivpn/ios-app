@@ -31,6 +31,8 @@ class ControlPanelViewController: UITableViewController {
     let hud = JGProgressHUD(style: .dark)
     var needsToReconnect = false
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
+    private var updateServerListDidComplete = false
+    private var updateServersTimer = Timer()
     
     private var keyManager: AppKeyManager {
         let keyManager = AppKeyManager()
@@ -88,6 +90,7 @@ class ControlPanelViewController: UITableViewController {
         super.viewDidLoad()
         initView()
         addObservers()
+        startServersUpdate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,6 +107,7 @@ class ControlPanelViewController: UITableViewController {
     
     deinit {
         removeObservers()
+        updateServersTimer.invalidate()
     }
     
     // MARK: - Methods -
@@ -131,6 +135,20 @@ class ControlPanelViewController: UITableViewController {
     
     @objc func serverSelected() {
         updateServerNames()
+    }
+    
+    @objc func updateServersList() {
+        ApiService.shared.getServersList(storeInCache: true) { result in
+            self.updateServerListDidComplete = true
+            switch result {
+            case .success(let serverList):
+                Application.shared.serverList = serverList
+                Pinger.shared.serverList = Application.shared.serverList
+                Pinger.shared.ping()
+            default:
+                break
+            }
+        }
     }
     
     // MARK: - Observers -
@@ -180,6 +198,11 @@ class ControlPanelViewController: UITableViewController {
         let serverViewModel = VPNServerViewModel(server: server)
         label.text = serverViewModel.formattedServerNameForMainScreen
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
+    }
+    
+    private func startServersUpdate() {
+        updateServersList()
+        updateServersTimer = Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
     }
     
     private func connect(status: NEVPNStatus) {
@@ -241,6 +264,12 @@ class ControlPanelViewController: UITableViewController {
         }
         
         registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
+        
+        if updateServerListDidComplete {
+            DispatchQueue.delay(0.5) {
+                Pinger.shared.ping()
+            }
+        }
     }
     
     private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
