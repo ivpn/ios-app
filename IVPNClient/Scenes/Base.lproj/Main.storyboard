@@ -1102,7 +1102,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="uz9-96-zU2">
                         <barButtonItem key="rightBarButtonItem" title="Close" id="S2o-wm-CfB">
                             <connections>
-                                <action selector="dismissViewController:" destination="5KC-W6-t9Q" id="X5A-wf-mmG"/>
+                                <action selector="close:" destination="5KC-W6-t9Q" id="rzK-5h-C82"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
