@@ -14,6 +14,8 @@ class MainViewControllerV2: UIViewController {
     // MARK: - Properties -
     
     var floatingPanel: FloatingPanelController!
+    private var updateServerListDidComplete = false
+    private var updateServersTimer = Timer()
     
     // MARK: - @IBActions -
     
@@ -27,11 +29,23 @@ class MainViewControllerV2: UIViewController {
         super.viewDidLoad()
         initFloatingPanel()
         addObservers()
+        startServersUpdate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if updateServerListDidComplete {
+            DispatchQueue.delay(0.5) {
+                Pinger.shared.ping()
+            }
+        }
     }
     
     deinit {
         destoryFloatingPanel()
         removeObservers()
+        updateServersTimer.invalidate()
     }
     
     // MARK: - Segues -
@@ -60,6 +74,20 @@ class MainViewControllerV2: UIViewController {
         floatingPanel.updateLayout()
     }
     
+    @objc func updateServersList() {
+        ApiService.shared.getServersList(storeInCache: true) { result in
+            self.updateServerListDidComplete = true
+            switch result {
+            case .success(let serverList):
+                Application.shared.serverList = serverList
+                Pinger.shared.serverList = Application.shared.serverList
+                Pinger.shared.ping()
+            default:
+                break
+            }
+        }
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
@@ -82,6 +110,11 @@ class MainViewControllerV2: UIViewController {
     
     private func destoryFloatingPanel() {
         floatingPanel.removePanelFromParent(animated: false)
+    }
+    
+    private func startServersUpdate() {
+        updateServersList()
+        updateServersTimer = Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
     }
     
 }
