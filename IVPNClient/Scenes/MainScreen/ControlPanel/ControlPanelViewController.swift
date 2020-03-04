@@ -15,14 +15,21 @@ class ControlPanelViewController: UITableViewController {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var protectionStatusLabel: UILabel!
-    @IBOutlet weak var connectToServerLabel: UILabel!
     @IBOutlet weak var connectSwitch: UISwitch!
     @IBOutlet weak var enableMultiHopButton: UIButton!
     @IBOutlet weak var disableMultiHopButton: UIButton!
+    @IBOutlet weak var exitServerConnectionLabel: UILabel!
+    @IBOutlet weak var exitServerNameLabel: UILabel!
+    @IBOutlet weak var exitServerFlagImage: UIImageView!
+    @IBOutlet weak var entryServerConnectionLabel: UILabel!
+    @IBOutlet weak var entryServerNameLabel: UILabel!
+    @IBOutlet weak var entryServerFlagImage: UIImageView!
+    
     
     // MARK: - Properties -
     
     let hud = JGProgressHUD(style: .dark)
+    var needsToReconnect = false
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
     
     private var keyManager: AppKeyManager {
@@ -42,6 +49,8 @@ class ControlPanelViewController: UITableViewController {
                 enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabel5), for: .normal)
                 disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelPrimary), for: .normal)
             }
+            
+            NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
         }
     }
     
@@ -70,13 +79,15 @@ class ControlPanelViewController: UITableViewController {
         }
         
         isMultiHop = sender == enableMultiHopButton
+        reloadView()
     }
     
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        initView()
+        addObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,7 +102,18 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    deinit {
+        removeObservers()
+    }
+    
     // MARK: - Methods -
+    
+    func reloadView() {
+        tableView.reloadData()
+        isMultiHop = UserDefaults.shared.isMultiHop
+        updateServerNames()
+        updateServerLabels()
+    }
     
     @objc func connectionExecute() {
         Application.shared.connectionManager.getStatus { _, status in
@@ -103,23 +125,61 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    @objc func updateControlPanel() {
+        reloadView()
+    }
+    
+    @objc func serverSelected() {
+        updateServerNames()
+    }
+    
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateControlPanel), name: Notification.Name.UpdateControlPanel, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(serverSelected), name: Notification.Name.ServerSelected, object: nil)
+    }
+    
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateControlPanel, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
+    }
+    
     // MARK: - Private methods -
     
-    private func setupTableView() {
+    private func initView() {
         tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         isMultiHop = UserDefaults.shared.isMultiHop
+        updateServerNames()
+        updateServerLabels()
     }
     
     private func updateStatus(vpnStatus: NEVPNStatus) {
         vpnStatusViewModel.status = vpnStatus
         protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
-        connectToServerLabel.text = vpnStatusViewModel.connectToServerText
         connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+        updateServerLabels()
         
         if vpnStatus == .disconnected {
             hud.dismiss()
         }
+    }
+    
+    private func updateServerLabels() {
+        entryServerConnectionLabel.text = vpnStatusViewModel.connectToServerText
+        exitServerConnectionLabel.text = "Exit Server"
+    }
+    
+    private func updateServerNames() {
+        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
+        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
+    }
+    
+    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
+        let serverViewModel = VPNServerViewModel(server: server)
+        label.text = serverViewModel.formattedServerNameForMainScreen
+        flag.image = serverViewModel.imageForCountryCodeForMainScreen
     }
     
     private func connect(status: NEVPNStatus) {

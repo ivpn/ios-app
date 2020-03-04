@@ -29,6 +29,20 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
         return [.full, .half]
     }
     
+    // MARK: - Private properties -
+    
+    private var halfHeight: CGFloat {
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            return 325
+        }
+        
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+            return 240
+        }
+        
+        return 196
+    }
+    
     // MARK: - Override public methods -
 
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
@@ -41,7 +55,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
         
         switch position {
             case .full: return 10
-        case .half: return Application.shared.settings.connectionProtocol.tunnelType() == .openvpn ? 240 : 196
+        case .half: return halfHeight
             default: return nil
         }
     }

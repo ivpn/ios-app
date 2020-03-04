@@ -41,6 +41,12 @@ class SettingsViewController: UITableViewController {
     
     // MARK: - @IBActions -
     
+    @IBAction func close(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
+        navigationController?.dismiss(animated: true)
+    }
+    
     @IBAction func toggleMultiHop(_ sender: UISwitch) {
         guard Application.shared.authentication.isLoggedIn else {
             authenticate(self)

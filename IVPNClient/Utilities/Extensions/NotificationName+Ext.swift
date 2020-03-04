@@ -26,5 +26,7 @@ extension Notification.Name {
     public static let ConnectError = Notification.Name("connectError")
     public static let ShowLogin = Notification.Name("showLogin")
     public static let ShowCreateAccount = Notification.Name("showCreateAccount")
+    public static let UpdateFloatingPanelLayout = Notification.Name("updateFloatingPanelLayout")
+    public static let UpdateControlPanel = Notification.Name("updateControlPanel")
     
 }

@@ -11,6 +11,38 @@ import SafariServices
 
 extension UIViewController {
     
+    // MARK: - Properties -
+    
+    var isPresentedModally: Bool {
+        if let navigationController = navigationController {
+            if navigationController.viewControllers.first != self {
+                return false
+            }
+        }
+        
+        if presentingViewController != nil {
+            return true
+        }
+        
+        if navigationController?.presentingViewController?.presentedViewController == navigationController  {
+            return true
+        }
+        
+        if tabBarController?.presentingViewController is UITabBarController {
+            return true
+        }
+        
+        return false
+    }
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func dismissViewController(_ sender: Any) {
+        navigationController?.dismiss(animated: true)
+    }
+    
+    // MARK: - Methods -
+    
     func logOut(deleteSession: Bool = true) {
         if deleteSession {
             let sessionManager = SessionManager()
