@@ -103,6 +103,16 @@ class ControlPanelViewController: UITableViewController {
                 self.updateStatus(vpnStatus: status)
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        Application.shared.connectionManager.removeStatusChangeUpdates()
+
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
     }
     
     deinit {
@@ -148,6 +158,15 @@ class ControlPanelViewController: UITableViewController {
             default:
                 break
             }
+        }
+    }
+    
+    @objc func pingDidComplete() {
+        updateServerNames()
+        
+        if needsToReconnect {
+            needsToReconnect = false
+            Application.shared.connectionManager.connect()
         }
     }
     
