@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.18.0 - [Unreleased]
+## 1.18.1 - 2020-03-04
 
 [NEW] Today widget  
 [NEW] Option to disable VPN keep-alive for improved battery performance  
@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 [IMPROVED] Web URLs are now opened in standard interface for web content  
 [FIXED] App crash that occasionally happens on app launch
 
-## 1.17.0 - 2019-12-20
+## 1.17.0 - 2019-12-12
 
 [NEW] IKEv2  
 [IMPROVED] Updated login screen  
