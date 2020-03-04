@@ -86,6 +86,7 @@ class ControlPanelViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
+        addObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +101,10 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    deinit {
+        removeObservers()
+    }
+    
     // MARK: - Methods -
     
     @objc func connectionExecute() {
@@ -112,11 +117,25 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    @objc func updateControlPanel() {
+        reloadView()
+    }
+    
     func reloadView() {
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
         updateServerNames()
         updateServerLabels()
+    }
+    
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateControlPanel), name: Notification.Name.UpdateControlPanel, object: nil)
+    }
+    
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateControlPanel, object: nil)
     }
     
     // MARK: - Private methods -

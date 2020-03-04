@@ -28,11 +28,8 @@ extension MainViewControllerV2: FloatingPanelControllerDelegate {
 extension MainViewControllerV2: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        if let viewController = floatingPanel.contentViewController as? ControlPanelViewController {
-            viewController.reloadView()
-        }
-        
         floatingPanel.updateLayout()
+        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
     }
     
 }
