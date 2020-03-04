@@ -29,6 +29,7 @@ class ControlPanelViewController: UITableViewController {
     // MARK: - Properties -
     
     let hud = JGProgressHUD(style: .dark)
+    var needsToReconnect = false
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
     
     private var keyManager: AppKeyManager {
@@ -107,6 +108,13 @@ class ControlPanelViewController: UITableViewController {
     
     // MARK: - Methods -
     
+    func reloadView() {
+        tableView.reloadData()
+        isMultiHop = UserDefaults.shared.isMultiHop
+        updateServerNames()
+        updateServerLabels()
+    }
+    
     @objc func connectionExecute() {
         Application.shared.connectionManager.getStatus { _, status in
             if status == .disconnected || status == .invalid {
@@ -121,21 +129,20 @@ class ControlPanelViewController: UITableViewController {
         reloadView()
     }
     
-    func reloadView() {
-        tableView.reloadData()
-        isMultiHop = UserDefaults.shared.isMultiHop
+    @objc func serverSelected() {
         updateServerNames()
-        updateServerLabels()
     }
     
     // MARK: - Observers -
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateControlPanel), name: Notification.Name.UpdateControlPanel, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(serverSelected), name: Notification.Name.ServerSelected, object: nil)
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateControlPanel, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
     }
     
     // MARK: - Private methods -

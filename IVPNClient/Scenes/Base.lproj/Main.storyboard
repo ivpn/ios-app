@@ -530,7 +530,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="zAv-yM-Pqo" kind="show" identifier="SelectServer" id="t8S-mX-mxa"/>
+                                            <segue destination="OOw-15-c1e" kind="show" identifier="SelectServer" id="t8S-mX-mxa"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="44" id="Plb-W7-zaX" userLabel="Exit Server Cell">
@@ -567,7 +567,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="zAv-yM-Pqo" kind="show" identifier="SelectExitServer" id="GUJ-Oz-Ag2"/>
+                                            <segue destination="OOw-15-c1e" kind="show" identifier="SelectExitServer" id="GUJ-Oz-Ag2"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1134,7 +1134,7 @@
             <objects>
                 <tableViewController id="zAv-yM-Pqo" customClass="ServerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="j8B-k6-W0Q">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -1249,7 +1249,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U7O-Th-D7m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="932" y="-734.48275862068965"/>
+            <point key="canvasLocation" x="1874.4000000000001" y="-734.48275862068965"/>
         </scene>
         <!--Network Protection-->
         <scene sceneID="RGC-q9-xc5">
@@ -1400,7 +1400,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RdK-uI-Lph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2708" y="-734.48275862068976"/>
+            <point key="canvasLocation" x="3650.4000000000001" y="-734.48275862068965"/>
         </scene>
         <!--Network Protection Rules-->
         <scene sceneID="VeL-oj-dpX">
@@ -1527,7 +1527,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tED-YZ-Xm6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3590" y="-734"/>
+            <point key="canvasLocation" x="4532" y="-734.48275862068965"/>
         </scene>
         <!--Select Protocol-->
         <scene sceneID="obu-pc-xnF">
@@ -1539,10 +1539,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
@@ -1555,7 +1555,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="324" height="21"/>
+                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1577,7 +1577,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.333332061767578" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -3080,7 +3080,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esH-ro-LaV" userLabel="Menu Button">
-                                        <rect key="frame" x="305" y="52" width="40" height="40"/>
+                                        <rect key="frame" x="332" y="52" width="40" height="40"/>
                                         <accessibility key="accessibilityConfiguration" label="Open Settings"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6jd-8M-wZB"/>
@@ -3119,6 +3119,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ww5-jx-W0A"/>
                     </view>
+                    <connections>
+                        <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectServer" id="s0z-do-bnX"/>
+                        <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectExitServer" id="fnd-go-o5i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPo-yL-uiu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3145,7 +3149,7 @@
             <objects>
                 <tableViewController id="ELw-vc-l7K" customClass="ServersConfigurationTableViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="KpS-b3-6R0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -3210,7 +3214,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W1e-Sr-wsO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1832.8" y="-734.48275862068965"/>
+            <point key="canvasLocation" x="2775.1999999999998" y="-734.48275862068965"/>
         </scene>
         <!--Custom DNS-->
         <scene sceneID="SKz-4s-VLh">
@@ -3301,7 +3305,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y1Z-OK-FZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4472.8000000000002" y="-734.48275862068965"/>
+            <point key="canvasLocation" x="5415.1999999999998" y="-734.48275862068965"/>
         </scene>
         <!--AntiTracker-->
         <scene sceneID="gpM-EZ-3TR">
@@ -3402,7 +3406,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lKI-3X-0iV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5354" y="-734"/>
+            <point key="canvasLocation" x="6295.1999999999998" y="-734.48275862068965"/>
         </scene>
         <!--Switch to IVPN Pro-->
         <scene sceneID="fZQ-ut-wkh">
@@ -3594,6 +3598,25 @@
             </objects>
             <point key="canvasLocation" x="932" y="13"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ztB-qB-P8T">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OOw-15-c1e" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Dwr-bn-cPG"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="siT-aP-BDl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zAv-yM-Pqo" kind="relationship" relationship="rootViewController" id="X5B-6f-Pgc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d1z-Tv-JE6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="932" y="-734.48275862068965"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icon-check" width="24" height="24"/>
@@ -3656,6 +3679,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GUJ-Oz-Ag2"/>
+        <segue reference="fnd-go-o5i"/>
     </inferredMetricsTieBreakers>
 </document>

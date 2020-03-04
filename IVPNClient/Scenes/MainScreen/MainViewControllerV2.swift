@@ -34,6 +34,26 @@ class MainViewControllerV2: UIViewController {
         removeObservers()
     }
     
+    // MARK: - Segues -
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ControlPanelSelectServer" {
+            if let navController = segue.destination as? UINavigationController {
+                if let viewController = navController.topViewController as? ServerViewController {
+                    viewController.serverDelegate = floatingPanel.contentViewController as! ControlPanelViewController
+                }
+            }
+        }
+        
+        if segue.identifier == "ControlPanelSelectExitServer" {
+            if let navController = segue.destination as? UINavigationController {
+                if let viewController = navController.topViewController as? ServerViewController {
+                    viewController.isExitServer = true
+                }
+            }
+        }
+    }
+    
     // MARK: - Methods -
     
     @objc func updateFloatingPanelLayout() {
