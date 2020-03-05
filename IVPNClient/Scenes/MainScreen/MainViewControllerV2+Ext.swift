@@ -32,4 +32,11 @@ extension MainViewControllerV2: UIAdaptivePresentationControllerDelegate {
         NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
     }
     
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        if let controlPanelViewController = floatingPanel.contentViewController {
+            NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.ServiceAuthorized, object: nil)
+            NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.SubscriptionActivated, object: nil)
+        }
+    }
+    
 }

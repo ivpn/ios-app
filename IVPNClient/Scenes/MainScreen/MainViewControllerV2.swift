@@ -21,6 +21,10 @@ class MainViewControllerV2: UIViewController {
     
     @IBAction func openSettings(_ sender: UIButton) {
         presentSettingsScreen()
+        
+        if let controlPanelViewController = floatingPanel.contentViewController {
+            NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.TermsOfServiceAgreed, object: nil)
+        }
     }
     
     // MARK: - View lifecycle -
