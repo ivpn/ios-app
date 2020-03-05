@@ -19,7 +19,7 @@ extension ControlPanelViewController {
         if indexPath.row == 1 { return 44 }
         if indexPath.row == 3 && !UserDefaults.shared.isMultiHop { return 0 }
         if indexPath.row == 4 { return 52 }
-        if indexPath.row == 8 && UserDefaults.shared.isMultiHop { return 335 }
+        if indexPath.row == 8 { return 335 }
 
         return 85
     }

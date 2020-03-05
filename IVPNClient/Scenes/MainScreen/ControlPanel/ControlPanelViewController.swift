@@ -100,6 +100,16 @@ class ControlPanelViewController: UITableViewController {
                 self.updateStatus(vpnStatus: status)
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        Application.shared.connectionManager.removeStatusChangeUpdates()
+
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
     }
     
     deinit {
@@ -133,16 +143,61 @@ class ControlPanelViewController: UITableViewController {
         updateServerNames()
     }
     
+    @objc func pingDidComplete() {
+        updateServerNames()
+        
+        if needsToReconnect {
+            needsToReconnect = false
+            Application.shared.connectionManager.connect()
+        }
+    }
+    
+    @objc func disconnect() {
+        let manager = Application.shared.connectionManager
+        
+        if UserDefaults.shared.networkProtectionEnabled {
+            manager.resetRulesAndDisconnectShortcut()
+        } else {
+            manager.resetRulesAndDisconnect()
+        }
+        
+        registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
+        
+        DispatchQueue.delay(1) {
+            Pinger.shared.ping()
+        }
+    }
+    
+    @objc func authenticationDismissed() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
+    }
+    
+    @objc func subscriptionDismissed() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
+    }
+    
+    @objc func agreedToTermsOfService() {
+        connectionExecute()
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateControlPanel), name: Notification.Name.UpdateControlPanel, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(serverSelected), name: Notification.Name.ServerSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: Notification.Name.Disconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateControlPanel, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.Disconnect, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.AuthenticationDismissed, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionDismissed, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
     }
     
     // MARK: - Private methods -
@@ -178,7 +233,7 @@ class ControlPanelViewController: UITableViewController {
     
     private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
         let serverViewModel = VPNServerViewModel(server: server)
-        label.text = serverViewModel.formattedServerNameForMainScreen
+        label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
     }
     
@@ -229,18 +284,6 @@ class ControlPanelViewController: UITableViewController {
         }
         
         registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
-    }
-    
-    private func disconnect() {
-        let manager = Application.shared.connectionManager
-        
-        if UserDefaults.shared.networkProtectionEnabled {
-            manager.resetRulesAndDisconnectShortcut()
-        } else {
-            manager.resetRulesAndDisconnect()
-        }
-        
-        registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
     }
     
     private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
