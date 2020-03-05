@@ -83,3 +83,92 @@ extension ControlPanelViewController: ServerViewControllerDelegate {
     }
     
 }
+
+// MARK: - SessionManagerDelegate -
+
+extension ControlPanelViewController {
+    
+    override func createSessionSuccess() {
+        connect(status: .disconnected)
+    }
+    
+    override func createSessionServiceNotActive() {
+        connect(status: .disconnected)
+    }
+    
+    override func createSessionTooManySessions(error: Any?) {
+        if let error = error as? ErrorResultSessionNew {
+            if let data = error.data {
+                if data.upgradable {
+                    NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
+                    NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
+                    UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
+                    UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
+                    UserDefaults.shared.set(data.isAppStoreSubscription(), forKey: UserDefaults.Key.subscriptionPurchasedOnDevice)
+                    present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
+                    return
+                }
+            }
+        }
+        
+        showCreateSessionAlert(message: "You've reached the maximum number of connected devices")
+    }
+    
+    override func createSessionAuthenticationError() {
+        logOut(deleteSession: false)
+        present(NavigationManager.getLoginViewController(), animated: true)
+    }
+    
+    override func createSessionFailure(error: Any?) {
+        if let error = error as? ErrorResultSessionNew {
+            showErrorAlert(title: "Error", message: error.message)
+        }
+    }
+    
+    override func sessionStatusNotFound() {
+        guard !UserDefaults.standard.bool(forKey: "-UITests") else { return }
+        logOut(deleteSession: false)
+        present(NavigationManager.getLoginViewController(), animated: true)
+    }
+    
+    override func sessionStatusExpired() {
+        showExpiredSubscriptionError()
+    }
+    
+    override func deleteSessionStart() {
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Deleting active session..."
+        hud.show(in: (navigationController?.view)!)
+    }
+    
+    override func deleteSessionSuccess() {
+        hud.delegate = self as? JGProgressHUDDelegate
+        hud.dismiss()
+    }
+    
+    override func deleteSessionFailure() {
+        hud.delegate = self as? JGProgressHUDDelegate
+        hud.indicatorView = JGProgressHUDErrorIndicatorView()
+        hud.detailTextLabel.text = "There was an error deleting session"
+        hud.show(in: (navigationController?.view)!)
+        hud.dismiss(afterDelay: 2)
+    }
+    
+    override func deleteSessionSkip() {
+        present(NavigationManager.getLoginViewController(), animated: true)
+    }
+    
+    func showCreateSessionAlert(message: String) {
+        showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.connectSwitch) { index in
+            switch index {
+            case 0:
+                self.sessionManager.createSession(force: true)
+            case 1:
+                self.sessionManager.createSession()
+            default:
+                break
+            }
+        }
+    }
+    
+}

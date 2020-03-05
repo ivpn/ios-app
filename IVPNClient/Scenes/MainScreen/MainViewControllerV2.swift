@@ -24,6 +24,8 @@ class MainViewControllerV2: UIViewController {
         
         if let controlPanelViewController = floatingPanel.contentViewController {
             NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.TermsOfServiceAgreed, object: nil)
+            NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.NewSession, object: nil)
+            NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.ForceNewSession, object: nil)
         }
     }
     
