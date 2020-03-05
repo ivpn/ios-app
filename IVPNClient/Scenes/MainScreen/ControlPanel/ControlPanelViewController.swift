@@ -152,6 +152,7 @@ class ControlPanelViewController: UITableViewController {
         isMultiHop = UserDefaults.shared.isMultiHop
         updateServerNames()
         updateServerLabels()
+        updateAntiTracker()
     }
     
     @objc func connectionExecute() {
@@ -321,6 +322,7 @@ class ControlPanelViewController: UITableViewController {
         isMultiHop = UserDefaults.shared.isMultiHop
         updateServerNames()
         updateServerLabels()
+        updateAntiTracker()
     }
     
     private func updateStatus(vpnStatus: NEVPNStatus) {
@@ -354,6 +356,10 @@ class ControlPanelViewController: UITableViewController {
         let serverViewModel = VPNServerViewModel(server: server)
         label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
+    }
+    
+    private func updateAntiTracker() {
+        antiTrackerSwitch.isOn = UserDefaults.shared.isAntiTracker
     }
     
     private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {

@@ -1990,7 +1990,7 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yu3-bo-38L">
+                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yu3-bo-38L">
                                                             <rect key="frame" x="266" y="12.666666666666664" width="51" height="31"/>
                                                             <color key="onTintColor" name="ivpnBlue"/>
                                                             <connections>
@@ -2192,7 +2192,7 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wvL-pi-gS0">
+                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wvL-pi-gS0">
                                                             <rect key="frame" x="266" y="10" width="51" height="31"/>
                                                             <color key="onTintColor" name="ivpnBlue"/>
                                                             <connections>
