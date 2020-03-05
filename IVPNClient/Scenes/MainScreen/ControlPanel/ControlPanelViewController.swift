@@ -24,6 +24,7 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var entryServerConnectionLabel: UILabel!
     @IBOutlet weak var entryServerNameLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
+    @IBOutlet weak var antiTrackerSwitch: UISwitch!
     
     
     // MARK: - Properties -
@@ -91,6 +92,23 @@ class ControlPanelViewController: UITableViewController {
         reloadView()
     }
     
+    @IBAction func toggleAntiTracker(_ sender: UISwitch) {
+        if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+            showAlert(title: "IKEv2 not supported", message: "AntiTracker is supported only for OpenVPN and WireGuard protocols.") { _ in
+                sender.setOn(false, animated: true)
+            }
+            return
+        }
+        
+        guard Application.shared.connectionManager.status.isDisconnected() else {
+            showConnectedAlert(message: "To change AntiTracker settings, please first disconnect", sender: sender)
+            sender.setOn(sender.isOn, animated: true)
+            return
+        }
+        
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
+    }
+    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {
@@ -134,6 +152,7 @@ class ControlPanelViewController: UITableViewController {
         isMultiHop = UserDefaults.shared.isMultiHop
         updateServerNames()
         updateServerLabels()
+        updateAntiTracker()
     }
     
     @objc func connectionExecute() {
@@ -303,6 +322,7 @@ class ControlPanelViewController: UITableViewController {
         isMultiHop = UserDefaults.shared.isMultiHop
         updateServerNames()
         updateServerLabels()
+        updateAntiTracker()
     }
     
     private func updateStatus(vpnStatus: NEVPNStatus) {
@@ -336,6 +356,10 @@ class ControlPanelViewController: UITableViewController {
         let serverViewModel = VPNServerViewModel(server: server)
         label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
+    }
+    
+    private func updateAntiTracker() {
+        antiTrackerSwitch.isOn = UserDefaults.shared.isAntiTracker
     }
     
     private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
