@@ -30,7 +30,16 @@ class ControlPanelViewController: UITableViewController {
     
     let hud = JGProgressHUD(style: .dark)
     var needsToReconnect = false
+    
+    var sessionManager: SessionManager {
+        let sessionManager = SessionManager()
+        sessionManager.delegate = self
+        return sessionManager
+    }
+    
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
+    private var lastStatusUpdateDate: Date?
+    private var lastAccountStatus: NEVPNStatus = .invalid
     
     private var keyManager: AppKeyManager {
         let keyManager = AppKeyManager()
@@ -102,6 +111,8 @@ class ControlPanelViewController: UITableViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
+        
+        refreshServiceStatus()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -152,92 +163,7 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
-    @objc func disconnect() {
-        let manager = Application.shared.connectionManager
-        
-        if UserDefaults.shared.networkProtectionEnabled {
-            manager.resetRulesAndDisconnectShortcut()
-        } else {
-            manager.resetRulesAndDisconnect()
-        }
-        
-        registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
-        
-        DispatchQueue.delay(1) {
-            Pinger.shared.ping()
-        }
-    }
-    
-    @objc func authenticationDismissed() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
-    }
-    
-    @objc func subscriptionDismissed() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
-    }
-    
-    @objc func agreedToTermsOfService() {
-        connectionExecute()
-    }
-    
-    // MARK: - Observers -
-    
-    private func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateControlPanel), name: Notification.Name.UpdateControlPanel, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(serverSelected), name: Notification.Name.ServerSelected, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: Notification.Name.Disconnect, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
-    }
-    
-    private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateControlPanel, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.Disconnect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.AuthenticationDismissed, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionDismissed, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
-    }
-    
-    // MARK: - Private methods -
-    
-    private func initView() {
-        tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
-        isMultiHop = UserDefaults.shared.isMultiHop
-        updateServerNames()
-        updateServerLabels()
-    }
-    
-    private func updateStatus(vpnStatus: NEVPNStatus) {
-        vpnStatusViewModel.status = vpnStatus
-        protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
-        connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
-        updateServerLabels()
-        
-        if vpnStatus == .disconnected {
-            hud.dismiss()
-        }
-    }
-    
-    private func updateServerLabels() {
-        entryServerConnectionLabel.text = vpnStatusViewModel.connectToServerText
-        exitServerConnectionLabel.text = "Exit Server"
-    }
-    
-    private func updateServerNames() {
-        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
-        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
-    }
-    
-    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
-        let serverViewModel = VPNServerViewModel(server: server)
-        label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
-        flag.image = serverViewModel.imageForCountryCodeForMainScreen
-    }
-    
-    private func connect(status: NEVPNStatus) {
+    func connect(status: NEVPNStatus) {
         guard evaluateIsNetworkReachable() else {
             connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
@@ -284,6 +210,132 @@ class ControlPanelViewController: UITableViewController {
         }
         
         registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
+    }
+    
+    @objc func disconnect() {
+        let manager = Application.shared.connectionManager
+        
+        if UserDefaults.shared.networkProtectionEnabled {
+            manager.resetRulesAndDisconnectShortcut()
+        } else {
+            manager.resetRulesAndDisconnect()
+        }
+        
+        registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
+        
+        DispatchQueue.delay(1) {
+            Pinger.shared.ping()
+        }
+    }
+    
+    @objc func authenticationDismissed() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
+    }
+    
+    @objc func subscriptionDismissed() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
+    }
+    
+    @objc func agreedToTermsOfService() {
+        connectionExecute()
+    }
+    
+    @objc func newSession() {
+        sessionManager.createSession()
+    }
+    
+    @objc func forceNewSession() {
+        sessionManager.createSession(force: true)
+    }
+    
+    func showExpiredSubscriptionError() {
+        showActionAlert(
+            title: "No active subscription",
+            message: "To continue using IVPN, you must activate your subscription.",
+            action: "Activate",
+            cancel: "Cancel",
+            actionHandler: { _ in
+                self.present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+            }
+        )
+    }
+    
+    func refreshServiceStatus() {
+        if let lastUpdateDate = lastStatusUpdateDate {
+            let now = Date()
+            if now.timeIntervalSince(lastUpdateDate) < Config.serviceStatusRefreshMaxIntervalSeconds { return }
+        }
+        
+        let status = Application.shared.connectionManager.status
+        if status != .connected && status != .connecting {
+            self.lastStatusUpdateDate = Date()
+            self.sessionManager.getSessionStatus()
+        }
+    }
+    
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateControlPanel), name: Notification.Name.UpdateControlPanel, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(serverSelected), name: Notification.Name.ServerSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: Notification.Name.Disconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
+    }
+    
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateControlPanel, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.Disconnect, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.AuthenticationDismissed, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionDismissed, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
+    }
+    
+    // MARK: - Private methods -
+    
+    private func initView() {
+        tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
+        isMultiHop = UserDefaults.shared.isMultiHop
+        updateServerNames()
+        updateServerLabels()
+    }
+    
+    private func updateStatus(vpnStatus: NEVPNStatus) {
+        vpnStatusViewModel.status = vpnStatus
+        protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
+        connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+        updateServerLabels()
+        
+        if vpnStatus == .disconnected {
+            hud.dismiss()
+        }
+        
+        if vpnStatus != lastAccountStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
+            refreshServiceStatus()
+        }
+        
+        lastAccountStatus = vpnStatus
+    }
+    
+    private func updateServerLabels() {
+        entryServerConnectionLabel.text = vpnStatusViewModel.connectToServerText
+        exitServerConnectionLabel.text = "Exit Server"
+    }
+    
+    private func updateServerNames() {
+        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
+        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
+    }
+    
+    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
+        let serverViewModel = VPNServerViewModel(server: server)
+        label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
+        flag.image = serverViewModel.imageForCountryCodeForMainScreen
     }
     
     private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
