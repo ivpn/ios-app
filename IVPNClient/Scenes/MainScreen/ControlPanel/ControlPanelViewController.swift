@@ -24,6 +24,7 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var entryServerConnectionLabel: UILabel!
     @IBOutlet weak var entryServerNameLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
+    @IBOutlet weak var antiTrackerSwitch: UISwitch!
     
     
     // MARK: - Properties -
@@ -89,6 +90,23 @@ class ControlPanelViewController: UITableViewController {
         
         isMultiHop = sender == enableMultiHopButton
         reloadView()
+    }
+    
+    @IBAction func toggleAntiTracker(_ sender: UISwitch) {
+        if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+            showAlert(title: "IKEv2 not supported", message: "AntiTracker is supported only for OpenVPN and WireGuard protocols.") { _ in
+                sender.setOn(false, animated: true)
+            }
+            return
+        }
+        
+        guard Application.shared.connectionManager.status.isDisconnected() else {
+            showConnectedAlert(message: "To change AntiTracker settings, please first disconnect", sender: sender)
+            sender.setOn(sender.isOn, animated: true)
+            return
+        }
+        
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
     }
     
     // MARK: - View lifecycle -
