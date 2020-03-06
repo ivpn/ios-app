@@ -72,6 +72,15 @@ class MainViewControllerV2: UIViewController {
                 }
             }
         }
+        
+        if segue.identifier == "MainScreenNetworkProtectionRules" {
+            if let navController = segue.destination as? UINavigationController {
+                if let viewController = navController.topViewController as? NetworkTrustViewController {
+                    let controlPanelViewController = floatingPanel.contentViewController as! ControlPanelViewController
+                    viewController.delegate = controlPanelViewController.networkView
+                }
+            }
+        }
     }
     
     // MARK: - Methods -

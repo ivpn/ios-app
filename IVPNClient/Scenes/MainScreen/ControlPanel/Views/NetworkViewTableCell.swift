@@ -50,11 +50,11 @@ class NetworkViewTableCell: UITableViewCell {
         
         switch network.trust {
         case NetworkTrust.Untrusted.rawValue:
-            trustLabel.textColor = UIColor.init(named: Theme.Key.ivpnRed)
+            trustLabel.backgroundColor = UIColor.init(named: Theme.Key.ivpnRed)
         case NetworkTrust.Trusted.rawValue:
-            trustLabel.textColor = UIColor.init(named: Theme.Key.ivpnGreen)
+            trustLabel.backgroundColor = UIColor.init(named: Theme.Key.ivpnGreen)
         default:
-            trustLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel5)
+            trustLabel.backgroundColor = UIColor.init(named: Theme.Key.ivpnLabel5)
         }
         
         switch network.type {

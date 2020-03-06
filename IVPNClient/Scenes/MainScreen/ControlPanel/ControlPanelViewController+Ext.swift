@@ -19,6 +19,7 @@ extension ControlPanelViewController {
         if indexPath.row == 1 { return 44 }
         if indexPath.row == 3 && !UserDefaults.shared.isMultiHop { return 0 }
         if indexPath.row == 4 { return 52 }
+        if indexPath.row == 6 && !UserDefaults.shared.networkProtectionEnabled { return 0 }
         if indexPath.row == 8 { return 335 }
 
         return 85
@@ -36,6 +37,12 @@ extension ControlPanelViewController {
         if indexPath.row == 3 {
             if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
                 topViewController.performSegue(withIdentifier: "ControlPanelSelectExitServer", sender: nil)
+            }
+        }
+        
+        if indexPath.row == 6 && Application.shared.network.trust != NetworkTrust.None.rawValue {
+            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+                topViewController.performSegue(withIdentifier: "MainScreenNetworkProtectionRules", sender: nil)
             }
         }
     }

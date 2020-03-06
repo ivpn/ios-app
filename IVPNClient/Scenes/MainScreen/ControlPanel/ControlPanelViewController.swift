@@ -25,7 +25,7 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var entryServerNameLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
-    
+    @IBOutlet weak var networkView: NetworkViewTableCell!
     
     // MARK: - Properties -
     
@@ -218,7 +218,7 @@ class ControlPanelViewController: UITableViewController {
             showActionSheet(title: "IVPN cannot connect to trusted network. Do you want to change Network Protection settings for the current network and connect?", actions: ["Connect"], sourceView: self.connectSwitch) { index in
                 switch index {
                 case 0:
-                    // self.networkView.resetTrustToDefault()
+                    self.networkView.resetTrustToDefault()
                     manager.resetRulesAndConnect()
                 default:
                     break
