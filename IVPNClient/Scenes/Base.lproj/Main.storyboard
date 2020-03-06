@@ -1528,7 +1528,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tED-YZ-Xm6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4532" y="-734.48275862068965"/>
+            <point key="canvasLocation" x="5415" y="-1468"/>
         </scene>
         <!--Select Protocol-->
         <scene sceneID="obu-pc-xnF">
@@ -3132,7 +3132,7 @@
                     <connections>
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectServer" id="s0z-do-bnX"/>
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectExitServer" id="fnd-go-o5i"/>
-                        <segue destination="CHV-qV-9fL" kind="show" identifier="MainScreenNetworkProtectionRules" id="AH3-3G-g5H"/>
+                        <segue destination="ktp-XB-N0p" kind="show" identifier="MainScreenNetworkProtectionRules" id="AH3-3G-g5H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPo-yL-uiu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3628,6 +3628,25 @@
             </objects>
             <point key="canvasLocation" x="932" y="-734.48275862068965"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="o6D-0m-XUh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ktp-XB-N0p" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Z5z-O1-wUs"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YXL-1b-d7X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CHV-qV-9fL" kind="relationship" relationship="rootViewController" id="CLh-8w-jLi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EN4-dr-5g2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4532" y="-1468"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icon-check" width="24" height="24"/>
@@ -3690,7 +3709,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fnd-go-o5i"/>
+        <segue reference="s0z-do-bnX"/>
         <segue reference="9Ib-aF-gei"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -30,7 +30,6 @@ class NetworkViewTableCell: UITableViewCell {
     
     override func awakeFromNib() {
         updateNetwork()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(updateNetwork), name: Notification.Name.UpdateNetwork, object: nil)
     }
     
