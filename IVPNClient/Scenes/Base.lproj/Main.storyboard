@@ -1524,7 +1524,7 @@
                             <outlet property="delegate" destination="CHV-qV-9fL" id="PcE-4g-vKp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="aHE-LA-hBb"/>
+                    <navigationItem key="navigationItem" title="Network Trust" id="aHE-LA-hBb"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tED-YZ-Xm6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3631,7 +3631,7 @@
         <!--Navigation Controller-->
         <scene sceneID="o6D-0m-XUh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ktp-XB-N0p" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ktp-XB-N0p" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Z5z-O1-wUs"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YXL-1b-d7X">

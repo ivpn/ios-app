@@ -14,10 +14,27 @@ protocol NetworkTrustViewControllerDelegate: class {
 
 class NetworkTrustViewController: UITableViewController {
     
+    // MARK: - Properties -
+    
     var collection = NetworkTrust.allCasesNormal
     var network = Network()
     var indexPath = IndexPath()
     weak var delegate: NetworkTrustViewControllerDelegate?
+    
+    // MARK: - View Lifecycle -
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initNavigationBar()
+    }
+    
+    // MARK: - Methods -
+    
+    private func initNavigationBar() {
+        if isPresentedModally {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissViewController(_:)))
+        }
+    }
     
 }
 
@@ -65,7 +82,12 @@ extension NetworkTrustViewController {
         tableView.reloadData()
         delegate?.selected(trust: network.trust ?? "", indexPath: self.indexPath)
         Application.shared.connectionManager.evaluateConnection()
-        navigationController?.popViewController(animated: true)
+        
+        if isPresentedModally {
+            navigationController?.dismiss(animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 
 }
