@@ -75,6 +75,7 @@
 		8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */; };
 		824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */; };
 		824F56082233FE6F00BCDD5C /* libwg-go.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 824F56072233FE6F00BCDD5C /* libwg-go.a */; };
+		82526BEF24123D2900E00880 /* NetworkViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */; };
 		8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8252747D21F1F80400D4B8B5 /* ServerViewController.swift */; };
 		82555005220ACAAF004763A7 /* VPNServersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82555004220ACAAF004763A7 /* VPNServersTests.swift */; };
 		8258649F2237A63C0081DC4B /* ConnectionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8258649E2237A63C0081DC4B /* ConnectionInfoView.swift */; };
@@ -412,6 +413,7 @@
 		8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdentifier.swift; sourceTree = "<group>"; };
 		824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModel.swift; sourceTree = "<group>"; };
 		824F56072233FE6F00BCDD5C /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libwg-go.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewTableCell.swift; sourceTree = "<group>"; };
 		8252747D21F1F80400D4B8B5 /* ServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerViewController.swift; sourceTree = "<group>"; };
 		82555004220ACAAF004763A7 /* VPNServersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServersTests.swift; sourceTree = "<group>"; };
 		8258649C2237A0830081DC4B /* SDCAlertView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDCAlertView.framework; path = ../Carthage/Build/iOS/SDCAlertView.framework; sourceTree = "<group>"; };
@@ -721,6 +723,7 @@
 			isa = PBXGroup;
 			children = (
 				820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */,
+				82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2002,6 +2005,7 @@
 				82A160BB221C4E2000730577 /* Server+CoreDataProperties.swift in Sources */,
 				9C454EB41E081E0000BD2AFA /* ConnectButtonParameters.swift in Sources */,
 				8270753622AFC5B90067C323 /* StringProtocol+Ext.swift in Sources */,
+				82526BEF24123D2900E00880 /* NetworkViewTableCell.swift in Sources */,
 				9CB2CE411DB2594A007A4D2D /* VPNServerList.swift in Sources */,
 				823FFB072338DF1800F91A5D /* Capability.swift in Sources */,
 				82061F65238D2730009DDF4D /* Ping.swift in Sources */,
