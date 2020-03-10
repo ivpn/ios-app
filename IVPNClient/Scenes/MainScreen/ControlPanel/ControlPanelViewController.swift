@@ -385,6 +385,12 @@ class ControlPanelViewController: UITableViewController {
             refreshServiceStatus()
         }
         
+        if vpnStatus != lastAccountStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
+            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+                topViewController.updateGeoLocation()
+            }
+        }
+        
         lastAccountStatus = vpnStatus
     }
     
