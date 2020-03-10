@@ -29,13 +29,14 @@ class NetworkViewTableCell: UITableViewCell {
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
-        updateNetwork()
         NotificationCenter.default.addObserver(self, selector: #selector(updateNetwork), name: Notification.Name.UpdateNetwork, object: nil)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        updateNetwork()
+        DispatchQueue.async {
+            self.updateNetwork()
+        }
     }
     
     // MARK: - Methods -
@@ -47,6 +48,8 @@ class NetworkViewTableCell: UITableViewCell {
     func render(network: Network, defaultNetwork: Network?) {
         trustLabel.isHidden = false
         trustLabel.text = network.trust?.uppercased()
+        accessoryType = .disclosureIndicator
+        selectionStyle = .default
         
         switch network.trust {
         case NetworkTrust.Untrusted.rawValue:
@@ -68,6 +71,8 @@ class NetworkViewTableCell: UITableViewCell {
             } else {
                 nameLabel.text = network.name
             }
+            accessoryType = .none
+            selectionStyle = .none
             trustLabel.isHidden = true
         default:
             break
