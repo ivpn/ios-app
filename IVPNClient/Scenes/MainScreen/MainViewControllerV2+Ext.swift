@@ -20,6 +20,12 @@ extension MainViewControllerV2: FloatingPanelControllerDelegate {
         return UIDevice.current.userInterfaceIdiom == .pad ? false : true
     }
     
+    func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
+        if vc.position == .full {
+            updateGeoLocation()
+        }
+    }
+    
 }
 
 
