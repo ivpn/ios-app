@@ -84,7 +84,7 @@ class ServerViewController: UITableViewController {
         }
         
         if isPresentedModally {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissViewController(_:)))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissViewController(_:)))
         }
     }
     
