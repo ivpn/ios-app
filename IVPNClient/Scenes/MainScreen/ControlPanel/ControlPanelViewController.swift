@@ -27,6 +27,9 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var networkView: NetworkViewTableCell!
     @IBOutlet weak var protocolLabel: UILabel!
+    @IBOutlet weak var ipAddressLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var providerLabel: UILabel!
     
     // MARK: - Properties -
     
@@ -37,6 +40,14 @@ class ControlPanelViewController: UITableViewController {
         let sessionManager = SessionManager()
         sessionManager.delegate = self
         return sessionManager
+    }
+    
+    var connectionInfoViewModel: ProofsViewModel! {
+        didSet {
+            ipAddressLabel.text = connectionInfoViewModel.ipAddress
+            locationLabel.text = "\(connectionInfoViewModel.city), \(connectionInfoViewModel.countryCode)"
+            providerLabel.text = connectionInfoViewModel.provider
+        }
     }
     
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
