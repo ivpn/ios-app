@@ -34,6 +34,7 @@ class NetworkViewTableCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         updateNetwork()
     }
     
