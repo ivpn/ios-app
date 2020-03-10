@@ -188,6 +188,8 @@ class ControlPanelViewController: UITableViewController {
     
     @objc func protocolSelected() {
         updateProtocol()
+        tableView.reloadData()
+        isMultiHop = UserDefaults.shared.isMultiHop
     }
     
     @objc func pingDidComplete() {
