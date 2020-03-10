@@ -23,6 +23,7 @@ class ProtocolViewController: UITableViewController {
         super.viewDidLoad()
         keyManager.delegate = self
         updateCollection(connectionProtocol: Application.shared.settings.connectionProtocol)
+        initNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +32,12 @@ class ProtocolViewController: UITableViewController {
     }
     
     // MARK: - Methods -
+    
+    private func initNavigationBar() {
+        if isPresentedModally {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissViewController(_:)))
+        }
+    }
     
     func updateCollection(connectionProtocol: ConnectionSettings) {
         collection.removeAll()
@@ -84,6 +91,7 @@ class ProtocolViewController: UITableViewController {
             guard index > -1 else { return }
             Application.shared.settings.connectionProtocol = protocols[index]
             self.tableView.reloadData()
+            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
         }
     }
     
@@ -248,6 +256,8 @@ extension ProtocolViewController {
         }
         
         reloadTable(connectionProtocol: connectionProtocol)
+        
+        NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

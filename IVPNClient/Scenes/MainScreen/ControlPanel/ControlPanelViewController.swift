@@ -26,6 +26,7 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var entryServerFlagImage: UIImageView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var networkView: NetworkViewTableCell!
+    @IBOutlet weak var protocolLabel: UILabel!
     
     // MARK: - Properties -
     
@@ -153,6 +154,7 @@ class ControlPanelViewController: UITableViewController {
         updateServerNames()
         updateServerLabels()
         updateAntiTracker()
+        updateProtocol()
     }
     
     @objc func connectionExecute() {
@@ -171,6 +173,10 @@ class ControlPanelViewController: UITableViewController {
     
     @objc func serverSelected() {
         updateServerNames()
+    }
+    
+    @objc func protocolSelected() {
+        updateProtocol()
     }
     
     @objc func pingDidComplete() {
@@ -292,6 +298,32 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
+        if let sourceView = sender as? UIView {
+            showActionSheet(title: message, actions: ["Disconnect"], sourceView: sourceView) { index in
+                if let completion = completion {
+                    completion()
+                }
+                
+                switch index {
+                case 0:
+                    let status = Application.shared.connectionManager.status
+                    guard Application.shared.connectionManager.canDisconnect(status: status) else {
+                        self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
+                        return
+                    }
+                    NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
+                    self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+                    self.hud.detailTextLabel.text = "Disconnecting"
+                    self.hud.show(in: (self.navigationController?.view)!)
+                    self.hud.dismiss(afterDelay: 5)
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
@@ -300,6 +332,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: Notification.Name.Disconnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     private func removeObservers() {
@@ -312,6 +345,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     // MARK: - Private methods -
@@ -323,6 +357,7 @@ class ControlPanelViewController: UITableViewController {
         updateServerNames()
         updateServerLabels()
         updateAntiTracker()
+        updateProtocol()
     }
     
     private func updateStatus(vpnStatus: NEVPNStatus) {
@@ -362,30 +397,9 @@ class ControlPanelViewController: UITableViewController {
         antiTrackerSwitch.isOn = UserDefaults.shared.isAntiTracker
     }
     
-    private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
-        if let sourceView = sender as? UIView {
-            showActionSheet(title: message, actions: ["Disconnect"], sourceView: sourceView) { index in
-                if let completion = completion {
-                    completion()
-                }
-                
-                switch index {
-                case 0:
-                    let status = Application.shared.connectionManager.status
-                    guard Application.shared.connectionManager.canDisconnect(status: status) else {
-                        self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
-                        return
-                    }
-                    NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
-                    self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-                    self.hud.detailTextLabel.text = "Disconnecting"
-                    self.hud.show(in: (self.navigationController?.view)!)
-                    self.hud.dismiss(afterDelay: 5)
-                default:
-                    break
-                }
-            }
-        }
+    private func updateProtocol() {
+        let selectedProtocol = Application.shared.connectionManager.settings.connectionProtocol
+        protocolLabel.text = selectedProtocol.format()
     }
     
 }
