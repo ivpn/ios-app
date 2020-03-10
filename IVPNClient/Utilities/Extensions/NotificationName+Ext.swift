@@ -28,5 +28,6 @@ extension Notification.Name {
     public static let ShowCreateAccount = Notification.Name("showCreateAccount")
     public static let UpdateFloatingPanelLayout = Notification.Name("updateFloatingPanelLayout")
     public static let UpdateControlPanel = Notification.Name("updateControlPanel")
+    public static let ProtocolSelected = Notification.Name("protocolSelected")
     
 }
