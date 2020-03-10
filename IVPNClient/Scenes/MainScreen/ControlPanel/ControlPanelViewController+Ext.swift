@@ -45,6 +45,12 @@ extension ControlPanelViewController {
                 topViewController.performSegue(withIdentifier: "MainScreenNetworkProtectionRules", sender: nil)
             }
         }
+        
+        if indexPath.row == 7 {
+            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+                topViewController.performSegue(withIdentifier: "MainScreenSelectProtocol", sender: nil)
+            }
+        }
     }
     
 }

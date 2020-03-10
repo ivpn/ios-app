@@ -23,6 +23,7 @@ class ProtocolViewController: UITableViewController {
         super.viewDidLoad()
         keyManager.delegate = self
         updateCollection(connectionProtocol: Application.shared.settings.connectionProtocol)
+        initNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +32,12 @@ class ProtocolViewController: UITableViewController {
     }
     
     // MARK: - Methods -
+    
+    private func initNavigationBar() {
+        if isPresentedModally {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissViewController(_:)))
+        }
+    }
     
     func updateCollection(connectionProtocol: ConnectionSettings) {
         collection.removeAll()
