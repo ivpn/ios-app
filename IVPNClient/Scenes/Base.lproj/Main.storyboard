@@ -2289,7 +2289,7 @@
                                                                     <color key="textColor" name="ivpnLabel5"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UDP 1234" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfE-oo-iTV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IKEv2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfE-oo-iTV">
                                                                     <rect key="frame" x="0.0" y="17.333333333333332" width="303" height="16.999999999999996"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
@@ -2565,6 +2565,7 @@
                         <outlet property="exitServerNameLabel" destination="ctm-zP-IXi" id="I0T-vU-CHS"/>
                         <outlet property="networkView" destination="IWY-FC-eTO" id="7rw-Ai-A0f"/>
                         <outlet property="protectionStatusLabel" destination="fZx-j5-ahl" id="v3k-fN-qnH"/>
+                        <outlet property="protocolLabel" destination="mfE-oo-iTV" id="W5w-VA-TNw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Tj-dt-TNi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

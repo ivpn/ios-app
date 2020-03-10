@@ -26,6 +26,7 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var entryServerFlagImage: UIImageView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var networkView: NetworkViewTableCell!
+    @IBOutlet weak var protocolLabel: UILabel!
     
     // MARK: - Properties -
     
@@ -171,6 +172,10 @@ class ControlPanelViewController: UITableViewController {
     
     @objc func serverSelected() {
         updateServerNames()
+    }
+    
+    @objc func protocolSelected() {
+        updateProtocol()
     }
     
     @objc func pingDidComplete() {
@@ -360,6 +365,11 @@ class ControlPanelViewController: UITableViewController {
     
     private func updateAntiTracker() {
         antiTrackerSwitch.isOn = UserDefaults.shared.isAntiTracker
+    }
+    
+    private func updateProtocol() {
+        let selectedProtocol = Application.shared.connectionManager.settings.connectionProtocol
+        protocolLabel.text = selectedProtocol.format()
     }
     
     private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
