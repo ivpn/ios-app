@@ -159,15 +159,6 @@ class ControlPanelViewController: UITableViewController {
     
     // MARK: - Methods -
     
-    func reloadView() {
-        tableView.reloadData()
-        isMultiHop = UserDefaults.shared.isMultiHop
-        updateServerNames()
-        updateServerLabels()
-        updateAntiTracker()
-        updateProtocol()
-    }
-    
     @objc func connectionExecute() {
         Application.shared.connectionManager.getStatus { _, status in
             if status == .disconnected || status == .invalid {
@@ -175,29 +166,6 @@ class ControlPanelViewController: UITableViewController {
             } else {
                 self.disconnect()
             }
-        }
-    }
-    
-    @objc func updateControlPanel() {
-        reloadView()
-    }
-    
-    @objc func serverSelected() {
-        updateServerNames()
-    }
-    
-    @objc func protocolSelected() {
-        updateProtocol()
-        tableView.reloadData()
-        isMultiHop = UserDefaults.shared.isMultiHop
-    }
-    
-    @objc func pingDidComplete() {
-        updateServerNames()
-        
-        if needsToReconnect {
-            needsToReconnect = false
-            Application.shared.connectionManager.connect()
         }
     }
     
@@ -266,18 +234,6 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
-    @objc func authenticationDismissed() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
-    }
-    
-    @objc func subscriptionDismissed() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
-    }
-    
-    @objc func agreedToTermsOfService() {
-        connectionExecute()
-    }
-    
     @objc func newSession() {
         sessionManager.createSession()
     }
@@ -296,19 +252,6 @@ class ControlPanelViewController: UITableViewController {
                 self.present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
             }
         )
-    }
-    
-    func refreshServiceStatus() {
-        if let lastUpdateDate = lastStatusUpdateDate {
-            let now = Date()
-            if now.timeIntervalSince(lastUpdateDate) < Config.serviceStatusRefreshMaxIntervalSeconds { return }
-        }
-        
-        let status = Application.shared.connectionManager.status
-        if status != .connected && status != .connecting {
-            self.lastStatusUpdateDate = Date()
-            self.sessionManager.getSessionStatus()
-        }
     }
     
     func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
@@ -373,6 +316,15 @@ class ControlPanelViewController: UITableViewController {
         updateProtocol()
     }
     
+    private func reloadView() {
+        tableView.reloadData()
+        isMultiHop = UserDefaults.shared.isMultiHop
+        updateServerNames()
+        updateServerLabels()
+        updateAntiTracker()
+        updateProtocol()
+    }
+    
     private func updateStatus(vpnStatus: NEVPNStatus) {
         vpnStatusViewModel.status = vpnStatus
         protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
@@ -419,6 +371,54 @@ class ControlPanelViewController: UITableViewController {
     private func updateProtocol() {
         let selectedProtocol = Application.shared.connectionManager.settings.connectionProtocol
         protocolLabel.text = selectedProtocol.format()
+    }
+    
+    private func refreshServiceStatus() {
+        if let lastUpdateDate = lastStatusUpdateDate {
+            let now = Date()
+            if now.timeIntervalSince(lastUpdateDate) < Config.serviceStatusRefreshMaxIntervalSeconds { return }
+        }
+        
+        let status = Application.shared.connectionManager.status
+        if status != .connected && status != .connecting {
+            self.lastStatusUpdateDate = Date()
+            self.sessionManager.getSessionStatus()
+        }
+    }
+    
+    @objc private func updateControlPanel() {
+        reloadView()
+    }
+    
+    @objc private func serverSelected() {
+        updateServerNames()
+    }
+    
+    @objc private func protocolSelected() {
+        updateProtocol()
+        tableView.reloadData()
+        isMultiHop = UserDefaults.shared.isMultiHop
+    }
+    
+    @objc private func pingDidComplete() {
+        updateServerNames()
+        
+        if needsToReconnect {
+            needsToReconnect = false
+            Application.shared.connectionManager.connect()
+        }
+    }
+    
+    @objc private func authenticationDismissed() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
+    }
+    
+    @objc private func subscriptionDismissed() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
+    }
+    
+    @objc private func agreedToTermsOfService() {
+        connectionExecute()
     }
     
 }
