@@ -100,7 +100,11 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        isMultiHop = sender == enableMultiHopButton
+        let isEnabled = sender == enableMultiHopButton
+        
+        Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: isEnabled)
+        
+        isMultiHop = isEnabled
         reloadView()
     }
     

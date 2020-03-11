@@ -94,4 +94,17 @@ class Settings {
         }
     }
     
+    func updateSelectedServerForMultiHop(isEnabled: Bool) {
+        if isEnabled && Application.shared.settings.selectedServer.fastest {
+            let server = Application.shared.serverList.servers.first!
+            server.fastest = false
+            Application.shared.settings.selectedServer = server
+            Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
+        }
+        
+        if !isEnabled {
+            Application.shared.settings.selectedServer.fastest = UserDefaults.standard.bool(forKey: "FastestServerPreferred")
+        }
+    }
+    
 }

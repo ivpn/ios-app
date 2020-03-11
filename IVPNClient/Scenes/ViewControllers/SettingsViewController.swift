@@ -56,6 +56,8 @@ class SettingsViewController: UITableViewController {
             return
         }
         
+        
+        
         guard Application.shared.serviceStatus.isActive else {
             guard UserDefaults.shared.hasUserConsent else {
                 present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
@@ -71,6 +73,8 @@ class SettingsViewController: UITableViewController {
             }
             return
         }
+        
+        
         
         guard Application.shared.serviceStatus.isEnabled(capability: .multihop) else {
             if Application.shared.serviceStatus.isOnFreeTrial {
@@ -93,12 +97,16 @@ class SettingsViewController: UITableViewController {
             return
         }
         
+        
+        
         if Application.shared.settings.connectionProtocol.tunnelType() != .openvpn {
             showAlert(title: "Change protocol to OpenVPN", message: "For Multi-Hop connection you must select OpenVPN protocol.") { _ in
                 sender.setOn(false, animated: true)
             }
             return
         }
+        
+        
         
         if !Application.shared.connectionManager.status.isDisconnected() {
             showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender, completion: {
@@ -108,18 +116,11 @@ class SettingsViewController: UITableViewController {
             return
         }
         
+        
+        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isMultiHop)
         
-        if sender.isOn && Application.shared.settings.selectedServer.fastest {
-            let server = Application.shared.serverList.servers.first!
-            server.fastest = false
-            Application.shared.settings.selectedServer = server
-            Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
-        }
-        
-        if !sender.isOn {
-            Application.shared.settings.selectedServer.fastest = UserDefaults.standard.bool(forKey: "FastestServerPreferred")
-        }
+        Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: sender.isOn)
         
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
         
