@@ -81,24 +81,6 @@ class MainViewControllerV2: UIViewController {
     
     // MARK: - Methods -
     
-    @objc func updateFloatingPanelLayout() {
-        floatingPanel.updateLayout()
-    }
-    
-    @objc func updateServersList() {
-        ApiService.shared.getServersList(storeInCache: true) { result in
-            self.updateServerListDidComplete = true
-            switch result {
-            case .success(let serverList):
-                Application.shared.serverList = serverList
-                Pinger.shared.serverList = Application.shared.serverList
-                Pinger.shared.ping()
-            default:
-                break
-            }
-        }
-    }
-    
     func updateGeoLocation() {
         let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
         
@@ -127,6 +109,24 @@ class MainViewControllerV2: UIViewController {
     }
     
     // MARK: - Private methods -
+    
+    @objc private func updateFloatingPanelLayout() {
+        floatingPanel.updateLayout()
+    }
+    
+    @objc private func updateServersList() {
+        ApiService.shared.getServersList(storeInCache: true) { result in
+            self.updateServerListDidComplete = true
+            switch result {
+            case .success(let serverList):
+                Application.shared.serverList = serverList
+                Pinger.shared.serverList = Application.shared.serverList
+                Pinger.shared.ping()
+            default:
+                break
+            }
+        }
+    }
     
     private func initFloatingPanel() {
         floatingPanel = FloatingPanelController()
