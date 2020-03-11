@@ -40,12 +40,7 @@ class MainViewControllerV2: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if updateServerListDidComplete {
-            DispatchQueue.delay(0.5) {
-                Pinger.shared.ping()
-            }
-        }
+        startPingService(updateServerListDidComplete: updateServerListDidComplete)
     }
     
     deinit {
@@ -86,19 +81,18 @@ class MainViewControllerV2: UIViewController {
     
     // MARK: - Methods -
     
-    @objc func updateFloatingPanelLayout() {
-        floatingPanel.updateLayout()
-    }
-    
-    @objc func updateServersList() {
-        ApiService.shared.getServersList(storeInCache: true) { result in
-            self.updateServerListDidComplete = true
+    func updateGeoLocation() {
+        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
+        
+        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
+            guard let self = self else { return }
+            
             switch result {
-            case .success(let serverList):
-                Application.shared.serverList = serverList
-                Pinger.shared.serverList = Application.shared.serverList
-                Pinger.shared.ping()
-            default:
+            case .success(let model):
+                if let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController {
+                    controlPanelViewController.connectionInfoViewModel = ProofsViewModel(model: model)
+                }
+            case .failure:
                 break
             }
         }
@@ -116,6 +110,24 @@ class MainViewControllerV2: UIViewController {
     
     // MARK: - Private methods -
     
+    @objc private func updateFloatingPanelLayout() {
+        floatingPanel.updateLayout()
+    }
+    
+    @objc private func updateServersList() {
+        ApiService.shared.getServersList(storeInCache: true) { result in
+            self.updateServerListDidComplete = true
+            switch result {
+            case .success(let serverList):
+                Application.shared.serverList = serverList
+                Pinger.shared.serverList = Application.shared.serverList
+                Pinger.shared.ping()
+            default:
+                break
+            }
+        }
+    }
+    
     private func initFloatingPanel() {
         floatingPanel = FloatingPanelController()
         floatingPanel.setup()
@@ -131,6 +143,14 @@ class MainViewControllerV2: UIViewController {
     private func startServersUpdate() {
         updateServersList()
         updateServersTimer = Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
+    }
+    
+    private func startPingService(updateServerListDidComplete: Bool) {
+        if updateServerListDidComplete {
+            DispatchQueue.delay(0.5) {
+                Pinger.shared.ping()
+            }
+        }
     }
     
 }

@@ -41,11 +41,21 @@ class NetworkViewTableCell: UITableViewCell {
     
     // MARK: - Methods -
     
-    @objc func updateNetwork() {
+    func resetTrustToDefault() {
+        if StorageManager.getDefaultTrust() == NetworkTrust.Trusted.rawValue {
+            update(trust: NetworkTrust.Untrusted.rawValue)
+        } else {
+            update(trust: NetworkTrust.Default.rawValue)
+        }
+    }
+    
+    // MARK: - Private methods -
+    
+    @objc private func updateNetwork() {
         render(network: Application.shared.network, defaultNetwork: defaultNetwork)
     }
     
-    func render(network: Network, defaultNetwork: Network?) {
+    private func render(network: Network, defaultNetwork: Network?) {
         trustLabel.isHidden = false
         trustLabel.text = network.trust?.uppercased()
         accessoryType = .disclosureIndicator
@@ -79,7 +89,7 @@ class NetworkViewTableCell: UITableViewCell {
         }
     }
     
-    func update(trust: String) {
+    private func update(trust: String) {
         Application.shared.network.trust = trust
         let network = Application.shared.network
         
@@ -91,14 +101,6 @@ class NetworkViewTableCell: UITableViewCell {
         }
         
         updateNetwork()
-    }
-    
-    func resetTrustToDefault() {
-        if StorageManager.getDefaultTrust() == NetworkTrust.Trusted.rawValue {
-            update(trust: NetworkTrust.Untrusted.rawValue)
-        } else {
-            update(trust: NetworkTrust.Default.rawValue)
-        }
     }
     
 }
