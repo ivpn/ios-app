@@ -40,12 +40,7 @@ class MainViewControllerV2: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if updateServerListDidComplete {
-            DispatchQueue.delay(0.5) {
-                Pinger.shared.ping()
-            }
-        }
+        startPingService(updateServerListDidComplete: updateServerListDidComplete)
     }
     
     deinit {
@@ -148,6 +143,14 @@ class MainViewControllerV2: UIViewController {
     private func startServersUpdate() {
         updateServersList()
         updateServersTimer = Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
+    }
+    
+    private func startPingService(updateServerListDidComplete: Bool) {
+        if updateServerListDidComplete {
+            DispatchQueue.delay(0.5) {
+                Pinger.shared.ping()
+            }
+        }
     }
     
 }
