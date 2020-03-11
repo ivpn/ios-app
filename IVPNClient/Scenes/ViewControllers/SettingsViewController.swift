@@ -48,67 +48,35 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func toggleMultiHop(_ sender: UISwitch) {
-        guard Application.shared.authentication.isLoggedIn else {
-            authenticate(self)
+        guard evaluateIsLoggedIn() else {
             DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
             }
             return
         }
         
-        
-        
-        guard Application.shared.serviceStatus.isActive else {
-            guard UserDefaults.shared.hasUserConsent else {
-                present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
-                DispatchQueue.delay(0.5) {
-                    sender.setOn(false, animated: true)
-                }
-                return
-            }
-            
-            present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+        guard evaluateIsServiceActive() else {
             DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
             }
             return
         }
         
-        
-        
-        guard Application.shared.serviceStatus.isEnabled(capability: .multihop) else {
-            if Application.shared.serviceStatus.isOnFreeTrial {
-                showAlert(title: "", message: "MultiHop is supported only on IVPN Pro plan") { _ in
-                    sender.setOn(false, animated: true)
-                }
-                return
-            }
-            
-            showActionSheet(title: "MultiHop is supported only on IVPN Pro plan", actions: ["Switch plan"], sourceView: sender) { index in
-                switch index {
-                case 0:
-                    sender.setOn(false, animated: true)
-                    self.manageSubscription(self)
-                default:
-                    sender.setOn(false, animated: true)
-                }
-            }
-            
-            return
-        }
-        
-        
-        
-        if Application.shared.settings.connectionProtocol.tunnelType() != .openvpn {
-            showAlert(title: "Change protocol to OpenVPN", message: "For Multi-Hop connection you must select OpenVPN protocol.") { _ in
+        guard evaluateMultiHopCapability(sender) else {
+            DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
             }
             return
         }
         
+        guard evaluateIsOpenVPN() else {
+            DispatchQueue.delay(0.5) {
+                sender.setOn(false, animated: true)
+            }
+            return
+        }
         
-        
-        if !Application.shared.connectionManager.status.isDisconnected() {
+        guard Application.shared.connectionManager.status.isDisconnected() else {
             showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender, completion: {
                 sender.setOn(UserDefaults.shared.isMultiHop, animated: true)
                 self.tableView.reloadData()
@@ -116,14 +84,9 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        
-        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isMultiHop)
-        
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: sender.isOn)
-        
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
-        
         tableView.reloadData()
     }
     
