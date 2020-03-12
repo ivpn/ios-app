@@ -211,6 +211,16 @@ extension UIViewController {
         return true
     }
     
+    func evaluateIsOpenVPN() -> Bool {
+        if Application.shared.settings.connectionProtocol.tunnelType() != .openvpn {
+            showAlert(title: "Change protocol to OpenVPN", message: "For Multi-Hop connection you must select OpenVPN protocol.") { _ in
+            }
+            return false
+        }
+        
+        return true
+    }
+    
     func manageSubscription() {
         if !Application.shared.serviceStatus.isActive {
             present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
