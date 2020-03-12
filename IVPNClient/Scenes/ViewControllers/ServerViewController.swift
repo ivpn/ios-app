@@ -33,15 +33,7 @@ class ServerViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Select Server"
-        
-        if isExitServer {
-            title = "Select Exit Server"
-        } else if UserDefaults.shared.isMultiHop {
-            title = "Select Entry Server"
-        }
-        
+        initNavigationBar()
         initCollection()
     }
     
@@ -81,6 +73,20 @@ class ServerViewController: UITableViewController {
     }
     
     // MARK: - Methods -
+    
+    private func initNavigationBar() {
+        title = "Select Server"
+        
+        if isExitServer {
+            title = "Select Exit Server"
+        } else if UserDefaults.shared.isMultiHop {
+            title = "Select Entry Server"
+        }
+        
+        if isPresentedModally {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissViewController(_:)))
+        }
+    }
     
     private func initCollection() {
         collection = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + Application.shared.serverList.servers
@@ -190,7 +196,11 @@ extension ServerViewController {
             }
         }
         
-        navigationController?.popViewController(animated: true)
+        if isPresentedModally {
+            navigationController?.dismiss(animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

@@ -43,6 +43,10 @@ struct ProofsViewModel {
         return model.countryCode
     }
     
+    var provider: String {
+        return model.isp
+    }
+    
     // MARK: - Initialize -
     
     init(model: GeoLookup) {

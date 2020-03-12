@@ -16,6 +16,7 @@ struct Theme {
         static let ivpnBackgroundTertiary = "ivpnBackgroundTertiary"
         static let ivpnBackgroundQuaternary = "ivpnBackgroundQuaternary"
         static let ivpnBackgroundConnected = "ivpnBackgroundConnected"
+        static let ivpnBackgroundBase = "ivpnBackgroundBase"
         static let ivpnLabelPrimary = "ivpnLabelPrimary"
         static let ivpnLabelSecondary = "ivpnLabelSecondary"
         static let ivpnLabelTertiary = "ivpnLabelTertiary"
@@ -27,6 +28,7 @@ struct Theme {
         static let ivpnGreen = "ivpnGreen"
         static let ivpnOrange = "ivpnOrange"
         static let ivpnRed = "ivpnRed"
+        static let ivpnRedOff = "ivpnRedOff"
         static let ivpnGray1 = "ivpnGray1"
         static let ivpnGray2 = "ivpnGray2"
         static let ivpnGray3 = "ivpnGray3"
@@ -40,6 +42,8 @@ struct Theme {
         static let ivpnGray11 = "ivpnGray11"
         static let ivpnGray12 = "ivpnGray12"
         static let ivpnGray13 = "ivpnGray13"
+        static let ivpnGray14 = "ivpnGray14"
+        static let ivpnGray15 = "ivpnGray15"
     }
     
 }

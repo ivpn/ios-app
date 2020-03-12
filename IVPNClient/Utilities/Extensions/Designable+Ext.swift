@@ -23,7 +23,7 @@ class DesignableLabel: UILabel {
 extension UIView {
     
     @IBInspectable
-    var cornerRadius: CGFloat {
+    var borderRadius: CGFloat {
         get {
             return layer.cornerRadius
         }

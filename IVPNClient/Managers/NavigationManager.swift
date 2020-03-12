@@ -48,4 +48,14 @@ class NavigationManager {
         return storyBoard.instantiateViewController(withIdentifier: "upgradePlanView")
     }
     
+    static func getSettingsViewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        return storyBoard.instantiateViewController(withIdentifier: "settingsView")
+    }
+    
+    static func getControlPanelViewController() -> UITableViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        return storyBoard.instantiateViewController(withIdentifier: "controlPanelView") as! ControlPanelViewController
+    }
+    
 }
