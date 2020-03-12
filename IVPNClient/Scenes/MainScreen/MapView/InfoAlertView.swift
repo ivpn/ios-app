@@ -14,6 +14,18 @@ protocol InfoAlertViewDelegate: class {
 
 class InfoAlertView: UIView {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var actionButton: UIButton!
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func action(_ sender: UIButton) {
+        delegate?.action()
+    }
+    
     // MARK: - Properties -
     
     weak var delegate: InfoAlertViewDelegate?
@@ -27,6 +39,9 @@ class InfoAlertView: UIView {
     // MARK: - Methods -
     
     func show(type: InfoAlertViewType = .info, text: String = "", actionText: String = "") {
+        setupAppearance(type: type)
+        setupText(text: text)
+        setupAction(actionText: actionText)
         isHidden = false
     }
     
@@ -36,19 +51,32 @@ class InfoAlertView: UIView {
     
     // MARK: - Private methods -
     
-    private func setupAppearance(type: InfoAlertViewType) {
+    func setupAppearance(type: InfoAlertViewType) {
         // TODO: setup UIView background color
+        // TODO: setup iconImage
+        switch type {
+        case .alert:
+            break
+        case .info:
+            break
+        }
     }
     
-    private func setupText(text: String) {
-        // TODO: setup UILabel text
+    func setupText(text: String) {
+        textLabel.text = text
     }
     
-    private func setupAction(actionText: String) {
-        // TODO: setup UIButton action
+    func setupAction(actionText: String) {
+        if actionText.isEmpty {
+            actionButton.isHidden = true
+        } else {
+            actionButton.setTitle(actionText, for: .normal)
+        }
     }
     
 }
+
+// MARK: - InfoAlertView extension -
 
 extension InfoAlertView {
     
