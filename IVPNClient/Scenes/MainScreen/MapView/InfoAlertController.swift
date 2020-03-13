@@ -39,12 +39,23 @@ class InfoAlertController {
         }
     }
     
-    private var infoAlert: InfoAlert = .trialPeriod
+    var shouldDisplay: Bool {
+        return Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3
+    }
+    
+    private var infoAlert: InfoAlert = .subscriptionExpiration
     
     // MARK: - Methods -
     
     func updateInfoAlert() {
-        // TODO: Update infoAlert property based on subscription status
+        if Application.shared.serviceStatus.isOnFreeTrial && shouldDisplay {
+            infoAlert = .trialPeriod
+            return
+        }
+        
+        if shouldDisplay {
+            infoAlert = .subscriptionExpiration
+        }
     }
     
 }
