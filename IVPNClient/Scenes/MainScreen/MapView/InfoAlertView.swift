@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum InfoAlertViewType {
+    case alert
+    case info
+}
+
 protocol InfoAlertViewDelegate: class {
     func action()
 }
@@ -93,17 +98,6 @@ class InfoAlertView: UIView {
         } else {
             actionButton.setTitle(actionText, for: .normal)
         }
-    }
-    
-}
-
-// MARK: - InfoAlertView extension -
-
-extension InfoAlertView {
-    
-    enum InfoAlertViewType {
-        case alert
-        case info
     }
     
 }
