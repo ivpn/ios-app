@@ -6,25 +6,40 @@
 //  Copyright © 2020 IVPN. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class InfoAlertController {
     
     // MARK: - Properties -
     
     var text: String {
-        return ""
+        switch infoAlert {
+        case .trialPeriod:
+            return "Trial period will expire in {n} days"
+        case .subscriptionExpiration:
+            return "Subscription will expire in {n} days"
+        }
     }
     
     var actionText: String {
-        return ""
+        switch infoAlert {
+        case .trialPeriod:
+            return "RENEW"
+        case .subscriptionExpiration:
+            return ""
+        }
     }
     
     var type: InfoAlertViewType {
-        return .info
+        switch infoAlert {
+        case .trialPeriod:
+            return .info
+        case .subscriptionExpiration:
+            return .alert
+        }
     }
     
-    private var infoAlert: InfoAlert = .trialPerion
+    private var infoAlert: InfoAlert = .trialPeriod
     
     // MARK: - Methods -
     
@@ -39,7 +54,7 @@ class InfoAlertController {
 extension InfoAlertController {
     
     enum InfoAlert {
-        case trialPerion
+        case trialPeriod
         case subscriptionExpiration
     }
     
@@ -50,7 +65,14 @@ extension InfoAlertController {
 extension InfoAlertController: InfoAlertViewDelegate {
     
     func action() {
-        // TODO: Handle action based on InfoAlert
+        switch infoAlert {
+        case .trialPeriod:
+            break
+        case .subscriptionExpiration:
+            if let topViewController = UIApplication.topViewController() {
+                topViewController.manageSubscription()
+            }
+        }
     }
     
 }
