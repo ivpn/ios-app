@@ -11,6 +11,10 @@ import FloatingPanel
 
 class MainViewControllerV2: UIViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var infoAlertView: InfoAlertView!
+    
     // MARK: - Properties -
     
     var floatingPanel: FloatingPanelController!
@@ -36,6 +40,7 @@ class MainViewControllerV2: UIViewController {
         initFloatingPanel()
         addObservers()
         startServersUpdate()
+        updateInfoAlert()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,6 +117,7 @@ class MainViewControllerV2: UIViewController {
     
     @objc private func updateFloatingPanelLayout() {
         floatingPanel.updateLayout()
+        updateInfoAlert()
     }
     
     @objc private func updateServersList() {
@@ -126,6 +132,11 @@ class MainViewControllerV2: UIViewController {
                 break
             }
         }
+    }
+    
+    private func updateInfoAlert() {
+        infoAlertView.show(type: .alert, text: "You’ve reached the maximum number of connected devices.", actionText: "UPGRADE")
+        infoAlertView.updateAutoLayout()
     }
     
     private func initFloatingPanel() {
