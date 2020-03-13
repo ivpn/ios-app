@@ -20,6 +20,7 @@ class MainViewControllerV2: UIViewController {
     var floatingPanel: FloatingPanelController!
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
+    private var infoAlertController = InfoAlertController()
     
     // MARK: - @IBActions -
     
@@ -40,6 +41,7 @@ class MainViewControllerV2: UIViewController {
         initFloatingPanel()
         addObservers()
         startServersUpdate()
+        initInfoAlert()
         updateInfoAlert()
     }
     
@@ -134,9 +136,18 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
+    private func initInfoAlert() {
+        infoAlertView.delegate = infoAlertController
+    }
+    
     private func updateInfoAlert() {
-        infoAlertView.show(type: .alert, text: "You’ve reached the maximum number of connected devices.", actionText: "UPGRADE")
-        infoAlertView.updateAutoLayout()
+        // TODO: call updateInfoAlert() in refreshUI() method
+        if infoAlertController.shouldDisplay {
+            infoAlertController.update()
+            infoAlertView.show(type: infoAlertController.type, text: infoAlertController.text, actionText: infoAlertController.actionText)
+        } else {
+            infoAlertView.hide()
+        }
     }
     
     private func initFloatingPanel() {

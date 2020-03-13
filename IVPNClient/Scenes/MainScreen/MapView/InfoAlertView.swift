@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum InfoAlertViewType {
+    case alert
+    case info
+}
+
 protocol InfoAlertViewDelegate: class {
     func action()
 }
@@ -40,6 +45,7 @@ class InfoAlertView: UIView {
     // MARK: - Methods -
     
     func show(type: InfoAlertViewType = .info, text: String = "", actionText: String = "") {
+        updateAutoLayout()
         setupAppearance(type: type)
         setupText(text: text)
         setupAction(actionText: actionText)
@@ -50,23 +56,9 @@ class InfoAlertView: UIView {
         isHidden = true
     }
     
-    func updateAutoLayout() {
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-            bottomConstraint.constant = 342
-            return
-        }
-
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
-            bottomConstraint.constant = 257
-            return
-        }
-        
-        bottomConstraint.constant = 213
-    }
-    
     // MARK: - Private methods -
     
-    func setupAppearance(type: InfoAlertViewType) {
+    private func setupAppearance(type: InfoAlertViewType) {
         switch type {
         case .alert:
             backgroundColor = UIColor.init(named: Theme.Key.ivpnLightYellow)
@@ -83,11 +75,11 @@ class InfoAlertView: UIView {
         }
     }
     
-    func setupText(text: String) {
+    private func setupText(text: String) {
         textLabel.text = text
     }
     
-    func setupAction(actionText: String) {
+    private func setupAction(actionText: String) {
         if actionText.isEmpty {
             actionButton.isHidden = true
         } else {
@@ -95,15 +87,18 @@ class InfoAlertView: UIView {
         }
     }
     
-}
+    private func updateAutoLayout() {
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            bottomConstraint.constant = 342
+            return
+        }
 
-// MARK: - InfoAlertView extension -
-
-extension InfoAlertView {
-    
-    enum InfoAlertViewType {
-        case alert
-        case info
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+            bottomConstraint.constant = 257
+            return
+        }
+        
+        bottomConstraint.constant = 213
     }
     
 }

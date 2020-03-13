@@ -126,6 +126,7 @@
 		8270753622AFC5B90067C323 /* StringProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */; };
 		8270753722AFC7E70067C323 /* StringProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */; };
 		8270D266241A477900B17B65 /* InfoAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270D265241A477900B17B65 /* InfoAlertView.swift */; };
+		8270D268241BB3D100B17B65 /* InfoAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270D267241BB3D000B17B65 /* InfoAlertController.swift */; };
 		82712DB922314AB100833445 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82712DB822314AB100833445 /* TimerManager.swift */; };
 		82774855237596DF0061BD46 /* OpenVPNConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82774854237596DF0061BD46 /* OpenVPNConf.swift */; };
 		8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */; };
@@ -443,6 +444,7 @@
 		826F7F4B23A7B4CD00777DB9 /* today-extension-staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "today-extension-staging.xcconfig"; sourceTree = "<group>"; };
 		8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Ext.swift"; sourceTree = "<group>"; };
 		8270D265241A477900B17B65 /* InfoAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertView.swift; sourceTree = "<group>"; };
+		8270D267241BB3D000B17B65 /* InfoAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertController.swift; sourceTree = "<group>"; };
 		82712DB822314AB100833445 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		82774854237596DF0061BD46 /* OpenVPNConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenVPNConf.swift; sourceTree = "<group>"; };
 		8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofsViewModel.swift; sourceTree = "<group>"; };
@@ -1154,6 +1156,7 @@
 			children = (
 				82C1D5BB23FE78570059A915 /* MapScrollView.swift */,
 				8270D265241A477900B17B65 /* InfoAlertView.swift */,
+				8270D267241BB3D000B17B65 /* InfoAlertController.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -2062,6 +2065,7 @@
 				821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */,
 				82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */,
 				825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */,
+				8270D268241BB3D100B17B65 /* InfoAlertController.swift in Sources */,
 				82D598B021A58CAD000FABDE /* NetworkTrustViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
