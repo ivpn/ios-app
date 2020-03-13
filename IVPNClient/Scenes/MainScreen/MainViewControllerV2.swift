@@ -13,7 +13,7 @@ class MainViewControllerV2: UIViewController {
     
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var infoAlertBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var infoAlertView: InfoAlertView!
     
     // MARK: - Properties -
     
@@ -135,17 +135,8 @@ class MainViewControllerV2: UIViewController {
     }
     
     private func updateInfoAlert() {
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-            infoAlertBottomConstraint.constant = 342
-            return
-        }
-
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
-            infoAlertBottomConstraint.constant = 257
-            return
-        }
-        
-        infoAlertBottomConstraint.constant = 213
+        infoAlertView.show(type: .alert, text: "You’ve reached the maximum number of connected devices.", actionText: "UPGRADE")
+        infoAlertView.updateAutoLayout()
     }
     
     private func initFloatingPanel() {

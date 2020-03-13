@@ -19,6 +19,7 @@ class InfoAlertView: UIView {
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     // MARK: - @IBActions -
     
@@ -47,6 +48,20 @@ class InfoAlertView: UIView {
     
     func hide() {
         isHidden = true
+    }
+    
+    func updateAutoLayout() {
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            bottomConstraint.constant = 342
+            return
+        }
+
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+            bottomConstraint.constant = 257
+            return
+        }
+        
+        bottomConstraint.constant = 213
     }
     
     // MARK: - Private methods -
