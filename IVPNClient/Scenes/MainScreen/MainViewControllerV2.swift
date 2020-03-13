@@ -41,6 +41,7 @@ class MainViewControllerV2: UIViewController {
         initFloatingPanel()
         addObservers()
         startServersUpdate()
+        initInfoAlert()
         updateInfoAlert()
     }
     
@@ -135,11 +136,12 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
-    private func setupInfoAlert() {
+    private func initInfoAlert() {
         infoAlertView.delegate = infoAlertController
     }
     
     private func updateInfoAlert() {
+        // TODO: call updateInfoAlert() in refreshUI() method
         if infoAlertController.shouldDisplay {
             infoAlertController.update()
             infoAlertView.show(type: infoAlertController.type, text: infoAlertController.text, actionText: infoAlertController.actionText)
