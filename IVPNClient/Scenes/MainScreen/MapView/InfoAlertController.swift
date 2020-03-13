@@ -47,7 +47,7 @@ class InfoAlertController {
     
     // MARK: - Methods -
     
-    func updateInfoAlert() {
+    func update() {
         if Application.shared.serviceStatus.isOnFreeTrial && shouldDisplay {
             infoAlert = .trialPeriod
             return
