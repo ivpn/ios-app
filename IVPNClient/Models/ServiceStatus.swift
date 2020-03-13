@@ -65,7 +65,7 @@ struct ServiceStatus: Codable {
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         
-        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(activeUntil  ?? 0)))
+        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0)))
     }
     
     func isEnabled(capability: Capability) -> Bool {
@@ -106,6 +106,18 @@ struct ServiceStatus: Codable {
     
     static func isValid(username: String) -> Bool {
         return username.hasPrefix("ivpn")
+    }
+    
+    func daysUntilSubscriptionExpiration() -> Int {
+        let calendar = Calendar.current
+        let startDate = Date()
+        let endDate = Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0))
+        let date1 = calendar.startOfDay(for: startDate)
+        let date2 = calendar.startOfDay(for: endDate)
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
+        let diff = components.day ?? 0
+        
+        return diff > 0 ? diff : 0
     }
     
 }
