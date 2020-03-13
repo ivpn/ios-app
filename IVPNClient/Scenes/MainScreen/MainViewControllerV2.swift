@@ -11,6 +11,10 @@ import FloatingPanel
 
 class MainViewControllerV2: UIViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var infoAlertBottomConstraint: NSLayoutConstraint!
+    
     // MARK: - Properties -
     
     var floatingPanel: FloatingPanelController!
@@ -36,6 +40,7 @@ class MainViewControllerV2: UIViewController {
         initFloatingPanel()
         addObservers()
         startServersUpdate()
+        updateInfoAlert()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,6 +117,7 @@ class MainViewControllerV2: UIViewController {
     
     @objc private func updateFloatingPanelLayout() {
         floatingPanel.updateLayout()
+        updateInfoAlert()
     }
     
     @objc private func updateServersList() {
@@ -126,6 +132,20 @@ class MainViewControllerV2: UIViewController {
                 break
             }
         }
+    }
+    
+    private func updateInfoAlert() {
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            infoAlertBottomConstraint.constant = 342
+            return
+        }
+
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+            infoAlertBottomConstraint.constant = 257
+            return
+        }
+        
+        infoAlertBottomConstraint.constant = 213
     }
     
     private func initFloatingPanel() {

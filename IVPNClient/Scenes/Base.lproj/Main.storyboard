@@ -3184,6 +3184,7 @@
                         <viewLayoutGuide key="safeArea" id="ww5-jx-W0A"/>
                     </view>
                     <connections>
+                        <outlet property="infoAlertBottomConstraint" destination="X5Y-qQ-ab3" id="fhq-fb-opQ"/>
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectServer" id="s0z-do-bnX"/>
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectExitServer" id="fnd-go-o5i"/>
                         <segue destination="ktp-XB-N0p" kind="show" identifier="MainScreenNetworkProtectionRules" id="AH3-3G-g5H"/>
