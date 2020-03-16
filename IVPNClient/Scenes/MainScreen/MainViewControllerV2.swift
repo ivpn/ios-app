@@ -45,6 +45,11 @@ class MainViewControllerV2: UIViewController {
         updateInfoAlert()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshUI()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startPingService(updateServerListDidComplete: updateServerListDidComplete)
@@ -87,6 +92,10 @@ class MainViewControllerV2: UIViewController {
     }
     
     // MARK: - Methods -
+    
+    func refreshUI() {
+        updateFloatingPanelLayout()
+    }
     
     func updateGeoLocation() {
         let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
@@ -141,7 +150,6 @@ class MainViewControllerV2: UIViewController {
     }
     
     private func updateInfoAlert() {
-        // TODO: call updateInfoAlert() in refreshUI() method
         if infoAlertController.shouldDisplay {
             infoAlertController.update()
             infoAlertView.show(type: infoAlertController.type, text: infoAlertController.text, actionText: infoAlertController.actionText)
