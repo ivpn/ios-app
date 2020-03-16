@@ -44,7 +44,7 @@ class InfoAlertViewModel {
         return Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3
     }
     
-    private var infoAlert: InfoAlert = .subscriptionExpiration
+    var infoAlert: InfoAlert = .subscriptionExpiration
     
     // MARK: - Methods -
     
