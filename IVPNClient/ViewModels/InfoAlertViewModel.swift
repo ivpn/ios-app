@@ -25,9 +25,9 @@ class InfoAlertViewModel {
     var actionText: String {
         switch infoAlert {
         case .trialPeriod:
-            return "RENEW"
-        case .subscriptionExpiration:
             return ""
+        case .subscriptionExpiration:
+            return "RENEW"
         }
     }
     
