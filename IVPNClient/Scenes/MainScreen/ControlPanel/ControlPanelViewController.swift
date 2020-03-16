@@ -24,6 +24,7 @@ class ControlPanelViewController: UITableViewController {
     @IBOutlet weak var entryServerConnectionLabel: UILabel!
     @IBOutlet weak var entryServerNameLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
+    @IBOutlet weak var fastestServerLabel: UILabel!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var networkView: NetworkViewTableCell!
     @IBOutlet weak var protocolLabel: UILabel!
@@ -360,6 +361,8 @@ class ControlPanelViewController: UITableViewController {
     private func updateServerNames() {
         updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
         updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
+        
+        fastestServerLabel.isHidden = !Application.shared.settings.selectedServer.fastest || Application.shared.settings.selectedServer.fastestServerLabelShouldBePresented
     }
     
     private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
