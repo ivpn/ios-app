@@ -64,4 +64,8 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertFalse(ServiceStatus.isValid(username: ""))
     }
     
+    func testDaysUntilSubscriptionExpiration() {
+        XCTAssertEqual(model.daysUntilSubscriptionExpiration(), 0)
+    }
+    
 }

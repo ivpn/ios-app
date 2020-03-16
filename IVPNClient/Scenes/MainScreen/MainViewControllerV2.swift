@@ -11,11 +11,16 @@ import FloatingPanel
 
 class MainViewControllerV2: UIViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var infoAlertView: InfoAlertView!
+    
     // MARK: - Properties -
     
     var floatingPanel: FloatingPanelController!
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
+    private var infoAlertViewModel = InfoAlertViewModel()
     
     // MARK: - @IBActions -
     
@@ -36,6 +41,13 @@ class MainViewControllerV2: UIViewController {
         initFloatingPanel()
         addObservers()
         startServersUpdate()
+        initInfoAlert()
+        updateInfoAlert()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,6 +93,10 @@ class MainViewControllerV2: UIViewController {
     
     // MARK: - Methods -
     
+    func refreshUI() {
+        updateFloatingPanelLayout()
+    }
+    
     func updateGeoLocation() {
         let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
         
@@ -112,6 +128,7 @@ class MainViewControllerV2: UIViewController {
     
     @objc private func updateFloatingPanelLayout() {
         floatingPanel.updateLayout()
+        updateInfoAlert()
     }
     
     @objc private func updateServersList() {
@@ -125,6 +142,19 @@ class MainViewControllerV2: UIViewController {
             default:
                 break
             }
+        }
+    }
+    
+    private func initInfoAlert() {
+        infoAlertView.delegate = infoAlertViewModel
+    }
+    
+    private func updateInfoAlert() {
+        if infoAlertViewModel.shouldDisplay {
+            infoAlertViewModel.update()
+            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
+        } else {
+            infoAlertView.hide()
         }
     }
     

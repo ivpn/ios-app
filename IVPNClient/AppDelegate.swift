@@ -183,6 +183,10 @@ extension AppDelegate: UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         NetworkManager.shared.stopMonitoring()
+        
+        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            topViewController.refreshUI()
+        }
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
