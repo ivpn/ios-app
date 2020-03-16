@@ -1,5 +1,5 @@
 //
-//  InfoAlertController.swift
+//  InfoAlertViewModel.swift
 //  IVPNClient
 //
 //  Created by Juraj Hilje on 13/03/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InfoAlertController {
+class InfoAlertViewModel {
     
     // MARK: - Properties -
     
@@ -61,9 +61,9 @@ class InfoAlertController {
     
 }
 
-// MARK: - InfoAlertController extension -
+// MARK: - InfoAlertViewModel extension -
 
-extension InfoAlertController {
+extension InfoAlertViewModel {
     
     enum InfoAlert {
         case trialPeriod
@@ -74,7 +74,7 @@ extension InfoAlertController {
 
 // MARK: - InfoAlertViewDelegate -
 
-extension InfoAlertController: InfoAlertViewDelegate {
+extension InfoAlertViewModel: InfoAlertViewDelegate {
     
     func action() {
         switch infoAlert {

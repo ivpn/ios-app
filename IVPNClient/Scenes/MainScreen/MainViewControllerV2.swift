@@ -20,7 +20,7 @@ class MainViewControllerV2: UIViewController {
     var floatingPanel: FloatingPanelController!
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
-    private var infoAlertController = InfoAlertController()
+    private var infoAlertViewModel = InfoAlertViewModel()
     
     // MARK: - @IBActions -
     
@@ -146,13 +146,13 @@ class MainViewControllerV2: UIViewController {
     }
     
     private func initInfoAlert() {
-        infoAlertView.delegate = infoAlertController
+        infoAlertView.delegate = infoAlertViewModel
     }
     
     private func updateInfoAlert() {
-        if infoAlertController.shouldDisplay {
-            infoAlertController.update()
-            infoAlertView.show(type: infoAlertController.type, text: infoAlertController.text, actionText: infoAlertController.actionText)
+        if infoAlertViewModel.shouldDisplay {
+            infoAlertViewModel.update()
+            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
         } else {
             infoAlertView.hide()
         }
