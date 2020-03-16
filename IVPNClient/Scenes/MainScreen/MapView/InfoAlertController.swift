@@ -13,11 +13,12 @@ class InfoAlertController {
     // MARK: - Properties -
     
     var text: String {
+        let days = Application.shared.serviceStatus.daysUntilSubscriptionExpiration()
         switch infoAlert {
         case .trialPeriod:
-            return "Trial period will expire in {n} days"
+            return "Trial period will expire in \(days) days"
         case .subscriptionExpiration:
-            return "Subscription will expire in {n} days"
+            return "Subscription will expire in \(days) days"
         }
     }
     
