@@ -8,26 +8,21 @@
 
 import UIKit
 import Bamboo
-
-enum MapMarkerState {
-    case unprotected
-    case protected
-    case changing
-}
+import NetworkExtension
 
 class MapMarkerView: UIView {
     
     // MARK: - Properties -
     
-    var state: MapMarkerState = .changing {
+    var status: NEVPNStatus = .invalid {
         didSet {
-            switch state {
-            case .unprotected:
-                updateCircles(color: redColor)
-            case .protected:
-                updateCircles(color: blueColor)
-            case .changing:
+            switch status {
+            case .reasserting, .connecting, .disconnecting:
                 updateCircles(color: grayColor)
+            case .connected:
+                updateCircles(color: blueColor)
+            default:
+                updateCircles(color: redColor)
             }
         }
     }

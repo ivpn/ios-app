@@ -8,6 +8,7 @@
 
 import UIKit
 import FloatingPanel
+import NetworkExtension
 
 class MainViewControllerV2: UIViewController {
     
@@ -21,6 +22,7 @@ class MainViewControllerV2: UIViewController {
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
     private var infoAlertViewModel = InfoAlertViewModel()
+    private var markerView = MapMarkerView()
     
     // MARK: - @IBActions -
     
@@ -98,6 +100,10 @@ class MainViewControllerV2: UIViewController {
         updateFloatingPanelLayout()
     }
     
+    func updateStatus(vpnStatus: NEVPNStatus) {
+        markerView.status = vpnStatus
+    }
+    
     func updateGeoLocation() {
         let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
         
@@ -148,7 +154,7 @@ class MainViewControllerV2: UIViewController {
     
     private func initMarker() {
         let container = MapMarkerContainerView()
-        container.addSubview(MapMarkerView())
+        container.addSubview(markerView)
         view.addSubview(container)
     }
     
