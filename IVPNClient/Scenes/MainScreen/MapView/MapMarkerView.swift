@@ -7,13 +7,21 @@
 //
 
 import UIKit
+import Bamboo
 
 class MapMarkerView: UIView {
     
     // MARK: - View lifecycle -
     
-    override func awakeFromNib() {
-        
+    override func updateConstraints() {
+        setupConstraints()
+        super.updateConstraints()
+    }
+    
+    // MARK: - Private methods -
+    
+    private func setupConstraints() {
+        bb.center().width(187).height(187)
     }
     
 }

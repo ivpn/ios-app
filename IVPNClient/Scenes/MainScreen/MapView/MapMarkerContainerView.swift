@@ -24,7 +24,7 @@ class MapMarkerContainerView: UIView {
         if UIDevice.current.userInterfaceIdiom == .pad {
             bb.left(375).top().right().bottom()
         } else {
-            bb.left().top().right().bottom(-230)
+            bb.left().top(25).right().bottom(-230)
         }
     }
     

@@ -147,7 +147,9 @@ class MainViewControllerV2: UIViewController {
     }
     
     private func initMarker() {
-        view.addSubview(MapMarkerContainerView())
+        let container = MapMarkerContainerView()
+        container.addSubview(MapMarkerView())
+        view.addSubview(container)
     }
     
     private func initInfoAlert() {
