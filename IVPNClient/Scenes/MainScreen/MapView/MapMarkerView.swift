@@ -49,6 +49,7 @@ class MapMarkerView: UIView {
         setupConstraints()
         initCircles()
         updateCircles(color: blueColor)
+        initActionButton()
         
         super.updateConstraints()
     }
@@ -86,6 +87,17 @@ class MapMarkerView: UIView {
         initCircle(circle2, radius: 97)
         initCircle(circle3, radius: 41)
         initCircle(circle4, radius: 9)
+    }
+    
+    private func initActionButton() {
+        let actionButton = UIButton()
+        addSubview(actionButton)
+        actionButton.bb.fill()
+        actionButton.addTarget(self, action: #selector(markerAction), for: .touchUpInside)
+    }
+    
+    @objc private func markerAction() {
+        // TODO: Present connection info popup
     }
     
 }
