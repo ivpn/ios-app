@@ -76,7 +76,9 @@ class MapMarkerView: UIView {
     }
     
     private func updateCircle(_ circle: UIView, color: UIColor) {
-        circle.backgroundColor = color
+        UIView.animate(withDuration: 0.25, animations: {
+            circle.backgroundColor = color
+        })
     }
     
     private func initCircles() {
