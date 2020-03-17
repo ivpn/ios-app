@@ -9,15 +9,36 @@
 import UIKit
 import Bamboo
 
+enum MapMarkerState {
+    case unprotected
+    case protected
+    case changing
+}
+
 class MapMarkerView: UIView {
     
     // MARK: - Properties -
+    
+    var state: MapMarkerState = .changing {
+        didSet {
+            switch state {
+            case .unprotected:
+                updateCircles(color: redColor)
+            case .protected:
+                updateCircles(color: blueColor)
+            case .changing:
+                updateCircles(color: grayColor)
+            }
+        }
+    }
     
     private var circle1 = UIView()
     private var circle2 = UIView()
     private var circle3 = UIView()
     private var circle4 = UIView()
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
+    private var redColor = UIColor.init(red: 255, green: 98, blue: 88)
+    private var grayColor = UIColor.init(red: 211, green: 211, blue: 211)
     
     // MARK: - View lifecycle -
     
@@ -35,6 +56,15 @@ class MapMarkerView: UIView {
         updateCircles(color: blueColor)
         
         super.updateConstraints()
+    }
+    
+    // MARK: - Methods -
+    
+    func updateCircles(color: UIColor) {
+        updateCircle(circle1, color: color.withAlphaComponent(0.1))
+        updateCircle(circle2, color: color.withAlphaComponent(0.3))
+        updateCircle(circle3, color: color.withAlphaComponent(0.5))
+        updateCircle(circle4, color: color)
     }
     
     // MARK: - Private methods -
@@ -59,13 +89,6 @@ class MapMarkerView: UIView {
         initCircle(circle2, radius: 97)
         initCircle(circle3, radius: 41)
         initCircle(circle4, radius: 9)
-    }
-    
-    private func updateCircles(color: UIColor) {
-        updateCircle(circle1, color: color.withAlphaComponent(0.1))
-        updateCircle(circle2, color: color.withAlphaComponent(0.3))
-        updateCircle(circle3, color: color.withAlphaComponent(0.5))
-        updateCircle(circle4, color: color)
     }
     
 }
