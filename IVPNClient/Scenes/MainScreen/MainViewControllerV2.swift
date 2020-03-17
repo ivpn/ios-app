@@ -145,6 +145,10 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
+    private func initMarker() {
+        
+    }
+    
     private func initInfoAlert() {
         infoAlertView.delegate = infoAlertViewModel
     }
