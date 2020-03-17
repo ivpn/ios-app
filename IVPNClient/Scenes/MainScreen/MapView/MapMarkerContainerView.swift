@@ -13,17 +13,18 @@ class MapMarkerContainerView: UIView {
     
     // MARK: - View lifecycle -
     
-    override func awakeFromNib() {
+    override func updateConstraints() {
         setupConstraints()
+        super.updateConstraints()
     }
     
     // MARK: - Private methods -
     
     private func setupConstraints() {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            bb.left(375).top(0).right(0).bottom(0)
+            bb.left(375).top().right().bottom()
         } else {
-            bb.left(0).top(0).right(0).bottom(196)
+            bb.left().top().right().bottom(-230)
         }
     }
     

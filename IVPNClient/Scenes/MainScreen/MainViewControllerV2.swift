@@ -38,6 +38,7 @@ class MainViewControllerV2: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initMarker()
         initFloatingPanel()
         addObservers()
         startServersUpdate()
@@ -146,7 +147,7 @@ class MainViewControllerV2: UIViewController {
     }
     
     private func initMarker() {
-        
+        view.addSubview(MapMarkerContainerView())
     }
     
     private func initInfoAlert() {
