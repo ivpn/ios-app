@@ -18,14 +18,25 @@ class MapMarkerContainerView: UIView {
         super.updateConstraints()
     }
     
-    // MARK: - Private methods -
+    // MARK: - Methods -
     
-    private func setupConstraints() {
+    func setupConstraints() {
         if UIDevice.current.userInterfaceIdiom == .pad {
             bb.left(375).top().right().bottom()
-        } else {
-            bb.left().top(25).right().bottom(-230)
+            return
         }
+        
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            bb.left().top(25).right().bottom(-359)
+            return
+        }
+        
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && !UserDefaults.shared.isMultiHop {
+            bb.left().top(25).right().bottom(-274)
+            return
+        }
+        
+        bb.left().top(25).right().bottom(-230)
     }
     
 }

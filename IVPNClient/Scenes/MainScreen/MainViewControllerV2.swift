@@ -22,7 +22,8 @@ class MainViewControllerV2: UIViewController {
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
     private var infoAlertViewModel = InfoAlertViewModel()
-    private var markerView = MapMarkerView()
+    private let markerContainerView = MapMarkerContainerView()
+    private let markerView = MapMarkerView()
     
     // MARK: - @IBActions -
     
@@ -135,6 +136,7 @@ class MainViewControllerV2: UIViewController {
     
     @objc private func updateFloatingPanelLayout() {
         floatingPanel.updateLayout()
+        markerContainerView.setupConstraints()
         updateInfoAlert()
     }
     
@@ -153,9 +155,8 @@ class MainViewControllerV2: UIViewController {
     }
     
     private func initMarker() {
-        let container = MapMarkerContainerView()
-        container.addSubview(markerView)
-        view.addSubview(container)
+        markerContainerView.addSubview(markerView)
+        view.addSubview(markerContainerView)
     }
     
     private func initInfoAlert() {
