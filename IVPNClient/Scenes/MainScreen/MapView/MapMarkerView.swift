@@ -97,7 +97,11 @@ class MapMarkerView: UIView {
     }
     
     @objc private func markerAction() {
-        connectionInfoPopup.show()
+        if connectionInfoPopup.displayMode == .hidden {
+            connectionInfoPopup.show()
+        } else {
+            connectionInfoPopup.hide()
+        }
     }
     
 }

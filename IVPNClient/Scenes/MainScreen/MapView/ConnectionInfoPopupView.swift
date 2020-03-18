@@ -83,35 +83,31 @@ class ConnectionInfoPopupView: UIView {
     
     var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
     
-    var displayMode: DisplayMode! {
+    var displayMode: DisplayMode = .hidden {
         didSet {
             switch displayMode {
-            case .hidden?:
-                isHidden = true
-                break
-            case .loading?:
+            case .hidden:
+                UIView.animate(withDuration: 0.15, animations: { self.alpha = 0 }) { _ in
+                    self.isHidden = true
+                }
+            case .loading:
                 spinner.startAnimating()
                 container.isHidden = true
                 errorLabel.isHidden = true
-            case .content?:
+                isHidden = false
+                UIView.animate(withDuration: 0.15, animations: { self.alpha = 1 })
+            case .content:
                 spinner.stopAnimating()
                 container.isHidden = false
                 errorLabel.isHidden = true
-            case .error?:
+                isHidden = false
+                UIView.animate(withDuration: 0.15, animations: { self.alpha = 1 })
+            case .error:
                 spinner.stopAnimating()
                 container.isHidden = true
                 errorLabel.isHidden = false
-            case .none:
-                break
-            }
-            
-            if displayMode == .hidden {
-                UIView.animate(withDuration: 0.25, animations: { self.alpha = 0 }) { _ in
-                    self.isHidden = true
-                }
-            } else {
                 isHidden = false
-                UIView.animate(withDuration: 0.25, animations: { self.alpha = 1 })
+                UIView.animate(withDuration: 0.15, animations: { self.alpha = 1 })
             }
         }
     }
@@ -137,10 +133,11 @@ class ConnectionInfoPopupView: UIView {
     
     func show() {
         displayMode = .loading
-        
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-            topViewController.updateGeoLocation()
-        }
+        fetchData()
+    }
+    
+    func hide() {
+        displayMode = .hidden
     }
     
     // MARK: - Private methods -
@@ -166,7 +163,6 @@ class ConnectionInfoPopupView: UIView {
         addSubview(spinner)
         
         displayMode = .hidden
-        
         setupLayout()
     }
     
@@ -178,6 +174,21 @@ class ConnectionInfoPopupView: UIView {
         actionButton.bb.size(width: 20, height: 20).bottom(-15).right(-18)
         errorLabel.bb.top(10).right(-10).bottom(-10).left(10)
         spinner.bb.center()
+    }
+    
+    private func fetchData() {
+        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
+        
+        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let model):
+                self.viewModel = ProofsViewModel(model: model)
+            case .failure:
+                self.displayMode = .error
+            }
+        }
     }
     
     @objc private func infoAction() {

@@ -115,10 +115,8 @@ class MainViewControllerV2: UIViewController {
             case .success(let model):
                 if let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController {
                     controlPanelViewController.connectionInfoViewModel = ProofsViewModel(model: model)
-                    self.markerView.connectionInfoPopup.viewModel = ProofsViewModel(model: model)
                 }
             case .failure:
-                self.markerView.connectionInfoPopup.displayMode = .error
                 break
             }
         }
