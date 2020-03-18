@@ -88,23 +88,30 @@ class ConnectionInfoPopupView: UIView {
             switch displayMode {
             case .hidden?:
                 isHidden = true
+                break
             case .loading?:
-                isHidden = false
                 spinner.startAnimating()
                 container.isHidden = true
                 errorLabel.isHidden = true
             case .content?:
-                isHidden = false
                 spinner.stopAnimating()
                 container.isHidden = false
                 errorLabel.isHidden = true
             case .error?:
-                isHidden = false
                 spinner.stopAnimating()
                 container.isHidden = true
                 errorLabel.isHidden = false
             case .none:
                 break
+            }
+            
+            if displayMode == .hidden {
+                UIView.animate(withDuration: 0.25, animations: { self.alpha = 0 }) { _ in
+                    self.isHidden = true
+                }
+            } else {
+                isHidden = false
+                UIView.animate(withDuration: 0.25, animations: { self.alpha = 1 })
             }
         }
     }
@@ -147,6 +154,8 @@ class ConnectionInfoPopupView: UIView {
         layer.cornerRadius = 8
         layer.masksToBounds = false
         clipsToBounds = false
+        isHidden = true
+        alpha = 0
         
         container.addSubview(statusLabel)
         container.addSubview(locationLabel)
