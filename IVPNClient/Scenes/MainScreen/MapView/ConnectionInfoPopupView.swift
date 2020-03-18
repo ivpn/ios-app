@@ -28,6 +28,28 @@ class ConnectionInfoPopupView: UIView {
         return arrow
     }()
     
+    lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        if #available(iOS 13.0, *) {
+            spinner.style = .medium
+        } else {
+            spinner.style = .gray
+        }
+        spinner.hidesWhenStopped = true
+        spinner.startAnimating()
+        return spinner
+    }()
+    
+    lazy var errorLabel: UILabel = {
+        let errorLabel = UILabel()
+        errorLabel.font = UIFont.systemFont(ofSize: 12)
+        errorLabel.text = "Please check your internet connection and try again."
+        errorLabel.textAlignment = .center
+        errorLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel5)
+        errorLabel.numberOfLines = 0
+        return errorLabel
+    }()
+    
     lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.font = UIFont.systemFont(ofSize: 12)
@@ -50,6 +72,36 @@ class ConnectionInfoPopupView: UIView {
         actionButton.addTarget(self, action: #selector(infoAction), for: .touchUpInside)
         return actionButton
     }()
+    
+    // MARK: - Properties -
+    
+    var viewModel: ProofsViewModel! {
+        didSet {
+            locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
+            displayMode = .content
+        }
+    }
+    
+    var displayMode: DisplayMode! {
+        didSet {
+            switch displayMode {
+            case .loading?:
+                spinner.startAnimating()
+                container.isHidden = true
+                errorLabel.isHidden = true
+            case .content?:
+                spinner.stopAnimating()
+                container.isHidden = false
+                errorLabel.isHidden = true
+            case .error?:
+                spinner.stopAnimating()
+                container.isHidden = true
+                errorLabel.isHidden = false
+            case .none:
+                break
+            }
+        }
+    }
     
     // MARK: - View lifecycle -
     
@@ -87,6 +139,8 @@ class ConnectionInfoPopupView: UIView {
         container.addSubview(actionButton)
         addSubview(arrow)
         addSubview(container)
+        addSubview(errorLabel)
+        addSubview(spinner)
         
         setupSubsviewsConstraints()
     }
@@ -97,10 +151,24 @@ class ConnectionInfoPopupView: UIView {
         statusLabel.bb.left(18).top(15).right(-18).height(14)
         locationLabel.bb.left(18).bottom(-15).right(-48).height(19)
         actionButton.bb.size(width: 20, height: 20).bottom(-15).right(-18)
+        errorLabel.bb.top(10).right(-10).bottom(-10).left(10)
+        spinner.bb.center()
     }
     
     @objc private func infoAction() {
         
+    }
+    
+}
+
+// MARK: - ConnectionInfoPopupView extension -
+
+extension ConnectionInfoPopupView {
+    
+    enum DisplayMode {
+        case loading
+        case content
+        case error
     }
     
 }
