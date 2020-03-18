@@ -65,6 +65,7 @@
 		82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */; };
 		82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */; };
 		82351FD02420D0E000E6E0FD /* MapMarkerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCF2420D0E000E6E0FD /* MapMarkerContainerView.swift */; };
+		82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */; };
 		823BD9E3231D4C8E002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823BD9E4231D4C8F002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823DA733215E3CCB00DAFE37 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
@@ -412,6 +413,7 @@
 		82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerView.swift; sourceTree = "<group>"; };
 		82351FCF2420D0E000E6E0FD /* MapMarkerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerContainerView.swift; sourceTree = "<group>"; };
+		82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoPopupView.swift; sourceTree = "<group>"; };
 		823AD1F32158F55E00BE0EBA /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = ../Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		823AD1F52158F56300BE0EBA /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = ../Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
 		823DA732215E3CCB00DAFE37 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
@@ -1177,6 +1179,7 @@
 				8270D265241A477900B17B65 /* InfoAlertView.swift */,
 				82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */,
 				82351FCF2420D0E000E6E0FD /* MapMarkerContainerView.swift */,
+				82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -2059,6 +2062,7 @@
 				9C3031301DB41FBA00C38B0C /* ServerTableViewCell.swift in Sources */,
 				8292E1AB2174C12200123538 /* Tunnel.swift in Sources */,
 				82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */,
+				82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */,
 				82B51CDF21DE3E31005CC9C9 /* UITableView+Ext.swift in Sources */,
 				82061F64238D2730009DDF4D /* PingResult.swift in Sources */,
 				8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */,
