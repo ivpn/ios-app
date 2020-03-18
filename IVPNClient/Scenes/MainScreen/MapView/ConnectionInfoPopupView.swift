@@ -34,9 +34,10 @@ class ConnectionInfoPopupView: UIView {
         return locationLabel
     }()
     
-    lazy var actionButton: UIButton = {
-        let actionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        actionButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
+    var actionButton: UIButton = {
+        let actionButton = UIButton()
+        actionButton.setImage(UIImage.init(named: "icon-info-2"), for: .normal)
+        actionButton.addTarget(self, action: #selector(infoAction), for: .touchUpInside)
         return actionButton
     }()
     
@@ -85,6 +86,10 @@ class ConnectionInfoPopupView: UIView {
         statusLabel.bb.left(18).top(15).right(-18).height(14)
         locationLabel.bb.left(18).bottom(-15).right(-48).height(19)
         actionButton.bb.size(width: 20, height: 20).bottom(-15).right(-18)
+    }
+    
+    @objc private func infoAction() {
+        
     }
     
 }

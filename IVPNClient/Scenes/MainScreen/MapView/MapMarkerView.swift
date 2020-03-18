@@ -60,7 +60,7 @@ class MapMarkerView: UIView {
     // MARK: - Private methods -
     
     private func setupConstraints() {
-        bb.center().size(width: 187, height: 187)
+        bb.center().size(width: 270, height: 187)
     }
     
     private func initCircle(_ circle: UIView, radius: CGFloat) {
@@ -86,7 +86,7 @@ class MapMarkerView: UIView {
     private func initActionButton() {
         let actionButton = UIButton()
         addSubview(actionButton)
-        actionButton.bb.fill()
+        actionButton.bb.center().size(width: 187, height: 187)
         actionButton.addTarget(self, action: #selector(markerAction), for: .touchUpInside)
     }
     
