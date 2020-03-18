@@ -351,6 +351,10 @@ class ControlPanelViewController: UITableViewController {
         }
         
         lastAccountStatus = vpnStatus
+        
+        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            topViewController.updateStatus(vpnStatus: vpnStatus)
+        }
     }
     
     private func updateServerLabels() {
