@@ -53,7 +53,6 @@ class ConnectionInfoPopupView: UIView {
     lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.font = UIFont.systemFont(ofSize: 12)
-        statusLabel.text = "Everyone knows about your location"
         statusLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel5)
         return statusLabel
     }()
@@ -61,7 +60,6 @@ class ConnectionInfoPopupView: UIView {
     lazy var locationLabel: UILabel = {
         let locationLabel = UILabel()
         locationLabel.font = UIFont.systemFont(ofSize: 16)
-        locationLabel.iconMirror(text: "Kyiv, UA", image: UIImage(named: "ua"), alignment: .left)
         locationLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
         return locationLabel
     }()
@@ -77,10 +75,13 @@ class ConnectionInfoPopupView: UIView {
     
     var viewModel: ProofsViewModel! {
         didSet {
+            statusLabel.text = vpnStatusViewModel.popupStatusText
             locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
             displayMode = .content
         }
     }
+    
+    var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
     
     var displayMode: DisplayMode! {
         didSet {

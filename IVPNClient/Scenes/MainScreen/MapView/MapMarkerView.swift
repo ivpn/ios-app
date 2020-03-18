@@ -24,6 +24,8 @@ class MapMarkerView: UIView {
             default:
                 updateCircles(color: redColor)
             }
+            
+            connectionInfoPopup.vpnStatusViewModel = VPNStatusViewModel(status: status)
         }
     }
     
