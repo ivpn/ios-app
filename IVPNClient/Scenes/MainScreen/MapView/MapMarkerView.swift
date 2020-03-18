@@ -29,11 +29,11 @@ class MapMarkerView: UIView {
         }
     }
     
+    var connectionInfoPopup = ConnectionInfoPopupView()
     private var circle1 = UIView()
     private var circle2 = UIView()
     private var circle3 = UIView()
     private var circle4 = UIView()
-    private var connectionInfoPopup = ConnectionInfoPopupView()
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
     private var redColor = UIColor.init(red: 255, green: 98, blue: 88)
     private var grayColor = UIColor.init(red: 211, green: 211, blue: 211)
@@ -97,7 +97,7 @@ class MapMarkerView: UIView {
     }
     
     @objc private func markerAction() {
-        // TODO: Present connection info popup
+        connectionInfoPopup.show()
     }
     
 }

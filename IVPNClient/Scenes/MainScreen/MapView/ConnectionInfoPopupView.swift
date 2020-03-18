@@ -86,15 +86,20 @@ class ConnectionInfoPopupView: UIView {
     var displayMode: DisplayMode! {
         didSet {
             switch displayMode {
+            case .hidden?:
+                isHidden = true
             case .loading?:
+                isHidden = false
                 spinner.startAnimating()
                 container.isHidden = true
                 errorLabel.isHidden = true
             case .content?:
+                isHidden = false
                 spinner.stopAnimating()
                 container.isHidden = false
                 errorLabel.isHidden = true
             case .error?:
+                isHidden = false
                 spinner.stopAnimating()
                 container.isHidden = true
                 errorLabel.isHidden = false
@@ -121,6 +126,16 @@ class ConnectionInfoPopupView: UIView {
         super.updateConstraints()
     }
     
+    // MARK: - Methods -
+    
+    func show() {
+        displayMode = .loading
+        
+        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            topViewController.updateGeoLocation()
+        }
+    }
+    
     // MARK: - Private methods -
     
     private func setupConstraints() {
@@ -128,13 +143,11 @@ class ConnectionInfoPopupView: UIView {
     }
     
     private func setupView() {
+        backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        layer.cornerRadius = 8
         layer.masksToBounds = false
         clipsToBounds = false
         
-        addSubsviews()
-    }
-    
-    private func addSubsviews() {
         container.addSubview(statusLabel)
         container.addSubview(locationLabel)
         container.addSubview(actionButton)
@@ -143,10 +156,12 @@ class ConnectionInfoPopupView: UIView {
         addSubview(errorLabel)
         addSubview(spinner)
         
-        setupSubsviewsConstraints()
+        displayMode = .hidden
+        
+        setupLayout()
     }
     
-    private func setupSubsviewsConstraints() {
+    private func setupLayout() {
         container.bb.fill()
         arrow.bb.size(width: 14, height: 14).centerX().top(-7)
         statusLabel.bb.left(18).top(15).right(-18).height(14)
@@ -167,6 +182,7 @@ class ConnectionInfoPopupView: UIView {
 extension ConnectionInfoPopupView {
     
     enum DisplayMode {
+        case hidden
         case loading
         case content
         case error
