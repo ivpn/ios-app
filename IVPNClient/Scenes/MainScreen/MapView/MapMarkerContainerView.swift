@@ -11,9 +11,14 @@ import Bamboo
 
 class MapMarkerContainerView: UIView {
     
+    var constraintsA: [NSLayoutConstraint] = []
+    var constraintsB: [NSLayoutConstraint] = []
+    var constraintsC: [NSLayoutConstraint] = []
+    
     // MARK: - View lifecycle -
     
     override func updateConstraints() {
+        initConstraints()
         setupConstraints()
         super.updateConstraints()
     }
@@ -22,21 +27,37 @@ class MapMarkerContainerView: UIView {
     
     func setupConstraints() {
         if UIDevice.current.userInterfaceIdiom == .pad {
+            return
+        }
+        
+        constraintsA.deactivate()
+        constraintsB.deactivate()
+        constraintsC.deactivate()
+        
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            constraintsA.activate()
+            return
+        }
+        
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+            constraintsB.activate()
+            return
+        }
+        
+        constraintsC.activate()
+    }
+    
+    // MARK: - Private methods -
+    
+    private func initConstraints() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             bb.left(375).top().right().bottom()
             return
         }
         
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-            bb.left().top(25).right().bottom(-359)
-            return
-        }
-        
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && !UserDefaults.shared.isMultiHop {
-            bb.left().top(25).right().bottom(-274)
-            return
-        }
-        
-        bb.left().top(25).right().bottom(-230)
+        constraintsA = bb.left().top(25).right().bottom(-359).constraints.deactivate()
+        constraintsB = bb.left().top(25).right().bottom(-274).constraints.deactivate()
+        constraintsC = bb.left().top(25).right().bottom(-230).constraints.deactivate()
     }
     
 }
