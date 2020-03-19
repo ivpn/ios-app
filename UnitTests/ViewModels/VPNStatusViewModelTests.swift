@@ -74,4 +74,24 @@ class VPNStatusViewModelTests: XCTestCase {
         XCTAssertFalse(viewModel.connectToggleIsOn)
     }
     
+    func testPopupStatusText() {
+        viewModel.status = .connecting
+        XCTAssertEqual(viewModel.connectToServerText, "Connecting VPN")
+        
+        viewModel.status = .reasserting
+        XCTAssertEqual(viewModel.connectToServerText, "Connecting VPN")
+        
+        viewModel.status = .disconnecting
+        XCTAssertEqual(viewModel.connectToServerText, "Disconnecting VPN")
+        
+        viewModel.status = .connected
+        XCTAssertEqual(viewModel.connectToServerText, "Your connection is protected")
+        
+        viewModel.status = .disconnected
+        XCTAssertEqual(viewModel.connectToServerText, "Everyone knows about your location")
+        
+        viewModel.status = .invalid
+        XCTAssertEqual(viewModel.connectToServerText, "Everyone knows about your location")
+    }
+    
 }

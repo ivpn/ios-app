@@ -24,9 +24,12 @@ class MapMarkerView: UIView {
             default:
                 updateCircles(color: redColor)
             }
+            
+            connectionInfoPopup.vpnStatusViewModel = VPNStatusViewModel(status: status)
         }
     }
     
+    var connectionInfoPopup = ConnectionInfoPopupView()
     private var circle1 = UIView()
     private var circle2 = UIView()
     private var circle3 = UIView()
@@ -37,21 +40,19 @@ class MapMarkerView: UIView {
     
     // MARK: - View lifecycle -
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     override func updateConstraints() {
         setupConstraints()
         initCircles()
         updateCircles(color: blueColor)
         initActionButton()
+        initConnectionInfoPopup()
+        addObservers()
         
         super.updateConstraints()
+    }
+    
+    deinit {
+        removeObservers()
     }
     
     // MARK: - Methods -
@@ -63,10 +64,20 @@ class MapMarkerView: UIView {
         updateCircle(circle4, color: color)
     }
     
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(hidePopup), name: Notification.Name.HideConnectionInfoPopup, object: nil)
+    }
+    
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.HideConnectionInfoPopup, object: nil)
+    }
+    
     // MARK: - Private methods -
     
     private func setupConstraints() {
-        bb.center().size(width: 187, height: 187)
+        bb.center().size(width: 270, height: 187)
     }
     
     private func initCircle(_ circle: UIView, radius: CGFloat) {
@@ -92,12 +103,24 @@ class MapMarkerView: UIView {
     private func initActionButton() {
         let actionButton = UIButton()
         addSubview(actionButton)
-        actionButton.bb.fill()
+        actionButton.bb.center().size(width: 187, height: 187)
         actionButton.addTarget(self, action: #selector(markerAction), for: .touchUpInside)
     }
     
+    private func initConnectionInfoPopup() {
+        addSubview(connectionInfoPopup)
+    }
+    
     @objc private func markerAction() {
-        // TODO: Present connection info popup
+        if connectionInfoPopup.displayMode == .hidden {
+            connectionInfoPopup.show()
+        } else {
+            connectionInfoPopup.hide()
+        }
+    }
+    
+    @objc func hidePopup() {
+        connectionInfoPopup.hide()
     }
     
 }

@@ -29,5 +29,6 @@ extension Notification.Name {
     public static let UpdateFloatingPanelLayout = Notification.Name("updateFloatingPanelLayout")
     public static let UpdateControlPanel = Notification.Name("updateControlPanel")
     public static let ProtocolSelected = Notification.Name("protocolSelected")
+    public static let HideConnectionInfoPopup = Notification.Name("hideConnectionInfoPopup")
     
 }
