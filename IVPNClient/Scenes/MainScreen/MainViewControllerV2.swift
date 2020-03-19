@@ -122,6 +122,10 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
+    func expandFloatingPanel() {
+        floatingPanel.move(to: .full, animated: true)
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
