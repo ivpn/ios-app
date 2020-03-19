@@ -46,8 +46,13 @@ class MapMarkerView: UIView {
         updateCircles(color: blueColor)
         initActionButton()
         initConnectionInfoPopup()
+        addObservers()
         
         super.updateConstraints()
+    }
+    
+    deinit {
+        removeObservers()
     }
     
     // MARK: - Methods -
@@ -57,6 +62,16 @@ class MapMarkerView: UIView {
         updateCircle(circle2, color: color.withAlphaComponent(0.3))
         updateCircle(circle3, color: color.withAlphaComponent(0.5))
         updateCircle(circle4, color: color)
+    }
+    
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(hidePopup), name: Notification.Name.HideConnectionInfoPopup, object: nil)
+    }
+    
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
     // MARK: - Private methods -
@@ -102,6 +117,10 @@ class MapMarkerView: UIView {
         } else {
             connectionInfoPopup.hide()
         }
+    }
+    
+    @objc func hidePopup() {
+        connectionInfoPopup.hide()
     }
     
 }

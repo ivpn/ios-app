@@ -19,6 +19,7 @@ class MapMarkerContainerView: UIView {
     
     override func updateConstraints() {
         initConstraints()
+        initGestures()
         setupConstraints()
         super.updateConstraints()
     }
@@ -49,6 +50,11 @@ class MapMarkerContainerView: UIView {
     
     // MARK: - Private methods -
     
+    private func initGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tap)
+    }
+    
     private func initConstraints() {
         if UIDevice.current.userInterfaceIdiom == .pad {
             bb.left(375).top().right().bottom()
@@ -58,6 +64,10 @@ class MapMarkerContainerView: UIView {
         constraintsA = bb.left().top(25).right().bottom(-359).constraints.deactivate()
         constraintsB = bb.left().top(25).right().bottom(-274).constraints.deactivate()
         constraintsC = bb.left().top(25).right().bottom(-230).constraints.deactivate()
+    }
+    
+    @objc private func handleTap() {
+        NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
 }
