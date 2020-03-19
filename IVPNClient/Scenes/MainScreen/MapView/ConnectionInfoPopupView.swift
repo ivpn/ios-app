@@ -77,7 +77,10 @@ class ConnectionInfoPopupView: UIView {
         didSet {
             statusLabel.text = vpnStatusViewModel.popupStatusText
             locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
-            displayMode = .content
+            
+            if displayMode == .loading {
+                displayMode = .content
+            }
         }
     }
     
@@ -186,7 +189,9 @@ class ConnectionInfoPopupView: UIView {
             case .success(let model):
                 self.viewModel = ProofsViewModel(model: model)
             case .failure:
-                self.displayMode = .error
+                if self.displayMode == .loading {
+                    self.displayMode = .error
+                }
             }
         }
     }
