@@ -172,7 +172,7 @@ class ConnectionInfoPopupView: UIView {
         statusLabel.bb.left(18).top(15).right(-18).height(14)
         locationLabel.bb.left(18).bottom(-15).right(-48).height(19)
         actionButton.bb.size(width: 20, height: 20).bottom(-15).right(-18)
-        errorLabel.bb.top(10).right(-10).bottom(-10).left(10)
+        errorLabel.bb.top(10).right(-20).bottom(-10).left(20)
         spinner.bb.center()
     }
     
