@@ -63,6 +63,9 @@
 		82342100225F5302008A1D6E /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823420FF225F5302008A1D6E /* SubscriptionViewController.swift */; };
 		82351FCA241FA16600E6E0FD /* InfoAlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */; };
 		82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */; };
+		82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */; };
+		82351FD02420D0E000E6E0FD /* MapMarkerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCF2420D0E000E6E0FD /* MapMarkerContainerView.swift */; };
+		82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */; };
 		823BD9E3231D4C8E002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823BD9E4231D4C8F002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823DA733215E3CCB00DAFE37 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
@@ -408,6 +411,9 @@
 		823420FF225F5302008A1D6E /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModelTests.swift; sourceTree = "<group>"; };
+		82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerView.swift; sourceTree = "<group>"; };
+		82351FCF2420D0E000E6E0FD /* MapMarkerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerContainerView.swift; sourceTree = "<group>"; };
+		82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoPopupView.swift; sourceTree = "<group>"; };
 		823AD1F32158F55E00BE0EBA /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = ../Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		823AD1F52158F56300BE0EBA /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = ../Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
 		823DA732215E3CCB00DAFE37 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
@@ -1171,6 +1177,9 @@
 			children = (
 				82C1D5BB23FE78570059A915 /* MapScrollView.swift */,
 				8270D265241A477900B17B65 /* InfoAlertView.swift */,
+				82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */,
+				82351FCF2420D0E000E6E0FD /* MapMarkerContainerView.swift */,
+				82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -2036,6 +2045,7 @@
 				8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */,
 				824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */,
 				8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */,
+				82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */,
 				9C6942371DD218A900F9A801 /* IKEv2AccessDetails.swift in Sources */,
 				82D598B421A5A7A3000FABDE /* NetworkTrust.swift in Sources */,
 				8292E1A92174C11600123538 /* Interface.swift in Sources */,
@@ -2052,6 +2062,7 @@
 				9C3031301DB41FBA00C38B0C /* ServerTableViewCell.swift in Sources */,
 				8292E1AB2174C12200123538 /* Tunnel.swift in Sources */,
 				82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */,
+				82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */,
 				82B51CDF21DE3E31005CC9C9 /* UITableView+Ext.swift in Sources */,
 				82061F64238D2730009DDF4D /* PingResult.swift in Sources */,
 				8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */,
@@ -2073,6 +2084,7 @@
 				826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */,
 				824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */,
 				8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */,
+				82351FD02420D0E000E6E0FD /* MapMarkerContainerView.swift in Sources */,
 				82234B6721BA7F3500B082DE /* Logging.swift in Sources */,
 				82DB75EC239E75EB0073E846 /* NEVPNStatus+Ext.swift in Sources */,
 				9CBFF0302102254800FE1757 /* Settings.swift in Sources */,

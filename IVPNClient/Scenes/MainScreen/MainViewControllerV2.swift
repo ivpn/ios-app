@@ -8,6 +8,7 @@
 
 import UIKit
 import FloatingPanel
+import NetworkExtension
 
 class MainViewControllerV2: UIViewController {
     
@@ -21,6 +22,8 @@ class MainViewControllerV2: UIViewController {
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
     private var infoAlertViewModel = InfoAlertViewModel()
+    private let markerContainerView = MapMarkerContainerView()
+    private let markerView = MapMarkerView()
     
     // MARK: - @IBActions -
     
@@ -38,6 +41,7 @@ class MainViewControllerV2: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initMarker()
         initFloatingPanel()
         addObservers()
         startServersUpdate()
@@ -97,6 +101,10 @@ class MainViewControllerV2: UIViewController {
         updateFloatingPanelLayout()
     }
     
+    func updateStatus(vpnStatus: NEVPNStatus) {
+        markerView.status = vpnStatus
+    }
+    
     func updateGeoLocation() {
         let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
         
@@ -114,6 +122,10 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
+    func expandFloatingPanel() {
+        floatingPanel.move(to: .full, animated: true)
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
@@ -128,6 +140,7 @@ class MainViewControllerV2: UIViewController {
     
     @objc private func updateFloatingPanelLayout() {
         floatingPanel.updateLayout()
+        markerContainerView.setupConstraints()
         updateInfoAlert()
     }
     
@@ -143,6 +156,11 @@ class MainViewControllerV2: UIViewController {
                 break
             }
         }
+    }
+    
+    private func initMarker() {
+        markerContainerView.addSubview(markerView)
+        view.addSubview(markerContainerView)
     }
     
     private func initInfoAlert() {

@@ -54,6 +54,19 @@ struct VPNStatusViewModel {
         }
     }
     
+    var popupStatusText: String {
+        switch status {
+        case .connecting, .reasserting:
+            return "Connecting VPN"
+        case .disconnecting:
+            return "Disconnecting VPN"
+        case .connected:
+            return "Your connection is protected"
+        default:
+            return "Everyone knows about your location"
+        }
+    }
+    
     // MARK: - Initialize -
     
     init(status: NEVPNStatus) {
