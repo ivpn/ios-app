@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -1540,14 +1540,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="42.666667938232422"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="42.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="13.333333333333336" width="326" height="16"/>
+                                            <rect key="frame" x="16" y="13.666666666666664" width="326" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1556,7 +1556,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11.000000000000002" width="324" height="20.666666666666671"/>
+                                            <rect key="frame" x="16" y="11" width="324" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1578,7 +1578,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98.333332061767578" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -2643,7 +2643,7 @@
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="4"/>
+                                                                <integer key="value" value="8"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
@@ -2676,7 +2676,7 @@
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="4"/>
+                                                                <integer key="value" value="8"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
@@ -2778,7 +2778,7 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3-days free trial then" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65y-QK-kGi">
-                                                        <rect key="frame" x="15" y="102" width="315" height="15"/>
+                                                        <rect key="frame" x="15" y="106" width="315" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="kUU-nz-rr0"/>
                                                         </constraints>
@@ -2787,7 +2787,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$60.00/year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YR-G6-cjE">
-                                                        <rect key="frame" x="15" y="120" width="315" height="20"/>
+                                                        <rect key="frame" x="15" y="124" width="315" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Vje-6e-zV5"/>
                                                         </constraints>
@@ -2796,11 +2796,11 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZu-WQ-hqs">
-                                                        <rect key="frame" x="225" y="105" width="105" height="33"/>
+                                                        <rect key="frame" x="225" y="105" width="105" height="40"/>
                                                         <color key="backgroundColor" name="ivpnBlue"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="105" id="2KP-dS-6F9"/>
-                                                            <constraint firstAttribute="height" constant="33" id="Rah-sw-hhR"/>
+                                                            <constraint firstAttribute="height" constant="40" id="Rah-sw-hhR"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <state key="normal" title="SELECT">
@@ -2837,7 +2837,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="iwl-Iy-nQe" secondAttribute="trailing" constant="15" id="szA-iC-dAb"/>
                                                     <constraint firstItem="iwl-Iy-nQe" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" constant="15" id="vsy-v8-wPv"/>
                                                     <constraint firstItem="C1K-hY-hBv" firstAttribute="top" secondItem="iwl-Iy-nQe" secondAttribute="bottom" constant="12" id="xeq-Ca-ywr"/>
-                                                    <constraint firstItem="65y-QK-kGi" firstAttribute="top" secondItem="C1K-hY-hBv" secondAttribute="bottom" constant="8" id="zUm-XS-TE7"/>
+                                                    <constraint firstItem="65y-QK-kGi" firstAttribute="top" secondItem="C1K-hY-hBv" secondAttribute="bottom" constant="12" id="zUm-XS-TE7"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HX5-fa-hGp">
@@ -2886,7 +2886,7 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3-days free trial then" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ah-mR-ogu">
-                                                        <rect key="frame" x="15" y="102" width="315" height="15"/>
+                                                        <rect key="frame" x="15" y="106" width="315" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="eBe-NI-gQy"/>
                                                         </constraints>
@@ -2895,7 +2895,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100.00/year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JY1-Y6-wdm">
-                                                        <rect key="frame" x="15" y="120" width="315" height="20"/>
+                                                        <rect key="frame" x="15" y="124" width="315" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="nfZ-wD-XgH"/>
                                                         </constraints>
@@ -2904,10 +2904,10 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2l-Es-dFP">
-                                                        <rect key="frame" x="225" y="105" width="105" height="33"/>
+                                                        <rect key="frame" x="225" y="105" width="105" height="40"/>
                                                         <color key="backgroundColor" name="ivpnBlue"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="33" id="BdP-fY-eHH"/>
+                                                            <constraint firstAttribute="height" constant="40" id="BdP-fY-eHH"/>
                                                             <constraint firstAttribute="width" constant="105" id="hQN-X5-pOv"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2954,7 +2954,7 @@
                                                     <constraint firstItem="CLk-rI-9eq" firstAttribute="top" secondItem="HX5-fa-hGp" secondAttribute="top" constant="15" id="np9-0b-BNZ"/>
                                                     <constraint firstItem="zWA-ma-npj" firstAttribute="top" secondItem="CLk-rI-9eq" secondAttribute="bottom" constant="11" id="nra-z2-uCN"/>
                                                     <constraint firstItem="zWA-ma-npj" firstAttribute="width" secondItem="PlA-G5-NFr" secondAttribute="width" id="oaG-Yg-55T"/>
-                                                    <constraint firstItem="1ah-mR-ogu" firstAttribute="top" secondItem="HYL-QC-y8b" secondAttribute="bottom" constant="8" id="ok6-mM-QuE"/>
+                                                    <constraint firstItem="1ah-mR-ogu" firstAttribute="top" secondItem="HYL-QC-y8b" secondAttribute="bottom" constant="12" id="ok6-mM-QuE"/>
                                                     <constraint firstItem="JY1-Y6-wdm" firstAttribute="leading" secondItem="HX5-fa-hGp" secondAttribute="leading" constant="15" id="pea-Wq-hgh"/>
                                                     <constraint firstAttribute="trailing" secondItem="1ah-mR-ogu" secondAttribute="trailing" constant="15" id="tnh-Fm-chU"/>
                                                 </constraints>
