@@ -16,6 +16,17 @@ class NavigationController: UINavigationController {
         UINavigationBar.appearance().tintColor = UIColor.init(named: Theme.Key.ivpnBlue)
         navigationBar.barTintColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .heavy), NSAttributedString.Key.foregroundColor: UIColor.init(named: Theme.Key.ivpnLabelPrimary)!]
+        
+        // Hide navigation bar 1px bottom line
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.shadowImage = nil
+            appearance.shadowColor = nil
+            navigationBar.standardAppearance = appearance
+        } else {
+            navigationBar.setBackgroundImage(#imageLiteral(resourceName: "BarBackground"), for: .default)
+            navigationBar.shadowImage = UIImage()
+        }
     }
     
 }
