@@ -2732,7 +2732,7 @@
                                                     <constraint firstItem="HF0-iq-RP9" firstAttribute="leading" secondItem="Ukz-Xt-zOH" secondAttribute="leading" id="yoh-Lf-JPz"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0I-fY-1bU" customClass="SubscriptionBorderView" customModule="IVPNClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0I-fY-1bU">
                                                 <rect key="frame" x="15" y="165" width="345" height="150"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Standard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhE-k8-qvi">
@@ -2757,7 +2757,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="G6N-V6-FQO"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" name="ivpnLabelTertiary"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -2766,7 +2766,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="zzO-M1-Iy0"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" name="ivpnLabelTertiary"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -2782,7 +2782,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="kUU-nz-rr0"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" name="ivpnLabel5"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -2791,7 +2791,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Vje-6e-zV5"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <color key="textColor" name="ivpnLabelPrimary"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -2808,7 +2808,7 @@
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="3"/>
+                                                                <integer key="value" value="8"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -2816,7 +2816,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="jZu-WQ-hqs" firstAttribute="top" secondItem="C1K-hY-hBv" secondAttribute="bottom" constant="11" id="4Sl-S9-ZGn"/>
                                                     <constraint firstItem="2YR-G6-cjE" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" constant="15" id="9Ve-8y-hp9"/>
@@ -2839,19 +2839,8 @@
                                                     <constraint firstItem="C1K-hY-hBv" firstAttribute="top" secondItem="iwl-Iy-nQe" secondAttribute="bottom" constant="12" id="xeq-Ca-ywr"/>
                                                     <constraint firstItem="65y-QK-kGi" firstAttribute="top" secondItem="C1K-hY-hBv" secondAttribute="bottom" constant="8" id="zUm-XS-TE7"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="6"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" name="ivpnGray10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HX5-fa-hGp" customClass="SubscriptionBorderView" customModule="IVPNClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HX5-fa-hGp">
                                                 <rect key="frame" x="15" y="325" width="345" height="150"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Pro" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLk-rI-9eq">
@@ -2876,16 +2865,16 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="Voo-Ex-z7t"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" name="ivpnLabelTertiary"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7 devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZn-l2-8d2">
-                                                        <rect key="frame" x="14.999999999999996" y="66" width="57.666666666666657" height="15"/>
+                                                        <rect key="frame" x="15.000000000000004" y="66" width="61.333333333333343" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="sME-hq-uia"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" name="ivpnLabelTertiary"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -2901,7 +2890,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="eBe-NI-gQy"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" name="ivpnLabel5"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -2910,7 +2899,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="nfZ-wD-XgH"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <color key="textColor" name="ivpnLabelPrimary"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -2927,7 +2916,7 @@
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="3"/>
+                                                                <integer key="value" value="8"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -2939,12 +2928,12 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="uWm-07-aUJ"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" name="ivpnLabelTertiary"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="cZn-l2-8d2" firstAttribute="top" secondItem="zWA-ma-npj" secondAttribute="bottom" constant="8" id="46f-gl-VyZ"/>
                                                     <constraint firstItem="JY1-Y6-wdm" firstAttribute="top" secondItem="1ah-mR-ogu" secondAttribute="bottom" constant="3" id="4EI-RQ-sSn"/>
@@ -2969,17 +2958,6 @@
                                                     <constraint firstItem="JY1-Y6-wdm" firstAttribute="leading" secondItem="HX5-fa-hGp" secondAttribute="leading" constant="15" id="pea-Wq-hgh"/>
                                                     <constraint firstAttribute="trailing" secondItem="1ah-mR-ogu" secondAttribute="trailing" constant="15" id="tnh-Fm-chU"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="6"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" name="ivpnGray10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>

@@ -12,14 +12,6 @@ import JGProgressHUD
 import ActiveLabel
 import SwiftyStoreKit
 
-class SubscriptionBorderView: UIView {
-    
-    override func layoutSubviews() {
-        layer.borderColor = UIColor.init(named: Theme.Key.ivpnGray10)!.cgColor
-    }
-    
-}
-
 class SubscriptionViewController: UIViewController {
     
     // MARK: - @IBOutlets -
