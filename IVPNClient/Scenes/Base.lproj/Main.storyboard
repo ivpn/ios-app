@@ -2616,10 +2616,10 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="702"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGs-b0-QwK">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="770"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8V-ay-k5A" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                <rect key="frame" x="15" y="490" width="345" height="260"/>
+                                                <rect key="frame" x="15" y="430" width="345" height="260"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="260" id="VdU-xM-9mt"/>
                                                 </constraints>
@@ -2633,7 +2633,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ukz-Xt-zOH" customClass="SubscriptionBorderView" customModule="IVPNClient" customModuleProvider="target">
-                                                <rect key="frame" x="15" y="110" width="345" height="40"/>
+                                                <rect key="frame" x="15" y="40" width="345" height="40"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-8Y-Eoj">
                                                         <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="40"/>
@@ -2651,7 +2651,7 @@
                                                         <rect key="frame" x="172.66666666666663" y="0.0" width="172.33333333333337" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-20%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztn-Zh-di0">
-                                                                <rect key="frame" x="123.33333333333334" y="11.666666666666657" width="34" height="17"/>
+                                                                <rect key="frame" x="123.33333333333334" y="11.666666666666671" width="34" height="17"/>
                                                                 <color key="backgroundColor" red="0.98039215690000003" green="0.1843137255" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="17" id="Xkh-JZ-QWq"/>
@@ -2733,16 +2733,16 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0I-fY-1bU">
-                                                <rect key="frame" x="15" y="165" width="345" height="150"/>
+                                                <rect key="frame" x="15" y="95" width="345" height="150"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhE-k8-qvi">
-                                                        <rect key="frame" x="15" y="15" width="58" height="15"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STANDARD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhE-k8-qvi">
+                                                        <rect key="frame" x="67" y="15" width="60" height="13"/>
                                                         <color key="backgroundColor" name="ivpnGray16"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="58" id="3zI-qw-y5P"/>
-                                                            <constraint firstAttribute="height" constant="15" id="ukr-qq-LVz"/>
+                                                            <constraint firstAttribute="width" constant="60" id="3zI-qw-y5P"/>
+                                                            <constraint firstAttribute="height" constant="13" id="ukr-qq-LVz"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="9"/>
                                                         <color key="textColor" name="ivpnBackgroundPrimary"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -2753,7 +2753,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All protocols" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2QJ-Zc-QWV">
-                                                        <rect key="frame" x="15" y="41" width="315" height="15"/>
+                                                        <rect key="frame" x="15" y="39" width="315" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="G6N-V6-FQO"/>
                                                         </constraints>
@@ -2762,7 +2762,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwl-Iy-nQe">
-                                                        <rect key="frame" x="15" y="64" width="315" height="15"/>
+                                                        <rect key="frame" x="15" y="62" width="315" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="zzO-M1-Iy0"/>
                                                         </constraints>
@@ -2771,14 +2771,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1K-hY-hBv">
-                                                        <rect key="frame" x="0.0" y="91" width="345" height="1"/>
+                                                        <rect key="frame" x="0.0" y="89" width="345" height="1"/>
                                                         <color key="backgroundColor" name="ivpnGray10"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="EsQ-MY-FHm"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3-days free trial then" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65y-QK-kGi">
-                                                        <rect key="frame" x="15" y="104" width="315" height="15"/>
+                                                        <rect key="frame" x="15" y="102" width="315" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="kUU-nz-rr0"/>
                                                         </constraints>
@@ -2787,7 +2787,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$60.00/year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YR-G6-cjE">
-                                                        <rect key="frame" x="15" y="122" width="315" height="20"/>
+                                                        <rect key="frame" x="15" y="120" width="315" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Vje-6e-zV5"/>
                                                         </constraints>
@@ -2796,7 +2796,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZu-WQ-hqs">
-                                                        <rect key="frame" x="225" y="103" width="105" height="40"/>
+                                                        <rect key="frame" x="225" y="101" width="105" height="40"/>
                                                         <color key="backgroundColor" name="ivpnBlue"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="105" id="2KP-dS-6F9"/>
@@ -2815,17 +2815,25 @@
                                                             <action selector="purchaseStandard:" destination="Fww-6Z-MLW" eventType="touchUpInside" id="YgR-hH-8Y2"/>
                                                         </connections>
                                                     </button>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ivpn-logo-gray" translatesAutoresizingMaskIntoConstraints="NO" id="zzo-Ho-HSa">
+                                                        <rect key="frame" x="15" y="15" width="44" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="44" id="MwU-lC-iCH"/>
+                                                            <constraint firstAttribute="height" constant="15" id="gkG-fj-ePp"/>
+                                                        </constraints>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="jZu-WQ-hqs" firstAttribute="top" secondItem="C1K-hY-hBv" secondAttribute="bottom" constant="11" id="4Sl-S9-ZGn"/>
                                                     <constraint firstItem="2YR-G6-cjE" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" constant="15" id="9Ve-8y-hp9"/>
+                                                    <constraint firstItem="zzo-Ho-HSa" firstAttribute="top" secondItem="h0I-fY-1bU" secondAttribute="top" constant="15" id="Axf-JK-7Gi"/>
                                                     <constraint firstItem="65y-QK-kGi" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" constant="15" id="D0o-91-8BM"/>
                                                     <constraint firstItem="2YR-G6-cjE" firstAttribute="top" secondItem="65y-QK-kGi" secondAttribute="bottom" constant="3" id="DGF-pg-k6D"/>
                                                     <constraint firstItem="2QJ-Zc-QWV" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" constant="15" id="DOA-1u-dFd"/>
                                                     <constraint firstItem="C1K-hY-hBv" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" id="GGc-bn-xfF"/>
                                                     <constraint firstAttribute="trailing" secondItem="C1K-hY-hBv" secondAttribute="trailing" id="I5J-Kv-aIa"/>
-                                                    <constraint firstItem="GhE-k8-qvi" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" constant="15" id="JL6-7D-BD7"/>
+                                                    <constraint firstItem="GhE-k8-qvi" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" constant="67" id="JL6-7D-BD7"/>
                                                     <constraint firstItem="iwl-Iy-nQe" firstAttribute="top" secondItem="2QJ-Zc-QWV" secondAttribute="bottom" constant="8" id="K3K-x0-biT"/>
                                                     <constraint firstItem="GhE-k8-qvi" firstAttribute="top" secondItem="h0I-fY-1bU" secondAttribute="top" constant="15" id="P2q-sv-RKy"/>
                                                     <constraint firstItem="2QJ-Zc-QWV" firstAttribute="top" secondItem="GhE-k8-qvi" secondAttribute="bottom" constant="11" id="S96-Gr-WUw"/>
@@ -2836,21 +2844,22 @@
                                                     <constraint firstAttribute="height" constant="150" id="s7V-AL-I5H"/>
                                                     <constraint firstAttribute="trailing" secondItem="iwl-Iy-nQe" secondAttribute="trailing" constant="15" id="szA-iC-dAb"/>
                                                     <constraint firstItem="iwl-Iy-nQe" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" constant="15" id="vsy-v8-wPv"/>
+                                                    <constraint firstItem="zzo-Ho-HSa" firstAttribute="leading" secondItem="h0I-fY-1bU" secondAttribute="leading" constant="15" id="x6x-n6-V5x"/>
                                                     <constraint firstItem="C1K-hY-hBv" firstAttribute="top" secondItem="iwl-Iy-nQe" secondAttribute="bottom" constant="12" id="xeq-Ca-ywr"/>
                                                     <constraint firstItem="65y-QK-kGi" firstAttribute="top" secondItem="C1K-hY-hBv" secondAttribute="bottom" constant="12" id="zUm-XS-TE7"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HX5-fa-hGp">
-                                                <rect key="frame" x="15" y="325" width="345" height="150"/>
+                                                <rect key="frame" x="15" y="255" width="345" height="150"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pro" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLk-rI-9eq">
-                                                        <rect key="frame" x="15" y="15" width="28" height="15"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLk-rI-9eq">
+                                                        <rect key="frame" x="67" y="15" width="28" height="13"/>
                                                         <color key="backgroundColor" name="ivpnGray16"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="28" id="KxL-bo-w7N"/>
-                                                            <constraint firstAttribute="height" constant="15" id="Npv-lz-7Q0"/>
+                                                            <constraint firstAttribute="height" constant="13" id="Npv-lz-7Q0"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="9"/>
                                                         <color key="textColor" name="ivpnBackgroundPrimary"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -2861,7 +2870,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All protocols" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWA-ma-npj">
-                                                        <rect key="frame" x="15" y="41" width="151.66666666666666" height="15"/>
+                                                        <rect key="frame" x="15" y="39" width="151.66666666666666" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="Voo-Ex-z7t"/>
                                                         </constraints>
@@ -2870,7 +2879,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7 devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZn-l2-8d2">
-                                                        <rect key="frame" x="15.000000000000004" y="64" width="61.333333333333343" height="15"/>
+                                                        <rect key="frame" x="15.000000000000004" y="62" width="61.333333333333343" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="sME-hq-uia"/>
                                                         </constraints>
@@ -2879,14 +2888,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYL-QC-y8b">
-                                                        <rect key="frame" x="0.0" y="91" width="345" height="1"/>
+                                                        <rect key="frame" x="0.0" y="89" width="345" height="1"/>
                                                         <color key="backgroundColor" name="ivpnGray10"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="YCm-3d-F8j"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3-days free trial then" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ah-mR-ogu">
-                                                        <rect key="frame" x="15" y="104" width="315" height="15"/>
+                                                        <rect key="frame" x="15" y="102" width="315" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="eBe-NI-gQy"/>
                                                         </constraints>
@@ -2895,7 +2904,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100.00/year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JY1-Y6-wdm">
-                                                        <rect key="frame" x="15" y="122" width="315" height="20"/>
+                                                        <rect key="frame" x="15" y="120" width="315" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="nfZ-wD-XgH"/>
                                                         </constraints>
@@ -2904,7 +2913,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2l-Es-dFP">
-                                                        <rect key="frame" x="225" y="103" width="105" height="40"/>
+                                                        <rect key="frame" x="225" y="101" width="105" height="40"/>
                                                         <color key="backgroundColor" name="ivpnBlue"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="BdP-fY-eHH"/>
@@ -2932,23 +2941,32 @@
                                                         <color key="textColor" name="ivpnLabel7"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ivpn-logo-gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ejw-cS-Lky">
+                                                        <rect key="frame" x="15" y="15" width="44" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="88s-JT-W41"/>
+                                                            <constraint firstAttribute="width" constant="44" id="mnG-z7-dRI"/>
+                                                        </constraints>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="cZn-l2-8d2" firstAttribute="top" secondItem="zWA-ma-npj" secondAttribute="bottom" constant="8" id="46f-gl-VyZ"/>
                                                     <constraint firstItem="JY1-Y6-wdm" firstAttribute="top" secondItem="1ah-mR-ogu" secondAttribute="bottom" constant="3" id="4EI-RQ-sSn"/>
                                                     <constraint firstAttribute="trailing" secondItem="HYL-QC-y8b" secondAttribute="trailing" id="7LN-CK-Zy6"/>
+                                                    <constraint firstItem="Ejw-cS-Lky" firstAttribute="leading" secondItem="HX5-fa-hGp" secondAttribute="leading" constant="15" id="7mY-YV-obE"/>
                                                     <constraint firstAttribute="trailing" secondItem="y2l-Es-dFP" secondAttribute="trailing" constant="15" id="8Mv-iz-fdw"/>
                                                     <constraint firstAttribute="trailing" secondItem="PlA-G5-NFr" secondAttribute="trailing" constant="15" id="H3J-Rj-RCH"/>
                                                     <constraint firstItem="PlA-G5-NFr" firstAttribute="leading" secondItem="zWA-ma-npj" secondAttribute="trailing" constant="12" id="JYP-EQ-dtN"/>
                                                     <constraint firstItem="1ah-mR-ogu" firstAttribute="leading" secondItem="HX5-fa-hGp" secondAttribute="leading" constant="15" id="NBL-oZ-lAf"/>
-                                                    <constraint firstItem="CLk-rI-9eq" firstAttribute="leading" secondItem="HX5-fa-hGp" secondAttribute="leading" constant="15" id="PMK-Ty-hBx"/>
+                                                    <constraint firstItem="CLk-rI-9eq" firstAttribute="leading" secondItem="HX5-fa-hGp" secondAttribute="leading" constant="67" id="PMK-Ty-hBx"/>
                                                     <constraint firstItem="HYL-QC-y8b" firstAttribute="leading" secondItem="HX5-fa-hGp" secondAttribute="leading" id="Q29-aJ-xI2"/>
                                                     <constraint firstItem="cZn-l2-8d2" firstAttribute="leading" secondItem="HX5-fa-hGp" secondAttribute="leading" constant="15" id="Vor-vY-JWe"/>
                                                     <constraint firstItem="y2l-Es-dFP" firstAttribute="top" secondItem="HYL-QC-y8b" secondAttribute="bottom" constant="11" id="aFE-Ak-JC8"/>
                                                     <constraint firstItem="PlA-G5-NFr" firstAttribute="top" secondItem="HX5-fa-hGp" secondAttribute="top" constant="43" id="bCb-dX-Xwo"/>
                                                     <constraint firstItem="zWA-ma-npj" firstAttribute="leading" secondItem="HX5-fa-hGp" secondAttribute="leading" constant="15" id="cuG-7c-hWk"/>
                                                     <constraint firstItem="HYL-QC-y8b" firstAttribute="top" secondItem="cZn-l2-8d2" secondAttribute="bottom" constant="12" id="fv1-JA-WAS"/>
+                                                    <constraint firstItem="Ejw-cS-Lky" firstAttribute="top" secondItem="HX5-fa-hGp" secondAttribute="top" constant="15" id="lCh-Ns-Uhk"/>
                                                     <constraint firstAttribute="trailing" secondItem="JY1-Y6-wdm" secondAttribute="trailing" constant="15" id="lpH-F5-djw"/>
                                                     <constraint firstAttribute="height" constant="150" id="mc0-hy-CVb"/>
                                                     <constraint firstItem="CLk-rI-9eq" firstAttribute="top" secondItem="HX5-fa-hGp" secondAttribute="top" constant="15" id="np9-0b-BNZ"/>
@@ -2959,20 +2977,40 @@
                                                     <constraint firstAttribute="trailing" secondItem="1ah-mR-ogu" secondAttribute="trailing" constant="15" id="tnh-Fm-chU"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ti-qN-P9C">
+                                                <rect key="frame" x="49.666666666666657" y="730" width="276" height="44"/>
+                                                <color key="backgroundColor" name="ivpnGray14"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="276" id="MNV-Td-f9X"/>
+                                                    <constraint firstAttribute="height" constant="44" id="kbf-EW-OaA"/>
+                                                </constraints>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Already have an account">
+                                                    <color key="titleColor" name="ivpnLabelSecondary"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Ukz-Xt-zOH" secondAttribute="trailing" constant="15" id="5mr-NG-ndt"/>
-                                            <constraint firstAttribute="height" constant="770" id="9Xc-5l-HqL"/>
+                                            <constraint firstAttribute="height" constant="800" id="9Xc-5l-HqL"/>
                                             <constraint firstAttribute="trailing" secondItem="Z8V-ay-k5A" secondAttribute="trailing" constant="15" id="A7b-4V-kfs"/>
                                             <constraint firstItem="Z8V-ay-k5A" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="EP2-WT-9sd"/>
-                                            <constraint firstItem="Ukz-Xt-zOH" firstAttribute="top" secondItem="LGs-b0-QwK" secondAttribute="top" constant="110" id="Egi-qV-OL8"/>
+                                            <constraint firstItem="Ukz-Xt-zOH" firstAttribute="top" secondItem="LGs-b0-QwK" secondAttribute="top" constant="40" id="Egi-qV-OL8"/>
                                             <constraint firstItem="HX5-fa-hGp" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="J4B-wt-Obu"/>
                                             <constraint firstItem="h0I-fY-1bU" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="Jer-Me-cfE"/>
-                                            <constraint firstItem="Z8V-ay-k5A" firstAttribute="top" secondItem="HX5-fa-hGp" secondAttribute="bottom" constant="15" id="NYi-2D-BbH"/>
+                                            <constraint firstItem="0ti-qN-P9C" firstAttribute="top" secondItem="Z8V-ay-k5A" secondAttribute="bottom" constant="40" id="NX4-JV-oOv"/>
+                                            <constraint firstItem="Z8V-ay-k5A" firstAttribute="top" secondItem="HX5-fa-hGp" secondAttribute="bottom" constant="25" id="NYi-2D-BbH"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="414" id="OiX-xb-lTT"/>
                                             <constraint firstItem="Ukz-Xt-zOH" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="aJa-ru-Iqu"/>
                                             <constraint firstAttribute="trailing" secondItem="h0I-fY-1bU" secondAttribute="trailing" constant="15" id="d9r-Eo-G2W"/>
+                                            <constraint firstItem="0ti-qN-P9C" firstAttribute="centerX" secondItem="LGs-b0-QwK" secondAttribute="centerX" id="h85-7F-9gt"/>
                                             <constraint firstItem="h0I-fY-1bU" firstAttribute="top" secondItem="Ukz-Xt-zOH" secondAttribute="bottom" constant="15" id="ikR-le-9qj"/>
                                             <constraint firstAttribute="trailing" secondItem="HX5-fa-hGp" secondAttribute="trailing" constant="15" id="mY0-iV-TjL"/>
                                             <constraint firstItem="HX5-fa-hGp" firstAttribute="top" secondItem="h0I-fY-1bU" secondAttribute="bottom" constant="10" id="rdi-xd-EI1"/>
@@ -3024,7 +3062,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hGU-Wp-2HV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="932" y="839"/>
+            <point key="canvasLocation" x="932" y="838.66995073891633"/>
         </scene>
         <!--Main View ControllerV2-->
         <scene sceneID="8Je-1b-eM7">
@@ -3692,6 +3730,7 @@
         <image name="icon-map-pin" width="24" height="24"/>
         <image name="icon-menu" width="20" height="16"/>
         <image name="icon-server" width="24" height="24"/>
+        <image name="ivpn-logo-gray" width="44" height="15"/>
         <image name="logo" width="72" height="24"/>
         <image name="nl-v" width="24" height="24"/>
         <image name="promo-2" width="360" height="280"/>
@@ -3713,6 +3752,9 @@
         </namedColor>
         <namedColor name="ivpnGray10">
             <color red="0.89803921568627454" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnGray14">
+            <color red="0.92941176470588238" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ivpnGray15">
             <color red="0.32156862745098042" green="0.40392156862745099" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3737,6 +3779,9 @@
         </namedColor>
         <namedColor name="ivpnLabelQuaternary">
             <color red="0.42745098039215684" green="0.51764705882352946" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnLabelSecondary">
+            <color red="0.20000000000000001" green="0.32156862745098042" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ivpnLabelTertiary">
             <color red="0.20000000000000001" green="0.30196078431372547" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
