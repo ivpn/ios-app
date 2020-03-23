@@ -13,7 +13,7 @@ extension UIButton {
     func setupIcon(imageName: String) {
         setImage(UIImage.init(named: imageName), for: .normal)
         backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
-        layer.cornerRadius = frame.size.width / 2
+        layer.cornerRadius = 21
         clipsToBounds = true
     }
     
