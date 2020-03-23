@@ -3656,7 +3656,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDZ-oO-5ye">
-                                    <rect key="frame" x="263" y="32" width="82" height="82"/>
+                                    <rect key="frame" x="255" y="28" width="90" height="90"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" name="ivpnBackgroundTertiary"/>
                                 </imageView>
@@ -3792,6 +3792,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Account" id="H32-NI-wH6"/>
+                    <connections>
+                        <outlet property="qrCodeImage" destination="LDZ-oO-5ye" id="47h-DP-QrR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ki9-Pc-OJB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

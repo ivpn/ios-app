@@ -10,6 +10,10 @@ import UIKit
 
 class AccountViewController: UITableViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var qrCodeImage: UIImageView!
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
