@@ -12,14 +12,6 @@ import JGProgressHUD
 import ActiveLabel
 import SwiftyStoreKit
 
-class SubscriptionBorderView: UIView {
-    
-    override func layoutSubviews() {
-        layer.borderColor = UIColor.init(named: Theme.Key.ivpnGray10)!.cgColor
-    }
-    
-}
-
 class SubscriptionViewController: UIViewController {
     
     // MARK: - @IBOutlets -
@@ -105,7 +97,7 @@ class SubscriptionViewController: UIViewController {
         guard self.displayMode == .content else { return }
         
         monthlyButton.setTitleColor(.white, for: .normal)
-        monthlyButtonBackground.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray13)
+        monthlyButtonBackground.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
         yearlyButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelTertiary), for: .normal)
         yearlyButtonBackground.backgroundColor = .clear
         
@@ -117,7 +109,7 @@ class SubscriptionViewController: UIViewController {
         guard self.displayMode == .content else { return }
         
         yearlyButton.setTitleColor(.white, for: .normal)
-        yearlyButtonBackground.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray13)
+        yearlyButtonBackground.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
         monthlyButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelTertiary), for: .normal)
         monthlyButtonBackground.backgroundColor = .clear
         
