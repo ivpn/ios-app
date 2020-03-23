@@ -53,6 +53,11 @@ class NavigationManager {
         return storyBoard.instantiateViewController(withIdentifier: "settingsView")
     }
     
+    static func getAccountViewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        return storyBoard.instantiateViewController(withIdentifier: "accountView")
+    }
+    
     static func getControlPanelViewController() -> UITableViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         return storyBoard.instantiateViewController(withIdentifier: "controlPanelView") as! ControlPanelViewController

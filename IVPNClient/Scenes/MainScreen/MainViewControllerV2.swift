@@ -38,7 +38,7 @@ class MainViewControllerV2: UIViewController {
     }
     
     @IBAction func openAccountInfo(_ sender: UIButton) {
-        
+        presentAccountScreen()
     }
     
     // MARK: - View lifecycle -
