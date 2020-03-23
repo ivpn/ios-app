@@ -1540,10 +1540,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
@@ -1556,7 +1556,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="324" height="21"/>
+                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1578,7 +1578,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.333332061767578" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -3083,29 +3083,15 @@
                                             <constraint firstAttribute="height" constant="1420" id="Q9A-Wa-2p0"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esH-ro-LaV" userLabel="Menu Button">
-                                        <rect key="frame" x="305" y="52" width="40" height="40"/>
-                                        <accessibility key="accessibilityConfiguration" label="Open Settings"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="6jd-8M-wZB"/>
-                                            <constraint firstAttribute="width" constant="40" id="bBk-2o-vhl"/>
-                                        </constraints>
-                                        <state key="normal" image="icon-menu"/>
-                                        <connections>
-                                            <action selector="openSettings:" destination="rTE-KQ-hdG" eventType="touchUpInside" id="ayf-E3-c7z"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="gIR-a7-hcm" firstAttribute="top" secondItem="rn8-hf-8bd" secondAttribute="top" id="41Z-1e-R6N"/>
                                     <constraint firstAttribute="bottom" secondItem="gIR-a7-hcm" secondAttribute="bottom" id="C33-NB-gbt"/>
                                     <constraint firstAttribute="bottom" secondItem="gIR-a7-hcm" secondAttribute="bottom" id="CSb-Bk-0Jg"/>
-                                    <constraint firstItem="esH-ro-LaV" firstAttribute="top" secondItem="iKt-h8-BW7" secondAttribute="top" constant="52" id="Juy-xN-BdD"/>
                                     <constraint firstItem="gIR-a7-hcm" firstAttribute="top" secondItem="rn8-hf-8bd" secondAttribute="top" id="KCh-fQ-UKx"/>
                                     <constraint firstAttribute="trailing" secondItem="gIR-a7-hcm" secondAttribute="trailing" id="Nn9-M9-yLk"/>
                                     <constraint firstAttribute="trailing" secondItem="gIR-a7-hcm" secondAttribute="trailing" id="WcI-kR-Gz0"/>
                                     <constraint firstItem="gIR-a7-hcm" firstAttribute="leading" secondItem="rn8-hf-8bd" secondAttribute="leading" id="e4I-ej-S68"/>
-                                    <constraint firstItem="neB-z0-wKv" firstAttribute="trailing" secondItem="esH-ro-LaV" secondAttribute="trailing" constant="30" id="saY-3T-41o"/>
                                 </constraints>
                                 <inset key="scrollIndicatorInsets" minX="395" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="iKt-h8-BW7"/>
@@ -3628,6 +3614,25 @@
             </objects>
             <point key="canvasLocation" x="932" y="1617"/>
         </scene>
+        <!--Account-->
+        <scene sceneID="GwZ-Nd-JSm">
+            <objects>
+                <viewController id="Jkz-Cw-eHe" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NLF-oj-Ixa"/>
+                        <viewControllerLayoutGuide type="bottom" id="ijo-H9-vwd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1HG-ee-bqE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Account" id="3sc-fv-HPK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9vO-24-Qrz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="932" y="2370"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="QQ4-JD-4Vf">
             <objects>
@@ -3720,6 +3725,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fcM-7f-Cw4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2775" y="13"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gMV-Au-PIJ">
+            <objects>
+                <navigationController storyboardIdentifier="accountView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BGv-z7-gLW" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2qi-Kl-qMF">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Jkz-Cw-eHe" kind="relationship" relationship="rootViewController" id="3rV-FU-lsW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVg-Ux-NCf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6" y="2370"/>
         </scene>
     </scenes>
     <resources>
