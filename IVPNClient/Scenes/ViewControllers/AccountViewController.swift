@@ -13,12 +13,25 @@ class AccountViewController: UITableViewController {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var qrCodeImage: UIImageView!
+    @IBOutlet weak var accountIdLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var subscriptionLabel: UILabel!
+    @IBOutlet weak var billingCycleLabel: UILabel!
+    @IBOutlet weak var nextBillingLabel: UILabel!
+    @IBOutlet weak var recurringAmountLabel: UILabel!
+    @IBOutlet weak var logOutActionButton: UIButton!
+    @IBOutlet weak var subscriptionActionButton: UIButton!
+    
+    // MARK: - Properties -
+    
+    private var viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
     
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
+        setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,6 +45,19 @@ class AccountViewController: UITableViewController {
         if isPresentedModally {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissViewController(_:)))
         }
+    }
+    
+    private func setupView() {
+        accountIdLabel.text = viewModel.accountId
+        statusLabel.text = viewModel.statusText
+        statusLabel.backgroundColor = viewModel.statusColor
+        subscriptionLabel.text = viewModel.subscriptionText
+        billingCycleLabel.text = viewModel.billingCycleText
+        nextBillingLabel.text = viewModel.nextBillingText
+        recurringAmountLabel.text = viewModel.recurringAmountText
+        logOutActionButton.setTitle(viewModel.logOutActionText, for: .normal)
+        subscriptionActionButton.setTitle(viewModel.subscriptionActionText, for: .normal)
+        subscriptionActionButton.isHidden = !viewModel.showSubscriptionAction
     }
     
     private func initQRCode() {

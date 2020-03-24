@@ -46,8 +46,20 @@ struct AccountViewModel {
         return "{ recurringAmount }"
     }
     
+    var logOutActionText: String {
+        return authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up"
+    }
+    
     var subscriptionActionText: String {
         return serviceStatus.isActive ? "Manage Subscription" : "Activate Subscription"
+    }
+    
+    var showSubscriptionAction: Bool {
+        if let paymentMethod = serviceStatus.paymentMethod, paymentMethod == "ivpniosiap" {
+            return true
+        }
+        
+        return false
     }
     
     // MARK: - Initialize -
