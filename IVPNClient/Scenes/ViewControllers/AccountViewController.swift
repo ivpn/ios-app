@@ -119,3 +119,14 @@ extension AccountViewController {
     }
     
 }
+
+// MARK: - JGProgressHUDDelegate -
+
+extension AccountViewController: JGProgressHUDDelegate {
+    
+    func progressHUD(_ progressHUD: JGProgressHUD, didDismissFrom view: UIView) {
+        tableView.reloadData()
+        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
+    }
+    
+}
