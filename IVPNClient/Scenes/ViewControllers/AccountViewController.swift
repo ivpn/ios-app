@@ -26,6 +26,18 @@ class AccountViewController: UITableViewController {
     
     private var viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
     
+    // MARK: - @IBActions -
+    
+    @IBAction func logOut(_ sender: Any) {
+        showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out") { _ in
+            self.logOut()
+        }
+    }
+    
+    @IBAction func manageSubscription(_ sender: Any) {
+        manageSubscription()
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
