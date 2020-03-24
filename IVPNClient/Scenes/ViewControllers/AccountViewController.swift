@@ -21,12 +21,21 @@ class AccountViewController: UITableViewController {
         initNavigationBar()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        initQRCode()
+    }
+    
     // MARK: - Methods -
     
     private func initNavigationBar() {
         if isPresentedModally {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissViewController(_:)))
         }
+    }
+    
+    private func initQRCode() {
+        qrCodeImage.image = UIImage.generateQRCode(from: "ivpnXXXXXXXX")
     }
     
 }
