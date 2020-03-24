@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class AccountViewController: UITableViewController {
     
@@ -24,6 +25,7 @@ class AccountViewController: UITableViewController {
     
     // MARK: - Properties -
     
+    private let hud = JGProgressHUD(style: .dark)
     private var viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
     
     // MARK: - @IBActions -
@@ -84,6 +86,36 @@ extension AccountViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
+    }
+    
+}
+
+// MARK: - SessionManagerDelegate -
+
+extension AccountViewController {
+    
+    override func deleteSessionStart() {
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Removing session from IVPN server..."
+        hud.show(in: (navigationController?.view)!)
+    }
+    
+    override func deleteSessionSuccess() {
+        hud.delegate = self
+        hud.dismiss()
+    }
+    
+    override func deleteSessionFailure() {
+        hud.delegate = self
+        hud.indicatorView = JGProgressHUDErrorIndicatorView()
+        hud.detailTextLabel.text = "There was an error with removing session"
+        hud.show(in: (navigationController?.view)!)
+        hud.dismiss(afterDelay: 2)
+    }
+    
+    override func deleteSessionSkip() {
+        tableView.reloadData()
+        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
     }
     
 }
