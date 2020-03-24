@@ -96,6 +96,7 @@
 		826C56D422FD551900D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826D182921D3DAFF0045A570 /* StorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826D182821D3DAFF0045A570 /* StorageManagerTests.swift */; };
 		826E61462428D5200064F195 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E61452428D5200064F195 /* UIButton+Ext.swift */; };
+		826E61482428F8E60064F195 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E61472428F8E60064F195 /* AccountViewController.swift */; };
 		826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */; };
 		826F7F1323A7A05F00777DB9 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 826F7F1223A7A05F00777DB9 /* NotificationCenter.framework */; };
 		826F7F1623A7A05F00777DB9 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F1523A7A05F00777DB9 /* TodayViewController.swift */; };
@@ -441,6 +442,7 @@
 		826D182821D3DAFF0045A570 /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
 		826D182A21D3DAFF0045A570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		826E61452428D5200064F195 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
+		826E61472428F8E60064F195 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaultsTodayExtension+Ext.swift"; sourceTree = "<group>"; };
 		826F7F1123A7A05F00777DB9 /* IVPN.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IVPN.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		826F7F1223A7A05F00777DB9 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -1047,6 +1049,7 @@
 				8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */,
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
 				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
+				826E61472428F8E60064F195 /* AccountViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2076,6 +2079,7 @@
 				828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */,
 				82E7880C22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift in Sources */,
 				82F638C2217DA89000410318 /* AddressType.swift in Sources */,
+				826E61482428F8E60064F195 /* AccountViewController.swift in Sources */,
 				820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */,
 				9C69422E1DD20FC200F9A801 /* KeyChain.swift in Sources */,
 				9C454EB61E0864AE00BD2AFA /* WaveView.swift in Sources */,
