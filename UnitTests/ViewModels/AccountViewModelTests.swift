@@ -12,17 +12,45 @@ import XCTest
 
 class AccountViewModelTests: XCTestCase {
     
-    var serviceStatus = ServiceStatus()
-    var authentication = Authentication()
-    
     func testStatusText() {
-        var viewModel = AccountViewModel(serviceStatus: serviceStatus, authentication: authentication)
+        var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
         
         viewModel.serviceStatus.isActive = false
         XCTAssertEqual(viewModel.statusText, "INACTIVE")
         
         viewModel.serviceStatus.isActive = true
         XCTAssertEqual(viewModel.statusText, "ACTIVE")
+    }
+    
+    func testSubscriptionText() {
+        var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
+        viewModel.serviceStatus.currentPlan = "IVPN Standard"
+        
+        viewModel.serviceStatus.isActive = false
+        XCTAssertEqual(viewModel.subscriptionText, "No active subscription")
+        
+        viewModel.serviceStatus.isActive = true
+        XCTAssertEqual(viewModel.subscriptionText, "IVPN Standard")
+    }
+    
+    func testLogOutActionText() {
+        let viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
+        XCTAssertEqual(viewModel.logOutActionText, "Log In or Sign Up")
+    }
+    
+    func testSubscriptionActionText() {
+        var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
+        
+        viewModel.serviceStatus.isActive = false
+        XCTAssertEqual(viewModel.subscriptionActionText, "Activate Subscription")
+        
+        viewModel.serviceStatus.isActive = true
+        XCTAssertEqual(viewModel.subscriptionActionText, "Manage Subscription")
+    }
+    
+    func testShowSubscriptionAction() {
+        var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
+        XCTAssertFalse(viewModel.showSubscriptionAction)
     }
     
 }
