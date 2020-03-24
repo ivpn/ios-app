@@ -48,6 +48,8 @@ struct Theme {
         static let ivpnDarkNavy = "ivpnDarkNavy"
         static let ivpnLightYellow = "ivpnLightYellow"
         static let ivpnDarkYellow = "ivpnDarkYellow"
+        static let ivpnLightGreen = "ivpnLightGreen"
+        static let ivpnDarkGreen = "ivpnDarkGreen"
     }
     
 }
