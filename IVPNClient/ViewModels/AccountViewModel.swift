@@ -6,7 +6,7 @@
 //  Copyright © 2020 IVPN. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct AccountViewModel {
     
@@ -21,6 +21,33 @@ struct AccountViewModel {
     
     var statusText: String {
         return serviceStatus.isActive ? "ACTIVE" : "INACTIVE"
+    }
+    
+    var statusColor: UIColor {
+        return serviceStatus.isActive ? UIColor.init(named: Theme.Key.ivpnGreen)! : UIColor.init(named: Theme.Key.ivpnRedOff)!
+    }
+    
+    var subscriptionText: String {
+        return serviceStatus.isActive ? serviceStatus.currentPlan ?? "" : "No active subscription"
+    }
+    
+    var billingCycleText: String {
+        #warning("TODO: Implement after service status API is updated")
+        return "{ billingCycle }"
+    }
+    
+    var nextBillingText: String {
+        #warning("TODO: Implement after service status API is updated")
+        return "{ nextBilling }"
+    }
+    
+    var recurringAmountText: String {
+        #warning("TODO: Implement after service status API is updated")
+        return "{ recurringAmount }"
+    }
+    
+    var subscriptionActionText: String {
+        return serviceStatus.isActive ? "Manage Subscription" : "Activate Subscription"
     }
     
     // MARK: - Initialize -
