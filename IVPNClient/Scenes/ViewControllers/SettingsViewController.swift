@@ -21,17 +21,13 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var selectedExitServerFlag: UIImageView!
     @IBOutlet weak var selectedExitServerName: UILabel!
     @IBOutlet weak var selectedProtocol: UILabel!
-    @IBOutlet weak var logOutButton: UIButton!
-    @IBOutlet weak var accountUsername: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
-    @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var multiHopSwitch: UISwitch!
     @IBOutlet weak var entryServerCell: UITableViewCell!
     @IBOutlet weak var keepAliveSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
     @IBOutlet weak var loggingCrashesSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
-    @IBOutlet weak var manageSubscriptionButton: UIButton!
     
     // MARK: - Properties -
     
@@ -118,21 +114,6 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    @IBAction func manageSubscription(_ sender: Any) {
-        manageSubscription()
-    }
-    
-    @IBAction func logOut(_ sender: Any) {
-        guard Application.shared.authentication.isLoggedIn else {
-            authenticate(self)
-            return
-        }
-        
-        showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out") { _ in
-            self.logOut()
-        }
-    }
-    
     @IBAction func authenticate(_ sender: Any) {
         if #available(iOS 13.0, *) {
             present(NavigationManager.getLoginViewController(modalPresentationStyle: .automatic), animated: true, completion: nil)
@@ -153,7 +134,6 @@ class SettingsViewController: UITableViewController {
         }
         
         updateSelectedProtocol()
-        setupLabels()
         addObservers()
         
         versionLabel.layer.cornerRadius = 4
@@ -403,13 +383,6 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    private func setupLabels() {
-        accountUsername.text = Application.shared.authentication.getStoredUsername()
-        subscriptionLabel.text = Application.shared.serviceStatus.getSubscriptionText()
-        logOutButton.setTitle(Application.shared.authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up", for: .normal)
-        manageSubscriptionButton.setTitle(Application.shared.serviceStatus.getSubscriptionActionText(), for: .normal)
-    }
-    
 }
 
 // MARK: - UITableViewDelegate -
@@ -423,11 +396,6 @@ extension SettingsViewController {
         if indexPath.section == 2 && indexPath.row == 2 { return 60 }
         if indexPath.section == 2 && indexPath.row == 5 { return 60 }
         if indexPath.section == 2 && indexPath.row == 6 && !loggingSwitch.isOn { return 0 }
-        if indexPath.section == 4 && indexPath.row == 0 && Application.shared.authentication.getStoredUsername().isEmpty { return 0 }
-        if indexPath.section == 4 && indexPath.row == 0 { return 60 }
-        if indexPath.section == 4 && indexPath.row == 1 && !Application.shared.authentication.isLoggedIn { return 0 }
-        if indexPath.section == 4 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 4 && indexPath.row == 2 && !Application.shared.showSubscriptionAction { return 0 }
         
         return UITableView.automaticDimension
     }
@@ -458,8 +426,6 @@ extension SettingsViewController {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
         }
-        
-        setupLabels()
     }
     
 }
@@ -470,47 +436,6 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
-    }
-    
-}
-
-// MARK: - SessionManagerDelegate -
-
-extension SettingsViewController {
-    
-    override func deleteSessionStart() {
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        hud.detailTextLabel.text = "Removing session from IVPN server..."
-        hud.show(in: (navigationController?.view)!)
-    }
-    
-    override func deleteSessionSuccess() {
-        hud.delegate = self
-        hud.dismiss()
-    }
-    
-    override func deleteSessionFailure() {
-        hud.delegate = self
-        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        hud.detailTextLabel.text = "There was an error with removing session"
-        hud.show(in: (navigationController?.view)!)
-        hud.dismiss(afterDelay: 2)
-    }
-    
-    override func deleteSessionSkip() {
-        tableView.reloadData()
-        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
-    }
-    
-}
-
-// MARK: - JGProgressHUDDelegate -
-
-extension SettingsViewController: JGProgressHUDDelegate {
-    
-    func progressHUD(_ progressHUD: JGProgressHUD, didDismissFrom view: UIView) {
-        tableView.reloadData()
-        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
     }
     
 }
