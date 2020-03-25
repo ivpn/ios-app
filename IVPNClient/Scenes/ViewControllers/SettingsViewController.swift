@@ -445,47 +445,6 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
     
 }
 
-// MARK: - SessionManagerDelegate -
-
-extension SettingsViewController {
-    
-    override func deleteSessionStart() {
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        hud.detailTextLabel.text = "Removing session from IVPN server..."
-        hud.show(in: (navigationController?.view)!)
-    }
-    
-    override func deleteSessionSuccess() {
-        hud.delegate = self
-        hud.dismiss()
-    }
-    
-    override func deleteSessionFailure() {
-        hud.delegate = self
-        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        hud.detailTextLabel.text = "There was an error with removing session"
-        hud.show(in: (navigationController?.view)!)
-        hud.dismiss(afterDelay: 2)
-    }
-    
-    override func deleteSessionSkip() {
-        tableView.reloadData()
-        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
-    }
-    
-}
-
-// MARK: - JGProgressHUDDelegate -
-
-extension SettingsViewController: JGProgressHUDDelegate {
-    
-    func progressHUD(_ progressHUD: JGProgressHUD, didDismissFrom view: UIView) {
-        tableView.reloadData()
-        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
-    }
-    
-}
-
 // MARK: - ServerViewControllerDelegate -
 
 extension SettingsViewController: ServerViewControllerDelegate {
