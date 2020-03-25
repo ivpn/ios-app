@@ -27,8 +27,11 @@ class NavigationController: UINavigationController {
             navigationBar.standardAppearance = appearance
             navigationBar.scrollEdgeAppearance = appearance
         } else {
+            navigationBar.barTintColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+            navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold), NSAttributedString.Key.foregroundColor: UIColor.init(named: Theme.Key.ivpnLabelPrimary)!]
             navigationBar.setBackgroundImage(#imageLiteral(resourceName: "BarBackground"), for: .default)
             navigationBar.shadowImage = UIImage()
+            navigationBar.barTintColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)!
         }
     }
     
