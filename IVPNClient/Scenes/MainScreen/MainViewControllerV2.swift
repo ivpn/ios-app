@@ -37,11 +37,20 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
+    @IBAction func openAccountInfo(_ sender: UIButton) {
+        guard evaluateIsLoggedIn() else {
+            return
+        }
+        
+        presentAccountScreen()
+    }
+    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initMarker()
+        initSettingsAction()
         initFloatingPanel()
         addObservers()
         startServersUpdate()
@@ -161,6 +170,20 @@ class MainViewControllerV2: UIViewController {
     private func initMarker() {
         markerContainerView.addSubview(markerView)
         view.addSubview(markerContainerView)
+    }
+    
+    private func initSettingsAction() {
+        let settingsButton = UIButton()
+        view.addSubview(settingsButton)
+        settingsButton.bb.size(width: 42, height: 42).top(60).right(-30)
+        settingsButton.setupIcon(imageName: "icon-settings")
+        settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
+        
+        let accountButton = UIButton()
+        view.addSubview(accountButton)
+        accountButton.bb.size(width: 42, height: 42).top(60).left(30)
+        accountButton.setupIcon(imageName: "icon-user")
+        accountButton.addTarget(self, action: #selector(openAccountInfo), for: .touchUpInside)
     }
     
     private func initInfoAlert() {

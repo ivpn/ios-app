@@ -95,6 +95,10 @@
 		826C56D322FD551800D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826C56D422FD551900D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826D182921D3DAFF0045A570 /* StorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826D182821D3DAFF0045A570 /* StorageManagerTests.swift */; };
+		826E61462428D5200064F195 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E61452428D5200064F195 /* UIButton+Ext.swift */; };
+		826E61482428F8E60064F195 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E61472428F8E60064F195 /* AccountViewController.swift */; };
+		826E614A242A1CA80064F195 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E6149242A1CA80064F195 /* AccountViewModel.swift */; };
+		826E614C242A61380064F195 /* AccountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E614B242A61380064F195 /* AccountViewModelTests.swift */; };
 		826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */; };
 		826F7F1323A7A05F00777DB9 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 826F7F1223A7A05F00777DB9 /* NotificationCenter.framework */; };
 		826F7F1623A7A05F00777DB9 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F1523A7A05F00777DB9 /* TodayViewController.swift */; };
@@ -439,6 +443,10 @@
 		826D182621D3DAFF0045A570 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		826D182821D3DAFF0045A570 /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
 		826D182A21D3DAFF0045A570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		826E61452428D5200064F195 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
+		826E61472428F8E60064F195 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		826E6149242A1CA80064F195 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
+		826E614B242A61380064F195 /* AccountViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelTests.swift; sourceTree = "<group>"; };
 		826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaultsTodayExtension+Ext.swift"; sourceTree = "<group>"; };
 		826F7F1123A7A05F00777DB9 /* IVPN.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IVPN.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		826F7F1223A7A05F00777DB9 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -771,6 +779,7 @@
 				8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */,
 				824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */,
 				8270D267241BB3D000B17B65 /* InfoAlertViewModel.swift */,
+				826E6149242A1CA80064F195 /* AccountViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -879,6 +888,7 @@
 			children = (
 				82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */,
 				82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */,
+				826E614B242A61380064F195 /* AccountViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -911,6 +921,7 @@
 				82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */,
 				82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */,
 				826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */,
+				826E61452428D5200064F195 /* UIButton+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1044,6 +1055,7 @@
 				8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */,
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
 				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
+				826E61472428F8E60064F195 /* AccountViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1815,6 +1827,7 @@
 				82F81A58224CFC0C00CB778B /* VPNManagerTests.swift in Sources */,
 				82EA857A21DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift in Sources */,
 				82F81A3D224CF69900CB778B /* ConnectionSettingsTests.swift in Sources */,
+				826E614C242A61380064F195 /* AccountViewModelTests.swift in Sources */,
 				82F81A3F224CF69900CB778B /* NSMutableAttributedStringTests.swift in Sources */,
 				82F81A4C224CFADB00CB778B /* PeerTests.swift in Sources */,
 				82F81A61224CFFD700CB778B /* AuthenticationTests.swift in Sources */,
@@ -1951,6 +1964,7 @@
 				8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */,
 				828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */,
 				82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */,
+				826E61462428D5200064F195 /* UIButton+Ext.swift in Sources */,
 				9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */,
 				82E716962181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */,
 				8292E1BE2174CA6800123538 /* x25519.c in Sources */,
@@ -2072,6 +2086,7 @@
 				828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */,
 				82E7880C22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift in Sources */,
 				82F638C2217DA89000410318 /* AddressType.swift in Sources */,
+				826E61482428F8E60064F195 /* AccountViewController.swift in Sources */,
 				820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */,
 				9C69422E1DD20FC200F9A801 /* KeyChain.swift in Sources */,
 				9C454EB61E0864AE00BD2AFA /* WaveView.swift in Sources */,
@@ -2094,6 +2109,7 @@
 				82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */,
 				825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */,
 				8270D268241BB3D100B17B65 /* InfoAlertViewModel.swift in Sources */,
+				826E614A242A1CA80064F195 /* AccountViewModel.swift in Sources */,
 				82D598B021A58CAD000FABDE /* NetworkTrustViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

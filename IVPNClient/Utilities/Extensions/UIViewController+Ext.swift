@@ -242,4 +242,10 @@ extension UIViewController {
         present(viewController, animated: true, completion: nil)
     }
     
+    func presentAccountScreen() {
+        let viewController = NavigationManager.getAccountViewController()
+        viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+        present(viewController, animated: true, completion: nil)
+    }
+    
 }
