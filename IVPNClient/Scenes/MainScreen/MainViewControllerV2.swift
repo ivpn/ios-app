@@ -38,6 +38,10 @@ class MainViewControllerV2: UIViewController {
     }
     
     @IBAction func openAccountInfo(_ sender: UIButton) {
+        guard evaluateIsLoggedIn() else {
+            return
+        }
+        
         presentAccountScreen()
     }
     
