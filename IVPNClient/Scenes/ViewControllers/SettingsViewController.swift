@@ -21,17 +21,13 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var selectedExitServerFlag: UIImageView!
     @IBOutlet weak var selectedExitServerName: UILabel!
     @IBOutlet weak var selectedProtocol: UILabel!
-    @IBOutlet weak var logOutButton: UIButton!
-    @IBOutlet weak var accountUsername: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
-    @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var multiHopSwitch: UISwitch!
     @IBOutlet weak var entryServerCell: UITableViewCell!
     @IBOutlet weak var keepAliveSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
     @IBOutlet weak var loggingCrashesSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
-    @IBOutlet weak var manageSubscriptionButton: UIButton!
     
     // MARK: - Properties -
     
@@ -118,21 +114,6 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    @IBAction func manageSubscription(_ sender: Any) {
-        manageSubscription()
-    }
-    
-    @IBAction func logOut(_ sender: Any) {
-        guard Application.shared.authentication.isLoggedIn else {
-            authenticate(self)
-            return
-        }
-        
-        showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out") { _ in
-            self.logOut()
-        }
-    }
-    
     @IBAction func authenticate(_ sender: Any) {
         if #available(iOS 13.0, *) {
             present(NavigationManager.getLoginViewController(modalPresentationStyle: .automatic), animated: true, completion: nil)
@@ -153,7 +134,6 @@ class SettingsViewController: UITableViewController {
         }
         
         updateSelectedProtocol()
-        setupLabels()
         addObservers()
         
         versionLabel.layer.cornerRadius = 4
@@ -403,13 +383,6 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    private func setupLabels() {
-        accountUsername.text = Application.shared.authentication.getStoredUsername()
-        subscriptionLabel.text = Application.shared.serviceStatus.getSubscriptionText()
-        logOutButton.setTitle(Application.shared.authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up", for: .normal)
-        manageSubscriptionButton.setTitle(Application.shared.serviceStatus.getSubscriptionActionText(), for: .normal)
-    }
-    
 }
 
 // MARK: - UITableViewDelegate -
@@ -458,8 +431,6 @@ extension SettingsViewController {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
         }
-        
-        setupLabels()
     }
     
 }
