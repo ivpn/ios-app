@@ -115,7 +115,9 @@ extension AccountViewController {
     
     override func deleteSessionSkip() {
         tableView.reloadData()
-        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
+        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out") { _ in
+            self.navigationController?.dismiss(animated: true)
+        }
     }
     
 }
@@ -126,7 +128,9 @@ extension AccountViewController: JGProgressHUDDelegate {
     
     func progressHUD(_ progressHUD: JGProgressHUD, didDismissFrom view: UIView) {
         tableView.reloadData()
-        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
+        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out") { _ in
+            self.navigationController?.dismiss(animated: true)
+        }
     }
     
 }
