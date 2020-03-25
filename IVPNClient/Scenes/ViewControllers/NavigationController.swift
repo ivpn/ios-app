@@ -19,7 +19,7 @@ class NavigationController: UINavigationController {
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .heavy), NSAttributedString.Key.foregroundColor: UIColor.init(named: Theme.Key.ivpnLabelPrimary)!]
+            appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold), NSAttributedString.Key.foregroundColor: UIColor.init(named: Theme.Key.ivpnLabelPrimary)!]
             appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(named: Theme.Key.ivpnLabelPrimary)!]
             appearance.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)!
             appearance.shadowImage = nil
