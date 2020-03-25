@@ -49,7 +49,7 @@ class AccountViewModelTests: XCTestCase {
     }
     
     func testShowSubscriptionAction() {
-        var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
+        let viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
         XCTAssertFalse(viewModel.showSubscriptionAction)
     }
     
