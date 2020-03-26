@@ -39,6 +39,8 @@ class TermsOfServiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "termsOfServiceScreen"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
         setupView()
     }
     

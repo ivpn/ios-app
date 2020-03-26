@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -421,18 +421,18 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1037.3333320617676" width="375" height="85"/>
+                            <rect key="frame" x="0.0" y="1037.3333320617676" width="375" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
-                                    <rect key="frame" x="131.66666666666666" y="18" width="112" height="26"/>
-                                    <color key="backgroundColor" name="ivpnGray4"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
+                                    <rect key="frame" x="112.66666666666669" y="15" width="150" height="26"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="26" id="FIi-QM-zdc"/>
-                                        <constraint firstAttribute="width" constant="112" id="gEM-YK-lgM"/>
+                                        <constraint firstAttribute="width" constant="150" id="gEM-YK-lgM"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" name="ivpnLabel6"/>
                                     <nil key="highlightedColor"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -445,7 +445,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="gBW-V1-BW0" firstAttribute="centerX" secondItem="zK0-8u-72W" secondAttribute="centerX" id="QCs-qw-fJO"/>
-                                <constraint firstItem="gBW-V1-BW0" firstAttribute="top" secondItem="zK0-8u-72W" secondAttribute="top" constant="18" id="dQh-Gx-YcS"/>
+                                <constraint firstItem="gBW-V1-BW0" firstAttribute="top" secondItem="zK0-8u-72W" secondAttribute="top" constant="15" id="dQh-Gx-YcS"/>
                             </constraints>
                         </view>
                         <sections>
@@ -964,7 +964,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="uz9-96-zU2">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="S2o-wm-CfB">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="done" id="S2o-wm-CfB">
                             <connections>
                                 <action selector="close:" destination="5KC-W6-t9Q" id="rzK-5h-C82"/>
                             </connections>
@@ -1253,7 +1253,7 @@
                             <outlet property="delegate" destination="i5q-UB-qUI" id="BXJ-aV-Wns"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="fjg-hW-27s"/>
+                    <navigationItem key="navigationItem" title="Network Protection" id="fjg-hW-27s"/>
                     <connections>
                         <segue destination="KeU-1p-EOn" kind="show" identifier="NetworkProtectionRules" id="Wvs-RO-4zt"/>
                     </connections>
@@ -1400,14 +1400,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="42.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="42.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="13.666666666666664" width="326" height="16"/>
+                                            <rect key="frame" x="16" y="13.333333333333336" width="326" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1416,7 +1416,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
+                                            <rect key="frame" x="16" y="11.000000000000002" width="324" height="20.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1438,7 +1438,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -1811,7 +1811,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kKP-8V-fst" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2775.1999999999998" y="838.66995073891633"/>
+            <point key="canvasLocation" x="2774" y="839"/>
         </scene>
         <!--Control Panel View Controller-->
         <scene sceneID="Q5m-Sk-fPt">
@@ -3209,7 +3209,7 @@
                             <outlet property="delegate" destination="veS-Vd-4Hc" id="fNy-Hx-PE4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hMU-Xj-iVs"/>
+                    <navigationItem key="navigationItem" title="Custom DNS" id="hMU-Xj-iVs"/>
                     <connections>
                         <outlet property="customDNSSwitch" destination="oqt-Zd-omX" id="bTt-HX-EOq"/>
                         <outlet property="customDNSTextField" destination="eHv-MZ-qyH" id="VNR-ZW-fju"/>
@@ -3310,7 +3310,7 @@
                             <outlet property="delegate" destination="dcq-sZ-1Jx" id="tel-IN-qhU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="q6l-3A-LwN"/>
+                    <navigationItem key="navigationItem" title="AntiTracker" id="q6l-3A-LwN"/>
                     <connections>
                         <outlet property="antiTrackerHardcoreSwitch" destination="xlE-hr-FAs" id="fRD-Q0-aZu"/>
                         <outlet property="antiTrackerSwitch" destination="ayn-kr-8Ii" id="1yv-C5-IN0"/>
@@ -3889,6 +3889,11 @@
             <point key="canvasLocation" x="6" y="2380"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="s0z-do-bnX"/>
+        <segue reference="aTx-JM-MV5"/>
+        <segue reference="9Ib-aF-gei"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="icon-alert-dark-yellow" width="16" height="16"/>
         <image name="icon-check" width="24" height="24"/>
@@ -3935,14 +3940,14 @@
         <namedColor name="ivpnGray2">
             <color red="0.87450980392156863" green="0.89803921568627454" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="ivpnGray4">
-            <color red="0.70588235294117652" green="0.75686274509803919" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="ivpnGreen">
             <color red="0.12941176470588237" green="0.81568627450980391" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ivpnLabel5">
             <color red="0.59607843137254901" green="0.6470588235294118" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnLabel6">
+            <color red="0.51764705882352946" green="0.58039215686274515" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ivpnLabel7">
             <color red="0.20000000000000001" green="0.30196078431372547" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3963,9 +3968,4 @@
             <color red="0.95294117647058818" green="0.88627450980392153" blue="0.63921568627450975" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="s0z-do-bnX"/>
-        <segue reference="aTx-JM-MV5"/>
-        <segue reference="9Ib-aF-gei"/>
-    </inferredMetricsTieBreakers>
 </document>
