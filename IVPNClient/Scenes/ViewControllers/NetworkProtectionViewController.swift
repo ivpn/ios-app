@@ -88,6 +88,14 @@ class NetworkProtectionViewController: UITableViewController {
         }
     }
     
+    private func trustSelected(trust: String, indexPath: IndexPath) {
+        collection[indexPath.section][indexPath.row].trust = trust
+        StorageManager.saveContext()
+        Application.shared.network.trust = StorageManager.getTrust(network: Application.shared.network)
+        tableView.reloadData()
+        NotificationCenter.default.post(name: Notification.Name.UpdateNetwork, object: nil)
+    }
+    
 }
 
 // MARK: - UITableViewDataSource -
@@ -158,16 +166,10 @@ extension NetworkProtectionViewController {
         
         guard indexPath.section > 0 else { return }
         
-        let network = collection[indexPath.section][indexPath.row]
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "NetworkTrustViewController") as! NetworkTrustViewController
-        viewController.network = network
-        viewController.indexPath = indexPath
-        viewController.delegate = self
-        if network.isDefault {
-            viewController.collection = NetworkTrust.allCasesDefault
+        selectNetworkTrust(network: collection[indexPath.section][indexPath.row], sourceView: view) { trust in
+            self.trustSelected(trust: trust, indexPath: indexPath)
         }
-        show(viewController, sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
