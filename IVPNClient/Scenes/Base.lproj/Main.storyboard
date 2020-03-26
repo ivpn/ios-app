@@ -1351,7 +1351,7 @@
                             <outlet property="delegate" destination="KeU-1p-EOn" id="0l4-Ve-69S"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Ksh-Tk-ybx"/>
+                    <navigationItem key="navigationItem" title="Rules" id="Ksh-Tk-ybx"/>
                     <connections>
                         <outlet property="trustedDisconnectSwitch" destination="KtM-VU-Ndh" id="ojw-XK-anV"/>
                         <outlet property="untrustedConnectSwitch" destination="9TS-ou-G9P" id="SJV-JP-pMb"/>
@@ -1766,7 +1766,7 @@
                             <outlet property="delegate" destination="BYK-jY-KqR" id="WID-Qq-MjB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="eDY-M3-Keu"/>
+                    <navigationItem key="navigationItem" title="WireGuard" id="eDY-M3-Keu"/>
                     <connections>
                         <outlet property="ipAddressLabel" destination="qNU-D4-qVs" id="mwl-04-9Ko"/>
                         <outlet property="keyExpirationTimestampLabel" destination="CVZ-Ec-6uA" id="KwX-wQ-FJX"/>
@@ -3137,10 +3137,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection footerTitle="Custom DNS is supported only for OpenVPN and WireGuard protocols. AntiTracker will override this setting when enabled." id="fXw-bI-bh4">
+                            <tableViewSection headerTitle="Custom DNS" footerTitle="Custom DNS is supported only for OpenVPN and WireGuard protocols. AntiTracker will override this setting when enabled." id="fXw-bI-bh4">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="4Hg-rL-6r3">
-                                        <rect key="frame" x="0.0" y="18" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Hg-rL-6r3" id="f1i-Ob-un6">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3177,7 +3177,7 @@
                             <tableViewSection headerTitle="Custom DNS Server:" footerTitle="When specified, VPN Client will use provided DNS server when connected to the VPN." id="ltg-v6-6QJ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Nid-d8-erU">
-                                        <rect key="frame" x="0.0" y="169.33333206176758" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="206.66666412353516" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nid-d8-erU" id="xI4-A3-BKE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3228,11 +3228,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection id="e8G-su-I9T">
+                            <tableViewSection headerTitle="AntiTracker" id="e8G-su-I9T">
                                 <string key="footerTitle">AntiTracker is supported only for OpenVPN and WireGuard protocols. AntiTracker uses our private DNS to block ads, malicious website and third-party trackers such as Google Analytics. Learn more</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="2xI-KL-qZa">
-                                        <rect key="frame" x="0.0" y="18" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2xI-KL-qZa" id="5gM-fr-R3A">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3266,17 +3266,17 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="sDr-JP-6yn">
+                            <tableViewSection headerTitle="Hardcore Mode" id="sDr-JP-6yn">
                                 <string key="footerTitle">Hardcore mode blocks the leading companies with business models relying on user surveillance (currently: Google and Facebook). Learn more</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="UYO-Vy-onE">
-                                        <rect key="frame" x="0.0" y="158" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="222.66666412353516" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UYO-Vy-onE" id="yDV-X9-eO8">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hardcore Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSe-dn-Ms4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hardcore mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSe-dn-Ms4">
                                                     <rect key="frame" x="16" y="11.666666666666664" width="286" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="7zj-bJ-dJO"/>
