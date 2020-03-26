@@ -1388,7 +1388,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="NetworkTrustViewController" title="Network Trust" id="CHV-qV-9fL" customClass="NetworkTrustViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="sKk-jA-Ml2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -3054,7 +3054,6 @@
                         <outlet property="infoAlertView" destination="ah4-aa-ds1" id="PiK-cf-Wij"/>
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectServer" id="s0z-do-bnX"/>
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectExitServer" id="fnd-go-o5i"/>
-                        <segue destination="ktp-XB-N0p" kind="show" identifier="MainScreenNetworkProtectionRules" id="AH3-3G-g5H"/>
                         <segue destination="IeW-p4-xm9" kind="show" identifier="MainScreenSelectProtocol" id="yv9-Ml-p11"/>
                     </connections>
                 </viewController>
@@ -3860,7 +3859,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Z5z-O1-wUs"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YXL-1b-d7X">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
