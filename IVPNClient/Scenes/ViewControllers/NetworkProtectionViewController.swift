@@ -198,20 +198,6 @@ extension NetworkProtectionViewController {
     
 }
 
-// MARK: - NetworkTrustViewControllerDelegate -
-
-extension NetworkProtectionViewController: NetworkTrustViewControllerDelegate {
-    
-    func selected(trust: String, indexPath: IndexPath) {
-        collection[indexPath.section][indexPath.row].trust = trust
-        StorageManager.saveContext()
-        Application.shared.network.trust = StorageManager.getTrust(network: Application.shared.network)
-        tableView.reloadData()
-        NotificationCenter.default.post(name: Notification.Name.UpdateNetwork, object: nil)
-    }
-    
-}
-
 // MARK: - NetworkProtectionHeaderTableViewCellDelegate -
 
 extension NetworkProtectionViewController: NetworkProtectionHeaderTableViewCellDelegate {
