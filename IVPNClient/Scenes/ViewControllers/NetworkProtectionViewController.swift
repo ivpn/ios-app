@@ -176,6 +176,12 @@ extension NetworkProtectionViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if let footer = view as? UITableViewHeaderFooterView {
+            footer.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         guard indexPath.section > 1 else {
             return []
