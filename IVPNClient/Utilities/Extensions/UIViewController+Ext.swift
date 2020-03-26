@@ -113,6 +113,21 @@ extension UIViewController {
         view.endEditing(true)
     }
     
+    func selectNetworkTrust(network: Network, sourceView: UIView, completion: @escaping (String) -> Void) {
+        var collection = NetworkTrust.allCasesNormal
+        
+        if network.isDefault {
+            collection = NetworkTrust.allCasesDefault
+        }
+        
+        let actions = collection.map { $0.rawValue }
+        
+        showActionSheet(image: nil, selected: network.trust, largeText: true, centered: true, title: "Network Trust", actions: actions, sourceView: sourceView) { index in
+            guard index > -1 else { return }
+            completion(actions[index])
+        }
+    }
+    
 }
 
 extension UIViewController: AppKeyManagerDelegate {
