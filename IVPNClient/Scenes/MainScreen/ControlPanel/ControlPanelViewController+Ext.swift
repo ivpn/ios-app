@@ -42,8 +42,8 @@ extension ControlPanelViewController {
         }
         
         if indexPath.row == 6 && Application.shared.network.type != NetworkType.none.rawValue {
-            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-                topViewController.performSegue(withIdentifier: "MainScreenNetworkProtectionRules", sender: nil)
+            selectNetworkTrust(network: Application.shared.network, sourceView: networkView) { trust in
+                self.networkView.update(trust: trust)
             }
         }
         
