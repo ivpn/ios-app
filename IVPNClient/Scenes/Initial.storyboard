@@ -176,7 +176,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wsH-wX-xZq">
-                                                <rect key="frame" x="49.666666666666657" y="72" width="276" height="50"/>
+                                                <rect key="frame" x="49.666666666666657" y="62" width="276" height="50"/>
                                                 <subviews>
                                                     <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="ivpnXXXXXXXX" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Hx4-AY-bCY" customClass="UITextFieldPadding" customModule="IVPNClient" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="276" height="50"/>
@@ -211,7 +211,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51o-0K-ge0">
-                                                <rect key="frame" x="49.666666666666657" y="167" width="276" height="50"/>
+                                                <rect key="frame" x="49.666666666666657" y="152" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnBlue"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="276" id="Ugg-t0-Eie"/>
@@ -232,7 +232,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-v0-Dhq">
-                                                <rect key="frame" x="49.666666666666657" y="233" width="276" height="50"/>
+                                                <rect key="frame" x="49.666666666666657" y="218" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnGray14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="276" id="Vrb-wX-nuj"/>
@@ -250,7 +250,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Account ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaq-vw-vSn" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                <rect key="frame" x="42.666666666666657" y="40" width="290" height="20"/>
+                                                <rect key="frame" x="42.666666666666657" y="30" width="290" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="lHB-hp-UWo"/>
                                                     <constraint firstAttribute="width" constant="290" id="xEj-4J-bHv"/>
@@ -262,10 +262,10 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="Oaq-vw-vSn" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="GCj-u8-AZn"/>
-                                            <constraint firstItem="51o-0K-ge0" firstAttribute="top" secondItem="wsH-wX-xZq" secondAttribute="bottom" constant="45" id="Xad-zk-HGz"/>
+                                            <constraint firstItem="51o-0K-ge0" firstAttribute="top" secondItem="wsH-wX-xZq" secondAttribute="bottom" constant="40" id="Xad-zk-HGz"/>
                                             <constraint firstItem="wsH-wX-xZq" firstAttribute="top" secondItem="Oaq-vw-vSn" secondAttribute="bottom" constant="12" id="c0M-pC-F7x"/>
                                             <constraint firstItem="51o-0K-ge0" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="cdc-ax-8DZ"/>
-                                            <constraint firstItem="Oaq-vw-vSn" firstAttribute="top" secondItem="BYK-dw-X2I" secondAttribute="top" constant="40" id="oQX-P1-OEP"/>
+                                            <constraint firstItem="Oaq-vw-vSn" firstAttribute="top" secondItem="BYK-dw-X2I" secondAttribute="top" constant="30" id="oQX-P1-OEP"/>
                                             <constraint firstItem="eXe-v0-Dhq" firstAttribute="top" secondItem="51o-0K-ge0" secondAttribute="bottom" constant="16" id="qcZ-NF-5Vg"/>
                                             <constraint firstItem="eXe-v0-Dhq" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="vCl-zW-vYV"/>
                                             <constraint firstItem="wsH-wX-xZq" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="xO7-YW-2Mq"/>
@@ -723,7 +723,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="5"/>
+                                                        <integer key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
