@@ -17,6 +17,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
         
@@ -56,15 +57,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         captureSession.startRunning()
     }
     
-    func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
-        captureSession = nil
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
+        // Remove when fixed in future releases
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.setNeedsLayout()
+        }
         
         if (captureSession?.isRunning == false) {
             captureSession.startRunning()
@@ -77,6 +77,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if (captureSession?.isRunning == true) {
             captureSession.stopRunning()
         }
+    }
+    
+    func failed() {
+        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+        captureSession = nil
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {

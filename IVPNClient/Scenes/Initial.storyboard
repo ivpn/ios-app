@@ -808,7 +808,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
             </objects>
             <point key="canvasLocation" x="-855" y="819"/>
         </scene>
-        <!--Scanner View Controller-->
+        <!--Scan QR code-->
         <scene sceneID="OfJ-Z4-zb2">
             <objects>
                 <viewController id="YcU-dg-mBO" customClass="ScannerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -821,7 +821,13 @@ IVPN purposefully does not log any usage data associated with an account as we p
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="46Q-1E-UBo"/>
+                    <navigationItem key="navigationItem" title="Scan QR code" id="46Q-1E-UBo">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="Fls-Ak-HAz">
+                            <connections>
+                                <action selector="dismissViewController:" destination="YcU-dg-mBO" id="xco-NT-yrE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pKV-6w-FVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
