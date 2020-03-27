@@ -63,4 +63,9 @@ class NavigationManager {
         return storyBoard.instantiateViewController(withIdentifier: "controlPanelView") as! ControlPanelViewController
     }
     
+    static func getScannerViewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
+        return storyBoard.instantiateViewController(withIdentifier: "scannerView")
+    }
+    
 }

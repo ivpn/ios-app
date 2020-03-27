@@ -197,6 +197,9 @@
                                                             <constraint firstAttribute="width" constant="40" id="zvA-ca-FRj"/>
                                                         </constraints>
                                                         <state key="normal" image="icon-qr-code"/>
+                                                        <connections>
+                                                            <action selector="openScanner:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PqY-Hu-yhc"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -805,6 +808,25 @@ IVPN purposefully does not log any usage data associated with an account as we p
             </objects>
             <point key="canvasLocation" x="-855" y="819"/>
         </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="OfJ-Z4-zb2">
+            <objects>
+                <viewController id="YcU-dg-mBO" customClass="ScannerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dlJ-fa-QlH"/>
+                        <viewControllerLayoutGuide type="bottom" id="0cH-lQ-ls5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i8u-z0-tev">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="46Q-1E-UBo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pKV-6w-FVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-855" y="1552"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cq2-aL-Vqk">
             <objects>
@@ -822,6 +844,24 @@ IVPN purposefully does not log any usage data associated with an account as we p
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WhU-x0-TF9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1694" y="819"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3JX-zZ-Egc">
+            <objects>
+                <navigationController storyboardIdentifier="scannerView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6FD-G5-djD" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xe1-AH-AzS">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YcU-dg-mBO" kind="relationship" relationship="rootViewController" id="alY-Cb-MF9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bME-c1-1Z5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1695" y="1552"/>
         </scene>
     </scenes>
     <resources>
