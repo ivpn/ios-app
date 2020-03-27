@@ -993,13 +993,12 @@
         <scene sceneID="vhE-7F-Ghe">
             <objects>
                 <tableViewController id="zAv-yM-Pqo" customClass="ServerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="j8B-k6-W0Q">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j8B-k6-W0Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServerTableViewCell" rowHeight="64" id="JY4-vi-6KD" customClass="ServerTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JY4-vi-6KD" id="96A-Ox-uPj">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
