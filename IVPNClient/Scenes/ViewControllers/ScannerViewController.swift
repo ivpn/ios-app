@@ -9,12 +9,17 @@
 import AVFoundation
 import UIKit
 
+protocol ScannerViewControllerDelegate: class {
+    func qrCodeFound(code: String)
+}
+
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     // MARK: - Properties -
     
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    weak var delegate: ScannerViewControllerDelegate?
     
     // MARK: - View lifecycle -
     
@@ -104,7 +109,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     private func found(code: String) {
-        print("QR code", code)
+        delegate?.qrCodeFound(code: code)
     }
     
     private func failed() {

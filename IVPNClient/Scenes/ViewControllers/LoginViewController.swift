@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func openScanner(_ sender: AnyObject) {
-        present(NavigationManager.getScannerViewController(), animated: true)
+        present(NavigationManager.getScannerViewController(delegate: self), animated: true)
     }
     
     // MARK: - View Lifecycle -
@@ -251,6 +251,16 @@ extension LoginViewController: UIAdaptivePresentationControllerDelegate {
                 NotificationCenter.default.post(name: Notification.Name.AuthenticationDismissed, object: nil)
             })
         }
+    }
+    
+}
+
+// MARK: - ScannerViewControllerDelegate -
+
+extension LoginViewController: ScannerViewControllerDelegate {
+    
+    func qrCodeFound(code: String) {
+        
     }
     
 }
