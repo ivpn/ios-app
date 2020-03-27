@@ -993,33 +993,32 @@
         <scene sceneID="vhE-7F-Ghe">
             <objects>
                 <tableViewController id="zAv-yM-Pqo" customClass="ServerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="j8B-k6-W0Q">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j8B-k6-W0Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServerTableViewCell" rowHeight="64" id="JY4-vi-6KD" customClass="ServerTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JY4-vi-6KD" id="96A-Ox-uPj">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="us" translatesAutoresizingMaskIntoConstraints="NO" id="tAR-GC-vmN" customClass="FlagImageView" customModule="IVPNClient" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="24.666666666666671" width="20" height="15"/>
+                                            <rect key="frame" x="17" y="24.666666666666671" width="20" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="mZM-a0-aGi"/>
                                                 <constraint firstAttribute="width" constant="20" id="ped-T8-1VQ"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Los Angeles, CA, USA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0z-oc-9ok">
-                                            <rect key="frame" x="50.000000000000014" y="5" width="167.33333333333337" height="54"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="51" y="5" width="150" height="54"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999ms" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suR-p9-Gde" userLabel="ping">
-                                            <rect key="frame" x="289" y="15" width="70" height="36"/>
+                                            <rect key="frame" x="288" y="15" width="70" height="36"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="HZV-1g-TWg"/>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" priority="500" constant="70" id="WCF-Et-uzM"/>
@@ -1029,28 +1028,26 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-check" translatesAutoresizingMaskIntoConstraints="NO" id="4WG-iU-MrA">
-                                            <rect key="frame" x="231.33333333333334" y="20" width="24" height="24"/>
+                                            <rect key="frame" x="215" y="20" width="24" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="aaD-w0-Cew"/>
                                                 <constraint firstAttribute="width" constant="24" id="fYP-6S-0Gp"/>
                                             </constraints>
                                         </imageView>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jdM-ts-Ng0">
-                                            <rect key="frame" x="281" y="26" width="8" height="12"/>
+                                            <rect key="frame" x="280" y="26" width="8" height="12"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="12" id="e4C-3h-PnH"/>
                                                 <constraint firstAttribute="width" constant="8" id="eXn-gY-Od0"/>
                                             </constraints>
                                         </imageView>
-                                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoE-no-GF4">
-                                            <rect key="frame" x="269" y="15" width="90" height="34"/>
-                                            <color key="backgroundColor" name="ivpnBlue"/>
+                                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoE-no-GF4">
+                                            <rect key="frame" x="327" y="15" width="34" height="34"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="90" id="9xn-Fw-R5O"/>
+                                                <constraint firstAttribute="width" constant="34" id="9xn-Fw-R5O"/>
                                                 <constraint firstAttribute="height" constant="34" id="kq8-hS-2wb"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <state key="normal" title="Configure">
+                                            <state key="normal" image="icon-settings-2">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <userDefinedRuntimeAttributes>
@@ -1067,14 +1064,14 @@
                                     <constraints>
                                         <constraint firstItem="4WG-iU-MrA" firstAttribute="leading" secondItem="x0z-oc-9ok" secondAttribute="trailing" constant="14" id="5VU-iL-m09"/>
                                         <constraint firstItem="tAR-GC-vmN" firstAttribute="centerY" secondItem="96A-Ox-uPj" secondAttribute="centerY" id="6yQ-TC-v3F"/>
-                                        <constraint firstItem="tAR-GC-vmN" firstAttribute="leading" secondItem="96A-Ox-uPj" secondAttribute="leading" constant="16" id="FFK-lf-7w5"/>
+                                        <constraint firstItem="tAR-GC-vmN" firstAttribute="leading" secondItem="96A-Ox-uPj" secondAttribute="leading" constant="17" id="FFK-lf-7w5"/>
                                         <constraint firstAttribute="bottom" secondItem="x0z-oc-9ok" secondAttribute="bottom" constant="5" id="IYR-ef-3at"/>
-                                        <constraint firstAttribute="trailing" secondItem="ZoE-no-GF4" secondAttribute="trailing" constant="16" id="Kt9-Lc-YwM"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZoE-no-GF4" secondAttribute="trailing" constant="14" id="Kt9-Lc-YwM"/>
                                         <constraint firstItem="suR-p9-Gde" firstAttribute="leading" secondItem="jdM-ts-Ng0" secondAttribute="trailing" id="NPz-xZ-PYi"/>
                                         <constraint firstItem="4WG-iU-MrA" firstAttribute="centerY" secondItem="96A-Ox-uPj" secondAttribute="centerY" id="OhY-K2-lTT"/>
                                         <constraint firstItem="x0z-oc-9ok" firstAttribute="top" secondItem="96A-Ox-uPj" secondAttribute="top" constant="5" id="Yvx-Sl-JsT"/>
                                         <constraint firstItem="ZoE-no-GF4" firstAttribute="centerY" secondItem="96A-Ox-uPj" secondAttribute="centerY" id="eUE-bf-9pW"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="suR-p9-Gde" secondAttribute="trailing" id="g4a-hL-tUV"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="suR-p9-Gde" secondAttribute="trailing" constant="1" id="g4a-hL-tUV"/>
                                         <constraint firstItem="suR-p9-Gde" firstAttribute="top" secondItem="96A-Ox-uPj" secondAttribute="topMargin" constant="4" id="hDk-7G-uXw"/>
                                         <constraint firstItem="jdM-ts-Ng0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4WG-iU-MrA" secondAttribute="trailing" constant="10" id="hTx-JL-hFW"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="suR-p9-Gde" secondAttribute="bottom" constant="2" id="iwa-Bm-Ey7"/>
@@ -1422,14 +1419,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="13.666666666666664" width="326" height="16"/>
+                                            <rect key="frame" x="16" y="14" width="326" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1438,7 +1435,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
+                                            <rect key="frame" x="16" y="11.000000000000002" width="324" height="21.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1460,7 +1457,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="99" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -3077,40 +3074,61 @@
             </objects>
             <point key="canvasLocation" x="-914" y="-734"/>
         </scene>
-        <!--Servers Configuration Table View Controller-->
+        <!--Configure-->
         <scene sceneID="fZ3-Gg-hfr">
             <objects>
                 <tableViewController id="ELw-vc-l7K" customClass="ServersConfigurationTableViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="KpS-b3-6R0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KpS-b3-6R0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="a4G-c8-WjK">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disable servers you do not want to be chosen as the fastest server" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHN-fW-Gbj">
+                                    <rect key="frame" x="16" y="16" width="343" height="43"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="2ap-vp-IS8"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" name="ivpnLabel5"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="YHN-fW-Gbj" firstAttribute="leading" secondItem="a4G-c8-WjK" secondAttribute="leading" constant="16" id="1bN-DF-KVi"/>
+                                <constraint firstAttribute="trailing" secondItem="YHN-fW-Gbj" secondAttribute="trailing" constant="16" id="6mp-bp-gjr"/>
+                                <constraint firstAttribute="bottom" secondItem="YHN-fW-Gbj" secondAttribute="bottom" constant="16" id="Hfj-6h-m7k"/>
+                                <constraint firstItem="YHN-fW-Gbj" firstAttribute="top" secondItem="a4G-c8-WjK" secondAttribute="top" constant="16" id="apf-Fv-7Td"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ServerConfigurationCell" rowHeight="64" id="AO5-vy-Opu" customClass="ServerConfigurationCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="103" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AO5-vy-Opu" id="K7C-et-KRe">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="us" translatesAutoresizingMaskIntoConstraints="NO" id="wjq-hr-Cq4" customClass="FlagImageView" customModule="IVPNClient" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="24.666666666666671" width="20" height="15"/>
+                                            <rect key="frame" x="17" y="24.666666666666671" width="20" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="cRg-b9-sAK"/>
                                                 <constraint firstAttribute="width" constant="20" id="sU0-8i-wwA"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Los Angeles, CA, USA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rem-z1-86r">
-                                            <rect key="frame" x="50" y="5" width="252" height="54"/>
+                                            <rect key="frame" x="51" y="5" width="249" height="54"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="54" id="YCI-0d-ygX"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4G-Z0-GA5">
-                                            <rect key="frame" x="310" y="16.666666666666671" width="49" height="31"/>
+                                            <rect key="frame" x="308" y="16.666666666666671" width="49" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="31" id="1rb-mD-Mja"/>
                                                 <constraint firstAttribute="width" constant="47" id="ZnH-64-p5O"/>
@@ -3126,8 +3144,8 @@
                                         <constraint firstItem="D4G-Z0-GA5" firstAttribute="leading" secondItem="Rem-z1-86r" secondAttribute="trailing" constant="8" id="CBA-ai-nB0"/>
                                         <constraint firstItem="wjq-hr-Cq4" firstAttribute="centerY" secondItem="K7C-et-KRe" secondAttribute="centerY" id="Esz-40-n94"/>
                                         <constraint firstItem="Rem-z1-86r" firstAttribute="centerY" secondItem="K7C-et-KRe" secondAttribute="centerY" id="Ihl-hf-45H"/>
-                                        <constraint firstAttribute="trailing" secondItem="D4G-Z0-GA5" secondAttribute="trailing" constant="18" id="Y9B-XC-nk3"/>
-                                        <constraint firstItem="wjq-hr-Cq4" firstAttribute="leading" secondItem="K7C-et-KRe" secondAttribute="leading" constant="16" id="bK3-lZ-Sek"/>
+                                        <constraint firstAttribute="trailing" secondItem="D4G-Z0-GA5" secondAttribute="trailing" constant="20" id="Y9B-XC-nk3"/>
+                                        <constraint firstItem="wjq-hr-Cq4" firstAttribute="leading" secondItem="K7C-et-KRe" secondAttribute="leading" constant="17" id="bK3-lZ-Sek"/>
                                         <constraint firstItem="Rem-z1-86r" firstAttribute="leading" secondItem="wjq-hr-Cq4" secondAttribute="trailing" constant="14" id="xfu-vs-4T0"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -3143,7 +3161,7 @@
                             <outlet property="delegate" destination="ELw-vc-l7K" id="zsO-CR-SCq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="7E0-DM-zV2"/>
+                    <navigationItem key="navigationItem" title="Configure" id="7E0-DM-zV2"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W1e-Sr-wsO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3922,6 +3940,7 @@
         <image name="icon-map-pin" width="24" height="24"/>
         <image name="icon-menu" width="20" height="16"/>
         <image name="icon-server" width="24" height="24"/>
+        <image name="icon-settings-2" width="24" height="24"/>
         <image name="ivpn-logo-gray" width="44" height="15"/>
         <image name="logo" width="72" height="24"/>
         <image name="nl-v" width="24" height="24"/>
