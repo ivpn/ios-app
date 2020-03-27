@@ -41,6 +41,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "loginScreen"
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         userName.delegate = self
         sessionManager.delegate = self

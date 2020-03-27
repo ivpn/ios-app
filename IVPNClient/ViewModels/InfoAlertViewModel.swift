@@ -41,7 +41,7 @@ class InfoAlertViewModel {
     }
     
     var shouldDisplay: Bool {
-        return Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3
+        return Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3 && Application.shared.authentication.isLoggedIn
     }
     
     var infoAlert: InfoAlert = .subscriptionExpiration

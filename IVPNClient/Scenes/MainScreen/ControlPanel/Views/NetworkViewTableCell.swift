@@ -49,6 +49,20 @@ class NetworkViewTableCell: UITableViewCell {
         }
     }
     
+    func update(trust: String) {
+        Application.shared.network.trust = trust
+        let network = Application.shared.network
+        
+        if let networks = StorageManager.fetchNetworks(name: network.name ?? "", type: network.type ?? "") {
+            if let first = networks.first {
+                first.trust = trust
+                StorageManager.saveContext()
+            }
+        }
+        
+        updateNetwork()
+    }
+    
     // MARK: - Private methods -
     
     @objc private func updateNetwork() {
@@ -87,20 +101,6 @@ class NetworkViewTableCell: UITableViewCell {
         default:
             break
         }
-    }
-    
-    private func update(trust: String) {
-        Application.shared.network.trust = trust
-        let network = Application.shared.network
-        
-        if let networks = StorageManager.fetchNetworks(name: network.name ?? "", type: network.type ?? "") {
-            if let first = networks.first {
-                first.trust = trust
-                StorageManager.saveContext()
-            }
-        }
-        
-        updateNetwork()
     }
     
 }

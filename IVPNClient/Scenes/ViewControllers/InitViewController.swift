@@ -34,6 +34,7 @@ class InitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "initScreen"
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         promotionsDataSrouce = PromotionsDataSource()
         createPageViewController()

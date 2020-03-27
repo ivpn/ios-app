@@ -141,7 +141,7 @@ class SettingsViewController: UITableViewController {
         
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             if let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-                versionLabel.text = "Version \(version) (\(buildNumber))"
+                versionLabel.text = "VERSION \(version) (\(buildNumber))"
             }
         } else {
             versionLabel.isHidden = true

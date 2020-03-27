@@ -18,7 +18,6 @@ class ServersConfigurationTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Configure"
     }
     
 }
@@ -27,12 +26,7 @@ class ServersConfigurationTableViewController: UITableViewController {
 
 extension ServersConfigurationTableViewController {
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 { return 0 }
         return collection.count
     }
     
@@ -43,16 +37,6 @@ extension ServersConfigurationTableViewController {
         cell.delegate = self
         
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 { return "Fastest Server Settings" }
-        return ""
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if section == 0 { return "Disable servers you do not want to be chosen as the fastest server" }
-        return ""
     }
     
 }
