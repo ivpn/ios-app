@@ -260,7 +260,8 @@ extension LoginViewController: UIAdaptivePresentationControllerDelegate {
 extension LoginViewController: ScannerViewControllerDelegate {
     
     func qrCodeFound(code: String) {
-        
+        userName.text = code
+        startLoginProcess()
     }
     
 }
