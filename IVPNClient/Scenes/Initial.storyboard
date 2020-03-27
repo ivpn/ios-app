@@ -711,11 +711,11 @@ IVPN purposefully does not log any usage data associated with an account as we p
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l67-ez-3v8">
-                                                <rect key="frame" x="62.666666666666657" y="528" width="249.99999999999997" height="40"/>
+                                                <rect key="frame" x="49.666666666666657" y="528" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnBlue"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="250" id="K24-01-hMp"/>
-                                                    <constraint firstAttribute="height" constant="40" id="cTJ-MW-sgd"/>
+                                                    <constraint firstAttribute="width" constant="276" id="K24-01-hMp"/>
+                                                    <constraint firstAttribute="height" constant="50" id="cTJ-MW-sgd"/>
                                                 </constraints>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Agree and continue">
@@ -732,7 +732,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOr-qA-R1R">
-                                                <rect key="frame" x="62.666666666666657" y="588" width="249.99999999999997" height="31"/>
+                                                <rect key="frame" x="62.666666666666657" y="598" width="249.99999999999997" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="I2y-xc-Far"/>
                                                     <constraint firstAttribute="width" constant="250" id="hk0-tJ-He7"/>
