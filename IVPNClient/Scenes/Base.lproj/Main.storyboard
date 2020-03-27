@@ -3074,17 +3074,38 @@
             </objects>
             <point key="canvasLocation" x="-914" y="-734"/>
         </scene>
-        <!--Servers Configuration Table View Controller-->
+        <!--Configure-->
         <scene sceneID="fZ3-Gg-hfr">
             <objects>
                 <tableViewController id="ELw-vc-l7K" customClass="ServersConfigurationTableViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="KpS-b3-6R0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KpS-b3-6R0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="a4G-c8-WjK">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disable servers you do not want to be chosen as the fastest server" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHN-fW-Gbj">
+                                    <rect key="frame" x="16" y="16" width="343" height="43"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="2ap-vp-IS8"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" name="ivpnLabel5"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="YHN-fW-Gbj" firstAttribute="leading" secondItem="a4G-c8-WjK" secondAttribute="leading" constant="16" id="1bN-DF-KVi"/>
+                                <constraint firstAttribute="trailing" secondItem="YHN-fW-Gbj" secondAttribute="trailing" constant="16" id="6mp-bp-gjr"/>
+                                <constraint firstAttribute="bottom" secondItem="YHN-fW-Gbj" secondAttribute="bottom" constant="16" id="Hfj-6h-m7k"/>
+                                <constraint firstItem="YHN-fW-Gbj" firstAttribute="top" secondItem="a4G-c8-WjK" secondAttribute="top" constant="16" id="apf-Fv-7Td"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ServerConfigurationCell" rowHeight="64" id="AO5-vy-Opu" customClass="ServerConfigurationCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="103" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AO5-vy-Opu" id="K7C-et-KRe">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -3140,7 +3161,7 @@
                             <outlet property="delegate" destination="ELw-vc-l7K" id="zsO-CR-SCq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="7E0-DM-zV2"/>
+                    <navigationItem key="navigationItem" title="Configure" id="7E0-DM-zV2"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W1e-Sr-wsO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
