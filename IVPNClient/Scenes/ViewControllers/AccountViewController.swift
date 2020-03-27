@@ -88,6 +88,18 @@ extension AccountViewController {
         return 44
     }
     
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if let footer = view as? UITableViewHeaderFooterView {
+            footer.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+        }
+    }
+    
 }
 
 // MARK: - SessionManagerDelegate -
