@@ -17,10 +17,9 @@ class NavigationManager {
         return viewController
     }
     
-    static func getLoginViewController(modalPresentationStyle: UIModalPresentationStyle = .fullScreen) -> UIViewController {
+    static func getLoginViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "loginView")
-        viewController.modalPresentationStyle = modalPresentationStyle
         return viewController
     }
     

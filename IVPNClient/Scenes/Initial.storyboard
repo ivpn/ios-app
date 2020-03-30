@@ -157,7 +157,7 @@
         <!--Log in to your account-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="formSheet" id="BYZ-38-t0r" customClass="LoginViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -563,7 +563,7 @@
                                 <rect key="frame" x="0.0" y="44" width="360" height="456"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="50" verticalCompressionResistancePriority="50" image="promo-1" translatesAutoresizingMaskIntoConstraints="NO" id="bKE-tg-y6Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="260"/>
+                                        <rect key="frame" x="18" y="0.0" width="324" height="260"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.84999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="CP0-M6-C5f">
                                         <rect key="frame" x="57.666666666666671" y="268" width="244.66666666666663" height="115"/>
@@ -840,7 +840,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
         <!--Navigation Controller-->
         <scene sceneID="Cq2-aL-Vqk">
             <objects>
-                <navigationController storyboardIdentifier="termsOfServiceView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cBX-xF-EWJ" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="termsOfServiceView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cBX-xF-EWJ" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fAG-5z-HGX">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -876,7 +876,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
         <!--Navigation Controller-->
         <scene sceneID="kpa-qI-ipL">
             <objects>
-                <navigationController storyboardIdentifier="loginView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NJt-ly-cJt" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NJt-ly-cJt" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="75N-bY-hJs">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>

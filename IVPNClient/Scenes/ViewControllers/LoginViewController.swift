@@ -65,6 +65,16 @@ class LoginViewController: UIViewController {
         hideKeyboardOnTap()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
+        // Remove when fixed in future releases
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.setNeedsLayout()
+        }
+    }
+    
     deinit {
         removeObservers()
     }
