@@ -36,9 +36,12 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func purchaseSubscription(_ sender: AnyObject) {
-        let viewController = NavigationManager.getSubscriptionViewController()
-        viewController.presentationController?.delegate = self
-        present(viewController, animated: true, completion: nil)
+        guard evaluateHasUserConsent() else {
+            NotificationCenter.default.addObserver(self, selector: #selector(termsOfServiceAgreed), name: Notification.Name.TermsOfServiceAgreed, object: nil)
+            return
+        }
+        
+        let _ = evaluateIsServiceActive()
     }
     
     @IBAction func openScanner(_ sender: AnyObject) {
@@ -72,6 +75,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
     }
     
     @objc func newSession() {
@@ -80,6 +84,11 @@ class LoginViewController: UIViewController {
     
     @objc func forceNewSession() {
         startLoginProcess(force: true)
+    }
+    
+    @objc func termsOfServiceAgreed() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
+        let _ = evaluateIsServiceActive()
     }
     
     // MARK: - Methods -
