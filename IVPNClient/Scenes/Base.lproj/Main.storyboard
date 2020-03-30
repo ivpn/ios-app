@@ -3365,7 +3365,7 @@
         <!--Switch to IVPN Pro-->
         <scene sceneID="fZQ-ut-wkh">
             <objects>
-                <viewController id="CsZ-It-hmk" customClass="UpgradePlanViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="formSheet" id="CsZ-It-hmk" customClass="UpgradePlanViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kL5-Np-scy"/>
                         <viewControllerLayoutGuide type="bottom" id="AtF-tQ-cSp"/>
@@ -3519,7 +3519,7 @@
         <!--Account-->
         <scene sceneID="A8X-Vs-cFn">
             <objects>
-                <tableViewController id="obv-bO-Y0X" customClass="AccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="formSheet" id="obv-bO-Y0X" customClass="AccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Aws-at-2vt" customClass="AccountView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3821,7 +3821,7 @@
         <!--Navigation Controller-->
         <scene sceneID="QQ4-JD-4Vf">
             <objects>
-                <navigationController storyboardIdentifier="upgradePlanView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wsh-Fn-UEe" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="upgradePlanView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wsh-Fn-UEe" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ubW-4d-tNu">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -3914,7 +3914,7 @@
         <!--Navigation Controller-->
         <scene sceneID="dRx-IJ-Af6">
             <objects>
-                <navigationController storyboardIdentifier="accountView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Blz-QQ-xeL" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="accountView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Blz-QQ-xeL" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xnO-fB-Svu">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
