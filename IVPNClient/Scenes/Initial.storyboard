@@ -562,7 +562,7 @@
                                 <rect key="frame" x="0.0" y="44" width="360" height="456"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="50" verticalCompressionResistancePriority="50" image="promo-1" translatesAutoresizingMaskIntoConstraints="NO" id="bKE-tg-y6Y">
-                                        <rect key="frame" x="18" y="0.0" width="324" height="260"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="260"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.84999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="CP0-M6-C5f">
                                         <rect key="frame" x="57.666666666666671" y="268" width="244.66666666666663" height="115"/>

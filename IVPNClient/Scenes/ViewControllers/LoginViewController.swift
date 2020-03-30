@@ -12,12 +12,21 @@ class LoginViewController: UIViewController {
 
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var userName: UITextField! {
+        didSet {
+            userName.delegate = self
+        }
+    }
     
     // MARK: - Properties -
     
+    private lazy var sessionManager: SessionManager = {
+        let sessionManager = SessionManager()
+        sessionManager.delegate = self
+        return sessionManager
+    }()
+    
     private var loginProcessStarted = false
-    private let sessionManager = SessionManager()
     
     // MARK: - @IBActions -
     
@@ -40,9 +49,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.accessibilityIdentifier = "loginScreen"
         navigationController?.navigationBar.prefersLargeTitles = false
-        
-        userName.delegate = self
-        sessionManager.delegate = self
         
         addObservers()
         hideKeyboardOnTap()
