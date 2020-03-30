@@ -36,6 +36,10 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func openScanner(_ sender: AnyObject) {
+        present(NavigationManager.getScannerViewController(delegate: self), animated: true)
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
@@ -247,6 +251,17 @@ extension LoginViewController: UIAdaptivePresentationControllerDelegate {
                 NotificationCenter.default.post(name: Notification.Name.AuthenticationDismissed, object: nil)
             })
         }
+    }
+    
+}
+
+// MARK: - ScannerViewControllerDelegate -
+
+extension LoginViewController: ScannerViewControllerDelegate {
+    
+    func qrCodeFound(code: String) {
+        userName.text = code
+        startLoginProcess()
     }
     
 }

@@ -63,4 +63,15 @@ class NavigationManager {
         return storyBoard.instantiateViewController(withIdentifier: "controlPanelView") as! ControlPanelViewController
     }
     
+    static func getScannerViewController(delegate: ScannerViewControllerDelegate? = nil) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
+        
+        let navController = storyBoard.instantiateViewController(withIdentifier: "scannerView") as? UINavigationController
+        if let viewController = navController?.topViewController as? ScannerViewController {
+            viewController.delegate = delegate
+        }
+        
+        return navController!
+    }
+    
 }
