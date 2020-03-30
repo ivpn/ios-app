@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import MessageUI
 
 extension UIViewController {
     
@@ -230,6 +231,15 @@ extension UIViewController {
         if Application.shared.settings.connectionProtocol.tunnelType() != .openvpn {
             showAlert(title: "Change protocol to OpenVPN", message: "For Multi-Hop connection you must select OpenVPN protocol.") { _ in
             }
+            return false
+        }
+        
+        return true
+    }
+    
+    func evaluateMailCompose() -> Bool {
+        guard MFMailComposeViewController.canSendMail() else {
+            showAlert(title: "Cannot send e-mail", message: "Your device cannot send e-mail. Please check e-mail configuration and try again.")
             return false
         }
         

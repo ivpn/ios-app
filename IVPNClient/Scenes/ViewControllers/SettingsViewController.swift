@@ -344,32 +344,35 @@ class SettingsViewController: UITableViewController {
     }
     
     private func sendLogs() {
-        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else {
-            showAlert(title: "Error", message: "You need to authenticate and have an active subscription to use this feature.")
+        guard evaluateIsLoggedIn() else {
             return
         }
         
-        if MFMailComposeViewController.canSendMail() {
-            Application.shared.connectionManager.getOpenVPNLog { log in
-                FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-                
-                let composer = MFMailComposeViewController()
-                composer.mailComposeDelegate = self
-                composer.setToRecipients([Config.contactSupportMail])
-                
-                let file = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                if let fileData = NSData(contentsOfFile: file) {
-                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName()).txt")
-                }
-                
-                self.present(composer, animated: true, completion: nil)
+        guard evaluateMailCompose() else {
+            return
+        }
+        
+        Application.shared.connectionManager.getOpenVPNLog { log in
+            FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+            
+            let composer = MFMailComposeViewController()
+            composer.mailComposeDelegate = self
+            composer.setToRecipients([Config.contactSupportMail])
+            
+            let file = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
+            if let fileData = NSData(contentsOfFile: file) {
+                composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName()).txt")
             }
-        } else {
-            showAlert(title: "Cannot send e-mail", message: "Your device cannot send e-mail. Please check e-mail configuration and try again.")
+            
+            self.present(composer, animated: true, completion: nil)
         }
     }
     
     private func contactSupport() {
+        guard evaluateMailCompose() else {
+            return
+        }
+        
         if let url = URL(string: Config.contactSupportPage) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
