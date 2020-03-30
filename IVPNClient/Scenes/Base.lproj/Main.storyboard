@@ -1419,14 +1419,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="42.666667938232422"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="42.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="13.333333333333336" width="326" height="16"/>
+                                            <rect key="frame" x="16" y="13.666666666666664" width="326" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1435,7 +1435,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11.000000000000002" width="324" height="20.666666666666671"/>
+                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1457,7 +1457,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -3517,7 +3517,7 @@
         <scene sceneID="A8X-Vs-cFn">
             <objects>
                 <tableViewController id="obv-bO-Y0X" customClass="AccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Aws-at-2vt">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Aws-at-2vt" customClass="AccountView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -3793,21 +3793,22 @@
                             </tableViewSection>
                         </sections>
                         <connections>
+                            <outlet property="accountIdLabel" destination="c74-BR-YIO" id="owd-hS-Ldx"/>
+                            <outlet property="billingCycleLabel" destination="rCl-hE-2rz" id="fw5-11-zgv"/>
                             <outlet property="dataSource" destination="obv-bO-Y0X" id="XXu-eT-PBh"/>
                             <outlet property="delegate" destination="obv-bO-Y0X" id="c2A-2b-bO7"/>
+                            <outlet property="logOutActionButton" destination="MVS-Nm-wlG" id="Yqw-Wn-PH0"/>
+                            <outlet property="nextBillingLabel" destination="XnP-Xb-npw" id="Syq-ON-8ig"/>
+                            <outlet property="qrCodeImage" destination="LDZ-oO-5ye" id="a4A-eq-b9i"/>
+                            <outlet property="recurringAmountLabel" destination="ZGR-de-kwn" id="Gkd-Q5-8fc"/>
+                            <outlet property="statusLabel" destination="hky-B3-yLX" id="42L-ka-GMJ"/>
+                            <outlet property="subscriptionActionButton" destination="HuQ-jO-yxH" id="a6d-RC-6yT"/>
+                            <outlet property="subscriptionLabel" destination="zC4-d3-7BM" id="8ff-HE-HH1"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Account" id="H32-NI-wH6"/>
                     <connections>
-                        <outlet property="accountIdLabel" destination="c74-BR-YIO" id="IUr-P2-1U1"/>
-                        <outlet property="billingCycleLabel" destination="rCl-hE-2rz" id="zBH-Jf-77a"/>
-                        <outlet property="logOutActionButton" destination="MVS-Nm-wlG" id="cXQ-QL-iV3"/>
-                        <outlet property="nextBillingLabel" destination="XnP-Xb-npw" id="X7M-c5-VLK"/>
-                        <outlet property="qrCodeImage" destination="LDZ-oO-5ye" id="47h-DP-QrR"/>
-                        <outlet property="recurringAmountLabel" destination="ZGR-de-kwn" id="y1F-sQ-Gjm"/>
-                        <outlet property="statusLabel" destination="hky-B3-yLX" id="DMP-44-r5V"/>
-                        <outlet property="subscriptionActionButton" destination="HuQ-jO-yxH" id="oaq-24-Pbf"/>
-                        <outlet property="subscriptionLabel" destination="zC4-d3-7BM" id="89E-dN-ZSD"/>
+                        <outlet property="accountView" destination="Aws-at-2vt" id="GDj-ca-izv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ki9-Pc-OJB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

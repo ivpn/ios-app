@@ -54,6 +54,7 @@
 		8223C54E22EAE93F00CD283D /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54D22EAE93F00CD283D /* SessionManager.swift */; };
 		8223C54F22EAEC7000CD283D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54B22E9E93A00CD283D /* Session.swift */; };
 		8223C55022EAEC7100CD283D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54B22E9E93A00CD283D /* Session.swift */; };
+		822563922431E03A00AE7F8D /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822563912431E03A00AE7F8D /* AccountView.swift */; };
 		8229196E2182EB1C00978BBA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229196D2182EB1B00978BBA /* String+Ext.swift */; };
 		822919712182EB1C00978BBA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229196D2182EB1B00978BBA /* String+Ext.swift */; };
 		822B85D921B941A200715691 /* NotificationName+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822B85D821B941A200715691 /* NotificationName+Ext.swift */; };
@@ -409,6 +410,7 @@
 		8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionKeyManager.swift; sourceTree = "<group>"; };
 		8223C54B22E9E93A00CD283D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		8223C54D22EAE93F00CD283D /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		822563912431E03A00AE7F8D /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		8229196D2182EB1B00978BBA /* String+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		822B85D821B941A200715691 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
@@ -885,6 +887,15 @@
 			path = ApiResults;
 			sourceTree = "<group>";
 		};
+		822563902431DFFB00AE7F8D /* AccountScreen */ = {
+			isa = PBXGroup;
+			children = (
+				826E61472428F8E60064F195 /* AccountViewController.swift */,
+				822563912431E03A00AE7F8D /* AccountView.swift */,
+			);
+			path = AccountScreen;
+			sourceTree = "<group>";
+		};
 		82351FC8241FA14F00E6E0FD /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1023,6 +1034,7 @@
 		82A208B321BAA4C500C9AD44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				822563902431DFFB00AE7F8D /* AccountScreen */,
 				8208525423FD56530008C112 /* MainScreen */,
 				82A208B621BAA51000C9AD44 /* Controls */,
 				82A208B521BAA4FF00C9AD44 /* Cells */,
@@ -1057,7 +1069,6 @@
 				8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */,
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
 				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
-				826E61472428F8E60064F195 /* AccountViewController.swift */,
 				82BC7144242E2A1D00C9E0C9 /* ScannerViewController.swift */,
 			);
 			path = ViewControllers;
@@ -2030,6 +2041,7 @@
 				8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */,
 				82E716902181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				8223C54C22E9E93A00CD283D /* Session.swift in Sources */,
+				822563922431E03A00AE7F8D /* AccountView.swift in Sources */,
 				9CBFF02C21021D2100FE1757 /* ConnectionManager.swift in Sources */,
 				82D598C821A6ADF1000FABDE /* NetworkType.swift in Sources */,
 				9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */,
