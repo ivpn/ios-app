@@ -7,16 +7,12 @@
 //
 
 import UIKit
-import ActiveLabel
 
 class LoginViewController: UIViewController {
 
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var userName: UITextField!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var noteLabel: ActiveLabel!
-    @IBOutlet weak var illustration: UIImageView!
     
     // MARK: - Properties -
     
@@ -30,10 +26,8 @@ class LoginViewController: UIViewController {
         startLoginProcess()
     }
     
-    @IBAction func showCreateAccount(_ sender: AnyObject) {
-        navigationController?.popViewController {
-            NotificationCenter.default.post(name: Notification.Name.ShowCreateAccount, object: nil)
-        }
+    @IBAction func purchaseSubscription(_ sender: AnyObject) {
+        
     }
     
     @IBAction func openScanner(_ sender: AnyObject) {
@@ -52,8 +46,6 @@ class LoginViewController: UIViewController {
         
         addObservers()
         hideKeyboardOnTap()
-        setupActiveLabel()
-        setupView()
     }
     
     deinit {
@@ -107,22 +99,6 @@ class LoginViewController: UIViewController {
             title: "You entered an invalid account ID",
             message: "Your account ID starts with the letters 'ivpn' and can be found in the welcome email sent to you on signup. You cannot use your email address."
         )
-    }
-    
-    private func setupActiveLabel() {
-        let customType = ActiveType.custom(pattern: "Client Area")
-        noteLabel.enabledTypes = [customType]
-        noteLabel.customColor[customType] = UIColor.init(named: Theme.Key.ivpnBlue)
-        noteLabel.text = noteLabel.text
-        noteLabel.handleCustomTap(for: customType) { _ in
-            self.openWebPage("http://ivpn.net/clientarea")
-        }
-    }
-    
-    private func setupView() {
-        if UIDevice.screenHeightSmallerThan(device: .iPhoneXR) {
-            illustration.isHidden = true
-        }
     }
     
     @objc private func subscriptionDismissed() {

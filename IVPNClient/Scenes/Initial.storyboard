@@ -248,8 +248,11 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="purchaseSubscription:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gVJ-lM-2ca"/>
+                                                </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Account ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaq-vw-vSn" customClass="ActiveLabel" customModule="ActiveLabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Account ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaq-vw-vSn">
                                                 <rect key="frame" x="42.666666666666657" y="30" width="290" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="lHB-hp-UWo"/>
@@ -300,8 +303,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="contentView" destination="BYK-dw-X2I" id="H0C-yf-fAb"/>
-                        <outlet property="noteLabel" destination="Oaq-vw-vSn" id="ike-03-pQ2"/>
                         <outlet property="userName" destination="Hx4-AY-bCY" id="0sY-d1-uGd"/>
                     </connections>
                 </viewController>
