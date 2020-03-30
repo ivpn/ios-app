@@ -130,6 +130,8 @@ class SubscriptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "subscriptionScreen"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
         setupView()
     }
     
