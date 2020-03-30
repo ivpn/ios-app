@@ -22,7 +22,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOe-du-tPR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-855" y="16"/>
+            <point key="canvasLocation" x="-930" y="482"/>
         </scene>
         <!--Log In or Sign Up-->
         <scene sceneID="sHU-CQ-MGR">
@@ -66,9 +66,6 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" identifier="LogIn" id="dwe-cR-6B7"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nm-WQ-cum">
                                         <rect key="frame" x="33.666666666666657" y="136" width="276" height="44"/>
@@ -155,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nmx-iY-5YA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9.5999999999999996" y="16.191904047976013"/>
+            <point key="canvasLocation" x="-66" y="482"/>
         </scene>
         <!--Log in to your account-->
         <scene sceneID="tne-QT-ifu">
@@ -251,8 +248,11 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="purchaseSubscription:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gVJ-lM-2ca"/>
+                                                </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Account ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaq-vw-vSn" customClass="ActiveLabel" customModule="ActiveLabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Account ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaq-vw-vSn">
                                                 <rect key="frame" x="42.666666666666657" y="30" width="290" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="lHB-hp-UWo"/>
@@ -296,16 +296,20 @@
                     </view>
                     <navigationItem key="navigationItem" title="Log in to your account" id="KqI-NH-rba">
                         <barButtonItem key="backBarButtonItem" title="Log In" id="2Kc-uL-g2E"/>
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="IM8-Ul-Szc">
+                            <connections>
+                                <action selector="dismissViewController:" destination="BYZ-38-t0r" id="66m-m4-9vM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="contentView" destination="BYK-dw-X2I" id="H0C-yf-fAb"/>
-                        <outlet property="noteLabel" destination="Oaq-vw-vSn" id="ike-03-pQ2"/>
+                        <outlet property="scannerButton" destination="noD-gn-rO6" id="WD1-7o-MJS"/>
                         <outlet property="userName" destination="Hx4-AY-bCY" id="0sY-d1-uGd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="893.60000000000002" y="818.7192118226601"/>
+            <point key="canvasLocation" x="-66" y="-242"/>
         </scene>
         <!--page-servers-->
         <scene sceneID="K8A-gg-txd">
@@ -370,7 +374,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W9m-3h-AFY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-275.19999999999999" y="-856.4039408866995"/>
+            <point key="canvasLocation" x="-254" y="-976"/>
         </scene>
         <!--Create Account-->
         <scene sceneID="n4q-8d-sZm">
@@ -541,7 +545,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b8-bh-WnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8.8000000000000007" y="818.7192118226601"/>
+            <point key="canvasLocation" x="814" y="482"/>
         </scene>
         <!--page-servers-->
         <scene sceneID="MvC-1F-sRr">
@@ -559,7 +563,7 @@
                                 <rect key="frame" x="0.0" y="44" width="360" height="456"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="50" verticalCompressionResistancePriority="50" image="promo-1" translatesAutoresizingMaskIntoConstraints="NO" id="bKE-tg-y6Y">
-                                        <rect key="frame" x="18" y="0.0" width="324" height="260"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="260"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.84999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="CP0-M6-C5f">
                                         <rect key="frame" x="57.666666666666671" y="268" width="244.66666666666663" height="115"/>
@@ -600,7 +604,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3S-Ii-ZVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1009.6" y="-856.4039408866995"/>
+            <point key="canvasLocation" x="-989" y="-976"/>
         </scene>
         <!--page-servers-->
         <scene sceneID="jIy-pI-NsR">
@@ -662,7 +666,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfk-Q7-SP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="474" y="-856"/>
+            <point key="canvasLocation" x="494" y="-976"/>
         </scene>
         <!--Subscription-->
         <scene sceneID="7ZQ-xD-zO7">
@@ -806,7 +810,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s93-Jm-UAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-855" y="819"/>
+            <point key="canvasLocation" x="-90" y="1216"/>
         </scene>
         <!--Scan QR code-->
         <scene sceneID="OfJ-Z4-zb2">
@@ -831,7 +835,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pKV-6w-FVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-855" y="1552"/>
+            <point key="canvasLocation" x="-90" y="1949"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cq2-aL-Vqk">
@@ -849,7 +853,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WhU-x0-TF9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1694" y="819"/>
+            <point key="canvasLocation" x="-930" y="1216"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3JX-zZ-Egc">
@@ -867,7 +871,25 @@ IVPN purposefully does not log any usage data associated with an account as we p
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bME-c1-1Z5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1695" y="1552"/>
+            <point key="canvasLocation" x="-930" y="1949"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kpa-qI-ipL">
+            <objects>
+                <navigationController storyboardIdentifier="loginView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NJt-ly-cJt" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="75N-bY-hJs">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="eB3-AW-d2b"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9ch-Eu-wQx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-930" y="-242"/>
         </scene>
     </scenes>
     <resources>
