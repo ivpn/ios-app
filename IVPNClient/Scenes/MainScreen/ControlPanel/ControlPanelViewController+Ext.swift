@@ -48,6 +48,10 @@ extension ControlPanelViewController {
         }
         
         if indexPath.row == 7 {
+            guard evaluateIsLoggedIn() else {
+                return
+            }
+            
             guard Application.shared.connectionManager.status.isDisconnected() else {
                 showConnectedAlert(message: "To change protocol, please first disconnect", sender: protocolLabel)
                 return
