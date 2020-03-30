@@ -745,13 +745,13 @@
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
-		820079F22407D8E700EC2062 /* Views */ = {
+		820079F22407D8E700EC2062 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */,
 				82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		82061F5F238D2730009DDF4D /* PingManager */ = {
@@ -768,7 +768,7 @@
 		8208525423FD56530008C112 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				82C1D5BA23FE78330059A915 /* MapView */,
+				82C1D5BA23FE78330059A915 /* Map */,
 				82C1D5BD23FE8BD90059A915 /* ControlPanel */,
 				8208525723FD5EB20008C112 /* MainViewControllerV2.swift */,
 				8208525B23FD64160008C112 /* MainViewControllerV2+Ext.swift */,
@@ -890,8 +890,8 @@
 		822563902431DFFB00AE7F8D /* AccountScreen */ = {
 			isa = PBXGroup;
 			children = (
+				829FBF702431E69300C84246 /* View */,
 				826E61472428F8E60064F195 /* AccountViewController.swift */,
-				822563912431E03A00AE7F8D /* AccountView.swift */,
 			);
 			path = AccountScreen;
 			sourceTree = "<group>";
@@ -1022,6 +1022,14 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
+		829FBF702431E69300C84246 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				822563912431E03A00AE7F8D /* AccountView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		829FCCDE230D23FE009C63DF /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -1037,7 +1045,7 @@
 				822563902431DFFB00AE7F8D /* AccountScreen */,
 				8208525423FD56530008C112 /* MainScreen */,
 				82A208B621BAA51000C9AD44 /* Controls */,
-				82A208B521BAA4FF00C9AD44 /* Cells */,
+				82A208B521BAA4FF00C9AD44 /* TableCells */,
 				82A208B421BAA4EF00C9AD44 /* ViewControllers */,
 				9CDDD5B71D9D2F9F00D39924 /* LaunchScreen.storyboard */,
 				9C2833731D9D3EB60024C553 /* Initial.storyboard */,
@@ -1074,7 +1082,7 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		82A208B521BAA4FF00C9AD44 /* Cells */ = {
+		82A208B521BAA4FF00C9AD44 /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
 				9C30312F1DB41FBA00C38B0C /* ServerTableViewCell.swift */,
@@ -1084,7 +1092,7 @@
 				82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */,
 				82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */,
 			);
-			path = Cells;
+			path = TableCells;
 			sourceTree = "<group>";
 		};
 		82A208B621BAA51000C9AD44 /* Controls */ = {
@@ -1198,7 +1206,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		82C1D5BA23FE78330059A915 /* MapView */ = {
+		82C1D5BA23FE78330059A915 /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				82C1D5BB23FE78570059A915 /* MapScrollView.swift */,
@@ -1207,13 +1215,13 @@
 				82351FCF2420D0E000E6E0FD /* MapMarkerContainerView.swift */,
 				82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */,
 			);
-			path = MapView;
+			path = Map;
 			sourceTree = "<group>";
 		};
 		82C1D5BD23FE8BD90059A915 /* ControlPanel */ = {
 			isa = PBXGroup;
 			children = (
-				820079F22407D8E700EC2062 /* Views */,
+				820079F22407D8E700EC2062 /* View */,
 				82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */,
 				821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */,
 				8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */,
