@@ -2857,11 +2857,11 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ti-qN-P9C">
-                                                <rect key="frame" x="49.666666666666657" y="730" width="276" height="44"/>
+                                                <rect key="frame" x="49.666666666666657" y="725" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnGray14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="276" id="MNV-Td-f9X"/>
-                                                    <constraint firstAttribute="height" constant="44" id="kbf-EW-OaA"/>
+                                                    <constraint firstAttribute="height" constant="50" id="kbf-EW-OaA"/>
                                                 </constraints>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Already have an account">
@@ -2869,10 +2869,13 @@
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="5"/>
+                                                        <integer key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dismissViewController:" destination="Fww-6Z-MLW" eventType="touchUpInside" id="ZFO-bB-ufJ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
@@ -2884,7 +2887,7 @@
                                             <constraint firstItem="Ukz-Xt-zOH" firstAttribute="top" secondItem="LGs-b0-QwK" secondAttribute="top" constant="40" id="Egi-qV-OL8"/>
                                             <constraint firstItem="HX5-fa-hGp" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="J4B-wt-Obu"/>
                                             <constraint firstItem="h0I-fY-1bU" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="Jer-Me-cfE"/>
-                                            <constraint firstItem="0ti-qN-P9C" firstAttribute="top" secondItem="Z8V-ay-k5A" secondAttribute="bottom" constant="40" id="NX4-JV-oOv"/>
+                                            <constraint firstItem="0ti-qN-P9C" firstAttribute="top" secondItem="Z8V-ay-k5A" secondAttribute="bottom" constant="35" id="NX4-JV-oOv"/>
                                             <constraint firstItem="Z8V-ay-k5A" firstAttribute="top" secondItem="HX5-fa-hGp" secondAttribute="bottom" constant="25" id="NYi-2D-BbH"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="414" id="OiX-xb-lTT"/>
                                             <constraint firstItem="Ukz-Xt-zOH" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="aJa-ru-Iqu"/>

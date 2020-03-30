@@ -18,6 +18,12 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var scannerButton: UIButton! {
+        didSet {
+            scannerButton.isHidden = !UIImagePickerController.isSourceTypeAvailable(.camera)
+        }
+    }
+    
     // MARK: - Properties -
     
     private lazy var sessionManager: SessionManager = {

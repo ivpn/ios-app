@@ -303,6 +303,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="scannerButton" destination="noD-gn-rO6" id="WD1-7o-MJS"/>
                         <outlet property="userName" destination="Hx4-AY-bCY" id="0sY-d1-uGd"/>
                     </connections>
                 </viewController>
