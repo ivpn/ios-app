@@ -36,7 +36,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func purchaseSubscription(_ sender: AnyObject) {
-        
+        let viewController = NavigationManager.getSubscriptionViewController()
+        viewController.presentationController?.delegate = self
+        present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func openScanner(_ sender: AnyObject) {
