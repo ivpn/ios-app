@@ -17,10 +17,9 @@ class NavigationManager {
         return viewController
     }
     
-    static func getLoginViewController(modalPresentationStyle: UIModalPresentationStyle = .fullScreen) -> UIViewController {
+    static func getLoginViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "initialView")
-        viewController.modalPresentationStyle = modalPresentationStyle
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "loginView")
         return viewController
     }
     
@@ -61,6 +60,18 @@ class NavigationManager {
     static func getControlPanelViewController() -> UITableViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         return storyBoard.instantiateViewController(withIdentifier: "controlPanelView") as! ControlPanelViewController
+    }
+    
+    static func getScannerViewController(delegate: ScannerViewControllerDelegate? = nil) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
+        
+        let navController = storyBoard.instantiateViewController(withIdentifier: "scannerView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        if let viewController = navController?.topViewController as? ScannerViewController {
+            viewController.delegate = delegate
+        }
+        
+        return navController!
     }
     
 }

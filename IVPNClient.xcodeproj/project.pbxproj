@@ -54,6 +54,7 @@
 		8223C54E22EAE93F00CD283D /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54D22EAE93F00CD283D /* SessionManager.swift */; };
 		8223C54F22EAEC7000CD283D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54B22E9E93A00CD283D /* Session.swift */; };
 		8223C55022EAEC7100CD283D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54B22E9E93A00CD283D /* Session.swift */; };
+		822563922431E03A00AE7F8D /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822563912431E03A00AE7F8D /* AccountView.swift */; };
 		8229196E2182EB1C00978BBA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229196D2182EB1B00978BBA /* String+Ext.swift */; };
 		822919712182EB1C00978BBA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229196D2182EB1B00978BBA /* String+Ext.swift */; };
 		822B85D921B941A200715691 /* NotificationName+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822B85D821B941A200715691 /* NotificationName+Ext.swift */; };
@@ -184,6 +185,7 @@
 		82BBF26921AE802400589766 /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */; };
 		82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */; };
 		82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF27021AECC8100589766 /* UILabel+Ext.swift */; };
+		82BC7145242E2A1D00C9E0C9 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BC7144242E2A1D00C9E0C9 /* ScannerViewController.swift */; };
 		82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */; };
 		82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BB23FE78570059A915 /* MapScrollView.swift */; };
 		82C1D5BF23FE8C6D0059A915 /* ControlPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */; };
@@ -408,6 +410,7 @@
 		8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionKeyManager.swift; sourceTree = "<group>"; };
 		8223C54B22E9E93A00CD283D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		8223C54D22EAE93F00CD283D /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		822563912431E03A00AE7F8D /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		8229196D2182EB1B00978BBA /* String+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		822B85D821B941A200715691 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
@@ -513,6 +516,7 @@
 		82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Ext.swift"; sourceTree = "<group>"; };
 		82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		82BBF27021AECC8100589766 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
+		82BC7144242E2A1D00C9E0C9 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
 		82C1D5BB23FE78570059A915 /* MapScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScrollView.swift; sourceTree = "<group>"; };
 		82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelViewController.swift; sourceTree = "<group>"; };
@@ -741,13 +745,13 @@
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
-		820079F22407D8E700EC2062 /* Views */ = {
+		820079F22407D8E700EC2062 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */,
 				82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		82061F5F238D2730009DDF4D /* PingManager */ = {
@@ -764,7 +768,7 @@
 		8208525423FD56530008C112 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				82C1D5BA23FE78330059A915 /* MapView */,
+				82C1D5BA23FE78330059A915 /* Map */,
 				82C1D5BD23FE8BD90059A915 /* ControlPanel */,
 				8208525723FD5EB20008C112 /* MainViewControllerV2.swift */,
 				8208525B23FD64160008C112 /* MainViewControllerV2+Ext.swift */,
@@ -881,6 +885,15 @@
 				8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */,
 			);
 			path = ApiResults;
+			sourceTree = "<group>";
+		};
+		822563902431DFFB00AE7F8D /* AccountScreen */ = {
+			isa = PBXGroup;
+			children = (
+				829FBF702431E69300C84246 /* View */,
+				826E61472428F8E60064F195 /* AccountViewController.swift */,
+			);
+			path = AccountScreen;
 			sourceTree = "<group>";
 		};
 		82351FC8241FA14F00E6E0FD /* ViewModels */ = {
@@ -1009,6 +1022,14 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
+		829FBF702431E69300C84246 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				822563912431E03A00AE7F8D /* AccountView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		829FCCDE230D23FE009C63DF /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -1021,9 +1042,10 @@
 		82A208B321BAA4C500C9AD44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				822563902431DFFB00AE7F8D /* AccountScreen */,
 				8208525423FD56530008C112 /* MainScreen */,
 				82A208B621BAA51000C9AD44 /* Controls */,
-				82A208B521BAA4FF00C9AD44 /* Cells */,
+				82A208B521BAA4FF00C9AD44 /* TableCells */,
 				82A208B421BAA4EF00C9AD44 /* ViewControllers */,
 				9CDDD5B71D9D2F9F00D39924 /* LaunchScreen.storyboard */,
 				9C2833731D9D3EB60024C553 /* Initial.storyboard */,
@@ -1055,12 +1077,12 @@
 				8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */,
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
 				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
-				826E61472428F8E60064F195 /* AccountViewController.swift */,
+				82BC7144242E2A1D00C9E0C9 /* ScannerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		82A208B521BAA4FF00C9AD44 /* Cells */ = {
+		82A208B521BAA4FF00C9AD44 /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
 				9C30312F1DB41FBA00C38B0C /* ServerTableViewCell.swift */,
@@ -1070,7 +1092,7 @@
 				82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */,
 				82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */,
 			);
-			path = Cells;
+			path = TableCells;
 			sourceTree = "<group>";
 		};
 		82A208B621BAA51000C9AD44 /* Controls */ = {
@@ -1184,7 +1206,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		82C1D5BA23FE78330059A915 /* MapView */ = {
+		82C1D5BA23FE78330059A915 /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				82C1D5BB23FE78570059A915 /* MapScrollView.swift */,
@@ -1193,13 +1215,13 @@
 				82351FCF2420D0E000E6E0FD /* MapMarkerContainerView.swift */,
 				82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */,
 			);
-			path = MapView;
+			path = Map;
 			sourceTree = "<group>";
 		};
 		82C1D5BD23FE8BD90059A915 /* ControlPanel */ = {
 			isa = PBXGroup;
 			children = (
-				820079F22407D8E700EC2062 /* Views */,
+				820079F22407D8E700EC2062 /* View */,
 				82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */,
 				821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */,
 				8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */,
@@ -2027,6 +2049,7 @@
 				8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */,
 				82E716902181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				8223C54C22E9E93A00CD283D /* Session.swift in Sources */,
+				822563922431E03A00AE7F8D /* AccountView.swift in Sources */,
 				9CBFF02C21021D2100FE1757 /* ConnectionManager.swift in Sources */,
 				82D598C821A6ADF1000FABDE /* NetworkType.swift in Sources */,
 				9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */,
@@ -2059,6 +2082,7 @@
 				8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */,
 				824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */,
 				8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */,
+				82BC7145242E2A1D00C9E0C9 /* ScannerViewController.swift in Sources */,
 				82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */,
 				9C6942371DD218A900F9A801 /* IKEv2AccessDetails.swift in Sources */,
 				82D598B421A5A7A3000FABDE /* NetworkTrust.swift in Sources */,

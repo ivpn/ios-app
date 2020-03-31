@@ -7,21 +7,32 @@
 //
 
 import UIKit
-import ActiveLabel
 
 class LoginViewController: UIViewController {
 
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var userName: UITextField!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var noteLabel: ActiveLabel!
-    @IBOutlet weak var illustration: UIImageView!
+    @IBOutlet weak var userName: UITextField! {
+        didSet {
+            userName.delegate = self
+        }
+    }
+    
+    @IBOutlet weak var scannerButton: UIButton! {
+        didSet {
+            scannerButton.isHidden = !UIImagePickerController.isSourceTypeAvailable(.camera)
+        }
+    }
     
     // MARK: - Properties -
     
+    private lazy var sessionManager: SessionManager = {
+        let sessionManager = SessionManager()
+        sessionManager.delegate = self
+        return sessionManager
+    }()
+    
     private var loginProcessStarted = false
-    private let sessionManager = SessionManager()
     
     // MARK: - @IBActions -
     
@@ -30,10 +41,17 @@ class LoginViewController: UIViewController {
         startLoginProcess()
     }
     
-    @IBAction func showCreateAccount(_ sender: AnyObject) {
-        navigationController?.popViewController {
-            NotificationCenter.default.post(name: Notification.Name.ShowCreateAccount, object: nil)
+    @IBAction func purchaseSubscription(_ sender: AnyObject) {
+        guard evaluateHasUserConsent() else {
+            NotificationCenter.default.addObserver(self, selector: #selector(termsOfServiceAgreed), name: Notification.Name.TermsOfServiceAgreed, object: nil)
+            return
         }
+        
+        let _ = evaluateIsServiceActive()
+    }
+    
+    @IBAction func openScanner(_ sender: AnyObject) {
+        present(NavigationManager.getScannerViewController(delegate: self), animated: true)
     }
     
     // MARK: - View Lifecycle -
@@ -43,13 +61,18 @@ class LoginViewController: UIViewController {
         view.accessibilityIdentifier = "loginScreen"
         navigationController?.navigationBar.prefersLargeTitles = false
         
-        userName.delegate = self
-        sessionManager.delegate = self
-        
         addObservers()
         hideKeyboardOnTap()
-        setupActiveLabel()
-        setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
+        // Remove when fixed in future releases
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.setNeedsLayout()
+        }
     }
     
     deinit {
@@ -68,6 +91,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
     }
     
     @objc func newSession() {
@@ -76,6 +100,11 @@ class LoginViewController: UIViewController {
     
     @objc func forceNewSession() {
         startLoginProcess(force: true)
+    }
+    
+    @objc func termsOfServiceAgreed() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
+        let _ = evaluateIsServiceActive()
     }
     
     // MARK: - Methods -
@@ -103,22 +132,6 @@ class LoginViewController: UIViewController {
             title: "You entered an invalid account ID",
             message: "Your account ID starts with the letters 'ivpn' and can be found in the welcome email sent to you on signup. You cannot use your email address."
         )
-    }
-    
-    private func setupActiveLabel() {
-        let customType = ActiveType.custom(pattern: "Client Area")
-        noteLabel.enabledTypes = [customType]
-        noteLabel.customColor[customType] = UIColor.init(named: Theme.Key.ivpnBlue)
-        noteLabel.text = noteLabel.text
-        noteLabel.handleCustomTap(for: customType) { _ in
-            self.openWebPage("http://ivpn.net/clientarea")
-        }
-    }
-    
-    private func setupView() {
-        if UIDevice.screenHeightSmallerThan(device: .iPhoneXR) {
-            illustration.isHidden = true
-        }
     }
     
     @objc private func subscriptionDismissed() {
@@ -247,6 +260,17 @@ extension LoginViewController: UIAdaptivePresentationControllerDelegate {
                 NotificationCenter.default.post(name: Notification.Name.AuthenticationDismissed, object: nil)
             })
         }
+    }
+    
+}
+
+// MARK: - ScannerViewControllerDelegate -
+
+extension LoginViewController: ScannerViewControllerDelegate {
+    
+    func qrCodeFound(code: String) {
+        userName.text = code
+        startLoginProcess()
     }
     
 }

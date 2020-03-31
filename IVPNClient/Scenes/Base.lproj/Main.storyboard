@@ -414,14 +414,14 @@
         <!--Settings-->
         <scene sceneID="dlR-3F-Q3M">
             <objects>
-                <tableViewController title="Settings" id="5KC-W6-t9Q" customClass="SettingsViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Settings" modalPresentationStyle="formSheet" id="5KC-W6-t9Q" customClass="SettingsViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="vDW-Ar-ozm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1037.3333320617676" width="375" height="65"/>
+                            <rect key="frame" x="0.0" y="1016.3333320617676" width="375" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -992,9 +992,9 @@
         <!--Server View Controller-->
         <scene sceneID="vhE-7F-Ghe">
             <objects>
-                <tableViewController id="zAv-yM-Pqo" customClass="ServerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="formSheet" id="zAv-yM-Pqo" customClass="ServerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j8B-k6-W0Q">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServerTableViewCell" rowHeight="64" id="JY4-vi-6KD" customClass="ServerTableViewCell" customModule="IVPNClient" customModuleProvider="target">
@@ -1412,21 +1412,21 @@
         <!--Select Protocol-->
         <scene sceneID="obu-pc-xnF">
             <objects>
-                <tableViewController title="Select Protocol" id="C8Y-kZ-eYV" customClass="ProtocolViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Select Protocol" modalPresentationStyle="formSheet" id="C8Y-kZ-eYV" customClass="ProtocolViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="YRl-Jj-sLY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="42.666667938232422"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="42.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="13.333333333333336" width="326" height="16"/>
+                                            <rect key="frame" x="16" y="13.666666666666664" width="326" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1435,7 +1435,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11.000000000000002" width="324" height="20.666666666666671"/>
+                                            <rect key="frame" x="16" y="11" width="324" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1457,7 +1457,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98.333332061767578" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -1530,7 +1530,7 @@
             <objects>
                 <tableViewController title="WireGuard details" id="BYK-jY-KqR" customClass="WireGuardSettingsViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Dqq-IB-wUh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -2464,7 +2464,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Zzo-AF-YfB">
             <objects>
-                <navigationController storyboardIdentifier="subscriptionView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NRV-kl-J2j" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="subscriptionView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NRV-kl-J2j" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pfH-Sv-Il0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
@@ -2482,7 +2482,7 @@
         <!--Subscription-->
         <scene sceneID="zxI-rX-CT3">
             <objects>
-                <viewController title="Subscription" id="Fww-6Z-MLW" customClass="SubscriptionViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Subscription" modalPresentationStyle="formSheet" id="Fww-6Z-MLW" customClass="SubscriptionViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d8I-mH-xq8"/>
                         <viewControllerLayoutGuide type="bottom" id="a0G-L8-42j"/>
@@ -2857,11 +2857,11 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ti-qN-P9C">
-                                                <rect key="frame" x="49.666666666666657" y="730" width="276" height="44"/>
+                                                <rect key="frame" x="49.666666666666657" y="725" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnGray14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="276" id="MNV-Td-f9X"/>
-                                                    <constraint firstAttribute="height" constant="44" id="kbf-EW-OaA"/>
+                                                    <constraint firstAttribute="height" constant="50" id="kbf-EW-OaA"/>
                                                 </constraints>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Already have an account">
@@ -2869,10 +2869,13 @@
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="5"/>
+                                                        <integer key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dismissViewController:" destination="Fww-6Z-MLW" eventType="touchUpInside" id="ZFO-bB-ufJ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
@@ -2884,7 +2887,7 @@
                                             <constraint firstItem="Ukz-Xt-zOH" firstAttribute="top" secondItem="LGs-b0-QwK" secondAttribute="top" constant="40" id="Egi-qV-OL8"/>
                                             <constraint firstItem="HX5-fa-hGp" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="J4B-wt-Obu"/>
                                             <constraint firstItem="h0I-fY-1bU" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="Jer-Me-cfE"/>
-                                            <constraint firstItem="0ti-qN-P9C" firstAttribute="top" secondItem="Z8V-ay-k5A" secondAttribute="bottom" constant="40" id="NX4-JV-oOv"/>
+                                            <constraint firstItem="0ti-qN-P9C" firstAttribute="top" secondItem="Z8V-ay-k5A" secondAttribute="bottom" constant="35" id="NX4-JV-oOv"/>
                                             <constraint firstItem="Z8V-ay-k5A" firstAttribute="top" secondItem="HX5-fa-hGp" secondAttribute="bottom" constant="25" id="NYi-2D-BbH"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="414" id="OiX-xb-lTT"/>
                                             <constraint firstItem="Ukz-Xt-zOH" firstAttribute="leading" secondItem="LGs-b0-QwK" secondAttribute="leading" constant="15" id="aJa-ru-Iqu"/>
@@ -2915,8 +2918,8 @@
                             <constraint firstItem="ept-i2-LDZ" firstAttribute="leading" secondItem="zKW-Rb-gB3" secondAttribute="leading" id="LSL-S2-4jK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Start 3-Days Free Trial" id="ahG-ef-lWG">
-                        <barButtonItem key="rightBarButtonItem" title="Close" id="oLh-tl-r91">
+                    <navigationItem key="navigationItem" title="Start 3-Day Free Trial" id="ahG-ef-lWG">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="oLh-tl-r91">
                             <connections>
                                 <action selector="close:" destination="Fww-6Z-MLW" id="QIx-vI-fi4"/>
                             </connections>
@@ -3079,7 +3082,7 @@
             <objects>
                 <tableViewController id="ELw-vc-l7K" customClass="ServersConfigurationTableViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KpS-b3-6R0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="a4G-c8-WjK">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -3362,7 +3365,7 @@
         <!--Switch to IVPN Pro-->
         <scene sceneID="fZQ-ut-wkh">
             <objects>
-                <viewController id="CsZ-It-hmk" customClass="UpgradePlanViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="formSheet" id="CsZ-It-hmk" customClass="UpgradePlanViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kL5-Np-scy"/>
                         <viewControllerLayoutGuide type="bottom" id="AtF-tQ-cSp"/>
@@ -3448,14 +3451,14 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="50" verticalCompressionResistancePriority="50" image="promo-2" translatesAutoresizingMaskIntoConstraints="NO" id="rcP-BJ-hh4">
-                                <rect key="frame" x="7.6666666666666572" y="170" width="360" height="236"/>
+                                <rect key="frame" x="7.6666666666666572" y="165" width="360" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="360" id="5J6-FX-Egp"/>
-                                    <constraint firstAttribute="height" constant="236" id="WKp-f4-slA"/>
+                                    <constraint firstAttribute="height" constant="200" id="WKp-f4-slA"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 devices connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yuP-Q3-TyH">
-                                <rect key="frame" x="57.666666666666657" y="421" width="260" height="30"/>
+                                <rect key="frame" x="57.666666666666657" y="370" width="260" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="cmT-4m-hIC"/>
                                     <constraint firstAttribute="height" constant="30" id="gBy-sj-TPa"/>
@@ -3465,7 +3468,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You've reached the maximum number of connected devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLm-4P-vGA">
-                                <rect key="frame" x="57.666666666666657" y="456" width="260" height="42"/>
+                                <rect key="frame" x="57.666666666666657" y="400" width="260" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="11g-di-LQ2"/>
                                     <constraint firstAttribute="height" constant="42" id="1x4-xV-OHg"/>
@@ -3478,14 +3481,14 @@
                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                         <constraints>
                             <constraint firstItem="yuP-Q3-TyH" firstAttribute="centerX" secondItem="SgG-90-3tk" secondAttribute="centerX" id="0tQ-7o-Xwh"/>
-                            <constraint firstItem="yuP-Q3-TyH" firstAttribute="top" secondItem="rcP-BJ-hh4" secondAttribute="bottom" constant="15" id="6cF-cr-5Dt"/>
+                            <constraint firstItem="yuP-Q3-TyH" firstAttribute="top" secondItem="rcP-BJ-hh4" secondAttribute="bottom" constant="5" id="6cF-cr-5Dt"/>
                             <constraint firstItem="rcP-BJ-hh4" firstAttribute="centerX" secondItem="SgG-90-3tk" secondAttribute="centerX" id="Chz-5I-1OK"/>
-                            <constraint firstItem="rcP-BJ-hh4" firstAttribute="top" secondItem="Dvo-gK-gYE" secondAttribute="bottom" constant="30" id="KT7-pe-cI0"/>
+                            <constraint firstItem="rcP-BJ-hh4" firstAttribute="top" secondItem="Dvo-gK-gYE" secondAttribute="bottom" constant="25" id="KT7-pe-cI0"/>
                             <constraint firstAttribute="bottom" secondItem="cDI-sk-38K" secondAttribute="bottom" constant="32" id="NC6-IF-Eyq">
                                 <variation key="heightClass=compact" constant="22"/>
                             </constraint>
                             <constraint firstItem="LLm-4P-vGA" firstAttribute="centerX" secondItem="SgG-90-3tk" secondAttribute="centerX" id="NE4-b7-UXW"/>
-                            <constraint firstItem="LLm-4P-vGA" firstAttribute="top" secondItem="yuP-Q3-TyH" secondAttribute="bottom" constant="5" id="Y2e-Vr-KOo"/>
+                            <constraint firstItem="LLm-4P-vGA" firstAttribute="top" secondItem="yuP-Q3-TyH" secondAttribute="bottom" id="Y2e-Vr-KOo"/>
                             <constraint firstItem="Dvo-gK-gYE" firstAttribute="centerX" secondItem="SgG-90-3tk" secondAttribute="centerX" id="dHR-Ui-Vu4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cDI-sk-38K" secondAttribute="trailing" id="hV7-3D-Z5t"/>
                             <constraint firstItem="Dvo-gK-gYE" firstAttribute="top" secondItem="kL5-Np-scy" secondAttribute="bottom" constant="28" id="nxs-kt-Ypu"/>
@@ -3516,8 +3519,8 @@
         <!--Account-->
         <scene sceneID="A8X-Vs-cFn">
             <objects>
-                <tableViewController id="obv-bO-Y0X" customClass="AccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Aws-at-2vt">
+                <tableViewController modalPresentationStyle="formSheet" id="obv-bO-Y0X" customClass="AccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Aws-at-2vt" customClass="AccountView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -3793,21 +3796,22 @@
                             </tableViewSection>
                         </sections>
                         <connections>
+                            <outlet property="accountIdLabel" destination="c74-BR-YIO" id="owd-hS-Ldx"/>
+                            <outlet property="billingCycleLabel" destination="rCl-hE-2rz" id="fw5-11-zgv"/>
                             <outlet property="dataSource" destination="obv-bO-Y0X" id="XXu-eT-PBh"/>
                             <outlet property="delegate" destination="obv-bO-Y0X" id="c2A-2b-bO7"/>
+                            <outlet property="logOutActionButton" destination="MVS-Nm-wlG" id="Yqw-Wn-PH0"/>
+                            <outlet property="nextBillingLabel" destination="XnP-Xb-npw" id="Syq-ON-8ig"/>
+                            <outlet property="qrCodeImage" destination="LDZ-oO-5ye" id="a4A-eq-b9i"/>
+                            <outlet property="recurringAmountLabel" destination="ZGR-de-kwn" id="Gkd-Q5-8fc"/>
+                            <outlet property="statusLabel" destination="hky-B3-yLX" id="42L-ka-GMJ"/>
+                            <outlet property="subscriptionActionButton" destination="HuQ-jO-yxH" id="a6d-RC-6yT"/>
+                            <outlet property="subscriptionLabel" destination="zC4-d3-7BM" id="8ff-HE-HH1"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Account" id="H32-NI-wH6"/>
                     <connections>
-                        <outlet property="accountIdLabel" destination="c74-BR-YIO" id="IUr-P2-1U1"/>
-                        <outlet property="billingCycleLabel" destination="rCl-hE-2rz" id="zBH-Jf-77a"/>
-                        <outlet property="logOutActionButton" destination="MVS-Nm-wlG" id="cXQ-QL-iV3"/>
-                        <outlet property="nextBillingLabel" destination="XnP-Xb-npw" id="X7M-c5-VLK"/>
-                        <outlet property="qrCodeImage" destination="LDZ-oO-5ye" id="47h-DP-QrR"/>
-                        <outlet property="recurringAmountLabel" destination="ZGR-de-kwn" id="y1F-sQ-Gjm"/>
-                        <outlet property="statusLabel" destination="hky-B3-yLX" id="DMP-44-r5V"/>
-                        <outlet property="subscriptionActionButton" destination="HuQ-jO-yxH" id="oaq-24-Pbf"/>
-                        <outlet property="subscriptionLabel" destination="zC4-d3-7BM" id="89E-dN-ZSD"/>
+                        <outlet property="accountView" destination="Aws-at-2vt" id="GDj-ca-izv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ki9-Pc-OJB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3817,7 +3821,7 @@
         <!--Navigation Controller-->
         <scene sceneID="QQ4-JD-4Vf">
             <objects>
-                <navigationController storyboardIdentifier="upgradePlanView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wsh-Fn-UEe" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="upgradePlanView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wsh-Fn-UEe" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ubW-4d-tNu">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -3835,7 +3839,7 @@
         <!--Navigation Controller-->
         <scene sceneID="h4R-SI-9Nq">
             <objects>
-                <navigationController storyboardIdentifier="settingsView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Du7-kp-t7k" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="settingsView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Du7-kp-t7k" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XHH-aU-fzp">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -3853,7 +3857,7 @@
         <!--Navigation Controller-->
         <scene sceneID="ztB-qB-P8T">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OOw-15-c1e" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="OOw-15-c1e" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Dwr-bn-cPG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="siT-aP-BDl">
@@ -3891,7 +3895,7 @@
         <!--Navigation Controller-->
         <scene sceneID="bOz-6a-A4u">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IeW-p4-xm9" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="IeW-p4-xm9" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="37d-ux-M0y"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="boL-qy-Qcf">
@@ -3910,7 +3914,7 @@
         <!--Navigation Controller-->
         <scene sceneID="dRx-IJ-Af6">
             <objects>
-                <navigationController storyboardIdentifier="accountView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Blz-QQ-xeL" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="accountView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Blz-QQ-xeL" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xnO-fB-Svu">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -3928,8 +3932,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="s0z-do-bnX"/>
-        <segue reference="aTx-JM-MV5"/>
-        <segue reference="9Ib-aF-gei"/>
+        <segue reference="tOU-fs-l4P"/>
+        <segue reference="X5B-6f-Pgc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon-alert-dark-yellow" width="16" height="16"/>

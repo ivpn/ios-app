@@ -395,7 +395,7 @@ class MainViewController: UIViewController {
         
         guard Application.shared.authentication.isLoggedIn else {
             if #available(iOS 13.0, *) {
-                let viewController = NavigationManager.getLoginViewController(modalPresentationStyle: .automatic)
+                let viewController = NavigationManager.getLoginViewController()
                 viewController.presentationController?.delegate = self
                 present(viewController, animated: true, completion: nil)
             } else {
