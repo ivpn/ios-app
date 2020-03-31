@@ -31,16 +31,18 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     
     // MARK: - Private properties -
     
+    private let bottomSafeArea = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+    
     private var halfHeight: CGFloat {
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-            return 325
+            return 359 - bottomSafeArea
         }
         
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
-            return 240
+            return 274 - bottomSafeArea
         }
         
-        return 196
+        return 230 - bottomSafeArea
     }
     
     // MARK: - Override public methods -
