@@ -13,14 +13,14 @@ class MapMarkerContainerView: UIView {
     
     // MARK: - Properties -
     
-    private var constraintsA: [NSLayoutConstraint] = []
-    private var constraintsB: [NSLayoutConstraint] = []
-    private var constraintsC: [NSLayoutConstraint] = []
+    private lazy var constraintsA = bb.left().top(25).right().bottom(-359).constraints.deactivate()
+    private lazy var constraintsB = bb.left().top(25).right().bottom(-274).constraints.deactivate()
+    private lazy var constraintsC = bb.left().top(25).right().bottom(-230).constraints.deactivate()
+    private lazy var iPadConstraints = bb.left(375).top().right().bottom().constraints.deactivate()
     
     // MARK: - View lifecycle -
     
     override func updateConstraints() {
-        initConstraints()
         initGestures()
         setupConstraints()
         super.updateConstraints()
@@ -29,13 +29,15 @@ class MapMarkerContainerView: UIView {
     // MARK: - Methods -
     
     func setupConstraints() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return
-        }
-        
         constraintsA.deactivate()
         constraintsB.deactivate()
         constraintsC.deactivate()
+        iPadConstraints.deactivate()
+        
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
+            iPadConstraints.activate()
+            return
+        }
         
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
             constraintsA.activate()
@@ -55,17 +57,6 @@ class MapMarkerContainerView: UIView {
     private func initGestures() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addGestureRecognizer(tap)
-    }
-    
-    private func initConstraints() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            bb.left(375).top().right().bottom()
-            return
-        }
-        
-        constraintsA = bb.left().top(25).right().bottom(-359).constraints.deactivate()
-        constraintsB = bb.left().top(25).right().bottom(-274).constraints.deactivate()
-        constraintsC = bb.left().top(25).right().bottom(-230).constraints.deactivate()
     }
     
     @objc private func handleTap() {

@@ -106,6 +106,7 @@ class MainViewControllerV2: UIViewController {
     func refreshUI() {
         updateFloatingPanelLayout()
         mapScrollView?.setupConstraints()
+        markerContainerView.setupConstraints()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
