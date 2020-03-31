@@ -274,10 +274,13 @@ class ControlPanelViewController: UITableViewController {
                         return
                     }
                     NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
-                    self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-                    self.hud.detailTextLabel.text = "Disconnecting"
-                    self.hud.show(in: (self.navigationController?.view)!)
-                    self.hud.dismiss(afterDelay: 5)
+                    
+                    if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+                        self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+                        self.hud.detailTextLabel.text = "Disconnecting"
+                        self.hud.show(in: topViewController.view)
+                        self.hud.dismiss(afterDelay: 5)
+                    }
                 default:
                     break
                 }

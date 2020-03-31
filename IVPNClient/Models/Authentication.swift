@@ -70,6 +70,7 @@ class Authentication {
         FileSystemManager.clearSession()
         StorageManager.clearSession()
         UserDefaults.clearSession()
+        Application.shared.clearSession()
     }
     
     func removeStoredCredentials() {
