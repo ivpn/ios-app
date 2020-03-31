@@ -60,4 +60,10 @@ class Application {
         connectionManager = ConnectionManager(settings: settings, authentication: authentication, vpnManager: VPNManager())
     }
     
+    // MARK: - Methods -
+    
+    func clearSession() {
+        serviceStatus.isActive = false
+    }
+    
 }
