@@ -87,7 +87,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
         
         if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isPortrait {
             return [
-                surfaceView.widthAnchor.constraint(equalToConstant: 500),
+                surfaceView.widthAnchor.constraint(equalToConstant: 520),
                 surfaceView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
             ]
         }

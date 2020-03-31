@@ -174,13 +174,17 @@ class MainViewControllerV2: UIViewController {
     private func initSettingsAction() {
         let settingsButton = UIButton()
         view.addSubview(settingsButton)
-        settingsButton.bb.size(width: 42, height: 42).top(60).right(-30)
+        settingsButton.bb.size(width: 42, height: 42).top(55).right(-30)
         settingsButton.setupIcon(imageName: "icon-settings")
         settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
         
         let accountButton = UIButton()
         view.addSubview(accountButton)
-        accountButton.bb.size(width: 42, height: 42).top(60).left(30)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            accountButton.bb.size(width: 42, height: 42).top(55).right(-100)
+        } else {
+            accountButton.bb.size(width: 42, height: 42).top(55).left(30)
+        }
         accountButton.setupIcon(imageName: "icon-user")
         accountButton.addTarget(self, action: #selector(openAccountInfo), for: .touchUpInside)
     }
