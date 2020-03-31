@@ -67,7 +67,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
 
     public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
         if let surfaceView = surfaceView as? FloatingPanelSurfaceView {
-            if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+            if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
                 surfaceView.grabberHandle.isHidden = true
                 surfaceView.cornerRadius = 0
             } else {
@@ -76,14 +76,14 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
             }
         }
         
-        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
             return [
                 surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0),
                 surfaceView.widthAnchor.constraint(equalToConstant: 375)
             ]
         }
         
-        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isPortrait {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isPortrait {
             return [
                 surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 160),
                 surfaceView.widthAnchor.constraint(equalToConstant: 500)
@@ -97,7 +97,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     }
     
     public func backdropAlphaFor(position: FloatingPanelPosition) -> CGFloat {
-        if position == .full && UIDevice.current.userInterfaceIdiom != .pad {
+        if position == .full && (UIDevice.current.userInterfaceIdiom == .phone || UIDevice.current.orientation.isPortrait) {
             return 0.3
         }
         
