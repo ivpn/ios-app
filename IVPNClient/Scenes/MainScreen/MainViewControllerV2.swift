@@ -15,6 +15,7 @@ class MainViewControllerV2: UIViewController {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var infoAlertView: InfoAlertView!
+    @IBOutlet weak var mapScrollView: MapScrollView?
     
     // MARK: - Properties -
     
@@ -104,6 +105,7 @@ class MainViewControllerV2: UIViewController {
     
     func refreshUI() {
         updateFloatingPanelLayout()
+        mapScrollView?.setupConstraints()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {

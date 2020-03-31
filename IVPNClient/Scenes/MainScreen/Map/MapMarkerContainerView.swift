@@ -11,9 +11,11 @@ import Bamboo
 
 class MapMarkerContainerView: UIView {
     
-    var constraintsA: [NSLayoutConstraint] = []
-    var constraintsB: [NSLayoutConstraint] = []
-    var constraintsC: [NSLayoutConstraint] = []
+    // MARK: - Properties -
+    
+    private var constraintsA: [NSLayoutConstraint] = []
+    private var constraintsB: [NSLayoutConstraint] = []
+    private var constraintsC: [NSLayoutConstraint] = []
     
     // MARK: - View lifecycle -
     

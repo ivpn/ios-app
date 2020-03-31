@@ -11,6 +11,10 @@ import Bamboo
 
 class MapScrollView: UIScrollView {
     
+    // MARK: - Properties -
+    
+    private lazy var iPadConstraints = bb.left(375).top(0).constraints.deactivate()
+    
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
@@ -19,9 +23,11 @@ class MapScrollView: UIScrollView {
     
     // MARK: - Private methods -
     
-    private func setupConstraints() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            bb.left(375).top(0)
+    func setupConstraints() {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+            iPadConstraints.activate()
+        } else {
+            iPadConstraints.deactivate()
         }
     }
     
