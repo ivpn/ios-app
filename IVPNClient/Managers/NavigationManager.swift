@@ -66,6 +66,7 @@ class NavigationManager {
         let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
         
         let navController = storyBoard.instantiateViewController(withIdentifier: "scannerView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
         if let viewController = navController?.topViewController as? ScannerViewController {
             viewController.delegate = delegate
         }
