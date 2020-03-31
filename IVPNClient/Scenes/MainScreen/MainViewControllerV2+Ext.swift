@@ -17,7 +17,7 @@ extension MainViewControllerV2: FloatingPanelControllerDelegate {
     }
     
     func floatingPanelShouldBeginDragging(_ vc: FloatingPanelController) -> Bool {
-        return UIDevice.current.userInterfaceIdiom == .pad ? false : true
+        return UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape ? false : true
     }
     
     func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {

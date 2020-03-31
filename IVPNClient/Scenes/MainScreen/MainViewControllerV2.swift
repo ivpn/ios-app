@@ -94,6 +94,12 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
+    // MARK: - Interface Orientations -
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        refreshUI()
+    }
+    
     // MARK: - Methods -
     
     func refreshUI() {

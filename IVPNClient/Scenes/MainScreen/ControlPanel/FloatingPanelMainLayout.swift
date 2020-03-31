@@ -14,7 +14,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     // MARK: - Override public properties -
     
     public var initialPosition: FloatingPanelPosition {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
             return .full
         }
         
@@ -22,7 +22,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     }
     
     public var supportedPositions: Set<FloatingPanelPosition> {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
             return [.full]
         }
         
@@ -46,25 +46,47 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     // MARK: - Override public methods -
 
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
             switch position {
-            case .full: return -20
-            default: return nil
+            case .full:
+                return -20
+            default:
+                return nil
             }
         }
         
         switch position {
-            case .full: return 10
-        case .half: return halfHeight
-            default: return nil
+        case .full:
+            return 10
+        case .half:
+            return halfHeight
+        default:
+            return nil
         }
     }
 
     public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if let surfaceView = surfaceView as? FloatingPanelSurfaceView {
+            if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+                surfaceView.grabberHandle.isHidden = true
+                surfaceView.cornerRadius = 0
+            } else {
+                surfaceView.grabberHandle.isHidden = false
+                surfaceView.cornerRadius = 15
+            }
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
             return [
                 surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0),
                 surfaceView.widthAnchor.constraint(equalToConstant: 375)
+            ]
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isPortrait {
+            return [
+                surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 160),
+                surfaceView.widthAnchor.constraint(equalToConstant: 500)
             ]
         }
         
