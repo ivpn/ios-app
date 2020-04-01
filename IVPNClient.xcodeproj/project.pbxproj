@@ -23,6 +23,7 @@
 		82061F67238D2730009DDF4D /* PingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82061F63238D2730009DDF4D /* PingManager.swift */; };
 		8206E5D022967E37003119AF /* UserActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5CF22967E37003119AF /* UserActivityType.swift */; };
 		8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5D122967EAF003119AF /* UserActivityTitle.swift */; };
+		8206F32124347A8F0056B465 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32024347A8F0056B465 /* MainView.swift */; };
 		8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */; };
 		8208525823FD5EB20008C112 /* MainViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525723FD5EB20008C112 /* MainViewControllerV2.swift */; };
 		8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */; };
@@ -391,6 +392,7 @@
 		82061F63238D2730009DDF4D /* PingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingManager.swift; sourceTree = "<group>"; };
 		8206E5CF22967E37003119AF /* UserActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityType.swift; sourceTree = "<group>"; };
 		8206E5D122967EAF003119AF /* UserActivityTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityTitle.swift; sourceTree = "<group>"; };
+		8206F32024347A8F0056B465 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelMainLayout.swift; sourceTree = "<group>"; };
 		8208525723FD5EB20008C112 /* MainViewControllerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerV2.swift; sourceTree = "<group>"; };
 		8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Ext.swift"; sourceTree = "<group>"; };
@@ -765,9 +767,18 @@
 			path = PingManager;
 			sourceTree = "<group>";
 		};
+		8206F31F24347A360056B465 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8206F32024347A8F0056B465 /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8208525423FD56530008C112 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				8206F31F24347A360056B465 /* View */,
 				82C1D5BA23FE78330059A915 /* Map */,
 				82C1D5BD23FE8BD90059A915 /* ControlPanel */,
 				8208525723FD5EB20008C112 /* MainViewControllerV2.swift */,
@@ -1987,6 +1998,7 @@
 				828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */,
 				82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */,
 				826E61462428D5200064F195 /* UIButton+Ext.swift in Sources */,
+				8206F32124347A8F0056B465 /* MainView.swift in Sources */,
 				9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */,
 				82E716962181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */,
 				8292E1BE2174CA6800123538 /* x25519.c in Sources */,
