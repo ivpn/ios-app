@@ -11,6 +11,11 @@ import UIKit
 extension UILabel {
     
     func icon(text textString: String, imageName: String, alignment: Alignment = .right) {
+        guard !imageName.isEmpty else {
+            self.text = textString
+            return
+        }
+        
         let image = UIImage(named: imageName)
         guard image != nil else {
             self.text = textString

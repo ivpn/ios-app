@@ -14,16 +14,13 @@ class MainViewControllerV2: UIViewController {
     
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var infoAlertView: InfoAlertView!
+    @IBOutlet weak var mainView: MainView!
     
     // MARK: - Properties -
     
     var floatingPanel: FloatingPanelController!
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
-    private var infoAlertViewModel = InfoAlertViewModel()
-    private let markerContainerView = MapMarkerContainerView()
-    private let markerView = MapMarkerView()
     
     // MARK: - @IBActions -
     
@@ -49,23 +46,23 @@ class MainViewControllerV2: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initMarker()
-        initSettingsAction()
         initFloatingPanel()
         addObservers()
         startServersUpdate()
-        initInfoAlert()
-        updateInfoAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startPingService(updateServerListDidComplete: updateServerListDidComplete)
+        refreshUI()
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            updateGeoLocation()
+        }
     }
     
     deinit {
@@ -94,14 +91,21 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
+    // MARK: - Interface Orientations -
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        refreshUI()
+    }
+    
     // MARK: - Methods -
     
     func refreshUI() {
         updateFloatingPanelLayout()
+        mainView.setupConstraints()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
-        markerView.status = vpnStatus
+        mainView.updateStatus(vpnStatus: vpnStatus)
     }
     
     func updateGeoLocation() {
@@ -139,8 +143,8 @@ class MainViewControllerV2: UIViewController {
     
     @objc private func updateFloatingPanelLayout() {
         floatingPanel.updateLayout()
-        markerContainerView.setupConstraints()
-        updateInfoAlert()
+        mainView.setupConstraints()
+        mainView.updateInfoAlert()
     }
     
     @objc private func updateServersList() {
@@ -154,38 +158,6 @@ class MainViewControllerV2: UIViewController {
             default:
                 break
             }
-        }
-    }
-    
-    private func initMarker() {
-        markerContainerView.addSubview(markerView)
-        view.addSubview(markerContainerView)
-    }
-    
-    private func initSettingsAction() {
-        let settingsButton = UIButton()
-        view.addSubview(settingsButton)
-        settingsButton.bb.size(width: 42, height: 42).top(60).right(-30)
-        settingsButton.setupIcon(imageName: "icon-settings")
-        settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
-        
-        let accountButton = UIButton()
-        view.addSubview(accountButton)
-        accountButton.bb.size(width: 42, height: 42).top(60).left(30)
-        accountButton.setupIcon(imageName: "icon-user")
-        accountButton.addTarget(self, action: #selector(openAccountInfo), for: .touchUpInside)
-    }
-    
-    private func initInfoAlert() {
-        infoAlertView.delegate = infoAlertViewModel
-    }
-    
-    private func updateInfoAlert() {
-        if infoAlertViewModel.shouldDisplay {
-            infoAlertViewModel.update()
-            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
-        } else {
-            infoAlertView.hide()
         }
     }
     
