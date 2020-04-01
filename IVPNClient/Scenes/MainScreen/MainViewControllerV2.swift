@@ -15,7 +15,8 @@ class MainViewControllerV2: UIViewController {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var infoAlertView: InfoAlertView!
-    @IBOutlet weak var mapScrollView: MapScrollView?
+    @IBOutlet weak var mapScrollView: MapScrollView!
+    @IBOutlet weak var mainView: MainView!
     
     // MARK: - Properties -
     
@@ -109,7 +110,7 @@ class MainViewControllerV2: UIViewController {
     
     func refreshUI() {
         updateFloatingPanelLayout()
-        mapScrollView?.setupConstraints()
+        mapScrollView.setupConstraints()
         markerContainerView.setupConstraints()
     }
     

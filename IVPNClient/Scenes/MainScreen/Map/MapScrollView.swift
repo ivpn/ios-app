@@ -21,7 +21,7 @@ class MapScrollView: UIScrollView {
         setupConstraints()
     }
     
-    // MARK: - Private methods -
+    // MARK: - Methods -
     
     func setupConstraints() {
         if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
