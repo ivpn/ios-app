@@ -25,10 +25,10 @@ class MainView: UIView {
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
-//        initMarker()
-//        initSettingsAction()
-//        initInfoAlert()
-//        updateInfoAlert()
+        initMarker()
+        initSettingsAction()
+        initInfoAlert()
+        updateInfoAlert()
     }
     
     // MARK: - Methods -
@@ -69,6 +69,19 @@ class MainView: UIView {
         }
         accountButton.setupIcon(imageName: "icon-user")
         accountButton.addTarget(self, action: #selector(MainViewControllerV2.openAccountInfo), for: .touchUpInside)
+    }
+    
+    private func initInfoAlert() {
+        infoAlertView.delegate = infoAlertViewModel
+    }
+    
+    private func updateInfoAlert() {
+        if infoAlertViewModel.shouldDisplay {
+            infoAlertViewModel.update()
+            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
+        } else {
+            infoAlertView.hide()
+        }
     }
     
 }

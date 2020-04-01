@@ -2950,7 +2950,7 @@
         <scene sceneID="8Je-1b-eM7">
             <objects>
                 <viewController storyboardIdentifier="mainView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rTE-KQ-hdG" customClass="MainViewControllerV2" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ITP-Ne-qOg">
+                    <view key="view" contentMode="scaleToFill" id="ITP-Ne-qOg" customClass="MainView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -3049,10 +3049,13 @@
                             <constraint firstItem="ah4-aa-ds1" firstAttribute="leading" secondItem="ww5-jx-W0A" secondAttribute="leading" constant="16" id="wVr-Qb-hx1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ww5-jx-W0A"/>
+                        <connections>
+                            <outlet property="infoAlertView" destination="ah4-aa-ds1" id="T3a-Bu-NGt"/>
+                            <outlet property="mapScrollView" destination="rn8-hf-8bd" id="UOg-VH-usL"/>
+                        </connections>
                     </view>
                     <connections>
-                        <outlet property="infoAlertView" destination="ah4-aa-ds1" id="PiK-cf-Wij"/>
-                        <outlet property="mapScrollView" destination="rn8-hf-8bd" id="emP-XG-PLg"/>
+                        <outlet property="mainView" destination="ITP-Ne-qOg" id="Wzw-Ez-vAE"/>
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectServer" id="s0z-do-bnX"/>
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectExitServer" id="fnd-go-o5i"/>
                         <segue destination="IeW-p4-xm9" kind="show" identifier="MainScreenSelectProtocol" id="yv9-Ml-p11"/>
