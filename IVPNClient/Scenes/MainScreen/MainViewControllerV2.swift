@@ -101,7 +101,6 @@ class MainViewControllerV2: UIViewController {
     
     func refreshUI() {
         updateFloatingPanelLayout()
-        mainView.setupConstraints()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
@@ -143,8 +142,7 @@ class MainViewControllerV2: UIViewController {
     
     @objc private func updateFloatingPanelLayout() {
         floatingPanel.updateLayout()
-        mainView.setupConstraints()
-        mainView.updateInfoAlert()
+        mainView.setupView()
     }
     
     @objc private func updateServersList() {
