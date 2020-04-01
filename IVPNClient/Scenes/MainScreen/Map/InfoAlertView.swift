@@ -25,6 +25,7 @@ class InfoAlertView: UIView {
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var centerXConstraint: NSLayoutConstraint!
     
     // MARK: - @IBActions -
     
@@ -89,17 +90,25 @@ class InfoAlertView: UIView {
     }
     
     private func updateAutoLayout() {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+            centerXConstraint.constant = 375 / 2
+            bottomConstraint.constant = 20
+            return
+        }
+        
+        centerXConstraint.constant = 0
+        
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-            bottomConstraint.constant = 378 - bottomSafeArea
+            bottomConstraint.constant = 381 - bottomSafeArea
             return
         }
 
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
-            bottomConstraint.constant = 293 - bottomSafeArea
+            bottomConstraint.constant = 296 - bottomSafeArea
             return
         }
         
-        bottomConstraint.constant = 249 - bottomSafeArea
+        bottomConstraint.constant = 252 - bottomSafeArea
     }
     
 }
