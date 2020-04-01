@@ -33,10 +33,6 @@ class MainView: UIView {
     
     // MARK: - Methods -
     
-    func setupView() {
-        
-    }
-    
     func setupConstraints() {
         mapScrollView.setupConstraints()
         markerContainerView.setupConstraints()
@@ -44,6 +40,15 @@ class MainView: UIView {
     
     func updateStatus(vpnStatus: NEVPNStatus) {
         markerView.status = vpnStatus
+    }
+    
+    func updateInfoAlert() {
+        if infoAlertViewModel.shouldDisplay {
+            infoAlertViewModel.update()
+            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
+        } else {
+            infoAlertView.hide()
+        }
     }
     
     // MARK: - Private methods -
@@ -73,15 +78,6 @@ class MainView: UIView {
     
     private func initInfoAlert() {
         infoAlertView.delegate = infoAlertViewModel
-    }
-    
-    private func updateInfoAlert() {
-        if infoAlertViewModel.shouldDisplay {
-            infoAlertViewModel.update()
-            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
-        } else {
-            infoAlertView.hide()
-        }
     }
     
 }
