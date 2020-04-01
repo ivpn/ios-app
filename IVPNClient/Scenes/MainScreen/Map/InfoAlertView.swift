@@ -35,6 +35,7 @@ class InfoAlertView: UIView {
     // MARK: - Properties -
     
     weak var delegate: InfoAlertViewDelegate?
+    private let bottomSafeArea = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
     
     // MARK: - View lifecycle -
     
@@ -89,16 +90,16 @@ class InfoAlertView: UIView {
     
     private func updateAutoLayout() {
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-            bottomConstraint.constant = 342
+            bottomConstraint.constant = 378 - bottomSafeArea
             return
         }
 
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
-            bottomConstraint.constant = 257
+            bottomConstraint.constant = 293 - bottomSafeArea
             return
         }
         
-        bottomConstraint.constant = 213
+        bottomConstraint.constant = 249 - bottomSafeArea
     }
     
 }
