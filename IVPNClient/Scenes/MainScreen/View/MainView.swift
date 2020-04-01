@@ -63,7 +63,7 @@ class MainView: UIView {
         addSubview(settingsButton)
         settingsButton.bb.size(width: 42, height: 42).top(55).right(-30)
         settingsButton.setupIcon(imageName: "icon-settings")
-        settingsButton.addTarget(self, action: #selector(MainViewControllerV2.openSettings), for: .touchUpInside)
+        settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
         
         let accountButton = UIButton()
         addSubview(accountButton)
@@ -73,11 +73,23 @@ class MainView: UIView {
             accountButton.bb.size(width: 42, height: 42).top(55).left(30)
         }
         accountButton.setupIcon(imageName: "icon-user")
-        accountButton.addTarget(self, action: #selector(MainViewControllerV2.openAccountInfo), for: .touchUpInside)
+        accountButton.addTarget(self, action: #selector(openAccountInfo), for: .touchUpInside)
     }
     
     private func initInfoAlert() {
         infoAlertView.delegate = infoAlertViewModel
+    }
+    
+    @objc private func openSettings(_ sender: UIButton) {
+        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            topViewController.openSettings(sender)
+        }
+    }
+    
+    @objc private func openAccountInfo(_ sender: UIButton) {
+        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            topViewController.openAccountInfo(sender)
+        }
     }
     
 }
