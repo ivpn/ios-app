@@ -69,6 +69,7 @@ class MainView: UIView {
     
     private func initInfoAlert() {
         infoAlertView.delegate = infoAlertViewModel
+        bringSubviewToFront(infoAlertView)
     }
     
     private func setupConstraints() {
