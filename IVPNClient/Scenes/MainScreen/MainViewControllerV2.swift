@@ -132,10 +132,12 @@ class MainViewControllerV2: UIViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateFloatingPanelLayout), name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(connectErrorObserver), name: Notification.Name.ConnectError, object: nil)
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ConnectError, object: nil)
     }
     
     // MARK: - Private methods -
@@ -181,6 +183,17 @@ class MainViewControllerV2: UIViewController {
             DispatchQueue.delay(0.5) {
                 Pinger.shared.ping()
             }
+        }
+    }
+    
+    @objc func connectErrorObserver() {
+        switch Application.shared.settings.connectionProtocol.tunnelType() {
+        case .ipsec:
+            handleIKEv2Error()
+        case .openvpn:
+            handleOpenVPNError()
+        case .wireguard:
+            break
         }
     }
     
