@@ -21,6 +21,7 @@ class MainViewControllerV2: UIViewController {
     var floatingPanel: FloatingPanelController!
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
+    private var wireguardErrorObserver: NSKeyValueObservation?
     
     // MARK: - @IBActions -
     
@@ -48,6 +49,7 @@ class MainViewControllerV2: UIViewController {
         super.viewDidLoad()
         initFloatingPanel()
         addObservers()
+        addErrorObservers()
         startServersUpdate()
     }
     
@@ -69,6 +71,8 @@ class MainViewControllerV2: UIViewController {
         destoryFloatingPanel()
         removeObservers()
         updateServersTimer.invalidate()
+        wireguardErrorObserver?.invalidate()
+        wireguardErrorObserver = nil
     }
     
     // MARK: - Segues -
@@ -212,6 +216,18 @@ class MainViewControllerV2: UIViewController {
         showErrorAlert(title: "Error", message: "OpenVPN tunnel failed with error: \(error.camelCaseToCapitalized() ?? "")")
         
         UserDefaults.shared.set("", forKey: UserDefaults.Key.openvpnTunnelProviderError)
+    }
+    
+    private func addErrorObservers() {
+        let defaults = UserDefaults(suiteName: Config.appGroup)
+        
+        wireguardErrorObserver = defaults?.observe(\.wireguardTunnelProviderError, options: [.initial, .new]) { _, _ in
+            guard defaults?.wireguardTunnelProviderError != "" else { return }
+            
+            defaults?.set("", forKey: UserDefaults.Key.wireguardTunnelProviderError)
+            
+            self.showErrorAlert(title: "Error", message: "WireGuard tunnel failed to start. Check WireGuard public key and IP address in your settings.")
+        }
     }
     
 }
