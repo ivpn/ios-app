@@ -184,4 +184,21 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
+    private func handleIKEv2Error() {
+        guard Application.shared.connectionManager.status != .connected else { return }
+        
+        NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
+        
+        showErrorAlert(title: "Error", message: "IKEv2 tunnel failed with error: Authentication")
+    }
+    
+    private func handleOpenVPNError() {
+        let error = UserDefaults.shared.openvpnTunnelProviderError
+        guard !error.isEmpty else { return }
+        
+        showErrorAlert(title: "Error", message: "OpenVPN tunnel failed with error: \(error.camelCaseToCapitalized() ?? "")")
+        
+        UserDefaults.shared.set("", forKey: UserDefaults.Key.openvpnTunnelProviderError)
+    }
+    
 }
