@@ -19,7 +19,10 @@ class VPNErrorObserver {
     weak var delegate: VPNErrorObserverDelegate?
     private var wireguardErrorObserver: NSKeyValueObservation?
     
+    // MARK: - Init -
+    
     init() {
+        addErrorObservers()
         NotificationCenter.default.addObserver(self, selector: #selector(connectErrorObserver), name: Notification.Name.ConnectError, object: nil)
     }
     
