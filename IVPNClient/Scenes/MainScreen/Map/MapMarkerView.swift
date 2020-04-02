@@ -37,10 +37,15 @@ class MapMarkerView: UIView {
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
     private var redColor = UIColor.init(red: 255, green: 98, blue: 88)
     private var grayColor = UIColor.init(red: 211, green: 211, blue: 211)
+    private var radius1: CGFloat = 187
+    private var radius2: CGFloat = 97
+    private var radius3: CGFloat = 41
+    private var radius4: CGFloat = 9
     
     // MARK: - View lifecycle -
     
     override func updateConstraints() {
+        updateSize()
         setupConstraints()
         initCircles()
         updateCircles(color: blueColor)
@@ -76,8 +81,17 @@ class MapMarkerView: UIView {
     
     // MARK: - Private methods -
     
+    private func updateSize() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            radius1 = 340
+            radius2 = 176
+            radius3 = 75
+            radius4 = 16
+        }
+    }
+    
     private func setupConstraints() {
-        bb.center().size(width: 270, height: 187)
+        bb.center().size(width: 340, height: radius1)
     }
     
     private func initCircle(_ circle: UIView, radius: CGFloat) {
@@ -94,16 +108,16 @@ class MapMarkerView: UIView {
     }
     
     private func initCircles() {
-        initCircle(circle1, radius: 187)
-        initCircle(circle2, radius: 97)
-        initCircle(circle3, radius: 41)
-        initCircle(circle4, radius: 9)
+        initCircle(circle1, radius: radius1)
+        initCircle(circle2, radius: radius2)
+        initCircle(circle3, radius: radius3)
+        initCircle(circle4, radius: radius4)
     }
     
     private func initActionButton() {
         let actionButton = UIButton()
         addSubview(actionButton)
-        actionButton.bb.center().size(width: 187, height: 187)
+        actionButton.bb.center().size(width: radius1, height: radius1)
         actionButton.addTarget(self, action: #selector(markerAction), for: .touchUpInside)
     }
     
