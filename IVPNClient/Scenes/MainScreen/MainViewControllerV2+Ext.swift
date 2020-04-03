@@ -46,3 +46,13 @@ extension MainViewControllerV2: UIAdaptivePresentationControllerDelegate {
     }
     
 }
+
+// MARK: - VPNErrorObserverDelegate -
+
+extension MainViewControllerV2: VPNErrorObserverDelegate {
+    
+    func presentError(title: String, message: String) {
+        showErrorAlert(title: title, message: message)
+    }
+    
+}

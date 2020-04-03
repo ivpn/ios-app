@@ -21,6 +21,7 @@ class MainViewControllerV2: UIViewController {
     var floatingPanel: FloatingPanelController!
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
+    private var vpnErrorObserver = VPNErrorObserver()
     
     // MARK: - @IBActions -
     
@@ -46,6 +47,7 @@ class MainViewControllerV2: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initErrorObservers()
         initFloatingPanel()
         addObservers()
         startServersUpdate()
@@ -182,6 +184,10 @@ class MainViewControllerV2: UIViewController {
                 Pinger.shared.ping()
             }
         }
+    }
+    
+    private func initErrorObservers() {
+        vpnErrorObserver.delegate = self
     }
     
 }
