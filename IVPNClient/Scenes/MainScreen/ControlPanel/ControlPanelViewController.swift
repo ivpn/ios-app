@@ -234,7 +234,7 @@ class ControlPanelViewController: UITableViewController {
         
         registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
         
-        DispatchQueue.delay(1) {
+        DispatchQueue.delay(0.5) {
             Pinger.shared.ping()
         }
     }
