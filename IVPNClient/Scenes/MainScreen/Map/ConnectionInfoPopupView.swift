@@ -84,7 +84,13 @@ class ConnectionInfoPopupView: UIView {
         }
     }
     
-    var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
+    var vpnStatusViewModel = VPNStatusViewModel(status: .invalid) {
+        didSet {
+            if displayMode == .content && (vpnStatusViewModel.status == .connected || vpnStatusViewModel.status == .disconnected) {
+                show()
+            }
+        }
+    }
     
     var displayMode: DisplayMode = .hidden {
         didSet {
