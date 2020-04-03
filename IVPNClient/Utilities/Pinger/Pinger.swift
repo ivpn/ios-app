@@ -53,7 +53,7 @@ class Pinger {
     private func evaluatePing() -> Bool {
         let lastPingTimestamp = UserDefaults.shared.integer(forKey: "LastPingTimestamp")
         let isPingTimeoutPassed = Date().timeIntervalSince1970 > Double(lastPingTimestamp) + Config.minPingCheckInterval
-        return Application.shared.settings.selectedServer.status.isDisconnected() && isPingTimeoutPassed
+        return Application.shared.connectionManager.status.isDisconnected() && isPingTimeoutPassed
     }
     
 }
