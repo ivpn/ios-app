@@ -18,9 +18,9 @@ class MainView: UIView {
     
     // MARK: - Properties -
     
+    let markerView = MapMarkerView()
     private var infoAlertViewModel = InfoAlertViewModel()
     private let markerContainerView = MapMarkerContainerView()
-    private let markerView = MapMarkerView()
     
     // MARK: - View lifecycle -
     
@@ -36,6 +36,7 @@ class MainView: UIView {
     func setupView() {
         setupConstraints()
         updateInfoAlert()
+        updateMarker()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
@@ -84,6 +85,10 @@ class MainView: UIView {
         } else {
             infoAlertView.hide()
         }
+    }
+    
+    private func updateMarker() {
+        markerView.connectionInfoPopup.updateView()
     }
     
     @objc private func openSettings(_ sender: UIButton) {
