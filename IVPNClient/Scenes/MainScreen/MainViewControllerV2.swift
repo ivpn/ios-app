@@ -21,7 +21,7 @@ class MainViewControllerV2: UIViewController {
     var floatingPanel: FloatingPanelController!
     private var updateServerListDidComplete = false
     private var updateServersTimer = Timer()
-    private var wireguardErrorObserver: NSKeyValueObservation?
+    private var vpnErrorObserver = VPNErrorObserver()
     
     // MARK: - @IBActions -
     
@@ -47,9 +47,9 @@ class MainViewControllerV2: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initErrorObservers()
         initFloatingPanel()
         addObservers()
-        addErrorObservers()
         startServersUpdate()
     }
     
@@ -71,8 +71,6 @@ class MainViewControllerV2: UIViewController {
         destoryFloatingPanel()
         removeObservers()
         updateServersTimer.invalidate()
-        wireguardErrorObserver?.invalidate()
-        wireguardErrorObserver = nil
     }
     
     // MARK: - Segues -
@@ -136,12 +134,10 @@ class MainViewControllerV2: UIViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateFloatingPanelLayout), name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(connectErrorObserver), name: Notification.Name.ConnectError, object: nil)
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ConnectError, object: nil)
     }
     
     // MARK: - Private methods -
@@ -190,44 +186,8 @@ class MainViewControllerV2: UIViewController {
         }
     }
     
-    @objc func connectErrorObserver() {
-        switch Application.shared.settings.connectionProtocol.tunnelType() {
-        case .ipsec:
-            handleIKEv2Error()
-        case .openvpn:
-            handleOpenVPNError()
-        case .wireguard:
-            break
-        }
-    }
-    
-    private func handleIKEv2Error() {
-        guard Application.shared.connectionManager.status != .connected else { return }
-        
-        NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
-        
-        showErrorAlert(title: "Error", message: "IKEv2 tunnel failed with error: Authentication")
-    }
-    
-    private func handleOpenVPNError() {
-        let error = UserDefaults.shared.openvpnTunnelProviderError
-        guard !error.isEmpty else { return }
-        
-        showErrorAlert(title: "Error", message: "OpenVPN tunnel failed with error: \(error.camelCaseToCapitalized() ?? "")")
-        
-        UserDefaults.shared.set("", forKey: UserDefaults.Key.openvpnTunnelProviderError)
-    }
-    
-    private func addErrorObservers() {
-        let defaults = UserDefaults(suiteName: Config.appGroup)
-        
-        wireguardErrorObserver = defaults?.observe(\.wireguardTunnelProviderError, options: [.initial, .new]) { _, _ in
-            guard defaults?.wireguardTunnelProviderError != "" else { return }
-            
-            defaults?.set("", forKey: UserDefaults.Key.wireguardTunnelProviderError)
-            
-            self.showErrorAlert(title: "Error", message: "WireGuard tunnel failed to start. Check WireGuard public key and IP address in your settings.")
-        }
+    private func initErrorObservers() {
+        vpnErrorObserver.delegate = self
     }
     
 }
