@@ -48,7 +48,7 @@ class MapMarkerView: UIView {
         updateSize()
         setupConstraints()
         initCircles()
-        updateCircles(color: blueColor)
+        updateCircles(color: grayColor)
         initActionButton()
         initConnectionInfoPopup()
         addObservers()
