@@ -122,21 +122,21 @@ class AppDelegate: UIResponder {
         
         switch endpoint {
         case Config.urlTypeConnect:
-            DispatchQueue.delay(0.75, closure: {
+            DispatchQueue.delay(0.75) {
                 if UserDefaults.shared.networkProtectionEnabled {
                     Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true)
                     return
                 }
                 Application.shared.connectionManager.connectShortcut(closeApp: true)
-            })
+            }
         case Config.urlTypeDisconnect:
-            DispatchQueue.delay(0.75, closure: {
+            DispatchQueue.delay(0.75) {
                 if UserDefaults.shared.networkProtectionEnabled {
                     Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true)
                     return
                 }
                 Application.shared.connectionManager.disconnectShortcut(closeApp: true)
-            })
+            }
         case Config.urlTypeLogin:
             if let topViewController = UIApplication.topViewController() {
                 if #available(iOS 13.0, *) {

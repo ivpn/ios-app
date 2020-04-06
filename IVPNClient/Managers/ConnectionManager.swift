@@ -47,7 +47,7 @@ class ConnectionManager {
             
             if status == .connected {
                 self.connected = true
-                DispatchQueue.delay(0.25, closure: {
+                DispatchQueue.delay(0.25) {
                     guard self.connected else {
                         NotificationCenter.default.post(name: Notification.Name.ConnectError, object: nil)
                         return
@@ -56,7 +56,7 @@ class ConnectionManager {
                     self.updateOpenVPNLogFile()
                     self.updateOpenVPNLocalIp()
                     self.evaluateCloseApp()
-                })
+                }
             } else {
                 self.connected = false
             }
@@ -192,11 +192,11 @@ class ConnectionManager {
             self.vpnManager.disconnect(tunnelType: tunnelType, reconnectAutomatically: reconnectAutomatically)
             
             if UserDefaults.shared.networkProtectionEnabled {
-                DispatchQueue.delay(2, closure: {
+                DispatchQueue.delay(2) {
                     self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
                         self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected)
                     }
-                })
+                }
             }
         }
     }
@@ -382,9 +382,9 @@ class ConnectionManager {
     private func evaluateCloseApp() {
         if closeApp {
             closeApp = false
-            DispatchQueue.delay(1.5, closure: {
+            DispatchQueue.delay(1.5) {
                 UIControl().sendAction(#selector(NSXPCConnection.suspend), to: UIApplication.shared, for: nil)
-            })
+            }
         }
     }
     

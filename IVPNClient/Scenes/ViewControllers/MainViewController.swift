@@ -365,9 +365,9 @@ class MainViewController: UIViewController {
         
         // Disable multiple tap gestures on VPN connect button
         connectButton.isUserInteractionEnabled = false
-        DispatchQueue.delay(1, closure: {
+        DispatchQueue.delay(1) {
             self.connectButton.isUserInteractionEnabled = true
-        })
+        }
     }
     
     @objc func UITestsConnect() {

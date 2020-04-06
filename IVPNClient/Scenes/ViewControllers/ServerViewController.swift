@@ -24,9 +24,9 @@ class ServerViewController: UITableViewController {
     
     @IBAction func refresh(_ sender: Any) {
         refreshControl?.endRefreshing()
-        DispatchQueue.delay(1, closure: {
+        DispatchQueue.delay(1) {
             Pinger.shared.ping()
-        })
+        }
     }
     
     // MARK: - View Lifecycle -

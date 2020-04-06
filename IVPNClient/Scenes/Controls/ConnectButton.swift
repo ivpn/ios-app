@@ -140,7 +140,7 @@ class ConnectButton: UIControl {
     }
     
     func connectedAnimation() {
-        DispatchQueue.delay(0.1, closure: {
+        DispatchQueue.delay(0.1) {
             Application.shared.connectionManager.getStatus { _, status in
                 guard status == .connected else { return }
                 
@@ -154,7 +154,7 @@ class ConnectButton: UIControl {
                     repeats: false
                 )
             }
-        })
+        }
     }
     
     override func layoutSubviews() {
