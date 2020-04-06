@@ -195,3 +195,17 @@ extension ControlPanelViewController {
     }
     
 }
+
+// MARK: - UIAdaptivePresentationControllerDelegate -
+
+extension ControlPanelViewController: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
+    }
+    
+}
