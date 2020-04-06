@@ -87,7 +87,9 @@ class ConnectionInfoPopupView: UIView {
     var vpnStatusViewModel = VPNStatusViewModel(status: .invalid) {
         didSet {
             if displayMode == .content && (vpnStatusViewModel.status == .connected || vpnStatusViewModel.status == .disconnected) {
-                show()
+                DispatchQueue.delay(0.25) {
+                    self.show()
+                }
             }
         }
     }
