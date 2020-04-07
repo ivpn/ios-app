@@ -112,11 +112,11 @@ extension ControlPanelViewController: ServerViewControllerDelegate {
 extension ControlPanelViewController {
     
     override func createSessionSuccess() {
-        connect(status: .disconnected)
+        connect()
     }
     
     override func createSessionServiceNotActive() {
-        connect(status: .disconnected)
+        connect()
     }
     
     override func createSessionTooManySessions(error: Any?) {

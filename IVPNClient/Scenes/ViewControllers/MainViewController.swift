@@ -428,7 +428,7 @@ class MainViewController: UIViewController {
         
         let manager = Application.shared.connectionManager
         
-        if defaults.networkProtectionEnabled && !manager.canConnect(status: status) {
+        if defaults.networkProtectionEnabled && !manager.canConnect {
             showActionSheet(title: "IVPN cannot connect to trusted network. Do you want to change Network Protection settings for the current network and connect?", actions: ["Connect"], sourceView: self.connectButton) { index in
                 switch index {
                 case 0:

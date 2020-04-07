@@ -167,14 +167,14 @@ class ControlPanelViewController: UITableViewController {
     @objc func connectionExecute() {
         Application.shared.connectionManager.getStatus { _, status in
             if status == .disconnected || status == .invalid {
-                self.connect(status: status)
+                self.connect()
             } else {
                 self.disconnect()
             }
         }
     }
     
-    func connect(status: NEVPNStatus) {
+    func connect() {
         guard evaluateIsNetworkReachable() else {
             connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
@@ -206,7 +206,7 @@ class ControlPanelViewController: UITableViewController {
         
         let manager = Application.shared.connectionManager
         
-        if UserDefaults.shared.networkProtectionEnabled && !manager.canConnect(status: status) {
+        if UserDefaults.shared.networkProtectionEnabled && !manager.canConnect {
             showActionSheet(title: "IVPN cannot connect to trusted network. Do you want to change Network Protection settings for the current network and connect?", actions: ["Connect"], sourceView: self.connectSwitch) { index in
                 switch index {
                 case 0:
