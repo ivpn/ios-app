@@ -100,10 +100,6 @@ class AppDelegate: UIResponder {
         
         IAPManager.shared.finishIncompletePurchases { serviceStatus, error in
             guard let viewController = UIApplication.topViewController() else { return }
-            
-            if let error = error {
-                viewController.showErrorAlert(title: "Error", message: error.message)
-            }
 
             if let serviceStatus = serviceStatus {
                 viewController.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
