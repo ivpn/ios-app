@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ControlPanelView: UIView {
+class ControlPanelView: UITableView {
     
     // MARK: - @IBOutlets -
     
