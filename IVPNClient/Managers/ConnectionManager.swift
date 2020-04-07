@@ -214,12 +214,22 @@ class ConnectionManager {
     }
     
     func resetRulesAndConnect() {
+        guard status != .invalid else {
+            connect()
+            return
+        }
+        
         removeOnDemandRules {
             self.connect()
         }
     }
     
     func resetRulesAndDisconnect(reconnectAutomatically: Bool = false) {
+        guard status != .invalid else {
+            disconnect(reconnectAutomatically: reconnectAutomatically)
+            return
+        }
+        
         removeOnDemandRules {
             self.disconnect(reconnectAutomatically: reconnectAutomatically)
         }
