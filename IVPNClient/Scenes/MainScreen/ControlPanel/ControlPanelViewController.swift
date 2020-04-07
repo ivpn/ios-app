@@ -165,12 +165,10 @@ class ControlPanelViewController: UITableViewController {
     // MARK: - Methods -
     
     @objc func connectionExecute() {
-        Application.shared.connectionManager.getStatus { _, status in
-            if status == .disconnected || status == .invalid {
-                self.connect()
-            } else {
-                self.disconnect()
-            }
+        if vpnStatusViewModel.connectToggleIsOn {
+            disconnect()
+        } else {
+            connect()
         }
     }
     
