@@ -45,7 +45,6 @@ class ControlPanelView: UITableView {
     
     func setupView() {
         connectSwitch.thumbTintColor = UIColor.init(named: Theme.Key.ivpnGray17)
-        connectSwitch.onTintColor = UIColor.init(named: Theme.Key.ivpnBlue)
         updateConnectSwitch()
     }
     
@@ -57,7 +56,9 @@ class ControlPanelView: UITableView {
     
     func updateVPNStatus(viewModel: VPNStatusViewModel) {
         protectionStatusLabel.text = viewModel.protectionStatusText
+        connectSwitch.onTintColor = viewModel.toggleOnTintColor
         connectSwitch.setOn(viewModel.connectToggleIsOn, animated: true)
+        updateConnectSwitch()
     }
     
     func updateServerLabels(viewModel: VPNStatusViewModel) {
