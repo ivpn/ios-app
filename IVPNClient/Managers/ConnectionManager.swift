@@ -108,7 +108,12 @@ class ConnectionManager {
     }
     
     func removeOnDemandRules(completion: @escaping () -> Void) {
-        getStatus { tunnelType, _ in
+        getStatus { tunnelType, status in
+            guard status != .invalid else {
+                completion()
+                return
+            }
+            
             self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
                 manager.onDemandRules = [NEOnDemandRule]()
                 manager.isOnDemandEnabled = false
@@ -217,22 +222,12 @@ class ConnectionManager {
     }
     
     func resetRulesAndConnect() {
-        guard status != .invalid else {
-            connect()
-            return
-        }
-        
         removeOnDemandRules {
             self.connect()
         }
     }
     
     func resetRulesAndDisconnect(reconnectAutomatically: Bool = false) {
-        guard status != .invalid else {
-            disconnect(reconnectAutomatically: reconnectAutomatically)
-            return
-        }
-        
         removeOnDemandRules {
             self.disconnect(reconnectAutomatically: reconnectAutomatically)
         }
