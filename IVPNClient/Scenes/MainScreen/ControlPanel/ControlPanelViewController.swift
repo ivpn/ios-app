@@ -142,25 +142,12 @@ class ControlPanelViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        Application.shared.connectionManager.getStatus { _, status in
-            self.updateStatus(vpnStatus: status)
-            
-            Application.shared.connectionManager.onStatusChanged { status in
-                self.updateStatus(vpnStatus: status)
-            }
-        }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
-        
         refreshServiceStatus()
+        NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        Application.shared.connectionManager.removeStatusChangeUpdates()
-
         NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
     }
     
@@ -297,10 +284,6 @@ class ControlPanelViewController: UITableViewController {
         }
         
         lastAccountStatus = vpnStatus
-        
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-            topViewController.updateStatus(vpnStatus: vpnStatus)
-        }
     }
     
     // MARK: - Observers -
