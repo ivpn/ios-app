@@ -67,15 +67,6 @@ struct VPNStatusViewModel {
         }
     }
     
-    var toggleOnTintColor: UIColor {
-        switch status {
-        case .connecting, .reasserting, .disconnecting:
-            return UIColor.init(named: Theme.Key.ivpnGray16)!
-        default:
-            return UIColor.init(named: Theme.Key.ivpnBlue)!
-        }
-    }
-    
     // MARK: - Initialize -
     
     init(status: NEVPNStatus) {
