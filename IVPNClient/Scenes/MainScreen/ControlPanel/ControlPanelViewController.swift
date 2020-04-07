@@ -81,6 +81,12 @@ class ControlPanelViewController: UITableViewController {
     
     @IBAction func toggleConnect(_ sender: UISwitch) {
         connectionExecute()
+        
+        // Disable multiple tap gestures on VPN connect button
+        sender.isUserInteractionEnabled = false
+        DispatchQueue.delay(1) {
+            sender.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func toggleMultiHop(_ sender: UIButton) {
