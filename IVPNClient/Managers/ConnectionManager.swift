@@ -52,7 +52,7 @@ class ConnectionManager {
     func onStatusChanged(completion: @escaping (NEVPNStatus) -> Void) {
         vpnManager.onStatusChanged { _, manager, status in
             if self.status == .connecting && status == .disconnecting {
-                NotificationCenter.default.post(name: Notification.Name.ConnectError, object: nil)
+                NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
             }
             
             self.status = status
@@ -61,7 +61,7 @@ class ConnectionManager {
                 self.connected = true
                 DispatchQueue.delay(0.25) {
                     guard self.connected else {
-                        NotificationCenter.default.post(name: Notification.Name.ConnectError, object: nil)
+                        NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
                         return
                     }
                     self.vpnManager.installOnDemandRules(manager: manager, status: status)
@@ -191,7 +191,10 @@ class ConnectionManager {
             settings: settings.connectionProtocol,
             accessDetails: accessDetails
         ) { error in
-            if error != nil { return }
+            guard error == nil else {
+                NotificationCenter.default.post(name: Notification.Name.VPNConfigurationError, object: nil)
+                return
+            }
             
             self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
         }

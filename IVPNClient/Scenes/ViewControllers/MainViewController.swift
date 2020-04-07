@@ -245,7 +245,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: Notification.Name.Disconnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(connectErrorObserver), name: Notification.Name.ConnectError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(connectErrorObserver), name: Notification.Name.VPNConnectError, object: nil)
     }
     
     func removeObservers() {
@@ -257,7 +257,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ConnectError, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.VPNConnectError, object: nil)
     }
     
     @objc func updateServerList() {

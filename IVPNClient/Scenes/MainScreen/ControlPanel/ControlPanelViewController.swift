@@ -184,12 +184,6 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        guard evaluateHasUserConsent() else {
-            NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.TermsOfServiceAgreed, object: nil)
-            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
-            return
-        }
-        
         guard evaluateIsServiceActive() else {
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.SubscriptionActivated, object: nil)
             connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
@@ -288,6 +282,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(vpnConfigurationError), name: Notification.Name.VPNConfigurationError, object: nil)
     }
     
     private func removeObservers() {
@@ -301,6 +296,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ProtocolSelected, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.VPNConfigurationError, object: nil)
     }
     
     // MARK: - Private methods -
@@ -424,6 +420,10 @@ class ControlPanelViewController: UITableViewController {
     
     @objc private func agreedToTermsOfService() {
         connectionExecute()
+    }
+    
+    @objc private func vpnConfigurationError() {
+        updateStatus(vpnStatus: Application.shared.connectionManager.status)
     }
     
 }
