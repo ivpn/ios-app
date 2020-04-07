@@ -102,11 +102,7 @@ class ControlPanelView: UITableView {
     
     private func updateConnectSwitch() {
         if #available(iOS 13.0, *) {
-            if connectSwitch.isOn {
-                connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.clear
-            } else {
-                connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.Key.ivpnRedOff)
-            }
+            connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.Key.ivpnRedOff)
         }
     }
     
