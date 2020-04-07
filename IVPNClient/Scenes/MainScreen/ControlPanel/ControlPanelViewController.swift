@@ -271,14 +271,7 @@ class ControlPanelViewController: UITableViewController {
                         self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
                         return
                     }
-                    NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
-                    
-                    if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-                        self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-                        self.hud.detailTextLabel.text = "Disconnecting"
-                        self.hud.show(in: topViewController.view)
-                        self.hud.dismiss(afterDelay: 5)
-                    }
+                    self.disconnect()
                 default:
                     break
                 }
