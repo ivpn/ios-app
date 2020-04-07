@@ -146,6 +146,7 @@ extension ControlPanelViewController {
         if let error = error as? ErrorResultSessionNew {
             showErrorAlert(title: "Error", message: error.message)
         }
+        updateStatus(vpnStatus: Application.shared.connectionManager.status)
     }
     
     override func sessionStatusNotFound() {
@@ -206,6 +207,7 @@ extension ControlPanelViewController: UIAdaptivePresentationControllerDelegate {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
+        updateStatus(vpnStatus: Application.shared.connectionManager.status)
     }
     
 }

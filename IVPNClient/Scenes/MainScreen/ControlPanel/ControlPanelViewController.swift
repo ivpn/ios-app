@@ -180,19 +180,16 @@ class ControlPanelViewController: UITableViewController {
         
         guard evaluateIsLoggedIn() else {
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.ServiceAuthorized, object: nil)
-            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
         }
         
         guard evaluateIsServiceActive() else {
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.SubscriptionActivated, object: nil)
-            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
         }
         
         if AppKeyManager.isKeyPairRequired && ExtensionKeyManager.needToRegenerate() {
             keyManager.setNewKey()
-            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
         }
         
@@ -273,6 +270,33 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    func updateStatus(vpnStatus: NEVPNStatus) {
+        vpnStatusViewModel.status = vpnStatus
+        protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
+        connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+        updateServerLabels()
+        
+        if vpnStatus == .disconnected {
+            hud.dismiss()
+        }
+        
+        if vpnStatus != lastAccountStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
+            refreshServiceStatus()
+        }
+        
+        if vpnStatus != lastAccountStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
+            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+                topViewController.updateGeoLocation()
+            }
+        }
+        
+        lastAccountStatus = vpnStatus
+        
+        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            topViewController.updateStatus(vpnStatus: vpnStatus)
+        }
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
@@ -318,33 +342,6 @@ class ControlPanelViewController: UITableViewController {
         updateServerLabels()
         updateAntiTracker()
         updateProtocol()
-    }
-    
-    private func updateStatus(vpnStatus: NEVPNStatus) {
-        vpnStatusViewModel.status = vpnStatus
-        protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
-        connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
-        updateServerLabels()
-        
-        if vpnStatus == .disconnected {
-            hud.dismiss()
-        }
-        
-        if vpnStatus != lastAccountStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
-            refreshServiceStatus()
-        }
-        
-        if vpnStatus != lastAccountStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
-            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-                topViewController.updateGeoLocation()
-            }
-        }
-        
-        lastAccountStatus = vpnStatus
-        
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-            topViewController.updateStatus(vpnStatus: vpnStatus)
-        }
     }
     
     private func updateServerLabels() {
