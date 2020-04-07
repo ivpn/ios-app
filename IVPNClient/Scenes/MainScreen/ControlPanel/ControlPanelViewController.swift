@@ -81,6 +81,12 @@ class ControlPanelViewController: UITableViewController {
     
     @IBAction func toggleConnect(_ sender: UISwitch) {
         connectionExecute()
+        
+        // Disable multiple tap gestures on VPN connect button
+        sender.isUserInteractionEnabled = false
+        DispatchQueue.delay(1) {
+            sender.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func toggleMultiHop(_ sender: UIButton) {
@@ -136,25 +142,12 @@ class ControlPanelViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        Application.shared.connectionManager.getStatus { _, status in
-            self.updateStatus(vpnStatus: status)
-            
-            Application.shared.connectionManager.onStatusChanged { status in
-                self.updateStatus(vpnStatus: status)
-            }
-        }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
-        
         refreshServiceStatus()
+        NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        Application.shared.connectionManager.removeStatusChangeUpdates()
-
         NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
     }
     
@@ -165,16 +158,14 @@ class ControlPanelViewController: UITableViewController {
     // MARK: - Methods -
     
     @objc func connectionExecute() {
-        Application.shared.connectionManager.getStatus { _, status in
-            if status == .disconnected || status == .invalid {
-                self.connect(status: status)
-            } else {
-                self.disconnect()
-            }
+        if vpnStatusViewModel.connectToggleIsOn {
+            disconnect()
+        } else {
+            connect()
         }
     }
     
-    func connect(status: NEVPNStatus) {
+    func connect() {
         guard evaluateIsNetworkReachable() else {
             connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
@@ -182,31 +173,22 @@ class ControlPanelViewController: UITableViewController {
         
         guard evaluateIsLoggedIn() else {
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.ServiceAuthorized, object: nil)
-            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
-            return
-        }
-        
-        guard evaluateHasUserConsent() else {
-            NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.TermsOfServiceAgreed, object: nil)
-            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
         }
         
         guard evaluateIsServiceActive() else {
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.SubscriptionActivated, object: nil)
-            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
         }
         
         if AppKeyManager.isKeyPairRequired && ExtensionKeyManager.needToRegenerate() {
             keyManager.setNewKey()
-            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
         }
         
         let manager = Application.shared.connectionManager
         
-        if UserDefaults.shared.networkProtectionEnabled && !manager.canConnect(status: status) {
+        if UserDefaults.shared.networkProtectionEnabled && !manager.canConnect {
             showActionSheet(title: "IVPN cannot connect to trusted network. Do you want to change Network Protection settings for the current network and connect?", actions: ["Connect"], sourceView: self.connectSwitch) { index in
                 switch index {
                 case 0:
@@ -273,19 +255,35 @@ class ControlPanelViewController: UITableViewController {
                         self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
                         return
                     }
-                    NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
-                    
-                    if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-                        self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-                        self.hud.detailTextLabel.text = "Disconnecting"
-                        self.hud.show(in: topViewController.view)
-                        self.hud.dismiss(afterDelay: 5)
-                    }
+                    self.disconnect()
                 default:
                     break
                 }
             }
         }
+    }
+    
+    func updateStatus(vpnStatus: NEVPNStatus) {
+        vpnStatusViewModel.status = vpnStatus
+        protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
+        connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+        updateServerLabels()
+        
+        if vpnStatus == .disconnected {
+            hud.dismiss()
+        }
+        
+        if vpnStatus != lastAccountStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
+            refreshServiceStatus()
+        }
+        
+        if vpnStatus != lastAccountStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
+            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+                topViewController.updateGeoLocation()
+            }
+        }
+        
+        lastAccountStatus = vpnStatus
     }
     
     // MARK: - Observers -
@@ -297,6 +295,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(vpnConfigurationError), name: Notification.Name.VPNConfigurationError, object: nil)
     }
     
     private func removeObservers() {
@@ -310,6 +309,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ProtocolSelected, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.VPNConfigurationError, object: nil)
     }
     
     // MARK: - Private methods -
@@ -331,33 +331,6 @@ class ControlPanelViewController: UITableViewController {
         updateServerLabels()
         updateAntiTracker()
         updateProtocol()
-    }
-    
-    private func updateStatus(vpnStatus: NEVPNStatus) {
-        vpnStatusViewModel.status = vpnStatus
-        protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
-        connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
-        updateServerLabels()
-        
-        if vpnStatus == .disconnected {
-            hud.dismiss()
-        }
-        
-        if vpnStatus != lastAccountStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
-            refreshServiceStatus()
-        }
-        
-        if vpnStatus != lastAccountStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
-            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-                topViewController.updateGeoLocation()
-            }
-        }
-        
-        lastAccountStatus = vpnStatus
-        
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-            topViewController.updateStatus(vpnStatus: vpnStatus)
-        }
     }
     
     private func updateServerLabels() {
@@ -433,6 +406,10 @@ class ControlPanelViewController: UITableViewController {
     
     @objc private func agreedToTermsOfService() {
         connectionExecute()
+    }
+    
+    @objc private func vpnConfigurationError() {
+        updateStatus(vpnStatus: Application.shared.connectionManager.status)
     }
     
 }

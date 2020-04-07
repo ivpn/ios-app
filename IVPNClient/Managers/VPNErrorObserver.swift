@@ -23,11 +23,11 @@ class VPNErrorObserver {
     
     init() {
         addErrorObservers()
-        NotificationCenter.default.addObserver(self, selector: #selector(connectErrorObserver), name: Notification.Name.ConnectError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(connectErrorObserver), name: Notification.Name.VPNConnectError, object: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ConnectError, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.VPNConnectError, object: nil)
         wireguardErrorObserver?.invalidate()
         wireguardErrorObserver = nil
     }

@@ -245,7 +245,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: Notification.Name.Disconnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(connectErrorObserver), name: Notification.Name.ConnectError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(connectErrorObserver), name: Notification.Name.VPNConnectError, object: nil)
     }
     
     func removeObservers() {
@@ -257,7 +257,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ConnectError, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.VPNConnectError, object: nil)
     }
     
     @objc func updateServerList() {
@@ -428,7 +428,7 @@ class MainViewController: UIViewController {
         
         let manager = Application.shared.connectionManager
         
-        if defaults.networkProtectionEnabled && !manager.canConnect(status: status) {
+        if defaults.networkProtectionEnabled && !manager.canConnect {
             showActionSheet(title: "IVPN cannot connect to trusted network. Do you want to change Network Protection settings for the current network and connect?", actions: ["Connect"], sourceView: self.connectButton) { index in
                 switch index {
                 case 0:
