@@ -18,6 +18,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var scannerView: UIView!
     
     // MARK: - Properties -
     
@@ -98,7 +99,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
+        scannerView.layer.addSublayer(previewLayer)
     }
     
     private func startCaptureSession() {

@@ -856,6 +856,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="scannerView" destination="eQa-b7-cZc" id="g2N-UV-UkI"/>
                         <outlet property="textLabel" destination="IWI-gs-0Hz" id="aHc-ug-2Ri"/>
                     </connections>
                 </viewController>
