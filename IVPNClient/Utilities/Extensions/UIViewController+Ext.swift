@@ -129,8 +129,7 @@ extension UIViewController {
         let actions = collection.map { $0.rawValue }
         
         showActionSheet(image: nil, selected: network.trust, largeText: true, centered: true, title: "Network Trust", actions: actions, sourceView: sourceView) { index in
-            guard index > -1 else { return }
-            Application.shared.connectionManager.evaluateConnection()
+            guard index > -1, actions[index] != network.trust else { return }
             completion(actions[index])
         }
     }
