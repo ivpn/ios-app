@@ -149,6 +149,7 @@
 		828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772FA221C28E000D5E330 /* FlagImageView.swift */; };
 		828E9C95231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
+		8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8290195E243CB27500777B6E /* ControlPanelView.swift */; };
 		8292E19B21748B0500123538 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8292E1A72174C10700123538 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A62174C10700123538 /* Peer.swift */; };
 		8292E1A92174C11600123538 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A82174C11600123538 /* Interface.swift */; };
@@ -479,6 +480,7 @@
 		828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersConfigurationTableViewController.swift; sourceTree = "<group>"; };
 		828772FA221C28E000D5E330 /* FlagImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagImageView.swift; sourceTree = "<group>"; };
 		828E9C94231E5780001E1FCF /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
+		8290195E243CB27500777B6E /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
 		8292E1942170AA2500123538 /* wireguard-tunnel-provider-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wireguard-tunnel-provider-Bridging-Header.h"; sourceTree = "<group>"; };
 		8292E1A62174C10700123538 /* Peer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
 		8292E1A82174C11600123538 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
@@ -773,6 +775,7 @@
 			isa = PBXGroup;
 			children = (
 				8206F32024347A8F0056B465 /* MainView.swift */,
+				8290195E243CB27500777B6E /* ControlPanelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2016,6 +2019,7 @@
 				82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */,
 				8206F32324367A240056B465 /* VPNErrorObserver.swift in Sources */,
 				822B85D921B941A200715691 /* NotificationName+Ext.swift in Sources */,
+				8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */,
 				82D598C021A6991B000FABDE /* NetworkManager.swift in Sources */,
 				9C2833821D9D3F2D0024C553 /* PromotionsDataSource.swift in Sources */,
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,

@@ -1419,14 +1419,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="42.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="42.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="14" width="326" height="16"/>
+                                            <rect key="frame" x="16" y="13.333333333333336" width="326" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1435,7 +1435,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11.000000000000002" width="324" height="21.666666666666671"/>
+                                            <rect key="frame" x="16" y="11.000000000000002" width="324" height="20.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1457,7 +1457,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -1836,7 +1836,7 @@
         <scene sceneID="Q5m-Sk-fPt">
             <objects>
                 <tableViewController storyboardIdentifier="controlPanelView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NB7-vL-gwX" customClass="ControlPanelViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fS8-Wz-zXw">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fS8-Wz-zXw" customClass="ControlPanelView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2124,10 +2124,10 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNTRUSTED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMt-Vw-meV">
-                                                            <rect key="frame" x="221" y="7.3333333333333321" width="82" height="20"/>
+                                                            <rect key="frame" x="225" y="7.3333333333333321" width="78" height="20"/>
                                                             <color key="backgroundColor" red="1" green="0.38431372549999998" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="82" id="KEj-No-uUy"/>
+                                                                <constraint firstAttribute="width" constant="78" id="KEj-No-uUy"/>
                                                                 <constraint firstAttribute="height" constant="20" id="tub-ID-yxB"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -2433,28 +2433,29 @@
                             </tableViewSection>
                         </sections>
                         <connections>
+                            <outlet property="antiTrackerSwitch" destination="wvL-pi-gS0" id="Rxk-Z3-9UR"/>
+                            <outlet property="connectSwitch" destination="yu3-bo-38L" id="cnj-ri-WDh"/>
                             <outlet property="dataSource" destination="NB7-vL-gwX" id="hcq-e0-hfv"/>
                             <outlet property="delegate" destination="NB7-vL-gwX" id="l2n-Zd-Ttg"/>
+                            <outlet property="disableMultiHopButton" destination="OqR-DO-cQW" id="8cm-DY-7uM"/>
+                            <outlet property="enableMultiHopButton" destination="g3l-2N-46o" id="i31-77-ICj"/>
+                            <outlet property="entryServerConnectionLabel" destination="XmW-6n-K3I" id="evK-6i-AgV"/>
+                            <outlet property="entryServerFlagImage" destination="maa-l9-NZC" id="W0a-Ng-2gh"/>
+                            <outlet property="entryServerNameLabel" destination="03A-CL-eb8" id="4Ps-96-cjw"/>
+                            <outlet property="exitServerConnectionLabel" destination="7tt-fV-1FL" id="KeG-c6-k0w"/>
+                            <outlet property="exitServerFlagImage" destination="vOo-Yi-Agw" id="RF5-Xe-JQm"/>
+                            <outlet property="exitServerNameLabel" destination="ctm-zP-IXi" id="FHi-nL-tnB"/>
+                            <outlet property="fastestServerLabel" destination="9Ab-9o-WKM" id="F8V-dE-HYq"/>
+                            <outlet property="ipAddressLabel" destination="LdG-Fb-Gn0" id="eKf-ZS-kcc"/>
+                            <outlet property="locationLabel" destination="c4A-VL-B59" id="8y1-lt-y8C"/>
+                            <outlet property="networkView" destination="IWY-FC-eTO" id="8o7-WG-viR"/>
+                            <outlet property="protectionStatusLabel" destination="fZx-j5-ahl" id="IPa-ne-fRV"/>
+                            <outlet property="protocolLabel" destination="mfE-oo-iTV" id="5o9-zb-c3x"/>
+                            <outlet property="providerLabel" destination="nYF-dn-WSY" id="N8D-wt-ARQ"/>
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="antiTrackerSwitch" destination="wvL-pi-gS0" id="frN-4Q-XXH"/>
-                        <outlet property="connectSwitch" destination="yu3-bo-38L" id="iPy-Wm-JHn"/>
-                        <outlet property="disableMultiHopButton" destination="OqR-DO-cQW" id="zIm-Ye-U2A"/>
-                        <outlet property="enableMultiHopButton" destination="g3l-2N-46o" id="D6D-Dm-UOI"/>
-                        <outlet property="entryServerConnectionLabel" destination="XmW-6n-K3I" id="qI3-kO-N9E"/>
-                        <outlet property="entryServerFlagImage" destination="maa-l9-NZC" id="qaR-JE-KOy"/>
-                        <outlet property="entryServerNameLabel" destination="03A-CL-eb8" id="h4V-HR-3ry"/>
-                        <outlet property="exitServerConnectionLabel" destination="7tt-fV-1FL" id="agI-0H-3GX"/>
-                        <outlet property="exitServerFlagImage" destination="vOo-Yi-Agw" id="aC2-Ih-J6d"/>
-                        <outlet property="exitServerNameLabel" destination="ctm-zP-IXi" id="I0T-vU-CHS"/>
-                        <outlet property="fastestServerLabel" destination="9Ab-9o-WKM" id="CcS-M7-X1h"/>
-                        <outlet property="ipAddressLabel" destination="LdG-Fb-Gn0" id="XBM-3q-gf7"/>
-                        <outlet property="locationLabel" destination="c4A-VL-B59" id="102-9D-WV8"/>
-                        <outlet property="networkView" destination="IWY-FC-eTO" id="7rw-Ai-A0f"/>
-                        <outlet property="protectionStatusLabel" destination="fZx-j5-ahl" id="v3k-fN-qnH"/>
-                        <outlet property="protocolLabel" destination="mfE-oo-iTV" id="W5w-VA-TNw"/>
-                        <outlet property="providerLabel" destination="nYF-dn-WSY" id="AGY-p3-jlS"/>
+                        <outlet property="controlPanelView" destination="fS8-Wz-zXw" id="KDW-zO-1ms"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Tj-dt-TNi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

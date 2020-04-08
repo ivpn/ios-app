@@ -14,23 +14,7 @@ class ControlPanelViewController: UITableViewController {
     
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var protectionStatusLabel: UILabel!
-    @IBOutlet weak var connectSwitch: UISwitch!
-    @IBOutlet weak var enableMultiHopButton: UIButton!
-    @IBOutlet weak var disableMultiHopButton: UIButton!
-    @IBOutlet weak var exitServerConnectionLabel: UILabel!
-    @IBOutlet weak var exitServerNameLabel: UILabel!
-    @IBOutlet weak var exitServerFlagImage: UIImageView!
-    @IBOutlet weak var entryServerConnectionLabel: UILabel!
-    @IBOutlet weak var entryServerNameLabel: UILabel!
-    @IBOutlet weak var entryServerFlagImage: UIImageView!
-    @IBOutlet weak var fastestServerLabel: UILabel!
-    @IBOutlet weak var antiTrackerSwitch: UISwitch!
-    @IBOutlet weak var networkView: NetworkViewTableCell!
-    @IBOutlet weak var protocolLabel: UILabel!
-    @IBOutlet weak var ipAddressLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var providerLabel: UILabel!
+    @IBOutlet weak var controlPanelView: ControlPanelView!
     
     // MARK: - Properties -
     
@@ -45,9 +29,7 @@ class ControlPanelViewController: UITableViewController {
     
     var connectionInfoViewModel: ProofsViewModel! {
         didSet {
-            ipAddressLabel.text = connectionInfoViewModel.ipAddress
-            locationLabel.text = "\(connectionInfoViewModel.city), \(connectionInfoViewModel.countryCode)"
-            providerLabel.text = connectionInfoViewModel.provider
+            controlPanelView.updateConnectionInfo(viewModel: connectionInfoViewModel)
         }
     }
     
@@ -64,15 +46,7 @@ class ControlPanelViewController: UITableViewController {
     private var isMultiHop: Bool = UserDefaults.shared.isMultiHop {
         didSet {
             UserDefaults.shared.set(isMultiHop, forKey: UserDefaults.Key.isMultiHop)
-            
-            if isMultiHop {
-                enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelPrimary), for: .normal)
-                disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabel5), for: .normal)
-            } else {
-                enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabel5), for: .normal)
-                disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelPrimary), for: .normal)
-            }
-            
+            controlPanelView.updateMultiHopButtons(isMultiHop: isMultiHop)
             NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
         }
     }
@@ -107,7 +81,7 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        let isEnabled = sender == enableMultiHopButton
+        let isEnabled = sender == controlPanelView.enableMultiHopButton
         
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: isEnabled)
         
@@ -167,7 +141,7 @@ class ControlPanelViewController: UITableViewController {
     
     func connect() {
         guard evaluateIsNetworkReachable() else {
-            connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
+            controlPanelView.connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
         }
         
@@ -189,10 +163,10 @@ class ControlPanelViewController: UITableViewController {
         let manager = Application.shared.connectionManager
         
         if UserDefaults.shared.networkProtectionEnabled && !manager.canConnect {
-            showActionSheet(title: "IVPN cannot connect to trusted network. Do you want to change Network Protection settings for the current network and connect?", actions: ["Connect"], sourceView: self.connectSwitch) { index in
+            showActionSheet(title: "IVPN cannot connect to trusted network. Do you want to change Network Protection settings for the current network and connect?", actions: ["Connect"], sourceView: self.controlPanelView.connectSwitch) { index in
                 switch index {
                 case 0:
-                    self.networkView.resetTrustToDefault()
+                    self.controlPanelView.networkView.resetTrustToDefault()
                     manager.resetRulesAndConnect()
                 default:
                     break
@@ -265,9 +239,8 @@ class ControlPanelViewController: UITableViewController {
     
     func updateStatus(vpnStatus: NEVPNStatus) {
         vpnStatusViewModel.status = vpnStatus
-        protectionStatusLabel.text = vpnStatusViewModel.protectionStatusText
-        connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
-        updateServerLabels()
+        controlPanelView.updateVPNStatus(viewModel: vpnStatusViewModel)
+        controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         
         if vpnStatus == .disconnected {
             hud.dismiss()
@@ -318,46 +291,19 @@ class ControlPanelViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         isMultiHop = UserDefaults.shared.isMultiHop
-        updateServerNames()
-        updateServerLabels()
-        updateAntiTracker()
-        updateProtocol()
+        controlPanelView.updateServerNames()
+        controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
+        controlPanelView.updateAntiTracker()
+        controlPanelView.updateProtocol()
     }
     
     private func reloadView() {
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
-        updateServerNames()
-        updateServerLabels()
-        updateAntiTracker()
-        updateProtocol()
-    }
-    
-    private func updateServerLabels() {
-        entryServerConnectionLabel.text = vpnStatusViewModel.connectToServerText
-        exitServerConnectionLabel.text = "Exit Server"
-    }
-    
-    private func updateServerNames() {
-        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
-        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
-        
-        fastestServerLabel.isHidden = !Application.shared.settings.selectedServer.fastest || Application.shared.settings.selectedServer.fastestServerLabelShouldBePresented
-    }
-    
-    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
-        let serverViewModel = VPNServerViewModel(server: server)
-        label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
-        flag.image = serverViewModel.imageForCountryCodeForMainScreen
-    }
-    
-    private func updateAntiTracker() {
-        antiTrackerSwitch.isOn = UserDefaults.shared.isAntiTracker
-    }
-    
-    private func updateProtocol() {
-        let selectedProtocol = Application.shared.connectionManager.settings.connectionProtocol
-        protocolLabel.text = selectedProtocol.format()
+        controlPanelView.updateServerNames()
+        controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
+        controlPanelView.updateAntiTracker()
+        controlPanelView.updateProtocol()
     }
     
     private func refreshServiceStatus() {
@@ -378,17 +324,17 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func serverSelected() {
-        updateServerNames()
+        controlPanelView.updateServerNames()
     }
     
     @objc private func protocolSelected() {
-        updateProtocol()
+        controlPanelView.updateProtocol()
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
     }
     
     @objc private func pingDidComplete() {
-        updateServerNames()
+        controlPanelView.updateServerNames()
         
         if needsToReconnect {
             needsToReconnect = false
