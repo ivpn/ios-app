@@ -17,8 +17,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var scannerView: UIView!
+    @IBOutlet weak var scannerView: ScannerView!
     
     // MARK: - Properties -
     
@@ -30,7 +29,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        navigationController?.navigationBar.prefersLargeTitles = false
         initCaptureSession()
     }
     
@@ -58,12 +57,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     // MARK: - Private methods -
-    
-    private func setupView() {
-        navigationController?.navigationBar.prefersLargeTitles = false
-        view.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
-        textLabel.textWithIcon(prefix: "Find your QR code under the User Profile menu", image: UIImage.init(named: "icon-user"), sufix: "on any other device with IVPN installed and scan it")
-    }
     
     private func initCaptureSession() {
         captureSession = AVCaptureSession()
@@ -99,7 +92,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
-        scannerView.layer.addSublayer(previewLayer)
+        scannerView.qrView.layer.addSublayer(previewLayer)
     }
     
     private func startCaptureSession() {

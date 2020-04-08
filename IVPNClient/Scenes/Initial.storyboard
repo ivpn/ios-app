@@ -820,7 +820,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                         <viewControllerLayoutGuide type="top" id="dlJ-fa-QlH"/>
                         <viewControllerLayoutGuide type="bottom" id="0cH-lQ-ls5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="i8u-z0-tev">
+                    <view key="view" contentMode="scaleToFill" id="i8u-z0-tev" customClass="ScannerView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -847,6 +847,10 @@ IVPN purposefully does not log any usage data associated with an account as we p
                             <constraint firstItem="IWI-gs-0Hz" firstAttribute="top" secondItem="dlJ-fa-QlH" secondAttribute="bottom" constant="28" id="edK-6H-YQl"/>
                             <constraint firstItem="eQa-b7-cZc" firstAttribute="top" secondItem="IWI-gs-0Hz" secondAttribute="bottom" constant="45" id="yWR-Vq-QdN"/>
                         </constraints>
+                        <connections>
+                            <outlet property="qrView" destination="eQa-b7-cZc" id="el1-YK-dIc"/>
+                            <outlet property="textLabel" destination="IWI-gs-0Hz" id="A73-CL-tuA"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Scan QR code" id="46Q-1E-UBo">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="Fls-Ak-HAz">
@@ -856,8 +860,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="scannerView" destination="eQa-b7-cZc" id="g2N-UV-UkI"/>
-                        <outlet property="textLabel" destination="IWI-gs-0Hz" id="aHc-ug-2Ri"/>
+                        <outlet property="scannerView" destination="i8u-z0-tev" id="4zl-ae-Y0C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pKV-6w-FVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

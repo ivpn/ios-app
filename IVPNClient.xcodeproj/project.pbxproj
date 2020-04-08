@@ -150,6 +150,7 @@
 		828E9C95231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8290195E243CB27500777B6E /* ControlPanelView.swift */; };
+		82901963243E070A00777B6E /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82901962243E070A00777B6E /* ScannerView.swift */; };
 		8292E19B21748B0500123538 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8292E1A72174C10700123538 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A62174C10700123538 /* Peer.swift */; };
 		8292E1A92174C11600123538 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A82174C11600123538 /* Interface.swift */; };
@@ -481,6 +482,7 @@
 		828772FA221C28E000D5E330 /* FlagImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagImageView.swift; sourceTree = "<group>"; };
 		828E9C94231E5780001E1FCF /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		8290195E243CB27500777B6E /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
+		82901962243E070A00777B6E /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		8292E1942170AA2500123538 /* wireguard-tunnel-provider-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wireguard-tunnel-provider-Bridging-Header.h"; sourceTree = "<group>"; };
 		8292E1A62174C10700123538 /* Peer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
 		8292E1A82174C11600123538 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
@@ -1018,6 +1020,23 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		82901960243E06D900777B6E /* ScannerScreen */ = {
+			isa = PBXGroup;
+			children = (
+				82901961243E06FA00777B6E /* View */,
+				82BC7144242E2A1D00C9E0C9 /* ScannerViewController.swift */,
+			);
+			path = ScannerScreen;
+			sourceTree = "<group>";
+		};
+		82901961243E06FA00777B6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82901962243E070A00777B6E /* ScannerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8292E1A52174C0CE00123538 /* WireGuard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1059,8 +1078,9 @@
 		82A208B321BAA4C500C9AD44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				822563902431DFFB00AE7F8D /* AccountScreen */,
 				8208525423FD56530008C112 /* MainScreen */,
+				822563902431DFFB00AE7F8D /* AccountScreen */,
+				82901960243E06D900777B6E /* ScannerScreen */,
 				82A208B621BAA51000C9AD44 /* Controls */,
 				82A208B521BAA4FF00C9AD44 /* TableCells */,
 				82A208B421BAA4EF00C9AD44 /* ViewControllers */,
@@ -1094,7 +1114,6 @@
 				8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */,
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
 				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
-				82BC7144242E2A1D00C9E0C9 /* ScannerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2111,6 +2130,7 @@
 				9C454EB01E081DF700BD2AFA /* CircleProgressLayer.swift in Sources */,
 				8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */,
 				821429B722FC2BE90056B8FF /* Result.swift in Sources */,
+				82901963243E070A00777B6E /* ScannerView.swift in Sources */,
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
 				82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */,
 				82061F67238D2730009DDF4D /* PingManager.swift in Sources */,
