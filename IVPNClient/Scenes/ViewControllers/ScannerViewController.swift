@@ -15,6 +15,10 @@ protocol ScannerViewControllerDelegate: class {
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var textLabel: UILabel!
+    
     // MARK: - Properties -
     
     var captureSession: AVCaptureSession!
@@ -57,6 +61,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     private func setupView() {
         navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        textLabel.textWithIcon(prefix: "Find your QR code under the User Profile menu", image: UIImage.init(named: "icon-user"), sufix: "on any other device with IVPN installed and scan it")
     }
     
     private func initCaptureSession() {
