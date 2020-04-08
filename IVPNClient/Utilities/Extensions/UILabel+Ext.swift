@@ -114,6 +114,14 @@ extension UILabel {
         self.attributedText = leftIcon1
     }
     
+    func textWithIcon(prefix: String, image: UIImage, sufix: String) {
+        let attachment = NSTextAttachment()
+        attachment.image = image
+        let attributedString = NSAttributedString(attachment: attachment)
+        let icon = NSMutableAttributedString(attributedString: attributedString)
+        self.attributedText = NSMutableAttributedString(string: "\(prefix) \(icon) \(sufix)")
+    }
+    
 }
 
 extension UILabel {
