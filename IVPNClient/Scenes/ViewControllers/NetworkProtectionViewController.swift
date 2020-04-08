@@ -168,6 +168,7 @@ extension NetworkProtectionViewController {
         
         selectNetworkTrust(network: collection[indexPath.section][indexPath.row], sourceView: view) { trust in
             self.trustSelected(trust: trust, indexPath: indexPath)
+            Application.shared.connectionManager.evaluateConnection()
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
