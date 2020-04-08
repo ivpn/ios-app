@@ -294,8 +294,8 @@ extension ProtocolViewController {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.detailTextLabel.text = "WireGuard keys successfully generated and uploaded to IVPN server."
         hud.dismiss(afterDelay: 2)
-        
         reloadTable(connectionProtocol: ConnectionSettings.wireguard(.udp, 2049))
+        NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     override func setKeyFail() {
