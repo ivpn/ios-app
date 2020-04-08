@@ -24,6 +24,18 @@ class ConnectionManager {
         }
     }
     
+    var canConnect: Bool {
+        let defaultTrust = StorageManager.getDefaultTrust()
+        let networkTrust = Application.shared.network.trust ?? NetworkTrust.Default.rawValue
+        let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
+        
+        if trust == NetworkTrust.Trusted.rawValue {
+            return false
+        }
+        
+        return true
+    }
+    
     private var authentication: Authentication
     private var vpnManager: VPNManager
     
@@ -40,7 +52,7 @@ class ConnectionManager {
     func onStatusChanged(completion: @escaping (NEVPNStatus) -> Void) {
         vpnManager.onStatusChanged { _, manager, status in
             if self.status == .connecting && status == .disconnecting {
-                NotificationCenter.default.post(name: Notification.Name.ConnectError, object: nil)
+                NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
             }
             
             self.status = status
@@ -49,7 +61,7 @@ class ConnectionManager {
                 self.connected = true
                 DispatchQueue.delay(0.25) {
                     guard self.connected else {
-                        NotificationCenter.default.post(name: Notification.Name.ConnectError, object: nil)
+                        NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
                         return
                     }
                     self.vpnManager.installOnDemandRules(manager: manager, status: status)
@@ -96,7 +108,12 @@ class ConnectionManager {
     }
     
     func removeOnDemandRules(completion: @escaping () -> Void) {
-        getStatus { tunnelType, _ in
+        getStatus { tunnelType, status in
+            guard status != .invalid else {
+                completion()
+                return
+            }
+            
             self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
                 manager.onDemandRules = [NEOnDemandRule]()
                 manager.isOnDemandEnabled = false
@@ -179,7 +196,10 @@ class ConnectionManager {
             settings: settings.connectionProtocol,
             accessDetails: accessDetails
         ) { error in
-            if error != nil { return }
+            guard error == nil else {
+                NotificationCenter.default.post(name: Notification.Name.VPNConfigurationError, object: nil)
+                return
+            }
             
             self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
         }
@@ -216,7 +236,7 @@ class ConnectionManager {
     func resetRulesAndConnectShortcut(closeApp: Bool = false) {
         self.closeApp = closeApp
         getStatus { _, status in
-            guard self.canConnect(status: status) else {
+            guard self.canConnect else {
                 if let mainViewController = UIApplication.topViewController() as? MainViewController {
                     mainViewController.connectionExecute()
                 }
@@ -274,18 +294,6 @@ class ConnectionManager {
             settings.selectedServer.status = status
             Application.shared.settings.selectedServer.status = status
         }
-    }
-    
-    func canConnect(status: NEVPNStatus) -> Bool {
-        let defaultTrust = StorageManager.getDefaultTrust()
-        let networkTrust = Application.shared.network.trust ?? NetworkTrust.Default.rawValue
-        let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
-        
-        if (status == .disconnected || status == .invalid) && trust == NetworkTrust.Trusted.rawValue {
-            return false
-        }
-        
-        return true
     }
     
     func canDisconnect(status: NEVPNStatus) -> Bool {

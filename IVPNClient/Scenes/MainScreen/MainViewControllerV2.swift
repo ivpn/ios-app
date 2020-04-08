@@ -55,6 +55,14 @@ class MainViewControllerV2: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        Application.shared.connectionManager.getStatus { _, status in
+            self.updateStatus(vpnStatus: status)
+            
+            Application.shared.connectionManager.onStatusChanged { status in
+                self.updateStatus(vpnStatus: status)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +79,7 @@ class MainViewControllerV2: UIViewController {
         destoryFloatingPanel()
         removeObservers()
         updateServersTimer.invalidate()
+        Application.shared.connectionManager.removeStatusChangeUpdates()
     }
     
     // MARK: - Segues -
@@ -107,6 +116,10 @@ class MainViewControllerV2: UIViewController {
     
     func updateStatus(vpnStatus: NEVPNStatus) {
         mainView.updateStatus(vpnStatus: vpnStatus)
+        
+        if let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController {
+            controlPanelViewController.updateStatus(vpnStatus: vpnStatus)
+        }
     }
     
     func updateGeoLocation() {

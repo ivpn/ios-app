@@ -42,8 +42,8 @@ extension ControlPanelViewController {
         }
         
         if indexPath.row == 6 && Application.shared.network.type != NetworkType.none.rawValue {
-            selectNetworkTrust(network: Application.shared.network, sourceView: networkView) { trust in
-                self.networkView.update(trust: trust)
+            selectNetworkTrust(network: Application.shared.network, sourceView: controlPanelView.networkView) { trust in
+                self.controlPanelView.networkView.update(trust: trust)
             }
         }
         
@@ -53,7 +53,7 @@ extension ControlPanelViewController {
             }
             
             guard Application.shared.connectionManager.status.isDisconnected() else {
-                showConnectedAlert(message: "To change protocol, please first disconnect", sender: protocolLabel)
+                showConnectedAlert(message: "To change protocol, please first disconnect", sender: controlPanelView.protocolLabel)
                 return
             }
             
@@ -112,11 +112,11 @@ extension ControlPanelViewController: ServerViewControllerDelegate {
 extension ControlPanelViewController {
     
     override func createSessionSuccess() {
-        connect(status: .disconnected)
+        connect()
     }
     
     override func createSessionServiceNotActive() {
-        connect(status: .disconnected)
+        connect()
     }
     
     override func createSessionTooManySessions(error: Any?) {
@@ -146,6 +146,7 @@ extension ControlPanelViewController {
         if let error = error as? ErrorResultSessionNew {
             showErrorAlert(title: "Error", message: error.message)
         }
+        updateStatus(vpnStatus: Application.shared.connectionManager.status)
     }
     
     override func sessionStatusNotFound() {
@@ -182,7 +183,7 @@ extension ControlPanelViewController {
     }
     
     func showCreateSessionAlert(message: String) {
-        showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.connectSwitch) { index in
+        showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.controlPanelView.connectSwitch) { index in
             switch index {
             case 0:
                 self.sessionManager.createSession(force: true)
@@ -206,6 +207,7 @@ extension ControlPanelViewController: UIAdaptivePresentationControllerDelegate {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
+        updateStatus(vpnStatus: Application.shared.connectionManager.status)
     }
     
 }
