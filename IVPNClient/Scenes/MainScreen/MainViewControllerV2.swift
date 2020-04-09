@@ -51,13 +51,7 @@ class MainViewControllerV2: UIViewController {
         initFloatingPanel()
         addObservers()
         startServersUpdate()
-        Application.shared.connectionManager.getStatus { _, status in
-            self.updateStatus(vpnStatus: status)
-            
-            Application.shared.connectionManager.onStatusChanged { status in
-                self.updateStatus(vpnStatus: status)
-            }
-        }
+        startVPNStatusObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -200,6 +194,16 @@ class MainViewControllerV2: UIViewController {
         if updateServerListDidComplete {
             DispatchQueue.delay(0.5) {
                 Pinger.shared.ping()
+            }
+        }
+    }
+    
+    private func startVPNStatusObserver() {
+        Application.shared.connectionManager.getStatus { _, status in
+            self.updateStatus(vpnStatus: status)
+            
+            Application.shared.connectionManager.onStatusChanged { status in
+                self.updateStatus(vpnStatus: status)
             }
         }
     }

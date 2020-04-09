@@ -186,7 +186,6 @@ class SettingsViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        Application.shared.connectionManager.removeStatusChangeUpdates()
         NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
     }
     

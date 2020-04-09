@@ -62,7 +62,6 @@ extension UIViewController {
         
         Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: false)
         DispatchQueue.delay(0.5) {
-            Application.shared.connectionManager.removeStatusChangeUpdates()
             Application.shared.connectionManager.removeAll()
             Application.shared.authentication.logOut()
             NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
