@@ -146,10 +146,12 @@ class MainViewControllerV2: UIViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateFloatingPanelLayout), name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(vpnConfigurationDisabled), name: Notification.Name.VPNConfigurationDisabled, object: nil)
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.VPNConfigurationDisabled, object: nil)
     }
     
     // MARK: - Private methods -
@@ -171,6 +173,10 @@ class MainViewControllerV2: UIViewController {
                 break
             }
         }
+    }
+    
+    @objc private func vpnConfigurationDisabled() {
+        updateStatus(vpnStatus: Application.shared.connectionManager.status)
     }
     
     private func initFloatingPanel() {

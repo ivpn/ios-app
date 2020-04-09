@@ -109,11 +109,6 @@ class ConnectionManager {
     
     func removeOnDemandRules(completion: @escaping () -> Void) {
         getStatus { tunnelType, status in
-            guard status != .invalid else {
-                completion()
-                return
-            }
-            
             self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
                 manager.onDemandRules = [NEOnDemandRule]()
                 manager.isOnDemandEnabled = false
@@ -197,7 +192,7 @@ class ConnectionManager {
             accessDetails: accessDetails
         ) { error in
             guard error == nil else {
-                NotificationCenter.default.post(name: Notification.Name.VPNConfigurationError, object: nil)
+                NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
                 return
             }
             

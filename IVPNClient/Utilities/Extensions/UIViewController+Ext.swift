@@ -60,10 +60,13 @@ extension UIViewController {
             UserDefaults.clearSession()
         }
         
-        Application.shared.connectionManager.removeStatusChangeUpdates()
         Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: false)
-        Application.shared.connectionManager.removeAll()
-        Application.shared.authentication.logOut()
+        DispatchQueue.delay(0.5) {
+            Application.shared.connectionManager.removeStatusChangeUpdates()
+            Application.shared.connectionManager.removeAll()
+            Application.shared.authentication.logOut()
+            NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
+        }
     }
     
     func openTermsOfService() {

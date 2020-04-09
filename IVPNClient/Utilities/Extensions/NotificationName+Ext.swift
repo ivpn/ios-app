@@ -24,7 +24,7 @@ extension Notification.Name {
     public static let NewSession = Notification.Name("newSession")
     public static let ForceNewSession = Notification.Name("forceNewSession")
     public static let VPNConnectError = Notification.Name("vpnConnectError")
-    public static let VPNConfigurationError = Notification.Name("vpnConfigurationError")
+    public static let VPNConfigurationDisabled = Notification.Name("vpnConfigurationDisabled")
     public static let ShowLogin = Notification.Name("showLogin")
     public static let ShowCreateAccount = Notification.Name("showCreateAccount")
     public static let UpdateFloatingPanelLayout = Notification.Name("updateFloatingPanelLayout")
