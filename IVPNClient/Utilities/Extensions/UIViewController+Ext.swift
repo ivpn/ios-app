@@ -61,7 +61,7 @@ extension UIViewController {
         }
         
         Application.shared.connectionManager.removeStatusChangeUpdates()
-        Application.shared.connectionManager.disconnectShortcut()
+        Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: false)
         Application.shared.connectionManager.removeAll()
         Application.shared.authentication.logOut()
     }

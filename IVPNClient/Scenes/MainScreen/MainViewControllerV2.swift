@@ -51,11 +51,6 @@ class MainViewControllerV2: UIViewController {
         initFloatingPanel()
         addObservers()
         startServersUpdate()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         Application.shared.connectionManager.getStatus { _, status in
             self.updateStatus(vpnStatus: status)
             
@@ -63,6 +58,10 @@ class MainViewControllerV2: UIViewController {
                 self.updateStatus(vpnStatus: status)
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
