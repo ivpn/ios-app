@@ -15,6 +15,10 @@ protocol ScannerViewControllerDelegate: class {
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var scannerView: ScannerView!
+    
     // MARK: - Properties -
     
     var captureSession: AVCaptureSession!
@@ -25,7 +29,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        navigationController?.navigationBar.prefersLargeTitles = false
         initCaptureSession()
     }
     
@@ -53,11 +57,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     // MARK: - Private methods -
-    
-    private func setupView() {
-        navigationController?.navigationBar.prefersLargeTitles = false
-        view.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
-    }
     
     private func initCaptureSession() {
         captureSession = AVCaptureSession()
@@ -93,7 +92,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
+        scannerView.qrView.layer.addSublayer(previewLayer)
     }
     
     private func startCaptureSession() {

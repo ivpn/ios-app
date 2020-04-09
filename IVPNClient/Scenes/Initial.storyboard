@@ -820,10 +820,37 @@ IVPN purposefully does not log any usage data associated with an account as we p
                         <viewControllerLayoutGuide type="top" id="dlJ-fa-QlH"/>
                         <viewControllerLayoutGuide type="bottom" id="0cH-lQ-ls5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="i8u-z0-tev">
+                    <view key="view" contentMode="scaleToFill" id="i8u-z0-tev" customClass="ScannerView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your QR code under the User Profile menu on any other device with IVPN installed and scan it" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWI-gs-0Hz">
+                                <rect key="frame" x="37.666666666666657" y="116" width="300" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="9K0-5D-rbb"/>
+                                    <constraint firstAttribute="width" constant="300" id="laf-pe-L4Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" name="ivpnLabelQuaternary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQa-b7-cZc">
+                                <rect key="frame" x="0.0" y="251" width="375" height="561"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="eQa-b7-cZc" secondAttribute="bottom" id="Jsk-5d-lt0"/>
+                            <constraint firstItem="IWI-gs-0Hz" firstAttribute="centerX" secondItem="i8u-z0-tev" secondAttribute="centerX" id="QsY-Va-lQi"/>
+                            <constraint firstAttribute="trailing" secondItem="eQa-b7-cZc" secondAttribute="trailing" id="bHs-DY-jsv"/>
+                            <constraint firstItem="eQa-b7-cZc" firstAttribute="leading" secondItem="i8u-z0-tev" secondAttribute="leading" id="cx0-q9-jmj"/>
+                            <constraint firstItem="IWI-gs-0Hz" firstAttribute="top" secondItem="dlJ-fa-QlH" secondAttribute="bottom" constant="28" id="edK-6H-YQl"/>
+                            <constraint firstItem="eQa-b7-cZc" firstAttribute="top" secondItem="IWI-gs-0Hz" secondAttribute="bottom" constant="45" id="yWR-Vq-QdN"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="qrView" destination="eQa-b7-cZc" id="el1-YK-dIc"/>
+                            <outlet property="textLabel" destination="IWI-gs-0Hz" id="A73-CL-tuA"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Scan QR code" id="46Q-1E-UBo">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="Fls-Ak-HAz">
@@ -832,10 +859,13 @@ IVPN purposefully does not log any usage data associated with an account as we p
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="scannerView" destination="i8u-z0-tev" id="4zl-ae-Y0C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pKV-6w-FVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-90" y="1949"/>
+            <point key="canvasLocation" x="-90.400000000000006" y="1948.5221674876848"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cq2-aL-Vqk">
