@@ -177,6 +177,9 @@ class ControlPanelViewController: UITableViewController {
         }
         
         registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
     }
     
     @objc func disconnect() {
