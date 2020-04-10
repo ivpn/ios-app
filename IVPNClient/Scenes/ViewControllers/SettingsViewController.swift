@@ -291,6 +291,7 @@ class SettingsViewController: UITableViewController {
         if needsToReconnect {
             needsToReconnect = false
             Application.shared.connectionManager.connect()
+            NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
         }
     }
     
