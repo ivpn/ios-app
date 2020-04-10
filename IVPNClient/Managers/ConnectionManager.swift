@@ -78,9 +78,9 @@ class ConnectionManager {
             }
             
             if status == .disconnected && self.reconnectAutomatically {
-                self.reconnectAutomatically = false
                 DispatchQueue.async {
                     self.connect()
+                    self.reconnectAutomatically = false
                 }
             }
 

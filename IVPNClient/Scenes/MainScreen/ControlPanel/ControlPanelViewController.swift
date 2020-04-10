@@ -35,7 +35,7 @@ class ControlPanelViewController: UITableViewController {
     
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
     private var lastStatusUpdateDate: Date?
-    private var lastAccountStatus: NEVPNStatus = .invalid
+    private var lastVPNStatus: NEVPNStatus = .invalid
     
     private var keyManager: AppKeyManager {
         let keyManager = AppKeyManager()
@@ -246,17 +246,17 @@ class ControlPanelViewController: UITableViewController {
             hud.dismiss()
         }
         
-        if vpnStatus != lastAccountStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
+        if vpnStatus != lastVPNStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
             refreshServiceStatus()
         }
         
-        if vpnStatus != lastAccountStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
+        if vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
             if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
                 topViewController.updateGeoLocation()
             }
         }
         
-        lastAccountStatus = vpnStatus
+        lastVPNStatus = vpnStatus
     }
     
     // MARK: - Observers -
