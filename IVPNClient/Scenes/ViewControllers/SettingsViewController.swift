@@ -291,6 +291,7 @@ class SettingsViewController: UITableViewController {
         if needsToReconnect {
             needsToReconnect = false
             Application.shared.connectionManager.connect()
+            NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
         }
     }
     
@@ -450,7 +451,10 @@ extension SettingsViewController: ServerViewControllerDelegate {
         Application.shared.connectionManager.getStatus { _, status in
             if status == .connected {
                 self.needsToReconnect = true
-                self.disconnect()
+                Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
+                DispatchQueue.delay(0.5) {
+                    Pinger.shared.ping()
+                }
             }
         }
     }

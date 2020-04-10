@@ -35,7 +35,7 @@ class ControlPanelViewController: UITableViewController {
     
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
     private var lastStatusUpdateDate: Date?
-    private var lastAccountStatus: NEVPNStatus = .invalid
+    private var lastVPNStatus: NEVPNStatus = .invalid
     
     private var keyManager: AppKeyManager {
         let keyManager = AppKeyManager()
@@ -246,17 +246,17 @@ class ControlPanelViewController: UITableViewController {
             hud.dismiss()
         }
         
-        if vpnStatus != lastAccountStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
+        if vpnStatus != lastVPNStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
             refreshServiceStatus()
         }
         
-        if vpnStatus != lastAccountStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
+        if vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
             if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
                 topViewController.updateGeoLocation()
             }
         }
         
-        lastAccountStatus = vpnStatus
+        lastVPNStatus = vpnStatus
     }
     
     // MARK: - Observers -
@@ -289,6 +289,7 @@ class ControlPanelViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         isMultiHop = UserDefaults.shared.isMultiHop
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker()
@@ -298,6 +299,7 @@ class ControlPanelViewController: UITableViewController {
     private func reloadView() {
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker()
@@ -322,6 +324,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func serverSelected() {
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateServerNames()
     }
     
@@ -332,6 +335,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func pingDidComplete() {
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateServerNames()
         
         if needsToReconnect {
