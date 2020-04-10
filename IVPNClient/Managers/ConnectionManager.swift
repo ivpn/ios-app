@@ -249,7 +249,7 @@ class ConnectionManager {
         getStatus { _, status in
             guard self.canDisconnect(status: status) else {
                 UIApplication.topViewController()?.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"") { _ in
-                    
+                    NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
                 }
                 return
             }

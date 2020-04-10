@@ -321,6 +321,7 @@ class ControlPanelViewController: UITableViewController {
     
     @objc private func updateControlPanel() {
         reloadView()
+        controlPanelView.updateVPNStatus(viewModel: vpnStatusViewModel)
     }
     
     @objc private func serverSelected() {
