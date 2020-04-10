@@ -67,6 +67,12 @@ class ControlPanelView: UITableView {
     }
     
     func updateServerNames() {
+        Application.shared.connectionManager.getStatus { _, status in
+            if status != .connected && status != .connecting {
+                Application.shared.connectionManager.updateSelectedServer()
+            }
+        }
+        
         updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
         updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
         

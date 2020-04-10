@@ -102,6 +102,9 @@ extension ControlPanelViewController: ServerViewControllerDelegate {
             if status == .connected {
                 self.needsToReconnect = true
                 Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
+                DispatchQueue.delay(0.5) {
+                    Pinger.shared.ping()
+                }
             }
         }
     }

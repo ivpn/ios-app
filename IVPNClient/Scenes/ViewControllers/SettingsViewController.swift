@@ -450,7 +450,10 @@ extension SettingsViewController: ServerViewControllerDelegate {
         Application.shared.connectionManager.getStatus { _, status in
             if status == .connected {
                 self.needsToReconnect = true
-                self.disconnect()
+                Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
+                DispatchQueue.delay(0.5) {
+                    Pinger.shared.ping()
+                }
             }
         }
     }
