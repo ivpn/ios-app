@@ -78,9 +78,9 @@ class ConnectionManager {
             }
             
             if status == .disconnected && self.reconnectAutomatically {
-                self.reconnectAutomatically = false
                 DispatchQueue.async {
                     self.connect()
+                    self.reconnectAutomatically = false
                 }
             }
 
@@ -288,6 +288,13 @@ class ConnectionManager {
         if let status = status {
             settings.selectedServer.status = status
             Application.shared.settings.selectedServer.status = status
+        }
+    }
+    
+    func needsUpdateSelectedServer() {
+        getStatus { _, status in
+            guard status.isDisconnected() else { return }
+            self.updateSelectedServer()
         }
     }
     

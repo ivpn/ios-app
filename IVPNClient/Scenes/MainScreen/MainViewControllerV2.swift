@@ -107,11 +107,11 @@ class MainViewControllerV2: UIViewController {
         updateFloatingPanelLayout()
     }
     
-    func updateStatus(vpnStatus: NEVPNStatus) {
+    func updateStatus(vpnStatus: NEVPNStatus, animated: Bool = true) {
         mainView.updateStatus(vpnStatus: vpnStatus)
         
         if let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController {
-            controlPanelViewController.updateStatus(vpnStatus: vpnStatus)
+            controlPanelViewController.updateStatus(vpnStatus: vpnStatus, animated: animated)
         }
     }
     
@@ -200,7 +200,7 @@ class MainViewControllerV2: UIViewController {
     
     private func startVPNStatusObserver() {
         Application.shared.connectionManager.getStatus { _, status in
-            self.updateStatus(vpnStatus: status)
+            self.updateStatus(vpnStatus: status, animated: false)
             
             Application.shared.connectionManager.onStatusChanged { status in
                 self.updateStatus(vpnStatus: status)
