@@ -237,9 +237,9 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
-    func updateStatus(vpnStatus: NEVPNStatus) {
+    func updateStatus(vpnStatus: NEVPNStatus, animated: Bool = true) {
         vpnStatusViewModel.status = vpnStatus
-        controlPanelView.updateVPNStatus(viewModel: vpnStatusViewModel)
+        controlPanelView.updateVPNStatus(viewModel: vpnStatusViewModel, animated: animated)
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         
         if vpnStatus == .disconnected {
