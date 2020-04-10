@@ -248,7 +248,9 @@ class ConnectionManager {
         self.closeApp = closeApp
         getStatus { _, status in
             guard self.canDisconnect(status: status) else {
-                UIApplication.topViewController()?.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
+                UIApplication.topViewController()?.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"") { _ in
+                    
+                }
                 return
             }
             

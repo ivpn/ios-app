@@ -169,7 +169,7 @@ class ControlPanelViewController: UITableViewController {
                     self.controlPanelView.networkView.resetTrustToDefault()
                     manager.resetRulesAndConnect()
                 default:
-                    break
+                    self.updateStatus(vpnStatus: Application.shared.connectionManager.status)
                 }
             }
         } else {
