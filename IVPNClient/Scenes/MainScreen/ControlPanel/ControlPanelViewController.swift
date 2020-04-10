@@ -289,6 +289,7 @@ class ControlPanelViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         isMultiHop = UserDefaults.shared.isMultiHop
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker()
@@ -298,6 +299,7 @@ class ControlPanelViewController: UITableViewController {
     private func reloadView() {
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker()
@@ -322,6 +324,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func serverSelected() {
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateServerNames()
     }
     
@@ -332,6 +335,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func pingDidComplete() {
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateServerNames()
         
         if needsToReconnect {
