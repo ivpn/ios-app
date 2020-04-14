@@ -64,7 +64,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         updatedSettings = settings.updateAttribute(key: "private_key", value: privateKeyHex)
         let handle = withStringsAsGoStrings(interfaceName, settings) { _, settingsGoStr -> Int32 in
-            return wgTurnOn(settingsGoStr, fileDescriptor)
+            return wgTurnOn(settings, fileDescriptor)
         }
         
         guard handle >= 0 else {
@@ -208,7 +208,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         let settings = self.settings.updateAttribute(key: key, value: value)
         updatedSettings = settings
         let _ = withStringsAsGoStrings(interfaceName, settings) { _, settingsGoStr -> Int32 in
-            wgSetConfig(handle, settingsGoStr)
+            wgSetConfig(handle, settings)
             return 0
         }
     }
@@ -217,7 +217,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         guard let handle = handle else { return }
         
         let _ = withStringsAsGoStrings(interfaceName, settings) { _, settingsGoStr -> Int32 in
-            wgSetConfig(handle, settingsGoStr)
+            wgSetConfig(handle, settings)
             return 0
         }
         
@@ -228,7 +228,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         
         if let ifscope = interfaces.first?.index {
-            wgBindInterfaceScope(handle, Int32(ifscope))
+//            wgBindInterfaceScope(handle, Int32(ifscope))
         }
     }
     
