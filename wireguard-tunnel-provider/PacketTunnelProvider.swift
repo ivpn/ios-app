@@ -63,9 +63,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         
         updatedSettings = settings.updateAttribute(key: "private_key", value: privateKeyHex)
-        let handle = withStringsAsGoStrings(interfaceName, settings) { _, settingsGoStr -> Int32 in
-            return wgTurnOn(settings, fileDescriptor)
-        }
+        let handle = wgTurnOn(settings, fileDescriptor)
         
         guard handle >= 0 else {
             tunnelSetupFailed()
@@ -207,29 +205,12 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         guard let handle = handle else { return }
         let settings = self.settings.updateAttribute(key: key, value: value)
         updatedSettings = settings
-        let _ = withStringsAsGoStrings(interfaceName, settings) { _, settingsGoStr -> Int32 in
-            wgSetConfig(handle, settings)
-            return 0
-        }
+        wgSetConfig(handle, settings)
     }
     
     private func pathUpdate(path: Network.NWPath) {
         guard let handle = handle else { return }
-        
-        let _ = withStringsAsGoStrings(interfaceName, settings) { _, settingsGoStr -> Int32 in
-            wgSetConfig(handle, settings)
-            return 0
-        }
-        
-        var interfaces = path.availableInterfaces
-        
-        if let ifname = ifname {
-            interfaces = interfaces.filter { $0.name != ifname }
-        }
-        
-        if let ifscope = interfaces.first?.index {
-//            wgBindInterfaceScope(handle, Int32(ifscope))
-        }
+        wgSetConfig(handle, settings)
     }
     
     private func withStringsAsGoStrings<R>(_ str1: String, _ str2: String, closure: (gostring_t, gostring_t) -> R) -> R {
