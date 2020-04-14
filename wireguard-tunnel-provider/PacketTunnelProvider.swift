@@ -213,14 +213,4 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         wgSetConfig(handle, settings)
     }
     
-    private func withStringsAsGoStrings<R>(_ str1: String, _ str2: String, closure: (gostring_t, gostring_t) -> R) -> R {
-        return str1.withCString { (s1cStr) -> R in
-            let gstr1 = gostring_t(p: s1cStr, n: str1.utf8.count)
-            return str2.withCString { (s2cStr) -> R in
-                let gstr2 = gostring_t(p: s2cStr, n: str2.utf8.count)
-                return closure(gstr1, gstr2)
-            }
-        }
-    }
-    
 }
