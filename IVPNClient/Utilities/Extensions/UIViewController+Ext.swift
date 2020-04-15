@@ -1,5 +1,5 @@
 //
-//  WireGuardSettingsViewController.swift
+//  UIViewController+Ext.swift
 //  IVPN Client
 //
 //  Created by Juraj Hilje on 10/10/2018.

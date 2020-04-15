@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  IVPN Client
 //
 //  Created by Fedir Nepyyvoda on 7/12/16.

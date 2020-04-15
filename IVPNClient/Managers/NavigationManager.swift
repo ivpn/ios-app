@@ -47,4 +47,16 @@ class NavigationManager {
         return storyBoard.instantiateViewController(withIdentifier: "upgradePlanView")
     }
     
+    static func getScannerViewController(delegate: ScannerViewControllerDelegate? = nil) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
+        
+        let navController = storyBoard.instantiateViewController(withIdentifier: "scannerView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        if let viewController = navController?.topViewController as? ScannerViewController {
+            viewController.delegate = delegate
+        }
+        
+        return navController!
+    }
+    
 }
