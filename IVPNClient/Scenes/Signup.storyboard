@@ -182,6 +182,80 @@
             </objects>
             <point key="canvasLocation" x="602.89855072463774" y="47.544642857142854"/>
         </scene>
+        <!--Scan QR code-->
+        <scene sceneID="OfJ-Z4-zb2">
+            <objects>
+                <viewController id="YcU-dg-mBO" customClass="ScannerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dlJ-fa-QlH"/>
+                        <viewControllerLayoutGuide type="bottom" id="0cH-lQ-ls5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i8u-z0-tev" customClass="ScannerView" customModule="IVPNClient" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your QR code under the User Profile menu on any other device with IVPN installed and scan it" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWI-gs-0Hz">
+                                <rect key="frame" x="57" y="116" width="300" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="9K0-5D-rbb"/>
+                                    <constraint firstAttribute="width" constant="300" id="laf-pe-L4Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" name="ivpnLabelQuaternary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQa-b7-cZc">
+                                <rect key="frame" x="0.0" y="251" width="414" height="645"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="eQa-b7-cZc" secondAttribute="bottom" id="Jsk-5d-lt0"/>
+                            <constraint firstItem="IWI-gs-0Hz" firstAttribute="centerX" secondItem="i8u-z0-tev" secondAttribute="centerX" id="QsY-Va-lQi"/>
+                            <constraint firstAttribute="trailing" secondItem="eQa-b7-cZc" secondAttribute="trailing" id="bHs-DY-jsv"/>
+                            <constraint firstItem="eQa-b7-cZc" firstAttribute="leading" secondItem="i8u-z0-tev" secondAttribute="leading" id="cx0-q9-jmj"/>
+                            <constraint firstItem="IWI-gs-0Hz" firstAttribute="top" secondItem="dlJ-fa-QlH" secondAttribute="bottom" constant="28" id="edK-6H-YQl"/>
+                            <constraint firstItem="eQa-b7-cZc" firstAttribute="top" secondItem="IWI-gs-0Hz" secondAttribute="bottom" constant="45" id="yWR-Vq-QdN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JUN-Az-Acd"/>
+                        <connections>
+                            <outlet property="qrView" destination="eQa-b7-cZc" id="el1-YK-dIc"/>
+                            <outlet property="textLabel" destination="IWI-gs-0Hz" id="A73-CL-tuA"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Scan QR code" id="46Q-1E-UBo">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="Fls-Ak-HAz">
+                            <connections>
+                                <action selector="dismissViewController:" destination="YcU-dg-mBO" id="xco-NT-yrE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="scannerView" destination="i8u-z0-tev" id="4zl-ae-Y0C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pKV-6w-FVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1513" y="791"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ec5-yl-wa5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pfo-b9-U3n" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2DR-73-ZHo">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YcU-dg-mBO" kind="relationship" relationship="rootViewController" id="gyY-HV-t7x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5qT-dn-lgd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="602.89855072463774" y="790.84821428571422"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icon-qr-code" width="24" height="24"/>
