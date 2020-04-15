@@ -951,6 +951,7 @@
 				82A208B421BAA4EF00C9AD44 /* ViewControllers */,
 				9CDDD5B71D9D2F9F00D39924 /* LaunchScreen.storyboard */,
 				9C2833731D9D3EB60024C553 /* Initial.storyboard */,
+				826470C32446F67100403A14 /* Signup.storyboard */,
 				9CDDD5B21D9D2F9F00D39924 /* Main.storyboard */,
 			);
 			path = Scenes;
@@ -1171,7 +1172,6 @@
 		9CDDD5A21D9D2F9E00D39924 = {
 			isa = PBXGroup;
 			children = (
-				826470C32446F67100403A14 /* Signup.storyboard */,
 				9CDDD5AD1D9D2F9F00D39924 /* IVPNClient */,
 				9C7840A920CD8A8A00335736 /* openvpn-tunnel-provider */,
 				82B605242170840C004B40E6 /* wireguard-tunnel-provider */,
