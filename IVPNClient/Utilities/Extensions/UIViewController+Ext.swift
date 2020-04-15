@@ -96,6 +96,23 @@ extension UIViewController {
     
 }
 
+// MARK: - Presenter -
+
+extension UIViewController {
+    
+    func evaluateIsServiceActive() -> Bool {
+        guard Application.shared.serviceStatus.isActive else {
+            let viewController = NavigationManager.getSubscriptionViewController()
+            viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+            present(viewController, animated: true, completion: nil)
+            return false
+        }
+        
+        return true
+    }
+    
+}
+
 extension UIViewController: AppKeyManagerDelegate {
     func setKeyStart() {}
     func setKeySuccess() {}
