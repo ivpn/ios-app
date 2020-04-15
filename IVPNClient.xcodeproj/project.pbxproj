@@ -75,6 +75,7 @@
 		825D4EC9224A46F0002E7378 /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */; };
 		825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53922325709006C4F14 /* ApiManager.swift */; };
 		825D5D8821908B2600B781BA /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
+		826470C42446F67100403A14 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826470C32446F67100403A14 /* Signup.storyboard */; };
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */; };
 		8269CD8F2164A8C700D083A1 /* servers-dev.json in Resources */ = {isa = PBXBuildFile; fileRef = 8269CD8E2164A8C700D083A1 /* servers-dev.json */; };
@@ -403,6 +404,7 @@
 		825864A02237B1060081DC4B /* Bamboo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bamboo.framework; path = ../Carthage/Build/iOS/Bamboo.framework; sourceTree = "<group>"; };
 		82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
+		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
 		8269CD8E2164A8C700D083A1 /* servers-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "servers-dev.json"; sourceTree = "<group>"; };
 		826C56D122FD4F2600D2B76A /* ServiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatus.swift; sourceTree = "<group>"; };
@@ -1169,6 +1171,7 @@
 		9CDDD5A21D9D2F9E00D39924 = {
 			isa = PBXGroup;
 			children = (
+				826470C32446F67100403A14 /* Signup.storyboard */,
 				9CDDD5AD1D9D2F9F00D39924 /* IVPNClient */,
 				9C7840A920CD8A8A00335736 /* openvpn-tunnel-provider */,
 				82B605242170840C004B40E6 /* wireguard-tunnel-provider */,
@@ -1534,6 +1537,7 @@
 				8269CD8F2164A8C700D083A1 /* servers-dev.json in Resources */,
 				9CDDD5B41D9D2F9F00D39924 /* Main.storyboard in Resources */,
 				9C2833741D9D3EB60024C553 /* Initial.storyboard in Resources */,
+				826470C42446F67100403A14 /* Signup.storyboard in Resources */,
 				82FF0D4223153D1000440E5D /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
