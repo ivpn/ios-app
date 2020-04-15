@@ -244,7 +244,7 @@
         <!--Navigation Controller-->
         <scene sceneID="cyL-IY-0fL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TaW-sx-eod" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TaW-sx-eod" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rHQ-EK-bSh">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -318,7 +318,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Ec5-yl-wa5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pfo-b9-U3n" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="scannerView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pfo-b9-U3n" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2DR-73-ZHo">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
