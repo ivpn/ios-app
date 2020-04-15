@@ -188,6 +188,8 @@
 		82DB75EE239E766A0073E846 /* NEVPNStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */; };
 		82DC75BC22B277D200D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
 		82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
+		82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF01D244714D900CCB5CD /* ScannerViewController.swift */; };
+		82DEF021244714F000CCB5CD /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF020244714F000CCB5CD /* ScannerView.swift */; };
 		82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */; };
 		82E4FCB023D71FDF00BEBA1A /* UIApplication+ExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */; };
 		82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
@@ -495,6 +497,8 @@
 		82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NEVPNStatus+Ext.swift"; sourceTree = "<group>"; };
 		82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEVPNStatusTests.swift; sourceTree = "<group>"; };
 		82DC75BB22B277D200D3C73C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		82DEF01D244714D900CCB5CD /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		82DEF020244714F000CCB5CD /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManagerTests.swift; sourceTree = "<group>"; };
 		82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ExtTests.swift"; sourceTree = "<group>"; };
 		82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunnelType.swift; sourceTree = "<group>"; };
@@ -949,6 +953,7 @@
 				82A208B621BAA51000C9AD44 /* Controls */,
 				82A208B521BAA4FF00C9AD44 /* Cells */,
 				82A208B421BAA4EF00C9AD44 /* ViewControllers */,
+				82DEF01B2447149000CCB5CD /* Signup */,
 				9CDDD5B71D9D2F9F00D39924 /* LaunchScreen.storyboard */,
 				9C2833731D9D3EB60024C553 /* Initial.storyboard */,
 				826470C32446F67100403A14 /* Signup.storyboard */,
@@ -961,9 +966,6 @@
 			isa = PBXGroup;
 			children = (
 				9C454EBD1E096F4100BD2AFA /* PrivacyPromoViewController.swift */,
-				9C2833751D9D3F060024C553 /* LoginViewController.swift */,
-				9C2833761D9D3F060024C553 /* InitViewController.swift */,
-				9C2833791D9D3F060024C553 /* SignUpController.swift */,
 				9CDDD5B01D9D2F9F00D39924 /* MainViewController.swift */,
 				9C3031361DB4307D00C38B0C /* SettingsViewController.swift */,
 				9C50959520FCF4C60048DBF2 /* ProtocolViewController.swift */,
@@ -1106,6 +1108,34 @@
 				82B81E4E235F2614005986E8 /* XCUIApplication+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		82DEF01B2447149000CCB5CD /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				82DEF01C244714B300CCB5CD /* Scanner */,
+				9C2833751D9D3F060024C553 /* LoginViewController.swift */,
+				9C2833761D9D3F060024C553 /* InitViewController.swift */,
+				9C2833791D9D3F060024C553 /* SignUpController.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		82DEF01C244714B300CCB5CD /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				82DEF01F244714DF00CCB5CD /* View */,
+				82DEF01D244714D900CCB5CD /* ScannerViewController.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		82DEF01F244714DF00CCB5CD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82DEF020244714F000CCB5CD /* ScannerView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		82E01647230BE667008B0AC0 /* Managers */ = {
@@ -1940,6 +1970,7 @@
 				82A160BB221C4E2000730577 /* Server+CoreDataProperties.swift in Sources */,
 				9C454EB41E081E0000BD2AFA /* ConnectButtonParameters.swift in Sources */,
 				8270753622AFC5B90067C323 /* StringProtocol+Ext.swift in Sources */,
+				82DEF021244714F000CCB5CD /* ScannerView.swift in Sources */,
 				9CB2CE411DB2594A007A4D2D /* VPNServerList.swift in Sources */,
 				823FFB072338DF1800F91A5D /* Capability.swift in Sources */,
 				82061F65238D2730009DDF4D /* Ping.swift in Sources */,
@@ -1987,6 +2018,7 @@
 				8247E1DC2268713E006C0C08 /* SubscriptionType.swift in Sources */,
 				821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */,
 				82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */,
+				82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */,
 				825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */,
 				82D598B021A58CAD000FABDE /* NetworkTrustViewController.swift in Sources */,
 			);
