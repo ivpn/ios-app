@@ -63,9 +63,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         
         updatedSettings = settings.updateAttribute(key: "private_key", value: privateKeyHex)
-        let handle = withStringsAsGoStrings(interfaceName, settings) { _, settingsGoStr -> Int32 in
-            return wgTurnOn(settingsGoStr, fileDescriptor)
-        }
+        let handle = wgTurnOn(settings, fileDescriptor)
         
         guard handle >= 0 else {
             tunnelSetupFailed()
@@ -207,39 +205,12 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         guard let handle = handle else { return }
         let settings = self.settings.updateAttribute(key: key, value: value)
         updatedSettings = settings
-        let _ = withStringsAsGoStrings(interfaceName, settings) { _, settingsGoStr -> Int32 in
-            wgSetConfig(handle, settingsGoStr)
-            return 0
-        }
+        wgSetConfig(handle, settings)
     }
     
     private func pathUpdate(path: Network.NWPath) {
         guard let handle = handle else { return }
-        
-        let _ = withStringsAsGoStrings(interfaceName, settings) { _, settingsGoStr -> Int32 in
-            wgSetConfig(handle, settingsGoStr)
-            return 0
-        }
-        
-        var interfaces = path.availableInterfaces
-        
-        if let ifname = ifname {
-            interfaces = interfaces.filter { $0.name != ifname }
-        }
-        
-        if let ifscope = interfaces.first?.index {
-            wgBindInterfaceScope(handle, Int32(ifscope))
-        }
-    }
-    
-    private func withStringsAsGoStrings<R>(_ str1: String, _ str2: String, closure: (gostring_t, gostring_t) -> R) -> R {
-        return str1.withCString { (s1cStr) -> R in
-            let gstr1 = gostring_t(p: s1cStr, n: str1.utf8.count)
-            return str2.withCString { (s2cStr) -> R in
-                let gstr2 = gostring_t(p: s2cStr, n: str2.utf8.count)
-                return closure(gstr1, gstr2)
-            }
-        }
+        wgSetConfig(handle, settings)
     }
     
 }
