@@ -103,6 +103,9 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="3Vr-55-vgw" kind="presentation" id="4eo-kB-QcK"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Account ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaq-vw-vSn">
                                                 <rect key="frame" x="62" y="30" width="290" height="20"/>
@@ -169,13 +172,14 @@
             <objects>
                 <viewController id="spu-nQ-a1v" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zFS-Rd-d7a">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="wkR-lU-nw1"/>
                     </view>
                     <navigationItem key="navigationItem" title="Hooray!" id="eEZ-46-KCv">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="7NX-OK-fX1"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1" style="plain" id="ewI-as-s10"/>
                     </navigationItem>
                     <connections>
                         <segue destination="tBH-nr-wv3" kind="show" id="vCU-KQ-uza"/>
@@ -183,14 +187,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pqK-FQ-x5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1513" y="763"/>
+            <point key="canvasLocation" x="3370" y="-229"/>
         </scene>
         <!--Select IVPN product-->
         <scene sceneID="rgD-Na-x65">
             <objects>
                 <tableViewController id="tBH-nr-wv3" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WSh-pq-wUH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -208,30 +212,34 @@
                             <outlet property="delegate" destination="tBH-nr-wv3" id="4CP-bT-dVU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Select IVPN product" id="GNb-Zt-1xj"/>
+                    <navigationItem key="navigationItem" title="Select IVPN product" id="GNb-Zt-1xj">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-2" style="plain" id="ThM-nh-AQD"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="hXj-ed-oVT" kind="show" id="HUc-V2-zUH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQ2-NM-xcV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2436" y="763"/>
+            <point key="canvasLocation" x="4293" y="-229"/>
         </scene>
         <!--Continue to payment-->
         <scene sceneID="aiV-b0-xge">
             <objects>
                 <viewController id="hXj-ed-oVT" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X49-2G-ar8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="hrI-es-y7a"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Continue to payment" id="6Us-su-Cbx"/>
+                    <navigationItem key="navigationItem" title="Continue to payment" id="6Us-su-Cbx">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="plain" id="qRz-Ei-UfG"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0wQ-Xt-fHS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3349" y="763"/>
+            <point key="canvasLocation" x="5206" y="-229"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cyL-IY-0fL">
@@ -305,7 +313,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pKV-6w-FVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1512" y="1479"/>
+            <point key="canvasLocation" x="1512" y="777"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ec5-yl-wa5">
@@ -323,15 +331,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qT-dn-lgd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="603" y="1479"/>
+            <point key="canvasLocation" x="603" y="777"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DiP-nH-p1J">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Vr-55-vgw" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Vr-55-vgw" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="E9p-k0-02K">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -341,11 +349,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oxz-7G-BQ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="604" y="763"/>
+            <point key="canvasLocation" x="2461" y="-229"/>
         </scene>
     </scenes>
     <resources>
         <image name="icon-qr-code" width="24" height="24"/>
+        <image name="icon-step-1" width="48" height="8"/>
+        <image name="icon-step-2" width="48" height="8"/>
+        <image name="icon-step-3" width="48" height="8"/>
         <namedColor name="ivpnBackgroundPrimary">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
