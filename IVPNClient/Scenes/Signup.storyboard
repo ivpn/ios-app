@@ -170,7 +170,7 @@
         <!--Hooray!-->
         <scene sceneID="u3u-TB-jtU">
             <objects>
-                <viewController id="spu-nQ-a1v" sceneMemberID="viewController">
+                <viewController id="spu-nQ-a1v" customClass="CreateAccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zFS-Rd-d7a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -178,8 +178,12 @@
                         <viewLayoutGuide key="safeArea" id="wkR-lU-nw1"/>
                     </view>
                     <navigationItem key="navigationItem" title="Hooray!" id="eEZ-46-KCv">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="7NX-OK-fX1"/>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1" style="plain" id="ewI-as-s10"/>
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="7NX-OK-fX1">
+                            <connections>
+                                <action selector="dismissViewController:" destination="spu-nQ-a1v" id="jB9-lx-nfH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="icon-step-1" style="plain" id="ewI-as-s10"/>
                     </navigationItem>
                     <connections>
                         <segue destination="tBH-nr-wv3" kind="show" id="vCU-KQ-uza"/>
@@ -192,7 +196,7 @@
         <!--Select IVPN product-->
         <scene sceneID="rgD-Na-x65">
             <objects>
-                <tableViewController id="tBH-nr-wv3" sceneMemberID="viewController">
+                <tableViewController id="tBH-nr-wv3" customClass="SelectPlanViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WSh-pq-wUH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -213,7 +217,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select IVPN product" id="GNb-Zt-1xj">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-2" style="plain" id="ThM-nh-AQD"/>
+                        <barButtonItem key="rightBarButtonItem" image="icon-step-2" style="plain" id="ThM-nh-AQD"/>
                     </navigationItem>
                     <connections>
                         <segue destination="hXj-ed-oVT" kind="show" id="HUc-V2-zUH"/>
@@ -226,7 +230,7 @@
         <!--Continue to payment-->
         <scene sceneID="aiV-b0-xge">
             <objects>
-                <viewController id="hXj-ed-oVT" sceneMemberID="viewController">
+                <viewController id="hXj-ed-oVT" customClass="PaymentViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X49-2G-ar8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -234,7 +238,7 @@
                         <viewLayoutGuide key="safeArea" id="hrI-es-y7a"/>
                     </view>
                     <navigationItem key="navigationItem" title="Continue to payment" id="6Us-su-Cbx">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="plain" id="qRz-Ei-UfG"/>
+                        <barButtonItem key="rightBarButtonItem" image="icon-step-3" style="plain" id="qRz-Ei-UfG"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0wQ-Xt-fHS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

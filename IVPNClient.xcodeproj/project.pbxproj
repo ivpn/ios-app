@@ -190,6 +190,9 @@
 		82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
 		82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF01D244714D900CCB5CD /* ScannerViewController.swift */; };
 		82DEF021244714F000CCB5CD /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF020244714F000CCB5CD /* ScannerView.swift */; };
+		82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */; };
+		82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */; };
+		82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0292447288100CCB5CD /* PaymentViewController.swift */; };
 		82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */; };
 		82E4FCB023D71FDF00BEBA1A /* UIApplication+ExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */; };
 		82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
@@ -499,6 +502,9 @@
 		82DC75BB22B277D200D3C73C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		82DEF01D244714D900CCB5CD /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		82DEF020244714F000CCB5CD /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlanViewController.swift; sourceTree = "<group>"; };
+		82DEF0292447288100CCB5CD /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManagerTests.swift; sourceTree = "<group>"; };
 		82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ExtTests.swift"; sourceTree = "<group>"; };
 		82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunnelType.swift; sourceTree = "<group>"; };
@@ -1114,6 +1120,9 @@
 			isa = PBXGroup;
 			children = (
 				82DEF01C244714B300CCB5CD /* Scanner */,
+				82DEF0222447280300CCB5CD /* CreateAccount */,
+				82DEF0232447281900CCB5CD /* SelectPlan */,
+				82DEF0242447282E00CCB5CD /* Payment */,
 				9C2833751D9D3F060024C553 /* LoginViewController.swift */,
 				9C2833761D9D3F060024C553 /* InitViewController.swift */,
 				9C2833791D9D3F060024C553 /* SignUpController.swift */,
@@ -1136,6 +1145,30 @@
 				82DEF020244714F000CCB5CD /* ScannerView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		82DEF0222447280300CCB5CD /* CreateAccount */ = {
+			isa = PBXGroup;
+			children = (
+				82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */,
+			);
+			path = CreateAccount;
+			sourceTree = "<group>";
+		};
+		82DEF0232447281900CCB5CD /* SelectPlan */ = {
+			isa = PBXGroup;
+			children = (
+				82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */,
+			);
+			path = SelectPlan;
+			sourceTree = "<group>";
+		};
+		82DEF0242447282E00CCB5CD /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				82DEF0292447288100CCB5CD /* PaymentViewController.swift */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		82E01647230BE667008B0AC0 /* Managers */ = {
@@ -1906,6 +1939,7 @@
 				82D598C021A6991B000FABDE /* NetworkManager.swift in Sources */,
 				9C2833821D9D3F2D0024C553 /* PromotionsDataSource.swift in Sources */,
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
+				82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */,
 				9C454EB31E081E0000BD2AFA /* ConnectButton.swift in Sources */,
 				82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */,
 				9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */,
@@ -1956,6 +1990,7 @@
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */,
 				9C28337C1D9D3F060024C553 /* InitViewController.swift in Sources */,
+				82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */,
 				9C28338A1D9D41A60024C553 /* ApiService.swift in Sources */,
 				9C454EB91E0869B400BD2AFA /* WaveLayer.swift in Sources */,
 				82BBF26921AE802400589766 /* DispatchQueue+Ext.swift in Sources */,
@@ -1984,6 +2019,7 @@
 				82F638CC217DC25600410318 /* CIDRAddress.swift in Sources */,
 				9C454EB01E081DF700BD2AFA /* CircleProgressLayer.swift in Sources */,
 				821429B722FC2BE90056B8FF /* Result.swift in Sources */,
+				82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */,
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
 				82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */,
 				82061F67238D2730009DDF4D /* PingManager.swift in Sources */,
