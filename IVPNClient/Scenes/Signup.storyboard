@@ -552,6 +552,8 @@
                             <outlet property="dataSource" destination="tBH-nr-wv3" id="D6b-Nb-JY8"/>
                             <outlet property="delegate" destination="tBH-nr-wv3" id="4CP-bT-dVU"/>
                             <outlet property="messageLabel" destination="ePG-jY-ehS" id="84O-sD-CkY"/>
+                            <outlet property="proView" destination="2Ea-Dw-ewM" id="McR-7D-U0o"/>
+                            <outlet property="standardView" destination="qOY-q9-zA8" id="mY6-vc-iGn"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select IVPN product" id="GNb-Zt-1xj">
