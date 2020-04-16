@@ -271,6 +271,7 @@
                         <viewLayoutGuide key="safeArea" id="wkR-lU-nw1"/>
                         <connections>
                             <outlet property="accountLabel" destination="67P-Iu-XlG" id="g9H-i5-nzd"/>
+                            <outlet property="accountView" destination="lGe-se-bbf" id="rRa-c3-MjL"/>
                             <outlet property="messageLabel" destination="LFY-xS-QHE" id="XiA-xX-jDo"/>
                         </connections>
                     </view>
