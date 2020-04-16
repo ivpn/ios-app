@@ -170,7 +170,7 @@
         <!--Hooray!-->
         <scene sceneID="u3u-TB-jtU">
             <objects>
-                <viewController id="spu-nQ-a1v" customClass="CreateAccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="formSheet" id="spu-nQ-a1v" customClass="CreateAccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zFS-Rd-d7a" customClass="CreateAccountView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -342,7 +342,7 @@
         <!--Navigation Controller-->
         <scene sceneID="cyL-IY-0fL">
             <objects>
-                <navigationController storyboardIdentifier="loginView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TaW-sx-eod" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TaW-sx-eod" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rHQ-EK-bSh">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -434,7 +434,7 @@
         <!--Navigation Controller-->
         <scene sceneID="DiP-nH-p1J">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Vr-55-vgw" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="3Vr-55-vgw" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="E9p-k0-02K">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
