@@ -166,6 +166,7 @@
 		82BBF26921AE802400589766 /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */; };
 		82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */; };
 		82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF27021AECC8100589766 /* UILabel+Ext.swift */; };
+		82BF32F624484E5100248E4F /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BF32F524484E5100248E4F /* CreateAccountView.swift */; };
 		82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */; };
 		82C215EC23992F6900E639F8 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */; };
 		82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293BE21CCD49A000B74EC /* NavigationController.swift */; };
@@ -480,6 +481,7 @@
 		82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Ext.swift"; sourceTree = "<group>"; };
 		82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		82BBF27021AECC8100589766 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
+		82BF32F524484E5100248E4F /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
 		82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		82C293BE21CCD49A000B74EC /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -1116,6 +1118,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		82BF32F424484E3800248E4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82BF32F524484E5100248E4F /* CreateAccountView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		82DEF01B2447149000CCB5CD /* Signup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1150,6 +1160,7 @@
 		82DEF0222447280300CCB5CD /* CreateAccount */ = {
 			isa = PBXGroup;
 			children = (
+				82BF32F424484E3800248E4F /* View */,
 				82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */,
 			);
 			path = CreateAccount;
@@ -1944,6 +1955,7 @@
 				82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */,
 				9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */,
 				8205963D2245264300011091 /* UITableViewController+Ext.swift in Sources */,
+				82BF32F624484E5100248E4F /* CreateAccountView.swift in Sources */,
 				82774855237596DF0061BD46 /* OpenVPNConf.swift in Sources */,
 				82589A2B21FB5A580009CC6C /* UIImage+Ext.swift in Sources */,
 				829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */,
