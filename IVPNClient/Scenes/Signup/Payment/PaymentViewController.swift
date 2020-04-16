@@ -8,7 +8,13 @@
 
 import UIKit
 
-class PaymentViewController: UIViewController {
+class PaymentViewController: UITableViewController {
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
     
     // MARK: - View lifecycle -
     
@@ -25,12 +31,8 @@ class PaymentViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-    }
-    
-    @objc private func backButtonPressed(sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
     }
     
 }
