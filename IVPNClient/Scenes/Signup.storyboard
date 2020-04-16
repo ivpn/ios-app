@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Log in to your account-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController modalPresentationStyle="formSheet" id="BYZ-38-t0r" customClass="LoginViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="mLW-w8-CLX">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYK-dw-X2I" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wsH-wX-xZq">
+                                                <rect key="frame" x="69" y="62" width="276" height="50"/>
+                                                <subviews>
+                                                    <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="ivpnXXXXXXXX" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Hx4-AY-bCY" customClass="UITextFieldPadding" customModule="IVPNClient" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="276" height="50"/>
+                                                        <color key="backgroundColor" name="ivpnGray2"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" textContentType="username"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noD-gn-rO6">
+                                                        <rect key="frame" x="231" y="5" width="40" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="VV0-wF-Qku"/>
+                                                            <constraint firstAttribute="width" constant="40" id="zvA-ca-FRj"/>
+                                                        </constraints>
+                                                        <state key="normal" image="icon-qr-code"/>
+                                                        <connections>
+                                                            <action selector="openScanner:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PqY-Hu-yhc"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="Hx4-AY-bCY" secondAttribute="bottom" id="EPe-e7-6tL"/>
+                                                    <constraint firstItem="noD-gn-rO6" firstAttribute="top" secondItem="wsH-wX-xZq" secondAttribute="top" constant="5" id="EVn-I2-f6d"/>
+                                                    <constraint firstAttribute="trailing" secondItem="noD-gn-rO6" secondAttribute="trailing" constant="5" id="Ke2-84-66Q"/>
+                                                    <constraint firstItem="Hx4-AY-bCY" firstAttribute="leading" secondItem="wsH-wX-xZq" secondAttribute="leading" id="OWA-cH-Z5o"/>
+                                                    <constraint firstAttribute="height" constant="50" id="UAE-zQ-Nny"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Hx4-AY-bCY" secondAttribute="trailing" id="UGg-5k-cjk"/>
+                                                    <constraint firstAttribute="width" constant="276" id="hIE-HL-zsq"/>
+                                                    <constraint firstItem="Hx4-AY-bCY" firstAttribute="top" secondItem="wsH-wX-xZq" secondAttribute="top" id="qGi-rr-vs1"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51o-0K-ge0">
+                                                <rect key="frame" x="69" y="152" width="276" height="50"/>
+                                                <color key="backgroundColor" name="ivpnBlue"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="276" id="Ugg-t0-Eie"/>
+                                                    <constraint firstAttribute="height" constant="50" id="ice-WA-180"/>
+                                                </constraints>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Log In">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="loginToAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jYN-zM-qKE"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-v0-Dhq">
+                                                <rect key="frame" x="69" y="218" width="276" height="50"/>
+                                                <color key="backgroundColor" name="ivpnGray14"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="276" id="Vrb-wX-nuj"/>
+                                                    <constraint firstAttribute="height" constant="50" id="kvo-t4-cN4"/>
+                                                </constraints>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Create Account">
+                                                    <color key="titleColor" name="ivpnLabelSecondary"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="3Vr-55-vgw" kind="presentation" id="4eo-kB-QcK"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Account ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaq-vw-vSn">
+                                                <rect key="frame" x="62" y="30" width="290" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="lHB-hp-UWo"/>
+                                                    <constraint firstAttribute="width" constant="290" id="xEj-4J-bHv"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" name="ivpnLabelQuaternary"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Oaq-vw-vSn" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="GCj-u8-AZn"/>
+                                            <constraint firstItem="51o-0K-ge0" firstAttribute="top" secondItem="wsH-wX-xZq" secondAttribute="bottom" constant="40" id="Xad-zk-HGz"/>
+                                            <constraint firstItem="wsH-wX-xZq" firstAttribute="top" secondItem="Oaq-vw-vSn" secondAttribute="bottom" constant="12" id="c0M-pC-F7x"/>
+                                            <constraint firstItem="51o-0K-ge0" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="cdc-ax-8DZ"/>
+                                            <constraint firstItem="Oaq-vw-vSn" firstAttribute="top" secondItem="BYK-dw-X2I" secondAttribute="top" constant="30" id="oQX-P1-OEP"/>
+                                            <constraint firstItem="eXe-v0-Dhq" firstAttribute="top" secondItem="51o-0K-ge0" secondAttribute="bottom" constant="16" id="qcZ-NF-5Vg"/>
+                                            <constraint firstItem="eXe-v0-Dhq" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="vCl-zW-vYV"/>
+                                            <constraint firstItem="wsH-wX-xZq" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="xO7-YW-2Mq"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="BYK-dw-X2I" secondAttribute="bottom" id="2Ba-Cd-wYj"/>
+                                    <constraint firstItem="BYK-dw-X2I" firstAttribute="top" secondItem="mLW-w8-CLX" secondAttribute="top" id="VC1-PA-I1W"/>
+                                    <constraint firstAttribute="trailing" secondItem="BYK-dw-X2I" secondAttribute="trailing" id="WbM-q4-Yis"/>
+                                    <constraint firstItem="BYK-dw-X2I" firstAttribute="leading" secondItem="mLW-w8-CLX" secondAttribute="leading" id="kDp-Px-Tna"/>
+                                    <constraint firstItem="BYK-dw-X2I" firstAttribute="centerX" secondItem="mLW-w8-CLX" secondAttribute="centerX" id="pYm-0k-7NU"/>
+                                    <constraint firstItem="BYK-dw-X2I" firstAttribute="centerY" secondItem="mLW-w8-CLX" secondAttribute="centerY" id="rdK-XF-1k5"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mLW-w8-CLX" secondAttribute="bottom" id="dEg-h5-N9f"/>
+                            <constraint firstAttribute="trailing" secondItem="mLW-w8-CLX" secondAttribute="trailing" id="isz-pz-O5a"/>
+                            <constraint firstItem="mLW-w8-CLX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="seM-Vq-IaZ"/>
+                            <constraint firstItem="mLW-w8-CLX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vJ6-eX-RVN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Mxq-9C-Wgq"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Log in to your account" id="KqI-NH-rba">
+                        <barButtonItem key="backBarButtonItem" title="Log In" id="2Kc-uL-g2E"/>
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="IM8-Ul-Szc">
+                            <connections>
+                                <action selector="dismissViewController:" destination="BYZ-38-t0r" id="66m-m4-9vM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="scannerButton" destination="noD-gn-rO6" id="WD1-7o-MJS"/>
+                        <outlet property="userName" destination="Hx4-AY-bCY" id="0sY-d1-uGd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1513.0434782608697" y="47.544642857142854"/>
+        </scene>
+        <!--Hooray!-->
+        <scene sceneID="u3u-TB-jtU">
+            <objects>
+                <viewController id="spu-nQ-a1v" customClass="CreateAccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zFS-Rd-d7a">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="wkR-lU-nw1"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Hooray!" id="eEZ-46-KCv">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="7NX-OK-fX1">
+                            <connections>
+                                <action selector="dismissViewController:" destination="spu-nQ-a1v" id="jB9-lx-nfH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1" style="plain" id="ewI-as-s10"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="tBH-nr-wv3" kind="show" id="vCU-KQ-uza"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pqK-FQ-x5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3370" y="-229"/>
+        </scene>
+        <!--Select IVPN product-->
+        <scene sceneID="rgD-Na-x65">
+            <objects>
+                <tableViewController id="tBH-nr-wv3" customClass="SelectPlanViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WSh-pq-wUH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="88p-3D-F4q">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="88p-3D-F4q" id="Grr-60-n61">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tBH-nr-wv3" id="D6b-Nb-JY8"/>
+                            <outlet property="delegate" destination="tBH-nr-wv3" id="4CP-bT-dVU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select IVPN product" id="GNb-Zt-1xj">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-2" style="plain" id="ThM-nh-AQD"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="hXj-ed-oVT" kind="show" id="HUc-V2-zUH"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CQ2-NM-xcV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4293" y="-229"/>
+        </scene>
+        <!--Continue to payment-->
+        <scene sceneID="aiV-b0-xge">
+            <objects>
+                <viewController id="hXj-ed-oVT" customClass="PaymentViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X49-2G-ar8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="hrI-es-y7a"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Continue to payment" id="6Us-su-Cbx">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="plain" id="qRz-Ei-UfG"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0wQ-Xt-fHS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5206" y="-229"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cyL-IY-0fL">
+            <objects>
+                <navigationController storyboardIdentifier="loginView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TaW-sx-eod" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rHQ-EK-bSh">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="CKq-Pu-5QV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZeN-hn-jV7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="602.89855072463774" y="47.544642857142854"/>
+        </scene>
+        <!--Scan QR code-->
+        <scene sceneID="OfJ-Z4-zb2">
+            <objects>
+                <viewController id="YcU-dg-mBO" customClass="ScannerViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dlJ-fa-QlH"/>
+                        <viewControllerLayoutGuide type="bottom" id="0cH-lQ-ls5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i8u-z0-tev" customClass="ScannerView" customModule="IVPNClient" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your QR code under the User Profile menu on any other device with IVPN installed and scan it" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWI-gs-0Hz">
+                                <rect key="frame" x="57" y="116" width="300" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="9K0-5D-rbb"/>
+                                    <constraint firstAttribute="width" constant="300" id="laf-pe-L4Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" name="ivpnLabelQuaternary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQa-b7-cZc">
+                                <rect key="frame" x="0.0" y="251" width="414" height="645"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="eQa-b7-cZc" secondAttribute="bottom" id="Jsk-5d-lt0"/>
+                            <constraint firstItem="IWI-gs-0Hz" firstAttribute="centerX" secondItem="i8u-z0-tev" secondAttribute="centerX" id="QsY-Va-lQi"/>
+                            <constraint firstAttribute="trailing" secondItem="eQa-b7-cZc" secondAttribute="trailing" id="bHs-DY-jsv"/>
+                            <constraint firstItem="eQa-b7-cZc" firstAttribute="leading" secondItem="i8u-z0-tev" secondAttribute="leading" id="cx0-q9-jmj"/>
+                            <constraint firstItem="IWI-gs-0Hz" firstAttribute="top" secondItem="dlJ-fa-QlH" secondAttribute="bottom" constant="28" id="edK-6H-YQl"/>
+                            <constraint firstItem="eQa-b7-cZc" firstAttribute="top" secondItem="IWI-gs-0Hz" secondAttribute="bottom" constant="45" id="yWR-Vq-QdN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JUN-Az-Acd"/>
+                        <connections>
+                            <outlet property="qrView" destination="eQa-b7-cZc" id="el1-YK-dIc"/>
+                            <outlet property="textLabel" destination="IWI-gs-0Hz" id="A73-CL-tuA"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Scan QR code" id="46Q-1E-UBo">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="Fls-Ak-HAz">
+                            <connections>
+                                <action selector="dismissViewController:" destination="YcU-dg-mBO" id="xco-NT-yrE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="scannerView" destination="i8u-z0-tev" id="4zl-ae-Y0C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pKV-6w-FVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1512" y="777"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ec5-yl-wa5">
+            <objects>
+                <navigationController storyboardIdentifier="scannerView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pfo-b9-U3n" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2DR-73-ZHo">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YcU-dg-mBO" kind="relationship" relationship="rootViewController" id="gyY-HV-t7x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5qT-dn-lgd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="603" y="777"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DiP-nH-p1J">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Vr-55-vgw" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="E9p-k0-02K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="spu-nQ-a1v" kind="relationship" relationship="rootViewController" id="O8m-gw-FW7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oxz-7G-BQ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2461" y="-229"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon-qr-code" width="24" height="24"/>
+        <image name="icon-step-1" width="48" height="8"/>
+        <image name="icon-step-2" width="48" height="8"/>
+        <image name="icon-step-3" width="48" height="8"/>
+        <namedColor name="ivpnBackgroundPrimary">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnBlue">
+            <color red="0.22352941176470589" green="0.5607843137254902" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnGray14">
+            <color red="0.92941176470588238" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnGray2">
+            <color red="0.87450980392156863" green="0.89803921568627454" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnLabelQuaternary">
+            <color red="0.42745098039215684" green="0.51764705882352946" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnLabelSecondary">
+            <color red="0.20000000000000001" green="0.32156862745098042" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

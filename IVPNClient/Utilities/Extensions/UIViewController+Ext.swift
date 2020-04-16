@@ -1,5 +1,5 @@
 //
-//  WireGuardSettingsViewController.swift
+//  UIViewController+Ext.swift
 //  IVPN Client
 //
 //  Created by Juraj Hilje on 10/10/2018.
@@ -10,6 +10,19 @@ import UIKit
 import SafariServices
 
 extension UIViewController {
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func dismissViewController(_ sender: Any) {
+        if #available(iOS 13.0, *) {
+            if let presentationController = navigationController?.presentationController {
+                presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+            }
+        }
+        navigationController?.dismiss(animated: true)
+    }
+    
+    // MARK: - Methods -
     
     func logOut(deleteSession: Bool = true) {
         if deleteSession {
@@ -79,6 +92,23 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+}
+
+// MARK: - Presenter -
+
+extension UIViewController {
+    
+    func evaluateIsServiceActive() -> Bool {
+        guard Application.shared.serviceStatus.isActive else {
+            let viewController = NavigationManager.getSubscriptionViewController()
+            viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+            present(viewController, animated: true, completion: nil)
+            return false
+        }
+        
+        return true
     }
     
 }
