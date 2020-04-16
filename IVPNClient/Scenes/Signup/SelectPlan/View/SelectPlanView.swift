@@ -1,5 +1,5 @@
 //
-//  CreateAccountView.swift
+//  SelectPlanView.swift
 //  IVPNClient
 //
 //  Created by Juraj Hilje on 16/04/2020.
@@ -9,13 +9,13 @@
 import UIKit
 import Bamboo
 
-class CreateAccountView: UIView {
+class SelectPlanView: UITableView {
     
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var accountLabel: UILabel!
-    @IBOutlet weak var accountView: UIView!
+    @IBOutlet weak var standardView: UIStackView!
+    @IBOutlet weak var proView: UIStackView!
     
     // MARK: - View lifecycle -
     
@@ -30,7 +30,8 @@ class CreateAccountView: UIView {
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             messageLabel.bb.left(21).right(-21)
-            accountView.bb.left(21).right(-21)
+            standardView.bb.left(21).right(-21)
+            proView.bb.left(21).right(-21)
         }
         
     }
