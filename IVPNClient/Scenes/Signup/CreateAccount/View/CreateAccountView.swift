@@ -17,8 +17,6 @@ class CreateAccountView: UIView {
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var accountView: UIView!
     
-    // MARK: - Properties -
-    
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
