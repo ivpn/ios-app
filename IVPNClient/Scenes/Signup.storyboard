@@ -174,7 +174,100 @@
                     <view key="view" contentMode="scaleToFill" id="zFS-Rd-d7a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5og-hw-zWP">
+                                <rect key="frame" x="67" y="723" width="280" height="50"/>
+                                <color key="backgroundColor" name="ivpnBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="xTT-8z-OBG"/>
+                                    <constraint firstAttribute="width" constant="280" id="zag-Hk-zdT"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Select your plan to continue">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="tBH-nr-wv3" kind="show" id="Dvm-7M-y0g"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGe-se-bbf">
+                                <rect key="frame" x="17" y="345.5" width="380" height="151"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account ID:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAa-Cw-zd2">
+                                        <rect key="frame" x="0.0" y="0.0" width="380" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="mkI-gs-Een"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" name="ivpnLabelTertiary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ivpnXXXXXXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67P-Iu-XlG">
+                                        <rect key="frame" x="0.0" y="28" width="380" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Dhn-8d-6BU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
+                                        <color key="textColor" name="ivpnLabelPrimary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please make sure you save your Account ID in a safe place, you will use it to connect to the VPN." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Csb-Ed-uVt">
+                                        <rect key="frame" x="0.0" y="73" width="380" height="78"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="78" id="rF3-Xt-JLg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" name="ivpnLabelTertiary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpl-Iv-Uwu">
+                                        <rect key="frame" x="355" y="31" width="25" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="gFK-uv-fdm"/>
+                                            <constraint firstAttribute="height" constant="34" id="wvK-aC-LJr"/>
+                                        </constraints>
+                                        <state key="normal" image="icon-copy"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="rAa-Cw-zd2" firstAttribute="leading" secondItem="lGe-se-bbf" secondAttribute="leading" id="7Rf-mW-6Pa"/>
+                                    <constraint firstAttribute="trailing" secondItem="Csb-Ed-uVt" secondAttribute="trailing" id="BNL-jD-VoE"/>
+                                    <constraint firstItem="Csb-Ed-uVt" firstAttribute="leading" secondItem="lGe-se-bbf" secondAttribute="leading" id="DOo-Tp-BXT"/>
+                                    <constraint firstAttribute="bottom" secondItem="Csb-Ed-uVt" secondAttribute="bottom" id="DaA-dx-cyx"/>
+                                    <constraint firstAttribute="trailing" secondItem="zpl-Iv-Uwu" secondAttribute="trailing" id="FfA-FW-yPv"/>
+                                    <constraint firstAttribute="trailing" secondItem="rAa-Cw-zd2" secondAttribute="trailing" id="GDc-XI-aEE"/>
+                                    <constraint firstItem="zpl-Iv-Uwu" firstAttribute="top" secondItem="rAa-Cw-zd2" secondAttribute="bottom" constant="11" id="KUa-gL-tGt"/>
+                                    <constraint firstAttribute="height" constant="151" id="RUU-7l-irF"/>
+                                    <constraint firstItem="67P-Iu-XlG" firstAttribute="top" secondItem="rAa-Cw-zd2" secondAttribute="bottom" constant="8" id="V8f-97-fQp"/>
+                                    <constraint firstAttribute="trailing" secondItem="67P-Iu-XlG" secondAttribute="trailing" id="WmZ-Ll-hs6"/>
+                                    <constraint firstItem="67P-Iu-XlG" firstAttribute="leading" secondItem="lGe-se-bbf" secondAttribute="leading" id="jLi-D4-H3C"/>
+                                    <constraint firstItem="rAa-Cw-zd2" firstAttribute="top" secondItem="lGe-se-bbf" secondAttribute="top" id="jcE-0h-uNW"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your account has been created." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-xS-QHE">
+                                <rect key="frame" x="17" y="86" width="380" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" name="ivpnLabelPrimary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="lGe-se-bbf" firstAttribute="centerY" secondItem="zFS-Rd-d7a" secondAttribute="centerY" id="7nD-jf-9sf"/>
+                            <constraint firstItem="wkR-lU-nw1" firstAttribute="trailing" secondItem="LFY-xS-QHE" secondAttribute="trailing" constant="17" id="D5U-UE-BOa"/>
+                            <constraint firstItem="wkR-lU-nw1" firstAttribute="bottom" secondItem="5og-hw-zWP" secondAttribute="bottom" constant="35" id="EZi-mu-tOS"/>
+                            <constraint firstItem="LFY-xS-QHE" firstAttribute="top" secondItem="wkR-lU-nw1" secondAttribute="top" constant="30" id="HeJ-fI-bEW"/>
+                            <constraint firstItem="5og-hw-zWP" firstAttribute="centerX" secondItem="zFS-Rd-d7a" secondAttribute="centerX" id="JKi-ja-nL4"/>
+                            <constraint firstItem="LFY-xS-QHE" firstAttribute="leading" secondItem="wkR-lU-nw1" secondAttribute="leading" constant="17" id="gsX-EM-NOP"/>
+                            <constraint firstItem="lGe-se-bbf" firstAttribute="leading" secondItem="wkR-lU-nw1" secondAttribute="leading" constant="17" id="n2j-z6-GuK"/>
+                            <constraint firstItem="wkR-lU-nw1" firstAttribute="trailing" secondItem="lGe-se-bbf" secondAttribute="trailing" constant="17" id="nsd-W2-Ls1"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="wkR-lU-nw1"/>
                     </view>
                     <navigationItem key="navigationItem" title="Hooray!" id="eEZ-46-KCv">
@@ -185,13 +278,10 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1" style="plain" id="ewI-as-s10"/>
                     </navigationItem>
-                    <connections>
-                        <segue destination="tBH-nr-wv3" kind="show" id="vCU-KQ-uza"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pqK-FQ-x5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3370" y="-229"/>
+            <point key="canvasLocation" x="3369.5652173913045" y="-229.01785714285714"/>
         </scene>
         <!--Select IVPN product-->
         <scene sceneID="rgD-Na-x65">
@@ -357,6 +447,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon-copy" width="66" height="91"/>
         <image name="icon-qr-code" width="24" height="24"/>
         <image name="icon-step-1" width="48" height="8"/>
         <image name="icon-step-2" width="48" height="8"/>
@@ -373,11 +464,17 @@
         <namedColor name="ivpnGray2">
             <color red="0.87450980392156863" green="0.89803921568627454" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="ivpnLabelPrimary">
+            <color red="0.14901960784313725" green="0.22352941176470589" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ivpnLabelQuaternary">
             <color red="0.42745098039215684" green="0.51764705882352946" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ivpnLabelSecondary">
             <color red="0.20000000000000001" green="0.32156862745098042" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnLabelTertiary">
+            <color red="0.20000000000000001" green="0.30196078431372547" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
