@@ -215,6 +215,7 @@
 		82E716992181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E716952181E96F00D6B7C2 /* OpenVPNProtocol.swift */; };
 		82E7169A2181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E716952181E96F00D6B7C2 /* OpenVPNProtocol.swift */; };
 		82E7880C22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7880B22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift */; };
+		82E81AE72449C44F00D81FB7 /* PaymentComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E81AE62449C44F00D81FB7 /* PaymentComponentView.swift */; };
 		82E96A4B224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E96A4A224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift */; };
 		82EA857A21DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */; };
 		82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F189A1225CE8A90038ABA0 /* UIView+Ext.swift */; };
@@ -523,6 +524,7 @@
 		82E7168F2181E90500D6B7C2 /* ConnectionSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionSettings.swift; sourceTree = "<group>"; };
 		82E716952181E96F00D6B7C2 /* OpenVPNProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenVPNProtocol.swift; sourceTree = "<group>"; };
 		82E7880B22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NETunnelProviderProtocol+Ext.swift"; sourceTree = "<group>"; };
+		82E81AE62449C44F00D81FB7 /* PaymentComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentComponentView.swift; sourceTree = "<group>"; };
 		82E96A4A224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionKeyManagerTests.swift; sourceTree = "<group>"; };
 		82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StorageManager+OnDemandRuleTests.swift"; sourceTree = "<group>"; };
 		82F189A1225CE8A90038ABA0 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
@@ -1196,8 +1198,8 @@
 		82DEF0242447282E00CCB5CD /* Payment */ = {
 			isa = PBXGroup;
 			children = (
+				82E81AE52449C42C00D81FB7 /* View */,
 				82DEF0292447288100CCB5CD /* PaymentViewController.swift */,
-				8263D9BC24499C1D00A3D914 /* PaymentView.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -1213,6 +1215,15 @@
 				82B81E38235ED845005986E8 /* SessionManagerTests.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		82E81AE52449C42C00D81FB7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8263D9BC24499C1D00A3D914 /* PaymentView.swift */,
+				82E81AE62449C44F00D81FB7 /* PaymentComponentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		82F81A33224CF36000CB778B /* WireGuard */ = {
@@ -1987,6 +1998,7 @@
 				8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */,
 				8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */,
 				8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */,
+				82E81AE72449C44F00D81FB7 /* PaymentComponentView.swift in Sources */,
 				8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */,
 				82342100225F5302008A1D6E /* SubscriptionViewController.swift in Sources */,
 				9CB2CE281DAB807A007A4D2D /* ProgressIndicator.swift in Sources */,

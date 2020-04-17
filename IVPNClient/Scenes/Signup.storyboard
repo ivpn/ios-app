@@ -573,7 +573,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="NX1-n9-1FS">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="NX1-n9-1FS" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -595,29 +595,41 @@
                             <rect key="frame" x="0.0" y="370" width="414" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfB-xJ-uvR">
-                                    <rect key="frame" x="17" y="35" width="160" height="45"/>
-                                    <color key="backgroundColor" name="ivpnBlue"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLD-yW-M4d" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfB-xJ-uvR">
+                                            <rect key="frame" x="17" y="35" width="160" height="45"/>
+                                            <color key="backgroundColor" name="ivpnBlue"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="45" id="Ybe-Ih-f6L"/>
+                                                <constraint firstAttribute="width" constant="160" id="hZy-8t-UUB"/>
+                                            </constraints>
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <state key="normal" title="Pay">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="45" id="Ybe-Ih-f6L"/>
-                                        <constraint firstAttribute="width" constant="160" id="hZy-8t-UUB"/>
+                                        <constraint firstItem="RfB-xJ-uvR" firstAttribute="leading" secondItem="YLD-yW-M4d" secondAttribute="leading" constant="17" id="488-2A-YUO"/>
+                                        <constraint firstAttribute="bottom" secondItem="RfB-xJ-uvR" secondAttribute="bottom" id="t6E-Ls-BlS"/>
                                     </constraints>
-                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" title="Pay">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="8"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </button>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="RfB-xJ-uvR" secondAttribute="bottom" id="l6Z-J0-4xI"/>
-                                <constraint firstItem="RfB-xJ-uvR" firstAttribute="leading" secondItem="3fw-Yl-V8z" secondAttribute="leading" constant="17" id="lp1-5c-fMJ"/>
+                                <constraint firstItem="YLD-yW-M4d" firstAttribute="top" secondItem="3fw-Yl-V8z" secondAttribute="top" id="1cT-Qn-Zaw"/>
+                                <constraint firstAttribute="bottom" secondItem="YLD-yW-M4d" secondAttribute="bottom" id="1wx-XI-vml"/>
+                                <constraint firstItem="YLD-yW-M4d" firstAttribute="leading" secondItem="3fw-Yl-V8z" secondAttribute="leading" id="OMa-lU-5jk"/>
+                                <constraint firstAttribute="trailing" secondItem="YLD-yW-M4d" secondAttribute="trailing" id="hef-uY-aFv"/>
                             </constraints>
                         </view>
                         <sections>
@@ -630,34 +642,46 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN STANDARD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-hH-oiJ">
-                                                    <rect key="frame" x="17" y="19.5" width="150" height="30"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSt-lx-3LK" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN STANDARD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-hH-oiJ">
+                                                            <rect key="frame" x="17" y="19.5" width="150" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="EZR-5y-hs6"/>
+                                                                <constraint firstAttribute="width" constant="150" id="W62-an-CeX"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3sP-4K-ZXY">
+                                                            <rect key="frame" x="333" y="19.5" width="60" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="2SK-6t-3ni"/>
+                                                                <constraint firstAttribute="width" constant="60" id="8F2-EF-UWD"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <state key="normal" title="Change"/>
+                                                            <connections>
+                                                                <action selector="goBack" destination="GbE-hF-jVK" eventType="touchUpInside" id="Xn8-bY-XcQ"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="EZR-5y-hs6"/>
-                                                        <constraint firstAttribute="width" constant="150" id="W62-an-CeX"/>
+                                                        <constraint firstItem="4C3-hH-oiJ" firstAttribute="leading" secondItem="RSt-lx-3LK" secondAttribute="leading" constant="17" id="Obo-Ik-YXV"/>
+                                                        <constraint firstItem="4C3-hH-oiJ" firstAttribute="centerY" secondItem="RSt-lx-3LK" secondAttribute="centerY" id="SF0-ir-Nel"/>
+                                                        <constraint firstItem="3sP-4K-ZXY" firstAttribute="centerY" secondItem="RSt-lx-3LK" secondAttribute="centerY" id="fiZ-wj-OcB"/>
+                                                        <constraint firstAttribute="trailing" secondItem="3sP-4K-ZXY" secondAttribute="trailing" constant="21" id="lXS-jL-j19"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3sP-4K-ZXY">
-                                                    <rect key="frame" x="337" y="19.5" width="60" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="2SK-6t-3ni"/>
-                                                        <constraint firstAttribute="width" constant="60" id="8F2-EF-UWD"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <state key="normal" title="Change"/>
-                                                    <connections>
-                                                        <action selector="goBack" destination="GbE-hF-jVK" eventType="touchUpInside" id="Xn8-bY-XcQ"/>
-                                                    </connections>
-                                                </button>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="4C3-hH-oiJ" firstAttribute="leading" secondItem="81z-wZ-CTY" secondAttribute="leading" constant="17" id="3Vq-Bh-btS"/>
-                                                <constraint firstAttribute="trailing" secondItem="3sP-4K-ZXY" secondAttribute="trailing" constant="17" id="4sg-5q-rfO"/>
-                                                <constraint firstItem="3sP-4K-ZXY" firstAttribute="centerY" secondItem="81z-wZ-CTY" secondAttribute="centerY" id="Dkb-Qm-1oo"/>
-                                                <constraint firstItem="4C3-hH-oiJ" firstAttribute="centerY" secondItem="81z-wZ-CTY" secondAttribute="centerY" id="jQK-wZ-8bL"/>
+                                                <constraint firstItem="RSt-lx-3LK" firstAttribute="leading" secondItem="81z-wZ-CTY" secondAttribute="leading" id="51y-vg-wgv"/>
+                                                <constraint firstAttribute="bottom" secondItem="RSt-lx-3LK" secondAttribute="bottom" id="lYl-ds-PYc"/>
+                                                <constraint firstItem="RSt-lx-3LK" firstAttribute="top" secondItem="81z-wZ-CTY" secondAttribute="top" id="m5w-Av-woA"/>
+                                                <constraint firstAttribute="trailing" secondItem="RSt-lx-3LK" secondAttribute="trailing" id="mMB-r3-u7F"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -668,48 +692,59 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S3H-W6-0ef">
-                                                    <rect key="frame" x="17" y="24.5" width="16" height="16"/>
-                                                    <color key="backgroundColor" name="ivpnGray2"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oYK-c4-LvQ" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S3H-W6-0ef">
+                                                            <rect key="frame" x="17" y="24.5" width="16" height="16"/>
+                                                            <color key="backgroundColor" name="ivpnGray2"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="16" id="8UB-us-qsj"/>
+                                                                <constraint firstAttribute="width" constant="16" id="Nh4-dI-sbz"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DW-Ct-k5H">
+                                                            <rect key="frame" x="50" y="21.5" width="90" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="22" id="hS7-x5-Qmz"/>
+                                                                <constraint firstAttribute="width" constant="90" id="wsU-Wu-W4M"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$2.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cb3-VJ-fiH">
+                                                            <rect key="frame" x="303" y="21.5" width="90" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="90" id="0OP-UR-xBk"/>
+                                                                <constraint firstAttribute="height" constant="22" id="WTR-Fg-nMc"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="8UB-us-qsj"/>
-                                                        <constraint firstAttribute="width" constant="16" id="Nh4-dI-sbz"/>
+                                                        <constraint firstItem="5DW-Ct-k5H" firstAttribute="leading" secondItem="S3H-W6-0ef" secondAttribute="trailing" constant="17" id="6Vx-yw-ybh"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Cb3-VJ-fiH" secondAttribute="trailing" constant="21" id="RIA-76-LAk"/>
+                                                        <constraint firstItem="S3H-W6-0ef" firstAttribute="centerY" secondItem="oYK-c4-LvQ" secondAttribute="centerY" id="d2w-gA-I7V"/>
+                                                        <constraint firstItem="S3H-W6-0ef" firstAttribute="leading" secondItem="oYK-c4-LvQ" secondAttribute="leading" constant="17" id="eHN-Hj-AVQ"/>
+                                                        <constraint firstItem="Cb3-VJ-fiH" firstAttribute="centerY" secondItem="oYK-c4-LvQ" secondAttribute="centerY" id="gOb-GC-ByR"/>
+                                                        <constraint firstItem="5DW-Ct-k5H" firstAttribute="centerY" secondItem="oYK-c4-LvQ" secondAttribute="centerY" id="mbo-en-m3m"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DW-Ct-k5H">
-                                                    <rect key="frame" x="50" y="21.5" width="90" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="hS7-x5-Qmz"/>
-                                                        <constraint firstAttribute="width" constant="90" id="wsU-Wu-W4M"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$2.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cb3-VJ-fiH">
-                                                    <rect key="frame" x="304" y="21.5" width="90" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="90" id="0OP-UR-xBk"/>
-                                                        <constraint firstAttribute="height" constant="22" id="WTR-Fg-nMc"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="5DW-Ct-k5H" firstAttribute="leading" secondItem="S3H-W6-0ef" secondAttribute="trailing" constant="17" id="HZ1-8h-01u"/>
-                                                <constraint firstItem="Cb3-VJ-fiH" firstAttribute="trailing" secondItem="yDK-ND-p1L" secondAttribute="trailingMargin" id="Iix-J3-sMs"/>
-                                                <constraint firstItem="S3H-W6-0ef" firstAttribute="leading" secondItem="yDK-ND-p1L" secondAttribute="leading" constant="17" id="Mgq-iB-5Bl"/>
-                                                <constraint firstItem="Cb3-VJ-fiH" firstAttribute="centerY" secondItem="yDK-ND-p1L" secondAttribute="centerY" id="Nsm-Vq-LfY"/>
-                                                <constraint firstItem="5DW-Ct-k5H" firstAttribute="centerY" secondItem="yDK-ND-p1L" secondAttribute="centerY" id="XfA-18-iSr"/>
-                                                <constraint firstItem="S3H-W6-0ef" firstAttribute="centerY" secondItem="yDK-ND-p1L" secondAttribute="centerY" id="l65-aQ-Hz3"/>
+                                                <constraint firstItem="oYK-c4-LvQ" firstAttribute="top" secondItem="yDK-ND-p1L" secondAttribute="top" id="3Jv-ym-mZr"/>
+                                                <constraint firstItem="oYK-c4-LvQ" firstAttribute="leading" secondItem="yDK-ND-p1L" secondAttribute="leading" id="Jsi-8j-ite"/>
+                                                <constraint firstAttribute="bottom" secondItem="oYK-c4-LvQ" secondAttribute="bottom" id="X5o-aZ-8Re"/>
+                                                <constraint firstAttribute="trailing" secondItem="oYK-c4-LvQ" secondAttribute="trailing" id="aT3-Rl-CYa"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -720,48 +755,59 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CAM-xh-uBm">
-                                                    <rect key="frame" x="17" y="24.5" width="16" height="16"/>
-                                                    <color key="backgroundColor" name="ivpnGray2"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6v-PP-slO" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CAM-xh-uBm">
+                                                            <rect key="frame" x="17" y="24.5" width="16" height="16"/>
+                                                            <color key="backgroundColor" name="ivpnGray2"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="16" id="7q9-vK-c8E"/>
+                                                                <constraint firstAttribute="width" constant="16" id="l5m-Du-bZ9"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff0-sT-Dr0">
+                                                            <rect key="frame" x="50" y="21.5" width="90" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="22" id="BWg-MT-dPe"/>
+                                                                <constraint firstAttribute="width" constant="90" id="NLL-Uk-82f"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$6.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9i-Xx-SRC">
+                                                            <rect key="frame" x="303" y="21.5" width="90" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="22" id="e96-aB-EVx"/>
+                                                                <constraint firstAttribute="width" constant="90" id="qdQ-hA-7RA"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="7q9-vK-c8E"/>
-                                                        <constraint firstAttribute="width" constant="16" id="l5m-Du-bZ9"/>
+                                                        <constraint firstItem="ff0-sT-Dr0" firstAttribute="leading" secondItem="CAM-xh-uBm" secondAttribute="trailing" constant="17" id="8t6-PP-6DT"/>
+                                                        <constraint firstItem="CAM-xh-uBm" firstAttribute="leading" secondItem="Q6v-PP-slO" secondAttribute="leading" constant="17" id="JOO-TM-efa"/>
+                                                        <constraint firstAttribute="trailing" secondItem="G9i-Xx-SRC" secondAttribute="trailing" constant="21" id="PcI-Sh-YuQ"/>
+                                                        <constraint firstItem="G9i-Xx-SRC" firstAttribute="centerY" secondItem="Q6v-PP-slO" secondAttribute="centerY" id="Ry5-PK-aJc"/>
+                                                        <constraint firstItem="CAM-xh-uBm" firstAttribute="centerY" secondItem="Q6v-PP-slO" secondAttribute="centerY" id="VY3-oH-9hj"/>
+                                                        <constraint firstItem="ff0-sT-Dr0" firstAttribute="centerY" secondItem="Q6v-PP-slO" secondAttribute="centerY" id="zbw-jX-nDG"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff0-sT-Dr0">
-                                                    <rect key="frame" x="50" y="21.5" width="90" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="BWg-MT-dPe"/>
-                                                        <constraint firstAttribute="width" constant="90" id="NLL-Uk-82f"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$6.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9i-Xx-SRC">
-                                                    <rect key="frame" x="304" y="21.5" width="90" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="e96-aB-EVx"/>
-                                                        <constraint firstAttribute="width" constant="90" id="qdQ-hA-7RA"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="G9i-Xx-SRC" firstAttribute="centerY" secondItem="Xxc-8y-JCi" secondAttribute="centerY" id="DKn-sv-vBT"/>
-                                                <constraint firstItem="ff0-sT-Dr0" firstAttribute="leading" secondItem="CAM-xh-uBm" secondAttribute="trailing" constant="17" id="F3L-Zj-0gv"/>
-                                                <constraint firstItem="G9i-Xx-SRC" firstAttribute="trailing" secondItem="Xxc-8y-JCi" secondAttribute="trailingMargin" id="FWO-Mc-XsB"/>
-                                                <constraint firstItem="CAM-xh-uBm" firstAttribute="leading" secondItem="Xxc-8y-JCi" secondAttribute="leading" constant="17" id="Qmo-W9-7RZ"/>
-                                                <constraint firstItem="ff0-sT-Dr0" firstAttribute="centerY" secondItem="Xxc-8y-JCi" secondAttribute="centerY" id="dEz-lQ-BnX"/>
-                                                <constraint firstItem="CAM-xh-uBm" firstAttribute="centerY" secondItem="Xxc-8y-JCi" secondAttribute="centerY" id="suc-7s-Iny"/>
+                                                <constraint firstAttribute="bottom" secondItem="Q6v-PP-slO" secondAttribute="bottom" id="3ak-2I-IXK"/>
+                                                <constraint firstAttribute="trailing" secondItem="Q6v-PP-slO" secondAttribute="trailing" id="e7y-nz-FlC"/>
+                                                <constraint firstItem="Q6v-PP-slO" firstAttribute="leading" secondItem="Xxc-8y-JCi" secondAttribute="leading" id="eFQ-e8-e91"/>
+                                                <constraint firstItem="Q6v-PP-slO" firstAttribute="top" secondItem="Xxc-8y-JCi" secondAttribute="top" id="xb0-uP-hwg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -772,67 +818,78 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-check" translatesAutoresizingMaskIntoConstraints="NO" id="3Z5-SD-W6I">
-                                                    <rect key="frame" x="17" y="24.5" width="16" height="16"/>
-                                                    <color key="backgroundColor" name="ivpnGray2"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RyN-9Z-UyZ" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-check" translatesAutoresizingMaskIntoConstraints="NO" id="3Z5-SD-W6I">
+                                                            <rect key="frame" x="17" y="24.5" width="16" height="16"/>
+                                                            <color key="backgroundColor" name="ivpnGray2"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="16" id="Cwr-NC-07c"/>
+                                                                <constraint firstAttribute="height" constant="16" id="vaO-JN-7Qd"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8UP-a5-Suq">
+                                                            <rect key="frame" x="50" y="21.5" width="80" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="80" id="FWz-Fv-Vq7"/>
+                                                                <constraint firstAttribute="height" constant="22" id="Vrb-1F-tbh"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-20%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzJ-i2-Sqn">
+                                                            <rect key="frame" x="135" y="24" width="34" height="17"/>
+                                                            <color key="backgroundColor" red="0.98039215690000003" green="0.1843137255" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="34" id="IYV-LK-REq"/>
+                                                                <constraint firstAttribute="height" constant="17" id="KvB-XE-NeN"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$60.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UT9-wK-aHF">
+                                                            <rect key="frame" x="303" y="21.5" width="90" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="90" id="psi-uV-62d"/>
+                                                                <constraint firstAttribute="height" constant="22" id="soE-wA-MiR"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="16" id="Cwr-NC-07c"/>
-                                                        <constraint firstAttribute="height" constant="16" id="vaO-JN-7Qd"/>
+                                                        <constraint firstItem="UT9-wK-aHF" firstAttribute="centerY" secondItem="RyN-9Z-UyZ" secondAttribute="centerY" id="6Iz-cE-brN"/>
+                                                        <constraint firstItem="8UP-a5-Suq" firstAttribute="centerY" secondItem="RyN-9Z-UyZ" secondAttribute="centerY" id="OHp-1I-wR5"/>
+                                                        <constraint firstAttribute="trailing" secondItem="UT9-wK-aHF" secondAttribute="trailing" constant="21" id="RgL-2k-Xcg"/>
+                                                        <constraint firstItem="3Z5-SD-W6I" firstAttribute="centerY" secondItem="RyN-9Z-UyZ" secondAttribute="centerY" id="WYN-cJ-74d"/>
+                                                        <constraint firstItem="LzJ-i2-Sqn" firstAttribute="leading" secondItem="8UP-a5-Suq" secondAttribute="trailing" constant="5" id="aDa-gd-bKU"/>
+                                                        <constraint firstItem="LzJ-i2-Sqn" firstAttribute="centerY" secondItem="RyN-9Z-UyZ" secondAttribute="centerY" id="ddP-6t-Rny"/>
+                                                        <constraint firstItem="8UP-a5-Suq" firstAttribute="leading" secondItem="3Z5-SD-W6I" secondAttribute="trailing" constant="17" id="oS9-8A-obt"/>
+                                                        <constraint firstItem="3Z5-SD-W6I" firstAttribute="leading" secondItem="RyN-9Z-UyZ" secondAttribute="leading" constant="17" id="r5X-k6-AqE"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8UP-a5-Suq">
-                                                    <rect key="frame" x="50" y="21.5" width="80" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="FWz-Fv-Vq7"/>
-                                                        <constraint firstAttribute="height" constant="22" id="Vrb-1F-tbh"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$60.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UT9-wK-aHF">
-                                                    <rect key="frame" x="304" y="21.5" width="90" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="90" id="psi-uV-62d"/>
-                                                        <constraint firstAttribute="height" constant="22" id="soE-wA-MiR"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-20%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzJ-i2-Sqn">
-                                                    <rect key="frame" x="135" y="24" width="34" height="17"/>
-                                                    <color key="backgroundColor" red="0.98039215690000003" green="0.1843137255" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="34" id="IYV-LK-REq"/>
-                                                        <constraint firstAttribute="height" constant="17" id="KvB-XE-NeN"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="3"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="3Z5-SD-W6I" firstAttribute="centerY" secondItem="1CO-CW-g3H" secondAttribute="centerY" id="TW8-ER-I1T"/>
-                                                <constraint firstItem="LzJ-i2-Sqn" firstAttribute="leading" secondItem="8UP-a5-Suq" secondAttribute="trailing" constant="5" id="UUW-Pa-co9"/>
-                                                <constraint firstItem="8UP-a5-Suq" firstAttribute="centerY" secondItem="1CO-CW-g3H" secondAttribute="centerY" id="iWS-jh-29i"/>
-                                                <constraint firstItem="LzJ-i2-Sqn" firstAttribute="centerY" secondItem="1CO-CW-g3H" secondAttribute="centerY" id="ijQ-LV-A19"/>
-                                                <constraint firstItem="UT9-wK-aHF" firstAttribute="centerY" secondItem="1CO-CW-g3H" secondAttribute="centerY" id="iml-Yw-Ejz"/>
-                                                <constraint firstItem="UT9-wK-aHF" firstAttribute="trailing" secondItem="1CO-CW-g3H" secondAttribute="trailingMargin" id="nh2-Me-rze"/>
-                                                <constraint firstItem="3Z5-SD-W6I" firstAttribute="leading" secondItem="1CO-CW-g3H" secondAttribute="leading" constant="17" id="p3Z-ZN-xIP"/>
-                                                <constraint firstItem="8UP-a5-Suq" firstAttribute="leading" secondItem="3Z5-SD-W6I" secondAttribute="trailing" constant="17" id="ph7-O8-HoM"/>
+                                                <constraint firstItem="RyN-9Z-UyZ" firstAttribute="leading" secondItem="1CO-CW-g3H" secondAttribute="leading" id="7wD-W7-73C"/>
+                                                <constraint firstAttribute="bottom" secondItem="RyN-9Z-UyZ" secondAttribute="bottom" id="Dvb-DI-6DR"/>
+                                                <constraint firstItem="RyN-9Z-UyZ" firstAttribute="top" secondItem="1CO-CW-g3H" secondAttribute="top" id="bP0-PM-d31"/>
+                                                <constraint firstAttribute="trailing" secondItem="RyN-9Z-UyZ" secondAttribute="trailing" id="qzZ-Nl-Yg4"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
