@@ -8,7 +8,17 @@
 
 import UIKit
 
-class PaymentViewController: UIViewController {
+class PaymentViewController: UITableViewController {
+    
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var paymentView: PaymentView!
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
     
     // MARK: - View lifecycle -
     
@@ -25,12 +35,29 @@ class PaymentViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
     }
     
-    @objc private func backButtonPressed(sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
+}
+
+// MARK: - UITableViewDelegate -
+
+extension PaymentViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 1:
+            paymentView.period = .week
+        case 2:
+            paymentView.period = .month
+        case 3:
+            paymentView.period = .year
+        default:
+            break
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
