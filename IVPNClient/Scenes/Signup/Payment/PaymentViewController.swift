@@ -10,6 +10,10 @@ import UIKit
 
 class PaymentViewController: UITableViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var paymentView: PaymentView!
+    
     // MARK: - @IBActions -
     
     @IBAction func goBack() {
@@ -33,6 +37,27 @@ class PaymentViewController: UITableViewController {
         button.sizeToFit()
         button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+    }
+    
+}
+
+// MARK: - UITableViewDelegate -
+
+extension PaymentViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 1:
+            paymentView.period = .week
+        case 2:
+            paymentView.period = .month
+        case 3:
+            paymentView.period = .year
+        default:
+            break
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
