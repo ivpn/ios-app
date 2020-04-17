@@ -77,6 +77,8 @@
 		825D4EC9224A46F0002E7378 /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */; };
 		825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53922325709006C4F14 /* ApiManager.swift */; };
 		825D5D8821908B2600B781BA /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
+		8263D9BD24499C1D00A3D914 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263D9BC24499C1D00A3D914 /* PaymentView.swift */; };
+		8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */; };
 		826470C42446F67100403A14 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826470C32446F67100403A14 /* Signup.storyboard */; };
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */; };
@@ -414,6 +416,8 @@
 		825864A02237B1060081DC4B /* Bamboo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bamboo.framework; path = ../Carthage/Build/iOS/Bamboo.framework; sourceTree = "<group>"; };
 		82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
+		8263D9BC24499C1D00A3D914 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPeriod.swift; sourceTree = "<group>"; };
 		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
 		8269CD8E2164A8C700D083A1 /* servers-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "servers-dev.json"; sourceTree = "<group>"; };
@@ -934,6 +938,7 @@
 				8206E5CF22967E37003119AF /* UserActivityType.swift */,
 				8206E5D122967EAF003119AF /* UserActivityTitle.swift */,
 				823FFB062338DF1800F91A5D /* Capability.swift */,
+				8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1192,6 +1197,7 @@
 			isa = PBXGroup;
 			children = (
 				82DEF0292447288100CCB5CD /* PaymentViewController.swift */,
+				8263D9BC24499C1D00A3D914 /* PaymentView.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -1958,6 +1964,7 @@
 				8292E1A72174C10700123538 /* Peer.swift in Sources */,
 				820EA86E232264EC00E16B2D /* SuccessResult.swift in Sources */,
 				82D6AA1B215E167C00F21CAA /* UIViewController+Ext.swift in Sources */,
+				8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */,
 				826C56D222FD4F2600D2B76A /* ServiceStatus.swift in Sources */,
 				82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */,
 				822B85D921B941A200715691 /* NotificationName+Ext.swift in Sources */,
@@ -2012,6 +2019,7 @@
 				82D598C821A6ADF1000FABDE /* NetworkType.swift in Sources */,
 				9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */,
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
+				8263D9BD24499C1D00A3D914 /* PaymentView.swift in Sources */,
 				9C28337F1D9D3F060024C553 /* SignUpController.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,

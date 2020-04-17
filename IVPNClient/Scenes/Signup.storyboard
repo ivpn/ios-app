@@ -568,7 +568,7 @@
         <scene sceneID="Kfi-9P-415">
             <objects>
                 <tableViewController id="GbE-hF-jVK" customClass="PaymentViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eid-0U-lpC">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eid-0U-lpC" customClass="PaymentView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -841,6 +841,9 @@
                         <connections>
                             <outlet property="dataSource" destination="GbE-hF-jVK" id="e8L-Bl-eVH"/>
                             <outlet property="delegate" destination="GbE-hF-jVK" id="Hlw-7q-gLl"/>
+                            <outlet property="monthCellImage" destination="CAM-xh-uBm" id="qwr-HY-ay7"/>
+                            <outlet property="weekCellImage" destination="S3H-W6-0ef" id="mTe-YS-ZHd"/>
+                            <outlet property="yearCellImage" destination="3Z5-SD-W6I" id="JUP-01-v8T"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Continue to payment" id="Pcw-dt-qz8">
