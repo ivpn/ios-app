@@ -44,11 +44,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
-        guard KeyChain.tempUsername == nil else {
-            present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
-            return
-        }
-        
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Creating new account..."
         hud.show(in: (navigationController?.view)!)
