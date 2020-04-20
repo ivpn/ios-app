@@ -12,6 +12,7 @@ class KeyChain {
     
     private static let emailKey = "email"
     private static let usernameKey = "username"
+    private static let tempUsernameKey = "tempUsernameKey"
     private static let passwordKey = "password"
     private static let wgPublicKeyKey = "WGPublicKey"
     private static let wgPrivateKeyKey = "WGPrivateKey"
@@ -39,6 +40,15 @@ class KeyChain {
         }
         set {
             KeyChain.bundle[usernameKey] = newValue
+        }
+    }
+    
+    class var tempUsername: String? {
+        get {
+            return KeyChain.bundle[tempUsernameKey]
+        }
+        set {
+            KeyChain.bundle[tempUsernameKey] = newValue
         }
     }
     
@@ -128,6 +138,7 @@ class KeyChain {
     static func clearAll() {
         email = nil
         username = nil
+        tempUsername = nil
         password = nil
         wgPrivateKey = nil
         wgPublicKey = nil
