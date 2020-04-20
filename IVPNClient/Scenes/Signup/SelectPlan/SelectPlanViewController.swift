@@ -10,11 +10,42 @@ import UIKit
 
 class SelectPlanViewController: UITableViewController {
     
+    // MARK: - Properties -
+    
+    lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.hidesWhenStopped = true
+        spinner.startAnimating()
+        return spinner
+    }()
+    
+    var displayMode: DisplayMode! {
+        didSet {
+            switch displayMode {
+            case .loading?:
+                spinner.startAnimating()
+            case .content?:
+                spinner.stopAnimating()
+            case .error?:
+                spinner.stopAnimating()
+            case .none:
+                break
+            }
+        }
+    }
+    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigation()
+        setupLayout()
+        displayMode = .loading
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchProducts()
     }
     
     // MARK: - Private methods -
@@ -31,6 +62,36 @@ class SelectPlanViewController: UITableViewController {
     
     @objc private func backButtonPressed(sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func setupLayout() {
+        spinner.bb.center()
+    }
+    
+    private func fetchProducts() {
+        IAPManager.shared.fetchProducts { [weak self] products, error in
+            guard let self = self else { return }
+            
+            if error != nil {
+                self.showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
+                self.displayMode = .error
+                return
+            }
+            
+            if products != nil {
+                self.displayMode = .content
+            }
+        }
+    }
+    
+}
+
+extension SelectPlanViewController {
+    
+    enum DisplayMode {
+        case loading
+        case content
+        case error
     }
     
 }
