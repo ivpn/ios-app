@@ -233,6 +233,9 @@
                                             <constraint firstAttribute="height" constant="34" id="wvK-aC-LJr"/>
                                         </constraints>
                                         <state key="normal" image="icon-copy"/>
+                                        <connections>
+                                            <action selector="copyAccountID:" destination="spu-nQ-a1v" eventType="touchUpInside" id="yCF-cT-qpj"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -283,6 +286,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1" style="plain" id="ewI-as-s10"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="createAccountView" destination="zFS-Rd-d7a" id="RiB-fh-HFd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pqK-FQ-x5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

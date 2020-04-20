@@ -20,10 +20,15 @@ class CreateAccountView: UIView {
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
+        setupView()
         setupLayout()
     }
     
     // MARK: - Private methods -
+    
+    private func setupView() {
+        accountLabel.text = Application.shared.authentication.getStoredUsername()
+    }
     
     private func setupLayout() {
         messageLabel.sizeToFit()
