@@ -20,10 +20,15 @@ class CreateAccountView: UIView {
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
+        setupView()
         setupLayout()
     }
     
     // MARK: - Private methods -
+    
+    private func setupView() {
+        accountLabel.text = KeyChain.tempUsername ?? ""
+    }
     
     private func setupLayout() {
         messageLabel.sizeToFit()

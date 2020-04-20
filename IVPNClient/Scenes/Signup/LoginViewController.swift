@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
 
@@ -33,6 +34,7 @@ class LoginViewController: UIViewController {
     }()
     
     private var loginProcessStarted = false
+    private let hud = JGProgressHUD(style: .dark)
     
     // MARK: - @IBActions -
     
@@ -41,8 +43,27 @@ class LoginViewController: UIViewController {
         startLoginProcess()
     }
     
-    @IBAction func purchaseSubscription(_ sender: AnyObject) {
+    @IBAction func createAccount(_ sender: AnyObject) {
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Creating new account..."
+        hud.show(in: (navigationController?.view)!)
         
+        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
+        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
+            guard let self = self else { return }
+            
+            self.hud.dismiss()
+            
+            switch result {
+            case .success:
+                // TODO: Set account ID
+                KeyChain.tempUsername = "ivpnXXXXXXXX"
+                self.present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
+            case .failure:
+                // TODO: Implement error handling
+                break
+            }
+        }
     }
     
     @IBAction func openScanner(_ sender: AnyObject) {

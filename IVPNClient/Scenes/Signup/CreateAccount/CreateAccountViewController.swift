@@ -7,8 +7,25 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class CreateAccountViewController: UIViewController {
+    
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var createAccountView: CreateAccountView!
+    
+    // MARK: - Properties -
+    
+    private let hud = JGProgressHUD(style: .dark)
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func copyAccountID(_ sender: UIButton) {
+        guard let text = createAccountView.accountLabel.text else { return }
+        UIPasteboard.general.string = text
+        showFlashNotification(message: "Account ID copied to clipboard", presentInView: (navigationController?.view)!)
+    }
     
     // MARK: - View lifecycle -
     

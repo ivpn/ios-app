@@ -59,4 +59,9 @@ class NavigationManager {
         return navController!
     }
     
+    static func getCreateAccountViewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
+        return storyBoard.instantiateViewController(withIdentifier: "createAccountView")
+    }
+    
 }
