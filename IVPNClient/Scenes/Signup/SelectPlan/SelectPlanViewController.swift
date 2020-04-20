@@ -19,18 +19,30 @@ class SelectPlanViewController: UITableViewController {
         return spinner
     }()
     
+    lazy var retryButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(fetchProducts), for: .touchUpInside)
+        button.setTitle("Retry", for: .normal)
+        button.sizeToFit()
+        button.isHidden = true
+        return button
+    }()
+    
     var displayMode: DisplayMode! {
         didSet {
             switch displayMode {
             case .loading?:
                 spinner.startAnimating()
                 tableView.separatorStyle = .none
+                retryButton.isHidden = true
             case .content?:
                 spinner.stopAnimating()
                 tableView.separatorStyle = .singleLine
+                retryButton.isHidden = true
             case .error?:
                 spinner.stopAnimating()
                 tableView.separatorStyle = .none
+                retryButton.isHidden = false
             case .none:
                 break
             }
@@ -45,7 +57,6 @@ class SelectPlanViewController: UITableViewController {
         super.viewDidLoad()
         initNavigation()
         setupView()
-        displayMode = .loading
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,10 +82,15 @@ class SelectPlanViewController: UITableViewController {
     
     private func setupView() {
         view.addSubview(spinner)
-        spinner.bb.center()
+        view.addSubview(retryButton)
+        spinner.bb.centerX().centerY(-80)
+        retryButton.bb.centerX().centerY(-80)
+        displayMode = .loading
     }
     
-    private func fetchProducts() {
+    @objc private func fetchProducts() {
+        displayMode = .loading
+        
         IAPManager.shared.fetchProducts { [weak self] products, error in
             guard let self = self else { return }
             
