@@ -31,6 +31,8 @@ class SelectPlanViewController: UITableViewController {
             case .none:
                 break
             }
+            
+            tableView.reloadData()
         }
     }
     
@@ -82,6 +84,20 @@ class SelectPlanViewController: UITableViewController {
                 self.displayMode = .content
             }
         }
+    }
+    
+}
+
+// MARK: - UITableViewDelegate -
+
+extension SelectPlanViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard displayMode == .content else {
+            return 0
+        }
+        
+        return tableView.rowHeight
     }
     
 }
