@@ -41,8 +41,24 @@ class LoginViewController: UIViewController {
         startLoginProcess()
     }
     
-    @IBAction func purchaseSubscription(_ sender: AnyObject) {
+    @IBAction func createAccount(_ sender: AnyObject) {
+        guard KeyChain.username == nil else {
+            present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
+            return
+        }
         
+        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
+        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                KeyChain.username = "ivpnXXXXXXXX"
+                self.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
+            case .failure:
+                break
+            }
+        }
     }
     
     @IBAction func openScanner(_ sender: AnyObject) {
