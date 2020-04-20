@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func createAccount(_ sender: AnyObject) {
         guard KeyChain.username == nil else {
-            present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
+            present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
             return
         }
         
@@ -53,9 +53,11 @@ class LoginViewController: UIViewController {
             
             switch result {
             case .success:
+                // TODO: Set account ID
                 KeyChain.username = "ivpnXXXXXXXX"
-                self.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
+                self.present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
             case .failure:
+                // TODO: Implement error handling
                 break
             }
         }
