@@ -28,23 +28,21 @@ class SelectPlanViewController: UITableViewController {
         return button
     }()
     
-    var displayMode: DisplayMode! {
+    var displayMode: DisplayMode = .loading {
         didSet {
             switch displayMode {
-            case .loading?:
+            case .loading:
                 spinner.startAnimating()
                 tableView.separatorStyle = .none
                 retryButton.isHidden = true
-            case .content?:
+            case .content:
                 spinner.stopAnimating()
                 tableView.separatorStyle = .singleLine
                 retryButton.isHidden = true
-            case .error?:
+            case .error:
                 spinner.stopAnimating()
                 tableView.separatorStyle = .none
                 retryButton.isHidden = false
-            case .none:
-                break
             }
             
             tableView.reloadData()
@@ -61,7 +59,10 @@ class SelectPlanViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchProducts()
+        
+        if displayMode == .loading {
+            fetchProducts()
+        }
     }
     
     // MARK: - Private methods -
@@ -81,11 +82,11 @@ class SelectPlanViewController: UITableViewController {
     }
     
     private func setupView() {
+        tableView.separatorStyle = .none
         view.addSubview(spinner)
         view.addSubview(retryButton)
         spinner.bb.centerX().centerY(-80)
         retryButton.bb.centerX().centerY(-80)
-        displayMode = .loading
     }
     
     @objc private func fetchProducts() {
