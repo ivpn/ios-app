@@ -27,7 +27,7 @@ class CreateAccountView: UIView {
     // MARK: - Private methods -
     
     private func setupView() {
-        accountLabel.text = Application.shared.authentication.getStoredUsername()
+        accountLabel.text = KeyChain.tempUsername ?? ""
     }
     
     private func setupLayout() {
