@@ -24,10 +24,13 @@ class SelectPlanViewController: UITableViewController {
             switch displayMode {
             case .loading?:
                 spinner.startAnimating()
+                tableView.separatorStyle = .none
             case .content?:
                 spinner.stopAnimating()
+                tableView.separatorStyle = .singleLine
             case .error?:
                 spinner.stopAnimating()
+                tableView.separatorStyle = .none
             case .none:
                 break
             }
@@ -41,7 +44,7 @@ class SelectPlanViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigation()
-        setupLayout()
+        setupView()
         displayMode = .loading
     }
     
@@ -66,7 +69,8 @@ class SelectPlanViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    private func setupLayout() {
+    private func setupView() {
+        view.addSubview(spinner)
         spinner.bb.center()
     }
     
