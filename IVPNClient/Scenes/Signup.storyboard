@@ -898,8 +898,10 @@
                             <outlet property="dataSource" destination="GbE-hF-jVK" id="e8L-Bl-eVH"/>
                             <outlet property="delegate" destination="GbE-hF-jVK" id="Hlw-7q-gLl"/>
                             <outlet property="monthCellImage" destination="CAM-xh-uBm" id="qwr-HY-ay7"/>
+                            <outlet property="monthPriceLabel" destination="G9i-Xx-SRC" id="Loo-o3-pfH"/>
                             <outlet property="weekCellImage" destination="S3H-W6-0ef" id="mTe-YS-ZHd"/>
                             <outlet property="yearCellImage" destination="3Z5-SD-W6I" id="JUP-01-v8T"/>
+                            <outlet property="yearPriceLabel" destination="UT9-wK-aHF" id="mq9-WG-YNl"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Continue to payment" id="Pcw-dt-qz8">

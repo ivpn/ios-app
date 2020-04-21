@@ -29,6 +29,7 @@ class PaymentViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigation()
+        paymentView.updatePrices(collection: collection)
     }
     
     // MARK: - Private methods -

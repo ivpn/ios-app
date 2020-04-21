@@ -15,6 +15,8 @@ class PaymentView: UITableView {
     @IBOutlet weak var weekCellImage: UIImageView!
     @IBOutlet weak var monthCellImage: UIImageView!
     @IBOutlet weak var yearCellImage: UIImageView!
+    @IBOutlet weak var monthPriceLabel: UILabel!
+    @IBOutlet weak var yearPriceLabel: UILabel!
     
     // MARK: - Properties -
     
@@ -33,6 +35,21 @@ class PaymentView: UITableView {
                 weekCellImage.image = nil
                 monthCellImage.image = nil
                 yearCellImage.image = UIImage.init(named: "icon-check")
+            }
+        }
+    }
+    
+    // MARK: - Methods -
+    
+    func updatePrices(collection: [SubscriptionType]) {
+        for subscriptionType in collection {
+            switch subscriptionType.getDurationLabel() {
+            case "month":
+                monthPriceLabel.text = IAPManager.shared.productPrice(subscriptionType: subscriptionType)
+            case "year":
+                yearPriceLabel.text = IAPManager.shared.productPrice(subscriptionType: subscriptionType)
+            default:
+                break
             }
         }
     }
