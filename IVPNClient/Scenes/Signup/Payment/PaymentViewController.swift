@@ -14,6 +14,10 @@ class PaymentViewController: UITableViewController {
     
     @IBOutlet weak var paymentView: PaymentView!
     
+    // MARK: - Properties -
+    
+    var collection: [SubscriptionType] = []
+    
     // MARK: - @IBActions -
     
     @IBAction func goBack() {
