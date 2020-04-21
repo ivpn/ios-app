@@ -16,6 +16,8 @@ class SelectPlanView: UITableView {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var standardView: UIStackView!
     @IBOutlet weak var proView: UIStackView!
+    @IBOutlet weak var standardPriceLabel: UILabel!
+    @IBOutlet weak var proPriceLabel: UILabel!
     
     // MARK: - View lifecycle -
     
