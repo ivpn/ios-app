@@ -529,13 +529,18 @@
                             <outlet property="dataSource" destination="tBH-nr-wv3" id="D6b-Nb-JY8"/>
                             <outlet property="delegate" destination="tBH-nr-wv3" id="4CP-bT-dVU"/>
                             <outlet property="messageLabel" destination="ePG-jY-ehS" id="84O-sD-CkY"/>
+                            <outlet property="proPriceLabel" destination="dvG-K4-iso" id="Ttw-8s-HiY"/>
                             <outlet property="proView" destination="2Ea-Dw-ewM" id="McR-7D-U0o"/>
+                            <outlet property="standardPriceLabel" destination="wIG-i6-5Eb" id="mOg-rM-FGC"/>
                             <outlet property="standardView" destination="qOY-q9-zA8" id="mY6-vc-iGn"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select IVPN product" id="GNb-Zt-1xj">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-2" style="plain" id="ThM-nh-AQD"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="selectPlanView" destination="WSh-pq-wUH" id="sou-WB-jAQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQ2-NM-xcV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

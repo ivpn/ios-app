@@ -10,6 +10,10 @@ import UIKit
 
 class SelectPlanViewController: UITableViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var selectPlanView: SelectPlanView!
+    
     // MARK: - Properties -
     
     lazy var spinner: UIActivityIndicatorView = {
@@ -48,6 +52,9 @@ class SelectPlanViewController: UITableViewController {
             tableView.reloadData()
         }
     }
+    
+    var standardSubscription: SubscriptionType = .standard(.monthly)
+    var proSubscription: SubscriptionType = .pro(.monthly)
     
     // MARK: - View lifecycle -
     
