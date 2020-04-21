@@ -109,9 +109,24 @@ class SelectPlanViewController: UITableViewController {
             }
             
             if products != nil {
+                self.updateSubscriptions()
                 self.displayMode = .content
             }
         }
+    }
+    
+    private func updateSubscriptions() {
+        updateSubscription(type: standardSubscription, label: selectPlanView.standardPriceLabel)
+        updateSubscription(type: proSubscription, label: selectPlanView.proPriceLabel)
+    }
+    
+    private func updateSubscription(type: SubscriptionType, label: UILabel) {
+        guard !IAPManager.shared.products.isEmpty else { return }
+        let identifier = type.getProductId()
+        guard let product = IAPManager.shared.getProduct(identifier: identifier) else { return }
+        let price = IAPManager.shared.productPrice(product: product)
+        let duration = type.getDurationLabel()
+        label.text = "\(price) / \(duration)"
     }
     
 }
