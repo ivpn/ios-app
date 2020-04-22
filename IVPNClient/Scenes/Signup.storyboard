@@ -718,9 +718,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$2.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cb3-VJ-fiH">
-                                                            <rect key="frame" x="303" y="21.5" width="90" height="22"/>
+                                                            <rect key="frame" x="268" y="21.5" width="125" height="22"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="90" id="0OP-UR-xBk"/>
+                                                                <constraint firstAttribute="width" constant="125" id="0OP-UR-xBk"/>
                                                                 <constraint firstAttribute="height" constant="22" id="WTR-Fg-nMc"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
@@ -781,10 +781,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$6.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9i-Xx-SRC">
-                                                            <rect key="frame" x="303" y="21.5" width="90" height="22"/>
+                                                            <rect key="frame" x="268" y="21.5" width="125" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="22" id="e96-aB-EVx"/>
-                                                                <constraint firstAttribute="width" constant="90" id="qdQ-hA-7RA"/>
+                                                                <constraint firstAttribute="width" constant="125" id="qdQ-hA-7RA"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                             <color key="textColor" name="ivpnLabelPrimary"/>
@@ -861,9 +861,9 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$60.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UT9-wK-aHF">
-                                                            <rect key="frame" x="303" y="21.5" width="90" height="22"/>
+                                                            <rect key="frame" x="268" y="21.5" width="125" height="22"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="90" id="psi-uV-62d"/>
+                                                                <constraint firstAttribute="width" constant="125" id="psi-uV-62d"/>
                                                                 <constraint firstAttribute="height" constant="22" id="soE-wA-MiR"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
