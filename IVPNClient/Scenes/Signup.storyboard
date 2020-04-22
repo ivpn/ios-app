@@ -397,7 +397,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
-                                                                        <segue destination="GbE-hF-jVK" kind="show" id="SH9-gf-B1N"/>
+                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectStandardPlan" id="SH9-gf-B1N"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -499,7 +499,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
-                                                                        <segue destination="GbE-hF-jVK" kind="show" id="igR-S1-Kcs"/>
+                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectProPlan" id="igR-S1-Kcs"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -613,6 +613,9 @@
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="purchase:" destination="GbE-hF-jVK" eventType="touchUpInside" id="wEY-GG-jab"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -718,9 +721,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$2.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cb3-VJ-fiH">
-                                                            <rect key="frame" x="303" y="21.5" width="90" height="22"/>
+                                                            <rect key="frame" x="268" y="21.5" width="125" height="22"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="90" id="0OP-UR-xBk"/>
+                                                                <constraint firstAttribute="width" constant="125" id="0OP-UR-xBk"/>
                                                                 <constraint firstAttribute="height" constant="22" id="WTR-Fg-nMc"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
@@ -781,10 +784,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$6.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9i-Xx-SRC">
-                                                            <rect key="frame" x="303" y="21.5" width="90" height="22"/>
+                                                            <rect key="frame" x="268" y="21.5" width="125" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="22" id="e96-aB-EVx"/>
-                                                                <constraint firstAttribute="width" constant="90" id="qdQ-hA-7RA"/>
+                                                                <constraint firstAttribute="width" constant="125" id="qdQ-hA-7RA"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                             <color key="textColor" name="ivpnLabelPrimary"/>
@@ -861,9 +864,9 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$60.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UT9-wK-aHF">
-                                                            <rect key="frame" x="303" y="21.5" width="90" height="22"/>
+                                                            <rect key="frame" x="268" y="21.5" width="125" height="22"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="90" id="psi-uV-62d"/>
+                                                                <constraint firstAttribute="width" constant="125" id="psi-uV-62d"/>
                                                                 <constraint firstAttribute="height" constant="22" id="soE-wA-MiR"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
@@ -898,8 +901,10 @@
                             <outlet property="dataSource" destination="GbE-hF-jVK" id="e8L-Bl-eVH"/>
                             <outlet property="delegate" destination="GbE-hF-jVK" id="Hlw-7q-gLl"/>
                             <outlet property="monthCellImage" destination="CAM-xh-uBm" id="qwr-HY-ay7"/>
+                            <outlet property="monthPriceLabel" destination="G9i-Xx-SRC" id="Loo-o3-pfH"/>
                             <outlet property="weekCellImage" destination="S3H-W6-0ef" id="mTe-YS-ZHd"/>
                             <outlet property="yearCellImage" destination="3Z5-SD-W6I" id="JUP-01-v8T"/>
+                            <outlet property="yearPriceLabel" destination="UT9-wK-aHF" id="mq9-WG-YNl"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Continue to payment" id="Pcw-dt-qz8">
@@ -1025,7 +1030,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SH9-gf-B1N"/>
+        <segue reference="igR-S1-Kcs"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon-check" width="24" height="24"/>

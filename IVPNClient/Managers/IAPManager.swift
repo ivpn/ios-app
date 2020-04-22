@@ -134,6 +134,13 @@ class IAPManager {
         return formatter.string(from: product.price) ?? ""
     }
     
+    func productPrice(subscriptionType: SubscriptionType) -> String {
+        guard !IAPManager.shared.products.isEmpty else { return "" }
+        let identifier = subscriptionType.getProductId()
+        guard let product = IAPManager.shared.getProduct(identifier: identifier) else { return "" }
+        return IAPManager.shared.productPrice(product: product)
+    }
+    
     // MARK: - Private methods -
     
     private func purchaseParams(purchase: PurchaseDetails) -> [URLQueryItem] {
