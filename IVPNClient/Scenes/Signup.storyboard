@@ -397,7 +397,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
-                                                                        <segue destination="GbE-hF-jVK" kind="show" id="SH9-gf-B1N"/>
+                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectStandardPlan" id="SH9-gf-B1N"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -499,7 +499,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
-                                                                        <segue destination="GbE-hF-jVK" kind="show" id="igR-S1-Kcs"/>
+                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectProPlan" id="igR-S1-Kcs"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -1027,7 +1027,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SH9-gf-B1N"/>
+        <segue reference="igR-S1-Kcs"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon-check" width="24" height="24"/>

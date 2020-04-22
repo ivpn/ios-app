@@ -72,6 +72,20 @@ class SelectPlanViewController: UITableViewController {
         }
     }
     
+    // MARK: - Segues -
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "selectStandardPlan" {
+            let viewController = segue.destination as! PaymentViewController
+            viewController.collection = [.standard(.monthly), .standard(.yearly)]
+        }
+        
+        if segue.identifier == "selectProPlan" {
+            let viewController = segue.destination as! PaymentViewController
+            viewController.collection = [.pro(.monthly), .pro(.yearly)]
+        }
+    }
+    
     // MARK: - Private methods -
     
     private func initNavigation() {
