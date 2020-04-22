@@ -18,7 +18,7 @@ class PaymentViewController: UITableViewController {
     // MARK: - Properties -
     
     var collection: [SubscriptionType] = []
-    var selectedSubscription: SubscriptionType = .standard(.monthly)
+    var selectedSubscription: SubscriptionType = .standard(.yearly)
     
     var deviceCanMakePurchases: Bool {
         guard IAPManager.shared.canMakePurchases else {
@@ -44,6 +44,7 @@ class PaymentViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigation()
+        selectedSubscription = collection.last ?? .standard(.yearly)
         paymentView.updatePrices(collection: collection)
     }
     
