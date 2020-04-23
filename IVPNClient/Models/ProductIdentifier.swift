@@ -10,10 +10,10 @@ import Foundation
 
 struct ProductIdentifier {
     
-    static let standardYearly = "net.ivpn.autosubscriptions.standard.12month"
-    static let standardMonthly = "net.ivpn.autosubscriptions.standard.1month"
-    static let proYearly = "net.ivpn.autosubscriptions.12month"
-    static let proMonthly = "net.ivpn.autosubscriptions.1month"
+    static let standardMonthly = "net.ivpn.subscriptions.standard.month"
+    static let standardYearly = "net.ivpn.subscriptions.standard.year"
+    static let proMonthly = "net.ivpn.subscriptions.pro.month"
+    static let proYearly = "net.ivpn.subscriptions.pro.year"
     
     static var all: Set<String> {
         return [standardYearly, standardMonthly, proYearly, proMonthly]
