@@ -15,7 +15,10 @@ class MapScrollView: UIScrollView {
     
     var viewModel: ProofsViewModel! {
         didSet {
-            
+            let halfWidth = Double(size.width / 2)
+            let halfHeight = Double(size.height / 2)
+            let point = getCoordinatesBy(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude)
+            setContentOffset(CGPoint(x: point.0 - halfWidth, y: point.1 - halfHeight + (230 / 2) - 25), animated: true)
         }
     }
     
@@ -39,15 +42,19 @@ class MapScrollView: UIScrollView {
     
     private func placeServerLocationMarkers() {
         for server in Application.shared.serverList.servers {
-            let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
-            
-            let marker = UIView(frame: CGRect(x: point.0 - 3, y: point.1 - 3, width: 6, height: 6))
-            marker.layer.cornerRadius = 3
-            marker.clipsToBounds = true
-            marker.backgroundColor = .green
-            
-            addSubview(marker)
+            placeMarker(latitude: server.latitude, longitude: server.longitude)
         }
+    }
+    
+    private func placeMarker(latitude: Double, longitude: Double) {
+        let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
+        
+        let marker = UIView(frame: CGRect(x: point.0 - 3, y: point.1 - 3, width: 6, height: 6))
+        marker.layer.cornerRadius = 3
+        marker.clipsToBounds = true
+        marker.backgroundColor = .green
+        
+        addSubview(marker)
     }
     
     private func getCoordinatesBy(latitude: Double, longitude: Double) -> (Double, Double) {
