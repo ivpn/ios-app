@@ -11,11 +11,19 @@ import Bamboo
 
 class MapScrollView: UIScrollView {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var mapImageView: UIImageView!
+    
     // MARK: - Properties -
     
     var viewModel: ProofsViewModel! {
         didSet {
-            updateMapPosition(animated: true)
+            if oldValue == nil {
+                UIView.animate(withDuration: 0.5, animations: { self.mapImageView.alpha = 1 })
+            }
+            
+            updateMapPosition(animated: oldValue != nil)
         }
     }
     
