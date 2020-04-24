@@ -15,11 +15,7 @@ class MapScrollView: UIScrollView {
     
     var viewModel: ProofsViewModel! {
         didSet {
-            let halfWidth = Double(size.width / 2)
-            let halfHeight = Double(size.height / 2)
-            let point = getCoordinatesBy(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude)
-            let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.topAnchor)
-            setContentOffset(CGPoint(x: point.0 - halfWidth, y: point.1 - halfHeight + bottomOffset), animated: true)
+            updateMapPosition()
         }
     }
     
@@ -40,6 +36,16 @@ class MapScrollView: UIScrollView {
             iPadConstraints.deactivate()
         }
     }
+    
+    func updateMapPosition() {
+        let halfWidth = Double(size.width / 2)
+        let halfHeight = Double(size.height / 2)
+        let point = getCoordinatesBy(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude)
+        let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.topAnchor)
+        setContentOffset(CGPoint(x: point.0 - halfWidth, y: point.1 - halfHeight + bottomOffset), animated: true)
+    }
+    
+    // MARK: - Private methods -
     
     private func placeServerLocationMarkers() {
         for server in Application.shared.serverList.servers {
