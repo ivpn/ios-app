@@ -15,4 +15,6 @@ struct GeoLookup: Decodable {
     let city: String
     let isIvpnServer: Bool
     let isp: String
+    let latitude: Double
+    let longitude: Double
 }

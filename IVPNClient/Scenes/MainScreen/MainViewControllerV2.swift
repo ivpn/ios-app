@@ -125,6 +125,7 @@ class MainViewControllerV2: UIViewController {
             case .success(let model):
                 if let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController {
                     controlPanelViewController.connectionInfoViewModel = ProofsViewModel(model: model)
+                    self.mainView.connectionInfoViewModel = ProofsViewModel(model: model)
                 }
             case .failure:
                 break

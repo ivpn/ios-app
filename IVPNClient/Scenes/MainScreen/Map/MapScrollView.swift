@@ -13,6 +13,12 @@ class MapScrollView: UIScrollView {
     
     // MARK: - Properties -
     
+    var viewModel: ProofsViewModel! {
+        didSet {
+            
+        }
+    }
+    
     private lazy var iPadConstraints = bb.left(375).top(0).constraints.deactivate()
     
     // MARK: - View lifecycle -

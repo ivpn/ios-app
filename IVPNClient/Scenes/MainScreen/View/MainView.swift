@@ -18,6 +18,12 @@ class MainView: UIView {
     
     // MARK: - Properties -
     
+    var connectionInfoViewModel: ProofsViewModel! {
+        didSet {
+            mapScrollView.viewModel = connectionInfoViewModel
+        }
+    }
+    
     let markerView = MapMarkerView()
     private var infoAlertViewModel = InfoAlertViewModel()
     private let markerContainerView = MapMarkerContainerView()
