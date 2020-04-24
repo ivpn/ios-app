@@ -15,7 +15,7 @@ class MapScrollView: UIScrollView {
     
     var viewModel: ProofsViewModel! {
         didSet {
-            updateMapPosition()
+            updateMapPosition(animated: true)
         }
     }
     
@@ -37,7 +37,7 @@ class MapScrollView: UIScrollView {
         }
     }
     
-    func updateMapPosition() {
+    func updateMapPosition(animated: Bool = false) {
         guard let viewModel = viewModel else { return }
         
         let halfWidth = Double(UIScreen.main.bounds.width / 2)
@@ -45,7 +45,7 @@ class MapScrollView: UIScrollView {
         let point = getCoordinatesBy(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude)
         let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
         let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
-        setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: true)
+        setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
     }
     
     // MARK: - Private methods -
