@@ -25,7 +25,7 @@ class MapConstants {
                 return iPadLandscapeTopAnchor
             }
             
-            return topAnchor
+            return topAnchor + 10
         }
         
         static func getLeftAnchor() -> Int {

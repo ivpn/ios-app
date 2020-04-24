@@ -38,11 +38,14 @@ class MapScrollView: UIScrollView {
     }
     
     func updateMapPosition() {
-        let halfWidth = Double(size.width / 2)
-        let halfHeight = Double(size.height / 2)
+        guard let viewModel = viewModel else { return }
+        
+        let halfWidth = Double(UIScreen.main.bounds.width / 2)
+        let halfHeight = Double(UIScreen.main.bounds.height / 2)
         let point = getCoordinatesBy(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude)
-        let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.topAnchor)
-        setContentOffset(CGPoint(x: point.0 - halfWidth, y: point.1 - halfHeight + bottomOffset), animated: true)
+        let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
+        let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
+        setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: true)
     }
     
     // MARK: - Private methods -

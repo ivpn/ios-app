@@ -81,6 +81,7 @@ class MainView: UIView {
     
     private func setupConstraints() {
         mapScrollView.setupConstraints()
+        mapScrollView.updateMapPosition()
         markerContainerView.setupConstraints()
     }
     
