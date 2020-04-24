@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class MapConstants {
+class MapConstants {
     
-    public class Container {
+    class Container {
         static let leftAnchor = 0
         static let topAnchor = 25
         static let bottomAnchorA = 230

@@ -18,11 +18,12 @@ class MapScrollView: UIScrollView {
             let halfWidth = Double(size.width / 2)
             let halfHeight = Double(size.height / 2)
             let point = getCoordinatesBy(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude)
-            setContentOffset(CGPoint(x: point.0 - halfWidth, y: point.1 - halfHeight + (230 / 2) - 25), animated: true)
+            let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.topAnchor)
+            setContentOffset(CGPoint(x: point.0 - halfWidth, y: point.1 - halfHeight + bottomOffset), animated: true)
         }
     }
     
-    private lazy var iPadConstraints = bb.left(375).top(0).constraints.deactivate()
+    private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     
     // MARK: - View lifecycle -
     
