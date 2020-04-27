@@ -27,13 +27,12 @@ struct Service {
     
     var type: ServiceType
     var duration: ServiceDuration
-    var productId: String
     
     // MARK: - Methods -
     
     func priceText() -> String {
         guard !IAPManager.shared.products.isEmpty else { return "" }
-        guard let product = IAPManager.shared.getProduct(identifier: productId) else { return "" }
+        guard let product = IAPManager.shared.getProduct(identifier: productId()) else { return "" }
         return IAPManager.shared.productPrice(product: product)
     }
     
@@ -83,23 +82,54 @@ struct Service {
         }
     }
     
+    func productId() -> String {
+        switch type {
+        case .standard:
+            switch duration {
+            case .week:
+                return ProductIdentifier.standardWeek
+            case .month:
+                return ProductIdentifier.standardMonth
+            case .year:
+                return ProductIdentifier.standardYear
+            case .twoYears:
+                return ProductIdentifier.standardTwoYears
+            case .threeYears:
+                return ProductIdentifier.standardThreeYears
+            }
+        case .pro:
+            switch duration {
+            case .week:
+                return ProductIdentifier.proWeek
+            case .month:
+                return ProductIdentifier.proMonth
+            case .year:
+                return ProductIdentifier.proYear
+            case .twoYears:
+                return ProductIdentifier.proTwoYears
+            case .threeYears:
+                return ProductIdentifier.proThreeYears
+            }
+        }
+    }
+    
     static func buildCollection(type: ServiceType) -> [Service] {
         switch type {
         case .standard:
             return [
-                Service(type: .standard, duration: .week, productId: ProductIdentifier.standardWeek),
-                Service(type: .standard, duration: .month, productId: ProductIdentifier.standardMonth),
-                Service(type: .standard, duration: .year, productId: ProductIdentifier.standardYear),
-                Service(type: .standard, duration: .twoYears, productId: ProductIdentifier.standardTwoYears),
-                Service(type: .standard, duration: .threeYears, productId: ProductIdentifier.standardThreeYears)
+                Service(type: .standard, duration: .week),
+                Service(type: .standard, duration: .month),
+                Service(type: .standard, duration: .year),
+                Service(type: .standard, duration: .twoYears),
+                Service(type: .standard, duration: .threeYears)
             ]
         case .pro:
             return [
-                Service(type: .pro, duration: .week, productId: ProductIdentifier.proWeek),
-                Service(type: .pro, duration: .month, productId: ProductIdentifier.proMonth),
-                Service(type: .pro, duration: .year, productId: ProductIdentifier.proYear),
-                Service(type: .pro, duration: .twoYears, productId: ProductIdentifier.proTwoYears),
-                Service(type: .pro, duration: .threeYears, productId: ProductIdentifier.proThreeYears)
+                Service(type: .pro, duration: .week),
+                Service(type: .pro, duration: .month),
+                Service(type: .pro, duration: .year),
+                Service(type: .pro, duration: .twoYears),
+                Service(type: .pro, duration: .threeYears)
             ]
         }
     }
