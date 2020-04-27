@@ -22,7 +22,18 @@ struct ProductIdentifier {
     static let proThreeYears = "net.ivpn.subscriptions.pro.threeYears"
     
     static var all: Set<String> {
-        return [standardMonth, standardYear, proMonth, proYear]
+        return [
+            standardWeek,
+            standardMonth,
+            standardYear,
+            standardTwoYears,
+            standardThreeYears,
+            proWeek,
+            proMonth,
+            proYear,
+            proTwoYears,
+            proThreeYears
+        ]
     }
     
 }
