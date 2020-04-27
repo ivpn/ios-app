@@ -130,8 +130,8 @@ class SelectPlanViewController: UITableViewController {
     }
     
     private func updateSubscriptions() {
-        selectPlanView.standardPriceLabel.text = "\(standardService.priceText()) / \(standardService.durationText())"
-        selectPlanView.proPriceLabel.text = "\(proService.priceText()) / \(proService.durationText())"
+        selectPlanView.standardPriceLabel.text = "\(standardService.priceText) / \(standardService.durationText)"
+        selectPlanView.proPriceLabel.text = "\(proService.priceText) / \(proService.durationText)"
     }
     
 }

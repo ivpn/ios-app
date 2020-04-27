@@ -32,7 +32,7 @@ class PaymentViewController: UITableViewController {
     }
     
     @IBAction func purchase(_ sender: UIButton) {
-        purchaseProduct(identifier: service.productId())
+        purchaseProduct(identifier: service.productId)
     }
     
     // MARK: - View lifecycle -

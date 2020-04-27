@@ -17,10 +17,10 @@ class ServiceTableViewCell: UITableViewCell {
     
     var service: Service! {
         didSet {
-            durationLabel.text = service.durationText()
-            priceLabel.text = service.priceText()
+            durationLabel.text = service.durationText
+            priceLabel.text = service.priceText
             
-            if let discountText = service.discountText() {
+            if let discountText = service.discountText {
                 discountLabel.text = discountText
                 discountLabel.isHidden = false
             } else {
