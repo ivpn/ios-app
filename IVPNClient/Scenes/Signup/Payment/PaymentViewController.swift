@@ -17,8 +17,8 @@ class PaymentViewController: UITableViewController {
     
     // MARK: - Properties -
     
-    var collection: [SubscriptionType] = []
-    var selectedSubscription: SubscriptionType = .standard(.yearly)
+    var collection: [Service] = []
+    var service = Service(type: .standard, duration: .month)
     
     var deviceCanMakePurchases: Bool {
         guard IAPManager.shared.canMakePurchases else {
@@ -36,7 +36,7 @@ class PaymentViewController: UITableViewController {
     }
     
     @IBAction func purchase(_ sender: UIButton) {
-        purchaseProduct(identifier: selectedSubscription.getProductId())
+        purchaseProduct(identifier: service.productId())
     }
     
     // MARK: - View lifecycle -
@@ -44,8 +44,6 @@ class PaymentViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigation()
-        selectedSubscription = collection.last ?? .standard(.yearly)
-        paymentView.updatePrices(collection: collection)
     }
     
     // MARK: - Private methods -
@@ -108,19 +106,7 @@ class PaymentViewController: UITableViewController {
 extension PaymentViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 1:
-            paymentView.period = .week
-        case 2:
-            paymentView.period = .month
-            selectedSubscription = collection[0]
-        case 3:
-            paymentView.period = .year
-            selectedSubscription = collection[1]
-        default:
-            break
-        }
-        
+        service = collection[indexPath.row + 1]
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

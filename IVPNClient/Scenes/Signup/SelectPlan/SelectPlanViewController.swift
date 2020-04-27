@@ -77,12 +77,12 @@ class SelectPlanViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectStandardPlan" {
             let viewController = segue.destination as! PaymentViewController
-            viewController.collection = [.standard(.monthly), .standard(.yearly)]
+            viewController.collection = Service.buildCollection(type: .standard)
         }
         
         if segue.identifier == "selectProPlan" {
             let viewController = segue.destination as! PaymentViewController
-            viewController.collection = [.pro(.monthly), .pro(.yearly)]
+            viewController.collection = Service.buildCollection(type: .pro)
         }
     }
     
