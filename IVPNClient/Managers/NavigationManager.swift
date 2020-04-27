@@ -24,7 +24,7 @@ class NavigationManager {
     }
     
     static func getSubscriptionViewController() -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "subscriptionView")
         return viewController
     }
