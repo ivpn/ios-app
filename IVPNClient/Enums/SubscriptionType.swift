@@ -8,10 +8,14 @@
 
 import Foundation
 
+// TODO: Remove SubscriptionDuartion enum
+
 enum SubscriptionDuartion {
     case yearly
     case monthly
 }
+
+// TODO: Remove SubscriptionType enum
 
 enum SubscriptionType {
     

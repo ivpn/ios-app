@@ -189,6 +189,7 @@
 		82D6AA1B215E167C00F21CAA /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D6AA1A215E167C00F21CAA /* UIViewController+Ext.swift */; };
 		82D90471216C7DAF0032F3BE /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		82D90474216C7DAF0032F3BE /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
+		82DAB37B2457013900302F4C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DAB37A2457013900302F4C /* Service.swift */; };
 		82DB75EC239E75EB0073E846 /* NEVPNStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */; };
 		82DB75EE239E766A0073E846 /* NEVPNStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */; };
 		82DC75BC22B277D200D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
@@ -508,6 +509,7 @@
 		82D598C721A6ADF1000FABDE /* NetworkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkType.swift; sourceTree = "<group>"; };
 		82D6AA1A215E167C00F21CAA /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		82D90470216C7DAF0032F3BE /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		82DAB37A2457013900302F4C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NEVPNStatus+Ext.swift"; sourceTree = "<group>"; };
 		82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEVPNStatusTests.swift; sourceTree = "<group>"; };
 		82DC75BB22B277D200D3C73C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -830,6 +832,7 @@
 				9CB2CE1E1DAA5258007A4D2D /* Authentication.swift */,
 				9CBFF02F2102254800FE1757 /* Settings.swift */,
 				826C56D122FD4F2600D2B76A /* ServiceStatus.swift */,
+				82DAB37A2457013900302F4C /* Service.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2033,6 +2036,7 @@
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
 				8263D9BD24499C1D00A3D914 /* PaymentView.swift in Sources */,
 				9C28337F1D9D3F060024C553 /* SignUpController.swift in Sources */,
+				82DAB37B2457013900302F4C /* Service.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */,
