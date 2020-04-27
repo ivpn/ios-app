@@ -115,11 +115,13 @@ extension PaymentViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTitleTableViewCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTitleTableViewCell", for: indexPath) as! ServiceTitleTableViewCell
+            cell.service = collection[0]
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTableViewCell", for: indexPath) as! ServiceTableViewCell
+        cell.service = collection[indexPath.row - 1]
         return cell
     }
     
@@ -131,7 +133,7 @@ extension PaymentViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         service = collection[indexPath.row + 1]
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
     }
     
 }

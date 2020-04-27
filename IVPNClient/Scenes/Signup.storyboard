@@ -590,7 +590,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="3fw-Yl-V8z">
-                            <rect key="frame" x="0.0" y="370" width="414" height="80"/>
+                            <rect key="frame" x="0.0" y="240" width="414" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLD-yW-M4d" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
@@ -634,7 +634,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ServiceTitleTableViewCell" rowHeight="69" id="yp4-DA-nL9">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ServiceTitleTableViewCell" rowHeight="69" id="yp4-DA-nL9" customClass="ServiceTitleTableViewCell" customModule="IVPNClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="78" width="414" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yp4-DA-nL9" id="81z-wZ-CTY">
@@ -662,9 +662,6 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="Change"/>
-                                                    <connections>
-                                                        <action selector="goBack" destination="GbE-hF-jVK" eventType="touchUpInside" id="Xn8-bY-XcQ"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -683,135 +680,12 @@
                                         <constraint firstAttribute="trailing" secondItem="RSt-lx-3LK" secondAttribute="trailing" id="mMB-r3-u7F"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="4C3-hH-oiJ" id="FhQ-XD-0Kv"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="D62-O1-0wN">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServiceTableViewCell" rowHeight="65" id="4VZ-0C-Lig" customClass="ServiceTableViewCell" customModule="IVPNClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="147" width="414" height="65"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D62-O1-0wN" id="yDK-ND-p1L">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oYK-c4-LvQ" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S3H-W6-0ef">
-                                                    <rect key="frame" x="17" y="24.5" width="16" height="16"/>
-                                                    <color key="backgroundColor" name="ivpnGray2"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="8UB-us-qsj"/>
-                                                        <constraint firstAttribute="width" constant="16" id="Nh4-dI-sbz"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DW-Ct-k5H">
-                                                    <rect key="frame" x="50" y="21.5" width="90" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="hS7-x5-Qmz"/>
-                                                        <constraint firstAttribute="width" constant="90" id="wsU-Wu-W4M"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$2.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cb3-VJ-fiH">
-                                                    <rect key="frame" x="268" y="21.5" width="125" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="125" id="0OP-UR-xBk"/>
-                                                        <constraint firstAttribute="height" constant="22" id="WTR-Fg-nMc"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="5DW-Ct-k5H" firstAttribute="leading" secondItem="S3H-W6-0ef" secondAttribute="trailing" constant="17" id="6Vx-yw-ybh"/>
-                                                <constraint firstAttribute="trailing" secondItem="Cb3-VJ-fiH" secondAttribute="trailing" constant="21" id="RIA-76-LAk"/>
-                                                <constraint firstItem="S3H-W6-0ef" firstAttribute="centerY" secondItem="oYK-c4-LvQ" secondAttribute="centerY" id="d2w-gA-I7V"/>
-                                                <constraint firstItem="S3H-W6-0ef" firstAttribute="leading" secondItem="oYK-c4-LvQ" secondAttribute="leading" constant="17" id="eHN-Hj-AVQ"/>
-                                                <constraint firstItem="Cb3-VJ-fiH" firstAttribute="centerY" secondItem="oYK-c4-LvQ" secondAttribute="centerY" id="gOb-GC-ByR"/>
-                                                <constraint firstItem="5DW-Ct-k5H" firstAttribute="centerY" secondItem="oYK-c4-LvQ" secondAttribute="centerY" id="mbo-en-m3m"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="oYK-c4-LvQ" firstAttribute="top" secondItem="yDK-ND-p1L" secondAttribute="top" id="3Jv-ym-mZr"/>
-                                        <constraint firstItem="oYK-c4-LvQ" firstAttribute="leading" secondItem="yDK-ND-p1L" secondAttribute="leading" id="Jsi-8j-ite"/>
-                                        <constraint firstAttribute="bottom" secondItem="oYK-c4-LvQ" secondAttribute="bottom" id="X5o-aZ-8Re"/>
-                                        <constraint firstAttribute="trailing" secondItem="oYK-c4-LvQ" secondAttribute="trailing" id="aT3-Rl-CYa"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="0Uy-rf-bHb">
-                                <rect key="frame" x="0.0" y="212" width="414" height="65"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Uy-rf-bHb" id="Xxc-8y-JCi">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6v-PP-slO" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CAM-xh-uBm">
-                                                    <rect key="frame" x="17" y="24.5" width="16" height="16"/>
-                                                    <color key="backgroundColor" name="ivpnGray2"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="7q9-vK-c8E"/>
-                                                        <constraint firstAttribute="width" constant="16" id="l5m-Du-bZ9"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff0-sT-Dr0">
-                                                    <rect key="frame" x="50" y="21.5" width="90" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="BWg-MT-dPe"/>
-                                                        <constraint firstAttribute="width" constant="90" id="NLL-Uk-82f"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$6.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9i-Xx-SRC">
-                                                    <rect key="frame" x="268" y="21.5" width="125" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="e96-aB-EVx"/>
-                                                        <constraint firstAttribute="width" constant="125" id="qdQ-hA-7RA"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ff0-sT-Dr0" firstAttribute="leading" secondItem="CAM-xh-uBm" secondAttribute="trailing" constant="17" id="8t6-PP-6DT"/>
-                                                <constraint firstItem="CAM-xh-uBm" firstAttribute="leading" secondItem="Q6v-PP-slO" secondAttribute="leading" constant="17" id="JOO-TM-efa"/>
-                                                <constraint firstAttribute="trailing" secondItem="G9i-Xx-SRC" secondAttribute="trailing" constant="21" id="PcI-Sh-YuQ"/>
-                                                <constraint firstItem="G9i-Xx-SRC" firstAttribute="centerY" secondItem="Q6v-PP-slO" secondAttribute="centerY" id="Ry5-PK-aJc"/>
-                                                <constraint firstItem="CAM-xh-uBm" firstAttribute="centerY" secondItem="Q6v-PP-slO" secondAttribute="centerY" id="VY3-oH-9hj"/>
-                                                <constraint firstItem="ff0-sT-Dr0" firstAttribute="centerY" secondItem="Q6v-PP-slO" secondAttribute="centerY" id="zbw-jX-nDG"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="Q6v-PP-slO" secondAttribute="bottom" id="3ak-2I-IXK"/>
-                                        <constraint firstAttribute="trailing" secondItem="Q6v-PP-slO" secondAttribute="trailing" id="e7y-nz-FlC"/>
-                                        <constraint firstItem="Q6v-PP-slO" firstAttribute="leading" secondItem="Xxc-8y-JCi" secondAttribute="leading" id="eFQ-e8-e91"/>
-                                        <constraint firstItem="Q6v-PP-slO" firstAttribute="top" secondItem="Xxc-8y-JCi" secondAttribute="top" id="xb0-uP-hwg"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServiceTableViewCell" rowHeight="65" id="4VZ-0C-Lig">
-                                <rect key="frame" x="0.0" y="277" width="414" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4VZ-0C-Lig" id="1CO-CW-g3H">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
@@ -891,17 +765,18 @@
                                         <constraint firstAttribute="trailing" secondItem="RyN-9Z-UyZ" secondAttribute="trailing" id="qzZ-Nl-Yg4"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="checkImage" destination="3Z5-SD-W6I" id="qUK-kE-6MX"/>
+                                    <outlet property="discountLabel" destination="LzJ-i2-Sqn" id="Nmf-7z-g7A"/>
+                                    <outlet property="durationLabel" destination="8UP-a5-Suq" id="fWT-5z-B2a"/>
+                                    <outlet property="priceLabel" destination="UT9-wK-aHF" id="mUX-Hc-SXk"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="GbE-hF-jVK" id="e8L-Bl-eVH"/>
                             <outlet property="delegate" destination="GbE-hF-jVK" id="Hlw-7q-gLl"/>
-                            <outlet property="monthCellImage" destination="CAM-xh-uBm" id="qwr-HY-ay7"/>
-                            <outlet property="monthPriceLabel" destination="G9i-Xx-SRC" id="Loo-o3-pfH"/>
-                            <outlet property="weekCellImage" destination="S3H-W6-0ef" id="mTe-YS-ZHd"/>
-                            <outlet property="yearCellImage" destination="3Z5-SD-W6I" id="JUP-01-v8T"/>
-                            <outlet property="yearPriceLabel" destination="UT9-wK-aHF" id="mq9-WG-YNl"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Continue to payment" id="Pcw-dt-qz8">
