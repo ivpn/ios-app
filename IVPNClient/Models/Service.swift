@@ -79,4 +79,15 @@ struct Service {
         }
     }
     
+    static func buildCollection(type: ServiceType) -> [Service] {
+        switch type {
+        case .standard:
+            return [
+                Service(type: .standard, duration: .week, productId: "")
+            ]
+        case .pro:
+            return []
+        }
+    }
+    
 }

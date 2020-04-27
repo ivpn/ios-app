@@ -27,16 +27,16 @@ enum SubscriptionType {
         case .standard(let duration):
             switch duration {
             case .yearly:
-                return ProductIdentifier.standardYearly
+                return ProductIdentifier.standardYear
             case .monthly:
-                return ProductIdentifier.standardMonthly
+                return ProductIdentifier.standardMonth
             }
         case .pro(let duration):
             switch duration {
             case .yearly:
-                return ProductIdentifier.proYearly
+                return ProductIdentifier.proYear
             case .monthly:
-                return ProductIdentifier.proMonthly
+                return ProductIdentifier.proMonth
             }
         }
     }
