@@ -101,6 +101,30 @@ class PaymentViewController: UITableViewController {
     
 }
 
+// MARK: - UITableViewDataSource -
+
+extension PaymentViewController {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return collection.count + 1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTitleTableViewCell", for: indexPath)
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTableViewCell", for: indexPath)
+        return cell
+    }
+    
+}
+
 // MARK: - UITableViewDelegate -
 
 extension PaymentViewController {
