@@ -550,7 +550,7 @@
         <scene sceneID="Kfi-9P-415">
             <objects>
                 <tableViewController id="GbE-hF-jVK" customClass="PaymentViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eid-0U-lpC" customClass="PaymentView" customModule="IVPNClient" customModuleProvider="target">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eid-0U-lpC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -662,6 +662,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="Change"/>
+                                                    <connections>
+                                                        <action selector="goBack" destination="GbE-hF-jVK" eventType="touchUpInside" id="wrY-Y6-g9z"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -782,9 +785,6 @@
                     <navigationItem key="navigationItem" title="Continue to payment" id="Pcw-dt-qz8">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="plain" id="QSt-8p-kF2"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="paymentView" destination="eid-0U-lpC" id="inF-Zr-6fA"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGB-VS-Z7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

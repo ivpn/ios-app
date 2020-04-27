@@ -113,6 +113,15 @@ struct Service {
         }
     }
     
+    func typeText() -> String {
+        switch type {
+        case .standard:
+            return "Standard"
+        case .pro:
+            return "Pro"
+        }
+    }
+    
     static func buildCollection(type: ServiceType) -> [Service] {
         switch type {
         case .standard:

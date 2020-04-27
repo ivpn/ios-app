@@ -11,10 +11,6 @@ import SwiftyStoreKit
 
 class PaymentViewController: UITableViewController {
     
-    // MARK: - @IBOutlets -
-    
-    @IBOutlet weak var paymentView: PaymentView!
-    
     // MARK: - Properties -
     
     var collection: [Service] = []

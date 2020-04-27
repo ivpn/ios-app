@@ -14,7 +14,7 @@ class ServiceTitleTableViewCell: UITableViewCell {
     
     var service: Service! {
         didSet {
-            
+            titleLabel.text = service.typeText()
         }
     }
     
