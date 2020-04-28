@@ -112,11 +112,14 @@ extension PaymentViewController {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTitleTableViewCell", for: indexPath) as! ServiceTitleTableViewCell
             cell.service = service.collection[0]
+            cell.selectionStyle = .none
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTableViewCell", for: indexPath) as! ServiceTableViewCell
         cell.service = service.collection[indexPath.row - 1]
+        cell.checked = service.collection[indexPath.row - 1] == service
+        cell.selectionStyle = .default
         return cell
     }
     
@@ -126,8 +129,13 @@ extension PaymentViewController {
 
 extension PaymentViewController {
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        service = service.collection[indexPath.row + 1]
+        guard indexPath.row > 0 else { return }
+        service = service.collection[indexPath.row - 1]
         tableView.reloadData()
     }
     

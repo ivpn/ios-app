@@ -138,4 +138,10 @@ struct Service {
         }
     }
     
+    // Methods
+    
+    static func == (lhs: Service, rhs: Service) -> Bool {
+        return (lhs.type == rhs.type && lhs.duration == rhs.duration)
+    }
+    
 }
