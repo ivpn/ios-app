@@ -13,7 +13,7 @@ enum ServiceType {
     case pro
 }
 
-enum ServiceDuration {
+enum ServiceDuration: CaseIterable {
     case week
     case month
     case year
@@ -132,26 +132,9 @@ struct Service {
         }
     }
     
-    // MARK: - Methods -
-    
-    static func buildCollection(type: ServiceType) -> [Service] {
-        switch type {
-        case .standard:
-            return [
-                Service(type: .standard, duration: .week),
-                Service(type: .standard, duration: .month),
-                Service(type: .standard, duration: .year),
-                Service(type: .standard, duration: .twoYears),
-                Service(type: .standard, duration: .threeYears)
-            ]
-        case .pro:
-            return [
-                Service(type: .pro, duration: .week),
-                Service(type: .pro, duration: .month),
-                Service(type: .pro, duration: .year),
-                Service(type: .pro, duration: .twoYears),
-                Service(type: .pro, duration: .threeYears)
-            ]
+    var collection: [Service] {
+        get {
+            return ServiceDuration.allCases.map { Service(type: type, duration: $0) }
         }
     }
     

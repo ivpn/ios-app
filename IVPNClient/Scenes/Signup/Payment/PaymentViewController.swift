@@ -13,8 +13,7 @@ class PaymentViewController: UITableViewController {
     
     // MARK: - Properties -
     
-    var collection: [Service] = []
-    var service = Service(type: .standard, duration: .month)
+    var service = Service(type: .standard, duration: .year)
     
     var deviceCanMakePurchases: Bool {
         guard IAPManager.shared.canMakePurchases else {
@@ -106,18 +105,18 @@ extension PaymentViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return collection.count + 1
+        return service.collection.count + 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTitleTableViewCell", for: indexPath) as! ServiceTitleTableViewCell
-            cell.service = collection[0]
+            cell.service = service.collection[0]
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTableViewCell", for: indexPath) as! ServiceTableViewCell
-        cell.service = collection[indexPath.row - 1]
+        cell.service = service.collection[indexPath.row - 1]
         return cell
     }
     
@@ -128,7 +127,7 @@ extension PaymentViewController {
 extension PaymentViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        service = collection[indexPath.row + 1]
+        service = service.collection[indexPath.row + 1]
         tableView.reloadData()
     }
     
