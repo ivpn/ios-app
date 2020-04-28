@@ -25,8 +25,14 @@ class NavigationManager {
     
     static func getSubscriptionViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "subscriptionView")
-        return viewController
+        
+        let navController = storyBoard.instantiateViewController(withIdentifier: "subscriptionView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        if let viewController = navController?.topViewController as? SelectPlanViewController {
+            viewController.extendingService = true
+        }
+        
+        return navController!
     }
     
     static func getStaticWebViewController(resourceName: String, screenTitle: String) -> UIViewController {

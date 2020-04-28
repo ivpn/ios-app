@@ -16,6 +16,8 @@ class SelectPlanViewController: UITableViewController {
     
     // MARK: - Properties -
     
+    var extendingService = false
+    
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
         spinner.hidesWhenStopped = true
@@ -91,11 +93,15 @@ class SelectPlanViewController: UITableViewController {
     private func initNavigation() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
-        button.sizeToFit()
-        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        if extendingService {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissViewController))
+        } else {
+            let button = UIButton(type: .system)
+            button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
+            button.sizeToFit()
+            button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        }
     }
     
     @objc private func backButtonPressed(sender: UIBarButtonItem) {

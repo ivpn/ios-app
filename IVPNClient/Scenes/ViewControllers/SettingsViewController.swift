@@ -78,7 +78,7 @@ class SettingsViewController: UITableViewController {
                 switch index {
                 case 0:
                     sender.setOn(false, animated: true)
-                    self.manageSubscription(self)
+                    self.extendSubscription(self)
                 default:
                     sender.setOn(false, animated: true)
                 }
@@ -148,19 +148,8 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    @IBAction func manageSubscription(_ sender: Any) {
-        if !Application.shared.serviceStatus.isActive {
-            present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
-            return
-        }
-        
-        if Application.shared.serviceStatus.isAppStoreSubscription() {
-            UIApplication.manageSubscription()
-        } else {
-            if let upgradeToUrl = Application.shared.serviceStatus.upgradeToUrl {
-                openWebPage(upgradeToUrl)
-            }
-        }
+    @IBAction func extendSubscription(_ sender: Any) {
+        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
     
     @IBAction func logOut(_ sender: Any) {

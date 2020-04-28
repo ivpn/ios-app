@@ -51,10 +51,7 @@ class ServiceStatusTests: XCTestCase {
     }
     
     func testGetSubscriptionActionText() {
-        XCTAssertEqual(model.getSubscriptionActionText(), "Activate Subscription")
-        
-        model.isActive = true
-        XCTAssertEqual(model.getSubscriptionActionText(), "Manage Subscription")
+        XCTAssertEqual(model.getSubscriptionActionText(), "Extend Subscription")
     }
     
     func testIsValid() {

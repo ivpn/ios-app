@@ -88,20 +88,8 @@ struct ServiceStatus: Codable {
         return "No active subscription"
     }
     
-    func isAppStoreSubscription() -> Bool {
-        if let paymentMethod = paymentMethod, paymentMethod == "ivpniosiap" {
-            return true
-        }
-        
-        return false
-    }
-    
     func getSubscriptionActionText() -> String {
-        if isActive {
-            return "Manage Subscription"
-        }
-        
-        return "Activate Subscription"
+        return "Extend Subscription"
     }
     
     static func isValid(username: String) -> Bool {
