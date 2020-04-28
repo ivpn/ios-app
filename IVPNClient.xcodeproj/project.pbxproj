@@ -56,7 +56,6 @@
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF52240E40F006B81D2 /* Error+Ext.swift */; };
-		82342100225F5302008A1D6E /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823420FF225F5302008A1D6E /* SubscriptionViewController.swift */; };
 		823BD9E3231D4C8E002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823BD9E4231D4C8F002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823DA733215E3CCB00DAFE37 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
@@ -67,7 +66,6 @@
 		824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */; };
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1D922686217006C0C08 /* IAPManager.swift */; };
-		8247E1DC2268713E006C0C08 /* SubscriptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DB2268713E006C0C08 /* SubscriptionType.swift */; };
 		8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */; };
 		824F56082233FE6F00BCDD5C /* libwg-go.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 824F56072233FE6F00BCDD5C /* libwg-go.a */; };
 		8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8252747D21F1F80400D4B8B5 /* ServerViewController.swift */; };
@@ -77,7 +75,6 @@
 		825D4EC9224A46F0002E7378 /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */; };
 		825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53922325709006C4F14 /* ApiManager.swift */; };
 		825D5D8821908B2600B781BA /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
-		8263D9BD24499C1D00A3D914 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263D9BC24499C1D00A3D914 /* PaymentView.swift */; };
 		8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */; };
 		826470C42446F67100403A14 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826470C32446F67100403A14 /* Signup.storyboard */; };
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
@@ -189,6 +186,9 @@
 		82D6AA1B215E167C00F21CAA /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D6AA1A215E167C00F21CAA /* UIViewController+Ext.swift */; };
 		82D90471216C7DAF0032F3BE /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		82D90474216C7DAF0032F3BE /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
+		82DAB37B2457013900302F4C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DAB37A2457013900302F4C /* Service.swift */; };
+		82DAB37D245725E200302F4C /* ServiceTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DAB37C245725E200302F4C /* ServiceTitleTableViewCell.swift */; };
+		82DAB37F2457260000302F4C /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DAB37E2457260000302F4C /* ServiceTableViewCell.swift */; };
 		82DB75EC239E75EB0073E846 /* NEVPNStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */; };
 		82DB75EE239E766A0073E846 /* NEVPNStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */; };
 		82DC75BC22B277D200D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
@@ -399,7 +399,6 @@
 		822B85D821B941A200715691 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		8232FBF52240E40F006B81D2 /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
-		823420FF225F5302008A1D6E /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		823AD1F32158F55E00BE0EBA /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = ../Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		823AD1F52158F56300BE0EBA /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = ../Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
 		823DA732215E3CCB00DAFE37 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
@@ -407,7 +406,6 @@
 		824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataClass.swift"; sourceTree = "<group>"; };
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
-		8247E1DB2268713E006C0C08 /* SubscriptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionType.swift; sourceTree = "<group>"; };
 		8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdentifier.swift; sourceTree = "<group>"; };
 		824F56072233FE6F00BCDD5C /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libwg-go.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8252747D21F1F80400D4B8B5 /* ServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerViewController.swift; sourceTree = "<group>"; };
@@ -417,7 +415,6 @@
 		825864A02237B1060081DC4B /* Bamboo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bamboo.framework; path = ../Carthage/Build/iOS/Bamboo.framework; sourceTree = "<group>"; };
 		82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
-		8263D9BC24499C1D00A3D914 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPeriod.swift; sourceTree = "<group>"; };
 		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
@@ -508,6 +505,9 @@
 		82D598C721A6ADF1000FABDE /* NetworkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkType.swift; sourceTree = "<group>"; };
 		82D6AA1A215E167C00F21CAA /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		82D90470216C7DAF0032F3BE /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		82DAB37A2457013900302F4C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		82DAB37C245725E200302F4C /* ServiceTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTitleTableViewCell.swift; sourceTree = "<group>"; };
+		82DAB37E2457260000302F4C /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NEVPNStatus+Ext.swift"; sourceTree = "<group>"; };
 		82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEVPNStatusTests.swift; sourceTree = "<group>"; };
 		82DC75BB22B277D200D3C73C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -830,6 +830,7 @@
 				9CB2CE1E1DAA5258007A4D2D /* Authentication.swift */,
 				9CBFF02F2102254800FE1757 /* Settings.swift */,
 				826C56D122FD4F2600D2B76A /* ServiceStatus.swift */,
+				82DAB37A2457013900302F4C /* Service.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -936,7 +937,6 @@
 				82E716832181E8E100D6B7C2 /* ProviderConfigurationKeys.swift */,
 				82D598B321A5A7A3000FABDE /* NetworkTrust.swift */,
 				82D598C721A6ADF1000FABDE /* NetworkType.swift */,
-				8247E1DB2268713E006C0C08 /* SubscriptionType.swift */,
 				8206E5CF22967E37003119AF /* UserActivityType.swift */,
 				8206E5D122967EAF003119AF /* UserActivityTitle.swift */,
 				823FFB062338DF1800F91A5D /* Capability.swift */,
@@ -1006,7 +1006,6 @@
 				828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */,
 				8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */,
 				82AAF0E82253A4A8005E792F /* StaticWebViewController.swift */,
-				823420FF225F5302008A1D6E /* SubscriptionViewController.swift */,
 				8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */,
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
 				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
@@ -1023,6 +1022,8 @@
 				82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */,
 				82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */,
 				82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */,
+				82DAB37E2457260000302F4C /* ServiceTableViewCell.swift */,
+				82DAB37C245725E200302F4C /* ServiceTitleTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1220,7 +1221,6 @@
 		82E81AE52449C42C00D81FB7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8263D9BC24499C1D00A3D914 /* PaymentView.swift */,
 				82E81AE62449C44F00D81FB7 /* PaymentComponentView.swift */,
 			);
 			path = View;
@@ -2000,7 +2000,6 @@
 				8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */,
 				82E81AE72449C44F00D81FB7 /* PaymentComponentView.swift in Sources */,
 				8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */,
-				82342100225F5302008A1D6E /* SubscriptionViewController.swift in Sources */,
 				9CB2CE281DAB807A007A4D2D /* ProgressIndicator.swift in Sources */,
 				8258649F2237A63C0081DC4B /* ConnectionInfoView.swift in Sources */,
 				820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */,
@@ -2031,8 +2030,8 @@
 				82D598C821A6ADF1000FABDE /* NetworkType.swift in Sources */,
 				9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */,
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
-				8263D9BD24499C1D00A3D914 /* PaymentView.swift in Sources */,
 				9C28337F1D9D3F060024C553 /* SignUpController.swift in Sources */,
+				82DAB37B2457013900302F4C /* Service.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */,
@@ -2047,6 +2046,7 @@
 				9C454EBE1E096F4100BD2AFA /* PrivacyPromoViewController.swift in Sources */,
 				9CB2CE2B1DABD120007A4D2D /* NavigationManager.swift in Sources */,
 				82BBF25921AC799A00589766 /* NetworkProtectionRulesViewController.swift in Sources */,
+				82DAB37D245725E200302F4C /* ServiceTitleTableViewCell.swift in Sources */,
 				82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */,
 				828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */,
 				82A160BB221C4E2000730577 /* Server+CoreDataProperties.swift in Sources */,
@@ -2091,6 +2091,7 @@
 				821429BB22FC36100056B8FF /* ApiRequestDI.swift in Sources */,
 				82AA8818231E330A00E18ECB /* SessionStatus.swift in Sources */,
 				9C28337E1D9D3F060024C553 /* Config.swift in Sources */,
+				82DAB37F2457260000302F4C /* ServiceTableViewCell.swift in Sources */,
 				9C454EAF1E081DF700BD2AFA /* CircleConnected.swift in Sources */,
 				82061F66238D2730009DDF4D /* ICMPHeader.swift in Sources */,
 				826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */,
@@ -2099,7 +2100,6 @@
 				82DB75EC239E75EB0073E846 /* NEVPNStatus+Ext.swift in Sources */,
 				9CBFF0302102254800FE1757 /* Settings.swift in Sources */,
 				9C3031371DB4307D00C38B0C /* SettingsViewController.swift in Sources */,
-				8247E1DC2268713E006C0C08 /* SubscriptionType.swift in Sources */,
 				821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */,
 				82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */,
 				82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */,

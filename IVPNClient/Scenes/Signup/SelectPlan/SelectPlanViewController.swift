@@ -53,8 +53,8 @@ class SelectPlanViewController: UITableViewController {
         }
     }
     
-    var standardSubscription: SubscriptionType = .standard(.monthly)
-    var proSubscription: SubscriptionType = .pro(.monthly)
+    var standardService = Service(type: .standard, duration: .month)
+    var proService = Service(type: .pro, duration: .month)
     
     // MARK: - View lifecycle -
     
@@ -77,12 +77,12 @@ class SelectPlanViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectStandardPlan" {
             let viewController = segue.destination as! PaymentViewController
-            viewController.collection = [.standard(.monthly), .standard(.yearly)]
+            viewController.service = Service(type: .standard, duration: .year)
         }
         
         if segue.identifier == "selectProPlan" {
             let viewController = segue.destination as! PaymentViewController
-            viewController.collection = [.pro(.monthly), .pro(.yearly)]
+            viewController.service = Service(type: .pro, duration: .year)
         }
     }
     
@@ -130,17 +130,8 @@ class SelectPlanViewController: UITableViewController {
     }
     
     private func updateSubscriptions() {
-        updateSubscription(type: standardSubscription, label: selectPlanView.standardPriceLabel)
-        updateSubscription(type: proSubscription, label: selectPlanView.proPriceLabel)
-    }
-    
-    private func updateSubscription(type: SubscriptionType, label: UILabel) {
-        guard !IAPManager.shared.products.isEmpty else { return }
-        let identifier = type.getProductId()
-        guard let product = IAPManager.shared.getProduct(identifier: identifier) else { return }
-        let price = IAPManager.shared.productPrice(product: product)
-        let duration = type.getDurationLabel()
-        label.text = "\(price) / \(duration)"
+        selectPlanView.standardPriceLabel.text = "\(standardService.priceText) / \(standardService.durationText)"
+        selectPlanView.proPriceLabel.text = "\(proService.priceText) / \(proService.durationText)"
     }
     
 }
