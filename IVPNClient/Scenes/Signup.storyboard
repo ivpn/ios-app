@@ -193,7 +193,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="tBH-nr-wv3" kind="show" id="Dvm-7M-y0g"/>
+                                    <segue destination="tBH-nr-wv3" kind="show" id="gLo-V8-Qbm"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGe-se-bbf">
@@ -544,7 +544,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQ2-NM-xcV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4292.753623188406" y="-229.01785714285714"/>
+            <point key="canvasLocation" x="4281" y="-229"/>
         </scene>
         <!--Continue to payment-->
         <scene sceneID="Kfi-9P-415">
@@ -788,7 +788,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGB-VS-Z7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5215.9420289855079" y="-229.01785714285714"/>
+            <point key="canvasLocation" x="5154" y="-229"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cyL-IY-0fL">
@@ -900,9 +900,29 @@
             </objects>
             <point key="canvasLocation" x="2461" y="-229"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wQK-0r-hM4">
+            <objects>
+                <navigationController storyboardIdentifier="subscriptionView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hsa-ng-hVu" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="510-bm-h3Z"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CwZ-xv-Dyg">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tBH-nr-wv3" kind="relationship" relationship="rootViewController" id="rrg-Fe-V0v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wdo-f2-Fix" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4280" y="-969"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="igR-S1-Kcs"/>
+        <segue reference="rrg-Fe-V0v"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon-check" width="24" height="24"/>
