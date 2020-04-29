@@ -21,12 +21,17 @@ class MainView: UIView {
     var connectionInfoViewModel: ProofsViewModel! {
         didSet {
             mapScrollView.viewModel = connectionInfoViewModel
+            
+            if !connectionInfoViewModel.model.isIvpnServer {
+                localCoordinates = (connectionInfoViewModel.model.latitude, connectionInfoViewModel.model.longitude)
+            }
         }
     }
     
     let markerView = MapMarkerView()
     private var infoAlertViewModel = InfoAlertViewModel()
     private let markerContainerView = MapMarkerContainerView()
+    private var localCoordinates: (Double, Double) = (0, 0)
     
     // MARK: - View lifecycle -
     
@@ -47,16 +52,7 @@ class MainView: UIView {
     
     func updateStatus(vpnStatus: NEVPNStatus) {
         markerView.status = vpnStatus
-        
-        if vpnStatus == .connecting {
-            var server = Application.shared.settings.selectedServer
-            
-            if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-                server = Application.shared.settings.selectedExitServer
-            }
-            
-            mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
-        }
+        updateMapPosition(vpnStatus: vpnStatus)
     }
     
     // MARK: - Private methods -
@@ -106,6 +102,22 @@ class MainView: UIView {
     
     private func updateMarker() {
         markerView.connectionInfoPopup.updateView()
+    }
+    
+    private func updateMapPosition(vpnStatus: NEVPNStatus) {
+        if vpnStatus == .connecting {
+            var server = Application.shared.settings.selectedServer
+            
+            if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+                server = Application.shared.settings.selectedExitServer
+            }
+            
+            mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
+        }
+        
+        if vpnStatus == .disconnecting {
+            mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: true)
+        }
     }
     
     @objc private func openSettings(_ sender: UIButton) {
