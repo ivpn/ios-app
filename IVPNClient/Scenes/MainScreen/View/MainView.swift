@@ -31,7 +31,7 @@ class MainView: UIView {
     let markerView = MapMarkerView()
     private var infoAlertViewModel = InfoAlertViewModel()
     private let markerContainerView = MapMarkerContainerView()
-    private var localCoordinates: (Double, Double) = (0, 0)
+    private var localCoordinates: (Double, Double)?
     
     // MARK: - View lifecycle -
     
@@ -115,7 +115,7 @@ class MainView: UIView {
             mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
         }
         
-        if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically {
+        if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically, let localCoordinates = localCoordinates {
             mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: true)
         }
     }
