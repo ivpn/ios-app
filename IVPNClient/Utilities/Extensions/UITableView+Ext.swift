@@ -11,8 +11,8 @@ import UIKit
 extension UITableView {
     
     open override func awakeFromNib() {
-        backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundQuaternary)
-        separatorColor = UIColor.init(named: Theme.Key.ivpnGray5)
+        backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
+        separatorColor = UIColor.init(named: Theme.ivpnGray5)
     }
     
 }

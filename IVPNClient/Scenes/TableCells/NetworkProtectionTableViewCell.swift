@@ -29,13 +29,13 @@ class NetworkProtectionTableViewCell: UITableViewCell {
         
         switch network.trust {
         case NetworkTrust.Untrusted.rawValue:
-            trustLabel.textColor = UIColor.init(named: Theme.Key.ivpnRed)
+            trustLabel.textColor = UIColor.init(named: Theme.ivpnRed)
             setTrustLayout(withDefault: false)
         case NetworkTrust.Trusted.rawValue:
-            trustLabel.textColor = UIColor.init(named: Theme.Key.ivpnGreen)
+            trustLabel.textColor = UIColor.init(named: Theme.ivpnGreen)
             setTrustLayout(withDefault: false)
         default:
-            trustLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+            trustLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
             setTrustLayout(withDefault: true)
         }
         

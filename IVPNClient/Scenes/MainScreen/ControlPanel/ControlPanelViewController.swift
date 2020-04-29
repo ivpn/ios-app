@@ -289,7 +289,7 @@ class ControlPanelViewController: UITableViewController {
     // MARK: - Private methods -
     
     private func initView() {
-        tableView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         isMultiHop = UserDefaults.shared.isMultiHop
         Application.shared.connectionManager.needsUpdateSelectedServer()

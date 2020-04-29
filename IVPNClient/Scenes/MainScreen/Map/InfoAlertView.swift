@@ -63,15 +63,15 @@ class InfoAlertView: UIView {
     private func setupAppearance(type: InfoAlertViewType) {
         switch type {
         case .alert:
-            backgroundColor = UIColor.init(named: Theme.Key.ivpnLightYellow)
-            textLabel.textColor = UIColor.init(named: Theme.Key.ivpnDarkYellow)
-            actionButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnDarkYellow), for: .normal)
+            backgroundColor = UIColor.init(named: Theme.ivpnLightYellow)
+            textLabel.textColor = UIColor.init(named: Theme.ivpnDarkYellow)
+            actionButton.setTitleColor(UIColor.init(named: Theme.ivpnDarkYellow), for: .normal)
             iconImage.image = UIImage(named: "icon-alert-dark-yellow")
             break
         case .info:
-            backgroundColor = UIColor.init(named: Theme.Key.ivpnLightNavy)
-            textLabel.textColor = UIColor.init(named: Theme.Key.ivpnDarkNavy)
-            actionButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnDarkNavy), for: .normal)
+            backgroundColor = UIColor.init(named: Theme.ivpnLightNavy)
+            textLabel.textColor = UIColor.init(named: Theme.ivpnDarkNavy)
+            actionButton.setTitleColor(UIColor.init(named: Theme.ivpnDarkNavy), for: .normal)
             iconImage.image = UIImage(named: "alert-info-dark-navy")
             break
         }

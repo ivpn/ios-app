@@ -10,8 +10,8 @@ import UIKit
 
 class WaveLayer: CALayer {
     
-    let connectedColor = UIColor.init(named: Theme.Key.ivpnBackgroundConnected)!
-    let disconnectedColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)!
+    let connectedColor = UIColor.init(named: Theme.ivpnBackgroundConnected)!
+    let disconnectedColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)!
     
     override init() {
         super.init()

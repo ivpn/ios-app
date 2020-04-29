@@ -24,7 +24,7 @@ struct AccountViewModel {
     }
     
     var statusColor: UIColor {
-        return serviceStatus.isActive ? UIColor.init(named: Theme.Key.ivpnGreen)! : UIColor.init(named: Theme.Key.ivpnRedOff)!
+        return serviceStatus.isActive ? UIColor.init(named: Theme.ivpnGreen)! : UIColor.init(named: Theme.ivpnRedOff)!
     }
     
     var subscriptionText: String {

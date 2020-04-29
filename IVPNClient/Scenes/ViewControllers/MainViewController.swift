@@ -605,13 +605,13 @@ class MainViewController: UIViewController {
             
         case .connecting, .reasserting:
             statusLabel.text = "Connecting..."
-            statusLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel5)
+            statusLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
             connectButton.isEnabled = true
             connectButton.setImmediateState(newState: .connecting)
             
         case .disconnected, .invalid:
             statusLabel.text = "Tap to connect"
-            statusLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel5)
+            statusLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
 
             waveView.setConnected(isConnected: false, isAnimated: animated)
 
@@ -629,7 +629,7 @@ class MainViewController: UIViewController {
             
         case .disconnecting:
             statusLabel.text = "Disconnecting"
-            statusLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel5)
+            statusLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
             
             connectButton.isEnabled = false
             if !animated {

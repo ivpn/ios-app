@@ -21,7 +21,7 @@ class PrivacyPromoViewController: UIViewController {
         formattedString.normal(" privacy\nprotection and peace\nof mind")
         
         privacyLabel.attributedText = formattedString
-        privacyLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelSecondary)
+        privacyLabel.textColor = UIColor.init(named: Theme.ivpnLabelSecondary)
     }
 
 }

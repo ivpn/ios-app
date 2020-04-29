@@ -24,7 +24,7 @@ class CircleWaveLayer: CAShapeLayer {
         opacity = 0
         
         let circleLayer = CAShapeLayer()
-        circleLayer.strokeColor = UIColor.init(named: Theme.Key.ivpnBlue)?.withAlphaComponent(0.5).cgColor
+        circleLayer.strokeColor = UIColor.init(named: Theme.ivpnBlue)?.withAlphaComponent(0.5).cgColor
         circleLayer.lineWidth = 6
         circleLayer.fillColor = UIColor.clear.cgColor
         circleLayer.path = circle.cgPath
@@ -32,7 +32,7 @@ class CircleWaveLayer: CAShapeLayer {
         addSublayer(circleLayer)
         
         let outerCircleLayer = CAShapeLayer()
-        outerCircleLayer.strokeColor = UIColor.init(named: Theme.Key.ivpnBlue)?.withAlphaComponent(0.9).cgColor
+        outerCircleLayer.strokeColor = UIColor.init(named: Theme.ivpnBlue)?.withAlphaComponent(0.9).cgColor
         outerCircleLayer.lineWidth = 3
         outerCircleLayer.fillColor = UIColor.clear.cgColor
         outerCircleLayer.path = circle.cgPath
