@@ -47,6 +47,8 @@ struct Theme {
         static let ivpnGray16 = "ivpnGray16"
         static let ivpnGray17 = "ivpnGray17"
         static let ivpnGray18 = "ivpnGray18"
+        static let ivpnGray19 = "ivpnGray19"
+        static let ivpnGray20 = "ivpnGray20"
         static let ivpnLightNavy = "ivpnLightNavy"
         static let ivpnDarkNavy = "ivpnDarkNavy"
         static let ivpnLightYellow = "ivpnLightYellow"
