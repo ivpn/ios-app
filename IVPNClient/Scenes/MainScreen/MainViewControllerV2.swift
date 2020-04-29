@@ -62,10 +62,7 @@ class MainViewControllerV2: UIViewController {
         super.viewDidAppear(animated)
         startPingService(updateServerListDidComplete: updateServerListDidComplete)
         refreshUI()
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            updateGeoLocation()
-        }
+        updateGeoLocation()
     }
     
     deinit {
