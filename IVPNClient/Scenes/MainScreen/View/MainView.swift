@@ -47,6 +47,16 @@ class MainView: UIView {
     
     func updateStatus(vpnStatus: NEVPNStatus) {
         markerView.status = vpnStatus
+        
+        if vpnStatus == .connecting {
+            var server = Application.shared.settings.selectedServer
+            
+            if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+                server = Application.shared.settings.selectedExitServer
+            }
+            
+            mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
+        }
     }
     
     // MARK: - Private methods -

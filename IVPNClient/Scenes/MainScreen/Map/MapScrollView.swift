@@ -21,6 +21,8 @@ class MapScrollView: UIScrollView {
         didSet {
             if oldValue == nil {
                 UIView.animate(withDuration: 0.5, animations: { self.mapImageView.alpha = 1 })
+            } else if Application.shared.connectionManager.status == .connected {
+                return
             }
             
             updateMapPosition(animated: oldValue != nil)
@@ -49,11 +51,16 @@ class MapScrollView: UIScrollView {
     func updateMapPosition(animated: Bool = false) {
         guard let viewModel = viewModel else { return }
         
+        updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated)
+    }
+    
+    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false) {
         let halfWidth = Double(UIScreen.main.bounds.width / 2)
         let halfHeight = Double(UIScreen.main.bounds.height / 2)
-        let point = getCoordinatesBy(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude)
+        let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
         let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
         let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
+        
         setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
     }
     
