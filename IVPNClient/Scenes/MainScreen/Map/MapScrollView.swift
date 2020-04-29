@@ -33,6 +33,7 @@ class MapScrollView: UIScrollView {
     
     override func awakeFromNib() {
         setupConstraints()
+        setupView()
     }
     
     // MARK: - Methods -
@@ -57,6 +58,12 @@ class MapScrollView: UIScrollView {
     }
     
     // MARK: - Private methods -
+    
+    private func setupView() {
+        backgroundColor = UIColor.init(named: Theme.ivpnGray19)
+        mapImageView.backgroundColor = .clear
+        mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray20)
+    }
     
     private func placeServerLocationMarkers() {
         for server in Application.shared.serverList.servers {
