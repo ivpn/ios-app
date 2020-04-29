@@ -25,6 +25,10 @@ class MapConstants {
                 return iPadLandscapeTopAnchor
             }
             
+            if UIDevice.current.hasNotch {
+                return topAnchor / 2
+            }
+            
             return topAnchor + 10
         }
         

@@ -10,6 +10,13 @@ import UIKit
 import SafariServices
 import MessageUI
 
+extension UIDevice {
+    var hasNotch: Bool {
+        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        return bottom > 0
+    }
+}
+
 extension UIViewController {
     
     // MARK: - Properties -
