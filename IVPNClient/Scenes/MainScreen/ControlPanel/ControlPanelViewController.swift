@@ -27,9 +27,9 @@ class ControlPanelViewController: UITableViewController {
         return sessionManager
     }
     
-    var connectionInfoViewModel: ProofsViewModel! {
+    var connectionViewModel: ProofsViewModel! {
         didSet {
-            controlPanelView.updateConnectionInfo(viewModel: connectionInfoViewModel)
+            controlPanelView.updateConnectionInfo(viewModel: connectionViewModel)
         }
     }
     

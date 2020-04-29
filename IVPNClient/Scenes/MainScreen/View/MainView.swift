@@ -18,12 +18,12 @@ class MainView: UIView {
     
     // MARK: - Properties -
     
-    var connectionInfoViewModel: ProofsViewModel! {
+    var connectionViewModel: ProofsViewModel! {
         didSet {
-            mapScrollView.viewModel = connectionInfoViewModel
+            mapScrollView.viewModel = connectionViewModel
             
-            if !connectionInfoViewModel.model.isIvpnServer {
-                localCoordinates = (connectionInfoViewModel.model.latitude, connectionInfoViewModel.model.longitude)
+            if !connectionViewModel.model.isIvpnServer {
+                localCoordinates = (connectionViewModel.model.latitude, connectionViewModel.model.longitude)
             }
         }
     }
