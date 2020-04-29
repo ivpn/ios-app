@@ -115,7 +115,7 @@ class MainView: UIView {
             mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
         }
         
-        if vpnStatus == .disconnecting {
+        if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically {
             mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: true)
         }
     }
