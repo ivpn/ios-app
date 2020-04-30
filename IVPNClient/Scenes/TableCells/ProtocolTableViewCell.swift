@@ -37,7 +37,7 @@ class ProtocolTableViewCell: UITableViewCell {
             updateLabel(title: title, isChecked: isChecked)
         }
         
-        tintColor = UIColor.init(named: Theme.Key.ivpnBlue)
+        tintColor = UIColor.init(named: Theme.ivpnBlue)
     }
     
     private func updateLabel(title: String, isChecked: Bool) {

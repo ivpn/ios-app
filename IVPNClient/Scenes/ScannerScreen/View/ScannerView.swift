@@ -29,7 +29,7 @@ class ScannerView: UIView {
     // MARK: - Methods -
     
     private func setupView() {
-        backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         setupLabel()
     }
     

@@ -97,8 +97,8 @@ class SubscriptionViewController: UIViewController {
         guard self.displayMode == .content else { return }
         
         monthlyButton.setTitleColor(.white, for: .normal)
-        monthlyButtonBackground.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
-        yearlyButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelTertiary), for: .normal)
+        monthlyButtonBackground.backgroundColor = UIColor.init(named: Theme.ivpnBlue)
+        yearlyButton.setTitleColor(UIColor.init(named: Theme.ivpnLabelTertiary), for: .normal)
         yearlyButtonBackground.backgroundColor = .clear
         
         standardSubscription = .standard(.monthly)
@@ -109,8 +109,8 @@ class SubscriptionViewController: UIViewController {
         guard self.displayMode == .content else { return }
         
         yearlyButton.setTitleColor(.white, for: .normal)
-        yearlyButtonBackground.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
-        monthlyButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelTertiary), for: .normal)
+        yearlyButtonBackground.backgroundColor = UIColor.init(named: Theme.ivpnBlue)
+        monthlyButton.setTitleColor(UIColor.init(named: Theme.ivpnLabelTertiary), for: .normal)
         monthlyButtonBackground.backgroundColor = .clear
         
         standardSubscription = .standard(.yearly)
@@ -174,7 +174,7 @@ class SubscriptionViewController: UIViewController {
         noteLabel.enabledTypes = [customType]
         noteLabel.text = noteLabel.text
         noteLabel.lineSpacing = 3
-        noteLabel.customColor[customType] = UIColor.init(named: Theme.Key.ivpnBlue)
+        noteLabel.customColor[customType] = UIColor.init(named: Theme.ivpnBlue)
         noteLabel.handleCustomTap(for: customType) { element in
             if element == "Terms Of Service" {
                 self.openTermsOfService()

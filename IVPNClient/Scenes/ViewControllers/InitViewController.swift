@@ -124,7 +124,7 @@ class InitViewController: UIViewController {
             } else {
                 pageControl.pageIndicatorTintColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
             }
-            pageControl.currentPageIndicatorTintColor = UIColor(named: Theme.Key.ivpnBlue)
+            pageControl.currentPageIndicatorTintColor = UIColor(named: Theme.ivpnBlue)
         }
         
         promotionsView.addSubview(pageViewController.view)

@@ -122,9 +122,9 @@ extension ProtocolViewController {
         cell.setup(connectionProtocol: connectionProtocol, isSettings: indexPath.section > 0)
         
         if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) {
-            cell.protocolLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabel6)
         } else {
-            cell.protocolLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+            cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         }
         
         return cell
@@ -268,13 +268,13 @@ extension ProtocolViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
     }
     
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         if let footer = view as? UITableViewHeaderFooterView {
-            footer.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
     }
     

@@ -18,9 +18,20 @@ class MainView: UIView {
     
     // MARK: - Properties -
     
+    var connectionViewModel: ProofsViewModel! {
+        didSet {
+            mapScrollView.viewModel = connectionViewModel
+            
+            if !connectionViewModel.model.isIvpnServer {
+                localCoordinates = (connectionViewModel.model.latitude, connectionViewModel.model.longitude)
+            }
+        }
+    }
+    
     let markerView = MapMarkerView()
     private var infoAlertViewModel = InfoAlertViewModel()
     private let markerContainerView = MapMarkerContainerView()
+    private var localCoordinates: (Double, Double)?
     
     // MARK: - View lifecycle -
     
@@ -41,6 +52,7 @@ class MainView: UIView {
     
     func updateStatus(vpnStatus: NEVPNStatus) {
         markerView.status = vpnStatus
+        updateMapPosition(vpnStatus: vpnStatus)
     }
     
     // MARK: - Private methods -
@@ -75,6 +87,7 @@ class MainView: UIView {
     
     private func setupConstraints() {
         mapScrollView.setupConstraints()
+        mapScrollView.updateMapPosition()
         markerContainerView.setupConstraints()
     }
     
@@ -89,6 +102,22 @@ class MainView: UIView {
     
     private func updateMarker() {
         markerView.connectionInfoPopup.updateView()
+    }
+    
+    private func updateMapPosition(vpnStatus: NEVPNStatus) {
+        if vpnStatus == .connecting {
+            var server = Application.shared.settings.selectedServer
+            
+            if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+                server = Application.shared.settings.selectedExitServer
+            }
+            
+            mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
+        }
+        
+        if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically, let localCoordinates = localCoordinates {
+            mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: true)
+        }
     }
     
     @objc private func openSettings(_ sender: UIButton) {

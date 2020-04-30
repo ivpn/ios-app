@@ -45,7 +45,7 @@ extension AntiTrackerViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         let footer = view as! UITableViewHeaderFooterView
-        footer.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+        footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         
         let urlString = section > 0 ? "https://www.ivpn.net/antitracker/hardcore" : "https://www.ivpn.net/antitracker"
         
@@ -55,8 +55,8 @@ extension AntiTrackerViewController {
         label.font = UIFont.systemFont(ofSize: 13)
         label.enabledTypes = [customType]
         label.text = footer.textLabel?.text
-        label.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
-        label.customColor[customType] = UIColor.init(named: Theme.Key.ivpnBlue)
+        label.textColor = UIColor.init(named: Theme.ivpnLabel6)
+        label.customColor[customType] = UIColor.init(named: Theme.ivpnBlue)
         label.handleCustomTap(for: customType) { _ in
             self.openWebPage(urlString)
         }
@@ -67,7 +67,7 @@ extension AntiTrackerViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
     }
     

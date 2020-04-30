@@ -11,7 +11,7 @@ import UIKit
 class ConnectionInfoBoxView: UIView {
     
     override func layoutSubviews() {
-        layer.shadowColor = UIColor.init(named: Theme.Key.ivpnGray15)!.cgColor
+        layer.shadowColor = UIColor.init(named: Theme.ivpnGray15)!.cgColor
     }
     
 }

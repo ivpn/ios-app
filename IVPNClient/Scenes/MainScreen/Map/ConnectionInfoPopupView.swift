@@ -15,7 +15,7 @@ class ConnectionInfoPopupView: UIView {
     
     lazy var container: UIView = {
         let container = UIView(frame: .zero)
-        container.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        container.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         container.layer.cornerRadius = 8
         container.clipsToBounds = false
         return container
@@ -23,7 +23,7 @@ class ConnectionInfoPopupView: UIView {
     
     lazy var arrow: UIView = {
         let arrow = UIView(frame: .zero)
-        arrow.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        arrow.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         arrow.rotate(angle: 45)
         return arrow
     }()
@@ -45,7 +45,7 @@ class ConnectionInfoPopupView: UIView {
         errorLabel.font = UIFont.systemFont(ofSize: 12)
         errorLabel.text = "Please check your internet connection and try again."
         errorLabel.textAlignment = .center
-        errorLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel5)
+        errorLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
         errorLabel.numberOfLines = 0
         return errorLabel
     }()
@@ -53,14 +53,14 @@ class ConnectionInfoPopupView: UIView {
     lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.font = UIFont.systemFont(ofSize: 12)
-        statusLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel5)
+        statusLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
         return statusLabel
     }()
     
     lazy var locationLabel: UILabel = {
         let locationLabel = UILabel()
         locationLabel.font = UIFont.systemFont(ofSize: 16)
-        locationLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        locationLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         return locationLabel
     }()
     
@@ -166,7 +166,7 @@ class ConnectionInfoPopupView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         layer.cornerRadius = 8
         layer.masksToBounds = false
         clipsToBounds = false

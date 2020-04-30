@@ -44,8 +44,8 @@ class ControlPanelView: UITableView {
     // MARK: - Methods -
     
     func setupView() {
-        connectSwitch.thumbTintColor = UIColor.init(named: Theme.Key.ivpnGray17)
-        connectSwitch.onTintColor = UIColor.init(named: Theme.Key.ivpnBlue)
+        connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
+        connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
         updateConnectSwitch()
     }
     
@@ -84,11 +84,11 @@ class ControlPanelView: UITableView {
     
     func updateMultiHopButtons(isMultiHop: Bool) {
         if isMultiHop {
-            enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelPrimary), for: .normal)
-            disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabel5), for: .normal)
+            enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.ivpnLabelPrimary), for: .normal)
+            disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.ivpnLabel5), for: .normal)
         } else {
-            enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabel5), for: .normal)
-            disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.Key.ivpnLabelPrimary), for: .normal)
+            enableMultiHopButton.setTitleColor(UIColor.init(named: Theme.ivpnLabel5), for: .normal)
+            disableMultiHopButton.setTitleColor(UIColor.init(named: Theme.ivpnLabelPrimary), for: .normal)
         }
     }
     
@@ -102,7 +102,7 @@ class ControlPanelView: UITableView {
     
     private func updateConnectSwitch() {
         if #available(iOS 13.0, *) {
-            connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.Key.ivpnRedOff)
+            connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
         }
     }
     
