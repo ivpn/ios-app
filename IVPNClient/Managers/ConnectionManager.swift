@@ -294,10 +294,8 @@ class ConnectionManager {
     }
     
     func needsUpdateSelectedServer() {
-        getStatus { _, status in
-            guard status.isDisconnected() else { return }
-            self.updateSelectedServer()
-        }
+        guard status.isDisconnected() else { return }
+        self.updateSelectedServer()
     }
     
     func canDisconnect(status: NEVPNStatus) -> Bool {
