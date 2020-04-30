@@ -98,8 +98,9 @@ class ControlPanelViewController: UITableViewController {
         }
         
         guard Application.shared.connectionManager.status.isDisconnected() else {
-            showConnectedAlert(message: "To change AntiTracker settings, please first disconnect", sender: sender)
-            sender.setOn(sender.isOn, animated: true)
+            showConnectedAlert(message: "To change AntiTracker settings, please first disconnect", sender: sender) {
+                sender.setOn(UserDefaults.shared.isAntiTracker, animated: true)
+            }
             return
         }
         
