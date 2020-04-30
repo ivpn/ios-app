@@ -13,10 +13,12 @@ class MapMarkerContainerView: UIView {
     
     // MARK: - Properties -
     
-    private lazy var constraintsA = bb.left().top(25).right().bottom(-359).constraints.deactivate()
-    private lazy var constraintsB = bb.left().top(25).right().bottom(-274).constraints.deactivate()
-    private lazy var constraintsC = bb.left().top(25).right().bottom(-230).constraints.deactivate()
-    private lazy var iPadConstraints = bb.left(375).top().right().bottom().constraints.deactivate()
+    let top = MapConstants.Container.topAnchor
+    
+    private lazy var constraintsA = bb.left().top(MapConstants.Container.topAnchor).right().bottom(-MapConstants.Container.bottomAnchorC).constraints.deactivate()
+    private lazy var constraintsB = bb.left().top(MapConstants.Container.topAnchor).right().bottom(-MapConstants.Container.bottomAnchorB).constraints.deactivate()
+    private lazy var constraintsC = bb.left().top(MapConstants.Container.topAnchor).right().bottom(-MapConstants.Container.bottomAnchorA).constraints.deactivate()
+    private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top().right().bottom().constraints.deactivate()
     
     // MARK: - View lifecycle -
     

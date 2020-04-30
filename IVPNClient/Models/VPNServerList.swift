@@ -220,6 +220,8 @@ class VPNServerList {
                 countryCode: server["country_code"] as? String ?? "",
                 country: server["country"] as? String ?? "",
                 city: server["city"] as? String ?? "",
+                latitude: server["latitude"] as? Double ?? 0,
+                longitude: server["longitude"] as? Double ?? 0,
                 ipAddresses: serverIpList,
                 hosts: serverHostsList
             )

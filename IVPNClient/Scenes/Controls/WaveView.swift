@@ -34,7 +34,7 @@ class WaveView: UIView {
             userInterfaceStyle = UIView().traitCollection.userInterfaceStyle.rawValue
             waveLayer.removeFromSuperlayer()
             waveLayer = WaveLayer()
-            let backgroundColor = isConnected ? UIColor.init(named: Theme.Key.ivpnBackgroundConnected)!.cgColor : UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)!.cgColor
+            let backgroundColor = isConnected ? UIColor.init(named: Theme.ivpnBackgroundConnected)!.cgColor : UIColor.init(named: Theme.ivpnBackgroundPrimary)!.cgColor
             waveLayer.updateLayer(backgroundColor: backgroundColor)
             layer.insertSublayer(waveLayer, at: 0)
             waveLayer.frame = self.bounds

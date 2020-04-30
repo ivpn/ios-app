@@ -12,7 +12,7 @@ class CircleParameters {
     
     static let circleSize: Int = 148
     static let circleStrokeWidth: Int = 8
-    static let activeColor = UIColor.init(named: Theme.Key.ivpnBlue)!
-    static let inactiveColor = UIColor.init(named: Theme.Key.ivpnGray6)!
+    static let activeColor = UIColor.init(named: Theme.ivpnBlue)!
+    static let inactiveColor = UIColor.init(named: Theme.ivpnGray6)!
     
 }

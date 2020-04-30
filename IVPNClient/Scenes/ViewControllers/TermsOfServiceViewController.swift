@@ -64,12 +64,12 @@ class TermsOfServiceViewController: UIViewController {
         formattedString.bold("Do you collect or store any usage/stats information relating to an account?\n\n", fontSize: 14)
         formattedString.regular("IVPN purposefully does not log any usage data associated with an account as we provide an unlimited and unrestricted quota free service.", fontSize: 14)
         textView.attributedText = formattedString
-        textView.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        textView.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         
         let customType = ActiveType.custom(pattern: "Privacy Policy")
         noteLabel.enabledTypes = [customType]
         noteLabel.text = noteLabel.text
-        noteLabel.customColor[customType] = UIColor.init(named: Theme.Key.ivpnBlue)
+        noteLabel.customColor[customType] = UIColor.init(named: Theme.ivpnBlue)
         noteLabel.handleCustomTap(for: customType) { _ in
             self.openPrivacyPolicy()
         }

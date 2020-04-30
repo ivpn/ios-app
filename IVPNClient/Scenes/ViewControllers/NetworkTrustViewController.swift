@@ -53,8 +53,8 @@ extension NetworkTrustViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = collection[indexPath.row].rawValue
-        cell.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
-        cell.tintColor = UIColor.init(named: Theme.Key.ivpnBlue)
+        cell.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
+        cell.tintColor = UIColor.init(named: Theme.ivpnBlue)
         
         if collection[indexPath.row].rawValue == network.trust {
             cell.accessoryType = .checkmark

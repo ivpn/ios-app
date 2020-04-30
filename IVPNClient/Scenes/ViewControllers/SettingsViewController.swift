@@ -427,7 +427,7 @@ extension SettingsViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
     }
     

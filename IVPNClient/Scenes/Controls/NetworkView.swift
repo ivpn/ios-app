@@ -68,13 +68,13 @@ class NetworkView: UIView {
         
         switch network.trust {
         case NetworkTrust.Untrusted.rawValue:
-            trustLabel.textColor = UIColor.init(named: Theme.Key.ivpnRed)
+            trustLabel.textColor = UIColor.init(named: Theme.ivpnRed)
             setTrustLayout(withDefault: false)
         case NetworkTrust.Trusted.rawValue:
-            trustLabel.textColor = UIColor.init(named: Theme.Key.ivpnGreen)
+            trustLabel.textColor = UIColor.init(named: Theme.ivpnGreen)
             setTrustLayout(withDefault: false)
         default:
-            trustLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel5)
+            trustLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
             setTrustLayout(withDefault: true)
         }
         

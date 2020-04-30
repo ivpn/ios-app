@@ -35,7 +35,7 @@ class ConnectionInfoView: UIView {
         errorLabel.font = UIFont.systemFont(ofSize: labelFontSize, weight: .regular)
         errorLabel.text = "Please check your internet connection and try again."
         errorLabel.textAlignment = .center
-        errorLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        errorLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         errorLabel.numberOfLines = 0
         return errorLabel
     }()
@@ -45,7 +45,7 @@ class ConnectionInfoView: UIView {
         countryLabel.font = UIFont.systemFont(ofSize: titleFontSize, weight: .regular)
         countryLabel.iconMirror(text: "Australia", image: UIImage(named: "au"), alignment: .left)
         countryLabel.textAlignment = .center
-        countryLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        countryLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         return countryLabel
     }()
     
@@ -54,7 +54,7 @@ class ConnectionInfoView: UIView {
         cityLabel.font = UIFont.systemFont(ofSize: titleFontSize, weight: .regular)
         cityLabel.text = "Salt Lake City, UT"
         cityLabel.textAlignment = .center
-        cityLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        cityLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         return cityLabel
     }()
     
@@ -62,7 +62,7 @@ class ConnectionInfoView: UIView {
         let ipAddressTitleLabel = UILabel()
         ipAddressTitleLabel.font = UIFont.systemFont(ofSize: labelFontSize, weight: .regular)
         ipAddressTitleLabel.text = "Public IP Address"
-        ipAddressTitleLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        ipAddressTitleLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         return ipAddressTitleLabel
     }()
     
@@ -71,7 +71,7 @@ class ConnectionInfoView: UIView {
         ipAddressLabel.font = UIFont.systemFont(ofSize: labelFontSize, weight: .regular)
         ipAddressLabel.text = "111.111.111.111"
         ipAddressLabel.textAlignment = .right
-        ipAddressLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        ipAddressLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         return ipAddressLabel
     }()
     
@@ -79,7 +79,7 @@ class ConnectionInfoView: UIView {
         let protocolTitleLabel = UILabel()
         protocolTitleLabel.font = UIFont.systemFont(ofSize: labelFontSize, weight: .regular)
         protocolTitleLabel.text = "Protocol"
-        protocolTitleLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        protocolTitleLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         return protocolTitleLabel
     }()
     
@@ -88,7 +88,7 @@ class ConnectionInfoView: UIView {
         protocolLabel.font = UIFont.systemFont(ofSize: labelFontSize, weight: .regular)
         protocolLabel.text = "WireGuard"
         protocolLabel.textAlignment = .right
-        protocolLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         return protocolLabel
     }()
     
@@ -96,7 +96,7 @@ class ConnectionInfoView: UIView {
         let localIpAddressTitleLabel = UILabel()
         localIpAddressTitleLabel.font = UIFont.systemFont(ofSize: labelFontSize, weight: .regular)
         localIpAddressTitleLabel.text = "Local IP Address"
-        localIpAddressTitleLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        localIpAddressTitleLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         return localIpAddressTitleLabel
     }()
     
@@ -105,19 +105,19 @@ class ConnectionInfoView: UIView {
         localIpAddressLabel.font = UIFont.systemFont(ofSize: labelFontSize, weight: .regular)
         localIpAddressLabel.text = ""
         localIpAddressLabel.textAlignment = .right
-        localIpAddressLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+        localIpAddressLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         return localIpAddressLabel
     }()
     
     lazy var delimiter1: UIView = {
         let delimiter1 = UIView(frame: .zero)
-        delimiter1.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray9)
+        delimiter1.backgroundColor = UIColor.init(named: Theme.ivpnGray9)
         return delimiter1
     }()
     
     lazy var delimiter2: UIView = {
         let delimiter2 = UIView(frame: .zero)
-        delimiter2.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray9)
+        delimiter2.backgroundColor = UIColor.init(named: Theme.ivpnGray9)
         return delimiter2
     }()
     

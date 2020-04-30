@@ -35,8 +35,8 @@ class MapMarkerView: UIView {
     private var circle3 = UIView()
     private var circle4 = UIView()
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
-    private var redColor = UIColor.init(named: Theme.Key.ivpnRedOff)!
-    private var grayColor = UIColor.init(named: Theme.Key.ivpnGray18)!
+    private var redColor = UIColor.init(named: Theme.ivpnRedOff)!
+    private var grayColor = UIColor.init(named: Theme.ivpnGray18)!
     private var radius1: CGFloat = 187
     private var radius2: CGFloat = 97
     private var radius3: CGFloat = 41

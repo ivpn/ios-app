@@ -14,7 +14,7 @@ extension FloatingPanelController {
     func setup() {
         surfaceView.shadowHidden = true
         surfaceView.contentInsets = .init(top: 20, left: 0, bottom: 0, right: 0)
-        surfaceView.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        surfaceView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         
         let contentViewController = NavigationManager.getControlPanelViewController()
         set(contentViewController: contentViewController)

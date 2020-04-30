@@ -53,10 +53,10 @@ class ServerTableViewCell: UITableViewCell {
     var serverToValidate: VPNServer! {
         didSet {
             if !Application.shared.serverList.validateServer(firstServer: viewModel.server, secondServer: serverToValidate) {
-                serverName.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+                serverName.textColor = UIColor.init(named: Theme.ivpnLabel6)
                 flagImage.alpha = 0.5
             } else {
-                serverName.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+                serverName.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
                 flagImage.alpha = 1
             }
         }
