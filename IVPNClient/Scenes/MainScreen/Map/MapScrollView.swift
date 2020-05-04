@@ -20,7 +20,7 @@ class MapScrollView: UIScrollView {
     var viewModel: ProofsViewModel! {
         didSet {
             if oldValue == nil {
-                UIView.animate(withDuration: 0.5, animations: { self.mapImageView.alpha = 1 })
+                UIView.animate(withDuration: 0.5, animations: { self.alpha = 1 })
             } else if Application.shared.connectionManager.status == .connected {
                 return
             }
@@ -36,6 +36,7 @@ class MapScrollView: UIScrollView {
     override func awakeFromNib() {
         setupConstraints()
         setupView()
+        placeServerLocationMarkers()
     }
     
     // MARK: - Methods -
@@ -75,19 +76,27 @@ class MapScrollView: UIScrollView {
     
     private func placeServerLocationMarkers() {
         for server in Application.shared.serverList.servers {
-            placeMarker(latitude: server.latitude, longitude: server.longitude)
+            placeMarker(latitude: server.latitude, longitude: server.longitude, city: server.city)
         }
     }
     
-    private func placeMarker(latitude: Double, longitude: Double) {
+    private func placeMarker(latitude: Double, longitude: Double, city: String) {
+        guard city != "Bratislava" else { return }
+        
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
         
-        let marker = UIView(frame: CGRect(x: point.0 - 3, y: point.1 - 3, width: 6, height: 6))
-        marker.layer.cornerRadius = 3
-        marker.clipsToBounds = true
-        marker.backgroundColor = .green
+        let label = UILabel(frame: CGRect(x: point.0 - 50, y: point.1 - 21, width: 100, height: 20))
+        label.text = city
+        label.textColor = UIColor.init(named: Theme.ivpnGray21)
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 10, weight: .regular)
         
-        addSubview(marker)
+        let marker = UIView(frame: CGRect(x: 50 - 3, y: 18, width: 6, height: 6))
+        marker.layer.cornerRadius = 3
+        marker.backgroundColor = UIColor.init(named: Theme.ivpnGray21)
+        
+        label.addSubview(marker)
+        addSubview(label)
     }
     
     private func getCoordinatesBy(latitude: Double, longitude: Double) -> (Double, Double) {

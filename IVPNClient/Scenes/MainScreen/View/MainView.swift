@@ -36,6 +36,7 @@ class MainView: UIView {
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
+        backgroundColor = UIColor.init(named: Theme.ivpnGray19)
         initMarker()
         initSettingsAction()
         initInfoAlert()
