@@ -31,21 +31,6 @@ struct AccountViewModel {
         return serviceStatus.isActive ? serviceStatus.currentPlan ?? "" : "No active subscription"
     }
     
-    var billingCycleText: String {
-        #warning("TODO: Implement after service status API is updated")
-        return "{ billingCycle }"
-    }
-    
-    var nextBillingText: String {
-        #warning("TODO: Implement after service status API is updated")
-        return "{ nextBilling }"
-    }
-    
-    var recurringAmountText: String {
-        #warning("TODO: Implement after service status API is updated")
-        return "{ recurringAmount }"
-    }
-    
     var logOutActionText: String {
         return authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up"
     }

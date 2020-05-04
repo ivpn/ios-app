@@ -1419,14 +1419,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="13.666666666666664" width="326" height="16"/>
+                                            <rect key="frame" x="16" y="14" width="326" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1435,7 +1435,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
+                                            <rect key="frame" x="16" y="11.000000000000002" width="324" height="21.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1457,7 +1457,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="99" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -3623,7 +3623,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="NhI-pa-20D">
-                            <rect key="frame" x="0.0" y="432.00000381469727" width="375" height="110"/>
+                            <rect key="frame" x="0.0" y="301" width="375" height="110"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuQ-jO-yxH">
@@ -3693,116 +3693,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Ta9-Nd-xfa">
-                                        <rect key="frame" x="0.0" y="239" width="375" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ta9-Nd-xfa" id="7KF-dR-4Y8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing cycle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEB-5B-6dQ">
-                                                    <rect key="frame" x="16" y="9.6666666666666643" width="150" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="38f-Nq-d1v"/>
-                                                        <constraint firstAttribute="width" constant="150" id="HZj-RC-y8y"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" name="ivpnLabel5"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monthly" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCl-hE-2rz">
-                                                    <rect key="frame" x="209" y="9.6666666666666643" width="150" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="eEe-bb-Zao"/>
-                                                        <constraint firstAttribute="width" constant="150" id="yRR-Ad-bLu"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="rCl-hE-2rz" firstAttribute="centerY" secondItem="7KF-dR-4Y8" secondAttribute="centerY" id="3Ih-Qb-k7Y"/>
-                                                <constraint firstAttribute="trailing" secondItem="rCl-hE-2rz" secondAttribute="trailing" constant="16" id="8MA-Yt-bcJ"/>
-                                                <constraint firstItem="NEB-5B-6dQ" firstAttribute="leading" secondItem="7KF-dR-4Y8" secondAttribute="leading" constant="16" id="GFq-5b-cEk"/>
-                                                <constraint firstItem="NEB-5B-6dQ" firstAttribute="centerY" secondItem="7KF-dR-4Y8" secondAttribute="centerY" id="b0C-d9-eCD"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="UOM-Nv-Szr">
-                                        <rect key="frame" x="0.0" y="282.66666793823242" width="375" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UOM-Nv-Szr" id="6fU-z9-VJp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next billing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcR-Hb-DYM">
-                                                    <rect key="frame" x="16" y="9.6666666666666643" width="150" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="150" id="oUP-Do-7IP"/>
-                                                        <constraint firstAttribute="height" constant="25" id="uU8-ZN-ZYY"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" name="ivpnLabel5"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mar 20, 2020" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnP-Xb-npw">
-                                                    <rect key="frame" x="209" y="9.6666666666666643" width="150" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="150" id="UYO-S2-I3h"/>
-                                                        <constraint firstAttribute="height" constant="25" id="Vxh-xY-TaP"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="pcR-Hb-DYM" firstAttribute="centerY" secondItem="6fU-z9-VJp" secondAttribute="centerY" id="i4F-AI-B4Y"/>
-                                                <constraint firstItem="XnP-Xb-npw" firstAttribute="centerY" secondItem="6fU-z9-VJp" secondAttribute="centerY" id="lIb-6F-0Nx"/>
-                                                <constraint firstAttribute="trailing" secondItem="XnP-Xb-npw" secondAttribute="trailing" constant="16" id="naI-5h-8la"/>
-                                                <constraint firstItem="pcR-Hb-DYM" firstAttribute="leading" secondItem="6fU-z9-VJp" secondAttribute="leading" constant="16" id="pY1-Wd-4tA"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Rxi-i7-2dY">
-                                        <rect key="frame" x="0.0" y="326.33333587646484" width="375" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rxi-i7-2dY" id="w9l-kT-e5C">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recurring amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCC-OX-LIA">
-                                                    <rect key="frame" x="16" y="9.6666666666666643" width="150" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="jYJ-BD-bqg"/>
-                                                        <constraint firstAttribute="width" constant="150" id="nxT-J9-a0k"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" name="ivpnLabel5"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$6.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGR-de-kwn">
-                                                    <rect key="frame" x="209" y="9.6666666666666643" width="150" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="H8s-7E-kqV"/>
-                                                        <constraint firstAttribute="width" constant="150" id="z0B-hB-YXo"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="dCC-OX-LIA" firstAttribute="leading" secondItem="w9l-kT-e5C" secondAttribute="leading" constant="16" id="GEc-ES-P2A"/>
-                                                <constraint firstAttribute="trailing" secondItem="ZGR-de-kwn" secondAttribute="trailing" constant="16" id="RbQ-it-nPx"/>
-                                                <constraint firstItem="dCC-OX-LIA" firstAttribute="centerY" secondItem="w9l-kT-e5C" secondAttribute="centerY" id="Yq0-BP-ggJ"/>
-                                                <constraint firstItem="ZGR-de-kwn" firstAttribute="centerY" secondItem="w9l-kT-e5C" secondAttribute="centerY" id="rgJ-9T-x0e"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="LZM-ff-BAA">
-                                        <rect key="frame" x="0.0" y="370.00000381469727" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="239" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LZM-ff-BAA" id="jeh-vO-g4G">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3834,13 +3726,10 @@
                         </sections>
                         <connections>
                             <outlet property="accountIdLabel" destination="c74-BR-YIO" id="owd-hS-Ldx"/>
-                            <outlet property="billingCycleLabel" destination="rCl-hE-2rz" id="fw5-11-zgv"/>
                             <outlet property="dataSource" destination="obv-bO-Y0X" id="XXu-eT-PBh"/>
                             <outlet property="delegate" destination="obv-bO-Y0X" id="c2A-2b-bO7"/>
                             <outlet property="logOutActionButton" destination="MVS-Nm-wlG" id="Yqw-Wn-PH0"/>
-                            <outlet property="nextBillingLabel" destination="XnP-Xb-npw" id="Syq-ON-8ig"/>
                             <outlet property="qrCodeImage" destination="LDZ-oO-5ye" id="a4A-eq-b9i"/>
-                            <outlet property="recurringAmountLabel" destination="ZGR-de-kwn" id="Gkd-Q5-8fc"/>
                             <outlet property="statusLabel" destination="hky-B3-yLX" id="42L-ka-GMJ"/>
                             <outlet property="subscriptionActionButton" destination="HuQ-jO-yxH" id="a6d-RC-6yT"/>
                             <outlet property="subscriptionLabel" destination="zC4-d3-7BM" id="8ff-HE-HH1"/>
