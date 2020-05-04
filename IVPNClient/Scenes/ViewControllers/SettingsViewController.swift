@@ -149,6 +149,7 @@ class SettingsViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -429,6 +430,10 @@ extension SettingsViewController {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
 }
