@@ -32,6 +32,7 @@ class AntiTrackerViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         antiTrackerSwitch.setOn(UserDefaults.shared.isAntiTracker, animated: false)
         antiTrackerHardcoreSwitch.setOn(UserDefaults.shared.isAntiTrackerHardcore, animated: false)
         antiTrackerHardcoreSwitch.isEnabled = UserDefaults.shared.isAntiTracker
@@ -69,6 +70,10 @@ extension AntiTrackerViewController {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
 }
