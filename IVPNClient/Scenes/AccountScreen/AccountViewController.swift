@@ -36,6 +36,7 @@ class AccountViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         initNavigationBar()
         accountView.setupView(viewModel: viewModel)
     }
@@ -73,6 +74,10 @@ extension AccountViewController {
         if let footer = view as? UITableViewHeaderFooterView {
             footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
 }

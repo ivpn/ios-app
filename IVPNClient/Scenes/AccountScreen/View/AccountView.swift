@@ -16,9 +16,6 @@ class AccountView: UITableView {
     @IBOutlet weak var accountIdLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var subscriptionLabel: UILabel!
-    @IBOutlet weak var billingCycleLabel: UILabel!
-    @IBOutlet weak var nextBillingLabel: UILabel!
-    @IBOutlet weak var recurringAmountLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
     @IBOutlet weak var subscriptionActionButton: UIButton!
     
@@ -29,9 +26,6 @@ class AccountView: UITableView {
         statusLabel.text = viewModel.statusText
         statusLabel.backgroundColor = viewModel.statusColor
         subscriptionLabel.text = viewModel.subscriptionText
-        billingCycleLabel.text = viewModel.billingCycleText
-        nextBillingLabel.text = viewModel.nextBillingText
-        recurringAmountLabel.text = viewModel.recurringAmountText
         logOutActionButton.setTitle(viewModel.logOutActionText, for: .normal)
         subscriptionActionButton.setTitle(viewModel.subscriptionActionText, for: .normal)
         subscriptionActionButton.isHidden = !viewModel.showSubscriptionAction

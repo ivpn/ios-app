@@ -28,6 +28,7 @@ class NetworkProtectionViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         StorageManager.saveDefaultNetwork()
         StorageManager.saveCellularNetwork()
         load(isOn: defaults.networkProtectionEnabled)
@@ -183,6 +184,10 @@ extension NetworkProtectionViewController {
         if let footer = view as? UITableViewHeaderFooterView {
             footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
