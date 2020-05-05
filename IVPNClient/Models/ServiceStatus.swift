@@ -65,7 +65,7 @@ struct ServiceStatus: Codable {
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         
-        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(activeUntil  ?? 0)))
+        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0)))
     }
     
     func isEnabled(capability: Capability) -> Bool {
