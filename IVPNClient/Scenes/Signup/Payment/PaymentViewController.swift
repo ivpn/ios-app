@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyStoreKit
+import Bamboo
 
 class PaymentViewController: UITableViewController {
     
@@ -16,6 +17,44 @@ class PaymentViewController: UITableViewController {
     var service = Service(type: .standard, duration: .year)
     
     var extendingService = false
+    
+    lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.hidesWhenStopped = true
+        spinner.startAnimating()
+        return spinner
+    }()
+    
+    lazy var retryButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(fetchProducts), for: .touchUpInside)
+        button.setTitle("Retry", for: .normal)
+        button.sizeToFit()
+        button.isHidden = true
+        return button
+    }()
+    
+    var displayMode: DisplayMode = .content {
+        didSet {
+            switch displayMode {
+            case .loading:
+                spinner.startAnimating()
+                tableView.separatorStyle = .none
+                retryButton.isHidden = true
+            case .content:
+                spinner.stopAnimating()
+                tableView.separatorStyle = .singleLine
+                tableView.reloadData()
+                retryButton.isHidden = true
+            case .error:
+                spinner.stopAnimating()
+                tableView.separatorStyle = .none
+                retryButton.isHidden = false
+            }
+            
+            tableView.reloadData()
+        }
+    }
     
     var deviceCanMakePurchases: Bool {
         guard IAPManager.shared.canMakePurchases else {
@@ -41,6 +80,15 @@ class PaymentViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigation()
+        setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if extendingService {
+            fetchProducts()
+        }
     }
     
     // MARK: - Private methods -
@@ -56,6 +104,35 @@ class PaymentViewController: UITableViewController {
             button.sizeToFit()
             button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
             navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        }
+    }
+    
+    private func setupView() {
+        if extendingService {
+            displayMode = .loading
+            tableView.separatorStyle = .none
+            view.addSubview(spinner)
+            view.addSubview(retryButton)
+            spinner.bb.centerX().centerY(-80)
+            retryButton.bb.centerX().centerY(-80)
+        }
+    }
+    
+    @objc private func fetchProducts() {
+        displayMode = .loading
+        
+        IAPManager.shared.fetchProducts { [weak self] products, error in
+            guard let self = self else { return }
+            
+            if error != nil {
+                self.showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
+                self.displayMode = .error
+                return
+            }
+            
+            if products != nil {
+                self.displayMode = .content
+            }
         }
     }
     
@@ -136,6 +213,10 @@ extension PaymentViewController {
 extension PaymentViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard displayMode == .content else {
+            return 0
+        }
+        
         return 64
     }
     
@@ -143,6 +224,16 @@ extension PaymentViewController {
         guard indexPath.row > 0 else { return }
         service = service.collection[indexPath.row - 1]
         tableView.reloadData()
+    }
+    
+}
+
+extension PaymentViewController {
+    
+    enum DisplayMode {
+        case loading
+        case content
+        case error
     }
     
 }

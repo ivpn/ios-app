@@ -397,7 +397,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
-                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectStandardPlan" id="SH9-gf-B1N"/>
+                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectStandardPlan" id="oRx-Qt-gFP"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -499,7 +499,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
-                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectProPlan" id="igR-S1-Kcs"/>
+                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectProPlan" id="gSv-4p-nMI"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -546,7 +546,7 @@
             </objects>
             <point key="canvasLocation" x="4281" y="-229"/>
         </scene>
-        <!--Continue to payment-->
+        <!--Payment-->
         <scene sceneID="Kfi-9P-415">
             <objects>
                 <tableViewController id="GbE-hF-jVK" customClass="PaymentViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -782,13 +782,13 @@
                             <outlet property="delegate" destination="GbE-hF-jVK" id="Hlw-7q-gLl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Continue to payment" id="Pcw-dt-qz8">
+                    <navigationItem key="navigationItem" title="Payment" id="Pcw-dt-qz8">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="plain" id="QSt-8p-kF2"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGB-VS-Z7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5154" y="-229"/>
+            <point key="canvasLocation" x="5183" y="-229"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cyL-IY-0fL">
@@ -903,7 +903,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wQK-0r-hM4">
             <objects>
-                <navigationController storyboardIdentifier="subscriptionView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hsa-ng-hVu" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hsa-ng-hVu" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="510-bm-h3Z"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CwZ-xv-Dyg">
@@ -919,9 +919,28 @@
             </objects>
             <point key="canvasLocation" x="4280" y="-969"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="L0q-g4-JCC">
+            <objects>
+                <navigationController storyboardIdentifier="subscriptionView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bqU-Od-06m" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="5p8-uh-4A4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fwt-Vh-aQ1">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GbE-hF-jVK" kind="relationship" relationship="rootViewController" id="uYX-O5-UET"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lZg-Ea-Uxg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5183" y="-970"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="igR-S1-Kcs"/>
+        <segue reference="gSv-4p-nMI"/>
         <segue reference="rrg-Fe-V0v"/>
     </inferredMetricsTieBreakers>
     <resources>

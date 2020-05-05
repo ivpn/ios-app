@@ -28,8 +28,9 @@ class NavigationManager {
         
         let navController = storyBoard.instantiateViewController(withIdentifier: "subscriptionView") as? UINavigationController
         navController?.modalPresentationStyle = .formSheet
-        if let viewController = navController?.topViewController as? SelectPlanViewController {
+        if let viewController = navController?.topViewController as? PaymentViewController {
             viewController.extendingService = true
+            viewController.service = Service(type: .standard, duration: .year)
         }
         
         return navController!
