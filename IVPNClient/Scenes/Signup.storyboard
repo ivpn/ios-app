@@ -380,14 +380,13 @@
                                                             <rect key="frame" x="0.0" y="147" width="380" height="45"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tf-CF-xHh">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="45"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="45"/>
                                                                     <color key="backgroundColor" name="ivpnBlue"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="AWW-Q7-ie1"/>
-                                                                        <constraint firstAttribute="width" constant="160" id="n6A-Qk-X8O"/>
                                                                     </constraints>
                                                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <state key="normal" title="Select">
+                                                                    <state key="normal" title="Select and continute to payment">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </state>
                                                                     <userDefinedRuntimeAttributes>
@@ -405,6 +404,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="bottom" secondItem="8tf-CF-xHh" secondAttribute="bottom" id="RQu-hf-oed"/>
                                                                 <constraint firstItem="8tf-CF-xHh" firstAttribute="top" secondItem="XD2-I9-v30" secondAttribute="top" id="cvt-3x-EwO"/>
+                                                                <constraint firstAttribute="trailing" secondItem="8tf-CF-xHh" secondAttribute="trailing" id="fq1-bN-eMN"/>
                                                                 <constraint firstAttribute="height" constant="45" id="i2u-Hq-32j"/>
                                                                 <constraint firstItem="8tf-CF-xHh" firstAttribute="leading" secondItem="XD2-I9-v30" secondAttribute="leading" id="nw5-ZK-w8e"/>
                                                             </constraints>
@@ -482,14 +482,13 @@
                                                             <rect key="frame" x="0.0" y="147" width="380" height="45"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bka-2j-C1Y">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="45"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="45"/>
                                                                     <color key="backgroundColor" name="ivpnBlue"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="AF7-Vo-Vy9"/>
-                                                                        <constraint firstAttribute="width" constant="160" id="uem-Oi-u55"/>
                                                                     </constraints>
                                                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <state key="normal" title="Select">
+                                                                    <state key="normal" title="Select and continute to payment">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </state>
                                                                     <userDefinedRuntimeAttributes>
@@ -505,6 +504,7 @@
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="Bka-2j-C1Y" secondAttribute="trailing" id="1eI-Aa-ekf"/>
                                                                 <constraint firstItem="Bka-2j-C1Y" firstAttribute="top" secondItem="SXs-j3-QlD" secondAttribute="top" id="ABg-p4-Enp"/>
                                                                 <constraint firstItem="Bka-2j-C1Y" firstAttribute="leading" secondItem="SXs-j3-QlD" secondAttribute="leading" id="Oef-ob-0KX"/>
                                                                 <constraint firstAttribute="height" constant="45" id="P4j-aR-DEe"/>
@@ -544,7 +544,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQ2-NM-xcV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4281" y="-229"/>
+            <point key="canvasLocation" x="4279.7101449275369" y="-229.01785714285714"/>
         </scene>
         <!--Payment-->
         <scene sceneID="Kfi-9P-415">
@@ -597,11 +597,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfB-xJ-uvR">
-                                            <rect key="frame" x="17" y="35" width="160" height="45"/>
+                                            <rect key="frame" x="17" y="35" width="380" height="45"/>
                                             <color key="backgroundColor" name="ivpnBlue"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="Ybe-Ih-f6L"/>
-                                                <constraint firstAttribute="width" constant="160" id="hZy-8t-UUB"/>
                                             </constraints>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" title="Pay">
@@ -621,6 +620,7 @@
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstItem="RfB-xJ-uvR" firstAttribute="leading" secondItem="YLD-yW-M4d" secondAttribute="leading" constant="17" id="488-2A-YUO"/>
+                                        <constraint firstAttribute="trailing" secondItem="RfB-xJ-uvR" secondAttribute="trailing" constant="17" id="K7Y-H3-cjB"/>
                                         <constraint firstAttribute="bottom" secondItem="RfB-xJ-uvR" secondAttribute="bottom" id="t6E-Ls-BlS"/>
                                     </constraints>
                                 </view>
@@ -785,6 +785,9 @@
                     <navigationItem key="navigationItem" title="Payment" id="Pcw-dt-qz8">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="plain" id="QSt-8p-kF2"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="payButton" destination="RfB-xJ-uvR" id="WU0-gz-far"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGB-VS-Z7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

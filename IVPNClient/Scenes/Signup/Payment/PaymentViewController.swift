@@ -12,6 +12,10 @@ import Bamboo
 
 class PaymentViewController: UITableViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var payButton: UIButton!
+    
     // MARK: - Properties -
     
     var service = Service(type: .standard, duration: .year)
@@ -41,15 +45,18 @@ class PaymentViewController: UITableViewController {
                 spinner.startAnimating()
                 tableView.separatorStyle = .none
                 retryButton.isHidden = true
+                payButton.isHidden = true
             case .content:
                 spinner.stopAnimating()
                 tableView.separatorStyle = .singleLine
                 tableView.reloadData()
                 retryButton.isHidden = true
+                payButton.isHidden = false
             case .error:
                 spinner.stopAnimating()
                 tableView.separatorStyle = .none
                 retryButton.isHidden = false
+                payButton.isHidden = true
             }
             
             tableView.reloadData()
@@ -98,6 +105,7 @@ class PaymentViewController: UITableViewController {
         
         if extendingService {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissViewController))
+            navigationItem.rightBarButtonItem = nil
         } else {
             let button = UIButton(type: .system)
             button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
