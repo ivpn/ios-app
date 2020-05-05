@@ -15,6 +15,8 @@ class PaymentViewController: UITableViewController {
     
     var service = Service(type: .standard, duration: .year)
     
+    var extendingService = false
+    
     var deviceCanMakePurchases: Bool {
         guard IAPManager.shared.canMakePurchases else {
             showAlert(title: "Error", message: "In-App Purchases are not available on your device.")
@@ -46,11 +48,15 @@ class PaymentViewController: UITableViewController {
     private func initNavigation() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
-        button.sizeToFit()
-        button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        if extendingService {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissViewController))
+        } else {
+            let button = UIButton(type: .system)
+            button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
+            button.sizeToFit()
+            button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        }
     }
     
     private func purchaseProduct(identifier: String) {
