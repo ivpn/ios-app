@@ -122,6 +122,8 @@ class PaymentViewController: UITableViewController {
     }
     
     private func setupView() {
+        view.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        
         if extendingService {
             displayMode = .loading
             tableView.separatorStyle = .none
