@@ -562,7 +562,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ak0-kW-Znu" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add funds to your account to start using IVPN" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TnB-3p-pAb">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add funds to your IVPN account" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TnB-3p-pAb">
                                             <rect key="frame" x="17" y="5" width="380" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="LtT-MC-kyY"/>
@@ -684,6 +684,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="changeButton" destination="3sP-4K-ZXY" id="xoD-y4-Eeq"/>
                                     <outlet property="titleLabel" destination="4C3-hH-oiJ" id="FhQ-XD-0Kv"/>
                                 </connections>
                             </tableViewCell>

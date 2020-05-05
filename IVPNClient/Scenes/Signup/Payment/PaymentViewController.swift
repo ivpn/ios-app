@@ -203,6 +203,7 @@ extension PaymentViewController {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTitleTableViewCell", for: indexPath) as! ServiceTitleTableViewCell
             cell.service = service.collection[0]
+            cell.changeButton.isHidden = extendingService
             cell.selectionStyle = .none
             return cell
         }

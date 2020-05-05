@@ -29,8 +29,9 @@ class NavigationManager {
         let navController = storyBoard.instantiateViewController(withIdentifier: "subscriptionView") as? UINavigationController
         navController?.modalPresentationStyle = .formSheet
         if let viewController = navController?.topViewController as? PaymentViewController {
+            let serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
             viewController.extendingService = true
-            viewController.service = Service(type: .standard, duration: .year)
+            viewController.service = Service(type: serviceType, duration: .year)
         }
         
         return navController!
