@@ -16,6 +16,7 @@ class AccountView: UITableView {
     @IBOutlet weak var accountIdLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var subscriptionLabel: UILabel!
+    @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
     @IBOutlet weak var subscriptionActionButton: UIButton!
     
@@ -26,6 +27,7 @@ class AccountView: UITableView {
         statusLabel.text = viewModel.statusText
         statusLabel.backgroundColor = viewModel.statusColor
         subscriptionLabel.text = viewModel.subscriptionText
+        activeUntilLabel.text = viewModel.activeUntilText
         logOutActionButton.setTitle(viewModel.logOutActionText, for: .normal)
         subscriptionActionButton.setTitle(viewModel.subscriptionActionText, for: .normal)
         subscriptionActionButton.isHidden = !viewModel.showSubscriptionAction

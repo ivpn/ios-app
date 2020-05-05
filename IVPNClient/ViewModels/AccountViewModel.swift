@@ -31,6 +31,10 @@ struct AccountViewModel {
         return serviceStatus.isActive ? serviceStatus.currentPlan ?? "" : "No active subscription"
     }
     
+    var activeUntilText: String {
+        return serviceStatus.activeUntilString()
+    }
+    
     var logOutActionText: String {
         return authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up"
     }
