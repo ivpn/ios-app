@@ -125,6 +125,14 @@ struct Service {
         }
     }
     
+    var willBeActiveUntil: String {
+        get {
+            let timestamp = Application.shared.serviceStatus.activeUntil
+            let date = Date(timeIntervalSince1970: TimeInterval(timestamp ?? 0))
+            return duration.willBeActiveUntilFrom(date: date)
+        }
+    }
+    
     // Methods
     
     static func == (lhs: Service, rhs: Service) -> Bool {

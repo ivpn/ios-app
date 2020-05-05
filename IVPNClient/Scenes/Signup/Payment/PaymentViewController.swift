@@ -14,11 +14,17 @@ class PaymentViewController: UITableViewController {
     
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var payButton: UIButton!
+    @IBOutlet weak var payButton: UIButton?
     
     // MARK: - Properties -
     
-    var service = Service(type: .standard, duration: .year)
+    var service = Service(type: .standard, duration: .year) {
+        didSet {
+            if extendingService {
+                payButton?.set(title: "Pay", subtitle: "(Will be active until \(service.willBeActiveUntil))")
+            }
+        }
+    }
     
     var extendingService = false
     
@@ -45,18 +51,18 @@ class PaymentViewController: UITableViewController {
                 spinner.startAnimating()
                 tableView.separatorStyle = .none
                 retryButton.isHidden = true
-                payButton.isHidden = true
+                payButton?.isHidden = true
             case .content:
                 spinner.stopAnimating()
                 tableView.separatorStyle = .singleLine
                 tableView.reloadData()
                 retryButton.isHidden = true
-                payButton.isHidden = false
+                payButton?.isHidden = false
             case .error:
                 spinner.stopAnimating()
                 tableView.separatorStyle = .none
                 retryButton.isHidden = false
-                payButton.isHidden = true
+                payButton?.isHidden = true
             }
             
             tableView.reloadData()
@@ -123,6 +129,7 @@ class PaymentViewController: UITableViewController {
             view.addSubview(retryButton)
             spinner.bb.centerX().centerY(-80)
             retryButton.bb.centerX().centerY(-80)
+            payButton?.set(title: "Pay", subtitle: "(Will be active until \(service.willBeActiveUntil))")
         }
     }
     

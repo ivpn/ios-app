@@ -35,4 +35,12 @@ enum ServiceDuration: CaseIterable {
         return Calendar.current.date(byAdding: dateComponent, to: date) ?? date
     }
     
+    func willBeActiveUntilFrom(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        
+        return formatter.string(from: activeUntilFrom(date: date))
+    }
+    
 }
