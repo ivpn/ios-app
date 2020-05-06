@@ -88,8 +88,8 @@ class MainView: UIView {
     
     private func setupConstraints() {
         mapScrollView.setupConstraints()
-        mapScrollView.updateMapPosition()
         markerContainerView.setupConstraints()
+        updateMapPosition()
     }
     
     private func updateInfoAlert() {
@@ -105,18 +105,38 @@ class MainView: UIView {
         markerView.connectionInfoPopup.updateView()
     }
     
+    private func updateMapPosition() {
+        let vpnStatus = Application.shared.connectionManager.status
+        
+        if vpnStatus.isDisconnected() && !Application.shared.connectionManager.reconnectAutomatically {
+            updateMapPositionToLocalCoordinates()
+        } else {
+            updateMapPositionToGateway()
+        }
+    }
+    
     private func updateMapPosition(vpnStatus: NEVPNStatus) {
-        if vpnStatus == .connecting {
-            var server = Application.shared.settings.selectedServer
-            
-            if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-                server = Application.shared.settings.selectedExitServer
-            }
-            
-            mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
+        if vpnStatus == .connecting || vpnStatus == .connected {
+            updateMapPositionToGateway()
         }
         
-        if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically, let localCoordinates = localCoordinates {
+        if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically {
+            updateMapPositionToLocalCoordinates()
+        }
+    }
+    
+    private func updateMapPositionToGateway() {
+        var server = Application.shared.settings.selectedServer
+        
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            server = Application.shared.settings.selectedExitServer
+        }
+        
+        mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
+    }
+    
+    private func updateMapPositionToLocalCoordinates() {
+        if let localCoordinates = localCoordinates {
             mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: true)
         }
     }

@@ -23,7 +23,7 @@ class MapScrollView: UIScrollView {
                 UIView.animate(withDuration: 0.5, animations: { self.alpha = 1 })
             }
             
-            if !viewModel.model.isIvpnServer {
+            if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
                 updateMapPosition(animated: oldValue != nil)
             }
         }
