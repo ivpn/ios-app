@@ -151,7 +151,7 @@ class MainViewControllerV2: UIViewController {
     
     @objc private func updateFloatingPanelLayout() {
         floatingPanel.updateLayout()
-        mainView.setupView()
+        mainView.setupView(animated: false)
     }
     
     @objc private func updateServersList() {

@@ -45,10 +45,11 @@ class MainView: UIView {
     
     // MARK: - Methods -
     
-    func setupView() {
+    func setupView(animated: Bool = true) {
         setupConstraints()
         updateInfoAlert()
         updateMarker()
+        updateMapPosition(animated: animated)
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
@@ -89,7 +90,6 @@ class MainView: UIView {
     private func setupConstraints() {
         mapScrollView.setupConstraints()
         markerContainerView.setupConstraints()
-        updateMapPosition()
     }
     
     private func updateInfoAlert() {
@@ -105,13 +105,13 @@ class MainView: UIView {
         markerView.connectionInfoPopup.updateView()
     }
     
-    private func updateMapPosition() {
+    private func updateMapPosition(animated: Bool = true) {
         let vpnStatus = Application.shared.connectionManager.status
         
         if vpnStatus.isDisconnected() && !Application.shared.connectionManager.reconnectAutomatically {
-            updateMapPositionToLocalCoordinates()
+            updateMapPositionToLocalCoordinates(animated: animated)
         } else {
-            updateMapPositionToGateway()
+            updateMapPositionToGateway(animated: animated)
         }
     }
     
@@ -125,7 +125,7 @@ class MainView: UIView {
         }
     }
     
-    private func updateMapPositionToGateway() {
+    private func updateMapPositionToGateway(animated: Bool = true) {
         var server = Application.shared.settings.selectedServer
         
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
@@ -135,9 +135,9 @@ class MainView: UIView {
         mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
     }
     
-    private func updateMapPositionToLocalCoordinates() {
+    private func updateMapPositionToLocalCoordinates(animated: Bool = true) {
         if let localCoordinates = localCoordinates {
-            mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: true)
+            mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: animated)
         }
     }
     
