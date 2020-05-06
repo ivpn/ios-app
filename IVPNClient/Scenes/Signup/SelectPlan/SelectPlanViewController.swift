@@ -17,7 +17,13 @@ class SelectPlanViewController: UITableViewController {
     
     // MARK: - Properties -
     
-    var service = Service(type: .standard, duration: .month)
+    var service = Service(type: .standard, duration: .month) {
+        didSet {
+            if changingPlan {
+                selectPlanView.setupView(service: service)
+            }
+        }
+    }
     
     var changingPlan = false
     
@@ -64,10 +70,20 @@ class SelectPlanViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func selectStandard(_ sender: UIButton) {
+        if changingPlan {
+            service = Service(type: .standard, duration: .month)
+            return
+        }
+        
         performSegue(withIdentifier: "selectStandardPlan", sender: nil)
     }
     
     @IBAction func selectPro(_ sender: UIButton) {
+        if changingPlan {
+            service = Service(type: .pro, duration: .month)
+            return
+        }
+        
         performSegue(withIdentifier: "selectProPlan", sender: nil)
     }
     
