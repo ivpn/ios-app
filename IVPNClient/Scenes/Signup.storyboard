@@ -396,7 +396,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
-                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectStandardPlan" id="oRx-Qt-gFP"/>
+                                                                        <action selector="selectStandard:" destination="tBH-nr-wv3" eventType="touchUpInside" id="n9T-E4-heS"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -498,7 +498,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
-                                                                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectProPlan" id="gSv-4p-nMI"/>
+                                                                        <action selector="selectPro:" destination="tBH-nr-wv3" eventType="touchUpInside" id="bSa-dl-R7Z"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -529,8 +529,10 @@
                             <outlet property="dataSource" destination="tBH-nr-wv3" id="D6b-Nb-JY8"/>
                             <outlet property="delegate" destination="tBH-nr-wv3" id="4CP-bT-dVU"/>
                             <outlet property="messageLabel" destination="ePG-jY-ehS" id="84O-sD-CkY"/>
+                            <outlet property="proButton" destination="Bka-2j-C1Y" id="f0C-5U-nf1"/>
                             <outlet property="proPriceLabel" destination="dvG-K4-iso" id="Ttw-8s-HiY"/>
                             <outlet property="proView" destination="2Ea-Dw-ewM" id="McR-7D-U0o"/>
+                            <outlet property="standardButton" destination="8tf-CF-xHh" id="c8N-Q9-CG3"/>
                             <outlet property="standardPriceLabel" destination="wIG-i6-5Eb" id="mOg-rM-FGC"/>
                             <outlet property="standardView" destination="qOY-q9-zA8" id="mY6-vc-iGn"/>
                         </connections>
@@ -944,7 +946,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gSv-4p-nMI"/>
         <segue reference="rrg-Fe-V0v"/>
     </inferredMetricsTieBreakers>
     <resources>

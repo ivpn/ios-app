@@ -29,7 +29,9 @@ class NavigationManager {
         let navController = storyBoard.instantiateViewController(withIdentifier: "selectPlanView") as? UINavigationController
         navController?.modalPresentationStyle = .formSheet
         if let viewController = navController?.topViewController as? SelectPlanViewController {
-            
+            let serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
+            viewController.changingPlan = true
+            viewController.service = Service(type: serviceType, duration: .month)
         }
         
         return navController!

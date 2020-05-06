@@ -17,6 +17,10 @@ class SelectPlanViewController: UITableViewController {
     
     // MARK: - Properties -
     
+    var service = Service(type: .standard, duration: .month)
+    
+    var changingPlan = false
+    
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
         spinner.hidesWhenStopped = true
@@ -56,6 +60,16 @@ class SelectPlanViewController: UITableViewController {
     
     var standardService = Service(type: .standard, duration: .month)
     var proService = Service(type: .pro, duration: .month)
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func selectStandard(_ sender: UIButton) {
+        performSegue(withIdentifier: "selectStandardPlan", sender: nil)
+    }
+    
+    @IBAction func selectPro(_ sender: UIButton) {
+        performSegue(withIdentifier: "selectProPlan", sender: nil)
+    }
     
     // MARK: - View lifecycle -
     
