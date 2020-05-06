@@ -23,6 +23,18 @@ class NavigationManager {
         return viewController
     }
     
+    static func getSelectPlanViewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
+        
+        let navController = storyBoard.instantiateViewController(withIdentifier: "selectPlanView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        if let viewController = navController?.topViewController as? SelectPlanViewController {
+            
+        }
+        
+        return navController!
+    }
+    
     static func getSubscriptionViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
         

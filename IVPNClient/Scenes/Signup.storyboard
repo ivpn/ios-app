@@ -907,7 +907,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wQK-0r-hM4">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hsa-ng-hVu" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="selectPlanView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hsa-ng-hVu" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="510-bm-h3Z"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CwZ-xv-Dyg">
