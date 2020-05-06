@@ -41,8 +41,8 @@ class SelectPlanView: UITableView {
         case .pro:
             standardButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray1)
             proButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
-            standardCurrentLabel.isHidden = false
-            proCurrentLabel.isHidden = true
+            standardCurrentLabel.isHidden = true
+            proCurrentLabel.isHidden = false
         }
     }
     

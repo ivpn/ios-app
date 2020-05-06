@@ -13,7 +13,7 @@ class SelectPlanViewController: UITableViewController {
     
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var selectPlanView: SelectPlanView!
+    @IBOutlet weak var selectPlanView: SelectPlanView?
     
     // MARK: - Properties -
     
@@ -24,7 +24,7 @@ class SelectPlanViewController: UITableViewController {
     var service = Service(type: .standard, duration: .month) {
         didSet {
             if changingPlan {
-                selectPlanView.setupView(service: service)
+                selectPlanView?.setupView(service: service)
             }
         }
     }
@@ -122,7 +122,7 @@ class SelectPlanViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         if changingPlan {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissViewController))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController))
             navigationItem.rightBarButtonItem = nil
         } else {
             let button = UIButton(type: .system)
@@ -143,6 +143,10 @@ class SelectPlanViewController: UITableViewController {
         view.addSubview(retryButton)
         spinner.bb.centerX().centerY(-80)
         retryButton.bb.centerX().centerY(-80)
+        
+        if changingPlan {
+            selectPlanView?.setupView(service: service)
+        }
     }
     
     @objc private func fetchProducts() {
@@ -165,8 +169,8 @@ class SelectPlanViewController: UITableViewController {
     }
     
     private func updateSubscriptions() {
-        selectPlanView.standardPriceLabel.text = "\(standardService.priceText) / \(standardService.durationText)"
-        selectPlanView.proPriceLabel.text = "\(proService.priceText) / \(proService.durationText)"
+        selectPlanView?.standardPriceLabel.text = "\(standardService.priceText) / \(standardService.durationText)"
+        selectPlanView?.proPriceLabel.text = "\(proService.priceText) / \(proService.durationText)"
     }
     
 }
