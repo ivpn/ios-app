@@ -17,6 +17,10 @@ class SelectPlanViewController: UITableViewController {
     
     // MARK: - Properties -
     
+    var changingPlan = false
+    var standardService = Service(type: .standard, duration: .month)
+    var proService = Service(type: .pro, duration: .month)
+    
     var service = Service(type: .standard, duration: .month) {
         didSet {
             if changingPlan {
@@ -24,8 +28,6 @@ class SelectPlanViewController: UITableViewController {
             }
         }
     }
-    
-    var changingPlan = false
     
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
@@ -63,9 +65,6 @@ class SelectPlanViewController: UITableViewController {
             tableView.reloadData()
         }
     }
-    
-    var standardService = Service(type: .standard, duration: .month)
-    var proService = Service(type: .pro, duration: .month)
     
     // MARK: - @IBActions -
     
@@ -122,12 +121,16 @@ class SelectPlanViewController: UITableViewController {
     private func initNavigation() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
-        button.sizeToFit()
-        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        if changingPlan {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissViewController))
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            let button = UIButton(type: .system)
+            button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
+            button.sizeToFit()
+            button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        }
     }
     
     @objc private func backButtonPressed(sender: UIBarButtonItem) {
