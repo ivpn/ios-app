@@ -151,6 +151,11 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
+        guard evaluateHasUserConsent() else {
+            NotificationCenter.default.addObserver(self, selector: #selector(agreedToTermsOfService), name: Notification.Name.TermsOfServiceAgreed, object: nil)
+            return
+        }
+        
         guard evaluateIsServiceActive() else {
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.SubscriptionActivated, object: nil)
             return
@@ -285,6 +290,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ProtocolSelected, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
     }
     
     // MARK: - Private methods -
