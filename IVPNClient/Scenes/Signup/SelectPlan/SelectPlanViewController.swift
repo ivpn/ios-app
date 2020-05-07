@@ -8,6 +8,7 @@
 
 import UIKit
 import Bamboo
+import JGProgressHUD
 
 class SelectPlanViewController: UITableViewController {
     
@@ -66,11 +67,13 @@ class SelectPlanViewController: UITableViewController {
         }
     }
     
+    private let hud = JGProgressHUD(style: .dark)
+    
     // MARK: - @IBActions -
     
     @IBAction func selectStandard(_ sender: UIButton) {
         if changingPlan {
-            service = Service(type: .standard, duration: .month)
+            changePlan(type: .standard)
             return
         }
         
@@ -79,7 +82,7 @@ class SelectPlanViewController: UITableViewController {
     
     @IBAction func selectPro(_ sender: UIButton) {
         if changingPlan {
-            service = Service(type: .pro, duration: .month)
+            changePlan(type: .pro)
             return
         }
         
@@ -164,6 +167,26 @@ class SelectPlanViewController: UITableViewController {
             if products != nil {
                 self.updateSubscriptions()
                 self.displayMode = .content
+            }
+        }
+    }
+    
+    private func changePlan(type: ServiceType) {
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Changing plan..."
+        hud.show(in: (navigationController?.view)!)
+        
+        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
+        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
+            guard let self = self else { return }
+            
+            self.hud.dismiss()
+            
+            switch result {
+            case .success:
+                self.service = Service(type: type, duration: .month)
+            case .failure:
+                break
             }
         }
     }
