@@ -13,13 +13,17 @@ extension UIButton {
     func set(title: String, subtitle: String) {
         // Applying the line break mode
         self.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
-        let buttonText: NSString = "\(title)\n\(subtitle)" as NSString
+        var buttonText: NSString = "\(title)\n\(subtitle)" as NSString
+        
+        if subtitle.isEmpty {
+            buttonText = "\(title)" as NSString
+        }
 
         // Getting the range to separate the button title strings
         let newlineRange: NSRange = buttonText.range(of: "\n")
 
         // Getting both substrings
-        var substring1 = ""
+        var substring1 = title
         var substring2 = ""
 
         if newlineRange.location != NSNotFound {
