@@ -123,6 +123,7 @@ class PaymentViewController: UITableViewController {
     
     private func setupView() {
         view.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        payButton?.set(title: "Pay", subtitle: "")
         
         if extendingService {
             displayMode = .loading

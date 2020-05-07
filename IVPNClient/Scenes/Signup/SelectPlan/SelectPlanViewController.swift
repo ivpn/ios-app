@@ -8,14 +8,27 @@
 
 import UIKit
 import Bamboo
+import JGProgressHUD
 
 class SelectPlanViewController: UITableViewController {
     
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var selectPlanView: SelectPlanView!
+    @IBOutlet weak var selectPlanView: SelectPlanView?
     
     // MARK: - Properties -
+    
+    var changingPlan = false
+    var standardService = Service(type: .standard, duration: .month)
+    var proService = Service(type: .pro, duration: .month)
+    
+    var service = Service(type: .standard, duration: .month) {
+        didSet {
+            if changingPlan {
+                selectPlanView?.setupView(service: service)
+            }
+        }
+    }
     
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
@@ -54,8 +67,27 @@ class SelectPlanViewController: UITableViewController {
         }
     }
     
-    var standardService = Service(type: .standard, duration: .month)
-    var proService = Service(type: .pro, duration: .month)
+    private let hud = JGProgressHUD(style: .dark)
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func selectStandard(_ sender: UIButton) {
+        if changingPlan {
+            changePlan(type: .standard)
+            return
+        }
+        
+        performSegue(withIdentifier: "selectStandardPlan", sender: nil)
+    }
+    
+    @IBAction func selectPro(_ sender: UIButton) {
+        if changingPlan {
+            changePlan(type: .pro)
+            return
+        }
+        
+        performSegue(withIdentifier: "selectProPlan", sender: nil)
+    }
     
     // MARK: - View lifecycle -
     
@@ -92,12 +124,16 @@ class SelectPlanViewController: UITableViewController {
     private func initNavigation() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
-        button.sizeToFit()
-        button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        if changingPlan {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController))
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            let button = UIButton(type: .system)
+            button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
+            button.sizeToFit()
+            button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        }
     }
     
     @objc private func backButtonPressed(sender: UIBarButtonItem) {
@@ -110,6 +146,10 @@ class SelectPlanViewController: UITableViewController {
         view.addSubview(retryButton)
         spinner.bb.centerX().centerY(-80)
         retryButton.bb.centerX().centerY(-80)
+        
+        if changingPlan {
+            selectPlanView?.setupView(service: service)
+        }
     }
     
     @objc private func fetchProducts() {
@@ -131,9 +171,29 @@ class SelectPlanViewController: UITableViewController {
         }
     }
     
+    private func changePlan(type: ServiceType) {
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Changing plan..."
+        hud.show(in: (navigationController?.view)!)
+        
+        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
+        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
+            guard let self = self else { return }
+            
+            self.hud.dismiss()
+            
+            switch result {
+            case .success:
+                self.service = Service(type: type, duration: .month)
+            case .failure:
+                break
+            }
+        }
+    }
+    
     private func updateSubscriptions() {
-        selectPlanView.standardPriceLabel.text = "\(standardService.priceText) / \(standardService.durationText)"
-        selectPlanView.proPriceLabel.text = "\(proService.priceText) / \(proService.durationText)"
+        selectPlanView?.standardPriceLabel.text = "\(standardService.priceText) / \(standardService.durationText)"
+        selectPlanView?.proPriceLabel.text = "\(proService.priceText) / \(proService.durationText)"
     }
     
 }

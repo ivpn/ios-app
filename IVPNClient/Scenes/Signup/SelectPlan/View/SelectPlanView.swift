@@ -18,11 +18,36 @@ class SelectPlanView: UITableView {
     @IBOutlet weak var proView: UIStackView!
     @IBOutlet weak var standardPriceLabel: UILabel!
     @IBOutlet weak var proPriceLabel: UILabel!
+    @IBOutlet weak var standardButton: UIButton!
+    @IBOutlet weak var proButton: UIButton!
+    @IBOutlet weak var standardCurrentLabel: UILabel!
+    @IBOutlet weak var proCurrentLabel: UILabel!
     
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
         setupLayout()
+    }
+    
+    // MARK: - Methods -
+    
+    func setupView(service: Service) {
+        switch service.type {
+        case .standard:
+            standardButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
+            standardButton.set(title: "Select", subtitle: "(Will be active until \(service.willBeActiveUntil))")
+            proButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray5)
+            proButton.set(title: "Select", subtitle: "")
+            standardCurrentLabel.isHidden = false
+            proCurrentLabel.isHidden = true
+        case .pro:
+            standardButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray5)
+            standardButton.set(title: "Select", subtitle: "")
+            proButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
+            proButton.set(title: "Select", subtitle: "(Will be active until \(service.willBeActiveUntil))")
+            standardCurrentLabel.isHidden = true
+            proCurrentLabel.isHidden = false
+        }
     }
     
     // MARK: - Private methods -

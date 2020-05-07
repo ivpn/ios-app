@@ -31,7 +31,6 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var loggingSwitch: UISwitch!
     @IBOutlet weak var loggingCrashesSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
-    @IBOutlet weak var manageSubscriptionButton: UIButton!
     
     // MARK: - Properties -
     
@@ -150,6 +149,10 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func extendSubscription(_ sender: Any) {
         present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+    }
+    
+    @IBAction func changePlan(_ sender: Any) {
+        present(NavigationManager.getSelectPlanViewController(), animated: true, completion: nil)
     }
     
     @IBAction func logOut(_ sender: Any) {
@@ -437,7 +440,6 @@ class SettingsViewController: UITableViewController {
         accountUsername.text = Application.shared.authentication.getStoredUsername()
         subscriptionLabel.text = Application.shared.serviceStatus.getSubscriptionText()
         logOutButton.setTitle(Application.shared.authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up", for: .normal)
-        manageSubscriptionButton.setTitle(Application.shared.serviceStatus.getSubscriptionActionText(), for: .normal)
     }
     
 }
@@ -458,6 +460,7 @@ extension SettingsViewController {
         if indexPath.section == 4 && indexPath.row == 1 && !Application.shared.authentication.isLoggedIn { return 0 }
         if indexPath.section == 4 && indexPath.row == 1 { return 60 }
         if indexPath.section == 4 && indexPath.row == 2 && !Application.shared.showSubscriptionAction { return 0 }
+        if indexPath.section == 4 && indexPath.row == 3 && !Application.shared.showSubscriptionAction { return 0 }
         
         return UITableView.automaticDimension
     }
