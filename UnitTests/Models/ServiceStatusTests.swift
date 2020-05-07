@@ -50,10 +50,6 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertFalse(model.isAppStoreSubscription())
     }
     
-    func testGetSubscriptionActionText() {
-        XCTAssertEqual(model.getSubscriptionActionText(), "Extend Subscription")
-    }
-    
     func testIsValid() {
         XCTAssertTrue(ServiceStatus.isValid(username: "ivpnXXXXXXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: "IVPNXXXXXXXX"))

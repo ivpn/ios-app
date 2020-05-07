@@ -88,10 +88,6 @@ struct ServiceStatus: Codable {
         return "No active subscription"
     }
     
-    func getSubscriptionActionText() -> String {
-        return "Extend Subscription"
-    }
-    
     static func isValid(username: String) -> Bool {
         return username.hasPrefix("ivpn")
     }

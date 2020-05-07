@@ -437,7 +437,7 @@ class SettingsViewController: UITableViewController {
         accountUsername.text = Application.shared.authentication.getStoredUsername()
         subscriptionLabel.text = Application.shared.serviceStatus.getSubscriptionText()
         logOutButton.setTitle(Application.shared.authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up", for: .normal)
-        manageSubscriptionButton.setTitle(Application.shared.serviceStatus.getSubscriptionActionText(), for: .normal)
+        manageSubscriptionButton.setTitle("Add more funds", for: .normal)
     }
     
 }
