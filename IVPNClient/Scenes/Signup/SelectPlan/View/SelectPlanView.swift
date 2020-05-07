@@ -35,12 +35,18 @@ class SelectPlanView: UITableView {
         switch service.type {
         case .standard:
             standardButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
-            proButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray1)
+            standardButton.set(title: "Select", subtitle: "(Will be active until \(service.willBeActiveUntil))")
+            proButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray5)
+            proButton.setAttributedTitle(nil, for: [])
+            proButton.setTitle("Select", for: .normal)
             standardCurrentLabel.isHidden = false
             proCurrentLabel.isHidden = true
         case .pro:
-            standardButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray1)
+            standardButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnGray5)
+            standardButton.setAttributedTitle(nil, for: [])
+            standardButton.setTitle("Select", for: .normal)
             proButton.backgroundColor = UIColor.init(named: Theme.Key.ivpnBlue)
+            proButton.set(title: "Select", subtitle: "(Will be active until \(service.willBeActiveUntil))")
             standardCurrentLabel.isHidden = true
             proCurrentLabel.isHidden = false
         }
