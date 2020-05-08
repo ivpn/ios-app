@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Used to scan QR codes</string>
 	<key>ApiHostName</key>
 	<string>$(ApiHostName)</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -67,6 +65,8 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to scan QR codes</string>
 	<key>SentryDsn</key>
 	<string>$(SentryDsn)</string>
 	<key>TlsHostName</key>
