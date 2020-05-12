@@ -268,6 +268,40 @@ class ControlPanelViewController: UITableViewController {
         lastVPNStatus = vpnStatus
     }
     
+    func askForCustomServer(isExitServer: Bool) {
+        let alert = UIAlertController(title: "Add Custom Server", message: "Enter Server Hostname", preferredStyle: .alert)
+        
+        alert.addTextField { _ in }
+        
+        alert.addAction(
+            UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
+                if let textField = alert?.textFields![0] {
+                    let host = textField.text ?? ""
+                    if isExitServer {
+                        Application.shared.settings.selectedExitServer = VPNServer(gateway: host, countryCode: "UNK", country: "Custom", city: host)
+                    } else {
+                        Application.shared.settings.selectedServer = VPNServer(gateway: host, countryCode: "UNK", country: "Custom", city: host)
+                    }
+                }
+                
+                Application.shared.connectionManager.getStatus { _, status in
+                    self.updateStatus(vpnStatus: status)
+                }
+            })
+        )
+        
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        
+        present(alert, animated: true, completion: {
+            let textField = alert.textFields![0]
+            let beginning = textField.beginningOfDocument
+            textField.text = ".gw.ivpn.net"
+            textField.selectedTextRange = textField.textRange(from: beginning, to: beginning)
+        })
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
