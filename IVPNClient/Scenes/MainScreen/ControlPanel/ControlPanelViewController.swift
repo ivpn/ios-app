@@ -113,6 +113,7 @@ class ControlPanelViewController: UITableViewController {
         super.viewDidLoad()
         initView()
         addObservers()
+        setupGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +129,31 @@ class ControlPanelViewController: UITableViewController {
     
     deinit {
         removeObservers()
+    }
+    
+    // MARK: - Gestures -
+    
+    private func setupGestureRecognizers() {
+        let entryServerGesture = UILongPressGestureRecognizer(target: self, action: #selector(selectServerlongPress(_:)))
+        entryServerGesture.numberOfTouchesRequired = 3
+        entryServerGesture.minimumPressDuration = 3
+        
+        let exitServerGesture = UILongPressGestureRecognizer(target: self, action: #selector(selectExitServerlongPress(_:)))
+        exitServerGesture.numberOfTouchesRequired = 3
+        exitServerGesture.minimumPressDuration = 3
+        
+        controlPanelView.entryServerNameLabel.addGestureRecognizer(entryServerGesture)
+        controlPanelView.exitServerNameLabel.addGestureRecognizer(exitServerGesture)
+    }
+    
+    @objc func selectServerlongPress(_ guesture: UILongPressGestureRecognizer) {
+        guard guesture.state == .recognized else { return }
+        askForCustomServer(isExitServer: false)
+    }
+    
+    @objc func selectExitServerlongPress(_ guesture: UILongPressGestureRecognizer) {
+        guard guesture.state == .recognized else { return }
+        askForCustomServer(isExitServer: true)
     }
     
     // MARK: - Methods -
