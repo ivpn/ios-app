@@ -16,9 +16,11 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var connectSwitch: UISwitch!
     @IBOutlet weak var enableMultiHopButton: UIButton!
     @IBOutlet weak var disableMultiHopButton: UIButton!
+    @IBOutlet weak var exitServerTableCell: UITableViewCell!
     @IBOutlet weak var exitServerConnectionLabel: UILabel!
     @IBOutlet weak var exitServerNameLabel: UILabel!
     @IBOutlet weak var exitServerFlagImage: UIImageView!
+    @IBOutlet weak var entryServerTableCell: UITableViewCell!
     @IBOutlet weak var entryServerConnectionLabel: UILabel!
     @IBOutlet weak var entryServerNameLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!

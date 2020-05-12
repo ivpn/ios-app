@@ -142,8 +142,8 @@ class ControlPanelViewController: UITableViewController {
         exitServerGesture.numberOfTouchesRequired = 3
         exitServerGesture.minimumPressDuration = 3
         
-        controlPanelView.entryServerNameLabel.addGestureRecognizer(entryServerGesture)
-        controlPanelView.exitServerNameLabel.addGestureRecognizer(exitServerGesture)
+        controlPanelView.entryServerTableCell.addGestureRecognizer(entryServerGesture)
+        controlPanelView.exitServerTableCell.addGestureRecognizer(exitServerGesture)
     }
     
     @objc func selectServerlongPress(_ guesture: UILongPressGestureRecognizer) {
