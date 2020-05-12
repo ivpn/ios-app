@@ -16,22 +16,22 @@ class VPNStatusViewModelTests: XCTestCase {
     
     func testProtectionStatusText() {
         viewModel.status = .connecting
-        XCTAssertEqual(viewModel.protectionStatusText, "connecting")
+        XCTAssertEqual(viewModel.protectionStatusText, "Connecting")
         
         viewModel.status = .reasserting
-        XCTAssertEqual(viewModel.protectionStatusText, "connecting")
+        XCTAssertEqual(viewModel.protectionStatusText, "Connecting")
         
         viewModel.status = .disconnecting
-        XCTAssertEqual(viewModel.protectionStatusText, "disconnecting")
+        XCTAssertEqual(viewModel.protectionStatusText, "Disconnecting")
         
         viewModel.status = .connected
-        XCTAssertEqual(viewModel.protectionStatusText, "protected")
+        XCTAssertEqual(viewModel.protectionStatusText, "Protected")
         
         viewModel.status = .disconnected
-        XCTAssertEqual(viewModel.protectionStatusText, "unprotected")
+        XCTAssertEqual(viewModel.protectionStatusText, "Unprotected")
         
         viewModel.status = .invalid
-        XCTAssertEqual(viewModel.protectionStatusText, "unprotected")
+        XCTAssertEqual(viewModel.protectionStatusText, "Unprotected")
     }
     
     func testConnectToServerText() {
