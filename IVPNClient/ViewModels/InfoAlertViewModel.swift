@@ -15,8 +15,6 @@ class InfoAlertViewModel {
     var text: String {
         let days = Application.shared.serviceStatus.daysUntilSubscriptionExpiration()
         switch infoAlert {
-        case .trialPeriod:
-            return "Trial period will expire in \(days) days"
         case .subscriptionExpiration:
             return "Subscription will expire in \(days) days"
         }
@@ -24,8 +22,6 @@ class InfoAlertViewModel {
     
     var actionText: String {
         switch infoAlert {
-        case .trialPeriod:
-            return ""
         case .subscriptionExpiration:
             return "RENEW"
         }
@@ -33,8 +29,6 @@ class InfoAlertViewModel {
     
     var type: InfoAlertViewType {
         switch infoAlert {
-        case .trialPeriod:
-            return .info
         case .subscriptionExpiration:
             return .alert
         }
@@ -49,11 +43,6 @@ class InfoAlertViewModel {
     // MARK: - Methods -
     
     func update() {
-        if Application.shared.serviceStatus.isOnFreeTrial && shouldDisplay {
-            infoAlert = .trialPeriod
-            return
-        }
-        
         if shouldDisplay {
             infoAlert = .subscriptionExpiration
         }
@@ -66,7 +55,6 @@ class InfoAlertViewModel {
 extension InfoAlertViewModel {
     
     enum InfoAlert {
-        case trialPeriod
         case subscriptionExpiration
     }
     
@@ -78,8 +66,6 @@ extension InfoAlertViewModel: InfoAlertViewDelegate {
     
     func action() {
         switch infoAlert {
-        case .trialPeriod:
-            break
         case .subscriptionExpiration:
             if let topViewController = UIApplication.topViewController() {
                 topViewController.manageSubscription()
