@@ -36,7 +36,14 @@ class InfoAlertView: UIView {
     // MARK: - Properties -
     
     weak var delegate: InfoAlertViewDelegate?
-    private let bottomSafeArea = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+    
+    private var bottomSafeArea: CGFloat {
+        if UIDevice.current.hasNotch {
+            return 35
+        }
+        
+        return 0
+    }
     
     // MARK: - View lifecycle -
     
@@ -99,16 +106,16 @@ class InfoAlertView: UIView {
         centerXConstraint.constant = 0
         
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-            bottomConstraint.constant = 381 - bottomSafeArea
+            bottomConstraint.constant = CGFloat(MapConstants.Container.bottomAnchorC + 22) - bottomSafeArea
             return
         }
 
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
-            bottomConstraint.constant = 296 - bottomSafeArea
+            bottomConstraint.constant = CGFloat(MapConstants.Container.bottomAnchorB + 22) - bottomSafeArea
             return
         }
         
-        bottomConstraint.constant = 252 - bottomSafeArea
+        bottomConstraint.constant = CGFloat(MapConstants.Container.bottomAnchorA + 22) - bottomSafeArea
     }
     
 }
