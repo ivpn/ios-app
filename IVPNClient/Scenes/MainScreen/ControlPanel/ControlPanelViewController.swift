@@ -310,6 +310,8 @@ class ControlPanelViewController: UITableViewController {
                     }
                 }
                 
+                self.controlPanelView.updateServerNames()
+                
                 Application.shared.connectionManager.getStatus { _, status in
                     self.updateStatus(vpnStatus: status)
                 }
