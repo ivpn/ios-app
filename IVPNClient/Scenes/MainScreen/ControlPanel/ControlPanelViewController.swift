@@ -113,6 +113,7 @@ class ControlPanelViewController: UITableViewController {
         super.viewDidLoad()
         initView()
         addObservers()
+        setupGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +129,31 @@ class ControlPanelViewController: UITableViewController {
     
     deinit {
         removeObservers()
+    }
+    
+    // MARK: - Gestures -
+    
+    private func setupGestureRecognizers() {
+        let entryServerGesture = UILongPressGestureRecognizer(target: self, action: #selector(selectServerlongPress(_:)))
+        entryServerGesture.numberOfTouchesRequired = 3
+        entryServerGesture.minimumPressDuration = 3
+        
+        let exitServerGesture = UILongPressGestureRecognizer(target: self, action: #selector(selectExitServerlongPress(_:)))
+        exitServerGesture.numberOfTouchesRequired = 3
+        exitServerGesture.minimumPressDuration = 3
+        
+        controlPanelView.entryServerTableCell.addGestureRecognizer(entryServerGesture)
+        controlPanelView.exitServerTableCell.addGestureRecognizer(exitServerGesture)
+    }
+    
+    @objc func selectServerlongPress(_ guesture: UILongPressGestureRecognizer) {
+        guard guesture.state == .recognized else { return }
+        askForCustomServer(isExitServer: false)
+    }
+    
+    @objc func selectExitServerlongPress(_ guesture: UILongPressGestureRecognizer) {
+        guard guesture.state == .recognized else { return }
+        askForCustomServer(isExitServer: true)
     }
     
     // MARK: - Methods -
@@ -266,6 +292,42 @@ class ControlPanelViewController: UITableViewController {
         }
         
         lastVPNStatus = vpnStatus
+    }
+    
+    func askForCustomServer(isExitServer: Bool) {
+        let alert = UIAlertController(title: "Add Custom Server", message: "Enter Server Hostname", preferredStyle: .alert)
+        
+        alert.addTextField { _ in }
+        
+        alert.addAction(
+            UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
+                if let textField = alert?.textFields![0] {
+                    let host = textField.text ?? ""
+                    if isExitServer {
+                        Application.shared.settings.selectedExitServer = VPNServer(gateway: host, countryCode: "UNK", country: "Custom", city: host)
+                    } else {
+                        Application.shared.settings.selectedServer = VPNServer(gateway: host, countryCode: "UNK", country: "Custom", city: host)
+                    }
+                }
+                
+                self.controlPanelView.updateServerNames()
+                
+                Application.shared.connectionManager.getStatus { _, status in
+                    self.updateStatus(vpnStatus: status)
+                }
+            })
+        )
+        
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        
+        present(alert, animated: true, completion: {
+            let textField = alert.textFields![0]
+            let beginning = textField.beginningOfDocument
+            textField.text = ".gw.ivpn.net"
+            textField.selectedTextRange = textField.textRange(from: beginning, to: beginning)
+        })
     }
     
     // MARK: - Observers -
