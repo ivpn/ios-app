@@ -44,7 +44,7 @@ struct ProofsViewModel {
     }
     
     var provider: String {
-        return model.isp
+        return model.isIvpnServer ? "IVPN" : model.isp
     }
     
     // MARK: - Initialize -
