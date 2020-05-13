@@ -82,6 +82,7 @@ class MapScrollView: UIScrollView {
     
     private func placeMarker(latitude: Double, longitude: Double, city: String) {
         guard city != "Bratislava" else { return }
+        guard city != "New Jersey, NJ" else { return }
         
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
         
