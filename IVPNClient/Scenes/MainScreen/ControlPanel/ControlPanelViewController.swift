@@ -107,6 +107,12 @@ class ControlPanelViewController: UITableViewController {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
     }
     
+    @IBAction func reloadGeoLocation() {
+        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            topViewController.updateGeoLocation()
+        }
+    }
+    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {
@@ -286,9 +292,7 @@ class ControlPanelViewController: UITableViewController {
         }
         
         if vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
-            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-                topViewController.updateGeoLocation()
-            }
+            reloadGeoLocation()
         }
         
         lastVPNStatus = vpnStatus
