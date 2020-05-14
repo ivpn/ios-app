@@ -29,8 +29,53 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var networkView: NetworkViewTableCell!
     @IBOutlet weak var protocolLabel: UILabel!
     @IBOutlet weak var ipAddressLabel: UILabel!
+    @IBOutlet weak var ipAddressLoader: UIActivityIndicatorView!
+    @IBOutlet weak var ipAddressErrorLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationLoader: UIActivityIndicatorView!
+    @IBOutlet weak var locationErrorLabel: UILabel!
     @IBOutlet weak var providerLabel: UILabel!
+    @IBOutlet weak var providerLoader: UIActivityIndicatorView!
+    @IBOutlet weak var providerErrorLabel: UILabel!
+    
+    // MARK: - Properties -
+    
+    var connectionInfoDisplayMode: ConnectionInfoDisplayMode = .content {
+        didSet {
+            switch connectionInfoDisplayMode {
+            case .loading:
+                ipAddressLabel.isHidden = true
+                ipAddressLoader.startAnimating()
+                ipAddressErrorLabel.isHidden = true
+                locationLabel.isHidden = true
+                locationLoader.startAnimating()
+                locationErrorLabel.isHidden = true
+                providerLabel.isHidden = true
+                providerLoader.startAnimating()
+                providerErrorLabel.isHidden = true
+            case .content:
+                ipAddressLabel.isHidden = false
+                ipAddressLoader.stopAnimating()
+                ipAddressErrorLabel.isHidden = true
+                locationLabel.isHidden = false
+                locationLoader.stopAnimating()
+                locationErrorLabel.isHidden = true
+                providerLabel.isHidden = false
+                providerLoader.stopAnimating()
+                providerErrorLabel.isHidden = true
+            case .error:
+                ipAddressLabel.isHidden = true
+                ipAddressLoader.stopAnimating()
+                ipAddressErrorLabel.isHidden = false
+                locationLabel.isHidden = true
+                locationLoader.stopAnimating()
+                locationErrorLabel.isHidden = false
+                providerLabel.isHidden = true
+                providerLoader.stopAnimating()
+                providerErrorLabel.isHidden = false
+            }
+        }
+    }
     
     // MARK: - View lifecycle -
     
@@ -48,10 +93,14 @@ class ControlPanelView: UITableView {
     func setupView() {
         connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
         connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
+        ipAddressErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
+        locationErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
+        providerErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
         updateConnectSwitch()
     }
     
     func updateConnectionInfo(viewModel: ProofsViewModel) {
+        connectionInfoDisplayMode = .content
         ipAddressLabel.text = viewModel.ipAddress
         locationLabel.text = "\(viewModel.city), \(viewModel.countryCode)"
         providerLabel.text = viewModel.provider
@@ -106,6 +155,16 @@ class ControlPanelView: UITableView {
         if #available(iOS 13.0, *) {
             connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
         }
+    }
+    
+}
+
+extension ControlPanelView {
+    
+    enum ConnectionInfoDisplayMode {
+        case loading
+        case content
+        case error
     }
     
 }
