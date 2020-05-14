@@ -12,7 +12,7 @@ class AnimatedCircleLayer: CAShapeLayer {
     
     // MARK: - Properties -
     
-    private let radius = 150
+    private let radius = 160
     
     private var circle: UIBezierPath {
         return UIBezierPath(
@@ -40,8 +40,6 @@ class AnimatedCircleLayer: CAShapeLayer {
         
         circleLayer.path = circle.cgPath
         addSublayer(circleLayer)
-        
-        startAnimation()
     }
     
     override init(layer: Any) {
