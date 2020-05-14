@@ -30,49 +30,49 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var protocolLabel: UILabel!
     @IBOutlet weak var ipAddressLabel: UILabel!
     @IBOutlet weak var ipAddressLoader: UIActivityIndicatorView!
-    @IBOutlet weak var ipAddressAction: UIButton!
+    @IBOutlet weak var ipAddressErrorLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var locationLoader: UIActivityIndicatorView!
-    @IBOutlet weak var locationAction: UIButton!
+    @IBOutlet weak var locationErrorLabel: UILabel!
     @IBOutlet weak var providerLabel: UILabel!
     @IBOutlet weak var providerLoader: UIActivityIndicatorView!
-    @IBOutlet weak var providerAction: UIButton!
+    @IBOutlet weak var providerErrorLabel: UILabel!
     
     // MARK: - Properties -
     
     var connectionInfoDisplayMode: ConnectionInfoDisplayMode = .content {
         didSet {
-            switch proofsDisplayMode {
+            switch connectionInfoDisplayMode {
             case .loading:
                 ipAddressLabel.isHidden = true
                 ipAddressLoader.startAnimating()
-                ipAddressAction.isHidden = true
+                ipAddressErrorLabel.isHidden = true
                 locationLabel.isHidden = true
                 locationLoader.startAnimating()
-                locationAction.isHidden = true
+                locationErrorLabel.isHidden = true
                 providerLabel.isHidden = true
                 providerLoader.startAnimating()
-                providerAction.isHidden = true
+                providerErrorLabel.isHidden = true
             case .content:
                 ipAddressLabel.isHidden = false
                 ipAddressLoader.stopAnimating()
-                ipAddressAction.isHidden = true
+                ipAddressErrorLabel.isHidden = true
                 locationLabel.isHidden = false
                 locationLoader.stopAnimating()
-                locationAction.isHidden = true
+                locationErrorLabel.isHidden = true
                 providerLabel.isHidden = false
                 providerLoader.stopAnimating()
-                providerAction.isHidden = true
+                providerErrorLabel.isHidden = true
             case .error:
                 ipAddressLabel.isHidden = true
                 ipAddressLoader.stopAnimating()
-                ipAddressAction.isHidden = false
+                ipAddressErrorLabel.isHidden = false
                 locationLabel.isHidden = true
                 locationLoader.stopAnimating()
-                locationAction.isHidden = false
+                locationErrorLabel.isHidden = false
                 providerLabel.isHidden = true
                 providerLoader.stopAnimating()
-                providerAction.isHidden = false
+                providerErrorLabel.isHidden = false
             }
         }
     }
