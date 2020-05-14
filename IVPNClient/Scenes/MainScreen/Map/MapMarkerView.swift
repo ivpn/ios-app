@@ -19,10 +19,13 @@ class MapMarkerView: UIView {
             switch status {
             case .reasserting, .connecting, .disconnecting:
                 updateCircles(color: grayColor)
+                animatedCircleLayer.stopAnimations()
             case .connected:
                 updateCircles(color: blueColor)
+                animatedCircleLayer.startAnimation()
             default:
                 updateCircles(color: redColor)
+                animatedCircleLayer.stopAnimations()
             }
             
             connectionInfoPopup.vpnStatusViewModel = VPNStatusViewModel(status: status)
@@ -33,19 +36,18 @@ class MapMarkerView: UIView {
     private var circle1 = UIView()
     private var circle2 = UIView()
     private var circle3 = UIView()
-    private var circle4 = UIView()
+    private var animatedCircle = UIView()
+    private var animatedCircleLayer = AnimatedCircleLayer()
+    private var radius1: CGFloat = 160
+    private var radius2: CGFloat = 26
+    private var radius3: CGFloat = 20
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
     private var redColor = UIColor.init(named: Theme.ivpnRedOff)!
     private var grayColor = UIColor.init(named: Theme.ivpnGray18)!
-    private var radius1: CGFloat = 187
-    private var radius2: CGFloat = 97
-    private var radius3: CGFloat = 41
-    private var radius4: CGFloat = 9
     
     // MARK: - View lifecycle -
     
     override func updateConstraints() {
-        updateSize()
         setupConstraints()
         initCircles()
         updateCircles(color: grayColor)
@@ -63,10 +65,9 @@ class MapMarkerView: UIView {
     // MARK: - Methods -
     
     func updateCircles(color: UIColor) {
-        updateCircle(circle1, color: color.withAlphaComponent(0.1))
-        updateCircle(circle2, color: color.withAlphaComponent(0.3))
-        updateCircle(circle3, color: color.withAlphaComponent(0.5))
-        updateCircle(circle4, color: color)
+        updateCircle(circle1, color: color.withAlphaComponent(0.5))
+        updateCircle(circle2, color: UIColor.white)
+        updateCircle(circle3, color: color)
     }
     
     // MARK: - Observers -
@@ -80,15 +81,6 @@ class MapMarkerView: UIView {
     }
     
     // MARK: - Private methods -
-    
-    private func updateSize() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            radius1 = 340
-            radius2 = 176
-            radius3 = 75
-            radius4 = 16
-        }
-    }
     
     private func setupConstraints() {
         bb.center().size(width: 340, height: radius1)
@@ -111,7 +103,10 @@ class MapMarkerView: UIView {
         initCircle(circle1, radius: radius1)
         initCircle(circle2, radius: radius2)
         initCircle(circle3, radius: radius3)
-        initCircle(circle4, radius: radius4)
+        
+        circle1.addSubview(animatedCircle)
+        animatedCircle.bb.center().size(width: radius1, height: radius1)
+        animatedCircle.layer.addSublayer(animatedCircleLayer)
     }
     
     private func initActionButton() {
