@@ -12,14 +12,22 @@ class AnimatedCircleLayer: CAShapeLayer {
     
     // MARK: - Properties -
     
+    private let radius = 150
+    
     private var circle: UIBezierPath {
         return UIBezierPath(
-            arcCenter: CGPoint(x: CircleParameters.circleSize / 2, y: CircleParameters.circleSize / 2),
-            radius: CGFloat(CircleParameters.circleSize / 2) - 10,
+            arcCenter: CGPoint(x: radius / 2, y: radius / 2),
+            radius: CGFloat(radius / 2) - 10,
             startAngle: 0,
             endAngle: CGFloat(.pi * 2.0),
             clockwise: true)
     }
+    
+    private var circleLayer: CAShapeLayer = {
+        let circleLayer = CAShapeLayer()
+        circleLayer.fillColor = UIColor.init(red: 68, green: 156, blue: 248).cgColor
+        return circleLayer
+    }()
     
     // MARK: - Initialize -
     
@@ -28,11 +36,9 @@ class AnimatedCircleLayer: CAShapeLayer {
         fillColor = UIColor.clear.cgColor
         path = circle.cgPath
         opacity = 0
-        frame = CGRect(x: 0, y: 0, width: CircleParameters.circleSize, height: CircleParameters.circleSize)
+        frame = CGRect(x: 0, y: 0, width: radius, height: radius)
         
-        let circleLayer = CAShapeLayer()
         circleLayer.path = circle.cgPath
-        circleLayer.fillColor = UIColor.init(red: 68, green: 156, blue: 248).cgColor
         addSublayer(circleLayer)
         
         startAnimation()
@@ -46,7 +52,7 @@ class AnimatedCircleLayer: CAShapeLayer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private methods -
+    // MARK: - Methods -
     
     func startAnimation() {
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
@@ -66,6 +72,10 @@ class AnimatedCircleLayer: CAShapeLayer {
         groupAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         
         add(groupAnimation, forKey: "groupanimation")
+    }
+    
+    func stopAnimations() {
+        removeAllAnimations()
     }
     
 }
