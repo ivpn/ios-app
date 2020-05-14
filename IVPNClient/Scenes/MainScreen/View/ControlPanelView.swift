@@ -29,8 +29,53 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var networkView: NetworkViewTableCell!
     @IBOutlet weak var protocolLabel: UILabel!
     @IBOutlet weak var ipAddressLabel: UILabel!
+    @IBOutlet weak var ipAddressLoader: UIActivityIndicatorView!
+    @IBOutlet weak var ipAddressAction: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationLoader: UIActivityIndicatorView!
+    @IBOutlet weak var locationAction: UIButton!
     @IBOutlet weak var providerLabel: UILabel!
+    @IBOutlet weak var providerLoader: UIActivityIndicatorView!
+    @IBOutlet weak var providerAction: UIButton!
+    
+    // MARK: - Properties -
+    
+    var proofsDisplayMode: ProofsDisplayMode = .loading {
+        didSet {
+            switch proofsDisplayMode {
+            case .loading:
+                ipAddressLabel.isHidden = true
+                ipAddressLoader.startAnimating()
+                ipAddressAction.isHidden = true
+                locationLabel.isHidden = true
+                locationLoader.startAnimating()
+                locationAction.isHidden = true
+                providerLabel.isHidden = true
+                providerLoader.startAnimating()
+                providerAction.isHidden = true
+            case .content:
+                ipAddressLabel.isHidden = false
+                ipAddressLoader.stopAnimating()
+                ipAddressAction.isHidden = true
+                locationLabel.isHidden = false
+                locationLoader.stopAnimating()
+                locationAction.isHidden = true
+                providerLabel.isHidden = false
+                providerLoader.stopAnimating()
+                providerAction.isHidden = true
+            case .error:
+                ipAddressLabel.isHidden = true
+                ipAddressLoader.stopAnimating()
+                ipAddressAction.isHidden = false
+                locationLabel.isHidden = true
+                locationLoader.stopAnimating()
+                locationAction.isHidden = false
+                providerLabel.isHidden = true
+                providerLoader.stopAnimating()
+                providerAction.isHidden = false
+            }
+        }
+    }
     
     // MARK: - View lifecycle -
     
@@ -106,6 +151,16 @@ class ControlPanelView: UITableView {
         if #available(iOS 13.0, *) {
             connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
         }
+    }
+    
+}
+
+extension ControlPanelView {
+    
+    enum ProofsDisplayMode {
+        case loading
+        case content
+        case error
     }
     
 }
