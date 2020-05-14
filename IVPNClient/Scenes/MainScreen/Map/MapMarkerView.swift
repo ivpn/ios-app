@@ -19,10 +19,13 @@ class MapMarkerView: UIView {
             switch status {
             case .reasserting, .connecting, .disconnecting:
                 updateCircles(color: grayColor)
+                animatedCircleLayer.stopAnimations()
             case .connected:
                 updateCircles(color: blueColor)
+                animatedCircleLayer.startAnimation()
             default:
                 updateCircles(color: redColor)
+                animatedCircleLayer.stopAnimations()
             }
             
             connectionInfoPopup.vpnStatusViewModel = VPNStatusViewModel(status: status)
@@ -34,9 +37,10 @@ class MapMarkerView: UIView {
     private var circle2 = UIView()
     private var circle3 = UIView()
     private var animatedCircle = UIView()
+    private var animatedCircleLayer = AnimatedCircleLayer()
     private var radius1: CGFloat = 150
-    private var radius2: CGFloat = 30
-    private var radius3: CGFloat = 25
+    private var radius2: CGFloat = 26
+    private var radius3: CGFloat = 20
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
     private var redColor = UIColor.init(named: Theme.ivpnRedOff)!
     private var grayColor = UIColor.init(named: Theme.ivpnGray18)!
@@ -102,7 +106,7 @@ class MapMarkerView: UIView {
         
         circle1.addSubview(animatedCircle)
         animatedCircle.bb.center().size(width: radius1, height: radius1)
-        animatedCircle.layer.addSublayer(AnimatedCircleLayer())
+        animatedCircle.layer.addSublayer(animatedCircleLayer)
     }
     
     private func initActionButton() {
