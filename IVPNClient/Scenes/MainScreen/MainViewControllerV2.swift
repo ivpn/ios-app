@@ -113,20 +113,24 @@ class MainViewControllerV2: UIViewController {
     }
     
     func updateGeoLocation() {
+        guard let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController else {
+            return
+        }
+        
         let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
+        
+        controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .loading
         
         ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
             guard let self = self else { return }
             
             switch result {
             case .success(let model):
-                if let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController {
-                    let viewModel = ProofsViewModel(model: model)
-                    controlPanelViewController.connectionViewModel = viewModel
-                    self.mainView.connectionViewModel = viewModel
-                }
+                let viewModel = ProofsViewModel(model: model)
+                controlPanelViewController.connectionViewModel = viewModel
+                self.mainView.connectionViewModel = viewModel
             case .failure:
-                break
+                controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .error
             }
         }
     }

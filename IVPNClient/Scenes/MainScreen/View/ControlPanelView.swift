@@ -40,7 +40,7 @@ class ControlPanelView: UITableView {
     
     // MARK: - Properties -
     
-    var proofsDisplayMode: ProofsDisplayMode = .loading {
+    var connectionInfoDisplayMode: ConnectionInfoDisplayMode = .content {
         didSet {
             switch proofsDisplayMode {
             case .loading:
@@ -97,6 +97,7 @@ class ControlPanelView: UITableView {
     }
     
     func updateConnectionInfo(viewModel: ProofsViewModel) {
+        connectionInfoDisplayMode = .content
         ipAddressLabel.text = viewModel.ipAddress
         locationLabel.text = "\(viewModel.city), \(viewModel.countryCode)"
         providerLabel.text = viewModel.provider
@@ -157,7 +158,7 @@ class ControlPanelView: UITableView {
 
 extension ControlPanelView {
     
-    enum ProofsDisplayMode {
+    enum ConnectionInfoDisplayMode {
         case loading
         case content
         case error
