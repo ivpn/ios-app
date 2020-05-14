@@ -73,7 +73,10 @@ extension ControlPanelViewController {
     override func setKeyStart() {
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Generating new keys..."
-        hud.show(in: (navigationController?.view)!)
+        
+        if let topViewController = UIApplication.topViewController() {
+            hud.show(in: topViewController.view)
+        }
     }
     
     override func setKeySuccess() {
@@ -166,7 +169,10 @@ extension ControlPanelViewController {
     override func deleteSessionStart() {
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Deleting active session..."
-        hud.show(in: (navigationController?.view)!)
+        
+        if let topViewController = UIApplication.topViewController() {
+            hud.show(in: topViewController.view)
+        }
     }
     
     override func deleteSessionSuccess() {
@@ -178,7 +184,11 @@ extension ControlPanelViewController {
         hud.delegate = self as? JGProgressHUDDelegate
         hud.indicatorView = JGProgressHUDErrorIndicatorView()
         hud.detailTextLabel.text = "There was an error deleting session"
-        hud.show(in: (navigationController?.view)!)
+        
+        if let topViewController = UIApplication.topViewController() {
+            hud.show(in: topViewController.view)
+        }
+        
         hud.dismiss(afterDelay: 2)
     }
     
