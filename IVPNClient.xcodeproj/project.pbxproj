@@ -144,6 +144,7 @@
 		8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */; };
 		8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CE2211A602007C6F15 /* GeoLookup.swift */; };
 		8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */; };
+		8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */; };
 		828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F6221C008100D5E330 /* ServerConfigurationCell.swift */; };
 		828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */; };
 		828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772FA221C28E000D5E330 /* FlagImageView.swift */; };
@@ -478,6 +479,7 @@
 		8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofsViewModel.swift; sourceTree = "<group>"; };
 		8277F1CE2211A602007C6F15 /* GeoLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLookup.swift; sourceTree = "<group>"; };
 		82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardRegenerationRateCell.swift; sourceTree = "<group>"; };
+		8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCircleLayer.swift; sourceTree = "<group>"; };
 		828772F6221C008100D5E330 /* ServerConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationCell.swift; sourceTree = "<group>"; };
 		828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersConfigurationTableViewController.swift; sourceTree = "<group>"; };
 		828772FA221C28E000D5E330 /* FlagImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagImageView.swift; sourceTree = "<group>"; };
@@ -1253,6 +1255,7 @@
 				82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */,
 				82351FCF2420D0E000E6E0FD /* MapMarkerContainerView.swift */,
 				82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */,
+				8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -2170,6 +2173,7 @@
 				82351FD02420D0E000E6E0FD /* MapMarkerContainerView.swift in Sources */,
 				82234B6721BA7F3500B082DE /* Logging.swift in Sources */,
 				82DB75EC239E75EB0073E846 /* NEVPNStatus+Ext.swift in Sources */,
+				8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */,
 				9CBFF0302102254800FE1757 /* Settings.swift in Sources */,
 				9C3031371DB4307D00C38B0C /* SettingsViewController.swift in Sources */,
 				8247E1DC2268713E006C0C08 /* SubscriptionType.swift in Sources */,
