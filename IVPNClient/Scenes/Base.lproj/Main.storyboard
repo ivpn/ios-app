@@ -421,7 +421,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1016.3333320617676" width="375" height="65"/>
+                            <rect key="frame" x="0.0" y="1037.3333320617676" width="375" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -1419,10 +1419,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
@@ -1435,7 +1435,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="324" height="21"/>
+                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1457,7 +1457,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.333332061767578" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -2258,6 +2258,23 @@
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Uyf-JW-zYe">
+                                                                    <rect key="frame" x="279" y="18" width="20" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="20" id="AJK-Ps-QkX"/>
+                                                                        <constraint firstAttribute="height" constant="20" id="YMx-SY-Sj1"/>
+                                                                    </constraints>
+                                                                </activityIndicatorView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection error" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpu-tj-hH1">
+                                                                    <rect key="frame" x="174" y="18" width="125" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="20" id="IqT-u4-NL9"/>
+                                                                        <constraint firstAttribute="width" constant="125" id="UWb-De-fta"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" name="ivpnLabel5"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" name="ivpnBackgroundBase"/>
                                                             <constraints>
@@ -2267,6 +2284,10 @@
                                                                 <constraint firstItem="SC4-oO-20O" firstAttribute="centerY" secondItem="0ME-0A-Ygf" secondAttribute="centerY" id="fuA-aU-2tf"/>
                                                                 <constraint firstItem="Jxf-yV-NoU" firstAttribute="leading" secondItem="0ME-0A-Ygf" secondAttribute="leading" constant="18" id="gGm-7f-T1Q"/>
                                                                 <constraint firstItem="Jxf-yV-NoU" firstAttribute="centerY" secondItem="0ME-0A-Ygf" secondAttribute="centerY" id="gXs-bq-zf3"/>
+                                                                <constraint firstItem="Wpu-tj-hH1" firstAttribute="centerY" secondItem="0ME-0A-Ygf" secondAttribute="centerY" id="kyb-Ve-Cpd"/>
+                                                                <constraint firstItem="Uyf-JW-zYe" firstAttribute="centerY" secondItem="0ME-0A-Ygf" secondAttribute="centerY" id="pba-Pb-6xt"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Wpu-tj-hH1" secondAttribute="trailing" constant="16" id="qMT-5l-1MR"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Uyf-JW-zYe" secondAttribute="trailing" constant="16" id="qO2-Ue-5AY"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
@@ -2313,15 +2334,36 @@
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="R4n-PY-IGn">
+                                                                    <rect key="frame" x="279" y="18" width="20" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="20" id="CDu-Xt-xCC"/>
+                                                                        <constraint firstAttribute="height" constant="20" id="htW-rg-aCO"/>
+                                                                    </constraints>
+                                                                </activityIndicatorView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection error" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzG-y6-euq">
+                                                                    <rect key="frame" x="174" y="18" width="125" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="20" id="6I9-wk-BZK"/>
+                                                                        <constraint firstAttribute="width" constant="125" id="s64-0T-1OW"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" name="ivpnLabel5"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" name="ivpnBackgroundBase"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="R4n-PY-IGn" secondAttribute="trailing" constant="16" id="0Mv-5K-KmT"/>
                                                                 <constraint firstItem="jbi-Lj-XIB" firstAttribute="leading" secondItem="MhB-vb-hH1" secondAttribute="leading" constant="18" id="663-hF-5ZK"/>
+                                                                <constraint firstAttribute="trailing" secondItem="nzG-y6-euq" secondAttribute="trailing" constant="16" id="BVV-gx-HQu"/>
                                                                 <constraint firstItem="E6a-2Z-ZUw" firstAttribute="centerY" secondItem="MhB-vb-hH1" secondAttribute="centerY" id="D2y-1q-haJ"/>
                                                                 <constraint firstItem="FWD-Jo-LI9" firstAttribute="centerY" secondItem="MhB-vb-hH1" secondAttribute="centerY" id="GNN-RX-qmW"/>
                                                                 <constraint firstItem="jbi-Lj-XIB" firstAttribute="centerY" secondItem="MhB-vb-hH1" secondAttribute="centerY" id="R2d-3F-5Xk"/>
                                                                 <constraint firstAttribute="trailing" secondItem="E6a-2Z-ZUw" secondAttribute="trailing" constant="16" id="Seg-xK-hFF"/>
+                                                                <constraint firstItem="R4n-PY-IGn" firstAttribute="centerY" secondItem="MhB-vb-hH1" secondAttribute="centerY" id="dCE-L9-QIL"/>
                                                                 <constraint firstItem="FWD-Jo-LI9" firstAttribute="leading" secondItem="jbi-Lj-XIB" secondAttribute="trailing" constant="16" id="i4C-d7-d8I"/>
+                                                                <constraint firstItem="nzG-y6-euq" firstAttribute="centerY" secondItem="MhB-vb-hH1" secondAttribute="centerY" id="qX3-pu-bTB"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
@@ -2368,6 +2410,23 @@
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Qyn-6a-4un">
+                                                                    <rect key="frame" x="279" y="18" width="20" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="20" id="fea-vW-KKs"/>
+                                                                        <constraint firstAttribute="height" constant="20" id="gdS-ST-kKf"/>
+                                                                    </constraints>
+                                                                </activityIndicatorView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection error" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdR-pT-kcI">
+                                                                    <rect key="frame" x="174" y="18" width="125" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="125" id="jx3-sf-jsd"/>
+                                                                        <constraint firstAttribute="height" constant="20" id="vie-bx-ys8"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" name="ivpnLabel5"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" name="ivpnBackgroundBase"/>
                                                             <constraints>
@@ -2375,8 +2434,12 @@
                                                                 <constraint firstItem="B5X-4A-Fpw" firstAttribute="leading" secondItem="Bbv-ts-7zP" secondAttribute="trailing" constant="16" id="84z-6r-xBL"/>
                                                                 <constraint firstItem="Bbv-ts-7zP" firstAttribute="leading" secondItem="OpQ-b5-AAg" secondAttribute="leading" constant="18" id="8xt-5B-2F7"/>
                                                                 <constraint firstItem="B5X-4A-Fpw" firstAttribute="centerY" secondItem="OpQ-b5-AAg" secondAttribute="centerY" id="A3P-22-K3B"/>
+                                                                <constraint firstItem="rdR-pT-kcI" firstAttribute="centerY" secondItem="OpQ-b5-AAg" secondAttribute="centerY" id="Y7k-kZ-MNz"/>
                                                                 <constraint firstItem="Bbv-ts-7zP" firstAttribute="centerY" secondItem="OpQ-b5-AAg" secondAttribute="centerY" id="cuP-P4-LAs"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Qyn-6a-4un" secondAttribute="trailing" constant="16" id="f2N-Zm-9Kd"/>
+                                                                <constraint firstAttribute="trailing" secondItem="rdR-pT-kcI" secondAttribute="trailing" constant="16" id="faa-p9-0B1"/>
                                                                 <constraint firstItem="LdG-Fb-Gn0" firstAttribute="centerY" secondItem="OpQ-b5-AAg" secondAttribute="centerY" id="nEQ-Rr-xp3"/>
+                                                                <constraint firstItem="Qyn-6a-4un" firstAttribute="centerY" secondItem="OpQ-b5-AAg" secondAttribute="centerY" id="s8d-76-ZuG"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
@@ -2473,12 +2536,18 @@
                             <outlet property="exitServerNameLabel" destination="ctm-zP-IXi" id="FHi-nL-tnB"/>
                             <outlet property="exitServerTableCell" destination="gB4-hN-vYJ" id="gTY-Aq-lp7"/>
                             <outlet property="fastestServerLabel" destination="tn2-Y1-vTK" id="Fre-F1-uPx"/>
+                            <outlet property="ipAddressErrorLabel" destination="Wpu-tj-hH1" id="LXW-Nc-zsS"/>
                             <outlet property="ipAddressLabel" destination="ir1-tN-PZC" id="qc2-dN-QBO"/>
+                            <outlet property="ipAddressLoader" destination="Uyf-JW-zYe" id="1pD-Yj-CY9"/>
+                            <outlet property="locationErrorLabel" destination="nzG-y6-euq" id="8dG-I7-akZ"/>
                             <outlet property="locationLabel" destination="E6a-2Z-ZUw" id="ci4-fm-zH0"/>
+                            <outlet property="locationLoader" destination="R4n-PY-IGn" id="Cff-x3-gFe"/>
                             <outlet property="networkView" destination="IWY-FC-eTO" id="8o7-WG-viR"/>
                             <outlet property="protectionStatusLabel" destination="fZx-j5-ahl" id="IPa-ne-fRV"/>
                             <outlet property="protocolLabel" destination="mfE-oo-iTV" id="5o9-zb-c3x"/>
+                            <outlet property="providerErrorLabel" destination="rdR-pT-kcI" id="tfT-k8-N5n"/>
                             <outlet property="providerLabel" destination="LdG-Fb-Gn0" id="h0R-lp-s5c"/>
+                            <outlet property="providerLoader" destination="Qyn-6a-4un" id="Kp9-1Y-xrf"/>
                         </connections>
                     </tableView>
                     <connections>
