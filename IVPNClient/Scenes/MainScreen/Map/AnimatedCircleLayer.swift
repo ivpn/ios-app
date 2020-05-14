@@ -17,7 +17,7 @@ class AnimatedCircleLayer: CAShapeLayer {
     private var circle: UIBezierPath {
         return UIBezierPath(
             arcCenter: CGPoint(x: radius / 2, y: radius / 2),
-            radius: CGFloat(radius / 2) - 10,
+            radius: CGFloat(radius / 2),
             startAngle: 0,
             endAngle: CGFloat(.pi * 2.0),
             clockwise: true)
@@ -58,19 +58,22 @@ class AnimatedCircleLayer: CAShapeLayer {
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
         scaleAnimation.fromValue = 0
         scaleAnimation.toValue = 1
+        scaleAnimation.duration = 2
         scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
+        scaleAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         
         let opacityAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-        opacityAnimation.fromValue = 1
+        opacityAnimation.fromValue = 0.4
         opacityAnimation.toValue = 0
+        opacityAnimation.duration = 2
         opacityAnimation.fillMode = CAMediaTimingFillMode.forwards
+        opacityAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
         
         let groupAnimation = CAAnimationGroup()
         groupAnimation.animations = [scaleAnimation, opacityAnimation]
-        groupAnimation.duration = 2.5
+        groupAnimation.duration = 4
         groupAnimation.repeatCount = .greatestFiniteMagnitude
-        groupAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-        
+    
         add(groupAnimation, forKey: "groupanimation")
     }
     
