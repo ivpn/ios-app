@@ -29,7 +29,7 @@ class MainView: UIView {
     }
     
     let markerView = MapMarkerView()
-    private var infoAlertViewModel = InfoAlertViewModel()
+    var infoAlertViewModel = InfoAlertViewModel()
     private let markerContainerView = MapMarkerContainerView()
     private var localCoordinates: (Double, Double)?
     
@@ -55,6 +55,15 @@ class MainView: UIView {
     func updateStatus(vpnStatus: NEVPNStatus) {
         markerView.status = vpnStatus
         updateMapPosition(vpnStatus: vpnStatus)
+    }
+    
+    func updateInfoAlert() {
+        if infoAlertViewModel.shouldDisplay {
+            infoAlertViewModel.update()
+            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
+        } else {
+            infoAlertView.hide()
+        }
     }
     
     // MARK: - Private methods -
@@ -90,15 +99,6 @@ class MainView: UIView {
     private func setupConstraints() {
         mapScrollView.setupConstraints()
         markerContainerView.setupConstraints()
-    }
-    
-    private func updateInfoAlert() {
-        if infoAlertViewModel.shouldDisplay {
-            infoAlertViewModel.update()
-            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
-        } else {
-            infoAlertView.hide()
-        }
     }
     
     private func updateMarker() {

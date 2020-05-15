@@ -17,6 +17,8 @@ class InfoAlertViewModel {
         switch infoAlert {
         case .subscriptionExpiration:
             return "Subscription will expire in \(days) days"
+        case .connectionInfoFailure:
+            return "Loading connection info failed."
         }
     }
     
@@ -24,6 +26,8 @@ class InfoAlertViewModel {
         switch infoAlert {
         case .subscriptionExpiration:
             return "RENEW"
+        case .connectionInfoFailure:
+            return "RETRY"
         }
     }
     
@@ -31,11 +35,13 @@ class InfoAlertViewModel {
         switch infoAlert {
         case .subscriptionExpiration:
             return .alert
+        case .connectionInfoFailure:
+            return .alert
         }
     }
     
     var shouldDisplay: Bool {
-        return Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3 && Application.shared.authentication.isLoggedIn
+        return Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3 && Application.shared.authentication.isLoggedIn || infoAlert == .connectionInfoFailure
     }
     
     var infoAlert: InfoAlert = .subscriptionExpiration
@@ -43,6 +49,8 @@ class InfoAlertViewModel {
     // MARK: - Methods -
     
     func update() {
+        guard infoAlert != .connectionInfoFailure else { return }
+        
         if shouldDisplay {
             infoAlert = .subscriptionExpiration
         }
@@ -56,6 +64,7 @@ extension InfoAlertViewModel {
     
     enum InfoAlert {
         case subscriptionExpiration
+        case connectionInfoFailure
     }
     
 }
@@ -69,6 +78,10 @@ extension InfoAlertViewModel: InfoAlertViewDelegate {
         case .subscriptionExpiration:
             if let topViewController = UIApplication.topViewController() {
                 topViewController.manageSubscription()
+            }
+        case .connectionInfoFailure:
+            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+                topViewController.updateGeoLocation()
             }
         }
     }

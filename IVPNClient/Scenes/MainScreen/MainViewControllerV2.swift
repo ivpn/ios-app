@@ -119,6 +119,8 @@ class MainViewControllerV2: UIViewController {
         
         let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
         
+        mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
+        mainView.updateInfoAlert()
         controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .loading
         
         ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
@@ -131,6 +133,8 @@ class MainViewControllerV2: UIViewController {
                 self.mainView.connectionViewModel = viewModel
             case .failure:
                 controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .error
+                self.mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
+                self.mainView.updateInfoAlert()
             }
         }
     }
