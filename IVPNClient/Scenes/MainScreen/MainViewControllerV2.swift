@@ -131,6 +131,8 @@ class MainViewControllerV2: UIViewController {
                 self.mainView.connectionViewModel = viewModel
             case .failure:
                 controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .error
+                self.mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
+                self.mainView.infoAlertView.show()
             }
         }
     }

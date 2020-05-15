@@ -29,7 +29,7 @@ class MainView: UIView {
     }
     
     let markerView = MapMarkerView()
-    private var infoAlertViewModel = InfoAlertViewModel()
+    var infoAlertViewModel = InfoAlertViewModel()
     private let markerContainerView = MapMarkerContainerView()
     private var localCoordinates: (Double, Double)?
     

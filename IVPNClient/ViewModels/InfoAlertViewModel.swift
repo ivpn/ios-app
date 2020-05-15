@@ -17,6 +17,8 @@ class InfoAlertViewModel {
         switch infoAlert {
         case .subscriptionExpiration:
             return "Subscription will expire in \(days) days"
+        case .connectionInfoFailure:
+            return "Loading connection info failed."
         }
     }
     
@@ -24,12 +26,16 @@ class InfoAlertViewModel {
         switch infoAlert {
         case .subscriptionExpiration:
             return "RENEW"
+        case .connectionInfoFailure:
+            return "RETRY"
         }
     }
     
     var type: InfoAlertViewType {
         switch infoAlert {
         case .subscriptionExpiration:
+            return .alert
+        case .connectionInfoFailure:
             return .alert
         }
     }
@@ -56,6 +62,7 @@ extension InfoAlertViewModel {
     
     enum InfoAlert {
         case subscriptionExpiration
+        case connectionInfoFailure
     }
     
 }
@@ -69,6 +76,10 @@ extension InfoAlertViewModel: InfoAlertViewDelegate {
         case .subscriptionExpiration:
             if let topViewController = UIApplication.topViewController() {
                 topViewController.manageSubscription()
+            }
+        case .connectionInfoFailure:
+            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+                topViewController.updateGeoLocation()
             }
         }
     }
