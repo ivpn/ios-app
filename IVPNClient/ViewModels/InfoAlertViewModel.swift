@@ -41,7 +41,7 @@ class InfoAlertViewModel {
     }
     
     var shouldDisplay: Bool {
-        return Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3 && Application.shared.authentication.isLoggedIn
+        return Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3 && Application.shared.authentication.isLoggedIn || infoAlert == .connectionInfoFailure
     }
     
     var infoAlert: InfoAlert = .subscriptionExpiration
@@ -49,6 +49,8 @@ class InfoAlertViewModel {
     // MARK: - Methods -
     
     func update() {
+        guard infoAlert != .connectionInfoFailure else { return }
+        
         if shouldDisplay {
             infoAlert = .subscriptionExpiration
         }

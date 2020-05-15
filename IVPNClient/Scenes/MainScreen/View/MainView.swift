@@ -57,6 +57,15 @@ class MainView: UIView {
         updateMapPosition(vpnStatus: vpnStatus)
     }
     
+    func updateInfoAlert() {
+        if infoAlertViewModel.shouldDisplay {
+            infoAlertViewModel.update()
+            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
+        } else {
+            infoAlertView.hide()
+        }
+    }
+    
     // MARK: - Private methods -
     
     private func initMarker() {
@@ -90,15 +99,6 @@ class MainView: UIView {
     private func setupConstraints() {
         mapScrollView.setupConstraints()
         markerContainerView.setupConstraints()
-    }
-    
-    private func updateInfoAlert() {
-        if infoAlertViewModel.shouldDisplay {
-            infoAlertViewModel.update()
-            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
-        } else {
-            infoAlertView.hide()
-        }
     }
     
     private func updateMarker() {
