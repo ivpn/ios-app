@@ -131,6 +131,10 @@ class PaymentViewController: UITableViewController {
     }
     
     private func setupView() {
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = true
+        }
+        
         view.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         payButton?.set(title: "Pay", subtitle: "")
         
