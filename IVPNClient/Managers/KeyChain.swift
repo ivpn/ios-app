@@ -10,10 +10,8 @@ import KeychainAccess
 
 class KeyChain {
     
-    private static let emailKey = "email"
     private static let usernameKey = "username"
     private static let tempUsernameKey = "tempUsernameKey"
-    private static let passwordKey = "password"
     private static let wgPublicKeyKey = "WGPublicKey"
     private static let wgPrivateKeyKey = "WGPrivateKey"
     private static let wgIpAddressKey = "WGIpAddressKey"
@@ -24,15 +22,6 @@ class KeyChain {
     static let bundle: Keychain = {
         return Keychain(service: "net.ivpn.clients.ios", accessGroup: "WQXXM75BYN.net.ivpn.IVPN-Client")
     }()
-    
-    class var email: String? {
-        get {
-            return KeyChain.bundle[emailKey]
-        }
-        set {
-            KeyChain.bundle[emailKey] = newValue
-        }
-    }
     
     class var username: String? {
         get {
@@ -49,15 +38,6 @@ class KeyChain {
         }
         set {
             KeyChain.bundle[tempUsernameKey] = newValue
-        }
-    }
-    
-    class var password: String? {
-        get {
-            return KeyChain.bundle[passwordKey]
-        }
-        set {
-            KeyChain.bundle[passwordKey] = newValue
         }
     }
     
@@ -136,10 +116,8 @@ class KeyChain {
     }
     
     static func clearAll() {
-        email = nil
         username = nil
         tempUsername = nil
-        password = nil
         wgPrivateKey = nil
         wgPublicKey = nil
         wgIpAddress = nil
