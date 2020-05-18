@@ -66,7 +66,7 @@ class SignUpController: UIViewController {
             URLQueryItem(name: "password", value: password),
             URLQueryItem(name: "password_confirmation", value: password)
         ]
-        let request = ApiRequestDI(method: .post, endpoint: Config.apiValidateAccount, params: params)
+        let request = ApiRequestDI(method: .post, endpoint: "", params: params)
         
         ProgressIndicator.shared.showIn(view: view)
         

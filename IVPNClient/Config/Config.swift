@@ -8,8 +8,6 @@ struct Config {
     static let appGroup = "group.net.ivpn.clients.ios"
     
     static let apiServersFile = "/v4/servers.json"
-    static let apiValidateAccount = "/subscriptions/validate"
-    static let apiSubscription = "/subscriptions/ios"
     static let apiGeoLookup = "/v4/geo-lookup"
     static let apiSessionNew = "/v4/session/new"
     static let apiSessionStatus = "/v4/session/status"
