@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyStoreKit
 import Bamboo
+import JGProgressHUD
 
 class PaymentViewController: UITableViewController {
     
@@ -77,6 +78,8 @@ class PaymentViewController: UITableViewController {
         
         return true
     }
+    
+    private let hud = JGProgressHUD(style: .dark)
     
     private lazy var sessionManager: SessionManager = {
         let sessionManager = SessionManager()
@@ -163,14 +166,16 @@ class PaymentViewController: UITableViewController {
     private func purchaseProduct(identifier: String) {
         guard deviceCanMakePurchases else { return }
         
-        ProgressIndicator.shared.showIn(view: view)
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Processing payment..."
+        hud.show(in: (navigationController?.view)!)
         
         IAPManager.shared.purchaseProduct(identifier: identifier) { [weak self] purchase, error in
             guard let self = self else { return }
             
             if let error = error {
                 self.showErrorAlert(title: "Error", message: error)
-                ProgressIndicator.shared.hide()
+                self.hud.dismiss()
                 return
             }
             
@@ -184,7 +189,7 @@ class PaymentViewController: UITableViewController {
         IAPManager.shared.completePurchase(purchase: purchase) { [weak self] serviceStatus, error in
             guard let self = self else { return }
             
-            ProgressIndicator.shared.hide()
+            self.hud.dismiss()
             
             if let error = error {
                 self.showErrorAlert(title: "Error", message: error.message) { _ in
@@ -267,11 +272,13 @@ extension PaymentViewController {
 extension PaymentViewController {
     
     override func createSessionStart() {
-        ProgressIndicator.shared.showIn(view: view)
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Creating new session..."
+        hud.show(in: (navigationController?.view)!)
     }
     
     override func createSessionSuccess() {
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         
         navigationController?.dismiss(animated: true) {
             NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
@@ -285,7 +292,7 @@ extension PaymentViewController {
             message = error.message
         }
         
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         showErrorAlert(title: "Error", message: message)
     }
