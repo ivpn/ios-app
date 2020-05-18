@@ -77,9 +77,6 @@ class SignUpController: UIViewController {
             switch result {
             case .success(let success):
                 if success.statusOK {
-                    KeyChain.email = email
-                    KeyChain.password = password
-                    
                     let viewController = NavigationManager.getSubscriptionViewController()
                     viewController.presentationController?.delegate = self
                     self.present(viewController, animated: true, completion: nil)

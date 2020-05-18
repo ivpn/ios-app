@@ -81,7 +81,6 @@ class IAPManager {
                 SwiftyStoreKit.finishTransaction(purchase.transaction)
                 Application.shared.serviceStatus = session.serviceStatus
                 Application.shared.authentication.logIn(session: session)
-                KeyChain.email = nil
                 completion(session.serviceStatus, nil)
                 log(info: "Purchase was successfully finished.")
             case .failure(let error):
@@ -114,7 +113,6 @@ class IAPManager {
                         SwiftyStoreKit.finishTransaction(product.transaction)
                         Application.shared.serviceStatus = session.serviceStatus
                         Application.shared.authentication.logIn(session: session)
-                        KeyChain.email = nil
                         completion(session.serviceStatus, nil)
                         log(info: "Purchase was successfully finished.")
                     case .failure(let error):

@@ -21,12 +21,6 @@ class Authentication {
         return !username.isEmpty || !sessionToken.isEmpty
     }
     
-    var hasSignupCredentials: Bool {
-        let email = KeyChain.email ?? ""
-        let password = KeyChain.password ?? ""
-        return !email.isEmpty && !password.isEmpty
-    }
-    
     private(set) var randomPart: String
     private let accountRandomPartKey = "AccountRandomPart"
     
