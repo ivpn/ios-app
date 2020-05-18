@@ -78,6 +78,12 @@ class PaymentViewController: UITableViewController {
         return true
     }
     
+    private lazy var sessionManager: SessionManager = {
+        let sessionManager = SessionManager()
+        sessionManager.delegate = self
+        return sessionManager
+    }()
+    
     // MARK: - @IBActions -
     
     @IBAction func goBack() {
@@ -190,7 +196,16 @@ class PaymentViewController: UITableViewController {
             }
             
             if let serviceStatus = serviceStatus {
-                self.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
+                self.showSubscriptionActivatedAlert(serviceStatus: serviceStatus) {
+                    if KeyChain.sessionToken == nil {
+                        self.sessionManager.createSession()
+                        return
+                    }
+                    
+                    self.navigationController?.dismiss(animated: true) {
+                        NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
+                    }
+                }
             }
         }
     }
@@ -243,6 +258,36 @@ extension PaymentViewController {
         guard indexPath.row > 0 else { return }
         service = service.collection[indexPath.row - 1]
         tableView.reloadData()
+    }
+    
+}
+
+// MARK: - SessionManagerDelegate -
+
+extension PaymentViewController {
+    
+    override func createSessionStart() {
+        ProgressIndicator.shared.showIn(view: view)
+    }
+    
+    override func createSessionSuccess() {
+        ProgressIndicator.shared.hide()
+        
+        navigationController?.dismiss(animated: true) {
+            NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
+        }
+    }
+    
+    override func createSessionFailure(error: Any?) {
+        var message = "There was an error creating a new session"
+        
+        if let error = error as? ErrorResultSessionNew {
+            message = error.message
+        }
+        
+        ProgressIndicator.shared.hide()
+        Application.shared.authentication.removeStoredCredentials()
+        showErrorAlert(title: "Error", message: message)
     }
     
 }

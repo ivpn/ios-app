@@ -79,13 +79,13 @@ extension UIViewController {
         present(safariVC, animated: true, completion: nil)
     }
     
-    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus) {
+    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> ())? = nil) {
         showAlert(
             title: "Thank you!",
             message: "Service was successfuly upgraded.\nService active until: " + serviceStatus.activeUntilString(),
             handler: { _ in
-                self.navigationController?.dismiss(animated: true) {
-                    NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
+                if let completion = completion {
+                    completion()
                 }
         })
     }
