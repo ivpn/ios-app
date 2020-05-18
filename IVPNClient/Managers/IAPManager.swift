@@ -20,6 +20,14 @@ class IAPManager {
         return SKPaymentQueue.canMakePayments()
     }
     
+    private var apiEndpoint: String {
+        if KeyChain.sessionToken != nil {
+            return Config.apiPaymentAdd
+        }
+        
+        return Config.apiPaymentInitial
+    }
+    
     // MARK: - Methods -
     
     func fetchProducts(completion: @escaping ([SKProduct]?, String?) -> Void) {
@@ -62,7 +70,8 @@ class IAPManager {
         }
     }
     
-    func completePurchase(purchase: PurchaseDetails, endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func completePurchase(purchase: PurchaseDetails, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        let endpoint = apiEndpoint
         let params = purchaseParams(purchase: purchase, endpoint: endpoint)
         let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
         
@@ -83,9 +92,9 @@ class IAPManager {
         }
     }
     
-    func finishIncompletePurchases(endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func finishIncompletePurchases(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         SwiftyStoreKit.completeTransactions(atomically: false) { products in
-            self.completePurchases(products: products, endpoint: endpoint) { serviceStatus, error in
+            self.completePurchases(products: products, endpoint: self.apiEndpoint) { serviceStatus, error in
                 completion(serviceStatus, error)
             }
         }
