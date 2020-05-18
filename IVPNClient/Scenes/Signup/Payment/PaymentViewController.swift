@@ -207,6 +207,8 @@ class PaymentViewController: UITableViewController {
             if let serviceStatus = serviceStatus {
                 self.showSubscriptionActivatedAlert(serviceStatus: serviceStatus) {
                     if KeyChain.sessionToken == nil {
+                        KeyChain.username = KeyChain.tempUsername
+                        KeyChain.tempUsername = nil
                         self.sessionManager.createSession()
                         return
                     }
