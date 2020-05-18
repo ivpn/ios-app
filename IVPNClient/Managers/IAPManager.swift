@@ -62,9 +62,9 @@ class IAPManager {
         }
     }
     
-    func completePurchase(purchase: PurchaseDetails, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
-        let params = purchaseParams(purchase: purchase)
-        let request = ApiRequestDI(method: .post, endpoint: Config.apiSubscription, params: params)
+    func completePurchase(purchase: PurchaseDetails, endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        let params = purchaseParams(purchase: purchase, endpoint: endpoint)
+        let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
         
         ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Session, ErrorResult>) in
             switch result {
@@ -83,21 +83,21 @@ class IAPManager {
         }
     }
     
-    func finishIncompletePurchases(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func finishIncompletePurchases(endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         SwiftyStoreKit.completeTransactions(atomically: false) { products in
-            self.completePurchases(products: products) { serviceStatus, error in
+            self.completePurchases(products: products, endpoint: endpoint) { serviceStatus, error in
                 completion(serviceStatus, error)
             }
         }
     }
     
-    func completePurchases(products: [Purchase], completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func completePurchases(products: [Purchase], endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         for product in products {
             log(info: "Found incomplete purchase. Completing purchase...")
             
             if product.transaction.transactionState == .purchased {
-                let params = finishPurchaseParams(product: product)
-                let request = ApiRequestDI(method: .post, endpoint: Config.apiSubscription, params: params)
+                let params = finishPurchaseParams(product: product, endpoint: endpoint)
+                let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
                 
                 ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Session, ErrorResult>) in
                     switch result {
@@ -136,52 +136,52 @@ class IAPManager {
     
     // MARK: - Private methods -
     
-    private func purchaseParams(purchase: PurchaseDetails) -> [URLQueryItem] {
-        let username = Application.shared.authentication.getStoredUsername()
+    private func purchaseParams(purchase: PurchaseDetails, endpoint: String) -> [URLQueryItem] {
         let transactionId = purchase.transaction.transactionIdentifier ?? "Unknown transaction ID"
         let base64receipt = SwiftyStoreKit.localReceiptData?.base64EncodedString(options: []) ?? ""
         
-        if let email = KeyChain.email, let password = KeyChain.password {
+        switch endpoint {
+        case Config.apiPaymentInitial:
             return [
-                URLQueryItem(name: "email", value: email),
-                URLQueryItem(name: "password", value: password),
-                URLQueryItem(name: "password_confirmation", value: password),
+                URLQueryItem(name: "account_id", value: KeyChain.tempUsername ?? ""),
                 URLQueryItem(name: "product_id", value: purchase.product.productIdentifier),
                 URLQueryItem(name: "transaction_id", value: transactionId),
                 URLQueryItem(name: "receipt_data", value: base64receipt)
             ]
+        case Config.apiPaymentAdd:
+            return [
+                URLQueryItem(name: "session_token", value: KeyChain.sessionToken ?? ""),
+                URLQueryItem(name: "product_id", value: purchase.product.productIdentifier),
+                URLQueryItem(name: "transaction_id", value: transactionId),
+                URLQueryItem(name: "receipt_data", value: base64receipt)
+            ]
+        default:
+            return []
         }
-        
-        return [
-            URLQueryItem(name: "username", value: username),
-            URLQueryItem(name: "product_id", value: purchase.product.productIdentifier),
-            URLQueryItem(name: "transaction_id", value: transactionId),
-            URLQueryItem(name: "receipt_data", value: base64receipt)
-        ]
     }
     
-    private func finishPurchaseParams(product: Purchase) -> [URLQueryItem] {
-        let username = Application.shared.authentication.getStoredUsername()
+    private func finishPurchaseParams(product: Purchase, endpoint: String) -> [URLQueryItem] {
         let transactionId = product.transaction.transactionIdentifier ?? ""
         let base64receipt = SwiftyStoreKit.localReceiptData?.base64EncodedString(options: []) ?? ""
         
-        if let email = KeyChain.email, let password = KeyChain.password {
+        switch endpoint {
+        case Config.apiPaymentInitial:
             return [
-                URLQueryItem(name: "email", value: email),
-                URLQueryItem(name: "password", value: password),
-                URLQueryItem(name: "password_confirmation", value: password),
+                URLQueryItem(name: "account_id", value: KeyChain.tempUsername ?? ""),
                 URLQueryItem(name: "product_id", value: product.productId),
                 URLQueryItem(name: "transaction_id", value: transactionId),
                 URLQueryItem(name: "receipt_data", value: base64receipt)
             ]
+        case Config.apiPaymentAdd:
+            return [
+                URLQueryItem(name: "session_token", value: KeyChain.sessionToken ?? ""),
+                URLQueryItem(name: "product_id", value: product.productId),
+                URLQueryItem(name: "transaction_id", value: transactionId),
+                URLQueryItem(name: "receipt_data", value: base64receipt)
+            ]
+        default:
+            return []
         }
-        
-        return [
-            URLQueryItem(name: "username", value: username),
-            URLQueryItem(name: "productId", value: product.productId),
-            URLQueryItem(name: "transactionId", value: transactionId),
-            URLQueryItem(name: "receiptData", value: base64receipt)
-        ]
     }
     
 }

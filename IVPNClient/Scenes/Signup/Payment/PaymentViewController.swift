@@ -175,7 +175,9 @@ class PaymentViewController: UITableViewController {
     }
     
     private func completePurchase(purchase: PurchaseDetails) {
-        IAPManager.shared.completePurchase(purchase: purchase) { [weak self] serviceStatus, error in
+        var endpoint = extendingService ? Config.apiPaymentAdd : Config.apiPaymentInitial
+        
+        IAPManager.shared.completePurchase(purchase: purchase, endpoint: endpoint) { [weak self] serviceStatus, error in
             guard let self = self else { return }
             
             ProgressIndicator.shared.hide()
