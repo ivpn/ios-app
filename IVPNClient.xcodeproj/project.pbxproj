@@ -126,6 +126,7 @@
 		82774855237596DF0061BD46 /* OpenVPNConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82774854237596DF0061BD46 /* OpenVPNConf.swift */; };
 		8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */; };
 		8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CE2211A602007C6F15 /* GeoLookup.swift */; };
+		827855B92472B27F00B3B6BD /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827855B82472B27F00B3B6BD /* Account.swift */; };
 		8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */; };
 		828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F6221C008100D5E330 /* ServerConfigurationCell.swift */; };
 		828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */; };
@@ -447,6 +448,7 @@
 		82774854237596DF0061BD46 /* OpenVPNConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenVPNConf.swift; sourceTree = "<group>"; };
 		8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofsViewModel.swift; sourceTree = "<group>"; };
 		8277F1CE2211A602007C6F15 /* GeoLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLookup.swift; sourceTree = "<group>"; };
+		827855B82472B27F00B3B6BD /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardRegenerationRateCell.swift; sourceTree = "<group>"; };
 		828772F6221C008100D5E330 /* ServerConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationCell.swift; sourceTree = "<group>"; };
 		828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersConfigurationTableViewController.swift; sourceTree = "<group>"; };
@@ -854,6 +856,7 @@
 				820EA86723223F7900E16B2D /* InterfaceResult.swift */,
 				820EA86D232264EC00E16B2D /* SuccessResult.swift */,
 				8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */,
+				827855B82472B27F00B3B6BD /* Account.swift */,
 			);
 			path = ApiResults;
 			sourceTree = "<group>";
@@ -2078,6 +2081,7 @@
 				8292E1A92174C11600123538 /* Interface.swift in Sources */,
 				82F638CC217DC25600410318 /* CIDRAddress.swift in Sources */,
 				9C454EB01E081DF700BD2AFA /* CircleProgressLayer.swift in Sources */,
+				827855B92472B27F00B3B6BD /* Account.swift in Sources */,
 				821429B722FC2BE90056B8FF /* Result.swift in Sources */,
 				82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */,
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
