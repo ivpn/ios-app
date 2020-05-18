@@ -598,6 +598,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="selectPlanView" destination="WSh-pq-wUH" id="sou-WB-jAQ"/>
+                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectStandardPlan" id="kox-UH-w9o"/>
+                        <segue destination="GbE-hF-jVK" kind="show" identifier="selectProPlan" id="IKn-po-jel"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQ2-NM-xcV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1002,6 +1004,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="IKn-po-jel"/>
         <segue reference="rrg-Fe-V0v"/>
     </inferredMetricsTieBreakers>
     <resources>
