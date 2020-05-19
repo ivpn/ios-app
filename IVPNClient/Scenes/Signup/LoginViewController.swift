@@ -35,15 +35,28 @@ class LoginViewController: UIViewController {
     
     private var loginProcessStarted = false
     private let hud = JGProgressHUD(style: .dark)
+    private var actionType: ActionType = .login
     
     // MARK: - @IBActions -
     
     @IBAction func loginToAccount(_ sender: AnyObject) {
+        guard UserDefaults.shared.hasUserConsent else {
+            actionType = .login
+            present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
+            return
+        }
+        
         view.endEditing(true)
         startLoginProcess()
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
+        guard UserDefaults.shared.hasUserConsent else {
+            actionType = .signup
+            present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
+            return
+        }
+        
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Creating new account..."
         hud.show(in: (navigationController?.view)!)
@@ -99,6 +112,7 @@ class LoginViewController: UIViewController {
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(termsOfServiceAgreed), name: Notification.Name.TermsOfServiceAgreed, object: nil)
     }
     
     func removeObservers() {
@@ -118,8 +132,12 @@ class LoginViewController: UIViewController {
     }
     
     @objc func termsOfServiceAgreed() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
-        let _ = evaluateIsServiceActive()
+        switch actionType {
+        case .login:
+            loginToAccount(self)
+        case .signup:
+            createAccount(self)
+        }
     }
     
     // MARK: - Methods -
@@ -286,6 +304,15 @@ extension LoginViewController: ScannerViewControllerDelegate {
     func qrCodeFound(code: String) {
         userName.text = code
         startLoginProcess()
+    }
+    
+}
+
+extension LoginViewController {
+    
+    enum ActionType {
+        case login
+        case signup
     }
     
 }
