@@ -22,13 +22,13 @@ class MainScreenTests: XCTestCase {
         XCTAssertTrue(app.isDisplayingMainScreen)
         
         app.buttons["Tap to connect"].tap()
-        XCTAssertTrue(app.isDisplayingInitScreen)
+        XCTAssertTrue(app.isDisplayingLoginScreen)
         
         app.buttons["Create Account"].tap()
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
         
         app.buttons["Decline"].tap()
-        XCTAssertTrue(app.isDisplayingInitScreen)
+        XCTAssertTrue(app.isDisplayingLoginScreen)
         
         app.buttons["Log In"].tap()
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
@@ -63,7 +63,7 @@ class MainScreenTests: XCTestCase {
         
         app.buttons["Tap to connect"].tap()
         XCTAssertFalse(app.isDisplayingTermsOfServiceScreen)
-        XCTAssertFalse(app.isDisplayingInitScreen)
+        XCTAssertFalse(app.isDisplayingLoginScreen)
         XCTAssertFalse(app.isDisplayingSubscriptionScreen)
         XCTAssertTrue(app.isDisplayingMainScreen)
     }

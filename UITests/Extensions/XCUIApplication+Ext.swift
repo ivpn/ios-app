@@ -10,10 +10,6 @@ import XCTest
 
 extension XCUIApplication {
     
-    var isDisplayingInitScreen: Bool {
-        return otherElements["initScreen"].exists
-    }
-    
     var isDisplayingTermsOfServiceScreen: Bool {
         return otherElements["termsOfServiceScreen"].exists
     }

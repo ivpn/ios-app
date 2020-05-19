@@ -101,6 +101,7 @@ class PaymentViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "subscriptionScreen"
         initNavigation()
         setupView()
     }
