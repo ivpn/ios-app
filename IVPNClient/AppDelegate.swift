@@ -76,6 +76,7 @@ class AppDelegate: UIResponder {
         
         if ProcessInfo.processInfo.arguments.contains("-authenticated") {
             KeyChain.sessionToken = "token"
+            KeyChain.username = "ivpnXXXXXXXX"
         }
         
         if ProcessInfo.processInfo.arguments.contains("-activeService") {

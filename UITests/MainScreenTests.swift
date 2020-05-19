@@ -48,8 +48,6 @@ class MainScreenTests: XCTestCase {
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
         
         app.buttons["Agree"].tap()
-        XCTAssertTrue(app.isDisplayingSubscriptionScreen)
-        
         app.buttons["Close"].tap()
         XCTAssertTrue(app.isDisplayingMainScreen)
     }
