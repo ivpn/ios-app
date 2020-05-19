@@ -650,8 +650,8 @@ class MainViewController: UIViewController {
         
         let status = Application.shared.connectionManager.status
         if status != .connected && status != .connecting {
-            self.lastStatusUpdateDate = Date()
-            self.sessionManager.getSessionStatus()
+            lastStatusUpdateDate = Date()
+            sessionManager.getSessionStatus()
         }
     }
     
