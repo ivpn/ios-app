@@ -46,10 +46,6 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertEqual(model.getSubscriptionText(), "\(model.currentPlan ?? ""), Active until \(model.activeUntilString())")
     }
     
-    func testIsAppStoreSubscription() {
-        XCTAssertFalse(model.isAppStoreSubscription())
-    }
-    
     func testIsValid() {
         XCTAssertTrue(ServiceStatus.isValid(username: "ivpnXXXXXXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: "IVPNXXXXXXXX"))
