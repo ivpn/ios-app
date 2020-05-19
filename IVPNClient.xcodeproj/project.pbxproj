@@ -252,9 +252,7 @@
 		9C048AA71DE71AD3001CB489 /* tos.html in Resources */ = {isa = PBXBuildFile; fileRef = 9C048AA61DE71AD3001CB489 /* tos.html */; };
 		9C2833741D9D3EB60024C553 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C2833731D9D3EB60024C553 /* Initial.storyboard */; };
 		9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833751D9D3F060024C553 /* LoginViewController.swift */; };
-		9C28337C1D9D3F060024C553 /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833761D9D3F060024C553 /* InitViewController.swift */; };
 		9C28337E1D9D3F060024C553 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
-		9C28337F1D9D3F060024C553 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833791D9D3F060024C553 /* SignUpController.swift */; };
 		9C2833821D9D3F2D0024C553 /* PromotionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833811D9D3F2D0024C553 /* PromotionsDataSource.swift */; };
 		9C28338A1D9D41A60024C553 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833891D9D41A60024C553 /* ApiService.swift */; };
 		9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3031251DB3B6E700C38B0C /* ServersUpdateResult.swift */; };
@@ -565,9 +563,7 @@
 		9C048AA61DE71AD3001CB489 /* tos.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = tos.html; sourceTree = "<group>"; };
 		9C2833731D9D3EB60024C553 /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		9C2833751D9D3F060024C553 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		9C2833761D9D3F060024C553 /* InitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
 		9C2833781D9D3F060024C553 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		9C2833791D9D3F060024C553 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		9C2833811D9D3F2D0024C553 /* PromotionsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromotionsDataSource.swift; sourceTree = "<group>"; };
 		9C2833891D9D41A60024C553 /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ApiService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9C3031251DB3B6E700C38B0C /* ServersUpdateResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersUpdateResult.swift; sourceTree = "<group>"; };
@@ -1167,8 +1163,6 @@
 				82DEF0232447281900CCB5CD /* SelectPlan */,
 				82DEF0242447282E00CCB5CD /* Payment */,
 				9C2833751D9D3F060024C553 /* LoginViewController.swift */,
-				9C2833761D9D3F060024C553 /* InitViewController.swift */,
-				9C2833791D9D3F060024C553 /* SignUpController.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -2044,12 +2038,10 @@
 				82D598C821A6ADF1000FABDE /* NetworkType.swift in Sources */,
 				9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */,
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
-				9C28337F1D9D3F060024C553 /* SignUpController.swift in Sources */,
 				82DAB37B2457013900302F4C /* Service.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */,
-				9C28337C1D9D3F060024C553 /* InitViewController.swift in Sources */,
 				82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */,
 				9C28338A1D9D41A60024C553 /* ApiService.swift in Sources */,
 				9C454EB91E0869B400BD2AFA /* WaveLayer.swift in Sources */,
@@ -2293,7 +2285,7 @@
 				INFOPLIST_FILE = "today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.today-extension";
@@ -2322,7 +2314,7 @@
 				INFOPLIST_FILE = "today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.today-extension";
 				PRODUCT_NAME = IVPN;
@@ -2350,7 +2342,7 @@
 				INFOPLIST_FILE = "today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.today-extension";
 				PRODUCT_NAME = IVPN;
@@ -2387,7 +2379,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
@@ -2425,7 +2417,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2584,7 +2576,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -2657,7 +2649,7 @@
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.openvpn-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2693,7 +2685,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
@@ -2758,7 +2750,7 @@
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.openvpn-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2799,7 +2791,7 @@
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.openvpn-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2944,7 +2936,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -2979,7 +2971,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(SRCROOT)/Carthage/Build/iOS";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.19.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",

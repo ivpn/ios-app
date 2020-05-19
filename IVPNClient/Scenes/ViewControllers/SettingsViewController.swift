@@ -460,7 +460,8 @@ extension SettingsViewController {
         if indexPath.section == 4 && indexPath.row == 1 && !Application.shared.authentication.isLoggedIn { return 0 }
         if indexPath.section == 4 && indexPath.row == 1 { return 60 }
         if indexPath.section == 4 && indexPath.row == 2 && !Application.shared.showSubscriptionAction { return 0 }
-        if indexPath.section == 4 && indexPath.row == 3 && !Application.shared.showSubscriptionAction { return 0 }
+        // if indexPath.section == 4 && indexPath.row == 3 && !Application.shared.showSubscriptionAction { return 0 }
+        if indexPath.section == 4 && indexPath.row == 3 { return 0 }
         
         return UITableView.automaticDimension
     }

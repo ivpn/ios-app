@@ -8,13 +8,14 @@ struct Config {
     static let appGroup = "group.net.ivpn.clients.ios"
     
     static let apiServersFile = "/v4/servers.json"
-    static let apiValidateAccount = "/subscriptions/validate"
-    static let apiSubscription = "/subscriptions/ios"
     static let apiGeoLookup = "/v4/geo-lookup"
     static let apiSessionNew = "/v4/session/new"
     static let apiSessionStatus = "/v4/session/status"
     static let apiSessionDelete = "/v4/session/delete"
     static let apiSessionWGKeySet = "/v4/session/wg/set"
+    static let apiAccountNew = "/v4/account/new"
+    static let apiPaymentInitial = "/v4/account/payment/ios/initial"
+    static let apiPaymentAdd = "/v4/account/payment/ios/add"
     
     static let urlTypeLogin = "login"
     static let urlTypeConnect = "connect"

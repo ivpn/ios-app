@@ -48,20 +48,19 @@ class LoginViewController: UIViewController {
         hud.detailTextLabel.text = "Creating new account..."
         hud.show(in: (navigationController?.view)!)
         
-        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
-        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
+        let request = ApiRequestDI(method: .post, endpoint: Config.apiAccountNew, params: [URLQueryItem(name: "product_name", value: "IVPN Standard")])
+        
+        ApiService.shared.request(request) { [weak self] (result: Result<Account>) in
             guard let self = self else { return }
             
             self.hud.dismiss()
             
             switch result {
-            case .success:
-                // TODO: Set account ID
-                KeyChain.tempUsername = "ivpnXXXXXXXX"
+            case .success(let account):
+                KeyChain.tempUsername = account.accountId
                 self.present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
             case .failure:
-                // TODO: Implement error handling
-                break
+                self.showErrorAlert(title: "Error", message: "There was a problem with creating a new account.")
             }
         }
     }

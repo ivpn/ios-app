@@ -141,6 +141,10 @@ class SelectPlanViewController: UITableViewController {
     }
     
     private func setupView() {
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = true
+        }
+        
         tableView.separatorStyle = .none
         view.addSubview(spinner)
         view.addSubview(retryButton)

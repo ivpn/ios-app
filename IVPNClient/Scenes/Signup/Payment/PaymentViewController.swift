@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyStoreKit
 import Bamboo
+import JGProgressHUD
 
 class PaymentViewController: UITableViewController {
     
@@ -78,6 +79,14 @@ class PaymentViewController: UITableViewController {
         return true
     }
     
+    private let hud = JGProgressHUD(style: .dark)
+    
+    private lazy var sessionManager: SessionManager = {
+        let sessionManager = SessionManager()
+        sessionManager.delegate = self
+        return sessionManager
+    }()
+    
     // MARK: - @IBActions -
     
     @IBAction func goBack() {
@@ -122,6 +131,10 @@ class PaymentViewController: UITableViewController {
     }
     
     private func setupView() {
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = true
+        }
+        
         view.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
         payButton?.set(title: "Pay", subtitle: "")
         
@@ -157,14 +170,16 @@ class PaymentViewController: UITableViewController {
     private func purchaseProduct(identifier: String) {
         guard deviceCanMakePurchases else { return }
         
-        ProgressIndicator.shared.showIn(view: view)
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Processing payment..."
+        hud.show(in: (navigationController?.view)!)
         
         IAPManager.shared.purchaseProduct(identifier: identifier) { [weak self] purchase, error in
             guard let self = self else { return }
             
             if let error = error {
                 self.showErrorAlert(title: "Error", message: error)
-                ProgressIndicator.shared.hide()
+                self.hud.dismiss()
                 return
             }
             
@@ -178,7 +193,7 @@ class PaymentViewController: UITableViewController {
         IAPManager.shared.completePurchase(purchase: purchase) { [weak self] serviceStatus, error in
             guard let self = self else { return }
             
-            ProgressIndicator.shared.hide()
+            self.hud.dismiss()
             
             if let error = error {
                 self.showErrorAlert(title: "Error", message: error.message) { _ in
@@ -190,7 +205,18 @@ class PaymentViewController: UITableViewController {
             }
             
             if let serviceStatus = serviceStatus {
-                self.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
+                self.showSubscriptionActivatedAlert(serviceStatus: serviceStatus) {
+                    if KeyChain.sessionToken == nil {
+                        KeyChain.username = KeyChain.tempUsername
+                        KeyChain.tempUsername = nil
+                        self.sessionManager.createSession()
+                        return
+                    }
+                    
+                    self.navigationController?.dismiss(animated: true) {
+                        NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
+                    }
+                }
             }
         }
     }
@@ -243,6 +269,38 @@ extension PaymentViewController {
         guard indexPath.row > 0 else { return }
         service = service.collection[indexPath.row - 1]
         tableView.reloadData()
+    }
+    
+}
+
+// MARK: - SessionManagerDelegate -
+
+extension PaymentViewController {
+    
+    override func createSessionStart() {
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Creating new session..."
+        hud.show(in: (navigationController?.view)!)
+    }
+    
+    override func createSessionSuccess() {
+        hud.dismiss()
+        
+        navigationController?.dismiss(animated: true) {
+            NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
+        }
+    }
+    
+    override func createSessionFailure(error: Any?) {
+        var message = "There was an error creating a new session"
+        
+        if let error = error as? ErrorResultSessionNew {
+            message = error.message
+        }
+        
+        hud.dismiss()
+        Application.shared.authentication.removeStoredCredentials()
+        showErrorAlert(title: "Error", message: message)
     }
     
 }
