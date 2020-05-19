@@ -4,23 +4,23 @@ PODS:
   - FloatingPanel (1.7.2)
   - JGProgressHUD (2.0.3)
   - KeychainAccess (3.2.0)
-  - OpenSSL-Apple (1.1.0l.4)
+  - OpenSSL-Apple (1.1.1g.6)
   - ReachabilitySwift (5.0.0)
   - SDCAlertView (11.0)
   - Sentry (4.3.4):
     - Sentry/Core (= 4.3.4)
   - Sentry/Core (4.3.4)
-  - SwiftyBeaver (1.8.3)
+  - SwiftyBeaver (1.9.1)
   - SwiftyStoreKit (0.15.0)
-  - TunnelKit (2.0.5):
-    - TunnelKit/Protocols/OpenVPN (= 2.0.5)
-  - TunnelKit/AppExtension (2.0.5):
+  - TunnelKit (2.2.5):
+    - TunnelKit/Protocols/OpenVPN (= 2.2.5)
+  - TunnelKit/AppExtension (2.2.5):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (2.0.5):
+  - TunnelKit/Core (2.2.5):
     - SwiftyBeaver
-  - TunnelKit/Protocols/OpenVPN (2.0.5):
-    - OpenSSL-Apple (~> 1.1.0j.4)
+  - TunnelKit/Protocols/OpenVPN (2.2.5):
+    - OpenSSL-Apple (~> 1.1.1g.6)
     - TunnelKit/AppExtension
     - TunnelKit/Core
 
@@ -34,7 +34,7 @@ DEPENDENCIES:
   - SDCAlertView (~> 11.0)
   - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `4.3.4`)
   - SwiftyStoreKit (~> 0.15.0)
-  - TunnelKit (~> 2.0.5)
+  - TunnelKit (~> 2.2.5)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -42,14 +42,14 @@ SPEC REPOS:
     - Bamboo
     - JGProgressHUD
     - KeychainAccess
-    - OpenSSL-Apple
-    - SwiftyBeaver
     - SwiftyStoreKit
-    - TunnelKit
   trunk:
     - FloatingPanel
+    - OpenSSL-Apple
     - ReachabilitySwift
     - SDCAlertView
+    - SwiftyBeaver
+    - TunnelKit
 
 EXTERNAL SOURCES:
   Sentry:
@@ -67,14 +67,14 @@ SPEC CHECKSUMS:
   FloatingPanel: b275a35d0a09be4bd37025e710a6a1d063bfc161
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   KeychainAccess: 3b1bf8a77eb4c6ea1ce9404c292e48f948954c6b
-  OpenSSL-Apple: f3d1668588ea8f06b076dcfa6177cd90452e3800
+  OpenSSL-Apple: c9c1b9c5b2b1fc4e1758fc5f0836b58ae7fd8183
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDCAlertView: 89514fa266623b9da9815f2248997b6772c5057d
   Sentry: 26f0e6492b103e87434d1a5eea2d241a36f2c2a2
-  SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
+  SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
-  TunnelKit: f33216415cd9d5e37b6acf02edb0c79350598b36
+  TunnelKit: 17c6af76028b29cc6ddc936160986a4d12e09266
 
-PODFILE CHECKSUM: ef00a38ee3747219fe6f20ac8c0bb1f10e7de83c
+PODFILE CHECKSUM: 957c4a1231944678acd64e7e76b0532c8c36ed70
 
 COCOAPODS: 1.8.4

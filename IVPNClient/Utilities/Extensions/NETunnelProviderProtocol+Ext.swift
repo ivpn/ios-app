@@ -79,7 +79,7 @@ extension NETunnelProviderProtocol {
     // MARK: WireGuard
     
     static func makeWireGuardProtocol(settings: ConnectionSettings) -> NETunnelProviderProtocol {
-        guard let host = Application.shared.settings.selectedServer.hosts.first else {
+        guard let host = Application.shared.settings.selectedServer.hosts.randomElement() else {
             return NETunnelProviderProtocol()
         }
         

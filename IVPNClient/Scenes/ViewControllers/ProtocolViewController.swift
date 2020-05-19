@@ -144,8 +144,6 @@ extension ProtocolViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-        case 0:
-            return "WARNING: The WireGuard protocol is currently under development and should be considered as experimental. Review the Wireguard project for more information. We do not recommend Wireguard except for testing or in situations where security is not critical."
         case 1:
             if Application.shared.settings.connectionProtocol.tunnelType() == .wireguard {
                 return "Keys regeneration will start automatically in the defined interval. It will also change the internal IP address."
