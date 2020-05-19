@@ -105,6 +105,10 @@ class SessionManager {
                     return
                 }
                 
+                if error?.code == 702 {
+                    Application.shared.serviceStatus.isActive = false
+                }
+                
                 self.delegate?.sessionStatusFailure()
             }
         }
