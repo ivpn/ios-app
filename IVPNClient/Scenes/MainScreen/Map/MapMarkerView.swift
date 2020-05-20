@@ -83,6 +83,32 @@ class MapMarkerView: UIView {
         updateCircle(circle3, color: color)
     }
     
+    func show(animated: Bool = false) {
+        guard animated else {
+            alpha = 1
+            transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
+            return
+        }
+        
+        UIView.animate(withDuration: 1) {
+            self.alpha = 1
+            self.transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
+        }
+    }
+    
+    func hide(animated: Bool = false) {
+        guard animated else {
+            alpha = 0
+            transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+            return
+        }
+        
+        UIView.animate(withDuration: 1) {
+            self.alpha = 0
+            self.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+        }
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
