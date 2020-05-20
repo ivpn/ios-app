@@ -75,12 +75,16 @@ class IAPManager {
             if results.restoreFailedPurchases.count > 0 {
                 let error = ErrorResult(status: 500, message: "Restore failed: \(results.restoreFailedPurchases)")
                 completion(nil, error)
+                log(error: "Restore failed: \(results.restoreFailedPurchases)")
             } else if results.restoredPurchases.count > 0 {
-                print("Restore Success: \(results.restoredPurchases)")
-                // TODO: Process restored purchases
+                self.completePurchases(products: results.restoredPurchases, endpoint: self.apiEndpoint) { serviceStatus, error in
+                    completion(serviceStatus, error)
+                }
+                log(info: "Purchases are restored.")
             } else {
                 let error = ErrorResult(status: 500, message: "There are no purchases to restore.")
                 completion(nil, error)
+                log(error: "There are no purchases to restore.")
             }
         }
     }
@@ -116,6 +120,31 @@ class IAPManager {
     func completePurchases(products: [Purchase], endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         for product in products {
             log(info: "Found incomplete purchase. Completing purchase...")
+            
+            if product.transaction.transactionState == .purchased {
+                let params = finishPurchaseParams(product: product, endpoint: endpoint)
+                let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
+                
+                ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
+                    switch result {
+                    case .success(let sessionStatus):
+                        SwiftyStoreKit.finishTransaction(product.transaction)
+                        Application.shared.serviceStatus = sessionStatus.serviceStatus
+                        completion(sessionStatus.serviceStatus, nil)
+                        log(info: "Purchase was successfully finished.")
+                    case .failure(let error):
+                        let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
+                        completion(nil, error ?? defaultErrorResult)
+                        log(error: "There was an error with purchase completion: \(error?.message ?? "")")
+                    }
+                }
+            }
+        }
+    }
+    
+    func completeRestoredPurchases(products: [Purchase], endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        for product in products {
+            log(info: "Found restored purchase. Completing purchase...")
             
             if product.transaction.transactionState == .purchased {
                 let params = finishPurchaseParams(product: product, endpoint: endpoint)
