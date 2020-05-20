@@ -90,7 +90,7 @@ class MapMarkerView: UIView {
             return
         }
         
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.alpha = 1
             self.transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
         }
@@ -103,7 +103,7 @@ class MapMarkerView: UIView {
             return
         }
         
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.alpha = 0
             self.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
         }
