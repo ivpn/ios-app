@@ -57,25 +57,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        hud.detailTextLabel.text = "Creating new account..."
-        hud.show(in: (navigationController?.view)!)
-        
-        let request = ApiRequestDI(method: .post, endpoint: Config.apiAccountNew, params: [URLQueryItem(name: "product_name", value: "IVPN Standard")])
-        
-        ApiService.shared.request(request) { [weak self] (result: Result<Account>) in
-            guard let self = self else { return }
-            
-            self.hud.dismiss()
-            
-            switch result {
-            case .success(let account):
-                KeyChain.tempUsername = account.accountId
-                self.present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
-            case .failure:
-                self.showErrorAlert(title: "Error", message: "There was a problem with creating a new account.")
-            }
-        }
+        startSignupProcess()
     }
     
     @IBAction func openScanner(_ sender: AnyObject) {
@@ -158,6 +140,28 @@ class LoginViewController: UIViewController {
         KeyChain.username = username
         
         sessionManager.createSession(force: force)
+    }
+    
+    private func startSignupProcess() {
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Creating new account..."
+        hud.show(in: (navigationController?.view)!)
+        
+        let request = ApiRequestDI(method: .post, endpoint: Config.apiAccountNew, params: [URLQueryItem(name: "product_name", value: "IVPN Standard")])
+        
+        ApiService.shared.requestCustomError(request) { [weak self] (result: ResultCustomError<Account, ErrorResult>) in
+            guard let self = self else { return }
+            
+            self.hud.dismiss()
+            
+            switch result {
+            case .success(let account):
+                KeyChain.tempUsername = account.accountId
+                self.present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
+            case .failure(let error):
+                self.showErrorAlert(title: "Error", message: error?.message ?? "There was a problem with creating a new account.")
+            }
+        }
     }
     
     private func showUsernameError() {
