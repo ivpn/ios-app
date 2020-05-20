@@ -70,6 +70,21 @@ class IAPManager {
         }
     }
     
+    func restorePurchases(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                let error = ErrorResult(status: 500, message: "Restore failed: \(results.restoreFailedPurchases)")
+                completion(nil, error)
+            } else if results.restoredPurchases.count > 0 {
+                print("Restore Success: \(results.restoredPurchases)")
+                // TODO: Process restored purchases
+            } else {
+                let error = ErrorResult(status: 500, message: "There are no purchases to restore.")
+                completion(nil, error)
+            }
+        }
+    }
+    
     func completePurchase(purchase: PurchaseDetails, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         let endpoint = apiEndpoint
         let params = purchaseParams(purchase: purchase, endpoint: endpoint)
