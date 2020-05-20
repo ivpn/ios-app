@@ -132,12 +132,12 @@ class MainView: UIView {
             server = Application.shared.settings.selectedExitServer
         }
         
-        mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true)
+        mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false)
     }
     
     private func updateMapPositionToLocalCoordinates(animated: Bool = true) {
         if let localCoordinates = localCoordinates {
-            mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: animated)
+            mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: animated, isLocalPosition: true)
         }
     }
     

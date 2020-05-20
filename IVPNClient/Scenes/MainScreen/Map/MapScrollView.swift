@@ -58,10 +58,10 @@ class MapScrollView: UIScrollView {
     func updateMapPosition(animated: Bool = false) {
         guard let viewModel = viewModel else { return }
         
-        updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated)
+        updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated, isLocalPosition: true)
     }
     
-    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false) {
+    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool) {
         let halfWidth = Double(UIScreen.main.bounds.width / 2)
         let halfHeight = Double(UIScreen.main.bounds.height / 2)
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
@@ -70,7 +70,11 @@ class MapScrollView: UIScrollView {
         
         setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
         
-        markerLocalView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
+        if isLocalPosition {
+            markerLocalView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
+        } else {
+            markerVPNView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
+        }
     }
     
     // MARK: - Private methods -
