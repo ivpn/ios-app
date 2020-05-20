@@ -25,9 +25,13 @@ class MapScrollView: UIScrollView {
             
             if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
                 updateMapPosition(animated: oldValue != nil)
+                markerLocalView.show(animated: oldValue != nil)
             }
         }
     }
+    
+    private let markerLocalView = MapMarkerView()
+    private let markerVPNView = MapMarkerView()
     
     private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     
@@ -37,6 +41,7 @@ class MapScrollView: UIScrollView {
         setupConstraints()
         setupView()
         placeServerLocationMarkers()
+        placeMarkers()
     }
     
     // MARK: - Methods -
@@ -63,12 +68,14 @@ class MapScrollView: UIScrollView {
         let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
         
         setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
+        
+        markerLocalView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
     }
     
     // MARK: - Private methods -
     
     private func setupView() {
-        isUserInteractionEnabled = false
+        isUserInteractionEnabled = true
         backgroundColor = UIColor.init(named: Theme.ivpnGray19)
         mapImageView.backgroundColor = .clear
         mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray20)
@@ -78,6 +85,15 @@ class MapScrollView: UIScrollView {
         for server in Application.shared.serverList.servers {
             placeMarker(latitude: server.latitude, longitude: server.longitude, city: server.city)
         }
+    }
+    
+    private func placeMarkers() {
+        markerLocalView.displayMode = .unprotected
+        markerLocalView.hide()
+        markerVPNView.displayMode = .changing
+        markerVPNView.hide()
+        addSubview(markerLocalView)
+        addSubview(markerVPNView)
     }
     
     private func placeMarker(latitude: Double, longitude: Double, city: String) {

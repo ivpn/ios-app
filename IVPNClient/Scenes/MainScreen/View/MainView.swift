@@ -53,7 +53,7 @@ class MainView: UIView {
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
-        markerView.status = vpnStatus
+//        markerView.status = vpnStatus
         updateMapPosition(vpnStatus: vpnStatus)
     }
     
@@ -69,8 +69,8 @@ class MainView: UIView {
     // MARK: - Private methods -
     
     private func initMarker() {
-        markerContainerView.addSubview(markerView)
-        addSubview(markerContainerView)
+//        markerContainerView.addSubview(markerView)
+//        addSubview(markerContainerView)
     }
     
     private func initSettingsAction() {
@@ -98,11 +98,11 @@ class MainView: UIView {
     
     private func setupConstraints() {
         mapScrollView.setupConstraints()
-        markerContainerView.setupConstraints()
+//        markerContainerView.setupConstraints()
     }
     
     private func updateMarker() {
-        markerView.connectionInfoPopup.updateView()
+//        markerView.connectionInfoPopup.updateView()
     }
     
     private func updateMapPosition(animated: Bool = true) {

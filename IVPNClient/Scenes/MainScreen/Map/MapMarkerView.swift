@@ -122,7 +122,7 @@ class MapMarkerView: UIView {
     // MARK: - Private methods -
     
     private func setupConstraints() {
-        bb.center().size(width: 340, height: radius1)
+        bb.size(width: 340, height: radius1)
     }
     
     private func initCircle(_ circle: UIView, radius: CGFloat) {
