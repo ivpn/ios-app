@@ -18,17 +18,30 @@ class MapMarkerView: UIView {
         didSet {
             switch status {
             case .reasserting, .connecting, .disconnecting:
-                updateCircles(color: grayColor)
-                animatedCircleLayer.stopAnimations()
+                displayMode = .changing
             case .connected:
-                updateCircles(color: blueColor)
-                animatedCircleLayer.startAnimation()
+                displayMode = .protected
             default:
-                updateCircles(color: redColor)
-                animatedCircleLayer.stopAnimations()
+                displayMode = .unprotected
             }
             
             connectionInfoPopup.vpnStatusViewModel = VPNStatusViewModel(status: status)
+        }
+    }
+    
+    var displayMode: DisplayMode = .unprotected {
+        didSet {
+            switch displayMode {
+            case .unprotected:
+                updateCircles(color: redColor)
+                animatedCircleLayer.stopAnimations()
+            case .changing:
+                updateCircles(color: grayColor)
+                animatedCircleLayer.stopAnimations()
+            case .protected:
+                updateCircles(color: blueColor)
+                animatedCircleLayer.startAnimation()
+            }
         }
     }
     
@@ -130,6 +143,16 @@ class MapMarkerView: UIView {
     
     @objc func hidePopup() {
         connectionInfoPopup.hide()
+    }
+    
+}
+
+extension MapMarkerView {
+    
+    enum DisplayMode {
+        case unprotected
+        case changing
+        case protected
     }
     
 }
