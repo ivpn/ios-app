@@ -98,9 +98,7 @@ class MapScrollView: UIScrollView {
     }
     
     private func placeMarkers() {
-        markerLocalView.displayMode = .unprotected
         markerLocalView.hide()
-        markerVPNView.displayMode = .changing
         markerVPNView.hide()
         addSubview(markerLocalView)
         addSubview(markerVPNView)

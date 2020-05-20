@@ -63,7 +63,7 @@ class MapMarkerView: UIView {
     override func updateConstraints() {
         setupConstraints()
         initCircles()
-        updateCircles(color: grayColor)
+        updateCircles(color: redColor)
         initActionButton()
         initConnectionInfoPopup()
         addObservers()
