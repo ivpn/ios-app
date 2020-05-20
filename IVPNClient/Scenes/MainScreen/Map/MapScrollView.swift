@@ -40,6 +40,7 @@ class MapScrollView: UIScrollView {
     override func awakeFromNib() {
         setupConstraints()
         setupView()
+        initGestures()
         placeServerLocationMarkers()
         placeMarkers()
     }
@@ -79,6 +80,15 @@ class MapScrollView: UIScrollView {
         backgroundColor = UIColor.init(named: Theme.ivpnGray19)
         mapImageView.backgroundColor = .clear
         mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray20)
+    }
+    
+    private func initGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tap)
+    }
+    
+    @objc private func handleTap() {
+        NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
     private func placeServerLocationMarkers() {
