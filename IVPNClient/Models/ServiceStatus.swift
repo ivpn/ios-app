@@ -89,7 +89,7 @@ struct ServiceStatus: Codable {
     }
     
     static func isValid(username: String) -> Bool {
-        return username.hasPrefix("ivpn")
+        return username.hasPrefix("ivpn") || username.hasPrefix("i-")
     }
     
 }

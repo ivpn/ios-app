@@ -48,6 +48,7 @@ class ServiceStatusTests: XCTestCase {
     
     func testIsValid() {
         XCTAssertTrue(ServiceStatus.isValid(username: "ivpnXXXXXXXX"))
+        XCTAssertTrue(ServiceStatus.isValid(username: "i-XXXX-XXXX-XXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: "IVPNXXXXXXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: "XXXXXXXXXXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: ""))
