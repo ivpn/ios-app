@@ -174,6 +174,12 @@ class SettingsViewController: UITableViewController {
         }
     }
     
+    @IBAction func copyAccountID(_ sender: UIButton) {
+        guard let text = accountUsername.text else { return }
+        UIPasteboard.general.string = text
+        showFlashNotification(message: "Account ID copied to clipboard", presentInView: (navigationController?.view)!)
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {

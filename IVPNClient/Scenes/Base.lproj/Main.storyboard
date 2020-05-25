@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qNQ-1N-fBI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qNQ-1N-fBI">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -992,12 +992,26 @@
                                                     <color key="textColor" name="ivpnLabel5"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4l-ri-UUu">
+                                                    <rect key="frame" x="327" y="10" width="32" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="fnv-6Y-lvj"/>
+                                                        <constraint firstAttribute="height" constant="40" id="puH-E1-wjw"/>
+                                                    </constraints>
+                                                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                    <state key="normal" title="Button" image="icon-copy"/>
+                                                    <connections>
+                                                        <action selector="copyAccountID:" destination="5KC-W6-t9Q" eventType="touchUpInside" id="YFv-22-3hM"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="1Uv-5f-ne5" secondAttribute="bottom" constant="10.5" id="4VQ-Cr-dwM"/>
                                                 <constraint firstItem="Abp-lI-eUF" firstAttribute="leading" secondItem="OT9-nc-F2X" secondAttribute="leading" constant="16" id="558-ZZ-iIQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="1Uv-5f-ne5" secondAttribute="trailing" constant="16" id="K0R-wo-xCl"/>
+                                                <constraint firstAttribute="trailing" secondItem="D4l-ri-UUu" secondAttribute="trailing" constant="16" id="MHQ-Kh-tBV"/>
                                                 <constraint firstItem="1Uv-5f-ne5" firstAttribute="leading" secondItem="OT9-nc-F2X" secondAttribute="leading" constant="16" id="SxA-S2-pQo"/>
+                                                <constraint firstItem="D4l-ri-UUu" firstAttribute="centerY" secondItem="OT9-nc-F2X" secondAttribute="centerY" id="eRB-kC-dHs"/>
                                                 <constraint firstItem="Abp-lI-eUF" firstAttribute="top" secondItem="OT9-nc-F2X" secondAttribute="top" constant="10" id="edg-xP-ISF"/>
                                                 <constraint firstAttribute="trailing" secondItem="Abp-lI-eUF" secondAttribute="trailing" constant="16" id="tVj-4M-0Ta"/>
                                             </constraints>
@@ -1567,10 +1581,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
@@ -1583,7 +1597,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="324" height="21"/>
+                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1605,7 +1619,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.333332061767578" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
