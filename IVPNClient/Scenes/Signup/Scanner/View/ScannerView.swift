@@ -33,7 +33,7 @@ class ScannerView: UIView {
     }
     
     private func setupLabel() {
-        textLabel.textWithIcon(prefix: "Find your QR code under the User Profile menu", image: UIImage.init(named: "icon-user"), sufix: "on any other device with IVPN installed and scan it")
+        // textLabel.textWithIcon(prefix: "Find your QR code under the User Profile menu", image: UIImage.init(named: "icon-user"), sufix: "on any other device with IVPN installed and scan it")
     }
     
 }
