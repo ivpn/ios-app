@@ -49,11 +49,7 @@ class UpgradePlanViewController: UIViewController {
     }
     
     @IBAction func upgradePlan(_ sender: Any) {
-        navigationController?.dismiss(animated: true) {
-            if let topViewController = UIApplication.topViewController() {
-                topViewController.present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
-            }
-        }
+        openWebPage(UserDefaults.shared.upgradeToUrl)
     }
 
 }
