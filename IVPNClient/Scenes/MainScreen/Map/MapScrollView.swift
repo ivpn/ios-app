@@ -25,6 +25,7 @@ class MapScrollView: UIScrollView {
             
             if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
                 updateMapPosition(animated: oldValue != nil)
+                markerGatewayView.hide(animated: true)
                 markerLocalView.show(animated: oldValue != nil)
             }
         }
