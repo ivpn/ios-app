@@ -64,7 +64,7 @@ struct Config {
     static let wgInterfaceListenPort = 51820
     static let wgAPIComment = "IVPN Client for iOS"
     static let wgKeyExpirationDays = 30
-    static let wgKeyRegenerationRate = 7
+    static let wgKeyRegenerationRate = 1
     
     // MARK: ENV variables
     
