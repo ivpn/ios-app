@@ -116,6 +116,8 @@ class MainView: UIView {
     }
     
     private func updateMapPosition(vpnStatus: NEVPNStatus) {
+        mapScrollView.markerGatewayView.status = vpnStatus
+        
         if vpnStatus == .connecting || vpnStatus == .connected {
             updateMapPositionToGateway()
         }
@@ -134,7 +136,7 @@ class MainView: UIView {
         
         mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false)
         mapScrollView.markerLocalView.hide(animated: true)
-        DispatchQueue.delay(1) {
+        DispatchQueue.delay(0.25) {
             self.mapScrollView.markerGatewayView.show(animated: true)
         }
     }
@@ -143,7 +145,7 @@ class MainView: UIView {
         if let localCoordinates = localCoordinates {
             mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: animated, isLocalPosition: true)
             mapScrollView.markerGatewayView.hide(animated: true)
-            DispatchQueue.delay(0.5) {
+            DispatchQueue.delay(0.25) {
                 self.mapScrollView.markerLocalView.show(animated: true)
             }
         }
