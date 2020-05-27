@@ -30,8 +30,8 @@ class MapScrollView: UIScrollView {
         }
     }
     
-    private let markerLocalView = MapMarkerView()
-    private let markerVPNView = MapMarkerView()
+    let markerLocalView = MapMarkerView()
+    let markerGatewayView = MapMarkerView()
     
     private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     
@@ -73,7 +73,7 @@ class MapScrollView: UIScrollView {
         if isLocalPosition {
             markerLocalView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
         } else {
-            markerVPNView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
+            markerGatewayView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
         }
     }
     
@@ -103,9 +103,9 @@ class MapScrollView: UIScrollView {
     
     private func placeMarkers() {
         markerLocalView.hide()
-        markerVPNView.hide()
+        markerGatewayView.hide()
         addSubview(markerLocalView)
-        addSubview(markerVPNView)
+        addSubview(markerGatewayView)
     }
     
     private func placeMarker(latitude: Double, longitude: Double, city: String) {
