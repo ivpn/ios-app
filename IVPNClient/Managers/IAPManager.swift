@@ -121,23 +121,30 @@ class IAPManager {
         for product in products {
             log(info: "Found incomplete purchase. Completing purchase...")
             
-            if product.transaction.transactionState == .purchased {
-                let params = finishPurchaseParams(product: product, endpoint: endpoint)
-                let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
-                
-                ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
-                    switch result {
-                    case .success(let sessionStatus):
-                        SwiftyStoreKit.finishTransaction(product.transaction)
-                        Application.shared.serviceStatus = sessionStatus.serviceStatus
-                        completion(sessionStatus.serviceStatus, nil)
-                        log(info: "Purchase was successfully finished.")
-                    case .failure(let error):
-                        let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
-                        completion(nil, error ?? defaultErrorResult)
-                        log(error: "There was an error with purchase completion: \(error?.message ?? "")")
+            switch product.transaction.transactionState {
+            case .purchased, .restored:
+                if product.needsFinishTransaction {
+                    let params = finishPurchaseParams(product: product, endpoint: endpoint)
+                    let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
+                    
+                    ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
+                        switch result {
+                        case .success(let sessionStatus):
+                            SwiftyStoreKit.finishTransaction(product.transaction)
+                            Application.shared.serviceStatus = sessionStatus.serviceStatus
+                            completion(sessionStatus.serviceStatus, nil)
+                            log(info: "Purchase was successfully finished.")
+                        case .failure(let error):
+                            let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
+                            completion(nil, error ?? defaultErrorResult)
+                            log(error: "There was an error with purchase completion: \(error?.message ?? "")")
+                        }
                     }
                 }
+            case .failed, .purchasing, .deferred:
+                break
+            @unknown default:
+                break
             }
         }
     }
