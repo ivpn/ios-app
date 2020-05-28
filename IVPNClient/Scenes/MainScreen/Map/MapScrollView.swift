@@ -72,25 +72,7 @@ class MapScrollView: UIScrollView {
         
         setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
         
-        if isLocalPosition {
-            markerLocalView.snp.remakeConstraints { make in
-                make.left.equalTo(point.0 - 170)
-                make.top.equalTo(point.1 - 80)
-            }
-            
-            UIView.animate(withDuration: 0.15) {
-                self.layoutIfNeeded()
-            }
-        } else {
-            markerGatewayView.snp.remakeConstraints { make in
-                make.left.equalTo(point.0 - 170)
-                make.top.equalTo(point.1 - 80)
-            }
-            
-            UIView.animate(withDuration: 0.15) {
-                self.layoutIfNeeded()
-            }
-        }
+        updateMarkerPosition(x: point.0 - 170, y: point.1 - 80, isLocalPosition: isLocalPosition)
     }
     
     // MARK: - Private methods -
@@ -122,6 +104,28 @@ class MapScrollView: UIScrollView {
         markerGatewayView.hide()
         addSubview(markerLocalView)
         addSubview(markerGatewayView)
+    }
+    
+    private func updateMarkerPosition(x: Double, y: Double, isLocalPosition: Bool) {
+        if isLocalPosition {
+            markerLocalView.snp.remakeConstraints { make in
+                make.left.equalTo(x)
+                make.top.equalTo(y)
+            }
+            
+            UIView.animate(withDuration: 0.15) {
+                self.layoutIfNeeded()
+            }
+        } else {
+            markerGatewayView.snp.remakeConstraints { make in
+                make.left.equalTo(x)
+                make.top.equalTo(y)
+            }
+            
+            UIView.animate(withDuration: 0.15) {
+                self.layoutIfNeeded()
+            }
+        }
     }
     
     private func placeMarker(latitude: Double, longitude: Double, city: String) {
