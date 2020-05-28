@@ -77,10 +77,18 @@ class MapScrollView: UIScrollView {
                 make.left.equalTo(point.0 - 170)
                 make.top.equalTo(point.1 - 80)
             }
+            
+            UIView.animate(withDuration: 0.15) {
+                self.layoutIfNeeded()
+            }
         } else {
             markerGatewayView.snp.remakeConstraints { make in
                 make.left.equalTo(point.0 - 170)
                 make.top.equalTo(point.1 - 80)
+            }
+            
+            UIView.animate(withDuration: 0.15) {
+                self.layoutIfNeeded()
             }
         }
     }
