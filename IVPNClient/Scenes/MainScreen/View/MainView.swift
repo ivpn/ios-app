@@ -30,7 +30,6 @@ class MainView: UIView {
     
     let markerView = MapMarkerView()
     var infoAlertViewModel = InfoAlertViewModel()
-    private let markerContainerView = MapMarkerContainerView()
     private var localCoordinates: (Double, Double)?
     
     // MARK: - View lifecycle -
