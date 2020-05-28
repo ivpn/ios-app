@@ -64,6 +64,25 @@ class LoginViewController: UIViewController {
         present(NavigationManager.getScannerViewController(delegate: self), animated: true)
     }
     
+    @IBAction func restorePurchases(_ sender: AnyObject) {
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Restoring purchases..."
+        hud.show(in: (navigationController?.view)!)
+        
+        IAPManager.shared.restorePurchases { account, error in
+            self.hud.dismiss()
+            
+            if let error = error {
+                self.showErrorAlert(title: "Error", message: error.message)
+                return
+            }
+            
+            if account != nil {
+                self.sessionManager.createSession()
+            }
+        }
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
@@ -192,11 +211,13 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     
     override func createSessionStart() {
-        ProgressIndicator.shared.showIn(view: view)
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Creating new session..."
+        hud.show(in: (navigationController?.view)!)
     }
     
     override func createSessionSuccess() {
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         loginProcessStarted = false
         
         navigationController?.dismiss(animated: true, completion: {
@@ -205,7 +226,7 @@ extension LoginViewController {
     }
     
     override func createSessionServiceNotActive() {
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         loginProcessStarted = false
         
         let viewController = NavigationManager.getSubscriptionViewController()
@@ -214,7 +235,7 @@ extension LoginViewController {
     }
     
     override func createSessionTooManySessions(error: Any?) {
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
         
@@ -236,7 +257,7 @@ extension LoginViewController {
     }
     
     override func createSessionAuthenticationError() {
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
         showErrorAlert(title: "Error", message: "Account ID is incorrect")
@@ -249,7 +270,7 @@ extension LoginViewController {
             message = error.message
         }
         
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
         showErrorAlert(title: "Error", message: message)
