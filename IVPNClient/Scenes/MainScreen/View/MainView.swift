@@ -125,6 +125,10 @@ class MainView: UIView {
         if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically {
             updateMapPositionToLocalCoordinates()
         }
+        
+        if vpnStatus == .disconnecting && Application.shared.connectionManager.reconnectAutomatically {
+            mapScrollView.markerGatewayView.hide(animated: true)
+        }
     }
     
     private func updateMapPositionToGateway(animated: Bool = true) {
