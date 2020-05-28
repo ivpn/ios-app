@@ -21,7 +21,9 @@ class MapScrollView: UIScrollView {
     var viewModel: ProofsViewModel! {
         didSet {
             if oldValue == nil {
-                UIView.animate(withDuration: 0.5, animations: { self.alpha = 1 })
+                UIView.animate(withDuration: 0.5) {
+                    self.alpha = 1
+                }
             }
             
             if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
