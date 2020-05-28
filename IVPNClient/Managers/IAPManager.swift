@@ -78,15 +78,15 @@ class IAPManager {
         }
     }
     
-    func restorePurchases(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func restorePurchases(completion: @escaping (Account?, ErrorResult?) -> Void) {
         SwiftyStoreKit.restorePurchases(atomically: false) { results in
             if results.restoreFailedPurchases.count > 0 {
                 let error = ErrorResult(status: 500, message: "Restore failed: \(results.restoreFailedPurchases)")
                 completion(nil, error)
                 log(error: "Restore failed: \(results.restoreFailedPurchases)")
             } else if results.restoredPurchases.count > 0 {
-                self.completeRestoredPurchase(purchase: results.restoredPurchases.first!) { serviceStatus, error in
-                    completion(serviceStatus, error)
+                self.completeRestoredPurchase(purchase: results.restoredPurchases.first!) { account, error in
+                    completion(account, error)
                     log(info: "Purchases are restored.")
                 }
             } else {
@@ -151,18 +151,18 @@ class IAPManager {
         }
     }
     
-    func completeRestoredPurchase(purchase: Purchase, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func completeRestoredPurchase(purchase: Purchase, completion: @escaping (Account?, ErrorResult?) -> Void) {
         let params = restorePurchaseParams()
         let request = ApiRequestDI(method: .post, endpoint: Config.apiPaymentRestore, params: params)
         
-        ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
+        ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Account, ErrorResult>) in
             switch result {
-            case .success(let sessionStatus):
+            case .success(let account):
                 if purchase.needsFinishTransaction {
                     SwiftyStoreKit.finishTransaction(purchase.transaction)
                 }
-                Application.shared.serviceStatus = sessionStatus.serviceStatus
-                completion(sessionStatus.serviceStatus, nil)
+                KeyChain.username = account.accountId
+                completion(account, nil)
                 log(info: "Purchase was successfully finished.")
             case .failure(let error):
                 let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was restored but service cannot be activated. Restart application to retry.")
