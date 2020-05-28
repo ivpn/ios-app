@@ -8,6 +8,7 @@
 
 import UIKit
 import Bamboo
+import SnapKit
 
 class MapScrollView: UIScrollView {
     
@@ -72,9 +73,15 @@ class MapScrollView: UIScrollView {
         setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
         
         if isLocalPosition {
-            markerLocalView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
+            markerLocalView.snp.remakeConstraints { make in
+                make.left.equalTo(point.0 - 170)
+                make.top.equalTo(point.1 - 80)
+            }
         } else {
-            markerGatewayView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
+            markerGatewayView.snp.remakeConstraints { make in
+                make.left.equalTo(point.0 - 170)
+                make.top.equalTo(point.1 - 80)
+            }
         }
     }
     
