@@ -30,14 +30,17 @@ class ServerViewController: UITableViewController {
     }
     
     @IBAction func sortBy(_ sender: Any) {
-        let actions = ServersSort.allCases.map { $0.rawValue }
-        let selected = UserDefaults.shared.serversSort
+        let actionsRawValue = ServersSort.allCases.map { $0.rawValue }
+        let actions = actionsRawValue.map { $0.camelCaseToCapitalized() ?? "" }
+        let selected = UserDefaults.shared.serversSort.camelCaseToCapitalized() ?? ""
         
         showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Sort by", actions: actions, sourceView: tableView) { index in
             guard index > -1 else { return }
+            
             let sort = ServersSort.allCases[index]
+            
             UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
-            Application.shared.serverList.sortServers()
+            self.initCollection()
             self.tableView.reloadData()
         }
     }
@@ -102,6 +105,8 @@ class ServerViewController: UITableViewController {
     }
     
     private func initCollection() {
+        Application.shared.serverList.sortServers()
+        
         collection = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + Application.shared.serverList.servers
         
         if UserDefaults.shared.isMultiHop {
