@@ -111,6 +111,8 @@ class ServerViewController: UITableViewController {
         if isPresentedModally {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController(_:)))
         }
+        
+        searchBar.backgroundImage = UIImage()
     }
     
     private func initCollection() {
@@ -260,6 +262,7 @@ extension ServerViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        tableView.reloadData()
     }
     
 }
