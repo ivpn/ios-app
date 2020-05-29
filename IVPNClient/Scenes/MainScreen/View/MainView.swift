@@ -30,14 +30,12 @@ class MainView: UIView {
     
     let markerView = MapMarkerView()
     var infoAlertViewModel = InfoAlertViewModel()
-    private let markerContainerView = MapMarkerContainerView()
     private var localCoordinates: (Double, Double)?
     
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
         backgroundColor = UIColor.init(named: Theme.ivpnGray19)
-        initMarker()
         initSettingsAction()
         initInfoAlert()
         updateInfoAlert()
@@ -48,12 +46,10 @@ class MainView: UIView {
     func setupView(animated: Bool = true) {
         setupConstraints()
         updateInfoAlert()
-        updateMarker()
         updateMapPosition(animated: animated)
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
-//        markerView.status = vpnStatus
         updateMapPosition(vpnStatus: vpnStatus)
     }
     
@@ -67,11 +63,6 @@ class MainView: UIView {
     }
     
     // MARK: - Private methods -
-    
-    private func initMarker() {
-//        markerContainerView.addSubview(markerView)
-//        addSubview(markerContainerView)
-    }
     
     private func initSettingsAction() {
         let settingsButton = UIButton()
@@ -98,11 +89,6 @@ class MainView: UIView {
     
     private func setupConstraints() {
         mapScrollView.setupConstraints()
-//        markerContainerView.setupConstraints()
-    }
-    
-    private func updateMarker() {
-//        markerView.connectionInfoPopup.updateView()
     }
     
     private func updateMapPosition(animated: Bool = true) {
@@ -124,6 +110,10 @@ class MainView: UIView {
         
         if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically {
             updateMapPositionToLocalCoordinates()
+        }
+        
+        if vpnStatus == .disconnecting && Application.shared.connectionManager.reconnectAutomatically {
+            mapScrollView.markerGatewayView.hide(animated: true)
         }
     }
     

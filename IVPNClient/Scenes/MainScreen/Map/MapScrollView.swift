@@ -8,6 +8,7 @@
 
 import UIKit
 import Bamboo
+import SnapKit
 
 class MapScrollView: UIScrollView {
     
@@ -20,7 +21,9 @@ class MapScrollView: UIScrollView {
     var viewModel: ProofsViewModel! {
         didSet {
             if oldValue == nil {
-                UIView.animate(withDuration: 0.5, animations: { self.alpha = 1 })
+                UIView.animate(withDuration: 0.5) {
+                    self.alpha = 1
+                }
             }
             
             if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
@@ -71,17 +74,13 @@ class MapScrollView: UIScrollView {
         
         setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
         
-        if isLocalPosition {
-            markerLocalView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
-        } else {
-            markerGatewayView.bb.left(point.0 - 170).top(CGFloat(point.1 - 80))
-        }
+        updateMarkerPosition(x: point.0 - 170, y: point.1 - 80, isLocalPosition: isLocalPosition)
     }
     
     // MARK: - Private methods -
     
     private func setupView() {
-        isUserInteractionEnabled = true
+        isUserInteractionEnabled = false
         backgroundColor = UIColor.init(named: Theme.ivpnGray19)
         mapImageView.backgroundColor = .clear
         mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray20)
@@ -107,6 +106,28 @@ class MapScrollView: UIScrollView {
         markerGatewayView.hide()
         addSubview(markerLocalView)
         addSubview(markerGatewayView)
+    }
+    
+    private func updateMarkerPosition(x: Double, y: Double, isLocalPosition: Bool) {
+        if isLocalPosition {
+            markerLocalView.snp.remakeConstraints { make in
+                make.left.equalTo(x)
+                make.top.equalTo(y)
+            }
+            
+            UIView.animate(withDuration: 0.15) {
+                self.layoutIfNeeded()
+            }
+        } else {
+            markerGatewayView.snp.remakeConstraints { make in
+                make.left.equalTo(x)
+                make.top.equalTo(y)
+            }
+            
+            UIView.animate(withDuration: 0.15) {
+                self.layoutIfNeeded()
+            }
+        }
     }
     
     private func placeMarker(latitude: Double, longitude: Double, city: String) {
