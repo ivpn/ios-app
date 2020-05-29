@@ -29,6 +29,19 @@ class ServerViewController: UITableViewController {
         }
     }
     
+    @IBAction func sortBy(_ sender: Any) {
+        let actions = ServersSort.allCases.map { $0.rawValue }
+        let selected = UserDefaults.shared.serversSort
+        
+        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Sort by", actions: actions, sourceView: tableView) { index in
+            guard index > -1 else { return }
+            let sort = ServersSort.allCases[index]
+            UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
+            Application.shared.serverList.sortServers()
+            self.tableView.reloadData()
+        }
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {

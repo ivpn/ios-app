@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ServersSort: String {
+enum ServersSort: String, CaseIterable {
     case countryCode
     case city
     case latency
