@@ -172,7 +172,7 @@ extension UserDefaults {
         shared.register(defaults: [UserDefaults.Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
         shared.register(defaults: [UserDefaults.Key.wgKeyTimestamp: Date()])
         standard.register(defaults: ["SelectedServerFastest": true])
-        shared.register(defaults: [UserDefaults.Key.serversSort: ServersSort.countryCode.rawValue])
+        shared.register(defaults: [UserDefaults.Key.serversSort: ServersSort.country.rawValue])
     }
     
     static func clearSession() {
