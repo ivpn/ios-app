@@ -80,7 +80,8 @@ class MapScrollView: UIScrollView {
     // MARK: - Private methods -
     
     private func setupView() {
-        isUserInteractionEnabled = false
+        isUserInteractionEnabled = true
+        isScrollEnabled = false
         backgroundColor = UIColor.init(named: Theme.ivpnGray19)
         mapImageView.backgroundColor = .clear
         mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray20)

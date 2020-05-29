@@ -14,11 +14,20 @@ protocol ServerViewControllerDelegate: class {
 
 class ServerViewController: UITableViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     // MARK: - Properties -
     
     var isExitServer = false
     var collection = [VPNServer]()
+    var filteredCollection = [VPNServer]()
     weak var serverDelegate: ServerViewControllerDelegate?
+    
+    var isSearchActive: Bool {
+        return !searchBar.text!.isEmpty
+    }
     
     // MARK: - IBActions -
     
@@ -102,6 +111,8 @@ class ServerViewController: UITableViewController {
         if isPresentedModally {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController(_:)))
         }
+        
+        searchBar.backgroundImage = UIImage()
     }
     
     private func initCollection() {
@@ -132,12 +143,16 @@ class ServerViewController: UITableViewController {
 extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return collection.count
+        if isSearchActive {
+            return filteredCollection.count
+        } else {
+            return collection.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServerTableViewCell", for: indexPath) as! ServerTableViewCell
-        let server = collection[indexPath.row]
+        let server = isSearchActive ? filteredCollection[indexPath.row] : collection[indexPath.row]
         
         cell.isMultiHop = UserDefaults.shared.isMultiHop
         cell.indexPath = indexPath
@@ -221,6 +236,33 @@ extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
+    }
+    
+}
+
+// MARK: - UISearchBarDelegate -
+
+extension ServerViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredCollection.removeAll(keepingCapacity: false)
+        
+        filteredCollection = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + collection.filter { (server: VPNServer) -> Bool in
+            return server.city.lowercased().contains(searchBar.text!.lowercased())
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        tableView.reloadData()
     }
     
 }
