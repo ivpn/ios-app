@@ -170,9 +170,9 @@ extension ServerViewController {
 extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.row < collection.count else { return }
+        guard indexPath.row < collection.count, isSearchActive && indexPath.row < filteredCollection.count else { return }
         
-        let server = collection[indexPath.row]
+        let server = isSearchActive ? filteredCollection[indexPath.row] : collection[indexPath.row]
         var secondServer = Application.shared.settings.selectedExitServer
         var serverDifferentToSelectedServer = server !== Application.shared.settings.selectedServer
         
