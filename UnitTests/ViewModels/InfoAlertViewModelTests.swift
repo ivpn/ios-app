@@ -17,25 +17,16 @@ class InfoAlertViewModelTests: XCTestCase {
     func testText() {
         viewModel.infoAlert = .subscriptionExpiration
         XCTAssertTrue(viewModel.text.starts(with: "Subscription will expire"))
-        
-        viewModel.infoAlert = .trialPeriod
-        XCTAssertTrue(viewModel.text.starts(with: "Trial period will expire"))
     }
     
     func testActionText() {
         viewModel.infoAlert = .subscriptionExpiration
         XCTAssertEqual(viewModel.actionText, "RENEW")
-        
-        viewModel.infoAlert = .trialPeriod
-        XCTAssertEqual(viewModel.actionText, "")
     }
     
     func testType() {
         viewModel.infoAlert = .subscriptionExpiration
         XCTAssertEqual(viewModel.type, .alert)
-        
-        viewModel.infoAlert = .trialPeriod
-        XCTAssertEqual(viewModel.type, .info)
     }
     
 }

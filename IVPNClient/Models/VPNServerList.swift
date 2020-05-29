@@ -186,6 +186,19 @@ class VPNServerList {
         }
     }
     
+    func sortServers() {
+        let sort = ServersSort.init(rawValue: UserDefaults.shared.serversSort)
+        
+        switch sort {
+        case .city:
+            servers.sort { $0.city < $1.city }
+        case .latency:
+            servers.sort { $0.pingMs ?? 0 < $1.pingMs ?? 0 }
+        default:
+            servers.sort { $0.countryCode == $1.countryCode ? $0.city < $1.city : $0.countryCode < $1.countryCode }
+        }
+    }
+    
     private func createServersFromLoadedJSON(_ serversList: [[String: Any]]) {
         servers.removeAll()
         
@@ -229,7 +242,7 @@ class VPNServerList {
             servers.append(newServer)
         }
         
-        servers.sort { $0.countryCode == $1.countryCode ? $0.city < $1.city : $0.countryCode < $1.countryCode }
+        sortServers()
     }
     
 }

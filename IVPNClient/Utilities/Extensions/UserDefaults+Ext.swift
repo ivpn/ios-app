@@ -45,6 +45,7 @@ extension UserDefaults {
         static let connectionLocation = "connectionLocation"
         static let connectionIpAddress = "connectionIpAddress"
         static let keepAlive = "keepAlive"
+        static let serversSort = "serversSort"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -159,6 +160,10 @@ extension UserDefaults {
         return bool(forKey: Key.keepAlive)
     }
     
+    @objc dynamic var serversSort: String {
+        return string(forKey: Key.serversSort) ?? ""
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [UserDefaults.Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [UserDefaults.Key.networkProtectionTrustedDisconnect: true])
@@ -167,6 +172,7 @@ extension UserDefaults {
         shared.register(defaults: [UserDefaults.Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
         shared.register(defaults: [UserDefaults.Key.wgKeyTimestamp: Date()])
         standard.register(defaults: ["SelectedServerFastest": true])
+        shared.register(defaults: [UserDefaults.Key.serversSort: ServersSort.country.rawValue])
     }
     
     static func clearSession() {
