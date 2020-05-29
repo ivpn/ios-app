@@ -8,6 +8,7 @@
 
 import UIKit
 import Bamboo
+import SnapKit
 
 class MapScrollView: UIScrollView {
     
@@ -20,14 +21,21 @@ class MapScrollView: UIScrollView {
     var viewModel: ProofsViewModel! {
         didSet {
             if oldValue == nil {
-                UIView.animate(withDuration: 0.5, animations: { self.alpha = 1 })
+                UIView.animate(withDuration: 0.5) {
+                    self.alpha = 1
+                }
             }
             
             if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
                 updateMapPosition(animated: oldValue != nil)
+                markerGatewayView.hide(animated: true)
+                markerLocalView.show(animated: oldValue != nil)
             }
         }
     }
+    
+    let markerLocalView = MapMarkerView()
+    let markerGatewayView = MapMarkerView()
     
     private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     
@@ -36,7 +44,9 @@ class MapScrollView: UIScrollView {
     override func awakeFromNib() {
         setupConstraints()
         setupView()
+        initGestures()
         placeServerLocationMarkers()
+        placeMarkers()
     }
     
     // MARK: - Methods -
@@ -52,10 +62,10 @@ class MapScrollView: UIScrollView {
     func updateMapPosition(animated: Bool = false) {
         guard let viewModel = viewModel else { return }
         
-        updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated)
+        updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated, isLocalPosition: true)
     }
     
-    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false) {
+    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool) {
         let halfWidth = Double(UIScreen.main.bounds.width / 2)
         let halfHeight = Double(UIScreen.main.bounds.height / 2)
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
@@ -63,6 +73,8 @@ class MapScrollView: UIScrollView {
         let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
         
         setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
+        
+        updateMarkerPosition(x: point.0 - 170, y: point.1 - 80, isLocalPosition: isLocalPosition)
     }
     
     // MARK: - Private methods -
@@ -74,9 +86,47 @@ class MapScrollView: UIScrollView {
         mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray20)
     }
     
+    private func initGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tap)
+    }
+    
+    @objc private func handleTap() {
+        NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
+    }
+    
     private func placeServerLocationMarkers() {
         for server in Application.shared.serverList.servers {
             placeMarker(latitude: server.latitude, longitude: server.longitude, city: server.city)
+        }
+    }
+    
+    private func placeMarkers() {
+        markerLocalView.hide()
+        markerGatewayView.hide()
+        addSubview(markerLocalView)
+        addSubview(markerGatewayView)
+    }
+    
+    private func updateMarkerPosition(x: Double, y: Double, isLocalPosition: Bool) {
+        if isLocalPosition {
+            markerLocalView.snp.remakeConstraints { make in
+                make.left.equalTo(x)
+                make.top.equalTo(y)
+            }
+            
+            UIView.animate(withDuration: 0.15) {
+                self.layoutIfNeeded()
+            }
+        } else {
+            markerGatewayView.snp.remakeConstraints { make in
+                make.left.equalTo(x)
+                make.top.equalTo(y)
+            }
+            
+            UIView.animate(withDuration: 0.15) {
+                self.layoutIfNeeded()
+            }
         }
     }
     

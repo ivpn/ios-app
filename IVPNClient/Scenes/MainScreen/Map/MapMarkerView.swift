@@ -18,17 +18,30 @@ class MapMarkerView: UIView {
         didSet {
             switch status {
             case .reasserting, .connecting, .disconnecting:
-                updateCircles(color: grayColor)
-                animatedCircleLayer.stopAnimations()
+                displayMode = .changing
             case .connected:
-                updateCircles(color: blueColor)
-                animatedCircleLayer.startAnimation()
+                displayMode = .protected
             default:
-                updateCircles(color: redColor)
-                animatedCircleLayer.stopAnimations()
+                displayMode = .unprotected
             }
             
             connectionInfoPopup.vpnStatusViewModel = VPNStatusViewModel(status: status)
+        }
+    }
+    
+    var displayMode: DisplayMode = .unprotected {
+        didSet {
+            switch displayMode {
+            case .unprotected:
+                updateCircles(color: redColor)
+                animatedCircleLayer.stopAnimations()
+            case .changing:
+                updateCircles(color: grayColor)
+                animatedCircleLayer.stopAnimations()
+            case .protected:
+                updateCircles(color: blueColor)
+                animatedCircleLayer.startAnimation()
+            }
         }
     }
     
@@ -50,7 +63,7 @@ class MapMarkerView: UIView {
     override func updateConstraints() {
         setupConstraints()
         initCircles()
-        updateCircles(color: grayColor)
+        updateCircles(color: redColor)
         initActionButton()
         initConnectionInfoPopup()
         addObservers()
@@ -70,6 +83,40 @@ class MapMarkerView: UIView {
         updateCircle(circle3, color: color)
     }
     
+    func show(animated: Bool = false, completion: (() -> Void)? = nil) {
+        guard animated else {
+            alpha = 1
+            transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
+            return
+        }
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 1
+            self.transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
+        }) { _ in
+            if let completion = completion {
+                completion()
+            }
+        }
+    }
+    
+    func hide(animated: Bool = false, completion: (() -> Void)? = nil) {
+        guard animated else {
+            alpha = 0
+            transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+            return
+        }
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 0
+            self.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+        }) { _ in
+            if let completion = completion {
+                completion()
+            }
+        }
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
@@ -83,7 +130,7 @@ class MapMarkerView: UIView {
     // MARK: - Private methods -
     
     private func setupConstraints() {
-        bb.center().size(width: 340, height: radius1)
+        bb.size(width: 340, height: radius1)
     }
     
     private func initCircle(_ circle: UIView, radius: CGFloat) {
@@ -130,6 +177,16 @@ class MapMarkerView: UIView {
     
     @objc func hidePopup() {
         connectionInfoPopup.hide()
+    }
+    
+}
+
+extension MapMarkerView {
+    
+    enum DisplayMode {
+        case unprotected
+        case changing
+        case protected
     }
     
 }
