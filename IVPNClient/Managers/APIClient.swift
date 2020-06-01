@@ -36,14 +36,9 @@ class APIRequest {
     var queryItems: [URLQueryItem]?
     var headers: [HTTPHeader]?
     var body: Data?
-    var contentType: HTTPContentType?
+    var contentType: HTTPContentType
     
-    init(method: HTTPMethod, path: String) {
-        self.method = method
-        self.path = path
-    }
-    
-    init(method: HTTPMethod, path: String, contentType: HTTPContentType? = nil) {
+    init(method: HTTPMethod, path: String, contentType: HTTPContentType = .applicationJSON) {
         self.method = method
         self.path = path
         self.contentType = contentType
@@ -125,9 +120,10 @@ class APIClient: NSObject {
         urlRequest.httpMethod = request.method.rawValue
         
         if request.method == .post, let queryItems = request.queryItems, !queryItems.isEmpty {
-            if let contentType = request.contentType, contentType == .applicationXWWWFromUrlencoded {
+            switch request.contentType {
+            case .applicationXWWWFromUrlencoded:
                 urlRequest.httpBody = query(queryItems).data(using: .utf8)
-            } else {
+            case .applicationJSON:
                 let parameters = queryItems.reduce([String: Any]()) { (dict, queryItem) -> [String: Any] in
                     var dict = dict
                     dict[queryItem.name] = queryItem.value
