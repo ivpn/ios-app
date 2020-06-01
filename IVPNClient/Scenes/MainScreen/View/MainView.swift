@@ -80,6 +80,12 @@ class MainView: UIView {
         }
         accountButton.setupIcon(imageName: "icon-user")
         accountButton.addTarget(self, action: #selector(openAccountInfo), for: .touchUpInside)
+        
+        let centerMapButton = UIButton()
+        addSubview(centerMapButton)
+        centerMapButton.bb.size(width: 42, height: 42).bottom(-300).right(-30)
+        centerMapButton.setupIcon(imageName: "icon-crosshair")
+        centerMapButton.addTarget(self, action: #selector(centerMap), for: .touchUpInside)
     }
     
     private func initInfoAlert() {
@@ -151,6 +157,10 @@ class MainView: UIView {
         if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
             topViewController.openAccountInfo(sender)
         }
+    }
+    
+    @objc private func centerMap(_ sender: UIButton) {
+        // TODO: Implement restoring map position
     }
     
 }
