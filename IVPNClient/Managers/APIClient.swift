@@ -19,6 +19,12 @@ enum HTTPMethod: String {
     }
 }
 
+
+enum HTTPContentType: String {
+    case applicationXWWWFromUrlencoded = "application/x-www-form-urlencoded"
+    case applicationJSON = "application/json"
+}
+
 struct HTTPHeader {
     let field: String
     let value: String
@@ -30,16 +36,17 @@ class APIRequest {
     var queryItems: [URLQueryItem]?
     var headers: [HTTPHeader]?
     var body: Data?
+    var contentType: HTTPContentType?
     
     init(method: HTTPMethod, path: String) {
         self.method = method
         self.path = path
     }
     
-    init<Body: Encodable>(method: HTTPMethod, path: String, body: Body) throws {
+    init(method: HTTPMethod, path: String, contentType: HTTPContentType? = nil) {
         self.method = method
         self.path = path
-        self.body = try JSONEncoder().encode(body)
+        self.contentType = contentType
     }
 }
 
@@ -118,7 +125,23 @@ class APIClient: NSObject {
         urlRequest.httpMethod = request.method.rawValue
         
         if request.method == .post, let queryItems = request.queryItems, !queryItems.isEmpty {
-            urlRequest.httpBody = query(queryItems).data(using: .utf8)
+            if let contentType = request.contentType, contentType == .applicationXWWWFromUrlencoded {
+                urlRequest.httpBody = query(queryItems).data(using: .utf8)
+            } else {
+                let parameters = queryItems.reduce([String: Any]()) { (dict, queryItem) -> [String: Any] in
+                    var dict = dict
+                    dict[queryItem.name] = queryItem.value
+                    return dict
+                }
+                
+                do {
+                    urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+                
+                urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
         }
         
         request.headers?.forEach { urlRequest.addValue($0.value, forHTTPHeaderField: $0.field) }
