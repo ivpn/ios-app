@@ -225,14 +225,14 @@ class IAPManager {
                 URLQueryItem(name: "account_id", value: KeyChain.tempUsername ?? ""),
                 URLQueryItem(name: "product_id", value: purchase.product.productIdentifier),
                 URLQueryItem(name: "transaction_id", value: transactionId),
-                URLQueryItem(name: "receipt_data", value: base64receipt)
+                URLQueryItem(name: "receipt", value: base64receipt)
             ]
         case Config.apiPaymentAdd:
             return [
                 URLQueryItem(name: "session_token", value: KeyChain.sessionToken ?? ""),
                 URLQueryItem(name: "product_id", value: purchase.product.productIdentifier),
                 URLQueryItem(name: "transaction_id", value: transactionId),
-                URLQueryItem(name: "receipt_data", value: base64receipt)
+                URLQueryItem(name: "receipt", value: base64receipt)
             ]
         default:
             return []
@@ -249,14 +249,14 @@ class IAPManager {
                 URLQueryItem(name: "account_id", value: KeyChain.tempUsername ?? ""),
                 URLQueryItem(name: "product_id", value: product.productId),
                 URLQueryItem(name: "transaction_id", value: transactionId),
-                URLQueryItem(name: "receipt_data", value: base64receipt)
+                URLQueryItem(name: "receipt", value: base64receipt)
             ]
         case Config.apiPaymentAdd:
             return [
                 URLQueryItem(name: "session_token", value: KeyChain.sessionToken ?? ""),
                 URLQueryItem(name: "product_id", value: product.productId),
                 URLQueryItem(name: "transaction_id", value: transactionId),
-                URLQueryItem(name: "receipt_data", value: base64receipt)
+                URLQueryItem(name: "receipt", value: base64receipt)
             ]
         default:
             return []
