@@ -160,7 +160,13 @@ class MainView: UIView {
     }
     
     @objc private func centerMap(_ sender: UIButton) {
-        // TODO: Implement restoring map position
+        let vpnStatus = Application.shared.connectionManager.status
+        
+        if vpnStatus.isDisconnected() {
+            updateMapPositionToLocalCoordinates()
+        } else {
+            updateMapPositionToGateway()
+        }
     }
     
 }
