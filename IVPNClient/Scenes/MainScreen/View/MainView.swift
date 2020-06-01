@@ -149,7 +149,12 @@ class MainView: UIView {
     }
     
     private func updateActionButtons() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            centerMapButton.snp.remakeConstraints { make in
+                make.size.equalTo(42)
+                make.right.equalTo(-170)
+                make.top.equalTo(55)
+            }
             return
         }
         
