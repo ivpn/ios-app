@@ -223,12 +223,12 @@
                                         <color key="textColor" name="ivpnLabel5"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ivpnXXXXXXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67P-Iu-XlG">
-                                        <rect key="frame" x="0.0" y="28" width="380" height="40"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ivpn-XXXX-XXXX-XXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67P-Iu-XlG">
+                                        <rect key="frame" x="0.0" y="28" width="345" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Dhn-8d-6BU"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="27"/>
                                         <color key="textColor" name="ivpnLabelPrimary"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -263,9 +263,9 @@
                                     <constraint firstItem="zpl-Iv-Uwu" firstAttribute="top" secondItem="rAa-Cw-zd2" secondAttribute="bottom" constant="11" id="KUa-gL-tGt"/>
                                     <constraint firstAttribute="height" constant="151" id="RUU-7l-irF"/>
                                     <constraint firstItem="67P-Iu-XlG" firstAttribute="top" secondItem="rAa-Cw-zd2" secondAttribute="bottom" constant="8" id="V8f-97-fQp"/>
-                                    <constraint firstAttribute="trailing" secondItem="67P-Iu-XlG" secondAttribute="trailing" id="WmZ-Ll-hs6"/>
                                     <constraint firstItem="67P-Iu-XlG" firstAttribute="leading" secondItem="lGe-se-bbf" secondAttribute="leading" id="jLi-D4-H3C"/>
                                     <constraint firstItem="rAa-Cw-zd2" firstAttribute="top" secondItem="lGe-se-bbf" secondAttribute="top" id="jcE-0h-uNW"/>
+                                    <constraint firstItem="zpl-Iv-Uwu" firstAttribute="leading" secondItem="67P-Iu-XlG" secondAttribute="trailing" constant="10" id="pif-bu-cf8"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your account has been created." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-xS-QHE">
@@ -1020,7 +1020,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="IKn-po-jel"/>
-        <segue reference="rrg-Fe-V0v"/>
+        <segue reference="gLo-V8-Qbm"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon-check" width="24" height="24"/>
