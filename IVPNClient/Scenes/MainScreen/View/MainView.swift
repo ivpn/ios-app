@@ -8,6 +8,7 @@
 
 import UIKit
 import NetworkExtension
+import SnapKit
 
 class MainView: UIView {
     
@@ -31,6 +32,7 @@ class MainView: UIView {
     let markerView = MapMarkerView()
     var infoAlertViewModel = InfoAlertViewModel()
     private var localCoordinates: (Double, Double)?
+    private var centerMapButton = UIButton()
     
     // MARK: - View lifecycle -
     
@@ -46,6 +48,7 @@ class MainView: UIView {
     func setupView(animated: Bool = true) {
         setupConstraints()
         updateInfoAlert()
+        updateActionButtons()
         updateMapPosition(animated: animated)
     }
     
@@ -81,9 +84,7 @@ class MainView: UIView {
         accountButton.setupIcon(imageName: "icon-user")
         accountButton.addTarget(self, action: #selector(openAccountInfo), for: .touchUpInside)
         
-        let centerMapButton = UIButton()
         addSubview(centerMapButton)
-        centerMapButton.bb.size(width: 42, height: 42).bottom(-300).right(-30)
         centerMapButton.setupIcon(imageName: "icon-crosshair")
         centerMapButton.addTarget(self, action: #selector(centerMap), for: .touchUpInside)
     }
@@ -144,6 +145,36 @@ class MainView: UIView {
             DispatchQueue.delay(0.25) {
                 self.mapScrollView.markerLocalView.show(animated: true)
             }
+        }
+    }
+    
+    private func updateActionButtons() {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+            return
+        }
+        
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            centerMapButton.snp.remakeConstraints { make in
+                make.size.equalTo(42)
+                make.right.equalTo(-30)
+                make.bottom.equalTo(-MapConstants.Container.bottomAnchorC - 22)
+            }
+            return
+        }
+
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+            centerMapButton.snp.remakeConstraints { make in
+                make.size.equalTo(42)
+                make.right.equalTo(-30)
+                make.bottom.equalTo(-MapConstants.Container.bottomAnchorB - 22)
+            }
+            return
+        }
+        
+        centerMapButton.snp.remakeConstraints { make in
+            make.size.equalTo(42)
+            make.right.equalTo(-30)
+            make.bottom.equalTo(-MapConstants.Container.bottomAnchorA - 22)
         }
     }
     
