@@ -29,11 +29,11 @@ struct Service {
         get {
             switch duration {
             case .week:
-                return "week"
+                return "Week"
             case .month:
-                return "month"
+                return "Month"
             case .year:
-                return "year"
+                return "Year"
             case .twoYears:
                 return "2 years"
             case .threeYears:
