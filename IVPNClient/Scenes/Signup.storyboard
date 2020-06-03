@@ -339,21 +339,21 @@
                         <sections>
                             <tableViewSection id="Lj8-rs-5LY">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="234" id="88p-3D-F4q">
-                                        <rect key="frame" x="0.0" y="93" width="414" height="234"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="240" id="88p-3D-F4q">
+                                        <rect key="frame" x="0.0" y="93" width="414" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="88p-3D-F4q" id="Grr-60-n61">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="234"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qOY-q9-zA8">
-                                                    <rect key="frame" x="17" y="10" width="380" height="200"/>
+                                                    <rect key="frame" x="17" y="10" width="380" height="206"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uO8-pu-q5K">
-                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="46.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="52.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN STANDARD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zA-L8-EEN">
-                                                                    <rect key="frame" x="0.0" y="8.5" width="140" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="11.5" width="140" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="Jk7-wY-NV8"/>
                                                                         <constraint firstAttribute="height" constant="30" id="Rmy-AX-ivJ"/>
@@ -363,7 +363,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSL-UW-2Sj">
-                                                                    <rect key="frame" x="140" y="15" width="62" height="17"/>
+                                                                    <rect key="frame" x="140" y="18" width="62" height="17"/>
                                                                     <color key="backgroundColor" name="ivpnGreen"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="aN7-Kt-eIQ"/>
@@ -380,13 +380,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0s3-r1-KL7">
-                                                                    <rect key="frame" x="140" y="0.0" width="240" height="46.5"/>
+                                                                    <rect key="frame" x="140" y="1.5" width="240" height="50"/>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 </view>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bIs-mY-bng">
-                                                            <rect key="frame" x="0.0" y="61.5" width="380" height="44"/>
+                                                            <rect key="frame" x="0.0" y="67.5" width="380" height="44"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ioU-uK-8Jj">
                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="17"/>
@@ -413,13 +413,13 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0 / month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIG-i6-5Eb">
-                                                            <rect key="frame" x="0.0" y="120.5" width="380" height="19.5"/>
+                                                            <rect key="frame" x="0.0" y="126.5" width="380" height="19.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XD2-I9-v30">
-                                                            <rect key="frame" x="0.0" y="155" width="380" height="45"/>
+                                                            <rect key="frame" x="0.0" y="161" width="380" height="45"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tf-CF-xHh">
                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="45"/>
@@ -462,21 +462,21 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="234" id="GrT-ru-LnQ">
-                                        <rect key="frame" x="0.0" y="327" width="414" height="234"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="240" id="GrT-ru-LnQ">
+                                        <rect key="frame" x="0.0" y="333" width="414" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GrT-ru-LnQ" id="Uc3-Xd-uPE">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="234"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2Ea-Dw-ewM">
-                                                    <rect key="frame" x="17" y="10" width="380" height="200"/>
+                                                    <rect key="frame" x="17" y="10" width="380" height="206"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Pv0-Ty-bKE">
-                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="46.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="52.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN PRO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x86-70-UiG">
-                                                                    <rect key="frame" x="0.0" y="8.5" width="86" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="11.5" width="86" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="WDS-6C-OkV"/>
                                                                         <constraint firstAttribute="width" constant="86" id="dmz-TG-Oqb"/>
@@ -486,7 +486,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILU-Ae-FAb">
-                                                                    <rect key="frame" x="86" y="15" width="62" height="17"/>
+                                                                    <rect key="frame" x="86" y="18" width="62" height="17"/>
                                                                     <color key="backgroundColor" name="ivpnGreen"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="62" id="LU0-db-Pfo"/>
@@ -503,13 +503,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FsA-xt-tNM">
-                                                                    <rect key="frame" x="86" y="0.0" width="294" height="46.5"/>
+                                                                    <rect key="frame" x="86" y="1.5" width="294" height="50"/>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 </view>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="geM-T7-F4m">
-                                                            <rect key="frame" x="0.0" y="61.5" width="380" height="44"/>
+                                                            <rect key="frame" x="0.0" y="67.5" width="380" height="44"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="avS-cM-gdS">
                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="17"/>
@@ -542,13 +542,13 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0 / month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvG-K4-iso">
-                                                            <rect key="frame" x="0.0" y="120.5" width="380" height="19.5"/>
+                                                            <rect key="frame" x="0.0" y="126.5" width="380" height="19.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXs-j3-QlD">
-                                                            <rect key="frame" x="0.0" y="155" width="380" height="45"/>
+                                                            <rect key="frame" x="0.0" y="161" width="380" height="45"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bka-2j-C1Y">
                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="45"/>
