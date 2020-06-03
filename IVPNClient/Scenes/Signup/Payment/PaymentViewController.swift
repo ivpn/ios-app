@@ -88,6 +88,12 @@ class PaymentViewController: UITableViewController {
         purchaseProduct(identifier: service.productId)
     }
     
+    @IBAction func close() {
+        navigationController?.dismiss(animated: true) {
+            NotificationCenter.default.post(name: Notification.Name.SubscriptionDismissed, object: nil)
+        }
+    }
+    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {
@@ -111,7 +117,7 @@ class PaymentViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         if extendingService {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissViewController))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
             navigationItem.rightBarButtonItem = nil
         } else {
             let button = UIButton(type: .system)
