@@ -68,6 +68,7 @@ class SelectPlanViewController: UITableViewController {
     }
     
     private let hud = JGProgressHUD(style: .dark)
+    private var segueStarted = false
     
     // MARK: - @IBActions -
     
@@ -77,6 +78,8 @@ class SelectPlanViewController: UITableViewController {
             return
         }
         
+        guard !segueStarted else { return }
+        segueStarted = true
         performSegue(withIdentifier: "selectStandardPlan", sender: nil)
     }
     
@@ -86,6 +89,8 @@ class SelectPlanViewController: UITableViewController {
             return
         }
         
+        guard !segueStarted else { return }
+        segueStarted = true
         performSegue(withIdentifier: "selectProPlan", sender: nil)
     }
     
@@ -103,6 +108,8 @@ class SelectPlanViewController: UITableViewController {
         if displayMode == .loading {
             fetchProducts()
         }
+        
+        segueStarted = false
     }
     
     // MARK: - Segues -
