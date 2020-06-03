@@ -70,15 +70,6 @@ class PaymentViewController: UITableViewController {
         }
     }
     
-    var deviceCanMakePurchases: Bool {
-        guard IAPManager.shared.canMakePurchases else {
-            showAlert(title: "Error", message: "In-App Purchases are not available on your device.")
-            return false
-        }
-        
-        return true
-    }
-    
     private let hud = JGProgressHUD(style: .dark)
     
     private lazy var sessionManager: SessionManager = {
@@ -169,7 +160,7 @@ class PaymentViewController: UITableViewController {
     }
     
     private func purchaseProduct(identifier: String) {
-        guard deviceCanMakePurchases else { return }
+        guard deviceCanMakePurchases() else { return }
         
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Processing payment..."

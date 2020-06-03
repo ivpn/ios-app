@@ -65,6 +65,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func restorePurchases(_ sender: AnyObject) {
+        guard deviceCanMakePurchases() else { return }
+        
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Restoring purchases..."
         hud.show(in: (navigationController?.view)!)
