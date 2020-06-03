@@ -23,7 +23,7 @@ class NavigationManager {
         return viewController
     }
     
-    static func getSelectPlanViewController() -> UIViewController {
+    static func getChangePlanViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
         
         let navController = storyBoard.instantiateViewController(withIdentifier: "selectPlanView") as? UINavigationController
@@ -32,6 +32,18 @@ class NavigationManager {
             let serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
             viewController.changingPlan = true
             viewController.service = Service(type: serviceType, duration: .month)
+        }
+        
+        return navController!
+    }
+    
+    static func getSelectPlanViewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
+        
+        let navController = storyBoard.instantiateViewController(withIdentifier: "selectPlanView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        if let viewController = navController?.topViewController as? SelectPlanViewController {
+            viewController.selectingPlan = true
         }
         
         return navController!

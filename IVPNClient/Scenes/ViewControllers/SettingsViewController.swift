@@ -152,7 +152,7 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func changePlan(_ sender: Any) {
-        present(NavigationManager.getSelectPlanViewController(), animated: true, completion: nil)
+        present(NavigationManager.getChangePlanViewController(), animated: true, completion: nil)
     }
     
     @IBAction func logOut(_ sender: Any) {

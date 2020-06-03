@@ -148,6 +148,13 @@ class LoginViewController: UIViewController {
     private func startLoginProcess(force: Bool = false) {
         guard !loginProcessStarted else { return }
         
+        guard KeyChain.tempUsername == nil else {
+            let viewController = NavigationManager.getSelectPlanViewController()
+            viewController.presentationController?.delegate = self
+            present(viewController, animated: true, completion: nil)
+            return
+        }
+        
         let username = (self.userName.text ?? "").trim()
         
         loginProcessStarted = true

@@ -19,6 +19,7 @@ class SelectPlanViewController: UITableViewController {
     // MARK: - Properties -
     
     var changingPlan = false
+    var selectingPlan = false
     var standardService = Service(type: .standard, duration: .month)
     var proService = Service(type: .pro, duration: .month)
     
@@ -134,6 +135,8 @@ class SelectPlanViewController: UITableViewController {
         if changingPlan {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController))
             navigationItem.rightBarButtonItem = nil
+        } else if selectingPlan {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissViewController))
         } else {
             let button = UIButton(type: .system)
             button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
