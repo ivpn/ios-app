@@ -30,7 +30,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = false
-        initCaptureSession()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +41,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             navigationController?.navigationBar.setNeedsLayout()
         }
         
+        evaluateCameraAccess()
         startCaptureSession()
     }
     
@@ -116,6 +116,29 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
         captureSession = nil
+    }
+    
+    private func evaluateCameraAccess() {
+        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        switch authStatus {
+        case .denied:
+            alertPromptToAllowCameraAccessViaSetting()
+        default:
+            initCaptureSession()
+        }
+    }
+
+    private func alertPromptToAllowCameraAccessViaSetting() {
+        let alert = UIAlertController(
+            title: "Allow Camera",
+            message: "Camera access required to scan QR code",
+            preferredStyle: UIAlertController.Style.alert
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .cancel, handler: { alert -> Void in
+            UIApplication.shared.openURL(URL(string: UIApplication.openSettingsURLString)!)
+        }))
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate -
