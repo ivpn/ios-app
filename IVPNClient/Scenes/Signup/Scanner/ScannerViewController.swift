@@ -122,23 +122,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         switch authStatus {
         case .denied:
-            alertPromptToAllowCameraAccessViaSetting()
+            allowCameraAccessViaSetting()
         default:
             initCaptureSession()
         }
     }
 
-    private func alertPromptToAllowCameraAccessViaSetting() {
-        let alert = UIAlertController(
-            title: "Allow Camera",
-            message: "Camera access required to scan QR code",
-            preferredStyle: UIAlertController.Style.alert
-        )
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Open Settings", style: .cancel, handler: { alert -> Void in
-            UIApplication.shared.openURL(URL(string: UIApplication.openSettingsURLString)!)
-        }))
-        present(alert, animated: true, completion: nil)
+    private func allowCameraAccessViaSetting() {
+        showActionAlert(title: "Allow Camera", message: "Camera access is required to scan QR code", action: "Open Settings") { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.openURL(url)
+            }
+        }
     }
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate -
