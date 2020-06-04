@@ -50,26 +50,26 @@ struct Service {
                 case .week:
                     return nil
                 case .month:
-                    return "-25%"
+                    return nil
                 case .year:
-                    return "-42%"
+                    return "-16%"
                 case .twoYears:
-                    return "-51%"
+                    return "-30%"
                 case .threeYears:
-                    return "-55%"
+                    return "-35%"
                 }
             case .pro:
                 switch duration {
                 case .week:
                     return nil
                 case .month:
-                    return "-16%"
+                    return nil
                 case .year:
-                    return "-35%"
+                    return "-16%"
                 case .twoYears:
-                    return "-48%"
+                    return "-33%"
                 case .threeYears:
-                    return "-52%"
+                    return "-38%"
                 }
             }
         }
