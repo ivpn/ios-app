@@ -131,7 +131,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     private func allowCameraAccessViaSetting() {
         showActionAlert(title: "Allow Camera", message: "Camera access is required to scan QR code", action: "Open Settings") { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url)
             }
         }
     }
