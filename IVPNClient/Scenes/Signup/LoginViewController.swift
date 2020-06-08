@@ -171,7 +171,7 @@ class LoginViewController: UIViewController {
     }
     
     private func startSignupProcess() {
-        guard KeyChain.tempUsername == nil else {
+        if let tempUsername = KeyChain.tempUsername, ServiceStatus.isNewStyleAccount(username: tempUsername) {
             present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
             return
         }
