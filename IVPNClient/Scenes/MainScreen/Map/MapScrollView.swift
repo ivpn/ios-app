@@ -49,6 +49,11 @@ class MapScrollView: UIScrollView {
         placeServerLocationMarkers()
         placeMarkers()
         updateSelectedMarker()
+        addObservers()
+    }
+    
+    deinit {
+        removeObservers()
     }
     
     // MARK: - Methods -
@@ -87,6 +92,14 @@ class MapScrollView: UIScrollView {
         backgroundColor = UIColor.init(named: Theme.ivpnGray19)
         mapImageView.backgroundColor = .clear
         mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray20)
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedMarker), name: Notification.Name.ServerSelected, object: nil)
+    }
+    
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
     }
     
     private func initGestures() {
@@ -156,7 +169,7 @@ class MapScrollView: UIScrollView {
         markers.append(button)
     }
     
-    private func updateSelectedMarker() {
+    @objc private func updateSelectedMarker() {
         let city = Application.shared.settings.selectedServer.city
         
         for marker in markers {
