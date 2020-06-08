@@ -43,6 +43,12 @@ class MainView: UIView {
         updateInfoAlert()
     }
     
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            centerMap()
+        }
+    }
+    
     // MARK: - Methods -
     
     func setupView(animated: Bool = true) {
@@ -195,7 +201,7 @@ class MainView: UIView {
         }
     }
     
-    @objc private func centerMap(_ sender: UIButton) {
+    @objc private func centerMap() {
         let vpnStatus = Application.shared.connectionManager.status
         
         if vpnStatus.isDisconnected() {
