@@ -121,10 +121,22 @@ class MapMarkerView: UIView {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(hidePopup), name: Notification.Name.HideConnectionInfoPopup, object: nil)
+        
+        if #available(iOS 13.0, *) {
+            NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIScene.didActivateNotification, object: nil)
+        } else {
+            NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.didBecomeActiveNotification, object: nil)
+        }
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.HideConnectionInfoPopup, object: nil)
+        
+        if #available(iOS 13.0, *) {
+            NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
+        } else {
+            NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        }
     }
     
     // MARK: - Private methods -
@@ -177,6 +189,12 @@ class MapMarkerView: UIView {
     
     @objc func hidePopup() {
         connectionInfoPopup.hide()
+    }
+    
+    @objc private func appMovedToForeground() {
+        if displayMode == .protected {
+            animatedCircleLayer.startAnimation()
+        }
     }
     
 }
