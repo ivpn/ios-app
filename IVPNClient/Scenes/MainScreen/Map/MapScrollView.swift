@@ -38,6 +38,7 @@ class MapScrollView: UIScrollView {
     let markerGatewayView = MapMarkerView()
     
     private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
+    private var markers: [UIButton] = []
     
     // MARK: - View lifecycle -
     
@@ -47,6 +48,7 @@ class MapScrollView: UIScrollView {
         initGestures()
         placeServerLocationMarkers()
         placeMarkers()
+        updateSelectedMarker()
     }
     
     // MARK: - Methods -
@@ -137,18 +139,47 @@ class MapScrollView: UIScrollView {
         
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
         
-        let label = UILabel(frame: CGRect(x: point.0 - 50, y: point.1 - 21, width: 100, height: 20))
-        label.text = city
-        label.textColor = UIColor.init(named: Theme.ivpnGray21)
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 10, weight: .regular)
+        let button = UIButton(frame: CGRect(x: point.0 - 50, y: point.1 - 21, width: 100, height: 20))
+        button.setTitle(city, for: .normal)
+        button.setTitleColor(UIColor.init(named: Theme.ivpnGray21), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 10, weight: .regular)
+        button.addTarget(self, action: #selector(selectServer), for: .touchUpInside)
         
         let marker = UIView(frame: CGRect(x: 50 - 3, y: 18, width: 6, height: 6))
         marker.layer.cornerRadius = 3
         marker.backgroundColor = UIColor.init(named: Theme.ivpnGray21)
+        marker.tag = 1
         
-        label.addSubview(marker)
-        addSubview(label)
+        button.addSubview(marker)
+        addSubview(button)
+        
+        markers.append(button)
+    }
+    
+    private func updateSelectedMarker() {
+        let city = Application.shared.settings.selectedServer.city
+        
+        for marker in markers {
+            if let circle = marker.viewWithTag(1) {
+                if marker.titleLabel?.text == city {
+                    marker.setTitleColor(UIColor.init(named: Theme.ivpnBlue), for: .normal)
+                    circle.backgroundColor = UIColor.init(named: Theme.ivpnBlue)
+                } else {
+                    marker.setTitleColor(UIColor.init(named: Theme.ivpnGray21), for: .normal)
+                    circle.backgroundColor = UIColor.init(named: Theme.ivpnGray21)
+                }
+            }
+        }
+    }
+    
+    @objc private func selectServer(_ sender: UIButton) {
+        let city = sender.titleLabel?.text ?? ""
+        
+        if let server = Application.shared.serverList.getServer(byCity: city) {
+            Application.shared.settings.selectedServer = server
+            updateSelectedMarker()
+            NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
+        }
     }
     
     private func getCoordinatesBy(latitude: Double, longitude: Double) -> (Double, Double) {
