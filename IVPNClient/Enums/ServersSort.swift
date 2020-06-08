@@ -9,7 +9,7 @@
 import Foundation
 
 enum ServersSort: String, CaseIterable {
-    case country
     case city
+    case country
     case latency
 }
