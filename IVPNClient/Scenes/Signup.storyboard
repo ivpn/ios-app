@@ -30,7 +30,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wsH-wX-xZq">
                                                 <rect key="frame" x="69" y="62" width="276" height="50"/>
                                                 <subviews>
-                                                    <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="ivpnXXXX or i-XXXX" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Hx4-AY-bCY" customClass="UITextFieldPadding" customModule="IVPNClient" customModuleProvider="target">
+                                                    <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="i-XXXX-... or ivpnXXXXXXXX" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Hx4-AY-bCY" customClass="UITextFieldPadding" customModule="IVPNClient" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="276" height="50"/>
                                                         <color key="backgroundColor" name="ivpnGray2"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
