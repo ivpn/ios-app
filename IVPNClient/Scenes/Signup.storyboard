@@ -862,6 +862,7 @@
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="plain" id="QSt-8p-kF2"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="descriptionLabel" destination="TnB-3p-pAb" id="hbn-63-098"/>
                         <outlet property="payButton" destination="RfB-xJ-uvR" id="WU0-gz-far"/>
                     </connections>
                 </tableViewController>

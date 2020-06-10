@@ -15,6 +15,7 @@ class PaymentViewController: UITableViewController {
     
     // MARK: - @IBOutlets -
     
+    @IBOutlet weak var descriptionLabel: UILabel?
     @IBOutlet weak var payButton: UIButton?
     
     // MARK: - Properties -
@@ -143,6 +144,7 @@ class PaymentViewController: UITableViewController {
             view.addSubview(retryButton)
             spinner.bb.centerX().centerY(-80)
             retryButton.bb.centerX().centerY(-80)
+            descriptionLabel?.text = "Add more time to your IVPN account"
             payButton?.set(title: "Pay", subtitle: "(Will be active until \(service.willBeActiveUntil))")
         }
     }
