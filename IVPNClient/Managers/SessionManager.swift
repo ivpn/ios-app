@@ -71,6 +71,12 @@ class SessionManager {
                         self.delegate?.createSessionTooManySessions(error: error)
                         return
                     }
+                    
+                    // Signup not completed with initial payment
+                    if error.status == 500 && KeyChain.tempUsername != nil {
+                        self.delegate?.createSessionServiceNotActive()
+                        return
+                    }
                 }
                 
                 self.delegate?.createSessionFailure(error: error)
