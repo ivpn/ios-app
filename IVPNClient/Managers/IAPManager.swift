@@ -81,9 +81,16 @@ class IAPManager {
     func restorePurchases(completion: @escaping (Account?, ErrorResult?) -> Void) {
         SwiftyStoreKit.restorePurchases(atomically: false) { results in
             if results.restoreFailedPurchases.count > 0 {
-                let error = ErrorResult(status: 500, message: "Restore failed: \(results.restoreFailedPurchases)")
+                if let restoreError = results.restoreFailedPurchases.first {
+                    let error = ErrorResult(status: 500, message: restoreError.0.localizedDescription)
+                    completion(nil, error)
+                    log(error: restoreError.0.localizedDescription)
+                    return
+                }
+                
+                let error = ErrorResult(status: 500, message: "Unknown error")
                 completion(nil, error)
-                log(error: "Restore failed: \(results.restoreFailedPurchases)")
+                log(error: "Unknown error")
             } else if results.restoredPurchases.count > 0 {
                 self.completeRestoredPurchase(purchase: results.restoredPurchases.first!) { account, error in
                     completion(account, error)
