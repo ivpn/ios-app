@@ -341,13 +341,17 @@ extension LoginViewController: UIAdaptivePresentationControllerDelegate {
 extension LoginViewController: ScannerViewControllerDelegate {
     
     func qrCodeFound(code: String) {
+        userName.text = code
+        
         guard UserDefaults.shared.hasUserConsent else {
-            actionType = .login
-            present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
+            DispatchQueue.async {
+                self.actionType = .login
+                self.present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
+            }
+            
             return
         }
         
-        userName.text = code
         startLoginProcess()
     }
     
