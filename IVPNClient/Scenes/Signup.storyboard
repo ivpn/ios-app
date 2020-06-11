@@ -228,7 +228,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Dhn-8d-6BU"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="29"/>
                                         <color key="textColor" name="ivpnLabelPrimary"/>
                                         <nil key="highlightedColor"/>
                                     </label>
