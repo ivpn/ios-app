@@ -22,6 +22,12 @@ class IAPManager {
     
     private var apiEndpoint: String {
         if KeyChain.sessionToken != nil {
+            let username = Application.shared.authentication.getStoredUsername()
+            
+            if !ServiceStatus.isNewStyleAccount(username: username) {
+                return Config.apiPaymentAddLegacy
+            }
+            
             return Config.apiPaymentAdd
         }
         
@@ -241,6 +247,13 @@ class IAPManager {
                 URLQueryItem(name: "transaction_id", value: transactionId),
                 URLQueryItem(name: "receipt", value: base64receipt)
             ]
+        case Config.apiPaymentAddLegacy:
+            return [
+                URLQueryItem(name: "username", value: KeyChain.username ?? ""),
+                URLQueryItem(name: "productId", value: purchase.product.productIdentifier),
+                URLQueryItem(name: "transactionId", value: transactionId),
+                URLQueryItem(name: "receiptData", value: base64receipt)
+            ]
         default:
             return []
         }
@@ -264,6 +277,13 @@ class IAPManager {
                 URLQueryItem(name: "product_id", value: product.productId),
                 URLQueryItem(name: "transaction_id", value: transactionId),
                 URLQueryItem(name: "receipt", value: base64receipt)
+            ]
+        case Config.apiPaymentAddLegacy:
+            return [
+                URLQueryItem(name: "username", value: KeyChain.username ?? ""),
+                URLQueryItem(name: "productId", value: product.productId),
+                URLQueryItem(name: "transactionId", value: transactionId),
+                URLQueryItem(name: "receiptData", value: base64receipt)
             ]
         default:
             return []
