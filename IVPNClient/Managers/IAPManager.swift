@@ -22,9 +22,7 @@ class IAPManager {
     
     private var apiEndpoint: String {
         if KeyChain.sessionToken != nil {
-            let username = Application.shared.authentication.getStoredUsername()
-            
-            if !ServiceStatus.isNewStyleAccount(username: username) {
+            if !Application.shared.authentication.isNewStyleAccount {
                 return Config.apiPaymentAddLegacy
             }
             

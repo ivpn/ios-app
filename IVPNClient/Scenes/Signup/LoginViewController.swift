@@ -236,7 +236,7 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         
-        guard KeyChain.tempUsername == nil else {
+        if KeyChain.tempUsername != nil && !Application.shared.authentication.isLoggedIn {
             Application.shared.authentication.removeStoredCredentials()
             
             let viewController = NavigationManager.getSelectPlanViewController()
