@@ -16,7 +16,7 @@ struct ServiceStatus: Codable {
     #warning("currentPlan should not be optional, change this after API is fixed")
     var currentPlan: String?
     var activeUntil: Int?
-    var isOnFreeTrial: Bool
+    var isOnFreeTrial: Bool?
     let username: String?
     let upgradeToUrl: String?
     let paymentMethod: String?

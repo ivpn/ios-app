@@ -21,6 +21,11 @@ class Authentication {
         return !username.isEmpty || !sessionToken.isEmpty
     }
     
+    var isNewStyleAccount: Bool {
+        let username = getStoredUsername()
+        return ServiceStatus.isNewStyleAccount(username: username)
+    }
+    
     private(set) var randomPart: String
     private let accountRandomPartKey = "AccountRandomPart"
     

@@ -66,7 +66,7 @@ class SettingsViewController: UITableViewController {
         }
         
         guard Application.shared.serviceStatus.isEnabled(capability: .multihop) else {
-            if Application.shared.serviceStatus.isOnFreeTrial {
+            if Application.shared.serviceStatus.isOnFreeTrial ?? false {
                 showAlert(title: "", message: "MultiHop is supported only on IVPN Pro plan") { _ in
                     sender.setOn(false, animated: true)
                 }
