@@ -237,6 +237,8 @@ extension LoginViewController {
         loginProcessStarted = false
         
         guard KeyChain.tempUsername == nil else {
+            Application.shared.authentication.removeStoredCredentials()
+            
             let viewController = NavigationManager.getSelectPlanViewController()
             viewController.presentationController?.delegate = self
             present(viewController, animated: true, completion: nil)
