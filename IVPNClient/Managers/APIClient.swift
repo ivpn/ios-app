@@ -126,7 +126,16 @@ class APIClient: NSObject {
             case .applicationJSON:
                 let parameters = queryItems.reduce([String: Any]()) { (dict, queryItem) -> [String: Any] in
                     var dict = dict
-                    dict[queryItem.name] = queryItem.value
+                    
+                    switch queryItem.value {
+                    case "true":
+                        dict[queryItem.name] = true
+                    case "false":
+                        dict[queryItem.name] = false
+                    default:
+                        dict[queryItem.name] = queryItem.value
+                    }
+                    
                     return dict
                 }
                 
