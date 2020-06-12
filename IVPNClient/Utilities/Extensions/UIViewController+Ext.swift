@@ -135,6 +135,7 @@ extension UIViewController: SessionManagerDelegate {
     func createSessionTooManySessions(error: Any?) {}
     func createSessionAuthenticationError() {}
     func createSessionServiceNotActive() {}
+    func createSessionAccountNotActivated() {}
     func deleteSessionStart() {}
     func deleteSessionSuccess() {}
     func deleteSessionFailure() {}

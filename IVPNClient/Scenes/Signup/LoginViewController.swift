@@ -236,18 +236,22 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         
-        if KeyChain.tempUsername != nil && !Application.shared.authentication.isLoggedIn {
+        let viewController = NavigationManager.getSubscriptionViewController()
+        viewController.presentationController?.delegate = self
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    override func createSessionAccountNotActivated() {
+        hud.dismiss()
+        loginProcessStarted = false
+        
+        if KeyChain.tempUsername != nil {
             Application.shared.authentication.removeStoredCredentials()
             
             let viewController = NavigationManager.getSelectPlanViewController()
             viewController.presentationController?.delegate = self
             present(viewController, animated: true, completion: nil)
-            return
         }
-        
-        let viewController = NavigationManager.getSubscriptionViewController()
-        viewController.presentationController?.delegate = self
-        present(viewController, animated: true, completion: nil)
     }
     
     override func createSessionTooManySessions(error: Any?) {
