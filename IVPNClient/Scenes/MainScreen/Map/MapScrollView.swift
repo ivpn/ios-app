@@ -96,10 +96,12 @@ class MapScrollView: UIScrollView {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedMarker), name: Notification.Name.ServerSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedMarker), name: Notification.Name.PingDidComplete, object: nil)
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
     }
     
     private func initGestures() {
@@ -170,6 +172,8 @@ class MapScrollView: UIScrollView {
     }
     
     @objc private func updateSelectedMarker() {
+        Application.shared.connectionManager.needsUpdateSelectedServer()
+        
         let city = Application.shared.settings.selectedServer.city
         
         for marker in markers {
