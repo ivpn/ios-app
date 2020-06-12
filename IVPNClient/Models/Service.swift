@@ -134,7 +134,12 @@ struct Service {
     
     var willBeActiveUntil: String {
         get {
-            let timestamp = Application.shared.serviceStatus.activeUntil
+            var timestamp = Application.shared.serviceStatus.activeUntil
+            
+            if !Application.shared.serviceStatus.isActive {
+                timestamp = Int(Date().timeIntervalSince1970)
+            }
+            
             let date = Date(timeIntervalSince1970: TimeInterval(timestamp ?? 0))
             return duration.willBeActiveUntilFrom(date: date)
         }
