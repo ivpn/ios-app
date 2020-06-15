@@ -66,7 +66,6 @@ class MainViewControllerV2: UIViewController {
     }
     
     deinit {
-        destoryFloatingPanel()
         removeObservers()
         updateServersTimer.invalidate()
         Application.shared.connectionManager.removeStatusChangeUpdates()
@@ -186,10 +185,6 @@ class MainViewControllerV2: UIViewController {
         floatingPanel.delegate = self
         floatingPanel.addPanel(toParent: self)
         floatingPanel.show(animated: true)
-    }
-    
-    private func destoryFloatingPanel() {
-        floatingPanel.removePanelFromParent(animated: false)
     }
     
     private func startServersUpdate() {
