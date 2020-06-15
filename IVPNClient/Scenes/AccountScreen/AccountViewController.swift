@@ -29,7 +29,7 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func manageSubscription(_ sender: Any) {
-        manageSubscription()
+        
     }
     
     // MARK: - View Lifecycle -

@@ -139,7 +139,7 @@ class PaymentViewController: UITableViewController {
             isModalInPresentation = true
         }
         
-        view.backgroundColor = UIColor.init(named: Theme.Key.ivpnBackgroundPrimary)
+        view.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         payButton?.set(title: "Pay", subtitle: "")
         
         if extendingService {

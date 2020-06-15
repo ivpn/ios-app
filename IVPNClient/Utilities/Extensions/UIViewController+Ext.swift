@@ -228,33 +228,9 @@ extension UIViewController {
         return true
     }
     
-    func evaluateIsServiceActive() -> Bool {
-        guard Application.shared.serviceStatus.isActive else {
-            let viewController = NavigationManager.getSubscriptionViewController()
-            viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
-            present(viewController, animated: true, completion: nil)
-            return false
-        }
-        
-        return true
-    }
-    
     func evaluateMultiHopCapability(_ sender: Any) -> Bool {
         guard Application.shared.serviceStatus.isEnabled(capability: .multihop) else {
-            if Application.shared.serviceStatus.isOnFreeTrial {
-                showAlert(title: "", message: "MultiHop is supported only on IVPN Pro plan")
-                return false
-            }
-            
-            showActionSheet(title: "MultiHop is supported only on IVPN Pro plan", actions: ["Switch plan"], sourceView: sender as! UIView) { index in
-                switch index {
-                case 0:
-                    self.manageSubscription()
-                default:
-                    break
-                }
-            }
-            
+            showAlert(title: "", message: "MultiHop is supported only on IVPN Pro plan")
             return false
         }
         
@@ -278,21 +254,6 @@ extension UIViewController {
         }
         
         return true
-    }
-    
-    func manageSubscription() {
-        if !Application.shared.serviceStatus.isActive {
-            present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
-            return
-        }
-        
-        if Application.shared.serviceStatus.isAppStoreSubscription() {
-            UIApplication.manageSubscription()
-        } else {
-            if let upgradeToUrl = Application.shared.serviceStatus.upgradeToUrl {
-                openWebPage(upgradeToUrl)
-            }
-        }
     }
     
     func presentSettingsScreen() {

@@ -76,9 +76,7 @@ extension InfoAlertViewModel: InfoAlertViewDelegate {
     func action() {
         switch infoAlert {
         case .subscriptionExpiration:
-            if let topViewController = UIApplication.topViewController() {
-                topViewController.manageSubscription()
-            }
+            #warning("TODO: present Add more time modal")
         case .connectionInfoFailure:
             if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
                 topViewController.updateGeoLocation()

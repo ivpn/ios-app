@@ -13,8 +13,6 @@
 		8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */; };
 		8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5032356536B008C83DB /* UpgradePlanViewController.swift */; };
 		820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */; };
-		8202CF2624487FAB00463FC4 /* SelectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8202CF2524487FAB00463FC4 /* SelectPlanView.swift */; };
-		8202CF282448840900463FC4 /* PlanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8202CF272448840900463FC4 /* PlanLabel.swift */; };
 		820535282302B9D7007BDD58 /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
 		820535292302BE8F007BDD58 /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
 		8205352A2302BEA3007BDD58 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
@@ -69,7 +67,6 @@
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF52240E40F006B81D2 /* Error+Ext.swift */; };
-		82342100225F5302008A1D6E /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823420FF225F5302008A1D6E /* SubscriptionViewController.swift */; };
 		82351FCA241FA16600E6E0FD /* InfoAlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */; };
 		82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */; };
 		82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */; };
@@ -104,7 +101,6 @@
 		826C56D322FD551800D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826C56D422FD551900D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826D182921D3DAFF0045A570 /* StorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826D182821D3DAFF0045A570 /* StorageManagerTests.swift */; };
-		826E61462428D5200064F195 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E61452428D5200064F195 /* UIButton+Ext.swift */; };
 		826E61482428F8E60064F195 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E61472428F8E60064F195 /* AccountViewController.swift */; };
 		826E614A242A1CA80064F195 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E6149242A1CA80064F195 /* AccountViewModel.swift */; };
 		826E614C242A61380064F195 /* AccountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E614B242A61380064F195 /* AccountViewModelTests.swift */; };
@@ -143,7 +139,6 @@
 		826F7F4F23A7B4CD00777DB9 /* today-extension-staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 826F7F4B23A7B4CD00777DB9 /* today-extension-staging.xcconfig */; };
 		826FBDA32461847D00B9E464 /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826FBDA22461847D00B9E464 /* ServiceType.swift */; };
 		826FBDA52461848A00B9E464 /* ServiceDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826FBDA42461848A00B9E464 /* ServiceDuration.swift */; };
-		826FBDA724618ACA00B9E464 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826FBDA624618ACA00B9E464 /* UIButton+Ext.swift */; };
 		8270753622AFC5B90067C323 /* StringProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */; };
 		8270753722AFC7E70067C323 /* StringProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */; };
 		8270D266241A477900B17B65 /* InfoAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270D265241A477900B17B65 /* InfoAlertView.swift */; };
@@ -161,7 +156,6 @@
 		828E9C95231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8290195E243CB27500777B6E /* ControlPanelView.swift */; };
-		82901963243E070A00777B6E /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82901962243E070A00777B6E /* ScannerView.swift */; };
 		8292E19B21748B0500123538 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8292E1A72174C10700123538 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A62174C10700123538 /* Peer.swift */; };
 		8292E1A92174C11600123538 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A82174C11600123538 /* Interface.swift */; };
@@ -173,6 +167,9 @@
 		82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82989FDD2188981900F7EBE0 /* AppKeyManager.swift */; };
 		829AA4732267372A00037198 /* Designable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AA4722267372A00037198 /* Designable+Ext.swift */; };
 		829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829D2C8121664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift */; };
+		829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27B2497949A000DC2DB /* PlanLabel.swift */; };
+		829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27C2497949A000DC2DB /* SelectPlanView.swift */; };
+		829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF2812497953C000DC2DB /* UIButton+Ext.swift */; };
 		82A160BA221C4E2000730577 /* Server+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A160B8221C4E2000730577 /* Server+CoreDataClass.swift */; };
 		82A160BB221C4E2000730577 /* Server+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A160B9221C4E2000730577 /* Server+CoreDataProperties.swift */; };
 		82A208C121BAAC6C00C9AD44 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
@@ -200,7 +197,6 @@
 		82BBF26921AE802400589766 /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */; };
 		82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */; };
 		82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF27021AECC8100589766 /* UILabel+Ext.swift */; };
-		82BC7145242E2A1D00C9E0C9 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BC7144242E2A1D00C9E0C9 /* ScannerViewController.swift */; };
 		82BF32F624484E5100248E4F /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BF32F524484E5100248E4F /* CreateAccountView.swift */; };
 		82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */; };
 		82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BB23FE78570059A915 /* MapScrollView.swift */; };
@@ -229,12 +225,12 @@
 		82DB75EE239E766A0073E846 /* NEVPNStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */; };
 		82DC75BC22B277D200D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
 		82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
-		82DEFFA62452DE5100ECB482 /* MapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEFFA52452DE5100ECB482 /* MapConstants.swift */; };
 		82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF01D244714D900CCB5CD /* ScannerViewController.swift */; };
 		82DEF021244714F000CCB5CD /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF020244714F000CCB5CD /* ScannerView.swift */; };
 		82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */; };
 		82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */; };
 		82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0292447288100CCB5CD /* PaymentViewController.swift */; };
+		82DEFFA62452DE5100ECB482 /* MapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEFFA52452DE5100ECB482 /* MapConstants.swift */; };
 		82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */; };
 		82E4FCB023D71FDF00BEBA1A /* UIApplication+ExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */; };
 		82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
@@ -407,8 +403,6 @@
 		8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResultSessionNew.swift; sourceTree = "<group>"; };
 		8201A5032356536B008C83DB /* UpgradePlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradePlanViewController.swift; sourceTree = "<group>"; };
 		820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardSettingsViewController.swift; sourceTree = "<group>"; };
-		8202CF2524487FAB00463FC4 /* SelectPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlanView.swift; sourceTree = "<group>"; };
-		8202CF272448840900463FC4 /* PlanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanLabel.swift; sourceTree = "<group>"; };
 		820535272302B9D7007BDD58 /* APIAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManager.swift; sourceTree = "<group>"; };
 		8205963C2245264300011091 /* UITableViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewController+Ext.swift"; sourceTree = "<group>"; };
 		82061F60238D2730009DDF4D /* PingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingResult.swift; sourceTree = "<group>"; };
@@ -444,7 +438,6 @@
 		822B85D821B941A200715691 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		8232FBF52240E40F006B81D2 /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
-		823420FF225F5302008A1D6E /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerView.swift; sourceTree = "<group>"; };
@@ -475,7 +468,6 @@
 		826D182621D3DAFF0045A570 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		826D182821D3DAFF0045A570 /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
 		826D182A21D3DAFF0045A570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		826E61452428D5200064F195 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		826E61472428F8E60064F195 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		826E6149242A1CA80064F195 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		826E614B242A61380064F195 /* AccountViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelTests.swift; sourceTree = "<group>"; };
@@ -494,7 +486,6 @@
 		826F7F4B23A7B4CD00777DB9 /* today-extension-staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "today-extension-staging.xcconfig"; sourceTree = "<group>"; };
 		826FBDA22461847D00B9E464 /* ServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
 		826FBDA42461848A00B9E464 /* ServiceDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDuration.swift; sourceTree = "<group>"; };
-		826FBDA624618ACA00B9E464 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Ext.swift"; sourceTree = "<group>"; };
 		8270D265241A477900B17B65 /* InfoAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertView.swift; sourceTree = "<group>"; };
 		8270D267241BB3D000B17B65 /* InfoAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewModel.swift; sourceTree = "<group>"; };
@@ -510,7 +501,6 @@
 		828772FA221C28E000D5E330 /* FlagImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagImageView.swift; sourceTree = "<group>"; };
 		828E9C94231E5780001E1FCF /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		8290195E243CB27500777B6E /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
-		82901962243E070A00777B6E /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		8292E1942170AA2500123538 /* wireguard-tunnel-provider-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wireguard-tunnel-provider-Bridging-Header.h"; sourceTree = "<group>"; };
 		8292E1A62174C10700123538 /* Peer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
 		8292E1A82174C11600123538 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
@@ -524,6 +514,9 @@
 		82989FE121898E4400F7EBE0 /* JGProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JGProgressHUD.framework; path = ../Carthage/Build/iOS/JGProgressHUD.framework; sourceTree = "<group>"; };
 		829AA4722267372A00037198 /* Designable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Designable+Ext.swift"; sourceTree = "<group>"; };
 		829D2C8121664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Ext.swift"; sourceTree = "<group>"; };
+		829DF27B2497949A000DC2DB /* PlanLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanLabel.swift; sourceTree = "<group>"; };
+		829DF27C2497949A000DC2DB /* SelectPlanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPlanView.swift; sourceTree = "<group>"; };
+		829DF2812497953C000DC2DB /* UIButton+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		82A160B8221C4E2000730577 /* Server+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataClass.swift"; sourceTree = "<group>"; };
 		82A160B9221C4E2000730577 /* Server+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatusTests.swift; sourceTree = "<group>"; };
@@ -552,7 +545,6 @@
 		82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Ext.swift"; sourceTree = "<group>"; };
 		82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		82BBF27021AECC8100589766 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
-		82BC7144242E2A1D00C9E0C9 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		82BF32F524484E5100248E4F /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
 		82C1D5BB23FE78570059A915 /* MapScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScrollView.swift; sourceTree = "<group>"; };
@@ -579,12 +571,12 @@
 		82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NEVPNStatus+Ext.swift"; sourceTree = "<group>"; };
 		82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEVPNStatusTests.swift; sourceTree = "<group>"; };
 		82DC75BB22B277D200D3C73C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		82DEFFA52452DE5100ECB482 /* MapConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConstants.swift; sourceTree = "<group>"; };
 		82DEF01D244714D900CCB5CD /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		82DEF020244714F000CCB5CD /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlanViewController.swift; sourceTree = "<group>"; };
 		82DEF0292447288100CCB5CD /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		82DEFFA52452DE5100ECB482 /* MapConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConstants.swift; sourceTree = "<group>"; };
 		82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManagerTests.swift; sourceTree = "<group>"; };
 		82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ExtTests.swift"; sourceTree = "<group>"; };
 		82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunnelType.swift; sourceTree = "<group>"; };
@@ -795,8 +787,6 @@
 			children = (
 				820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */,
 				82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */,
-				8202CF2524487FAB00463FC4 /* SelectPlanView.swift */,
-				8202CF272448840900463FC4 /* PlanLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -994,7 +984,7 @@
 				82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */,
 				82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */,
 				826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */,
-				826E61452428D5200064F195 /* UIButton+Ext.swift */,
+				829DF2812497953C000DC2DB /* UIButton+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1064,23 +1054,6 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		82901960243E06D900777B6E /* ScannerScreen */ = {
-			isa = PBXGroup;
-			children = (
-				82901961243E06FA00777B6E /* View */,
-				82BC7144242E2A1D00C9E0C9 /* ScannerViewController.swift */,
-			);
-			path = ScannerScreen;
-			sourceTree = "<group>";
-		};
-		82901961243E06FA00777B6E /* View */ = {
-			isa = PBXGroup;
-			children = (
-				82901962243E070A00777B6E /* ScannerView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		8292E1A52174C0CE00123538 /* WireGuard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,6 +1073,15 @@
 				8292E1BD2174CA6800123538 /* x25519.h */,
 			);
 			path = Crypto;
+			sourceTree = "<group>";
+		};
+		829DF27A2497949A000DC2DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				829DF27B2497949A000DC2DB /* PlanLabel.swift */,
+				829DF27C2497949A000DC2DB /* SelectPlanView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		829FBF702431E69300C84246 /* View */ = {
@@ -1124,7 +1106,6 @@
 			children = (
 				8208525423FD56530008C112 /* MainScreen */,
 				822563902431DFFB00AE7F8D /* AccountScreen */,
-				82901960243E06D900777B6E /* ScannerScreen */,
 				82A208B621BAA51000C9AD44 /* Controls */,
 				82A208B521BAA4FF00C9AD44 /* TableCells */,
 				82A208B421BAA4EF00C9AD44 /* ViewControllers */,
@@ -1286,6 +1267,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		82BF32F424484E3800248E4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82BF32F524484E5100248E4F /* CreateAccountView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		82C1D5BA23FE78330059A915 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -1309,14 +1298,6 @@
 				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
 			);
 			path = ControlPanel;
-			sourceTree = "<group>";
-		};
-		82BF32F424484E3800248E4F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				82BF32F524484E5100248E4F /* CreateAccountView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		82DEF01B2447149000CCB5CD /* Signup */ = {
@@ -1360,7 +1341,7 @@
 		82DEF0232447281900CCB5CD /* SelectPlan */ = {
 			isa = PBXGroup;
 			children = (
-				8202CF2424487F9C00463FC4 /* View */,
+				829DF27A2497949A000DC2DB /* View */,
 				82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */,
 			);
 			path = SelectPlan;
@@ -2145,7 +2126,6 @@
 				8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */,
 				828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */,
 				82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */,
-				826E61462428D5200064F195 /* UIButton+Ext.swift in Sources */,
 				8206F32124347A8F0056B465 /* MainView.swift in Sources */,
 				9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */,
 				82E716962181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */,
@@ -2157,6 +2137,7 @@
 				8292E1A72174C10700123538 /* Peer.swift in Sources */,
 				820EA86E232264EC00E16B2D /* SuccessResult.swift in Sources */,
 				82D6AA1B215E167C00F21CAA /* UIViewController+Ext.swift in Sources */,
+				829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */,
 				8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */,
 				826C56D222FD4F2600D2B76A /* ServiceStatus.swift in Sources */,
 				82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */,
@@ -2167,18 +2148,17 @@
 				9C2833821D9D3F2D0024C553 /* PromotionsDataSource.swift in Sources */,
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
 				82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */,
-				826FBDA724618ACA00B9E464 /* UIButton+Ext.swift in Sources */,
 				9C454EB31E081E0000BD2AFA /* ConnectButton.swift in Sources */,
 				8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */,
 				82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */,
 				9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */,
 				8205963D2245264300011091 /* UITableViewController+Ext.swift in Sources */,
 				82BF32F624484E5100248E4F /* CreateAccountView.swift in Sources */,
-				8202CF282448840900463FC4 /* PlanLabel.swift in Sources */,
 				82774855237596DF0061BD46 /* OpenVPNConf.swift in Sources */,
 				82589A2B21FB5A580009CC6C /* UIImage+Ext.swift in Sources */,
 				829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */,
 				820535282302B9D7007BDD58 /* APIAccessManager.swift in Sources */,
+				829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */,
 				82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */,
 				8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */,
 				8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */,
@@ -2250,12 +2230,10 @@
 				9CB2CE411DB2594A007A4D2D /* VPNServerList.swift in Sources */,
 				823FFB072338DF1800F91A5D /* Capability.swift in Sources */,
 				82061F65238D2730009DDF4D /* Ping.swift in Sources */,
-				8202CF2624487FAB00463FC4 /* SelectPlanView.swift in Sources */,
 				82AAF0E92253A4A8005E792F /* StaticWebViewController.swift in Sources */,
 				8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */,
 				824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */,
 				8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */,
-				82BC7145242E2A1D00C9E0C9 /* ScannerViewController.swift in Sources */,
 				82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */,
 				9C6942371DD218A900F9A801 /* IKEv2AccessDetails.swift in Sources */,
 				82D598B421A5A7A3000FABDE /* NetworkTrust.swift in Sources */,
@@ -2264,7 +2242,6 @@
 				9C454EB01E081DF700BD2AFA /* CircleProgressLayer.swift in Sources */,
 				8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */,
 				821429B722FC2BE90056B8FF /* Result.swift in Sources */,
-				82901963243E070A00777B6E /* ScannerView.swift in Sources */,
 				827855B92472B27F00B3B6BD /* Account.swift in Sources */,
 				82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */,
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
@@ -2301,6 +2278,7 @@
 				826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */,
 				824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */,
 				8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */,
+				829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */,
 				82234B6721BA7F3500B082DE /* Logging.swift in Sources */,
 				82DB75EC239E75EB0073E846 /* NEVPNStatus+Ext.swift in Sources */,
 				8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */,

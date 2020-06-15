@@ -87,10 +87,6 @@ class LoginViewController: UIViewController {
         let _ = evaluateIsServiceActive()
     }
     
-    @IBAction func openScanner(_ sender: AnyObject) {
-        present(NavigationManager.getScannerViewController(delegate: self), animated: true)
-    }
-    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {

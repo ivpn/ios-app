@@ -141,12 +141,6 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    @IBAction func copyAccountID(_ sender: UIButton) {
-        guard let text = accountUsername.text else { return }
-        UIPasteboard.general.string = text
-        showFlashNotification(message: "Account ID copied to clipboard", presentInView: (navigationController?.view)!)
-    }
-    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
@@ -410,12 +404,6 @@ class SettingsViewController: UITableViewController {
                 self.tableView.deselectRow(at: indexPath, animated: true)
             }
         }
-    }
-    
-    private func setupLabels() {
-        accountUsername.text = Application.shared.authentication.getStoredUsername()
-        subscriptionLabel.text = Application.shared.serviceStatus.getSubscriptionText()
-        logOutButton.setTitle(Application.shared.authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up", for: .normal)
     }
     
 }
