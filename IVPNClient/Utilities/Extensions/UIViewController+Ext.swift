@@ -1,5 +1,5 @@
 //
-//  WireGuardSettingsViewController.swift
+//  UIViewController+Ext.swift
 //  IVPN Client
 //
 //  Created by Juraj Hilje on 10/10/2018.
@@ -113,13 +113,13 @@ extension UIViewController {
         present(safariVC, animated: true, completion: nil)
     }
     
-    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus) {
+    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> ())? = nil) {
         showAlert(
             title: "Thank you!",
             message: "Service was successfuly upgraded.\nService active until: " + serviceStatus.activeUntilString(),
             handler: { _ in
-                self.navigationController?.dismiss(animated: true) {
-                    NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
+                if let completion = completion {
+                    completion()
                 }
         })
     }
@@ -145,6 +145,32 @@ extension UIViewController {
     
 }
 
+// MARK: - Presenter -
+
+extension UIViewController {
+    
+    func evaluateIsServiceActive() -> Bool {
+        guard Application.shared.serviceStatus.isActive else {
+            let viewController = NavigationManager.getSubscriptionViewController()
+            viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+            present(viewController, animated: true, completion: nil)
+            return false
+        }
+        
+        return true
+    }
+    
+    func deviceCanMakePurchases() -> Bool {
+        guard IAPManager.shared.canMakePurchases else {
+            showAlert(title: "Error", message: "In-App Purchases are not available on your device.")
+            return false
+        }
+        
+        return true
+    }
+    
+}
+
 extension UIViewController: AppKeyManagerDelegate {
     func setKeyStart() {}
     func setKeySuccess() {}
@@ -158,6 +184,7 @@ extension UIViewController: SessionManagerDelegate {
     func createSessionTooManySessions(error: Any?) {}
     func createSessionAuthenticationError() {}
     func createSessionServiceNotActive() {}
+    func createSessionAccountNotActivated() {}
     func deleteSessionStart() {}
     func deleteSessionSuccess() {}
     func deleteSessionFailure() {}

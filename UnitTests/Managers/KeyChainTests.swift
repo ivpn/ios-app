@@ -14,7 +14,6 @@ class KeyChainTests: XCTestCase {
     
     override func tearDown() {
         KeyChain.username = nil
-        KeyChain.password = nil
         KeyChain.vpnUsername = nil
         KeyChain.vpnPassword = nil
     }
@@ -30,7 +29,6 @@ class KeyChainTests: XCTestCase {
     
     func testVpnPassword() {
         KeyChain.vpnPassword = nil
-        KeyChain.password = "password"
         XCTAssertEqual(KeyChain.vpnPassword, nil)
         
         KeyChain.vpnPassword = "vpnPassword"

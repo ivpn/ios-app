@@ -16,7 +16,7 @@ struct ServiceStatus: Codable {
     #warning("currentPlan should not be optional, change this after API is fixed")
     var currentPlan: String?
     var activeUntil: Int?
-    var isOnFreeTrial: Bool
+    var isOnFreeTrial: Bool?
     let username: String?
     let upgradeToUrl: String?
     let paymentMethod: String?
@@ -88,24 +88,12 @@ struct ServiceStatus: Codable {
         return "No active subscription"
     }
     
-    func isAppStoreSubscription() -> Bool {
-        if let paymentMethod = paymentMethod, paymentMethod == "ivpniosiap" {
-            return true
-        }
-        
-        return false
-    }
-    
-    func getSubscriptionActionText() -> String {
-        if isActive {
-            return "Manage Subscription"
-        }
-        
-        return "Activate Subscription"
-    }
-    
     static func isValid(username: String) -> Bool {
-        return username.hasPrefix("ivpn")
+        return username.hasPrefix("ivpn") || username.hasPrefix("i-")
+    }
+    
+    static func isNewStyleAccount(username: String) -> Bool {
+        return username.hasPrefix("i-")
     }
     
     func daysUntilSubscriptionExpiration() -> Int {

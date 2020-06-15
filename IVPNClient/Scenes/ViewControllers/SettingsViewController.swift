@@ -114,12 +114,37 @@ class SettingsViewController: UITableViewController {
         }
     }
     
+    @IBAction func extendSubscription(_ sender: Any) {
+        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+    }
+    
+    @IBAction func changePlan(_ sender: Any) {
+        present(NavigationManager.getChangePlanViewController(), animated: true, completion: nil)
+    }
+    
+    @IBAction func logOut(_ sender: Any) {
+        guard Application.shared.authentication.isLoggedIn else {
+            authenticate(self)
+            return
+        }
+        
+        showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out") { _ in
+            self.logOut()
+        }
+    }
+    
     @IBAction func authenticate(_ sender: Any) {
         if #available(iOS 13.0, *) {
             present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
         } else {
             present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func copyAccountID(_ sender: UIButton) {
+        guard let text = accountUsername.text else { return }
+        UIPasteboard.general.string = text
+        showFlashNotification(message: "Account ID copied to clipboard", presentInView: (navigationController?.view)!)
     }
     
     // MARK: - View Lifecycle -
@@ -385,6 +410,12 @@ class SettingsViewController: UITableViewController {
                 self.tableView.deselectRow(at: indexPath, animated: true)
             }
         }
+    }
+    
+    private func setupLabels() {
+        accountUsername.text = Application.shared.authentication.getStoredUsername()
+        subscriptionLabel.text = Application.shared.serviceStatus.getSubscriptionText()
+        logOutButton.setTitle(Application.shared.authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up", for: .normal)
     }
     
 }

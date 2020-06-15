@@ -42,12 +42,7 @@ class Application {
     }
     
     var showSubscriptionAction: Bool {
-        if authentication.isLoggedIn &&
-            (serviceStatus.isAppStoreSubscription() || !serviceStatus.isActive) {
-            return true
-        }
-        
-        return false
+        return authentication.isLoggedIn
     }
     
     // MARK: - Initialize -
