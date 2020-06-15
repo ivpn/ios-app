@@ -1309,6 +1309,8 @@
 				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
 			);
 			path = ControlPanel;
+			sourceTree = "<group>";
+		};
 		82BF32F424484E3800248E4F /* View */ = {
 			isa = PBXGroup;
 			children = (
