@@ -8,6 +8,7 @@
 
 import UIKit
 import NetworkExtension
+import SnapKit
 
 class MainView: UIView {
     
@@ -31,6 +32,7 @@ class MainView: UIView {
     let markerView = MapMarkerView()
     var infoAlertViewModel = InfoAlertViewModel()
     private var localCoordinates: (Double, Double)?
+    private var centerMapButton = UIButton()
     
     // MARK: - View lifecycle -
     
@@ -41,11 +43,18 @@ class MainView: UIView {
         updateInfoAlert()
     }
     
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            centerMap()
+        }
+    }
+    
     // MARK: - Methods -
     
     func setupView(animated: Bool = true) {
         setupConstraints()
         updateInfoAlert()
+        updateActionButtons()
         updateMapPosition(animated: animated)
     }
     
@@ -80,6 +89,10 @@ class MainView: UIView {
         }
         accountButton.setupIcon(imageName: "icon-user")
         accountButton.addTarget(self, action: #selector(openAccountInfo), for: .touchUpInside)
+        
+        addSubview(centerMapButton)
+        centerMapButton.setupIcon(imageName: "icon-crosshair")
+        centerMapButton.addTarget(self, action: #selector(centerMap), for: .touchUpInside)
     }
     
     private func initInfoAlert() {
@@ -141,6 +154,41 @@ class MainView: UIView {
         }
     }
     
+    private func updateActionButtons() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            centerMapButton.snp.remakeConstraints { make in
+                make.size.equalTo(42)
+                make.right.equalTo(-170)
+                make.top.equalTo(55)
+            }
+            return
+        }
+        
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            centerMapButton.snp.remakeConstraints { make in
+                make.size.equalTo(42)
+                make.right.equalTo(-30)
+                make.bottom.equalTo(-MapConstants.Container.bottomAnchorC - 22)
+            }
+            return
+        }
+
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+            centerMapButton.snp.remakeConstraints { make in
+                make.size.equalTo(42)
+                make.right.equalTo(-30)
+                make.bottom.equalTo(-MapConstants.Container.bottomAnchorB - 22)
+            }
+            return
+        }
+        
+        centerMapButton.snp.remakeConstraints { make in
+            make.size.equalTo(42)
+            make.right.equalTo(-30)
+            make.bottom.equalTo(-MapConstants.Container.bottomAnchorA - 22)
+        }
+    }
+    
     @objc private func openSettings(_ sender: UIButton) {
         if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
             topViewController.openSettings(sender)
@@ -150,6 +198,16 @@ class MainView: UIView {
     @objc private func openAccountInfo(_ sender: UIButton) {
         if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
             topViewController.openAccountInfo(sender)
+        }
+    }
+    
+    @objc private func centerMap() {
+        let vpnStatus = Application.shared.connectionManager.status
+        
+        if vpnStatus.isDisconnected() {
+            updateMapPositionToLocalCoordinates()
+        } else {
+            updateMapPositionToGateway()
         }
     }
     
