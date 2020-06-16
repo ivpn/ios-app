@@ -27,7 +27,6 @@ class AccountView: UITableView {
         statusLabel.backgroundColor = viewModel.statusColor
         subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
-        logOutActionButton.setTitle(viewModel.logOutActionText, for: .normal)
     }
     
     func initQRCode(viewModel: AccountViewModel) {
