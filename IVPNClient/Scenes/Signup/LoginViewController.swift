@@ -241,7 +241,7 @@ extension LoginViewController {
         present(viewController, animated: true, completion: nil)
     }
     
-    override func createSessionAccountNotActivated() {
+    override func createSessionAccountNotActivated(error: Any?) {
         hud.dismiss()
         loginProcessStarted = false
         
