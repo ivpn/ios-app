@@ -18,7 +18,6 @@ class AccountView: UITableView {
     @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
-    @IBOutlet weak var subscriptionActionButton: UIButton!
     
     // MARK: - Methods -
     
@@ -29,8 +28,6 @@ class AccountView: UITableView {
         subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
         logOutActionButton.setTitle(viewModel.logOutActionText, for: .normal)
-        subscriptionActionButton.setTitle(viewModel.subscriptionActionText, for: .normal)
-        subscriptionActionButton.isHidden = !viewModel.showSubscriptionAction
     }
     
     func initQRCode(viewModel: AccountViewModel) {

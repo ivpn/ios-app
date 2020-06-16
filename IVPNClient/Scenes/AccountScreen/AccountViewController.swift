@@ -28,10 +28,6 @@ class AccountViewController: UITableViewController {
         }
     }
     
-    @IBAction func manageSubscription(_ sender: Any) {
-        
-    }
-    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
