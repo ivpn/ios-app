@@ -15,7 +15,7 @@ import Foundation
     func createSessionTooManySessions(error: Any?)
     func createSessionAuthenticationError()
     func createSessionServiceNotActive()
-    func createSessionAccountNotActivated()
+    func createSessionAccountNotActivated(error: Any?)
     func deleteSessionStart()
     func deleteSessionSuccess()
     func deleteSessionFailure()
@@ -73,9 +73,8 @@ class SessionManager {
                         return
                     }
                     
-                    // Signup not completed with initial payment
-                    if error.status == 500 && KeyChain.tempUsername != nil {
-                        self.delegate?.createSessionAccountNotActivated()
+                    if error.status == 11005 {
+                        self.delegate?.createSessionAccountNotActivated(error: error)
                         return
                     }
                 }
