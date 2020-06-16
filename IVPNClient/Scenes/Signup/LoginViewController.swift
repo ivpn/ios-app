@@ -247,13 +247,12 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         
-        if KeyChain.tempUsername != nil {
-            Application.shared.authentication.removeStoredCredentials()
-            
-            let viewController = NavigationManager.getSelectPlanViewController()
-            viewController.presentationController?.delegate = self
-            present(viewController, animated: true, completion: nil)
-        }
+        KeyChain.tempUsername = KeyChain.username
+        Application.shared.authentication.removeStoredCredentials()
+        
+        let viewController = NavigationManager.getSelectPlanViewController()
+        viewController.presentationController?.delegate = self
+        present(viewController, animated: true, completion: nil)
     }
     
     override func createSessionTooManySessions(error: Any?) {
