@@ -24,9 +24,7 @@ class AccountViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func addMoreTime(_ sender: Any) {
-        let viewController = NavigationManager.getSubscriptionViewController()
-        viewController.presentationController?.delegate = self
-        present(viewController, animated: true, completion: nil)
+        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
     
     @IBAction func logOut(_ sender: Any) {
@@ -41,6 +39,7 @@ class AccountViewController: UITableViewController {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         initNavigationBar()
+        addObservers()
         accountView.setupView(viewModel: viewModel)
     }
     
@@ -49,12 +48,31 @@ class AccountViewController: UITableViewController {
         accountView.initQRCode(viewModel: viewModel)
     }
     
+    deinit {
+        removeObservers()
+    }
+    
+    // MARK: - Observers -
+    
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
+    }
+    
+    func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
+    }
+    
     // MARK: - Private methods -
     
     private func initNavigationBar() {
         if isPresentedModally {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController(_:)))
         }
+    }
+    
+    @objc private func subscriptionActivated() {
+        let viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
+        accountView.setupView(viewModel: viewModel)
     }
     
 }
@@ -134,17 +152,6 @@ extension AccountViewController: JGProgressHUDDelegate {
         showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out") { _ in
             self.navigationController?.dismiss(animated: true)
         }
-    }
-    
-}
-
-// MARK: - UIAdaptivePresentationControllerDelegate -
-
-extension AccountViewController: UIAdaptivePresentationControllerDelegate {
-    
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        let viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
-        accountView.setupView(viewModel: viewModel)
     }
     
 }
