@@ -19,6 +19,7 @@ class AccountViewController: UITableViewController {
     
     private let hud = JGProgressHUD(style: .dark)
     private var viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
+    private var serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
     
     // MARK: - @IBActions -
     
@@ -59,6 +60,18 @@ class AccountViewController: UITableViewController {
 // MARK: - UITableViewDelegate -
 
 extension AccountViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 && serviceType == .standard {
+            return 220
+        }
+        
+        if indexPath.row == 0 && serviceType == .pro {
+            return 150
+        }
+        
+        return 71
+    }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {

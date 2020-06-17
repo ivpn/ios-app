@@ -3779,12 +3779,12 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOP-ai-2H5">
                                                     <rect key="frame" x="16" y="67" width="343" height="130"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdb-JH-wwb">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdb-JH-wwb">
                                                             <rect key="frame" x="15" y="5" width="313" height="120"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <attributedString key="attributedText">
                                                                 <fragment content="IVPN Pro">
                                                                     <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <font key="NSFont" metaFont="systemBold" size="12"/>
                                                                         <font key="NSOriginalFont" metaFont="systemBold" size="12"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -3795,6 +3795,7 @@
 
 * Connect up to </string>
                                                                     <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <font key="NSFont" metaFont="cellTitle"/>
                                                                         <font key="NSOriginalFont" metaFont="cellTitle"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -3802,6 +3803,7 @@
                                                                 </fragment>
                                                                 <fragment content="7 devices">
                                                                     <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <font key="NSFont" metaFont="systemBold" size="12"/>
                                                                         <font key="NSOriginalFont" metaFont="systemBold" size="12"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -3811,6 +3813,7 @@
                                                                     <string key="content">
 * Use </string>
                                                                     <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <font key="NSFont" metaFont="cellTitle"/>
                                                                         <font key="NSOriginalFont" metaFont="cellTitle"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -3818,6 +3821,7 @@
                                                                 </fragment>
                                                                 <fragment content="Multi-Hop ">
                                                                     <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <font key="NSFont" metaFont="systemBold" size="12"/>
                                                                         <font key="NSOriginalFont" metaFont="systemBold" size="12"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -3828,6 +3832,7 @@
 
 Go to your client area to change subscription plan</string>
                                                                     <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <font key="NSFont" metaFont="cellTitle"/>
                                                                         <font key="NSOriginalFont" metaFont="cellTitle"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -3840,6 +3845,10 @@ Go to your client area to change subscription plan</string>
                                                     <color key="backgroundColor" name="ivpnNavy"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="130" id="16Q-4R-334"/>
+                                                        <constraint firstItem="Qdb-JH-wwb" firstAttribute="top" secondItem="DOP-ai-2H5" secondAttribute="top" constant="5" id="GhZ-pD-h2k"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Qdb-JH-wwb" secondAttribute="bottom" constant="5" id="WGY-tj-01n"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Qdb-JH-wwb" secondAttribute="trailing" constant="15" id="ep6-RY-FTk"/>
+                                                        <constraint firstItem="Qdb-JH-wwb" firstAttribute="leading" secondItem="DOP-ai-2H5" secondAttribute="leading" constant="15" id="hxf-2C-rWI"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
