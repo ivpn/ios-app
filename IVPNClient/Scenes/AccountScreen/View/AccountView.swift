@@ -18,7 +18,12 @@ class AccountView: UITableView {
     @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
-    @IBOutlet weak var subscriptionActionButton: UIButton!
+    @IBOutlet weak var planLabel: UILabel!
+    @IBOutlet weak var planDescriptionHeightConstraint: NSLayoutConstraint!
+    
+    // MARK: - Properties -
+    
+    private var serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
     
     // MARK: - Methods -
     
@@ -28,9 +33,15 @@ class AccountView: UITableView {
         statusLabel.backgroundColor = viewModel.statusColor
         subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
-        logOutActionButton.setTitle(viewModel.logOutActionText, for: .normal)
-        subscriptionActionButton.setTitle(viewModel.subscriptionActionText, for: .normal)
-        subscriptionActionButton.isHidden = !viewModel.showSubscriptionAction
+        
+        switch serviceType {
+        case .standard:
+            break
+        case .pro:
+            planLabel.text = "Go to your client area to change subscription plan"
+            planLabel.font = .systemFont(ofSize: 12, weight: .regular)
+            planDescriptionHeightConstraint.constant = 58
+        }
     }
     
     func initQRCode(viewModel: AccountViewModel) {

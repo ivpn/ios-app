@@ -416,12 +416,12 @@
             <objects>
                 <tableViewController title="Settings" modalPresentationStyle="formSheet" id="5KC-W6-t9Q" customClass="SettingsViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="vDW-Ar-ozm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812.00000000000011"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1016.3333320617676" width="375" height="65"/>
+                            <rect key="frame" x="0.0" y="1037.3333320617676" width="375" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -1449,14 +1449,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="43.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.333332061767578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="14" width="326" height="16"/>
+                                            <rect key="frame" x="16" y="13.666666666666664" width="326" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1465,7 +1465,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="324" height="21"/>
+                                            <rect key="frame" x="16" y="10.999999999999998" width="324" height="21.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1487,7 +1487,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.333332061767578" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="98.666664123535156" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -3676,11 +3676,10 @@
                                     <color key="textColor" name="ivpnLabel5"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ivpnXXXXXXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c74-BR-YIO">
-                                    <rect key="frame" x="16" y="45" width="215" height="30"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i-XXXX-XXXX-XXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="c74-BR-YIO">
+                                    <rect key="frame" x="16" y="45" width="247" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="aei-xZ-pFh"/>
-                                        <constraint firstAttribute="width" constant="215" id="xgC-Wp-Nga"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
                                     <nil key="textColor"/>
@@ -3721,140 +3720,205 @@
                                 <constraint firstItem="LDZ-oO-5ye" firstAttribute="top" secondItem="8cm-8U-jrW" secondAttribute="top" constant="17" id="RX5-NP-8dX"/>
                                 <constraint firstAttribute="trailing" secondItem="LDZ-oO-5ye" secondAttribute="trailing" constant="16" id="eg9-i4-htV"/>
                                 <constraint firstItem="uMT-Cg-UIi" firstAttribute="top" secondItem="8cm-8U-jrW" secondAttribute="top" constant="23" id="fYQ-El-l04"/>
+                                <constraint firstItem="LDZ-oO-5ye" firstAttribute="leading" secondItem="c74-BR-YIO" secondAttribute="trailing" constant="10" id="xdH-P3-p9x"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="NhI-pa-20D">
-                            <rect key="frame" x="0.0" y="344.66666793823242" width="375" height="110"/>
+                            <rect key="frame" x="0.0" y="504.33333206176758" width="375" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuQ-jO-yxH">
-                                    <rect key="frame" x="62.666666666666657" y="30" width="249.99999999999997" height="45"/>
-                                    <color key="backgroundColor" name="ivpnBlue"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVS-Nm-wlG">
+                                    <rect key="frame" x="137.66666666666666" y="28" width="100" height="44"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="45" id="Axd-y0-BvS"/>
-                                        <constraint firstAttribute="width" constant="250" id="E7f-XW-FnV"/>
+                                        <constraint firstAttribute="width" constant="100" id="Bdd-SZ-Vsb"/>
+                                        <constraint firstAttribute="height" constant="44" id="Nmh-bz-3Ef"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal" title="Manage Subscription">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                    <state key="normal" title="LOG OUT">
+                                        <color key="titleColor" name="ivpnBlue"/>
                                     </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="5"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <action selector="manageSubscription:" destination="obv-bO-Y0X" eventType="touchUpInside" id="Qu8-KL-9Kg"/>
+                                        <action selector="logOut:" destination="obv-bO-Y0X" eventType="touchUpInside" id="CHB-v2-Xp7"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="HuQ-jO-yxH" firstAttribute="top" secondItem="NhI-pa-20D" secondAttribute="top" constant="30" id="SNP-BL-Jmg"/>
-                                <constraint firstItem="HuQ-jO-yxH" firstAttribute="centerX" secondItem="NhI-pa-20D" secondAttribute="centerX" id="wJh-2W-Su9"/>
+                                <constraint firstItem="MVS-Nm-wlG" firstAttribute="centerY" secondItem="NhI-pa-20D" secondAttribute="centerY" id="2pM-r3-qhU"/>
+                                <constraint firstItem="MVS-Nm-wlG" firstAttribute="centerX" secondItem="NhI-pa-20D" secondAttribute="centerX" id="5H1-73-mpQ"/>
                             </constraints>
                         </view>
                         <sections>
                             <tableViewSection headerTitle="Subscription details" id="paZ-ei-HWE">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="ixh-Fo-hUB">
-                                        <rect key="frame" x="0.0" y="195.33333206176758" width="375" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="220" id="ixh-Fo-hUB">
+                                        <rect key="frame" x="0.0" y="195.33333206176758" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ixh-Fo-hUB" id="psO-yp-sfg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subscription" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42W-3S-3Wa">
-                                                    <rect key="frame" x="16" y="9.6666666666666643" width="150" height="25"/>
+                                                    <rect key="frame" x="16" y="13" width="343" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="ORy-w8-D38"/>
-                                                        <constraint firstAttribute="width" constant="150" id="ghT-Qg-9fS"/>
+                                                        <constraint firstAttribute="height" constant="20" id="RFF-az-xNm"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" name="ivpnLabel5"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUv-Dn-k2p">
-                                                    <rect key="frame" x="209" y="9.6666666666666643" width="150" height="25"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Standard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUv-Dn-k2p">
+                                                    <rect key="frame" x="16" y="34" width="343" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="150" id="I5e-xf-V0U"/>
-                                                        <constraint firstAttribute="height" constant="25" id="u50-IX-fiw"/>
+                                                        <constraint firstAttribute="height" constant="20" id="AoK-zA-jI5"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOP-ai-2H5">
+                                                    <rect key="frame" x="16" y="67" width="343" height="130"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdb-JH-wwb">
+                                                            <rect key="frame" x="15" y="5" width="313" height="120"/>
+                                                            <attributedString key="attributedText">
+                                                                <fragment content="IVPN Pro">
+                                                                    <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <font key="NSFont" metaFont="systemBold" size="12"/>
+                                                                        <font key="NSOriginalFont" metaFont="systemBold" size="12"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment>
+                                                                    <string key="content"> gives you more possibilities to stay safe and protected:
+
+* Connect up to </string>
+                                                                    <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <font key="NSFont" metaFont="cellTitle"/>
+                                                                        <font key="NSOriginalFont" metaFont="cellTitle"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment content="7 devices">
+                                                                    <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <font key="NSFont" metaFont="systemBold" size="12"/>
+                                                                        <font key="NSOriginalFont" metaFont="systemBold" size="12"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment>
+                                                                    <string key="content">
+* Use </string>
+                                                                    <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <font key="NSFont" metaFont="cellTitle"/>
+                                                                        <font key="NSOriginalFont" metaFont="cellTitle"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment content="Multi-Hop ">
+                                                                    <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <font key="NSFont" metaFont="systemBold" size="12"/>
+                                                                        <font key="NSOriginalFont" metaFont="systemBold" size="12"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment>
+                                                                    <string key="content">connections
+
+Go to your client area to change subscription plan</string>
+                                                                    <attributes>
+                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <font key="NSFont" metaFont="cellTitle"/>
+                                                                        <font key="NSOriginalFont" metaFont="cellTitle"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="ivpnNavy"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="130" id="16Q-4R-334"/>
+                                                        <constraint firstItem="Qdb-JH-wwb" firstAttribute="top" secondItem="DOP-ai-2H5" secondAttribute="top" constant="5" id="GhZ-pD-h2k"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Qdb-JH-wwb" secondAttribute="bottom" constant="5" id="WGY-tj-01n"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Qdb-JH-wwb" secondAttribute="trailing" constant="15" id="ep6-RY-FTk"/>
+                                                        <constraint firstItem="Qdb-JH-wwb" firstAttribute="leading" secondItem="DOP-ai-2H5" secondAttribute="leading" constant="15" id="hxf-2C-rWI"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="TUv-Dn-k2p" firstAttribute="centerY" secondItem="psO-yp-sfg" secondAttribute="centerY" id="ElK-w4-aZH"/>
-                                                <constraint firstItem="42W-3S-3Wa" firstAttribute="leading" secondItem="psO-yp-sfg" secondAttribute="leading" constant="16" id="PBC-Ic-mne"/>
-                                                <constraint firstItem="42W-3S-3Wa" firstAttribute="centerY" secondItem="psO-yp-sfg" secondAttribute="centerY" id="c8H-QV-0uc"/>
-                                                <constraint firstAttribute="trailing" secondItem="TUv-Dn-k2p" secondAttribute="trailing" constant="16" id="eDv-qX-ox0"/>
+                                                <constraint firstAttribute="trailing" secondItem="42W-3S-3Wa" secondAttribute="trailing" constant="16" id="AaP-cJ-ESP"/>
+                                                <constraint firstItem="DOP-ai-2H5" firstAttribute="leading" secondItem="psO-yp-sfg" secondAttribute="leading" constant="16" id="PkW-h1-vhT"/>
+                                                <constraint firstItem="DOP-ai-2H5" firstAttribute="top" secondItem="TUv-Dn-k2p" secondAttribute="bottom" constant="13" id="QFe-E9-W6K"/>
+                                                <constraint firstItem="TUv-Dn-k2p" firstAttribute="leading" secondItem="psO-yp-sfg" secondAttribute="leading" constant="16" id="TfX-c2-OmL"/>
+                                                <constraint firstItem="TUv-Dn-k2p" firstAttribute="top" secondItem="42W-3S-3Wa" secondAttribute="bottom" constant="1" id="fE7-Sw-sdD"/>
+                                                <constraint firstAttribute="trailing" secondItem="TUv-Dn-k2p" secondAttribute="trailing" constant="16" id="icI-ov-M2b"/>
+                                                <constraint firstItem="42W-3S-3Wa" firstAttribute="leading" secondItem="psO-yp-sfg" secondAttribute="leading" constant="16" id="nEg-BN-2Pd"/>
+                                                <constraint firstAttribute="trailing" secondItem="DOP-ai-2H5" secondAttribute="trailing" constant="16" id="pmQ-cU-4EA"/>
+                                                <constraint firstItem="42W-3S-3Wa" firstAttribute="top" secondItem="psO-yp-sfg" secondAttribute="top" constant="13" id="yev-xc-53I"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="d4r-dE-4nQ">
-                                        <rect key="frame" x="0.0" y="239" width="375" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="71" id="d4r-dE-4nQ">
+                                        <rect key="frame" x="0.0" y="415.33333206176758" width="375" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d4r-dE-4nQ" id="JfI-ra-dIa">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active Until" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppK-HY-Pvm">
-                                                    <rect key="frame" x="16" y="9.6666666666666643" width="150" height="25"/>
+                                                    <rect key="frame" x="16" y="13" width="343" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="150" id="alY-4f-GRg"/>
-                                                        <constraint firstAttribute="height" constant="25" id="hzK-44-vhl"/>
+                                                        <constraint firstAttribute="height" constant="20" id="IMQ-ct-aZt"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" name="ivpnLabel5"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC4-d3-7BM">
-                                                    <rect key="frame" x="209" y="9.6666666666666643" width="150" height="25"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jun 16, 2020" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC4-d3-7BM">
+                                                    <rect key="frame" x="16" y="34" width="343" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="RNH-fP-Fk3"/>
-                                                        <constraint firstAttribute="width" constant="150" id="iDv-BH-E4L"/>
+                                                        <constraint firstAttribute="height" constant="20" id="zIB-W2-4v4"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="zC4-d3-7BM" firstAttribute="centerY" secondItem="JfI-ra-dIa" secondAttribute="centerY" id="833-rL-817"/>
-                                                <constraint firstItem="ppK-HY-Pvm" firstAttribute="centerY" secondItem="JfI-ra-dIa" secondAttribute="centerY" id="ASB-TO-tfB"/>
-                                                <constraint firstItem="ppK-HY-Pvm" firstAttribute="leading" secondItem="JfI-ra-dIa" secondAttribute="leading" constant="16" id="jfv-g2-1yF"/>
-                                                <constraint firstAttribute="trailing" secondItem="zC4-d3-7BM" secondAttribute="trailing" constant="16" id="zat-Fd-BHX"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="LZM-ff-BAA">
-                                        <rect key="frame" x="0.0" y="282.66666793823242" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LZM-ff-BAA" id="jeh-vO-g4G">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVS-Nm-wlG">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="44"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlm-X9-XNL">
+                                                    <rect key="frame" x="239" y="28" width="120" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="FUv-YT-j1D"/>
+                                                        <constraint firstAttribute="width" constant="120" id="Mp3-4e-z3o"/>
+                                                        <constraint firstAttribute="height" constant="30" id="hTj-DW-Bxc"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <state key="normal" title="Log Out">
+                                                    <state key="normal" title="Add more time">
                                                         <color key="titleColor" name="ivpnBlue"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="logOut:" destination="obv-bO-Y0X" eventType="touchUpInside" id="CHB-v2-Xp7"/>
+                                                        <action selector="addMoreTime:" destination="obv-bO-Y0X" eventType="touchUpInside" id="0bY-0Z-1pT"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="MVS-Nm-wlG" firstAttribute="leading" secondItem="jeh-vO-g4G" secondAttribute="leading" constant="16" id="PJb-Aq-era"/>
-                                                <constraint firstItem="MVS-Nm-wlG" firstAttribute="centerY" secondItem="jeh-vO-g4G" secondAttribute="centerY" id="WlP-pB-b3r"/>
-                                                <constraint firstAttribute="trailing" secondItem="MVS-Nm-wlG" secondAttribute="trailing" constant="16" id="c6h-PI-2wR"/>
+                                                <constraint firstAttribute="trailing" secondItem="ppK-HY-Pvm" secondAttribute="trailing" constant="16" id="AN5-gL-9xV"/>
+                                                <constraint firstAttribute="trailing" secondItem="mlm-X9-XNL" secondAttribute="trailing" constant="16" id="Iay-6F-B4T"/>
+                                                <constraint firstItem="mlm-X9-XNL" firstAttribute="top" secondItem="JfI-ra-dIa" secondAttribute="top" constant="28" id="P4n-bc-dOe"/>
+                                                <constraint firstItem="zC4-d3-7BM" firstAttribute="leading" secondItem="JfI-ra-dIa" secondAttribute="leading" constant="16" id="Whh-4B-cuz"/>
+                                                <constraint firstItem="zC4-d3-7BM" firstAttribute="top" secondItem="ppK-HY-Pvm" secondAttribute="bottom" constant="1" id="dau-26-d37"/>
+                                                <constraint firstItem="ppK-HY-Pvm" firstAttribute="leading" secondItem="JfI-ra-dIa" secondAttribute="leading" constant="16" id="efK-aQ-ti4"/>
+                                                <constraint firstItem="ppK-HY-Pvm" firstAttribute="top" secondItem="JfI-ra-dIa" secondAttribute="top" constant="13" id="lKE-MW-sui"/>
+                                                <constraint firstAttribute="trailing" secondItem="zC4-d3-7BM" secondAttribute="trailing" constant="16" id="sXd-9K-TGT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3867,9 +3931,10 @@
                             <outlet property="dataSource" destination="obv-bO-Y0X" id="XXu-eT-PBh"/>
                             <outlet property="delegate" destination="obv-bO-Y0X" id="c2A-2b-bO7"/>
                             <outlet property="logOutActionButton" destination="MVS-Nm-wlG" id="Yqw-Wn-PH0"/>
+                            <outlet property="planDescriptionHeightConstraint" destination="16Q-4R-334" id="CQb-ln-y0T"/>
+                            <outlet property="planLabel" destination="Qdb-JH-wwb" id="l8U-uJ-5q6"/>
                             <outlet property="qrCodeImage" destination="LDZ-oO-5ye" id="a4A-eq-b9i"/>
                             <outlet property="statusLabel" destination="hky-B3-yLX" id="42L-ka-GMJ"/>
-                            <outlet property="subscriptionActionButton" destination="HuQ-jO-yxH" id="a6d-RC-6yT"/>
                             <outlet property="subscriptionLabel" destination="TUv-Dn-k2p" id="ZXq-I1-38z"/>
                         </connections>
                     </tableView>
@@ -4070,6 +4135,9 @@
         </namedColor>
         <namedColor name="ivpnLightYellow">
             <color red="0.95294117647058818" green="0.88627450980392153" blue="0.63921568627450975" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ivpnNavy">
+            <color red="0.31764705882352939" green="0.51372549019607838" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

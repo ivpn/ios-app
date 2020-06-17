@@ -27,10 +27,17 @@ class AccountViewModelTests: XCTestCase {
         viewModel.serviceStatus.currentPlan = "IVPN Standard"
         
         viewModel.serviceStatus.isActive = false
-        XCTAssertEqual(viewModel.subscriptionText, "No active subscription")
+        XCTAssertEqual(viewModel.subscriptionText, "IVPN Standard")
         
         viewModel.serviceStatus.isActive = true
         XCTAssertEqual(viewModel.subscriptionText, "IVPN Standard")
+    }
+    
+    func testActiveUntilText() {
+        var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
+        
+        viewModel.serviceStatus.isActive = false
+        XCTAssertEqual(viewModel.activeUntilText, "No active subscription")
     }
     
     func testLogOutActionText() {

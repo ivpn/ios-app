@@ -28,11 +28,11 @@ struct AccountViewModel {
     }
     
     var subscriptionText: String {
-        return serviceStatus.isActive ? serviceStatus.currentPlan ?? "" : "No active subscription"
+        return serviceStatus.currentPlan ?? ""
     }
     
     var activeUntilText: String {
-        return serviceStatus.activeUntilString()
+        return serviceStatus.isActive ? serviceStatus.activeUntilString() : "No active subscription"
     }
     
     var logOutActionText: String {
