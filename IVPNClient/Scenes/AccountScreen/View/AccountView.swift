@@ -18,6 +18,8 @@ class AccountView: UITableView {
     @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
+    @IBOutlet weak var planLabel: UILabel!
+    @IBOutlet weak var planDescriptionHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Methods -
     

@@ -22,6 +22,10 @@ class AccountViewController: UITableViewController {
     
     // MARK: - @IBActions -
     
+    @IBAction func addMoreTime(_ sender: Any) {
+        
+    }
+    
     @IBAction func logOut(_ sender: Any) {
         showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out") { _ in
             self.logOut()
