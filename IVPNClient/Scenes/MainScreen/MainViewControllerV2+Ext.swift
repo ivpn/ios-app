@@ -43,6 +43,9 @@ extension MainViewControllerV2: UIAdaptivePresentationControllerDelegate {
             NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.ServiceAuthorized, object: nil)
             NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.SubscriptionActivated, object: nil)
         }
+        
+        mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
+        mainView.updateInfoAlert()
     }
     
 }
