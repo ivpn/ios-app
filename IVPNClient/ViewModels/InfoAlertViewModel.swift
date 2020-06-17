@@ -77,9 +77,7 @@ extension InfoAlertViewModel: InfoAlertViewDelegate {
         switch infoAlert {
         case .subscriptionExpiration:
             if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
-                let viewController = NavigationManager.getSubscriptionViewController()
-                viewController.presentationController?.delegate = topViewController
-                topViewController.present(viewController, animated: true, completion: nil)
+                topViewController.present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
             }
         case .connectionInfoFailure:
             if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
