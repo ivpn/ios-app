@@ -24,7 +24,9 @@ class AccountViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func addMoreTime(_ sender: Any) {
-        
+        let viewController = NavigationManager.getSubscriptionViewController()
+        viewController.presentationController?.delegate = self
+        present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func logOut(_ sender: Any) {
@@ -132,6 +134,17 @@ extension AccountViewController: JGProgressHUDDelegate {
         showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out") { _ in
             self.navigationController?.dismiss(animated: true)
         }
+    }
+    
+}
+
+// MARK: - UIAdaptivePresentationControllerDelegate -
+
+extension AccountViewController: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        let viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
+        accountView.setupView(viewModel: viewModel)
     }
     
 }
