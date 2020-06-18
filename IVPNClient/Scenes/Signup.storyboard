@@ -182,7 +182,7 @@
             </objects>
             <point key="canvasLocation" x="1513.0434782608697" y="47.544642857142854"/>
         </scene>
-        <!--Your account has been created-->
+        <!--Account is created-->
         <scene sceneID="u3u-TB-jtU">
             <objects>
                 <viewController modalPresentationStyle="formSheet" id="spu-nQ-a1v" customClass="CreateAccountViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -286,7 +286,7 @@ Please save your account ID in a safe place, you will use it to connect other de
                             <outlet property="accountView" destination="lGe-se-bbf" id="rRa-c3-MjL"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Your account has been created" id="eEZ-46-KCv">
+                    <navigationItem key="navigationItem" title="Account is created" id="eEZ-46-KCv">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="7NX-OK-fX1">
                             <connections>
                                 <action selector="dismissViewController:" destination="spu-nQ-a1v" id="jB9-lx-nfH"/>
