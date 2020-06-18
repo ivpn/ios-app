@@ -16,8 +16,12 @@ class SelectPlanView: UITableView {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var standardView: UIStackView!
     @IBOutlet weak var proView: UIStackView!
-    @IBOutlet weak var standardPriceLabel: UILabel!
-    @IBOutlet weak var proPriceLabel: UILabel!
+    @IBOutlet weak var standardWeekPriceLabel: UILabel!
+    @IBOutlet weak var standardMonthPriceLabel: UILabel!
+    @IBOutlet weak var standardYearPriceLabel: UILabel!
+    @IBOutlet weak var proWeekPriceLabel: UILabel!
+    @IBOutlet weak var proMonthPriceLabel: UILabel!
+    @IBOutlet weak var proYearPriceLabel: UILabel!
     @IBOutlet weak var standardButton: UIButton!
     @IBOutlet weak var proButton: UIButton!
     @IBOutlet weak var standardCurrentLabel: UILabel!
