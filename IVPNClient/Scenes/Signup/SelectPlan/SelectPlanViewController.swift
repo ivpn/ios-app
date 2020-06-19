@@ -229,7 +229,7 @@ extension SelectPlanViewController {
             return 0
         }
         
-        return tableView.rowHeight
+        return 226
     }
     
 }
