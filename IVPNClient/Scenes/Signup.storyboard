@@ -300,7 +300,7 @@
             </objects>
             <point key="canvasLocation" x="3369.5652173913045" y="-229.01785714285714"/>
         </scene>
-        <!--Select IVPN Product-->
+        <!--Select IVPN Plan-->
         <scene sceneID="rgD-Na-x65">
             <objects>
                 <tableViewController id="tBH-nr-wv3" customClass="SelectPlanViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -313,7 +313,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We offer different products to better suit your needs. Please select one. You’ll be able to change it any time in the future." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePG-jY-ehS">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We offer different plans to better suit your needs. Please select one. You’ll be able to change it any time in the future." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePG-jY-ehS">
                                     <rect key="frame" x="17" y="5" width="380" height="54"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" name="ivpnLabel5"/>
@@ -643,7 +643,7 @@
                             <outlet property="standardYearPriceLabel" destination="RwG-Vp-sA9" id="cBk-xT-SNQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Select IVPN Product" id="GNb-Zt-1xj">
+                    <navigationItem key="navigationItem" title="Select IVPN Plan" id="GNb-Zt-1xj">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-2" style="plain" id="ThM-nh-AQD"/>
                     </navigationItem>
                     <connections>
