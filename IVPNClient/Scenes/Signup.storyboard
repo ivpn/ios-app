@@ -233,13 +233,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Csb-Ed-uVt">
-                                        <rect key="frame" x="0.0" y="78" width="380" height="150"/>
+                                        <rect key="frame" x="0.0" y="78" width="380" height="94"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="rF3-Xt-JLg"/>
+                                            <constraint firstAttribute="height" constant="94" id="rF3-Xt-JLg"/>
                                         </constraints>
-                                        <string key="text">Find the QR Code in the client area on the website or other app.
-
-Please save your account ID in a safe place, you will use it to connect other devices or log into client area on the website. You can find this account ID later in the Settings.</string>
+                                        <string key="text">Please save your account ID in a safe place, you will use it to connect on another IVPN client App or log in to the client area of the IVPN website. You can find this account ID later in the IVPN App Settings.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" name="ivpnLabel5"/>
                                         <nil key="highlightedColor"/>
