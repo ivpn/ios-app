@@ -184,7 +184,7 @@ class IAPManager {
     }
     
     func completeRestoredPurchases(products: [Purchase], endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
-        for product in products {
+        if let product = products.last {
             log(info: "Found restored purchase. Completing purchase...")
             
             if product.transaction.transactionState == .purchased {
