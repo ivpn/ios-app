@@ -266,7 +266,6 @@ extension LoginViewController {
                     NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
                     UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
                     UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                    UserDefaults.shared.set(data.isAppStoreSubscription(), forKey: UserDefaults.Key.subscriptionPurchasedOnDevice)
                     present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
                     return
                 }

@@ -38,7 +38,6 @@ extension UserDefaults {
         static let hostNames = "hostNames"
         static let apiHostName = "apiHostName"
         static let hasUserConsent = "hasUserConsent"
-        static let subscriptionPurchasedOnDevice = "subscriptionPurchasedOnDevice"
         static let sessionsLimit = "sessionsLimit"
         static let upgradeToUrl = "upgradeToUrl"
         static let connectionStatus = "connectionStatus"
@@ -143,10 +142,6 @@ extension UserDefaults {
         return bool(forKey: Key.hasUserConsent)
     }
     
-    @objc dynamic var subscriptionPurchasedOnDevice: Bool {
-        return bool(forKey: Key.subscriptionPurchasedOnDevice)
-    }
-    
     @objc dynamic var sessionsLimit: Int {
         return integer(forKey: Key.sessionsLimit)
     }
@@ -188,7 +183,6 @@ extension UserDefaults {
         shared.removeObject(forKey: UserDefaults.Key.wgRegenerationRate)
         shared.removeObject(forKey: UserDefaults.Key.localIpAddress)
         shared.removeObject(forKey: UserDefaults.Key.apiHostName)
-        shared.removeObject(forKey: UserDefaults.Key.subscriptionPurchasedOnDevice)
         shared.removeObject(forKey: UserDefaults.Key.sessionsLimit)
         shared.removeObject(forKey: UserDefaults.Key.keepAlive)
         standard.removeObject(forKey: "SelectedServerFastest")
