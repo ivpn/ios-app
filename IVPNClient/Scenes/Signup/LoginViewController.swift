@@ -194,7 +194,7 @@ class LoginViewController: UIViewController {
     private func showUsernameError() {
         showErrorAlert(
             title: "You entered an invalid account ID",
-            message: "Your account ID has to be in 'i-XXXX-XXXX-XXXX' or 'ivpnXXXXXXXX' format. It can be found on other devices where you are logged in."
+            message: "Your account ID has to be in 'i-XXXX-XXXX-XXXX' or 'ivpnXXXXXXXX' format. You can find it on other devices where you are logged in and in the client area of the IVPN website."
         )
     }
     
