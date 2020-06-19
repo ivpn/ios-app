@@ -80,6 +80,7 @@ class LoginViewController: UIViewController {
             }
             
             if account != nil {
+                self.userName.text = account?.accountId
                 self.sessionManager.createSession()
             }
         }
