@@ -77,7 +77,8 @@ class SettingsViewController: UITableViewController {
                 switch index {
                 case 0:
                     sender.setOn(false, animated: true)
-                    self.extendSubscription(self)
+                    let upgradeToUrl = Application.shared.serviceStatus.upgradeToUrl ?? ""
+                    self.openWebPage(upgradeToUrl)
                 default:
                     sender.setOn(false, animated: true)
                 }
