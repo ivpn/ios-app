@@ -131,7 +131,7 @@ class IAPManager {
     }
     
     func completePurchases(products: [Purchase], endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
-        for product in products {
+        if let product = products.last {
             log(info: "Found incomplete purchase. Completing purchase...")
             
             switch product.transaction.transactionState {
