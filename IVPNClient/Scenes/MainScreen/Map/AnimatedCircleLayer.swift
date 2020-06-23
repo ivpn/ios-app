@@ -12,7 +12,7 @@ class AnimatedCircleLayer: CAShapeLayer {
     
     // MARK: - Properties -
     
-    private let radius = 160
+    private let radius = 98
     
     private var circle: UIBezierPath {
         return UIBezierPath(

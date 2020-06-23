@@ -81,7 +81,7 @@ class MapScrollView: UIScrollView {
         
         setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
         
-        updateMarkerPosition(x: point.0 - 80, y: point.1 - 80, isLocalPosition: isLocalPosition)
+        updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
     }
     
     // MARK: - Private methods -
