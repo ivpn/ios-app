@@ -20,8 +20,12 @@ class SelectPlanViewController: UITableViewController {
     
     var changingPlan = false
     var selectingPlan = false
-    var standardService = Service(type: .standard, duration: .month)
-    var proService = Service(type: .pro, duration: .month)
+    var standardWeekService = Service(type: .standard, duration: .week)
+    var standardMonthService = Service(type: .standard, duration: .month)
+    var standardYearService = Service(type: .standard, duration: .year)
+    var proWeekService = Service(type: .pro, duration: .week)
+    var proMonthService = Service(type: .pro, duration: .month)
+    var proYearService = Service(type: .pro, duration: .year)
     
     var service = Service(type: .standard, duration: .month) {
         didSet {
@@ -206,8 +210,12 @@ class SelectPlanViewController: UITableViewController {
     }
     
     private func updateSubscriptions() {
-        selectPlanView?.standardPriceLabel.text = "\(standardService.priceText) / \(standardService.durationText)"
-        selectPlanView?.proPriceLabel.text = "\(proService.priceText) / \(proService.durationText)"
+        selectPlanView?.standardWeekPriceLabel.text = "\(standardWeekService.priceText) / \(standardWeekService.durationText)"
+        selectPlanView?.standardMonthPriceLabel.text = "\(standardMonthService.priceText) / \(standardMonthService.durationText)"
+        selectPlanView?.standardYearPriceLabel.text = "\(standardYearService.priceText) / \(standardYearService.durationText)"
+        selectPlanView?.proWeekPriceLabel.text = "\(proWeekService.priceText) / \(proWeekService.durationText)"
+        selectPlanView?.proMonthPriceLabel.text = "\(proMonthService.priceText) / \(proMonthService.durationText)"
+        selectPlanView?.proYearPriceLabel.text = "\(proYearService.priceText) / \(proYearService.durationText)"
     }
     
 }
@@ -221,7 +229,7 @@ extension SelectPlanViewController {
             return 0
         }
         
-        return tableView.rowHeight
+        return 226
     }
     
 }

@@ -80,6 +80,7 @@ class LoginViewController: UIViewController {
             }
             
             if account != nil {
+                self.userName.text = account?.accountId
                 self.sessionManager.createSession()
             }
         }
@@ -195,7 +196,7 @@ class LoginViewController: UIViewController {
     private func showUsernameError() {
         showErrorAlert(
             title: "You entered an invalid account ID",
-            message: "Your account ID has to be in 'i-XXXX-XXXX-XXXX' or 'ivpnXXXXXXXX' format. It can be found on other devices where you are logged in."
+            message: "Your account ID has to be in 'i-XXXX-XXXX-XXXX' or 'ivpnXXXXXXXX' format. You can find it on other devices where you are logged in and in the client area of the IVPN website."
         )
     }
     
@@ -267,7 +268,6 @@ extension LoginViewController {
                     NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
                     UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
                     UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                    UserDefaults.shared.set(data.isAppStoreSubscription(), forKey: UserDefaults.Key.subscriptionPurchasedOnDevice)
                     present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
                     return
                 }

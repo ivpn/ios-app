@@ -13,7 +13,6 @@ class CreateAccountView: UIView {
     
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var accountView: UIView!
     
@@ -31,10 +30,7 @@ class CreateAccountView: UIView {
     }
     
     private func setupLayout() {
-        messageLabel.sizeToFit()
-        
         if UIDevice.current.userInterfaceIdiom == .pad {
-            messageLabel.bb.left(21).right(-21)
             accountView.bb.left(21).right(-21)
         }
         

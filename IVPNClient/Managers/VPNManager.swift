@@ -145,9 +145,9 @@ class VPNManager {
     private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails) {
         let configuration = NEVPNProtocolIKEv2()
         configuration.remoteIdentifier = accessDetails.serverAddress
-        configuration.localIdentifier = accessDetails.username + "-" + Application.shared.authentication.randomPart
+        configuration.localIdentifier = accessDetails.username
         configuration.serverAddress = accessDetails.serverAddress
-        configuration.username = accessDetails.username + "-" + Application.shared.authentication.randomPart
+        configuration.username = accessDetails.username
         configuration.passwordReference = accessDetails.passwordRef
         configuration.authenticationMethod = .none
         configuration.useExtendedAuthentication = true
