@@ -62,6 +62,18 @@ class SettingsViewController: UITableViewController {
             DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
             }
+            
+            showActionSheet(title: "MultiHop is supported only on IVPN Pro plan", actions: ["Switch plan"], sourceView: sender) { index in
+                switch index {
+                case 0:
+                    sender.setOn(false, animated: true)
+                    let upgradeToUrl = Application.shared.serviceStatus.upgradeToUrl ?? ""
+                    self.openWebPage(upgradeToUrl)
+                default:
+                    sender.setOn(false, animated: true)
+                }
+            }
+            
             return
         }
         
