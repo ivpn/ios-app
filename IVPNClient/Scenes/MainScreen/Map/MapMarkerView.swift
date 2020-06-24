@@ -51,7 +51,7 @@ class MapMarkerView: UIView {
     private var animatedCircle = UIView()
     private var animatedCircleLayer = AnimatedCircleLayer()
     private var radius1: CGFloat = 98
-    private var radius2: CGFloat = 9
+    private var radius2: CGFloat = 12
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
     private var redColor = UIColor.init(named: Theme.ivpnRedOff)!
     private var grayColor = UIColor.init(named: Theme.ivpnGray18)!
@@ -87,7 +87,7 @@ class MapMarkerView: UIView {
             return
         }
         
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.7, animations: {
             self.alpha = 1
             self.transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
         }) { _ in
@@ -104,7 +104,7 @@ class MapMarkerView: UIView {
             return
         }
         
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.7, animations: {
             self.alpha = 0
             self.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
         }) { _ in

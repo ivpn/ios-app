@@ -21,7 +21,7 @@ class MapScrollView: UIScrollView {
     var viewModel: ProofsViewModel! {
         didSet {
             if oldValue == nil {
-                UIView.animate(withDuration: 0.5) {
+                UIView.animate(withDuration: 0.65) {
                     self.alpha = 1
                 }
             }
@@ -79,7 +79,13 @@ class MapScrollView: UIScrollView {
         let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
         let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
         
-        setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: animated)
+        if animated {
+            UIView.animate(withDuration: 0.55, delay: 0, options: .curveEaseInOut, animations: {
+                self.setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
+            })
+        } else {
+            setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
+        }
         
         updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
     }
@@ -179,11 +185,11 @@ class MapScrollView: UIScrollView {
         for marker in markers {
             if let circle = marker.viewWithTag(1) {
                 if marker.titleLabel?.text == city {
-                    circle.layer.cornerRadius = 6
+                    circle.layer.cornerRadius = 5
                     circle.snp.remakeConstraints { make in
-                        make.size.equalTo(12)
-                        make.left.equalTo(44)
-                        make.top.equalTo(15)
+                        make.size.equalTo(10)
+                        make.left.equalTo(45)
+                        make.top.equalTo(16)
                     }
                 } else {
                     circle.layer.cornerRadius = 3
