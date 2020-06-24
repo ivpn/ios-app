@@ -48,12 +48,10 @@ class MapMarkerView: UIView {
     var connectionInfoPopup = ConnectionInfoPopupView()
     private var circle1 = UIView()
     private var circle2 = UIView()
-    private var circle3 = UIView()
     private var animatedCircle = UIView()
     private var animatedCircleLayer = AnimatedCircleLayer()
-    private var radius1: CGFloat = 160
-    private var radius2: CGFloat = 26
-    private var radius3: CGFloat = 20
+    private var radius1: CGFloat = 98
+    private var radius2: CGFloat = 12
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
     private var redColor = UIColor.init(named: Theme.ivpnRedOff)!
     private var grayColor = UIColor.init(named: Theme.ivpnGray18)!
@@ -79,8 +77,7 @@ class MapMarkerView: UIView {
     
     func updateCircles(color: UIColor) {
         updateCircle(circle1, color: color.withAlphaComponent(0.5))
-        updateCircle(circle2, color: UIColor.white)
-        updateCircle(circle3, color: color)
+        updateCircle(circle2, color: color)
     }
     
     func show(animated: Bool = false, completion: (() -> Void)? = nil) {
@@ -90,7 +87,7 @@ class MapMarkerView: UIView {
             return
         }
         
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.7, animations: {
             self.alpha = 1
             self.transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
         }) { _ in
@@ -107,7 +104,7 @@ class MapMarkerView: UIView {
             return
         }
         
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.7, animations: {
             self.alpha = 0
             self.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
         }) { _ in
@@ -161,7 +158,6 @@ class MapMarkerView: UIView {
     private func initCircles() {
         initCircle(circle1, radius: radius1)
         initCircle(circle2, radius: radius2)
-        initCircle(circle3, radius: radius3)
         
         circle1.addSubview(animatedCircle)
         animatedCircle.bb.center().size(width: radius1, height: radius1)
