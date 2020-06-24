@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Bamboo
+import SnapKit
 import NetworkExtension
 
 class MapMarkerView: UIView {
@@ -139,7 +139,11 @@ class MapMarkerView: UIView {
     // MARK: - Private methods -
     
     private func setupConstraints() {
-        bb.size(width: radius1, height: radius1)
+        snp.makeConstraints { make in
+            make.left.equalTo(0)
+            make.top.equalTo(0)
+            make.size.equalTo(radius1)
+        }
     }
     
     private func initCircle(_ circle: UIView, radius: CGFloat) {
@@ -191,6 +195,23 @@ class MapMarkerView: UIView {
         if displayMode == .protected {
             animatedCircleLayer.startAnimation()
         }
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard !clipsToBounds && !isHidden && alpha > 0 else {
+            return nil
+        }
+        
+        for member in subviews.reversed() {
+            let subPoint = member.convert(point, from: self)
+            guard let result = member.hitTest(subPoint, with: event) else {
+                continue
+            }
+            
+            return result
+        }
+        
+        return nil
     }
     
 }
