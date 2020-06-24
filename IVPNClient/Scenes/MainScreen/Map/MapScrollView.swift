@@ -39,6 +39,7 @@ class MapScrollView: UIScrollView {
     
     private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     private var markers: [UIButton] = []
+    private var connectToServerPopup = ConnectToServerPopupView()
     
     // MARK: - View lifecycle -
     
@@ -46,8 +47,9 @@ class MapScrollView: UIScrollView {
         setupConstraints()
         setupView()
         initGestures()
-        placeServerLocationMarkers()
-        placeMarkers()
+        initServerLocationMarkers()
+        initMarkers()
+        initConnectToServerPopup()
         updateSelectedMarker()
         addObservers()
     }
@@ -119,17 +121,21 @@ class MapScrollView: UIScrollView {
         NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
-    private func placeServerLocationMarkers() {
+    private func initServerLocationMarkers() {
         for server in Application.shared.serverList.servers {
             placeMarker(latitude: server.latitude, longitude: server.longitude, city: server.city)
         }
     }
     
-    private func placeMarkers() {
+    private func initMarkers() {
         markerLocalView.hide()
         markerGatewayView.hide()
         addSubview(markerLocalView)
         addSubview(markerGatewayView)
+    }
+    
+    private func initConnectToServerPopup() {
+        addSubview(connectToServerPopup)
     }
     
     private func updateMarkerPosition(x: Double, y: Double, isLocalPosition: Bool) {
@@ -211,9 +217,13 @@ class MapScrollView: UIScrollView {
         let city = sender.titleLabel?.text ?? ""
         
         if let server = Application.shared.serverList.getServer(byCity: city) {
-            Application.shared.settings.selectedServer = server
-            updateSelectedMarker()
-            NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
+            connectToServerPopup.vpnServer = server
+            let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
+            connectToServerPopup.snp.updateConstraints { make in
+                make.left.equalTo(point.0 - 135)
+                make.top.equalTo(point.1 + 17)
+            }
+            connectToServerPopup.show()
         }
     }
     

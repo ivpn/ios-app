@@ -109,12 +109,7 @@ class ConnectToServerPopupView: UIView {
     // MARK: - Private methods -
     
     private func setupConstraints() {
-        snp.makeConstraints { make in
-            make.width.equalTo(270)
-            make.height.equalTo(130)
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(55)
-        }
+        setupLayout()
     }
     
     private func setupView() {
@@ -132,11 +127,16 @@ class ConnectToServerPopupView: UIView {
         addSubview(container)
         
         displayMode = .hidden
-        setupLayout()
-        vpnServer = Application.shared.settings.selectedServer
     }
     
     private func setupLayout() {
+        snp.makeConstraints { make in
+            make.left.equalTo(0)
+            make.top.equalTo(0)
+            make.width.equalTo(270)
+            make.height.equalTo(130)
+        }
+        
         container.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
