@@ -120,6 +120,7 @@ class MapScrollView: UIScrollView {
     }
     
     @objc private func handleTap() {
+        connectToServerPopup.hide()
         NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
@@ -229,6 +230,12 @@ class MapScrollView: UIScrollView {
             connectToServerPopup.show()
             
             updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
+            
+            if Application.shared.connectionManager.status.isDisconnected() {
+                Application.shared.settings.selectedServer = server
+                updateSelectedMarker()
+                NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
+            }
         }
     }
     
