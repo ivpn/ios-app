@@ -210,10 +210,6 @@ class MapScrollView: UIScrollView {
                 }
             }
         }
-        
-        if !Application.shared.connectionManager.status.isDisconnected() {
-            Application.shared.connectionManager.reconnect()
-        }
     }
     
     @objc private func selectServer(_ sender: UIButton) {

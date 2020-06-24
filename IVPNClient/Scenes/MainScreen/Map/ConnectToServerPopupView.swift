@@ -171,6 +171,10 @@ class ConnectToServerPopupView: UIView {
     
     @objc private func connectAction() {
         // TODO: Connect to selected server
+        
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            Application.shared.connectionManager.reconnect()
+        }
     }
     
 }
