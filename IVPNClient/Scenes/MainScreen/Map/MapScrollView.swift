@@ -179,11 +179,19 @@ class MapScrollView: UIScrollView {
         for marker in markers {
             if let circle = marker.viewWithTag(1) {
                 if marker.titleLabel?.text == city {
-                    marker.setTitleColor(UIColor.init(named: Theme.ivpnBlue), for: .normal)
-                    circle.backgroundColor = UIColor.init(named: Theme.ivpnBlue)
+                    circle.layer.cornerRadius = 6
+                    circle.snp.remakeConstraints { make in
+                        make.size.equalTo(12)
+                        make.left.equalTo(44)
+                        make.top.equalTo(15)
+                    }
                 } else {
-                    marker.setTitleColor(UIColor.init(named: Theme.ivpnGray21), for: .normal)
-                    circle.backgroundColor = UIColor.init(named: Theme.ivpnGray21)
+                    circle.layer.cornerRadius = 3
+                    circle.snp.remakeConstraints { make in
+                        make.size.equalTo(6)
+                        make.left.equalTo(47)
+                        make.top.equalTo(18)
+                    }
                 }
             }
         }
