@@ -44,12 +44,25 @@ class ConnectToServerPopupView: UIView {
     
     var actionButton: UIButton = {
         let actionButton = UIButton()
+        actionButton.setTitle("CONNECT TO SERVER", for: .normal)
+        actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         actionButton.backgroundColor = UIColor.init(named: Theme.ivpnBlue)
+        actionButton.layer.cornerRadius = 8
         actionButton.addTarget(self, action: #selector(connectAction), for: .touchUpInside)
         return actionButton
     }()
     
     // MARK: - Properties -
+    
+    var vpnServer: VPNServer! {
+        didSet {
+            let geoLookupModel = GeoLookup(ipAddress: "", countryCode: vpnServer.countryCode, country: vpnServer.country, city: vpnServer.city, isIvpnServer: true, isp: "", latitude: 0, longitude: 0)
+            let viewModel = ProofsViewModel(model: geoLookupModel)
+            
+            descriptionLabel.text = "Protect yourself by connecting to"
+            locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
+        }
+    }
     
     var displayMode: DisplayMode = .hidden {
         didSet {
@@ -98,7 +111,7 @@ class ConnectToServerPopupView: UIView {
     private func setupConstraints() {
         snp.makeConstraints { make in
             make.width.equalTo(270)
-            make.height.equalTo(69)
+            make.height.equalTo(130)
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(55)
         }
@@ -120,6 +133,7 @@ class ConnectToServerPopupView: UIView {
         
         displayMode = .hidden
         setupLayout()
+        vpnServer = Application.shared.settings.selectedServer
     }
     
     private func setupLayout() {
@@ -147,11 +161,11 @@ class ConnectToServerPopupView: UIView {
             make.height.equalTo(19)
         }
         
-        arrow.snp.makeConstraints { make in
+        actionButton.snp.makeConstraints { make in
             make.left.equalTo(18)
             make.right.equalTo(-18)
             make.height.equalTo(44)
-            make.bottom.equalTo(-15)
+            make.bottom.equalTo(-20)
         }
     }
     
