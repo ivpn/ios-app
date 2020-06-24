@@ -74,7 +74,7 @@ class MapScrollView: UIScrollView {
         updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated, isLocalPosition: true)
     }
     
-    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool) {
+    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
         let halfWidth = Double(UIScreen.main.bounds.width / 2)
         let halfHeight = Double(UIScreen.main.bounds.height / 2)
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
@@ -89,7 +89,9 @@ class MapScrollView: UIScrollView {
             setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
         }
         
-        updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
+        if updateMarkers {
+            updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
+        }
     }
     
     // MARK: - Private methods -
@@ -217,13 +219,16 @@ class MapScrollView: UIScrollView {
         let city = sender.titleLabel?.text ?? ""
         
         if let server = Application.shared.serverList.getServer(byCity: city) {
-            connectToServerPopup.vpnServer = server
             let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
+            connectToServerPopup.vpnServer = server
             connectToServerPopup.snp.updateConstraints { make in
                 make.left.equalTo(point.0 - 135)
                 make.top.equalTo(point.1 + 17)
             }
+            
             connectToServerPopup.show()
+            
+            updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
         }
     }
     
