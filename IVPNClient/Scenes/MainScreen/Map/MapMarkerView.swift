@@ -183,6 +183,7 @@ class MapMarkerView: UIView {
         if connectionInfoPopup.displayMode == .hidden {
             connectionInfoPopup.show()
             NotificationCenter.default.post(name: Notification.Name.CenterMap, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
         } else {
             connectionInfoPopup.hide()
         }

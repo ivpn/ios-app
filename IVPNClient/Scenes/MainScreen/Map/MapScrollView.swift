@@ -107,11 +107,13 @@ class MapScrollView: UIScrollView {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedMarker), name: Notification.Name.ServerSelected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedMarker), name: Notification.Name.PingDidComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideConnectToServerPopup), name: Notification.Name.HideConnectToServerPopup, object: nil)
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.HideConnectToServerPopup, object: nil)
     }
     
     private func initGestures() {
@@ -120,7 +122,7 @@ class MapScrollView: UIScrollView {
     }
     
     @objc private func handleTap() {
-        connectToServerPopup.hide()
+        hideConnectToServerPopup()
         NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
@@ -234,6 +236,10 @@ class MapScrollView: UIScrollView {
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
         }
+    }
+    
+    @objc private func hideConnectToServerPopup() {
+        connectToServerPopup.hide()
     }
     
     private func getCoordinatesBy(latitude: Double, longitude: Double) -> (Double, Double) {
