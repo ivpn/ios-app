@@ -60,7 +60,7 @@ class ConnectToServerPopupView: UIView {
             let viewModel = ProofsViewModel(model: geoLookupModel)
             locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
             
-            if Application.shared.connectionManager.status.isDisconnected() && Application.shared.settings.selectedServer == vpnServer {
+            if !Application.shared.connectionManager.status.isDisconnected() && Application.shared.settings.selectedServer == vpnServer {
                 descriptionLabel.text = "Connected to"
                 actionButton.setTitle("DISCONNECT", for: .normal)
             } else {
