@@ -45,7 +45,7 @@ class ConnectToServerPopupView: UIView {
     var actionButton: UIButton = {
         let actionButton = UIButton()
         actionButton.setTitle("CONNECT TO SERVER", for: .normal)
-        actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         actionButton.backgroundColor = UIColor.init(named: Theme.ivpnBlue)
         actionButton.layer.cornerRadius = 8
         actionButton.addTarget(self, action: #selector(connectAction), for: .touchUpInside)
