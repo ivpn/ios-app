@@ -171,6 +171,7 @@ class MapMarkerView: UIView {
     private func initActionButton() {
         let actionButton = UIButton()
         addSubview(actionButton)
+        actionButton.accessibilityLabel = "Connection info"
         actionButton.bb.center().size(width: radius1, height: radius1)
         actionButton.addTarget(self, action: #selector(markerAction), for: .touchUpInside)
     }
