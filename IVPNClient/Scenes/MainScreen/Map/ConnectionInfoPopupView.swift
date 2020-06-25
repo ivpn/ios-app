@@ -67,6 +67,7 @@ class ConnectionInfoPopupView: UIView {
     var actionButton: UIButton = {
         let actionButton = UIButton()
         actionButton.setImage(UIImage.init(named: "icon-info-2"), for: .normal)
+        actionButton.accessibilityLabel = "Connection info details"
         actionButton.addTarget(self, action: #selector(infoAction), for: .touchUpInside)
         return actionButton
     }()
