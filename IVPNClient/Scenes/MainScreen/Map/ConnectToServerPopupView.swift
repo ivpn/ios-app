@@ -177,7 +177,10 @@ class ConnectToServerPopupView: UIView {
             NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
         } else {
             Application.shared.connectionManager.reconnect()
+            NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
         }
+        
+        hide()
     }
     
 }
