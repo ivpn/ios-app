@@ -109,6 +109,7 @@ class ControlPanelView: UITableView {
     func updateVPNStatus(viewModel: VPNStatusViewModel, animated: Bool = true) {
         protectionStatusLabel.text = viewModel.protectionStatusText
         connectSwitch.setOn(viewModel.connectToggleIsOn, animated: animated)
+        connectSwitch.accessibilityLabel = viewModel.connectToggleIsOn ? "Switch to disconnect" : "Switch to connect"
         updateConnectSwitch()
     }
     
