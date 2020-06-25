@@ -2580,6 +2580,7 @@
                             <outlet property="locationLoader" destination="R4n-PY-IGn" id="Cff-x3-gFe"/>
                             <outlet property="networkView" destination="IWY-FC-eTO" id="8o7-WG-viR"/>
                             <outlet property="protectionStatusLabel" destination="fZx-j5-ahl" id="IPa-ne-fRV"/>
+                            <outlet property="protectionStatusTableCell" destination="1dE-Ee-l4r" id="w0o-eH-gFE"/>
                             <outlet property="protocolLabel" destination="mfE-oo-iTV" id="5o9-zb-c3x"/>
                             <outlet property="providerErrorLabel" destination="rdR-pT-kcI" id="tfT-k8-N5n"/>
                             <outlet property="providerLabel" destination="LdG-Fb-Gn0" id="h0R-lp-s5c"/>
