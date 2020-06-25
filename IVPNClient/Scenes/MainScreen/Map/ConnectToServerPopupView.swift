@@ -58,9 +58,15 @@ class ConnectToServerPopupView: UIView {
         didSet {
             let geoLookupModel = GeoLookup(ipAddress: "", countryCode: vpnServer.countryCode, country: vpnServer.country, city: vpnServer.city, isIvpnServer: true, isp: "", latitude: 0, longitude: 0)
             let viewModel = ProofsViewModel(model: geoLookupModel)
-            
-            descriptionLabel.text = "Protect yourself by connecting to"
             locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
+            
+            if Application.shared.connectionManager.status.isDisconnected() && Application.shared.settings.selectedServer == vpnServer {
+                descriptionLabel.text = "Connected to"
+                actionButton.setTitle("DISCONNECT", for: .normal)
+            } else {
+                descriptionLabel.text = "Protect yourself by connecting to"
+                actionButton.setTitle("CONNECT TO SERVER", for: .normal)
+            }
         }
     }
     
