@@ -182,6 +182,7 @@ class MapMarkerView: UIView {
     @objc private func markerAction() {
         if connectionInfoPopup.displayMode == .hidden {
             connectionInfoPopup.show()
+            NotificationCenter.default.post(name: Notification.Name.CenterMap, object: nil)
         } else {
             connectionInfoPopup.hide()
         }
