@@ -39,6 +39,7 @@ class MapScrollView: UIScrollView {
     
     private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     private var markers: [UIButton] = []
+    private var connectToServerPopup = ConnectToServerPopupView()
     
     // MARK: - View lifecycle -
     
@@ -46,8 +47,9 @@ class MapScrollView: UIScrollView {
         setupConstraints()
         setupView()
         initGestures()
-        placeServerLocationMarkers()
-        placeMarkers()
+        initServerLocationMarkers()
+        initMarkers()
+        initConnectToServerPopup()
         updateSelectedMarker()
         addObservers()
     }
@@ -72,7 +74,7 @@ class MapScrollView: UIScrollView {
         updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated, isLocalPosition: true)
     }
     
-    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool) {
+    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
         let halfWidth = Double(UIScreen.main.bounds.width / 2)
         let halfHeight = Double(UIScreen.main.bounds.height / 2)
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
@@ -87,7 +89,9 @@ class MapScrollView: UIScrollView {
             setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
         }
         
-        updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
+        if updateMarkers {
+            updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
+        }
     }
     
     // MARK: - Private methods -
@@ -103,11 +107,13 @@ class MapScrollView: UIScrollView {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedMarker), name: Notification.Name.ServerSelected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedMarker), name: Notification.Name.PingDidComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideConnectToServerPopup), name: Notification.Name.HideConnectToServerPopup, object: nil)
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.HideConnectToServerPopup, object: nil)
     }
     
     private func initGestures() {
@@ -116,20 +122,25 @@ class MapScrollView: UIScrollView {
     }
     
     @objc private func handleTap() {
+        hideConnectToServerPopup()
         NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
-    private func placeServerLocationMarkers() {
+    private func initServerLocationMarkers() {
         for server in Application.shared.serverList.servers {
             placeMarker(latitude: server.latitude, longitude: server.longitude, city: server.city)
         }
     }
     
-    private func placeMarkers() {
+    private func initMarkers() {
         markerLocalView.hide()
         markerGatewayView.hide()
         addSubview(markerLocalView)
         addSubview(markerGatewayView)
+    }
+    
+    private func initConnectToServerPopup() {
+        addSubview(connectToServerPopup)
     }
     
     private func updateMarkerPosition(x: Double, y: Double, isLocalPosition: Bool) {
@@ -201,20 +212,34 @@ class MapScrollView: UIScrollView {
                 }
             }
         }
-        
-        if !Application.shared.connectionManager.status.isDisconnected() {
-            Application.shared.connectionManager.reconnect()
-        }
     }
     
     @objc private func selectServer(_ sender: UIButton) {
         let city = sender.titleLabel?.text ?? ""
         
         if let server = Application.shared.serverList.getServer(byCity: city) {
-            Application.shared.settings.selectedServer = server
-            updateSelectedMarker()
-            NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
+            let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
+            connectToServerPopup.vpnServer = server
+            connectToServerPopup.snp.updateConstraints { make in
+                make.left.equalTo(point.0 - 135)
+                make.top.equalTo(point.1 + 17)
+            }
+            
+            connectToServerPopup.show()
+            NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
+            
+            updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
+            
+            if Application.shared.connectionManager.status.isDisconnected() {
+                Application.shared.settings.selectedServer = server
+                updateSelectedMarker()
+                NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
+            }
         }
+    }
+    
+    @objc private func hideConnectToServerPopup() {
+        connectToServerPopup.hide()
     }
     
     private func getCoordinatesBy(latitude: Double, longitude: Double) -> (Double, Double) {

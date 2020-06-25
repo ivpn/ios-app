@@ -11,6 +11,7 @@ import Foundation
 extension Notification.Name {
     
     public static let ServerSelected = Notification.Name("serverSelected")
+    public static let Connect = Notification.Name("connect")
     public static let Disconnect = Notification.Name("disconnect")
     public static let TurnOffMultiHop = Notification.Name("turnOffMultiHop")
     public static let UpdateNetwork = Notification.Name("updateNetwork")
@@ -31,5 +32,7 @@ extension Notification.Name {
     public static let UpdateControlPanel = Notification.Name("updateControlPanel")
     public static let ProtocolSelected = Notification.Name("protocolSelected")
     public static let HideConnectionInfoPopup = Notification.Name("hideConnectionInfoPopup")
+    public static let HideConnectToServerPopup = Notification.Name("hideConnectToServerPopup")
+    public static let CenterMap = Notification.Name("centerMap")
     
 }

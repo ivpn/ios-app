@@ -339,6 +339,7 @@ class ControlPanelViewController: UITableViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateControlPanel), name: Notification.Name.UpdateControlPanel, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(serverSelected), name: Notification.Name.ServerSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.Connect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: Notification.Name.Disconnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
@@ -348,6 +349,7 @@ class ControlPanelViewController: UITableViewController {
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateControlPanel, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.Connect, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.Disconnect, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionDismissed, object: nil)

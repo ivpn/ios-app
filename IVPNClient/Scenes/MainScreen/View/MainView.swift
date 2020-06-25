@@ -41,12 +41,17 @@ class MainView: UIView {
         initSettingsAction()
         initInfoAlert()
         updateInfoAlert()
+        addObservers()
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             centerMap()
         }
+    }
+    
+    deinit {
+        removeObservers()
     }
     
     // MARK: - Methods -
@@ -72,6 +77,14 @@ class MainView: UIView {
     }
     
     // MARK: - Private methods -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(centerMap), name: Notification.Name.CenterMap, object: nil)
+    }
+    
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.CenterMap, object: nil)
+    }
     
     private func initSettingsAction() {
         let settingsButton = UIButton()
