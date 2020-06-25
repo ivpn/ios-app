@@ -224,6 +224,7 @@ class MapScrollView: UIScrollView {
             }
             
             connectToServerPopup.show()
+            NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
             
             updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
             
