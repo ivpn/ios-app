@@ -11,6 +11,7 @@ import Foundation
 extension Notification.Name {
     
     public static let ServerSelected = Notification.Name("serverSelected")
+    public static let Connect = Notification.Name("connect")
     public static let Disconnect = Notification.Name("disconnect")
     public static let TurnOffMultiHop = Notification.Name("turnOffMultiHop")
     public static let UpdateNetwork = Notification.Name("updateNetwork")

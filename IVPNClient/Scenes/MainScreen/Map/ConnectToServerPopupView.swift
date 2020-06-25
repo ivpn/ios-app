@@ -170,16 +170,19 @@ class ConnectToServerPopupView: UIView {
     }
     
     @objc private func connectAction() {
-        // TODO: Connect to selected server
+        Application.shared.settings.selectedServer = vpnServer
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         
-        if !Application.shared.connectionManager.status.isDisconnected() {
+        if Application.shared.connectionManager.status.isDisconnected() {
+            NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
+        } else {
             Application.shared.connectionManager.reconnect()
         }
     }
     
 }
 
-// MARK: - ConnectionInfoPopupView extension -
+// MARK: - ConnectToServerPopupView extension -
 
 extension ConnectToServerPopupView {
     
