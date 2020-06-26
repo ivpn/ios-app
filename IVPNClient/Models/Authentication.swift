@@ -21,10 +21,9 @@ class Authentication {
         return !username.isEmpty || !sessionToken.isEmpty
     }
     
-    var hasSignupCredentials: Bool {
-        let email = KeyChain.email ?? ""
-        let password = KeyChain.password ?? ""
-        return !email.isEmpty && !password.isEmpty
+    var isNewStyleAccount: Bool {
+        let username = getStoredUsername()
+        return ServiceStatus.isNewStyleAccount(username: username)
     }
     
     private(set) var randomPart: String

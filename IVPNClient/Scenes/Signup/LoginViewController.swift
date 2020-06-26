@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  IVPN Client
 //
 //  Created by Fedir Nepyyvoda on 7/12/16.
@@ -7,32 +7,82 @@
 //
 
 import UIKit
-import ActiveLabel
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
 
     // MARK: - @IBOutlets -
     
-    @IBOutlet weak var userName: UITextField!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var noteLabel: ActiveLabel!
-    @IBOutlet weak var illustration: UIImageView!
+    @IBOutlet weak var userName: UITextField! {
+        didSet {
+            userName.delegate = self
+        }
+    }
+    
+    @IBOutlet weak var scannerButton: UIButton! {
+        didSet {
+            scannerButton.isHidden = !UIImagePickerController.isSourceTypeAvailable(.camera)
+        }
+    }
     
     // MARK: - Properties -
     
+    private lazy var sessionManager: SessionManager = {
+        let sessionManager = SessionManager()
+        sessionManager.delegate = self
+        return sessionManager
+    }()
+    
     private var loginProcessStarted = false
-    private let sessionManager = SessionManager()
+    private let hud = JGProgressHUD(style: .dark)
+    private var actionType: ActionType = .login
     
     // MARK: - @IBActions -
     
     @IBAction func loginToAccount(_ sender: AnyObject) {
+        guard UserDefaults.shared.hasUserConsent else {
+            actionType = .login
+            present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
+            return
+        }
+        
         view.endEditing(true)
         startLoginProcess()
     }
     
-    @IBAction func showCreateAccount(_ sender: AnyObject) {
-        navigationController?.popViewController {
-            NotificationCenter.default.post(name: Notification.Name.ShowCreateAccount, object: nil)
+    @IBAction func createAccount(_ sender: AnyObject) {
+        guard UserDefaults.shared.hasUserConsent else {
+            actionType = .signup
+            present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
+            return
+        }
+        
+        startSignupProcess()
+    }
+    
+    @IBAction func openScanner(_ sender: AnyObject) {
+        present(NavigationManager.getScannerViewController(delegate: self), animated: true)
+    }
+    
+    @IBAction func restorePurchases(_ sender: AnyObject) {
+        guard deviceCanMakePurchases() else { return }
+        
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Restoring purchases..."
+        hud.show(in: (navigationController?.view)!)
+        
+        IAPManager.shared.restorePurchases { account, error in
+            self.hud.dismiss()
+            
+            if let error = error {
+                self.showErrorAlert(title: "Restore failed", message: error.message)
+                return
+            }
+            
+            if account != nil {
+                self.userName.text = account?.accountId
+                self.sessionManager.createSession()
+            }
         }
     }
     
@@ -41,14 +91,20 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "loginScreen"
-        
-        userName.delegate = self
-        sessionManager.delegate = self
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         addObservers()
         hideKeyboardOnTap()
-        setupActiveLabel()
-        setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
+        // Remove when fixed in future releases
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.setNeedsLayout()
+        }
     }
     
     deinit {
@@ -60,6 +116,7 @@ class LoginViewController: UIViewController {
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(termsOfServiceAgreed), name: Notification.Name.TermsOfServiceAgreed, object: nil)
     }
     
     func removeObservers() {
@@ -67,6 +124,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
     }
     
     @objc func newSession() {
@@ -75,6 +133,15 @@ class LoginViewController: UIViewController {
     
     @objc func forceNewSession() {
         startLoginProcess(force: true)
+    }
+    
+    @objc func termsOfServiceAgreed() {
+        switch actionType {
+        case .login:
+            loginToAccount(self)
+        case .signup:
+            createAccount(self)
+        }
     }
     
     // MARK: - Methods -
@@ -97,27 +164,38 @@ class LoginViewController: UIViewController {
         sessionManager.createSession(force: force)
     }
     
+    private func startSignupProcess() {
+        if let tempUsername = KeyChain.tempUsername, ServiceStatus.isNewStyleAccount(username: tempUsername) {
+            present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
+            return
+        }
+        
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Creating new account..."
+        hud.show(in: (navigationController?.view)!)
+        
+        let request = ApiRequestDI(method: .post, endpoint: Config.apiAccountNew, params: [URLQueryItem(name: "product_name", value: "IVPN Standard")])
+        
+        ApiService.shared.requestCustomError(request) { [weak self] (result: ResultCustomError<Account, ErrorResult>) in
+            guard let self = self else { return }
+            
+            self.hud.dismiss()
+            
+            switch result {
+            case .success(let account):
+                KeyChain.tempUsername = account.accountId
+                self.present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
+            case .failure(let error):
+                self.showErrorAlert(title: "Error", message: error?.message ?? "There was a problem with creating a new account.")
+            }
+        }
+    }
+    
     private func showUsernameError() {
         showErrorAlert(
             title: "You entered an invalid account ID",
-            message: "Your account ID starts with the letters 'ivpn' and can be found in the welcome email sent to you on signup. You cannot use your email address."
+            message: "Your account ID has to be in 'i-XXXX-XXXX-XXXX' or 'ivpnXXXXXXXX' format. You can find it on other devices where you are logged in and in the client area of the IVPN website."
         )
-    }
-    
-    private func setupActiveLabel() {
-        let customType = ActiveType.custom(pattern: "Client Area")
-        noteLabel.enabledTypes = [customType]
-        noteLabel.customColor[customType] = UIColor.init(named: Theme.Key.ivpnBlue)
-        noteLabel.text = noteLabel.text
-        noteLabel.handleCustomTap(for: customType) { _ in
-            self.openWebPage("http://ivpn.net/clientarea")
-        }
-    }
-    
-    private func setupView() {
-        if UIDevice.screenHeightSmallerThan(device: .iPhoneXR) {
-            illustration.isHidden = true
-        }
     }
     
     @objc private func subscriptionDismissed() {
@@ -141,11 +219,13 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     
     override func createSessionStart() {
-        ProgressIndicator.shared.showIn(view: view)
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Creating new session..."
+        hud.show(in: (navigationController?.view)!)
     }
     
     override func createSessionSuccess() {
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         loginProcessStarted = false
         
         navigationController?.dismiss(animated: true, completion: {
@@ -154,7 +234,7 @@ extension LoginViewController {
     }
     
     override func createSessionServiceNotActive() {
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         loginProcessStarted = false
         
         let viewController = NavigationManager.getSubscriptionViewController()
@@ -162,8 +242,20 @@ extension LoginViewController {
         present(viewController, animated: true, completion: nil)
     }
     
+    override func createSessionAccountNotActivated(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
+        
+        KeyChain.tempUsername = KeyChain.username
+        Application.shared.authentication.removeStoredCredentials()
+        
+        let viewController = NavigationManager.getSelectPlanViewController()
+        viewController.presentationController?.delegate = self
+        present(viewController, animated: true, completion: nil)
+    }
+    
     override func createSessionTooManySessions(error: Any?) {
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
         
@@ -174,7 +266,6 @@ extension LoginViewController {
                     NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
                     UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
                     UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                    UserDefaults.shared.set(data.isAppStoreSubscription(), forKey: UserDefaults.Key.subscriptionPurchasedOnDevice)
                     present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
                     return
                 }
@@ -185,7 +276,7 @@ extension LoginViewController {
     }
     
     override func createSessionAuthenticationError() {
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
         showErrorAlert(title: "Error", message: "Account ID is incorrect")
@@ -198,7 +289,7 @@ extension LoginViewController {
             message = error.message
         }
         
-        ProgressIndicator.shared.hide()
+        hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
         showErrorAlert(title: "Error", message: message)
@@ -246,6 +337,36 @@ extension LoginViewController: UIAdaptivePresentationControllerDelegate {
                 NotificationCenter.default.post(name: Notification.Name.AuthenticationDismissed, object: nil)
             })
         }
+    }
+    
+}
+
+// MARK: - ScannerViewControllerDelegate -
+
+extension LoginViewController: ScannerViewControllerDelegate {
+    
+    func qrCodeFound(code: String) {
+        userName.text = code
+        
+        guard UserDefaults.shared.hasUserConsent else {
+            DispatchQueue.async {
+                self.actionType = .login
+                self.present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
+            }
+            
+            return
+        }
+        
+        startLoginProcess()
+    }
+    
+}
+
+extension LoginViewController {
+    
+    enum ActionType {
+        case login
+        case signup
     }
     
 }

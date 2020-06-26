@@ -12,10 +12,12 @@ struct ApiRequestDI {
     let method: HTTPMethod
     let endpoint: String
     let params: [URLQueryItem]?
+    let contentType: HTTPContentType
     
-    init(method: HTTPMethod, endpoint: String, params: [URLQueryItem]? = nil) {
+    init(method: HTTPMethod, endpoint: String, params: [URLQueryItem]? = nil, contentType: HTTPContentType = .applicationJSON) {
         self.method = method
         self.endpoint = endpoint
         self.params = params
+        self.contentType = contentType
     }
 }

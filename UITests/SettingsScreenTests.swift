@@ -26,7 +26,7 @@ class SettingsScreenTests: XCTestCase {
         app.buttons["Open Settings"].tap()
         app.tables["settingsScreen"].swipeUp()
         app.buttons["Log In or Sign Up"].tap()
-        XCTAssertTrue(app.isDisplayingInitScreen)
+        XCTAssertTrue(app.isDisplayingLoginScreen)
         
         app.buttons["Log In"].tap()
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
@@ -43,7 +43,7 @@ class SettingsScreenTests: XCTestCase {
 
         app.buttons["Open Settings"].tap()
         app.tables["settingsScreen"].staticTexts["IKEv2"].tap()
-        XCTAssertTrue(app.isDisplayingInitScreen)
+        XCTAssertTrue(app.isDisplayingLoginScreen)
     }
     
     func testNetworkProtection() {
@@ -53,7 +53,7 @@ class SettingsScreenTests: XCTestCase {
 
         app.buttons["Open Settings"].tap()
         app.tables["settingsScreen"].staticTexts["Network Protection"].tap()
-        XCTAssertTrue(app.isDisplayingInitScreen)
+        XCTAssertTrue(app.isDisplayingLoginScreen)
     }
     
 }

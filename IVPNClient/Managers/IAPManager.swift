@@ -20,6 +20,18 @@ class IAPManager {
         return SKPaymentQueue.canMakePayments()
     }
     
+    private var apiEndpoint: String {
+        if KeyChain.sessionToken != nil {
+            if !Application.shared.authentication.isNewStyleAccount {
+                return Config.apiPaymentAddLegacy
+            }
+            
+            return Config.apiPaymentAdd
+        }
+        
+        return Config.apiPaymentInitial
+    }
+    
     // MARK: - Methods -
     
     func fetchProducts(completion: @escaping ([SKProduct]?, String?) -> Void) {
@@ -39,7 +51,7 @@ class IAPManager {
     }
     
     func purchaseProduct(identifier: String, completion: @escaping (PurchaseDetails?, String?) -> Void) {
-        SwiftyStoreKit.purchaseProduct(identifier, quantity: 1, atomically: true) { result in
+        SwiftyStoreKit.purchaseProduct(identifier, quantity: 1, atomically: false) { result in
             switch result {
             case .success(let purchase):
                 completion(purchase, nil)
@@ -62,18 +74,53 @@ class IAPManager {
         }
     }
     
+    func finishIncompletePurchases(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        SwiftyStoreKit.completeTransactions(atomically: false) { products in
+            self.completePurchases(products: products, endpoint: self.apiEndpoint) { serviceStatus, error in
+                completion(serviceStatus, error)
+            }
+        }
+    }
+    
+    func restorePurchases(completion: @escaping (Account?, ErrorResult?) -> Void) {
+        SwiftyStoreKit.restorePurchases(atomically: false) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                if let restoreError = results.restoreFailedPurchases.first {
+                    let error = ErrorResult(status: 500, message: restoreError.0.localizedDescription)
+                    completion(nil, error)
+                    log(error: restoreError.0.localizedDescription)
+                    return
+                }
+                
+                let error = ErrorResult(status: 500, message: "Unknown error")
+                completion(nil, error)
+                log(error: "Unknown error")
+            } else if results.restoredPurchases.count > 0 {
+                self.completeRestoredPurchase(purchase: results.restoredPurchases.first!) { account, error in
+                    completion(account, error)
+                    log(info: "Purchases are restored.")
+                }
+            } else {
+                let error = ErrorResult(status: 500, message: "There are no purchases to restore.")
+                completion(nil, error)
+                log(error: "There are no purchases to restore.")
+            }
+        }
+    }
+    
     func completePurchase(purchase: PurchaseDetails, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
-        let params = purchaseParams(purchase: purchase)
-        let request = ApiRequestDI(method: .post, endpoint: Config.apiSubscription, params: params)
+        let endpoint = apiEndpoint
+        let params = purchaseParams(purchase: purchase, endpoint: endpoint)
+        let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
         
-        ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Session, ErrorResult>) in
+        ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
             switch result {
-            case .success(let session):
-                SwiftyStoreKit.finishTransaction(purchase.transaction)
-                Application.shared.serviceStatus = session.serviceStatus
-                Application.shared.authentication.logIn(session: session)
-                KeyChain.email = nil
-                completion(session.serviceStatus, nil)
+            case .success(let sessionStatus):
+                if purchase.needsFinishTransaction {
+                    SwiftyStoreKit.finishTransaction(purchase.transaction)
+                }
+                Application.shared.serviceStatus = sessionStatus.serviceStatus
+                completion(sessionStatus.serviceStatus, nil)
                 log(info: "Purchase was successfully finished.")
             case .failure(let error):
                 let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
@@ -83,30 +130,73 @@ class IAPManager {
         }
     }
     
-    func finishIncompletePurchases(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
-        SwiftyStoreKit.completeTransactions(atomically: false) { products in
-            self.completePurchases(products: products) { serviceStatus, error in
-                completion(serviceStatus, error)
+    func completePurchases(products: [Purchase], endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        if let product = products.last {
+            log(info: "Found incomplete purchase. Completing purchase...")
+            
+            switch product.transaction.transactionState {
+            case .purchased, .restored:
+                if product.needsFinishTransaction {
+                    let params = finishPurchaseParams(product: product, endpoint: endpoint)
+                    let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
+                    
+                    ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
+                        switch result {
+                        case .success(let sessionStatus):
+                            SwiftyStoreKit.finishTransaction(product.transaction)
+                            Application.shared.serviceStatus = sessionStatus.serviceStatus
+                            completion(sessionStatus.serviceStatus, nil)
+                            log(info: "Purchase was successfully finished.")
+                        case .failure(let error):
+                            let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
+                            completion(nil, error ?? defaultErrorResult)
+                            log(error: "There was an error with purchase completion: \(error?.message ?? "")")
+                        }
+                    }
+                }
+            case .failed, .purchasing, .deferred:
+                break
+            @unknown default:
+                break
             }
         }
     }
     
-    func completePurchases(products: [Purchase], completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
-        for product in products {
-            log(info: "Found incomplete purchase. Completing purchase...")
+    func completeRestoredPurchase(purchase: Purchase, completion: @escaping (Account?, ErrorResult?) -> Void) {
+        let params = restorePurchaseParams()
+        let request = ApiRequestDI(method: .post, endpoint: Config.apiPaymentRestore, params: params)
+        
+        ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Account, ErrorResult>) in
+            switch result {
+            case .success(let account):
+                if purchase.needsFinishTransaction {
+                    SwiftyStoreKit.finishTransaction(purchase.transaction)
+                }
+                KeyChain.username = account.accountId
+                completion(account, nil)
+                log(info: "Purchase was successfully finished.")
+            case .failure(let error):
+                let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was restored but service cannot be activated. Restart application to retry.")
+                completion(nil, error ?? defaultErrorResult)
+                log(error: "There was an error with purchase completion: \(error?.message ?? "")")
+            }
+        }
+    }
+    
+    func completeRestoredPurchases(products: [Purchase], endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        if let product = products.last {
+            log(info: "Found restored purchase. Completing purchase...")
             
             if product.transaction.transactionState == .purchased {
-                let params = finishPurchaseParams(product: product)
-                let request = ApiRequestDI(method: .post, endpoint: Config.apiSubscription, params: params)
+                let params = finishPurchaseParams(product: product, endpoint: endpoint)
+                let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
                 
-                ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Session, ErrorResult>) in
+                ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
                     switch result {
-                    case .success(let session):
+                    case .success(let sessionStatus):
                         SwiftyStoreKit.finishTransaction(product.transaction)
-                        Application.shared.serviceStatus = session.serviceStatus
-                        Application.shared.authentication.logIn(session: session)
-                        KeyChain.email = nil
-                        completion(session.serviceStatus, nil)
+                        Application.shared.serviceStatus = sessionStatus.serviceStatus
+                        completion(sessionStatus.serviceStatus, nil)
                         log(info: "Purchase was successfully finished.")
                     case .failure(let error):
                         let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
@@ -136,52 +226,71 @@ class IAPManager {
     
     // MARK: - Private methods -
     
-    private func purchaseParams(purchase: PurchaseDetails) -> [URLQueryItem] {
-        let username = Application.shared.authentication.getStoredUsername()
+    private func purchaseParams(purchase: PurchaseDetails, endpoint: String) -> [URLQueryItem] {
         let transactionId = purchase.transaction.transactionIdentifier ?? "Unknown transaction ID"
         let base64receipt = SwiftyStoreKit.localReceiptData?.base64EncodedString(options: []) ?? ""
         
-        if let email = KeyChain.email, let password = KeyChain.password {
+        switch endpoint {
+        case Config.apiPaymentInitial:
             return [
-                URLQueryItem(name: "email", value: email),
-                URLQueryItem(name: "password", value: password),
-                URLQueryItem(name: "password_confirmation", value: password),
+                URLQueryItem(name: "account_id", value: KeyChain.tempUsername ?? ""),
                 URLQueryItem(name: "product_id", value: purchase.product.productIdentifier),
                 URLQueryItem(name: "transaction_id", value: transactionId),
-                URLQueryItem(name: "receipt_data", value: base64receipt)
+                URLQueryItem(name: "receipt", value: base64receipt)
             ]
+        case Config.apiPaymentAdd:
+            return [
+                URLQueryItem(name: "session_token", value: KeyChain.sessionToken ?? ""),
+                URLQueryItem(name: "product_id", value: purchase.product.productIdentifier),
+                URLQueryItem(name: "transaction_id", value: transactionId),
+                URLQueryItem(name: "receipt", value: base64receipt)
+            ]
+        case Config.apiPaymentAddLegacy:
+            return [
+                URLQueryItem(name: "username", value: KeyChain.username ?? ""),
+                URLQueryItem(name: "productId", value: purchase.product.productIdentifier),
+                URLQueryItem(name: "transactionId", value: transactionId),
+                URLQueryItem(name: "receiptData", value: base64receipt)
+            ]
+        default:
+            return []
         }
-        
-        return [
-            URLQueryItem(name: "username", value: username),
-            URLQueryItem(name: "product_id", value: purchase.product.productIdentifier),
-            URLQueryItem(name: "transaction_id", value: transactionId),
-            URLQueryItem(name: "receipt_data", value: base64receipt)
-        ]
     }
     
-    private func finishPurchaseParams(product: Purchase) -> [URLQueryItem] {
-        let username = Application.shared.authentication.getStoredUsername()
+    private func finishPurchaseParams(product: Purchase, endpoint: String) -> [URLQueryItem] {
         let transactionId = product.transaction.transactionIdentifier ?? ""
         let base64receipt = SwiftyStoreKit.localReceiptData?.base64EncodedString(options: []) ?? ""
         
-        if let email = KeyChain.email, let password = KeyChain.password {
+        switch endpoint {
+        case Config.apiPaymentInitial:
             return [
-                URLQueryItem(name: "email", value: email),
-                URLQueryItem(name: "password", value: password),
-                URLQueryItem(name: "password_confirmation", value: password),
+                URLQueryItem(name: "account_id", value: KeyChain.tempUsername ?? ""),
                 URLQueryItem(name: "product_id", value: product.productId),
                 URLQueryItem(name: "transaction_id", value: transactionId),
-                URLQueryItem(name: "receipt_data", value: base64receipt)
+                URLQueryItem(name: "receipt", value: base64receipt)
             ]
+        case Config.apiPaymentAdd:
+            return [
+                URLQueryItem(name: "session_token", value: KeyChain.sessionToken ?? ""),
+                URLQueryItem(name: "product_id", value: product.productId),
+                URLQueryItem(name: "transaction_id", value: transactionId),
+                URLQueryItem(name: "receipt", value: base64receipt)
+            ]
+        case Config.apiPaymentAddLegacy:
+            return [
+                URLQueryItem(name: "username", value: KeyChain.username ?? ""),
+                URLQueryItem(name: "productId", value: product.productId),
+                URLQueryItem(name: "transactionId", value: transactionId),
+                URLQueryItem(name: "receiptData", value: base64receipt)
+            ]
+        default:
+            return []
         }
-        
-        return [
-            URLQueryItem(name: "username", value: username),
-            URLQueryItem(name: "productId", value: product.productId),
-            URLQueryItem(name: "transactionId", value: transactionId),
-            URLQueryItem(name: "receiptData", value: base64receipt)
-        ]
+    }
+    
+    private func restorePurchaseParams() -> [URLQueryItem] {
+        let base64receipt = SwiftyStoreKit.localReceiptData?.base64EncodedString(options: []) ?? ""
+        return [URLQueryItem(name: "receipt", value: base64receipt)]
     }
     
 }

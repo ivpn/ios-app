@@ -28,18 +28,6 @@ extension UIApplication {
         return base
     }
     
-    class func manageSubscription() {
-        if let url = URL(string: "itms-apps://apps.apple.com/account/subscriptions") {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:])
-            } else {
-                if let topViewController = topViewController() {
-                    topViewController.showAlert(title: "Cannot open subscription settings", message: "Please go to App Store app to manage your auto-renewable subscriptions.")
-                }
-            }
-        }
-    }
-    
     class func isValidURL(urlString: String?) -> Bool {
         if let urlString = urlString {
             if let url = URL(string: urlString) {

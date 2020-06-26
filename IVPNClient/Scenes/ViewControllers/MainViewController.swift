@@ -403,6 +403,7 @@ class MainViewController: UIViewController {
                 viewController.presentationController?.delegate = self
                 present(viewController, animated: true, completion: nil)
             }
+            NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.ServiceAuthorized, object: nil)
             return
         }
@@ -417,6 +418,7 @@ class MainViewController: UIViewController {
             let viewController = NavigationManager.getSubscriptionViewController()
             viewController.presentationController?.delegate = self
             present(viewController, animated: true, completion: nil)
+            NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.SubscriptionActivated, object: nil)
             return
         }
@@ -755,7 +757,6 @@ extension MainViewController {
                     NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
                     UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
                     UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                    UserDefaults.shared.set(data.isAppStoreSubscription(), forKey: UserDefaults.Key.subscriptionPurchasedOnDevice)
                     present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
                     return
                 }

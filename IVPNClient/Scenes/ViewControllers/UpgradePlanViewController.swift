@@ -49,11 +49,7 @@ class UpgradePlanViewController: UIViewController {
     }
     
     @IBAction func upgradePlan(_ sender: Any) {
-        if UserDefaults.shared.subscriptionPurchasedOnDevice {
-            UIApplication.manageSubscription()
-        } else {
-            openWebPage(UserDefaults.shared.upgradeToUrl)
-        }
+        openWebPage(UserDefaults.shared.upgradeToUrl)
     }
 
 }

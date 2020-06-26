@@ -21,11 +21,17 @@ struct ExtensionKeyManager {
     }
     
     static var regenerationInterval: TimeInterval {
-        if Config.useDebugWireGuardKeyUpgrade {
-            return TimeInterval(UserDefaults.shared.wgRegenerationRate * 60)
+        var regenerationRate = UserDefaults.shared.wgRegenerationRate
+        
+        if regenerationRate <= 0 {
+            regenerationRate = 1
         }
         
-        return TimeInterval(UserDefaults.shared.wgRegenerationRate * 60 * 60 * 24)
+        if Config.useDebugWireGuardKeyUpgrade {
+            return TimeInterval(regenerationRate * 60)
+        }
+        
+        return TimeInterval(regenerationRate * 60 * 60 * 24)
     }
     
     func upgradeKey(completion: @escaping (String?, String?) -> Void) {

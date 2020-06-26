@@ -15,6 +15,7 @@ import Foundation
     func createSessionTooManySessions(error: Any?)
     func createSessionAuthenticationError()
     func createSessionServiceNotActive()
+    func createSessionAccountNotActivated(error: Any?)
     func deleteSessionStart()
     func deleteSessionSuccess()
     func deleteSessionFailure()
@@ -69,6 +70,11 @@ class SessionManager {
                     
                     if error.status == 602 {
                         self.delegate?.createSessionTooManySessions(error: error)
+                        return
+                    }
+                    
+                    if error.status == 11005 {
+                        self.delegate?.createSessionAccountNotActivated(error: error)
                         return
                     }
                 }

@@ -1,5 +1,5 @@
 //
-//  WireGuardSettingsViewController.swift
+//  UIViewController+Ext.swift
 //  IVPN Client
 //
 //  Created by Juraj Hilje on 10/10/2018.
@@ -10,6 +10,19 @@ import UIKit
 import SafariServices
 
 extension UIViewController {
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func dismissViewController(_ sender: Any) {
+        if #available(iOS 13.0, *) {
+            if let presentationController = navigationController?.presentationController {
+                presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+            }
+        }
+        navigationController?.dismiss(animated: true)
+    }
+    
+    // MARK: - Methods -
     
     func logOut(deleteSession: Bool = true) {
         if deleteSession {
@@ -66,19 +79,45 @@ extension UIViewController {
         present(safariVC, animated: true, completion: nil)
     }
     
-    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus) {
+    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> ())? = nil) {
         showAlert(
             title: "Thank you!",
-            message: "Service was successfuly upgraded.\nService active until: " + serviceStatus.activeUntilString(),
+            message: "The payment was successfully processed.\nService is active until: " + serviceStatus.activeUntilString(),
             handler: { _ in
-                self.navigationController?.dismiss(animated: true) {
-                    NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
+                if let completion = completion {
+                    completion()
                 }
         })
     }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+}
+
+// MARK: - Presenter -
+
+extension UIViewController {
+    
+    func evaluateIsServiceActive() -> Bool {
+        guard Application.shared.serviceStatus.isActive else {
+            let viewController = NavigationManager.getSubscriptionViewController()
+            viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+            present(viewController, animated: true, completion: nil)
+            return false
+        }
+        
+        return true
+    }
+    
+    func deviceCanMakePurchases() -> Bool {
+        guard IAPManager.shared.canMakePurchases else {
+            showAlert(title: "Error", message: "In-App Purchases are not available on your device.")
+            return false
+        }
+        
+        return true
     }
     
 }
@@ -96,6 +135,7 @@ extension UIViewController: SessionManagerDelegate {
     func createSessionTooManySessions(error: Any?) {}
     func createSessionAuthenticationError() {}
     func createSessionServiceNotActive() {}
+    func createSessionAccountNotActivated(error: Any?) {}
     func deleteSessionStart() {}
     func deleteSessionSuccess() {}
     func deleteSessionFailure() {}
