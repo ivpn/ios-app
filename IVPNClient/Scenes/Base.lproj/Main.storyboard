@@ -3711,7 +3711,9 @@
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LDZ-oO-5ye">
                                     <rect key="frame" x="273" y="17" width="86" height="86"/>
-                                    <accessibility key="accessibilityConfiguration" label="QR code for account ID"/>
+                                    <accessibility key="accessibilityConfiguration" label="QR code for account ID">
+                                        <bool key="isElement" value="YES"/>
+                                    </accessibility>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="86" id="Kre-TZ-4Lc"/>
                                         <constraint firstAttribute="width" constant="86" id="Mnz-qC-m02"/>
