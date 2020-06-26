@@ -91,6 +91,7 @@ class MainView: UIView {
         addSubview(settingsButton)
         settingsButton.bb.size(width: 42, height: 42).top(55).right(-30)
         settingsButton.setupIcon(imageName: "icon-settings")
+        settingsButton.accessibilityLabel = "Settings"
         settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
         
         let accountButton = UIButton()
@@ -101,10 +102,12 @@ class MainView: UIView {
             accountButton.bb.size(width: 42, height: 42).top(55).left(30)
         }
         accountButton.setupIcon(imageName: "icon-user")
+        accountButton.accessibilityLabel = "Account"
         accountButton.addTarget(self, action: #selector(openAccountInfo), for: .touchUpInside)
         
         addSubview(centerMapButton)
         centerMapButton.setupIcon(imageName: "icon-crosshair")
+        centerMapButton.accessibilityLabel = "Center map"
         centerMapButton.addTarget(self, action: #selector(centerMap), for: .touchUpInside)
     }
     

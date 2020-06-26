@@ -12,6 +12,7 @@ class ControlPanelView: UITableView {
     
     // MARK: - @IBOutlets -
     
+    @IBOutlet weak var protectionStatusTableCell: UITableViewCell!
     @IBOutlet weak var protectionStatusLabel: UILabel!
     @IBOutlet weak var connectSwitch: UISwitch!
     @IBOutlet weak var enableMultiHopButton: UIButton!
@@ -97,6 +98,7 @@ class ControlPanelView: UITableView {
         locationErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
         providerErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
         updateConnectSwitch()
+        UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: protectionStatusTableCell)
     }
     
     func updateConnectionInfo(viewModel: ProofsViewModel) {
@@ -109,6 +111,7 @@ class ControlPanelView: UITableView {
     func updateVPNStatus(viewModel: VPNStatusViewModel, animated: Bool = true) {
         protectionStatusLabel.text = viewModel.protectionStatusText
         connectSwitch.setOn(viewModel.connectToggleIsOn, animated: animated)
+        connectSwitch.accessibilityLabel = viewModel.connectToggleIsOn ? "Switch to disconnect" : "Switch to connect"
         updateConnectSwitch()
     }
     
