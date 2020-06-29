@@ -299,6 +299,19 @@ class ControlPanelViewController: UITableViewController {
         lastVPNStatus = vpnStatus
     }
     
+    func refreshServiceStatus() {
+        if let lastUpdateDate = lastStatusUpdateDate {
+            let now = Date()
+            if now.timeIntervalSince(lastUpdateDate) < Config.serviceStatusRefreshMaxIntervalSeconds { return }
+        }
+        
+        let status = Application.shared.connectionManager.status
+        if status != .connected && status != .connecting {
+            self.lastStatusUpdateDate = Date()
+            self.sessionManager.getSessionStatus()
+        }
+    }
+    
     func askForCustomServer(isExitServer: Bool) {
         let alert = UIAlertController(title: "Add Custom Server", message: "Enter Server Hostname", preferredStyle: .alert)
         
@@ -383,19 +396,6 @@ class ControlPanelViewController: UITableViewController {
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker()
         controlPanelView.updateProtocol()
-    }
-    
-    private func refreshServiceStatus() {
-        if let lastUpdateDate = lastStatusUpdateDate {
-            let now = Date()
-            if now.timeIntervalSince(lastUpdateDate) < Config.serviceStatusRefreshMaxIntervalSeconds { return }
-        }
-        
-        let status = Application.shared.connectionManager.status
-        if status != .connected && status != .connecting {
-            self.lastStatusUpdateDate = Date()
-            self.sessionManager.getSessionStatus()
-        }
     }
     
     @objc private func updateControlPanel() {

@@ -321,7 +321,6 @@
 		9CC29DF01E1560990080F799 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC29DEF1E1560990080F799 /* StoreKit.framework */; };
 		9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC29DF71E1D59E90080F799 /* Alerts+Ext.swift */; };
 		9CDDD5AF1D9D2F9F00D39924 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDDD5AE1D9D2F9F00D39924 /* AppDelegate.swift */; };
-		9CDDD5B11D9D2F9F00D39924 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B01D9D2F9F00D39924 /* MainViewController.swift */; };
 		9CDDD5B41D9D2F9F00D39924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B21D9D2F9F00D39924 /* Main.storyboard */; };
 		9CDDD5B61D9D2F9F00D39924 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B51D9D2F9F00D39924 /* Assets.xcassets */; };
 		9CDDD5B91D9D2F9F00D39924 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B71D9D2F9F00D39924 /* LaunchScreen.storyboard */; };
@@ -667,7 +666,6 @@
 		9CC29DF71E1D59E90080F799 /* Alerts+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alerts+Ext.swift"; sourceTree = "<group>"; };
 		9CDDD5AB1D9D2F9F00D39924 /* IVPNClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IVPNClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CDDD5AE1D9D2F9F00D39924 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9CDDD5B01D9D2F9F00D39924 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9CDDD5B31D9D2F9F00D39924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9CDDD5B51D9D2F9F00D39924 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CDDD5B81D9D2F9F00D39924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1124,7 +1122,6 @@
 			isa = PBXGroup;
 			children = (
 				9C454EBD1E096F4100BD2AFA /* PrivacyPromoViewController.swift */,
-				9CDDD5B01D9D2F9F00D39924 /* MainViewController.swift */,
 				9C3031361DB4307D00C38B0C /* SettingsViewController.swift */,
 				9C50959520FCF4C60048DBF2 /* ProtocolViewController.swift */,
 				820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */,
@@ -2180,7 +2177,6 @@
 				9CB2CE341DAF9283007A4D2D /* Model.xcdatamodeld in Sources */,
 				821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */,
 				82FF0D442315587000440E5D /* UITextFieldPadding.swift in Sources */,
-				9CDDD5B11D9D2F9F00D39924 /* MainViewController.swift in Sources */,
 				82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */,
 				8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */,
 				82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */,
