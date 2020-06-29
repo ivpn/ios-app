@@ -29,7 +29,7 @@ class TunnelTests: XCTestCase {
         )
     }
     
-    func testGenerateProviderConfiguration() {
+    func test_generateProviderConfiguration() {
         let configuration = tunnel.generateProviderConfiguration()
         
         XCTAssertEqual(configuration["dns"] as! String, "10.0.0.1")

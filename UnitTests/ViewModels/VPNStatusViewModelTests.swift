@@ -14,7 +14,7 @@ class VPNStatusViewModelTests: XCTestCase {
     
     var viewModel = VPNStatusViewModel(status: .invalid)
     
-    func testProtectionStatusText() {
+    func test_protectionStatusText() {
         viewModel.status = .connecting
         XCTAssertEqual(viewModel.protectionStatusText, "Connecting")
         
@@ -34,7 +34,7 @@ class VPNStatusViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.protectionStatusText, "Unprotected")
     }
     
-    func testConnectToServerText() {
+    func test_connectToServerText() {
         viewModel.status = .connecting
         XCTAssertEqual(viewModel.connectToServerText, "Connecting to")
         
@@ -54,7 +54,7 @@ class VPNStatusViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.connectToServerText, "Connect to")
     }
     
-    func testConnectToggleIsOn() {
+    func test_connectToggleIsOn() {
         viewModel.status = .connecting
         XCTAssertTrue(viewModel.connectToggleIsOn)
         
@@ -74,7 +74,7 @@ class VPNStatusViewModelTests: XCTestCase {
         XCTAssertFalse(viewModel.connectToggleIsOn)
     }
     
-    func testPopupStatusText() {
+    func test_popupStatusText() {
         viewModel.status = .connecting
         XCTAssertEqual(viewModel.connectToServerText, "Connecting to")
         

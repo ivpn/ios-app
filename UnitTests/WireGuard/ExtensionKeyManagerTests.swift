@@ -12,14 +12,14 @@ import XCTest
 
 class ExtensionKeyManagerTests: XCTestCase {
     
-    func testRegenerationInterval() {
+    func test_regenerationInterval() {
         UserDefaults.shared.set(Config.wgKeyRegenerationRate, forKey: UserDefaults.Key.wgRegenerationRate)
         let regenerationCheckInterval = ExtensionKeyManager.regenerationCheckInterval
         let regenerationInterval = ExtensionKeyManager.regenerationInterval
         XCTAssertTrue(regenerationInterval > regenerationCheckInterval)
     }
     
-    func testNeedToRegenerate() {
+    func test_needToRegenerate() {
         UserDefaults.shared.set(Date.changeDays(by: -50), forKey: UserDefaults.Key.wgKeyTimestamp)
         KeyChain.wgPublicKey = nil
         XCTAssertFalse(ExtensionKeyManager.needToRegenerate())

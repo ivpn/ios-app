@@ -6,13 +6,13 @@ class ArrayTests: XCTestCase {
     
     let array = [1, 2]
     
-    func testSafeSubscript() {
+    func test_safeSubscript() {
         XCTAssertEqual(array[safe: 0], 1)
         XCTAssertEqual(array[safe: 1], 2)
         XCTAssertEqual(array[safe: 2], nil)
     }
     
-    func testNext() {
+    func test_next() {
         let hostNames = ["1.1.1.1", "2.2.2.2"]
         
         if let nextHost = hostNames.next(item: "1.1.1.1") {
@@ -24,7 +24,7 @@ class ArrayTests: XCTestCase {
         XCTAssertNil(hostNames.next(item: "2.2.2.2"), "There should be no next element")
     }
     
-    func testMove() {
+    func test_move() {
         var hostNames = ["ivpn.net", "1.1.1.1", "2.2.2.2"]
         
         hostNames.move("ivpn.net", to: 0)

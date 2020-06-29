@@ -4,16 +4,16 @@ import XCTest
 
 class StringTests: XCTestCase {
     
-    func testCommaSeparatedStringFrom() {
+    func test_commaSeparatedStringFrom() {
         XCTAssertEqual(String.commaSeparatedStringFrom(elements: ["a", "b", "c"]), "a,b,c")
     }
     
-    func testCommaSeparatedToArray() {
+    func test_commaSeparatedToArray() {
         XCTAssertEqual("a,b,c".commaSeparatedToArray(), ["a", "b", "c"])
         XCTAssertEqual("a, b, c".commaSeparatedToArray(), ["a", "b", "c"])
     }
     
-    func testTrim() {
+    func test_trim() {
         let user1 = "  username  "
         let user2 = " user name "
         let user3 = "username"
@@ -23,12 +23,12 @@ class StringTests: XCTestCase {
         XCTAssertEqual(user3.trim(), "username")
     }
     
-    func testBase64KeyToHex() {
+    func test_base64KeyToHex() {
         XCTAssertEqual("=".base64KeyToHex(), nil)
         XCTAssertEqual("+CRaGBKzRDMBCrkP6ETC8CzzASl97v1oZtMcfo/9pFg=".base64KeyToHex(), "f8245a1812b34433010ab90fe844c2f02cf301297deefd6866d31c7e8ffda458")
     }
     
-    func testCamelCaseToCapitalized() {
+    func test_camelCaseToCapitalized() {
         XCTAssertEqual("dnsFailure".camelCaseToCapitalized(), "Dns Failure")
         XCTAssertEqual("tlsServerVerification".camelCaseToCapitalized(), "Tls Server Verification")
         XCTAssertEqual("authentication".camelCaseToCapitalized(), "Authentication")

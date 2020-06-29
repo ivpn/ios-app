@@ -4,7 +4,7 @@ import XCTest
 
 class UserDefaultsTests: XCTestCase {
     
-    func testProperties() {
+    func test_properties() {
         XCTAssertNotNil(UserDefaults.shared.wireguardTunnelProviderError)
         XCTAssertNotNil(UserDefaults.shared.isMultiHop)
         XCTAssertNotNil(UserDefaults.shared.exitServerLocation)

@@ -17,7 +17,7 @@ class StorageManagerTests: XCTestCase {
         StorageManager.clearSession()
     }
 
-    func testSaveDefaultNetwork() {
+    func test_saveDefaultNetwork() {
         StorageManager.saveDefaultNetwork()
         let networks = StorageManager.fetchNetworks(isDefault: true)
         if let network = networks?.first {
@@ -28,7 +28,7 @@ class StorageManagerTests: XCTestCase {
         }
     }
     
-    func testSaveCellularNetwork() {
+    func test_saveCellularNetwork() {
         StorageManager.saveCellularNetwork()
         let networks = StorageManager.fetchNetworks(name: "Mobile data", type: NetworkType.cellular.rawValue)
         if let network = networks?.first {
@@ -39,7 +39,7 @@ class StorageManagerTests: XCTestCase {
         }
     }
     
-    func testSaveWiFiNetwork() {
+    func test_saveWiFiNetwork() {
         StorageManager.saveWiFiNetwork(name: "WiFi 1")
         let networks = StorageManager.fetchNetworks(name: "WiFi 1", type: NetworkType.wifi.rawValue)
         if let network = networks?.first {
@@ -50,7 +50,7 @@ class StorageManagerTests: XCTestCase {
         }
     }
     
-    func testSaveNetwork() {
+    func test_saveNetwork() {
         StorageManager.saveNetwork(name: "WiFi 2", type: NetworkType.wifi.rawValue)
         let networks = StorageManager.fetchNetworks(name: "WiFi 2", type: NetworkType.wifi.rawValue)
         if let network = networks?.first {
@@ -61,7 +61,7 @@ class StorageManagerTests: XCTestCase {
         }
     }
     
-    func testFetchDefaultNeworks() {
+    func test_fetchDefaultNeworks() {
         StorageManager.saveDefaultNetwork()
         StorageManager.saveCellularNetwork()
         let networks = StorageManager.fetchDefaultNeworks()
@@ -81,7 +81,7 @@ class StorageManagerTests: XCTestCase {
         }
     }
     
-    func testGetTrust() {
+    func test_getTrust() {
         StorageManager.saveCellularNetwork()
         let networks = StorageManager.fetchNetworks(name: "Mobile data", type: NetworkType.cellular.rawValue)
         if let network = networks?.first {
@@ -92,21 +92,21 @@ class StorageManagerTests: XCTestCase {
         }
     }
     
-    func testRemoveNetworks() {
+    func test_removeNetworks() {
         StorageManager.saveCellularNetwork()
         StorageManager.remove(entityName: "Network")
         let networks = StorageManager.fetchNetworks(name: "Mobile data", type: NetworkType.cellular.rawValue)
         XCTAssertTrue(networks?.isEmpty ?? true)
     }
     
-    func testRemoveNetwork() {
+    func test_removeNetwork() {
         StorageManager.saveWiFiNetwork(name: "WiFi to remove")
         StorageManager.removeNetwork(name: "WiFi to remove")
         let networks = StorageManager.fetchNetworks(name: "WiFi to remove")
         XCTAssertNil(networks, "Network was not deleted")
     }
     
-    func testUpdateActiveNetwork() {
+    func test_updateActiveNetwork() {
         let network = Network(context: StorageManager.context, needToSave: false)
         network.name = "Mobile data"
         network.type = NetworkType.cellular.rawValue

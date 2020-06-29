@@ -25,7 +25,7 @@ class ApiServiceServersTests: XCTestCase {
     // This test both tests that the new servers list is retrieved from the server
     // as well as it is stored in the cache
     
-    func testUpdateServers() {
+    func test_updateServers() {
         VPNServerList.removeCached()
         let testBundle = Bundle(for: type(of: self))
         let serviceApi = ApiService.shared

@@ -12,7 +12,7 @@ import XCTest
 
 class AccountViewModelTests: XCTestCase {
     
-    func testStatusText() {
+    func test_statusText() {
         var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
         
         viewModel.serviceStatus.isActive = false
@@ -22,7 +22,7 @@ class AccountViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.statusText, "ACTIVE")
     }
     
-    func testSubscriptionText() {
+    func test_subscriptionText() {
         var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
         viewModel.serviceStatus.currentPlan = "IVPN Standard"
         
@@ -33,19 +33,19 @@ class AccountViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.subscriptionText, "IVPN Standard")
     }
     
-    func testActiveUntilText() {
+    func test_activeUntilText() {
         var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
         
         viewModel.serviceStatus.isActive = false
         XCTAssertEqual(viewModel.activeUntilText, "No active subscription")
     }
     
-    func testLogOutActionText() {
+    func test_logOutActionText() {
         let viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
         XCTAssertEqual(viewModel.logOutActionText, "Log In or Sign Up")
     }
     
-    func testSubscriptionActionText() {
+    func test_subscriptionActionText() {
         var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
         
         viewModel.serviceStatus.isActive = false
@@ -55,7 +55,7 @@ class AccountViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.subscriptionActionText, "Manage Subscription")
     }
     
-    func testShowSubscriptionAction() {
+    func test_showSubscriptionAction() {
         let viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
         XCTAssertFalse(viewModel.showSubscriptionAction)
     }

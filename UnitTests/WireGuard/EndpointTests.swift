@@ -4,7 +4,7 @@ import XCTest
 
 class EndpointTests: XCTestCase {
     
-    func testInit() {
+    func test_init() {
         let endpoint1 = ((try? Endpoint(endpointString: "10.0.0.0:53")) as Endpoint??)
         XCTAssertEqual(endpoint1??.ipAddress, "10.0.0.0")
         XCTAssertEqual(endpoint1??.port, 53)

@@ -4,7 +4,7 @@ import XCTest
 
 class CIDRAddressTests: XCTestCase {
     
-    func testEndpoint() {
+    func test_endpoint() {
         let address1 = ((try? CIDRAddress(stringRepresentation: "10.0.0.0/0")) as CIDRAddress??)
         XCTAssertEqual(address1??.ipAddress, "10.0.0.0")
         XCTAssertEqual(address1??.subnet, 0)
