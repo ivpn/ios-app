@@ -18,7 +18,7 @@ class SettingsScreenTests: XCTestCase {
         app.launch()
     }
     
-    func testSettingsToLoginPath() {
+    func test_settingsToLoginPath() {
         let app = XCUIApplication()
         
         XCTAssertTrue(app.isDisplayingMainScreen)
@@ -34,7 +34,7 @@ class SettingsScreenTests: XCTestCase {
         XCTAssert(loginScreen)
     }
     
-    func testSelectProtocol() {
+    func test_selectProtocol() {
         let app = XCUIApplication()
 
         XCTAssertTrue(app.isDisplayingMainScreen)
@@ -44,7 +44,7 @@ class SettingsScreenTests: XCTestCase {
         XCTAssertTrue(app.isDisplayingLoginScreen)
     }
     
-    func testNetworkProtection() {
+    func test_networkProtection() {
         let app = XCUIApplication()
 
         XCTAssertTrue(app.isDisplayingMainScreen)
