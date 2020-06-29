@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.19.0 - [Unreleased]
+
+[NEW] Signup without email  
+[NEW] Load balancer for WireGuard  
+[IMPROVED] Updated CA certificate for OpenVPN  
+[IMPROVED] OpenVPN and OpenSSL libraries upgraded to the latest version  
+[IMPROVED] WireGuard upgraded to the latest version  
+[IMPROVED] Removed WireGuard beta warning  
+[FIXED] Account status not updated for suspended accounts  
+[FIXED] Today widget is now available on all iOS 12+ devices  
+
 ## 1.18.1 - 2020-03-04
 
 [NEW] Today widget  
