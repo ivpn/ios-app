@@ -251,6 +251,12 @@ extension ServerViewController: UISearchBarDelegate {
             return server.city.lowercased().contains(searchBar.text!.lowercased())
         }
         
+        if UserDefaults.shared.isMultiHop {
+            filteredCollection = collection.filter { (server: VPNServer) -> Bool in
+                return server.city.lowercased().contains(searchBar.text!.lowercased())
+            }
+        }
+        
         tableView.reloadData()
     }
     
