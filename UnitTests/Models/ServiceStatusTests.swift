@@ -25,18 +25,18 @@ class ServiceStatusTests: XCTestCase {
         model.currentPlan = nil
     }
     
-    func testActiveUntilString() {
+    func test_activeUntilString() {
         XCTAssertEqual(model.activeUntilString(), "Jan 10, 2020")
     }
     
-    func testIsEnabled() {
+    func test_isEnabled() {
         XCTAssertFalse(model.isEnabled(capability: .multihop))
         XCTAssertFalse(model.isEnabled(capability: .portForwarding))
         XCTAssertFalse(model.isEnabled(capability: .wireguard))
         XCTAssertFalse(model.isEnabled(capability: .privateEmails))
     }
     
-    func testGetSubscriptionText() {
+    func test_getSubscriptionText() {
         XCTAssertEqual(model.getSubscriptionText(), "No active subscription")
         
         model.isActive = true
@@ -46,7 +46,7 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertEqual(model.getSubscriptionText(), "\(model.currentPlan ?? ""), Active until \(model.activeUntilString())")
     }
     
-    func testIsValid() {
+    func test_isValid() {
         XCTAssertTrue(ServiceStatus.isValid(username: "ivpnXXXXXXXX"))
         XCTAssertTrue(ServiceStatus.isValid(username: "i-XXXX-XXXX-XXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: "IVPNXXXXXXXX"))
@@ -54,7 +54,7 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertFalse(ServiceStatus.isValid(username: ""))
     }
     
-    func testDaysUntilSubscriptionExpiration() {
+    func test_daysUntilSubscriptionExpiration() {
         XCTAssertEqual(model.daysUntilSubscriptionExpiration(), 0)
     }
     

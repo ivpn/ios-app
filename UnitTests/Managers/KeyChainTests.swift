@@ -18,7 +18,7 @@ class KeyChainTests: XCTestCase {
         KeyChain.vpnPassword = nil
     }
     
-    func testVpnUsername() {
+    func test_vpnUsername() {
         KeyChain.vpnUsername = nil
         KeyChain.username = "username"
         XCTAssertEqual(KeyChain.vpnUsername, nil)
@@ -27,7 +27,7 @@ class KeyChainTests: XCTestCase {
         XCTAssertEqual(KeyChain.vpnUsername, "vpnUsername")
     }
     
-    func testVpnPassword() {
+    func test_vpnPassword() {
         KeyChain.vpnPassword = nil
         XCTAssertEqual(KeyChain.vpnPassword, nil)
         

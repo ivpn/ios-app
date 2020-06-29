@@ -4,7 +4,7 @@ import XCTest
 
 class AddressTypeTests: XCTestCase {
     
-    func testValidateIpAddress() {
+    func test_validateIpAddress() {
         let ipAddress1 = "127.0.0.1"
         let ipAddress2 = "::1"
         let ipAddress3 = "-"

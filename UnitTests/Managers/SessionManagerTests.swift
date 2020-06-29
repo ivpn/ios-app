@@ -22,7 +22,7 @@ class SessionManagerTests: XCTestCase {
         KeyChain.sessionToken = nil
     }
     
-    func testSessionExists() {
+    func test_sessionExists() {
         XCTAssertFalse(SessionManager.sessionExists)
         KeyChain.sessionToken = "9j4ynsp08jn29ebv6p2sj50i2d"
         XCTAssertTrue(SessionManager.sessionExists)

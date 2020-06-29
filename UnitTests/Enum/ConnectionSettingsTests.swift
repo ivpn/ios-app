@@ -20,66 +20,66 @@ class ConnectionSettingsTests: XCTestCase {
     let protocol3 = ConnectionSettings.openvpn(OpenVPNProtocol.tcp, 80)
     let protocol4 = ConnectionSettings.wireguard(WireGuardProtocol.udp, 48574)
     
-    func testFormat() {
+    func test_format() {
         XCTAssertEqual(protocol1.format(), "IKEv2")
         XCTAssertEqual(protocol2.format(), "OpenVPN, UDP 53")
         XCTAssertEqual(protocol3.format(), "OpenVPN, TCP 80")
         XCTAssertEqual(protocol4.format(), "WireGuard, UDP 48574")
     }
     
-    func testFormatTitle() {
+    func test_formatTitle() {
         XCTAssertEqual(protocol1.formatTitle(), "IKEv2")
         XCTAssertEqual(protocol2.formatTitle(), "OpenVPN")
         XCTAssertEqual(protocol4.formatTitle(), "WireGuard")
     }
     
-    func testFormatProtocol() {
+    func test_formatProtocol() {
         XCTAssertEqual(protocol1.formatProtocol(), "IKEv2")
         XCTAssertEqual(protocol2.formatProtocol(), "UDP 53")
         XCTAssertEqual(protocol3.formatProtocol(), "TCP 80")
         XCTAssertEqual(protocol4.formatProtocol(), "UDP 48574")
     }
     
-    func testTunnelTypest() {
+    func test_tunnelTypest() {
         let tunnelTypes = ConnectionSettings.tunnelTypes(protocols: protocols)
         XCTAssertEqual(tunnelTypes.count, 3)
     }
     
-    func testSupportedProtocols() {
+    func test_supportedProtocols() {
         XCTAssertEqual(protocol1.supportedProtocols(protocols: protocols).count, 1)
         XCTAssertEqual(protocol2.supportedProtocols(protocols: protocols).count, 6)
         XCTAssertEqual(protocol3.supportedProtocols(protocols: protocols).count, 6)
         XCTAssertEqual(protocol4.supportedProtocols(protocols: protocols).count, 1)
     }
     
-    func testSupportedProtocolsFormat() {
+    func test_supportedProtocolsFormat() {
         XCTAssertEqual(protocol1.supportedProtocolsFormat(protocols: protocols).count, 1)
         XCTAssertEqual(protocol4.supportedProtocols(protocols: protocols).count, 1)
         XCTAssertEqual(protocol4.supportedProtocolsFormat(protocols: protocols), ["UDP 2049", "UDP 2050", "UDP 53", "UDP 1194", "UDP 30587", "UDP 41893", "UDP 48574", "UDP 58237"])
     }
     
-    func testTunnelType() {
+    func test_tunnelType() {
         XCTAssertEqual(protocol1.tunnelType(), .ipsec)
         XCTAssertEqual(protocol2.tunnelType(), .openvpn)
         XCTAssertEqual(protocol3.tunnelType(), .openvpn)
         XCTAssertEqual(protocol4.tunnelType(), .wireguard)
     }
     
-    func testPort() {
+    func test_port() {
         XCTAssertEqual(protocol1.port(), 500)
         XCTAssertEqual(protocol2.port(), 53)
         XCTAssertEqual(protocol3.port(), 80)
         XCTAssertEqual(protocol4.port(), 48574)
     }
     
-    func testProtocolType() {
+    func test_protocolType() {
         XCTAssertEqual(protocol1.protocolType(), "IKEv2")
         XCTAssertEqual(protocol2.protocolType(), "UDP")
         XCTAssertEqual(protocol3.protocolType(), "TCP")
         XCTAssertEqual(protocol4.protocolType(), "UDP")
     }
     
-    func testEquatable() {
+    func test_equatable() {
         XCTAssertFalse(protocol1 == protocol2)
         XCTAssertFalse(protocol2 == protocol3)
         XCTAssertTrue(protocol2 == protocol2)

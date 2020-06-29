@@ -13,7 +13,7 @@ import NetworkExtension
 
 class NEVPNStatusTests: XCTestCase {
     
-    func testIsDisconnected() {
+    func test_isDisconnected() {
         var status: NEVPNStatus = .invalid
         XCTAssertTrue(status.isDisconnected())
         

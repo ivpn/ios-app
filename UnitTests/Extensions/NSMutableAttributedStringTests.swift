@@ -7,7 +7,7 @@ class NSMutableAttributedStringTests: XCTestCase {
     
     let label = UILabel()
     
-    func testBold() {
+    func test_bold() {
         let formattedString = NSMutableAttributedString()
         formattedString.bold("Bold text")
         
@@ -16,7 +16,7 @@ class NSMutableAttributedStringTests: XCTestCase {
         XCTAssertEqual(label.text, "Bold text")
     }
     
-    func testNormal() {
+    func test_normal() {
         let formattedString = NSMutableAttributedString()
         formattedString.normal("Normal text")
         

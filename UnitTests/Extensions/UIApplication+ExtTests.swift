@@ -12,7 +12,7 @@ import XCTest
 
 class UIApplicationExtTests: XCTestCase {
     
-    func testIsValidURL() {
+    func test_isValidURL() {
         XCTAssertFalse(UIApplication.isValidURL(urlString: ""))
         XCTAssertFalse(UIApplication.isValidURL(urlString: "N.A."))
         XCTAssertTrue(UIApplication.isValidURL(urlString: "http://example.com"))

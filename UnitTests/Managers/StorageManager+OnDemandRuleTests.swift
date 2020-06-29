@@ -23,17 +23,17 @@ class StorageManagerOnDemandRuleTests: XCTestCase {
         return nil
     }
     
-    func testGetDefaultTrust() {
+    func test_getDefaultTrust() {
         StorageManager.saveDefaultNetwork()
         XCTAssertEqual(StorageManager.getDefaultTrust(), NetworkTrust.None.rawValue)
     }
     
-    func testTrustValue() {
+    func test_trustValue() {
         XCTAssertEqual(StorageManager.trustValue(trust: NetworkTrust.Default.rawValue, defaultTrust: NetworkTrust.Untrusted.rawValue), NetworkTrust.Untrusted.rawValue)
         XCTAssertEqual(StorageManager.trustValue(trust: NetworkTrust.Trusted.rawValue, defaultTrust: NetworkTrust.Untrusted.rawValue), NetworkTrust.Trusted.rawValue)
     }
     
-    func testGetOnDemandRules() {
+    func test_getOnDemandRules() {
         StorageManager.clearSession()
         
         var rules = StorageManager.getOnDemandRules(status: .disconnected)
@@ -45,7 +45,7 @@ class StorageManagerOnDemandRuleTests: XCTestCase {
         StorageManager.clearSession()
     }
     
-    func testGetWiFiOnDemandRules() {
+    func test_getWiFiOnDemandRules() {
         UserDefaults.shared.set(true, forKey: UserDefaults.Key.networkProtectionEnabled)
         
         StorageManager.remove(entityName: "Network")

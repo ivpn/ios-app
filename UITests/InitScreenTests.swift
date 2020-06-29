@@ -18,7 +18,7 @@ class InitScreenTests: XCTestCase {
         app.launch()
     }
     
-    func testTapLogInButton() {
+    func test_tapLogInButton() {
         let app = XCUIApplication()
 
         XCTAssertTrue(app.isDisplayingMainScreen)
@@ -29,7 +29,7 @@ class InitScreenTests: XCTestCase {
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
     }
     
-    func testTapSignUpButton() {
+    func test_tapSignUpButton() {
         let app = XCUIApplication()
         
         XCTAssertTrue(app.isDisplayingMainScreen)

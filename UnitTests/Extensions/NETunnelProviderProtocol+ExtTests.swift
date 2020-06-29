@@ -45,7 +45,7 @@ class NETunnelProviderProtocolExtTests: XCTestCase {
         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isMultiHop)
     }
     
-    func testOpenVPNdnsServers() {
+    func test_openVPNdnsServers() {
         XCTAssertNil(NETunnelProviderProtocol.openVPNdnsServers())
         
         UserDefaults.shared.set(true, forKey: UserDefaults.Key.isCustomDNS)

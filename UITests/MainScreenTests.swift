@@ -14,7 +14,7 @@ class MainScreenTests: XCTestCase {
         continueAfterFailure = false
     }
     
-    func testTapConnectButtonToLoginPath() {
+    func test_tapConnectButtonToLoginPath() {
         let app = XCUIApplication()
         app.launchArguments = ["-UITests"]
         app.launch()
@@ -38,7 +38,7 @@ class MainScreenTests: XCTestCase {
         XCTAssertTrue(app.isDisplayingLoginScreen)
     }
     
-    func testTapConnectButtonToSubscribe() {
+    func test_tapConnectButtonToSubscribe() {
         let app = XCUIApplication()
         app.launchArguments = ["-UITests", "-authenticated"]
         app.launch()
@@ -53,7 +53,7 @@ class MainScreenTests: XCTestCase {
         XCTAssertTrue(app.isDisplayingMainScreen)
     }
     
-    func testTapConnectButton() {
+    func test_tapConnectButton() {
         let app = XCUIApplication()
         app.launchArguments = ["-UITests", "-authenticated", "-activeService", "-hasUserConsent"]
         app.launch()

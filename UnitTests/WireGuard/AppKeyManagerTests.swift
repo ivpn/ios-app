@@ -12,7 +12,7 @@ import XCTest
 
 class AppKeyManagerTests: XCTestCase {
     
-    func testKeyExpirationTimestamp() {
+    func test_keyExpirationTimestamp() {
         UserDefaults.shared.set(Date(), forKey: UserDefaults.Key.wgKeyTimestamp)
         
         let keyExpirationTimestamp = AppKeyManager.keyExpirationTimestamp
@@ -22,7 +22,7 @@ class AppKeyManagerTests: XCTestCase {
         XCTAssertTrue(keyExpirationTimestamp < Date.changeDays(by: Config.wgKeyExpirationDays + 1))
     }
     
-    func testKeyRegenerationTimestamp() {
+    func test_keyRegenerationTimestamp() {
         UserDefaults.shared.set(Config.wgKeyRegenerationRate, forKey: UserDefaults.Key.wgRegenerationRate)
         
         let keyRegenerationTimestamp = AppKeyManager.keyRegenerationTimestamp
@@ -33,7 +33,7 @@ class AppKeyManagerTests: XCTestCase {
         XCTAssertTrue(keyRegenerationTimestamp < Date.changeDays(by: wgRegenerationRate + 1))
     }
     
-    func testIsKeyExpired() {
+    func test_isKeyExpired() {
         XCTAssertFalse(AppKeyManager.isKeyExpired)
         
         UserDefaults.shared.set(Date.changeDays(by: (-10 - Config.wgKeyExpirationDays)), forKey: UserDefaults.Key.wgKeyTimestamp)
@@ -42,7 +42,7 @@ class AppKeyManagerTests: XCTestCase {
         XCTAssertTrue(AppKeyManager.isKeyExpired)
     }
     
-    func testGenerateKeyPair() {
+    func test_generateKeyPair() {
         AppKeyManager.generateKeyPair()
         XCTAssertTrue(KeyChain.wgPrivateKey != nil)
         XCTAssertTrue(KeyChain.wgPublicKey != nil)

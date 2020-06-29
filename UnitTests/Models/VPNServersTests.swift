@@ -25,7 +25,7 @@ class VPNServersTests: XCTestCase {
         super.tearDown()
     }
     
-    func testInitWithDefaults() {
+    func test_initWithDefaults() {
         let servers = VPNServerList()
         let server = servers.getServer(byGateway: "de.gw.ivpn.net")
         
@@ -39,7 +39,7 @@ class VPNServersTests: XCTestCase {
         XCTAssert(server!.ipAddresses.count > 0)
     }
     
-    func testUpdateWithNewData() {
+    func test_updateWithNewData() {
         var servers = VPNServerList()
         
         XCTAssertNotNil(servers)
@@ -67,7 +67,7 @@ class VPNServersTests: XCTestCase {
         }
     }
     
-    func testUpdateMultipleTimes() {
+    func test_updateMultipleTimes() {
         let newServersData = FileSystemManager.loadDataFromResource(
             resourceName: "test_servers",
             resourceType: "json",
