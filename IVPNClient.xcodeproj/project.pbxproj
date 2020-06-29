@@ -208,7 +208,6 @@
 		82D598A321A55210000FABDE /* NetworkProtectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */; };
 		82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */; };
 		82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */; };
-		82D598B021A58CAD000FABDE /* NetworkTrustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598AF21A58CAD000FABDE /* NetworkTrustViewController.swift */; };
 		82D598B421A5A7A3000FABDE /* NetworkTrust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598B321A5A7A3000FABDE /* NetworkTrust.swift */; };
 		82D598BC21A6949F000FABDE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598BB21A6949F000FABDE /* StorageManager.swift */; };
 		82D598C021A6991B000FABDE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598BF21A6991B000FABDE /* NetworkManager.swift */; };
@@ -545,7 +544,6 @@
 		82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionViewController.swift; sourceTree = "<group>"; };
 		82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionTableViewCell.swift; sourceTree = "<group>"; };
-		82D598AF21A58CAD000FABDE /* NetworkTrustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTrustViewController.swift; sourceTree = "<group>"; };
 		82D598B321A5A7A3000FABDE /* NetworkTrust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTrust.swift; sourceTree = "<group>"; };
 		82D598BB21A6949F000FABDE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		82D598BF21A6991B000FABDE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -1104,7 +1102,6 @@
 				9C50959520FCF4C60048DBF2 /* ProtocolViewController.swift */,
 				820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */,
 				82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */,
-				82D598AF21A58CAD000FABDE /* NetworkTrustViewController.swift */,
 				82BBF25821AC799A00589766 /* NetworkProtectionRulesViewController.swift */,
 				82C293BE21CCD49A000B74EC /* NavigationController.swift */,
 				8252747D21F1F80400D4B8B5 /* ServerViewController.swift */,
@@ -2236,7 +2233,6 @@
 				825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */,
 				8270D268241BB3D100B17B65 /* InfoAlertViewModel.swift in Sources */,
 				826E614A242A1CA80064F195 /* AccountViewModel.swift in Sources */,
-				82D598B021A58CAD000FABDE /* NetworkTrustViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
