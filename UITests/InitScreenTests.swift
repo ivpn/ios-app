@@ -20,10 +20,11 @@ class InitScreenTests: XCTestCase {
     
     func testTapLogInButton() {
         let app = XCUIApplication()
-        
+
         XCTAssertTrue(app.isDisplayingMainScreen)
         
-        app.buttons["Tap to connect"].tap()
+        app.buttons["Vienna"].tap()
+        app.otherElements.buttons["CONNECT TO SERVER"].tap()
         app.buttons["Log In"].tap()
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
     }
@@ -33,7 +34,8 @@ class InitScreenTests: XCTestCase {
         
         XCTAssertTrue(app.isDisplayingMainScreen)
         
-        app.buttons["Tap to connect"].tap()
+        app.buttons["Vienna"].tap()
+        app.otherElements.buttons["CONNECT TO SERVER"].tap()
         app.buttons["Create Account"].tap()
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
     }

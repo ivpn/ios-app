@@ -23,15 +23,13 @@ class SettingsScreenTests: XCTestCase {
         
         XCTAssertTrue(app.isDisplayingMainScreen)
         
-        app.buttons["Open Settings"].tap()
-        app.tables["settingsScreen"].swipeUp()
-        app.buttons["Log In or Sign Up"].tap()
+        app.buttons["Account"].tap()
         XCTAssertTrue(app.isDisplayingLoginScreen)
         
         app.buttons["Log In"].tap()
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
         
-        app.buttons["Agree"].tap()
+        app.buttons["Cancel"].tap()
         let loginScreen = app.otherElements["loginScreen"].waitForExistence(timeout: 1)
         XCTAssert(loginScreen)
     }
@@ -41,7 +39,7 @@ class SettingsScreenTests: XCTestCase {
 
         XCTAssertTrue(app.isDisplayingMainScreen)
 
-        app.buttons["Open Settings"].tap()
+        app.buttons["Settings"].tap()
         app.tables["settingsScreen"].staticTexts["IKEv2"].tap()
         XCTAssertTrue(app.isDisplayingLoginScreen)
     }
@@ -51,7 +49,7 @@ class SettingsScreenTests: XCTestCase {
 
         XCTAssertTrue(app.isDisplayingMainScreen)
 
-        app.buttons["Open Settings"].tap()
+        app.buttons["Settings"].tap()
         app.tables["settingsScreen"].staticTexts["Network Protection"].tap()
         XCTAssertTrue(app.isDisplayingLoginScreen)
     }

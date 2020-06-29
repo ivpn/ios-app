@@ -47,6 +47,7 @@ class MainViewControllerV2: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "mainScreen"
         initErrorObservers()
         initFloatingPanel()
         addObservers()
