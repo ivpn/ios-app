@@ -169,7 +169,7 @@ extension AppDelegate: UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if let mainViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+        if let mainViewController = UIApplication.topViewController() as? MainViewController {
             if let controlPanelViewController = mainViewController.floatingPanel.contentViewController as? ControlPanelViewController {
                 controlPanelViewController.refreshServiceStatus()
             }
@@ -183,7 +183,7 @@ extension AppDelegate: UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         NetworkManager.shared.stopMonitoring()
         
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
             topViewController.refreshUI()
         }
     }

@@ -26,9 +26,9 @@
 		8206F32124347A8F0056B465 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32024347A8F0056B465 /* MainView.swift */; };
 		8206F32324367A240056B465 /* VPNErrorObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32224367A240056B465 /* VPNErrorObserver.swift */; };
 		8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */; };
-		8208525823FD5EB20008C112 /* MainViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525723FD5EB20008C112 /* MainViewControllerV2.swift */; };
+		8208525823FD5EB20008C112 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525723FD5EB20008C112 /* MainViewController.swift */; };
 		8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */; };
-		8208525C23FD64160008C112 /* MainViewControllerV2+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525B23FD64160008C112 /* MainViewControllerV2+Ext.swift */; };
+		8208525C23FD64160008C112 /* MainViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525B23FD64160008C112 /* MainViewController+Ext.swift */; };
 		820EA86823223F7900E16B2D /* InterfaceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EA86723223F7900E16B2D /* InterfaceResult.swift */; };
 		820EA8692322406000E16B2D /* InterfaceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EA86723223F7900E16B2D /* InterfaceResult.swift */; };
 		820EA86B232242F800E16B2D /* ApiRequestDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429BA22FC36100056B8FF /* ApiRequestDI.swift */; };
@@ -402,9 +402,9 @@
 		8206F32024347A8F0056B465 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8206F32224367A240056B465 /* VPNErrorObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNErrorObserver.swift; sourceTree = "<group>"; };
 		8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelMainLayout.swift; sourceTree = "<group>"; };
-		8208525723FD5EB20008C112 /* MainViewControllerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerV2.swift; sourceTree = "<group>"; };
+		8208525723FD5EB20008C112 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Ext.swift"; sourceTree = "<group>"; };
-		8208525B23FD64160008C112 /* MainViewControllerV2+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewControllerV2+Ext.swift"; sourceTree = "<group>"; };
+		8208525B23FD64160008C112 /* MainViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Ext.swift"; sourceTree = "<group>"; };
 		820EA86723223F7900E16B2D /* InterfaceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceResult.swift; sourceTree = "<group>"; };
 		820EA86D232264EC00E16B2D /* SuccessResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResult.swift; sourceTree = "<group>"; };
 		821429B622FC2BE90056B8FF /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -793,8 +793,8 @@
 				8206F31F24347A360056B465 /* View */,
 				82C1D5BA23FE78330059A915 /* Map */,
 				82C1D5BD23FE8BD90059A915 /* ControlPanel */,
-				8208525723FD5EB20008C112 /* MainViewControllerV2.swift */,
-				8208525B23FD64160008C112 /* MainViewControllerV2+Ext.swift */,
+				8208525723FD5EB20008C112 /* MainViewController.swift */,
+				8208525B23FD64160008C112 /* MainViewController+Ext.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -2115,7 +2115,7 @@
 				82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */,
 				8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */,
 				8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */,
-				8208525C23FD64160008C112 /* MainViewControllerV2+Ext.swift in Sources */,
+				8208525C23FD64160008C112 /* MainViewController+Ext.swift in Sources */,
 				82C1D5BF23FE8C6D0059A915 /* ControlPanelViewController.swift in Sources */,
 				82DEFFA62452DE5100ECB482 /* MapConstants.swift in Sources */,
 				8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */,
@@ -2153,7 +2153,7 @@
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
 				82DAB37B2457013900302F4C /* Service.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
-				8208525823FD5EB20008C112 /* MainViewControllerV2.swift in Sources */,
+				8208525823FD5EB20008C112 /* MainViewController.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */,
 				82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */,

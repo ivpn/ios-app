@@ -108,7 +108,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @IBAction func reloadGeoLocation() {
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
             topViewController.updateGeoLocation()
         }
     }

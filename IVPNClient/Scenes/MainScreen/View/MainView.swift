@@ -206,13 +206,13 @@ class MainView: UIView {
     }
     
     @objc private func openSettings(_ sender: UIButton) {
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
             topViewController.openSettings(sender)
         }
     }
     
     @objc private func openAccountInfo(_ sender: UIButton) {
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
             topViewController.openAccountInfo(sender)
         }
     }

@@ -30,13 +30,13 @@ extension ControlPanelViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.row == 2 {
-            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            if let topViewController = UIApplication.topViewController() as? MainViewController {
                 topViewController.performSegue(withIdentifier: "ControlPanelSelectServer", sender: nil)
             }
         }
         
         if indexPath.row == 3 {
-            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            if let topViewController = UIApplication.topViewController() as? MainViewController {
                 topViewController.performSegue(withIdentifier: "ControlPanelSelectExitServer", sender: nil)
             }
         }
@@ -58,7 +58,7 @@ extension ControlPanelViewController {
                 return
             }
             
-            if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+            if let topViewController = UIApplication.topViewController() as? MainViewController {
                 topViewController.performSegue(withIdentifier: "MainScreenSelectProtocol", sender: nil)
             }
         }
