@@ -1,5 +1,5 @@
 //
-//  MainViewControllerV2.swift
+//  MainViewController.swift
 //  IVPNClient
 //
 //  Created by Juraj Hilje on 19/02/2020.
@@ -10,7 +10,7 @@ import UIKit
 import FloatingPanel
 import NetworkExtension
 
-class MainViewControllerV2: UIViewController {
+class MainViewController: UIViewController {
     
     // MARK: - @IBOutlets -
     

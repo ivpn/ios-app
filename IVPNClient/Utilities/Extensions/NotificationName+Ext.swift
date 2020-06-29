@@ -1,5 +1,5 @@
 //
-//  NotificationName.swift
+//  NotificationName+Ext.swift
 //  IVPN Client
 //
 //  Created by Juraj Hilje on 06/12/2018.
@@ -26,8 +26,6 @@ extension Notification.Name {
     public static let ForceNewSession = Notification.Name("forceNewSession")
     public static let VPNConnectError = Notification.Name("vpnConnectError")
     public static let VPNConfigurationDisabled = Notification.Name("vpnConfigurationDisabled")
-    public static let ShowLogin = Notification.Name("showLogin")
-    public static let ShowCreateAccount = Notification.Name("showCreateAccount")
     public static let UpdateFloatingPanelLayout = Notification.Name("updateFloatingPanelLayout")
     public static let UpdateControlPanel = Notification.Name("updateControlPanel")
     public static let ProtocolSelected = Notification.Name("protocolSelected")

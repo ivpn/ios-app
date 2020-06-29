@@ -232,9 +232,7 @@ class ConnectionManager {
         self.closeApp = closeApp
         getStatus { _, status in
             guard self.canConnect else {
-                if let mainViewController = UIApplication.topViewController() as? MainViewController {
-                    mainViewController.connectionExecute()
-                }
+                NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
                 return
             }
             

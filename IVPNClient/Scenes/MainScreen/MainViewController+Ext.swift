@@ -1,5 +1,5 @@
 //
-//  MainViewControllerV2+Ext.swift
+//  MainViewController+Ext.swift
 //  IVPNClient
 //
 //  Created by Juraj Hilje on 19/02/2020.
@@ -10,7 +10,7 @@ import FloatingPanel
 
 // MARK: - FloatingPanelControllerDelegate -
 
-extension MainViewControllerV2: FloatingPanelControllerDelegate {
+extension MainViewController: FloatingPanelControllerDelegate {
     
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
         return FloatingPanelMainLayout()
@@ -31,7 +31,7 @@ extension MainViewControllerV2: FloatingPanelControllerDelegate {
 
 // MARK: - UIAdaptivePresentationControllerDelegate -
 
-extension MainViewControllerV2: UIAdaptivePresentationControllerDelegate {
+extension MainViewController: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
         floatingPanel.updateLayout()
@@ -52,7 +52,7 @@ extension MainViewControllerV2: UIAdaptivePresentationControllerDelegate {
 
 // MARK: - VPNErrorObserverDelegate -
 
-extension MainViewControllerV2: VPNErrorObserverDelegate {
+extension MainViewController: VPNErrorObserverDelegate {
     
     func presentError(title: String, message: String) {
         showErrorAlert(title: title, message: message)

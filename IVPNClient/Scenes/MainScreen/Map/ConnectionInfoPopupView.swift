@@ -215,7 +215,7 @@ class ConnectionInfoPopupView: UIView {
     }
     
     @objc private func infoAction() {
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
             topViewController.expandFloatingPanel()
         }
     }

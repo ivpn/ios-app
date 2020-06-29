@@ -170,7 +170,9 @@ extension AppDelegate: UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         if let mainViewController = UIApplication.topViewController() as? MainViewController {
-            mainViewController.refreshServiceStatus()
+            if let controlPanelViewController = mainViewController.floatingPanel.contentViewController as? ControlPanelViewController {
+                controlPanelViewController.refreshServiceStatus()
+            }
         }
         
         if UserDefaults.shared.networkProtectionEnabled {
@@ -181,7 +183,7 @@ extension AppDelegate: UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         NetworkManager.shared.stopMonitoring()
         
-        if let topViewController = UIApplication.topViewController() as? MainViewControllerV2 {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
             topViewController.refreshUI()
         }
     }

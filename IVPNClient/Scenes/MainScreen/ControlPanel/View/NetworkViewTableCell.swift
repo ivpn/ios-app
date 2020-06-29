@@ -104,13 +104,3 @@ class NetworkViewTableCell: UITableViewCell {
     }
     
 }
-
-// MARK: - NetworkTrustViewControllerDelegate -
-
-extension NetworkViewTableCell: NetworkTrustViewControllerDelegate {
-    
-    func selected(trust: String, indexPath: IndexPath) {
-        update(trust: trust)
-    }
-    
-}
