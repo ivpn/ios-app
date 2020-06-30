@@ -173,6 +173,7 @@
 		82A160BB221C4E2000730577 /* Server+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A160B9221C4E2000730577 /* Server+CoreDataProperties.swift */; };
 		82A208C121BAAC6C00C9AD44 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
 		82A208C221BAAC6C00C9AD44 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
+		82A3422324AB660C00761AB0 /* ApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422224AB660C00761AB0 /* ApplicationTests.swift */; };
 		82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */; };
 		82A7F10523C8661B0015A357 /* ServiceStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */; };
 		82A9E8C523471EBE007BCA7E /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82A9E8C323471EBE007BCA7E /* release.xcconfig */; };
@@ -506,6 +507,7 @@
 		829DF2812497953C000DC2DB /* UIButton+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		82A160B8221C4E2000730577 /* Server+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataClass.swift"; sourceTree = "<group>"; };
 		82A160B9221C4E2000730577 /* Server+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		82A3422224AB660C00761AB0 /* ApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTests.swift; sourceTree = "<group>"; };
 		82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectToServerPopupView.swift; sourceTree = "<group>"; };
 		82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatusTests.swift; sourceTree = "<group>"; };
 		82A9E8C323471EBE007BCA7E /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
@@ -1183,6 +1185,7 @@
 				82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */,
 				82555004220ACAAF004763A7 /* VPNServersTests.swift */,
 				82F81A60224CFFD700CB778B /* AuthenticationTests.swift */,
+				82A3422224AB660C00761AB0 /* ApplicationTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1949,6 +1952,7 @@
 				82E96A4B224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift in Sources */,
 				82555005220ACAAF004763A7 /* VPNServersTests.swift in Sources */,
 				82F81A40224CF69900CB778B /* StringTests.swift in Sources */,
+				82A3422324AB660C00761AB0 /* ApplicationTests.swift in Sources */,
 				82351FCA241FA16600E6E0FD /* InfoAlertViewModelTests.swift in Sources */,
 				821BDE02224A6EC700F592BF /* AppKeyManagerTests.swift in Sources */,
 				82F81A4D224CFADB00CB778B /* TunnelTests.swift in Sources */,
