@@ -23,6 +23,7 @@ class UserDefaultsTests: XCTestCase {
         XCTAssertNotNil(UserDefaults.shared.wgKeyTimestamp)
         XCTAssertNotNil(UserDefaults.shared.wgRegenerationRate)
         XCTAssertNotNil(UserDefaults.shared.localIpAddress)
+        XCTAssertNotNil(UserDefaults.shared.serversSort)
     }
     
 }
