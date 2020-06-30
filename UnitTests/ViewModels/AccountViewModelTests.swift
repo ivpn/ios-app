@@ -12,6 +12,10 @@ import XCTest
 
 class AccountViewModelTests: XCTestCase {
     
+    override func setUp() {
+        Application.shared.authentication.removeStoredCredentials()
+    }
+    
     func test_statusText() {
         var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
         

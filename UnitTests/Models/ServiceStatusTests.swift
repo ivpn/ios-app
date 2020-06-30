@@ -55,6 +55,13 @@ class ServiceStatusTests: XCTestCase {
     }
     
     func test_daysUntilSubscriptionExpiration() {
+        model.activeUntil = Int(Date().changeDays(by: 3).timeIntervalSince1970)
+        XCTAssertEqual(model.daysUntilSubscriptionExpiration(), 3)
+        
+        model.activeUntil = Int(Date().changeDays(by: 0).timeIntervalSince1970)
+        XCTAssertEqual(model.daysUntilSubscriptionExpiration(), 0)
+        
+        model.activeUntil = Int(Date().changeDays(by: -3).timeIntervalSince1970)
         XCTAssertEqual(model.daysUntilSubscriptionExpiration(), 0)
     }
     
