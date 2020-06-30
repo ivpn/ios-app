@@ -177,6 +177,7 @@
 		82A3422524AB6AF700761AB0 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422424AB6AF700761AB0 /* Double+Ext.swift */; };
 		82A3422724AB6CA500761AB0 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422624AB6CA500761AB0 /* DoubleTests.swift */; };
 		82A3422924AB799600761AB0 /* ProofsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422824AB799600761AB0 /* ProofsViewModelTests.swift */; };
+		82A3422B24AB7F8600761AB0 /* VPNServerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422A24AB7F8600761AB0 /* VPNServerViewModelTests.swift */; };
 		82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */; };
 		82A7F10523C8661B0015A357 /* ServiceStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */; };
 		82A9E8C523471EBE007BCA7E /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82A9E8C323471EBE007BCA7E /* release.xcconfig */; };
@@ -514,6 +515,7 @@
 		82A3422424AB6AF700761AB0 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		82A3422624AB6CA500761AB0 /* DoubleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTests.swift; sourceTree = "<group>"; };
 		82A3422824AB799600761AB0 /* ProofsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofsViewModelTests.swift; sourceTree = "<group>"; };
+		82A3422A24AB7F8600761AB0 /* VPNServerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModelTests.swift; sourceTree = "<group>"; };
 		82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectToServerPopupView.swift; sourceTree = "<group>"; };
 		82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatusTests.swift; sourceTree = "<group>"; };
 		82A9E8C323471EBE007BCA7E /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
@@ -937,6 +939,7 @@
 				82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */,
 				826E614B242A61380064F195 /* AccountViewModelTests.swift */,
 				82A3422824AB799600761AB0 /* ProofsViewModelTests.swift */,
+				82A3422A24AB7F8600761AB0 /* VPNServerViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1957,6 +1960,7 @@
 				82F81A3F224CF69900CB778B /* NSMutableAttributedStringTests.swift in Sources */,
 				82F81A4C224CFADB00CB778B /* PeerTests.swift in Sources */,
 				82F81A61224CFFD700CB778B /* AuthenticationTests.swift in Sources */,
+				82A3422B24AB7F8600761AB0 /* VPNServerViewModelTests.swift in Sources */,
 				82F81A41224CF69900CB778B /* ArrayTests.swift in Sources */,
 				82F81A4A224CFADB00CB778B /* InterfaceTests.swift in Sources */,
 				82E96A4B224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift in Sources */,
