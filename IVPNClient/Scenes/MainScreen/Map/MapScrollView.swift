@@ -246,8 +246,8 @@ class MapScrollView: UIScrollView {
         let bitmapWidth: Double = 4206
         let bitmapHeight: Double = 3070
         
-        var x: Double = toRadian(longitude) - 0.18
-        var y: Double = toRadian(latitude) + 0.124
+        var x: Double = longitude.toRadian() - 0.18
+        var y: Double = latitude.toRadian() + 0.124
 
         y = 1.25 * log(tan(0.25 * Double.pi + 0.4 * y))
 
@@ -255,10 +255,6 @@ class MapScrollView: UIScrollView {
         y = (bitmapHeight / 2) - (bitmapHeight / (2 * 2.383412543)) * y
 
         return (x, y)
-    }
-
-    private func toRadian(_ value: Double) -> Double {
-        return value * Double.pi / 180
     }
     
 }
