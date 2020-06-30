@@ -243,29 +243,22 @@ class MapScrollView: UIScrollView {
     }
     
     private func getCoordinatesBy(latitude: Double, longitude: Double) -> (Double, Double) {
-        let bitmapWidth: Double = 3909
-        let bitmapHeight: Double = 2942
+        let bitmapWidth: Double = 11300
+        let bitmapHeight: Double = 8248
         
-        var y: Double
-        var blackMagicCoef: Double
-        
-        // Using this coefficients to compensate for the curvature of the map
-        let xMapCoefficient = 0.026
-        let yMapCoefficient = 0.965
-        
-        // Logic to convert longitude, latitude into x, y
-        var x: Double = (longitude + 180.0) * (bitmapWidth / 360.0)
-        let latRadius: Double = latitude * Double.pi / 180
-        blackMagicCoef = log(tan((Double.pi / 4) + (latRadius / 2)))
-        y = (bitmapHeight / 2) - (bitmapWidth * blackMagicCoef / (2 * Double.pi))
-        
-        // Trying to compensate for the curvature of the map
-        x -= bitmapWidth * xMapCoefficient
-        if y < bitmapHeight / 2 {
-            y *= yMapCoefficient
-        }
-        
+        var x: Double = toRadian(longitude) - 0.18
+        var y: Double = toRadian(latitude) + 0.124
+
+        y = 1.25 * log(tan(0.25 * Double.pi + 0.4 * y))
+
+        x = ((bitmapWidth) / 2) + (bitmapWidth / (2 * Double.pi)) * x
+        y = (bitmapHeight / 2) - (bitmapHeight / (2 * 2.383412543)) * y
+
         return (x, y)
+    }
+
+    private func toRadian(_ value: Double) -> Double {
+        return value * Double.pi / 180
     }
     
 }
