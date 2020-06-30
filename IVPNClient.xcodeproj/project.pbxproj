@@ -176,6 +176,7 @@
 		82A3422324AB660C00761AB0 /* ApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422224AB660C00761AB0 /* ApplicationTests.swift */; };
 		82A3422524AB6AF700761AB0 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422424AB6AF700761AB0 /* Double+Ext.swift */; };
 		82A3422724AB6CA500761AB0 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422624AB6CA500761AB0 /* DoubleTests.swift */; };
+		82A3422924AB799600761AB0 /* ProofsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422824AB799600761AB0 /* ProofsViewModelTests.swift */; };
 		82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */; };
 		82A7F10523C8661B0015A357 /* ServiceStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */; };
 		82A9E8C523471EBE007BCA7E /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82A9E8C323471EBE007BCA7E /* release.xcconfig */; };
@@ -512,6 +513,7 @@
 		82A3422224AB660C00761AB0 /* ApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTests.swift; sourceTree = "<group>"; };
 		82A3422424AB6AF700761AB0 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		82A3422624AB6CA500761AB0 /* DoubleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTests.swift; sourceTree = "<group>"; };
+		82A3422824AB799600761AB0 /* ProofsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofsViewModelTests.swift; sourceTree = "<group>"; };
 		82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectToServerPopupView.swift; sourceTree = "<group>"; };
 		82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatusTests.swift; sourceTree = "<group>"; };
 		82A9E8C323471EBE007BCA7E /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
@@ -934,6 +936,7 @@
 				82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */,
 				82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */,
 				826E614B242A61380064F195 /* AccountViewModelTests.swift */,
+				82A3422824AB799600761AB0 /* ProofsViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1947,6 +1950,7 @@
 				82F81A42224CF69900CB778B /* UIDeviceTests.swift in Sources */,
 				82F81A4B224CFADB00CB778B /* CIDRAddressTests.swift in Sources */,
 				82F81A58224CFC0C00CB778B /* VPNManagerTests.swift in Sources */,
+				82A3422924AB799600761AB0 /* ProofsViewModelTests.swift in Sources */,
 				82EA857A21DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift in Sources */,
 				82F81A3D224CF69900CB778B /* ConnectionSettingsTests.swift in Sources */,
 				826E614C242A61380064F195 /* AccountViewModelTests.swift in Sources */,
