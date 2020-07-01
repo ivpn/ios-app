@@ -29,7 +29,6 @@ class NavigationController: UINavigationController {
         } else {
             navigationBar.barTintColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
             navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold), NSAttributedString.Key.foregroundColor: UIColor.init(named: Theme.ivpnLabelPrimary)!]
-            navigationBar.setBackgroundImage(#imageLiteral(resourceName: "BarBackground"), for: .default)
             navigationBar.shadowImage = UIImage()
             navigationBar.barTintColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)!
         }
