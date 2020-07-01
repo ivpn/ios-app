@@ -2642,7 +2642,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="right" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rn8-hf-8bd" customClass="MapScrollView" customModule="IVPNClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map-dark" translatesAutoresizingMaskIntoConstraints="NO" id="gIR-a7-hcm">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="gIR-a7-hcm">
                                         <rect key="frame" x="0.0" y="0.0" width="4206" height="3070"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="4206" id="O1K-0N-DpT"/>
@@ -3599,7 +3599,7 @@ Go to your client area to change subscription plan</string>
         <image name="icon-settings-2" width="24" height="24"/>
         <image name="ivpn-logo-gray" width="44" height="15"/>
         <image name="logo" width="72" height="24"/>
-        <image name="map-dark" width="11300" height="8249"/>
+        <image name="map" width="4206" height="3071"/>
         <image name="nl-v" width="24" height="24"/>
         <image name="promo-2" width="360" height="280"/>
         <image name="us" width="16" height="16"/>
