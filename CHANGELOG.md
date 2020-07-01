@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.19.0 - [Unreleased]
+## 1.19.1 - [Unreleased]
+
+[FIXED] App crashing on iOS 12 devices
+
+## 1.19.0 - 2020-06-30
 
 [NEW] Signup without email  
 [NEW] Load balancer for WireGuard  
