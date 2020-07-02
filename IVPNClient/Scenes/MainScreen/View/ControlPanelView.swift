@@ -92,8 +92,10 @@ class ControlPanelView: UITableView {
     // MARK: - Methods -
     
     func setupView() {
-        connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
-        connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
+        if #available(iOS 13.0, *) {
+            connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
+            connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
+        }
         ipAddressErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
         locationErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
         providerErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
