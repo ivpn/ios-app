@@ -50,17 +50,6 @@ class AppDelegate: UIResponder {
         }
     }
     
-    private func loadServerList() {
-        ApiService.shared.getServersList(storeInCache: true) { result in
-            switch result {
-            case .success(let serverList):
-                Application.shared.serverList = serverList
-            default:
-                break
-            }
-        }
-    }
-    
     private func evaluateUITests() {
         // When running the application for UI Testing we need to remove all the stored data so we can start testing the clear app
         // It is impossible to access the KeyChain from the UI test itself as the test runs in different process
