@@ -104,7 +104,7 @@ class MapMarkerView: UIView {
             return
         }
         
-        UIView.animate(withDuration: 0.7, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.alpha = 0
             self.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
         }) { _ in
