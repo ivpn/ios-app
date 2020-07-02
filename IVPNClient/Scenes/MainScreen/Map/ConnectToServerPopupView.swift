@@ -74,13 +74,13 @@ class ConnectToServerPopupView: UIView {
         didSet {
             switch displayMode {
             case .hidden:
-                UIView.animate(withDuration: 0.15, animations: { self.alpha = 0 }) { _ in
+                UIView.animate(withDuration: 0.20, animations: { self.alpha = 0 }) { _ in
                     self.isHidden = true
                 }
             case .content:
                 container.isHidden = false
                 isHidden = false
-                UIView.animate(withDuration: 0.15, animations: { self.alpha = 1 })
+                UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             }
         }
     }

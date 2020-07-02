@@ -290,10 +290,12 @@ class ControlPanelViewController: UITableViewController {
         
         if vpnStatus != lastVPNStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
             refreshServiceStatus()
+            NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
         }
         
         if vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
             reloadGeoLocation()
+            NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
         }
         
         lastVPNStatus = vpnStatus

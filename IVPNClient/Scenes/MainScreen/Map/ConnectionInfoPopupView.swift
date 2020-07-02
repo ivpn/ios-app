@@ -99,7 +99,7 @@ class ConnectionInfoPopupView: UIView {
         didSet {
             switch displayMode {
             case .hidden:
-                UIView.animate(withDuration: 0.15, animations: { self.alpha = 0 }) { _ in
+                UIView.animate(withDuration: 0.20, animations: { self.alpha = 0 }) { _ in
                     self.isHidden = true
                 }
             case .loading:
@@ -107,19 +107,19 @@ class ConnectionInfoPopupView: UIView {
                 container.isHidden = true
                 errorLabel.isHidden = true
                 isHidden = false
-                UIView.animate(withDuration: 0.15, animations: { self.alpha = 1 })
+                UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             case .content:
                 spinner.stopAnimating()
                 container.isHidden = false
                 errorLabel.isHidden = true
                 isHidden = false
-                UIView.animate(withDuration: 0.15, animations: { self.alpha = 1 })
+                UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             case .error:
                 spinner.stopAnimating()
                 container.isHidden = true
                 errorLabel.isHidden = false
                 isHidden = false
-                UIView.animate(withDuration: 0.15, animations: { self.alpha = 1 })
+                UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             }
         }
     }
