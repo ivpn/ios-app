@@ -61,7 +61,7 @@ class MapScrollView: UIScrollView {
     // MARK: - Methods -
     
     func setupConstraints() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
             iPadConstraints.activate()
         } else {
             iPadConstraints.deactivate()

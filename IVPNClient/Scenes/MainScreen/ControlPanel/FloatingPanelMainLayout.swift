@@ -14,7 +14,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     // MARK: - Override public properties -
     
     public var initialPosition: FloatingPanelPosition {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
             return .full
         }
         
@@ -22,7 +22,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     }
     
     public var supportedPositions: Set<FloatingPanelPosition> {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
             return [.full]
         }
         
@@ -48,7 +48,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     // MARK: - Override public methods -
 
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
             switch position {
             case .full:
                 return -20
@@ -99,7 +99,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     }
     
     public func backdropAlphaFor(position: FloatingPanelPosition) -> CGFloat {
-        if position == .full && (UIDevice.current.userInterfaceIdiom == .phone || UIDevice.current.orientation.isPortrait) {
+        if position == .full && (UIDevice.current.userInterfaceIdiom == .phone || UIApplication.shared.statusBarOrientation.isPortrait) {
             return 0.3
         }
         

@@ -97,7 +97,7 @@ class InfoAlertView: UIView {
     }
     
     private func updateAutoLayout() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIDevice.current.orientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
             centerXConstraint.constant = 375 / 2
             bottomConstraint.constant = 20
             return
