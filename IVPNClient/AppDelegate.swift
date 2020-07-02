@@ -19,12 +19,6 @@ class AppDelegate: UIResponder {
     
     // MARK: - Methods -
     
-    private func setRootViewController() {
-        if let window = window {
-            window.rootViewController = NavigationManager.getMainViewController()
-        }
-    }
-    
     private func evaluateFirstRun() {
         if UserDefaults.standard.object(forKey: "FirstInstall") == nil {
             KeyChain.clearAll()
@@ -149,7 +143,6 @@ extension AppDelegate: UIApplicationDelegate {
         evaluateUITests()
         evaluateFirstRun()
         registerUserDefaults()
-        setRootViewController()
         finishIncompletePurchases()
         createLogFiles()
         resetLastPingTimestamp()
