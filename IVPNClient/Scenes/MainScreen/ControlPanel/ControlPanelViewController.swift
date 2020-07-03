@@ -173,6 +173,7 @@ class ControlPanelViewController: UITableViewController {
         }
         
         guard evaluateIsLoggedIn() else {
+            NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.ServiceAuthorized, object: nil)
             return
         }
@@ -184,6 +185,7 @@ class ControlPanelViewController: UITableViewController {
         }
         
         guard evaluateIsServiceActive() else {
+            NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(connectionExecute), name: Notification.Name.SubscriptionActivated, object: nil)
             return
         }
