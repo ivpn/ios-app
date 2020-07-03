@@ -107,12 +107,6 @@ class ControlPanelViewController: UITableViewController {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
     }
     
-    @IBAction func reloadGeoLocation() {
-        if let topViewController = UIApplication.topViewController() as? MainViewController {
-            topViewController.updateGeoLocation()
-        }
-    }
-    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {
@@ -294,7 +288,10 @@ class ControlPanelViewController: UITableViewController {
         }
         
         if vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
-            reloadGeoLocation()
+            if !Application.shared.connectionManager.reconnectAutomatically {
+                reloadGeoLocation()
+            }
+            
             NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
         }
         
@@ -398,6 +395,12 @@ class ControlPanelViewController: UITableViewController {
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker()
         controlPanelView.updateProtocol()
+    }
+    
+    private func reloadGeoLocation() {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
+            topViewController.updateGeoLocation()
+        }
     }
     
     @objc private func updateControlPanel() {
