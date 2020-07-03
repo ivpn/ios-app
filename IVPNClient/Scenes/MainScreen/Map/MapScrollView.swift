@@ -232,6 +232,7 @@ class MapScrollView: UIScrollView {
             
             if Application.shared.connectionManager.status.isDisconnected() {
                 Application.shared.settings.selectedServer = server
+                Application.shared.settings.selectedServer.fastest = false
                 updateSelectedMarker()
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
