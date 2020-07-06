@@ -1,0 +1,35 @@
+name: CI
+
+on: pull_request
+jobs:
+  test:
+    name: Unit and UI Tests
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v1
+      with:
+        path: Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pods-
+    - name: Dependencies
+      run: pod install
+    - name: Set up staging.xcconfig
+      run: cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig  
+    - name: Set up release.xcconfig
+      run: cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig
+    - name: Set up wg-staging.xcconfig
+      run: cp wireguard-tunnel-provider/Config/wg-staging.template.xcconfig wireguard-tunnel-provider/Config/wg-staging.xcconfig
+    - name: Set up wg-release.xcconfig
+      run: cp wireguard-tunnel-provider/Config/wg-release.template.xcconfig wireguard-tunnel-provider/Config/wg-release.xcconfig
+    - name: Set up today-extension-staging.xcconfig
+      run: cp today-extension/Config/today-extension-staging.template.xcconfig today-extension/Config/today-extension-staging.xcconfig
+    - name: Set up today-extension-release.xcconfig
+      run: cp today-extension/Config/today-extension-release.template.xcconfig today-extension/Config/today-extension-release.xcconfig
+    - name: Set up OpenVPNConf.swift
+      run: cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
+    - name: Set up Appfile
+      run: cp fastlane/Appfile.template fastlane/Appfile
+    - name: Build and test
+      run: xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11 Pro'
