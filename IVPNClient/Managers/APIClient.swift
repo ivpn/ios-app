@@ -19,7 +19,6 @@ enum HTTPMethod: String {
     }
 }
 
-
 enum HTTPContentType: String {
     case applicationXWWWFromUrlencoded = "application/x-www-form-urlencoded"
     case applicationJSON = "application/json"
