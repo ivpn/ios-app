@@ -57,15 +57,15 @@ extension NETunnelProviderProtocol {
     static func openVPNdnsServers() -> [String]? {
         if UserDefaults.shared.isAntiTracker {
             if UserDefaults.shared.isAntiTrackerHardcore {
-                if UserDefaults.shared.isMultiHop {
+                if UserDefaults.shared.isMultiHop && !UserDefaults.shared.antiTrackerHardcoreDNSMultiHop.isEmpty {
                     return [UserDefaults.shared.antiTrackerHardcoreDNSMultiHop]
-                } else {
+                } else if !UserDefaults.shared.antiTrackerHardcoreDNS.isEmpty {
                     return [UserDefaults.shared.antiTrackerHardcoreDNS]
                 }
             } else {
-                if UserDefaults.shared.isMultiHop {
+                if UserDefaults.shared.isMultiHop && !UserDefaults.shared.antiTrackerDNSMultiHop.isEmpty {
                     return [UserDefaults.shared.antiTrackerDNSMultiHop]
-                } else {
+                } else if !UserDefaults.shared.antiTrackerDNS.isEmpty {
                     return [UserDefaults.shared.antiTrackerDNS]
                 }
             }
