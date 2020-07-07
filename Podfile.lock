@@ -12,14 +12,14 @@ PODS:
   - SnapKit (5.0.1)
   - SwiftyBeaver (1.9.1)
   - SwiftyStoreKit (0.15.0)
-  - TunnelKit (2.2.5):
-    - TunnelKit/Protocols/OpenVPN (= 2.2.5)
-  - TunnelKit/AppExtension (2.2.5):
+  - TunnelKit (2.2.7):
+    - TunnelKit/Protocols/OpenVPN (= 2.2.7)
+  - TunnelKit/AppExtension (2.2.7):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (2.2.5):
+  - TunnelKit/Core (2.2.7):
     - SwiftyBeaver
-  - TunnelKit/Protocols/OpenVPN (2.2.5):
+  - TunnelKit/Protocols/OpenVPN (2.2.7):
     - OpenSSL-Apple (~> 1.1.1g.6)
     - TunnelKit/AppExtension
     - TunnelKit/Core
@@ -34,7 +34,7 @@ DEPENDENCIES:
   - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `4.3.4`)
   - SnapKit (~> 5.0.1)
   - SwiftyStoreKit (~> 0.15.0)
-  - TunnelKit (~> 2.2.5)
+  - TunnelKit (~> 2.2.7)
 
 SPEC REPOS:
   trunk:
@@ -72,8 +72,8 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
-  TunnelKit: 17c6af76028b29cc6ddc936160986a4d12e09266
+  TunnelKit: cbd063b8b6f4f6a182cf48e646ff35cb2365bf91
 
-PODFILE CHECKSUM: ae8797f6ac3b27d634c8a9ec15092ccb6763c9bf
+PODFILE CHECKSUM: ab2634f8c7c8c0cbe2510438277925929b5b6f10
 
 COCOAPODS: 1.8.4
