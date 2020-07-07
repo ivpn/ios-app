@@ -28,13 +28,6 @@ class ConnectToServerPopupView: UIView {
         return arrow
     }()
     
-    lazy var descriptionLabel: UILabel = {
-        let statusLabel = UILabel()
-        statusLabel.font = UIFont.systemFont(ofSize: 12)
-        statusLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
-        return statusLabel
-    }()
-    
     lazy var locationLabel: UILabel = {
         let locationLabel = UILabel()
         locationLabel.font = UIFont.systemFont(ofSize: 16)
@@ -61,10 +54,8 @@ class ConnectToServerPopupView: UIView {
             locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
             
             if !Application.shared.connectionManager.status.isDisconnected() && Application.shared.settings.selectedServer == vpnServer {
-                descriptionLabel.text = "Connected to"
                 actionButton.setTitle("DISCONNECT", for: .normal)
             } else {
-                descriptionLabel.text = "Protect yourself by connecting to"
                 actionButton.setTitle("CONNECT TO SERVER", for: .normal)
             }
         }
@@ -126,7 +117,6 @@ class ConnectToServerPopupView: UIView {
         isHidden = true
         alpha = 0
         
-        container.addSubview(descriptionLabel)
         container.addSubview(locationLabel)
         container.addSubview(actionButton)
         addSubview(arrow)
@@ -140,7 +130,7 @@ class ConnectToServerPopupView: UIView {
             make.left.equalTo(0)
             make.top.equalTo(0)
             make.width.equalTo(270)
-            make.height.equalTo(130)
+            make.height.equalTo(110)
         }
         
         container.snp.makeConstraints { make in
@@ -153,16 +143,9 @@ class ConnectToServerPopupView: UIView {
             make.top.equalTo(-7)
         }
         
-        descriptionLabel.snp.makeConstraints { make in
-            make.left.equalTo(18)
-            make.top.equalTo(15)
-            make.right.equalTo(-18)
-            make.height.equalTo(14)
-        }
-        
         locationLabel.snp.makeConstraints { make in
             make.left.equalTo(18)
-            make.top.equalTo(35)
+            make.top.equalTo(15)
             make.right.equalTo(-18)
             make.height.equalTo(19)
         }
@@ -171,7 +154,7 @@ class ConnectToServerPopupView: UIView {
             make.left.equalTo(18)
             make.right.equalTo(-18)
             make.height.equalTo(44)
-            make.bottom.equalTo(-20)
+            make.bottom.equalTo(-18)
         }
     }
     
