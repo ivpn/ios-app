@@ -79,7 +79,7 @@ extension UIViewController {
         present(safariVC, animated: true, completion: nil)
     }
     
-    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> ())? = nil) {
+    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> Void)? = nil) {
         showAlert(
             title: "Thank you!",
             message: "The payment was successfully processed.\nService is active until: " + serviceStatus.activeUntilString(),
