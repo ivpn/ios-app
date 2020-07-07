@@ -89,14 +89,17 @@ The **header** is mandatory and the **scope** of the header is optional.
 
 Must be one of the following:
 
-* **feat**: A new feature
-* **fix**: A bug fix
-* **docs**: Documentation only changes
-* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-* **refactor**: A code change that neither fixes a bug nor adds a feature
-* **perf**: A code change that improves performance
-* **test**: Adding missing tests
-* **chore**: Changes to the build process or auxiliary tools and libraries such as documentation generation
+* **feat**: A new feature  
+* **fix**: A bug fix  
+* **docs**: Documentation only changes  
+* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)  
+* **refactor**: A code change that neither fixes a bug nor adds a feature  
+* **perf**: A code change that improves performance  
+* **test**: Adding missing tests  
+* **build**: Changes that affect the build system  
+* **ci**: Changes to our CI configuration files and scripts  
+* **vendor**: Bumping a dependency like libchromiumcontent or node  
+* **chore**: Changes to the build process or auxiliary tools and libraries such as documentation generation  
 
 <a name="conventions"></a>
 ## Coding Conventions
