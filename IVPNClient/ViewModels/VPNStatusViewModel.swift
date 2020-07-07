@@ -63,7 +63,7 @@ struct VPNStatusViewModel {
         case .connected:
             return "Your connection is protected"
         default:
-            return "Everyone knows about your location"
+            return "Your current location"
         }
     }
     
