@@ -34,7 +34,7 @@ extension NETunnelProviderProtocol {
         sessionBuilder.hostname = accessDetails.serverAddress
         sessionBuilder.tlsWrap = OpenVPN.TLSWrap.init(strategy: .auth, key: staticKey!)
         
-        if let dnsServers = openVPNdnsServers() {
+        if let dnsServers = openVPNdnsServers(), dnsServers != [""] {
             sessionBuilder.dnsServers = dnsServers
         }
         
