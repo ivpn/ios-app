@@ -44,7 +44,6 @@ class MainView: UIView {
         }
     }
     
-    let markerView = MapMarkerView()
     var infoAlertViewModel = InfoAlertViewModel()
     private var localCoordinates: (Double, Double)?
     private var centerMapButton = UIButton()
