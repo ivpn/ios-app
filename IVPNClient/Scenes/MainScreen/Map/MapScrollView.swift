@@ -248,13 +248,16 @@ class MapScrollView: UIScrollView {
         let bitmapHeight: Double = 3070
         
         var x: Double = longitude.toRadian() - 0.18
-        var y: Double = latitude.toRadian() + 0.124
-
-        y = 1.25 * log(tan(0.25 * Double.pi + 0.4 * y))
-
+        var y: Double = latitude.toRadian()
+        
+        let yStrech = 0.542
+        let yOffset = 0.053
+        
+        y = yStrech * log(tan(0.25 * Double.pi + 0.4 * y)) + yOffset
+        
         x = ((bitmapWidth) / 2) + (bitmapWidth / (2 * Double.pi)) * x
-        y = (bitmapHeight / 2) - (bitmapHeight / (2 * 2.383412543)) * y
-
+        y = (bitmapHeight / 2) - (bitmapHeight / 2) * y
+        
         return (x, y)
     }
     
