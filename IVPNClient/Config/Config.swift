@@ -3,6 +3,7 @@
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
+//  Created by Fedir Nepyyvoda
 //  Copyright (c) 2020 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
