@@ -114,9 +114,11 @@ class ConnectionInfoPopupView: UIView {
         didSet {
             switch displayMode {
             case .hidden:
-                UIView.animate(withDuration: 0.20, animations: { self.alpha = 0 }) { _ in
+                UIView.animate(withDuration: 0.20, animations: {
+                    self.alpha = 0
+                }, completion: { _ in
                     self.isHidden = true
-                }
+                })
             case .loading:
                 spinner.startAnimating()
                 container.isHidden = true
