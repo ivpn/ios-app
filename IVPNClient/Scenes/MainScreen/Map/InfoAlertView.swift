@@ -89,13 +89,11 @@ class InfoAlertView: UIView {
             textLabel.textColor = UIColor.init(named: Theme.ivpnDarkYellow)
             actionButton.setTitleColor(UIColor.init(named: Theme.ivpnDarkYellow), for: .normal)
             iconImage.image = UIImage(named: "icon-alert-dark-yellow")
-            break
         case .info:
             backgroundColor = UIColor.init(named: Theme.ivpnLightNavy)
             textLabel.textColor = UIColor.init(named: Theme.ivpnDarkNavy)
             actionButton.setTitleColor(UIColor.init(named: Theme.ivpnDarkNavy), for: .normal)
             iconImage.image = UIImage(named: "alert-info-dark-navy")
-            break
         }
     }
     
