@@ -50,6 +50,16 @@ class ConnectToServerPopupView: UIView {
         return locationLabel
     }()
     
+    lazy var errorLabel: UILabel = {
+        let locationLabel = UILabel()
+        locationLabel.font = UIFont.systemFont(ofSize: 12)
+        locationLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
+        locationLabel.isHidden = true
+        locationLabel.numberOfLines = 0
+        locationLabel.text = "When using Multi-Hop you must select entry and exit servers in different countries."
+        return locationLabel
+    }()
+    
     var actionButton: UIButton = {
         let actionButton = UIButton()
         actionButton.setTitle("CONNECT TO SERVER", for: .normal)
@@ -72,6 +82,14 @@ class ConnectToServerPopupView: UIView {
                 actionButton.setTitle("DISCONNECT", for: .normal)
             } else {
                 actionButton.setTitle("CONNECT TO SERVER", for: .normal)
+            }
+            
+            if !Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: vpnServer) {
+                actionButton.isHidden = true
+                errorLabel.isHidden = false
+            } else {
+                actionButton.isHidden = false
+                errorLabel.isHidden = true
             }
         }
     }
@@ -135,6 +153,7 @@ class ConnectToServerPopupView: UIView {
         alpha = 0
         
         container.addSubview(locationLabel)
+        container.addSubview(errorLabel)
         container.addSubview(actionButton)
         addSubview(arrow)
         addSubview(container)
@@ -165,6 +184,13 @@ class ConnectToServerPopupView: UIView {
             make.top.equalTo(15)
             make.right.equalTo(-18)
             make.height.equalTo(19)
+        }
+        
+        errorLabel.snp.makeConstraints { make in
+            make.left.equalTo(18)
+            make.right.equalTo(-18)
+            make.bottom.equalTo(-13)
+            make.height.equalTo(55)
         }
         
         actionButton.snp.makeConstraints { make in
