@@ -245,9 +245,16 @@ class MapScrollView: UIScrollView {
             
             updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
             
-            if Application.shared.connectionManager.status.isDisconnected() {
-                Application.shared.settings.selectedServer = server
-                Application.shared.settings.selectedServer.fastest = false
+            if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) {
+                
+                if UserDefaults.shared.isMultiHop {
+                    Application.shared.settings.selectedExitServer = server
+                    Application.shared.settings.selectedExitServer.fastest = false
+                } else {
+                    Application.shared.settings.selectedServer = server
+                    Application.shared.settings.selectedServer.fastest = false
+                }
+                
                 updateSelectedMarker()
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
