@@ -56,7 +56,7 @@ class ConnectToServerPopupView: UIView {
         locationLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
         locationLabel.isHidden = true
         locationLabel.numberOfLines = 0
-        locationLabel.text = "When using Multi-Hop you must select entry and exit servers in different countries."
+        locationLabel.text = "When using Multi-Hop you must select entry and exit servers in different countries. Please select different entry or exit server."
         return locationLabel
     }()
     
@@ -189,8 +189,8 @@ class ConnectToServerPopupView: UIView {
         errorLabel.snp.makeConstraints { make in
             make.left.equalTo(18)
             make.right.equalTo(-18)
-            make.bottom.equalTo(-13)
-            make.height.equalTo(55)
+            make.bottom.equalTo(-10)
+            make.height.equalTo(60)
         }
         
         actionButton.snp.makeConstraints { make in
