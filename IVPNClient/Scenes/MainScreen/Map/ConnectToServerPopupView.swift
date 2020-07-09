@@ -43,6 +43,10 @@ class ConnectToServerPopupView: UIView {
         return arrow
     }()
     
+    lazy var flagImage: FlagImageView = {
+        return FlagImageView()
+    }()
+    
     lazy var locationLabel: UILabel = {
         let locationLabel = UILabel()
         locationLabel.font = UIFont.systemFont(ofSize: 16)
@@ -74,9 +78,9 @@ class ConnectToServerPopupView: UIView {
     
     var vpnServer: VPNServer! {
         didSet {
-            let geoLookupModel = GeoLookup(ipAddress: "", countryCode: vpnServer.countryCode, country: vpnServer.country, city: vpnServer.city, isIvpnServer: true, isp: "", latitude: 0, longitude: 0)
-            let viewModel = ProofsViewModel(model: geoLookupModel)
-            locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
+            let serverViewModel = VPNServerViewModel(server: vpnServer)
+            flagImage.image = serverViewModel.imageForCountryCode
+            locationLabel.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
             
             if !Application.shared.connectionManager.status.isDisconnected() && Application.shared.settings.selectedServer == vpnServer {
                 actionButton.setTitle("DISCONNECT", for: .normal)
@@ -152,6 +156,7 @@ class ConnectToServerPopupView: UIView {
         isHidden = true
         alpha = 0
         
+        container.addSubview(flagImage)
         container.addSubview(locationLabel)
         container.addSubview(errorLabel)
         container.addSubview(actionButton)
@@ -179,8 +184,15 @@ class ConnectToServerPopupView: UIView {
             make.top.equalTo(-7)
         }
         
-        locationLabel.snp.makeConstraints { make in
+        flagImage.snp.makeConstraints { make in
             make.left.equalTo(18)
+            make.top.equalTo(15)
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+        }
+        
+        locationLabel.snp.makeConstraints { make in
+            make.left.equalTo(45)
             make.top.equalTo(15)
             make.right.equalTo(-18)
             make.height.equalTo(19)
