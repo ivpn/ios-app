@@ -49,42 +49,12 @@ class Authentication {
         return ServiceStatus.isNewStyleAccount(username: username)
     }
     
-    private(set) var randomPart: String
-    private let accountRandomPartKey = "AccountRandomPart"
-    
-    // MARK: - Initialize -
-    
-    init() {
-        if let randomPartFromSettings = UserDefaults.standard.string(forKey: accountRandomPartKey) {
-            randomPart = randomPartFromSettings
-        } else {
-            randomPart = Authentication.randomString(length: 4)
-            UserDefaults.standard.set(randomPart, forKey: accountRandomPartKey)
-        }
-    }
-    
     // MARK: - Methods -
-    
-    private static func randomString(length: Int) -> String {
-        let letters: NSString = "abcdefghijklmnopqrstuvwxyz"
-        let len = UInt32(letters.length)
-        
-        var randomString = ""
-        
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
-        }
-        
-        return randomString
-    }
     
     func logIn(session: Session) {
         guard session.token != nil, session.vpnUsername != nil, session.vpnPassword != nil else { return }
         
         KeyChain.save(session: session)
-        saveRandomPart()
     }
     
     func logOut() {
@@ -111,11 +81,6 @@ class Authentication {
         log(info: "Session token read from Key Chain")
         
         return KeyChain.sessionToken ?? ""
-    }
-    
-    private func saveRandomPart() {
-        randomPart = Authentication.randomString(length: 4)
-        UserDefaults.standard.set(randomPart, forKey: accountRandomPartKey)
     }
     
 }
