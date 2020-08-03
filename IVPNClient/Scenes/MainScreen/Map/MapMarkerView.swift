@@ -63,6 +63,7 @@ class MapMarkerView: UIView {
     var connectionInfoPopup = ConnectionInfoPopupView()
     private var circle1 = UIView()
     private var circle2 = UIView()
+    private var locationLabel = UILabel()
     private var animatedCircle = UIView()
     private var animatedCircleLayer = AnimatedCircleLayer()
     private var radius1: CGFloat = 98
@@ -75,6 +76,7 @@ class MapMarkerView: UIView {
     
     override func updateConstraints() {
         setupConstraints()
+        initLabel()
         initCircles()
         updateCircles(color: redColor)
         initActionButton()
@@ -172,6 +174,18 @@ class MapMarkerView: UIView {
         UIView.animate(withDuration: 0.25, animations: {
             circle.backgroundColor = color
         })
+    }
+    
+    private func initLabel() {
+        locationLabel.text = "Disconnected location"
+        locationLabel.textColor = redColor
+        locationLabel.font = .systemFont(ofSize: 10)
+        addSubview(locationLabel)
+        
+        locationLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-13)
+        }
     }
     
     private func initCircles() {
