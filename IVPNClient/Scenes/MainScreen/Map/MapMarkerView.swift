@@ -44,18 +44,27 @@ class MapMarkerView: UIView {
         }
     }
     
+    var viewModel: ProofsViewModel? {
+        didSet {
+            locationLabel.text = viewModel?.city
+        }
+    }
+    
     var displayMode: DisplayMode = .unprotected {
         didSet {
             switch displayMode {
             case .unprotected:
                 updateCircles(color: redColor)
                 animatedCircleLayer.stopAnimations()
+                locationLabel.isHidden = false
             case .changing:
                 updateCircles(color: grayColor)
                 animatedCircleLayer.stopAnimations()
+                locationLabel.isHidden = true
             case .protected:
                 updateCircles(color: blueColor)
                 animatedCircleLayer.startAnimation()
+                locationLabel.isHidden = true
             }
         }
     }
@@ -177,7 +186,6 @@ class MapMarkerView: UIView {
     }
     
     private func initLabel() {
-        locationLabel.text = "Disconnected location"
         locationLabel.textColor = redColor
         locationLabel.font = .systemFont(ofSize: 10)
         addSubview(locationLabel)

@@ -45,6 +45,7 @@ class MapScrollView: UIScrollView {
                 updateMapPosition(animated: oldValue != nil)
                 markerGatewayView.hide(animated: true)
                 markerLocalView.show(animated: oldValue != nil)
+                markerLocalView.viewModel = viewModel
             }
         }
     }
