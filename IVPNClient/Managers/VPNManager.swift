@@ -145,9 +145,11 @@ class VPNManager {
         }
         
         manager.saveToPreferences { error in
-            if error == nil {
+            guard error == nil else {
                 completion(error)
+                return
             }
+            
             manager.loadFromPreferences { error in
                 manager.protocolConfiguration?.serverAddress = accessDetails.serverAddress
                 manager.saveToPreferences { error in

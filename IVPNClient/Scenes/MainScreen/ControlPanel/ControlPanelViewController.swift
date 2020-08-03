@@ -182,6 +182,8 @@ class ControlPanelViewController: UITableViewController {
     }
     
     func connect() {
+        log(info: "Connect VPN")
+        
         guard evaluateIsNetworkReachable() else {
             controlPanelView.connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
             return
@@ -233,6 +235,8 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc func disconnect() {
+        log(info: "Disconnect VPN")
+        
         let manager = Application.shared.connectionManager
         
         if UserDefaults.shared.networkProtectionEnabled {

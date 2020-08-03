@@ -131,7 +131,12 @@ class ConnectionManager {
     }
     
     func removeOnDemandRules(completion: @escaping () -> Void) {
-        getStatus { tunnelType, _ in
+        getStatus { tunnelType, status in
+            guard status != .invalid else {
+                completion()
+                return
+            }
+            
             self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
                 manager.onDemandRules = [NEOnDemandRule]()
                 manager.isOnDemandEnabled = false
