@@ -451,10 +451,12 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func authenticationDismissed() {
+        updateStatus(vpnStatus: Application.shared.connectionManager.status)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
     }
     
     @objc private func subscriptionDismissed() {
+        updateStatus(vpnStatus: Application.shared.connectionManager.status)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
     }
     
