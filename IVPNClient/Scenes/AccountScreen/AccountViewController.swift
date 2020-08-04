@@ -39,7 +39,7 @@ class AccountViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func addMoreTime(_ sender: Any) {
-        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+        
     }
     
     @IBAction func logOut(_ sender: Any) {

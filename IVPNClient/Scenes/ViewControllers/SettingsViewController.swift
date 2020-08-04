@@ -142,11 +142,11 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func extendSubscription(_ sender: Any) {
-        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+        
     }
     
     @IBAction func changePlan(_ sender: Any) {
-        present(NavigationManager.getChangePlanViewController(), animated: true, completion: nil)
+        
     }
     
     @IBAction func logOut(_ sender: Any) {
@@ -271,7 +271,6 @@ class SettingsViewController: UITableViewController {
             }
             
             if !Application.shared.serviceStatus.isActive {
-                present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
                 deselectRow(sender: sender)
                 return false
             }
@@ -318,7 +317,7 @@ class SettingsViewController: UITableViewController {
     }
     
     @objc fileprivate func agreedToTermsOfService() {
-        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+        
     }
     
     @objc fileprivate func serviceAuthorized() {

@@ -261,15 +261,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     func showExpiredSubscriptionError() {
-        showActionAlert(
-            title: "No active subscription",
-            message: "To continue using IVPN, you must activate your subscription.",
-            action: "Activate",
-            cancel: "Cancel",
-            actionHandler: { _ in
-                self.present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
-            }
-        )
+        showAlert(title: "No active subscription", message: "To continue using IVPN, you must activate your subscription.")
     }
     
     func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
