@@ -254,21 +254,16 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         
-        let viewController = NavigationManager.getSubscriptionViewController()
-        viewController.presentationController?.delegate = self
-        present(viewController, animated: true, completion: nil)
+        Application.shared.authentication.removeStoredCredentials()
+        showAlert(title: "Account not active", message: "Only active user accounts are enabled in this beta version.")
     }
     
     override func createSessionAccountNotActivated(error: Any?) {
         hud.dismiss()
         loginProcessStarted = false
         
-        KeyChain.tempUsername = KeyChain.username
         Application.shared.authentication.removeStoredCredentials()
-        
-        let viewController = NavigationManager.getSelectPlanViewController()
-        viewController.presentationController?.delegate = self
-        present(viewController, animated: true, completion: nil)
+        showAlert(title: "Account not active", message: "Only active user accounts are enabled in this beta version.")
     }
     
     override func createSessionTooManySessions(error: Any?) {
