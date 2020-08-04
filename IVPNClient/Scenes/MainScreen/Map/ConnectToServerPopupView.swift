@@ -214,7 +214,12 @@ class ConnectToServerPopupView: UIView {
     }
     
     @objc private func connectAction() {
-        Application.shared.settings.selectedServer = vpnServer
+        if UserDefaults.shared.isMultiHop {
+            Application.shared.settings.selectedExitServer = vpnServer
+        } else {
+            Application.shared.settings.selectedServer = vpnServer
+        }
+        
         Application.shared.connectionManager.needsUpdateSelectedServer()
         
         if Application.shared.connectionManager.status.isDisconnected() {
