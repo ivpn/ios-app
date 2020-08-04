@@ -180,10 +180,6 @@ extension ControlPanelViewController {
         present(NavigationManager.getLoginViewController(), animated: true)
     }
     
-    override func sessionStatusExpired() {
-        showExpiredSubscriptionError()
-    }
-    
     override func deleteSessionStart() {
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Deleting active session..."
