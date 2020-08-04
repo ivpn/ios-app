@@ -66,13 +66,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
-        guard UserDefaults.shared.hasUserConsent else {
-            actionType = .signup
-            present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
-            return
-        }
         
-        startSignupProcess()
     }
     
     @IBAction func openScanner(_ sender: AnyObject) {
@@ -80,27 +74,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func restorePurchases(_ sender: AnyObject) {
-        guard deviceCanMakePurchases() else { return }
         
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        hud.detailTextLabel.text = "Restoring purchases..."
-        hud.show(in: (navigationController?.view)!)
-        
-        IAPManager.shared.restorePurchases { account, error in
-            self.hud.dismiss()
-            
-            if let error = error {
-                self.showErrorAlert(title: "Restore failed", message: error.message)
-                return
-            }
-            
-            if account != nil {
-                self.userName.text = account?.accountId
-                self.sessionManager.createSession()
-            }
-        }
-        
-        let _ = evaluateIsServiceActive()
     }
     
     // MARK: - View Lifecycle -
