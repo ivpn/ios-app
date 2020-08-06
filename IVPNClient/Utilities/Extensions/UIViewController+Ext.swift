@@ -87,6 +87,7 @@ extension UIViewController {
             Application.shared.connectionManager.removeAll()
             Application.shared.authentication.logOut()
             NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
         }
     }
     

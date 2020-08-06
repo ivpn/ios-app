@@ -68,6 +68,10 @@ extension ControlPanelViewController {
                 return
             }
             
+            guard evaluateIsServiceActive() else {
+                return
+            }
+            
             guard Application.shared.connectionManager.status.isDisconnected() else {
                 showConnectedAlert(message: "To change protocol, please first disconnect", sender: controlPanelView.protocolLabel)
                 return
@@ -174,10 +178,6 @@ extension ControlPanelViewController {
         guard !UserDefaults.standard.bool(forKey: "-UITests") else { return }
         logOut(deleteSession: false)
         present(NavigationManager.getLoginViewController(), animated: true)
-    }
-    
-    override func sessionStatusExpired() {
-        showExpiredSubscriptionError()
     }
     
     override func deleteSessionStart() {
