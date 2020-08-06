@@ -74,6 +74,31 @@ class ConnectToServerPopupView: UIView {
         return actionButton
     }()
     
+    var prevButton: UIButton = {
+        let prevButton = UIButton()
+        prevButton.setTitle("<", for: .normal)
+        return prevButton
+    }()
+    
+    var nextButton: UIButton = {
+        let nextButton = UIButton()
+        nextButton.setTitle(">", for: .normal)
+        return nextButton
+    }()
+    
+    var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.isPagingEnabled = true
+        return scrollView
+    }()
+    
+    var pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.numberOfPages = 3
+        pageControl.currentPage = 0
+        return pageControl
+    }()
+    
     // MARK: - Properties -
     
     var vpnServer: VPNServer! {
@@ -111,9 +136,19 @@ class ConnectToServerPopupView: UIView {
                 container.isHidden = false
                 isHidden = false
                 UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
+            case .contentSelect:
+                container.isHidden = false
+                isHidden = false
+                UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             }
         }
     }
+    
+    var servers = [
+        VPNServer(gateway: "", countryCode: "", country: "", city: "City 1"),
+        VPNServer(gateway: "", countryCode: "", country: "", city: "City 2"),
+        VPNServer(gateway: "", countryCode: "", country: "", city: "City 3")
+    ]
     
     // MARK: - View lifecycle -
     
@@ -160,6 +195,10 @@ class ConnectToServerPopupView: UIView {
         container.addSubview(locationLabel)
         container.addSubview(errorLabel)
         container.addSubview(actionButton)
+        container.addSubview(scrollView)
+        container.addSubview(pageControl)
+        container.addSubview(prevButton)
+        container.addSubview(nextButton)
         addSubview(arrow)
         addSubview(container)
         
@@ -211,6 +250,34 @@ class ConnectToServerPopupView: UIView {
             make.height.equalTo(44)
             make.bottom.equalTo(-18)
         }
+        
+        scrollView.snp.makeConstraints { make in
+            make.left.equalTo(18)
+            make.top.equalTo(15)
+            make.right.equalTo(-18)
+            make.height.equalTo(19)
+        }
+        
+        prevButton.snp.makeConstraints { make in
+            make.left.equalTo(18)
+            make.top.equalTo(15)
+            make.height.equalTo(19)
+            make.width.equalTo(19)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.right.equalTo(-18)
+            make.top.equalTo(15)
+            make.height.equalTo(19)
+            make.width.equalTo(19)
+        }
+        
+        pageControl.snp.makeConstraints { make in
+            make.left.equalTo(18)
+            make.bottom.equalTo(2)
+            make.right.equalTo(-18)
+            make.height.equalTo(15)
+        }
     }
     
     @objc private func connectAction() {
@@ -241,6 +308,7 @@ extension ConnectToServerPopupView {
     enum DisplayMode {
         case hidden
         case content
+        case contentSelect
     }
     
 }
