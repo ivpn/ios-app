@@ -94,7 +94,6 @@ class ConnectToServerPopupView: UIView {
     
     var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = 3
         pageControl.currentPage = 0
         return pageControl
     }()
@@ -202,6 +201,8 @@ class ConnectToServerPopupView: UIView {
         addSubview(arrow)
         addSubview(container)
         
+        setupScrollView()
+        
         displayMode = .hidden
     }
     
@@ -255,21 +256,21 @@ class ConnectToServerPopupView: UIView {
             make.left.equalTo(18)
             make.top.equalTo(15)
             make.right.equalTo(-18)
-            make.height.equalTo(19)
+            make.height.equalTo(20)
         }
         
         prevButton.snp.makeConstraints { make in
             make.left.equalTo(18)
             make.top.equalTo(15)
-            make.height.equalTo(19)
-            make.width.equalTo(19)
+            make.height.equalTo(20)
+            make.width.equalTo(20)
         }
         
         nextButton.snp.makeConstraints { make in
             make.right.equalTo(-18)
             make.top.equalTo(15)
-            make.height.equalTo(19)
-            make.width.equalTo(19)
+            make.height.equalTo(20)
+            make.width.equalTo(20)
         }
         
         pageControl.snp.makeConstraints { make in
@@ -277,6 +278,31 @@ class ConnectToServerPopupView: UIView {
             make.bottom.equalTo(2)
             make.right.equalTo(-18)
             make.height.equalTo(15)
+        }
+    }
+    
+    private func setupScrollView() {
+        let width = scrollView.frame.width
+        let height = scrollView.frame.height
+        
+        pageControl.numberOfPages = servers.count
+        scrollView.contentSize = CGSize(width: width * CGFloat(servers.count), height: scrollView.frame.height)
+        
+        for (index, server) in servers.enumerated() {
+            let viewModel = VPNServerViewModel(server: server)
+            
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: height))
+            imageView.image = viewModel.imageForCountryCode
+            
+            let label = UILabel(frame: CGRect(x: 27, y: 0, width: width, height: height))
+            label.textAlignment = .center
+            label.icon(text: viewModel.formattedServerNameForMainScreen, imageName: viewModel.imageNameForPingTime)
+            
+            let slide = UIView(frame: CGRect(x: CGFloat(index) * width, y: 0, width: width, height: height))
+            slide.addSubview(imageView)
+            slide.addSubview(label)
+            
+            scrollView.addSubview(slide)
         }
     }
     
