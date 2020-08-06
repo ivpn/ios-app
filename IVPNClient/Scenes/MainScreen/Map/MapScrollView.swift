@@ -66,7 +66,6 @@ class MapScrollView: UIScrollView {
         initServerLocationMarkers()
         initMarkers()
         initConnectToServerPopup()
-        updateSelectedMarker()
         addObservers()
     }
     
@@ -121,8 +120,6 @@ class MapScrollView: UIScrollView {
     }
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedMarker), name: Notification.Name.ServerSelected, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedMarker), name: Notification.Name.PingDidComplete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideConnectToServerPopup), name: Notification.Name.HideConnectToServerPopup, object: nil)
     }
     
@@ -204,32 +201,6 @@ class MapScrollView: UIScrollView {
         markers.append(button)
     }
     
-    @objc private func updateSelectedMarker() {
-        Application.shared.connectionManager.needsUpdateSelectedServer()
-        
-        let city = Application.shared.settings.selectedServer.city
-        
-        for marker in markers {
-            if let circle = marker.viewWithTag(1) {
-                if marker.titleLabel?.text == city {
-                    circle.layer.cornerRadius = 5
-                    circle.snp.remakeConstraints { make in
-                        make.size.equalTo(10)
-                        make.left.equalTo(45)
-                        make.top.equalTo(16)
-                    }
-                } else {
-                    circle.layer.cornerRadius = 3
-                    circle.snp.remakeConstraints { make in
-                        make.size.equalTo(6)
-                        make.left.equalTo(47)
-                        make.top.equalTo(18)
-                    }
-                }
-            }
-        }
-    }
-    
     @objc private func selectServer(_ sender: UIButton) {
         let city = sender.titleLabel?.text ?? ""
         
@@ -258,7 +229,7 @@ class MapScrollView: UIScrollView {
                     Application.shared.settings.selectedServer.fastest = false
                 }
                 
-                updateSelectedMarker()
+                Application.shared.connectionManager.needsUpdateSelectedServer()
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
         }

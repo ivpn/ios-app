@@ -76,7 +76,7 @@ class MapMarkerView: UIView {
     private var animatedCircle = UIView()
     private var animatedCircleLayer = AnimatedCircleLayer()
     private var radius1: CGFloat = 98
-    private var radius2: CGFloat = 12
+    private var radius2: CGFloat = 9
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
     private var redColor = UIColor.init(named: Theme.ivpnRedOff)!
     private var grayColor = UIColor.init(named: Theme.ivpnGray18)!
