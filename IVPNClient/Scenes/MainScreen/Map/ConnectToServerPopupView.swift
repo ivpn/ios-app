@@ -184,7 +184,7 @@ class ConnectToServerPopupView: UIView {
     // MARK: - Methods -
     
     func show() {
-        displayMode = servers.isEmpty ? .content : .contentSelect
+        displayMode = servers.count > 1 ? .contentSelect : .content
         setupScrollView()
         updateLayout()
     }
@@ -226,7 +226,7 @@ class ConnectToServerPopupView: UIView {
             make.left.equalTo(0)
             make.top.equalTo(0)
             make.width.equalTo(270)
-            make.height.equalTo(servers.isEmpty ? 110 : 125)
+            make.height.equalTo(servers.count > 1 ? 125 : 110)
         }
         
         container.snp.makeConstraints { make in
@@ -264,7 +264,7 @@ class ConnectToServerPopupView: UIView {
             make.left.equalTo(18)
             make.right.equalTo(-18)
             make.height.equalTo(44)
-            make.bottom.equalTo(servers.isEmpty ? -18 : -33)
+            make.bottom.equalTo(servers.count > 1 ? -33 : -18)
         }
         
         scrollView.snp.makeConstraints { make in
@@ -298,11 +298,11 @@ class ConnectToServerPopupView: UIView {
     
     private func updateLayout() {
         snp.updateConstraints { make in
-            make.height.equalTo(servers.isEmpty ? 110 : 125)
+            make.height.equalTo(servers.count > 1 ? 125 : 110)
         }
         
         actionButton.snp.updateConstraints { make in
-            make.bottom.equalTo(servers.isEmpty ? -18 : -33)
+            make.bottom.equalTo(servers.count > 1 ? -33 : -18)
         }
     }
     
@@ -389,7 +389,7 @@ extension ConnectToServerPopupView {
 extension ConnectToServerPopupView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard !servers.isEmpty else { return }
+        guard servers.count > 1 else { return }
         
         let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
         pageControl.currentPage = index

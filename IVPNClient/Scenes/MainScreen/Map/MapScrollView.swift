@@ -235,13 +235,14 @@ class MapScrollView: UIScrollView {
         
         if let server = Application.shared.serverList.getServer(byCity: city) {
             let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
-            connectToServerPopup.vpnServer = server
             connectToServerPopup.snp.updateConstraints { make in
                 make.left.equalTo(point.0 - 135)
                 make.top.equalTo(point.1 + 17)
             }
             
-            connectToServerPopup.servers = getNearByServers(server: server)
+            let nearByServers = getNearByServers(server: server)
+            connectToServerPopup.servers = nearByServers
+            connectToServerPopup.vpnServer = nearByServers.first ?? server
             connectToServerPopup.show()
             NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
             
@@ -264,17 +265,18 @@ class MapScrollView: UIScrollView {
     }
     
     private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
-        var servers = [selectedServer]
+        var servers = Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: selectedServer) ? [selectedServer] : []
         
         for server in Application.shared.serverList.servers {
             guard server !== selectedServer else { continue }
+            guard Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) else { continue }
             
             if isNearByServer(selectedServer, server) {
                 servers.append(server)
             }
         }
         
-        return servers.count > 1 ? servers : []
+        return servers
     }
     
     private func isNearByServer(_ server1: VPNServer, _ server2: VPNServer) -> Bool {
