@@ -99,6 +99,8 @@ class ConnectToServerPopupView: UIView {
     var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.currentPage = 0
+        pageControl.pageIndicatorTintColor = UIColor.init(named: Theme.ivpnGray4)
+        pageControl.currentPageIndicatorTintColor = UIColor.init(named: Theme.ivpnBlue)
         return pageControl
     }()
     
@@ -224,7 +226,7 @@ class ConnectToServerPopupView: UIView {
             make.left.equalTo(0)
             make.top.equalTo(0)
             make.width.equalTo(270)
-            make.height.equalTo(110)
+            make.height.equalTo(servers.isEmpty ? 110 : 125)
         }
         
         container.snp.makeConstraints { make in
@@ -262,33 +264,33 @@ class ConnectToServerPopupView: UIView {
             make.left.equalTo(18)
             make.right.equalTo(-18)
             make.height.equalTo(44)
-            make.bottom.equalTo(-18)
+            make.bottom.equalTo(servers.isEmpty ? -18 : -33)
         }
         
         scrollView.snp.makeConstraints { make in
             make.left.equalTo(18)
-            make.top.equalTo(7)
+            make.top.equalTo(8)
             make.right.equalTo(-18)
             make.height.equalTo(30)
         }
         
         prevButton.snp.makeConstraints { make in
             make.left.equalTo(18)
-            make.top.equalTo(15)
+            make.top.equalTo(12)
             make.height.equalTo(20)
             make.width.equalTo(20)
         }
         
         nextButton.snp.makeConstraints { make in
             make.right.equalTo(-18)
-            make.top.equalTo(15)
+            make.top.equalTo(12)
             make.height.equalTo(20)
             make.width.equalTo(20)
         }
         
         pageControl.snp.makeConstraints { make in
             make.left.equalTo(18)
-            make.bottom.equalTo(2)
+            make.bottom.equalTo(-10)
             make.right.equalTo(-18)
             make.height.equalTo(15)
         }
