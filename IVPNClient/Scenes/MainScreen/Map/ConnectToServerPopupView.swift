@@ -186,6 +186,7 @@ class ConnectToServerPopupView: UIView {
     func show() {
         displayMode = servers.isEmpty ? .content : .contentSelect
         setupScrollView()
+        updateLayout()
     }
     
     func hide() {
@@ -292,6 +293,16 @@ class ConnectToServerPopupView: UIView {
             make.bottom.equalTo(-10)
             make.right.equalTo(-18)
             make.height.equalTo(15)
+        }
+    }
+    
+    private func updateLayout() {
+        snp.updateConstraints { make in
+            make.height.equalTo(servers.isEmpty ? 110 : 125)
+        }
+        
+        actionButton.snp.updateConstraints { make in
+            make.bottom.equalTo(servers.isEmpty ? -18 : -33)
         }
     }
     

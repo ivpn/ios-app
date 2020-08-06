@@ -241,6 +241,7 @@ class MapScrollView: UIScrollView {
                 make.top.equalTo(point.1 + 17)
             }
             
+            connectToServerPopup.servers = getNearByServers(server: server)
             connectToServerPopup.show()
             NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
             
@@ -260,6 +261,10 @@ class MapScrollView: UIScrollView {
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
         }
+    }
+    
+    private func getNearByServers(server: VPNServer) -> [VPNServer] {
+        return []
     }
     
     @objc private func hideConnectToServerPopup() {
