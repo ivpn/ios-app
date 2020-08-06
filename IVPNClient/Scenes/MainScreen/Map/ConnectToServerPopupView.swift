@@ -77,12 +77,14 @@ class ConnectToServerPopupView: UIView {
     var prevButton: UIButton = {
         let prevButton = UIButton()
         prevButton.setTitle("<", for: .normal)
+        prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
         return prevButton
     }()
     
     var nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.setTitle(">", for: .normal)
+        nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
         return nextButton
     }()
     
@@ -158,6 +160,7 @@ class ConnectToServerPopupView: UIView {
     }
     
     var servers: [VPNServer] = []
+    var currentPage = 0
     
     // MARK: - View lifecycle -
     
@@ -307,11 +310,11 @@ class ConnectToServerPopupView: UIView {
         for (index, server) in servers.enumerated() {
             let viewModel = VPNServerViewModel(server: server)
             
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
-            locationLabel.font = UIFont.systemFont(ofSize: 15)
+            let label = UILabel(frame: CGRect(x: 15, y: 0, width: width - 30, height: height))
+            locationLabel.font = UIFont.systemFont(ofSize: 13)
             label.textAlignment = .center
             label.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
-            label.iconMirror(text: viewModel.formattedServerNameForMainScreen, image: viewModel.imageForCountryCode, alignment: .left)
+            label.icon(text: viewModel.formattedServerNameForMainScreen, imageName: viewModel.imageNameForCountryCode, alignment: .left)
             
             let slide = UIView(frame: CGRect(x: CGFloat(index) * width, y: 0, width: width, height: height))
             slide.addSubview(label)
@@ -337,6 +340,26 @@ class ConnectToServerPopupView: UIView {
         }
         
         hide()
+    }
+    
+    @objc private func prevAction() {
+        scrollToPage(page: currentPage - 1)
+    }
+    
+    @objc private func nextAction() {
+        scrollToPage(page: currentPage + 1)
+    }
+    
+    private func scrollToPage(page: Int, animated: Bool = true) {
+        guard page >= 0, page <= servers.count else {
+            return
+        }
+        
+        var frame = scrollView.frame
+        frame.origin.x = frame.size.width * CGFloat(page)
+        frame.origin.y = 0
+        scrollView.scrollRectToVisible(frame, animated: animated)
+        currentPage = page
     }
     
 }
