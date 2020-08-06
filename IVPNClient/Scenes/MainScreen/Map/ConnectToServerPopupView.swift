@@ -76,14 +76,14 @@ class ConnectToServerPopupView: UIView {
     
     var prevButton: UIButton = {
         let prevButton = UIButton()
-        prevButton.setTitle("<", for: .normal)
+        prevButton.setImage(UIImage.init(named: "icon-arrow-left-gray"), for: .normal)
         prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
         return prevButton
     }()
     
     var nextButton: UIButton = {
         let nextButton = UIButton()
-        nextButton.setTitle(">", for: .normal)
+        nextButton.setImage(UIImage.init(named: "icon-arrow-right-gray"), for: .normal)
         nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
         return nextButton
     }()
@@ -268,22 +268,22 @@ class ConnectToServerPopupView: UIView {
         }
         
         scrollView.snp.makeConstraints { make in
-            make.left.equalTo(18)
+            make.left.equalTo(33)
             make.top.equalTo(8)
-            make.right.equalTo(-18)
+            make.right.equalTo(-33)
             make.height.equalTo(30)
         }
         
         prevButton.snp.makeConstraints { make in
-            make.left.equalTo(18)
-            make.top.equalTo(12)
+            make.left.equalTo(16)
+            make.top.equalTo(13)
             make.height.equalTo(20)
             make.width.equalTo(20)
         }
         
         nextButton.snp.makeConstraints { make in
-            make.right.equalTo(-18)
-            make.top.equalTo(12)
+            make.right.equalTo(-16)
+            make.top.equalTo(13)
             make.height.equalTo(20)
             make.width.equalTo(20)
         }
@@ -302,7 +302,7 @@ class ConnectToServerPopupView: UIView {
         servers.append(Application.shared.serverList.servers[1])
         servers.append(Application.shared.serverList.servers[2])
         
-        let width: CGFloat = 234
+        let width: CGFloat = 204
         let height: CGFloat = 30
         
         pageControl.numberOfPages = servers.count
@@ -312,7 +312,7 @@ class ConnectToServerPopupView: UIView {
         for (index, server) in servers.enumerated() {
             let viewModel = VPNServerViewModel(server: server)
             
-            let label = UILabel(frame: CGRect(x: 15, y: 0, width: width - 30, height: height))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
             locationLabel.font = UIFont.systemFont(ofSize: 13)
             label.textAlignment = .center
             label.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
