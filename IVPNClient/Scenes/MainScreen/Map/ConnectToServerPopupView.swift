@@ -394,6 +394,19 @@ extension ConnectToServerPopupView: UIScrollViewDelegate {
         let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
         pageControl.currentPage = index
         vpnServer = servers[index]
+        
+        if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: vpnServer) {
+            
+            if UserDefaults.shared.isMultiHop {
+                Application.shared.settings.selectedExitServer = vpnServer
+                Application.shared.settings.selectedExitServer.fastest = false
+            } else {
+                Application.shared.settings.selectedServer = vpnServer
+                Application.shared.settings.selectedServer.fastest = false
+            }
+            
+            NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
+        }
     }
     
 }
