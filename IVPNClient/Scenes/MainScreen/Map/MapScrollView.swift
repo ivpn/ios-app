@@ -267,9 +267,7 @@ class MapScrollView: UIScrollView {
         var servers = [selectedServer]
         
         for server in Application.shared.serverList.servers {
-            guard server !== selectedServer else {
-                continue
-            }
+            guard server !== selectedServer else { continue }
             
             if isNearByServer(selectedServer, server) {
                 servers.append(server)
