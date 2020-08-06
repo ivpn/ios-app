@@ -310,10 +310,12 @@ class ConnectToServerPopupView: UIView {
         let width: CGFloat = 204
         let height: CGFloat = 30
         
+        pageControl.currentPage = 0
         pageControl.numberOfPages = servers.count
         scrollView.contentSize = CGSize(width: width * CGFloat(servers.count), height: height)
         scrollView.subviews.forEach { $0.removeFromSuperview() }
         scrollView.delegate = self
+        scrollToPage(page: 0, animated: false)
         
         for (index, server) in servers.enumerated() {
             let viewModel = VPNServerViewModel(server: server)
@@ -359,9 +361,7 @@ class ConnectToServerPopupView: UIView {
     }
     
     private func scrollToPage(page: Int, animated: Bool = true) {
-        guard page >= 0, page <= servers.count else {
-            return
-        }
+        guard page >= 0, page <= servers.count else { return }
         
         var frame = scrollView.frame
         frame.origin.x = frame.size.width * CGFloat(page)
@@ -389,6 +389,8 @@ extension ConnectToServerPopupView {
 extension ConnectToServerPopupView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard !servers.isEmpty else { return }
+        
         let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
         pageControl.currentPage = index
         vpnServer = servers[index]
