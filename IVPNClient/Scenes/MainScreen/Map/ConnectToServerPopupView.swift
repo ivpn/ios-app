@@ -89,6 +89,8 @@ class ConnectToServerPopupView: UIView {
     var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
@@ -133,21 +135,29 @@ class ConnectToServerPopupView: UIView {
                 })
             case .content:
                 container.isHidden = false
+                locationLabel.isHidden = false
+                flagImage.isHidden = false
+                scrollView.isHidden = true
+                pageControl.isHidden = true
+                prevButton.isHidden = true
+                nextButton.isHidden = true
                 isHidden = false
                 UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             case .contentSelect:
                 container.isHidden = false
+                locationLabel.isHidden = true
+                flagImage.isHidden = true
+                scrollView.isHidden = false
+                pageControl.isHidden = false
+                prevButton.isHidden = false
+                nextButton.isHidden = false
                 isHidden = false
                 UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             }
         }
     }
     
-    var servers = [
-        VPNServer(gateway: "", countryCode: "", country: "", city: "City 1"),
-        VPNServer(gateway: "", countryCode: "", country: "", city: "City 2"),
-        VPNServer(gateway: "", countryCode: "", country: "", city: "City 3")
-    ]
+    var servers: [VPNServer] = []
     
     // MARK: - View lifecycle -
     
@@ -169,7 +179,7 @@ class ConnectToServerPopupView: UIView {
     // MARK: - Methods -
     
     func show() {
-        displayMode = .content
+        displayMode = .contentSelect
     }
     
     func hide() {
@@ -254,9 +264,9 @@ class ConnectToServerPopupView: UIView {
         
         scrollView.snp.makeConstraints { make in
             make.left.equalTo(18)
-            make.top.equalTo(15)
+            make.top.equalTo(7)
             make.right.equalTo(-18)
-            make.height.equalTo(20)
+            make.height.equalTo(30)
         }
         
         prevButton.snp.makeConstraints { make in
@@ -282,24 +292,28 @@ class ConnectToServerPopupView: UIView {
     }
     
     private func setupScrollView() {
-        let width = scrollView.frame.width
-        let height = scrollView.frame.height
+        servers.removeAll()
+        servers.append(Application.shared.serverList.servers[0])
+        servers.append(Application.shared.serverList.servers[1])
+        servers.append(Application.shared.serverList.servers[2])
+        
+        let width: CGFloat = 234
+        let height: CGFloat = 30
         
         pageControl.numberOfPages = servers.count
-        scrollView.contentSize = CGSize(width: width * CGFloat(servers.count), height: scrollView.frame.height)
+        scrollView.contentSize = CGSize(width: width * CGFloat(servers.count), height: height)
+        scrollView.delegate = self
         
         for (index, server) in servers.enumerated() {
             let viewModel = VPNServerViewModel(server: server)
             
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: height))
-            imageView.image = viewModel.imageForCountryCode
-            
-            let label = UILabel(frame: CGRect(x: 27, y: 0, width: width, height: height))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+            locationLabel.font = UIFont.systemFont(ofSize: 15)
             label.textAlignment = .center
-            label.icon(text: viewModel.formattedServerNameForMainScreen, imageName: viewModel.imageNameForPingTime)
+            label.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
+            label.iconMirror(text: viewModel.formattedServerNameForMainScreen, image: viewModel.imageForCountryCode, alignment: .left)
             
             let slide = UIView(frame: CGRect(x: CGFloat(index) * width, y: 0, width: width, height: height))
-            slide.addSubview(imageView)
             slide.addSubview(label)
             
             scrollView.addSubview(slide)
@@ -335,6 +349,17 @@ extension ConnectToServerPopupView {
         case hidden
         case content
         case contentSelect
+    }
+    
+}
+
+// MARK: - UIScrollViewDelegate -
+
+extension ConnectToServerPopupView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
+        pageControl.currentPage = Int(pageIndex)
     }
     
 }
