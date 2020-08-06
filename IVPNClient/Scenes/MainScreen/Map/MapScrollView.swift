@@ -263,8 +263,34 @@ class MapScrollView: UIScrollView {
         }
     }
     
-    private func getNearByServers(server: VPNServer) -> [VPNServer] {
-        return []
+    private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
+        var servers = [selectedServer]
+        
+        for server in Application.shared.serverList.servers {
+            guard server !== selectedServer else {
+                continue
+            }
+            
+            if isNearByServer(selectedServer, server) {
+                servers.append(server)
+            }
+        }
+        
+        return servers.count > 1 ? servers : []
+    }
+    
+    private func isNearByServer(_ server1: VPNServer, _ server2: VPNServer) -> Bool {
+        let point1 = getCoordinatesBy(latitude: server1.latitude, longitude: server1.longitude)
+        let point2 = getCoordinatesBy(latitude: server2.latitude, longitude: server2.longitude)
+        
+        let diffX = abs(point1.0 - point2.0)
+        let diffY = abs(point1.1 - point2.1)
+        
+        if diffX <= 100 && diffY <= 20 {
+            return true
+        }
+        
+        return false
     }
     
     @objc private func hideConnectToServerPopup() {
