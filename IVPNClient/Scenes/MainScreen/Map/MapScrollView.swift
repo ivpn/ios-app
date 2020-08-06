@@ -235,12 +235,14 @@ class MapScrollView: UIScrollView {
         
         if let server = Application.shared.serverList.getServer(byCity: city) {
             let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
-            connectToServerPopup.vpnServer = server
             connectToServerPopup.snp.updateConstraints { make in
                 make.left.equalTo(point.0 - 135)
                 make.top.equalTo(point.1 + 17)
             }
             
+            let nearByServers = getNearByServers(server: server)
+            connectToServerPopup.servers = nearByServers
+            connectToServerPopup.vpnServer = nearByServers.first ?? server
             connectToServerPopup.show()
             NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
             
@@ -260,6 +262,35 @@ class MapScrollView: UIScrollView {
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
         }
+    }
+    
+    private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
+        var servers = Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: selectedServer) ? [selectedServer] : []
+        
+        for server in Application.shared.serverList.servers {
+            guard server !== selectedServer else { continue }
+            guard Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) else { continue }
+            
+            if isNearByServer(selectedServer, server) {
+                servers.append(server)
+            }
+        }
+        
+        return servers
+    }
+    
+    private func isNearByServer(_ server1: VPNServer, _ server2: VPNServer) -> Bool {
+        let point1 = getCoordinatesBy(latitude: server1.latitude, longitude: server1.longitude)
+        let point2 = getCoordinatesBy(latitude: server2.latitude, longitude: server2.longitude)
+        
+        let diffX = abs(point1.0 - point2.0)
+        let diffY = abs(point1.1 - point2.1)
+        
+        if diffX < 80 && diffY < 20 {
+            return true
+        }
+        
+        return false
     }
     
     @objc private func hideConnectToServerPopup() {

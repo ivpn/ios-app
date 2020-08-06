@@ -74,6 +74,36 @@ class ConnectToServerPopupView: UIView {
         return actionButton
     }()
     
+    var prevButton: UIButton = {
+        let prevButton = UIButton()
+        prevButton.setImage(UIImage.init(named: "icon-arrow-left-gray"), for: .normal)
+        prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
+        return prevButton
+    }()
+    
+    var nextButton: UIButton = {
+        let nextButton = UIButton()
+        nextButton.setImage(UIImage.init(named: "icon-arrow-right-gray"), for: .normal)
+        nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
+        return nextButton
+    }()
+    
+    var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+    
+    var pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.currentPage = 0
+        pageControl.pageIndicatorTintColor = UIColor.init(named: Theme.ivpnGray4)
+        pageControl.currentPageIndicatorTintColor = UIColor.init(named: Theme.ivpnBlue)
+        return pageControl
+    }()
+    
     // MARK: - Properties -
     
     var vpnServer: VPNServer! {
@@ -109,11 +139,30 @@ class ConnectToServerPopupView: UIView {
                 })
             case .content:
                 container.isHidden = false
+                locationLabel.isHidden = false
+                flagImage.isHidden = false
+                scrollView.isHidden = true
+                pageControl.isHidden = true
+                prevButton.isHidden = true
+                nextButton.isHidden = true
+                isHidden = false
+                UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
+            case .contentSelect:
+                container.isHidden = false
+                locationLabel.isHidden = true
+                flagImage.isHidden = true
+                scrollView.isHidden = false
+                pageControl.isHidden = false
+                prevButton.isHidden = false
+                nextButton.isHidden = false
                 isHidden = false
                 UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             }
         }
     }
+    
+    var servers: [VPNServer] = []
+    var currentPage = 0
     
     // MARK: - View lifecycle -
     
@@ -135,7 +184,9 @@ class ConnectToServerPopupView: UIView {
     // MARK: - Methods -
     
     func show() {
-        displayMode = .content
+        displayMode = servers.count > 1 ? .contentSelect : .content
+        setupScrollView()
+        updateLayout()
     }
     
     func hide() {
@@ -160,6 +211,10 @@ class ConnectToServerPopupView: UIView {
         container.addSubview(locationLabel)
         container.addSubview(errorLabel)
         container.addSubview(actionButton)
+        container.addSubview(scrollView)
+        container.addSubview(pageControl)
+        container.addSubview(prevButton)
+        container.addSubview(nextButton)
         addSubview(arrow)
         addSubview(container)
         
@@ -171,7 +226,7 @@ class ConnectToServerPopupView: UIView {
             make.left.equalTo(0)
             make.top.equalTo(0)
             make.width.equalTo(270)
-            make.height.equalTo(110)
+            make.height.equalTo(servers.count > 1 ? 125 : 110)
         }
         
         container.snp.makeConstraints { make in
@@ -209,7 +264,72 @@ class ConnectToServerPopupView: UIView {
             make.left.equalTo(18)
             make.right.equalTo(-18)
             make.height.equalTo(44)
-            make.bottom.equalTo(-18)
+            make.bottom.equalTo(servers.count > 1 ? -33 : -18)
+        }
+        
+        scrollView.snp.makeConstraints { make in
+            make.left.equalTo(33)
+            make.top.equalTo(8)
+            make.right.equalTo(-33)
+            make.height.equalTo(30)
+        }
+        
+        prevButton.snp.makeConstraints { make in
+            make.left.equalTo(16)
+            make.top.equalTo(13)
+            make.height.equalTo(20)
+            make.width.equalTo(20)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.right.equalTo(-16)
+            make.top.equalTo(13)
+            make.height.equalTo(20)
+            make.width.equalTo(20)
+        }
+        
+        pageControl.snp.makeConstraints { make in
+            make.left.equalTo(18)
+            make.bottom.equalTo(-10)
+            make.right.equalTo(-18)
+            make.height.equalTo(15)
+        }
+    }
+    
+    private func updateLayout() {
+        snp.updateConstraints { make in
+            make.height.equalTo(servers.count > 1 ? 125 : 110)
+        }
+        
+        actionButton.snp.updateConstraints { make in
+            make.bottom.equalTo(servers.count > 1 ? -33 : -18)
+        }
+    }
+    
+    private func setupScrollView() {
+        let width: CGFloat = 204
+        let height: CGFloat = 30
+        
+        pageControl.currentPage = 0
+        pageControl.numberOfPages = servers.count
+        scrollView.contentSize = CGSize(width: width * CGFloat(servers.count), height: height)
+        scrollView.subviews.forEach { $0.removeFromSuperview() }
+        scrollView.delegate = self
+        scrollToPage(page: 0, animated: false)
+        
+        for (index, server) in servers.enumerated() {
+            let viewModel = VPNServerViewModel(server: server)
+            
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+            locationLabel.font = UIFont.systemFont(ofSize: 13)
+            label.textAlignment = .center
+            label.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
+            label.icon(text: viewModel.formattedServerNameForMainScreen, imageName: viewModel.imageNameForCountryCode, alignment: .left)
+            
+            let slide = UIView(frame: CGRect(x: CGFloat(index) * width, y: 0, width: width, height: height))
+            slide.addSubview(label)
+            
+            scrollView.addSubview(slide)
         }
     }
     
@@ -232,6 +352,24 @@ class ConnectToServerPopupView: UIView {
         hide()
     }
     
+    @objc private func prevAction() {
+        scrollToPage(page: currentPage - 1)
+    }
+    
+    @objc private func nextAction() {
+        scrollToPage(page: currentPage + 1)
+    }
+    
+    private func scrollToPage(page: Int, animated: Bool = true) {
+        guard page >= 0, page <= servers.count else { return }
+        
+        var frame = scrollView.frame
+        frame.origin.x = frame.size.width * CGFloat(page)
+        frame.origin.y = 0
+        scrollView.scrollRectToVisible(frame, animated: animated)
+        currentPage = page
+    }
+    
 }
 
 // MARK: - ConnectToServerPopupView extension -
@@ -241,6 +379,34 @@ extension ConnectToServerPopupView {
     enum DisplayMode {
         case hidden
         case content
+        case contentSelect
+    }
+    
+}
+
+// MARK: - UIScrollViewDelegate -
+
+extension ConnectToServerPopupView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard servers.count > 1 else { return }
+        
+        let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+        pageControl.currentPage = index
+        vpnServer = servers[index]
+        
+        if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: vpnServer) {
+            
+            if UserDefaults.shared.isMultiHop {
+                Application.shared.settings.selectedExitServer = vpnServer
+                Application.shared.settings.selectedExitServer.fastest = false
+            } else {
+                Application.shared.settings.selectedServer = vpnServer
+                Application.shared.settings.selectedServer.fastest = false
+            }
+            
+            NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
+        }
     }
     
 }
