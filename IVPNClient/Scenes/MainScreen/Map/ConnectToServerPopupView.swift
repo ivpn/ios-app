@@ -184,7 +184,8 @@ class ConnectToServerPopupView: UIView {
     // MARK: - Methods -
     
     func show() {
-        displayMode = .contentSelect
+        displayMode = servers.isEmpty ? .content : .contentSelect
+        setupScrollView()
     }
     
     func hide() {
@@ -215,8 +216,6 @@ class ConnectToServerPopupView: UIView {
         container.addSubview(nextButton)
         addSubview(arrow)
         addSubview(container)
-        
-        setupScrollView()
         
         displayMode = .hidden
     }
@@ -297,16 +296,12 @@ class ConnectToServerPopupView: UIView {
     }
     
     private func setupScrollView() {
-        servers.removeAll()
-        servers.append(Application.shared.serverList.servers[0])
-        servers.append(Application.shared.serverList.servers[1])
-        servers.append(Application.shared.serverList.servers[2])
-        
         let width: CGFloat = 204
         let height: CGFloat = 30
         
         pageControl.numberOfPages = servers.count
         scrollView.contentSize = CGSize(width: width * CGFloat(servers.count), height: height)
+        scrollView.subviews.forEach { $0.removeFromSuperview() }
         scrollView.delegate = self
         
         for (index, server) in servers.enumerated() {
@@ -383,8 +378,9 @@ extension ConnectToServerPopupView {
 extension ConnectToServerPopupView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
-        pageControl.currentPage = Int(pageIndex)
+        let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+        pageControl.currentPage = index
+        vpnServer = servers[index]
     }
     
 }
