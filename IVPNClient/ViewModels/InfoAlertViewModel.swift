@@ -31,9 +31,13 @@ class InfoAlertViewModel {
         let days = Application.shared.serviceStatus.daysUntilSubscriptionExpiration()
         switch infoAlert {
         case .subscriptionExpiration:
+            if days == 0 {
+                return "Subscription expired"
+            }
+            
             return "Subscription will expire in \(days) days"
         case .connectionInfoFailure:
-            return "Loading connection info failed."
+            return "Loading connection info failed"
         }
     }
     
