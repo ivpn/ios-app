@@ -247,6 +247,7 @@ extension LoginViewController {
         
         navigationController?.dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: Notification.Name.ServiceAuthorized, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
         })
     }
     
@@ -257,6 +258,8 @@ extension LoginViewController {
         let viewController = NavigationManager.getSubscriptionViewController()
         viewController.presentationController?.delegate = self
         present(viewController, animated: true, completion: nil)
+        
+        NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
     }
     
     override func createSessionAccountNotActivated(error: Any?) {
@@ -269,6 +272,8 @@ extension LoginViewController {
         let viewController = NavigationManager.getSelectPlanViewController()
         viewController.presentationController?.delegate = self
         present(viewController, animated: true, completion: nil)
+        
+        NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
     }
     
     override func createSessionTooManySessions(error: Any?) {
