@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.0 - [Unreleased, Public beta]  
+
+[NEW] Redesigned UI  
+[NEW] Interactive map  
+[NEW] Control panel  
+[NEW] Dedicated account screen  
+[IMPROVED] Search and sort on the servers list  
+
+Feedback and support:  
+beta@ivpn.net  
+
 ## 1.19.1 - 2020-07-01
 
 [FIXED] App crashing on iOS 12 devices
