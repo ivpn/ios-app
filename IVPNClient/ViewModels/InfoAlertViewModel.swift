@@ -95,7 +95,9 @@ extension InfoAlertViewModel: InfoAlertViewDelegate {
     func action() {
         switch infoAlert {
         case .subscriptionExpiration:
-            break
+            if let topViewController = UIApplication.topViewController() as? MainViewController {
+                topViewController.showAlert(title: "Account not active", message: "Only active user accounts are enabled in this beta version.")
+            }
         case .connectionInfoFailure:
             if let topViewController = UIApplication.topViewController() as? MainViewController {
                 topViewController.updateGeoLocation()
