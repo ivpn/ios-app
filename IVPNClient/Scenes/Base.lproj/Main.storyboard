@@ -3276,6 +3276,9 @@
                                             <color key="value" name="ivpnLabelQuaternary"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="copyAccountID:" destination="obv-bO-Y0X" eventType="touchUpInside" id="Lhv-x8-chW"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
