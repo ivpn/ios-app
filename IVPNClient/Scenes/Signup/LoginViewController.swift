@@ -229,7 +229,7 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         
-        Application.shared.authentication.removeStoredCredentials()
+        Application.shared.authentication.logOut()
         showAlert(title: "Account not active", message: "Only active user accounts are enabled in this beta version.")
     }
     
@@ -237,7 +237,7 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         
-        Application.shared.authentication.removeStoredCredentials()
+        Application.shared.authentication.logOut()
         showAlert(title: "Account not active", message: "Only active user accounts are enabled in this beta version.")
     }
     
