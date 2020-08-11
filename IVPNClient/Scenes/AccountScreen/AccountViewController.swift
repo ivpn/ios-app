@@ -38,6 +38,12 @@ class AccountViewController: UITableViewController {
     
     // MARK: - @IBActions -
     
+    @IBAction func copyAccountID(_ sender: UIButton) {
+        guard let text = accountView.accountIdLabel.text else { return }
+        UIPasteboard.general.string = text
+        showFlashNotification(message: "Account ID copied to clipboard", presentInView: (navigationController?.view)!)
+    }
+    
     @IBAction func addMoreTime(_ sender: Any) {
         
     }
