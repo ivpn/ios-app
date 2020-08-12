@@ -65,6 +65,7 @@ class ServerViewController: UITableViewController {
             
             UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
             self.initCollection()
+            self.filteredCollection = self.sortFilteredServers(self.filteredCollection)
             self.tableView.reloadData()
         }
     }
@@ -149,6 +150,22 @@ class ServerViewController: UITableViewController {
     private func disableRefreshControl() {
         refreshControl?.removeTarget(self, action: #selector(self.refresh), for: UIControl.Event.valueChanged)
         refreshControl = nil
+    }
+    
+    private func sortFilteredServers(_ servers: [VPNServer]) -> [VPNServer] {
+        let sort = ServersSort.init(rawValue: UserDefaults.shared.serversSort)
+        var servers = servers
+        
+        switch sort {
+        case .country:
+            servers.sort { $0.countryCode == $1.countryCode ? $0.city < $1.city : $0.countryCode < $1.countryCode }
+        case .latency:
+            servers.sort { $0.pingMs ?? 0 < $1.pingMs ?? 0 }
+        default:
+            servers.sort { $0.city < $1.city }
+        }
+        
+        return servers
     }
     
 }
@@ -271,6 +288,8 @@ extension ServerViewController: UISearchBarDelegate {
                 return server.city.lowercased().contains(searchBar.text!.lowercased())
             }
         }
+        
+        filteredCollection = sortFilteredServers(filteredCollection)
         
         tableView.reloadData()
     }
