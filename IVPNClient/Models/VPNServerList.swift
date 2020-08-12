@@ -202,7 +202,12 @@ class VPNServerList {
     }
     
     func sortServers() {
+        servers = VPNServerList.sort(servers)
+    }
+    
+    static func sort(_ servers: [VPNServer]) -> [VPNServer] {
         let sort = ServersSort.init(rawValue: UserDefaults.shared.serversSort)
+        var servers = servers
         
         switch sort {
         case .country:
@@ -212,6 +217,8 @@ class VPNServerList {
         default:
             servers.sort { $0.city < $1.city }
         }
+        
+        return servers
     }
     
     private func createServersFromLoadedJSON(_ serversList: [[String: Any]]) {
