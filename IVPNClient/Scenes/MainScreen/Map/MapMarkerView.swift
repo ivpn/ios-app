@@ -125,6 +125,7 @@ class MapMarkerView: UIView {
         guard animated else {
             alpha = 0
             transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+            connectionInfoPopup.hide()
             return
         }
         
@@ -132,6 +133,8 @@ class MapMarkerView: UIView {
             self.alpha = 0
             self.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
         }, completion: { _ in
+            self.connectionInfoPopup.hide()
+            
             if let completion = completion {
                 completion()
             }
