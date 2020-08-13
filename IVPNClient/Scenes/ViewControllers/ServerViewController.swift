@@ -65,6 +65,7 @@ class ServerViewController: UITableViewController {
             
             UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
             self.initCollection()
+            self.filteredCollection = VPNServerList.sort(self.filteredCollection)
             self.tableView.reloadData()
         }
     }
@@ -271,6 +272,8 @@ extension ServerViewController: UISearchBarDelegate {
                 return server.city.lowercased().contains(searchBar.text!.lowercased())
             }
         }
+        
+        filteredCollection = VPNServerList.sort(filteredCollection)
         
         tableView.reloadData()
     }
