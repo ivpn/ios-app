@@ -33,13 +33,13 @@ struct VPNStatusViewModel {
     var protectionStatusText: String {
         switch status {
         case .connecting, .reasserting:
-            return "Connecting"
+            return "connecting"
         case .disconnecting:
-            return "Disconnecting"
+            return "disconnecting"
         case .connected:
-            return "Protected"
+            return "connected"
         default:
-            return "Unprotected"
+            return "disconnected"
         }
     }
     
