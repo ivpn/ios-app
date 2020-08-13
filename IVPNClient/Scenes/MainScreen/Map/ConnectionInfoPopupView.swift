@@ -147,7 +147,7 @@ class ConnectionInfoPopupView: UIView {
     // MARK: - Private methods -
     
     private func setupConstraints() {
-        bb.size(width: 270, height: 69).centerX().centerY(55)
+        bb.size(width: 270, height: 69).centerX().centerY(52)
     }
     
     private func setupView() {
