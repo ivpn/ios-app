@@ -46,7 +46,7 @@ class MapMarkerView: UIView {
     
     var viewModel: ProofsViewModel? {
         didSet {
-            locationLabel.text = viewModel?.city
+            locationButton.setTitle(viewModel?.city, for: .normal)
         }
     }
     
@@ -56,15 +56,15 @@ class MapMarkerView: UIView {
             case .unprotected:
                 updateCircles(color: redColor)
                 animatedCircleLayer.stopAnimations()
-                locationLabel.isHidden = false
+                locationButton.setTitle(viewModel?.city, for: .normal)
             case .changing:
                 updateCircles(color: grayColor)
                 animatedCircleLayer.stopAnimations()
-                locationLabel.isHidden = true
+                locationButton.setTitle("", for: .normal)
             case .protected:
                 updateCircles(color: blueColor)
                 animatedCircleLayer.startAnimation()
-                locationLabel.isHidden = true
+                locationButton.setTitle("", for: .normal)
             }
         }
     }
@@ -72,11 +72,11 @@ class MapMarkerView: UIView {
     var connectionInfoPopup = ConnectionInfoPopupView()
     private var circle1 = UIView()
     private var circle2 = UIView()
-    private var locationLabel = UILabel()
+    private var locationButton = UIButton()
     private var animatedCircle = UIView()
     private var animatedCircleLayer = AnimatedCircleLayer()
     private var radius1: CGFloat = 98
-    private var radius2: CGFloat = 9
+    private var radius2: CGFloat = 8
     private var blueColor = UIColor.init(red: 68, green: 156, blue: 248)
     private var redColor = UIColor.init(named: Theme.ivpnRedOff)!
     private var grayColor = UIColor.init(named: Theme.ivpnGray18)!
@@ -85,10 +85,9 @@ class MapMarkerView: UIView {
     
     override func updateConstraints() {
         setupConstraints()
-        initLabel()
         initCircles()
         updateCircles(color: redColor)
-        initActionButton()
+        initLocationButton()
         initConnectionInfoPopup()
         addObservers()
         
@@ -102,7 +101,6 @@ class MapMarkerView: UIView {
     // MARK: - Methods -
     
     func updateCircles(color: UIColor) {
-        updateCircle(circle1, color: color.withAlphaComponent(0.5))
         updateCircle(circle2, color: color)
     }
     
@@ -185,32 +183,29 @@ class MapMarkerView: UIView {
         })
     }
     
-    private func initLabel() {
-        locationLabel.textColor = redColor
-        locationLabel.font = .systemFont(ofSize: 10)
-        addSubview(locationLabel)
-        
-        locationLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-13)
-        }
-    }
-    
     private func initCircles() {
         initCircle(circle1, radius: radius1)
         initCircle(circle2, radius: radius2)
         
         circle1.addSubview(animatedCircle)
+        circle1.isUserInteractionEnabled = false
+        animatedCircle.isUserInteractionEnabled = false
         animatedCircle.bb.center().size(width: radius1, height: radius1)
         animatedCircle.layer.addSublayer(animatedCircleLayer)
     }
     
-    private func initActionButton() {
-        let actionButton = UIButton()
-        addSubview(actionButton)
-        actionButton.accessibilityLabel = "Connection info"
-        actionButton.bb.center().size(width: radius1, height: radius1)
-        actionButton.addTarget(self, action: #selector(markerAction), for: .touchUpInside)
+    private func initLocationButton() {
+        locationButton.setTitleColor(redColor, for: .normal)
+        locationButton.titleLabel?.font = .systemFont(ofSize: 10)
+        locationButton.addTarget(self, action: #selector(markerAction), for: .touchUpInside)
+        addSubview(locationButton)
+        
+        locationButton.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(20)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-11)
+        }
     }
     
     private func initConnectionInfoPopup() {
