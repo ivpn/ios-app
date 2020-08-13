@@ -43,18 +43,6 @@ class ConnectionInfoPopupView: UIView {
         return arrow
     }()
     
-    lazy var spinner: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView()
-        if #available(iOS 13.0, *) {
-            spinner.style = .medium
-        } else {
-            spinner.style = .gray
-        }
-        spinner.hidesWhenStopped = true
-        spinner.startAnimating()
-        return spinner
-    }()
-    
     lazy var errorLabel: UILabel = {
         let errorLabel = UILabel()
         errorLabel.font = UIFont.systemFont(ofSize: 12)
@@ -93,24 +81,12 @@ class ConnectionInfoPopupView: UIView {
         didSet {
             statusLabel.text = vpnStatusViewModel.popupStatusText
             locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
-            
-            if displayMode == .loading {
-                displayMode = .content
-            }
         }
     }
     
     var vpnStatusViewModel = VPNStatusViewModel(status: .invalid) {
         didSet {
-            if displayMode == .content && vpnStatusViewModel.status == .connecting {
-                displayMode = .loading
-            }
             
-            if (displayMode == .content || displayMode == .loading) && (vpnStatusViewModel.status == .connected || (vpnStatusViewModel.status == .disconnected && oldValue.status != .disconnected)) && !Application.shared.connectionManager.reconnectAutomatically {
-                DispatchQueue.delay(0.25) {
-                    self.show()
-                }
-            }
         }
     }
     
@@ -123,20 +99,12 @@ class ConnectionInfoPopupView: UIView {
                 }, completion: { _ in
                     self.isHidden = true
                 })
-            case .loading:
-                spinner.startAnimating()
-                container.isHidden = true
-                errorLabel.isHidden = true
-                isHidden = false
-                UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             case .content:
-                spinner.stopAnimating()
                 container.isHidden = false
                 errorLabel.isHidden = true
                 isHidden = false
                 UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             case .error:
-                spinner.stopAnimating()
                 container.isHidden = true
                 errorLabel.isHidden = false
                 isHidden = false
@@ -165,8 +133,7 @@ class ConnectionInfoPopupView: UIView {
     // MARK: - Methods -
     
     func show() {
-        displayMode = .loading
-        fetchData()
+        displayMode = .content
     }
     
     func hide() {
@@ -201,7 +168,6 @@ class ConnectionInfoPopupView: UIView {
         addSubview(arrow)
         addSubview(container)
         addSubview(errorLabel)
-        addSubview(spinner)
         
         displayMode = .hidden
         setupLayout()
@@ -215,24 +181,6 @@ class ConnectionInfoPopupView: UIView {
         locationLabel.bb.left(18).bottom(-15).right(-48).height(19)
         actionButton.bb.size(width: 20, height: 20).bottom(-15).right(-18)
         errorLabel.bb.top(10).right(-20).bottom(-10).left(20)
-        spinner.bb.center()
-    }
-    
-    private func fetchData() {
-        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
-        
-        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let model):
-                self.viewModel = ProofsViewModel(model: model)
-            case .failure:
-                if self.displayMode == .loading {
-                    self.displayMode = .error
-                }
-            }
-        }
     }
     
     @objc private func infoAction() {
@@ -249,7 +197,6 @@ extension ConnectionInfoPopupView {
     
     enum DisplayMode {
         case hidden
-        case loading
         case content
         case error
     }
