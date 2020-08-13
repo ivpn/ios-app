@@ -180,9 +180,6 @@ class MapScrollView: UIScrollView {
     }
     
     private func placeMarker(latitude: Double, longitude: Double, city: String) {
-        guard city != "Bratislava" else { return }
-        guard city != "New Jersey, NJ" else { return }
-        
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
         
         let button = UIButton(frame: CGRect(x: point.0 - 50, y: point.1 - 21, width: 100, height: 20))
@@ -195,6 +192,24 @@ class MapScrollView: UIScrollView {
         marker.layer.cornerRadius = 3
         marker.backgroundColor = UIColor.init(named: Theme.ivpnGray21)
         marker.tag = 1
+        
+        if city == "Bratislava" {
+            button.titleEdgeInsets = UIEdgeInsets(top: 21, left: 59, bottom: 0, right: 0)
+            button.frame = CGRect(x: point.0 - 55, y: point.1 - 21, width: 110, height: 20)
+            marker.frame = CGRect(x: 55 - 3, y: 18, width: 6, height: 6)
+        }
+
+        if city == "Budapest" {
+            button.titleEdgeInsets = UIEdgeInsets(top: 21, left: 58, bottom: 0, right: 0)
+            button.frame = CGRect(x: point.0 - 55, y: point.1 - 21, width: 110, height: 20)
+            marker.frame = CGRect(x: 55 - 3, y: 18, width: 6, height: 6)
+        }
+        
+        if city == "New Jersey, NJ" {
+            button.titleEdgeInsets = UIEdgeInsets(top: 22, left: 93, bottom: 0, right: 0)
+            button.frame = CGRect(x: point.0 - 85, y: point.1 - 21, width: 170, height: 20)
+            marker.frame = CGRect(x: 85 - 3, y: 18, width: 6, height: 6)
+        }
         
         button.addSubview(marker)
         addSubview(button)
