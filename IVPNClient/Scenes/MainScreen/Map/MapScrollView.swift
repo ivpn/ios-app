@@ -41,17 +41,18 @@ class MapScrollView: UIScrollView {
                 }
             }
             
+            markerLocalView.viewModel = viewModel
+            
             if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
                 updateMapPosition(animated: oldValue != nil)
                 markerGatewayView.hide(animated: true)
                 markerLocalView.show(animated: oldValue != nil)
-                markerLocalView.viewModel = viewModel
             }
         }
     }
     
-    let markerLocalView = MapMarkerView()
-    let markerGatewayView = MapMarkerView()
+    let markerLocalView = MapMarkerView(type: .local)
+    let markerGatewayView = MapMarkerView(type: .gateway)
     
     private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     private var markers: [UIButton] = []

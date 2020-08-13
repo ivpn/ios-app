@@ -46,7 +46,15 @@ class MapMarkerView: UIView {
     
     var viewModel: ProofsViewModel? {
         didSet {
-            locationButton.setTitle(viewModel?.city, for: .normal)
+            connectionInfoPopup.viewModel = viewModel
+            
+            if markerType == .local && !(viewModel?.model.isIvpnServer ?? false) {
+                locationButton.setTitle(viewModel?.city, for: .normal)
+            }
+            
+            if markerType == .gateway {
+                locationButton.setTitle("", for: .normal)
+            }
         }
     }
     
@@ -56,18 +64,17 @@ class MapMarkerView: UIView {
             case .unprotected:
                 updateCircles(color: redColor)
                 animatedCircleLayer.stopAnimations()
-                locationButton.setTitle(viewModel?.city, for: .normal)
             case .changing:
                 updateCircles(color: grayColor)
                 animatedCircleLayer.stopAnimations()
-                locationButton.setTitle("", for: .normal)
             case .protected:
                 updateCircles(color: blueColor)
                 animatedCircleLayer.startAnimation()
-                locationButton.setTitle("", for: .normal)
             }
         }
     }
+    
+    var markerType: MarkerType = .local
     
     var connectionInfoPopup = ConnectionInfoPopupView()
     private var circle1 = UIView()
@@ -82,6 +89,12 @@ class MapMarkerView: UIView {
     private var grayColor = UIColor.init(named: Theme.ivpnGray18)!
     
     // MARK: - View lifecycle -
+    
+    convenience init(type: MarkerType) {
+        self.init(frame: CGRect.zero)
+        self.markerType = type
+    }
+
     
     override func updateConstraints() {
         setupConstraints()
@@ -125,6 +138,7 @@ class MapMarkerView: UIView {
         guard animated else {
             alpha = 0
             transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+            connectionInfoPopup.hide()
             return
         }
         
@@ -132,6 +146,8 @@ class MapMarkerView: UIView {
             self.alpha = 0
             self.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
         }, completion: { _ in
+            self.connectionInfoPopup.hide()
+            
             if let completion = completion {
                 completion()
             }
@@ -257,6 +273,11 @@ extension MapMarkerView {
         case unprotected
         case changing
         case protected
+    }
+    
+    enum MarkerType {
+        case local
+        case gateway
     }
     
 }

@@ -72,11 +72,11 @@ struct VPNStatusViewModel {
     var popupStatusText: String {
         switch status {
         case .connecting, .reasserting:
-            return "Connecting VPN"
+            return "Connecting"
         case .disconnecting:
-            return "Disconnecting VPN"
+            return "Disconnecting"
         case .connected:
-            return "Your connection is protected"
+            return "Connected to"
         default:
             return "Your current location"
         }
