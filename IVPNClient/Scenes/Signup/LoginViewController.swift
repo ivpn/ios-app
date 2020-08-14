@@ -99,8 +99,6 @@ class LoginViewController: UIViewController {
                 self.sessionManager.createSession()
             }
         }
-        
-        let _ = evaluateIsServiceActive()
     }
     
     // MARK: - View Lifecycle -
