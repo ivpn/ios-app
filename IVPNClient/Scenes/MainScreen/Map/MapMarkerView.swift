@@ -114,6 +114,7 @@ class MapMarkerView: UIView {
     // MARK: - Methods -
     
     func updateCircles(color: UIColor) {
+        updateCircle(circle1, color: color.withAlphaComponent(0.5))
         updateCircle(circle2, color: color)
     }
     
