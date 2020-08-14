@@ -91,22 +91,22 @@ class VPNStatusViewModelTests: XCTestCase {
     
     func test_popupStatusText() {
         viewModel.status = .connecting
-        XCTAssertEqual(viewModel.connectToServerText, "Connecting")
+        XCTAssertEqual(viewModel.popupStatusText, "Connecting")
         
         viewModel.status = .reasserting
-        XCTAssertEqual(viewModel.connectToServerText, "Connecting")
+        XCTAssertEqual(viewModel.popupStatusText, "Connecting")
         
         viewModel.status = .disconnecting
-        XCTAssertEqual(viewModel.connectToServerText, "Disconnecting")
+        XCTAssertEqual(viewModel.popupStatusText, "Disconnecting")
         
         viewModel.status = .connected
-        XCTAssertEqual(viewModel.connectToServerText, "Connected to")
+        XCTAssertEqual(viewModel.popupStatusText, "Connected to")
         
         viewModel.status = .disconnected
-        XCTAssertEqual(viewModel.connectToServerText, "Your current location")
+        XCTAssertEqual(viewModel.popupStatusText, "Your current location")
         
         viewModel.status = .invalid
-        XCTAssertEqual(viewModel.connectToServerText, "Your current location")
+        XCTAssertEqual(viewModel.popupStatusText, "Your current location")
     }
     
 }
