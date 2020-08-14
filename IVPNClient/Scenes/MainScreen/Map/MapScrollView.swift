@@ -274,7 +274,7 @@ class MapScrollView: UIScrollView {
         let diffX = abs(point1.0 - point2.0)
         let diffY = abs(point1.1 - point2.1)
         
-        if diffX < 80 && diffY < 20 {
+        if diffX < 60 && diffY < 18 {
             return true
         }
         
