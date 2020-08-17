@@ -22,6 +22,7 @@
 //
 
 import UIKit
+import NetworkExtension
 import Bamboo
 import SnapKit
 
@@ -84,6 +85,18 @@ class MapScrollView: UIScrollView {
         }
     }
     
+    func updateStatus(vpnStatus: NEVPNStatus) {
+        var color = UIColor.init(named: Theme.ivpnGray22)
+        
+        if vpnStatus == .connected {
+            color = UIColor.init(named: Theme.ivpnGray24)
+        }
+        
+        UIView.animate(withDuration: 0.25) {
+            self.mapImageView.backgroundColor = color
+        }
+    }
+    
     func updateMapPosition(animated: Bool = false) {
         guard let viewModel = viewModel else { return }
         
@@ -117,8 +130,7 @@ class MapScrollView: UIScrollView {
         isScrollEnabled = true
         backgroundColor = UIColor.init(named: Theme.ivpnGray19)
         contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -600, right: 0)
-        mapImageView.backgroundColor = UIColor.init(named: Theme.ivpnGray19)
-        mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray20)
+        mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray23)
     }
     
     private func addObservers() {
