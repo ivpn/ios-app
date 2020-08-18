@@ -168,6 +168,7 @@ class ConnectionInfoPopupView: UIView {
         displayMode = .hidden
         setupLayout()
         updateView()
+        initGestures()
     }
     
     private func setupLayout() {
@@ -183,6 +184,15 @@ class ConnectionInfoPopupView: UIView {
         if let topViewController = UIApplication.topViewController() as? MainViewController {
             topViewController.expandFloatingPanel()
         }
+    }
+    
+    private func initGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tap)
+    }
+    
+    @objc private func handleTap() {
+        
     }
     
 }

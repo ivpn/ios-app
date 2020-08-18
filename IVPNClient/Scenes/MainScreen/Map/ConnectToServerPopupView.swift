@@ -219,6 +219,7 @@ class ConnectToServerPopupView: UIView {
         addSubview(container)
         
         displayMode = .hidden
+        initGestures()
     }
     
     private func setupLayout() {
@@ -373,6 +374,15 @@ class ConnectToServerPopupView: UIView {
         frame.origin.y = 0
         scrollView.scrollRectToVisible(frame, animated: animated)
         currentPage = page
+    }
+    
+    private func initGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tap)
+    }
+    
+    @objc private func handleTap() {
+        
     }
     
 }
