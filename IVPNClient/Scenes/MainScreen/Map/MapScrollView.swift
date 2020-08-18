@@ -135,12 +135,14 @@ class MapScrollView: UIScrollView {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(hideConnectToServerPopup), name: Notification.Name.HideConnectToServerPopup, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateConnectToServerPopup), name: Notification.Name.UpdateConnectToServerPopup, object: nil)
     }
     
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.HideConnectToServerPopup, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateConnectToServerPopup, object: nil)
     }
     
     private func initGestures() {
@@ -234,33 +236,40 @@ class MapScrollView: UIScrollView {
         let city = sender.titleLabel?.text ?? ""
         
         if let server = Application.shared.serverList.getServer(byCity: city) {
-            let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
-            connectToServerPopup.snp.updateConstraints { make in
-                make.left.equalTo(point.0 - 135)
-                make.top.equalTo(point.1 + 17)
-            }
-            
-            let nearByServers = getNearByServers(server: server)
-            connectToServerPopup.servers = nearByServers
-            connectToServerPopup.vpnServer = nearByServers.first ?? server
-            connectToServerPopup.show()
-            NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
-            
-            updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
+            updateSelectedServer(server)
             
             if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) {
-                
-                if UserDefaults.shared.isMultiHop {
-                    Application.shared.settings.selectedExitServer = server
-                    Application.shared.settings.selectedExitServer.fastest = false
-                } else {
-                    Application.shared.settings.selectedServer = server
-                    Application.shared.settings.selectedServer.fastest = false
-                }
-                
-                Application.shared.connectionManager.needsUpdateSelectedServer()
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
+        }
+    }
+    
+    private func updateSelectedServer(_ server: VPNServer) {
+        let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
+        connectToServerPopup.snp.updateConstraints { make in
+            make.left.equalTo(point.0 - 135)
+            make.top.equalTo(point.1 + 17)
+        }
+        
+        let nearByServers = getNearByServers(server: server)
+        connectToServerPopup.servers = nearByServers
+        connectToServerPopup.vpnServer = nearByServers.first ?? server
+        connectToServerPopup.show()
+        NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
+        
+        updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
+        
+        if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) {
+            
+            if UserDefaults.shared.isMultiHop {
+                Application.shared.settings.selectedExitServer = server
+                Application.shared.settings.selectedExitServer.fastest = false
+            } else {
+                Application.shared.settings.selectedServer = server
+                Application.shared.settings.selectedServer.fastest = false
+            }
+            
+            Application.shared.connectionManager.needsUpdateSelectedServer()
         }
     }
     
@@ -295,6 +304,11 @@ class MapScrollView: UIScrollView {
     
     @objc private func hideConnectToServerPopup() {
         connectToServerPopup.hide()
+    }
+    
+    @objc private func updateConnectToServerPopup() {
+        let server = Application.shared.settings.selectedServer
+        updateSelectedServer(server)
     }
     
     private func getCoordinatesBy(latitude: Double, longitude: Double) -> (Double, Double) {
