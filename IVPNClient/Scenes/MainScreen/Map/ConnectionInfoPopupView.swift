@@ -136,14 +136,6 @@ class ConnectionInfoPopupView: UIView {
         displayMode = .hidden
     }
     
-    func updateView() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
-            actionButton.isHidden = true
-        } else {
-            actionButton.isHidden = false
-        }
-    }
-    
     // MARK: - Private methods -
     
     private func setupConstraints() {
@@ -167,7 +159,6 @@ class ConnectionInfoPopupView: UIView {
         
         displayMode = .hidden
         setupLayout()
-        updateView()
         initGestures()
     }
     
