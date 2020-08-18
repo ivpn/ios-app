@@ -237,6 +237,7 @@ class MapScrollView: UIScrollView {
         
         if let server = Application.shared.serverList.getServer(byCity: city) {
             updateSelectedServer(server)
+            connectToServerPopup.show()
             
             if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) {
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
@@ -254,10 +255,6 @@ class MapScrollView: UIScrollView {
         let nearByServers = getNearByServers(server: server)
         connectToServerPopup.servers = nearByServers
         connectToServerPopup.vpnServer = nearByServers.first ?? server
-        connectToServerPopup.show()
-        NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
-        
-        updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
         
         if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) {
             
@@ -271,6 +268,10 @@ class MapScrollView: UIScrollView {
             
             Application.shared.connectionManager.needsUpdateSelectedServer()
         }
+        
+        updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
+        
+        NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
     private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
