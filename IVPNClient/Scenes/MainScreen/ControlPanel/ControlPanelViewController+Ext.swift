@@ -47,12 +47,14 @@ extension ControlPanelViewController {
         if indexPath.row == 2 {
             if let topViewController = UIApplication.topViewController() as? MainViewController {
                 topViewController.performSegue(withIdentifier: "ControlPanelSelectServer", sender: nil)
+                NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
             }
         }
         
         if indexPath.row == 3 {
             if let topViewController = UIApplication.topViewController() as? MainViewController {
                 topViewController.performSegue(withIdentifier: "ControlPanelSelectExitServer", sender: nil)
+                NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
             }
         }
         
