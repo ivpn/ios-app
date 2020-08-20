@@ -420,7 +420,6 @@ class ControlPanelViewController: UITableViewController {
     @objc private func serverSelected() {
         Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateServerNames()
-        NotificationCenter.default.post(name: Notification.Name.UpdateConnectToServerPopup, object: nil)
     }
     
     @objc private func protocolSelected() {
