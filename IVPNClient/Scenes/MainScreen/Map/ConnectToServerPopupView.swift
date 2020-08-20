@@ -43,8 +43,10 @@ class ConnectToServerPopupView: UIView {
         return arrow
     }()
     
-    lazy var flagImage: FlagImageView = {
-        return FlagImageView()
+    lazy var flagImage: UIImageView = {
+        let flagImage = UIImageView()
+        flagImage.setFlagIconBorder()
+        return flagImage
     }()
     
     lazy var locationLabel: UILabel = {
