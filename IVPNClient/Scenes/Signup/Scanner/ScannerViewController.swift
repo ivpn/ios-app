@@ -45,6 +45,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,10 +67,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         stopCaptureSession()
     }
     
+    deinit {
+       NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
     // MARK: - Orientation -
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+    
+    @objc private func orientationDidChange() {
+        previewLayer.connection?.videoOrientation = UIApplication.shared.statusBarOrientation.asAVCaptureVideoOrientation()
     }
     
     // MARK: - Private methods -
@@ -164,6 +174,27 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
         
         dismiss(animated: true)
+    }
+    
+}
+
+// MARK: UIInterfaceOrientation extension
+
+extension UIInterfaceOrientation {
+    
+    func asAVCaptureVideoOrientation() -> AVCaptureVideoOrientation {
+        switch self {
+        case .portrait:
+            return .portrait
+        case .landscapeLeft:
+            return .landscapeLeft
+        case .landscapeRight:
+            return .landscapeRight
+        case .portraitUpsideDown:
+            return .portraitUpsideDown
+        default:
+            return .portrait
+        }
     }
     
 }
