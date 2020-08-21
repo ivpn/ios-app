@@ -24,6 +24,7 @@
 import Foundation
 import CoreData
 import UIKit
+import CoreLocation
 
 class VPNServerList {
     
@@ -214,6 +215,10 @@ class VPNServerList {
             servers.sort { $0.countryCode == $1.countryCode ? $0.city < $1.city : $0.countryCode < $1.countryCode }
         case .latency:
             servers.sort { $0.pingMs ?? 0 < $1.pingMs ?? 0 }
+        case .proximity:
+            let geoLookup = Application.shared.settings.localGeoLookup
+            let location = CLLocation(latitude: geoLookup.latitude, longitude: geoLookup.longitude)
+            servers.sort { $0.distance(to: location) < $1.distance(to: location) }
         default:
             servers.sort { $0.city < $1.city }
         }
