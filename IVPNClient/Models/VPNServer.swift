@@ -23,6 +23,7 @@
 
 import Foundation
 import NetworkExtension
+import CoreLocation
 
 class VPNServer {
     
@@ -49,6 +50,10 @@ class VPNServer {
             return true
         }
         return false
+    }
+    
+    var location: CLLocation {
+        return CLLocation(latitude: latitude, longitude: longitude)
     }
     
     private (set) var gateway: String
