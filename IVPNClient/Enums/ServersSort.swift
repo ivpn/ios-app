@@ -27,4 +27,5 @@ enum ServersSort: String, CaseIterable {
     case city
     case country
     case latency
+    case proximity
 }

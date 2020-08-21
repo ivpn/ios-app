@@ -23,6 +23,7 @@
 
 import Foundation
 import NetworkExtension
+import CoreLocation
 
 class VPNServer {
     
@@ -49,6 +50,10 @@ class VPNServer {
             return true
         }
         return false
+    }
+    
+    var location: CLLocation {
+        return CLLocation(latitude: latitude, longitude: longitude)
     }
     
     private (set) var gateway: String
@@ -80,6 +85,10 @@ class VPNServer {
         let gatewayParts = gateway.components(separatedBy: ".")
         if let location = gatewayParts.first { return location }
         return ""
+    }
+    
+    func distance(to location: CLLocation) -> CLLocationDistance {
+        return location.distance(from: self.location)
     }
     
     static func == (lhs: VPNServer, rhs: VPNServer) -> Bool {
