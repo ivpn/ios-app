@@ -146,6 +146,10 @@ class MainViewController: UIViewController {
                 let viewModel = ProofsViewModel(model: model)
                 controlPanelViewController.connectionViewModel = viewModel
                 self.mainView.connectionViewModel = viewModel
+                
+                if !model.isIvpnServer {
+                    Application.shared.settings.localGeoLookup = model
+                }
             case .failure:
                 controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .error
                 self.mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure

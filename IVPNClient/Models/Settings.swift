@@ -63,6 +63,8 @@ class Settings {
             return "FastestServerConfiguredForOpenVPN"
         }
     }
+    
+    var localGeoLookup = GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
 
     init(serverList: VPNServerList) {
         let protocolIndex = UserDefaults.standard.integer(forKey: "selectedProtocolIndex")
