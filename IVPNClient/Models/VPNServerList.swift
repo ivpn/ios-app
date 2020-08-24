@@ -269,7 +269,9 @@ class VPNServerList {
             servers.append(newServer)
         }
         
-        sortServers()
+        DispatchQueue.async {
+            self.sortServers()
+        }
     }
     
 }
