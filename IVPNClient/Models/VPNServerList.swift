@@ -215,10 +215,12 @@ class VPNServerList {
             servers.sort { $0.countryCode == $1.countryCode ? $0.city < $1.city : $0.countryCode < $1.countryCode }
         case .latency:
             servers.sort { $0.pingMs ?? 5000 < $1.pingMs ?? 5000 }
+            servers.sort { $0.fastest && !$1.fastest }
         case .proximity:
             let geoLookup = Application.shared.geoLookup
             let location = CLLocation(latitude: geoLookup.latitude, longitude: geoLookup.longitude)
             servers.sort { $0.distance(to: location) < $1.distance(to: location) }
+            servers.sort { $0.fastest && !$1.fastest }
         default:
             servers.sort { $0.city < $1.city }
         }
