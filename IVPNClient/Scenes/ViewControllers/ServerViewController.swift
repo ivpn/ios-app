@@ -76,6 +76,7 @@ class ServerViewController: UITableViewController {
         super.viewDidLoad()
         initNavigationBar()
         initCollection()
+        tableView.keyboardDismissMode = .onDrag
     }
     
     override func viewWillAppear(_ animated: Bool) {
