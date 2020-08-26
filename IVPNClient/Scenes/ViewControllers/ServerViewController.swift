@@ -36,9 +36,24 @@ class ServerViewController: UITableViewController {
     // MARK: - Properties -
     
     var isExitServer = false
-    var collection = [VPNServer]()
     var filteredCollection = [VPNServer]()
     weak var serverDelegate: ServerViewControllerDelegate?
+    
+    var collection:[VPNServer] {
+        var list = [VPNServer]()
+        
+        if isSearchActive {
+            list = filteredCollection
+        } else {
+            list = Application.shared.serverList.servers
+        }
+        
+        if !UserDefaults.shared.isMultiHop {
+            list = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + list
+        }
+        
+        return list
+    }
     
     var isSearchActive: Bool {
         return !searchBar.text!.isEmpty
@@ -62,9 +77,8 @@ class ServerViewController: UITableViewController {
             guard index > -1 else { return }
             
             let sort = ServersSort.allCases[index]
-            
             UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
-            self.initCollection()
+            Application.shared.serverList.sortServers()
             self.filteredCollection = VPNServerList.sort(self.filteredCollection)
             self.tableView.reloadData()
         }
@@ -75,7 +89,7 @@ class ServerViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
-        initCollection()
+        Application.shared.serverList.sortServers()
         tableView.keyboardDismissMode = .onDrag
     }
     
@@ -110,7 +124,8 @@ class ServerViewController: UITableViewController {
     }
     
     @objc func pingDidComplete() {
-        initCollection()
+        Application.shared.serverList.sortServers()
+        filteredCollection = VPNServerList.sort(self.filteredCollection)
         tableView.reloadData()
     }
     
@@ -132,16 +147,6 @@ class ServerViewController: UITableViewController {
         searchBar.backgroundImage = UIImage()
     }
     
-    private func initCollection() {
-        Application.shared.serverList.sortServers()
-        
-        collection = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + Application.shared.serverList.servers
-        
-        if UserDefaults.shared.isMultiHop {
-            collection = Application.shared.serverList.servers
-        }
-    }
-    
     private func enableRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(self.refresh), for: UIControl.Event.valueChanged)
@@ -160,20 +165,14 @@ class ServerViewController: UITableViewController {
 extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearchActive {
-            return filteredCollection.count
-        } else {
-            return collection.count
-        }
+        return collection.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServerTableViewCell", for: indexPath) as! ServerTableViewCell
-        let server = isSearchActive ? filteredCollection[indexPath.row] : collection[indexPath.row]
-        
         cell.isMultiHop = UserDefaults.shared.isMultiHop
         cell.indexPath = indexPath
-        cell.viewModel = VPNServerViewModel(server: server)
+        cell.viewModel = VPNServerViewModel(server: collection[indexPath.row])
         cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         cell.selectedServer = isExitServer ? Application.shared.settings.selectedExitServer : Application.shared.settings.selectedServer
         
@@ -189,7 +188,7 @@ extension ServerViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.row < collection.count else { return }
         
-        let server = isSearchActive ? filteredCollection[indexPath.row] : collection[indexPath.row]
+        let server = collection[indexPath.row]
         var secondServer = Application.shared.settings.selectedExitServer
         var serverDifferentToSelectedServer = server !== Application.shared.settings.selectedServer
         
@@ -262,17 +261,14 @@ extension ServerViewController {
 extension ServerViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredCollection.removeAll(keepingCapacity: false)
+        let collection = Application.shared.serverList.servers
         
+        filteredCollection.removeAll(keepingCapacity: false)
         filteredCollection = collection.filter { (server: VPNServer) -> Bool in
             return server.city.lowercased().contains(searchBar.text!.lowercased())
         }
         
         filteredCollection = VPNServerList.sort(filteredCollection)
-        
-        if !UserDefaults.shared.isMultiHop {
-            filteredCollection = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + filteredCollection
-        }
         
         tableView.reloadData()
     }
