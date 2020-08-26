@@ -264,17 +264,15 @@ extension ServerViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredCollection.removeAll(keepingCapacity: false)
         
-        filteredCollection = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + collection.filter { (server: VPNServer) -> Bool in
+        filteredCollection = collection.filter { (server: VPNServer) -> Bool in
             return server.city.lowercased().contains(searchBar.text!.lowercased())
         }
         
-        if UserDefaults.shared.isMultiHop {
-            filteredCollection = collection.filter { (server: VPNServer) -> Bool in
-                return server.city.lowercased().contains(searchBar.text!.lowercased())
-            }
-        }
-        
         filteredCollection = VPNServerList.sort(filteredCollection)
+        
+        if !UserDefaults.shared.isMultiHop {
+            filteredCollection = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + filteredCollection
+        }
         
         tableView.reloadData()
     }
