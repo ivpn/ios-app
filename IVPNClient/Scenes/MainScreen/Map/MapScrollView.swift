@@ -298,8 +298,8 @@ class MapScrollView: UIScrollView {
     }
     
     private func getCoordinatesBy(latitude: Double, longitude: Double) -> (Double, Double) {
-        let bitmapWidth: Double = 4206
-        let bitmapHeight: Double = 3070
+        let bitmapWidth: Double = 5400
+        let bitmapHeight: Double = 3942
         
         var x: Double = longitude.toRadian() - 0.18
         var y: Double = latitude.toRadian()
