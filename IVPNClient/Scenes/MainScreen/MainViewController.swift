@@ -48,6 +48,8 @@ class MainViewController: UIViewController {
             NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.NewSession, object: nil)
             NotificationCenter.default.removeObserver(controlPanelViewController, name: Notification.Name.ForceNewSession, object: nil)
         }
+        
+        NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
     }
     
     @IBAction func openAccountInfo(_ sender: UIButton) {
