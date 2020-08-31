@@ -129,7 +129,7 @@ class MapScrollView: UIScrollView {
         isUserInteractionEnabled = true
         isScrollEnabled = true
         backgroundColor = UIColor.init(named: Theme.ivpnGray19)
-        contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -600, right: 0)
+        contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -875, right: 0)
         mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray23)
     }
     
@@ -298,8 +298,8 @@ class MapScrollView: UIScrollView {
     }
     
     private func getCoordinatesBy(latitude: Double, longitude: Double) -> (Double, Double) {
-        let bitmapWidth: Double = 4206
-        let bitmapHeight: Double = 3070
+        let bitmapWidth: Double = 5400
+        let bitmapHeight: Double = 3942
         
         var x: Double = longitude.toRadian() - 0.18
         var y: Double = latitude.toRadian()
