@@ -129,7 +129,7 @@ class MapScrollView: UIScrollView {
         isUserInteractionEnabled = true
         isScrollEnabled = true
         backgroundColor = UIColor.init(named: Theme.ivpnGray19)
-        contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -600, right: 0)
+        contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -875, right: 0)
         mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray23)
     }
     
