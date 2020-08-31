@@ -117,6 +117,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
+        previewLayer.connection?.videoOrientation = UIApplication.shared.statusBarOrientation.asAVCaptureVideoOrientation()
         scannerView.qrView.layer.addSublayer(previewLayer)
     }
     
