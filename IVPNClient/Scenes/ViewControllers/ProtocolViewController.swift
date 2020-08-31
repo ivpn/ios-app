@@ -198,7 +198,9 @@ extension ProtocolViewController {
                 showActionSheet(title: "To use this protocol you must turn Multi-Hop off", actions: ["Turn off"], sourceView: cell as UIView) { index in
                     switch index {
                     case 0:
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isMultiHop)
                         NotificationCenter.default.post(name: Notification.Name.TurnOffMultiHop, object: nil)
+                        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
                         tableView.reloadData()
                     default:
                         break
@@ -217,6 +219,7 @@ extension ProtocolViewController {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
+                        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
                         tableView.reloadData()
                     default:
                         break
@@ -234,6 +237,7 @@ extension ProtocolViewController {
                     switch index {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
+                        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
                         tableView.reloadData()
                     default:
                         break
