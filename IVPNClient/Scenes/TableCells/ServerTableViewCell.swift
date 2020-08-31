@@ -41,7 +41,7 @@ class ServerTableViewCell: UITableViewCell {
                 configureButton.isHidden = false
                 configureButton.isUserInteractionEnabled = true
             } else if (isMultiHop && indexPath.row == 0 || !isMultiHop && indexPath.row == 1) {
-                flagImage.image = UIImage(named: "icon-fastest-server")
+                flagImage.image = UIImage(named: "icon-shuffle")
                 serverName.text = "Random server"
                 configureButton.isHidden = true
                 configureButton.isUserInteractionEnabled = true
