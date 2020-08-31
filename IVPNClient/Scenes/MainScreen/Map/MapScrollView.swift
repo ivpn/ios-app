@@ -93,6 +93,7 @@ class MapScrollView: UIScrollView {
         }
         
         UIView.animate(withDuration: 0.25) {
+            self.backgroundColor = color
             self.mapImageView.backgroundColor = color
         }
     }
@@ -128,7 +129,7 @@ class MapScrollView: UIScrollView {
     private func setupView() {
         isUserInteractionEnabled = true
         isScrollEnabled = true
-        backgroundColor = UIColor.init(named: Theme.ivpnGray19)
+        backgroundColor = UIColor.init(named: Theme.ivpnGray22)
         contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -875, right: 0)
         mapImageView.tintColor = UIColor.init(named: Theme.ivpnGray23)
     }
