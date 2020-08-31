@@ -40,6 +40,11 @@ class ServerTableViewCell: UITableViewCell {
                 serverName.text = "Fastest server"
                 configureButton.isHidden = false
                 configureButton.isUserInteractionEnabled = true
+            } else if (isMultiHop && indexPath.row == 0 || !isMultiHop && indexPath.row == 1) {
+                flagImage.image = UIImage(named: "icon-fastest-server")
+                serverName.text = "Random server"
+                configureButton.isHidden = true
+                configureButton.isUserInteractionEnabled = true
             } else {
                 flagImage.image = viewModel.imageForCountryCode
                 serverName.text = viewModel.formattedServerName
@@ -93,7 +98,7 @@ class ServerTableViewCell: UITableViewCell {
     
     var indexPath: IndexPath! {
         didSet {
-            if !isMultiHop && indexPath.row == 0 {
+            if indexPath.row == 0 || !isMultiHop && indexPath.row == 1 {
                 pingImage.isHidden = true
                 pingTimeMs.isHidden = true
             }
