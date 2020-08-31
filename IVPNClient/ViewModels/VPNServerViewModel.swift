@@ -35,16 +35,10 @@ struct VPNServerViewModel {
     }
     
     var formattedServerNameForMainScreen: String {
-        if server.fastestServerLabelShouldBePresented { return "Fastest server" }
         return formattedServerName
     }
     
     var imageForCountryCodeForMainScreen: UIImage? {
-        if server.fastestServerLabelShouldBePresented {
-            let image = UIImage(named: "icon-fastest-server")
-            image?.accessibilityIdentifier = "icon-fastest-server"
-            return image
-        }
         return UIImage(named: server.countryCode.lowercased() + "-v")
     }
     

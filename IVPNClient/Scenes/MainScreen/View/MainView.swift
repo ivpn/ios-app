@@ -89,6 +89,8 @@ class MainView: UIView {
         } else {
             infoAlertView.hide()
         }
+        
+        updateActionButtons()
     }
     
     // MARK: - Private methods -
@@ -197,11 +199,17 @@ class MainView: UIView {
             return
         }
         
+        var bottomOffset = 22
+        
+        if infoAlertViewModel.shouldDisplay {
+            bottomOffset = 74
+        }
+        
         if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
             centerMapButton.snp.remakeConstraints { make in
                 make.size.equalTo(42)
                 make.right.equalTo(-30)
-                make.bottom.equalTo(-MapConstants.Container.bottomAnchorC - 22)
+                make.bottom.equalTo(-MapConstants.Container.bottomAnchorC - bottomOffset)
             }
             return
         }
@@ -210,7 +218,7 @@ class MainView: UIView {
             centerMapButton.snp.remakeConstraints { make in
                 make.size.equalTo(42)
                 make.right.equalTo(-30)
-                make.bottom.equalTo(-MapConstants.Container.bottomAnchorB - 22)
+                make.bottom.equalTo(-MapConstants.Container.bottomAnchorB - bottomOffset)
             }
             return
         }
@@ -218,7 +226,7 @@ class MainView: UIView {
         centerMapButton.snp.remakeConstraints { make in
             make.size.equalTo(42)
             make.right.equalTo(-30)
-            make.bottom.equalTo(-MapConstants.Container.bottomAnchorA - 22)
+            make.bottom.equalTo(-MapConstants.Container.bottomAnchorA - bottomOffset)
         }
     }
     
