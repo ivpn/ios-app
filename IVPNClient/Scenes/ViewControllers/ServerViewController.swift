@@ -48,8 +48,10 @@ class ServerViewController: UITableViewController {
             list = Application.shared.serverList.servers
         }
         
+        list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
+        
         if !UserDefaults.shared.isMultiHop {
-            list = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + list
+            list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true), at: 0)
         }
         
         return list
