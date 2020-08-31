@@ -39,7 +39,7 @@ class ServerViewController: UITableViewController {
     var filteredCollection = [VPNServer]()
     weak var serverDelegate: ServerViewControllerDelegate?
     
-    var collection:[VPNServer] {
+    private var collection: [VPNServer] {
         var list = [VPNServer]()
         
         if isSearchActive {
@@ -48,14 +48,29 @@ class ServerViewController: UITableViewController {
             list = Application.shared.serverList.servers
         }
         
+        list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
+        
         if !UserDefaults.shared.isMultiHop {
-            list = [VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true)] + list
+            list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true), at: 0)
         }
         
         return list
     }
     
-    var isSearchActive: Bool {
+    private var serversCollection: [VPNServer] {
+        var list = [VPNServer]()
+        let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        
+        if isSearchActive {
+            list = filteredCollection.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
+        } else {
+            list = Application.shared.serverList.servers.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
+        }
+        
+        return list
+    }
+    
+    private var isSearchActive: Bool {
         return !searchBar.text!.isEmpty
     }
     
@@ -188,7 +203,14 @@ extension ServerViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.row < collection.count else { return }
         
-        let server = collection[indexPath.row]
+        var server = collection[indexPath.row]
+        
+        if (!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0) {
+            if let randomServer = serversCollection.randomElement() {
+                server = randomServer
+            }
+        }
+        
         var secondServer = Application.shared.settings.selectedExitServer
         var serverDifferentToSelectedServer = server !== Application.shared.settings.selectedServer
         
