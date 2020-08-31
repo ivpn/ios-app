@@ -208,6 +208,9 @@ extension ServerViewController {
         if (!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0) {
             if let randomServer = serversCollection.randomElement() {
                 server = randomServer
+            } else {
+                tableView.deselectRow(at: indexPath, animated: true)
+                return
             }
         }
         
