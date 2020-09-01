@@ -194,6 +194,19 @@ class VPNServerList {
         return VPNServer(gateway: "Not loaded", countryCode: "US", country: "", city: "")
     }
     
+    func getRandomServer(isExitServer: Bool) -> VPNServer {
+        var list = [VPNServer]()
+        let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        
+        list = servers.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
+        
+        if let randomServer = list.randomElement() {
+            return randomServer
+        }
+        
+        return VPNServer(gateway: "Not loaded", countryCode: "US", country: "", city: "")
+    }
+    
     func saveAllServers(exceptionGateway: String) {
         let group = Application.shared.settings.fastestServerConfiguredKey
         for server in servers {
