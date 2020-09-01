@@ -127,4 +127,14 @@ class Settings {
         }
     }
     
+    func updateRandomServer() {
+        if Application.shared.settings.selectedServer.random {
+            Application.shared.settings.selectedServer = Application.shared.serverList.getRandomServer(isExitServer: false)
+        }
+        
+        if Application.shared.settings.selectedExitServer.random {
+            Application.shared.settings.selectedExitServer = Application.shared.serverList.getRandomServer(isExitServer: true)
+        }
+    }
+    
 }
