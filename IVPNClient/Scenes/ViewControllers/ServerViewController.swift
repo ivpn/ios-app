@@ -61,11 +61,7 @@ class ServerViewController: UITableViewController {
         var list = [VPNServer]()
         let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         
-        if isSearchActive {
-            list = filteredCollection.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
-        } else {
-            list = Application.shared.serverList.servers.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
-        }
+        list = Application.shared.serverList.servers.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
         
         return list
     }
@@ -204,13 +200,13 @@ extension ServerViewController {
         guard indexPath.row < collection.count else { return }
         
         var server = collection[indexPath.row]
+        server.random = false
         
         if (!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0) {
             if let randomServer = serversCollection.randomElement() {
                 server = randomServer
-            } else {
-                tableView.deselectRow(at: indexPath, animated: true)
-                return
+                server.random = true
+                server.fastest = false
             }
         }
         
@@ -231,7 +227,7 @@ extension ServerViewController {
         if isExitServer {
             Application.shared.settings.selectedExitServer = server
         } else {
-            if UserDefaults.shared.isMultiHop || indexPath.row > 0 {
+            if UserDefaults.shared.isMultiHop || indexPath.row > 0 || server.random {
                 Application.shared.settings.selectedServer = server
                 Application.shared.settings.selectedServer.fastest = false
             } else {

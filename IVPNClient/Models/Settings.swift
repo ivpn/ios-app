@@ -93,21 +93,21 @@ class Settings {
         if let savedExitCity = UserDefaults.standard.string(forKey: "SelectedExitServerCity") {
             if let lastUsedServer = serverList.getServer(byCity: savedExitCity) {
                 selectedExitServer = lastUsedServer
-                selectedExitServer.fastest = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
+                selectedExitServer.random = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
             }
         }
         
         if let savedExitGateway = UserDefaults.standard.string(forKey: "SelectedExitServerGateway") {
             if let lastUsedServer = serverList.getServer(byGateway: savedExitGateway) {
                 selectedExitServer = lastUsedServer
-                selectedExitServer.fastest = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
+                selectedExitServer.random = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
             }
         }
         
         defaults?.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
         
         selectedServer.fastest = UserDefaults.standard.bool(forKey: "SelectedServerFastest")
-        selectedServer.fastest = UserDefaults.standard.bool(forKey: "SelectedServerRandom")
+        selectedServer.random = UserDefaults.standard.bool(forKey: "SelectedServerRandom")
         
         if let status = NEVPNStatus.init(rawValue: UserDefaults.standard.integer(forKey: "SelectedServerStatus")) {
             selectedServer.status = status

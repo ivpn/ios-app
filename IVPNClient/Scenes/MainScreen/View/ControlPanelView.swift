@@ -171,7 +171,7 @@ class ControlPanelView: UITableView {
     
     private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
         let serverViewModel = VPNServerViewModel(server: server)
-        label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
+        label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTimeForMainScreen)
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
     }
     
