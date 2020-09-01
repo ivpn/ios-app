@@ -56,7 +56,14 @@ struct VPNServerViewModel {
     }
     
     var formattedServerNameForSettings: String {
-        if server.fastest { return "Fastest server" }
+        if server.fastest {
+            return "Fastest server"
+        }
+        
+        if server.random {
+            return "Random server"
+        }
+        
         return formattedServerName
     }
     
@@ -66,6 +73,13 @@ struct VPNServerViewModel {
             image?.accessibilityIdentifier = "icon-fastest-server"
             return image
         }
+        
+        if server.random {
+            let image = UIImage(named: "icon-shuffle")
+            image?.accessibilityIdentifier = "icon-shuffle"
+            return image
+        }
+        
         return UIImage(named: server.countryCode.lowercased() + "-v")
     }
     
