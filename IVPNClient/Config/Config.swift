@@ -62,6 +62,7 @@ struct Config {
     
     static let daysBeforeDueDateNotification = 5
     static let serviceStatusRefreshMaxIntervalSeconds: TimeInterval = 60
+    static let stableVPNStatusInterval: TimeInterval = 0.85
     
     static let defaultProtocol = ConnectionSettings.ipsec
     static let supportedProtocols = [
