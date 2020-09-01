@@ -40,11 +40,17 @@ class ConnectionManager {
     var connected = false
     var settings: Settings
     var closeApp = false
+    var statusModificationDate = Date()
     
     var status: NEVPNStatus = .invalid {
         didSet {
+            statusModificationDate = Date()
             UserDefaults.shared.set(status.rawValue, forKey: UserDefaults.Key.connectionStatus)
         }
+    }
+    
+    var isStatusStable: Bool {
+        return Date().timeIntervalSince(statusModificationDate) >= Config.stableVPNStatusInterval
     }
     
     var canConnect: Bool {
