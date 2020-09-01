@@ -377,8 +377,8 @@ class SettingsViewController: UITableViewController {
         let exitServerViewModel = VPNServerViewModel(server: Application.shared.settings.selectedExitServer)
         selectedServerName.text = serverViewModel.formattedServerNameForSettings
         selectedServerFlag.image = serverViewModel.imageForCountryCodeForSettings
-        selectedExitServerName.text = exitServerViewModel.formattedServerName
-        selectedExitServerFlag.image = exitServerViewModel.imageForCountryCode
+        selectedExitServerName.text = exitServerViewModel.formattedServerNameForSettings
+        selectedExitServerFlag.image = exitServerViewModel.imageForCountryCodeForSettings
     }
     
     private func updateSelectedProtocol() {
