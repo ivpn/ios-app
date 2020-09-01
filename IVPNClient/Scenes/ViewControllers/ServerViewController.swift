@@ -229,6 +229,7 @@ extension ServerViewController {
                     }
                 }
                 Application.shared.settings.selectedServer.fastest = true
+                Application.shared.settings.selectedServer.random = false
             }
             
             if !UserDefaults.shared.isMultiHop {

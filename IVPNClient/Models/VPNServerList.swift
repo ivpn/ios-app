@@ -201,6 +201,7 @@ class VPNServerList {
         list = servers.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
         
         if let randomServer = list.randomElement() {
+            randomServer.fastest = false
             randomServer.random = true
             return randomServer
         }
