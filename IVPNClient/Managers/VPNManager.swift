@@ -342,10 +342,14 @@ class VPNManager {
                 }
                 
                 completion(newestLog)
+                return
             }
         } catch {
             completion(nil)
+            return
         }
+        
+        completion(nil)
     }
     
 }
