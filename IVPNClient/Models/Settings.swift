@@ -33,6 +33,7 @@ class Settings {
             UserDefaults.standard.set(selectedServer.gateway, forKey: "SelectedServerGateway")
             UserDefaults.standard.set(selectedServer.city, forKey: "SelectedServerCity")
             UserDefaults.standard.set(selectedServer.fastest, forKey: "SelectedServerFastest")
+            UserDefaults.standard.set(selectedServer.random, forKey: "SelectedServerRandom")
             UserDefaults.standard.synchronize()
         }
     }
@@ -41,6 +42,7 @@ class Settings {
         didSet {
             UserDefaults.standard.set(selectedExitServer.gateway, forKey: "SelectedExitServerGateway")
             UserDefaults.standard.set(selectedExitServer.city, forKey: "SelectedExitServerCity")
+            UserDefaults.standard.set(selectedExitServer.random, forKey: "SelectedExitServerRandom")
             UserDefaults.standard.synchronize()
             
             defaults?.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
@@ -91,18 +93,21 @@ class Settings {
         if let savedExitCity = UserDefaults.standard.string(forKey: "SelectedExitServerCity") {
             if let lastUsedServer = serverList.getServer(byCity: savedExitCity) {
                 selectedExitServer = lastUsedServer
+                selectedExitServer.fastest = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
             }
         }
         
         if let savedExitGateway = UserDefaults.standard.string(forKey: "SelectedExitServerGateway") {
             if let lastUsedServer = serverList.getServer(byGateway: savedExitGateway) {
                 selectedExitServer = lastUsedServer
+                selectedExitServer.fastest = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
             }
         }
         
         defaults?.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
         
         selectedServer.fastest = UserDefaults.standard.bool(forKey: "SelectedServerFastest")
+        selectedServer.fastest = UserDefaults.standard.bool(forKey: "SelectedServerRandom")
         
         if let status = NEVPNStatus.init(rawValue: UserDefaults.standard.integer(forKey: "SelectedServerStatus")) {
             selectedServer.status = status

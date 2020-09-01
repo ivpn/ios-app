@@ -45,11 +45,14 @@ class VPNServer {
         }
     }
     
+    var random = false
+    
     var fastestServerLabelShouldBePresented: Bool {
-        if fastest && pingMs == nil && status != .connected {
-            return true
-        }
-        return false
+        return fastest && pingMs == nil && status.isDisconnected()
+    }
+    
+    var randomServerLabelShouldBePresented: Bool {
+        return random && status.isDisconnected()
     }
     
     var location: CLLocation {
