@@ -54,6 +54,7 @@ class MapScrollView: UIScrollView {
     
     let markerLocalView = MapMarkerView(type: .local)
     let markerGatewayView = MapMarkerView(type: .gateway)
+    var localCoordinates: (Double, Double)?
     
     private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     private var markers: [UIButton] = []
@@ -95,6 +96,12 @@ class MapScrollView: UIScrollView {
         UIView.animate(withDuration: 0.25) {
             self.backgroundColor = color
             self.mapImageView.backgroundColor = color
+        }
+        
+        if vpnStatus == .disconnected {
+            if localCoordinates != nil {
+                markerGatewayView.hide(animated: true)
+            }
         }
     }
     
