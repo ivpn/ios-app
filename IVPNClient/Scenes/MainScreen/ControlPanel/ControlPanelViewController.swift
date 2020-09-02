@@ -301,12 +301,10 @@ class ControlPanelViewController: UITableViewController {
             NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
         }
         
-        if vpnStatus != lastVPNStatus && ((vpnStatus == .connected && UIDevice.current.userInterfaceIdiom == .pad) || vpnStatus == .disconnected) {
-            if !Application.shared.connectionManager.reconnectAutomatically {
-                DispatchQueue.delay(1) {
-                    if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable {
-                        self.reloadGeoLocation()
-                    }
+        if !Application.shared.connectionManager.reconnectAutomatically && NetworkManager.shared.isNetworkReachable && vpnStatus != lastVPNStatus && ((vpnStatus == .connected && UIDevice.current.userInterfaceIdiom == .pad) || vpnStatus == .disconnected) {
+            DispatchQueue.delay(1) {
+                if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable {
+                    self.reloadGeoLocation()
                 }
             }
         }
