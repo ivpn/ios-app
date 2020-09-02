@@ -127,6 +127,7 @@ extension ControlPanelViewController: ServerViewControllerDelegate {
                 self.needsToReconnect = true
                 Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
                 DispatchQueue.delay(0.5) {
+                    UserDefaults.shared.set(0, forKey: "LastPingTimestamp")
                     Pinger.shared.ping()
                 }
             }
