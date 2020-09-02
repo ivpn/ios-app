@@ -90,7 +90,15 @@ class ServerTableViewCell: UITableViewCell {
                 checkImage.isHidden = false
             }
             
-            if viewModel.server == selectedServer && !selectedServer.fastest {
+            if !isMultiHop && indexPath.row == 1 && selectedServer.random {
+                checkImage.isHidden = false
+            }
+            
+            if isMultiHop && indexPath.row == 0 && selectedServer.random {
+                checkImage.isHidden = false
+            }
+            
+            if viewModel.server == selectedServer && !selectedServer.fastest && !selectedServer.random {
                 checkImage.isHidden = false
             }
         }

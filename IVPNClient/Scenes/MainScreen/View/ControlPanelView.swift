@@ -130,6 +130,7 @@ class ControlPanelView: UITableView {
         connectSwitch.setOn(viewModel.connectToggleIsOn, animated: animated)
         connectSwitch.accessibilityLabel = viewModel.connectToggleIsOn ? "Switch to disconnect" : "Switch to connect"
         updateConnectSwitch()
+        updateServerNames()
     }
     
     func updateServerLabels(viewModel: VPNStatusViewModel) {
@@ -171,7 +172,7 @@ class ControlPanelView: UITableView {
     
     private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
         let serverViewModel = VPNServerViewModel(server: server)
-        label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
+        label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTimeForMainScreen)
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
     }
     

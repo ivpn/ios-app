@@ -249,6 +249,7 @@ class ControlPanelViewController: UITableViewController {
         
         DispatchQueue.delay(0.5) {
             Pinger.shared.ping()
+            Application.shared.settings.updateRandomServer()
         }
     }
     
