@@ -63,21 +63,21 @@ extension Date {
     }
     
     func formatDate() -> String {
-        let formater = DateFormatter()
-        formater.dateFormat = Date.dateFormat
-        return formater.string(from: self)
+        let formatter = DateFormatter()
+        formatter.dateFormat = Date.dateFormat
+        return formatter.string(from: self)
     }
     
     func formatDateTime() -> String {
-        let formater = DateFormatter()
-        formater.dateFormat = Date.dateTimeFormat
-        return formater.string(from: self)
+        let formatter = DateFormatter()
+        formatter.dateFormat = Date.dateTimeFormat
+        return formatter.string(from: self)
     }
     
     private static func formatted(format: String) -> String {
-        let formater = DateFormatter()
-        formater.dateFormat = format
-        return formater.string(from: Date())
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: Date())
     }
     
 }

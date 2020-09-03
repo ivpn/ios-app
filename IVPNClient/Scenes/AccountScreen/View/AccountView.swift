@@ -48,6 +48,7 @@ class AccountView: UITableView {
         statusLabel.backgroundColor = viewModel.statusColor
         subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
+        planLabel.textColor = .white
         
         switch serviceType {
         case .standard:
