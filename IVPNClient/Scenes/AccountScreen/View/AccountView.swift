@@ -53,7 +53,7 @@ class AccountView: UITableView {
         case .standard:
             break
         case .pro:
-            planLabel.text = "Go to your client area to change subscription plan"
+            planLabel.text = "Login to the website to change subscription plan"
             planLabel.font = .systemFont(ofSize: 12, weight: .regular)
             planDescriptionHeightConstraint.constant = 58
         }
