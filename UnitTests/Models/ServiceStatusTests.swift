@@ -41,7 +41,7 @@ class ServiceStatusTests: XCTestCase {
     }
     
     func test_activeUntilString() {
-        XCTAssertEqual(model.activeUntilString(), "Jan 10, 2020")
+        XCTAssertEqual(model.activeUntilString(), "10.01.2020")
     }
     
     func test_isEnabled() {
