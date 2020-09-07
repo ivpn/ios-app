@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## 2.0.0 - [Unreleased, Public beta]  
 
-[NEW] Redesigned UI  
+[NEW] New design  
 [NEW] Interactive map  
-[NEW] Control panel  
+[NEW] Switch servers, MultiHop, protocols and toggle AntiTracker directly on the main screen  
 [NEW] Dedicated account screen  
 [IMPROVED] Search and sort on the servers list  
 
