@@ -2,11 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.0.0 - [Unreleased, Public beta]  
+## 2.0.0 - 2020-09-08  
 
 [NEW] New design  
 [NEW] Interactive map  
 [NEW] Switch servers, MultiHop, protocols and toggle AntiTracker directly on the main screen  
+[NEW] Dedicated account screen  
+[IMPROVED] Search and sort on the servers list  
+
+## 2.0.0 - [Unreleased, Public beta]  
+
+[NEW] Redesigned UI  
+[NEW] Interactive map  
+[NEW] Control panel  
 [NEW] Dedicated account screen  
 [IMPROVED] Search and sort on the servers list  
 
