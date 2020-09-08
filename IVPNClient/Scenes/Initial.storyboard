@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,12 +57,12 @@ IVPN purposefully does not log any usage data associated with an account as we p
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l67-ez-3v8">
-                                                <rect key="frame" x="62.666666666666657" y="528" width="249.99999999999997" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l67-ez-3v8">
+                                                <rect key="frame" x="49.666666666666657" y="518" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnBlue"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="250" id="K24-01-hMp"/>
-                                                    <constraint firstAttribute="height" constant="40" id="cTJ-MW-sgd"/>
+                                                    <constraint firstAttribute="width" constant="276" id="K24-01-hMp"/>
+                                                    <constraint firstAttribute="height" constant="50" id="cTJ-MW-sgd"/>
                                                 </constraints>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Agree and continue">
@@ -70,7 +70,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="5"/>
+                                                        <integer key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
@@ -78,11 +78,11 @@ IVPN purposefully does not log any usage data associated with an account as we p
                                                     <action selector="agree:" destination="gfz-SF-neZ" eventType="touchUpInside" id="YYC-Fo-8VP"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOr-qA-R1R">
-                                                <rect key="frame" x="62.666666666666657" y="588" width="249.99999999999997" height="31"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOr-qA-R1R">
+                                                <rect key="frame" x="49.666666666666657" y="588" width="276" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="I2y-xc-Far"/>
-                                                    <constraint firstAttribute="width" constant="250" id="hk0-tJ-He7"/>
+                                                    <constraint firstAttribute="height" constant="40" id="I2y-xc-Far"/>
+                                                    <constraint firstAttribute="width" constant="276" id="hk0-tJ-He7"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <state key="normal" title="Decline">
@@ -104,7 +104,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                                             <constraint firstItem="l67-ez-3v8" firstAttribute="centerX" secondItem="bDc-Bm-Dfi" secondAttribute="centerX" id="KgP-jO-hkv"/>
                                             <constraint firstItem="qrM-8m-TdV" firstAttribute="leading" secondItem="bDc-Bm-Dfi" secondAttribute="leading" constant="22" id="aqh-P7-k8X"/>
                                             <constraint firstItem="vOr-qA-R1R" firstAttribute="top" secondItem="l67-ez-3v8" secondAttribute="bottom" constant="20" id="bzF-kx-5V3"/>
-                                            <constraint firstItem="l67-ez-3v8" firstAttribute="top" secondItem="aQM-2e-Rkx" secondAttribute="bottom" constant="42" id="fv4-1e-bzv"/>
+                                            <constraint firstItem="l67-ez-3v8" firstAttribute="top" secondItem="aQM-2e-Rkx" secondAttribute="bottom" constant="32" id="fv4-1e-bzv"/>
                                             <constraint firstItem="vOr-qA-R1R" firstAttribute="centerX" secondItem="bDc-Bm-Dfi" secondAttribute="centerX" id="qjA-9z-6ni"/>
                                             <constraint firstAttribute="trailing" secondItem="aQM-2e-Rkx" secondAttribute="trailing" constant="27" id="stB-qB-l3v"/>
                                             <constraint firstItem="aQM-2e-Rkx" firstAttribute="centerX" secondItem="bDc-Bm-Dfi" secondAttribute="centerX" id="v03-bb-s42"/>
@@ -171,6 +171,11 @@ IVPN purposefully does not log any usage data associated with an account as we p
             <point key="canvasLocation" x="-1694" y="819"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="aQM-2e-Rkx">
+            <size key="intrinsicContentSize" width="340" height="17"/>
+        </designable>
+    </designables>
     <resources>
         <namedColor name="ivpnBackgroundPrimary">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

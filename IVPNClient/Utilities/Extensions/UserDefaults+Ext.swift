@@ -1,9 +1,24 @@
 //
-//  UserDefaults.swift
-//  IVPN Client
+//  UserDefaults+Ext.swift
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 22/10/2018.
-//  Copyright © 2018 IVPN. All rights reserved.
+//  Created by Juraj Hilje on 2018-10-22.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import Foundation
@@ -44,6 +59,7 @@ extension UserDefaults {
         static let connectionLocation = "connectionLocation"
         static let connectionIpAddress = "connectionIpAddress"
         static let keepAlive = "keepAlive"
+        static let serversSort = "serversSort"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -154,6 +170,10 @@ extension UserDefaults {
         return bool(forKey: Key.keepAlive)
     }
     
+    @objc dynamic var serversSort: String {
+        return string(forKey: Key.serversSort) ?? ""
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [UserDefaults.Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [UserDefaults.Key.networkProtectionTrustedDisconnect: true])
@@ -162,6 +182,7 @@ extension UserDefaults {
         shared.register(defaults: [UserDefaults.Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
         shared.register(defaults: [UserDefaults.Key.wgKeyTimestamp: Date()])
         standard.register(defaults: ["SelectedServerFastest": true])
+        shared.register(defaults: [UserDefaults.Key.serversSort: ServersSort.city.rawValue])
     }
     
     static func clearSession() {

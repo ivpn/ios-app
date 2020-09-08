@@ -6,6 +6,29 @@
 //  Copyright © 2018 IVPN. All rights reserved.
 //
 
+//
+//  ConnectionManager.swift
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
+//
+//  Created by Fedir Nepyyvoda on 2018-07-20.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
+//
+
 import UIKit
 import NetworkExtension
 
@@ -17,11 +40,29 @@ class ConnectionManager {
     var connected = false
     var settings: Settings
     var closeApp = false
+    var statusModificationDate = Date()
     
     var status: NEVPNStatus = .invalid {
         didSet {
+            statusModificationDate = Date()
             UserDefaults.shared.set(status.rawValue, forKey: UserDefaults.Key.connectionStatus)
         }
+    }
+    
+    var isStatusStable: Bool {
+        return Date().timeIntervalSince(statusModificationDate) >= Config.stableVPNStatusInterval
+    }
+    
+    var canConnect: Bool {
+        let defaultTrust = StorageManager.getDefaultTrust()
+        let networkTrust = Application.shared.network.trust ?? NetworkTrust.Default.rawValue
+        let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
+        
+        if trust == NetworkTrust.Trusted.rawValue {
+            return false
+        }
+        
+        return true
     }
     
     private var authentication: Authentication
@@ -40,23 +81,23 @@ class ConnectionManager {
     func onStatusChanged(completion: @escaping (NEVPNStatus) -> Void) {
         vpnManager.onStatusChanged { _, manager, status in
             if self.status == .connecting && status == .disconnecting {
-                NotificationCenter.default.post(name: Notification.Name.ConnectError, object: nil)
+                NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
             }
             
             self.status = status
             
             if status == .connected {
                 self.connected = true
-                DispatchQueue.delay(0.25, closure: {
+                DispatchQueue.delay(0.25) {
                     guard self.connected else {
-                        NotificationCenter.default.post(name: Notification.Name.ConnectError, object: nil)
+                        NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
                         return
                     }
                     self.vpnManager.installOnDemandRules(manager: manager, status: status)
                     self.updateOpenVPNLogFile()
                     self.updateOpenVPNLocalIp()
                     self.evaluateCloseApp()
-                })
+                }
             } else {
                 self.connected = false
             }
@@ -66,9 +107,9 @@ class ConnectionManager {
             }
             
             if status == .disconnected && self.reconnectAutomatically {
-                self.reconnectAutomatically = false
                 DispatchQueue.async {
                     self.connect()
+                    self.reconnectAutomatically = false
                 }
             }
 
@@ -96,7 +137,12 @@ class ConnectionManager {
     }
     
     func removeOnDemandRules(completion: @escaping () -> Void) {
-        getStatus { tunnelType, _ in
+        getStatus { tunnelType, status in
+            guard status != .invalid else {
+                completion()
+                return
+            }
+            
             self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
                 manager.onDemandRules = [NEOnDemandRule]()
                 manager.isOnDemandEnabled = false
@@ -179,7 +225,10 @@ class ConnectionManager {
             settings: settings.connectionProtocol,
             accessDetails: accessDetails
         ) { error in
-            if error != nil { return }
+            guard error == nil else {
+                NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
+                return
+            }
             
             self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
         }
@@ -192,11 +241,11 @@ class ConnectionManager {
             self.vpnManager.disconnect(tunnelType: tunnelType, reconnectAutomatically: reconnectAutomatically)
             
             if UserDefaults.shared.networkProtectionEnabled {
-                DispatchQueue.delay(2, closure: {
+                DispatchQueue.delay(2) {
                     self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
                         self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected)
                     }
-                })
+                }
             }
         }
     }
@@ -216,10 +265,8 @@ class ConnectionManager {
     func resetRulesAndConnectShortcut(closeApp: Bool = false) {
         self.closeApp = closeApp
         getStatus { _, status in
-            guard self.canConnect(status: status) else {
-                if let mainViewController = UIApplication.topViewController() as? MainViewController {
-                    mainViewController.connectionExecute()
-                }
+            guard self.canConnect else {
+                NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
                 return
             }
             
@@ -233,7 +280,9 @@ class ConnectionManager {
         self.closeApp = closeApp
         getStatus { _, status in
             guard self.canDisconnect(status: status) else {
-                UIApplication.topViewController()?.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
+                UIApplication.topViewController()?.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"") { _ in
+                    NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
+                }
                 return
             }
             
@@ -276,16 +325,9 @@ class ConnectionManager {
         }
     }
     
-    func canConnect(status: NEVPNStatus) -> Bool {
-        let defaultTrust = StorageManager.getDefaultTrust()
-        let networkTrust = Application.shared.network.trust ?? NetworkTrust.Default.rawValue
-        let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
-        
-        if (status == .disconnected || status == .invalid) && trust == NetworkTrust.Trusted.rawValue {
-            return false
-        }
-        
-        return true
+    func needsUpdateSelectedServer() {
+        guard status.isDisconnected() else { return }
+        self.updateSelectedServer()
     }
     
     func canDisconnect(status: NEVPNStatus) -> Bool {
@@ -382,9 +424,9 @@ class ConnectionManager {
     private func evaluateCloseApp() {
         if closeApp {
             closeApp = false
-            DispatchQueue.delay(1.5, closure: {
+            DispatchQueue.delay(1.5) {
                 UIControl().sendAction(#selector(NSXPCConnection.suspend), to: UIApplication.shared, for: nil)
-            })
+            }
         }
     }
     

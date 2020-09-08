@@ -1,9 +1,24 @@
 //
 //  ServiceStatus.swift
-//  IVPNClient
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 09/08/2019.
-//  Copyright © 2019 IVPN. All rights reserved.
+//  Created by Juraj Hilje on 2019-08-09.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import Foundation
@@ -64,6 +79,7 @@ struct ServiceStatus: Codable {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
+        formatter.dateFormat = "dd.MM.yyyy"
         
         return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0)))
     }
@@ -94,6 +110,18 @@ struct ServiceStatus: Codable {
     
     static func isNewStyleAccount(username: String) -> Bool {
         return username.hasPrefix("i-")
+    }
+    
+    func daysUntilSubscriptionExpiration() -> Int {
+        let calendar = Calendar.current
+        let startDate = Date()
+        let endDate = Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0))
+        let date1 = calendar.startOfDay(for: startDate)
+        let date2 = calendar.startOfDay(for: endDate)
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
+        let diff = components.day ?? 0
+        
+        return diff > 0 ? diff : 0
     }
     
 }

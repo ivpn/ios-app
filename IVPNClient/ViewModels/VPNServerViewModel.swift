@@ -1,9 +1,24 @@
 //
 //  VPNServerViewModel.swift
-//  IVPNClient
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 28/01/2019.
-//  Copyright © 2019 IVPN. All rights reserved.
+//  Created by Juraj Hilje on 2019-01-28.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import UIKit
@@ -14,27 +29,41 @@ struct VPNServerViewModel {
     
     var server: VPNServer
     
-    var imageForPingTimeForMainScreen: UIImage? {
-        if server.pingMs == nil { return nil }
-        return UIImage(named: imageNameForPingTime)
+    var imageNameForPingTimeForMainScreen: String {
+        if server.randomServerLabelShouldBePresented {
+            return ""
+        }
+        
+        return imageNameForPingTime
     }
     
     var formattedServerNameForMainScreen: String {
-        if server.fastestServerLabelShouldBePresented { return "Fastest server" }
+        if server.randomServerLabelShouldBePresented {
+            return "Random server"
+        }
+        
         return formattedServerName
     }
     
     var imageForCountryCodeForMainScreen: UIImage? {
-        if server.fastestServerLabelShouldBePresented {
-            let image = UIImage(named: "icon-fastest-server")
-            image?.accessibilityIdentifier = "icon-fastest-server"
+        if server.randomServerLabelShouldBePresented {
+            let image = UIImage(named: "icon-shuffle")
+            image?.accessibilityIdentifier = "icon-shuffle"
             return image
         }
+        
         return UIImage(named: server.countryCode.lowercased() + "-v")
     }
     
     var formattedServerNameForSettings: String {
-        if server.fastest { return "Fastest server" }
+        if server.fastest {
+            return "Fastest server"
+        }
+        
+        if server.random {
+            return "Random server"
+        }
+        
         return formattedServerName
     }
     
@@ -44,6 +73,13 @@ struct VPNServerViewModel {
             image?.accessibilityIdentifier = "icon-fastest-server"
             return image
         }
+        
+        if server.random {
+            let image = UIImage(named: "icon-shuffle")
+            image?.accessibilityIdentifier = "icon-shuffle"
+            return image
+        }
+        
         return UIImage(named: server.countryCode.lowercased() + "-v")
     }
     

@@ -1,9 +1,24 @@
 //
 //  SettingsViewController.swift
-//  IVPN Client
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Fedir Nepyyvoda on 10/17/16.
-//  Copyright © 2016 IVPN. All rights reserved.
+//  Created by Fedir Nepyyvoda on 2016-10-17.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import Foundation
@@ -21,10 +36,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var selectedExitServerFlag: UIImageView!
     @IBOutlet weak var selectedExitServerName: UILabel!
     @IBOutlet weak var selectedProtocol: UILabel!
-    @IBOutlet weak var logOutButton: UIButton!
-    @IBOutlet weak var accountUsername: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
-    @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var multiHopSwitch: UISwitch!
     @IBOutlet weak var entryServerCell: UITableViewCell!
     @IBOutlet weak var keepAliveSwitch: UISwitch!
@@ -40,37 +52,30 @@ class SettingsViewController: UITableViewController {
     
     // MARK: - @IBActions -
     
+    @IBAction func close(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
+        navigationController?.dismiss(animated: true)
+    }
+    
     @IBAction func toggleMultiHop(_ sender: UISwitch) {
-        guard Application.shared.authentication.isLoggedIn else {
-            authenticate(self)
+        guard evaluateIsLoggedIn() else {
             DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
             }
             return
         }
         
-        guard Application.shared.serviceStatus.isActive else {
-            guard UserDefaults.shared.hasUserConsent else {
-                present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
-                DispatchQueue.delay(0.5) {
-                    sender.setOn(false, animated: true)
-                }
-                return
-            }
-            
-            present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+        guard evaluateIsServiceActive() else {
             DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
             }
             return
         }
         
-        guard Application.shared.serviceStatus.isEnabled(capability: .multihop) else {
-            if Application.shared.serviceStatus.isOnFreeTrial ?? false {
-                showAlert(title: "", message: "MultiHop is supported only on IVPN Pro plan") { _ in
-                    sender.setOn(false, animated: true)
-                }
-                return
+        guard evaluateMultiHopCapability(sender) else {
+            DispatchQueue.delay(0.5) {
+                sender.setOn(false, animated: true)
             }
             
             showActionSheet(title: "MultiHop is supported only on IVPN Pro plan", actions: ["Switch plan"], sourceView: sender) { index in
@@ -87,14 +92,14 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        if Application.shared.settings.connectionProtocol.tunnelType() != .openvpn {
-            showAlert(title: "Change protocol to OpenVPN", message: "For Multi-Hop connection you must select OpenVPN protocol.") { _ in
+        guard evaluateIsOpenVPN() else {
+            DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
             }
             return
         }
         
-        if !Application.shared.connectionManager.status.isDisconnected() {
+        guard Application.shared.connectionManager.status.isDisconnected() else {
             showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender, completion: {
                 sender.setOn(UserDefaults.shared.isMultiHop, animated: true)
                 self.tableView.reloadData()
@@ -103,20 +108,8 @@ class SettingsViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isMultiHop)
-        
-        if sender.isOn && Application.shared.settings.selectedServer.fastest {
-            let server = Application.shared.serverList.servers.first!
-            server.fastest = false
-            Application.shared.settings.selectedServer = server
-            Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
-        }
-        
-        if !sender.isOn {
-            Application.shared.settings.selectedServer.fastest = UserDefaults.standard.bool(forKey: "FastestServerPreferred")
-        }
-        
+        Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: sender.isOn)
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
-        
         tableView.reloadData()
     }
     
@@ -169,16 +162,10 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func authenticate(_ sender: Any) {
         if #available(iOS 13.0, *) {
-            present(NavigationManager.getLoginViewController(modalPresentationStyle: .automatic), animated: true, completion: nil)
+            present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
         } else {
             present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
         }
-    }
-    
-    @IBAction func copyAccountID(_ sender: UIButton) {
-        guard let text = accountUsername.text else { return }
-        UIPasteboard.general.string = text
-        showFlashNotification(message: "Account ID copied to clipboard", presentInView: (navigationController?.view)!)
     }
     
     // MARK: - View Lifecycle -
@@ -193,7 +180,6 @@ class SettingsViewController: UITableViewController {
         }
         
         updateSelectedProtocol()
-        setupLabels()
         addObservers()
         
         versionLabel.layer.cornerRadius = 4
@@ -201,7 +187,7 @@ class SettingsViewController: UITableViewController {
         
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             if let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-                versionLabel.text = "Version \(version) (\(buildNumber))"
+                versionLabel.text = "VERSION \(version) (\(buildNumber))"
             }
         } else {
             versionLabel.isHidden = true
@@ -209,6 +195,7 @@ class SettingsViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -246,7 +233,6 @@ class SettingsViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        Application.shared.connectionManager.removeStatusChangeUpdates()
         NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
     }
     
@@ -352,6 +338,7 @@ class SettingsViewController: UITableViewController {
         if needsToReconnect {
             needsToReconnect = false
             Application.shared.connectionManager.connect()
+            NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
         }
     }
     
@@ -390,8 +377,8 @@ class SettingsViewController: UITableViewController {
         let exitServerViewModel = VPNServerViewModel(server: Application.shared.settings.selectedExitServer)
         selectedServerName.text = serverViewModel.formattedServerNameForSettings
         selectedServerFlag.image = serverViewModel.imageForCountryCodeForSettings
-        selectedExitServerName.text = exitServerViewModel.formattedServerName
-        selectedExitServerFlag.image = exitServerViewModel.imageForCountryCode
+        selectedExitServerName.text = exitServerViewModel.formattedServerNameForSettings
+        selectedExitServerFlag.image = exitServerViewModel.imageForCountryCodeForSettings
     }
     
     private func updateSelectedProtocol() {
@@ -404,32 +391,35 @@ class SettingsViewController: UITableViewController {
     }
     
     private func sendLogs() {
-        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else {
-            showAlert(title: "Error", message: "You need to authenticate and have an active subscription to use this feature.")
+        guard evaluateIsLoggedIn() else {
             return
         }
         
-        if MFMailComposeViewController.canSendMail() {
-            Application.shared.connectionManager.getOpenVPNLog { log in
-                FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-                
-                let composer = MFMailComposeViewController()
-                composer.mailComposeDelegate = self
-                composer.setToRecipients([Config.contactSupportMail])
-                
-                let file = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                if let fileData = NSData(contentsOfFile: file) {
-                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName()).txt")
-                }
-                
-                self.present(composer, animated: true, completion: nil)
+        guard evaluateMailCompose() else {
+            return
+        }
+        
+        Application.shared.connectionManager.getOpenVPNLog { log in
+            FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+            
+            let composer = MFMailComposeViewController()
+            composer.mailComposeDelegate = self
+            composer.setToRecipients([Config.contactSupportMail])
+            
+            let file = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
+            if let fileData = NSData(contentsOfFile: file) {
+                composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName()).txt")
             }
-        } else {
-            showAlert(title: "Cannot send e-mail", message: "Your device cannot send e-mail. Please check e-mail configuration and try again.")
+            
+            self.present(composer, animated: true, completion: nil)
         }
     }
     
     private func contactSupport() {
+        guard evaluateMailCompose() else {
+            return
+        }
+        
         if let url = URL(string: Config.contactSupportPage) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
@@ -441,12 +431,6 @@ class SettingsViewController: UITableViewController {
                 self.tableView.deselectRow(at: indexPath, animated: true)
             }
         }
-    }
-    
-    private func setupLabels() {
-        accountUsername.text = Application.shared.authentication.getStoredUsername()
-        subscriptionLabel.text = Application.shared.serviceStatus.getSubscriptionText()
-        logOutButton.setTitle(Application.shared.authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up", for: .normal)
     }
     
 }
@@ -462,13 +446,6 @@ extension SettingsViewController {
         if indexPath.section == 2 && indexPath.row == 2 { return 60 }
         if indexPath.section == 2 && indexPath.row == 5 { return 60 }
         if indexPath.section == 2 && indexPath.row == 6 && !loggingSwitch.isOn { return 0 }
-        if indexPath.section == 4 && indexPath.row == 0 && Application.shared.authentication.getStoredUsername().isEmpty { return 0 }
-        if indexPath.section == 4 && indexPath.row == 0 { return 60 }
-        if indexPath.section == 4 && indexPath.row == 1 && !Application.shared.authentication.isLoggedIn { return 0 }
-        if indexPath.section == 4 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 4 && indexPath.row == 2 && !Application.shared.showSubscriptionAction { return 0 }
-        // if indexPath.section == 4 && indexPath.row == 3 && !Application.shared.showSubscriptionAction { return 0 }
-        if indexPath.section == 4 && indexPath.row == 3 { return 0 }
         
         return UITableView.automaticDimension
     }
@@ -497,10 +474,12 @@ extension SettingsViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
-        
-        setupLabels()
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
 }
@@ -515,47 +494,6 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
     
 }
 
-// MARK: - SessionManagerDelegate -
-
-extension SettingsViewController {
-    
-    override func deleteSessionStart() {
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        hud.detailTextLabel.text = "Removing session from IVPN server..."
-        hud.show(in: (navigationController?.view)!)
-    }
-    
-    override func deleteSessionSuccess() {
-        hud.delegate = self
-        hud.dismiss()
-    }
-    
-    override func deleteSessionFailure() {
-        hud.delegate = self
-        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        hud.detailTextLabel.text = "There was an error with removing session"
-        hud.show(in: (navigationController?.view)!)
-        hud.dismiss(afterDelay: 2)
-    }
-    
-    override func deleteSessionSkip() {
-        tableView.reloadData()
-        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
-    }
-    
-}
-
-// MARK: - JGProgressHUDDelegate -
-
-extension SettingsViewController: JGProgressHUDDelegate {
-    
-    func progressHUD(_ progressHUD: JGProgressHUD, didDismissFrom view: UIView) {
-        tableView.reloadData()
-        showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out")
-    }
-    
-}
-
 // MARK: - ServerViewControllerDelegate -
 
 extension SettingsViewController: ServerViewControllerDelegate {
@@ -564,7 +502,10 @@ extension SettingsViewController: ServerViewControllerDelegate {
         Application.shared.connectionManager.getStatus { _, status in
             if status == .connected {
                 self.needsToReconnect = true
-                self.disconnect()
+                Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
+                DispatchQueue.delay(0.5) {
+                    Pinger.shared.ping()
+                }
             }
         }
     }

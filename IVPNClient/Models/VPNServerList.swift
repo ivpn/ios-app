@@ -1,14 +1,30 @@
 //
 //  VPNServers.swift
-//  IVPN Client
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Fedir Nepyyvoda on 10/15/16.
-//  Copyright © 2016 IVPN. All rights reserved.
+//  Created by Fedir Nepyyvoda on 2016-10-15.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import Foundation
 import CoreData
 import UIKit
+import CoreLocation
 
 class VPNServerList {
     
@@ -178,12 +194,51 @@ class VPNServerList {
         return VPNServer(gateway: "Not loaded", countryCode: "US", country: "", city: "")
     }
     
+    func getRandomServer(isExitServer: Bool) -> VPNServer {
+        var list = [VPNServer]()
+        let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        
+        list = servers.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
+        
+        if let randomServer = list.randomElement() {
+            randomServer.fastest = false
+            randomServer.random = true
+            return randomServer
+        }
+        
+        return VPNServer(gateway: "Not loaded", countryCode: "US", country: "", city: "")
+    }
+    
     func saveAllServers(exceptionGateway: String) {
         let group = Application.shared.settings.fastestServerConfiguredKey
         for server in servers {
             let isFastestEnabled = server.gateway != exceptionGateway
             StorageManager.saveServer(gateway: server.gateway, group: group, isFastestEnabled: isFastestEnabled)
         }
+    }
+    
+    func sortServers() {
+        servers = VPNServerList.sort(servers)
+    }
+    
+    static func sort(_ servers: [VPNServer]) -> [VPNServer] {
+        let sort = ServersSort.init(rawValue: UserDefaults.shared.serversSort)
+        var servers = servers
+        
+        switch sort {
+        case .country:
+            servers.sort { $0.countryCode == $1.countryCode ? $0.city < $1.city : $0.countryCode < $1.countryCode }
+        case .latency:
+            servers.sort { $0.pingMs ?? 5000 < $1.pingMs ?? 5000 }
+        case .proximity:
+            let geoLookup = Application.shared.geoLookup
+            let location = CLLocation(latitude: geoLookup.latitude, longitude: geoLookup.longitude)
+            servers.sort { $0.distance(to: location) < $1.distance(to: location) }
+        default:
+            servers.sort { $0.city < $1.city }
+        }
+        
+        return servers
     }
     
     private func createServersFromLoadedJSON(_ serversList: [[String: Any]]) {
@@ -220,6 +275,8 @@ class VPNServerList {
                 countryCode: server["country_code"] as? String ?? "",
                 country: server["country"] as? String ?? "",
                 city: server["city"] as? String ?? "",
+                latitude: server["latitude"] as? Double ?? 0,
+                longitude: server["longitude"] as? Double ?? 0,
                 ipAddresses: serverIpList,
                 hosts: serverHostsList
             )
@@ -227,7 +284,9 @@ class VPNServerList {
             servers.append(newServer)
         }
         
-        servers.sort { $0.countryCode == $1.countryCode ? $0.city < $1.city : $0.countryCode < $1.countryCode }
+        DispatchQueue.async {
+            self.sortServers()
+        }
     }
     
 }

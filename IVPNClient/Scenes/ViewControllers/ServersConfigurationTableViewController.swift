@@ -1,9 +1,24 @@
 //
 //  ServersConfigurationTableViewController.swift
-//  IVPNClient
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 19/02/2019.
-//  Copyright © 2019 IVPN. All rights reserved.
+//  Created by Juraj Hilje on 2019-02-19.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import UIKit
@@ -18,7 +33,6 @@ class ServersConfigurationTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Configure"
     }
     
 }
@@ -27,12 +41,7 @@ class ServersConfigurationTableViewController: UITableViewController {
 
 extension ServersConfigurationTableViewController {
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 { return 0 }
         return collection.count
     }
     
@@ -45,16 +54,6 @@ extension ServersConfigurationTableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 { return "Fastest Server Settings" }
-        return ""
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if section == 0 { return "Disable servers you do not want to be chosen as the fastest server" }
-        return ""
-    }
-    
 }
 
 // MARK: - UITableViewDelegate -
@@ -63,13 +62,13 @@ extension ServersConfigurationTableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
     }
     
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         if let footer = view as? UITableViewHeaderFooterView {
-            footer.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
     }
     

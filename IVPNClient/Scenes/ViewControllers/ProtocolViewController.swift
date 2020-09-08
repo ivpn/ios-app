@@ -1,9 +1,24 @@
 //
 //  ProtocolViewController.swift
-//  IVPN Client
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Fedir Nepyyvoda on 7/16/18.
-//  Copyright © 2018 IVPN. All rights reserved.
+//  Created by Fedir Nepyyvoda on 2018-07-16.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import UIKit
@@ -21,8 +36,10 @@ class ProtocolViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         keyManager.delegate = self
         updateCollection(connectionProtocol: Application.shared.settings.connectionProtocol)
+        initNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +48,12 @@ class ProtocolViewController: UITableViewController {
     }
     
     // MARK: - Methods -
+    
+    private func initNavigationBar() {
+        if isPresentedModally {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController(_:)))
+        }
+    }
     
     func updateCollection(connectionProtocol: ConnectionSettings) {
         collection.removeAll()
@@ -84,6 +107,7 @@ class ProtocolViewController: UITableViewController {
             guard index > -1 else { return }
             Application.shared.settings.connectionProtocol = protocols[index]
             self.tableView.reloadData()
+            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
         }
     }
     
@@ -114,9 +138,9 @@ extension ProtocolViewController {
         cell.setup(connectionProtocol: connectionProtocol, isSettings: indexPath.section > 0)
         
         if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) {
-            cell.protocolLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabel6)
         } else {
-            cell.protocolLabel.textColor = UIColor.init(named: Theme.Key.ivpnLabelPrimary)
+            cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         }
         
         return cell
@@ -174,7 +198,9 @@ extension ProtocolViewController {
                 showActionSheet(title: "To use this protocol you must turn Multi-Hop off", actions: ["Turn off"], sourceView: cell as UIView) { index in
                     switch index {
                     case 0:
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isMultiHop)
                         NotificationCenter.default.post(name: Notification.Name.TurnOffMultiHop, object: nil)
+                        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
                         tableView.reloadData()
                     default:
                         break
@@ -193,6 +219,7 @@ extension ProtocolViewController {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
+                        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
                         tableView.reloadData()
                     default:
                         break
@@ -210,6 +237,7 @@ extension ProtocolViewController {
                     switch index {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
+                        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
                         tableView.reloadData()
                     default:
                         break
@@ -246,6 +274,8 @@ extension ProtocolViewController {
         }
         
         reloadTable(connectionProtocol: connectionProtocol)
+        
+        NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -256,14 +286,18 @@ extension ProtocolViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
     }
     
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         if let footer = view as? UITableViewHeaderFooterView {
-            footer.textLabel?.textColor = UIColor.init(named: Theme.Key.ivpnLabel6)
+            footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
 }
@@ -282,8 +316,8 @@ extension ProtocolViewController {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.detailTextLabel.text = "WireGuard keys successfully generated and uploaded to IVPN server."
         hud.dismiss(afterDelay: 2)
-        
         reloadTable(connectionProtocol: ConnectionSettings.wireguard(.udp, 2049))
+        NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     override func setKeyFail() {

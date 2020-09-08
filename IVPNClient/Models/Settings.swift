@@ -1,9 +1,24 @@
 //
 //  Settings.swift
-//  IVPN Client
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Fedir Nepyyvoda on 7/20/18.
-//  Copyright © 2018 IVPN. All rights reserved.
+//  Created by Fedir Nepyyvoda on 2018-07-20.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import Foundation
@@ -18,6 +33,7 @@ class Settings {
             UserDefaults.standard.set(selectedServer.gateway, forKey: "SelectedServerGateway")
             UserDefaults.standard.set(selectedServer.city, forKey: "SelectedServerCity")
             UserDefaults.standard.set(selectedServer.fastest, forKey: "SelectedServerFastest")
+            UserDefaults.standard.set(selectedServer.random, forKey: "SelectedServerRandom")
             UserDefaults.standard.synchronize()
         }
     }
@@ -26,6 +42,7 @@ class Settings {
         didSet {
             UserDefaults.standard.set(selectedExitServer.gateway, forKey: "SelectedExitServerGateway")
             UserDefaults.standard.set(selectedExitServer.city, forKey: "SelectedExitServerCity")
+            UserDefaults.standard.set(selectedExitServer.random, forKey: "SelectedExitServerRandom")
             UserDefaults.standard.synchronize()
             
             defaults?.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
@@ -76,21 +93,47 @@ class Settings {
         if let savedExitCity = UserDefaults.standard.string(forKey: "SelectedExitServerCity") {
             if let lastUsedServer = serverList.getServer(byCity: savedExitCity) {
                 selectedExitServer = lastUsedServer
+                selectedExitServer.random = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
             }
         }
         
         if let savedExitGateway = UserDefaults.standard.string(forKey: "SelectedExitServerGateway") {
             if let lastUsedServer = serverList.getServer(byGateway: savedExitGateway) {
                 selectedExitServer = lastUsedServer
+                selectedExitServer.random = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
             }
         }
         
         defaults?.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
         
         selectedServer.fastest = UserDefaults.standard.bool(forKey: "SelectedServerFastest")
+        selectedServer.random = UserDefaults.standard.bool(forKey: "SelectedServerRandom")
         
         if let status = NEVPNStatus.init(rawValue: UserDefaults.standard.integer(forKey: "SelectedServerStatus")) {
             selectedServer.status = status
+        }
+    }
+    
+    func updateSelectedServerForMultiHop(isEnabled: Bool) {
+        if isEnabled && Application.shared.settings.selectedServer.fastest {
+            let server = Application.shared.serverList.servers.first!
+            server.fastest = false
+            Application.shared.settings.selectedServer = server
+            Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
+        }
+        
+        if !isEnabled {
+            Application.shared.settings.selectedServer.fastest = UserDefaults.standard.bool(forKey: "FastestServerPreferred")
+        }
+    }
+    
+    func updateRandomServer() {
+        if Application.shared.settings.selectedServer.random {
+            Application.shared.settings.selectedServer = Application.shared.serverList.getRandomServer(isExitServer: false)
+        }
+        
+        if Application.shared.settings.selectedExitServer.random {
+            Application.shared.settings.selectedExitServer = Application.shared.serverList.getRandomServer(isExitServer: true)
         }
     }
     

@@ -1,9 +1,24 @@
 //
 //  AppDelegate.swift
-//  IVPN Client
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Fedir Nepyyvoda on 9/29/16.
-//  Copyright © 2016 IVPN. All rights reserved.
+//  Created by Fedir Nepyyvoda on 2016-09-29.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import UIKit
@@ -18,12 +33,6 @@ class AppDelegate: UIResponder {
     var window: UIWindow?
     
     // MARK: - Methods -
-    
-    private func setRootViewController() {
-        if let window = window {
-            window.rootViewController = NavigationManager.getMainViewController()
-        }
-    }
     
     private func evaluateFirstRun() {
         if UserDefaults.standard.object(forKey: "FirstInstall") == nil {
@@ -47,17 +56,6 @@ class AppDelegate: UIResponder {
             log(info: "Sentry crash handler started successfully")
         } catch let error {
             log(error: "\(error)")
-        }
-    }
-    
-    private func loadServerList() {
-        ApiService.shared.getServersList(storeInCache: true) { result in
-            switch result {
-            case .success(let serverList):
-                Application.shared.serverList = serverList
-            default:
-                break
-            }
         }
     }
     
@@ -119,25 +117,25 @@ class AppDelegate: UIResponder {
         
         switch endpoint {
         case Config.urlTypeConnect:
-            DispatchQueue.delay(0.75, closure: {
+            DispatchQueue.delay(0.75) {
                 if UserDefaults.shared.networkProtectionEnabled {
                     Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true)
                     return
                 }
                 Application.shared.connectionManager.connectShortcut(closeApp: true)
-            })
+            }
         case Config.urlTypeDisconnect:
-            DispatchQueue.delay(0.75, closure: {
+            DispatchQueue.delay(0.75) {
                 if UserDefaults.shared.networkProtectionEnabled {
                     Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true)
                     return
                 }
                 Application.shared.connectionManager.disconnectShortcut(closeApp: true)
-            })
+            }
         case Config.urlTypeLogin:
             if let topViewController = UIApplication.topViewController() {
                 if #available(iOS 13.0, *) {
-                    topViewController.present(NavigationManager.getLoginViewController(modalPresentationStyle: .automatic), animated: true, completion: nil)
+                    topViewController.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
                 } else {
                     topViewController.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
                 }
@@ -160,7 +158,6 @@ extension AppDelegate: UIApplicationDelegate {
         evaluateUITests()
         evaluateFirstRun()
         registerUserDefaults()
-        setRootViewController()
         finishIncompletePurchases()
         createLogFiles()
         resetLastPingTimestamp()
@@ -170,7 +167,9 @@ extension AppDelegate: UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         if let mainViewController = UIApplication.topViewController() as? MainViewController {
-            mainViewController.refreshServiceStatus()
+            if let controlPanelViewController = mainViewController.floatingPanel.contentViewController as? ControlPanelViewController {
+                controlPanelViewController.refreshServiceStatus()
+            }
         }
         
         if UserDefaults.shared.networkProtectionEnabled {
@@ -180,6 +179,10 @@ extension AppDelegate: UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         NetworkManager.shared.stopMonitoring()
+        
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
+            topViewController.refreshUI()
+        }
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {

@@ -1,9 +1,24 @@
 //
-//  Date.swift
-//  IVPN Client
+//  Date+Ext.swift
+//  IVPN iOS app
+//  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 09/10/2018.
-//  Copyright © 2018 IVPN. All rights reserved.
+//  Created by Juraj Hilje on 2018-10-09.
+//  Copyright (c) 2020 Privatus Limited.
+//
+//  This file is part of the IVPN iOS app.
+//
+//  The IVPN iOS app is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The IVPN iOS app is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
 import Foundation
@@ -48,21 +63,21 @@ extension Date {
     }
     
     func formatDate() -> String {
-        let formater = DateFormatter()
-        formater.dateFormat = Date.dateFormat
-        return formater.string(from: self)
+        let formatter = DateFormatter()
+        formatter.dateFormat = Date.dateFormat
+        return formatter.string(from: self)
     }
     
     func formatDateTime() -> String {
-        let formater = DateFormatter()
-        formater.dateFormat = Date.dateTimeFormat
-        return formater.string(from: self)
+        let formatter = DateFormatter()
+        formatter.dateFormat = Date.dateTimeFormat
+        return formatter.string(from: self)
     }
     
     private static func formatted(format: String) -> String {
-        let formater = DateFormatter()
-        formater.dateFormat = format
-        return formater.string(from: Date())
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: Date())
     }
     
 }

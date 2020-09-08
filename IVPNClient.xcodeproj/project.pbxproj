@@ -9,11 +9,10 @@
 /* Begin PBXBuildFile section */
 		08DDD46C7843193A0C8A9F4D /* Pods_openvpn_tunnel_provider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042B1F5A4F38CCA3591AD441 /* Pods_openvpn_tunnel_provider.framework */; };
 		62FD760D711D4A4507FAFE24 /* Pods_wireguard_tunnel_provider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58126B967EB9B059871FD7AB /* Pods_wireguard_tunnel_provider.framework */; };
+		820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */; };
 		8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */; };
 		8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5032356536B008C83DB /* UpgradePlanViewController.swift */; };
 		820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */; };
-		8202CF2624487FAB00463FC4 /* SelectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8202CF2524487FAB00463FC4 /* SelectPlanView.swift */; };
-		8202CF282448840900463FC4 /* PlanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8202CF272448840900463FC4 /* PlanLabel.swift */; };
 		820535282302B9D7007BDD58 /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
 		820535292302BE8F007BDD58 /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
 		8205352A2302BEA3007BDD58 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
@@ -24,6 +23,12 @@
 		82061F67238D2730009DDF4D /* PingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82061F63238D2730009DDF4D /* PingManager.swift */; };
 		8206E5D022967E37003119AF /* UserActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5CF22967E37003119AF /* UserActivityType.swift */; };
 		8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5D122967EAF003119AF /* UserActivityTitle.swift */; };
+		8206F32124347A8F0056B465 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32024347A8F0056B465 /* MainView.swift */; };
+		8206F32324367A240056B465 /* VPNErrorObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32224367A240056B465 /* VPNErrorObserver.swift */; };
+		8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */; };
+		8208525823FD5EB20008C112 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525723FD5EB20008C112 /* MainViewController.swift */; };
+		8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */; };
+		8208525C23FD64160008C112 /* MainViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525B23FD64160008C112 /* MainViewController+Ext.swift */; };
 		820EA86823223F7900E16B2D /* InterfaceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EA86723223F7900E16B2D /* InterfaceResult.swift */; };
 		820EA8692322406000E16B2D /* InterfaceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EA86723223F7900E16B2D /* InterfaceResult.swift */; };
 		820EA86B232242F800E16B2D /* ApiRequestDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429BA22FC36100056B8FF /* ApiRequestDI.swift */; };
@@ -35,6 +40,7 @@
 		821AFA1323602B71001EF617 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821AFA1223602B71001EF617 /* SettingsScreenTests.swift */; };
 		821BDE02224A6EC700F592BF /* AppKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
+		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
 		8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */; };
 		82234B6721BA7F3500B082DE /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82234B6621BA7F3500B082DE /* Logging.swift */; };
 		82234B6A21BA7F5400B082DE /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82234B6621BA7F3500B082DE /* Logging.swift */; };
@@ -50,12 +56,21 @@
 		8223C54E22EAE93F00CD283D /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54D22EAE93F00CD283D /* SessionManager.swift */; };
 		8223C54F22EAEC7000CD283D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54B22E9E93A00CD283D /* Session.swift */; };
 		8223C55022EAEC7100CD283D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54B22E9E93A00CD283D /* Session.swift */; };
+		822563922431E03A00AE7F8D /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822563912431E03A00AE7F8D /* AccountView.swift */; };
 		8229196E2182EB1C00978BBA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229196D2182EB1B00978BBA /* String+Ext.swift */; };
 		822919712182EB1C00978BBA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229196D2182EB1B00978BBA /* String+Ext.swift */; };
+		822920A02480FA3600476FC1 /* ServersSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229209F2480FA3600476FC1 /* ServersSort.swift */; };
+		822920A12480FC2700476FC1 /* ServersSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229209F2480FA3600476FC1 /* ServersSort.swift */; };
+		822920A22480FC2800476FC1 /* ServersSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229209F2480FA3600476FC1 /* ServersSort.swift */; };
+		822920A32480FC2800476FC1 /* ServersSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229209F2480FA3600476FC1 /* ServersSort.swift */; };
 		822B85D921B941A200715691 /* NotificationName+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822B85D821B941A200715691 /* NotificationName+Ext.swift */; };
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF52240E40F006B81D2 /* Error+Ext.swift */; };
+		82351FCA241FA16600E6E0FD /* InfoAlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */; };
+		82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */; };
+		82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */; };
+		82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */; };
 		823BD9E3231D4C8E002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823BD9E4231D4C8F002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823DA733215E3CCB00DAFE37 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
@@ -67,10 +82,11 @@
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1D922686217006C0C08 /* IAPManager.swift */; };
 		8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */; };
+		824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */; };
 		824F56082233FE6F00BCDD5C /* libwg-go.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 824F56072233FE6F00BCDD5C /* libwg-go.a */; };
+		82526BEF24123D2900E00880 /* NetworkViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */; };
 		8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8252747D21F1F80400D4B8B5 /* ServerViewController.swift */; };
 		82555005220ACAAF004763A7 /* VPNServersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82555004220ACAAF004763A7 /* VPNServersTests.swift */; };
-		8258649F2237A63C0081DC4B /* ConnectionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8258649E2237A63C0081DC4B /* ConnectionInfoView.swift */; };
 		82589A2B21FB5A580009CC6C /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */; };
 		825D4EC9224A46F0002E7378 /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */; };
 		825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53922325709006C4F14 /* ApiManager.swift */; };
@@ -84,6 +100,9 @@
 		826C56D322FD551800D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826C56D422FD551900D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826D182921D3DAFF0045A570 /* StorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826D182821D3DAFF0045A570 /* StorageManagerTests.swift */; };
+		826E61482428F8E60064F195 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E61472428F8E60064F195 /* AccountViewController.swift */; };
+		826E614A242A1CA80064F195 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E6149242A1CA80064F195 /* AccountViewModel.swift */; };
+		826E614C242A61380064F195 /* AccountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E614B242A61380064F195 /* AccountViewModelTests.swift */; };
 		826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */; };
 		826F7F1323A7A05F00777DB9 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 826F7F1223A7A05F00777DB9 /* NotificationCenter.framework */; };
 		826F7F1623A7A05F00777DB9 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F1523A7A05F00777DB9 /* TodayViewController.swift */; };
@@ -119,20 +138,23 @@
 		826F7F4F23A7B4CD00777DB9 /* today-extension-staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 826F7F4B23A7B4CD00777DB9 /* today-extension-staging.xcconfig */; };
 		826FBDA32461847D00B9E464 /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826FBDA22461847D00B9E464 /* ServiceType.swift */; };
 		826FBDA52461848A00B9E464 /* ServiceDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826FBDA42461848A00B9E464 /* ServiceDuration.swift */; };
-		826FBDA724618ACA00B9E464 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826FBDA624618ACA00B9E464 /* UIButton+Ext.swift */; };
 		8270753622AFC5B90067C323 /* StringProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */; };
 		8270753722AFC7E70067C323 /* StringProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */; };
+		8270D266241A477900B17B65 /* InfoAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270D265241A477900B17B65 /* InfoAlertView.swift */; };
+		8270D268241BB3D100B17B65 /* InfoAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270D267241BB3D000B17B65 /* InfoAlertViewModel.swift */; };
 		82712DB922314AB100833445 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82712DB822314AB100833445 /* TimerManager.swift */; };
 		82774855237596DF0061BD46 /* OpenVPNConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82774854237596DF0061BD46 /* OpenVPNConf.swift */; };
 		8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */; };
 		8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CE2211A602007C6F15 /* GeoLookup.swift */; };
 		827855B92472B27F00B3B6BD /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827855B82472B27F00B3B6BD /* Account.swift */; };
 		8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */; };
+		8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */; };
 		828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F6221C008100D5E330 /* ServerConfigurationCell.swift */; };
 		828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */; };
 		828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772FA221C28E000D5E330 /* FlagImageView.swift */; };
 		828E9C95231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
+		8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8290195E243CB27500777B6E /* ControlPanelView.swift */; };
 		8292E19B21748B0500123538 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8292E1A72174C10700123538 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A62174C10700123538 /* Peer.swift */; };
 		8292E1A92174C11600123538 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A82174C11600123538 /* Interface.swift */; };
@@ -144,10 +166,19 @@
 		82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82989FDD2188981900F7EBE0 /* AppKeyManager.swift */; };
 		829AA4732267372A00037198 /* Designable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AA4722267372A00037198 /* Designable+Ext.swift */; };
 		829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829D2C8121664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift */; };
+		829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27B2497949A000DC2DB /* PlanLabel.swift */; };
+		829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27C2497949A000DC2DB /* SelectPlanView.swift */; };
+		829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF2812497953C000DC2DB /* UIButton+Ext.swift */; };
 		82A160BA221C4E2000730577 /* Server+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A160B8221C4E2000730577 /* Server+CoreDataClass.swift */; };
 		82A160BB221C4E2000730577 /* Server+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A160B9221C4E2000730577 /* Server+CoreDataProperties.swift */; };
 		82A208C121BAAC6C00C9AD44 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
 		82A208C221BAAC6C00C9AD44 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
+		82A3422324AB660C00761AB0 /* ApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422224AB660C00761AB0 /* ApplicationTests.swift */; };
+		82A3422524AB6AF700761AB0 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422424AB6AF700761AB0 /* Double+Ext.swift */; };
+		82A3422724AB6CA500761AB0 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422624AB6CA500761AB0 /* DoubleTests.swift */; };
+		82A3422924AB799600761AB0 /* ProofsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422824AB799600761AB0 /* ProofsViewModelTests.swift */; };
+		82A3422B24AB7F8600761AB0 /* VPNServerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3422A24AB7F8600761AB0 /* VPNServerViewModelTests.swift */; };
+		82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */; };
 		82A7F10523C8661B0015A357 /* ServiceStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */; };
 		82A9E8C523471EBE007BCA7E /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82A9E8C323471EBE007BCA7E /* release.xcconfig */; };
 		82A9E8C623471EBE007BCA7E /* staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82A9E8C423471EBE007BCA7E /* staging.xcconfig */; };
@@ -167,12 +198,13 @@
 		82BA8AC122E5DC93004E8D8D /* NETunnelProviderProtocol+ExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA8AC022E5DC93004E8D8D /* NETunnelProviderProtocol+ExtTests.swift */; };
 		82BBF25921AC799A00589766 /* NetworkProtectionRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF25821AC799A00589766 /* NetworkProtectionRulesViewController.swift */; };
 		82BBF26121AD213500589766 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26021AD213500589766 /* Theme.swift */; };
-		82BBF26521AD3FB800589766 /* NetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26421AD3FB800589766 /* NetworkView.swift */; };
 		82BBF26921AE802400589766 /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */; };
 		82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */; };
 		82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF27021AECC8100589766 /* UILabel+Ext.swift */; };
 		82BF32F624484E5100248E4F /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BF32F524484E5100248E4F /* CreateAccountView.swift */; };
 		82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */; };
+		82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BB23FE78570059A915 /* MapScrollView.swift */; };
+		82C1D5BF23FE8C6D0059A915 /* ControlPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */; };
 		82C215EC23992F6900E639F8 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */; };
 		82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293BE21CCD49A000B74EC /* NavigationController.swift */; };
 		82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293C221CCDA42000B74EC /* UIColor+Ext.swift */; };
@@ -181,7 +213,6 @@
 		82D598A321A55210000FABDE /* NetworkProtectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */; };
 		82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */; };
 		82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */; };
-		82D598B021A58CAD000FABDE /* NetworkTrustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598AF21A58CAD000FABDE /* NetworkTrustViewController.swift */; };
 		82D598B421A5A7A3000FABDE /* NetworkTrust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598B321A5A7A3000FABDE /* NetworkTrust.swift */; };
 		82D598BC21A6949F000FABDE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598BB21A6949F000FABDE /* StorageManager.swift */; };
 		82D598C021A6991B000FABDE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598BF21A6991B000FABDE /* NetworkManager.swift */; };
@@ -202,8 +233,10 @@
 		82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */; };
 		82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */; };
 		82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0292447288100CCB5CD /* PaymentViewController.swift */; };
+		82DEFFA62452DE5100ECB482 /* MapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEFFA52452DE5100ECB482 /* MapConstants.swift */; };
 		82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */; };
 		82E4FCB023D71FDF00BEBA1A /* UIApplication+ExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */; };
+		82E5449224EE584E006DEF8D /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */; };
 		82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
 		82E716812181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
 		82E716822181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
@@ -253,23 +286,12 @@
 		9C2833741D9D3EB60024C553 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C2833731D9D3EB60024C553 /* Initial.storyboard */; };
 		9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833751D9D3F060024C553 /* LoginViewController.swift */; };
 		9C28337E1D9D3F060024C553 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
-		9C2833821D9D3F2D0024C553 /* PromotionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833811D9D3F2D0024C553 /* PromotionsDataSource.swift */; };
 		9C28338A1D9D41A60024C553 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833891D9D41A60024C553 /* ApiService.swift */; };
 		9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3031251DB3B6E700C38B0C /* ServersUpdateResult.swift */; };
 		9C3031301DB41FBA00C38B0C /* ServerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C30312F1DB41FBA00C38B0C /* ServerTableViewCell.swift */; };
 		9C3031351DB42EF900C38B0C /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3031341DB42EF900C38B0C /* Application.swift */; };
 		9C3031371DB4307D00C38B0C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3031361DB4307D00C38B0C /* SettingsViewController.swift */; };
 		9C3324F31DB37724003885C3 /* VPNServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3324F21DB37724003885C3 /* VPNServer.swift */; };
-		9C454EAD1E081DF700BD2AFA /* CircleInactiveLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EA91E081DF700BD2AFA /* CircleInactiveLayer.swift */; };
-		9C454EAE1E081DF700BD2AFA /* ImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EAA1E081DF700BD2AFA /* ImageLayer.swift */; };
-		9C454EAF1E081DF700BD2AFA /* CircleConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EAB1E081DF700BD2AFA /* CircleConnected.swift */; };
-		9C454EB01E081DF700BD2AFA /* CircleProgressLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EAC1E081DF700BD2AFA /* CircleProgressLayer.swift */; };
-		9C454EB31E081E0000BD2AFA /* ConnectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EB11E081E0000BD2AFA /* ConnectButton.swift */; };
-		9C454EB41E081E0000BD2AFA /* ConnectButtonParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EB21E081E0000BD2AFA /* ConnectButtonParameters.swift */; };
-		9C454EB61E0864AE00BD2AFA /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EB51E0864AE00BD2AFA /* WaveView.swift */; };
-		9C454EB91E0869B400BD2AFA /* WaveLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EB81E0869B400BD2AFA /* WaveLayer.swift */; };
-		9C454EBB1E08862E00BD2AFA /* CircleWaveLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EBA1E08862E00BD2AFA /* CircleWaveLayer.swift */; };
-		9C454EBE1E096F4100BD2AFA /* PrivacyPromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454EBD1E096F4100BD2AFA /* PrivacyPromoViewController.swift */; };
 		9C50959620FCF4C60048DBF2 /* ProtocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C50959520FCF4C60048DBF2 /* ProtocolViewController.swift */; };
 		9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C50959920FCF6850048DBF2 /* ProtocolTableViewCell.swift */; };
 		9C51340A1DE8398400423551 /* Pinger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5134091DE8398400423551 /* Pinger.swift */; };
@@ -291,7 +313,6 @@
 		9CC29DF01E1560990080F799 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC29DEF1E1560990080F799 /* StoreKit.framework */; };
 		9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC29DF71E1D59E90080F799 /* Alerts+Ext.swift */; };
 		9CDDD5AF1D9D2F9F00D39924 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDDD5AE1D9D2F9F00D39924 /* AppDelegate.swift */; };
-		9CDDD5B11D9D2F9F00D39924 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B01D9D2F9F00D39924 /* MainViewController.swift */; };
 		9CDDD5B41D9D2F9F00D39924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B21D9D2F9F00D39924 /* Main.storyboard */; };
 		9CDDD5B61D9D2F9F00D39924 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B51D9D2F9F00D39924 /* Assets.xcassets */; };
 		9CDDD5B91D9D2F9F00D39924 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B71D9D2F9F00D39924 /* LaunchScreen.storyboard */; };
@@ -370,11 +391,10 @@
 		6F076EC404F769A3D7C17CF4 /* Pods-IVPNClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IVPNClient.release.xcconfig"; path = "../ios-app/Pods/Target Support Files/Pods-IVPNClient/Pods-IVPNClient.release.xcconfig"; sourceTree = "<group>"; };
 		70DFEFF11AFF9C4E3D88A443 /* Pods-IVPNClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IVPNClient.debug.xcconfig"; path = "../ios-app/Pods/Target Support Files/Pods-IVPNClient/Pods-IVPNClient.debug.xcconfig"; sourceTree = "<group>"; };
 		751AB84B8432BC3E6BEDD483 /* Pods_today_extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_today_extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoBoxView.swift; sourceTree = "<group>"; };
 		8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResultSessionNew.swift; sourceTree = "<group>"; };
 		8201A5032356536B008C83DB /* UpgradePlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradePlanViewController.swift; sourceTree = "<group>"; };
 		820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardSettingsViewController.swift; sourceTree = "<group>"; };
-		8202CF2524487FAB00463FC4 /* SelectPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlanView.swift; sourceTree = "<group>"; };
-		8202CF272448840900463FC4 /* PlanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanLabel.swift; sourceTree = "<group>"; };
 		820535272302B9D7007BDD58 /* APIAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManager.swift; sourceTree = "<group>"; };
 		8205963C2245264300011091 /* UITableViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewController+Ext.swift"; sourceTree = "<group>"; };
 		82061F60238D2730009DDF4D /* PingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingResult.swift; sourceTree = "<group>"; };
@@ -383,6 +403,12 @@
 		82061F63238D2730009DDF4D /* PingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingManager.swift; sourceTree = "<group>"; };
 		8206E5CF22967E37003119AF /* UserActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityType.swift; sourceTree = "<group>"; };
 		8206E5D122967EAF003119AF /* UserActivityTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityTitle.swift; sourceTree = "<group>"; };
+		8206F32024347A8F0056B465 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8206F32224367A240056B465 /* VPNErrorObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNErrorObserver.swift; sourceTree = "<group>"; };
+		8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelMainLayout.swift; sourceTree = "<group>"; };
+		8208525723FD5EB20008C112 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Ext.swift"; sourceTree = "<group>"; };
+		8208525B23FD64160008C112 /* MainViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Ext.swift"; sourceTree = "<group>"; };
 		820EA86723223F7900E16B2D /* InterfaceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceResult.swift; sourceTree = "<group>"; };
 		820EA86D232264EC00E16B2D /* SuccessResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResult.swift; sourceTree = "<group>"; };
 		821429B622FC2BE90056B8FF /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -391,16 +417,23 @@
 		821AFA1223602B71001EF617 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
 		821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyManagerTests.swift; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
+		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
 		8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSViewController.swift; sourceTree = "<group>"; };
 		82234B6621BA7F3500B082DE /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		8223C53922325709006C4F14 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionKeyManager.swift; sourceTree = "<group>"; };
 		8223C54B22E9E93A00CD283D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		8223C54D22EAE93F00CD283D /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		822563912431E03A00AE7F8D /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		8229196D2182EB1B00978BBA /* String+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		8229209F2480FA3600476FC1 /* ServersSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersSort.swift; sourceTree = "<group>"; };
 		822B85D821B941A200715691 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		8232FBF52240E40F006B81D2 /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
+		82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewModelTests.swift; sourceTree = "<group>"; };
+		82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModelTests.swift; sourceTree = "<group>"; };
+		82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerView.swift; sourceTree = "<group>"; };
+		82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoPopupView.swift; sourceTree = "<group>"; };
 		823AD1F32158F55E00BE0EBA /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = ../Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		823AD1F52158F56300BE0EBA /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = ../Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
 		823DA732215E3CCB00DAFE37 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
@@ -409,11 +442,12 @@
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdentifier.swift; sourceTree = "<group>"; };
+		824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModel.swift; sourceTree = "<group>"; };
 		824F56072233FE6F00BCDD5C /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libwg-go.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewTableCell.swift; sourceTree = "<group>"; };
 		8252747D21F1F80400D4B8B5 /* ServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerViewController.swift; sourceTree = "<group>"; };
 		82555004220ACAAF004763A7 /* VPNServersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServersTests.swift; sourceTree = "<group>"; };
 		8258649C2237A0830081DC4B /* SDCAlertView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDCAlertView.framework; path = ../Carthage/Build/iOS/SDCAlertView.framework; sourceTree = "<group>"; };
-		8258649E2237A63C0081DC4B /* ConnectionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoView.swift; sourceTree = "<group>"; };
 		825864A02237B1060081DC4B /* Bamboo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bamboo.framework; path = ../Carthage/Build/iOS/Bamboo.framework; sourceTree = "<group>"; };
 		82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
@@ -425,6 +459,9 @@
 		826D182621D3DAFF0045A570 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		826D182821D3DAFF0045A570 /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
 		826D182A21D3DAFF0045A570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		826E61472428F8E60064F195 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		826E6149242A1CA80064F195 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
+		826E614B242A61380064F195 /* AccountViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelTests.swift; sourceTree = "<group>"; };
 		826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaultsTodayExtension+Ext.swift"; sourceTree = "<group>"; };
 		826F7F1123A7A05F00777DB9 /* IVPN.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IVPN.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		826F7F1223A7A05F00777DB9 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -440,18 +477,21 @@
 		826F7F4B23A7B4CD00777DB9 /* today-extension-staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "today-extension-staging.xcconfig"; sourceTree = "<group>"; };
 		826FBDA22461847D00B9E464 /* ServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
 		826FBDA42461848A00B9E464 /* ServiceDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDuration.swift; sourceTree = "<group>"; };
-		826FBDA624618ACA00B9E464 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Ext.swift"; sourceTree = "<group>"; };
+		8270D265241A477900B17B65 /* InfoAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertView.swift; sourceTree = "<group>"; };
+		8270D267241BB3D000B17B65 /* InfoAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewModel.swift; sourceTree = "<group>"; };
 		82712DB822314AB100833445 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		82774854237596DF0061BD46 /* OpenVPNConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenVPNConf.swift; sourceTree = "<group>"; };
 		8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofsViewModel.swift; sourceTree = "<group>"; };
 		8277F1CE2211A602007C6F15 /* GeoLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLookup.swift; sourceTree = "<group>"; };
 		827855B82472B27F00B3B6BD /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardRegenerationRateCell.swift; sourceTree = "<group>"; };
+		8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCircleLayer.swift; sourceTree = "<group>"; };
 		828772F6221C008100D5E330 /* ServerConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationCell.swift; sourceTree = "<group>"; };
 		828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersConfigurationTableViewController.swift; sourceTree = "<group>"; };
 		828772FA221C28E000D5E330 /* FlagImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagImageView.swift; sourceTree = "<group>"; };
 		828E9C94231E5780001E1FCF /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
+		8290195E243CB27500777B6E /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
 		8292E1942170AA2500123538 /* wireguard-tunnel-provider-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wireguard-tunnel-provider-Bridging-Header.h"; sourceTree = "<group>"; };
 		8292E1A62174C10700123538 /* Peer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
 		8292E1A82174C11600123538 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
@@ -465,8 +505,17 @@
 		82989FE121898E4400F7EBE0 /* JGProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JGProgressHUD.framework; path = ../Carthage/Build/iOS/JGProgressHUD.framework; sourceTree = "<group>"; };
 		829AA4722267372A00037198 /* Designable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Designable+Ext.swift"; sourceTree = "<group>"; };
 		829D2C8121664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Ext.swift"; sourceTree = "<group>"; };
+		829DF27B2497949A000DC2DB /* PlanLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanLabel.swift; sourceTree = "<group>"; };
+		829DF27C2497949A000DC2DB /* SelectPlanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPlanView.swift; sourceTree = "<group>"; };
+		829DF2812497953C000DC2DB /* UIButton+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		82A160B8221C4E2000730577 /* Server+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataClass.swift"; sourceTree = "<group>"; };
 		82A160B9221C4E2000730577 /* Server+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		82A3422224AB660C00761AB0 /* ApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTests.swift; sourceTree = "<group>"; };
+		82A3422424AB6AF700761AB0 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		82A3422624AB6CA500761AB0 /* DoubleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTests.swift; sourceTree = "<group>"; };
+		82A3422824AB799600761AB0 /* ProofsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofsViewModelTests.swift; sourceTree = "<group>"; };
+		82A3422A24AB7F8600761AB0 /* VPNServerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModelTests.swift; sourceTree = "<group>"; };
+		82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectToServerPopupView.swift; sourceTree = "<group>"; };
 		82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatusTests.swift; sourceTree = "<group>"; };
 		82A9E8C323471EBE007BCA7E /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		82A9E8C423471EBE007BCA7E /* staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = staging.xcconfig; sourceTree = "<group>"; };
@@ -489,12 +538,13 @@
 		82BA8AC022E5DC93004E8D8D /* NETunnelProviderProtocol+ExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NETunnelProviderProtocol+ExtTests.swift"; sourceTree = "<group>"; };
 		82BBF25821AC799A00589766 /* NetworkProtectionRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionRulesViewController.swift; sourceTree = "<group>"; };
 		82BBF26021AD213500589766 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		82BBF26421AD3FB800589766 /* NetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkView.swift; sourceTree = "<group>"; };
 		82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Ext.swift"; sourceTree = "<group>"; };
 		82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		82BBF27021AECC8100589766 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		82BF32F524484E5100248E4F /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
+		82C1D5BB23FE78570059A915 /* MapScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScrollView.swift; sourceTree = "<group>"; };
+		82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelViewController.swift; sourceTree = "<group>"; };
 		82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		82C293BE21CCD49A000B74EC /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		82C293C221CCDA42000B74EC /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
@@ -503,7 +553,6 @@
 		82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionViewController.swift; sourceTree = "<group>"; };
 		82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionTableViewCell.swift; sourceTree = "<group>"; };
-		82D598AF21A58CAD000FABDE /* NetworkTrustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTrustViewController.swift; sourceTree = "<group>"; };
 		82D598B321A5A7A3000FABDE /* NetworkTrust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTrust.swift; sourceTree = "<group>"; };
 		82D598BB21A6949F000FABDE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		82D598BF21A6991B000FABDE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -522,8 +571,10 @@
 		82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlanViewController.swift; sourceTree = "<group>"; };
 		82DEF0292447288100CCB5CD /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		82DEFFA52452DE5100ECB482 /* MapConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConstants.swift; sourceTree = "<group>"; };
 		82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManagerTests.swift; sourceTree = "<group>"; };
 		82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ExtTests.swift"; sourceTree = "<group>"; };
+		82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunnelType.swift; sourceTree = "<group>"; };
 		82E716832181E8E100D6B7C2 /* ProviderConfigurationKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderConfigurationKeys.swift; sourceTree = "<group>"; };
 		82E716892181E8E900D6B7C2 /* WireGuardProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WireGuardProtocol.swift; sourceTree = "<group>"; };
@@ -564,23 +615,12 @@
 		9C2833731D9D3EB60024C553 /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		9C2833751D9D3F060024C553 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9C2833781D9D3F060024C553 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		9C2833811D9D3F2D0024C553 /* PromotionsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromotionsDataSource.swift; sourceTree = "<group>"; };
 		9C2833891D9D41A60024C553 /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ApiService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9C3031251DB3B6E700C38B0C /* ServersUpdateResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersUpdateResult.swift; sourceTree = "<group>"; };
 		9C30312F1DB41FBA00C38B0C /* ServerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTableViewCell.swift; sourceTree = "<group>"; };
 		9C3031341DB42EF900C38B0C /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		9C3031361DB4307D00C38B0C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9C3324F21DB37724003885C3 /* VPNServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPNServer.swift; sourceTree = "<group>"; };
-		9C454EA91E081DF700BD2AFA /* CircleInactiveLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleInactiveLayer.swift; sourceTree = "<group>"; };
-		9C454EAA1E081DF700BD2AFA /* ImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLayer.swift; sourceTree = "<group>"; };
-		9C454EAB1E081DF700BD2AFA /* CircleConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleConnected.swift; sourceTree = "<group>"; };
-		9C454EAC1E081DF700BD2AFA /* CircleProgressLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressLayer.swift; sourceTree = "<group>"; };
-		9C454EB11E081E0000BD2AFA /* ConnectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectButton.swift; sourceTree = "<group>"; };
-		9C454EB21E081E0000BD2AFA /* ConnectButtonParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectButtonParameters.swift; sourceTree = "<group>"; };
-		9C454EB51E0864AE00BD2AFA /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
-		9C454EB81E0869B400BD2AFA /* WaveLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveLayer.swift; sourceTree = "<group>"; };
-		9C454EBA1E08862E00BD2AFA /* CircleWaveLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleWaveLayer.swift; sourceTree = "<group>"; };
-		9C454EBD1E096F4100BD2AFA /* PrivacyPromoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPromoViewController.swift; sourceTree = "<group>"; };
 		9C4AFCFF21134A0A007826CC /* OpenVPNAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenVPNAdapter.framework; path = ../Carthage/Build/iOS/OpenVPNAdapter.framework; sourceTree = "<group>"; };
 		9C50959520FCF4C60048DBF2 /* ProtocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolViewController.swift; sourceTree = "<group>"; };
 		9C50959920FCF6850048DBF2 /* ProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolTableViewCell.swift; sourceTree = "<group>"; };
@@ -610,7 +650,6 @@
 		9CC29DF71E1D59E90080F799 /* Alerts+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alerts+Ext.swift"; sourceTree = "<group>"; };
 		9CDDD5AB1D9D2F9F00D39924 /* IVPNClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IVPNClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CDDD5AE1D9D2F9F00D39924 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9CDDD5B01D9D2F9F00D39924 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9CDDD5B31D9D2F9F00D39924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9CDDD5B51D9D2F9F00D39924 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CDDD5B81D9D2F9F00D39924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -727,11 +766,11 @@
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
-		8202CF2424487F9C00463FC4 /* View */ = {
+		820079F22407D8E700EC2062 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8202CF2524487FAB00463FC4 /* SelectPlanView.swift */,
-				8202CF272448840900463FC4 /* PlanLabel.swift */,
+				820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */,
+				82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -747,11 +786,35 @@
 			path = PingManager;
 			sourceTree = "<group>";
 		};
+		8206F31F24347A360056B465 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8206F32024347A8F0056B465 /* MainView.swift */,
+				8290195E243CB27500777B6E /* ControlPanelView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8208525423FD56530008C112 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8206F31F24347A360056B465 /* View */,
+				82C1D5BA23FE78330059A915 /* Map */,
+				82C1D5BD23FE8BD90059A915 /* ControlPanel */,
+				8208525723FD5EB20008C112 /* MainViewController.swift */,
+				8208525B23FD64160008C112 /* MainViewController+Ext.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
 		821F1C7C21FF541800107311 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				821F1C7D21FF544200107311 /* VPNServerViewModel.swift */,
 				8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */,
+				824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */,
+				8270D267241BB3D000B17B65 /* InfoAlertViewModel.swift */,
+				826E6149242A1CA80064F195 /* AccountViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -815,6 +878,7 @@
 				8247E1D922686217006C0C08 /* IAPManager.swift */,
 				820535272302B9D7007BDD58 /* APIAccessManager.swift */,
 				8223C54D22EAE93F00CD283D /* SessionManager.swift */,
+				8206F32224367A240056B465 /* VPNErrorObserver.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -822,7 +886,6 @@
 		82234B7521BAA13D00B082DE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				82A208C421BAAF3800C9AD44 /* DataSource */,
 				82A208B821BAA66800C9AD44 /* CoreData */,
 				8292E1A52174C0CE00123538 /* WireGuard */,
 				9C3324F21DB37724003885C3 /* VPNServer.swift */,
@@ -857,6 +920,27 @@
 			path = ApiResults;
 			sourceTree = "<group>";
 		};
+		822563902431DFFB00AE7F8D /* AccountScreen */ = {
+			isa = PBXGroup;
+			children = (
+				829FBF702431E69300C84246 /* View */,
+				826E61472428F8E60064F195 /* AccountViewController.swift */,
+			);
+			path = AccountScreen;
+			sourceTree = "<group>";
+		};
+		82351FC8241FA14F00E6E0FD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */,
+				82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */,
+				826E614B242A61380064F195 /* AccountViewModelTests.swift */,
+				82A3422824AB799600761AB0 /* ProofsViewModelTests.swift */,
+				82A3422A24AB7F8600761AB0 /* VPNServerViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		825A43FB215CCFC10076131F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,7 +969,9 @@
 				82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */,
 				82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */,
 				826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */,
-				826FBDA624618ACA00B9E464 /* UIButton+Ext.swift */,
+				829DF2812497953C000DC2DB /* UIButton+Ext.swift */,
+				82A3422424AB6AF700761AB0 /* Double+Ext.swift */,
+				82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -893,6 +979,7 @@
 		826D182721D3DAFF0045A570 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				82351FC8241FA14F00E6E0FD /* ViewModels */,
 				82A7F10323C865F90015A357 /* Models */,
 				82E01647230BE667008B0AC0 /* Managers */,
 				82F81A34224CF69900CB778B /* Enum */,
@@ -946,6 +1033,7 @@
 				8206E5CF22967E37003119AF /* UserActivityType.swift */,
 				8206E5D122967EAF003119AF /* UserActivityTitle.swift */,
 				823FFB062338DF1800F91A5D /* Capability.swift */,
+				8229209F2480FA3600476FC1 /* ServersSort.swift */,
 				8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */,
 				826FBDA22461847D00B9E464 /* ServiceType.swift */,
 				826FBDA42461848A00B9E464 /* ServiceDuration.swift */,
@@ -974,6 +1062,23 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
+		829DF27A2497949A000DC2DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				829DF27B2497949A000DC2DB /* PlanLabel.swift */,
+				829DF27C2497949A000DC2DB /* SelectPlanView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		829FBF702431E69300C84246 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				822563912431E03A00AE7F8D /* AccountView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		829FCCDE230D23FE009C63DF /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -986,8 +1091,10 @@
 		82A208B321BAA4C500C9AD44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8208525423FD56530008C112 /* MainScreen */,
+				822563902431DFFB00AE7F8D /* AccountScreen */,
 				82A208B621BAA51000C9AD44 /* Controls */,
-				82A208B521BAA4FF00C9AD44 /* Cells */,
+				82A208B521BAA4FF00C9AD44 /* TableCells */,
 				82A208B421BAA4EF00C9AD44 /* ViewControllers */,
 				82DEF01B2447149000CCB5CD /* Signup */,
 				9CDDD5B71D9D2F9F00D39924 /* LaunchScreen.storyboard */,
@@ -1001,13 +1108,10 @@
 		82A208B421BAA4EF00C9AD44 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9C454EBD1E096F4100BD2AFA /* PrivacyPromoViewController.swift */,
-				9CDDD5B01D9D2F9F00D39924 /* MainViewController.swift */,
 				9C3031361DB4307D00C38B0C /* SettingsViewController.swift */,
 				9C50959520FCF4C60048DBF2 /* ProtocolViewController.swift */,
 				820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */,
 				82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */,
-				82D598AF21A58CAD000FABDE /* NetworkTrustViewController.swift */,
 				82BBF25821AC799A00589766 /* NetworkProtectionRulesViewController.swift */,
 				82C293BE21CCD49A000B74EC /* NavigationController.swift */,
 				8252747D21F1F80400D4B8B5 /* ServerViewController.swift */,
@@ -1021,7 +1125,7 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		82A208B521BAA4FF00C9AD44 /* Cells */ = {
+		82A208B521BAA4FF00C9AD44 /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
 				9C30312F1DB41FBA00C38B0C /* ServerTableViewCell.swift */,
@@ -1033,37 +1137,18 @@
 				82DAB37E2457260000302F4C /* ServiceTableViewCell.swift */,
 				82DAB37C245725E200302F4C /* ServiceTitleTableViewCell.swift */,
 			);
-			path = Cells;
+			path = TableCells;
 			sourceTree = "<group>";
 		};
 		82A208B621BAA51000C9AD44 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				82A208B721BAA52800C9AD44 /* ConnectButtonLayers */,
-				9C454EB81E0869B400BD2AFA /* WaveLayer.swift */,
-				9C454EB11E081E0000BD2AFA /* ConnectButton.swift */,
-				9C454EB51E0864AE00BD2AFA /* WaveView.swift */,
-				9C454EB21E081E0000BD2AFA /* ConnectButtonParameters.swift */,
-				82BBF26421AD3FB800589766 /* NetworkView.swift */,
 				9CB2CE271DAB807A007A4D2D /* ProgressIndicator.swift */,
 				82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */,
 				828772FA221C28E000D5E330 /* FlagImageView.swift */,
-				8258649E2237A63C0081DC4B /* ConnectionInfoView.swift */,
 				82FF0D432315587000440E5D /* UITextFieldPadding.swift */,
 			);
 			path = Controls;
-			sourceTree = "<group>";
-		};
-		82A208B721BAA52800C9AD44 /* ConnectButtonLayers */ = {
-			isa = PBXGroup;
-			children = (
-				9C454EA91E081DF700BD2AFA /* CircleInactiveLayer.swift */,
-				9C454EAA1E081DF700BD2AFA /* ImageLayer.swift */,
-				9C454EAB1E081DF700BD2AFA /* CircleConnected.swift */,
-				9C454EAC1E081DF700BD2AFA /* CircleProgressLayer.swift */,
-				9C454EBA1E08862E00BD2AFA /* CircleWaveLayer.swift */,
-			);
-			path = ConnectButtonLayers;
 			sourceTree = "<group>";
 		};
 		82A208B821BAA66800C9AD44 /* CoreData */ = {
@@ -1094,20 +1179,13 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		82A208C421BAAF3800C9AD44 /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-				9C2833811D9D3F2D0024C553 /* PromotionsDataSource.swift */,
-			);
-			path = DataSource;
-			sourceTree = "<group>";
-		};
 		82A7F10323C865F90015A357 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */,
 				82555004220ACAAF004763A7 /* VPNServersTests.swift */,
 				82F81A60224CFFD700CB778B /* AuthenticationTests.swift */,
+				82A3422224AB660C00761AB0 /* ApplicationTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1155,6 +1233,32 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		82C1D5BA23FE78330059A915 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				82DEFFA52452DE5100ECB482 /* MapConstants.swift */,
+				82C1D5BB23FE78570059A915 /* MapScrollView.swift */,
+				8270D265241A477900B17B65 /* InfoAlertView.swift */,
+				82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */,
+				82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */,
+				8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */,
+				82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		82C1D5BD23FE8BD90059A915 /* ControlPanel */ = {
+			isa = PBXGroup;
+			children = (
+				820079F22407D8E700EC2062 /* View */,
+				82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */,
+				821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */,
+				8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */,
+				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
+			);
+			path = ControlPanel;
+			sourceTree = "<group>";
+		};
 		82DEF01B2447149000CCB5CD /* Signup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1196,7 +1300,7 @@
 		82DEF0232447281900CCB5CD /* SelectPlan */ = {
 			isa = PBXGroup;
 			children = (
-				8202CF2424487F9C00463FC4 /* View */,
+				829DF27A2497949A000DC2DB /* View */,
 				82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */,
 			);
 			path = SelectPlan;
@@ -1266,6 +1370,7 @@
 				82BA8AC022E5DC93004E8D8D /* NETunnelProviderProtocol+ExtTests.swift */,
 				82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */,
 				82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */,
+				82A3422624AB6CA500761AB0 /* DoubleTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1786,12 +1891,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-IVPNClient/Pods-IVPNClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/Bamboo/Bamboo.framework",
+				"${BUILT_PRODUCTS_DIR}/FloatingPanel/FloatingPanel.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SDCAlertView/SDCAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
@@ -1800,12 +1906,13 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bamboo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FloatingPanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
@@ -1825,6 +1932,7 @@
 				82F81A49224CFADB00CB778B /* EndpointTests.swift in Sources */,
 				82B81E3B235ED845005986E8 /* KeyChainTests.swift in Sources */,
 				82B81E3A235ED845005986E8 /* SessionManagerTests.swift in Sources */,
+				82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */,
 				82F81A43224CF69900CB778B /* UserDefaultsTests.swift in Sources */,
 				82F81A3E224CF69900CB778B /* AddressTypeTests.swift in Sources */,
 				82E4FCB023D71FDF00BEBA1A /* UIApplication+ExtTests.swift in Sources */,
@@ -1834,16 +1942,22 @@
 				82F81A42224CF69900CB778B /* UIDeviceTests.swift in Sources */,
 				82F81A4B224CFADB00CB778B /* CIDRAddressTests.swift in Sources */,
 				82F81A58224CFC0C00CB778B /* VPNManagerTests.swift in Sources */,
+				82A3422924AB799600761AB0 /* ProofsViewModelTests.swift in Sources */,
 				82EA857A21DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift in Sources */,
 				82F81A3D224CF69900CB778B /* ConnectionSettingsTests.swift in Sources */,
+				826E614C242A61380064F195 /* AccountViewModelTests.swift in Sources */,
 				82F81A3F224CF69900CB778B /* NSMutableAttributedStringTests.swift in Sources */,
 				82F81A4C224CFADB00CB778B /* PeerTests.swift in Sources */,
 				82F81A61224CFFD700CB778B /* AuthenticationTests.swift in Sources */,
+				82A3422B24AB7F8600761AB0 /* VPNServerViewModelTests.swift in Sources */,
 				82F81A41224CF69900CB778B /* ArrayTests.swift in Sources */,
 				82F81A4A224CFADB00CB778B /* InterfaceTests.swift in Sources */,
 				82E96A4B224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift in Sources */,
 				82555005220ACAAF004763A7 /* VPNServersTests.swift in Sources */,
 				82F81A40224CF69900CB778B /* StringTests.swift in Sources */,
+				82A3422324AB660C00761AB0 /* ApplicationTests.swift in Sources */,
+				82A3422724AB6CA500761AB0 /* DoubleTests.swift in Sources */,
+				82351FCA241FA16600E6E0FD /* InfoAlertViewModelTests.swift in Sources */,
 				821BDE02224A6EC700F592BF /* AppKeyManagerTests.swift in Sources */,
 				82F81A4D224CFADB00CB778B /* TunnelTests.swift in Sources */,
 				82F81A5B224CFC0C00CB778B /* ApiServiceServersTests.swift in Sources */,
@@ -1866,6 +1980,7 @@
 				826F7F2F23A7A88E00777DB9 /* GeoLookup.swift in Sources */,
 				826F7F2E23A7A88700777DB9 /* APIClient.swift in Sources */,
 				826F7F3D23A7AA4700777DB9 /* TunnelType.swift in Sources */,
+				822920A32480FC2800476FC1 /* ServersSort.swift in Sources */,
 				826F7F3723A7A95000777DB9 /* APIAccessManager.swift in Sources */,
 				826F7F3623A7A94000777DB9 /* Config.swift in Sources */,
 				826F7F1623A7A05F00777DB9 /* TodayViewController.swift in Sources */,
@@ -1910,6 +2025,7 @@
 				8270753722AFC7E70067C323 /* StringProtocol+Ext.swift in Sources */,
 				82B605262170840C004B40E6 /* PacketTunnelProvider.swift in Sources */,
 				8223C53C2232626E006C4F14 /* ExtensionKeyManager.swift in Sources */,
+				822920A22480FC2800476FC1 /* ServersSort.swift in Sources */,
 				82E7168E2181E8E900D6B7C2 /* WireGuardProtocol.swift in Sources */,
 				8292E19B21748B0500123538 /* UserDefaults+Ext.swift in Sources */,
 				8223C55022EAEC7100CD283D /* Session.swift in Sources */,
@@ -1948,6 +2064,7 @@
 				82234B6F21BA90EC00B082DE /* FileSystemManager.swift in Sources */,
 				8223C54F22EAEC7000CD283D /* Session.swift in Sources */,
 				82234B6A21BA7F5400B082DE /* Logging.swift in Sources */,
+				822920A12480FC2700476FC1 /* ServersSort.swift in Sources */,
 				826C56D322FD551800D2B76A /* ServiceStatus.swift in Sources */,
 				825D5D8821908B2600B781BA /* UIDevice+Ext.swift in Sources */,
 				82E716932181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
@@ -1971,6 +2088,7 @@
 				8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */,
 				828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */,
 				82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */,
+				8206F32124347A8F0056B465 /* MainView.swift in Sources */,
 				9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */,
 				82E716962181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */,
 				8292E1BE2174CA6800123538 /* x25519.c in Sources */,
@@ -1981,48 +2099,51 @@
 				8292E1A72174C10700123538 /* Peer.swift in Sources */,
 				820EA86E232264EC00E16B2D /* SuccessResult.swift in Sources */,
 				82D6AA1B215E167C00F21CAA /* UIViewController+Ext.swift in Sources */,
+				829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */,
 				8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */,
 				826C56D222FD4F2600D2B76A /* ServiceStatus.swift in Sources */,
 				82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */,
+				8206F32324367A240056B465 /* VPNErrorObserver.swift in Sources */,
 				822B85D921B941A200715691 /* NotificationName+Ext.swift in Sources */,
+				8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */,
 				82D598C021A6991B000FABDE /* NetworkManager.swift in Sources */,
-				9C2833821D9D3F2D0024C553 /* PromotionsDataSource.swift in Sources */,
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
 				82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */,
-				826FBDA724618ACA00B9E464 /* UIButton+Ext.swift in Sources */,
-				9C454EB31E081E0000BD2AFA /* ConnectButton.swift in Sources */,
+				8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */,
 				82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */,
 				9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */,
 				8205963D2245264300011091 /* UITableViewController+Ext.swift in Sources */,
 				82BF32F624484E5100248E4F /* CreateAccountView.swift in Sources */,
-				8202CF282448840900463FC4 /* PlanLabel.swift in Sources */,
 				82774855237596DF0061BD46 /* OpenVPNConf.swift in Sources */,
 				82589A2B21FB5A580009CC6C /* UIImage+Ext.swift in Sources */,
 				829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */,
 				820535282302B9D7007BDD58 /* APIAccessManager.swift in Sources */,
+				829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */,
 				82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */,
 				8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */,
 				8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */,
+				8208525C23FD64160008C112 /* MainViewController+Ext.swift in Sources */,
+				82C1D5BF23FE8C6D0059A915 /* ControlPanelViewController.swift in Sources */,
+				82DEFFA62452DE5100ECB482 /* MapConstants.swift in Sources */,
 				8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */,
 				8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */,
+				82E5449224EE584E006DEF8D /* UIImageView+Ext.swift in Sources */,
 				82E81AE72449C44F00D81FB7 /* PaymentComponentView.swift in Sources */,
 				8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */,
 				9CB2CE281DAB807A007A4D2D /* ProgressIndicator.swift in Sources */,
-				8258649F2237A63C0081DC4B /* ConnectionInfoView.swift in Sources */,
 				820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */,
 				8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */,
 				9C3324F31DB37724003885C3 /* VPNServer.swift in Sources */,
 				9CB2CE341DAF9283007A4D2D /* Model.xcdatamodeld in Sources */,
+				821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */,
 				82FF0D442315587000440E5D /* UITextFieldPadding.swift in Sources */,
-				9CDDD5B11D9D2F9F00D39924 /* MainViewController.swift in Sources */,
 				82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */,
 				8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */,
 				82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */,
-				82BBF26521AD3FB800589766 /* NetworkView.swift in Sources */,
 				82A160BA221C4E2000730577 /* Server+CoreDataClass.swift in Sources */,
 				82989FDA2188783200F7EBE0 /* WireGuardKeyResult.swift in Sources */,
-				9C454EAE1E081DF700BD2AFA /* ImageLayer.swift in Sources */,
 				9CB2CE381DB0F860007A4D2D /* FileSystemManager.swift in Sources */,
+				8270D266241A477900B17B65 /* InfoAlertView.swift in Sources */,
 				82C215EC23992F6900E639F8 /* UINavigationController+Ext.swift in Sources */,
 				9C50959620FCF4C60048DBF2 /* ProtocolViewController.swift in Sources */,
 				9CAE14C020FE453E00D4DAC0 /* VPNManager.swift in Sources */,
@@ -2030,51 +2151,50 @@
 				82D598BC21A6949F000FABDE /* StorageManager.swift in Sources */,
 				826FBDA32461847D00B9E464 /* ServiceType.swift in Sources */,
 				821429B922FC2EA40056B8FF /* ApiService+Ext.swift in Sources */,
-				9C454EAD1E081DF700BD2AFA /* CircleInactiveLayer.swift in Sources */,
 				8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */,
 				82E716902181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				8223C54C22E9E93A00CD283D /* Session.swift in Sources */,
+				822563922431E03A00AE7F8D /* AccountView.swift in Sources */,
 				9CBFF02C21021D2100FE1757 /* ConnectionManager.swift in Sources */,
 				82D598C821A6ADF1000FABDE /* NetworkType.swift in Sources */,
 				9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */,
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
 				82DAB37B2457013900302F4C /* Service.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
+				8208525823FD5EB20008C112 /* MainViewController.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */,
 				82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */,
 				9C28338A1D9D41A60024C553 /* ApiService.swift in Sources */,
-				9C454EB91E0869B400BD2AFA /* WaveLayer.swift in Sources */,
 				82BBF26921AE802400589766 /* DispatchQueue+Ext.swift in Sources */,
 				82DC75BC22B277D200D3C73C /* APIClient.swift in Sources */,
 				82D90471216C7DAF0032F3BE /* Date+Ext.swift in Sources */,
 				825D4EC9224A46F0002E7378 /* ExtensionKeyManager.swift in Sources */,
-				9C454EBE1E096F4100BD2AFA /* PrivacyPromoViewController.swift in Sources */,
 				9CB2CE2B1DABD120007A4D2D /* NavigationManager.swift in Sources */,
 				82BBF25921AC799A00589766 /* NetworkProtectionRulesViewController.swift in Sources */,
 				82DAB37D245725E200302F4C /* ServiceTitleTableViewCell.swift in Sources */,
 				82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */,
 				828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */,
 				82A160BB221C4E2000730577 /* Server+CoreDataProperties.swift in Sources */,
-				9C454EB41E081E0000BD2AFA /* ConnectButtonParameters.swift in Sources */,
 				8270753622AFC5B90067C323 /* StringProtocol+Ext.swift in Sources */,
+				82526BEF24123D2900E00880 /* NetworkViewTableCell.swift in Sources */,
 				82DEF021244714F000CCB5CD /* ScannerView.swift in Sources */,
 				826FBDA52461848A00B9E464 /* ServiceDuration.swift in Sources */,
 				9CB2CE411DB2594A007A4D2D /* VPNServerList.swift in Sources */,
 				823FFB072338DF1800F91A5D /* Capability.swift in Sources */,
 				82061F65238D2730009DDF4D /* Ping.swift in Sources */,
-				8202CF2624487FAB00463FC4 /* SelectPlanView.swift in Sources */,
 				82AAF0E92253A4A8005E792F /* StaticWebViewController.swift in Sources */,
 				8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */,
 				824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */,
 				8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */,
+				82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */,
 				9C6942371DD218A900F9A801 /* IKEv2AccessDetails.swift in Sources */,
 				82D598B421A5A7A3000FABDE /* NetworkTrust.swift in Sources */,
 				8292E1A92174C11600123538 /* Interface.swift in Sources */,
 				82F638CC217DC25600410318 /* CIDRAddress.swift in Sources */,
-				9C454EB01E081DF700BD2AFA /* CircleProgressLayer.swift in Sources */,
-				827855B92472B27F00B3B6BD /* Account.swift in Sources */,
+				8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */,
 				821429B722FC2BE90056B8FF /* Result.swift in Sources */,
+				827855B92472B27F00B3B6BD /* Account.swift in Sources */,
 				82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */,
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
 				82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */,
@@ -2085,34 +2205,42 @@
 				9C3031301DB41FBA00C38B0C /* ServerTableViewCell.swift in Sources */,
 				8292E1AB2174C12200123538 /* Tunnel.swift in Sources */,
 				82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */,
+				82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */,
 				82B51CDF21DE3E31005CC9C9 /* UITableView+Ext.swift in Sources */,
 				82061F64238D2730009DDF4D /* PingResult.swift in Sources */,
+				82A3422524AB6AF700761AB0 /* Double+Ext.swift in Sources */,
 				8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */,
 				9C3031351DB42EF900C38B0C /* Application.swift in Sources */,
 				8206E5D022967E37003119AF /* UserActivityType.swift in Sources */,
-				9C454EBB1E08862E00BD2AFA /* CircleWaveLayer.swift in Sources */,
+				82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */,
 				828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */,
 				82E7880C22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift in Sources */,
 				82F638C2217DA89000410318 /* AddressType.swift in Sources */,
+				822920A02480FA3600476FC1 /* ServersSort.swift in Sources */,
+				826E61482428F8E60064F195 /* AccountViewController.swift in Sources */,
+				820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */,
 				9C69422E1DD20FC200F9A801 /* KeyChain.swift in Sources */,
-				9C454EB61E0864AE00BD2AFA /* WaveView.swift in Sources */,
 				821429BB22FC36100056B8FF /* ApiRequestDI.swift in Sources */,
+				82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */,
 				82AA8818231E330A00E18ECB /* SessionStatus.swift in Sources */,
 				9C28337E1D9D3F060024C553 /* Config.swift in Sources */,
 				82DAB37F2457260000302F4C /* ServiceTableViewCell.swift in Sources */,
-				9C454EAF1E081DF700BD2AFA /* CircleConnected.swift in Sources */,
 				82061F66238D2730009DDF4D /* ICMPHeader.swift in Sources */,
 				826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */,
+				824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */,
 				8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */,
+				829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */,
 				82234B6721BA7F3500B082DE /* Logging.swift in Sources */,
 				82DB75EC239E75EB0073E846 /* NEVPNStatus+Ext.swift in Sources */,
+				8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */,
 				9CBFF0302102254800FE1757 /* Settings.swift in Sources */,
 				9C3031371DB4307D00C38B0C /* SettingsViewController.swift in Sources */,
 				821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */,
 				82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */,
 				82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */,
 				825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */,
-				82D598B021A58CAD000FABDE /* NetworkTrustViewController.swift in Sources */,
+				8270D268241BB3D100B17B65 /* InfoAlertViewModel.swift in Sources */,
+				826E614A242A1CA80064F195 /* AccountViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2279,13 +2407,13 @@
 				CODE_SIGN_ENTITLEMENTS = "today-extension/today-extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.today-extension";
@@ -2308,13 +2436,13 @@
 				CODE_SIGN_ENTITLEMENTS = "today-extension/today-extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.today-extension";
 				PRODUCT_NAME = IVPN;
@@ -2336,13 +2464,13 @@
 				CODE_SIGN_ENTITLEMENTS = "today-extension/today-extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.today-extension";
 				PRODUCT_NAME = IVPN;
@@ -2364,7 +2492,7 @@
 				CODE_SIGN_ENTITLEMENTS = "wireguard-tunnel-provider/wireguard_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2379,7 +2507,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
@@ -2402,7 +2530,7 @@
 				CODE_SIGN_ENTITLEMENTS = "wireguard-tunnel-provider/wireguard_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2417,7 +2545,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2567,7 +2695,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2576,7 +2704,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -2639,7 +2767,7 @@
 				CODE_SIGN_ENTITLEMENTS = "openvpn-tunnel-provider/openvpn_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2649,7 +2777,7 @@
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.openvpn-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2670,7 +2798,7 @@
 				CODE_SIGN_ENTITLEMENTS = "wireguard-tunnel-provider/wireguard_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2685,7 +2813,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
@@ -2740,7 +2868,7 @@
 				CODE_SIGN_ENTITLEMENTS = "openvpn-tunnel-provider/openvpn_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2750,7 +2878,7 @@
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.openvpn-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2781,7 +2909,7 @@
 				CODE_SIGN_ENTITLEMENTS = "openvpn-tunnel-provider/openvpn_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2791,7 +2919,7 @@
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.openvpn-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2927,7 +3055,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2936,7 +3064,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -2962,7 +3090,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2971,7 +3099,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(SRCROOT)/Carthage/Build/iOS";
-				MARKETING_VERSION = 1.19.1;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
