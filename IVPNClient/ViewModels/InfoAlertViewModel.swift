@@ -64,7 +64,7 @@ class InfoAlertViewModel {
             return true
         }
         
-        if infoAlert == .subscriptionExpiration && Application.shared.serviceStatus.isActiveUntilValid() && Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3 {
+        if Application.shared.authentication.isLoggedIn && infoAlert == .subscriptionExpiration && (Application.shared.serviceStatus.isActiveUntilValid() && Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3 || !Application.shared.serviceStatus.isActive) {
             return true
         }
         
