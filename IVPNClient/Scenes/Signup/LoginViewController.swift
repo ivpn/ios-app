@@ -253,6 +253,8 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         
+        KeyChain.username = (self.userName.text ?? "").trim()
+        
         let viewController = NavigationManager.getSubscriptionViewController()
         viewController.presentationController?.delegate = self
         present(viewController, animated: true, completion: nil)
