@@ -174,9 +174,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        KeyChain.username = username
-        
-        sessionManager.createSession(force: force)
+        sessionManager.createSession(force: force, username: username)
     }
     
     private func startSignupProcess() {
@@ -243,6 +241,8 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         
+        KeyChain.username = (self.userName.text ?? "").trim()
+        
         navigationController?.dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: Notification.Name.ServiceAuthorized, object: nil)
             NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
@@ -264,7 +264,7 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         
-        KeyChain.tempUsername = KeyChain.username
+        KeyChain.tempUsername = (self.userName.text ?? "").trim()
         Application.shared.authentication.removeStoredCredentials()
         
         let viewController = NavigationManager.getSelectPlanViewController()
