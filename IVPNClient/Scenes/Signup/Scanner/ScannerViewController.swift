@@ -37,7 +37,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     // MARK: - Properties -
     
     var captureSession: AVCaptureSession!
-    var previewLayer: AVCaptureVideoPreviewLayer!
+    var previewLayer: AVCaptureVideoPreviewLayer?
     weak var delegate: ScannerViewControllerDelegate?
     
     // MARK: - View lifecycle -
@@ -78,6 +78,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     @objc private func orientationDidChange() {
+        guard let previewLayer = previewLayer else {
+            return
+        }
+        
         previewLayer.connection?.videoOrientation = UIApplication.shared.statusBarOrientation.asAVCaptureVideoOrientation()
     }
     
@@ -115,6 +119,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        
+        guard let previewLayer = previewLayer else {
+            return
+        }
+        
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         previewLayer.connection?.videoOrientation = UIApplication.shared.statusBarOrientation.asAVCaptureVideoOrientation()
@@ -155,11 +164,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
 
     private func allowCameraAccessViaSetting() {
-        showActionAlert(title: "Allow Camera", message: "Camera access is required to scan QR code", action: "Open Settings") { _ in
+        showActionAlert(title: "Allow Camera", message: "Camera access is required to scan QR code", action: "Open Settings", actionHandler:  { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url)
             }
-        }
+        })
     }
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate -
