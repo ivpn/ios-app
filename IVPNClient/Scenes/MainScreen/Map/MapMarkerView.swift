@@ -95,7 +95,6 @@ class MapMarkerView: UIView {
         self.markerType = type
     }
 
-    
     override func updateConstraints() {
         setupConstraints()
         initCircles()
