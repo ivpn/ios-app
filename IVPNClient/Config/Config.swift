@@ -61,7 +61,7 @@ struct Config {
     static let contactSupportPage = "mailto:support@ivpn.net"
     
     static let daysBeforeDueDateNotification = 5
-    static let serviceStatusRefreshMaxIntervalSeconds: TimeInterval = 60
+    static let serviceStatusRefreshMaxIntervalSeconds: TimeInterval = 30
     static let stableVPNStatusInterval: TimeInterval = 0.95
     
     static let defaultProtocol = ConnectionSettings.ipsec

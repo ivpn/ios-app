@@ -9,9 +9,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Lint Code Base
-        uses: docker://github/super-linter:v3
+        uses: github/super-linter@v3.10.0
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_MD: false
           VALIDATE_GO: false
+          VALIDATE_POWERSHELL: false
           DEFAULT_BRANCH: develop
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
