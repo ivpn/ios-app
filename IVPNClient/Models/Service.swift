@@ -125,7 +125,7 @@ struct Service {
     }
     
     var collection: [Service] {
-        if Application.shared.authentication.isLoggedIn && !Application.shared.authentication.isNewStyleAccount {
+        if Application.shared.authentication.isLoggedIn && !Application.shared.serviceStatus.isNewStyleAccount() {
             return [
                 Service(type: type, duration: .month),
                 Service(type: type, duration: .year)

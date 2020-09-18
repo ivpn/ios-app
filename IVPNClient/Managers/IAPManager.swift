@@ -37,7 +37,7 @@ class IAPManager {
     
     private var apiEndpoint: String {
         if KeyChain.sessionToken != nil {
-            if !Application.shared.authentication.isNewStyleAccount {
+            if !Application.shared.serviceStatus.isNewStyleAccount() {
                 return Config.apiPaymentAddLegacy
             }
             

@@ -180,7 +180,7 @@ class LoginViewController: UIViewController {
     }
     
     private func startSignupProcess() {
-        if let tempUsername = KeyChain.tempUsername, ServiceStatus.isNewStyleAccount(username: tempUsername) {
+        if KeyChain.tempUsername != nil {
             present(NavigationManager.getCreateAccountViewController(), animated: true, completion: nil)
             return
         }
