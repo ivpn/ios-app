@@ -88,4 +88,13 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertFalse(ServiceStatus.isNewStyleAccount(username: ""))
     }
     
+    func test_isActiveUntilValid() {
+        model.activeUntil = nil
+        XCTAssertFalse(model.isActiveUntilValid())
+        model.activeUntil = 0
+        XCTAssertFalse(model.isActiveUntilValid())
+        model.activeUntil = 1578643221
+        XCTAssertTrue(model.isActiveUntilValid())
+    }
+    
 }

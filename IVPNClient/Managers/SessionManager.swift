@@ -53,7 +53,7 @@ class SessionManager {
     
     // MARK: - Methods -
     
-    func createSession(force: Bool = false, connecting: Bool = false) {
+    func createSession(force: Bool = false, connecting: Bool = false, username: String? = nil) {
         delegate?.createSessionStart()
         
         if AppKeyManager.isKeyPairRequired || connecting {
@@ -61,7 +61,7 @@ class SessionManager {
             UserDefaults.shared.set(Date(), forKey: UserDefaults.Key.wgKeyTimestamp)
         }
         
-        let params = sessionNewParams(force: force)
+        let params = sessionNewParams(force: force, username: username)
         let request = ApiRequestDI(method: .post, endpoint: Config.apiSessionNew, params: params)
         
         ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Session, ErrorResultSessionNew>) in
@@ -162,8 +162,8 @@ class SessionManager {
     
     // MARK: - Helper methods -
     
-    private func sessionNewParams(force: Bool = false) -> [URLQueryItem] {
-        let username = Application.shared.authentication.getStoredUsername()
+    private func sessionNewParams(force: Bool = false, username: String? = nil) -> [URLQueryItem] {
+        let username = username ?? Application.shared.authentication.getStoredUsername()
         var params = [URLQueryItem(name: "username", value: username)]
         
         if let wgPublicKey = KeyChain.wgPublicKey {
