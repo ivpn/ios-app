@@ -318,10 +318,9 @@ class ControlPanelViewController: UITableViewController {
             if now.timeIntervalSince(lastUpdateDate) < Config.serviceStatusRefreshMaxIntervalSeconds { return }
         }
         
-        let status = Application.shared.connectionManager.status
-        if status != .connected && status != .connecting {
-            self.lastStatusUpdateDate = Date()
-            self.sessionManager.getSessionStatus()
+        if Application.shared.connectionManager.status != .connecting {
+            lastStatusUpdateDate = Date()
+            sessionManager.getSessionStatus()
         }
     }
     

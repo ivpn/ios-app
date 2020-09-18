@@ -124,4 +124,8 @@ struct ServiceStatus: Codable {
         return diff > 0 ? diff : 0
     }
     
+    func isActiveUntilValid() -> Bool {
+        return activeUntil != nil && (activeUntil ?? 0) > 0
+    }
+    
 }
