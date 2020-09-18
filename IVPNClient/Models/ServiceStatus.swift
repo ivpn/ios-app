@@ -76,12 +76,7 @@ struct ServiceStatus: Codable {
     }
     
     func activeUntilString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "yyyy-MMM-dd"
-        
-        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0)))
+        return Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0)).formatDate()
     }
     
     func isEnabled(capability: Capability) -> Bool {

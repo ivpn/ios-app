@@ -25,10 +25,10 @@ import Foundation
 
 extension Date {
     
-    private static let logFormat = "dd.MM.yyyy HH:mm:ss"
-    private static let fileNameFormat = "MMddyyyyHHmmss"
-    private static let dateFormat = "d MMM yyyy"
-    private static let dateTimeFormat = "d MMM yyyy HH:mm"
+    private static let logFormat = "yyyy-MMM-dd HH:mm:ss"
+    private static let fileNameFormat = "yyyy-MMM-dd-HHmmss"
+    private static let dateFormat = "yyyy-MMM-dd"
+    private static let dateTimeFormat = "yyyy-MMM-dd HH:mm"
     
     static func logTime() -> String {
         return formatted(format: logFormat)
