@@ -60,7 +60,15 @@ class InfoAlertViewModel {
     }
     
     var shouldDisplay: Bool {
-        return Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3 && Application.shared.authentication.isLoggedIn || infoAlert == .connectionInfoFailure
+        if infoAlert == .connectionInfoFailure {
+            return true
+        }
+        
+        if Application.shared.authentication.isLoggedIn && infoAlert == .subscriptionExpiration && (Application.shared.serviceStatus.isActiveUntilValid() && Application.shared.serviceStatus.daysUntilSubscriptionExpiration() <= 3 || !Application.shared.serviceStatus.isActive) {
+            return true
+        }
+        
+        return false
     }
     
     var infoAlert: InfoAlert = .subscriptionExpiration
