@@ -79,7 +79,7 @@ struct ServiceStatus: Codable {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
-        formatter.dateFormat = "dd.MM.yyyy"
+        formatter.dateFormat = "yyyy-MMM-dd"
         
         return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0)))
     }
