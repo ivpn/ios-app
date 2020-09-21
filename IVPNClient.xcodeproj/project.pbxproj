@@ -279,6 +279,8 @@
 		82F81A5B224CFC0C00CB778B /* ApiServiceServersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A53224CFC0B00CB778B /* ApiServiceServersTests.swift */; };
 		82F81A61224CFFD700CB778B /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A60224CFFD700CB778B /* AuthenticationTests.swift */; };
 		82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */; };
+		82FDA6942518D5C2007F881E /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82712DB822314AB100833445 /* TimerManager.swift */; };
+		82FDA69B2518EA40007F881E /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */; };
 		82FF0D4223153D1000440E5D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82FF0D4123153D1000440E5D /* Colors.xcassets */; };
 		82FF0D442315587000440E5D /* UITextFieldPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF0D432315587000440E5D /* UITextFieldPadding.swift */; };
 		9C048AA51DE71A9B001CB489 /* privacy-policy.html in Resources */ = {isa = PBXBuildFile; fileRef = 9C048AA41DE71A9B001CB489 /* privacy-policy.html */; };
@@ -1986,6 +1988,9 @@
 				826F7F1623A7A05F00777DB9 /* TodayViewController.swift in Sources */,
 				826F7F4023A7AA8200777DB9 /* Capability.swift in Sources */,
 				826F7F3B23A7AA3D00777DB9 /* OpenVPNProtocol.swift in Sources */,
+				82FDA69B2518EA40007F881E /* DispatchQueue+Ext.swift in Sources */,
+				82FDA6942518D5C2007F881E /* TimerManager.swift in Sources */,
+				82AA85782514DEB40027DAB8 /* Date+Ext.swift in Sources */,
 				826F7F3123A7A8CE00777DB9 /* Result.swift in Sources */,
 				826F7F3C23A7AA4200777DB9 /* WireGuardProtocol.swift in Sources */,
 				826F7F3F23A7AA6A00777DB9 /* ErrorResult.swift in Sources */,

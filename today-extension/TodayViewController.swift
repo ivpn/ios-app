@@ -23,6 +23,7 @@
 
 import UIKit
 import NotificationCenter
+import NetworkExtension
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
@@ -83,6 +84,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
+    private var vpnStatus: NEVPNStatus = .invalid
+    
     // MARK: - @IBActions -
     
     @IBAction func action(_ sender: Any) {
@@ -90,6 +93,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     // MARK: - View Lifecycle -
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        startVPNStatusMonitor()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -180,6 +188,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         let url = URL(string: "ivpn://\(endpoint)")!
         extensionContext?.open(url) { _ in }
+    }
+    
+    private func startVPNStatusMonitor() {
+        let timer = TimerManager(timeInterval: 1)
+        timer.eventHandler = {
+            if self.vpnStatus != ViewModel.status {
+                DispatchQueue.delay(0.5) {
+                    self.updateView()
+                }
+                self.vpnStatus = ViewModel.status
+            }
+            timer.proceed()
+        }
+        timer.resume()
     }
     
 }
