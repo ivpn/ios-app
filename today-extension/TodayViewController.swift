@@ -58,23 +58,32 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 loginView.isHidden = false
                 disconnectedView.isHidden = true
                 connectedView.isHidden = true
-                actionButton.setTitle("Log In", for: .normal)
                 actionButton.backgroundColor = UIColor.init(named: "ivpnBlue")
                 logoView.backgroundColor = UIColor.init(named: "ivpnGray")
+                UIView.performWithoutAnimation {
+                    self.actionButton.setTitle("Log In", for: .normal)
+                    self.actionButton.layoutIfNeeded()
+                }
             case .disconnected?:
                 loginView.isHidden = true
                 disconnectedView.isHidden = false
                 connectedView.isHidden = true
-                actionButton.setTitle("Connect", for: .normal)
                 actionButton.backgroundColor = UIColor.init(named: "ivpnBlue")
                 logoView.backgroundColor = UIColor.init(named: "ivpnGray")
+                UIView.performWithoutAnimation {
+                    self.actionButton.setTitle("Connect", for: .normal)
+                    self.actionButton.layoutIfNeeded()
+                }
             case .connected?:
                 loginView.isHidden = true
                 disconnectedView.isHidden = true
                 connectedView.isHidden = false
-                actionButton.setTitle("Disconnect", for: .normal)
                 actionButton.backgroundColor = UIColor.init(named: "ivpnGray")
                 logoView.backgroundColor = UIColor.init(named: "ivpnBlue")
+                UIView.performWithoutAnimation {
+                    self.actionButton.setTitle("Disconnect", for: .normal)
+                    self.actionButton.layoutIfNeeded()
+                }
             case .none:
                 break
             }
