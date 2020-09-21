@@ -191,10 +191,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     private func startVPNStatusMonitor() {
-        let timer = TimerManager(timeInterval: 1)
+        let timer = TimerManager(timeInterval: 2)
         timer.eventHandler = {
             if self.latestStatus != ViewModel.currentStatus {
-                DispatchQueue.delay(0.5) {
+                DispatchQueue.async {
                     self.updateView()
                 }
                 self.latestStatus = ViewModel.currentStatus
