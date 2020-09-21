@@ -26,7 +26,7 @@ import NetworkExtension
 
 struct ViewModel {
     
-    static var status: NEVPNStatus {
+    static var currentStatus: NEVPNStatus {
         let rawValue = UserDefaults.shared.connectionStatus
         return NEVPNStatus.init(rawValue: rawValue) ?? .invalid
     }

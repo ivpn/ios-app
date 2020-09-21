@@ -84,7 +84,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
-    private var vpnStatus: NEVPNStatus = .invalid
+    var latestStatus: NEVPNStatus = .invalid
     
     // MARK: - @IBActions -
     
@@ -122,7 +122,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             return
         }
         
-        guard ViewModel.status == .connected else {
+        guard ViewModel.currentStatus == .connected else {
             if displayMode != .disconnected {
                 displayMode = .disconnected
                 completionHandler(.newData)
@@ -151,7 +151,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             return
         }
         
-        guard ViewModel.status == .connected else {
+        guard ViewModel.currentStatus == .connected else {
             displayMode = .disconnected
             return
         }
@@ -193,11 +193,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private func startVPNStatusMonitor() {
         let timer = TimerManager(timeInterval: 1)
         timer.eventHandler = {
-            if self.vpnStatus != ViewModel.status {
+            if self.latestStatus != ViewModel.currentStatus {
                 DispatchQueue.delay(0.5) {
                     self.updateView()
                 }
-                self.vpnStatus = ViewModel.status
+                self.latestStatus = ViewModel.currentStatus
             }
             timer.proceed()
         }
