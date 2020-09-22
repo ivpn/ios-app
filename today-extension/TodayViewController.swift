@@ -208,6 +208,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 }
                 self.latestStatus = ViewModel.currentStatus
             }
+            
+            if (self.displayMode == .login && UserDefaults.shared.isLoggedIn) || (self.displayMode != .login && !UserDefaults.shared.isLoggedIn) {
+                DispatchQueue.async {
+                    self.updateView()
+                }
+            }
+            
             timer.proceed()
         }
         timer.resume()
