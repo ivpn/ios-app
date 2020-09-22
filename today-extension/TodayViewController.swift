@@ -168,6 +168,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         displayMode = .connected
         locationLabel.text = UserDefaults.shared.connectionLocation
         ipAddressLabel.text = UserDefaults.shared.connectionIpAddress
+        geoLookup { _ in }
     }
     
     private func geoLookup(completion: (@escaping (NCUpdateResult) -> Void)) {
