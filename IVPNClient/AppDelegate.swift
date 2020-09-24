@@ -119,18 +119,18 @@ class AppDelegate: UIResponder {
         case Config.urlTypeConnect:
             DispatchQueue.delay(0.75) {
                 if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true)
+                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
                     return
                 }
-                Application.shared.connectionManager.connectShortcut(closeApp: true)
+                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
             }
         case Config.urlTypeDisconnect:
             DispatchQueue.delay(0.75) {
                 if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true)
+                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
                     return
                 }
-                Application.shared.connectionManager.disconnectShortcut(closeApp: true)
+                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
             }
         case Config.urlTypeLogin:
             if let topViewController = UIApplication.topViewController() {
@@ -191,19 +191,19 @@ extension AppDelegate: UIApplicationDelegate {
         switch shortcutItem.type {
         case "Connect":
             if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true)
+                Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
                 completionHandler(true)
                 break
             }
-            Application.shared.connectionManager.connectShortcut(closeApp: true)
+            Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
             completionHandler(true)
         case "Disconnect":
             if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true)
+                Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
                 completionHandler(true)
                 break
             }
-            Application.shared.connectionManager.disconnectShortcut(closeApp: true)
+            Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
             completionHandler(true)
         default:
             completionHandler(false)
@@ -216,16 +216,16 @@ extension AppDelegate: UIApplicationDelegate {
         switch userActivity.activityType {
         case UserActivityType.Connect:
             if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true)
+                Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
                 break
             }
-            Application.shared.connectionManager.connectShortcut(closeApp: true)
+            Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
         case UserActivityType.Disconnect:
             if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true)
+                Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
                 break
             }
-            Application.shared.connectionManager.disconnectShortcut(closeApp: true)
+            Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
         default:
             log(info: "No such user activity")
         }

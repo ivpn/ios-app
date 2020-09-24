@@ -23,6 +23,7 @@
 
 import UIKit
 import NotificationCenter
+import NetworkExtension
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
@@ -57,23 +58,32 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 loginView.isHidden = false
                 disconnectedView.isHidden = true
                 connectedView.isHidden = true
-                actionButton.setTitle("Log In", for: .normal)
                 actionButton.backgroundColor = UIColor.init(named: "ivpnBlue")
                 logoView.backgroundColor = UIColor.init(named: "ivpnGray")
+                UIView.performWithoutAnimation {
+                    self.actionButton.setTitle("Log In", for: .normal)
+                    self.actionButton.layoutIfNeeded()
+                }
             case .disconnected?:
                 loginView.isHidden = true
                 disconnectedView.isHidden = false
                 connectedView.isHidden = true
-                actionButton.setTitle("Connect", for: .normal)
                 actionButton.backgroundColor = UIColor.init(named: "ivpnBlue")
                 logoView.backgroundColor = UIColor.init(named: "ivpnGray")
+                UIView.performWithoutAnimation {
+                    self.actionButton.setTitle("Connect", for: .normal)
+                    self.actionButton.layoutIfNeeded()
+                }
             case .connected?:
                 loginView.isHidden = true
                 disconnectedView.isHidden = true
                 connectedView.isHidden = false
-                actionButton.setTitle("Disconnect", for: .normal)
                 actionButton.backgroundColor = UIColor.init(named: "ivpnGray")
                 logoView.backgroundColor = UIColor.init(named: "ivpnBlue")
+                UIView.performWithoutAnimation {
+                    self.actionButton.setTitle("Disconnect", for: .normal)
+                    self.actionButton.layoutIfNeeded()
+                }
             case .none:
                 break
             }
@@ -83,6 +93,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
+    var latestStatus: NEVPNStatus = .invalid
+    
     // MARK: - @IBActions -
     
     @IBAction func action(_ sender: Any) {
@@ -90,6 +102,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     // MARK: - View Lifecycle -
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        startVPNStatusMonitor()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -114,7 +131,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             return
         }
         
-        guard ViewModel.status == .connected else {
+        guard ViewModel.currentStatus == .connected else {
             if displayMode != .disconnected {
                 displayMode = .disconnected
                 completionHandler(.newData)
@@ -143,7 +160,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             return
         }
         
-        guard ViewModel.status == .connected else {
+        guard ViewModel.currentStatus == .connected else {
             displayMode = .disconnected
             return
         }
@@ -151,6 +168,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         displayMode = .connected
         locationLabel.text = UserDefaults.shared.connectionLocation
         ipAddressLabel.text = UserDefaults.shared.connectionIpAddress
+        geoLookup { _ in }
     }
     
     private func geoLookup(completion: (@escaping (NCUpdateResult) -> Void)) {
@@ -180,6 +198,27 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         let url = URL(string: "ivpn://\(endpoint)")!
         extensionContext?.open(url) { _ in }
+    }
+    
+    private func startVPNStatusMonitor() {
+        let timer = TimerManager(timeInterval: 2)
+        timer.eventHandler = {
+            if self.latestStatus != ViewModel.currentStatus {
+                DispatchQueue.async {
+                    self.updateView()
+                }
+                self.latestStatus = ViewModel.currentStatus
+            }
+            
+            if (self.displayMode == .login && UserDefaults.shared.isLoggedIn) || (self.displayMode != .login && !UserDefaults.shared.isLoggedIn) {
+                DispatchQueue.async {
+                    self.updateView()
+                }
+            }
+            
+            timer.proceed()
+        }
+        timer.resume()
     }
     
 }

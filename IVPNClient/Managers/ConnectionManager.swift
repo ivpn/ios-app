@@ -37,10 +37,7 @@ class ConnectionManager {
     // MARK: - Properties -
     
     var reconnectAutomatically = false
-    var connected = false
     var settings: Settings
-    var closeApp = false
-    var statusModificationDate = Date()
     
     var status: NEVPNStatus = .invalid {
         didSet {
@@ -67,6 +64,10 @@ class ConnectionManager {
     
     private var authentication: Authentication
     private var vpnManager: VPNManager
+    private var connected = false
+    private var closeApp = false
+    private var actionType: ActionType = .connect
+    private var statusModificationDate = Date()
     
     // MARK: - Initialize -
     
@@ -96,7 +97,9 @@ class ConnectionManager {
                     self.vpnManager.installOnDemandRules(manager: manager, status: status)
                     self.updateOpenVPNLogFile()
                     self.updateOpenVPNLocalIp()
-                    self.evaluateCloseApp()
+                    if self.actionType == .connect {
+                        self.evaluateCloseApp()
+                    }
                 }
             } else {
                 self.connected = false
@@ -119,7 +122,7 @@ class ConnectionManager {
                 self.reconnectAutomatically = false
             }
 
-            if status == .disconnected {
+            if status == .disconnected && self.actionType == .disconnect {
                 self.evaluateCloseApp()
             }
             
@@ -268,8 +271,9 @@ class ConnectionManager {
         }
     }
     
-    func resetRulesAndConnectShortcut(closeApp: Bool = false) {
+    func resetRulesAndConnectShortcut(closeApp: Bool = false, actionType: ActionType = .connect) {
         self.closeApp = closeApp
+        self.actionType = actionType
         getStatus { _, status in
             guard self.canConnect else {
                 NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
@@ -282,8 +286,9 @@ class ConnectionManager {
         }
     }
     
-    func resetRulesAndDisconnectShortcut(closeApp: Bool = false) {
+    func resetRulesAndDisconnectShortcut(closeApp: Bool = false, actionType: ActionType = .connect) {
         self.closeApp = closeApp
+        self.actionType = actionType
         getStatus { _, status in
             guard self.canDisconnect(status: status) else {
                 UIApplication.topViewController()?.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"") { _ in
@@ -298,21 +303,21 @@ class ConnectionManager {
         }
     }
     
-    func connectShortcut(closeApp: Bool = false) {
+    func connectShortcut(closeApp: Bool = false, actionType: ActionType = .connect) {
         self.closeApp = closeApp
-        getStatus { _, status in
-            if status == .disconnected || status == .invalid {
-                self.resetRulesAndConnect()
-            }
+        self.actionType = actionType
+        
+        if status == .disconnected || status == .invalid {
+            self.resetRulesAndConnect()
         }
     }
     
-    func disconnectShortcut(closeApp: Bool = false) {
+    func disconnectShortcut(closeApp: Bool = false, actionType: ActionType = .connect) {
         self.closeApp = closeApp
-        getStatus { _, status in
-            if status != .disconnected && status != .invalid {
-                self.resetRulesAndDisconnect()
-            }
+        self.actionType = actionType
+        
+        if status != .disconnected && status != .invalid {
+            self.resetRulesAndDisconnect()
         }
     }
     
@@ -434,6 +439,15 @@ class ConnectionManager {
                 UIControl().sendAction(#selector(NSXPCConnection.suspend), to: UIApplication.shared, for: nil)
             }
         }
+    }
+    
+}
+
+extension ConnectionManager {
+    
+    enum ActionType {
+        case connect
+        case disconnect
     }
     
 }
