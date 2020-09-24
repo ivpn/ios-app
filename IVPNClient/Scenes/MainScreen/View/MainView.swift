@@ -141,6 +141,10 @@ class MainView: UIView {
     private func updateMapPosition(animated: Bool = true) {
         let vpnStatus = Application.shared.connectionManager.status
         
+        guard vpnStatus != .invalid else {
+            return
+        }
+        
         if vpnStatus.isDisconnected() && !Application.shared.connectionManager.reconnectAutomatically {
             updateMapPositionToLocalCoordinates(animated: animated)
         } else {
