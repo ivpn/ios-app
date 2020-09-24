@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.1 - 2020-09-23  
+
+[FIXED] Incorrect subscription expired warning  
+[FIXED] App crash when changing screen orientation on QR scanner without camera permission  
+[FIXED] Minor UI issues on the main screen  
+[FIXED] Today widget not updating UI state on iOS 14  
+
 ## 2.0.0 - 2020-09-08  
 
 [NEW] New design  
