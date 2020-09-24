@@ -110,10 +110,16 @@ class ConnectionManager {
             }
             
             if status == .disconnected && self.reconnectAutomatically {
-                DispatchQueue.async {
-                    self.connect()
-                    self.reconnectAutomatically = false
+                if Application.shared.settings.connectionProtocol == .ipsec {
+                    DispatchQueue.delay(0.25) {
+                        self.connect()
+                    }
+                } else {
+                    DispatchQueue.async {
+                        self.connect()
+                    }
                 }
+                self.reconnectAutomatically = false
             }
 
             if status == .disconnected && self.actionType == .disconnect {

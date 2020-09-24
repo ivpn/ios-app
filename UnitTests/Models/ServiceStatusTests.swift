@@ -41,7 +41,7 @@ class ServiceStatusTests: XCTestCase {
     }
     
     func test_activeUntilString() {
-        XCTAssertEqual(model.activeUntilString(), "10.01.2020")
+        XCTAssertEqual(model.activeUntilString(), "2020-Jan-10")
     }
     
     func test_isEnabled() {
@@ -81,11 +81,7 @@ class ServiceStatusTests: XCTestCase {
     }
     
     func test_isNewStyleAccount() {
-        XCTAssertTrue(ServiceStatus.isNewStyleAccount(username: "i-XXXX-XXXX-XXXX"))
-        XCTAssertFalse(ServiceStatus.isNewStyleAccount(username: "ivpnXXXXXXXX"))
-        XCTAssertFalse(ServiceStatus.isNewStyleAccount(username: "IVPNXXXXXXXX"))
-        XCTAssertFalse(ServiceStatus.isNewStyleAccount(username: "XXXXXXXXXXXX"))
-        XCTAssertFalse(ServiceStatus.isNewStyleAccount(username: ""))
+        XCTAssertFalse(model.isNewStyleAccount())
     }
     
     func test_isActiveUntilValid() {

@@ -186,7 +186,7 @@ class MapScrollView: UIScrollView {
                 make.top.equalTo(y)
             }
             
-            UIView.animate(withDuration: 0.25) {
+            UIView.animate(withDuration: 0.15) {
                 self.layoutIfNeeded()
             }
         } else {
@@ -195,7 +195,7 @@ class MapScrollView: UIScrollView {
                 make.top.equalTo(y)
             }
             
-            UIView.animate(withDuration: 0.25) {
+            UIView.animate(withDuration: 0.15) {
                 self.layoutIfNeeded()
             }
         }
