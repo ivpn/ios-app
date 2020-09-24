@@ -108,8 +108,8 @@ struct ServiceStatus: Codable {
         return username.hasPrefix("ivpn") || username.hasPrefix("i-")
     }
     
-    static func isNewStyleAccount(username: String) -> Bool {
-        return username.hasPrefix("i-")
+    func isNewStyleAccount() -> Bool {
+        return paymentMethod == "prepaid"
     }
     
     func daysUntilSubscriptionExpiration() -> Int {
