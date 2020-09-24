@@ -184,6 +184,7 @@
 		82A9E8C623471EBE007BCA7E /* staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82A9E8C423471EBE007BCA7E /* staging.xcconfig */; };
 		82A9E8C923471FB2007BCA7E /* wg-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82A9E8C723471FB2007BCA7E /* wg-release.xcconfig */; };
 		82A9E8CA23471FB2007BCA7E /* wg-staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82A9E8C823471FB2007BCA7E /* wg-staging.xcconfig */; };
+		82AA85782514DEB40027DAB8 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		82AA8818231E330A00E18ECB /* SessionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AA8817231E330A00E18ECB /* SessionStatus.swift */; };
 		82AAF0E92253A4A8005E792F /* StaticWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AAF0E82253A4A8005E792F /* StaticWebViewController.swift */; };
 		82B51CDF21DE3E31005CC9C9 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B51CDE21DE3E31005CC9C9 /* UITableView+Ext.swift */; };
@@ -1986,6 +1987,7 @@
 				826F7F1623A7A05F00777DB9 /* TodayViewController.swift in Sources */,
 				826F7F4023A7AA8200777DB9 /* Capability.swift in Sources */,
 				826F7F3B23A7AA3D00777DB9 /* OpenVPNProtocol.swift in Sources */,
+				82AA85782514DEB40027DAB8 /* Date+Ext.swift in Sources */,
 				826F7F3123A7A8CE00777DB9 /* Result.swift in Sources */,
 				826F7F3C23A7AA4200777DB9 /* WireGuardProtocol.swift in Sources */,
 				826F7F3F23A7AA6A00777DB9 /* ErrorResult.swift in Sources */,

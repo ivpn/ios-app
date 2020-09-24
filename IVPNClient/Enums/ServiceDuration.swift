@@ -51,11 +51,7 @@ enum ServiceDuration: CaseIterable {
     }
     
     func willBeActiveUntilFrom(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        
-        return formatter.string(from: activeUntilFrom(date: date))
+        return activeUntilFrom(date: date).formatDate()
     }
     
 }
