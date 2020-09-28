@@ -43,6 +43,10 @@ class Pinger {
     func ping() {
         guard evaluatePing() else { return }
         
+        PingMannager.shared.stopPing()
+        PingMannager.shared.pings = []
+        UserDefaults.shared.set(Date().timeIntervalSince1970, forKey: "LastPingTimestamp")
+        
         for server in serverList.servers {
             if let ipAddress = server.ipAddresses.first {
                 guard !ipAddress.isEmpty else { continue }
@@ -126,7 +130,6 @@ extension Pinger: PingDelegate {
             if pingsCount > 0 {
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: Notification.Name.PingDidComplete, object: nil)
-                    UserDefaults.shared.set(Date().timeIntervalSince1970, forKey: "LastPingTimestamp")
                     log(info: "Pinger service finished")
                 }
             }
