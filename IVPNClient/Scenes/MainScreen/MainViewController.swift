@@ -136,8 +136,6 @@ class MainViewController: UIViewController {
         
         let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
         
-        mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
-        mainView.updateInfoAlert()
         controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .loading
         
         ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
@@ -148,6 +146,8 @@ class MainViewController: UIViewController {
                 let viewModel = ProofsViewModel(model: model)
                 controlPanelViewController.connectionViewModel = viewModel
                 self.mainView.connectionViewModel = viewModel
+                self.mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
+                self.mainView.updateInfoAlert()
                 
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model

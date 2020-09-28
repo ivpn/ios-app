@@ -73,16 +73,6 @@ class InfoAlertViewModel {
     
     var infoAlert: InfoAlert = .subscriptionExpiration
     
-    // MARK: - Methods -
-    
-    func update() {
-        guard infoAlert != .connectionInfoFailure else { return }
-        
-        if shouldDisplay {
-            infoAlert = .subscriptionExpiration
-        }
-    }
-    
 }
 
 // MARK: - InfoAlertViewModel extension -
