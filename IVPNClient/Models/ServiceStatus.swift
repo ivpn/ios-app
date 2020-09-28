@@ -47,7 +47,7 @@ struct ServiceStatus: Codable {
     
     init() {
         let service = ServiceStatus.load()
-        isActive = service?.isActive ?? false
+        isActive = service?.isActive ?? true
         currentPlan = service?.currentPlan ?? nil
         activeUntil = service?.activeUntil ?? nil
         isOnFreeTrial = service?.isOnFreeTrial ?? false
