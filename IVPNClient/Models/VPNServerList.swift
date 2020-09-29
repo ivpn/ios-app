@@ -210,10 +210,9 @@ class VPNServerList {
     }
     
     func saveAllServers(exceptionGateway: String) {
-        let group = Application.shared.settings.fastestServerConfiguredKey
         for server in servers {
             let isFastestEnabled = server.gateway != exceptionGateway
-            StorageManager.saveServer(gateway: server.gateway, group: group, isFastestEnabled: isFastestEnabled)
+            StorageManager.saveServer(gateway: server.gateway, isFastestEnabled: isFastestEnabled)
         }
     }
     

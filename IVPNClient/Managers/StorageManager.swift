@@ -313,21 +313,20 @@ extension StorageManager {
 
 extension StorageManager {
     
-    static func saveServer(gateway: String, group: String, isFastestEnabled: Bool) {
+    static func saveServer(gateway: String, isFastestEnabled: Bool) {
         if let server = fetchServer(gateway: gateway) {
             server.isFastestEnabled = isFastestEnabled
         } else {
             let newServer = Server(context: context)
-            newServer.gateway = gateway
-            newServer.group = group
+            newServer.gateway = gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
             newServer.isFastestEnabled = isFastestEnabled
         }
         
         saveContext()
     }
     
-    static func fetchServers(gateway: String = "", group: String = "", isFastestEnabled: Bool = false) -> [Server]? {
-        let request: NSFetchRequest<Server> = Server.fetchRequest(gateway: gateway, group: group, isFastestEnabled: isFastestEnabled)
+    static func fetchServers(gateway: String = "", isFastestEnabled: Bool = false) -> [Server]? {
+        let request: NSFetchRequest<Server> = Server.fetchRequest(gateway: gateway, isFastestEnabled: isFastestEnabled)
         
         do {
             let result = try context.fetch(request)
@@ -362,10 +361,8 @@ extension StorageManager {
     static func canUpdateServer(isOn: Bool) -> Bool {
         guard !isOn else { return true }
         
-        let group = Application.shared.settings.fastestServerConfiguredKey
-        
-        if UserDefaults.standard.bool(forKey: group) {
-            if let servers = fetchServers(group: group, isFastestEnabled: true) {
+        if UserDefaults.standard.bool(forKey: Application.shared.settings.fastestServerConfiguredKey) {
+            if let servers = fetchServers(isFastestEnabled: true) {
                 if servers.count == 1 {
                     return false
                 }
