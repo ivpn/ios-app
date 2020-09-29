@@ -169,7 +169,9 @@ class VPNServerList {
     func getFastestServer() -> VPNServer? {
         let servers = filteredFastestServers
         let serversWithPing = servers.filter { $0.pingMs ?? -1 >= 0 }
-        if serversWithPing.isEmpty { return nil }
+        if serversWithPing.isEmpty {
+            return filteredFastestServers.first
+        }
         
         return servers.min {
             let leftPingMs = $0.pingMs ?? -1
