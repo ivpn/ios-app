@@ -65,10 +65,6 @@ class MainView: UIView {
         }
     }
     
-    deinit {
-        removeObservers()
-    }
-    
     // MARK: - Methods -
     
     func setupView(animated: Bool = true) {
@@ -98,10 +94,6 @@ class MainView: UIView {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(centerMap), name: Notification.Name.CenterMap, object: nil)
-    }
-    
-    private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.CenterMap, object: nil)
     }
     
     private func initSettingsAction() {

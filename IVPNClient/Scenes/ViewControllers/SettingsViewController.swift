@@ -236,10 +236,6 @@ class SettingsViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
     }
     
-    deinit {
-        removeObservers()
-    }
-    
     // MARK: - Segues -
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -302,13 +298,6 @@ class SettingsViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(agreedToTermsOfService), name: Notification.Name.TermsOfServiceAgreed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(serviceAuthorized), name: Notification.Name.ServiceAuthorized, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
-    }
-    
-    func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.TurnOffMultiHop, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.AuthenticationDismissed, object: nil)
     }
     
     @objc func turnOffMultiHop() {

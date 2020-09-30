@@ -51,10 +51,6 @@ class NetworkProtectionViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(loadHandler), name: Notification.Name.NetworkSaved, object: nil)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     // MARK: - Interface Orientations -
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

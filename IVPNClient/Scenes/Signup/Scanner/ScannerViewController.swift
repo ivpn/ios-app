@@ -67,10 +67,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         stopCaptureSession()
     }
     
-    deinit {
-       NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
-    }
-    
     // MARK: - Orientation -
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
