@@ -249,12 +249,7 @@ class MapScrollView: UIScrollView {
                 make.top.equalTo(point.1 + 17)
             }
             
-            let nearByServers = getNearByServers(server: server)
-            connectToServerPopup.servers = nearByServers
-            connectToServerPopup.vpnServer = nearByServers.first ?? server
-            connectToServerPopup.show()
-            NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
-            
+            showConnectToServerPopup(server: server)
             updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
             
             if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) {
@@ -271,6 +266,25 @@ class MapScrollView: UIScrollView {
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
         }
+    }
+    
+    @objc private func updateMapPositionToSelectedServer() {
+        guard Application.shared.connectionManager.status.isDisconnected() else {
+            return
+        }
+        
+        let server = UserDefaults.shared.isMultiHop ? Application.shared.settings.selectedExitServer : Application.shared.settings.selectedServer
+        
+        updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
+        showConnectToServerPopup(server: server)
+    }
+    
+    private func showConnectToServerPopup(server: VPNServer) {
+        let nearByServers = getNearByServers(server: server)
+        connectToServerPopup.servers = nearByServers
+        connectToServerPopup.vpnServer = nearByServers.first ?? server
+        connectToServerPopup.show()
+        NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
     private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
