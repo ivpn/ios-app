@@ -45,6 +45,7 @@ extension Notification.Name {
     public static let UpdateControlPanel = Notification.Name("updateControlPanel")
     public static let ProtocolSelected = Notification.Name("protocolSelected")
     public static let HideConnectionInfoPopup = Notification.Name("hideConnectionInfoPopup")
+    public static let ShowConnectToServerPopup = Notification.Name("showConnectToServerPopup")
     public static let HideConnectToServerPopup = Notification.Name("hideConnectToServerPopup")
     public static let CenterMap = Notification.Name("centerMap")
     
