@@ -51,6 +51,7 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var locationLoader: UIActivityIndicatorView!
     @IBOutlet weak var locationErrorLabel: UILabel!
     @IBOutlet weak var providerLabel: UILabel!
+    @IBOutlet weak var providerPlaceholderLabel: UILabel!
     @IBOutlet weak var providerLoader: UIActivityIndicatorView!
     @IBOutlet weak var providerErrorLabel: UILabel!
     
@@ -116,6 +117,10 @@ class ControlPanelView: UITableView {
         providerErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
         updateConnectSwitch()
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: protectionStatusTableCell)
+        
+        if UIDevice.screenHeightSmallerThan(device: .iPhones66s78) {
+            providerPlaceholderLabel.text = "ISP"
+        }
     }
     
     func updateConnectionInfo(viewModel: ProofsViewModel) {
