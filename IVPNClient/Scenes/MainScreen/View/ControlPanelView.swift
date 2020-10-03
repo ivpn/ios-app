@@ -119,6 +119,7 @@ class ControlPanelView: UITableView {
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: protectionStatusTableCell)
         
         if UIDevice.screenHeightSmallerThan(device: .iPhones66s78) {
+            protectionStatusLabel.font = protectionStatusLabel.font.withSize(28)
             providerPlaceholderLabel.text = "ISP"
         }
     }
