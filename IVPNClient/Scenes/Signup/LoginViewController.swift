@@ -122,24 +122,12 @@ class LoginViewController: UIViewController {
         }
     }
     
-    deinit {
-        removeObservers()
-    }
-    
     // MARK: - Observers -
     
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(termsOfServiceAgreed), name: Notification.Name.TermsOfServiceAgreed, object: nil)
-    }
-    
-    func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionDismissed, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
     }
     
     @objc func newSession() {

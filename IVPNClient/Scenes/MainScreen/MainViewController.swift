@@ -84,7 +84,6 @@ class MainViewController: UIViewController {
     }
     
     deinit {
-        removeObservers()
         updateServersTimer.invalidate()
         Application.shared.connectionManager.removeStatusChangeUpdates()
     }
@@ -170,12 +169,6 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateFloatingPanelLayout), name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(vpnConfigurationDisabled), name: Notification.Name.VPNConfigurationDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
-    }
-    
-    private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.VPNConfigurationDisabled, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
     }
     
     // MARK: - Private methods -

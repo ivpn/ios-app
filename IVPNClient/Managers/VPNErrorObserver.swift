@@ -42,7 +42,6 @@ class VPNErrorObserver {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.VPNConnectError, object: nil)
         wireguardErrorObserver?.invalidate()
         wireguardErrorObserver = nil
     }

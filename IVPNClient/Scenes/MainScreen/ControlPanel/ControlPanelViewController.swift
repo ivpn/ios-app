@@ -142,10 +142,6 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
     }
     
-    deinit {
-        removeObservers()
-    }
-    
     // MARK: - Gestures -
     
     private func setupGestureRecognizers() {
@@ -370,21 +366,6 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
-    }
-    
-    private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UpdateControlPanel, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.Connect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.Disconnect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.AuthenticationDismissed, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionDismissed, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ProtocolSelected, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.TermsOfServiceAgreed, object: nil)
     }
     
     // MARK: - Private methods -

@@ -69,18 +69,10 @@ class AccountViewController: UITableViewController {
         accountView.initQRCode(viewModel: viewModel)
     }
     
-    deinit {
-        removeObservers()
-    }
-    
     // MARK: - Observers -
     
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
-    }
-    
-    func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
     }
     
     // MARK: - Private methods -

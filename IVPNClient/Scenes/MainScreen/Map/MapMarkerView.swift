@@ -106,10 +106,6 @@ class MapMarkerView: UIView {
         super.updateConstraints()
     }
     
-    deinit {
-        removeObservers()
-    }
-    
     // MARK: - Methods -
     
     func updateCircles(color: UIColor) {
@@ -163,16 +159,6 @@ class MapMarkerView: UIView {
             NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive), name: UIScene.didActivateNotification, object: nil)
         } else {
             NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-        }
-    }
-    
-    private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.HideConnectionInfoPopup, object: nil)
-        
-        if #available(iOS 13.0, *) {
-            NotificationCenter.default.removeObserver(self, name: UIScene.didActivateNotification, object: nil)
-        } else {
-            NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         }
     }
     
