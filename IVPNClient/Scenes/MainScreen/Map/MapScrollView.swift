@@ -139,6 +139,7 @@ class MapScrollView: UIScrollView {
     }
     
     private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateMapPositionToSelectedServer), name: Notification.Name.ShowConnectToServerPopup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideConnectToServerPopup), name: Notification.Name.HideConnectToServerPopup, object: nil)
     }
     
@@ -233,18 +234,7 @@ class MapScrollView: UIScrollView {
         let city = sender.titleLabel?.text ?? ""
         
         if let server = Application.shared.serverList.getServer(byCity: city) {
-            let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
-            connectToServerPopup.snp.updateConstraints { make in
-                make.left.equalTo(point.0 - 135)
-                make.top.equalTo(point.1 + 17)
-            }
-            
-            let nearByServers = getNearByServers(server: server)
-            connectToServerPopup.servers = nearByServers
-            connectToServerPopup.vpnServer = nearByServers.first ?? server
-            connectToServerPopup.show()
-            NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
-            
+            showConnectToServerPopup(server: server)
             updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
             
             if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) {
@@ -261,6 +251,36 @@ class MapScrollView: UIScrollView {
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
         }
+    }
+    
+    @objc private func updateMapPositionToSelectedServer() {
+        guard Application.shared.connectionManager.status.isDisconnected() else {
+            return
+        }
+        
+        let server = UserDefaults.shared.isMultiHop ? Application.shared.settings.selectedExitServer : Application.shared.settings.selectedServer
+        
+        guard !server.random else {
+            NotificationCenter.default.post(name: Notification.Name.CenterMap, object: nil)
+            return
+        }
+        
+        showConnectToServerPopup(server: server)
+        updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
+    }
+    
+    private func showConnectToServerPopup(server: VPNServer) {
+        let point = getCoordinatesBy(latitude: server.latitude, longitude: server.longitude)
+        connectToServerPopup.snp.updateConstraints { make in
+            make.left.equalTo(point.0 - 135)
+            make.top.equalTo(point.1 + 17)
+        }
+        
+        let nearByServers = getNearByServers(server: server)
+        connectToServerPopup.servers = nearByServers
+        connectToServerPopup.vpnServer = nearByServers.first ?? server
+        connectToServerPopup.show()
+        NotificationCenter.default.post(name: Notification.Name.HideConnectionInfoPopup, object: nil)
     }
     
     private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
