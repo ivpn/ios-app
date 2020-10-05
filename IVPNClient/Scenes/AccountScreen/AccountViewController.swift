@@ -49,9 +49,9 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func logOut(_ sender: Any) {
-        showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out") { _ in
+        showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out", actionHandler: { _ in
             self.logOut()
-        }
+        })
     }
     
     // MARK: - View Lifecycle -

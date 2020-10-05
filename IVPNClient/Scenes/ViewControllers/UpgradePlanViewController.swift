@@ -28,6 +28,7 @@ class UpgradePlanViewController: UIViewController {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var illustrationHeightConstraint: NSLayoutConstraint!
     
     // MARK: - View Lifecycle -
     
@@ -35,6 +36,10 @@ class UpgradePlanViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = false
         titleLabel.text = "\(UserDefaults.shared.sessionsLimit) devices connected"
+        
+        if UIDevice.screenHeightSmallerThan(device: .iPhones66s78) {
+            illustrationHeightConstraint.constant = 0
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
