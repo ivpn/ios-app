@@ -27,7 +27,6 @@ import CoreData
 extension Server {
     
     @NSManaged public var gateway: String?
-    @NSManaged public var group: String?
     @NSManaged public var isFastestEnabled: Bool
     
     convenience init(context: NSManagedObjectContext, needToSave: Bool) {
@@ -35,16 +34,12 @@ extension Server {
         self.init(entity: entity!, insertInto: needToSave ? context : nil)
     }
     
-    @nonobjc public class func fetchRequest(gateway: String = "", group: String = "", isFastestEnabled: Bool = false) -> NSFetchRequest<Server> {
+    @nonobjc public class func fetchRequest(gateway: String = "", isFastestEnabled: Bool = false) -> NSFetchRequest<Server> {
         let fetchRequest = NSFetchRequest<Server>(entityName: "Server")
         var filters = [NSPredicate]()
         
         if !gateway.isEmpty {
-            filters.append(NSPredicate(format: "gateway == %@", gateway))
-        }
-        
-        if !group.isEmpty {
-            filters.append(NSPredicate(format: "group == %@", group))
+            filters.append(NSPredicate(format: "gateway == %@", gateway.replacingOccurrences(of: ".wg.", with: ".gw.")))
         }
         
         if isFastestEnabled {
