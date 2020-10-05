@@ -192,7 +192,9 @@ class MainViewController: UIViewController {
             case .success(let serverList):
                 Application.shared.serverList = serverList
                 Pinger.shared.serverList = Application.shared.serverList
-                Pinger.shared.ping()
+                DispatchQueue.async {
+                    Pinger.shared.ping()
+                }
             default:
                 break
             }
