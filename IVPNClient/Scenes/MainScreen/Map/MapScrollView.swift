@@ -23,7 +23,6 @@
 
 import UIKit
 import NetworkExtension
-import Bamboo
 import SnapKit
 
 class MapScrollView: UIScrollView {
@@ -56,7 +55,6 @@ class MapScrollView: UIScrollView {
     let markerGatewayView = MapMarkerView(type: .gateway)
     var localCoordinates: (Double, Double)?
     
-    private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     private var markers: [UIButton] = []
     private var connectToServerPopup = ConnectToServerPopupView()
     
@@ -76,9 +74,12 @@ class MapScrollView: UIScrollView {
     
     func setupConstraints() {
         if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
-            iPadConstraints.activate()
+            snp.remakeConstraints { make in
+                make.top.equalTo(MapConstants.Container.iPadLandscapeTopAnchor)
+                make.left.equalTo(MapConstants.Container.iPadLandscapeLeftAnchor)
+            }
         } else {
-            iPadConstraints.deactivate()
+            snp.removeConstraints()
         }
     }
     
