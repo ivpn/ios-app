@@ -23,7 +23,7 @@
 
 import UIKit
 import SwiftyStoreKit
-import Bamboo
+import SnapKit
 import JGProgressHUD
 
 class PaymentViewController: UITableViewController {
@@ -162,8 +162,17 @@ class PaymentViewController: UITableViewController {
             tableView.separatorStyle = .none
             view.addSubview(spinner)
             view.addSubview(retryButton)
-            spinner.bb.centerX().centerY(-80)
-            retryButton.bb.centerX().centerY(-80)
+            
+            spinner.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.centerY.equalToSuperview().offset(-80)
+            }
+            
+            retryButton.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.centerY.equalToSuperview().offset(-80)
+            }
+            
             descriptionLabel?.text = "Add more time to your IVPN account"
             payButton?.set(title: "Pay", subtitle: "(Will be active until \(service.willBeActiveUntil))")
         }
