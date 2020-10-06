@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import Bamboo
+import SnapKit
 
 class PaymentComponentView: UIView {
     
@@ -30,7 +30,9 @@ class PaymentComponentView: UIView {
     
     override func awakeFromNib() {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            bb.left(4)
+            snp.makeConstraints { make in
+                make.left.equalTo(4)
+            }
         }
     }
     
