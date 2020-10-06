@@ -91,6 +91,10 @@ extension InfoAlertViewModel {
 extension InfoAlertViewModel: InfoAlertViewDelegate {
     
     func action() {
+        guard shouldDisplay else {
+            return
+        }
+        
         switch infoAlert {
         case .subscriptionExpiration:
             if let topViewController = UIApplication.topViewController() as? MainViewController {
