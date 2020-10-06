@@ -174,7 +174,13 @@ class MapMarkerView: UIView {
     
     private func initCircle(_ circle: UIView, radius: CGFloat) {
         addSubview(circle)
-        circle.bb.center().size(width: radius, height: radius)
+        
+        circle.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(radius)
+            make.height.equalTo(radius)
+        }
+        
         circle.layer.cornerRadius = radius / 2
         circle.clipsToBounds = true
     }
@@ -192,7 +198,13 @@ class MapMarkerView: UIView {
         circle1.addSubview(animatedCircle)
         circle1.isUserInteractionEnabled = false
         animatedCircle.isUserInteractionEnabled = false
-        animatedCircle.bb.center().size(width: radius1, height: radius1)
+        
+        animatedCircle.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(radius1)
+            make.height.equalTo(radius1)
+        }
+        
         animatedCircle.layer.addSublayer(animatedCircleLayer)
     }
     
