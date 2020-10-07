@@ -85,7 +85,6 @@ class MainView: UIView {
     
     func updateInfoAlert() {
         if infoAlertViewModel.shouldDisplay {
-            infoAlertViewModel.update()
             infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
         } else {
             infoAlertView.hide()
