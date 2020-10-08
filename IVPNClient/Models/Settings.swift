@@ -59,11 +59,7 @@ class Settings {
     }
     
     var fastestServerConfiguredKey: String {
-        if connectionProtocol.tunnelType() == .wireguard {
-            return "FastestServerConfiguredForWireGuard"
-        } else {
-            return "FastestServerConfiguredForOpenVPN"
-        }
+        return "FastestServerConfiguredForOpenVPN"
     }
 
     init(serverList: VPNServerList) {

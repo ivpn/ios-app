@@ -86,7 +86,7 @@ extension ServersConfigurationTableViewController: ServerConfigurationCellDelega
         let fastestServerConfiguredKey = Application.shared.settings.fastestServerConfiguredKey
         
         if UserDefaults.standard.bool(forKey: fastestServerConfiguredKey) {
-            StorageManager.saveServer(gateway: gateway, group: fastestServerConfiguredKey, isFastestEnabled: isOn)
+            StorageManager.saveServer(gateway: gateway, isFastestEnabled: isOn)
         } else {
             Application.shared.serverList.saveAllServers(exceptionGateway: gateway)
             UserDefaults.standard.set(true, forKey: fastestServerConfiguredKey)
