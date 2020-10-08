@@ -72,10 +72,6 @@ class MapScrollView: UIScrollView {
         addObservers()
     }
     
-    deinit {
-        removeObservers()
-    }
-    
     // MARK: - Methods -
     
     func setupConstraints() {
@@ -145,12 +141,6 @@ class MapScrollView: UIScrollView {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateMapPositionToSelectedServer), name: Notification.Name.ShowConnectToServerPopup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideConnectToServerPopup), name: Notification.Name.HideConnectToServerPopup, object: nil)
-    }
-    
-    private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.ServerSelected, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.PingDidComplete, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.HideConnectToServerPopup, object: nil)
     }
     
     private func initGestures() {

@@ -67,10 +67,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         stopCaptureSession()
     }
     
-    deinit {
-       NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
-    }
-    
     // MARK: - Orientation -
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -164,7 +160,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
 
     private func allowCameraAccessViaSetting() {
-        showActionAlert(title: "Allow Camera", message: "Camera access is required to scan QR code", action: "Open Settings", actionHandler:  { _ in
+        showActionAlert(title: "Allow Camera", message: "Camera access is required to scan QR code", action: "Open Settings", actionHandler: { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url)
             }
