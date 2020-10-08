@@ -1,5 +1,9 @@
 # IVPN for iOS
 
+![CI](https://github.com/ivpn/ios-app/workflows/CI/badge.svg)
+![SwiftLint](https://github.com/ivpn/ios-app/workflows/SwiftLint/badge.svg)
+![Lint Code Base](https://github.com/ivpn/ios-app/workflows/Lint%20Code%20Base/badge.svg)
+
 **IVPN for iOS** is a native app built using Swift language. Some of the features include: multiple protocols (IKEv2, OpenVPN, WireGuard), Kill-switch, Multi-Hop, Trusted Networks, AntiTracker, Custom DNS, Dark mode and more.  
 IVPN iOS app is distributed on the [App Store](https://apps.apple.com/us/app/ivpn-serious-privacy-protection/id1193122683?mt=8).  
 
