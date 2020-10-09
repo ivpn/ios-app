@@ -62,6 +62,7 @@ extension ControlPanelViewController {
             selectNetworkTrust(network: Application.shared.network, sourceView: controlPanelView.networkView) { trust in
                 self.controlPanelView.networkView.update(trust: trust)
                 Application.shared.connectionManager.evaluateConnection()
+                self.needToUpdateNetworkProtectionRules()
             }
         }
         

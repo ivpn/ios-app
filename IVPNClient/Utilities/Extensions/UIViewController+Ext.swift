@@ -159,6 +159,27 @@ extension UIViewController {
         }
     }
     
+    func needToUpdateNetworkProtectionRules() {
+        guard UserDefaults.shared.networkProtectionEnabled else {
+            return
+        }
+        
+        if Application.shared.connectionManager.status == .connected {
+            showActionSheet(title: "Network Protection settings will take effect the next time the VPN is connected.", actions: ["Reconnect now"], sourceView: view) { index in
+                switch index {
+                case 0:
+                    Application.shared.connectionManager.reconnect()
+                default:
+                    break
+                }
+            }
+        }
+        
+        if Application.shared.connectionManager.status == .disconnected {
+            Application.shared.connectionManager.installOnDemandRules()
+        }
+    }
+    
 }
 
 // MARK: - Presenter -

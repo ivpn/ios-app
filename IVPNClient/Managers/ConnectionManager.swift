@@ -259,6 +259,16 @@ class ConnectionManager {
         }
     }
     
+    func installOnDemandRules() {
+        getStatus { tunnelType, status in
+            if status == .disconnected {
+                self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
+                    self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected)
+                }
+            }
+        }
+    }
+    
     func resetRulesAndConnect() {
         removeOnDemandRules {
             self.connect()
