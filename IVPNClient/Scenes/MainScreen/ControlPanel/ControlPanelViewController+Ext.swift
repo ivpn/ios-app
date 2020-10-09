@@ -122,14 +122,11 @@ extension ControlPanelViewController {
 extension ControlPanelViewController: ServerViewControllerDelegate {
     
     func reconnectToFastestServer() {
-        Application.shared.connectionManager.getStatus { _, status in
-            if status == .connected {
-                self.needsToReconnect = true
-                Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
-                DispatchQueue.delay(0.5) {
-                    UserDefaults.shared.set(0, forKey: "LastPingTimestamp")
-                    Pinger.shared.ping()
-                }
+        if Application.shared.connectionManager.status == .connected {
+            needsToReconnect = true
+            Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
+            DispatchQueue.delay(0.5) {
+                Pinger.shared.ping()
             }
         }
     }
