@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.2 - 2020-10-08  
+
+[IMPROVED] Minor improvements on the map  
+[FIXED] Selecting the fastest server ignores user's configuration  
+[FIXED] App crash caused by servers ping indicators  
+[FIXED] UI fixes for 4" display iPhone devices (5, 5s, 5c, SE)  
+
 ## 2.0.1 - 2020-09-23  
 
 [FIXED] Incorrect subscription expired warning  
