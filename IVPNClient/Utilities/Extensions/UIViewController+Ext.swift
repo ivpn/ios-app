@@ -159,13 +159,13 @@ extension UIViewController {
         }
     }
     
-    func needToUpdateNetworkProtectionRules() {
+    func needToUpdateNetworkProtectionRules(network: Network) {
         guard UserDefaults.shared.networkProtectionEnabled else {
             return
         }
         
-        if Application.shared.connectionManager.status == .connected {
-            showActionSheet(title: "Network Protection settings will take effect the next time the VPN is connected.", actions: ["Reconnect now"], sourceView: view) { index in
+        if Application.shared.connectionManager.status == .connected && (network.name != Application.shared.network.name || network.trust != NetworkTrust.Trusted.rawValue) {
+            showActionSheet(title: "The new Network Protection settings will take effect the next time the VPN is connected.", actions: ["Reconnect now"], sourceView: view) { index in
                 switch index {
                 case 0:
                     Application.shared.connectionManager.reconnect()
@@ -175,8 +175,12 @@ extension UIViewController {
             }
         }
         
-        if Application.shared.connectionManager.status == .disconnected {
-            Application.shared.connectionManager.installOnDemandRules()
+        if Application.shared.connectionManager.status == .disconnected && (network.name != Application.shared.network.name || network.trust != NetworkTrust.Untrusted.rawValue) {
+            if Application.shared.settings.connectionProtocol != .ipsec {
+                Application.shared.connectionManager.installOnDemandRules()
+            } else  {
+                showAlert(title: "", message: "The new Network Protection settings will take effect the next time the VPN is connected.")
+            }
         }
     }
     

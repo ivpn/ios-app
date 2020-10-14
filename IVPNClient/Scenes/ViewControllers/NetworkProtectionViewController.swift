@@ -181,7 +181,7 @@ extension NetworkProtectionViewController {
         selectNetworkTrust(network: collection[indexPath.section][indexPath.row], sourceView: view) { trust in
             self.trustSelected(trust: trust, indexPath: indexPath)
             Application.shared.connectionManager.evaluateConnection()
-            self.needToUpdateNetworkProtectionRules()
+            self.needToUpdateNetworkProtectionRules(network: self.collection[indexPath.section][indexPath.row])
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -228,7 +228,7 @@ extension NetworkProtectionViewController: NetworkProtectionHeaderTableViewCellD
         if isOn {
             NetworkManager.shared.startMonitoring {
                 Application.shared.connectionManager.evaluateConnection()
-                self.needToUpdateNetworkProtectionRules()
+                self.needToUpdateNetworkProtectionRules(network: Application.shared.network)
             }
         } else {
             Application.shared.connectionManager.resetOnDemandRules()
