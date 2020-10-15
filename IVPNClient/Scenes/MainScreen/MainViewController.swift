@@ -80,7 +80,6 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         startPingService(updateServerListDidComplete: updateServerListDidComplete)
         refreshUI()
-        updateGeoLocation()
     }
     
     deinit {
