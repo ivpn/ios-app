@@ -244,10 +244,8 @@ class MainViewController: UIViewController {
             mainView.updateInfoAlert()
         }
         
-        Application.shared.connectionManager.getStatus { _, status in
-            if status == .invalid {
-                self.updateGeoLocation()
-            }
+        if Application.shared.connectionManager.status == .invalid {
+            updateGeoLocation()
         }
         
         if UserDefaults.standard.bool(forKey: "-UITests") {
