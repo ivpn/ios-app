@@ -80,15 +80,7 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         startPingService(updateServerListDidComplete: updateServerListDidComplete)
         refreshUI()
-        
-        if !NetworkManager.shared.isNetworkReachable {
-            mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
-            mainView.updateInfoAlert()
-        }
-        
-        if UserDefaults.standard.bool(forKey: "-UITests") {
-            updateGeoLocation()
-        }
+        initConnectionInfo()
     }
     
     deinit {
@@ -244,6 +236,23 @@ class MainViewController: UIViewController {
     
     private func initErrorObservers() {
         vpnErrorObserver.delegate = self
+    }
+    
+    private func initConnectionInfo() {
+        if !NetworkManager.shared.isNetworkReachable {
+            mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
+            mainView.updateInfoAlert()
+        }
+        
+        Application.shared.connectionManager.getStatus { _, status in
+            if status == .invalid {
+                self.updateGeoLocation()
+            }
+        }
+        
+        if UserDefaults.standard.bool(forKey: "-UITests") {
+            updateGeoLocation()
+        }
     }
     
 }
