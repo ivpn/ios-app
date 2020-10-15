@@ -80,6 +80,15 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         startPingService(updateServerListDidComplete: updateServerListDidComplete)
         refreshUI()
+        
+        if !NetworkManager.shared.isNetworkReachable {
+            mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
+            mainView.updateInfoAlert()
+        }
+        
+        if UserDefaults.standard.bool(forKey: "-UITests") {
+            updateGeoLocation()
+        }
     }
     
     deinit {
