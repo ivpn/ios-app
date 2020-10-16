@@ -105,7 +105,7 @@ class NetworkViewTableCell: UITableViewCell {
         case NetworkType.cellular.rawValue:
             nameLabel.icon(text: network.name!, imageName: "Cellular")
         case NetworkType.none.rawValue:
-            if network.name == "WiFi" {
+            if network.name == "Wi-Fi" {
                 nameLabel.icon(text: network.name!, imageName: "WiFi")
             } else {
                 nameLabel.text = network.name
