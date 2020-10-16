@@ -112,7 +112,7 @@ class MainViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         floatingPanel.updateLayout()
-        mainView.updateView()
+        mainView.updateLayout()
     }
     
     // MARK: - Methods -

@@ -74,7 +74,7 @@ class MainView: UIView {
         updateMapPosition(animated: animated)
     }
     
-    func updateView() {
+    func updateLayout() {
         setupConstraints()
         updateInfoAlert()
         updateActionButtons()
