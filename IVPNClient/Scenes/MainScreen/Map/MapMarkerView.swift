@@ -150,6 +150,10 @@ class MapMarkerView: UIView {
         })
     }
     
+    func updateView() {
+        connectionInfoPopup.updateView()
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {

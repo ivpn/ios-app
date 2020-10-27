@@ -127,6 +127,11 @@ class MapScrollView: UIScrollView {
         }
     }
     
+    func updateMapMarkers() {
+        markerLocalView.updateView()
+        markerGatewayView.updateView()
+    }
+    
     // MARK: - Private methods -
     
     private func setupView() {

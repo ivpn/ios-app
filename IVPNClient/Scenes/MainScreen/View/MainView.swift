@@ -72,6 +72,7 @@ class MainView: UIView {
         updateInfoAlert()
         updateActionButtons()
         updateMapPosition(animated: animated)
+        mapScrollView.updateMapMarkers()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
