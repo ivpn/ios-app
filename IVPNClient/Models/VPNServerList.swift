@@ -170,7 +170,7 @@ class VPNServerList {
         let servers = filteredFastestServers
         let serversWithPing = servers.filter { $0.pingMs ?? -1 >= 0 }
         if serversWithPing.isEmpty {
-            return filteredFastestServers.first
+            return Application.shared.settings.selectedServer
         }
         
         return servers.min {
