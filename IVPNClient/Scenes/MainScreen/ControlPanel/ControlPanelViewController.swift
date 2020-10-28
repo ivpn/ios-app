@@ -420,7 +420,12 @@ class ControlPanelViewController: UITableViewController {
         
         if needsToReconnect {
             needsToReconnect = false
+            Application.shared.connectionManager.reconnectAutomatically = true
             Application.shared.connectionManager.connect()
+            
+            DispatchQueue.delay(1) {
+                Application.shared.connectionManager.reconnectAutomatically = false
+            }
         }
     }
     

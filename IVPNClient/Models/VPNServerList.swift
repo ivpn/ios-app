@@ -181,6 +181,11 @@ class VPNServerList {
         }
     }
     
+    func noPing() -> Bool {
+        let serversWithPing = servers.filter { $0.pingMs ?? -1 >= 0 }
+        return serversWithPing.isEmpty
+    }
+    
     func validateServer(firstServer: VPNServer, secondServer: VPNServer) -> Bool {
         guard UserDefaults.shared.isMultiHop else { return true }
         guard firstServer.countryCode != secondServer.countryCode else { return false }
