@@ -228,7 +228,6 @@ extension NetworkProtectionViewController: NetworkProtectionHeaderTableViewCellD
         if isOn {
             NetworkManager.shared.startMonitoring {
                 Application.shared.connectionManager.evaluateConnection()
-                self.needToUpdateNetworkProtectionRules(network: Application.shared.network)
             }
         } else {
             Application.shared.connectionManager.resetOnDemandRules()
