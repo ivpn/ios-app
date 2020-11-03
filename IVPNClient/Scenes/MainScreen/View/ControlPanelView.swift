@@ -153,8 +153,7 @@ class ControlPanelView: UITableView {
     
     func updateAntiTracker() {
         antiTrackerSwitch.isOn = UserDefaults.shared.isAntiTracker
-        // TODO: Implement with new custom color
-        // antiTrackerSwitch.onTintColor = UserDefaults.shared.isAntiTrackerHardcore ? UIColor.init(named: Theme.ivpnRed) : UIColor.init(named: Theme.ivpnBlue)
+        antiTrackerSwitch.onTintColor = UserDefaults.shared.isAntiTrackerHardcore ? UIColor.init(named: Theme.ivpnDarkRed) : UIColor.init(named: Theme.ivpnBlue)
     }
     
     func updateProtocol() {
