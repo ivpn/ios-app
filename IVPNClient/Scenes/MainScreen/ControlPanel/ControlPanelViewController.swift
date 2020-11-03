@@ -297,9 +297,9 @@ class ControlPanelViewController: UITableViewController {
             NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
         }
         
-        if !Application.shared.connectionManager.reconnectAutomatically && NetworkManager.shared.isNetworkReachable && vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
+        if NetworkManager.shared.isNetworkReachable && vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
             DispatchQueue.delay(0.6) {
-                if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable {
+                if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable && !self.needsToReconnect && !Application.shared.connectionManager.reconnectAutomatically {
                     self.reloadGeoLocation()
                 }
             }
