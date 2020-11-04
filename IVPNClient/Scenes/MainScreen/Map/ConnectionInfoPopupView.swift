@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import Bamboo
+import SnapKit
 
 class ConnectionInfoPopupView: UIView {
     
@@ -139,7 +139,12 @@ class ConnectionInfoPopupView: UIView {
     // MARK: - Private methods -
     
     private func setupConstraints() {
-        bb.size(width: 270, height: 69).centerX().centerY(52)
+        snp.makeConstraints { make in
+            make.width.equalTo(270)
+            make.height.equalTo(69)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(52)
+        }
     }
     
     private func setupView() {
@@ -163,12 +168,44 @@ class ConnectionInfoPopupView: UIView {
     }
     
     private func setupLayout() {
-        container.bb.fill()
-        arrow.bb.size(width: 14, height: 14).centerX().top(-7)
-        statusLabel.bb.left(18).top(15).right(-18).height(14)
-        locationLabel.bb.left(18).bottom(-15).right(-48).height(19)
-        actionButton.bb.size(width: 20, height: 20).bottom(-15).right(-18)
-        errorLabel.bb.top(10).right(-20).bottom(-10).left(20)
+        container.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        arrow.snp.makeConstraints { make in
+            make.width.equalTo(14)
+            make.height.equalTo(14)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(-7)
+        }
+        
+        statusLabel.snp.makeConstraints { make in
+            make.left.equalTo(18)
+            make.top.equalTo(15)
+            make.right.equalTo(-18)
+            make.height.equalTo(14)
+        }
+        
+        locationLabel.snp.makeConstraints { make in
+            make.left.equalTo(18)
+            make.bottom.equalTo(-15)
+            make.right.equalTo(-48)
+            make.height.equalTo(19)
+        }
+        
+        actionButton.snp.makeConstraints { make in
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+            make.bottom.equalTo(-15)
+            make.right.equalTo(-18)
+        }
+        
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(10)
+            make.right.equalTo(-20)
+            make.bottom.equalTo(-10)
+            make.left.equalTo(20)
+        }
     }
     
     @objc private func infoAction() {

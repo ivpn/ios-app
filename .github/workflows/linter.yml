@@ -12,7 +12,7 @@ jobs:
         uses: docker://github/super-linter:v3.13.1
         env:
           VALIDATE_ALL_CODEBASE: false
-          VALIDATE_MD: false
+          VALIDATE_MARKDOWN: false
           VALIDATE_GO: false
           VALIDATE_POWERSHELL: false
           DEFAULT_BRANCH: develop
