@@ -74,6 +74,13 @@ class MainView: UIView {
         updateMapPosition(animated: animated)
     }
     
+    func updateLayout() {
+        setupConstraints()
+        updateInfoAlert()
+        updateActionButtons()
+        mapScrollView.updateMapPositionToCurrentCoordinates()
+    }
+    
     func updateStatus(vpnStatus: NEVPNStatus) {
         updateMapPosition(vpnStatus: vpnStatus)
         mapScrollView.updateStatus(vpnStatus: vpnStatus)

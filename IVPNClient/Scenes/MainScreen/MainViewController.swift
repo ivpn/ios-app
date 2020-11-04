@@ -111,7 +111,8 @@ class MainViewController: UIViewController {
     // MARK: - Interface Orientations -
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        refreshUI()
+        floatingPanel.updateLayout()
+        mainView.updateLayout()
     }
     
     // MARK: - Methods -
