@@ -244,8 +244,11 @@ class ControlPanelViewController: UITableViewController {
         registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
         
         DispatchQueue.delay(0.5) {
-            Pinger.shared.ping()
-            Application.shared.settings.updateRandomServer()
+            if Application.shared.connectionManager.status.isDisconnected() {
+                Pinger.shared.ping()
+                Application.shared.settings.updateRandomServer()
+            }
+            
         }
     }
     
@@ -288,17 +291,16 @@ class ControlPanelViewController: UITableViewController {
             hud.dismiss()
         }
         
-        if vpnStatus != lastVPNStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
-            refreshServiceStatus()
-            NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
+        if !needsToReconnect && !Application.shared.connectionManager.reconnectAutomatically && vpnStatus != lastVPNStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
+            if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable {
+                refreshServiceStatus()
+                NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
+            }
         }
         
         if vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
             NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
-        }
-        
-        if vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
-            DispatchQueue.delay(0.6) {
+            DispatchQueue.delay(0.75) {
                 if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable && !self.needsToReconnect && !Application.shared.connectionManager.reconnectAutomatically {
                     self.reloadGeoLocation()
                 }
@@ -418,7 +420,12 @@ class ControlPanelViewController: UITableViewController {
         
         if needsToReconnect {
             needsToReconnect = false
+            Application.shared.connectionManager.reconnectAutomatically = true
             Application.shared.connectionManager.connect()
+            
+            DispatchQueue.delay(1) {
+                Application.shared.connectionManager.reconnectAutomatically = false
+            }
         }
     }
     

@@ -1,6 +1,5 @@
 PODS:
   - ActiveLabel (1.1.0)
-  - Bamboo (1.2.0)
   - FloatingPanel (1.7.4)
   - JGProgressHUD (2.0.4)
   - KeychainAccess (3.2.1)
@@ -26,7 +25,6 @@ PODS:
 
 DEPENDENCIES:
   - ActiveLabel (~> 1.1.0)
-  - Bamboo (~> 1.2.0)
   - FloatingPanel (~> 1.7.2)
   - JGProgressHUD (~> 2.0.3)
   - KeychainAccess (~> 3.2.0)
@@ -39,7 +37,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - ActiveLabel
-    - Bamboo
     - FloatingPanel
     - JGProgressHUD
     - KeychainAccess
@@ -62,7 +59,6 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
-  Bamboo: d8a9761dc8c1bfbace8eb82c6518626724f812b0
   FloatingPanel: 3c9d0e30fe350e1613157557769d2ec97f76b96b
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   KeychainAccess: d5470352939ced6d6f7fb51cb2e67aae51fc294f
@@ -74,6 +70,6 @@ SPEC CHECKSUMS:
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
   TunnelKit: cbd063b8b6f4f6a182cf48e646ff35cb2365bf91
 
-PODFILE CHECKSUM: ab2634f8c7c8c0cbe2510438277925929b5b6f10
+PODFILE CHECKSUM: 4e0b3b78101a54c563c4f00daa8d96522f22e04c
 
 COCOAPODS: 1.8.4
