@@ -244,8 +244,11 @@ class ControlPanelViewController: UITableViewController {
         registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
         
         DispatchQueue.delay(0.5) {
-            Pinger.shared.ping()
-            Application.shared.settings.updateRandomServer()
+            if Application.shared.connectionManager.status.isDisconnected() {
+                Pinger.shared.ping()
+                Application.shared.settings.updateRandomServer()
+            }
+            
         }
     }
     
