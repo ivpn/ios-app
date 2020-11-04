@@ -55,10 +55,10 @@ class StorageManagerTests: XCTestCase {
     }
     
     func test_saveWiFiNetwork() {
-        StorageManager.saveWiFiNetwork(name: "WiFi 1")
-        let networks = StorageManager.fetchNetworks(name: "WiFi 1", type: NetworkType.wifi.rawValue)
+        StorageManager.saveWiFiNetwork(name: "Wi-Fi 1")
+        let networks = StorageManager.fetchNetworks(name: "Wi-Fi 1", type: NetworkType.wifi.rawValue)
         if let network = networks?.first {
-            XCTAssertEqual(network.name, "WiFi 1")
+            XCTAssertEqual(network.name, "Wi-Fi 1")
             XCTAssertEqual(network.type, NetworkType.wifi.rawValue)
         } else {
             XCTFail("Network not found")
@@ -66,10 +66,10 @@ class StorageManagerTests: XCTestCase {
     }
     
     func test_saveNetwork() {
-        StorageManager.saveNetwork(name: "WiFi 2", type: NetworkType.wifi.rawValue)
-        let networks = StorageManager.fetchNetworks(name: "WiFi 2", type: NetworkType.wifi.rawValue)
+        StorageManager.saveNetwork(name: "Wi-Fi 2", type: NetworkType.wifi.rawValue)
+        let networks = StorageManager.fetchNetworks(name: "Wi-Fi 2", type: NetworkType.wifi.rawValue)
         if let network = networks?.first {
-            XCTAssertEqual(network.name, "WiFi 2")
+            XCTAssertEqual(network.name, "Wi-Fi 2")
             XCTAssertEqual(network.type, NetworkType.wifi.rawValue)
         } else {
             XCTFail("Network not found")
@@ -115,9 +115,9 @@ class StorageManagerTests: XCTestCase {
     }
     
     func test_removeNetwork() {
-        StorageManager.saveWiFiNetwork(name: "WiFi to remove")
-        StorageManager.removeNetwork(name: "WiFi to remove")
-        let networks = StorageManager.fetchNetworks(name: "WiFi to remove")
+        StorageManager.saveWiFiNetwork(name: "Wi-Fi to remove")
+        StorageManager.removeNetwork(name: "Wi-Fi to remove")
+        let networks = StorageManager.fetchNetworks(name: "Wi-Fi to remove")
         XCTAssertNil(networks, "Network was not deleted")
     }
     
