@@ -300,11 +300,8 @@ class ControlPanelViewController: UITableViewController {
         
         if vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
             NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
-        }
-        
-        if !needsToReconnect && !Application.shared.connectionManager.reconnectAutomatically && NetworkManager.shared.isNetworkReachable && vpnStatus != lastVPNStatus && ((vpnStatus == .connected && UIDevice.current.userInterfaceIdiom == .pad) || vpnStatus == .disconnected) {
-            DispatchQueue.delay(1) {
-                if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable {
+            DispatchQueue.delay(0.75) {
+                if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable && !self.needsToReconnect && !Application.shared.connectionManager.reconnectAutomatically {
                     self.reloadGeoLocation()
                 }
             }

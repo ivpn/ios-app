@@ -137,6 +137,11 @@ class MapScrollView: UIScrollView {
         currentCoordinates = (latitude, longitude)
     }
     
+    func updateMapMarkers() {
+        markerLocalView.updateView()
+        markerGatewayView.updateView()
+    }
+    
     // MARK: - Private methods -
     
     private func setupView() {
