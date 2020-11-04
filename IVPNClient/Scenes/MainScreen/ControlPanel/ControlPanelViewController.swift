@@ -291,16 +291,18 @@ class ControlPanelViewController: UITableViewController {
             hud.dismiss()
         }
         
-        if vpnStatus != lastVPNStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
-            refreshServiceStatus()
-            NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
+        if !needsToReconnect && !Application.shared.connectionManager.reconnectAutomatically && vpnStatus != lastVPNStatus && (vpnStatus == .invalid || vpnStatus == .disconnected) {
+            if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable {
+                refreshServiceStatus()
+                NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
+            }
         }
         
         if vpnStatus != lastVPNStatus && (vpnStatus == .connected || vpnStatus == .disconnected) {
             NotificationCenter.default.post(name: Notification.Name.HideConnectToServerPopup, object: nil)
         }
         
-        if !Application.shared.connectionManager.reconnectAutomatically && NetworkManager.shared.isNetworkReachable && vpnStatus != lastVPNStatus && ((vpnStatus == .connected && UIDevice.current.userInterfaceIdiom == .pad) || vpnStatus == .disconnected) {
+        if !needsToReconnect && !Application.shared.connectionManager.reconnectAutomatically && NetworkManager.shared.isNetworkReachable && vpnStatus != lastVPNStatus && ((vpnStatus == .connected && UIDevice.current.userInterfaceIdiom == .pad) || vpnStatus == .disconnected) {
             DispatchQueue.delay(1) {
                 if Application.shared.connectionManager.isStatusStable && NetworkManager.shared.isNetworkReachable {
                     self.reloadGeoLocation()
@@ -421,7 +423,12 @@ class ControlPanelViewController: UITableViewController {
         
         if needsToReconnect {
             needsToReconnect = false
+            Application.shared.connectionManager.reconnectAutomatically = true
             Application.shared.connectionManager.connect()
+            
+            DispatchQueue.delay(1) {
+                Application.shared.connectionManager.reconnectAutomatically = false
+            }
         }
     }
     
