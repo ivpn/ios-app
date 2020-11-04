@@ -80,6 +80,7 @@ class MainView: UIView {
         updateInfoAlert()
         updateActionButtons()
         mapScrollView.updateMapPositionToCurrentCoordinates()
+        mapScrollView.updateMapMarkers()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
