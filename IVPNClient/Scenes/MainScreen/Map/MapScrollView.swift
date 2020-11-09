@@ -23,7 +23,6 @@
 
 import UIKit
 import NetworkExtension
-import Bamboo
 import SnapKit
 
 class MapScrollView: UIScrollView {
@@ -55,8 +54,8 @@ class MapScrollView: UIScrollView {
     let markerLocalView = MapMarkerView(type: .local)
     let markerGatewayView = MapMarkerView(type: .gateway)
     var localCoordinates: (Double, Double)?
+    var currentCoordinates: (Double, Double)?
     
-    private lazy var iPadConstraints = bb.left(MapConstants.Container.iPadLandscapeLeftAnchor).top(MapConstants.Container.iPadLandscapeTopAnchor).constraints.deactivate()
     private var markers: [UIButton] = []
     private var connectToServerPopup = ConnectToServerPopupView()
     
@@ -76,9 +75,12 @@ class MapScrollView: UIScrollView {
     
     func setupConstraints() {
         if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
-            iPadConstraints.activate()
+            snp.remakeConstraints { make in
+                make.top.equalTo(MapConstants.Container.iPadLandscapeTopAnchor)
+                make.left.equalTo(MapConstants.Container.iPadLandscapeLeftAnchor)
+            }
         } else {
-            iPadConstraints.deactivate()
+            snp.removeConstraints()
         }
     }
     
@@ -107,6 +109,12 @@ class MapScrollView: UIScrollView {
         updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated, isLocalPosition: true)
     }
     
+    func updateMapPositionToCurrentCoordinates() {
+        if let currentCoordinates = currentCoordinates {
+            updateMapPosition(latitude: currentCoordinates.0, longitude: currentCoordinates.1, isLocalPosition: false, updateMarkers: false)
+        }
+    }
+    
     func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
         let halfWidth = Double(UIScreen.main.bounds.width / 2)
         let halfHeight = Double(UIScreen.main.bounds.height / 2)
@@ -125,6 +133,13 @@ class MapScrollView: UIScrollView {
         if updateMarkers {
             updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
         }
+        
+        currentCoordinates = (latitude, longitude)
+    }
+    
+    func updateMapMarkers() {
+        markerLocalView.updateView()
+        markerGatewayView.updateView()
     }
     
     // MARK: - Private methods -

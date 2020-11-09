@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import Bamboo
+import SnapKit
 
 class SelectPlanView: UITableView {
     
@@ -75,9 +75,20 @@ class SelectPlanView: UITableView {
         messageLabel.sizeToFit()
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            messageLabel.bb.left(21).right(-21)
-            standardView.bb.left(21).right(-21)
-            proView.bb.left(21).right(-21)
+            messageLabel.snp.makeConstraints { make in
+                make.left.equalTo(21)
+                make.right.equalTo(-21)
+            }
+            
+            standardView.snp.makeConstraints { make in
+                make.left.equalTo(21)
+                make.right.equalTo(-21)
+            }
+            
+            proView.snp.makeConstraints { make in
+                make.left.equalTo(21)
+                make.right.equalTo(-21)
+            }
         }
         
     }

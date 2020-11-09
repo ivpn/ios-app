@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import Bamboo
+import SnapKit
 
 class CreateAccountView: UIView {
     
@@ -46,7 +46,10 @@ class CreateAccountView: UIView {
     
     private func setupLayout() {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            accountView.bb.left(21).right(-21)
+            accountView.snp.makeConstraints { make in
+                make.left.equalTo(21)
+                make.right.equalTo(-21)
+            }
         }
         
     }

@@ -35,12 +35,6 @@ extension MainViewController: FloatingPanelControllerDelegate {
         return UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape ? false : true
     }
     
-    func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
-        if vc.position == .full {
-            updateGeoLocation()
-        }
-    }
-    
 }
 
 // MARK: - UIAdaptivePresentationControllerDelegate -

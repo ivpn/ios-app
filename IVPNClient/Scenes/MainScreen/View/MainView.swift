@@ -72,6 +72,15 @@ class MainView: UIView {
         updateInfoAlert()
         updateActionButtons()
         updateMapPosition(animated: animated)
+        mapScrollView.updateMapMarkers()
+    }
+    
+    func updateLayout() {
+        setupConstraints()
+        updateInfoAlert()
+        updateActionButtons()
+        mapScrollView.updateMapPositionToCurrentCoordinates()
+        mapScrollView.updateMapMarkers()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
@@ -98,7 +107,14 @@ class MainView: UIView {
     private func initSettingsAction() {
         let settingsButton = UIButton()
         addSubview(settingsButton)
-        settingsButton.bb.size(width: 42, height: 42).top(55).right(-30)
+        
+        settingsButton.snp.makeConstraints { make in
+            make.width.equalTo(42)
+            make.height.equalTo(42)
+            make.top.equalTo(55)
+            make.right.equalTo(-30)
+        }
+        
         settingsButton.setupIcon(imageName: "icon-settings")
         settingsButton.accessibilityLabel = "Settings"
         settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
@@ -106,9 +122,19 @@ class MainView: UIView {
         let accountButton = UIButton()
         addSubview(accountButton)
         if UIDevice.current.userInterfaceIdiom == .pad {
-            accountButton.bb.size(width: 42, height: 42).top(55).right(-100)
+            accountButton.snp.makeConstraints { make in
+                make.width.equalTo(42)
+                make.height.equalTo(42)
+                make.top.equalTo(55)
+                make.right.equalTo(-100)
+            }
         } else {
-            accountButton.bb.size(width: 42, height: 42).top(55).left(30)
+            accountButton.snp.makeConstraints { make in
+                make.width.equalTo(42)
+                make.height.equalTo(42)
+                make.top.equalTo(55)
+                make.left.equalTo(30)
+            }
         }
         accountButton.setupIcon(imageName: "icon-user")
         accountButton.accessibilityLabel = "Account"

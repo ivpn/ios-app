@@ -44,6 +44,11 @@ class VPNServerList {
         return serversArray
     }
     
+    var noPing: Bool {
+        let serversWithPing = servers.filter { $0.pingMs ?? -1 >= 0 }
+        return serversWithPing.isEmpty
+    }
+    
     // MARK: - Initialize -
     
     // This initializer without parameters will try to load either cached servers.json file
@@ -168,9 +173,8 @@ class VPNServerList {
     
     func getFastestServer() -> VPNServer? {
         let servers = filteredFastestServers
-        let serversWithPing = servers.filter { $0.pingMs ?? -1 >= 0 }
-        if serversWithPing.isEmpty {
-            return filteredFastestServers.first
+        if noPing {
+            return Application.shared.settings.selectedServer
         }
         
         return servers.min {

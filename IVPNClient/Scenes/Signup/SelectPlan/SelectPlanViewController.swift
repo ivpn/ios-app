@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import Bamboo
+import SnapKit
 import JGProgressHUD
 
 class SelectPlanViewController: UITableViewController {
@@ -177,8 +177,16 @@ class SelectPlanViewController: UITableViewController {
         tableView.separatorStyle = .none
         view.addSubview(spinner)
         view.addSubview(retryButton)
-        spinner.bb.centerX().centerY(-80)
-        retryButton.bb.centerX().centerY(-80)
+        
+        spinner.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-80)
+        }
+        
+        retryButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-80)
+        }
         
         if changingPlan {
             selectPlanView?.setupView(service: service)

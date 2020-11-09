@@ -241,8 +241,8 @@ extension ServerViewController {
         NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
         NotificationCenter.default.post(name: Notification.Name.ShowConnectToServerPopup, object: nil)
         
-        if serverDifferentToSelectedServer {
-            if Application.shared.settings.selectedServer.fastest {
+        if serverDifferentToSelectedServer || Application.shared.serverList.noPing {
+            if Application.shared.settings.selectedServer.fastest && Application.shared.serverList.noPing {
                 serverDelegate?.reconnectToFastestServer()
             } else {
                 Application.shared.connectionManager.reconnect()

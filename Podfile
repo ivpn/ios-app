@@ -3,7 +3,6 @@ use_frameworks!
 
 target 'IVPNClient' do
     pod 'TunnelKit', '~> 2.2.7'
-    pod 'Bamboo', '~> 1.2.0'
     pod 'KeychainAccess', '~> 3.2.0'
     pod 'SwiftyStoreKit', '~> 0.15.0'
     pod 'JGProgressHUD', '~> 2.0.3'

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.3 - 2020-11-05  
+
+[IMPROVED] Optimised connection info on the control panel  
+[IMPROVED] AntiTracker hardcore mode indicator on the control panel  
+[IMPROVED] App memory performance  
+[FIXED] App does not reconnect to fastest server without ping indicators  
+[FIXED] Last server selected as fastest server without ping indicators  
+[FIXED] Sometimes app fails to reconnect to fastest server  
+[FIXED] Sometimes app disconnects from VPN when switching to fastest server  
+[FIXED] App connects to another random server when trying to disconnect from an untrusted network  
+
 ## 2.0.2 - 2020-10-08  
 
 [IMPROVED] Minor improvements on the map  
