@@ -94,7 +94,6 @@ class ConnectionManager {
                         NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
                         return
                     }
-                    self.vpnManager.installOnDemandRules(manager: manager, status: status)
                     self.updateOpenVPNLogFile()
                     self.updateOpenVPNLocalIp()
                     self.reconnectAutomatically = false
@@ -367,28 +366,29 @@ class ConnectionManager {
     
     func evaluateConnection() {
         let defaults = UserDefaults.shared
-        guard defaults.networkProtectionEnabled else { return }
+        guard defaults.networkProtectionEnabled else {
+            return
+        }
         
         log(info: "Evaluating VPN connection for Network protection")
         
-        let defaultTrust = StorageManager.getDefaultTrust()
         let network = Application.shared.network
         
-        guard let networkTrust = network.trust else { return }
+        guard let networkTrust = network.trust else {
+            return
+        }
+        
+        let defaultTrust = StorageManager.getDefaultTrust()
         let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
         
         switch trust {
         case NetworkTrust.Untrusted.rawValue:
-            guard defaults.networkProtectionUntrustedConnect else { return }
-            getStatus { _, status in
-                guard status != .connected && status != .connecting else { return }
-                self.resetRulesAndConnect()
+            if defaults.networkProtectionUntrustedConnect && status.isDisconnected() {
+                resetRulesAndConnect()
             }
         case NetworkTrust.Trusted.rawValue:
-            guard defaults.networkProtectionTrustedDisconnect else { return }
-            getStatus { _, status in
-                guard status != .disconnected && status != .disconnecting && status != .invalid else { return }
-                self.resetRulesAndDisconnectShortcut()
+            if defaults.networkProtectionTrustedDisconnect && !status.isDisconnected() {
+                resetRulesAndDisconnect()
             }
         default:
             return
