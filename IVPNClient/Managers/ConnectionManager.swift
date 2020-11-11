@@ -388,7 +388,7 @@ class ConnectionManager {
             guard defaults.networkProtectionTrustedDisconnect else { return }
             getStatus { _, status in
                 guard status != .disconnected && status != .disconnecting && status != .invalid else { return }
-                self.resetRulesAndDisconnect()
+                self.resetRulesAndDisconnectShortcut()
             }
         default:
             return
