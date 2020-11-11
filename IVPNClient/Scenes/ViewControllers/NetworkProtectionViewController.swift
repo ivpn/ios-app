@@ -149,7 +149,7 @@ extension NetworkProtectionViewController {
         case 1:
             return "Default & Mobile data"
         case 2:
-            return "WiFi networks"
+            return "Wi-Fi networks"
         default:
             return nil
         }
@@ -158,7 +158,7 @@ extension NetworkProtectionViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "On iOS 13 and above, current WiFi name is available only when IVPN profile is saved in iOS VPN Configurations."
+            return "On iOS 13 and above, current Wi-Fi name is available only when IVPN profile is saved in iOS VPN Configurations."
         default:
             return nil
         }

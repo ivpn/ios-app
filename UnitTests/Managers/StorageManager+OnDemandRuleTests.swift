@@ -67,14 +67,14 @@ class StorageManagerOnDemandRuleTests: XCTestCase {
         StorageManager.saveDefaultNetwork()
         defaultNetwork?.trust = NetworkTrust.Untrusted.rawValue
         
-        StorageManager.saveNetwork(name: "WiFi 1", type: NetworkType.wifi.rawValue, trust: NetworkTrust.Default.rawValue)
-        StorageManager.saveNetwork(name: "WiFi 2", type: NetworkType.wifi.rawValue, trust: NetworkTrust.Untrusted.rawValue)
+        StorageManager.saveNetwork(name: "Wi-Fi 1", type: NetworkType.wifi.rawValue, trust: NetworkTrust.Default.rawValue)
+        StorageManager.saveNetwork(name: "Wi-Fi 2", type: NetworkType.wifi.rawValue, trust: NetworkTrust.Untrusted.rawValue)
         
         let rules = StorageManager.getOnDemandRules(status: .disconnected)
         XCTAssertEqual(rules[0].interfaceTypeMatch, .wiFi)
         XCTAssertEqual(rules[0].ssidMatch?.count, 2)
-        XCTAssertEqual(rules[0].ssidMatch?[0], "WiFi 1")
-        XCTAssertEqual(rules[0].ssidMatch?[1], "WiFi 2")
+        XCTAssertEqual(rules[0].ssidMatch?[0], "Wi-Fi 1")
+        XCTAssertEqual(rules[0].ssidMatch?[1], "Wi-Fi 2")
         
         defaultNetwork?.trust = NetworkTrust.None.rawValue
     }

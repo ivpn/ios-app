@@ -79,7 +79,8 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startPingService(updateServerListDidComplete: updateServerListDidComplete)
-        updateGeoLocation()
+        refreshUI()
+        initConnectionInfo()
     }
     
     deinit {
@@ -110,7 +111,8 @@ class MainViewController: UIViewController {
     // MARK: - Interface Orientations -
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        refreshUI()
+        floatingPanel.updateLayout()
+        mainView.updateLayout()
     }
     
     // MARK: - Methods -
@@ -235,6 +237,21 @@ class MainViewController: UIViewController {
     
     private func initErrorObservers() {
         vpnErrorObserver.delegate = self
+    }
+    
+    private func initConnectionInfo() {
+        if !NetworkManager.shared.isNetworkReachable {
+            mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
+            mainView.updateInfoAlert()
+        }
+        
+        if Application.shared.connectionManager.status == .invalid {
+            updateGeoLocation()
+        }
+        
+        if UserDefaults.standard.bool(forKey: "-UITests") {
+            updateGeoLocation()
+        }
     }
     
 }

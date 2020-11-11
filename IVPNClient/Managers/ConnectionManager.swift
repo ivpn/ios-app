@@ -97,6 +97,7 @@ class ConnectionManager {
                     self.vpnManager.installOnDemandRules(manager: manager, status: status)
                     self.updateOpenVPNLogFile()
                     self.updateOpenVPNLocalIp()
+                    self.reconnectAutomatically = false
                     if self.actionType == .connect {
                         self.evaluateCloseApp()
                     }
@@ -109,7 +110,7 @@ class ConnectionManager {
                 self.updateOpenVPNLogFile()
             }
             
-            if status == .disconnected && self.reconnectAutomatically {
+            if (status == .disconnected || status == .invalid) && self.reconnectAutomatically {
                 if Application.shared.settings.connectionProtocol == .ipsec {
                     DispatchQueue.delay(0.25) {
                         self.connect()
@@ -119,7 +120,6 @@ class ConnectionManager {
                         self.connect()
                     }
                 }
-                self.reconnectAutomatically = false
             }
 
             if status == .disconnected && self.actionType == .disconnect {
@@ -249,7 +249,7 @@ class ConnectionManager {
         getStatus { tunnelType, status in
             self.vpnManager.disconnect(tunnelType: tunnelType, reconnectAutomatically: reconnectAutomatically)
             
-            if UserDefaults.shared.networkProtectionEnabled {
+            if UserDefaults.shared.networkProtectionEnabled && !reconnectAutomatically {
                 DispatchQueue.delay(2) {
                     self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
                         self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected)

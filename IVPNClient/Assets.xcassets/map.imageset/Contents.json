@@ -1,8 +1,18 @@
 {
   "images" : [
     {
-      "filename" : "map.pdf",
+      "filename" : "map-4700.pdf",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "map-2350.pdf",
+      "idiom" : "universal",
+      "memory" : "1GB"
+    },
+    {
+      "filename" : "map-4700.pdf",
+      "idiom" : "universal",
+      "memory" : "2GB"
     }
   ],
   "info" : {
