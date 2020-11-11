@@ -192,22 +192,33 @@ class VPNManager {
         
         manager.protocolConfiguration = NETunnelProviderProtocol.makeOpenVPNProtocol(settings: settings, accessDetails: accessDetails)
         manager.localizedDescription = Config.openvpnTunnelTitle
+        manager.onDemandRules = StorageManager.getOnDemandRules(status: .connected)
+        manager.isOnDemandEnabled = true
         manager.isEnabled = true
     }
     
     private func setupWireGuardTunnel(settings: ConnectionSettings, accessDetails: AccessDetails, completion: @escaping (Error?) -> Void) {
-        guard let manager = wireguardManager else { return }
+        guard let manager = wireguardManager else {
+            return
+        }
         
         manager.protocolConfiguration = NETunnelProviderProtocol.makeWireGuardProtocol(settings: settings)
         manager.localizedDescription = Config.wireguardTunnelTitle
+        manager.onDemandRules = StorageManager.getOnDemandRules(status: .connected)
+        manager.isOnDemandEnabled = true
         manager.isEnabled = true
     }
     
     func installOnDemandRules(manager: NEVPNManager, status: NEVPNStatus) {
-        guard manager != ipsecManager else { return }
-        manager.isOnDemandEnabled = true
-        manager.onDemandRules = StorageManager.getOnDemandRules(status: status)
-        manager.saveToPreferences { _ in }
+        guard manager != ipsecManager else {
+            return
+        }
+        
+        manager.loadFromPreferences { _ in
+            manager.isOnDemandEnabled = true
+            manager.onDemandRules = StorageManager.getOnDemandRules(status: status)
+            manager.saveToPreferences { _ in }
+        }
     }
     
     func removeOnDemandRule(manager: NEVPNManager) {

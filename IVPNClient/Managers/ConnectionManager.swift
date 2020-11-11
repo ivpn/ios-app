@@ -94,7 +94,6 @@ class ConnectionManager {
                         NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
                         return
                     }
-                    self.vpnManager.installOnDemandRules(manager: manager, status: status)
                     self.updateOpenVPNLogFile()
                     self.updateOpenVPNLocalIp()
                     self.reconnectAutomatically = false
