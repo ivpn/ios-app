@@ -56,7 +56,7 @@ extension NETunnelProviderProtocol {
         var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.shouldDebug = true
         builder.debugLogFormat = "$Dyyyy-MMM-dd HH:mm:ss$d $L $M"
-        builder.masksPrivateData = false
+        builder.masksPrivateData = true
         
         let openVPNconfiguration = builder.build()
         let configuration = try! openVPNconfiguration.generatedTunnelProtocol(
