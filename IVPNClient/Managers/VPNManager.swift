@@ -135,26 +135,17 @@ class VPNManager {
     }
     
     private func setupNETunnelProviderManager(manager: NEVPNManager, settings: ConnectionSettings, accessDetails: AccessDetails, completion: @escaping (Error?) -> Void) {
-        switch settings {
-        case .ipsec:
-            break
-        case .openvpn:
-            self.setupOpenVPNTunnel(settings: settings, accessDetails: accessDetails, completion: completion)
-        case .wireguard:
-            self.setupWireGuardTunnel(settings: settings, accessDetails: accessDetails, completion: completion)
-        }
-        
-        manager.saveToPreferences { error in
-            guard error == nil else {
-                completion(error)
-                return
+        manager.loadFromPreferences { error in
+            switch settings {
+            case .ipsec:
+                break
+            case .openvpn:
+                self.setupOpenVPNTunnel(settings: settings, accessDetails: accessDetails, completion: completion)
+            case .wireguard:
+                self.setupWireGuardTunnel(settings: settings, accessDetails: accessDetails, completion: completion)
             }
-            
-            manager.loadFromPreferences { error in
-                manager.protocolConfiguration?.serverAddress = accessDetails.serverAddress
-                manager.saveToPreferences { error in
-                    completion(error)
-                }
+            manager.saveToPreferences { error in
+                completion(error)
             }
         }
     }
@@ -192,6 +183,8 @@ class VPNManager {
         
         manager.protocolConfiguration = NETunnelProviderProtocol.makeOpenVPNProtocol(settings: settings, accessDetails: accessDetails)
         manager.localizedDescription = Config.openvpnTunnelTitle
+        manager.onDemandRules = StorageManager.getOnDemandRules(status: .connected)
+        manager.isOnDemandEnabled = true
         manager.isEnabled = true
     }
     
@@ -200,6 +193,8 @@ class VPNManager {
         
         manager.protocolConfiguration = NETunnelProviderProtocol.makeWireGuardProtocol(settings: settings)
         manager.localizedDescription = Config.wireguardTunnelTitle
+        manager.onDemandRules = StorageManager.getOnDemandRules(status: .connected)
+        manager.isOnDemandEnabled = true
         manager.isEnabled = true
     }
     
