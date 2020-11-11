@@ -182,7 +182,7 @@ extension UIViewController {
             }
         }
         
-        if Application.shared.connectionManager.status == .disconnected && (network.name != Application.shared.network.name || network.trust != NetworkTrust.Untrusted.rawValue) {
+        if Application.shared.connectionManager.status == .disconnected && (network.name != Application.shared.network.name || trust != NetworkTrust.Untrusted.rawValue) {
             if Application.shared.settings.connectionProtocol != .ipsec {
                 Application.shared.connectionManager.installOnDemandRules()
             } else  {
