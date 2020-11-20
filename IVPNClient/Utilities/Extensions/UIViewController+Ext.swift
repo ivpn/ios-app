@@ -172,7 +172,7 @@ extension UIViewController {
         let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
         
         if Application.shared.connectionManager.status == .connected && (network.name != Application.shared.network.name || trust != NetworkTrust.Trusted.rawValue) {
-            showActionSheet(title: "The new Network Protection settings will take effect the next time the VPN is connected.", actions: ["Reconnect now"], sourceView: view) { index in
+            showActionSheet(title: "The new Network Protection settings will take effect the next time the VPN is connected.", actions: ["Reconnect now"], cancelAction: "OK, dismiss", sourceView: view) { index in
                 switch index {
                 case 0:
                     Application.shared.connectionManager.reconnect()
