@@ -35,4 +35,4 @@ jobs:
     - name: Set up Appfile
       run: cp fastlane/Appfile.template fastlane/Appfile
     - name: Build and test
-      run: xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11 Pro'
+      run: xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 12'
