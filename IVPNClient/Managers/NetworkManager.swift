@@ -52,10 +52,8 @@ class NetworkManager {
                     StorageManager.saveWiFiNetwork(name: ssid)
                     NotificationCenter.default.post(name: Notification.Name.NetworkSaved, object: nil)
                     self.updateNetwork(name: ssid, type: NetworkType.wifi.rawValue)
-                } else if Application.shared.connectionManager.status == .invalid {
-                    self.updateNetwork(name: "Wi-Fi", type: NetworkType.none.rawValue)
                 } else {
-                    self.updateNetwork(name: "No network", type: NetworkType.none.rawValue)
+                    self.updateNetwork(name: "Wi-Fi", type: NetworkType.none.rawValue)
                 }
             case .cellular:
                 self.updateNetwork(name: "Mobile data", type: NetworkType.cellular.rawValue)
