@@ -364,7 +364,7 @@ class ConnectionManager {
         return true
     }
     
-    func evaluateConnection() {
+    func evaluateConnectionForNetworkProtection() {
         let defaults = UserDefaults.shared
         guard defaults.networkProtectionEnabled else {
             return
@@ -393,6 +393,25 @@ class ConnectionManager {
         default:
             return
         }
+    }
+    
+    func needToReconnectForNetworkProtection(network: Network) -> Bool {
+        guard UserDefaults.shared.networkProtectionEnabled else {
+            return false
+        }
+        
+        guard let networkTrust = network.trust else {
+            return false
+        }
+        
+        let defaultTrust = StorageManager.getDefaultTrust()
+        let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
+        
+        if Application.shared.connectionManager.status == .connected && (network.name != Application.shared.network.name || trust != NetworkTrust.Trusted.rawValue) {
+            return true
+        }
+        
+        return false
     }
     
     func reconnect() {
