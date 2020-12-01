@@ -154,39 +154,27 @@ extension UIViewController {
         let actions = collection.map { $0.rawValue }
         
         showActionSheet(image: nil, selected: network.trust, largeText: true, centered: true, title: "Network Trust", actions: actions, sourceView: sourceView) { index in
-            guard index > -1, actions[index] != network.trust else { return }
+            guard index > -1, actions[index] != network.trust else {
+                return
+            }
+            
             completion(actions[index])
         }
     }
     
     func needToUpdateNetworkProtectionRules(network: Network) {
-        guard UserDefaults.shared.networkProtectionEnabled else {
-            return
-        }
         
-        guard let networkTrust = network.trust else {
-            return
-        }
-        
-        let defaultTrust = StorageManager.getDefaultTrust()
-        let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
-        
-        if Application.shared.connectionManager.status == .connected && (network.name != Application.shared.network.name || trust != NetworkTrust.Trusted.rawValue) {
-            showActionSheet(title: "The new Network Protection settings will take effect the next time the VPN is connected.", actions: ["Reconnect now"], cancelAction: "OK, dismiss", sourceView: view) { index in
-                switch index {
-                case 0:
-                    Application.shared.connectionManager.reconnect()
-                default:
-                    break
-                }
-            }
-        }
-        
-        if Application.shared.connectionManager.status == .disconnected && (network.name != Application.shared.network.name || trust != NetworkTrust.Untrusted.rawValue) {
-            if Application.shared.settings.connectionProtocol != .ipsec {
-                Application.shared.connectionManager.installOnDemandRules()
-            } else  {
-                showAlert(title: "", message: "The new Network Protection settings will take effect the next time the VPN is connected.")
+    }
+    
+    func showReconnectPrompt(confirmed: @escaping () -> Void) {
+        showActionSheet(title: "To apply the new settings, VPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: view) { index in
+            switch index {
+            case 0:
+                confirmed()
+            case 1:
+                confirmed()
+            default:
+                break
             }
         }
     }
