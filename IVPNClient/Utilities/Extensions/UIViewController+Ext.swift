@@ -162,10 +162,6 @@ extension UIViewController {
         }
     }
     
-    func needToUpdateNetworkProtectionRules(network: Network) {
-        
-    }
-    
     func showReconnectPrompt(confirmed: @escaping () -> Void) {
         guard !UserDefaults.shared.notAskToReconnect else {
             confirmed()

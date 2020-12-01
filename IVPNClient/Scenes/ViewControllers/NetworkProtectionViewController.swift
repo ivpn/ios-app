@@ -179,12 +179,17 @@ extension NetworkProtectionViewController {
         guard indexPath.section > 0 else { return }
         
         selectNetworkTrust(network: collection[indexPath.section][indexPath.row], sourceView: view) { trust in
-            self.trustSelected(trust: trust, indexPath: indexPath)
-            Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
-            DispatchQueue.async {
-                self.needToUpdateNetworkProtectionRules(network: self.collection[indexPath.section][indexPath.row])
+            if Application.shared.connectionManager.needToReconnectForNetworkProtection(network: self.collection[indexPath.section][indexPath.row]) {
+                self.showReconnectPrompt {
+                    self.trustSelected(trust: trust, indexPath: indexPath)
+                    Application.shared.connectionManager.reconnect()
+                }
+            } else {
+                self.trustSelected(trust: trust, indexPath: indexPath)
+                Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
             }
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

@@ -60,8 +60,6 @@ extension ControlPanelViewController {
         
         if indexPath.row == 6 && Application.shared.network.type != NetworkType.none.rawValue {
             selectNetworkTrust(network: Application.shared.network, sourceView: controlPanelView.networkView) { trust in
-                Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
-                
                 if Application.shared.connectionManager.needToReconnectForNetworkProtection(network: Application.shared.network) {
                     self.showReconnectPrompt {
                         self.controlPanelView.networkView.update(trust: trust)
@@ -69,6 +67,7 @@ extension ControlPanelViewController {
                     }
                 } else {
                     self.controlPanelView.networkView.update(trust: trust)
+                    Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
                 }
             }
         }
