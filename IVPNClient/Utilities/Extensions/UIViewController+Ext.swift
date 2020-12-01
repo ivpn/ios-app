@@ -167,11 +167,17 @@ extension UIViewController {
     }
     
     func showReconnectPrompt(confirmed: @escaping () -> Void) {
+        guard !UserDefaults.shared.notAskToReconnect else {
+            confirmed()
+            return
+        }
+        
         showActionSheet(title: "To apply the new settings, VPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: view) { index in
             switch index {
             case 0:
                 confirmed()
             case 1:
+                UserDefaults.shared.setValue(true, forKey: UserDefaults.Key.notAskToReconnect)
                 confirmed()
             default:
                 break
