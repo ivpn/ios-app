@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/setup-go@v2
       with:
-        go-version: 1.14
+        go-version: 1.13
     - uses: actions/checkout@v2
     - uses: actions/cache@v1
       with:
@@ -35,4 +35,4 @@ jobs:
     - name: Set up Appfile
       run: cp fastlane/Appfile.template fastlane/Appfile
     - name: Build and test
-      run: xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11 Pro'
+      run: xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11'
