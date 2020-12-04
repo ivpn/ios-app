@@ -418,9 +418,9 @@ class ConnectionManager {
         let defaultTrust = StorageManager.getDefaultTrust()
         let trust = StorageManager.trustValue(trust: newTrust, defaultTrust: defaultTrust)
         
-        if Application.shared.connectionManager.status == .disconnected && (network.name != Application.shared.network.name || trust != NetworkTrust.Untrusted.rawValue) {
+        if Application.shared.connectionManager.status.isDisconnected() && (network.name != Application.shared.network.name || trust != NetworkTrust.Untrusted.rawValue) {
             if Application.shared.settings.connectionProtocol != .ipsec {
-                Application.shared.connectionManager.installOnDemandRules()
+                installOnDemandRules()
             } else  {
                 UIApplication.topViewController()?.showAlert(title: "", message: "The new Network Protection settings will take effect the next time the VPN is connected.")
             }
