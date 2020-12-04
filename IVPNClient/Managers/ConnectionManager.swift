@@ -364,7 +364,7 @@ class ConnectionManager {
         return true
     }
     
-    func evaluateConnection() {
+    func evaluateConnection(network: Network? = nil, newTrust: String? = nil) {
         let defaults = UserDefaults.shared
         guard defaults.networkProtectionEnabled else {
             return
@@ -372,9 +372,7 @@ class ConnectionManager {
         
         log(info: "Evaluating VPN connection for Network protection")
         
-        let network = Application.shared.network
-        
-        guard let networkTrust = network.trust else {
+        guard let networkTrust = Application.shared.network.trust else {
             return
         }
         
@@ -385,13 +383,19 @@ class ConnectionManager {
         case NetworkTrust.Untrusted.rawValue:
             if defaults.networkProtectionUntrustedConnect && status.isDisconnected() {
                 resetRulesAndConnect()
+                return
             }
         case NetworkTrust.Trusted.rawValue:
             if defaults.networkProtectionTrustedDisconnect && !status.isDisconnected() {
                 resetRulesAndDisconnect()
+                return
             }
         default:
-            return
+            break
+        }
+        
+        if let network = network, let newTrust = newTrust {
+            needToInstallOnDemandRules(network: network, newTrust: newTrust)
         }
     }
     

@@ -187,8 +187,7 @@ extension NetworkProtectionViewController {
                 }
             } else {
                 self.trustSelected(trust: trust, indexPath: indexPath)
-                Application.shared.connectionManager.evaluateConnection()
-                Application.shared.connectionManager.needToInstallOnDemandRules(network: network, newTrust: trust)
+                Application.shared.connectionManager.evaluateConnection(network: network, newTrust: trust)
             }
         }
         

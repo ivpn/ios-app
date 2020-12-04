@@ -67,8 +67,7 @@ extension ControlPanelViewController {
                     }
                 } else {
                     self.controlPanelView.networkView.update(trust: trust)
-                    Application.shared.connectionManager.evaluateConnection()
-                    Application.shared.connectionManager.needToInstallOnDemandRules(network: Application.shared.network, newTrust: trust)
+                    Application.shared.connectionManager.evaluateConnection(network: Application.shared.network, newTrust: trust)
                 }
             }
         }
