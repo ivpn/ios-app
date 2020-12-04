@@ -151,7 +151,7 @@ extension StorageManager {
                 network.trust = trust
                 saveContext()
                 Application.shared.network = network
-                Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
+                Application.shared.connectionManager.evaluateConnection()
             }
         }
     }

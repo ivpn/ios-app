@@ -364,7 +364,7 @@ class ConnectionManager {
         return true
     }
     
-    func evaluateConnectionForNetworkProtection() {
+    func evaluateConnection() {
         let defaults = UserDefaults.shared
         guard defaults.networkProtectionEnabled else {
             return
@@ -395,7 +395,7 @@ class ConnectionManager {
         }
     }
     
-    func needToReconnectForNetworkProtection(network: Network, newTrust: String) -> Bool {
+    func needToReconnect(network: Network, newTrust: String) -> Bool {
         guard UserDefaults.shared.networkProtectionEnabled else {
             return false
         }
@@ -408,6 +408,23 @@ class ConnectionManager {
         }
         
         return false
+    }
+    
+    func needToInstallOnDemandRules(network: Network, newTrust: String) {
+        guard UserDefaults.shared.networkProtectionEnabled else {
+            return
+        }
+        
+        let defaultTrust = StorageManager.getDefaultTrust()
+        let trust = StorageManager.trustValue(trust: newTrust, defaultTrust: defaultTrust)
+        
+        if Application.shared.connectionManager.status == .disconnected && (network.name != Application.shared.network.name || trust != NetworkTrust.Untrusted.rawValue) {
+            if Application.shared.settings.connectionProtocol != .ipsec {
+                Application.shared.connectionManager.installOnDemandRules()
+            } else  {
+                UIApplication.topViewController()?.showAlert(title: "", message: "The new Network Protection settings will take effect the next time the VPN is connected.")
+            }
+        }
     }
     
     func reconnect() {

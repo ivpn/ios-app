@@ -60,14 +60,15 @@ extension ControlPanelViewController {
         
         if indexPath.row == 6 && Application.shared.network.type != NetworkType.none.rawValue {
             selectNetworkTrust(network: Application.shared.network, sourceView: controlPanelView.networkView) { trust in
-                if Application.shared.connectionManager.needToReconnectForNetworkProtection(network: Application.shared.network, newTrust: trust) {
+                if Application.shared.connectionManager.needToReconnect(network: Application.shared.network, newTrust: trust) {
                     self.showReconnectPrompt {
                         self.controlPanelView.networkView.update(trust: trust)
                         Application.shared.connectionManager.reconnect()
                     }
                 } else {
                     self.controlPanelView.networkView.update(trust: trust)
-                    Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
+                    Application.shared.connectionManager.evaluateConnection()
+                    Application.shared.connectionManager.needToInstallOnDemandRules(network: Application.shared.network, newTrust: trust)
                 }
             }
         }

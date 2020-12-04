@@ -179,14 +179,15 @@ extension NetworkProtectionViewController {
         guard indexPath.section > 0 else { return }
         
         selectNetworkTrust(network: collection[indexPath.section][indexPath.row], sourceView: view) { trust in
-            if Application.shared.connectionManager.needToReconnectForNetworkProtection(network: self.collection[indexPath.section][indexPath.row], newTrust: trust) {
+            if Application.shared.connectionManager.needToReconnect(network: self.collection[indexPath.section][indexPath.row], newTrust: trust) {
                 self.showReconnectPrompt {
                     self.trustSelected(trust: trust, indexPath: indexPath)
                     Application.shared.connectionManager.reconnect()
                 }
             } else {
                 self.trustSelected(trust: trust, indexPath: indexPath)
-                Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
+                Application.shared.connectionManager.evaluateConnection()
+                Application.shared.connectionManager.needToInstallOnDemandRules(network: Application.shared.network, newTrust: trust)
             }
         }
         
@@ -234,7 +235,7 @@ extension NetworkProtectionViewController: NetworkProtectionHeaderTableViewCellD
         
         if isOn {
             NetworkManager.shared.startMonitoring {
-                Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
+                Application.shared.connectionManager.evaluateConnection()
             }
         } else {
             Application.shared.connectionManager.resetOnDemandRules()

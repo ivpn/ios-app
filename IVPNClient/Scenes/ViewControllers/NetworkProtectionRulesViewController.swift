@@ -31,12 +31,12 @@ class NetworkProtectionRulesViewController: UITableViewController {
     
     @IBAction func toggleUntrustedConnect(_ sender: UISwitch) {
         defaults.set(sender.isOn, forKey: UserDefaults.Key.networkProtectionUntrustedConnect)
-        Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
+        Application.shared.connectionManager.evaluateConnection()
     }
     
     @IBAction func toggleTrustedDisconnect(_ sender: UISwitch) {
         defaults.set(sender.isOn, forKey: UserDefaults.Key.networkProtectionTrustedDisconnect)
-        Application.shared.connectionManager.evaluateConnectionForNetworkProtection()
+        Application.shared.connectionManager.evaluateConnection()
     }
     
     override func viewDidLoad() {
