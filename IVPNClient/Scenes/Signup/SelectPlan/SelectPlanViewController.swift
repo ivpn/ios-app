@@ -122,6 +122,15 @@ class SelectPlanViewController: UITableViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
+        // Remove when fixed in future releases
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.setNeedsLayout()
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -250,6 +259,10 @@ extension SelectPlanViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard displayMode == .content else {
             return 0
+        }
+        
+        if indexPath.row == 1 {
+            return 286
         }
         
         return 226
