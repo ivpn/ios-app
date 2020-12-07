@@ -107,11 +107,7 @@ class APIClient: NSObject {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["User-Agent": userAgent]
         
-        if APIAccessManager.shared.isHostIpAddress(host: hostName) {
-            return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
-        }
-        
-        return URLSession(configuration: configuration)
+        return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }
     
     func perform(_ request: APIRequest, _ completion: @escaping APIClientCompletion) {
@@ -247,19 +243,37 @@ class APIClient: NSObject {
 extension APIClient: URLSessionDelegate {
     
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        guard challenge.previousFailureCount == 0 else {
-            challenge.sender?.cancel(challenge)
+        guard let trust = challenge.protectionSpace.serverTrust, SecTrustGetCertificateCount(trust) > 0 else {
             completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }
         
-        if checkValidity(of: challenge, tlsHostName: Config.TlsHostName) {
-            let proposedCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-            completionHandler(.useCredential, proposedCredential)
+        // TLS host name validation
+        guard checkValidity(of: challenge, tlsHostName: Config.TlsHostName) else {
+            completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }
         
-        completionHandler(.performDefaultHandling, nil)
+        // Certificate validation
+//        if let serverCertificate = SecTrustGetCertificateAtIndex(trust, 0) {
+//            let serverCertificateData = SecCertificateCopyData(serverCertificate) as Data
+//
+//            if APIClient.pinnedCertificates().contains(serverCertificateData) {
+//                completionHandler(.useCredential, URLCredential(trust: trust))
+//                return
+//            }
+//        }
+        
+        // Certificate public key validation
+        if let serverCertificate = SecTrustGetCertificateAtIndex(trust, 0), let serverCertificateKey = APIClient.publicKey(for: serverCertificate) {
+
+            if APIClient.pinnedKeys().contains(serverCertificateKey) {
+                completionHandler(.useCredential, URLCredential(trust: trust))
+                return
+            }
+        }
+        
+        completionHandler(.cancelAuthenticationChallenge, nil)
     }
     
     private func checkValidity(of challenge: URLAuthenticationChallenge, tlsHostName: String) -> Bool {
@@ -285,6 +299,52 @@ extension APIClient: URLSessionDelegate {
         }
         
         return true
+    }
+    
+    private static func pinnedCertificates() -> [Data] {
+        var certificates: [Data] = []
+        
+        if let pinnedCertificateURL = Bundle.main.url(forResource: "api.ivpn.net", withExtension: "der") {
+            do {
+                let pinnedCertificateData = try Data(contentsOf: pinnedCertificateURL)
+                certificates.append(pinnedCertificateData)
+            } catch {
+                
+            }
+        }
+        
+        return certificates
+    }
+    
+    private static func pinnedKeys() -> [SecKey] {
+        var publicKeys: [SecKey] = []
+        
+        if let pinnedCertificateURL = Bundle.main.url(forResource: "api.ivpn.net", withExtension: "der") {
+            do {
+                let pinnedCertificateData = try Data(contentsOf: pinnedCertificateURL) as CFData
+                if let pinnedCertificate = SecCertificateCreateWithData(nil, pinnedCertificateData), let key = publicKey(for: pinnedCertificate) {
+                    publicKeys.append(key)
+                }
+            } catch {
+                
+            }
+        }
+        
+        return publicKeys
+    }
+    
+    private static func publicKey(for certificate: SecCertificate) -> SecKey? {
+        var publicKey: SecKey?
+        
+        let policy = SecPolicyCreateBasicX509()
+        var trust: SecTrust?
+        let trustCreationStatus = SecTrustCreateWithCertificates(certificate, policy, &trust)
+        
+        if let trust = trust, trustCreationStatus == errSecSuccess {
+            publicKey = SecTrustCopyPublicKey(trust)
+        }
+        
+        return publicKey
     }
     
 }
