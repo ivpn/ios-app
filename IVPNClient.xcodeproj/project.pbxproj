@@ -67,9 +67,6 @@
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF52240E40F006B81D2 /* Error+Ext.swift */; };
-		8233D32A257E65FF00918834 /* api.ivpn.net.der in Resources */ = {isa = PBXBuildFile; fileRef = 8233D329257E65FF00918834 /* api.ivpn.net.der */; };
-		8233D32B257E65FF00918834 /* api.ivpn.net.der in Resources */ = {isa = PBXBuildFile; fileRef = 8233D329257E65FF00918834 /* api.ivpn.net.der */; };
-		8233D32C257E65FF00918834 /* api.ivpn.net.der in Resources */ = {isa = PBXBuildFile; fileRef = 8233D329257E65FF00918834 /* api.ivpn.net.der */; };
 		82351FCA241FA16600E6E0FD /* InfoAlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */; };
 		82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */; };
 		82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */; };
@@ -436,7 +433,6 @@
 		822B85D821B941A200715691 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		8232FBF52240E40F006B81D2 /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
-		8233D329257E65FF00918834 /* api.ivpn.net.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = api.ivpn.net.der; sourceTree = "<group>"; };
 		82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerView.swift; sourceTree = "<group>"; };
@@ -1438,7 +1434,6 @@
 				82FF0D4123153D1000440E5D /* Colors.xcassets */,
 				9CB2CE261DAA6C1B007A4D2D /* IVPNClient.entitlements */,
 				9CB2CE321DAF9283007A4D2D /* Model.xcdatamodeld */,
-				8233D329257E65FF00918834 /* api.ivpn.net.der */,
 			);
 			path = IVPNClient;
 			sourceTree = "<group>";
@@ -1721,7 +1716,6 @@
 				826F7F4623A7AF2F00777DB9 /* Assets.xcassets in Resources */,
 				826F7F4E23A7B4CD00777DB9 /* today-extension-release.xcconfig in Resources */,
 				826F7F2523A7A1F400777DB9 /* Colors.xcassets in Resources */,
-				8233D32C257E65FF00918834 /* api.ivpn.net.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1731,7 +1725,6 @@
 			files = (
 				82A9E8CA23471FB2007BCA7E /* wg-staging.xcconfig in Resources */,
 				82A9E8C923471FB2007BCA7E /* wg-release.xcconfig in Resources */,
-				8233D32B257E65FF00918834 /* api.ivpn.net.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1754,7 +1747,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				82A9E8C623471EBE007BCA7E /* staging.xcconfig in Resources */,
-				8233D32A257E65FF00918834 /* api.ivpn.net.der in Resources */,
 				82A9E8C523471EBE007BCA7E /* release.xcconfig in Resources */,
 				9CDDD5B91D9D2F9F00D39924 /* LaunchScreen.storyboard in Resources */,
 				9C048AA71DE71AD3001CB489 /* tos.html in Resources */,

@@ -22,6 +22,7 @@
 //
 
 import Foundation
+import CryptoKit
 
 enum HTTPMethod: String {
     case get = "GET"
@@ -254,23 +255,11 @@ extension APIClient: URLSessionDelegate {
             return
         }
         
-        // Certificate validation
-//        if let serverCertificate = SecTrustGetCertificateAtIndex(trust, 0) {
-//            let serverCertificateData = SecCertificateCopyData(serverCertificate) as Data
-//
-//            if APIClient.pinnedCertificates().contains(serverCertificateData) {
-//                completionHandler(.useCredential, URLCredential(trust: trust))
-//                return
-//            }
-//        }
-        
         // Certificate public key validation
-        if let serverCertificate = SecTrustGetCertificateAtIndex(trust, 0), let serverCertificateKey = APIClient.publicKey(for: serverCertificate) {
-
-            if APIClient.pinnedKeys().contains(serverCertificateKey) {
-                completionHandler(.useCredential, URLCredential(trust: trust))
-                return
-            }
+        let pinner = PublicKeyPinner(hashes: ["Tz0NrBdPdcAJBBep5aw8gDTvQ8uqkIrECrumVKiLD0s="])
+        if pinner.validate(serverTrust: trust, domain: nil) {
+            completionHandler(.useCredential, URLCredential(trust: trust))
+            return
         }
         
         completionHandler(.cancelAuthenticationChallenge, nil)
@@ -301,50 +290,60 @@ extension APIClient: URLSessionDelegate {
         return true
     }
     
-    private static func pinnedCertificates() -> [Data] {
-        var certificates: [Data] = []
+}
+
+class PublicKeyPinner {
+    
+    private let hashes: [String]
+    
+    public init(hashes: [String]) {
+        self.hashes = hashes
+    }
+    
+    public func validate(serverTrust: SecTrust, domain: String?) -> Bool {
+        if let domain = domain {
+            let policies = NSMutableArray()
+            policies.add(SecPolicyCreateSSL(true, domain as CFString))
+            SecTrustSetPolicies(serverTrust, policies)
+        }
         
-        if let pinnedCertificateURL = Bundle.main.url(forResource: "api.ivpn.net", withExtension: "der") {
-            do {
-                let pinnedCertificateData = try Data(contentsOf: pinnedCertificateURL)
-                certificates.append(pinnedCertificateData)
-            } catch {
-                
+        var secResult = SecTrustResultType.invalid
+        let status = SecTrustEvaluate(serverTrust, &secResult)
+        
+        guard status == errSecSuccess else {
+            return false
+        }
+        
+        for index in 0..<SecTrustGetCertificateCount(serverTrust) {
+            guard let certificate = SecTrustGetCertificateAtIndex(serverTrust, index),
+                  let publicKey = SecCertificateCopyKey(certificate),
+                  let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) else {
+                return false
+            }
+            
+            let keyHash = hash(data: (publicKeyData as NSData) as Data)
+            if hashes.contains(keyHash) {
+                return true
             }
         }
         
-        return certificates
+        return false
     }
     
-    private static func pinnedKeys() -> [SecKey] {
-        var publicKeys: [SecKey] = []
+    private func hash(data: Data) -> String {
+        // Add the missing ASN1 header for public keys to re-create the subject public key info
+        let rsa4096Asn1Header: [UInt8] = [
+            0x30, 0x82, 0x02, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
+            0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x02, 0x0f, 0x00
+        ]
+        var keyWithHeader = Data(rsa4096Asn1Header)
+        keyWithHeader.append(data)
         
-        if let pinnedCertificateURL = Bundle.main.url(forResource: "api.ivpn.net", withExtension: "der") {
-            do {
-                let pinnedCertificateData = try Data(contentsOf: pinnedCertificateURL) as CFData
-                if let pinnedCertificate = SecCertificateCreateWithData(nil, pinnedCertificateData), let key = publicKey(for: pinnedCertificate) {
-                    publicKeys.append(key)
-                }
-            } catch {
-                
-            }
+        if #available(iOS 13, *) {
+            return Data(SHA256.hash(data: keyWithHeader)).base64EncodedString()
+        } else {
+            return ""
         }
-        
-        return publicKeys
-    }
-    
-    private static func publicKey(for certificate: SecCertificate) -> SecKey? {
-        var publicKey: SecKey?
-        
-        let policy = SecPolicyCreateBasicX509()
-        var trust: SecTrust?
-        let trustCreationStatus = SecTrustCreateWithCertificates(certificate, policy, &trust)
-        
-        if let trust = trust, trustCreationStatus == errSecSuccess {
-            publicKey = SecTrustCopyPublicKey(trust)
-        }
-        
-        return publicKey
     }
     
 }
