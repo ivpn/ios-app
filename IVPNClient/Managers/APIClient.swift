@@ -256,7 +256,12 @@ extension APIClient: URLSessionDelegate {
         }
         
         // Certificate public key validation
-        let pinner = PublicKeyPinner(hashes: ["Tz0NrBdPdcAJBBep5aw8gDTvQ8uqkIrECrumVKiLD0s="])
+        let pinner = PublicKeyPinner(hashes: [
+            "Jl+pK4qpKGVHQAUOvJOpuu3blkJeZNqHrHKTJTvslDY=",
+            "U9XDB04u2rzA7daBcxHKzCtePOhDSp1x1LY6rf2TRXU=",
+            "3cEBzcOsAm+pfk5F24jbWulvqtS4ECzAYSjEqOKm4Pw=",
+            "sTkDAlpsHzTakpXj8SGCE1rXL8qlmYW77vn4WWHnLLc="
+        ])
         if pinner.validate(serverTrust: trust, domain: nil) {
             completionHandler(.useCredential, URLCredential(trust: trust))
             return
