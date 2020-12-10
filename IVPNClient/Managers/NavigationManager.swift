@@ -128,4 +128,16 @@ class NavigationManager {
         return storyBoard.instantiateViewController(withIdentifier: "createAccountView")
     }
     
+    static func getTwoFactorViewController(delegate: TwoFactorViewControllerDelegate? = nil) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
+        
+        let navController = storyBoard.instantiateViewController(withIdentifier: "twoFactorView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        if let viewController = navController?.topViewController as? TwoFactorViewController {
+            viewController.delegate = delegate
+        }
+        
+        return navController!
+    }
+    
 }
