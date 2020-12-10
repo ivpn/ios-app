@@ -87,8 +87,4 @@ extension TwoFactorViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-    }
-    
 }

@@ -1160,6 +1160,9 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="submitAction:" destination="U83-5O-go8" eventType="touchUpInside" id="fnH-es-wWm"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account has two-factor authentication enabled. Please enter TOTP token to login." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDg-l8-8dR">
                                                 <rect key="frame" x="62" y="30" width="290" height="40"/>
@@ -1225,6 +1228,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="codeField" destination="mrp-ba-WSd" id="hU9-I9-Qyh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ac-ua-gAG" sceneMemberID="firstResponder"/>
             </objects>
