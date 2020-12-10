@@ -57,8 +57,14 @@ class TwoFactorViewController: UIViewController {
     // MARK: - Methods -
     
     private func submit() {
-        // TODO: Input validation
-        delegate?.codeSubmited(code: codeField.text ?? "")
+        let code = codeField.text ?? ""
+        
+        guard ServiceStatus.isValid(verificationCode: code) else {
+            showValidationError()
+            return
+        }
+        
+        delegate?.codeSubmited(code: code)
     }
     
     private func showValidationError() {
