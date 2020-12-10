@@ -23,6 +23,10 @@
 
 import UIKit
 
+protocol TwoFactorViewControllerDelegate: class {
+    func codeSubmited(code: String)
+}
+
 class TwoFactorViewController: UIViewController {
     
     // MARK: - @IBOutlets -
@@ -33,11 +37,35 @@ class TwoFactorViewController: UIViewController {
         }
     }
     
+    // MARK: - Properties -
+    
+    weak var delegate: TwoFactorViewControllerDelegate?
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func submitAction(_ sender: AnyObject) {
+        submit()
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardOnTap()
+    }
+    
+    // MARK: - Methods -
+    
+    private func submit() {
+        // TODO: Input validation
+        delegate?.codeSubmited(code: codeField.text ?? "")
+    }
+    
+    private func showValidationError() {
+        showErrorAlert(
+            title: "You entered an invalid code",
+            message: "Please enter 6-digit verification code"
+        )
     }
 
 }
@@ -48,7 +76,7 @@ extension TwoFactorViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         codeField.resignFirstResponder()
-        // TODO: Submit form
+        submit()
         
         return true
     }
