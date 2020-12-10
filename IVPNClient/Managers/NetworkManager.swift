@@ -115,6 +115,7 @@ class NetworkManager {
         network.type = type
         network.trust = StorageManager.getTrust(network: network)
         Application.shared.network = network
+        Application.shared.connectionManager.evaluateIpsecConnection()
     }
     
     private func startNetworkSignalCheck() {
