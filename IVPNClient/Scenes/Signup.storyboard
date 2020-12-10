@@ -1103,7 +1103,7 @@
         <!--2-Factor Authentication-->
         <scene sceneID="kRm-zV-X8H">
             <objects>
-                <viewController modalPresentationStyle="formSheet" id="U83-5O-go8" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="formSheet" id="U83-5O-go8" customClass="TwoFactorViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LA5-ox-ibQ"/>
                         <viewControllerLayoutGuide type="bottom" id="n2M-jO-dU9"/>
