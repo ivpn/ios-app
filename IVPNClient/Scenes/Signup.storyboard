@@ -182,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1513.0434782608697" y="47.544642857142854"/>
+            <point key="canvasLocation" x="1287" y="-229"/>
         </scene>
         <!--Account created-->
         <scene sceneID="u3u-TB-jtU">
@@ -965,7 +965,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZeN-hn-jV7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="602.89855072463774" y="47.544642857142854"/>
+            <point key="canvasLocation" x="365" y="-229"/>
         </scene>
         <!--Scan QR code-->
         <scene sceneID="OfJ-Z4-zb2">
@@ -1021,7 +1021,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pKV-6w-FVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1512" y="777"/>
+            <point key="canvasLocation" x="1287" y="515"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ec5-yl-wa5">
@@ -1039,7 +1039,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qT-dn-lgd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="603" y="777"/>
+            <point key="canvasLocation" x="364" y="515"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DiP-nH-p1J">
@@ -1099,6 +1099,154 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZg-Ea-Uxg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5183" y="-970"/>
+        </scene>
+        <!--2-Factor Authentication-->
+        <scene sceneID="kRm-zV-X8H">
+            <objects>
+                <viewController modalPresentationStyle="formSheet" id="U83-5O-go8" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LA5-ox-ibQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="n2M-jO-dU9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ejq-N8-NqU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="aFo-4M-4x3">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inu-6x-BUa" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWX-2b-S2y">
+                                                <rect key="frame" x="69" y="82" width="276" height="50"/>
+                                                <subviews>
+                                                    <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="xxxxxx" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="mrp-ba-WSd" customClass="UITextFieldPadding" customModule="IVPNClient" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="276" height="50"/>
+                                                        <color key="backgroundColor" name="ivpnGray2"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" textContentType="username"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="mrp-ba-WSd" firstAttribute="leading" secondItem="JWX-2b-S2y" secondAttribute="leading" id="M1S-MV-JT4"/>
+                                                    <constraint firstAttribute="bottom" secondItem="mrp-ba-WSd" secondAttribute="bottom" id="S1G-6c-5JE"/>
+                                                    <constraint firstAttribute="width" constant="276" id="VCu-fF-C4l"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mrp-ba-WSd" secondAttribute="trailing" id="YX7-dq-rhe"/>
+                                                    <constraint firstItem="mrp-ba-WSd" firstAttribute="top" secondItem="JWX-2b-S2y" secondAttribute="top" id="ez7-J2-9OY"/>
+                                                    <constraint firstAttribute="height" constant="50" id="z1W-23-5Fw"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DQ-gJ-yjM">
+                                                <rect key="frame" x="69" y="172" width="276" height="50"/>
+                                                <color key="backgroundColor" name="ivpnBlue"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="iJa-vp-Z3w"/>
+                                                    <constraint firstAttribute="width" constant="276" id="n90-Fl-hB3"/>
+                                                </constraints>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Submit">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account has two-factor authentication enabled. Please enter TOTP token to login." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDg-l8-8dR">
+                                                <rect key="frame" x="62" y="30" width="290" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="290" id="Ief-G5-M8K"/>
+                                                    <constraint firstAttribute="height" constant="40" id="gal-kF-zpf"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" name="ivpnLabelQuaternary"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEh-QU-ggD">
+                                                <rect key="frame" x="127" y="694" width="160" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="5Sv-Fh-5eM"/>
+                                                    <constraint firstAttribute="width" constant="160" id="A4B-2y-WYe"/>
+                                                </constraints>
+                                                <state key="normal" title="Restore Purchases">
+                                                    <color key="titleColor" name="ivpnBlue"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="restorePurchases:" destination="U83-5O-go8" eventType="touchUpInside" id="IqH-yH-RwI"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="1DQ-gJ-yjM" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="3bQ-Xq-lGy"/>
+                                            <constraint firstItem="bDg-l8-8dR" firstAttribute="top" secondItem="inu-6x-BUa" secondAttribute="top" constant="30" id="MEp-Jg-hEb"/>
+                                            <constraint firstItem="YEh-QU-ggD" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="NV7-PI-0Vx"/>
+                                            <constraint firstItem="JWX-2b-S2y" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="XJi-op-ykP"/>
+                                            <constraint firstItem="bDg-l8-8dR" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="f3g-he-NGe"/>
+                                            <constraint firstAttribute="bottom" secondItem="YEh-QU-ggD" secondAttribute="bottom" constant="30" id="fyZ-F1-HVw"/>
+                                            <constraint firstItem="JWX-2b-S2y" firstAttribute="top" secondItem="bDg-l8-8dR" secondAttribute="bottom" constant="12" id="nGm-J6-UzT"/>
+                                            <constraint firstItem="1DQ-gJ-yjM" firstAttribute="top" secondItem="JWX-2b-S2y" secondAttribute="bottom" constant="40" id="zQy-QS-Isw"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="inu-6x-BUa" firstAttribute="centerY" secondItem="aFo-4M-4x3" secondAttribute="centerY" id="LYm-6L-PTY"/>
+                                    <constraint firstItem="inu-6x-BUa" firstAttribute="leading" secondItem="aFo-4M-4x3" secondAttribute="leading" id="NhW-mg-cNX"/>
+                                    <constraint firstItem="inu-6x-BUa" firstAttribute="centerX" secondItem="aFo-4M-4x3" secondAttribute="centerX" id="QWy-IC-R3a"/>
+                                    <constraint firstAttribute="trailing" secondItem="inu-6x-BUa" secondAttribute="trailing" id="SJu-L8-1YJ"/>
+                                    <constraint firstItem="inu-6x-BUa" firstAttribute="top" secondItem="aFo-4M-4x3" secondAttribute="top" id="fYf-Or-X4F"/>
+                                    <constraint firstAttribute="bottom" secondItem="inu-6x-BUa" secondAttribute="bottom" id="oCj-rq-tFR"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Yvr-ra-ZUY"/>
+                        <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
+                        <constraints>
+                            <constraint firstItem="aFo-4M-4x3" firstAttribute="top" secondItem="LA5-ox-ibQ" secondAttribute="bottom" id="E2e-3o-Qs2"/>
+                            <constraint firstAttribute="trailing" secondItem="aFo-4M-4x3" secondAttribute="trailing" id="F8f-df-i89"/>
+                            <constraint firstItem="aFo-4M-4x3" firstAttribute="leading" secondItem="Ejq-N8-NqU" secondAttribute="leading" id="mfk-Fx-qrE"/>
+                            <constraint firstItem="n2M-jO-dU9" firstAttribute="top" secondItem="aFo-4M-4x3" secondAttribute="bottom" id="ucy-bm-ie0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="2-Factor Authentication" id="Cwr-ZP-d1X">
+                        <barButtonItem key="backBarButtonItem" title="Log In" id="bFH-9R-JWS"/>
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="7Oz-eD-EOr">
+                            <connections>
+                                <action selector="dismissViewController:" destination="U83-5O-go8" id="eBV-em-JJe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6ac-ua-gAG" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1287" y="1266"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aIw-ln-iUM">
+            <objects>
+                <navigationController storyboardIdentifier="2faView" automaticallyAdjustsScrollViewInsets="NO" id="amk-ql-5NR" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wHZ-yq-cXd">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="U83-5O-go8" kind="relationship" relationship="rootViewController" id="6Kq-W7-Z9w"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9hn-5Z-9j6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364" y="1267"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
