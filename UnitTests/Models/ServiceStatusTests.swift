@@ -61,12 +61,19 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertEqual(model.getSubscriptionText(), "\(model.currentPlan ?? ""), Active until \(model.activeUntilString())")
     }
     
-    func test_isValid() {
+    func test_isValidUsername() {
         XCTAssertTrue(ServiceStatus.isValid(username: "ivpnXXXXXXXX"))
         XCTAssertTrue(ServiceStatus.isValid(username: "i-XXXX-XXXX-XXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: "IVPNXXXXXXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: "XXXXXXXXXXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: ""))
+    }
+    
+    func test_isValidVerificationCode() {
+        XCTAssertTrue(ServiceStatus.isValid(verificationCode: "123456"))
+        XCTAssertFalse(ServiceStatus.isValid(verificationCode: "12345"))
+        XCTAssertFalse(ServiceStatus.isValid(verificationCode: "12345x"))
+        XCTAssertFalse(ServiceStatus.isValid(verificationCode: ""))
     }
     
     func test_daysUntilSubscriptionExpiration() {

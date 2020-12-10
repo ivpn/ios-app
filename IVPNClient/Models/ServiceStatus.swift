@@ -103,6 +103,10 @@ struct ServiceStatus: Codable {
         return username.hasPrefix("ivpn") || username.hasPrefix("i-")
     }
     
+    static func isValid(verificationCode: String) -> Bool {
+        return !verificationCode.isEmpty && verificationCode.count == 6 && NumberFormatter().number(from: verificationCode) != nil
+    }
+    
     func isNewStyleAccount() -> Bool {
         return paymentMethod == "prepaid"
     }
