@@ -372,6 +372,16 @@ extension LoginViewController: ScannerViewControllerDelegate {
     
 }
 
+// MARK: - TwoFactorViewControllerDelegate -
+
+extension LoginViewController: TwoFactorViewControllerDelegate {
+    
+    func codeSubmitted(code: String) {
+        
+    }
+    
+}
+
 extension LoginViewController {
     
     enum ActionType {

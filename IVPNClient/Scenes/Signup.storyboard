@@ -1175,27 +1175,12 @@
                                                 <color key="textColor" name="ivpnLabelQuaternary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEh-QU-ggD">
-                                                <rect key="frame" x="127" y="694" width="160" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="5Sv-Fh-5eM"/>
-                                                    <constraint firstAttribute="width" constant="160" id="A4B-2y-WYe"/>
-                                                </constraints>
-                                                <state key="normal" title="Restore Purchases">
-                                                    <color key="titleColor" name="ivpnBlue"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="restorePurchases:" destination="U83-5O-go8" eventType="touchUpInside" id="IqH-yH-RwI"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="1DQ-gJ-yjM" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="3bQ-Xq-lGy"/>
                                             <constraint firstItem="bDg-l8-8dR" firstAttribute="top" secondItem="inu-6x-BUa" secondAttribute="top" constant="30" id="MEp-Jg-hEb"/>
-                                            <constraint firstItem="YEh-QU-ggD" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="NV7-PI-0Vx"/>
                                             <constraint firstItem="JWX-2b-S2y" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="XJi-op-ykP"/>
                                             <constraint firstItem="bDg-l8-8dR" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="f3g-he-NGe"/>
-                                            <constraint firstAttribute="bottom" secondItem="YEh-QU-ggD" secondAttribute="bottom" constant="30" id="fyZ-F1-HVw"/>
                                             <constraint firstItem="JWX-2b-S2y" firstAttribute="top" secondItem="bDg-l8-8dR" secondAttribute="bottom" constant="12" id="nGm-J6-UzT"/>
                                             <constraint firstItem="1DQ-gJ-yjM" firstAttribute="top" secondItem="JWX-2b-S2y" secondAttribute="bottom" constant="40" id="zQy-QS-Isw"/>
                                         </constraints>

@@ -24,7 +24,7 @@
 import UIKit
 
 protocol TwoFactorViewControllerDelegate: class {
-    func codeSubmited(code: String)
+    func codeSubmitted(code: String)
 }
 
 class TwoFactorViewController: UIViewController {
@@ -51,6 +51,7 @@ class TwoFactorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = false
         hideKeyboardOnTap()
     }
     
@@ -64,12 +65,13 @@ class TwoFactorViewController: UIViewController {
             return
         }
         
-        delegate?.codeSubmited(code: code)
+        delegate?.codeSubmitted(code: code)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     private func showValidationError() {
         showErrorAlert(
-            title: "You entered an invalid code",
+            title: "Invalid code",
             message: "Please enter 6-digit verification code"
         )
     }
