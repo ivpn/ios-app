@@ -149,7 +149,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Methods -
     
-    private func startLoginProcess(force: Bool = false) {
+    private func startLoginProcess(force: Bool = false, confirmation: String? = nil) {
         guard !loginProcessStarted else { return }
         
         let username = (self.userName.text ?? "").trim()
@@ -162,7 +162,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        sessionManager.createSession(force: force, username: username)
+        sessionManager.createSession(force: force, username: username, confirmation: confirmation)
     }
     
     private func startSignupProcess() {
@@ -377,7 +377,7 @@ extension LoginViewController: ScannerViewControllerDelegate {
 extension LoginViewController: TwoFactorViewControllerDelegate {
     
     func codeSubmitted(code: String) {
-        
+        startLoginProcess(force: false, confirmation: code)
     }
     
 }
