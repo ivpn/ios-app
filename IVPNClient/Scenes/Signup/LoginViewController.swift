@@ -305,6 +305,18 @@ extension LoginViewController {
         showErrorAlert(title: "Error", message: message)
     }
     
+    override func twoFactorEnabled(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
+        present(NavigationManager.getTwoFactorViewController(delegate: self), animated: true)
+    }
+    
+    override func twoFactorIncorrect(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
+        showErrorAlert(title: "Error", message: (error as AnyObject).message ?? "")
+    }
+    
     func showCreateSessionAlert(message: String) {
         showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { index in
             switch index {

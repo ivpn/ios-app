@@ -39,6 +39,8 @@ import Foundation
     func sessionStatusNotFound()
     func sessionStatusExpired()
     func sessionStatusFailure()
+    func twoFactorEnabled(error: Any?)
+    func twoFactorIncorrect(error: Any?)
 }
 
 class SessionManager {
@@ -77,20 +79,25 @@ class SessionManager {
                 
                 self.delegate?.createSessionSuccess()
             case .failure(let error):
-                if let error = error {
-                    if error.status == 401 {
+                if let error = error {                    
+                    switch error.status {
+                    case 401:
                         self.delegate?.createSessionAuthenticationError()
                         return
-                    }
-                    
-                    if error.status == 602 {
+                    case 602:
                         self.delegate?.createSessionTooManySessions(error: error)
                         return
-                    }
-                    
-                    if error.status == 11005 {
+                    case 11005:
                         self.delegate?.createSessionAccountNotActivated(error: error)
                         return
+                    case 70011:
+                        self.delegate?.twoFactorEnabled(error: error)
+                        return
+                    case 70012:
+                        self.delegate?.twoFactorIncorrect(error: error)
+                        return
+                    default:
+                        break
                     }
                 }
                 
