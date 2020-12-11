@@ -312,9 +312,15 @@ extension LoginViewController {
     }
     
     override func twoFactorIncorrect(error: Any?) {
+        var message = "Unknown error occurred"
+        
+        if let error = error as? ErrorResultSessionNew {
+            message = error.message
+        }
+        
         hud.dismiss()
         loginProcessStarted = false
-        showErrorAlert(title: "Error", message: (error as AnyObject).message ?? "")
+        showErrorAlert(title: "Error", message: message)
     }
     
     func showCreateSessionAlert(message: String) {
