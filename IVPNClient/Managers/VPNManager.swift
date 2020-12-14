@@ -209,12 +209,16 @@ class VPNManager {
         manager.isEnabled = true
     }
     
-    func installOnDemandRules(manager: NEVPNManager, status: NEVPNStatus) {
+    func installOnDemandRules(manager: NEVPNManager, status: NEVPNStatus, gateway: String? = nil) {
         guard manager != ipsecManager else {
             return
         }
         
         manager.loadFromPreferences { _ in
+            if let gateway = gateway {
+                manager.protocolConfiguration?.serverAddress = gateway
+            }
+            
             manager.isOnDemandEnabled = true
             manager.onDemandRules = StorageManager.getOnDemandRules(status: status)
             manager.saveToPreferences { _ in }

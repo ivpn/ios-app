@@ -258,11 +258,15 @@ class ConnectionManager {
         }
     }
     
-    func installOnDemandRules() {
+    func installOnDemandRules(gateway: String? = nil) {
+        guard UserDefaults.shared.networkProtectionEnabled else {
+            return
+        }
+        
         getStatus { tunnelType, status in
-            if status == .disconnected {
+            if status.isDisconnected() {
                 self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
-                    self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected)
+                    self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected, gateway: gateway)
                 }
             }
         }
@@ -347,7 +351,8 @@ class ConnectionManager {
     
     func needsUpdateSelectedServer() {
         guard status.isDisconnected() else { return }
-        self.updateSelectedServer()
+        updateSelectedServer()
+        installOnDemandRules(gateway: Application.shared.settings.selectedServer.gateway)
     }
     
     func canDisconnect(status: NEVPNStatus) -> Bool {
