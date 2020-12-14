@@ -46,20 +46,7 @@ class NetworkManager {
     
     func startMonitoring(completion: (() -> Void)? = nil) {
         reachability.whenReachable = { reachability in
-            switch reachability.connection {
-            case .wifi:
-                if let ssid = UIDevice.wiFiSsid {
-                    StorageManager.saveWiFiNetwork(name: ssid)
-                    NotificationCenter.default.post(name: Notification.Name.NetworkSaved, object: nil)
-                    self.updateNetwork(name: ssid, type: NetworkType.wifi.rawValue)
-                } else {
-                    self.updateNetwork(name: "Wi-Fi", type: NetworkType.none.rawValue)
-                }
-            case .cellular:
-                self.updateNetwork(name: "Mobile data", type: NetworkType.cellular.rawValue)
-            case .unavailable, .none:
-                self.updateNetwork(name: "No network", type: NetworkType.none.rawValue)
-            }
+            self.connectionUpdated(reachability: reachability)
             
             if let completion = completion {
                 completion()
@@ -90,24 +77,29 @@ class NetworkManager {
     
     @objc func evaluateReachability() {
         let reachability = try! Reachability()
-        
-        if reachability.connection == .cellular {
-            updateNetwork(name: "Mobile data", type: NetworkType.cellular.rawValue)
-        }
-        
-        if reachability.connection == .wifi {
+        connectionUpdated(reachability: reachability)
+    }
+    
+    // MARK: - Private methods -
+    
+    private func connectionUpdated(reachability: Reachability) {
+        switch reachability.connection {
+        case .wifi:
             if let ssid = UIDevice.wiFiSsid {
                 StorageManager.saveWiFiNetwork(name: ssid)
+                NotificationCenter.default.post(name: Notification.Name.NetworkSaved, object: nil)
                 updateNetwork(name: ssid, type: NetworkType.wifi.rawValue)
             } else if Application.shared.connectionManager.status == .invalid {
                 self.updateNetwork(name: "Wi-Fi", type: NetworkType.none.rawValue)
             } else {
                 self.updateNetwork(name: "No network", type: NetworkType.none.rawValue)
             }
+        case .cellular:
+            self.updateNetwork(name: "Mobile data", type: NetworkType.cellular.rawValue)
+        case .unavailable, .none:
+            self.updateNetwork(name: "No network", type: NetworkType.none.rawValue)
         }
     }
-    
-    // MARK: - Private methods -
     
     private func updateNetwork(name: String, type: String) {
         let network = Network(context: StorageManager.context, needToSave: false)
