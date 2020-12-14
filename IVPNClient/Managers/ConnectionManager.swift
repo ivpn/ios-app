@@ -399,36 +399,6 @@ class ConnectionManager {
         }
     }
     
-    func evaluateIpsecConnection() {
-        guard Application.shared.settings.connectionProtocol == .ipsec else {
-            return
-        }
-        
-        let defaults = UserDefaults.shared
-        guard defaults.networkProtectionEnabled else {
-            return
-        }
-        
-        log(info: "Evaluating IKEv2 VPN connection for Network Protection")
-        
-        guard let networkTrust = Application.shared.network.trust else {
-            return
-        }
-        
-        let defaultTrust = StorageManager.getDefaultTrust()
-        let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
-        
-        switch trust {
-        case NetworkTrust.Untrusted.rawValue:
-            if defaults.networkProtectionUntrustedConnect && status.isDisconnected() {
-                connect()
-                return
-            }
-        default:
-            break
-        }
-    }
-    
     func needToReconnect(network: Network, newTrust: String) -> Bool {
         guard UserDefaults.shared.networkProtectionEnabled else {
             return false
