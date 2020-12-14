@@ -430,7 +430,7 @@ class ConnectionManager {
             if Application.shared.settings.connectionProtocol != .ipsec {
                 installOnDemandRules()
             } else  {
-                UIApplication.topViewController()?.showAlert(title: "", message: "The new Network Protection settings will take effect the next time the VPN is connected.")
+                UIApplication.topViewController()?.showAlert(title: "", message: "New settings will be applied the next time the VPN is connected.")
             }
         }
     }
