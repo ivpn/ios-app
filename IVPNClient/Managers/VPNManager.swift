@@ -209,12 +209,14 @@ class VPNManager {
         manager.isEnabled = true
     }
     
-    func installOnDemandRules(manager: NEVPNManager, status: NEVPNStatus, settings: ConnectionSettings, accessDetails: AccessDetails) {
+    func installOnDemandRules(status: NEVPNStatus, settings: ConnectionSettings, accessDetails: AccessDetails) {
         switch settings {
         case .ipsec:
             self.disable(tunnelType: .openvpn) { _ in
                 self.disable(tunnelType: .wireguard) { _ in
-                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in }
+                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
+                        self.disconnect(tunnelType: .ipsec)
+                    }
                 }
             }
         case .openvpn:

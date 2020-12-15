@@ -132,15 +132,10 @@ class ConnectionManager {
     // MARK: - Methods -
     
     func resetOnDemandRules() {
-        getStatus { tunnelType, status in
-            self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
-                if status == .connected || status == .connecting {
-                    self.installOnDemandRules()
-                }
-                if status == .disconnected || status == .disconnecting || status == .invalid {
-                    self.vpnManager.removeOnDemandRule(manager: manager)
-                }
-            }
+        if status.isDisconnected() {
+            vpnManager.disable(tunnelType: .ipsec) { _ in }
+            vpnManager.disable(tunnelType: .openvpn) { _ in }
+            vpnManager.disable(tunnelType: .wireguard) { _ in }
         }
     }
     
@@ -151,12 +146,8 @@ class ConnectionManager {
                 return
             }
             
-            self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
-                manager.onDemandRules = [NEOnDemandRule]()
-                manager.isOnDemandEnabled = false
-                manager.saveToPreferences { _ in
-                    completion()
-                }
+            self.vpnManager.disable(tunnelType: tunnelType) { _ in 
+                completion()
             }
         }
     }
@@ -263,16 +254,14 @@ class ConnectionManager {
         
         getStatus { tunnelType, status in
             if status.isDisconnected() {
-                self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
-                    let accessDetails = AccessDetails(
-                        serverAddress: Application.shared.settings.selectedServer.gateway,
-                        username: KeyChain.vpnUsername ?? "",
-                        passwordRef: KeyChain.vpnPasswordRef
-                    )
-                    let settings = self.settings.connectionProtocol
-                    
-                    self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected, settings: settings, accessDetails: accessDetails)
-                }
+                let accessDetails = AccessDetails(
+                    serverAddress: Application.shared.settings.selectedServer.gateway,
+                    username: KeyChain.vpnUsername ?? "",
+                    passwordRef: KeyChain.vpnPasswordRef
+                )
+                let settings = self.settings.connectionProtocol
+                
+                self.vpnManager.installOnDemandRules(status: .disconnected, settings: settings, accessDetails: accessDetails)
             }
         }
     }
@@ -340,8 +329,13 @@ class ConnectionManager {
     }
     
     func updateSelectedServer(status: NEVPNStatus? = nil) {
-        guard Application.shared.settings.selectedServer.fastest else { return }
-        guard let fastestServer = Application.shared.serverList.getFastestServer() else { return }
+        guard Application.shared.settings.selectedServer.fastest else {
+            return
+        }
+        
+        guard let fastestServer = Application.shared.serverList.getFastestServer() else {
+            return
+        }
         
         settings.selectedServer = fastestServer
         settings.selectedServer.fastest = true
@@ -363,7 +357,9 @@ class ConnectionManager {
     }
     
     func canDisconnect(status: NEVPNStatus) -> Bool {
-        guard UserDefaults.shared.networkProtectionEnabled else { return true }
+        guard UserDefaults.shared.networkProtectionEnabled else {
+            return true
+        }
         
         let defaultTrust = StorageManager.getDefaultTrust()
         let networkTrust = Application.shared.network.trust ?? NetworkTrust.Default.rawValue
@@ -431,7 +427,7 @@ class ConnectionManager {
     }
     
     func needToInstallOnDemandRules(network: Network, newTrust: String) {
-        guard UserDefaults.shared.networkProtectionEnabled else {
+        guard UserDefaults.shared.networkProtectionEnabled, status.isDisconnected() else {
             return
         }
         

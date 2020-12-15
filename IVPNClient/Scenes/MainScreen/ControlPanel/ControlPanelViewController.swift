@@ -393,9 +393,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     private func reloadGeoLocation() {
-        if let topViewController = UIApplication.topViewController() as? MainViewController {
-            topViewController.updateGeoLocation()
-        }
+        NotificationCenter.default.post(name: Notification.Name.UpdateGeoLocation, object: nil)
     }
     
     @objc private func updateControlPanel() {
@@ -419,7 +417,6 @@ class ControlPanelViewController: UITableViewController {
     
     @objc private func pingDidComplete() {
         Application.shared.connectionManager.needsToUpdateSelectedServer()
-        Application.shared.connectionManager.installOnDemandRules()
         controlPanelView.updateServerNames()
         
         if needsToReconnect {
