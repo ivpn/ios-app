@@ -354,10 +354,12 @@ class ConnectionManager {
         }
     }
     
-    func needsUpdateSelectedServer() {
-        guard status.isDisconnected() else { return }
+    func needsToUpdateSelectedServer() {
+        guard status.isDisconnected() else {
+            return
+        }
+        
         updateSelectedServer()
-        installOnDemandRules()
     }
     
     func canDisconnect(status: NEVPNStatus) -> Bool {

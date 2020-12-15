@@ -385,7 +385,7 @@ class ControlPanelViewController: UITableViewController {
     private func reloadView() {
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
-        Application.shared.connectionManager.needsUpdateSelectedServer()
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker()
@@ -404,19 +404,22 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func serverSelected() {
-        Application.shared.connectionManager.needsUpdateSelectedServer()
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
+        Application.shared.connectionManager.installOnDemandRules()
         controlPanelView.updateServerNames()
     }
     
     @objc private func protocolSelected() {
-        Application.shared.connectionManager.needsUpdateSelectedServer()
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
+        Application.shared.connectionManager.installOnDemandRules()
         controlPanelView.updateProtocol()
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
     }
     
     @objc private func pingDidComplete() {
-        Application.shared.connectionManager.needsUpdateSelectedServer()
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
+        Application.shared.connectionManager.installOnDemandRules()
         controlPanelView.updateServerNames()
         
         if needsToReconnect {
