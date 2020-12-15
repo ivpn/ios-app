@@ -212,14 +212,22 @@ class VPNManager {
     func installOnDemandRules(manager: NEVPNManager, status: NEVPNStatus, settings: ConnectionSettings, accessDetails: AccessDetails) {
         switch settings {
         case .ipsec:
-            return
+            self.disable(tunnelType: .openvpn) { _ in
+                self.disable(tunnelType: .wireguard) { _ in
+                    self.setup(settings: settings, accessDetails: accessDetails) { _ in }
+                }
+            }
         case .openvpn:
-            self.disable(tunnelType: .wireguard) { _ in
-                self.setup(settings: settings, accessDetails: accessDetails) { _ in }
+            self.disable(tunnelType: .ipsec) { _ in
+                self.disable(tunnelType: .wireguard) { _ in
+                    self.setup(settings: settings, accessDetails: accessDetails) { _ in }
+                }
             }
         case .wireguard:
-            self.disable(tunnelType: .openvpn) { _ in
-                self.setup(settings: settings, accessDetails: accessDetails) { _ in }
+            self.disable(tunnelType: .ipsec) { _ in
+                self.disable(tunnelType: .openvpn) { _ in
+                    self.setup(settings: settings, accessDetails: accessDetails) { _ in }
+                }
             }
         }
     }

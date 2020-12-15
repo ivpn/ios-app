@@ -437,11 +437,7 @@ class ConnectionManager {
         let trust = StorageManager.trustValue(trust: newTrust, defaultTrust: defaultTrust)
         
         if Application.shared.connectionManager.status.isDisconnected() && (network.name != Application.shared.network.name || trust != NetworkTrust.Untrusted.rawValue) {
-            if Application.shared.settings.connectionProtocol != .ipsec {
-                installOnDemandRules()
-            } else  {
-                UIApplication.topViewController()?.showAlert(title: "", message: "New settings will be applied the next time the VPN is connected.")
-            }
+            installOnDemandRules()
         }
     }
     
