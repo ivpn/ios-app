@@ -209,19 +209,18 @@ class VPNManager {
         manager.isEnabled = true
     }
     
-    func installOnDemandRules(manager: NEVPNManager, status: NEVPNStatus, gateway: String? = nil) {
-        guard manager != ipsecManager else {
+    func installOnDemandRules(manager: NEVPNManager, status: NEVPNStatus, settings: ConnectionSettings, accessDetails: AccessDetails) {
+        switch settings {
+        case .ipsec:
             return
-        }
-        
-        manager.loadFromPreferences { _ in
-            if let gateway = gateway {
-                manager.protocolConfiguration?.serverAddress = gateway
+        case .openvpn:
+            self.disable(tunnelType: .wireguard) { _ in
+                self.setup(settings: settings, accessDetails: accessDetails) { _ in }
             }
-            
-            manager.isOnDemandEnabled = true
-            manager.onDemandRules = StorageManager.getOnDemandRules(status: status)
-            manager.saveToPreferences { _ in }
+        case .wireguard:
+            self.disable(tunnelType: .openvpn) { _ in
+                self.setup(settings: settings, accessDetails: accessDetails) { _ in }
+            }
         }
     }
     
@@ -267,6 +266,16 @@ class VPNManager {
                     name: NSNotification.Name.NEVPNStatusDidChange,
                     object: nil
                 )
+            }
+        }
+    }
+    
+    func disable(tunnelType: TunnelType, completion: @escaping (Error?) -> Void) {
+        getManagerFor(tunnelType: tunnelType) { manager in
+            manager.loadFromPreferences { _ in
+                manager.onDemandRules = [NEOnDemandRule]()
+                manager.isOnDemandEnabled = false
+                manager.saveToPreferences(completionHandler: completion)
             }
         }
     }

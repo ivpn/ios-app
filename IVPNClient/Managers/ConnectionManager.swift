@@ -135,7 +135,7 @@ class ConnectionManager {
         getStatus { tunnelType, status in
             self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
                 if status == .connected || status == .connecting {
-                    self.vpnManager.installOnDemandRules(manager: manager, status: status)
+                    self.installOnDemandRules()
                 }
                 if status == .disconnected || status == .disconnecting || status == .invalid {
                     self.vpnManager.removeOnDemandRule(manager: manager)
@@ -250,15 +250,13 @@ class ConnectionManager {
             
             if UserDefaults.shared.networkProtectionEnabled && !reconnectAutomatically {
                 DispatchQueue.delay(2) {
-                    self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
-                        self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected)
-                    }
+                    self.installOnDemandRules()
                 }
             }
         }
     }
     
-    func installOnDemandRules(gateway: String? = nil) {
+    func installOnDemandRules() {
         guard UserDefaults.shared.networkProtectionEnabled else {
             return
         }
@@ -266,7 +264,14 @@ class ConnectionManager {
         getStatus { tunnelType, status in
             if status.isDisconnected() {
                 self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
-                    self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected, gateway: gateway)
+                    let accessDetails = AccessDetails(
+                        serverAddress: Application.shared.settings.selectedServer.gateway,
+                        username: KeyChain.vpnUsername ?? "",
+                        passwordRef: KeyChain.vpnPasswordRef
+                    )
+                    let settings = self.settings.connectionProtocol
+                    
+                    self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected, settings: settings, accessDetails: accessDetails)
                 }
             }
         }
@@ -352,7 +357,7 @@ class ConnectionManager {
     func needsUpdateSelectedServer() {
         guard status.isDisconnected() else { return }
         updateSelectedServer()
-        installOnDemandRules(gateway: Application.shared.settings.selectedServer.gateway)
+        installOnDemandRules()
     }
     
     func canDisconnect(status: NEVPNStatus) -> Bool {

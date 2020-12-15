@@ -409,6 +409,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func protocolSelected() {
+        Application.shared.connectionManager.needsUpdateSelectedServer()
         controlPanelView.updateProtocol()
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
