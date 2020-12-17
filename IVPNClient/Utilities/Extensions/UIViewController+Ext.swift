@@ -168,7 +168,7 @@ extension UIViewController {
             return
         }
         
-        showActionSheet(title: "To apply the new settings, VPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: view) { index in
+        showActionSheet(title: "To apply the new settings, IVPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: view) { index in
             switch index {
             case 0:
                 confirmed()
