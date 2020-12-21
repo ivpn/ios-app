@@ -154,8 +154,30 @@ extension UIViewController {
         let actions = collection.map { $0.rawValue }
         
         showActionSheet(image: nil, selected: network.trust, largeText: true, centered: true, title: "Network Trust", actions: actions, sourceView: sourceView) { index in
-            guard index > -1, actions[index] != network.trust else { return }
+            guard index > -1, actions[index] != network.trust else {
+                return
+            }
+            
             completion(actions[index])
+        }
+    }
+    
+    func showReconnectPrompt(confirmed: @escaping () -> Void) {
+        guard !UserDefaults.shared.notAskToReconnect else {
+            confirmed()
+            return
+        }
+        
+        showActionSheet(title: "To apply the new settings, IVPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: view) { index in
+            switch index {
+            case 0:
+                confirmed()
+            case 1:
+                UserDefaults.shared.setValue(true, forKey: UserDefaults.Key.notAskToReconnect)
+                confirmed()
+            default:
+                break
+            }
         }
     }
     

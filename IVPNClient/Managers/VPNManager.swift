@@ -107,9 +107,9 @@ class VPNManager {
         }
     }
     
-    func setup(settings: ConnectionSettings, accessDetails: AccessDetails, completion: @escaping (Error?) -> Void) {
+    func setup(settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
         getManagerFor(tunnelType: settings.tunnelType()) { manager in
-            guard manager.connection.status == .disconnected || manager.connection.status == .invalid else {
+            guard manager.connection.status.isDisconnected() else {
                 log(error: "Trying to setup new VPN protocol, while previous connection is not disconnected")
                 completion(nil)
                 return
@@ -118,30 +118,30 @@ class VPNManager {
             self.accessDetails = accessDetails
             
             if settings == .ipsec {
-                self.setupNEVPNManager(manager: manager, accessDetails: accessDetails, completion: completion)
+                self.setupNEVPNManager(manager: manager, accessDetails: accessDetails, status: status, completion: completion)
             } else {
-                self.setupNETunnelProviderManager(manager: manager, settings: settings, accessDetails: accessDetails, completion: completion)
+                self.setupNETunnelProviderManager(manager: manager, settings: settings, accessDetails: accessDetails, status: status, completion: completion)
             }
         }
     }
     
-    private func setupNEVPNManager(manager: NEVPNManager, accessDetails: AccessDetails, completion: @escaping (Error?) -> Void) {
+    private func setupNEVPNManager(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
         manager.loadFromPreferences { error in
-            self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails)
+            self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
             manager.saveToPreferences { error in
                 completion(error)
             }
         }
     }
     
-    private func setupNETunnelProviderManager(manager: NEVPNManager, settings: ConnectionSettings, accessDetails: AccessDetails, completion: @escaping (Error?) -> Void) {
+    private func setupNETunnelProviderManager(manager: NEVPNManager, settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
         switch settings {
         case .ipsec:
             break
         case .openvpn:
-            self.setupOpenVPNTunnel(settings: settings, accessDetails: accessDetails, completion: completion)
+            self.setupOpenVPNTunnel(settings: settings, accessDetails: accessDetails, status: status, completion: completion)
         case .wireguard:
-            self.setupWireGuardTunnel(settings: settings, accessDetails: accessDetails, completion: completion)
+            self.setupWireGuardTunnel(settings: settings, accessDetails: accessDetails, status: status, completion: completion)
         }
         
         manager.saveToPreferences { error in
@@ -159,7 +159,7 @@ class VPNManager {
         }
     }
     
-    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails) {
+    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil) {
         let configuration = NEVPNProtocolIKEv2()
         configuration.remoteIdentifier = accessDetails.serverAddress
         configuration.localIdentifier = accessDetails.username
@@ -182,32 +182,56 @@ class VPNManager {
         
         manager.localizedDescription = Config.ikev2TunnelTitle
         manager.protocolConfiguration = configuration
-        manager.onDemandRules = StorageManager.getOnDemandRules(status: .connected)
+        manager.onDemandRules = StorageManager.getOnDemandRules(status: status ?? .connected)
         manager.isOnDemandEnabled = true
         manager.isEnabled = true
     }
     
-    private func setupOpenVPNTunnel(settings: ConnectionSettings, accessDetails: AccessDetails, completion: @escaping (Error?) -> Void) {
+    private func setupOpenVPNTunnel(settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
         guard let manager = openvpnManager else { return }
         
         manager.protocolConfiguration = NETunnelProviderProtocol.makeOpenVPNProtocol(settings: settings, accessDetails: accessDetails)
         manager.localizedDescription = Config.openvpnTunnelTitle
+        manager.onDemandRules = StorageManager.getOnDemandRules(status: status ?? .connected)
+        manager.isOnDemandEnabled = true
         manager.isEnabled = true
     }
     
-    private func setupWireGuardTunnel(settings: ConnectionSettings, accessDetails: AccessDetails, completion: @escaping (Error?) -> Void) {
-        guard let manager = wireguardManager else { return }
+    private func setupWireGuardTunnel(settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
+        guard let manager = wireguardManager else {
+            return
+        }
         
         manager.protocolConfiguration = NETunnelProviderProtocol.makeWireGuardProtocol(settings: settings)
         manager.localizedDescription = Config.wireguardTunnelTitle
+        manager.onDemandRules = StorageManager.getOnDemandRules(status: status ?? .connected)
+        manager.isOnDemandEnabled = true
         manager.isEnabled = true
     }
     
-    func installOnDemandRules(manager: NEVPNManager, status: NEVPNStatus) {
-        guard manager != ipsecManager else { return }
-        manager.isOnDemandEnabled = true
-        manager.onDemandRules = StorageManager.getOnDemandRules(status: status)
-        manager.saveToPreferences { _ in }
+    func installOnDemandRules(status: NEVPNStatus, settings: ConnectionSettings, accessDetails: AccessDetails) {
+        switch settings {
+        case .ipsec:
+            self.disable(tunnelType: .openvpn) { _ in
+                self.disable(tunnelType: .wireguard) { _ in
+                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
+                        self.disconnect(tunnelType: .ipsec)
+                    }
+                }
+            }
+        case .openvpn:
+            self.disable(tunnelType: .ipsec) { _ in
+                self.disable(tunnelType: .wireguard) { _ in
+                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in }
+                }
+            }
+        case .wireguard:
+            self.disable(tunnelType: .ipsec) { _ in
+                self.disable(tunnelType: .openvpn) { _ in
+                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in }
+                }
+            }
+        }
     }
     
     func removeOnDemandRule(manager: NEVPNManager) {
@@ -252,6 +276,16 @@ class VPNManager {
                     name: NSNotification.Name.NEVPNStatusDidChange,
                     object: nil
                 )
+            }
+        }
+    }
+    
+    func disable(tunnelType: TunnelType, completion: @escaping (Error?) -> Void) {
+        getManagerFor(tunnelType: tunnelType) { manager in
+            manager.loadFromPreferences { _ in
+                manager.onDemandRules = [NEOnDemandRule]()
+                manager.isOnDemandEnabled = false
+                manager.saveToPreferences(completionHandler: completion)
             }
         }
     }

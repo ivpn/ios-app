@@ -262,7 +262,8 @@ class MapScrollView: UIScrollView {
                     Application.shared.settings.selectedServer.fastest = false
                 }
                 
-                Application.shared.connectionManager.needsUpdateSelectedServer()
+                Application.shared.connectionManager.needsToUpdateSelectedServer()
+                Application.shared.connectionManager.installOnDemandRules()
                 NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
             }
         }
