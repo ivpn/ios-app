@@ -46,7 +46,7 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showActionSheet(image: UIImage? = nil, selected: String? = nil, largeText: Bool = false, centered: Bool = false, title message: String = "", actions: [String] = [], sourceView: UIView = UIView(), completion: @escaping (_ index: Int) -> Void) {
+    func showActionSheet(image: UIImage? = nil, selected: String? = nil, largeText: Bool = false, centered: Bool = false, title message: String = "", actions: [String] = [], cancelAction: String = "Cancel", sourceView: UIView = UIView(), completion: @escaping (_ index: Int) -> Void) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
         
         let messageFont: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: largeText ? 17 : 16)]
@@ -68,7 +68,7 @@ extension UIViewController {
             alert.addAction(alertAction)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: cancelAction, style: .cancel) { _ in
             alert.dismiss(animated: true, completion: {
                 completion(-1)
             })

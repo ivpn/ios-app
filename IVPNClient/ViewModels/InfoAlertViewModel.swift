@@ -101,9 +101,7 @@ extension InfoAlertViewModel: InfoAlertViewDelegate {
                 topViewController.present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
             }
         case .connectionInfoFailure:
-            if let topViewController = UIApplication.topViewController() as? MainViewController {
-                topViewController.updateGeoLocation()
-            }
+            NotificationCenter.default.post(name: Notification.Name.UpdateGeoLocation, object: nil)
         }
     }
     

@@ -94,7 +94,6 @@ class ConnectionManager {
                         NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
                         return
                     }
-                    self.vpnManager.installOnDemandRules(manager: manager, status: status)
                     self.updateOpenVPNLogFile()
                     self.updateOpenVPNLocalIp()
                     self.reconnectAutomatically = false
@@ -133,15 +132,10 @@ class ConnectionManager {
     // MARK: - Methods -
     
     func resetOnDemandRules() {
-        getStatus { tunnelType, status in
-            self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
-                if status == .connected || status == .connecting {
-                    self.vpnManager.installOnDemandRules(manager: manager, status: status)
-                }
-                if status == .disconnected || status == .disconnecting || status == .invalid {
-                    self.vpnManager.removeOnDemandRule(manager: manager)
-                }
-            }
+        if status.isDisconnected() {
+            vpnManager.disable(tunnelType: .ipsec) { _ in }
+            vpnManager.disable(tunnelType: .openvpn) { _ in }
+            vpnManager.disable(tunnelType: .wireguard) { _ in }
         }
     }
     
@@ -152,12 +146,8 @@ class ConnectionManager {
                 return
             }
             
-            self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
-                manager.onDemandRules = [NEOnDemandRule]()
-                manager.isOnDemandEnabled = false
-                manager.saveToPreferences { _ in
-                    completion()
-                }
+            self.vpnManager.disable(tunnelType: tunnelType) { _ in 
+                completion()
             }
         }
     }
@@ -251,10 +241,27 @@ class ConnectionManager {
             
             if UserDefaults.shared.networkProtectionEnabled && !reconnectAutomatically {
                 DispatchQueue.delay(2) {
-                    self.vpnManager.getManagerFor(tunnelType: tunnelType) { manager in
-                        self.vpnManager.installOnDemandRules(manager: manager, status: .disconnected)
-                    }
+                    self.installOnDemandRules()
                 }
+            }
+        }
+    }
+    
+    func installOnDemandRules() {
+        guard UserDefaults.shared.networkProtectionEnabled else {
+            return
+        }
+        
+        getStatus { tunnelType, status in
+            if status.isDisconnected() {
+                let accessDetails = AccessDetails(
+                    serverAddress: Application.shared.settings.selectedServer.gateway,
+                    username: KeyChain.vpnUsername ?? "",
+                    passwordRef: KeyChain.vpnPasswordRef
+                )
+                let settings = self.settings.connectionProtocol
+                
+                self.vpnManager.installOnDemandRules(status: .disconnected, settings: settings, accessDetails: accessDetails)
             }
         }
     }
@@ -322,8 +329,13 @@ class ConnectionManager {
     }
     
     func updateSelectedServer(status: NEVPNStatus? = nil) {
-        guard Application.shared.settings.selectedServer.fastest else { return }
-        guard let fastestServer = Application.shared.serverList.getFastestServer() else { return }
+        guard Application.shared.settings.selectedServer.fastest else {
+            return
+        }
+        
+        guard let fastestServer = Application.shared.serverList.getFastestServer() else {
+            return
+        }
         
         settings.selectedServer = fastestServer
         settings.selectedServer.fastest = true
@@ -336,13 +348,18 @@ class ConnectionManager {
         }
     }
     
-    func needsUpdateSelectedServer() {
-        guard status.isDisconnected() else { return }
-        self.updateSelectedServer()
+    func needsToUpdateSelectedServer() {
+        guard status.isDisconnected() else {
+            return
+        }
+        
+        updateSelectedServer()
     }
     
     func canDisconnect(status: NEVPNStatus) -> Bool {
-        guard UserDefaults.shared.networkProtectionEnabled else { return true }
+        guard UserDefaults.shared.networkProtectionEnabled else {
+            return true
+        }
         
         let defaultTrust = StorageManager.getDefaultTrust()
         let networkTrust = Application.shared.network.trust ?? NetworkTrust.Default.rawValue
@@ -355,33 +372,70 @@ class ConnectionManager {
         return true
     }
     
-    func evaluateConnection() {
+    func evaluateConnection(network: Network? = nil, newTrust: String? = nil) {
         let defaults = UserDefaults.shared
-        guard defaults.networkProtectionEnabled else { return }
+        guard defaults.networkProtectionEnabled else {
+            return
+        }
         
-        log(info: "Evaluating VPN connection for Network protection")
+        log(info: "Evaluating VPN connection for Network Protection")
+        
+        guard let networkTrust = Application.shared.network.trust else {
+            return
+        }
         
         let defaultTrust = StorageManager.getDefaultTrust()
-        let network = Application.shared.network
-        
-        guard let networkTrust = network.trust else { return }
         let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
         
         switch trust {
         case NetworkTrust.Untrusted.rawValue:
-            guard defaults.networkProtectionUntrustedConnect else { return }
-            getStatus { _, status in
-                guard status != .connected && status != .connecting else { return }
-                self.resetRulesAndConnect()
+            if defaults.networkProtectionUntrustedConnect && status.isDisconnected() {
+                resetRulesAndConnect()
+                return
             }
         case NetworkTrust.Trusted.rawValue:
-            guard defaults.networkProtectionTrustedDisconnect else { return }
-            getStatus { _, status in
-                guard status != .disconnected && status != .disconnecting && status != .invalid else { return }
-                self.resetRulesAndDisconnect()
+            if defaults.networkProtectionTrustedDisconnect && !status.isDisconnected() {
+                resetRulesAndDisconnect()
+                return
             }
         default:
+            break
+        }
+        
+        if let network = network, let newTrust = newTrust {
+            needToInstallOnDemandRules(network: network, newTrust: newTrust)
+        }
+    }
+    
+    func needToReconnect(network: Network, newTrust: String) -> Bool {
+        guard UserDefaults.shared.networkProtectionEnabled else {
+            return false
+        }
+        
+        let defaultTrust = StorageManager.getDefaultTrust()
+        let trust = StorageManager.trustValue(trust: newTrust, defaultTrust: defaultTrust)
+        
+        if Application.shared.connectionManager.status == .connected && network.name == "Default" && newTrust == NetworkTrust.Trusted.rawValue && Application.shared.network.trust == NetworkTrust.Default.rawValue {
+            return false
+        }
+        
+        if Application.shared.connectionManager.status == .connected && (network.name != Application.shared.network.name || trust != NetworkTrust.Trusted.rawValue) {
+            return true
+        }
+        
+        return false
+    }
+    
+    func needToInstallOnDemandRules(network: Network, newTrust: String) {
+        guard UserDefaults.shared.networkProtectionEnabled, status.isDisconnected() else {
             return
+        }
+        
+        let defaultTrust = StorageManager.getDefaultTrust()
+        let trust = StorageManager.trustValue(trust: newTrust, defaultTrust: defaultTrust)
+        
+        if Application.shared.connectionManager.status.isDisconnected() && (network.name != Application.shared.network.name || trust != NetworkTrust.Untrusted.rawValue) {
+            installOnDemandRules()
         }
     }
     

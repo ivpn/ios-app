@@ -385,7 +385,7 @@ class ControlPanelViewController: UITableViewController {
     private func reloadView() {
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
-        Application.shared.connectionManager.needsUpdateSelectedServer()
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker()
@@ -393,9 +393,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     private func reloadGeoLocation() {
-        if let topViewController = UIApplication.topViewController() as? MainViewController {
-            topViewController.updateGeoLocation()
-        }
+        NotificationCenter.default.post(name: Notification.Name.UpdateGeoLocation, object: nil)
     }
     
     @objc private func updateControlPanel() {
@@ -404,18 +402,21 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func serverSelected() {
-        Application.shared.connectionManager.needsUpdateSelectedServer()
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
+        Application.shared.connectionManager.installOnDemandRules()
         controlPanelView.updateServerNames()
     }
     
     @objc private func protocolSelected() {
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
+        Application.shared.connectionManager.installOnDemandRules()
         controlPanelView.updateProtocol()
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
     }
     
     @objc private func pingDidComplete() {
-        Application.shared.connectionManager.needsUpdateSelectedServer()
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
         controlPanelView.updateServerNames()
         
         if needsToReconnect {
