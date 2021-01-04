@@ -61,6 +61,21 @@ class CaptchaViewController: UIViewController {
         hideKeyboardOnTap()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        processImage()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard UIApplication.shared.applicationState == .active else {
+            return
+        }
+        
+        processImage()
+    }
+    
     // MARK: - Methods -
     
     private func submit() {
@@ -85,6 +100,18 @@ class CaptchaViewController: UIViewController {
             title: "Invalid code",
             message: "Please enter 6-digit verification code"
         )
+    }
+    
+    private func processImage() {
+        guard let image = UIImage(named: "captcha") else {
+            return
+        }
+        
+        if traitCollection.userInterfaceStyle == .dark {
+            captchaImage.image = UIImage.process(image: image, with: "CIColorInvert")
+        } else {
+            captchaImage.image = UIImage.process(image: image, with: "CIPhotoEffectMono")
+        }
     }
     
 }
