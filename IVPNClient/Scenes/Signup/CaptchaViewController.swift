@@ -24,7 +24,7 @@
 import UIKit
 
 protocol CaptchaViewControllerDelegate: class {
-    func codeSubmitted(code: String)
+    func captchaSubmitted(code: String)
 }
 
 class CaptchaViewController: UIViewController {
@@ -71,12 +71,12 @@ class CaptchaViewController: UIViewController {
             return
         }
         
-        delegate?.codeSubmitted(code: code)
+        delegate?.captchaSubmitted(code: code)
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
     private func reloadImage() {
-        delegate?.codeSubmitted(code: "")
+        delegate?.captchaSubmitted(code: "")
         navigationController?.dismiss(animated: true, completion: nil)
     }
     

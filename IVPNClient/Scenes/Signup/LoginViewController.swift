@@ -400,6 +400,16 @@ extension LoginViewController: TwoFactorViewControllerDelegate {
     
 }
 
+// MARK: - CaptchaViewControllerDelegate -
+
+extension LoginViewController: CaptchaViewControllerDelegate {
+    
+    func captchaSubmitted(code: String) {
+        startLoginProcess(force: false, confirmation: code)
+    }
+    
+}
+
 extension LoginViewController {
     
     enum ActionType {
