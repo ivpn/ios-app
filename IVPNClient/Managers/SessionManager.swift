@@ -39,8 +39,10 @@ import Foundation
     func sessionStatusNotFound()
     func sessionStatusExpired()
     func sessionStatusFailure()
-    func twoFactorEnabled(error: Any?)
+    func twoFactorRequired(error: Any?)
     func twoFactorIncorrect(error: Any?)
+    func captchaRequired(error: Any?)
+    func captchaIncorrect(error: Any?)
 }
 
 class SessionManager {
@@ -91,10 +93,16 @@ class SessionManager {
                         self.delegate?.createSessionAccountNotActivated(error: error)
                         return
                     case 70011:
-                        self.delegate?.twoFactorEnabled(error: error)
+                        self.delegate?.twoFactorRequired(error: error)
                         return
                     case 70012:
                         self.delegate?.twoFactorIncorrect(error: error)
+                        return
+                    case 70001:
+                        self.delegate?.captchaRequired(error: error)
+                        return
+                    case 70002:
+                        self.delegate?.captchaIncorrect(error: error)
                         return
                     default:
                         break

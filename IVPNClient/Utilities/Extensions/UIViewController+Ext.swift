@@ -231,8 +231,10 @@ extension UIViewController: SessionManagerDelegate {
     func sessionStatusNotFound() {}
     func sessionStatusExpired() {}
     func sessionStatusFailure() {}
-    func twoFactorEnabled(error: Any?) {}
+    func twoFactorRequired(error: Any?) {}
     func twoFactorIncorrect(error: Any?) {}
+    func captchaRequired(error: Any?) {}
+    func captchaIncorrect(error: Any?) {}
 }
 
 // MARK: - Presenter -

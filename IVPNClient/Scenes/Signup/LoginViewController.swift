@@ -305,7 +305,7 @@ extension LoginViewController {
         showErrorAlert(title: "Error", message: message)
     }
     
-    override func twoFactorEnabled(error: Any?) {
+    override func twoFactorRequired(error: Any?) {
         hud.dismiss()
         loginProcessStarted = false
         present(NavigationManager.getTwoFactorViewController(delegate: self), animated: true)
