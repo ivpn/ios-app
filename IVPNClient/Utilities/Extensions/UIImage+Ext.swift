@@ -49,4 +49,16 @@ extension UIImage {
         return nil
     }
     
+    static func process(image: UIImage, with filter: String) -> UIImage? {
+        let ciImage = CIImage(image: image)
+        let filter = CIFilter(name: filter)
+        filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        
+        if let outputImage = filter?.outputImage {
+            return UIImage(ciImage: outputImage)
+        }
+        
+        return nil
+    }
+    
 }
