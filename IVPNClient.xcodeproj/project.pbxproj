@@ -91,6 +91,7 @@
 		825D4EC9224A46F0002E7378 /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */; };
 		825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53922325709006C4F14 /* ApiManager.swift */; };
 		825D5D8821908B2600B781BA /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
+		825E834F25A327EB00938240 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E834E25A327EB00938240 /* CaptchaViewController.swift */; };
 		8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */; };
 		826470C42446F67100403A14 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826470C32446F67100403A14 /* Signup.storyboard */; };
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
@@ -455,6 +456,7 @@
 		825864A02237B1060081DC4B /* Bamboo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bamboo.framework; path = ../Carthage/Build/iOS/Bamboo.framework; sourceTree = "<group>"; };
 		82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
+		825E834E25A327EB00938240 /* CaptchaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaViewController.swift; sourceTree = "<group>"; };
 		8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPeriod.swift; sourceTree = "<group>"; };
 		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
@@ -1273,6 +1275,7 @@
 				82DEF0242447282E00CCB5CD /* Payment */,
 				9C2833751D9D3F060024C553 /* LoginViewController.swift */,
 				828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */,
+				825E834E25A327EB00938240 /* CaptchaViewController.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -2183,6 +2186,7 @@
 				82DAB37D245725E200302F4C /* ServiceTitleTableViewCell.swift in Sources */,
 				82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */,
 				828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */,
+				825E834F25A327EB00938240 /* CaptchaViewController.swift in Sources */,
 				82A160BB221C4E2000730577 /* Server+CoreDataProperties.swift in Sources */,
 				8270753622AFC5B90067C323 /* StringProtocol+Ext.swift in Sources */,
 				82526BEF24123D2900E00880 /* NetworkViewTableCell.swift in Sources */,
