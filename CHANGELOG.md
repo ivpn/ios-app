@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.4 - 2020-12-18  
+
+[IMPROVED] App memory performance  
+[FIXED] Sometimes app failed to disconnect from a trusted network   
+
 ## 2.0.3 - 2020-11-05  
 
 [IMPROVED] Optimised connection info on the control panel  

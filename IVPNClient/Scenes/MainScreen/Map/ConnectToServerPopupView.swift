@@ -348,7 +348,7 @@ class ConnectToServerPopupView: UIView {
             Application.shared.settings.selectedServer = vpnServer
         }
         
-        Application.shared.connectionManager.needsUpdateSelectedServer()
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
         
         if Application.shared.connectionManager.status.isDisconnected() {
             NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)

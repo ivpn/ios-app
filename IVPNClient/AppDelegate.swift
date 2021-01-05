@@ -170,6 +170,8 @@ extension AppDelegate: UIApplicationDelegate {
             if let controlPanelViewController = mainViewController.floatingPanel.contentViewController as? ControlPanelViewController {
                 controlPanelViewController.refreshServiceStatus()
             }
+            
+            mainViewController.refreshUI()
         }
         
         if UserDefaults.shared.networkProtectionEnabled {

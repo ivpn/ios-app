@@ -129,7 +129,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    func updateGeoLocation() {
+    @objc func updateGeoLocation() {
         guard let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController else {
             return
         }
@@ -170,6 +170,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateFloatingPanelLayout), name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(vpnConfigurationDisabled), name: Notification.Name.VPNConfigurationDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGeoLocation), name: Notification.Name.UpdateGeoLocation, object: nil)
     }
     
     // MARK: - Private methods -

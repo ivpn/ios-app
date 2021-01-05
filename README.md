@@ -35,7 +35,7 @@ These instructions will get you a copy of the project up and running on your loc
 - Swift 5.0+
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
-- CocoaPods 1.6.2+
+- CocoaPods 1.10.0+
 - fastlane 2.137.0+
 - Go 1.14+
 
