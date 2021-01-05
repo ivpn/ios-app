@@ -269,16 +269,14 @@ extension LoginViewController {
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
         
-        if let error = error as? ErrorResultSessionNew {
-            if let data = error.data {
-                if data.upgradable {
-                    NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
-                    NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
-                    UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
-                    UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                    present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
-                    return
-                }
+        if let error = error as? ErrorResultSessionNew, let data = error.data {
+            if data.upgradable {
+                NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
+                UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
+                UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
+                present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
+                return
             }
         }
         
@@ -349,10 +347,8 @@ extension LoginViewController {
     }
     
     private func presentCaptchaScreen(error: Any?) {
-        if let error = error as? ErrorResultSessionNew {
-            if let imageData = error.captchaImage, let captchaId = error.captchaId {
-                present(NavigationManager.getCaptchaViewController(delegate: self, imageData: imageData, captchaId: captchaId), animated: true)
-            }
+        if let error = error as? ErrorResultSessionNew, let imageData = error.captchaImage, let captchaId = error.captchaId {
+            present(NavigationManager.getCaptchaViewController(delegate: self, imageData: imageData, captchaId: captchaId), animated: true)
         }
     }
     

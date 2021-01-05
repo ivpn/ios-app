@@ -158,11 +158,9 @@ extension CaptchaViewController {
     }
     
     private func updateImageData(error: Any?) {
-        if let error = error as? ErrorResultSessionNew {
-            if let captchaImage = error.captchaImage {
-                imageData = captchaImage
-                processImage()
-            }
+        if let error = error as? ErrorResultSessionNew, let captchaImage = error.captchaImage {
+            imageData = captchaImage
+            processImage()
         }
     }
     
