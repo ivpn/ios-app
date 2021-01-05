@@ -91,6 +91,9 @@
 		825D4EC9224A46F0002E7378 /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */; };
 		825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53922325709006C4F14 /* ApiManager.swift */; };
 		825D5D8821908B2600B781BA /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
+		825E836325A4834200938240 /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
+		825E836425A4834200938240 /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
+		825E836525A4834200938240 /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
 		8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */; };
 		826470C42446F67100403A14 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826470C32446F67100403A14 /* Signup.storyboard */; };
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
@@ -454,6 +457,7 @@
 		825864A02237B1060081DC4B /* Bamboo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bamboo.framework; path = ../Carthage/Build/iOS/Bamboo.framework; sourceTree = "<group>"; };
 		82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
+		825E836225A4834200938240 /* APIPublicKeyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPublicKeyPin.swift; sourceTree = "<group>"; };
 		8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPeriod.swift; sourceTree = "<group>"; };
 		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
@@ -882,6 +886,7 @@
 				820535272302B9D7007BDD58 /* APIAccessManager.swift */,
 				8223C54D22EAE93F00CD283D /* SessionManager.swift */,
 				8206F32224367A240056B465 /* VPNErrorObserver.swift */,
+				825E836225A4834200938240 /* APIPublicKeyPin.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2000,6 +2005,7 @@
 				826F7F4223A7AAB800777DB9 /* Array+Ext.swift in Sources */,
 				826F7F3323A7A90200777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */,
 				826F7F3023A7A89B00777DB9 /* UserDefaults+Ext.swift in Sources */,
+				825E836525A4834200938240 /* APIPublicKeyPin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2038,6 +2044,7 @@
 				820EA86C2322430700E16B2D /* Result.swift in Sources */,
 				823FFB092338E09A00F91A5D /* Capability.swift in Sources */,
 				82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */,
+				825E836425A4834200938240 /* APIPublicKeyPin.swift in Sources */,
 				8223C53D22326300006C4F14 /* Interface.swift in Sources */,
 				823BD9E4231D4C8F002E631D /* ErrorResult.swift in Sources */,
 			);
@@ -2166,6 +2173,7 @@
 				82DAB37B2457013900302F4C /* Service.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
 				8208525823FD5EB20008C112 /* MainViewController.swift in Sources */,
+				825E836325A4834200938240 /* APIPublicKeyPin.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */,
 				82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */,
