@@ -36,4 +36,6 @@ struct ErrorResultSessionNew: Decodable {
     let status: Int
     let message: String
     let data: SessionLimitData?
+    let captchaId: String?
+    let captchaImage: String?
 }

@@ -42,6 +42,7 @@ class CaptchaViewController: UIViewController {
     // MARK: - Properties -
     
     weak var delegate: CaptchaViewControllerDelegate?
+    var imageData = ""
     
     // MARK: - @IBActions -
     
@@ -103,7 +104,7 @@ class CaptchaViewController: UIViewController {
     }
     
     private func processImage() {
-        guard let image = UIImage(named: "captcha") else {
+        guard let image = imageData.base64ToImage() else {
             return
         }
         

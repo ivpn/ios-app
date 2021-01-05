@@ -51,6 +51,7 @@ class LoginViewController: UIViewController {
     private var loginProcessStarted = false
     private let hud = JGProgressHUD(style: .dark)
     private var actionType: ActionType = .login
+    private var captchaId: String?
     
     // MARK: - @IBActions -
     
@@ -149,7 +150,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Methods -
     
-    private func startLoginProcess(force: Bool = false, confirmation: String? = nil) {
+    private func startLoginProcess(force: Bool = false, confirmation: String? = nil, captchaId: String? = nil) {
         guard !loginProcessStarted else { return }
         
         let username = (self.userName.text ?? "").trim()
@@ -162,7 +163,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        sessionManager.createSession(force: force, username: username, confirmation: confirmation)
+        sessionManager.createSession(force: force, username: username, confirmation: confirmation, captchaId: captchaId)
     }
     
     private func startSignupProcess() {
@@ -323,6 +324,30 @@ extension LoginViewController {
         showErrorAlert(title: "Error", message: message)
     }
     
+    override func captchaRequired(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
+        
+        if let error = error as? ErrorResultSessionNew {
+            captchaId = error.captchaId
+            if let imageData = error.captchaImage {
+                present(NavigationManager.getCaptchaViewController(delegate: self, imageData: imageData), animated: true)
+            }
+        }
+    }
+    
+    override func captchaIncorrect(error: Any?) {
+        var message = "Unknown error occurred"
+        
+        if let error = error as? ErrorResultSessionNew {
+            message = error.message
+        }
+        
+        hud.dismiss()
+        loginProcessStarted = false
+        showErrorAlert(title: "Error", message: message)
+    }
+    
     func showCreateSessionAlert(message: String) {
         showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { index in
             switch index {
@@ -405,7 +430,7 @@ extension LoginViewController: TwoFactorViewControllerDelegate {
 extension LoginViewController: CaptchaViewControllerDelegate {
     
     func captchaSubmitted(code: String) {
-        startLoginProcess(force: false, confirmation: code)
+        startLoginProcess(force: false, confirmation: code, captchaId: captchaId)
     }
     
 }
