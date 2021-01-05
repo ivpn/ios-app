@@ -24,7 +24,7 @@
 import UIKit
 
 protocol CaptchaViewControllerDelegate: class {
-    func captchaSubmitted(code: String)
+    func captchaSubmitted(code: String, captchaId: String)
 }
 
 class CaptchaViewController: UIViewController {
@@ -43,6 +43,7 @@ class CaptchaViewController: UIViewController {
     
     weak var delegate: CaptchaViewControllerDelegate?
     var imageData = ""
+    var captchaId = ""
     
     // MARK: - @IBActions -
     
@@ -87,12 +88,12 @@ class CaptchaViewController: UIViewController {
             return
         }
         
-        delegate?.captchaSubmitted(code: code)
+        delegate?.captchaSubmitted(code: code, captchaId: captchaId)
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
     private func reloadImage() {
-        delegate?.captchaSubmitted(code: "")
+        delegate?.captchaSubmitted(code: "", captchaId: "")
         navigationController?.dismiss(animated: true, completion: nil)
     }
     

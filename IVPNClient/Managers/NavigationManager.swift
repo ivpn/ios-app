@@ -148,7 +148,7 @@ class NavigationManager {
         return navController!
     }
     
-    static func getCaptchaViewController(delegate: CaptchaViewControllerDelegate? = nil, imageData: String) -> UIViewController {
+    static func getCaptchaViewController(delegate: CaptchaViewControllerDelegate? = nil, imageData: String, captchaId: String) -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
         let navController = storyBoard.instantiateViewController(withIdentifier: "captchaView") as? UINavigationController
         navController?.modalPresentationStyle = .formSheet
@@ -156,6 +156,7 @@ class NavigationManager {
         if let viewController = navController?.topViewController as? CaptchaViewController {
             viewController.delegate = delegate
             viewController.imageData = imageData
+            viewController.captchaId = captchaId
         }
         
         return navController!

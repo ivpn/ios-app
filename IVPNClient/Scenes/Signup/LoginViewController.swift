@@ -51,7 +51,6 @@ class LoginViewController: UIViewController {
     private var loginProcessStarted = false
     private let hud = JGProgressHUD(style: .dark)
     private var actionType: ActionType = .login
-    private var captchaId: String?
     
     // MARK: - @IBActions -
     
@@ -350,9 +349,8 @@ extension LoginViewController {
         loginProcessStarted = false
         
         if let error = error as? ErrorResultSessionNew {
-            captchaId = error.captchaId
-            if let imageData = error.captchaImage {
-                present(NavigationManager.getCaptchaViewController(delegate: self, imageData: imageData), animated: true)
+            if let imageData = error.captchaImage, let captchaId = error.captchaId {
+                present(NavigationManager.getCaptchaViewController(delegate: self, imageData: imageData, captchaId: captchaId), animated: true)
             }
         }
     }
@@ -425,7 +423,7 @@ extension LoginViewController: TwoFactorViewControllerDelegate {
 
 extension LoginViewController: CaptchaViewControllerDelegate {
     
-    func captchaSubmitted(code: String) {
+    func captchaSubmitted(code: String, captchaId: String) {
         startLoginProcess(force: false, confirmation: code, captchaId: captchaId)
     }
     
