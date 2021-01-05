@@ -324,10 +324,14 @@ extension LoginViewController {
     }
     
     override func captchaRequired(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
         presentCaptchaScreen(error: error)
     }
     
     override func captchaIncorrect(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
         presentCaptchaScreen(error: error)
     }
     
@@ -345,9 +349,6 @@ extension LoginViewController {
     }
     
     private func presentCaptchaScreen(error: Any?) {
-        hud.dismiss()
-        loginProcessStarted = false
-        
         if let error = error as? ErrorResultSessionNew {
             if let imageData = error.captchaImage, let captchaId = error.captchaId {
                 present(NavigationManager.getCaptchaViewController(delegate: self, imageData: imageData, captchaId: captchaId), animated: true)
