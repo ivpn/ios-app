@@ -102,7 +102,7 @@ class CaptchaViewController: UIViewController {
     }
     
     private func reloadImage() {
-        sessionManager.createSession()
+        sessionManager.createSession(username: "i-XXXX-XXXX-XXXX")
     }
     
     private func showValidationError() {
