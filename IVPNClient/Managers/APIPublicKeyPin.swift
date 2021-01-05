@@ -30,10 +30,10 @@ class APIPublicKeyPin {
     // MARK: - Properties -
     
     private let hashes = [
-        "Jl+pK4qpKGVHQAUOvJOpuu3blkJeZNqHrHKTJTvslDY=",
-        "U9XDB04u2rzA7daBcxHKzCtePOhDSp1x1LY6rf2TRXU=",
-        "3cEBzcOsAm+pfk5F24jbWulvqtS4ECzAYSjEqOKm4Pw=",
-        "sTkDAlpsHzTakpXj8SGCE1rXL8qlmYW77vn4WWHnLLc="
+        "g6WEFnt9DyTi70nW/fufsZNw83vFpcmIhMuDPQ1MFcI=",
+        "KCcpK9y22OrlapwO1/oP8q3LrcDM9Jy9lcfngg2r+Pk=",
+        "iRHkSbdOY/YD8EE5fpl8W0P8EqmfkBRTADEegR2/Wnc=",
+        "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
     ]
     
     // MARK: - Methods -
