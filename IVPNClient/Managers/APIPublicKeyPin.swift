@@ -23,6 +23,7 @@
 
 import Foundation
 import CryptoKit
+import CommonCrypto
 
 class APIPublicKeyPin {
     
@@ -79,8 +80,18 @@ class APIPublicKeyPin {
         if #available(iOS 13, *) {
             return Data(SHA256.hash(data: keyWithHeader)).base64EncodedString()
         } else {
-            return ""
+            return sha256(keyWithHeader)?.base64EncodedString() ?? ""
         }
+    }
+    
+    private func sha256(_ data: Data) -> Data? {
+        guard let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH)) else {
+            return nil
+        }
+        
+        CC_SHA256((data as NSData).bytes, CC_LONG(data.count), res.mutableBytes.assumingMemoryBound(to: UInt8.self))
+        
+        return res as Data
     }
     
 }
