@@ -26,12 +26,16 @@ import CryptoKit
 
 class APIPublicKeyPin {
     
+    // MARK: - Properties -
+    
     private let hashes = [
         "Jl+pK4qpKGVHQAUOvJOpuu3blkJeZNqHrHKTJTvslDY=",
         "U9XDB04u2rzA7daBcxHKzCtePOhDSp1x1LY6rf2TRXU=",
         "3cEBzcOsAm+pfk5F24jbWulvqtS4ECzAYSjEqOKm4Pw=",
         "sTkDAlpsHzTakpXj8SGCE1rXL8qlmYW77vn4WWHnLLc="
     ]
+    
+    // MARK: - Methods -
     
     public func validate(serverTrust: SecTrust, domain: String?) -> Bool {
         if let domain = domain {
