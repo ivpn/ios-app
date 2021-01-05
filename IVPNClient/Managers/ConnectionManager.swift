@@ -80,7 +80,7 @@ class ConnectionManager {
     // MARK: - Event handlers -
 
     func onStatusChanged(completion: @escaping (NEVPNStatus) -> Void) {
-        vpnManager.onStatusChanged { _, manager, status in
+        vpnManager.onStatusChanged { _, _, status in
             if self.status == .connecting && status == .disconnecting {
                 NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
             }
@@ -236,7 +236,7 @@ class ConnectionManager {
     func disconnect(reconnectAutomatically: Bool = false) {
         updateSelectedServer(status: .disconnecting)
         
-        getStatus { tunnelType, status in
+        getStatus { tunnelType, _ in
             self.vpnManager.disconnect(tunnelType: tunnelType, reconnectAutomatically: reconnectAutomatically)
             
             if UserDefaults.shared.networkProtectionEnabled && !reconnectAutomatically {
@@ -252,7 +252,7 @@ class ConnectionManager {
             return
         }
         
-        getStatus { tunnelType, status in
+        getStatus { _, status in
             if status.isDisconnected() {
                 let accessDetails = AccessDetails(
                     serverAddress: Application.shared.settings.selectedServer.gateway,
