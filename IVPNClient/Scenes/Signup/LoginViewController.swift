@@ -325,30 +325,14 @@ extension LoginViewController {
     }
     
     override func captchaRequired(error: Any?) {
-        hud.dismiss()
-        loginProcessStarted = false
-        
-        if let error = error as? ErrorResultSessionNew {
-            captchaId = error.captchaId
-            if let imageData = error.captchaImage {
-                present(NavigationManager.getCaptchaViewController(delegate: self, imageData: imageData), animated: true)
-            }
-        }
+        presentCaptchaScreen(error: error)
     }
     
     override func captchaIncorrect(error: Any?) {
-        var message = "Unknown error occurred"
-        
-        if let error = error as? ErrorResultSessionNew {
-            message = error.message
-        }
-        
-        hud.dismiss()
-        loginProcessStarted = false
-        showErrorAlert(title: "Error", message: message)
+        presentCaptchaScreen(error: error)
     }
     
-    func showCreateSessionAlert(message: String) {
+    private func showCreateSessionAlert(message: String) {
         showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { index in
             switch index {
             case 0:
@@ -357,6 +341,18 @@ extension LoginViewController {
                 self.startLoginProcess()
             default:
                 break
+            }
+        }
+    }
+    
+    private func presentCaptchaScreen(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
+        
+        if let error = error as? ErrorResultSessionNew {
+            captchaId = error.captchaId
+            if let imageData = error.captchaImage {
+                present(NavigationManager.getCaptchaViewController(delegate: self, imageData: imageData), animated: true)
             }
         }
     }
