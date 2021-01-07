@@ -66,10 +66,6 @@ class Application {
     
     var geoLookup = GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
     
-    var showSubscriptionAction: Bool {
-        return authentication.isLoggedIn
-    }
-    
     // MARK: - Initialize -
     
     private init() {
