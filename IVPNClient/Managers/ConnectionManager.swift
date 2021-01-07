@@ -253,7 +253,7 @@ class ConnectionManager {
                 )
                 let settings = self.settings.connectionProtocol
                 
-                self.vpnManager.installOnDemandRules(status: .disconnected, settings: settings, accessDetails: accessDetails)
+                self.vpnManager.installOnDemandRules(settings: settings, accessDetails: accessDetails)
             }
         }
     }
