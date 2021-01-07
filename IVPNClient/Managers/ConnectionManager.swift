@@ -95,7 +95,6 @@ class ConnectionManager {
                         return
                     }
                     self.updateOpenVPNLogFile()
-                    self.updateOpenVPNLocalIp()
                     self.reconnectAutomatically = false
                     if self.actionType == .connect {
                         self.evaluateCloseApp()
@@ -463,18 +462,6 @@ class ConnectionManager {
         
         getOpenVPNLog { log in
             FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-        }
-    }
-    
-    func updateOpenVPNLocalIp() {
-        guard Application.shared.settings.connectionProtocol.tunnelType() == .openvpn else { return }
-        
-        Application.shared.connectionManager.getOpenVPNLog { log in
-            guard let log = log else { return }
-            let ipAddress = log.findLastSubstring(from: "IPv4: addr", to: "netmask")
-            guard !ipAddress.isEmpty else { return }
-            
-            UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.localIpAddress)
         }
     }
     

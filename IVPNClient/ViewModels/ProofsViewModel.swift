@@ -42,10 +42,6 @@ struct ProofsViewModel {
         return model.ipAddress
     }
     
-    var localIpAddress: String {
-        return UserDefaults.shared.localIpAddress
-    }
-    
     var country: String {
         return model.country
     }
