@@ -38,18 +38,6 @@ extension Date {
         return formatted(format: fileNameFormat)
     }
     
-    static func changeDays(by days: Int) -> Date {
-        var dateComponents = DateComponents()
-        dateComponents.day = days
-        return Calendar.current.date(byAdding: dateComponents, to: Date())!
-    }
-    
-    static func changeMinutes(by minutes: Int) -> Date {
-        var dateComponents = DateComponents()
-        dateComponents.minute = minutes
-        return Calendar.current.date(byAdding: dateComponents, to: Date())!
-    }
-    
     func changeDays(by days: Int) -> Date {
         var dateComponents = DateComponents()
         dateComponents.day = days
