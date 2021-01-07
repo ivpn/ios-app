@@ -149,12 +149,6 @@ class VPNServerList {
     
     // MARK: - Methods -
     
-    static func removeCached() {
-        if FileManager.default.fileExists(atPath: VPNServerList.cacheFileURL.path) {
-            FileSystemManager.deleteDocumentFile(VPNServerList.cacheFileURL)
-        }
-    }
-    
     static var cacheFileURL: URL = {
         return FileSystemManager.pathToDocumentFile(Config.serversListCacheFileName)
     }()
