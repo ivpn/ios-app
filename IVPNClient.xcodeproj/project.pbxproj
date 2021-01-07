@@ -91,7 +91,6 @@
 		825D4EC9224A46F0002E7378 /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */; };
 		825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53922325709006C4F14 /* ApiManager.swift */; };
 		825D5D8821908B2600B781BA /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
-		8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */; };
 		826470C42446F67100403A14 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826470C32446F67100403A14 /* Signup.storyboard */; };
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */; };
@@ -453,7 +452,6 @@
 		825864A02237B1060081DC4B /* Bamboo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bamboo.framework; path = ../Carthage/Build/iOS/Bamboo.framework; sourceTree = "<group>"; };
 		82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
-		8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPeriod.swift; sourceTree = "<group>"; };
 		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
 		8269CD8E2164A8C700D083A1 /* servers-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "servers-dev.json"; sourceTree = "<group>"; };
@@ -1034,7 +1032,6 @@
 				8206E5D122967EAF003119AF /* UserActivityTitle.swift */,
 				823FFB062338DF1800F91A5D /* Capability.swift */,
 				8229209F2480FA3600476FC1 /* ServersSort.swift */,
-				8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */,
 				826FBDA22461847D00B9E464 /* ServiceType.swift */,
 				826FBDA42461848A00B9E464 /* ServiceDuration.swift */,
 			);
@@ -2101,7 +2098,6 @@
 				820EA86E232264EC00E16B2D /* SuccessResult.swift in Sources */,
 				82D6AA1B215E167C00F21CAA /* UIViewController+Ext.swift in Sources */,
 				829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */,
-				8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */,
 				826C56D222FD4F2600D2B76A /* ServiceStatus.swift in Sources */,
 				82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */,
 				8206F32324367A240056B465 /* VPNErrorObserver.swift in Sources */,
