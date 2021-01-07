@@ -201,7 +201,6 @@
 		82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */; };
 		82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF27021AECC8100589766 /* UILabel+Ext.swift */; };
 		82BF32F624484E5100248E4F /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BF32F524484E5100248E4F /* CreateAccountView.swift */; };
-		82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */; };
 		82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BB23FE78570059A915 /* MapScrollView.swift */; };
 		82C1D5BF23FE8C6D0059A915 /* ControlPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */; };
 		82C215EC23992F6900E639F8 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */; };
@@ -302,7 +301,6 @@
 		9C7840B020CD8A8A00335736 /* openvpn-tunnel-provider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9C7840A820CD8A8A00335736 /* openvpn-tunnel-provider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9CAE14C020FE453E00D4DAC0 /* VPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAE14BF20FE453E00D4DAC0 /* VPNManager.swift */; };
 		9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE1E1DAA5258007A4D2D /* Authentication.swift */; };
-		9CB2CE281DAB807A007A4D2D /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE271DAB807A007A4D2D /* ProgressIndicator.swift */; };
 		9CB2CE2B1DABD120007A4D2D /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE2A1DABD120007A4D2D /* NavigationManager.swift */; };
 		9CB2CE311DAF9227007A4D2D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB2CE301DAF9227007A4D2D /* CoreData.framework */; };
 		9CB2CE341DAF9283007A4D2D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE321DAF9283007A4D2D /* Model.xcdatamodeld */; };
@@ -541,7 +539,6 @@
 		82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		82BBF27021AECC8100589766 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		82BF32F524484E5100248E4F /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
-		82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
 		82C1D5BB23FE78570059A915 /* MapScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScrollView.swift; sourceTree = "<group>"; };
 		82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelViewController.swift; sourceTree = "<group>"; };
 		82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
@@ -636,7 +633,6 @@
 		9CAE14BF20FE453E00D4DAC0 /* VPNManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNManager.swift; sourceTree = "<group>"; };
 		9CB2CE1E1DAA5258007A4D2D /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		9CB2CE261DAA6C1B007A4D2D /* IVPNClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IVPNClient.entitlements; sourceTree = "<group>"; };
-		9CB2CE271DAB807A007A4D2D /* ProgressIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		9CB2CE2A1DABD120007A4D2D /* NavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		9CB2CE301DAF9227007A4D2D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9CB2CE331DAF9283007A4D2D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -1140,8 +1136,6 @@
 		82A208B621BAA51000C9AD44 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				9CB2CE271DAB807A007A4D2D /* ProgressIndicator.swift */,
-				82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */,
 				828772FA221C28E000D5E330 /* FlagImageView.swift */,
 				82FF0D432315587000440E5D /* UITextFieldPadding.swift */,
 			);
@@ -2127,7 +2121,6 @@
 				82E5449224EE584E006DEF8D /* UIImageView+Ext.swift in Sources */,
 				82E81AE72449C44F00D81FB7 /* PaymentComponentView.swift in Sources */,
 				8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */,
-				9CB2CE281DAB807A007A4D2D /* ProgressIndicator.swift in Sources */,
 				820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */,
 				8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */,
 				9C3324F31DB37724003885C3 /* VPNServer.swift in Sources */,
@@ -2193,7 +2186,6 @@
 				827855B92472B27F00B3B6BD /* Account.swift in Sources */,
 				82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */,
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
-				82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */,
 				82061F67238D2730009DDF4D /* PingManager.swift in Sources */,
 				9CDDD5AF1D9D2F9F00D39924 /* AppDelegate.swift in Sources */,
 				82BBF26121AD213500589766 /* Theme.swift in Sources */,
