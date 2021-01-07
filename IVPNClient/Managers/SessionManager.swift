@@ -177,7 +177,7 @@ class SessionManager {
         return params
     }
     
-    private func sessionDeleteParams(force: Bool = false) -> [URLQueryItem] {
+    private func sessionDeleteParams() -> [URLQueryItem] {
         let sessionToken = Application.shared.authentication.getStoredSessionToken()
         return [URLQueryItem(name: "session_token", value: sessionToken)]
     }
