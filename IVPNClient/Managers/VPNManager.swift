@@ -351,12 +351,6 @@ class VPNManager {
         }
     }
     
-    func getServerAddress( tunnelType: TunnelType, completion: @escaping (String?) -> Void) {
-        self.getManagerFor(tunnelType: tunnelType) { manager in
-            completion(manager.protocolConfiguration?.serverAddress)
-        }
-    }
-    
     func getOpenVPNLog(completion: @escaping (String?) -> Void) {
         guard let session = openvpnManager?.connection as? NETunnelProviderSession else {
             completion(nil)

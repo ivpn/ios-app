@@ -203,14 +203,6 @@ class ConnectionManager {
         }
     }
     
-    func getConnectionServerAddress(completion: @escaping (String?) -> Void) {
-        getStatus { tunnelType, _ in
-            self.vpnManager.getServerAddress(tunnelType: tunnelType) { serverAddress in
-                completion(serverAddress)
-            }
-        }
-    }
-    
     func connect() {
         updateSelectedServer(status: .connecting)
         
