@@ -192,12 +192,12 @@ class MainView: UIView {
             server = Application.shared.settings.selectedExitServer
         }
         
-        mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false)
-        mapScrollView.markerLocalView.hide(animated: true)
+        mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: animated, isLocalPosition: false)
+        mapScrollView.markerLocalView.hide(animated: animated)
         DispatchQueue.delay(0.25) {
             let model = GeoLookup(ipAddress: server.ipAddresses.first ?? "", countryCode: server.countryCode, country: server.country, city: server.city, isIvpnServer: true, isp: "", latitude: server.latitude, longitude: server.longitude)
             self.mapScrollView.markerGatewayView.viewModel = ProofsViewModel(model: model)
-            self.mapScrollView.markerGatewayView.show(animated: true)
+            self.mapScrollView.markerGatewayView.show(animated: animated)
         }
     }
     
