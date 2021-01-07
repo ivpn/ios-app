@@ -162,7 +162,6 @@
 		8292E1BE2174CA6800123538 /* x25519.c in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1BC2174CA6800123538 /* x25519.c */; };
 		8294BC8C22A10F4100328932 /* TunnelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8294BC8B22A10F4100328932 /* TunnelKit.framework */; };
 		8294BC8E22A126C900328932 /* TunnelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8294BC8D22A126C900328932 /* TunnelKit.framework */; };
-		82989FDA2188783200F7EBE0 /* WireGuardKeyResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82989FD92188783200F7EBE0 /* WireGuardKeyResult.swift */; };
 		82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82989FDD2188981900F7EBE0 /* AppKeyManager.swift */; };
 		829AA4732267372A00037198 /* Designable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AA4722267372A00037198 /* Designable+Ext.swift */; };
 		829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829D2C8121664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift */; };
@@ -503,7 +502,6 @@
 		8292E1BD2174CA6800123538 /* x25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x25519.h; sourceTree = "<group>"; };
 		8294BC8B22A10F4100328932 /* TunnelKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TunnelKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8294BC8D22A126C900328932 /* TunnelKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TunnelKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		82989FD92188783200F7EBE0 /* WireGuardKeyResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardKeyResult.swift; sourceTree = "<group>"; };
 		82989FDD2188981900F7EBE0 /* AppKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyManager.swift; sourceTree = "<group>"; };
 		82989FE121898E4400F7EBE0 /* JGProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JGProgressHUD.framework; path = ../Carthage/Build/iOS/JGProgressHUD.framework; sourceTree = "<group>"; };
 		829AA4722267372A00037198 /* Designable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Designable+Ext.swift"; sourceTree = "<group>"; };
@@ -909,7 +907,6 @@
 			isa = PBXGroup;
 			children = (
 				9C3031251DB3B6E700C38B0C /* ServersUpdateResult.swift */,
-				82989FD92188783200F7EBE0 /* WireGuardKeyResult.swift */,
 				8277F1CE2211A602007C6F15 /* GeoLookup.swift */,
 				8223C54B22E9E93A00CD283D /* Session.swift */,
 				82AA8817231E330A00E18ECB /* SessionStatus.swift */,
@@ -2145,7 +2142,6 @@
 				8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */,
 				82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */,
 				82A160BA221C4E2000730577 /* Server+CoreDataClass.swift in Sources */,
-				82989FDA2188783200F7EBE0 /* WireGuardKeyResult.swift in Sources */,
 				9CB2CE381DB0F860007A4D2D /* FileSystemManager.swift in Sources */,
 				8270D266241A477900B17B65 /* InfoAlertView.swift in Sources */,
 				82C215EC23992F6900E639F8 /* UINavigationController+Ext.swift in Sources */,
