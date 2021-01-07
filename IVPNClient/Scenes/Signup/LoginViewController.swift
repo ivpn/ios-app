@@ -149,7 +149,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Methods -
     
-    private func startLoginProcess(force: Bool = false, confirmation: String? = nil, captchaId: String? = nil) {
+    private func startLoginProcess(force: Bool = false, confirmation: String? = nil, captcha: String? = nil, captchaId: String? = nil) {
         guard !loginProcessStarted else { return }
         
         let username = (self.userName.text ?? "").trim()
@@ -162,7 +162,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        sessionManager.createSession(force: force, username: username, confirmation: confirmation, captchaId: captchaId)
+        sessionManager.createSession(force: force, username: username, confirmation: confirmation, captcha: captcha, captchaId: captchaId)
     }
     
     private func startSignupProcess() {
@@ -421,7 +421,7 @@ extension LoginViewController: TwoFactorViewControllerDelegate {
 extension LoginViewController: CaptchaViewControllerDelegate {
     
     func captchaSubmitted(code: String, captchaId: String) {
-        startLoginProcess(force: false, confirmation: code, captchaId: captchaId)
+        startLoginProcess(force: false, captcha: code, captchaId: captchaId)
     }
     
 }
