@@ -1296,32 +1296,9 @@
                                                 <color key="textColor" name="ivpnLabelQuaternary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLd-Vs-YNX">
-                                                <rect key="frame" x="69" y="312" width="276" height="50"/>
-                                                <color key="backgroundColor" name="ivpnGray14"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="DRs-5N-FbY"/>
-                                                    <constraint firstAttribute="width" constant="276" id="QOt-zR-Qyb"/>
-                                                </constraints>
-                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Reload Image">
-                                                    <color key="titleColor" name="ivpnLabelSecondary"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="8"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="reloadImageAction:" destination="VB7-sR-4BL" eventType="touchUpInside" id="scA-oQ-BAE"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="Ycm-K0-gRI" firstAttribute="centerX" secondItem="3Wc-44-z61" secondAttribute="centerX" id="61d-V1-tqk"/>
-                                            <constraint firstItem="XLd-Vs-YNX" firstAttribute="centerX" secondItem="3Wc-44-z61" secondAttribute="centerX" id="8dZ-Gy-EIT"/>
-                                            <constraint firstItem="XLd-Vs-YNX" firstAttribute="top" secondItem="Ycm-K0-gRI" secondAttribute="bottom" constant="14" id="LDA-H3-vg0"/>
                                             <constraint firstItem="lnO-Pm-4Fi" firstAttribute="centerX" secondItem="3Wc-44-z61" secondAttribute="centerX" id="aOo-8A-OVa"/>
                                             <constraint firstItem="n7l-pP-XzT" firstAttribute="centerX" secondItem="3Wc-44-z61" secondAttribute="centerX" id="exQ-H1-Wr0"/>
                                             <constraint firstItem="Ycm-K0-gRI" firstAttribute="top" secondItem="lnO-Pm-4Fi" secondAttribute="bottom" constant="30" id="fA2-wh-q6h"/>
