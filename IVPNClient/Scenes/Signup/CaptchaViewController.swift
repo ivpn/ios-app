@@ -22,7 +22,6 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 protocol CaptchaViewControllerDelegate: class {
     func captchaSubmitted(code: String, captchaId: String)
@@ -46,22 +45,10 @@ class CaptchaViewController: UIViewController {
     var imageData = ""
     var captchaId = ""
     
-    private lazy var sessionManager: SessionManager = {
-        let manager = SessionManager()
-        manager.delegate = self
-        return manager
-    }()
-    
-    private let hud = JGProgressHUD(style: .dark)
-    
     // MARK: - @IBActions -
     
     @IBAction func submitAction(_ sender: AnyObject) {
         submit()
-    }
-    
-    @IBAction func reloadImageAction(_ sender: AnyObject) {
-        reloadImage()
     }
     
     // MARK: - View Lifecycle -
@@ -96,10 +83,6 @@ class CaptchaViewController: UIViewController {
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    private func reloadImage() {
-        sessionManager.createSession(username: "i-XXXX-XXXX-XXXX")
-    }
-    
     private func showValidationError() {
         showErrorAlert(
             title: "Invalid code",
@@ -113,46 +96,6 @@ class CaptchaViewController: UIViewController {
         }
         
         captchaImage.image = image.processCaptcha(userInterfaceStyle: traitCollection.userInterfaceStyle)
-    }
-    
-}
-
-// MARK: - SessionManagerDelegate -
-
-extension CaptchaViewController {
-    
-    override func createSessionStart() {
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        hud.detailTextLabel.text = "Reloading captcha image..."
-        hud.show(in: (navigationController?.view)!)
-    }
-    
-    override func createSessionFailure(error: Any?) {
-        var message = "There was an error creating a new session"
-        
-        if let error = error as? ErrorResultSessionNew {
-            message = error.message
-        }
-        
-        hud.dismiss()
-        showErrorAlert(title: "Error", message: message)
-    }
-    
-    override func captchaRequired(error: Any?) {
-        hud.dismiss()
-        updateImageData(error: error)
-    }
-    
-    override func captchaIncorrect(error: Any?) {
-        hud.dismiss()
-        updateImageData(error: error)
-    }
-    
-    private func updateImageData(error: Any?) {
-        if let error = error as? ErrorResultSessionNew, let captchaImage = error.captchaImage {
-            imageData = captchaImage
-            processImage()
-        }
     }
     
 }
