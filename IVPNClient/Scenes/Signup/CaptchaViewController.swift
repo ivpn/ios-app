@@ -79,11 +79,6 @@ class CaptchaViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
-        guard UIApplication.shared.applicationState == .active else {
-            return
-        }
-        
         processImage()
     }
     
@@ -117,11 +112,7 @@ class CaptchaViewController: UIViewController {
             return
         }
         
-        if traitCollection.userInterfaceStyle == .dark {
-            captchaImage.image = UIImage.process(image: image, with: "CIColorInvert")
-        } else {
-            captchaImage.image = UIImage.process(image: image, with: "CIPhotoEffectMono")
-        }
+        captchaImage.image = image.processCaptcha(userInterfaceStyle: traitCollection.userInterfaceStyle)
     }
     
 }
