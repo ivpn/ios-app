@@ -34,16 +34,8 @@ struct ProofsViewModel {
         return model.countryCode.lowercased()
     }
     
-    var protocolTitle: String {
-        return Application.shared.settings.connectionProtocol.formatTitle()
-    }
-    
     var ipAddress: String {
         return model.ipAddress
-    }
-    
-    var country: String {
-        return model.country
     }
     
     var city: String {
