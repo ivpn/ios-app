@@ -94,10 +94,6 @@ struct VPNServerViewModel {
         return "\(server.city), \(server.countryCode.uppercased())"
     }
     
-    var formattedServerLocation: String {
-        return "\(server.city), \(server.country)"
-    }
-    
     var imageForCountryCode: UIImage? {
         return UIImage(named: server.countryCode.lowercased() + "-v")
     }
