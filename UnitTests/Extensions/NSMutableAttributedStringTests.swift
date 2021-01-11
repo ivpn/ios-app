@@ -39,13 +39,4 @@ class NSMutableAttributedStringTests: XCTestCase {
         XCTAssertEqual(label.text, "Bold text")
     }
     
-    func test_normal() {
-        let formattedString = NSMutableAttributedString()
-        formattedString.normal("Normal text")
-        
-        label.attributedText = formattedString
-        
-        XCTAssertEqual(label.text, "Normal text")
-    }
-    
 }

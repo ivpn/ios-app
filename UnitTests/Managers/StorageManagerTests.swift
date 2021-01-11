@@ -120,15 +120,5 @@ class StorageManagerTests: XCTestCase {
         let networks = StorageManager.fetchNetworks(name: "Wi-Fi to remove")
         XCTAssertNil(networks, "Network was not deleted")
     }
-    
-    func test_updateActiveNetwork() {
-        let network = Network(context: StorageManager.context, needToSave: false)
-        network.name = "Mobile data"
-        network.type = NetworkType.cellular.rawValue
-        network.trust = NetworkTrust.Default.rawValue
-        Application.shared.network = network
-        StorageManager.updateActiveNetwork(trust: NetworkTrust.Default.rawValue)
-        XCTAssertEqual(Application.shared.network.trust, NetworkTrust.Default.rawValue)
-    }
 
 }

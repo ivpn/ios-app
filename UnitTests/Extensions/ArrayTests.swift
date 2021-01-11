@@ -27,14 +27,6 @@ import XCTest
 
 class ArrayTests: XCTestCase {
     
-    let array = [1, 2]
-    
-    func test_safeSubscript() {
-        XCTAssertEqual(array[safe: 0], 1)
-        XCTAssertEqual(array[safe: 1], 2)
-        XCTAssertEqual(array[safe: 2], nil)
-    }
-    
     func test_next() {
         let hostNames = ["1.1.1.1", "2.2.2.2"]
         
