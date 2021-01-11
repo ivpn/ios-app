@@ -37,11 +37,6 @@ class APIAccessManagerTests: XCTestCase {
         UserDefaults.shared.removeObject(forKey: UserDefaults.Key.apiHostName)
     }
     
-    func test_isHostIpAddress() {
-        XCTAssertTrue(APIAccessManager.shared.isHostIpAddress(host: "1.1.1.1"))
-        XCTAssertFalse(APIAccessManager.shared.isHostIpAddress(host: "ivpn.net"))
-    }
-    
     func test_nextHostName() {
         let currentHost = UserDefaults.shared.apiHostName
         if let nextHost = APIAccessManager.shared.nextHostName(failedHostName: currentHost) {
