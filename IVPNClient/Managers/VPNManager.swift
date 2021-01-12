@@ -256,8 +256,6 @@ class VPNManager {
     
     func connect(tunnelType: TunnelType) {
         getManagerFor(tunnelType: tunnelType) { manager in
-            manager.isEnabled = true
-            
             do {
                 try manager.connection.startVPNTunnel()
             } catch NEVPNError.configurationInvalid {
