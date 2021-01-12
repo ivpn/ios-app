@@ -129,7 +129,9 @@ class VPNManager {
         manager.loadFromPreferences { error in
             self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
             manager.saveToPreferences { error in
-                completion(error)
+                manager.loadFromPreferences { error in
+                    completion(error)
+                }
             }
         }
     }
