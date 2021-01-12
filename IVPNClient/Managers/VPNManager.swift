@@ -126,11 +126,17 @@ class VPNManager {
     }
     
     private func setupNEVPNManager(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
-        manager.loadFromPreferences { error in
-            self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
-            manager.saveToPreferences { error in
-                manager.loadFromPreferences { error in
-                    completion(error)
+        self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
+        manager.saveToPreferences { error in
+            guard error == nil else {
+                completion(nil)
+                return
+            }
+            
+            manager.loadFromPreferences { error in
+                manager.protocolConfiguration?.serverAddress = accessDetails.serverAddress
+                manager.saveToPreferences { error in
+                    completion(nil)
                 }
             }
         }
@@ -148,14 +154,14 @@ class VPNManager {
         
         manager.saveToPreferences { error in
             guard error == nil else {
-                completion(error)
+                completion(nil)
                 return
             }
             
             manager.loadFromPreferences { error in
                 manager.protocolConfiguration?.serverAddress = accessDetails.serverAddress
                 manager.saveToPreferences { error in
-                    completion(error)
+                    completion(nil)
                 }
             }
         }
@@ -256,6 +262,8 @@ class VPNManager {
     
     func connect(tunnelType: TunnelType) {
         getManagerFor(tunnelType: tunnelType) { manager in
+            manager.isEnabled = true
+            
             do {
                 try manager.connection.startVPNTunnel()
             } catch NEVPNError.configurationInvalid {
