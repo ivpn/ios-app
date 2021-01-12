@@ -38,10 +38,10 @@ class ConnectionManager {
     
     var reconnectAutomatically = false
     var settings: Settings
+    var statusModificationDate = Date()
     
     var status: NEVPNStatus = .invalid {
         didSet {
-            statusModificationDate = Date()
             UserDefaults.shared.set(status.rawValue, forKey: UserDefaults.Key.connectionStatus)
         }
     }
@@ -67,7 +67,6 @@ class ConnectionManager {
     private var connected = false
     private var closeApp = false
     private var actionType: ActionType = .connect
-    private var statusModificationDate = Date()
     
     // MARK: - Initialize -
     
