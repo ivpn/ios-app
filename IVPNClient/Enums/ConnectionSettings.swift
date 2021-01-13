@@ -171,8 +171,4 @@ enum ConnectionSettings {
         }
     }
     
-    static func != (lhs: ConnectionSettings, rhs: ConnectionSettings) -> Bool {
-        return !(lhs == rhs)
-    }
-    
 }

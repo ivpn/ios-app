@@ -37,10 +37,6 @@ struct ServiceStatus: Codable {
     let paymentMethod: String?
     let capabilities: [String]?
     
-    private var activeUntilDate: Date {
-        return Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0))
-    }
-    
     private static let serviceStatusKey = "ServiceStatus"
     
     // MARK: - Initialize -
@@ -85,18 +81,6 @@ struct ServiceStatus: Codable {
         }
         
         return false
-    }
-    
-    func getSubscriptionText() -> String {
-        if isActive {
-            if let currentPlan = currentPlan, !currentPlan.isEmpty {
-                return "\(currentPlan), Active until \(activeUntilString())"
-            } else {
-                return "Active until \(activeUntilString())"
-            }
-        }
-        
-        return "No active subscription"
     }
     
     static func isValid(username: String) -> Bool {

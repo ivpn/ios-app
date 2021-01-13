@@ -25,14 +25,7 @@ import UIKit
 
 class NavigationManager {
     
-    static func getMainViewController() -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "mainView")
-        viewController.modalPresentationStyle = .fullScreen
-        return viewController
-    }
-    
-    static func getLoginViewController(modalPresentationStyle: UIModalPresentationStyle = .formSheet) -> UIViewController {
+    static func getLoginViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "loginView")
         return viewController

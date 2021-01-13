@@ -59,24 +59,4 @@ class AccountViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.activeUntilText, "No active subscription")
     }
     
-    func test_logOutActionText() {
-        let viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
-        XCTAssertEqual(viewModel.logOutActionText, "Log In or Sign Up")
-    }
-    
-    func test_subscriptionActionText() {
-        var viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
-        
-        viewModel.serviceStatus.isActive = false
-        XCTAssertEqual(viewModel.subscriptionActionText, "Activate Subscription")
-        
-        viewModel.serviceStatus.isActive = true
-        XCTAssertEqual(viewModel.subscriptionActionText, "Manage Subscription")
-    }
-    
-    func test_showSubscriptionAction() {
-        let viewModel = AccountViewModel(serviceStatus: ServiceStatus(), authentication: Authentication())
-        XCTAssertFalse(viewModel.showSubscriptionAction)
-    }
-    
 }

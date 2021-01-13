@@ -25,8 +25,6 @@ import UIKit
 
 class FileSystemManager {
     
-    private static let maxLogFileSize: UInt64 = 262144
-    
     // Returns the URL to the application's Documents directory.
     static var applicationDocumentsDirectory: URL {
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -116,16 +114,6 @@ class FileSystemManager {
         }
     }
     
-    static func deleteSharedFile(name: String) {
-        let file = sharedFilePath(name: name)
-        
-        do {
-            try FileManager.default.removeItem(atPath: file.path)
-        } catch let error {
-            log(error: "Something went wrong: \(error)")
-        }
-    }
-    
     static func resetLogFile(name: String) {
         if !fileExists(name: name) {
             createSharedFile(name: name)
@@ -158,16 +146,6 @@ class FileSystemManager {
         guard let directory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Config.appGroup) else { return URL(fileURLWithPath: "") }
         
         return directory.appendingPathComponent(name)
-    }
-    
-    private static func getFileSize(path: String) -> UInt64 {
-        do {
-            let fileSize = try (FileManager.default.attributesOfItem(atPath: path) as NSDictionary).fileSize()
-            return fileSize
-        } catch let error {
-            log(error: "Something went wrong: \(error)")
-            return 0
-        }
     }
     
 }
