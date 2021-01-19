@@ -125,10 +125,11 @@ class VPNManager {
     }
     
     private func setupNEVPNManager(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
-        self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
+        let serverAddress = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
+        self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
         manager.saveToPreferences { error in
             manager.loadFromPreferences { error in
-                self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
+                self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
                 manager.saveToPreferences { error in
                     completion(nil)
                 }
@@ -160,10 +161,9 @@ class VPNManager {
         }
     }
     
-    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil) {
+    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails, serverAddress: String, status: NEVPNStatus? = nil) {
         let configuration = NEVPNProtocolIKEv2()
-        let serverAddress = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
-        configuration.remoteIdentifier = serverAddress
+        configuration.remoteIdentifier = accessDetails.serverAddress
         configuration.localIdentifier = accessDetails.username
         configuration.serverAddress = serverAddress
         configuration.username = accessDetails.username
