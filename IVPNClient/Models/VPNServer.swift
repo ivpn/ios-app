@@ -30,7 +30,6 @@ class VPNServer {
     // MARK: - Properties -
     
     var pingMs: Int?
-    var pingRelative: Double?
     var status: NEVPNStatus = .invalid {
         didSet {
             UserDefaults.standard.set(status.rawValue, forKey: "SelectedServerStatus")

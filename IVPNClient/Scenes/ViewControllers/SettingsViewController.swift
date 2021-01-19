@@ -47,7 +47,6 @@ class SettingsViewController: UITableViewController {
     // MARK: - Properties -
     
     let hud = JGProgressHUD(style: .dark)
-    private let defaults = UserDefaults(suiteName: Config.appGroup)
     private var needsToReconnect = false
     
     // MARK: - @IBActions -
@@ -316,11 +315,6 @@ class SettingsViewController: UITableViewController {
     
     @objc fileprivate func authenticationDismissed() {
         tableView.reloadData()
-    }
-    
-    @objc func disconnect() {
-        Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
-        Pinger.shared.ping()
     }
     
     @objc func pingDidComplete() {

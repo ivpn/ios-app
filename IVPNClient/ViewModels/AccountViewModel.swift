@@ -50,22 +50,6 @@ struct AccountViewModel {
         return serviceStatus.isActive ? serviceStatus.activeUntilString() : "No active subscription"
     }
     
-    var logOutActionText: String {
-        return authentication.isLoggedIn ? "Log Out" : "Log In or Sign Up"
-    }
-    
-    var subscriptionActionText: String {
-        return serviceStatus.isActive ? "Manage Subscription" : "Activate Subscription"
-    }
-    
-    var showSubscriptionAction: Bool {
-        if let paymentMethod = serviceStatus.paymentMethod, paymentMethod == "ivpniosiap" {
-            return true
-        }
-        
-        return false
-    }
-    
     // MARK: - Initialize -
     
     init(serviceStatus: ServiceStatus, authentication: Authentication) {

@@ -127,6 +127,8 @@ class MainViewController: UIViewController {
         if let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController {
             controlPanelViewController.updateStatus(vpnStatus: vpnStatus, animated: animated)
         }
+        
+        Application.shared.connectionManager.statusModificationDate = Date()
     }
     
     @objc func updateGeoLocation() {

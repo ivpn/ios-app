@@ -29,11 +29,6 @@ extension Server {
     @NSManaged public var gateway: String?
     @NSManaged public var isFastestEnabled: Bool
     
-    convenience init(context: NSManagedObjectContext, needToSave: Bool) {
-        let entity = NSEntityDescription.entity(forEntityName: "Server", in: context)
-        self.init(entity: entity!, insertInto: needToSave ? context : nil)
-    }
-    
     @nonobjc public class func fetchRequest(gateway: String = "", isFastestEnabled: Bool = false) -> NSFetchRequest<Server> {
         let fetchRequest = NSFetchRequest<Server>(entityName: "Server")
         var filters = [NSPredicate]()
