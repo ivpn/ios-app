@@ -47,10 +47,6 @@ class VPNServerViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.formattedServerName, "Amsterdam, NL")
     }
     
-    func test_formattedServerLocation() {
-        XCTAssertEqual(viewModel.formattedServerLocation, "Amsterdam, Netherlands")
-    }
-    
     func test_imageNameForCountryCode() {
         XCTAssertEqual(viewModel.imageNameForCountryCode, "nl-v")
     }

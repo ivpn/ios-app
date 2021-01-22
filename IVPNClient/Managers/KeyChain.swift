@@ -124,12 +124,6 @@ class KeyChain {
         }
     }
     
-    static func deleteSession() {
-        sessionToken = nil
-        vpnUsername = nil
-        vpnPassword = nil
-    }
-    
     static func clearAll() {
         username = nil
         tempUsername = nil

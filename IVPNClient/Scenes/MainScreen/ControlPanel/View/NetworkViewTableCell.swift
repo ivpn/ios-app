@@ -30,17 +30,6 @@ class NetworkViewTableCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var trustLabel: UILabel!
     
-    // MARK: - Properties -
-    
-    var defaultNetwork: Network? {
-        if let defaultNetworks = StorageManager.fetchNetworks(isDefault: true) {
-            if let first = defaultNetworks.first {
-                return first
-            }
-        }
-        return nil
-    }
-    
     // MARK: - View lifecycle -
     
     override func awakeFromNib() {
@@ -81,10 +70,10 @@ class NetworkViewTableCell: UITableViewCell {
     // MARK: - Private methods -
     
     @objc private func updateNetwork() {
-        render(network: Application.shared.network, defaultNetwork: defaultNetwork)
+        render(network: Application.shared.network)
     }
     
-    private func render(network: Network, defaultNetwork: Network?) {
+    private func render(network: Network) {
         trustLabel.isHidden = false
         trustLabel.text = network.trust?.uppercased()
         accessoryType = .disclosureIndicator
