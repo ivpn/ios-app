@@ -61,9 +61,11 @@ extension ControlPanelViewController {
         if indexPath.row == 6 && Application.shared.network.type != NetworkType.none.rawValue {
             selectNetworkTrust(network: Application.shared.network, sourceView: controlPanelView.networkView) { trust in
                 if Application.shared.connectionManager.needToReconnect(network: Application.shared.network, newTrust: trust) {
-                    self.showReconnectPrompt {
-                        self.controlPanelView.networkView.update(trust: trust)
-                        Application.shared.connectionManager.reconnect()
+                    if let cell = tableView.cellForRow(at: indexPath) {
+                        self.showReconnectPrompt(sourceView: cell as UIView) {
+                            self.controlPanelView.networkView.update(trust: trust)
+                            Application.shared.connectionManager.reconnect()
+                        }
                     }
                 } else {
                     self.controlPanelView.networkView.update(trust: trust)

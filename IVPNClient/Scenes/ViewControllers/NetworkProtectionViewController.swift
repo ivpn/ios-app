@@ -181,9 +181,11 @@ extension NetworkProtectionViewController {
         selectNetworkTrust(network: collection[indexPath.section][indexPath.row], sourceView: view) { trust in
             let network = self.collection[indexPath.section][indexPath.row]
             if Application.shared.connectionManager.needToReconnect(network: network, newTrust: trust) {
-                self.showReconnectPrompt {
-                    self.trustSelected(trust: trust, indexPath: indexPath)
-                    Application.shared.connectionManager.reconnect()
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    self.showReconnectPrompt(sourceView: cell as UIView) {
+                        self.trustSelected(trust: trust, indexPath: indexPath)
+                        Application.shared.connectionManager.reconnect()
+                    }
                 }
             } else {
                 self.trustSelected(trust: trust, indexPath: indexPath)
