@@ -29,20 +29,22 @@ class NavigationManager {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "mainView")
         viewController.modalPresentationStyle = .fullScreen
+        
         return viewController
     }
     
-    static func getLoginViewController(modalPresentationStyle: UIModalPresentationStyle = .formSheet) -> UIViewController {
+    static func getLoginViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "loginView")
+        
         return viewController
     }
     
     static func getChangePlanViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        
         let navController = storyBoard.instantiateViewController(withIdentifier: "selectPlanView") as? UINavigationController
         navController?.modalPresentationStyle = .formSheet
+        
         if let viewController = navController?.topViewController as? SelectPlanViewController {
             let serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
             viewController.changingPlan = true
@@ -54,9 +56,9 @@ class NavigationManager {
     
     static func getSelectPlanViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        
         let navController = storyBoard.instantiateViewController(withIdentifier: "selectPlanView") as? UINavigationController
         navController?.modalPresentationStyle = .formSheet
+        
         if let viewController = navController?.topViewController as? SelectPlanViewController {
             viewController.selectingPlan = true
         }
@@ -66,9 +68,9 @@ class NavigationManager {
     
     static func getSubscriptionViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        
         let navController = storyBoard.instantiateViewController(withIdentifier: "subscriptionView") as? UINavigationController
         navController?.modalPresentationStyle = .formSheet
+        
         if let viewController = navController?.topViewController as? PaymentViewController {
             let serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
             viewController.extendingService = true
@@ -83,39 +85,45 @@ class NavigationManager {
         let viewController = storyBoard.instantiateViewController(withIdentifier: "staticWebView") as! StaticWebViewController
         viewController.resourceName = resourceName
         viewController.screenTitle = screenTitle
+        
         return viewController
     }
     
     static func getTermsOfServiceViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
+        
         return storyBoard.instantiateViewController(withIdentifier: "termsOfServiceView")
     }
     
     static func getUpgradePlanViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
         return storyBoard.instantiateViewController(withIdentifier: "upgradePlanView")
     }
     
     static func getSettingsViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
         return storyBoard.instantiateViewController(withIdentifier: "settingsView")
     }
     
     static func getAccountViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
         return storyBoard.instantiateViewController(withIdentifier: "accountView")
     }
     
     static func getControlPanelViewController() -> UITableViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
         return storyBoard.instantiateViewController(withIdentifier: "controlPanelView") as! ControlPanelViewController
     }
     
     static func getScannerViewController(delegate: ScannerViewControllerDelegate? = nil) -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        
         let navController = storyBoard.instantiateViewController(withIdentifier: "scannerView") as? UINavigationController
         navController?.modalPresentationStyle = .formSheet
+        
         if let viewController = navController?.topViewController as? ScannerViewController {
             viewController.delegate = delegate
         }
@@ -126,6 +134,32 @@ class NavigationManager {
     static func getCreateAccountViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
         return storyBoard.instantiateViewController(withIdentifier: "createAccountView")
+    }
+    
+    static func getTwoFactorViewController(delegate: TwoFactorViewControllerDelegate? = nil) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
+        let navController = storyBoard.instantiateViewController(withIdentifier: "twoFactorView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        
+        if let viewController = navController?.topViewController as? TwoFactorViewController {
+            viewController.delegate = delegate
+        }
+        
+        return navController!
+    }
+    
+    static func getCaptchaViewController(delegate: CaptchaViewControllerDelegate? = nil, imageData: String, captchaId: String) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
+        let navController = storyBoard.instantiateViewController(withIdentifier: "captchaView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        
+        if let viewController = navController?.topViewController as? CaptchaViewController {
+            viewController.delegate = delegate
+            viewController.imageData = imageData
+            viewController.captchaId = captchaId
+        }
+        
+        return navController!
     }
     
 }

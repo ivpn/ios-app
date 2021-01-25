@@ -57,8 +57,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             return
         }
         
-        UserDefaults.shared.set(wgIpAddress, forKey: UserDefaults.Key.localIpAddress)
-        
         guard let tunnelSettings = getTunnelSettings(ipAddress: wgIpAddress) else {
             tunnelSetupFailed()
             completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
@@ -155,7 +153,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                     }
                     
                     self.updateWgConfig(key: "private_key", value: privateKeyHex)
-                    UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.localIpAddress)
                     completion(nil)
                 }
             }

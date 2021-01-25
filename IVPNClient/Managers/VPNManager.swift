@@ -36,7 +36,6 @@ class VPNManager {
     private var openvpnObserver: NSObjectProtocol?
     private var ipsecObserver: NSObjectProtocol?
     private var wireguardObserver: NSObjectProtocol?
-    private var openVPNConnectionInitialized = false
     private(set) var accessDetails: AccessDetails?
     
     // MARK: - Methods -
@@ -126,10 +125,14 @@ class VPNManager {
     }
     
     private func setupNEVPNManager(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
-        manager.loadFromPreferences { error in
-            self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
-            manager.saveToPreferences { error in
-                completion(error)
+        let serverAddress = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
+        self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
+        manager.saveToPreferences { error in
+            manager.loadFromPreferences { error in
+                self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
+                manager.saveToPreferences { error in
+                    completion(nil)
+                }
             }
         }
     }
@@ -139,31 +142,30 @@ class VPNManager {
         case .ipsec:
             break
         case .openvpn:
-            self.setupOpenVPNTunnel(settings: settings, accessDetails: accessDetails, status: status, completion: completion)
+            self.setupOpenVPNTunnel(settings: settings, accessDetails: accessDetails, status: status)
         case .wireguard:
-            self.setupWireGuardTunnel(settings: settings, accessDetails: accessDetails, status: status, completion: completion)
+            self.setupWireGuardTunnel(settings: settings, accessDetails: accessDetails, status: status)
         }
         
         manager.saveToPreferences { error in
             guard error == nil else {
-                completion(error)
+                completion(nil)
                 return
             }
             
             manager.loadFromPreferences { error in
-                manager.protocolConfiguration?.serverAddress = accessDetails.serverAddress
                 manager.saveToPreferences { error in
-                    completion(error)
+                    completion(nil)
                 }
             }
         }
     }
     
-    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil) {
+    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails, serverAddress: String, status: NEVPNStatus? = nil) {
         let configuration = NEVPNProtocolIKEv2()
         configuration.remoteIdentifier = accessDetails.serverAddress
         configuration.localIdentifier = accessDetails.username
-        configuration.serverAddress = accessDetails.serverAddress
+        configuration.serverAddress = serverAddress
         configuration.username = accessDetails.username
         configuration.passwordReference = accessDetails.passwordRef
         configuration.authenticationMethod = .none
@@ -187,7 +189,7 @@ class VPNManager {
         manager.isEnabled = true
     }
     
-    private func setupOpenVPNTunnel(settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
+    private func setupOpenVPNTunnel(settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil) {
         guard let manager = openvpnManager else { return }
         
         manager.protocolConfiguration = NETunnelProviderProtocol.makeOpenVPNProtocol(settings: settings, accessDetails: accessDetails)
@@ -197,7 +199,7 @@ class VPNManager {
         manager.isEnabled = true
     }
     
-    private func setupWireGuardTunnel(settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
+    private func setupWireGuardTunnel(settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil) {
         guard let manager = wireguardManager else {
             return
         }
@@ -209,7 +211,7 @@ class VPNManager {
         manager.isEnabled = true
     }
     
-    func installOnDemandRules(status: NEVPNStatus, settings: ConnectionSettings, accessDetails: AccessDetails) {
+    func installOnDemandRules(settings: ConnectionSettings, accessDetails: AccessDetails) {
         switch settings {
         case .ipsec:
             self.disable(tunnelType: .openvpn) { _ in
@@ -348,12 +350,6 @@ class VPNManager {
                     
                     event(TunnelType.wireguard, manager, manager.connection.status)
             }
-        }
-    }
-    
-    func getServerAddress( tunnelType: TunnelType, completion: @escaping (String?) -> Void) {
-        self.getManagerFor(tunnelType: tunnelType) { manager in
-            completion(manager.protocolConfiguration?.serverAddress)
         }
     }
     

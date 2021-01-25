@@ -49,7 +49,6 @@ extension UserDefaults {
         static let antiTrackerHardcoreDNSMultiHop = "antiTrackerHardcoreDNSMultiHop"
         static let wgKeyTimestamp = "wgKeyTimestamp"
         static let wgRegenerationRate = "wgRegenerationRate"
-        static let localIpAddress = "localIpAddress"
         static let hostNames = "hostNames"
         static let apiHostName = "apiHostName"
         static let hasUserConsent = "hasUserConsent"
@@ -143,10 +142,6 @@ extension UserDefaults {
         return integer(forKey: Key.wgRegenerationRate)
     }
     
-    @objc dynamic var localIpAddress: String {
-        return string(forKey: Key.localIpAddress) ?? ""
-    }
-    
     @objc dynamic var hostNames: [String] {
         return stringArray(forKey: Key.hostNames) ?? []
     }
@@ -202,7 +197,6 @@ extension UserDefaults {
         shared.removeObject(forKey: UserDefaults.Key.isAntiTrackerHardcore)
         shared.removeObject(forKey: UserDefaults.Key.wgKeyTimestamp)
         shared.removeObject(forKey: UserDefaults.Key.wgRegenerationRate)
-        shared.removeObject(forKey: UserDefaults.Key.localIpAddress)
         shared.removeObject(forKey: UserDefaults.Key.apiHostName)
         shared.removeObject(forKey: UserDefaults.Key.sessionsLimit)
         shared.removeObject(forKey: UserDefaults.Key.keepAlive)

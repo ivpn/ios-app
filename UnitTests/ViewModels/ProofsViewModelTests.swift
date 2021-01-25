@@ -41,10 +41,6 @@ class ProofsViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.ipAddress, "0.0.0.0")
     }
     
-    func test_country() {
-        XCTAssertEqual(viewModel.country, "Germany")
-    }
-    
     func test_city() {
         XCTAssertEqual(viewModel.city, "Berlin")
     }

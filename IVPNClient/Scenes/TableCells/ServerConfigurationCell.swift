@@ -36,10 +36,6 @@ class ServerConfigurationCell: UITableViewCell {
     
     weak var delegate: ServerConfigurationCellDelegate?
     
-    var isFastestEnabled: Bool {
-        return fastestEnabledSwitch.isOn
-    }
-    
     @IBAction func toggle(_ sender: UISwitch) {
         guard StorageManager.canUpdateServer(isOn: sender.isOn) else {
             sender.setOn(true, animated: false)

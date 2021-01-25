@@ -38,10 +38,10 @@ class ConnectionManager {
     
     var reconnectAutomatically = false
     var settings: Settings
+    var statusModificationDate = Date()
     
     var status: NEVPNStatus = .invalid {
         didSet {
-            statusModificationDate = Date()
             UserDefaults.shared.set(status.rawValue, forKey: UserDefaults.Key.connectionStatus)
         }
     }
@@ -67,7 +67,6 @@ class ConnectionManager {
     private var connected = false
     private var closeApp = false
     private var actionType: ActionType = .connect
-    private var statusModificationDate = Date()
     
     // MARK: - Initialize -
     
@@ -80,7 +79,7 @@ class ConnectionManager {
     // MARK: - Event handlers -
 
     func onStatusChanged(completion: @escaping (NEVPNStatus) -> Void) {
-        vpnManager.onStatusChanged { _, manager, status in
+        vpnManager.onStatusChanged { _, _, status in
             if self.status == .connecting && status == .disconnecting {
                 NotificationCenter.default.post(name: Notification.Name.VPNConnectError, object: nil)
             }
@@ -95,7 +94,6 @@ class ConnectionManager {
                         return
                     }
                     self.updateOpenVPNLogFile()
-                    self.updateOpenVPNLocalIp()
                     self.reconnectAutomatically = false
                     if self.actionType == .connect {
                         self.evaluateCloseApp()
@@ -203,19 +201,12 @@ class ConnectionManager {
         }
     }
     
-    func getConnectionServerAddress(completion: @escaping (String?) -> Void) {
-        getStatus { tunnelType, _ in
-            self.vpnManager.getServerAddress(tunnelType: tunnelType) { serverAddress in
-                completion(serverAddress)
-            }
-        }
-    }
-    
     func connect() {
         updateSelectedServer(status: .connecting)
         
         let accessDetails = AccessDetails(
             serverAddress: settings.selectedServer.gateway,
+            ipAddresses: settings.selectedServer.ipAddresses,
             username: KeyChain.vpnUsername ?? "",
             passwordRef: KeyChain.vpnPasswordRef
         )
@@ -236,7 +227,7 @@ class ConnectionManager {
     func disconnect(reconnectAutomatically: Bool = false) {
         updateSelectedServer(status: .disconnecting)
         
-        getStatus { tunnelType, status in
+        getStatus { tunnelType, _ in
             self.vpnManager.disconnect(tunnelType: tunnelType, reconnectAutomatically: reconnectAutomatically)
             
             if UserDefaults.shared.networkProtectionEnabled && !reconnectAutomatically {
@@ -252,16 +243,17 @@ class ConnectionManager {
             return
         }
         
-        getStatus { tunnelType, status in
+        getStatus { _, status in
             if status.isDisconnected() {
                 let accessDetails = AccessDetails(
                     serverAddress: Application.shared.settings.selectedServer.gateway,
+                    ipAddresses: Application.shared.settings.selectedServer.ipAddresses,
                     username: KeyChain.vpnUsername ?? "",
                     passwordRef: KeyChain.vpnPasswordRef
                 )
                 let settings = self.settings.connectionProtocol
                 
-                self.vpnManager.installOnDemandRules(status: .disconnected, settings: settings, accessDetails: accessDetails)
+                self.vpnManager.installOnDemandRules(settings: settings, accessDetails: accessDetails)
             }
         }
     }
@@ -471,18 +463,6 @@ class ConnectionManager {
         
         getOpenVPNLog { log in
             FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-        }
-    }
-    
-    func updateOpenVPNLocalIp() {
-        guard Application.shared.settings.connectionProtocol.tunnelType() == .openvpn else { return }
-        
-        Application.shared.connectionManager.getOpenVPNLog { log in
-            guard let log = log else { return }
-            let ipAddress = log.findLastSubstring(from: "IPv4: addr", to: "netmask")
-            guard !ipAddress.isEmpty else { return }
-            
-            UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.localIpAddress)
         }
     }
     

@@ -46,7 +46,7 @@ extension NETunnelProviderProtocol {
         sessionBuilder.cipher = .aes256cbc
         sessionBuilder.compressionFraming = .disabled
         sessionBuilder.endpointProtocols = [EndpointProtocol(socketType, port)]
-        sessionBuilder.hostname = accessDetails.serverAddress
+        sessionBuilder.hostname = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
         sessionBuilder.tlsWrap = OpenVPN.TLSWrap.init(strategy: .auth, key: staticKey!)
         
         if let dnsServers = openVPNdnsServers(), dnsServers != [""] {

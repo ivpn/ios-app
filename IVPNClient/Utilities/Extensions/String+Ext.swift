@@ -21,13 +21,9 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 
 extension String {
-    
-    static func commaSeparatedStringFrom(elements: [String]) -> String {
-        return elements.joined(separator: ",")
-    }
     
     func commaSeparatedToArray() -> [String] {
         return components(separatedBy: .whitespaces)
@@ -96,6 +92,14 @@ extension String {
         let regex = try? NSRegularExpression(pattern: pattern, options: [])
         let range = NSRange(location: 0, length: count)
         return regex?.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "$1 $2").lowercased().capitalized
+    }
+    
+    func base64ToImage() -> UIImage? {
+        if let url = URL(string: self), let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+            return image
+        }
+        
+        return nil
     }
     
 }

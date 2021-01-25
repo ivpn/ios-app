@@ -49,4 +49,25 @@ extension UIImage {
         return nil
     }
     
+    func processCaptcha(userInterfaceStyle: UIUserInterfaceStyle) -> UIImage? {
+        let ciImage = CIImage(image: self)
+        var filter = CIFilter(name: "CIPhotoEffectMono")
+        filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        
+        if let outputImage = filter?.outputImage {
+            if userInterfaceStyle == .light {
+                return UIImage(ciImage: outputImage)
+            }
+            
+            filter = CIFilter(name: "CIColorInvert")
+            filter?.setValue(outputImage, forKey: kCIInputImageKey)
+            
+            if let outputImage = filter?.outputImage {
+                return UIImage(ciImage: outputImage)
+            }
+        }
+        
+        return nil
+    }
+    
 }

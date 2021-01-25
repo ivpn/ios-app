@@ -1,9 +1,9 @@
 //
-//  UINavigationController+Ext.swift
+//  IKEv2AccessDetails.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2019-12-05.
+//  Created by Fedir Nepyyvoda on 2016-11-08.
 //  Copyright (c) 2020 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -21,15 +21,20 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
+import Foundation
 
-extension UINavigationController {
+class AccessDetails {
     
-    func popViewController(animated: Bool = true, completion: @escaping () -> Void) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock(completion)
-        popViewController(animated: animated)
-        CATransaction.commit()
+    var serverAddress: String
+    var ipAddresses: [String]
+    var username: String
+    var passwordRef: Data?
+    
+    init(serverAddress: String, ipAddresses: [String], username: String, passwordRef: Data?) {
+        self.serverAddress = serverAddress
+        self.ipAddresses = ipAddresses
+        self.username = username
+        self.passwordRef = passwordRef
     }
     
 }
