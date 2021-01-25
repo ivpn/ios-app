@@ -298,7 +298,7 @@
 		9C51340A1DE8398400423551 /* Pinger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5134091DE8398400423551 /* Pinger.swift */; };
 		9C6942251DD0CBF800F9A801 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6942241DD0CBF800F9A801 /* NetworkExtension.framework */; };
 		9C69422E1DD20FC200F9A801 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C69422D1DD20FC200F9A801 /* KeyChain.swift */; };
-		9C6942371DD218A900F9A801 /* IKEv2AccessDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6942361DD218A900F9A801 /* IKEv2AccessDetails.swift */; };
+		9C6942371DD218A900F9A801 /* AccessDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6942361DD218A900F9A801 /* AccessDetails.swift */; };
 		9C7840B020CD8A8A00335736 /* openvpn-tunnel-provider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9C7840A820CD8A8A00335736 /* openvpn-tunnel-provider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9CAE14C020FE453E00D4DAC0 /* VPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAE14BF20FE453E00D4DAC0 /* VPNManager.swift */; };
 		9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE1E1DAA5258007A4D2D /* Authentication.swift */; };
@@ -627,7 +627,7 @@
 		9C54520B5B9FA78FA98FB0EC /* Pods-today-extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-today-extension.release.xcconfig"; path = "../ios-app/Pods/Target Support Files/Pods-today-extension/Pods-today-extension.release.xcconfig"; sourceTree = "<group>"; };
 		9C6942241DD0CBF800F9A801 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		9C69422D1DD20FC200F9A801 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
-		9C6942361DD218A900F9A801 /* IKEv2AccessDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IKEv2AccessDetails.swift; sourceTree = "<group>"; };
+		9C6942361DD218A900F9A801 /* AccessDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessDetails.swift; sourceTree = "<group>"; };
 		9C7840A820CD8A8A00335736 /* openvpn-tunnel-provider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "openvpn-tunnel-provider.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7840AA20CD8A8A00335736 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		9C7840AC20CD8A8A00335736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -888,7 +888,7 @@
 				9C3324F21DB37724003885C3 /* VPNServer.swift */,
 				9CB2CE401DB2594A007A4D2D /* VPNServerList.swift */,
 				82C9739F217DFA9C00CE06D4 /* Host.swift */,
-				9C6942361DD218A900F9A801 /* IKEv2AccessDetails.swift */,
+				9C6942361DD218A900F9A801 /* AccessDetails.swift */,
 				9C3031341DB42EF900C38B0C /* Application.swift */,
 				8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */,
 				9CB2CE1E1DAA5258007A4D2D /* Authentication.swift */,
@@ -2181,7 +2181,7 @@
 				824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */,
 				8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */,
 				82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */,
-				9C6942371DD218A900F9A801 /* IKEv2AccessDetails.swift in Sources */,
+				9C6942371DD218A900F9A801 /* AccessDetails.swift in Sources */,
 				82D598B421A5A7A3000FABDE /* NetworkTrust.swift in Sources */,
 				8292E1A92174C11600123538 /* Interface.swift in Sources */,
 				82F638CC217DC25600410318 /* CIDRAddress.swift in Sources */,

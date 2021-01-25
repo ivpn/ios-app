@@ -206,6 +206,7 @@ class ConnectionManager {
         
         let accessDetails = AccessDetails(
             serverAddress: settings.selectedServer.gateway,
+            ipAddresses: settings.selectedServer.ipAddresses,
             username: KeyChain.vpnUsername ?? "",
             passwordRef: KeyChain.vpnPasswordRef
         )
@@ -246,6 +247,7 @@ class ConnectionManager {
             if status.isDisconnected() {
                 let accessDetails = AccessDetails(
                     serverAddress: Application.shared.settings.selectedServer.gateway,
+                    ipAddresses: Application.shared.settings.selectedServer.ipAddresses,
                     username: KeyChain.vpnUsername ?? "",
                     passwordRef: KeyChain.vpnPasswordRef
                 )
