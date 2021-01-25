@@ -149,7 +149,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Methods -
     
-    private func startLoginProcess(force: Bool = false) {
+    private func startLoginProcess(force: Bool = false, confirmation: String? = nil) {
         guard !loginProcessStarted else { return }
         
         let username = (self.userName.text ?? "").trim()
@@ -162,7 +162,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        sessionManager.createSession(force: force, username: username)
+        sessionManager.createSession(force: force, username: username, confirmation: confirmation)
     }
     
     private func startSignupProcess() {
@@ -305,6 +305,24 @@ extension LoginViewController {
         showErrorAlert(title: "Error", message: message)
     }
     
+    override func twoFactorEnabled(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
+        present(NavigationManager.getTwoFactorViewController(delegate: self), animated: true)
+    }
+    
+    override func twoFactorIncorrect(error: Any?) {
+        var message = "Unknown error occurred"
+        
+        if let error = error as? ErrorResultSessionNew {
+            message = error.message
+        }
+        
+        hud.dismiss()
+        loginProcessStarted = false
+        showErrorAlert(title: "Error", message: message)
+    }
+    
     func showCreateSessionAlert(message: String) {
         showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { index in
             switch index {
@@ -368,6 +386,16 @@ extension LoginViewController: ScannerViewControllerDelegate {
         }
         
         startLoginProcess()
+    }
+    
+}
+
+// MARK: - TwoFactorViewControllerDelegate -
+
+extension LoginViewController: TwoFactorViewControllerDelegate {
+    
+    func codeSubmitted(code: String) {
+        startLoginProcess(force: false, confirmation: code)
     }
     
 }

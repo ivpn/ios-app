@@ -151,6 +151,7 @@
 		828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F6221C008100D5E330 /* ServerConfigurationCell.swift */; };
 		828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */; };
 		828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772FA221C28E000D5E330 /* FlagImageView.swift */; };
+		828D8A6D258245AD00CB0E5B /* TwoFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */; };
 		828E9C95231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8290195E243CB27500777B6E /* ControlPanelView.swift */; };
@@ -487,6 +488,7 @@
 		828772F6221C008100D5E330 /* ServerConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationCell.swift; sourceTree = "<group>"; };
 		828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersConfigurationTableViewController.swift; sourceTree = "<group>"; };
 		828772FA221C28E000D5E330 /* FlagImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagImageView.swift; sourceTree = "<group>"; };
+		828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorViewController.swift; sourceTree = "<group>"; };
 		828E9C94231E5780001E1FCF /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		8290195E243CB27500777B6E /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
 		8292E1942170AA2500123538 /* wireguard-tunnel-provider-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wireguard-tunnel-provider-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1255,6 +1257,7 @@
 				82DEF0232447281900CCB5CD /* SelectPlan */,
 				82DEF0242447282E00CCB5CD /* Payment */,
 				9C2833751D9D3F060024C553 /* LoginViewController.swift */,
+				828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -2079,6 +2082,7 @@
 				82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */,
 				8206F32124347A8F0056B465 /* MainView.swift in Sources */,
 				9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */,
+				828D8A6D258245AD00CB0E5B /* TwoFactorViewController.swift in Sources */,
 				82E716962181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */,
 				8292E1BE2174CA6800123538 /* x25519.c in Sources */,
 				82E7168A2181E8E900D6B7C2 /* WireGuardProtocol.swift in Sources */,

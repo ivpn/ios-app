@@ -59,6 +59,13 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertFalse(ServiceStatus.isValid(username: ""))
     }
     
+    func test_isValidVerificationCode() {
+        XCTAssertTrue(ServiceStatus.isValid(verificationCode: "123456"))
+        XCTAssertFalse(ServiceStatus.isValid(verificationCode: "12345"))
+        XCTAssertFalse(ServiceStatus.isValid(verificationCode: "12345x"))
+        XCTAssertFalse(ServiceStatus.isValid(verificationCode: ""))
+    }
+    
     func test_daysUntilSubscriptionExpiration() {
         model.activeUntil = Int(Date().changeDays(by: 3).timeIntervalSince1970)
         XCTAssertEqual(model.daysUntilSubscriptionExpiration(), 3)
