@@ -25,10 +25,6 @@ import Foundation
 
 extension Array where Element: Equatable {
     
-    subscript (safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
-    
     func next(item: Element) -> Element? {
         if let index = self.firstIndex(of: item), index + 1 <= self.count {
             return index + 1 == self.count ? nil : self[index + 1]

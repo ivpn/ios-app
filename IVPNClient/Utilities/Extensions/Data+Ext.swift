@@ -39,11 +39,4 @@ extension Data {
         }
     }
     
-    mutating func withUnsafeMutableInt8Bytes<R>(_ body: (UnsafeMutablePointer<Int8>) -> R) -> R {
-        return self.withUnsafeMutableBytes { (ptr: UnsafeMutableRawBufferPointer) -> R in
-            let bytes = ptr.bindMemory(to: Int8.self)
-            return body(bytes.baseAddress!) // might crash if self.count == 0
-        }
-    }
-    
 }

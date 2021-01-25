@@ -25,10 +25,6 @@ import UIKit
 
 extension String {
     
-    static func commaSeparatedStringFrom(elements: [String]) -> String {
-        return elements.joined(separator: ",")
-    }
-    
     func commaSeparatedToArray() -> [String] {
         return components(separatedBy: .whitespaces)
             .joined()

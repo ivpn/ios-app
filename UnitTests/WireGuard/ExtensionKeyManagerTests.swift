@@ -33,17 +33,5 @@ class ExtensionKeyManagerTests: XCTestCase {
         let regenerationInterval = ExtensionKeyManager.regenerationInterval
         XCTAssertTrue(regenerationInterval > regenerationCheckInterval)
     }
-    
-    func test_needToRegenerate() {
-        UserDefaults.shared.set(Date.changeDays(by: -50), forKey: UserDefaults.Key.wgKeyTimestamp)
-        KeyChain.wgPublicKey = nil
-        XCTAssertFalse(ExtensionKeyManager.needToRegenerate())
-        
-        KeyChain.wgPublicKey = "5q5ijOijHkhkJWiWT3bC7jRGFfDQo+2EL5aCgGgW5Qw="
-        XCTAssertTrue(ExtensionKeyManager.needToRegenerate())
-        
-        UserDefaults.shared.set(Date.changeDays(by: 50), forKey: UserDefaults.Key.wgKeyTimestamp)
-        XCTAssertFalse(ExtensionKeyManager.needToRegenerate())
-    }
 
 }

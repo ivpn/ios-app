@@ -169,12 +169,12 @@ class SelectPlanViewController: UITableViewController {
             let button = UIButton(type: .system)
             button.setImage(UIImage(named: "icon-arrow-left"), for: .normal)
             button.sizeToFit()
-            button.addTarget(self, action: #selector(backButtonPressed(sender:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
             navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         }
     }
     
-    @objc private func backButtonPressed(sender: UIBarButtonItem) {
+    @objc private func backButtonPressed() {
         navigationController?.popViewController(animated: true)
     }
     
