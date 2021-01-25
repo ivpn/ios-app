@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -68,7 +68,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51o-0K-ge0">
-                                                <rect key="frame" x="69" y="152" width="276" height="50"/>
+                                                <rect key="frame" x="69" y="142" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnBlue"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="276" id="Ugg-t0-Eie"/>
@@ -89,7 +89,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-v0-Dhq">
-                                                <rect key="frame" x="69" y="218" width="276" height="50"/>
+                                                <rect key="frame" x="69" y="208" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnGray14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="276" id="Vrb-wX-nuj"/>
@@ -136,7 +136,7 @@
                                         <constraints>
                                             <constraint firstItem="Oaq-vw-vSn" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="GCj-u8-AZn"/>
                                             <constraint firstItem="34F-JE-p7Q" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="Ju0-tk-I0p"/>
-                                            <constraint firstItem="51o-0K-ge0" firstAttribute="top" secondItem="wsH-wX-xZq" secondAttribute="bottom" constant="40" id="Xad-zk-HGz"/>
+                                            <constraint firstItem="51o-0K-ge0" firstAttribute="top" secondItem="wsH-wX-xZq" secondAttribute="bottom" constant="30" id="Xad-zk-HGz"/>
                                             <constraint firstItem="wsH-wX-xZq" firstAttribute="top" secondItem="Oaq-vw-vSn" secondAttribute="bottom" constant="12" id="c0M-pC-F7x"/>
                                             <constraint firstItem="51o-0K-ge0" firstAttribute="centerX" secondItem="BYK-dw-X2I" secondAttribute="centerX" id="cdc-ax-8DZ"/>
                                             <constraint firstItem="Oaq-vw-vSn" firstAttribute="top" secondItem="BYK-dw-X2I" secondAttribute="top" constant="30" id="oQX-P1-OEP"/>
@@ -1126,7 +1126,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="276" height="50"/>
                                                         <color key="backgroundColor" name="ivpnGray2"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" textContentType="username"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="next" textContentType="username"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="8"/>
@@ -1145,7 +1145,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DQ-gJ-yjM">
-                                                <rect key="frame" x="69" y="172" width="276" height="50"/>
+                                                <rect key="frame" x="69" y="162" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnBlue"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="iJa-vp-Z3w"/>
@@ -1182,7 +1182,7 @@
                                             <constraint firstItem="JWX-2b-S2y" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="XJi-op-ykP"/>
                                             <constraint firstItem="bDg-l8-8dR" firstAttribute="centerX" secondItem="inu-6x-BUa" secondAttribute="centerX" id="f3g-he-NGe"/>
                                             <constraint firstItem="JWX-2b-S2y" firstAttribute="top" secondItem="bDg-l8-8dR" secondAttribute="bottom" constant="12" id="nGm-J6-UzT"/>
-                                            <constraint firstItem="1DQ-gJ-yjM" firstAttribute="top" secondItem="JWX-2b-S2y" secondAttribute="bottom" constant="40" id="zQy-QS-Isw"/>
+                                            <constraint firstItem="1DQ-gJ-yjM" firstAttribute="top" secondItem="JWX-2b-S2y" secondAttribute="bottom" constant="30" id="zQy-QS-Isw"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1220,12 +1220,143 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ac-ua-gAG" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1287" y="1266"/>
+            <point key="canvasLocation" x="1287" y="1267"/>
+        </scene>
+        <!--Captcha Required-->
+        <scene sceneID="zVU-Jw-mhj">
+            <objects>
+                <viewController modalPresentationStyle="formSheet" id="VB7-sR-4BL" customClass="CaptchaViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gxt-E2-TPB"/>
+                        <viewControllerLayoutGuide type="bottom" id="1F1-Ur-Q0y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="isR-77-XN6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="AOo-dY-xFe">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Wc-44-z61" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnO-Pm-4Fi">
+                                                <rect key="frame" x="69" y="168" width="276" height="50"/>
+                                                <subviews>
+                                                    <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="xxxxxx" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="H4J-bJ-dOg" customClass="UITextFieldPadding" customModule="IVPNClient" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="276" height="50"/>
+                                                        <color key="backgroundColor" name="ivpnGray2"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="next" textContentType="username"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="276" id="3CX-Vs-jd9"/>
+                                                    <constraint firstItem="H4J-bJ-dOg" firstAttribute="leading" secondItem="lnO-Pm-4Fi" secondAttribute="leading" id="Rny-Bj-MQ6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="H4J-bJ-dOg" secondAttribute="bottom" id="U0t-BW-oSE"/>
+                                                    <constraint firstItem="H4J-bJ-dOg" firstAttribute="top" secondItem="lnO-Pm-4Fi" secondAttribute="top" id="UmV-KM-mBh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="H4J-bJ-dOg" secondAttribute="trailing" id="efy-Mu-Icm"/>
+                                                    <constraint firstAttribute="height" constant="50" id="fbz-qi-ckm"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ycm-K0-gRI">
+                                                <rect key="frame" x="69" y="248" width="276" height="50"/>
+                                                <color key="backgroundColor" name="ivpnBlue"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="276" id="BaG-vQ-6Gy"/>
+                                                    <constraint firstAttribute="height" constant="50" id="LX9-Iz-vY6"/>
+                                                </constraints>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Submit">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="submitAction:" destination="VB7-sR-4BL" eventType="touchUpInside" id="wwn-lH-RVW"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter number you see above" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7l-pP-XzT">
+                                                <rect key="frame" x="62" y="130" width="290" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="5tQ-Ig-ZXi"/>
+                                                    <constraint firstAttribute="width" constant="290" id="eV7-jk-UGZ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" name="ivpnLabelQuaternary"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Ycm-K0-gRI" firstAttribute="centerX" secondItem="3Wc-44-z61" secondAttribute="centerX" id="61d-V1-tqk"/>
+                                            <constraint firstItem="lnO-Pm-4Fi" firstAttribute="centerX" secondItem="3Wc-44-z61" secondAttribute="centerX" id="aOo-8A-OVa"/>
+                                            <constraint firstItem="n7l-pP-XzT" firstAttribute="centerX" secondItem="3Wc-44-z61" secondAttribute="centerX" id="exQ-H1-Wr0"/>
+                                            <constraint firstItem="Ycm-K0-gRI" firstAttribute="top" secondItem="lnO-Pm-4Fi" secondAttribute="bottom" constant="30" id="fA2-wh-q6h"/>
+                                            <constraint firstItem="lnO-Pm-4Fi" firstAttribute="top" secondItem="n7l-pP-XzT" secondAttribute="bottom" constant="12" id="zBb-1M-eY2"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rYx-nA-sd9">
+                                        <rect key="frame" x="87" y="25" width="240" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="1B8-0E-AXX"/>
+                                            <constraint firstAttribute="width" constant="240" id="4YL-jj-9Tj"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="n7l-pP-XzT" firstAttribute="top" secondItem="rYx-nA-sd9" secondAttribute="bottom" constant="25" id="1Xe-4B-bAU"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Wc-44-z61" secondAttribute="bottom" id="3zI-sY-mPK"/>
+                                    <constraint firstItem="3Wc-44-z61" firstAttribute="leading" secondItem="AOo-dY-xFe" secondAttribute="leading" id="8TM-qu-NT3"/>
+                                    <constraint firstItem="3Wc-44-z61" firstAttribute="top" secondItem="AOo-dY-xFe" secondAttribute="top" id="9d3-OH-EeO"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Wc-44-z61" secondAttribute="trailing" id="EZV-7B-nXt"/>
+                                    <constraint firstItem="3Wc-44-z61" firstAttribute="centerX" secondItem="AOo-dY-xFe" secondAttribute="centerX" id="Fvk-ZE-uGC"/>
+                                    <constraint firstItem="rYx-nA-sd9" firstAttribute="centerX" secondItem="AOo-dY-xFe" secondAttribute="centerX" id="X0x-cZ-w2B"/>
+                                    <constraint firstItem="rYx-nA-sd9" firstAttribute="top" secondItem="AOo-dY-xFe" secondAttribute="top" constant="25" id="tmK-bB-XeL"/>
+                                    <constraint firstItem="3Wc-44-z61" firstAttribute="centerY" secondItem="AOo-dY-xFe" secondAttribute="centerY" id="yRp-La-vvc"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="phc-zD-K9b"/>
+                        <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="AOo-dY-xFe" secondAttribute="trailing" id="Xy4-RQ-4y7"/>
+                            <constraint firstItem="AOo-dY-xFe" firstAttribute="leading" secondItem="isR-77-XN6" secondAttribute="leading" id="bqh-oP-uhJ"/>
+                            <constraint firstItem="1F1-Ur-Q0y" firstAttribute="top" secondItem="AOo-dY-xFe" secondAttribute="bottom" id="cdo-86-IfK"/>
+                            <constraint firstItem="AOo-dY-xFe" firstAttribute="top" secondItem="Gxt-E2-TPB" secondAttribute="bottom" id="ndb-32-FUF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Captcha Required" id="7rJ-fo-CWB">
+                        <barButtonItem key="backBarButtonItem" title="Log In" id="FZv-td-bAs"/>
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="aZo-Jq-QCB">
+                            <connections>
+                                <action selector="dismissViewController:" destination="VB7-sR-4BL" id="FOV-Lh-ycH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="captchaImage" destination="rYx-nA-sd9" id="ebT-Hn-n0m"/>
+                        <outlet property="codeField" destination="H4J-bJ-dOg" id="QT5-qc-JkB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7sF-Gs-IfO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1287" y="2028"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aIw-ln-iUM">
             <objects>
-                <navigationController storyboardIdentifier="twoFactorView" automaticallyAdjustsScrollViewInsets="NO" id="amk-ql-5NR" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="twoFactorView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="amk-ql-5NR" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wHZ-yq-cXd">
@@ -1240,6 +1371,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9hn-5Z-9j6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="364" y="1267"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZoM-dn-DfL">
+            <objects>
+                <navigationController storyboardIdentifier="captchaView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ifQ-n8-RT2" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1P7-QA-y66">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VB7-sR-4BL" kind="relationship" relationship="rootViewController" id="t2n-nx-RzE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fiH-gq-HO4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364" y="2028"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

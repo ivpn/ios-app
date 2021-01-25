@@ -149,7 +149,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Methods -
     
-    private func startLoginProcess(force: Bool = false, confirmation: String? = nil) {
+    private func startLoginProcess(force: Bool = false, confirmation: String? = nil, captcha: String? = nil, captchaId: String? = nil) {
         guard !loginProcessStarted else { return }
         
         let username = (self.userName.text ?? "").trim()
@@ -162,7 +162,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        sessionManager.createSession(force: force, username: username, confirmation: confirmation)
+        sessionManager.createSession(force: force, username: username, confirmation: confirmation, captcha: captcha, captchaId: captchaId)
     }
     
     private func startSignupProcess() {
@@ -269,16 +269,14 @@ extension LoginViewController {
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
         
-        if let error = error as? ErrorResultSessionNew {
-            if let data = error.data {
-                if data.upgradable {
-                    NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
-                    NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
-                    UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
-                    UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                    present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
-                    return
-                }
+        if let error = error as? ErrorResultSessionNew, let data = error.data {
+            if data.upgradable {
+                NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
+                UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
+                UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
+                present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
+                return
             }
         }
         
@@ -305,7 +303,7 @@ extension LoginViewController {
         showErrorAlert(title: "Error", message: message)
     }
     
-    override func twoFactorEnabled(error: Any?) {
+    override func twoFactorRequired(error: Any?) {
         hud.dismiss()
         loginProcessStarted = false
         present(NavigationManager.getTwoFactorViewController(delegate: self), animated: true)
@@ -323,7 +321,19 @@ extension LoginViewController {
         showErrorAlert(title: "Error", message: message)
     }
     
-    func showCreateSessionAlert(message: String) {
+    override func captchaRequired(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
+        presentCaptchaScreen(error: error)
+    }
+    
+    override func captchaIncorrect(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
+        presentCaptchaScreen(error: error)
+    }
+    
+    private func showCreateSessionAlert(message: String) {
         showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { index in
             switch index {
             case 0:
@@ -333,6 +343,12 @@ extension LoginViewController {
             default:
                 break
             }
+        }
+    }
+    
+    private func presentCaptchaScreen(error: Any?) {
+        if let error = error as? ErrorResultSessionNew, let imageData = error.captchaImage, let captchaId = error.captchaId {
+            present(NavigationManager.getCaptchaViewController(delegate: self, imageData: imageData, captchaId: captchaId), animated: true)
         }
     }
     
@@ -396,6 +412,16 @@ extension LoginViewController: TwoFactorViewControllerDelegate {
     
     func codeSubmitted(code: String) {
         startLoginProcess(force: false, confirmation: code)
+    }
+    
+}
+
+// MARK: - CaptchaViewControllerDelegate -
+
+extension LoginViewController: CaptchaViewControllerDelegate {
+    
+    func captchaSubmitted(code: String, captchaId: String) {
+        startLoginProcess(force: false, captcha: code, captchaId: captchaId)
     }
     
 }

@@ -39,8 +39,10 @@ import Foundation
     func sessionStatusNotFound()
     func sessionStatusExpired()
     func sessionStatusFailure()
-    func twoFactorEnabled(error: Any?)
+    func twoFactorRequired(error: Any?)
     func twoFactorIncorrect(error: Any?)
+    func captchaRequired(error: Any?)
+    func captchaIncorrect(error: Any?)
 }
 
 class SessionManager {
@@ -55,7 +57,7 @@ class SessionManager {
     
     // MARK: - Methods -
     
-    func createSession(force: Bool = false, connecting: Bool = false, username: String? = nil, confirmation: String? = nil) {
+    func createSession(force: Bool = false, connecting: Bool = false, username: String? = nil, confirmation: String? = nil, captcha: String? = nil, captchaId: String? = nil) {
         delegate?.createSessionStart()
         
         if AppKeyManager.isKeyPairRequired || connecting {
@@ -63,7 +65,7 @@ class SessionManager {
             UserDefaults.shared.set(Date(), forKey: UserDefaults.Key.wgKeyTimestamp)
         }
         
-        let params = sessionNewParams(force: force, username: username, confirmation: confirmation)
+        let params = sessionNewParams(force: force, username: username, confirmation: confirmation, captcha: captcha, captchaId: captchaId)
         let request = ApiRequestDI(method: .post, endpoint: Config.apiSessionNew, params: params)
         
         ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Session, ErrorResultSessionNew>) in
@@ -91,10 +93,16 @@ class SessionManager {
                         self.delegate?.createSessionAccountNotActivated(error: error)
                         return
                     case 70011:
-                        self.delegate?.twoFactorEnabled(error: error)
+                        self.delegate?.twoFactorRequired(error: error)
                         return
                     case 70012:
                         self.delegate?.twoFactorIncorrect(error: error)
+                        return
+                    case 70001:
+                        self.delegate?.captchaRequired(error: error)
+                        return
+                    case 70002:
+                        self.delegate?.captchaIncorrect(error: error)
                         return
                     default:
                         break
@@ -169,7 +177,7 @@ class SessionManager {
     
     // MARK: - Helper methods -
     
-    private func sessionNewParams(force: Bool = false, username: String? = nil, confirmation: String? = nil) -> [URLQueryItem] {
+    private func sessionNewParams(force: Bool = false, username: String? = nil, confirmation: String? = nil, captcha: String? = nil, captchaId: String? = nil) -> [URLQueryItem] {
         let username = username ?? Application.shared.authentication.getStoredUsername()
         var params = [URLQueryItem(name: "username", value: username)]
         
@@ -179,6 +187,14 @@ class SessionManager {
         
         if let confirmation = confirmation {
             params.append(URLQueryItem(name: "confirmation", value: confirmation))
+        }
+        
+        if let captcha = captcha {
+            params.append(URLQueryItem(name: "captcha", value: captcha))
+        }
+        
+        if let captchaId = captchaId {
+            params.append(URLQueryItem(name: "captcha_id", value: captchaId))
         }
         
         if force {
