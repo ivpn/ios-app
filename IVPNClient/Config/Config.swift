@@ -60,7 +60,6 @@ struct Config {
     static let contactSupportMail = "support@ivpn.net"
     static let contactSupportPage = "mailto:support@ivpn.net"
     
-    static let daysBeforeDueDateNotification = 5
     static let serviceStatusRefreshMaxIntervalSeconds: TimeInterval = 30
     static let stableVPNStatusInterval: TimeInterval = 0.5
     
@@ -89,7 +88,6 @@ struct Config {
     static let wgPeerAllowedIPs = "0.0.0.0/0"
     static let wgPeerPersistentKeepalive: Int32 = 25
     static let wgInterfaceListenPort = 51820
-    static let wgAPIComment = "IVPN Client for iOS"
     static let wgKeyExpirationDays = 30
     static let wgKeyRegenerationRate = 1
     
@@ -109,10 +107,6 @@ struct Config {
     
     static var TlsHostName: String {
         return value(for: "TlsHostName")
-    }
-    
-    static var IAPSharedSecret: String {
-        return value(for: "IAPSharedSecret")
     }
     
     // MARK: ENV .xcconfig parser

@@ -22,17 +22,12 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 class CreateAccountViewController: UIViewController {
     
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var createAccountView: CreateAccountView!
-    
-    // MARK: - Properties -
-    
-    private let hud = JGProgressHUD(style: .dark)
     
     // MARK: - @IBActions -
     

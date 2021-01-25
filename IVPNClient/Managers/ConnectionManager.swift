@@ -38,10 +38,10 @@ class ConnectionManager {
     
     var reconnectAutomatically = false
     var settings: Settings
+    var statusModificationDate = Date()
     
     var status: NEVPNStatus = .invalid {
         didSet {
-            statusModificationDate = Date()
             UserDefaults.shared.set(status.rawValue, forKey: UserDefaults.Key.connectionStatus)
         }
     }
@@ -67,7 +67,6 @@ class ConnectionManager {
     private var connected = false
     private var closeApp = false
     private var actionType: ActionType = .connect
-    private var statusModificationDate = Date()
     
     // MARK: - Initialize -
     
@@ -95,7 +94,6 @@ class ConnectionManager {
                         return
                     }
                     self.updateOpenVPNLogFile()
-                    self.updateOpenVPNLocalIp()
                     self.reconnectAutomatically = false
                     if self.actionType == .connect {
                         self.evaluateCloseApp()
@@ -203,14 +201,6 @@ class ConnectionManager {
         }
     }
     
-    func getConnectionServerAddress(completion: @escaping (String?) -> Void) {
-        getStatus { tunnelType, _ in
-            self.vpnManager.getServerAddress(tunnelType: tunnelType) { serverAddress in
-                completion(serverAddress)
-            }
-        }
-    }
-    
     func connect() {
         updateSelectedServer(status: .connecting)
         
@@ -261,7 +251,7 @@ class ConnectionManager {
                 )
                 let settings = self.settings.connectionProtocol
                 
-                self.vpnManager.installOnDemandRules(status: .disconnected, settings: settings, accessDetails: accessDetails)
+                self.vpnManager.installOnDemandRules(settings: settings, accessDetails: accessDetails)
             }
         }
     }
@@ -471,18 +461,6 @@ class ConnectionManager {
         
         getOpenVPNLog { log in
             FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-        }
-    }
-    
-    func updateOpenVPNLocalIp() {
-        guard Application.shared.settings.connectionProtocol.tunnelType() == .openvpn else { return }
-        
-        Application.shared.connectionManager.getOpenVPNLog { log in
-            guard let log = log else { return }
-            let ipAddress = log.findLastSubstring(from: "IPv4: addr", to: "netmask")
-            guard !ipAddress.isEmpty else { return }
-            
-            UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.localIpAddress)
         }
     }
     

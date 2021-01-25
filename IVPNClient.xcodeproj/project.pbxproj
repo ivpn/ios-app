@@ -91,7 +91,6 @@
 		825D4EC9224A46F0002E7378 /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53B2232626E006C4F14 /* ExtensionKeyManager.swift */; };
 		825D4ECA224A48F7002E7378 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C53922325709006C4F14 /* ApiManager.swift */; };
 		825D5D8821908B2600B781BA /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
-		8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */; };
 		826470C42446F67100403A14 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826470C32446F67100403A14 /* Signup.storyboard */; };
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */; };
@@ -163,7 +162,6 @@
 		8292E1BE2174CA6800123538 /* x25519.c in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1BC2174CA6800123538 /* x25519.c */; };
 		8294BC8C22A10F4100328932 /* TunnelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8294BC8B22A10F4100328932 /* TunnelKit.framework */; };
 		8294BC8E22A126C900328932 /* TunnelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8294BC8D22A126C900328932 /* TunnelKit.framework */; };
-		82989FDA2188783200F7EBE0 /* WireGuardKeyResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82989FD92188783200F7EBE0 /* WireGuardKeyResult.swift */; };
 		82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82989FDD2188981900F7EBE0 /* AppKeyManager.swift */; };
 		829AA4732267372A00037198 /* Designable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AA4722267372A00037198 /* Designable+Ext.swift */; };
 		829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829D2C8121664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift */; };
@@ -204,10 +202,8 @@
 		82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */; };
 		82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF27021AECC8100589766 /* UILabel+Ext.swift */; };
 		82BF32F624484E5100248E4F /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BF32F524484E5100248E4F /* CreateAccountView.swift */; };
-		82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */; };
 		82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BB23FE78570059A915 /* MapScrollView.swift */; };
 		82C1D5BF23FE8C6D0059A915 /* ControlPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */; };
-		82C215EC23992F6900E639F8 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */; };
 		82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293BE21CCD49A000B74EC /* NavigationController.swift */; };
 		82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293C221CCDA42000B74EC /* UIColor+Ext.swift */; };
 		82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
@@ -305,7 +301,6 @@
 		9C7840B020CD8A8A00335736 /* openvpn-tunnel-provider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9C7840A820CD8A8A00335736 /* openvpn-tunnel-provider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9CAE14C020FE453E00D4DAC0 /* VPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAE14BF20FE453E00D4DAC0 /* VPNManager.swift */; };
 		9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE1E1DAA5258007A4D2D /* Authentication.swift */; };
-		9CB2CE281DAB807A007A4D2D /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE271DAB807A007A4D2D /* ProgressIndicator.swift */; };
 		9CB2CE2B1DABD120007A4D2D /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE2A1DABD120007A4D2D /* NavigationManager.swift */; };
 		9CB2CE311DAF9227007A4D2D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB2CE301DAF9227007A4D2D /* CoreData.framework */; };
 		9CB2CE341DAF9283007A4D2D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE321DAF9283007A4D2D /* Model.xcdatamodeld */; };
@@ -455,7 +450,6 @@
 		825864A02237B1060081DC4B /* Bamboo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bamboo.framework; path = ../Carthage/Build/iOS/Bamboo.framework; sourceTree = "<group>"; };
 		82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
-		8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPeriod.swift; sourceTree = "<group>"; };
 		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
 		8269CD8E2164A8C700D083A1 /* servers-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "servers-dev.json"; sourceTree = "<group>"; };
@@ -505,7 +499,6 @@
 		8292E1BD2174CA6800123538 /* x25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x25519.h; sourceTree = "<group>"; };
 		8294BC8B22A10F4100328932 /* TunnelKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TunnelKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8294BC8D22A126C900328932 /* TunnelKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TunnelKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		82989FD92188783200F7EBE0 /* WireGuardKeyResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardKeyResult.swift; sourceTree = "<group>"; };
 		82989FDD2188981900F7EBE0 /* AppKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyManager.swift; sourceTree = "<group>"; };
 		82989FE121898E4400F7EBE0 /* JGProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JGProgressHUD.framework; path = ../Carthage/Build/iOS/JGProgressHUD.framework; sourceTree = "<group>"; };
 		829AA4722267372A00037198 /* Designable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Designable+Ext.swift"; sourceTree = "<group>"; };
@@ -547,10 +540,8 @@
 		82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		82BBF27021AECC8100589766 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		82BF32F524484E5100248E4F /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
-		82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
 		82C1D5BB23FE78570059A915 /* MapScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScrollView.swift; sourceTree = "<group>"; };
 		82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelViewController.swift; sourceTree = "<group>"; };
-		82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		82C293BE21CCD49A000B74EC /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		82C293C221CCDA42000B74EC /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
@@ -642,7 +633,6 @@
 		9CAE14BF20FE453E00D4DAC0 /* VPNManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNManager.swift; sourceTree = "<group>"; };
 		9CB2CE1E1DAA5258007A4D2D /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		9CB2CE261DAA6C1B007A4D2D /* IVPNClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IVPNClient.entitlements; sourceTree = "<group>"; };
-		9CB2CE271DAB807A007A4D2D /* ProgressIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		9CB2CE2A1DABD120007A4D2D /* NavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		9CB2CE301DAF9227007A4D2D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9CB2CE331DAF9283007A4D2D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -911,7 +901,6 @@
 			isa = PBXGroup;
 			children = (
 				9C3031251DB3B6E700C38B0C /* ServersUpdateResult.swift */,
-				82989FD92188783200F7EBE0 /* WireGuardKeyResult.swift */,
 				8277F1CE2211A602007C6F15 /* GeoLookup.swift */,
 				8223C54B22E9E93A00CD283D /* Session.swift */,
 				82AA8817231E330A00E18ECB /* SessionStatus.swift */,
@@ -971,7 +960,6 @@
 				8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */,
 				82E7880B22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift */,
 				828E9C94231E5780001E1FCF /* Data+Ext.swift */,
-				82C215EB23992F6900E639F8 /* UINavigationController+Ext.swift */,
 				82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */,
 				826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */,
 				829DF2812497953C000DC2DB /* UIButton+Ext.swift */,
@@ -1039,7 +1027,6 @@
 				8206E5D122967EAF003119AF /* UserActivityTitle.swift */,
 				823FFB062338DF1800F91A5D /* Capability.swift */,
 				8229209F2480FA3600476FC1 /* ServersSort.swift */,
-				8263D9BF24499D2000A3D914 /* PaymentPeriod.swift */,
 				826FBDA22461847D00B9E464 /* ServiceType.swift */,
 				826FBDA42461848A00B9E464 /* ServiceDuration.swift */,
 			);
@@ -1148,8 +1135,6 @@
 		82A208B621BAA51000C9AD44 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				9CB2CE271DAB807A007A4D2D /* ProgressIndicator.swift */,
-				82C1A2B2221AE56900DBCEB2 /* DisclosureIndicator.swift */,
 				828772FA221C28E000D5E330 /* FlagImageView.swift */,
 				82FF0D432315587000440E5D /* UITextFieldPadding.swift */,
 			);
@@ -2108,7 +2093,6 @@
 				820EA86E232264EC00E16B2D /* SuccessResult.swift in Sources */,
 				82D6AA1B215E167C00F21CAA /* UIViewController+Ext.swift in Sources */,
 				829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */,
-				8263D9C024499D2000A3D914 /* PaymentPeriod.swift in Sources */,
 				826C56D222FD4F2600D2B76A /* ServiceStatus.swift in Sources */,
 				82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */,
 				8206F32324367A240056B465 /* VPNErrorObserver.swift in Sources */,
@@ -2138,7 +2122,6 @@
 				82E5449224EE584E006DEF8D /* UIImageView+Ext.swift in Sources */,
 				82E81AE72449C44F00D81FB7 /* PaymentComponentView.swift in Sources */,
 				8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */,
-				9CB2CE281DAB807A007A4D2D /* ProgressIndicator.swift in Sources */,
 				820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */,
 				8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */,
 				9C3324F31DB37724003885C3 /* VPNServer.swift in Sources */,
@@ -2149,10 +2132,8 @@
 				8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */,
 				82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */,
 				82A160BA221C4E2000730577 /* Server+CoreDataClass.swift in Sources */,
-				82989FDA2188783200F7EBE0 /* WireGuardKeyResult.swift in Sources */,
 				9CB2CE381DB0F860007A4D2D /* FileSystemManager.swift in Sources */,
 				8270D266241A477900B17B65 /* InfoAlertView.swift in Sources */,
-				82C215EC23992F6900E639F8 /* UINavigationController+Ext.swift in Sources */,
 				9C50959620FCF4C60048DBF2 /* ProtocolViewController.swift in Sources */,
 				9CAE14C020FE453E00D4DAC0 /* VPNManager.swift in Sources */,
 				82D598A321A55210000FABDE /* NetworkProtectionViewController.swift in Sources */,
@@ -2205,7 +2186,6 @@
 				827855B92472B27F00B3B6BD /* Account.swift in Sources */,
 				82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */,
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
-				82C1A2B3221AE56900DBCEB2 /* DisclosureIndicator.swift in Sources */,
 				82061F67238D2730009DDF4D /* PingManager.swift in Sources */,
 				9CDDD5AF1D9D2F9F00D39924 /* AppDelegate.swift in Sources */,
 				82BBF26121AD213500589766 /* Theme.swift in Sources */,

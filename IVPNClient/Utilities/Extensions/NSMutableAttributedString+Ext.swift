@@ -41,12 +41,4 @@ extension NSMutableAttributedString {
         return self
     }
     
-    @discardableResult func normal(_ text: String, fontSize: CGFloat = 28) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.light)]
-        let normalString = NSMutableAttributedString(string: text, attributes: attrs)
-        append(normalString)
-        
-        return self
-    }
-    
 }

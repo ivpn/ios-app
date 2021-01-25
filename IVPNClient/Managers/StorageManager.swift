@@ -145,17 +145,6 @@ extension StorageManager {
         return NetworkTrust.Default.rawValue
     }
     
-    static func updateActiveNetwork(trust: String) {
-        if let networks = fetchNetworks(name: Application.shared.network.name ?? "", type: Application.shared.network.type ?? "") {
-            if let network = networks.first {
-                network.trust = trust
-                saveContext()
-                Application.shared.network = network
-                Application.shared.connectionManager.evaluateConnection()
-            }
-        }
-    }
-    
     static func removeNetwork(name: String) {
         if let networks = fetchNetworks(name: name, type: NetworkType.wifi.rawValue) {
             if let network = networks.first {

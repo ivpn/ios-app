@@ -51,17 +51,7 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertFalse(model.isEnabled(capability: .privateEmails))
     }
     
-    func test_getSubscriptionText() {
-        XCTAssertEqual(model.getSubscriptionText(), "No active subscription")
-        
-        model.isActive = true
-        XCTAssertEqual(model.getSubscriptionText(), "Active until \(model.activeUntilString())")
-        
-        model.currentPlan = "IVPN Pro"
-        XCTAssertEqual(model.getSubscriptionText(), "\(model.currentPlan ?? ""), Active until \(model.activeUntilString())")
-    }
-    
-    func test_isValidUsername() {
+    func test_isValid() {
         XCTAssertTrue(ServiceStatus.isValid(username: "ivpnXXXXXXXX"))
         XCTAssertTrue(ServiceStatus.isValid(username: "i-XXXX-XXXX-XXXX"))
         XCTAssertFalse(ServiceStatus.isValid(username: "IVPNXXXXXXXX"))

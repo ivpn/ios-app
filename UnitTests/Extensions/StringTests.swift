@@ -27,10 +27,6 @@ import XCTest
 
 class StringTests: XCTestCase {
     
-    func test_commaSeparatedStringFrom() {
-        XCTAssertEqual(String.commaSeparatedStringFrom(elements: ["a", "b", "c"]), "a,b,c")
-    }
-    
     func test_commaSeparatedToArray() {
         XCTAssertEqual("a,b,c".commaSeparatedToArray(), ["a", "b", "c"])
         XCTAssertEqual("a, b, c".commaSeparatedToArray(), ["a", "b", "c"])

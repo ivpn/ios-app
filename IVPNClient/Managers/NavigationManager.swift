@@ -33,7 +33,7 @@ class NavigationManager {
         return viewController
     }
     
-    static func getLoginViewController(modalPresentationStyle: UIModalPresentationStyle = .formSheet) -> UIViewController {
+    static func getLoginViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "loginView")
         
