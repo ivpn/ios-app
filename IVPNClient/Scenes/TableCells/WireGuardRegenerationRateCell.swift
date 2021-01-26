@@ -48,8 +48,8 @@ class WireGuardRegenerationRateCell: UITableViewCell {
     // MARK: - Methods -
     
     private func regenerationLabelText(days: Int) -> String {
-        if days == 1 { return "Regenerate key every \(days) day" }
-        return "Regenerate key every \(days) days"
+        if days == 1 { return "Rotate key every \(days) day" }
+        return "Rotate key every \(days) days"
     }
     
 }
