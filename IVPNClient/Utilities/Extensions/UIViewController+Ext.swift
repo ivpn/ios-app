@@ -92,13 +92,11 @@ extension UIViewController {
     }
     
     func openTermsOfService() {
-        let viewController = NavigationManager.getStaticWebViewController(resourceName: "tos", screenTitle: "Terms of Service")
-        navigationController?.show(viewController, sender: nil)
+        openWebPage("https://www.ivpn.net/tos-mobile-app/")
     }
     
     func openPrivacyPolicy() {
-        let viewController = NavigationManager.getStaticWebViewController(resourceName: "privacy-policy", screenTitle: "Privacy Policy")
-        navigationController?.show(viewController, sender: nil)
+        openWebPage("https://www.ivpn.net/privacy-mobile-app/")
     }
     
     func registerUserActivity(type: String, title: String) {

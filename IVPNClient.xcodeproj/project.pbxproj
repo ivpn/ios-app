@@ -282,8 +282,6 @@
 		82FDA69B2518EA40007F881E /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */; };
 		82FF0D4223153D1000440E5D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82FF0D4123153D1000440E5D /* Colors.xcassets */; };
 		82FF0D442315587000440E5D /* UITextFieldPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF0D432315587000440E5D /* UITextFieldPadding.swift */; };
-		9C048AA51DE71A9B001CB489 /* privacy-policy.html in Resources */ = {isa = PBXBuildFile; fileRef = 9C048AA41DE71A9B001CB489 /* privacy-policy.html */; };
-		9C048AA71DE71AD3001CB489 /* tos.html in Resources */ = {isa = PBXBuildFile; fileRef = 9C048AA61DE71AD3001CB489 /* tos.html */; };
 		9C2833741D9D3EB60024C553 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C2833731D9D3EB60024C553 /* Initial.storyboard */; };
 		9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833751D9D3F060024C553 /* LoginViewController.swift */; };
 		9C28337E1D9D3F060024C553 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
@@ -608,8 +606,6 @@
 		881BCA7FAAA43B4573D9E56C /* Pods-openvpn-tunnel-provider.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-openvpn-tunnel-provider.staging.xcconfig"; path = "../ios-app/Pods/Target Support Files/Pods-openvpn-tunnel-provider/Pods-openvpn-tunnel-provider.staging.xcconfig"; sourceTree = "<group>"; };
 		95BC1917294DF1E93B308C82 /* Pods_IVPNClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IVPNClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A198837B44229CF470C077A /* Pods-IVPNClient.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IVPNClient.staging.xcconfig"; path = "../ios-app/Pods/Target Support Files/Pods-IVPNClient/Pods-IVPNClient.staging.xcconfig"; sourceTree = "<group>"; };
-		9C048AA41DE71A9B001CB489 /* privacy-policy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-policy.html"; sourceTree = "<group>"; };
-		9C048AA61DE71AD3001CB489 /* tos.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = tos.html; sourceTree = "<group>"; };
 		9C2833731D9D3EB60024C553 /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		9C2833751D9D3F060024C553 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9C2833781D9D3F060024C553 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -828,15 +824,6 @@
 				82BBF26021AD213500589766 /* Theme.swift */,
 			);
 			path = Config;
-			sourceTree = "<group>";
-		};
-		82234B6221BA7DAC00B082DE /* HTML */ = {
-			isa = PBXGroup;
-			children = (
-				9C048AA41DE71A9B001CB489 /* privacy-policy.html */,
-				9C048AA61DE71AD3001CB489 /* tos.html */,
-			);
-			path = HTML;
 			sourceTree = "<group>";
 		};
 		82234B6421BA7EB500B082DE /* Utilities */ = {
@@ -1163,14 +1150,6 @@
 			path = Pinger;
 			sourceTree = "<group>";
 		};
-		82A208C321BAAD8C00C9AD44 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				82234B6221BA7DAC00B082DE /* HTML */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
 		82A7F10323C865F90015A357 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1410,7 +1389,6 @@
 		9CDDD5AD1D9D2F9F00D39924 /* IVPNClient */ = {
 			isa = PBXGroup;
 			children = (
-				82A208C321BAAD8C00C9AD44 /* Assets */,
 				82234B6121BA7ACA00B082DE /* Config */,
 				8286638C21524D9F00C4D068 /* Enums */,
 				82234B7521BAA13D00B082DE /* Models */,
@@ -1740,8 +1718,6 @@
 				82A9E8C623471EBE007BCA7E /* staging.xcconfig in Resources */,
 				82A9E8C523471EBE007BCA7E /* release.xcconfig in Resources */,
 				9CDDD5B91D9D2F9F00D39924 /* LaunchScreen.storyboard in Resources */,
-				9C048AA71DE71AD3001CB489 /* tos.html in Resources */,
-				9C048AA51DE71A9B001CB489 /* privacy-policy.html in Resources */,
 				9CDDD5B61D9D2F9F00D39924 /* Assets.xcassets in Resources */,
 				9CB2CE541DB2A999007A4D2D /* servers.json in Resources */,
 				8269CD8F2164A8C700D083A1 /* servers-dev.json in Resources */,
