@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +27,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For more information, please read our Privacy Policy." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQM-2e-Rkx" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                <rect key="frame" x="27" y="442" width="321" height="44"/>
+                                                <rect key="frame" x="27" y="58" width="321" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" priority="750" constant="266" id="Brj-B8-Hns"/>
                                                     <constraint firstAttribute="height" constant="44" id="N1p-um-oDB"/>
@@ -37,28 +37,17 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qrM-8m-TdV">
-                                                <rect key="frame" x="22" y="25" width="331" height="417"/>
+                                                <rect key="frame" x="22" y="25" width="331" height="33"/>
                                                 <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" priority="250" constant="276" id="Dhx-1M-utw"/>
                                                 </constraints>
-                                                <string key="text">What information do we collect and store when you sign up for our service?
-
-To ensure your privacy we collect only your email address to facilitate password resets and send important security updates relating to our service. You are free to use any email address. We do not request or store your name, physical addresses, phone number or any other personal information.
-
-What information is logged when customers connect to our network?
-
-We do not store any connection logs whatsoever. In addition we do not log bandwidth usage, session data or requests to our DNS servers.
-
-Do you collect or store any usage/stats information relating to an account?
-
-IVPN purposefully does not log any usage data associated with an account as we provide an unlimited and unrestricted quota free service.</string>
                                                 <color key="textColor" name="ivpnLabelPrimary"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l67-ez-3v8">
-                                                <rect key="frame" x="49.666666666666657" y="518" width="276" height="50"/>
+                                                <rect key="frame" x="49.666666666666657" y="134" width="276" height="50"/>
                                                 <color key="backgroundColor" name="ivpnBlue"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="276" id="K24-01-hMp"/>
@@ -79,7 +68,7 @@ IVPN purposefully does not log any usage data associated with an account as we p
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOr-qA-R1R">
-                                                <rect key="frame" x="49.666666666666657" y="588" width="276" height="40"/>
+                                                <rect key="frame" x="49.666666666666657" y="204" width="276" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="I2y-xc-Far"/>
                                                     <constraint firstAttribute="width" constant="276" id="hk0-tJ-He7"/>
