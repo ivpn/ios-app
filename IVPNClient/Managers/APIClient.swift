@@ -87,7 +87,11 @@ enum APIResult<Body> {
 
 class APIClient: NSObject {
     
+    // MARK: - Typealias -
+    
     typealias APIClientCompletion = (APIResult<Data?>) -> Void
+    
+    // MARK: - Properties -
     
     private var hostName = UserDefaults.shared.apiHostName
     
@@ -107,12 +111,10 @@ class APIClient: NSObject {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["User-Agent": userAgent]
         
-        if APIAccessManager.shared.isHostIpAddress(host: hostName) {
-            return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
-        }
-        
-        return URLSession(configuration: configuration)
+        return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }
+    
+    // MARK: - Methods -
     
     func perform(_ request: APIRequest, _ completion: @escaping APIClientCompletion) {
         var urlComponents = URLComponents()
@@ -247,22 +249,28 @@ class APIClient: NSObject {
 extension APIClient: URLSessionDelegate {
     
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        guard challenge.previousFailureCount == 0 else {
-            challenge.sender?.cancel(challenge)
+        guard let trust = challenge.protectionSpace.serverTrust, SecTrustGetCertificateCount(trust) > 0 else {
             completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }
         
-        if checkValidity(of: challenge, tlsHostName: Config.TlsHostName) {
-            let proposedCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-            completionHandler(.useCredential, proposedCredential)
+        // TLS host name validation
+        guard validateHostName(of: challenge, tlsHostName: Config.TlsHostName) else {
+            completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }
         
-        completionHandler(.performDefaultHandling, nil)
+        // Certificate public key validation
+        let publicKeyPin = APIPublicKeyPin()
+        if publicKeyPin.validate(serverTrust: trust, domain: nil) {
+            completionHandler(.useCredential, URLCredential(trust: trust))
+            return
+        }
+        
+        completionHandler(.cancelAuthenticationChallenge, nil)
     }
     
-    private func checkValidity(of challenge: URLAuthenticationChallenge, tlsHostName: String) -> Bool {
+    private func validateHostName(of challenge: URLAuthenticationChallenge, tlsHostName: String) -> Bool {
         guard challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust else {
             return false
         }

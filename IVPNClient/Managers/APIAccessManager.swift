@@ -45,13 +45,4 @@ class APIAccessManager {
         return hostNames.next(item: failedHostName)
     }
     
-    func isHostIpAddress(host: String) -> Bool {
-        do {
-            let _ = try CIDRAddress(stringRepresentation: host)
-            return true
-        } catch {
-            return false
-        }
-    }
-    
 }
