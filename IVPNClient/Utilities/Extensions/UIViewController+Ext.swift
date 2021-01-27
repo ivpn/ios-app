@@ -160,13 +160,13 @@ extension UIViewController {
         }
     }
     
-    func showReconnectPrompt(confirmed: @escaping () -> Void) {
+    func showReconnectPrompt(sourceView: UIView, confirmed: @escaping () -> Void) {
         guard !UserDefaults.shared.notAskToReconnect else {
             confirmed()
             return
         }
         
-        showActionSheet(title: "To apply the new settings, IVPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: view) { index in
+        showActionSheet(title: "To apply the new settings, IVPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: sourceView) { index in
             switch index {
             case 0:
                 confirmed()
