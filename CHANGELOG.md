@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.0 - Unreleased  
+
+[NEW] Updated Privacy Policy and Terms of Service  
+[NEW] Certificate pinning to prevent man-in-the-middle attacks  
+[NEW] Connect IKEv2 and OpenVPN using the IP address instead of DNS hostname  
+[NEW] Support two-factor authentication for login  
+[NEW] Support captcha to mitigate attacks  
+[FIXED] VPN toggle in a disconnected state when connecting with IKEv2 for the first time  
+[FIXED] Disconnect VPN shortcut not working always  
+[FIXED] Minor UI issues on iPad devices  
+
 ## 2.0.4 - 2020-12-18  
 
 [IMPROVED] App memory performance  
