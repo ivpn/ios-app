@@ -192,20 +192,24 @@ extension AppDelegate: UIApplicationDelegate {
         
         switch shortcutItem.type {
         case "Connect":
-            if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                completionHandler(true)
-                break
+            DispatchQueue.delay(0.75) {
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
+                    return
+                }
+                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
             }
-            Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
+            
             completionHandler(true)
         case "Disconnect":
-            if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                completionHandler(true)
-                break
+            DispatchQueue.delay(0.75) {
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
+                    return
+                }
+                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
             }
-            Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
+            
             completionHandler(true)
         default:
             completionHandler(false)
@@ -217,17 +221,21 @@ extension AppDelegate: UIApplicationDelegate {
         
         switch userActivity.activityType {
         case UserActivityType.Connect:
-            if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                break
+            DispatchQueue.delay(0.75) {
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
+                    return
+                }
+                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
             }
-            Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
         case UserActivityType.Disconnect:
-            if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                break
+            DispatchQueue.delay(0.75) {
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
+                    return
+                }
+                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
             }
-            Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
         default:
             log(info: "No such user activity")
         }
