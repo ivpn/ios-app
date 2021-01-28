@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.1.0 - Unreleased  
+## 2.1.0 - 2021-01-28  
 
 [NEW] Updated Privacy Policy and Terms of Service  
 [NEW] Certificate pinning to prevent man-in-the-middle attacks  
