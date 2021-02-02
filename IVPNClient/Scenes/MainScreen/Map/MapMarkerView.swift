@@ -114,6 +114,10 @@ class MapMarkerView: UIView {
     }
     
     func show(animated: Bool = false, completion: (() -> Void)? = nil) {
+        guard alpha == 0 else {
+            return
+        }
+        
         guard animated else {
             alpha = 1
             transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
@@ -131,6 +135,10 @@ class MapMarkerView: UIView {
     }
     
     func hide(animated: Bool = false, completion: (() -> Void)? = nil) {
+        guard alpha == 1 else {
+            return
+        }
+        
         guard animated else {
             alpha = 0
             transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)

@@ -84,7 +84,6 @@ class MainView: UIView {
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
-        updateMapPosition(vpnStatus: vpnStatus)
         mapScrollView.updateStatus(vpnStatus: vpnStatus)
     }
     
@@ -162,53 +161,7 @@ class MainView: UIView {
             return
         }
         
-        if vpnStatus.isDisconnected() && !Application.shared.connectionManager.reconnectAutomatically {
-            updateMapPositionToLocalCoordinates(animated: animated)
-        } else {
-            updateMapPositionToGateway(animated: animated)
-        }
-    }
-    
-    private func updateMapPosition(vpnStatus: NEVPNStatus) {
-        mapScrollView.markerGatewayView.status = vpnStatus
-        
-        if vpnStatus == .connecting || vpnStatus == .connected {
-            updateMapPositionToGateway()
-        }
-        
-        if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically {
-            updateMapPositionToLocalCoordinates()
-        }
-        
-        if vpnStatus == .disconnecting && Application.shared.connectionManager.reconnectAutomatically {
-            mapScrollView.markerGatewayView.hide(animated: true)
-        }
-    }
-    
-    private func updateMapPositionToGateway(animated: Bool = true) {
-        var server = Application.shared.settings.selectedServer
-        
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
-            server = Application.shared.settings.selectedExitServer
-        }
-        
-        mapScrollView.updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: animated, isLocalPosition: false)
-        mapScrollView.markerLocalView.hide(animated: animated)
-        DispatchQueue.delay(0.25) {
-            let model = GeoLookup(ipAddress: server.ipAddresses.first ?? "", countryCode: server.countryCode, country: server.country, city: server.city, isIvpnServer: true, isp: "", latitude: server.latitude, longitude: server.longitude)
-            self.mapScrollView.markerGatewayView.viewModel = ProofsViewModel(model: model)
-            self.mapScrollView.markerGatewayView.show(animated: animated)
-        }
-    }
-    
-    private func updateMapPositionToLocalCoordinates(animated: Bool = true) {
-        if let localCoordinates = localCoordinates {
-            mapScrollView.updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: animated, isLocalPosition: true)
-            mapScrollView.markerGatewayView.hide(animated: true)
-            DispatchQueue.delay(0.25) {
-                self.mapScrollView.markerLocalView.show(animated: true)
-            }
-        }
+        mapScrollView.updateStatus(vpnStatus: vpnStatus)
     }
     
     private func updateActionButtons() {
@@ -265,13 +218,7 @@ class MainView: UIView {
     }
     
     @objc private func centerMap() {
-        let vpnStatus = Application.shared.connectionManager.status
-        
-        if vpnStatus.isDisconnected() {
-            updateMapPositionToLocalCoordinates()
-        } else {
-            updateMapPositionToGateway()
-        }
+        updateMapPosition()
     }
     
 }
