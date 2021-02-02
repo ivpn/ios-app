@@ -218,7 +218,7 @@ class MainView: UIView {
     }
     
     @objc private func centerMap() {
-        updateMapPosition()
+        mapScrollView.centerMap()
     }
     
 }

@@ -105,6 +105,16 @@ class MapScrollView: UIScrollView {
         }
     }
     
+    func centerMap() {
+        let vpnStatus = Application.shared.connectionManager.status
+        
+        if vpnStatus.isDisconnected() {
+            updateMapPositionToLocalCoordinates()
+        } else {
+            updateMapPositionToGateway()
+        }
+    }
+    
     func updateMapMarkers() {
         markerLocalView.updateView()
         markerGatewayView.updateView()
