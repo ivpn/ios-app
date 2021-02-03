@@ -199,6 +199,7 @@ class MapScrollView: UIScrollView {
             let model = GeoLookup(ipAddress: server.ipAddresses.first ?? "", countryCode: server.countryCode, country: server.country, city: server.city, isIvpnServer: true, isp: "", latitude: server.latitude, longitude: server.longitude)
             self.markerGatewayView.viewModel = ProofsViewModel(model: model)
             self.markerGatewayView.show(animated: animated)
+            self.markerLocalView.hide(animated: false)
         }
     }
     
@@ -208,6 +209,7 @@ class MapScrollView: UIScrollView {
             markerGatewayView.hide(animated: true)
             DispatchQueue.delay(0.25) {
                 self.markerLocalView.show(animated: true)
+                self.markerGatewayView.hide(animated: false)
             }
         }
     }
