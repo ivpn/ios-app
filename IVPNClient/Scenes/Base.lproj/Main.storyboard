@@ -1020,14 +1020,14 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="14" width="361" height="16"/>
+                                            <rect key="frame" x="16" y="13.5" width="361" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1036,7 +1036,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="359" height="21.5"/>
+                                            <rect key="frame" x="16" y="11" width="359" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1058,7 +1058,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="98.5" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -1549,12 +1549,13 @@
                                                             <color key="textColor" name="ivpnLabel5"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uWK-OJ-vJ5">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uWK-OJ-vJ5">
                                                             <rect key="frame" x="0.0" y="21" width="323" height="20"/>
                                                             <subviews>
                                                                 <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nl-v" translatesAutoresizingMaskIntoConstraints="NO" id="maa-l9-NZC" customClass="FlagImageView" customModule="IVPNClient" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="2.5" width="20" height="15"/>
                                                                     <constraints>
+                                                                        <constraint firstAttribute="height" constant="15" id="1Zq-5b-lMF"/>
                                                                         <constraint firstAttribute="width" constant="20" id="PNs-c2-np1"/>
                                                                     </constraints>
                                                                 </imageView>
@@ -1624,12 +1625,13 @@
                                                             <color key="textColor" name="ivpnLabel5"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="e17-fK-0P2">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="e17-fK-0P2">
                                                             <rect key="frame" x="0.0" y="21" width="323" height="20"/>
                                                             <subviews>
                                                                 <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nl-v" translatesAutoresizingMaskIntoConstraints="NO" id="vOo-Yi-Agw" customClass="FlagImageView" customModule="IVPNClient" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="2.5" width="20" height="15"/>
                                                                     <constraints>
+                                                                        <constraint firstAttribute="height" constant="15" id="Ah3-48-Ej4"/>
                                                                         <constraint firstAttribute="width" constant="20" id="Ng6-09-liL"/>
                                                                     </constraints>
                                                                 </imageView>

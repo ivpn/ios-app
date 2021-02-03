@@ -38,4 +38,9 @@ extension UIImageView {
         backgroundColor = UIColor.clear
     }
     
+    func removeFlagIconBorder() {
+        layer.shadowOpacity = 0
+        layer.shadowColor = UIColor.clear.cgColor
+    }
+    
 }

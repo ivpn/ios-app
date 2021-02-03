@@ -25,7 +25,7 @@ import UIKit
 
 class ServerTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var flagImage: UIImageView!
+    @IBOutlet weak var flagImage: FlagImageView!
     @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var serverLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var serverName: UILabel!
@@ -37,20 +37,24 @@ class ServerTableViewCell: UITableViewCell {
         didSet {
             if !isMultiHop && indexPath.row == 0 {
                 flagImage.image = UIImage(named: "icon-fastest-server")
+                flagImage.image?.accessibilityIdentifier = "icon-fastest-server"
                 serverName.text = "Fastest server"
                 configureButton.isHidden = false
                 configureButton.isUserInteractionEnabled = true
             } else if isMultiHop && indexPath.row == 0 || !isMultiHop && indexPath.row == 1 {
                 flagImage.image = UIImage(named: "icon-shuffle")
+                flagImage.image?.accessibilityIdentifier = "icon-shuffle"
                 serverName.text = "Random server"
                 configureButton.isHidden = true
                 configureButton.isUserInteractionEnabled = true
             } else {
                 flagImage.image = viewModel.imageForCountryCode
+                flagImage.image?.accessibilityIdentifier = ""
                 serverName.text = viewModel.formattedServerName
                 configureButton.isHidden = true
                 configureButton.isUserInteractionEnabled = false
             }
+            flagImage.updateUpFlagIcon()
             serverName.sizeToFit()
             
             if let pingMs = viewModel.server.pingMs {
