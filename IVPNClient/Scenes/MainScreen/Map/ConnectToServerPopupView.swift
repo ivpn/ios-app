@@ -244,9 +244,9 @@ class ConnectToServerPopupView: UIView {
         
         flagImage.snp.makeConstraints { make in
             make.left.equalTo(18)
-            make.top.equalTo(15)
+            make.top.equalTo(17)
             make.width.equalTo(20)
-            make.height.equalTo(20)
+            make.height.equalTo(15)
         }
         
         locationLabel.snp.makeConstraints { make in
