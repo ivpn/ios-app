@@ -43,22 +43,6 @@ class AppDelegate: UIResponder {
         }
     }
     
-    func setupCrashReports() {
-        guard UserDefaults.shared.isLoggingCrashes else { return }
-        
-        do {
-            Client.shared = try Client(dsn: "https://\(Config.SentryDsn)")
-            Client.shared?.enabled = true
-            Client.shared?.beforeSerializeEvent = { event in
-                event.environment = Config.Environment
-            }
-            try Client.shared?.startCrashHandler()
-            log(info: "Sentry crash handler started successfully")
-        } catch let error {
-            log(error: "\(error)")
-        }
-    }
-    
     private func evaluateUITests() {
         // When running the application for UI Testing we need to remove all the stored data so we can start testing the clear app
         // It is impossible to access the KeyChain from the UI test itself as the test runs in different process
@@ -154,7 +138,6 @@ class AppDelegate: UIResponder {
 extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        setupCrashReports()
         evaluateUITests()
         evaluateFirstRun()
         registerUserDefaults()
