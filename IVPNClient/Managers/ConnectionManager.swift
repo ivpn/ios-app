@@ -239,7 +239,7 @@ class ConnectionManager {
     }
     
     func installOnDemandRules() {
-        guard UserDefaults.shared.networkProtectionEnabled else {
+        guard UserDefaults.shared.networkProtectionEnabled || !NetworkManager.shared.isNetworkReachable else {
             return
         }
         
