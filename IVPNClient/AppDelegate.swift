@@ -22,7 +22,6 @@
 //
 
 import UIKit
-import Sentry
 
 @UIApplicationMain
 

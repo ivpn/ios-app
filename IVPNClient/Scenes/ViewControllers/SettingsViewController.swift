@@ -25,7 +25,6 @@ import Foundation
 import UIKit
 import MessageUI
 import JGProgressHUD
-import Sentry
 
 class SettingsViewController: UITableViewController {
     
