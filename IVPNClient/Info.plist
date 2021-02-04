@@ -65,8 +65,6 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to scan QR codes</string>
-	<key>SentryDsn</key>
-	<string>$(SentryDsn)</string>
 	<key>TlsHostName</key>
 	<string>$(TlsHostName)</string>
 	<key>UIApplicationShortcutItems</key>

@@ -97,10 +97,6 @@ struct Config {
         return value(for: "Environment")
     }
     
-    static var SentryDsn: String {
-        return value(for: "SentryDsn")
-    }
-    
     static var ApiHostName: String {
         return value(for: "ApiHostName")
     }
