@@ -239,12 +239,12 @@ class ConnectionManager {
     }
     
     func installOnDemandRules() {
-        guard UserDefaults.shared.networkProtectionEnabled else {
+        guard UserDefaults.shared.networkProtectionEnabled || !NetworkManager.shared.isNetworkReachable else {
             return
         }
         
         getStatus { _, status in
-            if status.isDisconnected() {
+            if status == .disconnected {
                 let accessDetails = AccessDetails(
                     serverAddress: Application.shared.settings.selectedServer.gateway,
                     ipAddresses: Application.shared.settings.selectedServer.ipAddresses,
