@@ -22,7 +22,6 @@
 //
 
 import UIKit
-import Sentry
 
 @UIApplicationMain
 
@@ -40,22 +39,6 @@ class AppDelegate: UIResponder {
             UserDefaults.clearSession()
             UserDefaults.standard.set(false, forKey: "FirstInstall")
             UserDefaults.standard.synchronize()
-        }
-    }
-    
-    func setupCrashReports() {
-        guard UserDefaults.shared.isLoggingCrashes else { return }
-        
-        do {
-            Client.shared = try Client(dsn: "https://\(Config.SentryDsn)")
-            Client.shared?.enabled = true
-            Client.shared?.beforeSerializeEvent = { event in
-                event.environment = Config.Environment
-            }
-            try Client.shared?.startCrashHandler()
-            log(info: "Sentry crash handler started successfully")
-        } catch let error {
-            log(error: "\(error)")
         }
     }
     
@@ -154,7 +137,6 @@ class AppDelegate: UIResponder {
 extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        setupCrashReports()
         evaluateUITests()
         evaluateFirstRun()
         registerUserDefaults()
