@@ -416,8 +416,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func pingDidComplete() {
-        Application.shared.connectionManager.needsToUpdateSelectedServer()
-        controlPanelView.updateServerNames()
+        serverSelected()
         
         if needsToReconnect {
             needsToReconnect = false
