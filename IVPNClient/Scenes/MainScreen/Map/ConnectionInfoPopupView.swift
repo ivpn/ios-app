@@ -60,6 +60,8 @@ class ConnectionInfoPopupView: UIView {
         return statusLabel
     }()
     
+    lazy var flagImage = FlagImageView()
+    
     lazy var locationLabel: UILabel = {
         let locationLabel = UILabel()
         locationLabel.font = UIFont.systemFont(ofSize: 16)
@@ -80,7 +82,8 @@ class ConnectionInfoPopupView: UIView {
     var viewModel: ProofsViewModel! {
         didSet {
             statusLabel.text = vpnStatusViewModel.popupStatusText
-            locationLabel.iconMirror(text: "\(viewModel.city), \(viewModel.countryCode)", image: UIImage(named: viewModel.imageNameForCountryCode), alignment: .left)
+            flagImage.image = UIImage.init(named: viewModel.imageNameForCountryCode)
+            locationLabel.text = "\(viewModel.city), \(viewModel.countryCode)"
         }
     }
     
@@ -164,6 +167,7 @@ class ConnectionInfoPopupView: UIView {
         alpha = 0
         
         container.addSubview(statusLabel)
+        container.addSubview(flagImage)
         container.addSubview(locationLabel)
         container.addSubview(actionButton)
         addSubview(arrow)
@@ -194,8 +198,15 @@ class ConnectionInfoPopupView: UIView {
             make.height.equalTo(14)
         }
         
-        locationLabel.snp.makeConstraints { make in
+        flagImage.snp.makeConstraints { make in
             make.left.equalTo(18)
+            make.bottom.equalTo(-17)
+            make.width.equalTo(20)
+            make.height.equalTo(15)
+        }
+        
+        locationLabel.snp.makeConstraints { make in
+            make.left.equalTo(45)
             make.bottom.equalTo(-15)
             make.right.equalTo(-48)
             make.height.equalTo(19)

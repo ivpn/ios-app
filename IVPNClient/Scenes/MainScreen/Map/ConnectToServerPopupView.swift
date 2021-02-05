@@ -43,11 +43,7 @@ class ConnectToServerPopupView: UIView {
         return arrow
     }()
     
-    lazy var flagImage: UIImageView = {
-        let flagImage = UIImageView()
-        flagImage.setFlagIconBorder()
-        return flagImage
-    }()
+    lazy var flagImage = FlagImageView()
     
     lazy var locationLabel: UILabel = {
         let locationLabel = UILabel()
@@ -244,9 +240,9 @@ class ConnectToServerPopupView: UIView {
         
         flagImage.snp.makeConstraints { make in
             make.left.equalTo(18)
-            make.top.equalTo(15)
+            make.top.equalTo(17)
             make.width.equalTo(20)
-            make.height.equalTo(20)
+            make.height.equalTo(15)
         }
         
         locationLabel.snp.makeConstraints { make in
