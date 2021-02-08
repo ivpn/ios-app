@@ -51,4 +51,11 @@ class VPNServerViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.imageNameForCountryCode, "nl-v")
     }
     
+    func test_formattedServerNameSort() {
+        XCTAssertEqual(viewModel.formattedServerName(sort: .city), "Amsterdam, NL")
+        XCTAssertEqual(viewModel.formattedServerName(sort: .latency), "Amsterdam, NL")
+        XCTAssertEqual(viewModel.formattedServerName(sort: .proximity), "Amsterdam, NL")
+        XCTAssertEqual(viewModel.formattedServerName(sort: .country), "NL, Amsterdam")
+    }
+    
 }
