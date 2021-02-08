@@ -60,9 +60,6 @@
 		8229196E2182EB1C00978BBA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229196D2182EB1B00978BBA /* String+Ext.swift */; };
 		822919712182EB1C00978BBA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229196D2182EB1B00978BBA /* String+Ext.swift */; };
 		822920A02480FA3600476FC1 /* ServersSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229209F2480FA3600476FC1 /* ServersSort.swift */; };
-		822920A12480FC2700476FC1 /* ServersSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229209F2480FA3600476FC1 /* ServersSort.swift */; };
-		822920A22480FC2800476FC1 /* ServersSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229209F2480FA3600476FC1 /* ServersSort.swift */; };
-		822920A32480FC2800476FC1 /* ServersSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229209F2480FA3600476FC1 /* ServersSort.swift */; };
 		822B85D921B941A200715691 /* NotificationName+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822B85D821B941A200715691 /* NotificationName+Ext.swift */; };
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
@@ -1953,7 +1950,6 @@
 				826F7F2F23A7A88E00777DB9 /* GeoLookup.swift in Sources */,
 				826F7F2E23A7A88700777DB9 /* APIClient.swift in Sources */,
 				826F7F3D23A7AA4700777DB9 /* TunnelType.swift in Sources */,
-				822920A32480FC2800476FC1 /* ServersSort.swift in Sources */,
 				826F7F3723A7A95000777DB9 /* APIAccessManager.swift in Sources */,
 				826F7F3623A7A94000777DB9 /* Config.swift in Sources */,
 				826F7F1623A7A05F00777DB9 /* TodayViewController.swift in Sources */,
@@ -2002,7 +1998,6 @@
 				8270753722AFC7E70067C323 /* StringProtocol+Ext.swift in Sources */,
 				82B605262170840C004B40E6 /* PacketTunnelProvider.swift in Sources */,
 				8223C53C2232626E006C4F14 /* ExtensionKeyManager.swift in Sources */,
-				822920A22480FC2800476FC1 /* ServersSort.swift in Sources */,
 				82E7168E2181E8E900D6B7C2 /* WireGuardProtocol.swift in Sources */,
 				8292E19B21748B0500123538 /* UserDefaults+Ext.swift in Sources */,
 				8223C55022EAEC7100CD283D /* Session.swift in Sources */,
@@ -2042,7 +2037,6 @@
 				82234B6F21BA90EC00B082DE /* FileSystemManager.swift in Sources */,
 				8223C54F22EAEC7000CD283D /* Session.swift in Sources */,
 				82234B6A21BA7F5400B082DE /* Logging.swift in Sources */,
-				822920A12480FC2700476FC1 /* ServersSort.swift in Sources */,
 				826C56D322FD551800D2B76A /* ServiceStatus.swift in Sources */,
 				825D5D8821908B2600B781BA /* UIDevice+Ext.swift in Sources */,
 				82E716932181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
