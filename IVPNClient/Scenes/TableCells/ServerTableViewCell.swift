@@ -48,9 +48,10 @@ class ServerTableViewCell: UITableViewCell {
                 configureButton.isHidden = true
                 configureButton.isUserInteractionEnabled = true
             } else {
+                let sort = ServersSort.init(rawValue: UserDefaults.shared.serversSort) ?? .city
                 flagImage.image = viewModel.imageForCountryCode
                 flagImage.image?.accessibilityIdentifier = ""
-                serverName.text = viewModel.formattedServerName
+                serverName.text = viewModel.formattedServerName(sort: sort)
                 configureButton.isHidden = true
                 configureButton.isUserInteractionEnabled = false
             }
