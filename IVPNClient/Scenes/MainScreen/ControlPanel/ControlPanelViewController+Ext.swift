@@ -90,13 +90,14 @@ extension ControlPanelViewController {
             
             Application.shared.connectionManager.isOnDemandEnabled { enabled in
                 guard !enabled else {
-                    self.showConnectedAlert(message: "VPN tunnel is To change protocol, please first disconnect", sender: self.controlPanelView.protocolLabel)
+                    self.showDisableVPNPrompt(sourceView: self.controlPanelView.protocolLabel) {
+                        self.disconnect()
+                        self.presentSelectProtocol()
+                    }
                     return
                 }
                 
-                if let topViewController = UIApplication.topViewController() as? MainViewController {
-                    topViewController.performSegue(withIdentifier: "MainScreenSelectProtocol", sender: nil)
-                }
+                self.presentSelectProtocol()
             }
         }
     }
