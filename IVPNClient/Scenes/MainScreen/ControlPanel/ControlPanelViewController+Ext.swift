@@ -88,8 +88,15 @@ extension ControlPanelViewController {
                 return
             }
             
-            if let topViewController = UIApplication.topViewController() as? MainViewController {
-                topViewController.performSegue(withIdentifier: "MainScreenSelectProtocol", sender: nil)
+            Application.shared.connectionManager.isOnDemandEnabled { enabled in
+                guard !enabled else {
+                    self.showConnectedAlert(message: "VPN tunnel is To change protocol, please first disconnect", sender: self.controlPanelView.protocolLabel)
+                    return
+                }
+                
+                if let topViewController = UIApplication.topViewController() as? MainViewController {
+                    topViewController.performSegue(withIdentifier: "MainScreenSelectProtocol", sender: nil)
+                }
             }
         }
     }
