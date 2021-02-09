@@ -88,8 +88,16 @@ extension ControlPanelViewController {
                 return
             }
             
-            if let topViewController = UIApplication.topViewController() as? MainViewController {
-                topViewController.performSegue(withIdentifier: "MainScreenSelectProtocol", sender: nil)
+            Application.shared.connectionManager.isOnDemandEnabled { enabled in
+                guard !enabled else {
+                    self.showDisableVPNPrompt(sourceView: self.controlPanelView.protocolLabel) {
+                        self.disconnect()
+                        self.presentSelectProtocol()
+                    }
+                    return
+                }
+                
+                self.presentSelectProtocol()
             }
         }
     }

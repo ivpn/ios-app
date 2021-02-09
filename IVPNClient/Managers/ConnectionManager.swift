@@ -170,6 +170,31 @@ class ConnectionManager {
         }
     }
     
+    func isOnDemandEnabled(completion: @escaping (Bool) -> ()) {
+        vpnManager.getManagerFor(tunnelType: .ipsec) { manager in
+            if manager.isOnDemandEnabled {
+                completion(true)
+                return
+            }
+            
+            self.vpnManager.getManagerFor(tunnelType: .openvpn) { manager in
+                if manager.isOnDemandEnabled {
+                    completion(true)
+                    return
+                }
+                
+                self.vpnManager.getManagerFor(tunnelType: .wireguard) { manager in
+                    if manager.isOnDemandEnabled {
+                        completion(true)
+                        return
+                    }
+                    
+                    completion(false)
+                }
+            }
+        }
+    }
+    
     func combineStatus(selectedTunnelType: TunnelType, ipSecStatus: NEVPNStatus, openVPNStatus: NEVPNStatus, wireGuardStatus: NEVPNStatus, completion: (TunnelType, NEVPNStatus) -> Void) {
         let meaningfulStatus = [NEVPNStatus.connected, NEVPNStatus.connecting, NEVPNStatus.disconnecting]
         
@@ -239,12 +264,12 @@ class ConnectionManager {
     }
     
     func installOnDemandRules() {
-        guard UserDefaults.shared.networkProtectionEnabled || !NetworkManager.shared.isNetworkReachable else {
-            return
-        }
-        
-        getStatus { _, status in
-            if status == .disconnected {
+        isOnDemandEnabled { enabled in
+            guard UserDefaults.shared.networkProtectionEnabled || enabled else {
+                return
+            }
+            
+            if self.status != .connected && self.status != .invalid {
                 let accessDetails = AccessDetails(
                     serverAddress: Application.shared.settings.selectedServer.gateway,
                     ipAddresses: Application.shared.settings.selectedServer.ipAddresses,
