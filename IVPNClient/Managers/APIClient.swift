@@ -110,6 +110,8 @@ class APIClient: NSObject {
     var session: URLSession {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["User-Agent": userAgent]
+        configuration.urlCache = nil
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         
         return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }
@@ -134,6 +136,7 @@ class APIClient: NSObject {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
+        urlRequest.cachePolicy = .reloadIgnoringLocalCacheData
         
         if request.method == .post, let queryItems = request.queryItems, !queryItems.isEmpty {
             switch request.contentType {
