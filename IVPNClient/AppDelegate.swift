@@ -110,6 +110,10 @@ class AppDelegate: UIResponder {
         UserDefaults.shared.set(0, forKey: "LastPingTimestamp")
     }
     
+    private func clearURLCache() {
+        URLCache.shared.removeAllCachedResponses()
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         guard let endpoint = url.host else {
             return false
@@ -161,6 +165,7 @@ extension AppDelegate: UIApplicationDelegate {
         finishIncompletePurchases()
         createLogFiles()
         resetLastPingTimestamp()
+        clearURLCache()
         
         return true
     }
