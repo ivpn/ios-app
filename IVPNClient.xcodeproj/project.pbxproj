@@ -74,6 +74,8 @@
 		823FFB072338DF1800F91A5D /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823FFB062338DF1800F91A5D /* Capability.swift */; };
 		823FFB082338E09900F91A5D /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823FFB062338DF1800F91A5D /* Capability.swift */; };
 		823FFB092338E09A00F91A5D /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823FFB062338DF1800F91A5D /* Capability.swift */; };
+		8243584425DAA7BD005FDEBB /* SecureDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */; };
+		8243584E25DAA842005FDEBB /* SecureDNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243584D25DAA842005FDEBB /* SecureDNSView.swift */; };
 		824777E721A6BC3A001EEFAF /* Network+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */; };
 		824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */; };
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
@@ -436,6 +438,8 @@
 		823AD1F52158F56300BE0EBA /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = ../Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
 		823DA732215E3CCB00DAFE37 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		823FFB062338DF1800F91A5D /* Capability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capability.swift; sourceTree = "<group>"; };
+		8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSViewController.swift; sourceTree = "<group>"; };
+		8243584D25DAA842005FDEBB /* SecureDNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSView.swift; sourceTree = "<group>"; };
 		824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataClass.swift"; sourceTree = "<group>"; };
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -926,6 +930,23 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		8243584B25DAA81D005FDEBB /* SecureDNS */ = {
+			isa = PBXGroup;
+			children = (
+				8243584C25DAA833005FDEBB /* View */,
+				8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */,
+			);
+			path = SecureDNS;
+			sourceTree = "<group>";
+		};
+		8243584C25DAA833005FDEBB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8243584D25DAA842005FDEBB /* SecureDNSView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		825A43FB215CCFC10076131F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1074,6 +1095,7 @@
 		82A208B321BAA4C500C9AD44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8243584B25DAA81D005FDEBB /* SecureDNS */,
 				8208525423FD56530008C112 /* MainScreen */,
 				822563902431DFFB00AE7F8D /* AccountScreen */,
 				82A208B621BAA51000C9AD44 /* Controls */,
@@ -2039,6 +2061,7 @@
 				8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */,
 				828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */,
 				82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */,
+				8243584E25DAA842005FDEBB /* SecureDNSView.swift in Sources */,
 				8206F32124347A8F0056B465 /* MainView.swift in Sources */,
 				9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */,
 				828D8A6D258245AD00CB0E5B /* TwoFactorViewController.swift in Sources */,
@@ -2087,6 +2110,7 @@
 				9CB2CE341DAF9283007A4D2D /* Model.xcdatamodeld in Sources */,
 				821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */,
 				82FF0D442315587000440E5D /* UITextFieldPadding.swift in Sources */,
+				8243584425DAA7BD005FDEBB /* SecureDNSViewController.swift in Sources */,
 				82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */,
 				8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */,
 				82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */,
