@@ -33,17 +33,56 @@ class SecureDNSViewController: UITableViewController {
     
     private var model = SecureDNS()
     
+    // MARK: - @IBActions -
+    
+    @IBAction func changeType(_ sender: UISegmentedControl) {
+        let type = sender.selectedSegmentIndex == 1 ? "dot" : "doh"
+        model.type = type
+    }
+    
+    @IBAction func changeMobileNetwork(_ sender: UISwitch) {
+        model.mobileNetwork = sender.isOn
+    }
+    
+    @IBAction func changeWifiNetwork(_ sender: UISwitch) {
+        model.wifiNetwork = sender.isOn
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        secureDNSView.setupView(model: model)
     }
     
-    // MARK: - Private methods -
+    // MARK: - Methods -
     
-    private func setupView() {
+    @objc func cancelTapped() {
         secureDNSView.setupView(model: model)
+        view.endEditing(true)
+    }
+    
+    @objc func saveTapped() {
+        saveIpAddress()
+        view.endEditing(true)
+    }
+    
+    func saveIpAddress() {
+        guard let text = secureDNSView.ipAddressField.text else {
+            return
+        }
+        
+        if text.isEmpty {
+            model.ipAddress = ""
+            return
+        }
+        
+        do {
+            let ipAddress = try CIDRAddress(stringRepresentation: text)
+            model.ipAddress = ipAddress?.ipAddress
+        } catch {
+            showAlert(title: "Invalid DNS Server", message: "The IP Address (\(text)) is invalid.")
+        }
     }
     
 }
@@ -68,4 +107,33 @@ extension SecureDNSViewController {
         cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
 
+}
+
+// MARK: - UITextFieldDelegate -
+
+extension SecureDNSViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == secureDNSView.ipAddressField {
+            textField.resignFirstResponder()
+            saveIpAddress()
+        }
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveTapped))
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        navigationItem.hidesBackButton = false
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
+        DispatchQueue.async {
+            self.secureDNSView.setupView(model: self.model)
+        }
+    }
+    
 }

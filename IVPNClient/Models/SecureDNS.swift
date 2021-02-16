@@ -25,10 +25,30 @@ import Foundation
 
 struct SecureDNS: Codable {
     
-    var ipAddress: String?
-    var type: String
-    var mobileNetwork: Bool
-    var wifiNetwork: Bool
+    var ipAddress: String? {
+        didSet {
+            save()
+        }
+    }
+    
+    var type: String {
+        didSet {
+            save()
+        }
+    }
+    
+    var mobileNetwork: Bool {
+        didSet {
+            save()
+        }
+    }
+    
+    var wifiNetwork: Bool {
+        didSet {
+            save()
+        }
+    }
+    
     
     private static let secureDNSKey = "SecureDNS"
     
