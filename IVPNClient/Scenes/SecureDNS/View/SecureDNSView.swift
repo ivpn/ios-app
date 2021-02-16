@@ -40,6 +40,10 @@ class SecureDNSView: UITableView {
         typeControl.selectedSegmentIndex = type == .dot ? 1 : 0
         mobileNetworkSwitch.isOn = model.mobileNetwork
         wifiNetworkSwitch.isOn = model.wifiNetwork
+        
+        if #available(iOS 14.0, *) {
+            enableSwitch.isOn = DNSManager.shared.isEnabled
+        }
     }
     
 }
