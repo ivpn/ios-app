@@ -409,6 +409,14 @@ extension SettingsViewController {
         if indexPath.section == 2 && indexPath.row == 5 { return 60 }
         if indexPath.section == 2 && indexPath.row == 6 && !loggingSwitch.isOn { return 0 }
         
+        if indexPath.section == 2 && indexPath.row == 4 {
+            if #available(iOS 14.0, *) {
+                return UITableView.automaticDimension
+            } else {
+                return 0
+            }
+        }
+        
         return UITableView.automaticDimension
     }
     

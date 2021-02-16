@@ -40,7 +40,7 @@ class SecureDNSViewController: UITableViewController {
             switch sender.isOn {
             case true:
                 guard let ipAddress = model.ipAddress, !ipAddress.isEmpty else {
-                    showAlert(title: "", message: "Please enter DNS address first") { _ in
+                    showAlert(title: "", message: "Please enter DNS server first") { _ in
                         sender.setOn(false, animated: true)
                     }
                     
