@@ -907,7 +907,7 @@
         <scene sceneID="XQG-8w-qZN">
             <objects>
                 <tableViewController title="DNS over HTTPS/TLS" id="7IF-sv-8mt" customClass="SecureDNSViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="PFf-6o-Eh2">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="PFf-6o-Eh2" customClass="SecureDNSView" customModule="IVPNClient" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
@@ -955,6 +955,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BQv-Oq-mTJ">
                                                     <rect key="frame" x="349" y="6.5" width="51" height="31"/>
                                                     <color key="onTintColor" name="ivpnBlue"/>
+                                                    <connections>
+                                                        <action selector="enable:" destination="7IF-sv-8mt" eventType="valueChanged" id="ZfV-Co-75E"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -985,6 +988,9 @@
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" textContentType="url"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="7IF-sv-8mt" id="csF-aQ-y48"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1020,6 +1026,9 @@
                                                         <segment title="DOH"/>
                                                         <segment title="DOT"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="changeType:" destination="7IF-sv-8mt" eventType="valueChanged" id="LRb-El-3Bd"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -1054,6 +1063,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eeH-ED-8OF">
                                                     <rect key="frame" x="349" y="6.5" width="51" height="31"/>
                                                     <color key="onTintColor" name="ivpnBlue"/>
+                                                    <connections>
+                                                        <action selector="changeMobileNetwork:" destination="7IF-sv-8mt" eventType="valueChanged" id="mjN-ho-dCU"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -1084,6 +1096,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xNc-pn-QbE">
                                                     <rect key="frame" x="349" y="6.5" width="51" height="31"/>
                                                     <color key="onTintColor" name="ivpnBlue"/>
+                                                    <connections>
+                                                        <action selector="changeWifiNetwork:" destination="7IF-sv-8mt" eventType="valueChanged" id="oST-Vf-WvA"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -1101,9 +1116,17 @@
                         <connections>
                             <outlet property="dataSource" destination="7IF-sv-8mt" id="SqJ-Tv-ZuJ"/>
                             <outlet property="delegate" destination="7IF-sv-8mt" id="KM6-9b-nyf"/>
+                            <outlet property="enableSwitch" destination="BQv-Oq-mTJ" id="cv6-EJ-9Rd"/>
+                            <outlet property="ipAddressField" destination="Knr-db-CpJ" id="1qI-1D-QiH"/>
+                            <outlet property="mobileNetworkSwitch" destination="eeH-ED-8OF" id="gav-sw-XTt"/>
+                            <outlet property="typeControl" destination="CVv-lc-hOs" id="aoC-kh-89z"/>
+                            <outlet property="wifiNetworkSwitch" destination="xNc-pn-QbE" id="lUT-As-mUi"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="DNS over HTTPS/TLS" id="SWl-jE-v1I"/>
+                    <connections>
+                        <outlet property="secureDNSView" destination="PFf-6o-Eh2" id="wrx-1C-L3K"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ztW-fk-tmt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

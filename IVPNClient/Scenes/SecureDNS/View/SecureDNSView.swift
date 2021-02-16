@@ -23,10 +23,10 @@
 
 import UIKit
 
-class SecureDNSView: UIView {
+class SecureDNSView: UITableView {
     
     // MARK: - @IBOutlets -
-    
+    @IBOutlet weak var enableSwitch: UISwitch!
     @IBOutlet weak var ipAddressField: UITextField!
     @IBOutlet weak var typeControl: UISegmentedControl!
     @IBOutlet weak var mobileNetworkSwitch: UISwitch!

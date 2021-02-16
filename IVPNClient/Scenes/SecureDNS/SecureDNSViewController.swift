@@ -35,6 +35,10 @@ class SecureDNSViewController: UITableViewController {
     
     // MARK: - @IBActions -
     
+    @IBAction func enable(_ sender: UISwitch) {
+        
+    }
+    
     @IBAction func changeType(_ sender: UISegmentedControl) {
         let type = sender.selectedSegmentIndex == 1 ? "dot" : "doh"
         model.type = type
