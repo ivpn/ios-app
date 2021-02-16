@@ -76,6 +76,7 @@
 		823FFB092338E09A00F91A5D /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823FFB062338DF1800F91A5D /* Capability.swift */; };
 		8243584425DAA7BD005FDEBB /* SecureDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */; };
 		8243584E25DAA842005FDEBB /* SecureDNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243584D25DAA842005FDEBB /* SecureDNSView.swift */; };
+		8243587125DBB73F005FDEBB /* SecureDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243587025DBB73E005FDEBB /* SecureDNS.swift */; };
 		824777E721A6BC3A001EEFAF /* Network+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */; };
 		824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */; };
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
@@ -440,6 +441,7 @@
 		823FFB062338DF1800F91A5D /* Capability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capability.swift; sourceTree = "<group>"; };
 		8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSViewController.swift; sourceTree = "<group>"; };
 		8243584D25DAA842005FDEBB /* SecureDNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSView.swift; sourceTree = "<group>"; };
+		8243587025DBB73E005FDEBB /* SecureDNS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNS.swift; sourceTree = "<group>"; };
 		824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataClass.swift"; sourceTree = "<group>"; };
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -888,6 +890,7 @@
 				9CBFF02F2102254800FE1757 /* Settings.swift */,
 				826C56D122FD4F2600D2B76A /* ServiceStatus.swift */,
 				82DAB37A2457013900302F4C /* Service.swift */,
+				8243587025DBB73E005FDEBB /* SecureDNS.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2180,6 +2183,7 @@
 				82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */,
 				82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */,
 				82B51CDF21DE3E31005CC9C9 /* UITableView+Ext.swift in Sources */,
+				8243587125DBB73F005FDEBB /* SecureDNS.swift in Sources */,
 				82061F64238D2730009DDF4D /* PingResult.swift in Sources */,
 				82A3422524AB6AF700761AB0 /* Double+Ext.swift in Sources */,
 				8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */,
