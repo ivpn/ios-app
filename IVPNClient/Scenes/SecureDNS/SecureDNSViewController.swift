@@ -25,8 +25,25 @@ import UIKit
 
 class SecureDNSViewController: UITableViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var secureDNSView: SecureDNSView!
+    
+    // MARK: - Properties -
+    
+    private var model = SecureDNS()
+    
+    // MARK: - View Lifecycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+    
+    // MARK: - Private methods -
+    
+    private func setupView() {
+        secureDNSView.setupView(model: model)
     }
     
 }

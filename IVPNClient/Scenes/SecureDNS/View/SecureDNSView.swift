@@ -25,4 +25,21 @@ import UIKit
 
 class SecureDNSView: UIView {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var ipAddressField: UITextField!
+    @IBOutlet weak var typeControl: UISegmentedControl!
+    @IBOutlet weak var mobileNetworkSwitch: UISwitch!
+    @IBOutlet weak var wifiNetworkSwitch: UISwitch!
+    
+    // MARK: - Methods -
+    
+    func setupView(model: SecureDNS) {
+        let type = SecureDNSType.init(rawValue: model.type)
+        ipAddressField.text = model.ipAddress
+        typeControl.selectedSegmentIndex = type == .dot ? 1 : 0
+        mobileNetworkSwitch.isOn = model.mobileNetwork
+        wifiNetworkSwitch.isOn = model.wifiNetwork
+    }
+    
 }
