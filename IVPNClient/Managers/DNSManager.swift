@@ -44,10 +44,9 @@ class DNSManager {
     // MARK: - Methods -
     
     func saveProfile(model: SecureDNS, completion: @escaping (Error?) -> ()) {
-        manager.loadFromPreferences { error in
-            let dnsSettings = NEDNSSettings(servers: [model.ipAddress ?? ""])
-            self.manager.dnsSettings = dnsSettings
-            self.manager.onDemandRules = [NEOnDemandRuleConnect()]
+        manager.loadFromPreferences { _ in
+            self.manager.dnsSettings = self.getDnsSettings(model: model)
+            self.manager.onDemandRules = self.getOnDemandRules(model: model)
             self.manager.saveToPreferences { error in
                 completion(error)
             }
@@ -58,6 +57,39 @@ class DNSManager {
         manager.removeFromPreferences { error in
             completion(error)
         }
+    }
+    
+    // MARK: - Private methods -
+    
+    private func getDnsSettings(model: SecureDNS) -> NEDNSSettings {
+        let ipAddress = model.ipAddress ?? ""
+        let type = SecureDNSType.init(rawValue: model.type)
+
+        if type == .dot {
+            let dnsSettings = NEDNSOverTLSSettings(servers: [ipAddress])
+            dnsSettings.serverName = "" // TODO: Implement serverName
+            return dnsSettings
+        } else {
+            let dnsSettings = NEDNSOverHTTPSSettings(servers: [ipAddress])
+            dnsSettings.serverURL = URL.init(string: "") // TODO: Implement serverURL
+            return dnsSettings
+        }
+    }
+    
+    private func getOnDemandRules(model: SecureDNS) -> [NEOnDemandRule] {
+        var onDemandRules: [NEOnDemandRule] = []
+        
+        let mobileNetworkRule = model.mobileNetwork ? NEOnDemandRuleConnect() : NEOnDemandRuleDisconnect()
+        mobileNetworkRule.interfaceTypeMatch = .cellular
+        onDemandRules.append(mobileNetworkRule)
+        
+        let wifiNetworkRule = model.wifiNetwork ? NEOnDemandRuleConnect() : NEOnDemandRuleDisconnect()
+        wifiNetworkRule.interfaceTypeMatch = .wiFi
+        onDemandRules.append(wifiNetworkRule)
+        
+        onDemandRules.append(NEOnDemandRuleConnect())
+        
+        return onDemandRules
     }
     
 }
