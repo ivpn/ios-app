@@ -36,12 +36,42 @@ class SecureDNSViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func enable(_ sender: UISwitch) {
-        
+        if #available(iOS 14.0, *) {
+            switch sender.isOn {
+            case true:
+                guard let ipAddress = model.ipAddress, !ipAddress.isEmpty else {
+                    showAlert(title: "", message: "Please enter DNS address first") { _ in
+                        sender.setOn(false, animated: true)
+                    }
+                    
+                    return
+                }
+                
+                DNSManager.shared.saveProfile(model: model) { error in
+                    if let error = error {
+                        self.showErrorAlert(title: "Error", message: "There was an error saving DNS profile: \(error.localizedDescription)") { _ in
+                            sender.setOn(false, animated: true)
+                        }
+                        return
+                    }
+                    
+                    self.showActionSheet(title: "Enable your DNS config in iOS Settings - General - VPN & Network - DNS", actions: ["Open iOS Settings"], sourceView: self.secureDNSView.enableSwitch) { index in
+                        switch index {
+                        case 0:
+                            UIApplication.openNetworkSettings()
+                        default:
+                            sender.setOn(false, animated: true)
+                        }
+                    }
+                }
+            case false:
+                DNSManager.shared.removeProfile() { _ in }
+            }
+        }
     }
     
     @IBAction func changeType(_ sender: UISegmentedControl) {
-        let type = sender.selectedSegmentIndex == 1 ? "dot" : "doh"
-        model.type = type
+        model.type = sender.selectedSegmentIndex == 1 ? "dot" : "doh"
     }
     
     @IBAction func changeMobileNetwork(_ sender: UISwitch) {
@@ -77,7 +107,7 @@ class SecureDNSViewController: UITableViewController {
         }
         
         if text.isEmpty {
-            model.ipAddress = ""
+            model.ipAddress = nil
             return
         }
         
