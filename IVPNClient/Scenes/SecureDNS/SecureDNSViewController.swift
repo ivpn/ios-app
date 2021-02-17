@@ -39,8 +39,10 @@ class SecureDNSViewController: UITableViewController {
         if #available(iOS 14.0, *) {
             switch sender.isOn {
             case true:
-                guard let ipAddress = model.ipAddress, !ipAddress.isEmpty else {
-                    showAlert(title: "", message: "Please enter DNS server first") { _ in
+                let validation = model.validation()
+                
+                guard validation.0 else {
+                    showAlert(title: "", message: validation.1 ?? "Invalid DNS configuration") { _ in
                         sender.setOn(false, animated: true)
                     }
                     

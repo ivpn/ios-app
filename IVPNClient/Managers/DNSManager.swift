@@ -67,11 +67,11 @@ class DNSManager {
 
         if type == .dot {
             let dnsSettings = NEDNSOverTLSSettings(servers: [ipAddress])
-            dnsSettings.serverName = "" // TODO: Implement serverName
+            dnsSettings.serverName = model.serverName
             return dnsSettings
         } else {
             let dnsSettings = NEDNSOverHTTPSSettings(servers: [ipAddress])
-            dnsSettings.serverURL = URL.init(string: "") // TODO: Implement serverURL
+            dnsSettings.serverURL = URL.init(string: model.serverURL ?? "")
             return dnsSettings
         }
     }

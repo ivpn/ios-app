@@ -94,6 +94,29 @@ struct SecureDNS: Codable {
         return nil
     }
     
+    func validation() -> (Bool, String?) {
+        let configType = SecureDNSType.init(rawValue: type)
+        
+        guard let ipAddress = ipAddress, !ipAddress.isEmpty else {
+            return (false, "Please enter DNS server ip address")
+        }
+        
+        switch configType {
+        case .doh:
+            guard let serverURL = serverURL, !serverURL.isEmpty else {
+                return (false, "Please enter DNS server URL")
+            }
+        case .dot:
+            guard let serverName = serverName, !serverName.isEmpty else {
+                return (false, "Please enter DNS server name")
+            }
+        case .none:
+            return (false, "Invalid DNS configuration")
+        }
+        
+        return (true, nil)
+    }
+    
 }
 
 enum SecureDNSType: String {
