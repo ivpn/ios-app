@@ -52,10 +52,12 @@ class SecureDNSViewController: UITableViewController {
     
     @IBAction func changeMobileNetwork(_ sender: UISwitch) {
         model.mobileNetwork = sender.isOn
+        updateDNSProfile()
     }
     
     @IBAction func changeWifiNetwork(_ sender: UISwitch) {
         model.wifiNetwork = sender.isOn
+        updateDNSProfile()
     }
     
     // MARK: - View Lifecycle -
