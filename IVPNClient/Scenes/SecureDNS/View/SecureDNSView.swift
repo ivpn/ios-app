@@ -34,6 +34,12 @@ class SecureDNSView: UITableView {
     @IBOutlet weak var mobileNetworkSwitch: UISwitch!
     @IBOutlet weak var wifiNetworkSwitch: UISwitch!
     
+    // MARK: - View lifecycle -
+    
+    override func awakeFromNib() {
+        addObservers()
+    }
+    
     // MARK: - Methods -
     
     func setupView(model: SecureDNS) {
@@ -44,9 +50,24 @@ class SecureDNSView: UITableView {
         typeControl.selectedSegmentIndex = type == .dot ? 1 : 0
         mobileNetworkSwitch.isOn = model.mobileNetwork
         wifiNetworkSwitch.isOn = model.wifiNetwork
+        updateEnableSwitch()
+    }
+    
+    @objc func updateEnableSwitch() {
+        guard #available(iOS 14.0, *) else {
+            return
+        }
         
-        if #available(iOS 14.0, *) {
-            enableSwitch.isOn = DNSManager.shared.isEnabled
+        enableSwitch.isOn = DNSManager.shared.isEnabled
+    }
+    
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        if #available(iOS 13.0, *) {
+            NotificationCenter.default.addObserver(self, selector: #selector(updateEnableSwitch), name: UIScene.didActivateNotification, object: nil)
+        } else {
+            NotificationCenter.default.addObserver(self, selector: #selector(updateEnableSwitch), name: UIApplication.didBecomeActiveNotification, object: nil)
         }
     }
     
