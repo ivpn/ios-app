@@ -44,7 +44,17 @@ class DNSManager {
     // MARK: - Methods -
     
     func saveProfile(model: SecureDNS, completion: @escaping (Error?) -> ()) {
-        manager.loadFromPreferences { _ in
+        guard model.validation().0 else {
+            let error = NSError(
+                domain: "NEConfigurationErrorDomain",
+                code: 8,
+                userInfo: [NSLocalizedDescriptionKey: "Invalid configuration operation request"]
+            )
+            completion(error)
+            return
+        }
+        
+        manager.loadFromPreferences { error in
             self.manager.dnsSettings = self.getDnsSettings(model: model)
             self.manager.onDemandRules = self.getOnDemandRules(model: model)
             self.manager.saveToPreferences { error in

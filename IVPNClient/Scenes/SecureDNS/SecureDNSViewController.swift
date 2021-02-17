@@ -36,44 +36,17 @@ class SecureDNSViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func enable(_ sender: UISwitch) {
-        if #available(iOS 14.0, *) {
-            switch sender.isOn {
-            case true:
-                let validation = model.validation()
-                
-                guard validation.0 else {
-                    showAlert(title: "", message: validation.1 ?? "Invalid DNS configuration") { _ in
-                        sender.setOn(false, animated: true)
-                    }
-                    
-                    return
-                }
-                
-                DNSManager.shared.saveProfile(model: model) { error in
-                    if let error = error {
-                        self.showErrorAlert(title: "Error", message: "There was an error saving DNS profile: \(error.localizedDescription)") { _ in
-                            sender.setOn(false, animated: true)
-                        }
-                        return
-                    }
-                    
-                    self.showActionSheet(title: "Enable your DNS config in iOS Settings - General - VPN & Network - DNS", actions: ["Open iOS Settings"], sourceView: self.secureDNSView.enableSwitch) { index in
-                        switch index {
-                        case 0:
-                            UIApplication.openNetworkSettings()
-                        default:
-                            sender.setOn(false, animated: true)
-                        }
-                    }
-                }
-            case false:
-                DNSManager.shared.removeProfile() { _ in }
-            }
+        switch sender.isOn {
+        case true:
+            saveDNSProfile()
+        case false:
+            removeDNSProfile()
         }
     }
     
     @IBAction func changeType(_ sender: UISegmentedControl) {
         model.type = sender.selectedSegmentIndex == 1 ? "dot" : "doh"
+        updateDNSProfile()
         tableView.reloadData()
     }
     
@@ -110,6 +83,58 @@ class SecureDNSViewController: UITableViewController {
     
     // MARK: - Private methods -
     
+    private func saveDNSProfile() {
+        guard #available(iOS 14.0, *) else {
+            return
+        }
+        
+        let validation = model.validation()
+        
+        guard validation.0 else {
+            showAlert(title: "", message: validation.1 ?? "Invalid DNS configuration") { _ in
+                self.secureDNSView.enableSwitch.setOn(false, animated: true)
+            }
+            
+            return
+        }
+        
+        DNSManager.shared.saveProfile(model: model) { error in
+            if let error = error, error.code != 9 {
+                self.showErrorAlert(title: "Error", message: "There was an error saving DNS profile: \(error.localizedDescription)") { _ in
+                    self.secureDNSView.enableSwitch.setOn(false, animated: true)
+                }
+                return
+            }
+            
+            if !DNSManager.shared.isEnabled {
+                self.showActionSheet(title: "Enable your DNS config in iOS Settings - General - VPN & Network - DNS", actions: ["Open iOS Settings"], sourceView: self.secureDNSView.enableSwitch) { index in
+                    switch index {
+                    case 0:
+                        UIApplication.openNetworkSettings()
+                    default:
+                        self.secureDNSView.enableSwitch.setOn(false, animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func updateDNSProfile() {
+        guard #available(iOS 14.0, *) else {
+            return
+        }
+        
+        DNSManager.shared.saveProfile(model: model) { _ in }
+    }
+    
+    private func removeDNSProfile() {
+        guard #available(iOS 14.0, *) else {
+            return
+        }
+        
+        DNSManager.shared.removeProfile() { _ in }
+    }
+    
     private func saveIpAddress() {
         guard let text = secureDNSView.ipAddressField.text else {
             return
@@ -123,6 +148,7 @@ class SecureDNSViewController: UITableViewController {
         do {
             let ipAddress = try CIDRAddress(stringRepresentation: text)
             model.ipAddress = ipAddress?.ipAddress
+            updateDNSProfile()
         } catch {
             showAlert(title: "Invalid DNS server IP", message: "The DNS server IP address (\(text)) is invalid.")
         }
@@ -140,6 +166,7 @@ class SecureDNSViewController: UITableViewController {
         
         if UIApplication.isValidURL(urlString: text) {
             model.serverURL = text
+            updateDNSProfile()
         } else {
             showAlert(title: "Invalid DNS server URL", message: "The DNS server URL (\(text)) is invalid.")
         }
@@ -157,12 +184,14 @@ class SecureDNSViewController: UITableViewController {
         
         if UIApplication.isValidURL(urlString: text) {
             model.serverName = text
+            updateDNSProfile()
             return
         }
         
         do {
             let ipAddress = try CIDRAddress(stringRepresentation: text)
             model.serverName = ipAddress?.ipAddress
+            updateDNSProfile()
         } catch {
             showAlert(title: "Invalid DNS server name", message: "The DNS server name (\(text)) is invalid.")
         }
