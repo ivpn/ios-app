@@ -100,6 +100,7 @@
 		8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */; };
 		8269CD8F2164A8C700D083A1 /* servers-dev.json in Resources */ = {isa = PBXBuildFile; fileRef = 8269CD8E2164A8C700D083A1 /* servers-dev.json */; };
 		826C1F8425DBEF1800314C4B /* DNSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C1F8325DBEF1800314C4B /* DNSManager.swift */; };
+		826C1F8C25DD528400314C4B /* SecureDNSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C1F8B25DD528400314C4B /* SecureDNSTests.swift */; };
 		826C56D222FD4F2600D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826C56D322FD551800D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826C56D422FD551900D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
@@ -462,6 +463,7 @@
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
 		8269CD8E2164A8C700D083A1 /* servers-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "servers-dev.json"; sourceTree = "<group>"; };
 		826C1F8325DBEF1800314C4B /* DNSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSManager.swift; sourceTree = "<group>"; };
+		826C1F8B25DD528400314C4B /* SecureDNSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSTests.swift; sourceTree = "<group>"; };
 		826C56D122FD4F2600D2B76A /* ServiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatus.swift; sourceTree = "<group>"; };
 		826D182621D3DAFF0045A570 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		826D182821D3DAFF0045A570 /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
@@ -1187,6 +1189,7 @@
 				82555004220ACAAF004763A7 /* VPNServersTests.swift */,
 				82F81A60224CFFD700CB778B /* AuthenticationTests.swift */,
 				82A3422224AB660C00761AB0 /* ApplicationTests.swift */,
+				826C1F8B25DD528400314C4B /* SecureDNSTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1916,6 +1919,7 @@
 				82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */,
 				826D182921D3DAFF0045A570 /* StorageManagerTests.swift in Sources */,
 				82DB75EE239E766A0073E846 /* NEVPNStatusTests.swift in Sources */,
+				826C1F8C25DD528400314C4B /* SecureDNSTests.swift in Sources */,
 				82F81A42224CF69900CB778B /* UIDeviceTests.swift in Sources */,
 				82F81A4B224CFADB00CB778B /* CIDRAddressTests.swift in Sources */,
 				82F81A58224CFC0C00CB778B /* VPNManagerTests.swift in Sources */,
