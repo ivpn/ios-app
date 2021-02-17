@@ -58,7 +58,9 @@ class SecureDNSView: UITableView {
             return
         }
         
-        enableSwitch.isOn = DNSManager.shared.isEnabled
+        DNSManager.shared.loadProfile { _ in
+            self.enableSwitch.isOn = DNSManager.shared.isEnabled
+        }
     }
     
     // MARK: - Observers -

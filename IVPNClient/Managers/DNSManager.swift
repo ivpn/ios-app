@@ -63,6 +63,12 @@ class DNSManager {
         }
     }
     
+    func loadProfile(completion: @escaping (Error?) -> ()) {
+        manager.loadFromPreferences { error in
+            completion(error)
+        }
+    }
+    
     func removeProfile(completion: @escaping (Error?) -> ()) {
         manager.removeFromPreferences { error in
             completion(error)
