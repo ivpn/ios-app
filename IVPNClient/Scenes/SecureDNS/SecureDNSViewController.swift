@@ -98,10 +98,14 @@ class SecureDNSViewController: UITableViewController {
     
     @objc func saveTapped() {
         saveIpAddress()
+        saveServerURL()
+        saveServerName()
         view.endEditing(true)
     }
     
-    func saveIpAddress() {
+    // MARK: - Private methods -
+    
+    private func saveIpAddress() {
         guard let text = secureDNSView.ipAddressField.text else {
             return
         }
@@ -115,7 +119,36 @@ class SecureDNSViewController: UITableViewController {
             let ipAddress = try CIDRAddress(stringRepresentation: text)
             model.ipAddress = ipAddress?.ipAddress
         } catch {
-            showAlert(title: "Invalid DNS Server", message: "The IP Address (\(text)) is invalid.")
+            showAlert(title: "Invalid DNS server", message: "The IP address (\(text)) is invalid.")
+        }
+    }
+    
+    private func saveServerURL() {
+        guard let text = secureDNSView.serverURLField.text else {
+            return
+        }
+        
+        if text.isEmpty {
+            model.serverURL = nil
+            return
+        }
+        
+        if UIApplication.isValidURL(urlString: text) {
+            model.serverURL = text
+        } else {
+            showAlert(title: "Invalid DNS server URL", message: "The DNS server URL (\(text)) is invalid.")
+        }
+    }
+    
+    private func saveServerName() {
+        guard let text = secureDNSView.serverNameField.text else {
+            return
+        }
+        
+        if text.isEmpty {
+            model.serverName = nil
+        } else {
+            model.serverName = text
         }
     }
     
@@ -148,9 +181,18 @@ extension SecureDNSViewController {
 extension SecureDNSViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == secureDNSView.ipAddressField {
+        switch textField {
+        case secureDNSView.ipAddressField:
             textField.resignFirstResponder()
             saveIpAddress()
+        case secureDNSView.serverURLField:
+            textField.resignFirstResponder()
+            saveServerURL()
+        case secureDNSView.serverNameField:
+            textField.resignFirstResponder()
+            saveServerName()
+        default:
+            break
         }
         
         return true

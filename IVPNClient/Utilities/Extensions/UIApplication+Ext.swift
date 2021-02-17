@@ -54,7 +54,7 @@ extension UIApplication {
     }
     
     class func openNetworkSettings() {
-        if let url = URL(string: "App-prefs:root=General&path=Network/VPN") {
+        if let url = URL(string: "App-prefs:root=General") {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:])
             } else {

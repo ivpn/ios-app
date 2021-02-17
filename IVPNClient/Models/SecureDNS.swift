@@ -31,6 +31,18 @@ struct SecureDNS: Codable {
         }
     }
     
+    var serverURL: String? {
+        didSet {
+            save()
+        }
+    }
+    
+    var serverName: String? {
+        didSet {
+            save()
+        }
+    }
+    
     var type: String {
         didSet {
             save()
@@ -57,6 +69,8 @@ struct SecureDNS: Codable {
     init() {
         let model = SecureDNS.load()
         ipAddress = model?.ipAddress
+        serverURL = model?.serverURL
+        serverName = model?.serverName
         type = model?.type ?? "doh"
         mobileNetwork = model?.mobileNetwork ?? true
         wifiNetwork = model?.wifiNetwork ?? true
