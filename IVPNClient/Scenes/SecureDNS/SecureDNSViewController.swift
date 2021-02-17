@@ -124,7 +124,7 @@ class SecureDNSViewController: UITableViewController {
             let ipAddress = try CIDRAddress(stringRepresentation: text)
             model.ipAddress = ipAddress?.ipAddress
         } catch {
-            showAlert(title: "Invalid DNS server", message: "The IP address (\(text)) is invalid.")
+            showAlert(title: "Invalid DNS server IP", message: "The DNS server IP address (\(text)) is invalid.")
         }
     }
     
@@ -152,8 +152,19 @@ class SecureDNSViewController: UITableViewController {
         
         if text.isEmpty {
             model.serverName = nil
-        } else {
+            return
+        }
+        
+        if UIApplication.isValidURL(urlString: text) {
             model.serverName = text
+            return
+        }
+        
+        do {
+            let ipAddress = try CIDRAddress(stringRepresentation: text)
+            model.serverName = ipAddress?.ipAddress
+        } catch {
+            showAlert(title: "Invalid DNS server name", message: "The DNS server name (\(text)) is invalid.")
         }
     }
     
