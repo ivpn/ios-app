@@ -74,6 +74,7 @@ class SecureDNSViewController: UITableViewController {
     
     @IBAction func changeType(_ sender: UISegmentedControl) {
         model.type = sender.selectedSegmentIndex == 1 ? "dot" : "doh"
+        tableView.reloadData()
     }
     
     @IBAction func changeMobileNetwork(_ sender: UISwitch) {
@@ -88,7 +89,9 @@ class SecureDNSViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         secureDNSView.setupView(model: model)
+        hideKeyboardOnTap()
     }
     
     // MARK: - Methods -
@@ -159,6 +162,20 @@ class SecureDNSViewController: UITableViewController {
 // MARK: - UITableViewDelegate -
 
 extension SecureDNSViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let type = SecureDNSType.init(rawValue: model.type)
+        
+        if type == .dot && indexPath.section == 1 && indexPath.row == 1 {
+            return 0
+        }
+        
+        if type == .doh && indexPath.section == 1 && indexPath.row == 2 {
+            return 0
+        }
+        
+        return 45
+    }
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
