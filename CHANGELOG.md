@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.2.0 - 2021-02-18  
+
+[NEW] Load balancer for IKEv2 and OpenVPN  
+[IMPROVED] WireGuard upgraded to the latest version  
+[IMPROVED] Security enhancements  
+[FIXED] Small UI bugs on the main screen  
+[FIXED] Server mismatch when device recovers from losing internet connection  
+
 ## 2.1.0 - 2021-01-28  
 
 [NEW] Updated Privacy Policy and Terms of Service  
