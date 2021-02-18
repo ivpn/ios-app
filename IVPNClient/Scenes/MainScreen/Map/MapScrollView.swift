@@ -44,7 +44,7 @@ class MapScrollView: UIScrollView {
             markerLocalView.viewModel = viewModel
             
             if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
-                updateMapPosition(animated: oldValue != nil)
+                updateMapPosition(viewModel: viewModel, animated: oldValue != nil)
                 markerGatewayView.hide(animated: true)
                 markerLocalView.show(animated: oldValue != nil)
             }
@@ -96,17 +96,7 @@ class MapScrollView: UIScrollView {
             self.mapImageView.backgroundColor = color
         }
         
-        if vpnStatus == .disconnected {
-            if localCoordinates != nil {
-                markerGatewayView.hide(animated: true)
-            }
-        }
-    }
-    
-    func updateMapPosition(animated: Bool = false) {
-        guard let viewModel = viewModel else { return }
-        
-        updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated, isLocalPosition: true)
+        updateMapPosition(vpnStatus: vpnStatus)
     }
     
     func updateMapPositionToCurrentCoordinates() {
@@ -115,26 +105,14 @@ class MapScrollView: UIScrollView {
         }
     }
     
-    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
-        let halfWidth = Double(UIScreen.main.bounds.width / 2)
-        let halfHeight = Double(UIScreen.main.bounds.height / 2)
-        let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
-        let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
-        let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
+    func centerMap() {
+        let vpnStatus = Application.shared.connectionManager.status
         
-        if animated {
-            UIView.animate(withDuration: 0.55, delay: 0, options: .curveEaseInOut, animations: {
-                self.setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
-            })
+        if vpnStatus.isDisconnected() {
+            updateMapPositionToLocalCoordinates()
         } else {
-            setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
+            updateMapPositionToGateway()
         }
-        
-        if updateMarkers {
-            updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
-        }
-        
-        currentCoordinates = (latitude, longitude)
     }
     
     func updateMapMarkers() {
@@ -183,6 +161,79 @@ class MapScrollView: UIScrollView {
     
     private func initConnectToServerPopup() {
         addSubview(connectToServerPopup)
+    }
+    
+    private func updateMapPosition(vpnStatus: NEVPNStatus, animated: Bool = true) {
+        markerGatewayView.status = vpnStatus
+        
+        if vpnStatus == .connecting || vpnStatus == .connected {
+            updateMapPositionToGateway(animated: animated)
+            return
+        }
+        
+        if vpnStatus == .disconnecting && !Application.shared.connectionManager.reconnectAutomatically {
+            updateMapPositionToLocalCoordinates(animated: animated)
+            return
+        }
+        
+        if vpnStatus == .disconnecting && Application.shared.connectionManager.reconnectAutomatically {
+            markerGatewayView.hide(animated: true)
+            return
+        }
+    }
+    
+    private func updateMapPosition(viewModel: ProofsViewModel, animated: Bool = false) {
+        updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated, isLocalPosition: true)
+    }
+    
+    private func updateMapPositionToGateway(animated: Bool = true) {
+        var server = Application.shared.settings.selectedServer
+        
+        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            server = Application.shared.settings.selectedExitServer
+        }
+        
+        updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: animated, isLocalPosition: false)
+        markerLocalView.hide(animated: animated)
+        DispatchQueue.delay(0.25) {
+            let model = GeoLookup(ipAddress: server.ipAddresses.first ?? "", countryCode: server.countryCode, country: server.country, city: server.city, isIvpnServer: true, isp: "", latitude: server.latitude, longitude: server.longitude)
+            self.markerGatewayView.viewModel = ProofsViewModel(model: model)
+            self.markerGatewayView.show(animated: animated)
+            self.markerLocalView.hide(animated: false)
+        }
+    }
+    
+    private func updateMapPositionToLocalCoordinates(animated: Bool = true) {
+        if let localCoordinates = localCoordinates {
+            updateMapPosition(latitude: localCoordinates.0, longitude: localCoordinates.1, animated: animated, isLocalPosition: true)
+            markerGatewayView.hide(animated: true)
+            DispatchQueue.delay(0.25) {
+                self.markerLocalView.show(animated: true)
+                self.markerGatewayView.hide(animated: false)
+            }
+        }
+    }
+    
+    private func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
+        let halfWidth = Double(UIScreen.main.bounds.width / 2)
+        let halfHeight = Double(UIScreen.main.bounds.height / 2)
+        let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
+        let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
+        let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
+        
+        if animated {
+            UIView.animate(withDuration: 0.55, delay: 0, options: .curveEaseInOut, animations: {
+                self.setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
+            })
+        } else {
+            setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
+        }
+        
+        if updateMarkers {
+            updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
+        }
+        
+        currentCoordinates = (latitude, longitude)
     }
     
     private func updateMarkerPosition(x: Double, y: Double, isLocalPosition: Bool) {

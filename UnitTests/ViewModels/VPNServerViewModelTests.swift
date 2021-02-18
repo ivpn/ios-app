@@ -48,7 +48,7 @@ class VPNServerViewModelTests: XCTestCase {
     }
     
     func test_imageNameForCountryCode() {
-        XCTAssertEqual(viewModel.imageNameForCountryCode, "nl-v")
+        XCTAssertEqual(viewModel.imageNameForCountryCode, "NL")
     }
     
 }

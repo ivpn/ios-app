@@ -358,6 +358,12 @@ class ControlPanelViewController: UITableViewController {
         })
     }
     
+    func presentSelectProtocol() {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
+            topViewController.performSegue(withIdentifier: "MainScreenSelectProtocol", sender: nil)
+        }
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
@@ -416,8 +422,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc private func pingDidComplete() {
-        Application.shared.connectionManager.needsToUpdateSelectedServer()
-        controlPanelView.updateServerNames()
+        serverSelected()
         
         if needsToReconnect {
             needsToReconnect = false

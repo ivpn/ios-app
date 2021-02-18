@@ -75,7 +75,6 @@ class MapMarkerView: UIView {
     }
     
     var markerType: MarkerType = .local
-    
     var connectionInfoPopup = ConnectionInfoPopupView()
     private var circle1 = UIView()
     private var circle2 = UIView()
