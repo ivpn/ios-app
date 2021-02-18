@@ -25,7 +25,6 @@ import Foundation
 import UIKit
 import MessageUI
 import JGProgressHUD
-import Sentry
 
 class SettingsViewController: UITableViewController {
     
@@ -41,7 +40,6 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var entryServerCell: UITableViewCell!
     @IBOutlet weak var keepAliveSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
-    @IBOutlet weak var loggingCrashesSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
     
     // MARK: - Properties -
@@ -130,16 +128,6 @@ class SettingsViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    @IBAction func toggleLoggingCrashes(_ sender: UISwitch) {
-        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLoggingCrashes)
-        Client.shared?.enabled = sender.isOn as NSNumber
-        
-        if sender.isOn {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.setupCrashReports()
-        }
-    }
-    
     @IBAction func extendSubscription(_ sender: Any) {
         present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
@@ -208,10 +196,6 @@ class SettingsViewController: UITableViewController {
             keepAliveSwitch.setOn(false, animated: false)
         }
         
-        if !UserDefaults.shared.isLoggingCrashes {
-            loggingCrashesSwitch.setOn(false, animated: false)
-        }
-        
         if UserDefaults.shared.isLogging {
             loggingSwitch.setOn(true, animated: false)
         }
@@ -252,7 +236,7 @@ class SettingsViewController: UITableViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         let status = Application.shared.connectionManager.status
         
-        if identifier == "SelectProtocol" || identifier == "NetworkProtection" {
+        if identifier == "NetworkProtection" {
             if !Application.shared.authentication.isLoggedIn {
                 authenticate(self)
                 deselectRow(sender: sender)
@@ -270,11 +254,6 @@ class SettingsViewController: UITableViewController {
                 deselectRow(sender: sender)
                 return false
             }
-        }
-        
-        if identifier == "SelectProtocol" && !status.isDisconnected() {
-            showConnectedAlert(message: "To change protocol, please first disconnect", sender: sender)
-            return false
         }
         
         if identifier == "CustomDNS" && !status.isDisconnected() {
@@ -427,14 +406,14 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 2 && indexPath.row == 1 { return 60 }
         if indexPath.section == 2 && indexPath.row == 2 { return 60 }
-        if indexPath.section == 2 && indexPath.row == 5 { return 60 }
-        if indexPath.section == 2 && indexPath.row == 6 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 2 && indexPath.row == 4 { return 60 }
+        if indexPath.section == 2 && indexPath.row == 5 && !loggingSwitch.isOn { return 0 }
         
         return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && indexPath.row == 6 {
+        if indexPath.section == 2 && indexPath.row == 5 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
@@ -452,6 +431,35 @@ extension SettingsViewController {
         if indexPath.section == 3 && indexPath.row == 2 {
             tableView.deselectRow(at: indexPath, animated: true)
             contactSupport()
+        }
+        
+        if indexPath.section == 1 && indexPath.row == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            guard evaluateIsLoggedIn() else {
+                return
+            }
+            
+            guard evaluateIsServiceActive() else {
+                return
+            }
+            
+            guard Application.shared.connectionManager.status.isDisconnected() else {
+                showConnectedAlert(message: "To change protocol, please first disconnect", sender: tableView.cellForRow(at: indexPath))
+                return
+            }
+            
+            Application.shared.connectionManager.isOnDemandEnabled { enabled in
+                guard !enabled else {
+                    self.showDisableVPNPrompt(sourceView: tableView.cellForRow(at: indexPath)!) {
+                        Application.shared.connectionManager.resetRulesAndDisconnect()
+                        self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
+                    }
+                    return
+                }
+                
+                self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
+            }
         }
     }
     

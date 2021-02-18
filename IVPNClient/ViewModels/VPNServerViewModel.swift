@@ -52,7 +52,7 @@ struct VPNServerViewModel {
             return image
         }
         
-        return UIImage(named: server.countryCode.lowercased() + "-v")
+        return UIImage(named: server.countryCode.uppercased())
     }
     
     var formattedServerNameForSettings: String {
@@ -80,7 +80,7 @@ struct VPNServerViewModel {
             return image
         }
         
-        return UIImage(named: server.countryCode.lowercased() + "-v")
+        return UIImage(named: server.countryCode.uppercased())
     }
     
     var imageNameForPingTime: String {
@@ -95,11 +95,11 @@ struct VPNServerViewModel {
     }
     
     var imageForCountryCode: UIImage? {
-        return UIImage(named: server.countryCode.lowercased() + "-v")
+        return UIImage(named: server.countryCode.uppercased())
     }
     
     var imageNameForCountryCode: String {
-        return server.countryCode.lowercased() + "-v"
+        return server.countryCode.uppercased()
     }
     
     var imageForPingTime: UIImage? {

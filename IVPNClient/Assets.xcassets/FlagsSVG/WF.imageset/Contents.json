@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "WF.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

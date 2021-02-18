@@ -35,7 +35,6 @@ extension UserDefaults {
         static let isMultiHop = "isMultiHop"
         static let exitServerLocation = "exitServerLocation"
         static let isLogging = "isLogging"
-        static let isLoggingCrashes = "isLoggingCrashes"
         static let networkProtectionEnabled = "networkProtection.enabled"
         static let networkProtectionUntrustedConnect = "networkProtection.untrusted.connect"
         static let networkProtectionTrustedDisconnect = "networkProtection.trusted.disconnect"
@@ -80,10 +79,6 @@ extension UserDefaults {
     
     @objc dynamic var isLogging: Bool {
         return bool(forKey: Key.isLogging)
-    }
-    
-    @objc dynamic var isLoggingCrashes: Bool {
-        return bool(forKey: Key.isLoggingCrashes)
     }
     
     @objc dynamic var networkProtectionEnabled: Bool {
@@ -178,7 +173,6 @@ extension UserDefaults {
         shared.register(defaults: [UserDefaults.Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [UserDefaults.Key.networkProtectionTrustedDisconnect: true])
         shared.register(defaults: [UserDefaults.Key.keepAlive: true])
-        shared.register(defaults: [UserDefaults.Key.isLoggingCrashes: true])
         shared.register(defaults: [UserDefaults.Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
         shared.register(defaults: [UserDefaults.Key.wgKeyTimestamp: Date()])
         standard.register(defaults: ["SelectedServerFastest": true])
@@ -188,7 +182,6 @@ extension UserDefaults {
     static func clearSession() {
         shared.removeObject(forKey: UserDefaults.Key.isMultiHop)
         shared.removeObject(forKey: UserDefaults.Key.isLogging)
-        shared.removeObject(forKey: UserDefaults.Key.isLoggingCrashes)
         shared.removeObject(forKey: UserDefaults.Key.networkProtectionEnabled)
         shared.removeObject(forKey: UserDefaults.Key.networkProtectionUntrustedConnect)
         shared.removeObject(forKey: UserDefaults.Key.networkProtectionTrustedDisconnect)

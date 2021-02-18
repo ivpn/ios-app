@@ -37,7 +37,7 @@ These instructions will get you a copy of the project up and running on your loc
 - Ruby (preinstalled with macOS)
 - CocoaPods 1.10.0+
 - fastlane 2.137.0+
-- Go 1.14+
+- Go 1.15+
 
 ### Dev dependencies
 

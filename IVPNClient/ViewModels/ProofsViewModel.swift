@@ -31,7 +31,7 @@ struct ProofsViewModel {
     var model: GeoLookup
     
     var imageNameForCountryCode: String {
-        return model.countryCode.lowercased()
+        return model.countryCode.uppercased()
     }
     
     var ipAddress: String {
