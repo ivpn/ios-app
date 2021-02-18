@@ -113,4 +113,14 @@ struct VPNServerViewModel {
         self.server = server
     }
     
+    // MARK: - Methods -
+    
+    func formattedServerName(sort: ServersSort) -> String {
+        guard sort != .country else {
+            return "\(server.countryCode.uppercased()), \(server.city)"
+        }
+        
+        return "\(server.city), \(server.countryCode.uppercased())"
+    }
+    
 }
