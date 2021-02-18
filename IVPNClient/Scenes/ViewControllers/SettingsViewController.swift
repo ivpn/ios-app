@@ -252,7 +252,7 @@ class SettingsViewController: UITableViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         let status = Application.shared.connectionManager.status
         
-        if identifier == "SelectProtocol" || identifier == "NetworkProtection" {
+        if identifier == "NetworkProtection" {
             if !Application.shared.authentication.isLoggedIn {
                 authenticate(self)
                 deselectRow(sender: sender)
@@ -270,11 +270,6 @@ class SettingsViewController: UITableViewController {
                 deselectRow(sender: sender)
                 return false
             }
-        }
-        
-        if identifier == "SelectProtocol" && !status.isDisconnected() {
-            showConnectedAlert(message: "To change protocol, please first disconnect", sender: sender)
-            return false
         }
         
         if identifier == "CustomDNS" && !status.isDisconnected() {
@@ -452,6 +447,35 @@ extension SettingsViewController {
         if indexPath.section == 3 && indexPath.row == 2 {
             tableView.deselectRow(at: indexPath, animated: true)
             contactSupport()
+        }
+        
+        if indexPath.section == 1 && indexPath.row == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            guard evaluateIsLoggedIn() else {
+                return
+            }
+            
+            guard evaluateIsServiceActive() else {
+                return
+            }
+            
+            guard Application.shared.connectionManager.status.isDisconnected() else {
+                showConnectedAlert(message: "To change protocol, please first disconnect", sender: tableView.cellForRow(at: indexPath))
+                return
+            }
+            
+            Application.shared.connectionManager.isOnDemandEnabled { enabled in
+                guard !enabled else {
+                    self.showDisableVPNPrompt(sourceView: tableView.cellForRow(at: indexPath)!) {
+                        Application.shared.connectionManager.resetRulesAndDisconnect()
+                        self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
+                    }
+                    return
+                }
+                
+                self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
+            }
         }
     }
     

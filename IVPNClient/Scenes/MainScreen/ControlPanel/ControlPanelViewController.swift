@@ -358,6 +358,12 @@ class ControlPanelViewController: UITableViewController {
         })
     }
     
+    func presentSelectProtocol() {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
+            topViewController.performSegue(withIdentifier: "MainScreenSelectProtocol", sender: nil)
+        }
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
