@@ -127,10 +127,10 @@ class VPNManager {
     private func setupNEVPNManager(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
         let serverAddress = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
         self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
-        manager.saveToPreferences { error in
-            manager.loadFromPreferences { error in
+        manager.saveToPreferences { _ in
+            manager.loadFromPreferences { _ in
                 self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
-                manager.saveToPreferences { error in
+                manager.saveToPreferences { _ in
                     completion(nil)
                 }
             }
@@ -153,8 +153,8 @@ class VPNManager {
                 return
             }
             
-            manager.loadFromPreferences { error in
-                manager.saveToPreferences { error in
+            manager.loadFromPreferences { _ in
+                manager.saveToPreferences { _ in
                     completion(nil)
                 }
             }
