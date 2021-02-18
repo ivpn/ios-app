@@ -2660,6 +2660,7 @@
 					"\"KeychainAccess\"",
 					"-framework",
 					"\"SwiftyStoreKit\"",
+					"-Wl,-sectcreate,__RESTRICT,__restrict,/dev/null",
 				);
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios;
@@ -3055,6 +3056,7 @@
 					"\"KeychainAccess\"",
 					"-framework",
 					"\"SwiftyStoreKit\"",
+					"-Wl,-sectcreate,__RESTRICT,__restrict,/dev/null",
 				);
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios;
