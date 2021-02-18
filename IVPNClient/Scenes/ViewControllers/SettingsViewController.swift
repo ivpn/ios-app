@@ -25,7 +25,6 @@ import Foundation
 import UIKit
 import MessageUI
 import JGProgressHUD
-import Sentry
 
 class SettingsViewController: UITableViewController {
     
@@ -41,7 +40,6 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var entryServerCell: UITableViewCell!
     @IBOutlet weak var keepAliveSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
-    @IBOutlet weak var loggingCrashesSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
     
     // MARK: - Properties -
@@ -130,16 +128,6 @@ class SettingsViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    @IBAction func toggleLoggingCrashes(_ sender: UISwitch) {
-        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLoggingCrashes)
-        Client.shared?.enabled = sender.isOn as NSNumber
-        
-        if sender.isOn {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.setupCrashReports()
-        }
-    }
-    
     @IBAction func extendSubscription(_ sender: Any) {
         present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
@@ -206,10 +194,6 @@ class SettingsViewController: UITableViewController {
         
         if !UserDefaults.shared.keepAlive {
             keepAliveSwitch.setOn(false, animated: false)
-        }
-        
-        if !UserDefaults.shared.isLoggingCrashes {
-            loggingCrashesSwitch.setOn(false, animated: false)
         }
         
         if UserDefaults.shared.isLogging {
@@ -422,14 +406,14 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 2 && indexPath.row == 1 { return 60 }
         if indexPath.section == 2 && indexPath.row == 2 { return 60 }
-        if indexPath.section == 2 && indexPath.row == 5 { return 60 }
-        if indexPath.section == 2 && indexPath.row == 6 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 2 && indexPath.row == 4 { return 60 }
+        if indexPath.section == 2 && indexPath.row == 5 && !loggingSwitch.isOn { return 0 }
         
         return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && indexPath.row == 6 {
+        if indexPath.section == 2 && indexPath.row == 5 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
