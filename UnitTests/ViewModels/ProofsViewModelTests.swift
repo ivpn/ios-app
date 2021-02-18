@@ -34,7 +34,7 @@ class ProofsViewModelTests: XCTestCase {
     }
     
     func test_imageNameForCountryCode() {
-        XCTAssertEqual(viewModel.imageNameForCountryCode, "de")
+        XCTAssertEqual(viewModel.imageNameForCountryCode, "DE")
     }
     
     func test_ipAddress() {
