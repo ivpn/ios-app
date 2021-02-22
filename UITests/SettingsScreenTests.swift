@@ -55,7 +55,7 @@ class SettingsScreenTests: XCTestCase {
         XCTAssertTrue(app.isDisplayingMainScreen)
 
         app.buttons["Settings"].tap()
-        app.tables["settingsScreen"].staticTexts["IKEv2"].tap()
+        app.tables["settingsScreen"].staticTexts["WireGuard, UDP 2049"].tap()
         XCTAssertTrue(app.isDisplayingLoginScreen)
     }
     
