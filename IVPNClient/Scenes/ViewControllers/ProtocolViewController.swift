@@ -159,7 +159,7 @@ extension ProtocolViewController {
         
         cell.setup(connectionProtocol: connectionProtocol, isSettings: indexPath.section > 0)
         
-        if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) {
+        if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) || !validateSecureDNS(connectionProtocol: connectionProtocol) {
             cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabel6)
         } else {
             cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
