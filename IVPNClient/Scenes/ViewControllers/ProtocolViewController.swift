@@ -314,6 +314,12 @@ extension ProtocolViewController {
             }
         }
         
+        if connectionProtocol.tunnelType() == .ipsec {
+            if #available(iOS 14.0, *) {
+                DNSManager.shared.removeProfile { _ in }
+            }
+        }
+        
         reloadTable(connectionProtocol: connectionProtocol)
         
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
