@@ -61,7 +61,6 @@ struct SecureDNS: Codable {
         }
     }
     
-    
     private static let secureDNSKey = "SecureDNS"
     
     // MARK: - Initialize -
