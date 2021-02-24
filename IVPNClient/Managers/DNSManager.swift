@@ -43,7 +43,7 @@ class DNSManager {
     
     // MARK: - Methods -
     
-    func saveProfile(model: SecureDNS, completion: @escaping (Error?) -> ()) {
+    func saveProfile(model: SecureDNS, completion: @escaping (Error?) -> Void) {
         guard model.validation().0 else {
             let error = NSError(
                 domain: "NEConfigurationErrorDomain",
@@ -63,13 +63,13 @@ class DNSManager {
         }
     }
     
-    func loadProfile(completion: @escaping (Error?) -> ()) {
+    func loadProfile(completion: @escaping (Error?) -> Void) {
         manager.loadFromPreferences { error in
             completion(error)
         }
     }
     
-    func removeProfile(completion: @escaping (Error?) -> ()) {
+    func removeProfile(completion: @escaping (Error?) -> Void) {
         manager.removeFromPreferences { error in
             completion(error)
         }
