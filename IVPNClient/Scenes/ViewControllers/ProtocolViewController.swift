@@ -69,22 +69,44 @@ class ProtocolViewController: UITableViewController {
     }
     
     func validateMultiHop(connectionProtocol: ConnectionSettings) -> Bool {
-        if UserDefaults.shared.isMultiHop && connectionProtocol.tunnelType() != .openvpn { return false }
+        if UserDefaults.shared.isMultiHop && connectionProtocol.tunnelType() != .openvpn {
+            return false
+        }
+        
         return true
     }
     
     func validateCustomDNSAndAntiTracker(connectionProtocol: ConnectionSettings) -> Bool {
-        if UserDefaults.shared.isCustomDNS && UserDefaults.shared.isAntiTracker && connectionProtocol == .ipsec { return false }
+        if UserDefaults.shared.isCustomDNS && UserDefaults.shared.isAntiTracker && connectionProtocol == .ipsec {
+            return false
+        }
+        
         return true
     }
     
     func validateCustomDNS(connectionProtocol: ConnectionSettings) -> Bool {
-        if UserDefaults.shared.isCustomDNS && connectionProtocol == .ipsec { return false }
+        if UserDefaults.shared.isCustomDNS && connectionProtocol == .ipsec {
+            return false
+        }
+        
         return true
     }
     
     func validateAntiTracker(connectionProtocol: ConnectionSettings) -> Bool {
-        if UserDefaults.shared.isAntiTracker && connectionProtocol == .ipsec { return false }
+        if UserDefaults.shared.isAntiTracker && connectionProtocol == .ipsec {
+            return false
+        }
+        
+        return true
+    }
+    
+    func validateSecureDNS(connectionProtocol: ConnectionSettings) -> Bool {
+        if #available(iOS 14.0, *) {
+            if DNSManager.shared.isEnabled && connectionProtocol == .ipsec {
+                return false
+            }
+        }
+        
         return true
     }
     
@@ -255,6 +277,25 @@ extension ProtocolViewController {
                     switch index {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+                        tableView.reloadData()
+                    default:
+                        break
+                    }
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+            return
+        }
+        
+        guard validateSecureDNS(connectionProtocol: connectionProtocol) else {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                showActionSheet(title: "To use IKEv2 protocol you must disable DNS over HTTTPS/TLS", actions: ["Disable"], sourceView: cell as UIView) { index in
+                    switch index {
+                    case 0:
+                        if #available(iOS 14.0, *) {
+                            DNSManager.shared.removeProfile { _ in }
+                        }
                         tableView.reloadData()
                     default:
                         break
