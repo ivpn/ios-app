@@ -36,6 +36,13 @@ class SecureDNSViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func enable(_ sender: UISwitch) {
+        if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+            showAlert(title: "IKEv2 not supported", message: "DNS over HTTPS/TLS is supported only when using OpenVPN and WireGuard protocols.") { _ in
+                sender.setOn(false, animated: true)
+            }
+            return
+        }
+        
         switch sender.isOn {
         case true:
             saveDNSProfile()
