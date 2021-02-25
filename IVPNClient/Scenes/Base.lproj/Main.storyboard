@@ -2970,7 +2970,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Dvo-gK-gYE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ivpn-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Dvo-gK-gYE">
                                 <rect key="frame" x="171" y="116" width="72" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="g2c-ME-5fh"/>
@@ -3469,7 +3469,7 @@ Login to the website to change subscription plan</string>
         <image name="icon-map-pin" width="24" height="24"/>
         <image name="icon-server" width="24" height="24"/>
         <image name="icon-settings-2" width="24" height="24"/>
-        <image name="logo" width="72" height="24"/>
+        <image name="ivpn-logo" width="732" height="244"/>
         <image name="map" width="4700" height="3431"/>
         <image name="nl-v" width="24" height="24"/>
         <image name="promo-2" width="360" height="280"/>
