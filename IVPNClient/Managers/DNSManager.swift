@@ -78,15 +78,15 @@ class DNSManager {
     // MARK: - Private methods -
     
     private func getDnsSettings(model: SecureDNS) -> NEDNSSettings {
-        let ipAddress = model.ipAddress ?? ""
+        let ipAddresses = model.ipAddresses ?? []
         let type = SecureDNSType.init(rawValue: model.type)
 
         if type == .dot {
-            let dnsSettings = NEDNSOverTLSSettings(servers: [ipAddress])
+            let dnsSettings = NEDNSOverTLSSettings(servers: ipAddresses)
             dnsSettings.serverName = model.serverName
             return dnsSettings
         } else {
-            let dnsSettings = NEDNSOverHTTPSSettings(servers: [ipAddress])
+            let dnsSettings = NEDNSOverHTTPSSettings(servers: ipAddresses)
             dnsSettings.serverURL = URL.init(string: model.serverURL ?? "")
             return dnsSettings
         }

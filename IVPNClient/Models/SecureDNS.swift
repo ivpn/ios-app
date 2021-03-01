@@ -38,6 +38,8 @@ struct SecureDNS: Codable {
         }
     }
     
+    var ipAddresses: [String]?
+    
     var serverURL: String? {
         didSet {
             save()
@@ -75,6 +77,7 @@ struct SecureDNS: Codable {
     init() {
         let model = SecureDNS.load()
         address = model?.address
+        ipAddresses = model?.ipAddresses
         serverURL = model?.serverURL
         serverName = model?.serverName
         type = model?.type ?? "doh"
