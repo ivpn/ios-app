@@ -34,26 +34,21 @@ class SecureDNSTests: XCTestCase {
     }
     
     func test_validation() {
-        model.ipAddress = nil
+        model.address = nil
         XCTAssertFalse(model.validation().0)
-        XCTAssertEqual(model.validation().1, "Please enter DNS server ip address")
+        XCTAssertEqual(model.validation().1, "Please enter DNS server")
         
-        model.ipAddress = "0.0.0.0"
-        model.type = "doh"
-        model.serverURL = nil
-        XCTAssertFalse(model.validation().0)
-        XCTAssertEqual(model.validation().1, "Please enter DNS server URL")
+        model.serverName = "0.0.0.0"
+        XCTAssertTrue(model.validation().0)
+        XCTAssertNil(model.validation().1)
         
         model.serverURL = "https://example.com"
         XCTAssertTrue(model.validation().0)
-        
-        model.type = "dot"
-        model.serverName = nil
-        XCTAssertFalse(model.validation().0)
-        XCTAssertEqual(model.validation().1, "Please enter DNS server name")
+        XCTAssertNil(model.validation().1)
         
         model.serverName = "example.com"
         XCTAssertTrue(model.validation().0)
+        XCTAssertNil(model.validation().1)
     }
     
     func test_getServerURL() {

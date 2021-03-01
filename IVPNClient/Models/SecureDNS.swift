@@ -27,14 +27,13 @@ struct SecureDNS: Codable {
     
     var address: String? {
         didSet {
-            serverURL = getServerURL(address: address ?? "")
-            serverName = getServerName(address: address ?? "")
-            save()
-        }
-    }
-    
-    var ipAddress: String? {
-        didSet {
+            if let address = address {
+                serverURL = getServerURL(address: address)
+                serverName = getServerName(address: address)
+            } else {
+                serverURL = nil
+                serverName = nil
+            }
             save()
         }
     }
@@ -76,7 +75,6 @@ struct SecureDNS: Codable {
     init() {
         let model = SecureDNS.load()
         address = model?.address
-        ipAddress = model?.ipAddress
         serverURL = model?.serverURL
         serverName = model?.serverName
         type = model?.type ?? "doh"
@@ -103,23 +101,8 @@ struct SecureDNS: Codable {
     }
     
     func validation() -> (Bool, String?) {
-        let configType = SecureDNSType.init(rawValue: type)
-        
-        guard let ipAddress = ipAddress, !ipAddress.isEmpty else {
-            return (false, "Please enter DNS server ip address")
-        }
-        
-        switch configType {
-        case .doh:
-            guard let serverURL = serverURL, !serverURL.isEmpty else {
-                return (false, "Please enter DNS server URL")
-            }
-        case .dot:
-            guard let serverName = serverName, !serverName.isEmpty else {
-                return (false, "Please enter DNS server name")
-            }
-        case .none:
-            return (false, "Invalid DNS configuration")
+        guard let address = address, !address.isEmpty else {
+            return (false, "Please enter DNS server")
         }
         
         return (true, nil)
@@ -127,7 +110,7 @@ struct SecureDNS: Codable {
     
     // MARK: - Private methods -
     
-    private func getServerURL(address: String) -> String {
+    private func getServerURL(address: String) -> String? {
         var serverURL = address
         
         if !address.hasPrefix("https://") {
