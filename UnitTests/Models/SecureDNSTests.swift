@@ -38,15 +38,15 @@ class SecureDNSTests: XCTestCase {
         XCTAssertFalse(model.validation().0)
         XCTAssertEqual(model.validation().1, "Please enter DNS server")
         
-        model.serverName = "0.0.0.0"
+        model.address = "0.0.0.0"
         XCTAssertTrue(model.validation().0)
         XCTAssertNil(model.validation().1)
         
-        model.serverURL = "https://example.com"
+        model.address = "https://example.com"
         XCTAssertTrue(model.validation().0)
         XCTAssertNil(model.validation().1)
         
-        model.serverName = "example.com"
+        model.address = "example.com"
         XCTAssertTrue(model.validation().0)
         XCTAssertNil(model.validation().1)
     }
