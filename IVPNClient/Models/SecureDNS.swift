@@ -149,6 +149,13 @@ struct SecureDNS: Codable {
         }
         
         if let serverURL = URL.init(string: serverName) {
+            if let host = serverURL.host {
+                do {
+                    let ipAddress = try CIDRAddress(stringRepresentation: host)
+                    return ipAddress?.ipAddress ?? address
+                } catch {}
+            }
+            
             return serverURL.getTopLevelDomain()
         }
         
