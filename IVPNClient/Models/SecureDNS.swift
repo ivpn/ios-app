@@ -25,6 +25,14 @@ import Foundation
 
 struct SecureDNS: Codable {
     
+    var address: String? {
+        didSet {
+            serverURL = getServerURL(address: address ?? "")
+            serverName = getServerName(address: address ?? "")
+            save()
+        }
+    }
+    
     var ipAddress: String? {
         didSet {
             save()
@@ -67,6 +75,7 @@ struct SecureDNS: Codable {
     
     init() {
         let model = SecureDNS.load()
+        address = model?.address
         ipAddress = model?.ipAddress
         serverURL = model?.serverURL
         serverName = model?.serverName
@@ -114,6 +123,36 @@ struct SecureDNS: Codable {
         }
         
         return (true, nil)
+    }
+    
+    // MARK: - Private methods -
+    
+    private func getServerURL(address: String) -> String {
+        var serverURL = address
+        
+        if !address.hasPrefix("https://") {
+            serverURL = "https://\(serverURL)"
+        }
+        
+        if !address.hasSuffix("/dns-query") {
+            serverURL = "\(serverURL)/dns-query"
+        }
+        
+        return serverURL
+    }
+    
+    private func getServerName(address: String) -> String {
+        var serverName = address
+        
+        if !address.hasPrefix("https://") {
+            serverName = "https://\(serverName)"
+        }
+        
+        if let serverURL = URL.init(string: serverName) {
+            return serverURL.getTopLevelDomain()
+        }
+        
+        return address
     }
     
 }

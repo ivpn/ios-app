@@ -214,6 +214,7 @@
 		82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293C221CCDA42000B74EC /* UIColor+Ext.swift */; };
 		82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
 		82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9739F217DFA9C00CE06D4 /* Host.swift */; };
+		82CE599025ED3C7A0078099D /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE598F25ED3C7A0078099D /* URL+Ext.swift */; };
 		82D598A321A55210000FABDE /* NetworkProtectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */; };
 		82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */; };
 		82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */; };
@@ -557,6 +558,7 @@
 		82C293C221CCDA42000B74EC /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
 		82C9739F217DFA9C00CE06D4 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
+		82CE598F25ED3C7A0078099D /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionViewController.swift; sourceTree = "<group>"; };
 		82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -985,6 +987,7 @@
 				829DF2812497953C000DC2DB /* UIButton+Ext.swift */,
 				82A3422424AB6AF700761AB0 /* Double+Ext.swift */,
 				82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */,
+				82CE598F25ED3C7A0078099D /* URL+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2189,6 +2192,7 @@
 				9C3031301DB41FBA00C38B0C /* ServerTableViewCell.swift in Sources */,
 				8292E1AB2174C12200123538 /* Tunnel.swift in Sources */,
 				82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */,
+				82CE599025ED3C7A0078099D /* URL+Ext.swift in Sources */,
 				82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */,
 				82B51CDF21DE3E31005CC9C9 /* UITableView+Ext.swift in Sources */,
 				8243587125DBB73F005FDEBB /* SecureDNS.swift in Sources */,
