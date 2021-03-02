@@ -184,6 +184,7 @@ extension SecureDNSViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == secureDNSView.serverField {
+            textField.resignFirstResponder()
             saveAddress()
         }
         
