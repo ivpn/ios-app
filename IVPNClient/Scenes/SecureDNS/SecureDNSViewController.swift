@@ -143,13 +143,11 @@ class SecureDNSViewController: UITableViewController {
     }
     
     private func saveAddress() {
-        guard let text = secureDNSView.serverField.text else {
+        guard let text = secureDNSView.serverField.text, !text.isEmpty else {
             return
         }
         
-        if text.isEmpty {
-            model.address = text
-        }
+        model.address = text
     }
     
 }
