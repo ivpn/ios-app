@@ -405,7 +405,6 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 0 { return 60 }
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 2 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 2 && indexPath.row == 2 { return 60 }
         if indexPath.section == 2 && indexPath.row == 5 { return 60 }
         if indexPath.section == 2 && indexPath.row == 6 && !loggingSwitch.isOn { return 0 }
         
