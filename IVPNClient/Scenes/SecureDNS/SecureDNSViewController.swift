@@ -119,7 +119,7 @@ class SecureDNSViewController: UITableViewController {
             }
             
             if !DNSManager.shared.isEnabled {
-                self.showActionSheet(title: "Enable your DNS config in iOS Settings - General - VPN & Network - DNS", actions: ["Open iOS Settings"], sourceView: self.secureDNSView.enableSwitch) { index in
+                self.showActionSheet(title: "Select IVPN in iOS Settings - VPN & Network - DNS", actions: ["Open iOS Settings"], sourceView: self.secureDNSView.enableSwitch) { index in
                     switch index {
                     case 0:
                         UIApplication.openNetworkSettings()
