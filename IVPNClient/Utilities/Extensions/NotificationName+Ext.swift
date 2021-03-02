@@ -49,5 +49,6 @@ extension Notification.Name {
     public static let HideConnectToServerPopup = Notification.Name("hideConnectToServerPopup")
     public static let CenterMap = Notification.Name("centerMap")
     public static let UpdateGeoLocation = Notification.Name("updateGeoLocation")
+    public static let UpdateResolvedDNS = Notification.Name("updateResolvedDNS")
     
 }

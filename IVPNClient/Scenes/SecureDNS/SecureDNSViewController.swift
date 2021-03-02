@@ -73,6 +73,7 @@ class SecureDNSViewController: UITableViewController {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         secureDNSView.setupView(model: model)
+        addObservers()
         hideKeyboardOnTap()
     }
     
@@ -89,6 +90,10 @@ class SecureDNSViewController: UITableViewController {
     }
     
     // MARK: - Private methods -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDNSProfile), name: Notification.Name.UpdateResolvedDNS, object: nil)
+    }
     
     private func saveDNSProfile() {
         guard #available(iOS 14.0, *) else {
@@ -114,7 +119,7 @@ class SecureDNSViewController: UITableViewController {
             }
             
             if !DNSManager.shared.isEnabled {
-                self.showActionSheet(title: "Enable your DNS config in iOS Settings - General - VPN & Network - DNS", actions: ["Open iOS Settings"], sourceView: self.secureDNSView.enableSwitch) { index in
+                self.showActionSheet(title: "Select IVPN in iOS Settings - VPN & Network - DNS", actions: ["Open iOS Settings"], sourceView: self.secureDNSView.enableSwitch) { index in
                     switch index {
                     case 0:
                         UIApplication.openNetworkSettings()
@@ -126,7 +131,7 @@ class SecureDNSViewController: UITableViewController {
         }
     }
     
-    private func updateDNSProfile() {
+    @objc private func updateDNSProfile() {
         guard #available(iOS 14.0, *) else {
             return
         }
@@ -143,7 +148,7 @@ class SecureDNSViewController: UITableViewController {
     }
     
     private func saveAddress() {
-        guard let text = secureDNSView.serverField.text, !text.isEmpty else {
+        guard let text = secureDNSView.serverField.text else {
             return
         }
         
