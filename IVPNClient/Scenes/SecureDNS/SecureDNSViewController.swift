@@ -73,6 +73,7 @@ class SecureDNSViewController: UITableViewController {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         secureDNSView.setupView(model: model)
+        addObservers()
         hideKeyboardOnTap()
     }
     
@@ -89,6 +90,10 @@ class SecureDNSViewController: UITableViewController {
     }
     
     // MARK: - Private methods -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDNSProfile), name: Notification.Name.UpdateResolvedDNS, object: nil)
+    }
     
     private func saveDNSProfile() {
         guard #available(iOS 14.0, *) else {
@@ -126,7 +131,7 @@ class SecureDNSViewController: UITableViewController {
         }
     }
     
-    private func updateDNSProfile() {
+    @objc private func updateDNSProfile() {
         guard #available(iOS 14.0, *) else {
             return
         }

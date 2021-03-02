@@ -86,6 +86,7 @@ class DNSManager {
             }
             
             UserDefaults.standard.set(addresses, forKey: UserDefaults.Key.resolvedDNS)
+            NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNS, object: nil)
         }
     }
     
