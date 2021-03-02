@@ -59,6 +59,7 @@ extension UserDefaults {
         static let keepAlive = "keepAlive"
         static let serversSort = "serversSort"
         static let notAskToReconnect = "notAskToReconnect"
+        static let resolvedDNS = "resolvedDNS"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {

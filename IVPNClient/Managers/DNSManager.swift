@@ -75,18 +75,32 @@ class DNSManager {
         }
     }
     
+    func saveResolvedDNS(server: String) {
+        DNSResolver.resolve(host: server) { list in
+            var addresses: [String]? = nil
+            
+            for ip in list {
+                if let host = ip.host {
+                    addresses?.append(host)
+                }
+            }
+            
+            UserDefaults.standard.set(addresses, forKey: UserDefaults.Key.resolvedDNS)
+        }
+    }
+    
     // MARK: - Private methods -
     
     private func getDnsSettings(model: SecureDNS) -> NEDNSSettings {
-        let ipAddress = model.ipAddress ?? ""
+        let servers = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNS) as? [String] ?? []
         let type = SecureDNSType.init(rawValue: model.type)
 
         if type == .dot {
-            let dnsSettings = NEDNSOverTLSSettings(servers: [ipAddress])
+            let dnsSettings = NEDNSOverTLSSettings(servers: servers)
             dnsSettings.serverName = model.serverName
             return dnsSettings
         } else {
-            let dnsSettings = NEDNSOverHTTPSSettings(servers: [ipAddress])
+            let dnsSettings = NEDNSOverHTTPSSettings(servers: servers)
             dnsSettings.serverURL = URL.init(string: model.serverURL ?? "")
             return dnsSettings
         }

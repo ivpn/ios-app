@@ -214,6 +214,9 @@
 		82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293C221CCDA42000B74EC /* UIColor+Ext.swift */; };
 		82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
 		82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9739F217DFA9C00CE06D4 /* Host.swift */; };
+		82CE599025ED3C7A0078099D /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE598F25ED3C7A0078099D /* URL+Ext.swift */; };
+		82CE599925ED48D60078099D /* InternetAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE599825ED48D60078099D /* InternetAddress.swift */; };
+		82CE59A725ED491B0078099D /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE59A625ED491B0078099D /* DNSResolver.swift */; };
 		82D598A321A55210000FABDE /* NetworkProtectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */; };
 		82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */; };
 		82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */; };
@@ -557,6 +560,9 @@
 		82C293C221CCDA42000B74EC /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
 		82C9739F217DFA9C00CE06D4 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
+		82CE598F25ED3C7A0078099D /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
+		82CE599825ED48D60078099D /* InternetAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetAddress.swift; sourceTree = "<group>"; };
+		82CE59A625ED491B0078099D /* DNSResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
 		82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionViewController.swift; sourceTree = "<group>"; };
 		82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -840,6 +846,7 @@
 		82234B6421BA7EB500B082DE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				82CE599725ED48AB0078099D /* DNSResolver */,
 				825A43FB215CCFC10076131F /* Extensions */,
 				82234B6521BA7F3500B082DE /* Logging */,
 				8292E1BB2174CA6800123538 /* Crypto */,
@@ -985,6 +992,7 @@
 				829DF2812497953C000DC2DB /* UIButton+Ext.swift */,
 				82A3422424AB6AF700761AB0 /* Double+Ext.swift */,
 				82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */,
+				82CE598F25ED3C7A0078099D /* URL+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1261,6 +1269,15 @@
 				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
 			);
 			path = ControlPanel;
+			sourceTree = "<group>";
+		};
+		82CE599725ED48AB0078099D /* DNSResolver */ = {
+			isa = PBXGroup;
+			children = (
+				82CE599825ED48D60078099D /* InternetAddress.swift */,
+				82CE59A625ED491B0078099D /* DNSResolver.swift */,
+			);
+			path = DNSResolver;
 			sourceTree = "<group>";
 		};
 		82DEF01B2447149000CCB5CD /* Signup */ = {
@@ -2063,6 +2080,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				820EA86823223F7900E16B2D /* InterfaceResult.swift in Sources */,
+				82CE599925ED48D60078099D /* InternetAddress.swift in Sources */,
 				823DA733215E3CCB00DAFE37 /* Array+Ext.swift in Sources */,
 				82F638C7217DC22300410318 /* Endpoint.swift in Sources */,
 				824777E721A6BC3A001EEFAF /* Network+CoreDataClass.swift in Sources */,
@@ -2184,11 +2202,13 @@
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
 				82061F67238D2730009DDF4D /* PingManager.swift in Sources */,
 				9CDDD5AF1D9D2F9F00D39924 /* AppDelegate.swift in Sources */,
+				82CE59A725ED491B0078099D /* DNSResolver.swift in Sources */,
 				82BBF26121AD213500589766 /* Theme.swift in Sources */,
 				829AA4732267372A00037198 /* Designable+Ext.swift in Sources */,
 				9C3031301DB41FBA00C38B0C /* ServerTableViewCell.swift in Sources */,
 				8292E1AB2174C12200123538 /* Tunnel.swift in Sources */,
 				82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */,
+				82CE599025ED3C7A0078099D /* URL+Ext.swift in Sources */,
 				82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */,
 				82B51CDF21DE3E31005CC9C9 /* UITableView+Ext.swift in Sources */,
 				8243587125DBB73F005FDEBB /* SecureDNS.swift in Sources */,

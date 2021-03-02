@@ -34,26 +34,79 @@ class SecureDNSTests: XCTestCase {
     }
     
     func test_validation() {
-        model.ipAddress = nil
+        model.address = nil
         XCTAssertFalse(model.validation().0)
-        XCTAssertEqual(model.validation().1, "Please enter DNS server ip address")
+        XCTAssertEqual(model.validation().1, "Please enter DNS server")
         
-        model.ipAddress = "0.0.0.0"
-        model.type = "doh"
-        model.serverURL = nil
-        XCTAssertFalse(model.validation().0)
-        XCTAssertEqual(model.validation().1, "Please enter DNS server URL")
-        
-        model.serverURL = "https://example.com"
+        model.address = "0.0.0.0"
         XCTAssertTrue(model.validation().0)
+        XCTAssertNil(model.validation().1)
         
-        model.type = "dot"
-        model.serverName = nil
-        XCTAssertFalse(model.validation().0)
-        XCTAssertEqual(model.validation().1, "Please enter DNS server name")
-        
-        model.serverName = "example.com"
+        model.address = "https://example.com"
         XCTAssertTrue(model.validation().0)
+        XCTAssertNil(model.validation().1)
+        
+        model.address = "example.com"
+        XCTAssertTrue(model.validation().0)
+        XCTAssertNil(model.validation().1)
+    }
+    
+    func test_getServerURL() {
+        model.address = "0.0.0.0"
+        XCTAssertEqual(model.serverURL, "https://0.0.0.0/dns-query")
+        
+        model.address = "https://0.0.0.0"
+        XCTAssertEqual(model.serverURL, "https://0.0.0.0/dns-query")
+        
+        model.address = "0.0.0.0/dns-query"
+        XCTAssertEqual(model.serverURL, "https://0.0.0.0/dns-query")
+        
+        model.address = "https://0.0.0.0/dns-query"
+        XCTAssertEqual(model.serverURL, "https://0.0.0.0/dns-query")
+        
+        model.address = "example.com"
+        XCTAssertEqual(model.serverURL, "https://example.com/dns-query")
+        
+        model.address = "https://example.com"
+        XCTAssertEqual(model.serverURL, "https://example.com/dns-query")
+        
+        model.address = "example.com/dns-query"
+        XCTAssertEqual(model.serverURL, "https://example.com/dns-query")
+        
+        model.address = "https://example.com/dns-query"
+        XCTAssertEqual(model.serverURL, "https://example.com/dns-query")
+    }
+    
+    func test_getServerName() {
+        model.address = "0.0.0.0"
+        XCTAssertEqual(model.serverName, "0.0.0.0")
+        
+        model.address = "https://0.0.0.0"
+        XCTAssertEqual(model.serverName, "0.0.0.0")
+        
+        model.address = "0.0.0.0/dns-query"
+        XCTAssertEqual(model.serverName, "0.0.0.0")
+        
+        model.address = "https://0.0.0.0/dns-query"
+        XCTAssertEqual(model.serverName, "0.0.0.0")
+        
+        model.address = "example.com"
+        XCTAssertEqual(model.serverName, "example.com")
+        
+        model.address = "https://example.com"
+        XCTAssertEqual(model.serverName, "example.com")
+        
+        model.address = "example.com/dns-query"
+        XCTAssertEqual(model.serverName, "example.com")
+        
+        model.address = "https://example.com/dns-query"
+        XCTAssertEqual(model.serverName, "example.com")
+        
+        model.address = "subdomain.example.com"
+        XCTAssertEqual(model.serverName, "example.com")
+        
+        model.address = "subdomain.subdomain.example.com"
+        XCTAssertEqual(model.serverName, "example.com")
     }
     
 }

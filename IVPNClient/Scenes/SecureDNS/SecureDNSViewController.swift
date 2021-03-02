@@ -84,9 +84,7 @@ class SecureDNSViewController: UITableViewController {
     }
     
     @objc func saveTapped() {
-        saveIpAddress()
-        saveServerURL()
-        saveServerName()
+        saveAddress()
         view.endEditing(true)
     }
     
@@ -144,66 +142,12 @@ class SecureDNSViewController: UITableViewController {
         DNSManager.shared.removeProfile() { _ in }
     }
     
-    private func saveIpAddress() {
-        guard let text = secureDNSView.ipAddressField.text else {
+    private func saveAddress() {
+        guard let text = secureDNSView.serverField.text, !text.isEmpty else {
             return
         }
         
-        if text.isEmpty {
-            model.ipAddress = nil
-            return
-        }
-        
-        do {
-            let ipAddress = try CIDRAddress(stringRepresentation: text)
-            model.ipAddress = ipAddress?.ipAddress
-            updateDNSProfile()
-        } catch {
-            showAlert(title: "Invalid DNS server IP", message: "The DNS server IP address (\(text)) is invalid.")
-        }
-    }
-    
-    private func saveServerURL() {
-        guard let text = secureDNSView.serverURLField.text else {
-            return
-        }
-        
-        if text.isEmpty {
-            model.serverURL = nil
-            return
-        }
-        
-        if UIApplication.isValidURL(urlString: text) {
-            model.serverURL = text
-            updateDNSProfile()
-        } else {
-            showAlert(title: "Invalid DNS server URL", message: "The DNS server URL (\(text)) is invalid.")
-        }
-    }
-    
-    private func saveServerName() {
-        guard let text = secureDNSView.serverNameField.text else {
-            return
-        }
-        
-        if text.isEmpty {
-            model.serverName = nil
-            return
-        }
-        
-        if UIApplication.isValidURL(urlString: text) {
-            model.serverName = text
-            updateDNSProfile()
-            return
-        }
-        
-        do {
-            let ipAddress = try CIDRAddress(stringRepresentation: text)
-            model.serverName = ipAddress?.ipAddress
-            updateDNSProfile()
-        } catch {
-            showAlert(title: "Invalid DNS server name", message: "The DNS server name (\(text)) is invalid.")
-        }
+        model.address = text
     }
     
 }
@@ -213,16 +157,6 @@ class SecureDNSViewController: UITableViewController {
 extension SecureDNSViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let type = SecureDNSType.init(rawValue: model.type)
-        
-        if type == .dot && indexPath.section == 1 && indexPath.row == 1 {
-            return 0
-        }
-        
-        if type == .doh && indexPath.section == 1 && indexPath.row == 2 {
-            return 0
-        }
-        
         return 45
     }
 
@@ -249,18 +183,9 @@ extension SecureDNSViewController {
 extension SecureDNSViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case secureDNSView.ipAddressField:
+        if textField == secureDNSView.serverField {
             textField.resignFirstResponder()
-            saveIpAddress()
-        case secureDNSView.serverURLField:
-            textField.resignFirstResponder()
-            saveServerURL()
-        case secureDNSView.serverNameField:
-            textField.resignFirstResponder()
-            saveServerName()
-        default:
-            break
+            saveAddress()
         }
         
         return true
