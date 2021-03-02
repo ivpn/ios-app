@@ -30,6 +30,9 @@ struct SecureDNS: Codable {
             if let address = address {
                 serverURL = getServerURL(address: address)
                 serverName = getServerName(address: address)
+                if #available(iOS 14.0, *) {
+                    DNSManager.shared.saveResolvedDNS(server: address)
+                }
             } else {
                 serverURL = nil
                 serverName = nil
@@ -37,8 +40,6 @@ struct SecureDNS: Codable {
             save()
         }
     }
-    
-    var ipAddresses: [String]?
     
     var serverURL: String? {
         didSet {
@@ -77,7 +78,6 @@ struct SecureDNS: Codable {
     init() {
         let model = SecureDNS.load()
         address = model?.address
-        ipAddresses = model?.ipAddresses
         serverURL = model?.serverURL
         serverName = model?.serverName
         type = model?.type ?? "doh"
