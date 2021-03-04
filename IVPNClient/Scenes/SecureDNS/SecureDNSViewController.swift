@@ -153,6 +153,11 @@ class SecureDNSViewController: UITableViewController {
         }
         
         model.address = text
+        
+        if text.isEmpty {
+            removeDNSProfile()
+            secureDNSView.enableSwitch.setOn(false, animated: true)
+        }
     }
     
 }
