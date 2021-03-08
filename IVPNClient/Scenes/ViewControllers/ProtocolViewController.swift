@@ -57,7 +57,7 @@ class ProtocolViewController: UITableViewController {
     
     func updateCollection(connectionProtocol: ConnectionSettings) {
         collection.removeAll()
-        collection.append(ConnectionSettings.tunnelTypes(protocols: Config.supportedProtocols))
+        collection.append(ConnectionSettings.tunnelTypes(protocols: Config.supportedProtocolTypes))
         
         if connectionProtocol.tunnelType() == .wireguard {
             collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])

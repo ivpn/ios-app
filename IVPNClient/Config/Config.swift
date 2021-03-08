@@ -65,14 +65,6 @@ struct Config {
     
     static let defaultProtocol = ConnectionSettings.wireguard(.udp, 2049)
     static let supportedProtocols = [
-        ConnectionSettings.wireguard(.udp, 2049),
-        ConnectionSettings.wireguard(.udp, 2050),
-        ConnectionSettings.wireguard(.udp, 53),
-        ConnectionSettings.wireguard(.udp, 1194),
-        ConnectionSettings.wireguard(.udp, 30587),
-        ConnectionSettings.wireguard(.udp, 41893),
-        ConnectionSettings.wireguard(.udp, 48574),
-        ConnectionSettings.wireguard(.udp, 58237),
         ConnectionSettings.ipsec,
         ConnectionSettings.openvpn(.udp, 2049),
         ConnectionSettings.openvpn(.udp, 2050),
@@ -80,7 +72,21 @@ struct Config {
         ConnectionSettings.openvpn(.udp, 1194),
         ConnectionSettings.openvpn(.tcp, 443),
         ConnectionSettings.openvpn(.tcp, 1443),
-        ConnectionSettings.openvpn(.tcp, 80)
+        ConnectionSettings.openvpn(.tcp, 80),
+        ConnectionSettings.wireguard(.udp, 2049),
+        ConnectionSettings.wireguard(.udp, 2050),
+        ConnectionSettings.wireguard(.udp, 53),
+        ConnectionSettings.wireguard(.udp, 1194),
+        ConnectionSettings.wireguard(.udp, 30587),
+        ConnectionSettings.wireguard(.udp, 41893),
+        ConnectionSettings.wireguard(.udp, 48574),
+        ConnectionSettings.wireguard(.udp, 58237)
+    ]
+    
+    static let supportedProtocolTypes = [
+        ConnectionSettings.wireguard(.udp, 2049),
+        ConnectionSettings.ipsec,
+        ConnectionSettings.openvpn(.udp, 2049)
     ]
     
     // MARK: WireGuard
