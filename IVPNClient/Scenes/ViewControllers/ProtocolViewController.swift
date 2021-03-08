@@ -294,9 +294,12 @@ extension ProtocolViewController {
                     switch index {
                     case 0:
                         if #available(iOS 14.0, *) {
-                            DNSManager.shared.removeProfile { _ in }
+                            DNSManager.shared.removeProfile { _ in
+                                DNSManager.shared.loadProfile { _ in
+                                    self.tableView.reloadData()
+                                }
+                            }
                         }
-                        tableView.reloadData()
                     default:
                         break
                     }
