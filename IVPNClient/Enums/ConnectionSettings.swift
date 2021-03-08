@@ -110,7 +110,7 @@ enum ConnectionSettings {
     }
     
     static func serversListKey() -> String {
-        let index = UserDefaults.standard.integer(forKey: "selectedProtocolIndex")
+        let index = UserDefaults.standard.integer(forKey: UserDefaults.Key.selectedProtocolIndex)
         let connectionProtocol = Config.supportedProtocols[index]
         
         switch connectionProtocol {
