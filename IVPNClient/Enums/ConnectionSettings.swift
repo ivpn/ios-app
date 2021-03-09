@@ -109,11 +109,18 @@ enum ConnectionSettings {
         return protocols.map({ $0.formatProtocol() })
     }
     
-    static func serversListKey() -> String {
-        let index = UserDefaults.standard.integer(forKey: UserDefaults.Key.selectedProtocolIndex)
-        let connectionProtocol = Config.supportedProtocols[index]
+    static func getSavedProtocol() -> ConnectionSettings {
+        let protocolIndex = UserDefaults.standard.integer(forKey: UserDefaults.Key.selectedProtocolIndex)
         
-        switch connectionProtocol {
+        if Config.supportedProtocols.indices.contains(protocolIndex) && UserDefaults.standard.object(forKey: UserDefaults.Key.selectedProtocolIndex) != nil || !(KeyChain.sessionToken ?? "").isEmpty {
+            return Config.supportedProtocols[protocolIndex]
+        } else {
+            return Config.defaultProtocol
+        }
+    }
+    
+    static func serversListKey() -> String {
+        switch getSavedProtocol() {
         case .ipsec: return "openvpn"
         case .openvpn: return "openvpn"
         case .wireguard: return "wireguard"
