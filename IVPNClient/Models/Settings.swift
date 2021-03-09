@@ -68,7 +68,7 @@ class Settings {
         selectedServer = serverList.servers.first ?? VPNServer(gateway: "Not loaded", countryCode: "US", country: "", city: "")
         selectedExitServer = serverList.getExitServer(entryServer: selectedServer)
         
-        if Config.supportedProtocols.indices.contains(protocolIndex) && UserDefaults.standard.object(forKey: UserDefaults.Key.selectedProtocolIndex) != nil {
+        if Config.supportedProtocols.indices.contains(protocolIndex) && UserDefaults.standard.object(forKey: UserDefaults.Key.selectedProtocolIndex) != nil || !(KeyChain.sessionToken ?? "").isEmpty {
             connectionProtocol = Config.supportedProtocols[protocolIndex]
         } else {
             connectionProtocol = Config.defaultProtocol
