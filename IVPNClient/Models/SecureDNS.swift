@@ -149,8 +149,3 @@ struct SecureDNS: Codable {
     }
     
 }
-
-enum SecureDNSType: String {
-    case doh
-    case dot
-}

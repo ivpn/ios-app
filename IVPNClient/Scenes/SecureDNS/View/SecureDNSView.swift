@@ -41,7 +41,7 @@ class SecureDNSView: UITableView {
     // MARK: - Methods -
     
     func setupView(model: SecureDNS) {
-        let type = SecureDNSType.init(rawValue: model.type)
+        let type = DNSProtocolType.init(rawValue: model.type)
         serverField.text = model.address
         typeControl.selectedSegmentIndex = type == .dot ? 1 : 0
         mobileNetworkSwitch.isOn = model.mobileNetwork

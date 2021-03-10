@@ -94,7 +94,7 @@ class DNSManager {
     
     private func getDnsSettings(model: SecureDNS) -> NEDNSSettings {
         let servers = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNSOutsideVPN) as? [String] ?? []
-        let type = SecureDNSType.init(rawValue: model.type)
+        let type = DNSProtocolType.init(rawValue: model.type)
 
         if type == .dot {
             let dnsSettings = NEDNSOverTLSSettings(servers: servers)
