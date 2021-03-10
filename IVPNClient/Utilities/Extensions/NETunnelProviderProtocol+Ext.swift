@@ -58,15 +58,18 @@ extension NETunnelProviderProtocol {
         builder.debugLogFormat = "$Dyyyy-MMM-dd HH:mm:ss$d $L $M"
         builder.masksPrivateData = true
         
-        let openVPNconfiguration = builder.build()
-        let configuration = try! openVPNconfiguration.generatedTunnelProtocol(
+        let configuration = builder.build()
+        let keychain = Keychain(group: Config.appGroup)
+        try? keychain.set(password: credentials.password, for: credentials.username, context: Config.openvpnTunnelProvider)
+        let proto = try! configuration.generatedTunnelProtocol(
             withBundleIdentifier: Config.openvpnTunnelProvider,
             appGroup: Config.appGroup,
-            credentials: credentials
+            context: Config.openvpnTunnelProvider,
+            username: credentials.username
         )
-        configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
+        proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
         
-        return configuration
+        return proto
     }
     
     static func openVPNdnsServers() -> [String]? {
