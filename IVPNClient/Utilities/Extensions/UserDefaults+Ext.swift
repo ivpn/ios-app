@@ -59,7 +59,8 @@ extension UserDefaults {
         static let keepAlive = "keepAlive"
         static let serversSort = "serversSort"
         static let notAskToReconnect = "notAskToReconnect"
-        static let resolvedDNS = "resolvedDNS"
+        static let resolvedDNSInsideVPN = "resolvedDNSInsideVPN"
+        static let resolvedDNSOutsideVPN = "resolvedDNSOutsideVPN"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -168,6 +169,10 @@ extension UserDefaults {
     
     @objc dynamic var notAskToReconnect: Bool {
         return bool(forKey: Key.notAskToReconnect)
+    }
+    
+    @objc dynamic var resolvedDNSInsideVPN: [String] {
+        return stringArray(forKey: Key.resolvedDNSInsideVPN) ?? [customDNS]
     }
     
     static func registerUserDefaults() {

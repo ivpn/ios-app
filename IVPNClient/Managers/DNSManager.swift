@@ -85,7 +85,7 @@ class DNSManager {
                 }
             }
             
-            UserDefaults.standard.set(addresses, forKey: UserDefaults.Key.resolvedDNS)
+            UserDefaults.standard.set(addresses, forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
             NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNS, object: nil)
         }
     }
@@ -93,7 +93,7 @@ class DNSManager {
     // MARK: - Private methods -
     
     private func getDnsSettings(model: SecureDNS) -> NEDNSSettings {
-        let servers = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNS) as? [String] ?? []
+        let servers = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNSOutsideVPN) as? [String] ?? []
         let type = SecureDNSType.init(rawValue: model.type)
 
         if type == .dot {
