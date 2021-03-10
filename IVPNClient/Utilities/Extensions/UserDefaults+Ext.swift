@@ -39,8 +39,7 @@ extension UserDefaults {
         static let networkProtectionUntrustedConnect = "networkProtection.untrusted.connect"
         static let networkProtectionTrustedDisconnect = "networkProtection.trusted.disconnect"
         static let isCustomDNS = "isCustomDNS"
-        static let isCustomDNSSecure = "isCustomDNSSecure"
-        static let customDNSType = "customDNS"
+        static let customDNSProtocol = "customDNSProtocol"
         static let customDNS = "customDNS"
         static let isAntiTracker = "isAntiTracker"
         static let isAntiTrackerHardcore = "isAntiTrackerHardcore"
@@ -104,6 +103,10 @@ extension UserDefaults {
     #warning("customDNS property is deprecated")
     @objc dynamic var customDNS: String {
         return string(forKey: Key.customDNS) ?? ""
+    }
+    
+    @objc dynamic var customDNSProtocol: String {
+        return string(forKey: Key.customDNSProtocol) ?? "plain"
     }
     
     @objc dynamic var isAntiTracker: Bool {
