@@ -51,6 +51,17 @@ extension NETunnelProviderProtocol {
         
         if let dnsServers = openVPNdnsServers(), dnsServers != [""] {
             sessionBuilder.dnsServers = dnsServers
+            
+            switch preferredDNSProtocol() {
+            case .doh:
+                sessionBuilder.dnsProtocol = .https
+                sessionBuilder.dnsHTTPSURL = URL.init(string: SecureDNS.getServerURL(address: UserDefaults.shared.customDNS) ?? "")
+            case .dot:
+                sessionBuilder.dnsProtocol = .tls
+                sessionBuilder.dnsTLSServerName = SecureDNS.getServerName(address: UserDefaults.shared.customDNS)
+            default:
+                sessionBuilder.dnsProtocol = .plain
+            }
         }
         
         var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
@@ -92,6 +103,14 @@ extension NETunnelProviderProtocol {
         }
         
         return nil
+    }
+    
+    static func preferredDNSProtocol() -> DNSProtocolType {
+        guard !UserDefaults.shared.isAntiTracker else {
+            return .plain
+        }
+        
+        return DNSProtocolType.init(rawValue: UserDefaults.shared.customDNSProtocol) ?? .plain
     }
     
     // MARK: WireGuard

@@ -28,8 +28,8 @@ struct SecureDNS: Codable {
     var address: String? {
         didSet {
             if let address = address {
-                serverURL = getServerURL(address: address)
-                serverName = getServerName(address: address)
+                serverURL = SecureDNS.getServerURL(address: address)
+                serverName = SecureDNS.getServerName(address: address)
                 if #available(iOS 14.0, *) {
                     DNSManager.shared.saveResolvedDNS(server: address)
                 }
@@ -111,9 +111,7 @@ struct SecureDNS: Codable {
         return (true, nil)
     }
     
-    // MARK: - Private methods -
-    
-    private func getServerURL(address: String) -> String? {
+    static func getServerURL(address: String) -> String? {
         var serverURL = address
         
         if !address.hasPrefix("https://") {
@@ -127,7 +125,7 @@ struct SecureDNS: Codable {
         return serverURL
     }
     
-    private func getServerName(address: String) -> String {
+    static func getServerName(address: String) -> String {
         var serverName = address
         
         if !address.hasPrefix("https://") {

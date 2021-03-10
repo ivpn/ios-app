@@ -100,7 +100,6 @@ extension UserDefaults {
         return bool(forKey: Key.isCustomDNS)
     }
     
-    #warning("customDNS property is deprecated")
     @objc dynamic var customDNS: String {
         return string(forKey: Key.customDNS) ?? ""
     }
