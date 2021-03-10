@@ -203,7 +203,22 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 newSettings.dnsSettings = NEDNSSettings(servers: [UserDefaults.shared.antiTrackerDNS])
             }
         } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty {
-            newSettings.dnsSettings = NEDNSSettings(servers: [UserDefaults.shared.customDNS])
+            if #available(iOS 14.0, *) {
+                switch SecureDNS.preferredDNSProtocol() {
+                case .doh:
+                    let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+                    dnsSettings.serverURL = URL.init(string: SecureDNS.getServerURL(address: UserDefaults.shared.customDNS) ?? "")
+                    newSettings.dnsSettings = dnsSettings
+                case .dot:
+                    let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+                    dnsSettings.serverName = SecureDNS.getServerName(address: UserDefaults.shared.customDNS)
+                    newSettings.dnsSettings = dnsSettings
+                default:
+                    newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+                }
+            } else {
+                newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+            }
         }
         
         if let mtu = self.config.providerConfiguration![PCKeys.mtu.rawValue] as? NSNumber, mtu.intValue > 0 {

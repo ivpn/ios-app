@@ -146,4 +146,12 @@ struct SecureDNS: Codable {
         return address
     }
     
+    static func preferredDNSProtocol() -> DNSProtocolType {
+        guard !UserDefaults.shared.isAntiTracker else {
+            return .plain
+        }
+        
+        return DNSProtocolType.init(rawValue: UserDefaults.shared.customDNSProtocol) ?? .plain
+    }
+    
 }

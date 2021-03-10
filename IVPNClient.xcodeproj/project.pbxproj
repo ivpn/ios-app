@@ -263,6 +263,8 @@
 		82E96A4B224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E96A4A224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift */; };
 		82EA857A21DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */; };
 		82EEB6C625F9398600915837 /* DNSProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EEB6C525F9398600915837 /* DNSProtocolType.swift */; };
+		82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EEB6C525F9398600915837 /* DNSProtocolType.swift */; };
+		82EEB6D425F9429700915837 /* SecureDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243587025DBB73E005FDEBB /* SecureDNS.swift */; };
 		82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F189A1225CE8A90038ABA0 /* UIView+Ext.swift */; };
 		82F638C2217DA89000410318 /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638C1217DA89000410318 /* AddressType.swift */; };
 		82F638C5217DA89000410318 /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638C1217DA89000410318 /* AddressType.swift */; };
@@ -2021,6 +2023,7 @@
 				828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */,
 				82E716942181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				82F638CF217DC25600410318 /* CIDRAddress.swift in Sources */,
+				82EEB6D425F9429700915837 /* SecureDNS.swift in Sources */,
 				8223C53F22326375006C4F14 /* Logging.swift in Sources */,
 				820EA8692322406000E16B2D /* InterfaceResult.swift in Sources */,
 				8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */,
@@ -2034,6 +2037,7 @@
 				8223C55022EAEC7100CD283D /* Session.swift in Sources */,
 				8223C53E22326321006C4F14 /* x25519.c in Sources */,
 				826C56D422FD551900D2B76A /* ServiceStatus.swift in Sources */,
+				82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */,
 				820EA86C2322430700E16B2D /* Result.swift in Sources */,
 				823FFB092338E09A00F91A5D /* Capability.swift in Sources */,
 				82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */,
