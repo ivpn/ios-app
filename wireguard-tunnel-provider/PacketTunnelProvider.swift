@@ -204,14 +204,14 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             }
         } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty {
             if #available(iOS 14.0, *) {
-                switch SecureDNS.preferredDNSProtocol() {
+                switch DNSProtocolType.preferred() {
                 case .doh:
                     let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverURL = URL.init(string: SecureDNS.getServerURL(address: UserDefaults.shared.customDNS) ?? "")
+                    dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS) ?? "")
                     newSettings.dnsSettings = dnsSettings
                 case .dot:
                     let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverName = SecureDNS.getServerName(address: UserDefaults.shared.customDNS)
+                    dnsSettings.serverName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
                     newSettings.dnsSettings = dnsSettings
                 default:
                     newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)

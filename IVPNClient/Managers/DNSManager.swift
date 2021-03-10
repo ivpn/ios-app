@@ -75,7 +75,7 @@ class DNSManager {
         }
     }
     
-    func saveResolvedDNS(server: String) {
+    static func saveResolvedDNS(server: String, key: String) {
         DNSResolver.resolve(host: server) { list in
             var addresses: [String]? = nil
             
@@ -85,8 +85,15 @@ class DNSManager {
                 }
             }
             
-            UserDefaults.standard.set(addresses, forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
-            NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNS, object: nil)
+            switch key {
+            case UserDefaults.Key.resolvedDNSOutsideVPN:
+                UserDefaults.standard.set(addresses, forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
+                NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNS, object: nil)
+            case UserDefaults.Key.resolvedDNSInsideVPN:
+                UserDefaults.shared.set(addresses, forKey: UserDefaults.Key.resolvedDNSInsideVPN)
+            default:
+                break
+            }
         }
     }
     

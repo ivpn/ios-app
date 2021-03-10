@@ -264,7 +264,7 @@
 		82EA857A21DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */; };
 		82EEB6C625F9398600915837 /* DNSProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EEB6C525F9398600915837 /* DNSProtocolType.swift */; };
 		82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EEB6C525F9398600915837 /* DNSProtocolType.swift */; };
-		82EEB6D425F9429700915837 /* SecureDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243587025DBB73E005FDEBB /* SecureDNS.swift */; };
+		82EEB6DB25F961BC00915837 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE598F25ED3C7A0078099D /* URL+Ext.swift */; };
 		82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F189A1225CE8A90038ABA0 /* UIView+Ext.swift */; };
 		82F638C2217DA89000410318 /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638C1217DA89000410318 /* AddressType.swift */; };
 		82F638C5217DA89000410318 /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638C1217DA89000410318 /* AddressType.swift */; };
@@ -2016,6 +2016,7 @@
 				82E716882181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				8223C5402232694E006C4F14 /* KeyChain.swift in Sources */,
 				82F638C5217DA89000410318 /* AddressType.swift in Sources */,
+				82EEB6DB25F961BC00915837 /* URL+Ext.swift in Sources */,
 				822919712182EB1C00978BBA /* String+Ext.swift in Sources */,
 				8223C53A22325709006C4F14 /* ApiManager.swift in Sources */,
 				820535292302BE8F007BDD58 /* APIAccessManager.swift in Sources */,
@@ -2023,7 +2024,6 @@
 				828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */,
 				82E716942181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				82F638CF217DC25600410318 /* CIDRAddress.swift in Sources */,
-				82EEB6D425F9429700915837 /* SecureDNS.swift in Sources */,
 				8223C53F22326375006C4F14 /* Logging.swift in Sources */,
 				820EA8692322406000E16B2D /* InterfaceResult.swift in Sources */,
 				8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */,

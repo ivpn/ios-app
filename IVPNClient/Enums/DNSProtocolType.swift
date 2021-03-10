@@ -21,8 +21,55 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Foundation
+
 enum DNSProtocolType: String {
+    
     case doh
     case dot
     case plain
+    
+    static func getServerURL(address: String) -> String? {
+        var serverURL = address
+        
+        if !address.hasPrefix("https://") {
+            serverURL = "https://\(serverURL)"
+        }
+        
+        if !address.hasSuffix("/dns-query") {
+            serverURL = "\(serverURL)/dns-query"
+        }
+        
+        return serverURL
+    }
+    
+    static func getServerName(address: String) -> String {
+        var serverName = address
+        
+        if !address.hasPrefix("https://") {
+            serverName = "https://\(serverName)"
+        }
+        
+        if let serverURL = URL.init(string: serverName) {
+            if let host = serverURL.host {
+                do {
+                    let ipAddress = try CIDRAddress(stringRepresentation: host)
+                    return ipAddress?.ipAddress ?? address
+                } catch {}
+            }
+            
+            return serverURL.getTopLevelDomain()
+        }
+        
+        return address
+    }
+    
+    static func preferred() -> DNSProtocolType {
+        guard !UserDefaults.shared.isAntiTracker else {
+            return .plain
+        }
+        
+        return DNSProtocolType.init(rawValue: UserDefaults.shared.customDNSProtocol) ?? .plain
+    }
+    
 }

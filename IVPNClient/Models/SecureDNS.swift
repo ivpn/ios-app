@@ -28,10 +28,10 @@ struct SecureDNS: Codable {
     var address: String? {
         didSet {
             if let address = address {
-                serverURL = SecureDNS.getServerURL(address: address)
-                serverName = SecureDNS.getServerName(address: address)
+                serverURL = DNSProtocolType.getServerURL(address: address)
+                serverName = DNSProtocolType.getServerName(address: address)
                 if #available(iOS 14.0, *) {
-                    DNSManager.shared.saveResolvedDNS(server: address)
+                    DNSManager.saveResolvedDNS(server: address, key: UserDefaults.Key.resolvedDNSOutsideVPN)
                 }
             } else {
                 serverURL = nil
@@ -109,49 +109,6 @@ struct SecureDNS: Codable {
         }
         
         return (true, nil)
-    }
-    
-    static func getServerURL(address: String) -> String? {
-        var serverURL = address
-        
-        if !address.hasPrefix("https://") {
-            serverURL = "https://\(serverURL)"
-        }
-        
-        if !address.hasSuffix("/dns-query") {
-            serverURL = "\(serverURL)/dns-query"
-        }
-        
-        return serverURL
-    }
-    
-    static func getServerName(address: String) -> String {
-        var serverName = address
-        
-        if !address.hasPrefix("https://") {
-            serverName = "https://\(serverName)"
-        }
-        
-        if let serverURL = URL.init(string: serverName) {
-            if let host = serverURL.host {
-                do {
-                    let ipAddress = try CIDRAddress(stringRepresentation: host)
-                    return ipAddress?.ipAddress ?? address
-                } catch {}
-            }
-            
-            return serverURL.getTopLevelDomain()
-        }
-        
-        return address
-    }
-    
-    static func preferredDNSProtocol() -> DNSProtocolType {
-        guard !UserDefaults.shared.isAntiTracker else {
-            return .plain
-        }
-        
-        return DNSProtocolType.init(rawValue: UserDefaults.shared.customDNSProtocol) ?? .plain
     }
     
 }
