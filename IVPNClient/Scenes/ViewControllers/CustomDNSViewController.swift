@@ -70,23 +70,24 @@ class CustomDNSViewController: UITableViewController {
     }
     
     @objc func saveTapped() {
-        saveCustomDNS()
+        saveAddress()
         view.endEditing(true)
     }
     
-    func saveCustomDNS() {
-        guard let text = customDNSTextField.text else { return }
-        
-        if text.isEmpty {
-            UserDefaults.shared.set("", forKey: UserDefaults.Key.customDNS)
+    func saveAddress() {
+        guard let server = customDNSTextField.text else {
             return
         }
         
-        do {
-            let address = try CIDRAddress(stringRepresentation: text)
-            UserDefaults.shared.set(address?.ipAddress, forKey: UserDefaults.Key.customDNS)
-        } catch {
-            showAlert(title: "Invalid DNS Server", message: "The IP Address (\(text)) is invalid.")
+        if #available(iOS 14.0, *) {
+            DNSManager.saveResolvedDNS(server: server, key: UserDefaults.Key.resolvedDNSInsideVPN)
+        }
+        
+        UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
+        
+        if server.isEmpty {
+            UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+            customDNSSwitch.setOn(false, animated: true)
         }
     }
     
@@ -134,7 +135,7 @@ extension CustomDNSViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == customDNSTextField {
             textField.resignFirstResponder()
-            saveCustomDNS()
+            saveAddress()
         }
         
         return true
