@@ -40,6 +40,14 @@ class CustomDNSViewController: UITableViewController {
             return
         }
         
+        guard let server = customDNSTextField.text, !server.isEmpty else {
+            showAlert(title: "", message: "Please enter DNS server") { _ in
+                sender.setOn(false, animated: true)
+            }
+            
+            return
+        }
+        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isCustomDNS)
     }
     
