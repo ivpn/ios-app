@@ -109,7 +109,7 @@ class CustomDNSViewController: UITableViewController {
         customDNSTextField.delegate = self
         secureDNSSwitch.isOn = preferred != .plain
         typeControl.isEnabled = preferred != .plain
-        typeControl.selectedSegmentIndex = preferred != .dot ? 1 : 0
+        typeControl.selectedSegmentIndex = preferred == .dot ? 1 : 0
     }
     
 }
