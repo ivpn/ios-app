@@ -49,7 +49,7 @@ extension NETunnelProviderProtocol {
         sessionBuilder.hostname = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
         sessionBuilder.tlsWrap = OpenVPN.TLSWrap.init(strategy: .auth, key: staticKey!)
         
-        if let dnsServers = openVPNdnsServers(), dnsServers != [""] {
+        if let dnsServers = openVPNdnsServers(), !dnsServers.isEmpty, dnsServers != [""] {
             sessionBuilder.dnsServers = dnsServers
             
             switch DNSProtocolType.preferred() {
