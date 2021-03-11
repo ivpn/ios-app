@@ -72,4 +72,8 @@ enum DNSProtocolType: String {
         return DNSProtocolType.init(rawValue: UserDefaults.shared.customDNSProtocol) ?? .plain
     }
     
+    static func save(preferred: DNSProtocolType) {
+        UserDefaults.shared.setValue(preferred.rawValue, forKey: UserDefaults.Key.customDNSProtocol)
+    }
+    
 }

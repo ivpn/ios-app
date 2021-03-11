@@ -27,6 +27,10 @@ class CustomDNSViewController: UITableViewController {
     
     @IBOutlet weak var customDNSSwitch: UISwitch!
     @IBOutlet weak var customDNSTextField: UITextField!
+    @IBOutlet weak var secureDNSSwitch: UISwitch!
+    @IBOutlet weak var typeControl: UISegmentedControl!
+    
+    // MARK: - @IBActions -
     
     @IBAction func toggleCustomDNS(_ sender: UISwitch) {
         if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
@@ -39,13 +43,23 @@ class CustomDNSViewController: UITableViewController {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isCustomDNS)
     }
     
+    @IBAction func enableSecureDNS(_ sender: UISwitch) {
+        typeControl.isEnabled = sender.isOn
+        let preferred: DNSProtocolType = typeControl.selectedSegmentIndex == 1 ? .dot : .doh
+        DNSProtocolType.save(preferred: sender.isOn ? preferred : .plain)
+    }
+    
+    @IBAction func changeType(_ sender: UISegmentedControl) {
+        let preferred: DNSProtocolType = sender.selectedSegmentIndex == 1 ? .dot : .doh
+        DNSProtocolType.save(preferred: preferred)
+    }
+    
+    // MARK: - View Lifecycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         hideKeyboardOnTap()
-        customDNSSwitch.isOn = UserDefaults.shared.isCustomDNS
-        customDNSTextField.text = UserDefaults.shared.customDNS
-        customDNSTextField.delegate = self
+        setupView()
     }
     
     // MARK: - Methods -
@@ -74,6 +88,19 @@ class CustomDNSViewController: UITableViewController {
         } catch {
             showAlert(title: "Invalid DNS Server", message: "The IP Address (\(text)) is invalid.")
         }
+    }
+    
+    // MARK: - Private methods -
+    
+    private func setupView() {
+        let preferred = DNSProtocolType.preferred()
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
+        customDNSSwitch.isOn = UserDefaults.shared.isCustomDNS
+        customDNSTextField.text = UserDefaults.shared.customDNS
+        customDNSTextField.delegate = self
+        secureDNSSwitch.isOn = preferred != .plain
+        typeControl.isEnabled = preferred != .plain
+        typeControl.selectedSegmentIndex = preferred != .dot ? 1 : 0
     }
     
 }
