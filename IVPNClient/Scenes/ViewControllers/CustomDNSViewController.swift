@@ -110,6 +110,18 @@ class CustomDNSViewController: UITableViewController {
 
 extension CustomDNSViewController {
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 && (indexPath.row == 1 || indexPath.row == 2) {
+            if #available(iOS 14.0, *) {
+                return UITableView.automaticDimension
+            } else {
+                return 0
+            }
+        }
+        
+        return UITableView.automaticDimension
+    }
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
