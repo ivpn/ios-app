@@ -28,11 +28,22 @@ class InfoAlertViewModel {
     // MARK: - Properties -
     
     var text: String {
-        let days = Application.shared.serviceStatus.daysUntilSubscriptionExpiration()
+        
         switch infoAlert {
         case .subscriptionExpiration:
+            let days = Application.shared.serviceStatus.daysUntilSubscriptionExpiration()
+            let activeUntilExpired = Application.shared.serviceStatus.activeUntilExpired()
+            
             if days == 0 {
+                if !activeUntilExpired {
+                    return "Subscription expires today"
+                }
+                
                 return "Subscription expired"
+            }
+            
+            if days == 1 {
+                return "Subscription will expire in \(days) day"
             }
             
             return "Subscription will expire in \(days) days"
