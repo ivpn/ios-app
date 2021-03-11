@@ -77,11 +77,11 @@ class DNSManager {
     
     static func saveResolvedDNS(server: String, key: String) {
         DNSResolver.resolve(host: server) { list in
-            var addresses: [String]? = nil
+            var addresses: [String] = []
             
             for ip in list {
                 if let host = ip.host {
-                    addresses?.append(host)
+                    addresses.append(host)
                 }
             }
             

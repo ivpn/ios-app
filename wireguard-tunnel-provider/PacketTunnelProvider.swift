@@ -202,7 +202,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             } else {
                 newSettings.dnsSettings = NEDNSSettings(servers: [UserDefaults.shared.antiTrackerDNS])
             }
-        } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty {
+        } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty && !UserDefaults.shared.resolvedDNSInsideVPN.isEmpty && UserDefaults.shared.resolvedDNSInsideVPN != [""] {
             if #available(iOS 14.0, *) {
                 switch DNSProtocolType.preferred() {
                 case .doh:
