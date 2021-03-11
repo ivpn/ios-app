@@ -39,6 +39,7 @@ extension UserDefaults {
         static let networkProtectionUntrustedConnect = "networkProtection.untrusted.connect"
         static let networkProtectionTrustedDisconnect = "networkProtection.trusted.disconnect"
         static let isCustomDNS = "isCustomDNS"
+        static let customDNSProtocol = "customDNSProtocol"
         static let customDNS = "customDNS"
         static let isAntiTracker = "isAntiTracker"
         static let isAntiTrackerHardcore = "isAntiTrackerHardcore"
@@ -59,8 +60,9 @@ extension UserDefaults {
         static let keepAlive = "keepAlive"
         static let serversSort = "serversSort"
         static let notAskToReconnect = "notAskToReconnect"
-        static let resolvedDNS = "resolvedDNS"
         static let selectedProtocolIndex = "selectedProtocolIndex"
+        static let resolvedDNSInsideVPN = "resolvedDNSInsideVPN"
+        static let resolvedDNSOutsideVPN = "resolvedDNSOutsideVPN"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -101,6 +103,10 @@ extension UserDefaults {
     
     @objc dynamic var customDNS: String {
         return string(forKey: Key.customDNS) ?? ""
+    }
+    
+    @objc dynamic var customDNSProtocol: String {
+        return string(forKey: Key.customDNSProtocol) ?? "plain"
     }
     
     @objc dynamic var isAntiTracker: Bool {
@@ -169,6 +175,10 @@ extension UserDefaults {
     
     @objc dynamic var notAskToReconnect: Bool {
         return bool(forKey: Key.notAskToReconnect)
+    }
+    
+    @objc dynamic var resolvedDNSInsideVPN: [String] {
+        return stringArray(forKey: Key.resolvedDNSInsideVPN) ?? [customDNS]
     }
     
     static func registerUserDefaults() {

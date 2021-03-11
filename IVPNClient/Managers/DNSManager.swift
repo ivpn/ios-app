@@ -75,7 +75,7 @@ class DNSManager {
         }
     }
     
-    func saveResolvedDNS(server: String) {
+    static func saveResolvedDNS(server: String, key: String) {
         DNSResolver.resolve(host: server) { list in
             var addresses: [String]? = nil
             
@@ -85,16 +85,23 @@ class DNSManager {
                 }
             }
             
-            UserDefaults.standard.set(addresses, forKey: UserDefaults.Key.resolvedDNS)
-            NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNS, object: nil)
+            switch key {
+            case UserDefaults.Key.resolvedDNSOutsideVPN:
+                UserDefaults.standard.set(addresses, forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
+                NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNS, object: nil)
+            case UserDefaults.Key.resolvedDNSInsideVPN:
+                UserDefaults.shared.set(addresses, forKey: UserDefaults.Key.resolvedDNSInsideVPN)
+            default:
+                break
+            }
         }
     }
     
     // MARK: - Private methods -
     
     private func getDnsSettings(model: SecureDNS) -> NEDNSSettings {
-        let servers = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNS) as? [String] ?? []
-        let type = SecureDNSType.init(rawValue: model.type)
+        let servers = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNSOutsideVPN) as? [String] ?? []
+        let type = DNSProtocolType.init(rawValue: model.type)
 
         if type == .dot {
             let dnsSettings = NEDNSOverTLSSettings(servers: servers)

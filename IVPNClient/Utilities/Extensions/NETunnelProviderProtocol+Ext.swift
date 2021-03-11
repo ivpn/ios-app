@@ -51,6 +51,17 @@ extension NETunnelProviderProtocol {
         
         if let dnsServers = openVPNdnsServers(), dnsServers != [""] {
             sessionBuilder.dnsServers = dnsServers
+            
+            switch DNSProtocolType.preferred() {
+            case .doh:
+                sessionBuilder.dnsProtocol = .https
+                sessionBuilder.dnsHTTPSURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS) ?? "")
+            case .dot:
+                sessionBuilder.dnsProtocol = .tls
+                sessionBuilder.dnsTLSServerName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
+            default:
+                sessionBuilder.dnsProtocol = .plain
+            }
         }
         
         var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
@@ -58,15 +69,18 @@ extension NETunnelProviderProtocol {
         builder.debugLogFormat = "$Dyyyy-MMM-dd HH:mm:ss$d $L $M"
         builder.masksPrivateData = true
         
-        let openVPNconfiguration = builder.build()
-        let configuration = try! openVPNconfiguration.generatedTunnelProtocol(
+        let configuration = builder.build()
+        let keychain = Keychain(group: Config.appGroup)
+        try? keychain.set(password: credentials.password, for: credentials.username, context: Config.openvpnTunnelProvider)
+        let proto = try! configuration.generatedTunnelProtocol(
             withBundleIdentifier: Config.openvpnTunnelProvider,
             appGroup: Config.appGroup,
-            credentials: credentials
+            context: Config.openvpnTunnelProvider,
+            username: credentials.username
         )
-        configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
+        proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
         
-        return configuration
+        return proto
     }
     
     static func openVPNdnsServers() -> [String]? {
@@ -85,7 +99,7 @@ extension NETunnelProviderProtocol {
                 }
             }
         } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty {
-            return [UserDefaults.shared.customDNS]
+            return UserDefaults.shared.resolvedDNSInsideVPN
         }
         
         return nil

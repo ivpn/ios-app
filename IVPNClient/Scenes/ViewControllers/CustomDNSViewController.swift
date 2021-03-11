@@ -27,6 +27,10 @@ class CustomDNSViewController: UITableViewController {
     
     @IBOutlet weak var customDNSSwitch: UISwitch!
     @IBOutlet weak var customDNSTextField: UITextField!
+    @IBOutlet weak var secureDNSSwitch: UISwitch!
+    @IBOutlet weak var typeControl: UISegmentedControl!
+    
+    // MARK: - @IBActions -
     
     @IBAction func toggleCustomDNS(_ sender: UISwitch) {
         if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
@@ -36,16 +40,34 @@ class CustomDNSViewController: UITableViewController {
             return
         }
         
+        guard let server = customDNSTextField.text, !server.isEmpty else {
+            showAlert(title: "", message: "Please enter DNS server") { _ in
+                sender.setOn(false, animated: true)
+            }
+            
+            return
+        }
+        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isCustomDNS)
     }
     
+    @IBAction func enableSecureDNS(_ sender: UISwitch) {
+        typeControl.isEnabled = sender.isOn
+        let preferred: DNSProtocolType = typeControl.selectedSegmentIndex == 1 ? .dot : .doh
+        DNSProtocolType.save(preferred: sender.isOn ? preferred : .plain)
+    }
+    
+    @IBAction func changeType(_ sender: UISegmentedControl) {
+        let preferred: DNSProtocolType = sender.selectedSegmentIndex == 1 ? .dot : .doh
+        DNSProtocolType.save(preferred: preferred)
+    }
+    
+    // MARK: - View Lifecycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         hideKeyboardOnTap()
-        customDNSSwitch.isOn = UserDefaults.shared.isCustomDNS
-        customDNSTextField.text = UserDefaults.shared.customDNS
-        customDNSTextField.delegate = self
+        setupView()
     }
     
     // MARK: - Methods -
@@ -56,24 +78,38 @@ class CustomDNSViewController: UITableViewController {
     }
     
     @objc func saveTapped() {
-        saveCustomDNS()
+        saveAddress()
         view.endEditing(true)
     }
     
-    func saveCustomDNS() {
-        guard let text = customDNSTextField.text else { return }
-        
-        if text.isEmpty {
-            UserDefaults.shared.set("", forKey: UserDefaults.Key.customDNS)
+    func saveAddress() {
+        guard let server = customDNSTextField.text else {
             return
         }
         
-        do {
-            let address = try CIDRAddress(stringRepresentation: text)
-            UserDefaults.shared.set(address?.ipAddress, forKey: UserDefaults.Key.customDNS)
-        } catch {
-            showAlert(title: "Invalid DNS Server", message: "The IP Address (\(text)) is invalid.")
+        if #available(iOS 14.0, *) {
+            DNSManager.saveResolvedDNS(server: server, key: UserDefaults.Key.resolvedDNSInsideVPN)
         }
+        
+        UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
+        
+        if server.isEmpty {
+            UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+            customDNSSwitch.setOn(false, animated: true)
+        }
+    }
+    
+    // MARK: - Private methods -
+    
+    private func setupView() {
+        let preferred = DNSProtocolType.preferred()
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
+        customDNSSwitch.isOn = UserDefaults.shared.isCustomDNS
+        customDNSTextField.text = UserDefaults.shared.customDNS
+        customDNSTextField.delegate = self
+        secureDNSSwitch.isOn = preferred != .plain
+        typeControl.isEnabled = preferred != .plain
+        typeControl.selectedSegmentIndex = preferred == .dot ? 1 : 0
     }
     
 }
@@ -81,6 +117,18 @@ class CustomDNSViewController: UITableViewController {
 // MARK: - UITableViewDelegate -
 
 extension CustomDNSViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 && (indexPath.row == 1 || indexPath.row == 2) {
+            if #available(iOS 14.0, *) {
+                return UITableView.automaticDimension
+            } else {
+                return 0
+            }
+        }
+        
+        return UITableView.automaticDimension
+    }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
@@ -107,7 +155,7 @@ extension CustomDNSViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == customDNSTextField {
             textField.resignFirstResponder()
-            saveCustomDNS()
+            saveAddress()
         }
         
         return true

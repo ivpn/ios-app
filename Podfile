@@ -2,7 +2,7 @@ platform :ios, '12.0'
 use_frameworks!
 
 target 'IVPNClient' do
-    pod 'TunnelKit', '~> 2.2.7'
+    pod 'TunnelKit', '~> 3.3.1'
     pod 'KeychainAccess', '~> 3.2.0'
     pod 'SwiftyStoreKit', '~> 0.15.0'
     pod 'JGProgressHUD', '~> 2.0.3'
@@ -13,7 +13,7 @@ target 'IVPNClient' do
 end
 
 target 'openvpn-tunnel-provider' do
-    pod 'TunnelKit', '~> 2.2.7'
+    pod 'TunnelKit', '~> 3.3.1'
     pod 'KeychainAccess', '~> 3.2.0'
 end
 
