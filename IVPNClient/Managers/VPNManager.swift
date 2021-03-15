@@ -127,7 +127,13 @@ class VPNManager {
     private func setupNEVPNManager(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
         let serverAddress = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
         self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
-        manager.saveToPreferences { _ in
+        manager.saveToPreferences { error in
+            if let error = error, error.code == 5 {
+                manager.isOnDemandEnabled = false
+                NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
+                return
+            }
+            
             manager.loadFromPreferences { _ in
                 self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
                 manager.saveToPreferences { _ in
@@ -262,12 +268,15 @@ class VPNManager {
                 try manager.connection.startVPNTunnel()
             } catch NEVPNError.configurationInvalid {
                 log(error: "Error connecting to VPN: configuration is invalid")
+                manager.isOnDemandEnabled = false
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
             } catch NEVPNError.configurationDisabled {
                 log(error: "Error connecting to VPN: configuration is disabled")
+                manager.isOnDemandEnabled = false
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
             } catch NEVPNError.configurationReadWriteFailed {
                 log(error: "Error connecting to VPN: configuration read write failed")
+                manager.isOnDemandEnabled = false
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
             } catch NEVPNError.configurationStale {
                 log(error: "Error connecting to VPN: configuration is stale")
