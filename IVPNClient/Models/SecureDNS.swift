@@ -105,7 +105,7 @@ struct SecureDNS: Codable {
     
     func validation() -> (Bool, String?) {
         guard let address = address, !address.isEmpty else {
-            return (false, "Please enter DNS server")
+            return (false, "Please enter DNS server info")
         }
         
         return (true, nil)

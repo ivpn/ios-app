@@ -41,7 +41,7 @@ class CustomDNSViewController: UITableViewController {
         }
         
         guard let server = customDNSTextField.text, !server.isEmpty else {
-            showAlert(title: "", message: "Please enter DNS server") { _ in
+            showAlert(title: "", message: "Please enter DNS server info") { _ in
                 sender.setOn(false, animated: true)
             }
             
