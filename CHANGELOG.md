@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.3.0 - Unreleased  
+
+[NEW] Configure custom DNS over HTTPS  
+[NEW] Application icon  
+[IMPROVED] WireGuard is now the default protocol  
+[IMPROVED] OpenVPN and OpenSSL libraries upgraded to the latest version  
+[FIXED] Incorrect subscription expiration alert  
+
 ## 2.2.0 - 2021-02-18  
 
 [NEW] Load balancer for IKEv2 and OpenVPN  
