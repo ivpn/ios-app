@@ -36,7 +36,7 @@ class SecureDNSTests: XCTestCase {
     func test_validation() {
         model.address = nil
         XCTAssertFalse(model.validation().0)
-        XCTAssertEqual(model.validation().1, "Please enter DNS server")
+        XCTAssertEqual(model.validation().1, "Please enter DNS server info")
         
         model.address = "0.0.0.0"
         XCTAssertTrue(model.validation().0)
