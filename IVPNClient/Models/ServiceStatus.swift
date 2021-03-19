@@ -37,8 +37,6 @@ struct ServiceStatus: Codable {
     let paymentMethod: String?
     let capabilities: [String]?
     
-    private static let serviceStatusKey = "ServiceStatus"
-    
     // MARK: - Initialize -
     
     init() {
@@ -57,12 +55,12 @@ struct ServiceStatus: Codable {
     
     func save() {
         if let encoded = try? JSONEncoder().encode(self) {
-            UserDefaults.standard.set(encoded, forKey: ServiceStatus.serviceStatusKey)
+            UserDefaults.standard.set(encoded, forKey: UserDefaults.Key.serviceStatus)
         }
     }
     
     static func load() -> ServiceStatus? {
-        if let savedObj = UserDefaults.standard.object(forKey: ServiceStatus.serviceStatusKey) as? Data {
+        if let savedObj = UserDefaults.standard.object(forKey: UserDefaults.Key.serviceStatus) as? Data {
             if let loadedObj = try? JSONDecoder().decode(ServiceStatus.self, from: savedObj) {
                 return loadedObj
             }
