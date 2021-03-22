@@ -109,10 +109,42 @@ class SecureDNSTests: XCTestCase {
         XCTAssertEqual(model.serverName, "example.com")
         
         model.address = "subdomain.example.com"
-        XCTAssertEqual(model.serverName, "example.com")
+        XCTAssertEqual(model.serverName, "subdomain.example.com")
         
         model.address = "subdomain.subdomain.example.com"
-        XCTAssertEqual(model.serverName, "example.com")
+        XCTAssertEqual(model.serverName, "subdomain.subdomain.example.com")
+    }
+    
+    func test_getServerToResolve() {
+        var server = DNSProtocolType.getServerToResolve(address: "0.0.0.0")
+        XCTAssertEqual(server, "0.0.0.0")
+        
+        server = DNSProtocolType.getServerToResolve(address: "https://0.0.0.0")
+        XCTAssertEqual(server, "0.0.0.0")
+        
+        server = DNSProtocolType.getServerToResolve(address: "0.0.0.0/dns-query")
+        XCTAssertEqual(server, "0.0.0.0")
+        
+        server = DNSProtocolType.getServerToResolve(address: "https://0.0.0.0/dns-query")
+        XCTAssertEqual(server, "0.0.0.0")
+        
+        server = DNSProtocolType.getServerToResolve(address: "example.com")
+        XCTAssertEqual(server, "example.com")
+        
+        server = DNSProtocolType.getServerToResolve(address: "https://example.com")
+        XCTAssertEqual(server, "example.com")
+        
+        server = DNSProtocolType.getServerToResolve(address: "example.com/dns-query")
+        XCTAssertEqual(server, "example.com")
+        
+        server = DNSProtocolType.getServerToResolve(address: "https://example.com/dns-query")
+        XCTAssertEqual(server, "example.com")
+        
+        server = DNSProtocolType.getServerToResolve(address: "subdomain.example.com")
+        XCTAssertEqual(server, "subdomain.example.com")
+        
+        server = DNSProtocolType.getServerToResolve(address: "subdomain.subdomain.example.com")
+        XCTAssertEqual(server, "subdomain.example.com")
     }
     
 }
