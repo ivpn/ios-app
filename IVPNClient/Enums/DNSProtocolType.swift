@@ -56,9 +56,30 @@ enum DNSProtocolType: String {
                     let ipAddress = try CIDRAddress(stringRepresentation: host)
                     return ipAddress?.ipAddress ?? address
                 } catch {}
+                
+                return host
             }
-            
-            return serverURL.getTopLevelDomain()
+        }
+        
+        return address
+    }
+    
+    static func getServerToResolve(address: String) -> String {
+        var serverName = address
+        
+        if !address.hasPrefix("https://") {
+            serverName = "https://\(serverName)"
+        }
+        
+        if let serverURL = URL.init(string: serverName) {
+            if let host = serverURL.host {
+                do {
+                    let ipAddress = try CIDRAddress(stringRepresentation: host)
+                    return ipAddress?.ipAddress ?? address
+                } catch {}
+                
+                return serverURL.getTopLevelSubdomain()
+            }
         }
         
         return address
