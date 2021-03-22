@@ -34,10 +34,10 @@ enum DNSProtocolType: String {
         
         if !address.hasPrefix("https://") {
             serverURL = "https://\(serverURL)"
-        }
-        
-        if !address.hasSuffix("/dns-query") {
-            serverURL = "\(serverURL)/dns-query"
+            
+            if !address.hasSuffix("/dns-query") {
+                serverURL = "\(serverURL)/dns-query"
+            }
         }
         
         return serverURL
