@@ -42,7 +42,7 @@ class VPNServersTests: XCTestCase {
     
     func test_initWithDefaults() {
         let servers = VPNServerList()
-        let server = servers.getServer(byGateway: "de.gw.ivpn.net")
+        let server = servers.getServer(byGateway: "de.wg.ivpn.net")
         
         XCTAssertNotNil(servers)
         XCTAssert(servers.servers.count > 5)

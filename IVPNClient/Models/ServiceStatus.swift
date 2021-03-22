@@ -111,4 +111,9 @@ struct ServiceStatus: Codable {
         return activeUntil != nil && (activeUntil ?? 0) > 0
     }
     
+    func activeUntilExpired() -> Bool {
+        let activeUntilDate = Date(timeIntervalSince1970: TimeInterval(activeUntil ?? 0))
+        return Date() > activeUntilDate
+    }
+    
 }

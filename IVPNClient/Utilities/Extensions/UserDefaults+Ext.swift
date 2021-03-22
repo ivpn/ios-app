@@ -62,6 +62,7 @@ extension UserDefaults {
         static let notAskToReconnect = "notAskToReconnect"
         static let resolvedDNSInsideVPN = "resolvedDNSInsideVPN"
         static let resolvedDNSOutsideVPN = "resolvedDNSOutsideVPN"
+        static let selectedProtocolIndex = "selectedProtocolIndex"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
