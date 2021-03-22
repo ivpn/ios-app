@@ -28,18 +28,18 @@ class Settings {
     
     var selectedServer: VPNServer {
         didSet {
-            UserDefaults.standard.set(selectedServer.gateway, forKey: "SelectedServerGateway")
-            UserDefaults.standard.set(selectedServer.city, forKey: "SelectedServerCity")
-            UserDefaults.standard.set(selectedServer.fastest, forKey: "SelectedServerFastest")
-            UserDefaults.standard.set(selectedServer.random, forKey: "SelectedServerRandom")
+            UserDefaults.standard.set(selectedServer.gateway, forKey: UserDefaults.Key.selectedServerGateway)
+            UserDefaults.standard.set(selectedServer.city, forKey: UserDefaults.Key.selectedServerCity)
+            UserDefaults.standard.set(selectedServer.fastest, forKey: UserDefaults.Key.selectedServerFastest)
+            UserDefaults.standard.set(selectedServer.random, forKey: UserDefaults.Key.selectedServerRandom)
         }
     }
     
     var selectedExitServer: VPNServer {
         didSet {
-            UserDefaults.standard.set(selectedExitServer.gateway, forKey: "SelectedExitServerGateway")
-            UserDefaults.standard.set(selectedExitServer.city, forKey: "SelectedExitServerCity")
-            UserDefaults.standard.set(selectedExitServer.random, forKey: "SelectedExitServerRandom")
+            UserDefaults.standard.set(selectedExitServer.gateway, forKey: UserDefaults.Key.selectedExitServerGateway)
+            UserDefaults.standard.set(selectedExitServer.city, forKey: UserDefaults.Key.selectedExitServerCity)
+            UserDefaults.standard.set(selectedExitServer.random, forKey: UserDefaults.Key.selectedExitServerRandom)
             UserDefaults.shared.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
         }
     }
@@ -49,10 +49,6 @@ class Settings {
             saveConnectionProtocol()
         }
     }
-    
-    var fastestServerConfiguredKey: String {
-        return "FastestServerConfiguredForOpenVPN"
-    }
 
     init(serverList: VPNServerList) {
         connectionProtocol = ConnectionSettings.getSavedProtocol()
@@ -60,39 +56,39 @@ class Settings {
         selectedServer = serverList.servers.first ?? VPNServer(gateway: "Not loaded", countryCode: "US", country: "", city: "")
         selectedExitServer = serverList.getExitServer(entryServer: selectedServer)
         
-        if let savedCity = UserDefaults.standard.string(forKey: "SelectedServerCity") {
+        if let savedCity = UserDefaults.standard.string(forKey: UserDefaults.Key.selectedServerCity) {
             if let lastUsedServer = serverList.getServer(byCity: savedCity) {
                 selectedServer = lastUsedServer
             }
         }
         
-        if let savedGateway = UserDefaults.standard.string(forKey: "SelectedServerGateway") {
+        if let savedGateway = UserDefaults.standard.string(forKey: UserDefaults.Key.selectedServerGateway) {
             if let lastUsedServer = serverList.getServer(byGateway: savedGateway) {
                 selectedServer = lastUsedServer
             }
         }
         
-        if let savedExitCity = UserDefaults.standard.string(forKey: "SelectedExitServerCity") {
+        if let savedExitCity = UserDefaults.standard.string(forKey: UserDefaults.Key.selectedExitServerCity) {
             if let lastUsedServer = serverList.getServer(byCity: savedExitCity) {
                 selectedExitServer = lastUsedServer
-                selectedExitServer.random = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
+                selectedExitServer.random = UserDefaults.standard.bool(forKey: UserDefaults.Key.selectedExitServerRandom)
             }
         }
         
-        if let savedExitGateway = UserDefaults.standard.string(forKey: "SelectedExitServerGateway") {
+        if let savedExitGateway = UserDefaults.standard.string(forKey: UserDefaults.Key.selectedExitServerGateway) {
             if let lastUsedServer = serverList.getServer(byGateway: savedExitGateway) {
                 selectedExitServer = lastUsedServer
-                selectedExitServer.random = UserDefaults.standard.bool(forKey: "SelectedExitServerRandom")
+                selectedExitServer.random = UserDefaults.standard.bool(forKey: UserDefaults.Key.selectedExitServerRandom)
             }
         }
         
         UserDefaults.shared.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
         saveConnectionProtocol()
         
-        selectedServer.fastest = UserDefaults.standard.bool(forKey: "SelectedServerFastest")
-        selectedServer.random = UserDefaults.standard.bool(forKey: "SelectedServerRandom")
+        selectedServer.fastest = UserDefaults.standard.bool(forKey: UserDefaults.Key.selectedServerFastest)
+        selectedServer.random = UserDefaults.standard.bool(forKey: UserDefaults.Key.selectedServerRandom)
         
-        if let status = NEVPNStatus.init(rawValue: UserDefaults.standard.integer(forKey: "SelectedServerStatus")) {
+        if let status = NEVPNStatus.init(rawValue: UserDefaults.standard.integer(forKey: UserDefaults.Key.selectedServerStatus)) {
             selectedServer.status = status
         }
     }
@@ -106,7 +102,7 @@ class Settings {
         }
         
         if !isEnabled {
-            Application.shared.settings.selectedServer.fastest = UserDefaults.standard.bool(forKey: "FastestServerPreferred")
+            Application.shared.settings.selectedServer.fastest = UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerPreferred)
         }
     }
     

@@ -63,6 +63,19 @@ extension UserDefaults {
         static let selectedProtocolIndex = "selectedProtocolIndex"
         static let resolvedDNSInsideVPN = "resolvedDNSInsideVPN"
         static let resolvedDNSOutsideVPN = "resolvedDNSOutsideVPN"
+        static let selectedServerCity = "SelectedServerCity"
+        static let selectedServerGateway = "SelectedServerGateway"
+        static let selectedServerRandom = "SelectedServerRandom"
+        static let selectedServerFastest = "SelectedServerFastest"
+        static let selectedServerStatus = "SelectedServerStatus"
+        static let selectedExitServerCity = "SelectedExitServerCity"
+        static let selectedExitServerGateway = "SelectedExitServerGateway"
+        static let selectedExitServerRandom = "SelectedExitServerRandom"
+        static let fastestServerPreferred = "FastestServerPreferred"
+        static let fastestServerConfigured = "FastestServerConfiguredForOpenVPN"
+        static let firstInstall = "FirstInstall"
+        static let secureDNS = "SecureDNS"
+        static let serviceStatus = "ServiceStatus"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -182,33 +195,32 @@ extension UserDefaults {
     }
     
     static func registerUserDefaults() {
-        shared.register(defaults: [UserDefaults.Key.networkProtectionUntrustedConnect: true])
-        shared.register(defaults: [UserDefaults.Key.networkProtectionTrustedDisconnect: true])
-        shared.register(defaults: [UserDefaults.Key.keepAlive: true])
-        shared.register(defaults: [UserDefaults.Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
-        shared.register(defaults: [UserDefaults.Key.wgKeyTimestamp: Date()])
-        standard.register(defaults: ["SelectedServerFastest": true])
-        shared.register(defaults: [UserDefaults.Key.serversSort: "city"])
+        shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
+        shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
+        shared.register(defaults: [Key.keepAlive: true])
+        shared.register(defaults: [Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
+        shared.register(defaults: [Key.wgKeyTimestamp: Date()])
+        standard.register(defaults: [Key.selectedServerFastest: true])
+        shared.register(defaults: [Key.serversSort: "city"])
     }
     
     static func clearSession() {
-        shared.removeObject(forKey: UserDefaults.Key.isMultiHop)
-        shared.removeObject(forKey: UserDefaults.Key.isLogging)
-        shared.removeObject(forKey: UserDefaults.Key.networkProtectionEnabled)
-        shared.removeObject(forKey: UserDefaults.Key.networkProtectionUntrustedConnect)
-        shared.removeObject(forKey: UserDefaults.Key.networkProtectionTrustedDisconnect)
-        shared.removeObject(forKey: UserDefaults.Key.isCustomDNS)
-        shared.removeObject(forKey: UserDefaults.Key.isAntiTracker)
-        shared.removeObject(forKey: UserDefaults.Key.isAntiTrackerHardcore)
-        shared.removeObject(forKey: UserDefaults.Key.wgKeyTimestamp)
-        shared.removeObject(forKey: UserDefaults.Key.wgRegenerationRate)
-        shared.removeObject(forKey: UserDefaults.Key.apiHostName)
-        shared.removeObject(forKey: UserDefaults.Key.sessionsLimit)
-        shared.removeObject(forKey: UserDefaults.Key.keepAlive)
-        shared.removeObject(forKey: UserDefaults.Key.notAskToReconnect)
-        standard.removeObject(forKey: "SelectedServerFastest")
-        standard.removeObject(forKey: "FastestServerConfiguredForOpenVPN")
-        standard.removeObject(forKey: "FastestServerConfiguredForWireGuard")
+        shared.removeObject(forKey: Key.isMultiHop)
+        shared.removeObject(forKey: Key.isLogging)
+        shared.removeObject(forKey: Key.networkProtectionEnabled)
+        shared.removeObject(forKey: Key.networkProtectionUntrustedConnect)
+        shared.removeObject(forKey: Key.networkProtectionTrustedDisconnect)
+        shared.removeObject(forKey: Key.isCustomDNS)
+        shared.removeObject(forKey: Key.isAntiTracker)
+        shared.removeObject(forKey: Key.isAntiTrackerHardcore)
+        shared.removeObject(forKey: Key.wgKeyTimestamp)
+        shared.removeObject(forKey: Key.wgRegenerationRate)
+        shared.removeObject(forKey: Key.apiHostName)
+        shared.removeObject(forKey: Key.sessionsLimit)
+        shared.removeObject(forKey: Key.keepAlive)
+        shared.removeObject(forKey: Key.notAskToReconnect)
+        standard.removeObject(forKey: Key.selectedServerFastest)
+        standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.synchronize()
     }
     

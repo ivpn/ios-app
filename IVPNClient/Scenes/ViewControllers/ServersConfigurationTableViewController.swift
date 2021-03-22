@@ -83,13 +83,11 @@ extension ServersConfigurationTableViewController {
 extension ServersConfigurationTableViewController: ServerConfigurationCellDelegate {
     
     func toggle(isOn: Bool, gateway: String) {
-        let fastestServerConfiguredKey = Application.shared.settings.fastestServerConfiguredKey
-        
-        if UserDefaults.standard.bool(forKey: fastestServerConfiguredKey) {
+        if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
             StorageManager.saveServer(gateway: gateway, isFastestEnabled: isOn)
         } else {
             Application.shared.serverList.saveAllServers(exceptionGateway: gateway)
-            UserDefaults.standard.set(true, forKey: fastestServerConfiguredKey)
+            UserDefaults.standard.set(true, forKey: UserDefaults.Key.fastestServerConfigured)
         }
         
         UserDefaults.standard.synchronize()

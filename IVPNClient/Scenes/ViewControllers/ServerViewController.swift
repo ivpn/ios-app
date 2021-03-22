@@ -235,7 +235,7 @@ extension ServerViewController {
             if !UserDefaults.shared.isMultiHop {
                 Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
             }
-            UserDefaults.standard.set(Application.shared.settings.selectedServer.fastest, forKey: "FastestServerPreferred")
+            UserDefaults.standard.set(Application.shared.settings.selectedServer.fastest, forKey: UserDefaults.Key.fastestServerPreferred)
         }
         
         NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)

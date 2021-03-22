@@ -350,7 +350,7 @@ extension StorageManager {
     static func canUpdateServer(isOn: Bool) -> Bool {
         guard !isOn else { return true }
         
-        if UserDefaults.standard.bool(forKey: Application.shared.settings.fastestServerConfiguredKey) {
+        if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
             if let servers = fetchServers(isFastestEnabled: true) {
                 if servers.count == 1 {
                     return false
