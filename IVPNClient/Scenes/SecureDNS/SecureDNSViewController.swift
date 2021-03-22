@@ -172,6 +172,16 @@ class SecureDNSViewController: UITableViewController {
 extension SecureDNSViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let type = DNSProtocolType.init(rawValue: model.type)
+        
+        if type == .dot && indexPath.section == 1 && indexPath.row == 2 {
+            return 0
+        }
+        
+        if type == .doh && indexPath.section == 1 && indexPath.row == 3 {
+            return 0
+        }
+        
         return 45
     }
 

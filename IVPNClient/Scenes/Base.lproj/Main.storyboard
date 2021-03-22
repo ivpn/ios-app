@@ -1006,44 +1006,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="HaW-3w-1r3">
-                                        <rect key="frame" x="0.0" y="249.5" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HaW-3w-1r3" id="0G5-ie-xuB">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hy-an-9ad">
-                                                    <rect key="frame" x="16" y="11.5" width="100" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="0yG-Sr-7rH"/>
-                                                        <constraint firstAttribute="width" constant="100" id="izX-4A-hbo"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2js-gp-J1U">
-                                                    <rect key="frame" x="131" y="11.5" width="263" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="shY-wi-mVf"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="ivpnGray16"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="1hy-an-9ad" firstAttribute="centerY" secondItem="0G5-ie-xuB" secondAttribute="centerY" id="4cc-yg-npA"/>
-                                                <constraint firstItem="1hy-an-9ad" firstAttribute="leading" secondItem="0G5-ie-xuB" secondAttribute="leading" constant="16" id="B6e-xr-Bg0"/>
-                                                <constraint firstItem="2js-gp-J1U" firstAttribute="centerY" secondItem="0G5-ie-xuB" secondAttribute="centerY" id="RW7-fF-ulY"/>
-                                                <constraint firstItem="2js-gp-J1U" firstAttribute="leading" secondItem="1hy-an-9ad" secondAttribute="trailing" constant="15" id="sfZ-yG-iV6"/>
-                                                <constraint firstAttribute="trailing" secondItem="2js-gp-J1U" secondAttribute="trailing" constant="20" id="v8l-3p-MQ7"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="eVZ-84-Z0Q">
-                                        <rect key="frame" x="0.0" y="293.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="249.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eVZ-84-Z0Q" id="9lf-BC-BOt">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1075,6 +1039,42 @@
                                                 <constraint firstItem="cGI-Ba-1AA" firstAttribute="leading" secondItem="tZS-S0-Lcg" secondAttribute="trailing" constant="15" id="NJt-VD-sqK"/>
                                                 <constraint firstItem="cGI-Ba-1AA" firstAttribute="centerY" secondItem="9lf-BC-BOt" secondAttribute="centerY" id="QSO-We-xeU"/>
                                                 <constraint firstItem="tZS-S0-Lcg" firstAttribute="centerY" secondItem="9lf-BC-BOt" secondAttribute="centerY" id="Ua6-YQ-QlH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="HaW-3w-1r3">
+                                        <rect key="frame" x="0.0" y="293.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HaW-3w-1r3" id="0G5-ie-xuB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hy-an-9ad">
+                                                    <rect key="frame" x="16" y="11.5" width="100" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="0yG-Sr-7rH"/>
+                                                        <constraint firstAttribute="width" constant="100" id="izX-4A-hbo"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2js-gp-J1U">
+                                                    <rect key="frame" x="131" y="11.5" width="263" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="shY-wi-mVf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" name="ivpnGray16"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1hy-an-9ad" firstAttribute="centerY" secondItem="0G5-ie-xuB" secondAttribute="centerY" id="4cc-yg-npA"/>
+                                                <constraint firstItem="1hy-an-9ad" firstAttribute="leading" secondItem="0G5-ie-xuB" secondAttribute="leading" constant="16" id="B6e-xr-Bg0"/>
+                                                <constraint firstItem="2js-gp-J1U" firstAttribute="centerY" secondItem="0G5-ie-xuB" secondAttribute="centerY" id="RW7-fF-ulY"/>
+                                                <constraint firstItem="2js-gp-J1U" firstAttribute="leading" secondItem="1hy-an-9ad" secondAttribute="trailing" constant="15" id="sfZ-yG-iV6"/>
+                                                <constraint firstAttribute="trailing" secondItem="2js-gp-J1U" secondAttribute="trailing" constant="20" id="v8l-3p-MQ7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
