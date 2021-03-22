@@ -31,7 +31,8 @@ struct SecureDNS: Codable {
                 serverURL = DNSProtocolType.getServerURL(address: address)
                 serverName = DNSProtocolType.getServerName(address: address)
                 if #available(iOS 14.0, *) {
-                    DNSManager.saveResolvedDNS(server: address, key: UserDefaults.Key.resolvedDNSOutsideVPN)
+                    let url = URL.init(string: serverURL ?? address)
+                    DNSManager.saveResolvedDNS(server: url?.host ?? address, key: UserDefaults.Key.resolvedDNSOutsideVPN)
                 }
             } else {
                 serverURL = nil
