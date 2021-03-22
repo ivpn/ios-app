@@ -28,10 +28,10 @@ struct SecureDNS: Codable {
     var address: String? {
         didSet {
             if let address = address {
-                serverURL = getServerURL(address: address)
-                serverName = getServerName(address: address)
+                serverURL = DNSProtocolType.getServerURL(address: address)
+                serverName = DNSProtocolType.getServerName(address: address)
                 if #available(iOS 14.0, *) {
-                    DNSManager.shared.saveResolvedDNS(server: address)
+                    DNSManager.saveResolvedDNS(server: address, key: UserDefaults.Key.resolvedDNSOutsideVPN)
                 }
             } else {
                 serverURL = nil
@@ -105,52 +105,10 @@ struct SecureDNS: Codable {
     
     func validation() -> (Bool, String?) {
         guard let address = address, !address.isEmpty else {
-            return (false, "Please enter DNS server")
+            return (false, "Please enter DNS server info")
         }
         
         return (true, nil)
     }
     
-    // MARK: - Private methods -
-    
-    private func getServerURL(address: String) -> String? {
-        var serverURL = address
-        
-        if !address.hasPrefix("https://") {
-            serverURL = "https://\(serverURL)"
-        }
-        
-        if !address.hasSuffix("/dns-query") {
-            serverURL = "\(serverURL)/dns-query"
-        }
-        
-        return serverURL
-    }
-    
-    private func getServerName(address: String) -> String {
-        var serverName = address
-        
-        if !address.hasPrefix("https://") {
-            serverName = "https://\(serverName)"
-        }
-        
-        if let serverURL = URL.init(string: serverName) {
-            if let host = serverURL.host {
-                do {
-                    let ipAddress = try CIDRAddress(stringRepresentation: host)
-                    return ipAddress?.ipAddress ?? address
-                } catch {}
-            }
-            
-            return serverURL.getTopLevelDomain()
-        }
-        
-        return address
-    }
-    
-}
-
-enum SecureDNSType: String {
-    case doh
-    case dot
 }

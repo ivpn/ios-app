@@ -262,6 +262,9 @@
 		82E81AE72449C44F00D81FB7 /* PaymentComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E81AE62449C44F00D81FB7 /* PaymentComponentView.swift */; };
 		82E96A4B224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E96A4A224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift */; };
 		82EA857A21DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */; };
+		82EEB6C625F9398600915837 /* DNSProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EEB6C525F9398600915837 /* DNSProtocolType.swift */; };
+		82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EEB6C525F9398600915837 /* DNSProtocolType.swift */; };
+		82EEB6DB25F961BC00915837 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE598F25ED3C7A0078099D /* URL+Ext.swift */; };
 		82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F189A1225CE8A90038ABA0 /* UIView+Ext.swift */; };
 		82F638C2217DA89000410318 /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638C1217DA89000410318 /* AddressType.swift */; };
 		82F638C5217DA89000410318 /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638C1217DA89000410318 /* AddressType.swift */; };
@@ -597,6 +600,7 @@
 		82E81AE62449C44F00D81FB7 /* PaymentComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentComponentView.swift; sourceTree = "<group>"; };
 		82E96A4A224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionKeyManagerTests.swift; sourceTree = "<group>"; };
 		82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StorageManager+OnDemandRuleTests.swift"; sourceTree = "<group>"; };
+		82EEB6C525F9398600915837 /* DNSProtocolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSProtocolType.swift; sourceTree = "<group>"; };
 		82F189A1225CE8A90038ABA0 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		82F638C1217DA89000410318 /* AddressType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressType.swift; sourceTree = "<group>"; };
 		82F638C6217DC22300410318 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -1057,6 +1061,7 @@
 				8229209F2480FA3600476FC1 /* ServersSort.swift */,
 				826FBDA22461847D00B9E464 /* ServiceType.swift */,
 				826FBDA42461848A00B9E464 /* ServiceDuration.swift */,
+				82EEB6C525F9398600915837 /* DNSProtocolType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -2011,6 +2016,7 @@
 				82E716882181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				8223C5402232694E006C4F14 /* KeyChain.swift in Sources */,
 				82F638C5217DA89000410318 /* AddressType.swift in Sources */,
+				82EEB6DB25F961BC00915837 /* URL+Ext.swift in Sources */,
 				822919712182EB1C00978BBA /* String+Ext.swift in Sources */,
 				8223C53A22325709006C4F14 /* ApiManager.swift in Sources */,
 				820535292302BE8F007BDD58 /* APIAccessManager.swift in Sources */,
@@ -2031,6 +2037,7 @@
 				8223C55022EAEC7100CD283D /* Session.swift in Sources */,
 				8223C53E22326321006C4F14 /* x25519.c in Sources */,
 				826C56D422FD551900D2B76A /* ServiceStatus.swift in Sources */,
+				82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */,
 				820EA86C2322430700E16B2D /* Result.swift in Sources */,
 				823FFB092338E09A00F91A5D /* Capability.swift in Sources */,
 				82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */,
@@ -2240,6 +2247,7 @@
 				8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */,
 				9CBFF0302102254800FE1757 /* Settings.swift in Sources */,
 				9C3031371DB4307D00C38B0C /* SettingsViewController.swift in Sources */,
+				82EEB6C625F9398600915837 /* DNSProtocolType.swift in Sources */,
 				821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */,
 				82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */,
 				82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */,

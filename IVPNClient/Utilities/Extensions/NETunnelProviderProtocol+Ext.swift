@@ -49,8 +49,19 @@ extension NETunnelProviderProtocol {
         sessionBuilder.hostname = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
         sessionBuilder.tlsWrap = OpenVPN.TLSWrap.init(strategy: .auth, key: staticKey!)
         
-        if let dnsServers = openVPNdnsServers(), dnsServers != [""] {
+        if let dnsServers = openVPNdnsServers(), !dnsServers.isEmpty, dnsServers != [""] {
             sessionBuilder.dnsServers = dnsServers
+            
+            switch DNSProtocolType.preferred() {
+            case .doh:
+                sessionBuilder.dnsProtocol = .https
+                sessionBuilder.dnsHTTPSURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS) ?? "")
+            case .dot:
+                sessionBuilder.dnsProtocol = .tls
+                sessionBuilder.dnsTLSServerName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
+            default:
+                sessionBuilder.dnsProtocol = .plain
+            }
         }
         
         var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
@@ -88,7 +99,7 @@ extension NETunnelProviderProtocol {
                 }
             }
         } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty {
-            return [UserDefaults.shared.customDNS]
+            return UserDefaults.shared.resolvedDNSInsideVPN
         }
         
         return nil

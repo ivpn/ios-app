@@ -144,7 +144,11 @@ class SecureDNSViewController: UITableViewController {
             return
         }
         
-        DNSManager.shared.removeProfile() { _ in }
+        DNSManager.shared.removeProfile { _ in
+            DNSManager.shared.loadProfile { _ in
+                
+            }
+        }
     }
     
     private func saveAddress() {
