@@ -56,7 +56,7 @@ class SecureDNSTests: XCTestCase {
         XCTAssertEqual(model.serverURL, "https://0.0.0.0/dns-query")
         
         model.address = "https://0.0.0.0"
-        XCTAssertEqual(model.serverURL, "https://0.0.0.0/dns-query")
+        XCTAssertEqual(model.serverURL, "https://0.0.0.0")
         
         model.address = "0.0.0.0/dns-query"
         XCTAssertEqual(model.serverURL, "https://0.0.0.0/dns-query")
@@ -68,13 +68,19 @@ class SecureDNSTests: XCTestCase {
         XCTAssertEqual(model.serverURL, "https://example.com/dns-query")
         
         model.address = "https://example.com"
-        XCTAssertEqual(model.serverURL, "https://example.com/dns-query")
+        XCTAssertEqual(model.serverURL, "https://example.com")
         
         model.address = "example.com/dns-query"
         XCTAssertEqual(model.serverURL, "https://example.com/dns-query")
         
         model.address = "https://example.com/dns-query"
         XCTAssertEqual(model.serverURL, "https://example.com/dns-query")
+        
+        model.address = "https://example.com/123456"
+        XCTAssertEqual(model.serverURL, "https://example.com/123456")
+        
+        model.address = "https://123456.example.com"
+        XCTAssertEqual(model.serverURL, "https://123456.example.com")
     }
     
     func test_getServerName() {
