@@ -157,6 +157,7 @@ class SecureDNSViewController: UITableViewController {
         }
         
         model.address = text
+        secureDNSView.setupView(model: model)
         
         if text.isEmpty {
             removeDNSProfile()
