@@ -63,7 +63,7 @@ struct Config {
     static let serviceStatusRefreshMaxIntervalSeconds: TimeInterval = 30
     static let stableVPNStatusInterval: TimeInterval = 0.5
     
-    static let defaultProtocol = ConnectionSettings.ipsec
+    static let defaultProtocol = ConnectionSettings.wireguard(.udp, 2049)
     static let supportedProtocols = [
         ConnectionSettings.ipsec,
         ConnectionSettings.openvpn(.udp, 2049),
@@ -81,6 +81,12 @@ struct Config {
         ConnectionSettings.wireguard(.udp, 41893),
         ConnectionSettings.wireguard(.udp, 48574),
         ConnectionSettings.wireguard(.udp, 58237)
+    ]
+    
+    static let supportedProtocolTypes = [
+        ConnectionSettings.wireguard(.udp, 2049),
+        ConnectionSettings.ipsec,
+        ConnectionSettings.openvpn(.udp, 2049)
     ]
     
     // MARK: WireGuard

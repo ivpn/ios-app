@@ -53,7 +53,7 @@ class Settings {
     var connectionProtocol: ConnectionSettings {
         didSet {
             if let index = Config.supportedProtocols.firstIndex(where: {$0 == connectionProtocol}) {
-                UserDefaults.standard.set(index, forKey: "selectedProtocolIndex")
+                UserDefaults.standard.set(index, forKey: UserDefaults.Key.selectedProtocolIndex)
             }
         }
     }
@@ -63,16 +63,10 @@ class Settings {
     }
 
     init(serverList: VPNServerList) {
-        let protocolIndex = UserDefaults.standard.integer(forKey: "selectedProtocolIndex")
+        connectionProtocol = ConnectionSettings.getSavedProtocol()
         
         selectedServer = serverList.servers.first ?? VPNServer(gateway: "Not loaded", countryCode: "US", country: "", city: "")
         selectedExitServer = serverList.getExitServer(entryServer: selectedServer)
-        
-        if Config.supportedProtocols.indices.contains(protocolIndex) {
-            connectionProtocol = Config.supportedProtocols[protocolIndex]
-        } else {
-            connectionProtocol = Config.defaultProtocol
-        }
         
         if let savedCity = UserDefaults.standard.string(forKey: "SelectedServerCity") {
             if let lastUsedServer = serverList.getServer(byCity: savedCity) {
