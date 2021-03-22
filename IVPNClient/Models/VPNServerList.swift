@@ -34,8 +34,7 @@ class VPNServerList {
     
     var filteredFastestServers: [VPNServer] {
         var serversArray = servers
-        let fastestServerConfiguredKey = Application.shared.settings.fastestServerConfiguredKey
-        let fastestServerConfigured = UserDefaults.standard.bool(forKey: fastestServerConfiguredKey)
+        let fastestServerConfigured = UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured)
         
         if fastestServerConfigured {
             serversArray = serversArray.filter { StorageManager.isFastestEnabled(server: $0) }

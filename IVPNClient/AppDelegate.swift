@@ -34,10 +34,10 @@ class AppDelegate: UIResponder {
     // MARK: - Methods -
     
     private func evaluateFirstRun() {
-        if UserDefaults.standard.object(forKey: "FirstInstall") == nil {
+        if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil {
             KeyChain.clearAll()
             UserDefaults.clearSession()
-            UserDefaults.standard.set(false, forKey: "FirstInstall")
+            UserDefaults.standard.set(false, forKey: UserDefaults.Key.firstInstall)
             UserDefaults.standard.synchronize()
         }
     }

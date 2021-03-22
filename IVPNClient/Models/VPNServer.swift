@@ -32,14 +32,14 @@ class VPNServer {
     var pingMs: Int?
     var status: NEVPNStatus = .invalid {
         didSet {
-            UserDefaults.standard.set(status.rawValue, forKey: "SelectedServerStatus")
+            UserDefaults.standard.set(status.rawValue, forKey: UserDefaults.Key.selectedServerStatus)
             UserDefaults.standard.synchronize()
         }
     }
     
     var fastest = false {
         didSet {
-            UserDefaults.standard.set(fastest, forKey: "SelectedServerFastest")
+            UserDefaults.standard.set(fastest, forKey: UserDefaults.Key.selectedServerFastest)
             UserDefaults.standard.synchronize()
         }
     }

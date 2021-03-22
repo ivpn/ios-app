@@ -71,8 +71,6 @@ struct SecureDNS: Codable {
         }
     }
     
-    private static let secureDNSKey = "SecureDNS"
-    
     // MARK: - Initialize -
     
     init() {
@@ -89,12 +87,12 @@ struct SecureDNS: Codable {
     
     func save() {
         if let encoded = try? JSONEncoder().encode(self) {
-            UserDefaults.standard.set(encoded, forKey: SecureDNS.secureDNSKey)
+            UserDefaults.standard.set(encoded, forKey: UserDefaults.Key.secureDNS)
         }
     }
     
     static func load() -> SecureDNS? {
-        if let savedObj = UserDefaults.standard.object(forKey: SecureDNS.secureDNSKey) as? Data {
+        if let savedObj = UserDefaults.standard.object(forKey: UserDefaults.Key.secureDNS) as? Data {
             if let loadedObj = try? JSONDecoder().decode(SecureDNS.self, from: savedObj) {
                 return loadedObj
             }

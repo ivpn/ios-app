@@ -48,13 +48,12 @@ class ServerConfigurationCell: UITableViewCell {
     
     var viewModel: VPNServerViewModel! {
         didSet {
-            let fastestServerConfiguredKey = Application.shared.settings.fastestServerConfiguredKey
             let sort = ServersSort.init(rawValue: UserDefaults.shared.serversSort) ?? .city
             
             flagImage.image = viewModel.imageForCountryCode
             serverLabel.text = viewModel.formattedServerName(sort: sort)
             
-            if UserDefaults.standard.bool(forKey: fastestServerConfiguredKey) {
+            if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
                 let isFastestEnabled = StorageManager.isFastestEnabled(server: viewModel.server)
                 fastestEnabledSwitch.setOn(isFastestEnabled, animated: false)
             }
