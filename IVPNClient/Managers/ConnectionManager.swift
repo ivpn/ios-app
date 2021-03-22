@@ -170,7 +170,7 @@ class ConnectionManager {
         }
     }
     
-    func isOnDemandEnabled(completion: @escaping (Bool) -> ()) {
+    func isOnDemandEnabled(completion: @escaping (Bool) -> Void) {
         vpnManager.getManagerFor(tunnelType: .ipsec) { manager in
             if manager.isOnDemandEnabled {
                 completion(true)

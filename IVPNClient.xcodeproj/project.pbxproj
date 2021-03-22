@@ -74,6 +74,9 @@
 		823FFB072338DF1800F91A5D /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823FFB062338DF1800F91A5D /* Capability.swift */; };
 		823FFB082338E09900F91A5D /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823FFB062338DF1800F91A5D /* Capability.swift */; };
 		823FFB092338E09A00F91A5D /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823FFB062338DF1800F91A5D /* Capability.swift */; };
+		8243584425DAA7BD005FDEBB /* SecureDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */; };
+		8243584E25DAA842005FDEBB /* SecureDNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243584D25DAA842005FDEBB /* SecureDNSView.swift */; };
+		8243587125DBB73F005FDEBB /* SecureDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243587025DBB73E005FDEBB /* SecureDNS.swift */; };
 		824777E721A6BC3A001EEFAF /* Network+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */; };
 		824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */; };
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
@@ -96,6 +99,8 @@
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */; };
 		8269CD8F2164A8C700D083A1 /* servers-dev.json in Resources */ = {isa = PBXBuildFile; fileRef = 8269CD8E2164A8C700D083A1 /* servers-dev.json */; };
+		826C1F8425DBEF1800314C4B /* DNSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C1F8325DBEF1800314C4B /* DNSManager.swift */; };
+		826C1F8C25DD528400314C4B /* SecureDNSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C1F8B25DD528400314C4B /* SecureDNSTests.swift */; };
 		826C56D222FD4F2600D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826C56D322FD551800D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
 		826C56D422FD551900D2B76A /* ServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826C56D122FD4F2600D2B76A /* ServiceStatus.swift */; };
@@ -209,6 +214,9 @@
 		82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293C221CCDA42000B74EC /* UIColor+Ext.swift */; };
 		82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
 		82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9739F217DFA9C00CE06D4 /* Host.swift */; };
+		82CE599025ED3C7A0078099D /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE598F25ED3C7A0078099D /* URL+Ext.swift */; };
+		82CE599925ED48D60078099D /* InternetAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE599825ED48D60078099D /* InternetAddress.swift */; };
+		82CE59A725ED491B0078099D /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE59A625ED491B0078099D /* DNSResolver.swift */; };
 		82D598A321A55210000FABDE /* NetworkProtectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */; };
 		82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */; };
 		82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */; };
@@ -436,6 +444,9 @@
 		823AD1F52158F56300BE0EBA /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = ../Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
 		823DA732215E3CCB00DAFE37 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		823FFB062338DF1800F91A5D /* Capability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capability.swift; sourceTree = "<group>"; };
+		8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSViewController.swift; sourceTree = "<group>"; };
+		8243584D25DAA842005FDEBB /* SecureDNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSView.swift; sourceTree = "<group>"; };
+		8243587025DBB73E005FDEBB /* SecureDNS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNS.swift; sourceTree = "<group>"; };
 		824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataClass.swift"; sourceTree = "<group>"; };
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -454,6 +465,8 @@
 		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
 		8269CD8E2164A8C700D083A1 /* servers-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "servers-dev.json"; sourceTree = "<group>"; };
+		826C1F8325DBEF1800314C4B /* DNSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSManager.swift; sourceTree = "<group>"; };
+		826C1F8B25DD528400314C4B /* SecureDNSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSTests.swift; sourceTree = "<group>"; };
 		826C56D122FD4F2600D2B76A /* ServiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatus.swift; sourceTree = "<group>"; };
 		826D182621D3DAFF0045A570 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		826D182821D3DAFF0045A570 /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
@@ -547,6 +560,9 @@
 		82C293C221CCDA42000B74EC /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
 		82C9739F217DFA9C00CE06D4 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
+		82CE598F25ED3C7A0078099D /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
+		82CE599825ED48D60078099D /* InternetAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetAddress.swift; sourceTree = "<group>"; };
+		82CE59A625ED491B0078099D /* DNSResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
 		82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionViewController.swift; sourceTree = "<group>"; };
 		82D598A721A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		82D598AB21A566CD000FABDE /* NetworkProtectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -830,6 +846,7 @@
 		82234B6421BA7EB500B082DE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				82CE599725ED48AB0078099D /* DNSResolver */,
 				825A43FB215CCFC10076131F /* Extensions */,
 				82234B6521BA7F3500B082DE /* Logging */,
 				8292E1BB2174CA6800123538 /* Crypto */,
@@ -865,6 +882,7 @@
 				8223C54D22EAE93F00CD283D /* SessionManager.swift */,
 				8206F32224367A240056B465 /* VPNErrorObserver.swift */,
 				825E836225A4834200938240 /* APIPublicKeyPin.swift */,
+				826C1F8325DBEF1800314C4B /* DNSManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -884,6 +902,7 @@
 				9CBFF02F2102254800FE1757 /* Settings.swift */,
 				826C56D122FD4F2600D2B76A /* ServiceStatus.swift */,
 				82DAB37A2457013900302F4C /* Service.swift */,
+				8243587025DBB73E005FDEBB /* SecureDNS.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -926,6 +945,23 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		8243584B25DAA81D005FDEBB /* SecureDNS */ = {
+			isa = PBXGroup;
+			children = (
+				8243584C25DAA833005FDEBB /* View */,
+				8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */,
+			);
+			path = SecureDNS;
+			sourceTree = "<group>";
+		};
+		8243584C25DAA833005FDEBB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8243584D25DAA842005FDEBB /* SecureDNSView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		825A43FB215CCFC10076131F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -956,6 +992,7 @@
 				829DF2812497953C000DC2DB /* UIButton+Ext.swift */,
 				82A3422424AB6AF700761AB0 /* Double+Ext.swift */,
 				82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */,
+				82CE598F25ED3C7A0078099D /* URL+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1074,6 +1111,7 @@
 		82A208B321BAA4C500C9AD44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8243584B25DAA81D005FDEBB /* SecureDNS */,
 				8208525423FD56530008C112 /* MainScreen */,
 				822563902431DFFB00AE7F8D /* AccountScreen */,
 				82A208B621BAA51000C9AD44 /* Controls */,
@@ -1159,6 +1197,7 @@
 				82555004220ACAAF004763A7 /* VPNServersTests.swift */,
 				82F81A60224CFFD700CB778B /* AuthenticationTests.swift */,
 				82A3422224AB660C00761AB0 /* ApplicationTests.swift */,
+				826C1F8B25DD528400314C4B /* SecureDNSTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1230,6 +1269,15 @@
 				8208525923FD5F670008C112 /* FloatingPanelController+Ext.swift */,
 			);
 			path = ControlPanel;
+			sourceTree = "<group>";
+		};
+		82CE599725ED48AB0078099D /* DNSResolver */ = {
+			isa = PBXGroup;
+			children = (
+				82CE599825ED48D60078099D /* InternetAddress.swift */,
+				82CE59A625ED491B0078099D /* DNSResolver.swift */,
+			);
+			path = DNSResolver;
 			sourceTree = "<group>";
 		};
 		82DEF01B2447149000CCB5CD /* Signup */ = {
@@ -1888,6 +1936,7 @@
 				82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */,
 				826D182921D3DAFF0045A570 /* StorageManagerTests.swift in Sources */,
 				82DB75EE239E766A0073E846 /* NEVPNStatusTests.swift in Sources */,
+				826C1F8C25DD528400314C4B /* SecureDNSTests.swift in Sources */,
 				82F81A42224CF69900CB778B /* UIDeviceTests.swift in Sources */,
 				82F81A4B224CFADB00CB778B /* CIDRAddressTests.swift in Sources */,
 				82F81A58224CFC0C00CB778B /* VPNManagerTests.swift in Sources */,
@@ -2031,6 +2080,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				820EA86823223F7900E16B2D /* InterfaceResult.swift in Sources */,
+				82CE599925ED48D60078099D /* InternetAddress.swift in Sources */,
 				823DA733215E3CCB00DAFE37 /* Array+Ext.swift in Sources */,
 				82F638C7217DC22300410318 /* Endpoint.swift in Sources */,
 				824777E721A6BC3A001EEFAF /* Network+CoreDataClass.swift in Sources */,
@@ -2039,6 +2089,7 @@
 				8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */,
 				828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */,
 				82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */,
+				8243584E25DAA842005FDEBB /* SecureDNSView.swift in Sources */,
 				8206F32124347A8F0056B465 /* MainView.swift in Sources */,
 				9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */,
 				828D8A6D258245AD00CB0E5B /* TwoFactorViewController.swift in Sources */,
@@ -2060,6 +2111,7 @@
 				82D598C021A6991B000FABDE /* NetworkManager.swift in Sources */,
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
 				82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */,
+				826C1F8425DBEF1800314C4B /* DNSManager.swift in Sources */,
 				8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */,
 				82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */,
 				9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */,
@@ -2087,6 +2139,7 @@
 				9CB2CE341DAF9283007A4D2D /* Model.xcdatamodeld in Sources */,
 				821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */,
 				82FF0D442315587000440E5D /* UITextFieldPadding.swift in Sources */,
+				8243584425DAA7BD005FDEBB /* SecureDNSViewController.swift in Sources */,
 				82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */,
 				8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */,
 				82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */,
@@ -2149,13 +2202,16 @@
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
 				82061F67238D2730009DDF4D /* PingManager.swift in Sources */,
 				9CDDD5AF1D9D2F9F00D39924 /* AppDelegate.swift in Sources */,
+				82CE59A725ED491B0078099D /* DNSResolver.swift in Sources */,
 				82BBF26121AD213500589766 /* Theme.swift in Sources */,
 				829AA4732267372A00037198 /* Designable+Ext.swift in Sources */,
 				9C3031301DB41FBA00C38B0C /* ServerTableViewCell.swift in Sources */,
 				8292E1AB2174C12200123538 /* Tunnel.swift in Sources */,
 				82D598A821A566B1000FABDE /* NetworkProtectionHeaderTableViewCell.swift in Sources */,
+				82CE599025ED3C7A0078099D /* URL+Ext.swift in Sources */,
 				82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */,
 				82B51CDF21DE3E31005CC9C9 /* UITableView+Ext.swift in Sources */,
+				8243587125DBB73F005FDEBB /* SecureDNS.swift in Sources */,
 				82061F64238D2730009DDF4D /* PingResult.swift in Sources */,
 				82A3422524AB6AF700761AB0 /* Double+Ext.swift in Sources */,
 				8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */,
@@ -2356,13 +2412,13 @@
 				CODE_SIGN_ENTITLEMENTS = "today-extension/today-extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.today-extension";
@@ -2385,13 +2441,13 @@
 				CODE_SIGN_ENTITLEMENTS = "today-extension/today-extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.today-extension";
 				PRODUCT_NAME = IVPN;
@@ -2413,13 +2469,13 @@
 				CODE_SIGN_ENTITLEMENTS = "today-extension/today-extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.today-extension";
 				PRODUCT_NAME = IVPN;
@@ -2441,7 +2497,7 @@
 				CODE_SIGN_ENTITLEMENTS = "wireguard-tunnel-provider/wireguard_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2456,7 +2512,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
@@ -2479,7 +2535,7 @@
 				CODE_SIGN_ENTITLEMENTS = "wireguard-tunnel-provider/wireguard_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2494,7 +2550,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2644,7 +2700,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2653,7 +2709,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -2717,7 +2773,7 @@
 				CODE_SIGN_ENTITLEMENTS = "openvpn-tunnel-provider/openvpn_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2727,7 +2783,7 @@
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.openvpn-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2748,7 +2804,7 @@
 				CODE_SIGN_ENTITLEMENTS = "wireguard-tunnel-provider/wireguard_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2763,7 +2819,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
@@ -2818,7 +2874,7 @@
 				CODE_SIGN_ENTITLEMENTS = "openvpn-tunnel-provider/openvpn_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2828,7 +2884,7 @@
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.openvpn-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2859,7 +2915,7 @@
 				CODE_SIGN_ENTITLEMENTS = "openvpn-tunnel-provider/openvpn_tunnel_provider.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2869,7 +2925,7 @@
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.openvpn-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3005,7 +3061,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3014,7 +3070,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -3040,7 +3096,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3049,7 +3105,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(SRCROOT)/Carthage/Build/iOS";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.3.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",

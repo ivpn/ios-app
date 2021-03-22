@@ -145,7 +145,7 @@ extension NetworkProtectionViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Network Protection"
+            return ""
         case 1:
             return "Default & Mobile data"
         case 2:

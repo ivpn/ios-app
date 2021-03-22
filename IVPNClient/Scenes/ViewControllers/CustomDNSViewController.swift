@@ -72,7 +72,7 @@ class CustomDNSViewController: UITableViewController {
             let address = try CIDRAddress(stringRepresentation: text)
             UserDefaults.shared.set(address?.ipAddress, forKey: UserDefaults.Key.customDNS)
         } catch {
-            showAlert(title: "Invalid Custom DNS Server", message: "The IP Address (\(text)) is invalid.")
+            showAlert(title: "Invalid DNS Server", message: "The IP Address (\(text)) is invalid.")
         }
     }
     
