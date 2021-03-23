@@ -34,11 +34,11 @@ enum DNSProtocolType: String {
         
         if !address.hasPrefix("https://") {
             serverURL = "https://\(serverURL)"
-            
-            if let url = URL.init(string: serverURL) {
-                if url.path.deletingPrefix("/").isEmpty {
-                    serverURL = "\(serverURL)/dns-query"
-                }
+        }
+        
+        if let url = URL.init(string: serverURL) {
+            if url.path.deletingPrefix("/").isEmpty {
+                serverURL = "\(serverURL.deletingSuffix("/"))/dns-query"
             }
         }
         

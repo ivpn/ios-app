@@ -82,6 +82,7 @@
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1D922686217006C0C08 /* IAPManager.swift */; };
 		8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */; };
+		824B141C2609D5E700766B05 /* DNSProtocolTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B141B2609D5E700766B05 /* DNSProtocolTypeTests.swift */; };
 		824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */; };
 		824F56082233FE6F00BCDD5C /* libwg-go.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 824F56072233FE6F00BCDD5C /* libwg-go.a */; };
 		82526BEF24123D2900E00880 /* NetworkViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */; };
@@ -454,6 +455,7 @@
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdentifier.swift; sourceTree = "<group>"; };
+		824B141B2609D5E700766B05 /* DNSProtocolTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSProtocolTypeTests.swift; sourceTree = "<group>"; };
 		824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModel.swift; sourceTree = "<group>"; };
 		824F56072233FE6F00BCDD5C /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libwg-go.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewTableCell.swift; sourceTree = "<group>"; };
@@ -1383,6 +1385,7 @@
 			children = (
 				82F81A35224CF69900CB778B /* ConnectionSettingsTests.swift */,
 				82F81A36224CF69900CB778B /* AddressTypeTests.swift */,
+				824B141B2609D5E700766B05 /* DNSProtocolTypeTests.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1948,6 +1951,7 @@
 				82A3422924AB799600761AB0 /* ProofsViewModelTests.swift in Sources */,
 				82EA857A21DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift in Sources */,
 				82F81A3D224CF69900CB778B /* ConnectionSettingsTests.swift in Sources */,
+				824B141C2609D5E700766B05 /* DNSProtocolTypeTests.swift in Sources */,
 				826E614C242A61380064F195 /* AccountViewModelTests.swift in Sources */,
 				82F81A3F224CF69900CB778B /* NSMutableAttributedStringTests.swift in Sources */,
 				82F81A4C224CFADB00CB778B /* PeerTests.swift in Sources */,
