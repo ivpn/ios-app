@@ -58,11 +58,13 @@ class CustomDNSViewController: UITableViewController {
         typeControl.isEnabled = sender.isOn
         let preferred: DNSProtocolType = typeControl.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: sender.isOn ? preferred : .plain)
+        tableView.reloadData()
     }
     
     @IBAction func changeType(_ sender: UISegmentedControl) {
         let preferred: DNSProtocolType = sender.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: preferred)
+        tableView.reloadData()
     }
     
     // MARK: - View Lifecycle -
@@ -100,6 +102,7 @@ class CustomDNSViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
+        setupView()
         
         if server.isEmpty {
             UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
@@ -108,7 +111,7 @@ class CustomDNSViewController: UITableViewController {
     }
     
     @objc func updateResolvedDNS() {
-        let resolvedDNS = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNSInsideVPN) as? [String]
+        let resolvedDNS = UserDefaults.shared.value(forKey: UserDefaults.Key.resolvedDNSInsideVPN) as? [String]
             ?? []
         resolvedIPLabel.text = resolvedDNS.map { String($0) }.joined(separator: ",")
     }
@@ -145,11 +148,15 @@ extension CustomDNSViewController {
             if #available(iOS 14.0, *) {
                 let type = DNSProtocolType.preferred()
                 
-                if type == .dot && indexPath.row == 2 {
+                if type != .doh && indexPath.row == 3 {
                     return 0
                 }
                 
-                if type == .doh && indexPath.row == 3 {
+                if type != .dot && indexPath.row == 4 {
+                    return 0
+                }
+                
+                if type == .plain && indexPath.row == 5 {
                     return 0
                 }
                 
