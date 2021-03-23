@@ -83,12 +83,15 @@ class CustomDNSViewController: UITableViewController {
     }
     
     func saveAddress() {
-        guard let server = customDNSTextField.text else {
+        guard var server = customDNSTextField.text else {
             return
         }
         
+        server = DNSProtocolType.sanitizeServer(address: server)
+        
         if #available(iOS 14.0, *) {
-            DNSManager.saveResolvedDNS(server: server, key: UserDefaults.Key.resolvedDNSInsideVPN)
+            let serverToResolve = DNSProtocolType.getServerToResolve(address: server)
+            DNSManager.saveResolvedDNS(server: serverToResolve, key: UserDefaults.Key.resolvedDNSInsideVPN)
         }
         
         UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
