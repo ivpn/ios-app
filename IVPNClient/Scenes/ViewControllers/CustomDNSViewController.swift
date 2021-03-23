@@ -28,6 +28,9 @@ class CustomDNSViewController: UITableViewController {
     @IBOutlet weak var customDNSSwitch: UISwitch!
     @IBOutlet weak var customDNSTextField: UITextField!
     @IBOutlet weak var secureDNSSwitch: UISwitch!
+    @IBOutlet weak var resolvedIPLabel: UILabel!
+    @IBOutlet weak var serverURLLabel: UILabel!
+    @IBOutlet weak var serverNameLabel: UILabel!
     @IBOutlet weak var typeControl: UISegmentedControl!
     
     // MARK: - @IBActions -
@@ -55,11 +58,13 @@ class CustomDNSViewController: UITableViewController {
         typeControl.isEnabled = sender.isOn
         let preferred: DNSProtocolType = typeControl.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: sender.isOn ? preferred : .plain)
+        tableView.reloadData()
     }
     
     @IBAction func changeType(_ sender: UISegmentedControl) {
         let preferred: DNSProtocolType = sender.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: preferred)
+        tableView.reloadData()
     }
     
     // MARK: - View Lifecycle -
@@ -68,6 +73,7 @@ class CustomDNSViewController: UITableViewController {
         super.viewDidLoad()
         hideKeyboardOnTap()
         setupView()
+        addObservers()
     }
     
     // MARK: - Methods -
@@ -83,15 +89,20 @@ class CustomDNSViewController: UITableViewController {
     }
     
     func saveAddress() {
-        guard let server = customDNSTextField.text else {
+        guard var server = customDNSTextField.text else {
             return
         }
         
+        server = DNSProtocolType.sanitizeServer(address: server)
+        customDNSTextField.text = server
+        
         if #available(iOS 14.0, *) {
-            DNSManager.saveResolvedDNS(server: server, key: UserDefaults.Key.resolvedDNSInsideVPN)
+            let serverToResolve = DNSProtocolType.getServerToResolve(address: server)
+            DNSManager.saveResolvedDNS(server: serverToResolve, key: UserDefaults.Key.resolvedDNSInsideVPN)
         }
         
         UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
+        setupView()
         
         if server.isEmpty {
             UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
@@ -99,17 +110,31 @@ class CustomDNSViewController: UITableViewController {
         }
     }
     
+    @objc func updateResolvedDNS() {
+        let resolvedDNS = UserDefaults.shared.value(forKey: UserDefaults.Key.resolvedDNSInsideVPN) as? [String]
+            ?? []
+        resolvedIPLabel.text = resolvedDNS.map { String($0) }.joined(separator: ",")
+    }
+    
     // MARK: - Private methods -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
+    }
     
     private func setupView() {
         let preferred = DNSProtocolType.preferred()
+        let customDNS = UserDefaults.shared.customDNS
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         customDNSSwitch.isOn = UserDefaults.shared.isCustomDNS
-        customDNSTextField.text = UserDefaults.shared.customDNS
+        customDNSTextField.text = customDNS
         customDNSTextField.delegate = self
+        serverURLLabel.text = DNSProtocolType.getServerURL(address: customDNS)
+        serverNameLabel.text = DNSProtocolType.getServerName(address: customDNS)
         secureDNSSwitch.isOn = preferred != .plain
         typeControl.isEnabled = preferred != .plain
         typeControl.selectedSegmentIndex = preferred == .dot ? 1 : 0
+        updateResolvedDNS()
     }
     
 }
@@ -119,8 +144,22 @@ class CustomDNSViewController: UITableViewController {
 extension CustomDNSViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 1 && (indexPath.row == 1 || indexPath.row == 2) {
+        if indexPath.section == 1 && indexPath.row > 0 {
             if #available(iOS 14.0, *) {
+                let type = DNSProtocolType.preferred()
+                
+                if type != .doh && indexPath.row == 3 {
+                    return 0
+                }
+                
+                if type != .dot && indexPath.row == 4 {
+                    return 0
+                }
+                
+                if type == .plain && indexPath.row == 5 {
+                    return 0
+                }
+                
                 return UITableView.automaticDimension
             } else {
                 return 0
