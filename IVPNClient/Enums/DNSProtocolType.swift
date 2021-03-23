@@ -85,6 +85,10 @@ enum DNSProtocolType: String {
         return address
     }
     
+    static func sanitizeServer(address: String) -> String {
+        return address.trim().deletingPrefix("tls://")
+    }
+    
     static func preferred() -> DNSProtocolType {
         guard !UserDefaults.shared.isAntiTracker else {
             return .plain

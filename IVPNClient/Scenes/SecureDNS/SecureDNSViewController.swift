@@ -156,7 +156,7 @@ class SecureDNSViewController: UITableViewController {
             return
         }
         
-        model.address = text
+        model.address = DNSProtocolType.sanitizeServer(address: text)
         secureDNSView.setupView(model: model)
         
         if text.isEmpty {

@@ -36,6 +36,14 @@ extension String {
         return trimmingCharacters(in: CharacterSet.whitespaces)
     }
     
+    func deletingPrefix(_ prefix: String) -> String {
+        guard self.hasPrefix(prefix) else {
+            return self
+        }
+        
+        return String(self.dropFirst(prefix.count))
+    }
+    
     func base64KeyToHex() -> String? {
         let base64 = self
         

@@ -68,7 +68,7 @@ class SecureDNSView: UITableView {
     @objc func updateResolvedDNS() {
         let resolvedDNS = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNSOutsideVPN) as? [String]
             ?? []
-        resolvedIPLabel.text = resolvedDNS.map { String($0) }.joined(separator: ", ")
+        resolvedIPLabel.text = resolvedDNS.map { String($0) }.joined(separator: ",")
     }
     
     // MARK: - Observers -
