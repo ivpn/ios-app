@@ -95,6 +95,10 @@ class DNSManager {
             default:
                 break
             }
+            
+            if addresses.isEmpty {
+                NotificationCenter.default.post(name: Notification.Name.ResolvedDNSError, object: nil)
+            }
         }
     }
     
