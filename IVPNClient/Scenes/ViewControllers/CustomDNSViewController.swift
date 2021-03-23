@@ -120,6 +120,7 @@ class CustomDNSViewController: UITableViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showResolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
     }
     
     private func setupView() {

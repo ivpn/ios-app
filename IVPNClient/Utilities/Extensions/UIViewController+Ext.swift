@@ -190,6 +190,10 @@ extension UIViewController {
         }
     }
     
+    @objc func showResolvedDNSError() {
+        showErrorAlert(title: "Error", message: "Failed to resolve IP addresses for DNS server")
+    }
+    
 }
 
 // MARK: - Presenter -

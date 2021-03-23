@@ -76,6 +76,10 @@ class DNSManager {
     }
     
     static func saveResolvedDNS(server: String, key: String) {
+        guard !server.trim().isEmpty else {
+            return
+        }
+        
         DNSResolver.resolve(host: server) { list in
             var addresses: [String] = []
             
