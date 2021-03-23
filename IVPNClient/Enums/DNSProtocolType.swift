@@ -30,6 +30,10 @@ enum DNSProtocolType: String {
     case plain
     
     static func getServerURL(address: String) -> String? {
+        guard !address.trim().isEmpty else {
+            return ""
+        }
+        
         var serverURL = address
         
         if !address.hasPrefix("https://") {

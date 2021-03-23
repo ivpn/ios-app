@@ -63,6 +63,9 @@ class DNSProtocolTypeTests: XCTestCase {
         
         server = DNSProtocolType.getServerURL(address: "example.com/123456")
         XCTAssertEqual(server, "https://example.com/123456")
+        
+        server = DNSProtocolType.getServerURL(address: "")
+        XCTAssertEqual(server, "")
     }
     
     func test_getServerName() {
