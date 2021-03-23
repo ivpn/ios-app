@@ -55,7 +55,7 @@ extension NETunnelProviderProtocol {
             switch DNSProtocolType.preferred() {
             case .doh:
                 sessionBuilder.dnsProtocol = .https
-                sessionBuilder.dnsHTTPSURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS) ?? "")
+                sessionBuilder.dnsHTTPSURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
             case .dot:
                 sessionBuilder.dnsProtocol = .tls
                 sessionBuilder.dnsTLSServerName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)

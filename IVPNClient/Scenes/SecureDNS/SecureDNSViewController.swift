@@ -152,14 +152,15 @@ class SecureDNSViewController: UITableViewController {
     }
     
     private func saveAddress() {
-        guard let text = secureDNSView.serverField.text else {
+        guard var server = secureDNSView.serverField.text else {
             return
         }
         
-        model.address = DNSProtocolType.sanitizeServer(address: text)
+        server = DNSProtocolType.sanitizeServer(address: server)
+        model.address = server
         secureDNSView.setupView(model: model)
         
-        if text.isEmpty {
+        if server.isEmpty {
             removeDNSProfile()
             secureDNSView.enableSwitch.setOn(false, animated: true)
         }

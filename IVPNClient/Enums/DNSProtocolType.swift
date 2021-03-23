@@ -29,7 +29,7 @@ enum DNSProtocolType: String {
     case dot
     case plain
     
-    static func getServerURL(address: String) -> String? {
+    static func getServerURL(address: String) -> String {
         guard !address.trim().isEmpty else {
             return ""
         }

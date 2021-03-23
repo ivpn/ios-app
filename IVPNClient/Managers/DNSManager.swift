@@ -91,6 +91,7 @@ class DNSManager {
                 NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNS, object: nil)
             case UserDefaults.Key.resolvedDNSInsideVPN:
                 UserDefaults.shared.set(addresses, forKey: UserDefaults.Key.resolvedDNSInsideVPN)
+                NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
             default:
                 break
             }
