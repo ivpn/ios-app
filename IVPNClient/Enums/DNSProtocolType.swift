@@ -35,8 +35,10 @@ enum DNSProtocolType: String {
         if !address.hasPrefix("https://") {
             serverURL = "https://\(serverURL)"
             
-            if !address.hasSuffix("/dns-query") {
-                serverURL = "\(serverURL)/dns-query"
+            if let url = URL.init(string: serverURL) {
+                if url.path.deletingPrefix("/").isEmpty {
+                    serverURL = "\(serverURL)/dns-query"
+                }
             }
         }
         
@@ -50,8 +52,8 @@ enum DNSProtocolType: String {
             serverName = "https://\(serverName)"
         }
         
-        if let serverURL = URL.init(string: serverName) {
-            if let host = serverURL.host {
+        if let url = URL.init(string: serverName) {
+            if let host = url.host {
                 do {
                     let ipAddress = try CIDRAddress(stringRepresentation: host)
                     return ipAddress?.ipAddress ?? address
@@ -86,7 +88,7 @@ enum DNSProtocolType: String {
     }
     
     static func sanitizeServer(address: String) -> String {
-        return address.trim().deletingPrefix("tls://")
+        return address.trim().deletingPrefix("https://").deletingPrefix("tls://")
     }
     
     static func preferred() -> DNSProtocolType {
