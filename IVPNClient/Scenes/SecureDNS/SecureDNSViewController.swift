@@ -93,6 +93,7 @@ class SecureDNSViewController: UITableViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateDNSProfile), name: Notification.Name.UpdateResolvedDNS, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showResolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
     }
     
     private func saveDNSProfile() {

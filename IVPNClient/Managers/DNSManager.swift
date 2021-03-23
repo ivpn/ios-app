@@ -76,6 +76,10 @@ class DNSManager {
     }
     
     static func saveResolvedDNS(server: String, key: String) {
+        guard !server.trim().isEmpty else {
+            return
+        }
+        
         DNSResolver.resolve(host: server) { list in
             var addresses: [String] = []
             
@@ -94,6 +98,10 @@ class DNSManager {
                 NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
             default:
                 break
+            }
+            
+            if addresses.isEmpty {
+                NotificationCenter.default.post(name: Notification.Name.ResolvedDNSError, object: nil)
             }
         }
     }
