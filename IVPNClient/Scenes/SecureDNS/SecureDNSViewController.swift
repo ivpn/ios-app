@@ -159,12 +159,14 @@ class SecureDNSViewController: UITableViewController {
         
         server = DNSProtocolType.sanitizeServer(address: server)
         model.address = server
-        secureDNSView.setupView(model: model)
         
         if server.isEmpty {
+            UserDefaults.standard.set([], forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
             removeDNSProfile()
             secureDNSView.enableSwitch.setOn(false, animated: true)
         }
+        
+        secureDNSView.setupView(model: model)
     }
     
 }
