@@ -102,12 +102,14 @@ class CustomDNSViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
-        setupView()
         
         if server.isEmpty {
             UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+            UserDefaults.shared.set([], forKey: UserDefaults.Key.resolvedDNSInsideVPN)
             customDNSSwitch.setOn(false, animated: true)
         }
+        
+        setupView()
     }
     
     @objc func updateResolvedDNS() {
