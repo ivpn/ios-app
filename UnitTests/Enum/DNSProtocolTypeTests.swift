@@ -130,6 +130,9 @@ class DNSProtocolTypeTests: XCTestCase {
         
         server = DNSProtocolType.getServerToResolve(address: "subdomain.subdomain.example.com")
         XCTAssertEqual(server, "subdomain.example.com")
+        
+        server = DNSProtocolType.getServerToResolve(address: "example")
+        XCTAssertEqual(server, "example")
     }
     
     func test_sanitizeServer() {

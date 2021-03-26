@@ -33,7 +33,7 @@ extension URL {
             
             if count > 2 {
                 domainName = subStrings[count - 3] + "." + subStrings[count - 2] + "." + subStrings[count - 1]
-            } else if count == 2 {
+            } else if count <= 2 {
                 domainName = hostName
             }
             
