@@ -75,6 +75,7 @@ class SecureDNSViewController: UITableViewController {
         secureDNSView.setupView(model: model)
         addObservers()
         hideKeyboardOnTap()
+        saveAddress()
     }
     
     // MARK: - Methods -
