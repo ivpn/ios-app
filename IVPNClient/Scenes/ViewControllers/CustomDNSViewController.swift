@@ -74,6 +74,7 @@ class CustomDNSViewController: UITableViewController {
         hideKeyboardOnTap()
         setupView()
         addObservers()
+        saveAddress()
     }
     
     // MARK: - Methods -
