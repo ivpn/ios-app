@@ -75,6 +75,8 @@ class SecureDNSViewController: UITableViewController {
         secureDNSView.setupView(model: model)
         addObservers()
         hideKeyboardOnTap()
+        
+        #warning("Added to resolve upgrade disruption from 2.3.0 to 2.3.1")
         saveAddress()
     }
     
