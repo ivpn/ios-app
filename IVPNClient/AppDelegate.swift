@@ -79,7 +79,6 @@ class AppDelegate: UIResponder {
     
     private func finishIncompletePurchases() {
         guard Application.shared.authentication.isLoggedIn || KeyChain.tempUsername != nil else {
-            IAPManager.shared.completeTransactions()
             return
         }
         
