@@ -22,6 +22,7 @@
 //
 
 import Foundation
+import Network
 
 struct Interface {
     
@@ -75,6 +76,16 @@ struct Interface {
         }
         
         return privateKey.base64EncodedString()
+    }
+    
+    static func getAddresses(ipv4: String, ipv6: String?) -> String {
+        guard let ipv6 = ipv6 else {
+            return ipv4
+        }
+        
+        let ipv6Address = IPv6Address("\(ipv6.components(separatedBy: "/")[0])\(ipv4)")
+        
+        return "\(ipv4),\(ipv6Address?.debugDescription ?? "")"
     }
     
 }
