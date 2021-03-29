@@ -144,8 +144,11 @@ class CustomDNSViewController: UITableViewController {
     }
     
     @objc private func resolvedDNSError() {
+        customDNSTextField.text = ""
+        UserDefaults.shared.set("", forKey: UserDefaults.Key.customDNS)
         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
         customDNSSwitch.setOn(false, animated: true)
+        setupView()
         showResolvedDNSError()
     }
     

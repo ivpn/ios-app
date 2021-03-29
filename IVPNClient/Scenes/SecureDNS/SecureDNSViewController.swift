@@ -173,8 +173,11 @@ class SecureDNSViewController: UITableViewController {
     }
     
     @objc private func resolvedDNSError() {
+        secureDNSView.serverField.text = ""
+        model.address = ""
         removeDNSProfile()
         secureDNSView.enableSwitch.setOn(false, animated: true)
+        secureDNSView.setupView(model: model)
         showResolvedDNSError()
     }
     
