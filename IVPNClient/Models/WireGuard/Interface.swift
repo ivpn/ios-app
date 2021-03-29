@@ -78,7 +78,11 @@ struct Interface {
         return privateKey.base64EncodedString()
     }
     
-    static func getAddresses(ipv4: String, ipv6: String?) -> String {
+    static func getAddresses(ipv4: String?, ipv6: String?) -> String {
+        guard let ipv4 = ipv4 else {
+            return ""
+        }
+        
         guard let ipv6 = ipv6 else {
             return ipv4
         }
