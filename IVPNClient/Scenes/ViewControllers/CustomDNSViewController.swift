@@ -125,7 +125,7 @@ class CustomDNSViewController: UITableViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showResolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
     }
     
     private func setupView() {
@@ -141,6 +141,12 @@ class CustomDNSViewController: UITableViewController {
         typeControl.isEnabled = preferred != .plain
         typeControl.selectedSegmentIndex = preferred == .dot ? 1 : 0
         updateResolvedDNS()
+    }
+    
+    @objc private func resolvedDNSError() {
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+        customDNSSwitch.setOn(false, animated: true)
+        showResolvedDNSError()
     }
     
 }
