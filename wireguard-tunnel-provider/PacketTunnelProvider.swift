@@ -51,13 +51,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        guard let wgIpAddress = KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
+        guard let addresses = UserDefaults.shared.isIPv6 ? KeyChain.wgIpAddresses : KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
             tunnelSetupFailed()
             completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
             return
         }
         
-        guard let tunnelSettings = getTunnelSettings(ipAddress: wgIpAddress) else {
+        guard let tunnelSettings = getTunnelSettings(ipAddress: addresses) else {
             tunnelSetupFailed()
             completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
             return

@@ -116,6 +116,7 @@ extension NETunnelProviderProtocol {
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
             addresses = Interface.getAddresses(ipv4: KeyChain.wgIpAddress, ipv6: ipv6.localIP)
+            KeyChain.wgIpAddresses = addresses
         }
         
         let peer = Peer(
