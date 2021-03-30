@@ -41,6 +41,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var keepAliveSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
+    @IBOutlet weak var ipv6Switch: UISwitch!
     
     // MARK: - Properties -
     
@@ -108,6 +109,10 @@ class SettingsViewController: UITableViewController {
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: sender.isOn)
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
         tableView.reloadData()
+    }
+    
+    @IBAction func toggleIpv6(_ sender: UISwitch) {
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isIPv6)
     }
     
     @IBAction func toggleKeepAlive(_ sender: UISwitch) {
@@ -190,6 +195,10 @@ class SettingsViewController: UITableViewController {
         
         if UserDefaults.shared.isMultiHop {
             multiHopSwitch.setOn(true, animated: false)
+        }
+        
+        if UserDefaults.shared.isIPv6 {
+            ipv6Switch.setOn(true, animated: false)
         }
         
         if !UserDefaults.shared.keepAlive {
