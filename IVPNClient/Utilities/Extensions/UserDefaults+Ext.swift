@@ -76,6 +76,7 @@ extension UserDefaults {
         static let firstInstall = "FirstInstall"
         static let secureDNS = "SecureDNS"
         static let serviceStatus = "ServiceStatus"
+        static let isIPv6 = "isIPv6"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -194,6 +195,10 @@ extension UserDefaults {
         return stringArray(forKey: Key.resolvedDNSInsideVPN) ?? [customDNS]
     }
     
+    @objc dynamic var isIPv6: Bool {
+        return bool(forKey: Key.isIPv6)
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
@@ -219,6 +224,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.sessionsLimit)
         shared.removeObject(forKey: Key.keepAlive)
         shared.removeObject(forKey: Key.notAskToReconnect)
+        shared.removeObject(forKey: Key.isIPv6)
         standard.removeObject(forKey: Key.selectedServerFastest)
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.synchronize()

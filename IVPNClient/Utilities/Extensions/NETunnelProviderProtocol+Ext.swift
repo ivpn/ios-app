@@ -112,6 +112,12 @@ extension NETunnelProviderProtocol {
             return NETunnelProviderProtocol()
         }
         
+        var addresses = KeyChain.wgIpAddress
+        
+        if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
+            addresses = Interface.getAddresses(ipv4: KeyChain.wgIpAddress, ipv6: ipv6.localIP)
+        }
+        
         let peer = Peer(
             publicKey: host.publicKey,
             allowedIPs: Config.wgPeerAllowedIPs,
@@ -119,7 +125,7 @@ extension NETunnelProviderProtocol {
             persistentKeepalive: Config.wgPeerPersistentKeepalive
         )
         let interface = Interface(
-            addresses: KeyChain.wgIpAddress,
+            addresses: addresses,
             listenPort: Config.wgInterfaceListenPort,
             privateKey: KeyChain.wgPrivateKey,
             dns: host.localIPAddress()
