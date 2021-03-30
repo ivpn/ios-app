@@ -89,7 +89,7 @@ struct Interface {
         
         let ipv6Address = IPv6Address("\(ipv6.components(separatedBy: "/")[0])\(ipv4)")
         
-        return "\(ipv4),\(ipv6Address?.debugDescription ?? "")"
+        return "\(ipv4),\(ipv6Address?.debugDescription ?? "")/64"
     }
     
 }

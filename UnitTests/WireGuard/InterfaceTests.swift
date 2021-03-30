@@ -49,8 +49,8 @@ class InterfaceTests: XCTestCase {
         XCTAssertEqual(Interface.getAddresses(ipv4: nil, ipv6: nil), "")
         XCTAssertEqual(Interface.getAddresses(ipv4: "", ipv6: nil), "")
         XCTAssertEqual(Interface.getAddresses(ipv4: "192.0.2.0", ipv6: nil), "192.0.2.0")
-        XCTAssertEqual(Interface.getAddresses(ipv4: "192.0.2.0", ipv6: "a:a:a:a::/64"), "192.0.2.0,a:a:a:a::c000:200")
-        XCTAssertEqual(Interface.getAddresses(ipv4: "192.0.2.0", ipv6: "a:a:a:a::"), "192.0.2.0,a:a:a:a::c000:200")
+        XCTAssertEqual(Interface.getAddresses(ipv4: "192.0.2.0", ipv6: "a:a:a:a::/64"), "192.0.2.0,a:a:a:a::c000:200/64")
+        XCTAssertEqual(Interface.getAddresses(ipv4: "192.0.2.0", ipv6: "a:a:a:a::"), "192.0.2.0,a:a:a:a::c000:200/64")
     }
     
 }
