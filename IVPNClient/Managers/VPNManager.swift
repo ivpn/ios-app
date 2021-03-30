@@ -160,6 +160,7 @@ class VPNManager {
             }
             
             manager.loadFromPreferences { _ in
+                manager.protocolConfiguration?.serverAddress = accessDetails.serverAddress
                 manager.saveToPreferences { _ in
                     completion(nil)
                 }
