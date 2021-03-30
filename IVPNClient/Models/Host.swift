@@ -23,11 +23,16 @@
 
 import Foundation
 
+struct IPv6 {
+    var localIP: String
+}
+
 struct Host {
     
     var host: String
     var publicKey: String
     var localIP: String
+    var ipv6: IPv6?
     
     func localIPAddress() -> String {
         if let range = localIP.range(of: "/", options: .backwards, range: nil, locale: nil) {

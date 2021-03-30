@@ -264,11 +264,17 @@ class VPNServerList {
                         serverIpList.append(hostIp)
                     }
                     
-                    let newHost = Host(
+                    var newHost = Host(
                         host: host["host"] as? String ?? "",
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? ""
                     )
+                    
+                    if let ipv6 = host["ipv6"] as? [String: Any] {
+                        newHost.ipv6 = IPv6(
+                            localIP: ipv6["local_ip"] as? String ?? ""
+                        )
+                    }
                     
                     serverHostsList.append(newHost)
                 }
