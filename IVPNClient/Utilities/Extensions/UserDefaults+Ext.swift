@@ -77,6 +77,7 @@ extension UserDefaults {
         static let secureDNS = "SecureDNS"
         static let serviceStatus = "ServiceStatus"
         static let isIPv6 = "isIPv6"
+        static let showIPv4Servers = "showIPv4Servers"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -199,6 +200,10 @@ extension UserDefaults {
         return bool(forKey: Key.isIPv6)
     }
     
+    @objc dynamic var showIPv4Servers: Bool {
+        return bool(forKey: Key.showIPv4Servers)
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
@@ -206,6 +211,7 @@ extension UserDefaults {
         shared.register(defaults: [Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
         shared.register(defaults: [Key.wgKeyTimestamp: Date()])
         standard.register(defaults: [Key.selectedServerFastest: true])
+        standard.register(defaults: [Key.showIPv4Servers: true])
         shared.register(defaults: [Key.serversSort: "city"])
     }
     
@@ -227,6 +233,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.isIPv6)
         standard.removeObject(forKey: Key.selectedServerFastest)
         standard.removeObject(forKey: Key.fastestServerConfigured)
+        standard.removeObject(forKey: Key.showIPv4Servers)
         standard.synchronize()
     }
     
