@@ -121,6 +121,7 @@ class SettingsViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isIPv6)
+        showIPv4ServersSwitch.isEnabled = sender.isOn
     }
     
     @IBAction func toggleShowIPv4Servers(_ sender: UISwitch) {
@@ -211,6 +212,7 @@ class SettingsViewController: UITableViewController {
         
         if UserDefaults.shared.isIPv6 {
             ipv6Switch.setOn(true, animated: false)
+            showIPv4ServersSwitch.isEnabled = true
         }
         
         if UserDefaults.standard.showIPv4Servers {
