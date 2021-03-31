@@ -206,26 +206,12 @@ class SettingsViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if UserDefaults.shared.isMultiHop {
-            multiHopSwitch.setOn(true, animated: false)
-        }
-        
-        if UserDefaults.shared.isIPv6 {
-            ipv6Switch.setOn(true, animated: false)
-            showIPv4ServersSwitch.isEnabled = true
-        }
-        
-        if UserDefaults.standard.showIPv4Servers {
-            showIPv4ServersSwitch.setOn(true, animated: false)
-        }
-        
-        if !UserDefaults.shared.keepAlive {
-            keepAliveSwitch.setOn(false, animated: false)
-        }
-        
-        if UserDefaults.shared.isLogging {
-            loggingSwitch.setOn(true, animated: false)
-        }
+        multiHopSwitch.setOn(UserDefaults.shared.isMultiHop, animated: false)
+        ipv6Switch.setOn(UserDefaults.shared.isIPv6, animated: false)
+        showIPv4ServersSwitch.setOn(UserDefaults.standard.showIPv4Servers, animated: false)
+        showIPv4ServersSwitch.isEnabled = UserDefaults.shared.isIPv6
+        keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
+        loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
         updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
