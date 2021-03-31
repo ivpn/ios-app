@@ -75,6 +75,9 @@ class SecureDNSViewController: UITableViewController {
         secureDNSView.setupView(model: model)
         addObservers()
         hideKeyboardOnTap()
+        
+        #warning("Added to resolve upgrade disruption from 2.3.0 to 2.3.1")
+        saveAddress()
     }
     
     // MARK: - Methods -
@@ -93,6 +96,7 @@ class SecureDNSViewController: UITableViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateDNSProfile), name: Notification.Name.UpdateResolvedDNS, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
     }
     
     private func saveDNSProfile() {
@@ -158,12 +162,23 @@ class SecureDNSViewController: UITableViewController {
         
         server = DNSProtocolType.sanitizeServer(address: server)
         model.address = server
-        secureDNSView.setupView(model: model)
         
         if server.isEmpty {
+            UserDefaults.standard.set([], forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
             removeDNSProfile()
             secureDNSView.enableSwitch.setOn(false, animated: true)
         }
+        
+        secureDNSView.setupView(model: model)
+    }
+    
+    @objc private func resolvedDNSError() {
+        secureDNSView.serverField.text = ""
+        model.address = ""
+        removeDNSProfile()
+        secureDNSView.enableSwitch.setOn(false, animated: true)
+        secureDNSView.setupView(model: model)
+        showResolvedDNSError()
     }
     
 }

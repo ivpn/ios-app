@@ -317,9 +317,13 @@ extension ProtocolViewController {
             }
         }
         
-        if connectionProtocol.tunnelType() == .ipsec {
-            if #available(iOS 14.0, *) {
-                DNSManager.shared.removeProfile { _ in }
+        if #available(iOS 14.0, *) {
+            if connectionProtocol.tunnelType() == .ipsec {
+                DNSManager.shared.removeProfile { _ in
+                    DNSManager.shared.loadProfile { _ in
+                        
+                    }
+                }
             }
         }
         

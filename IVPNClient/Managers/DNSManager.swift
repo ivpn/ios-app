@@ -32,10 +32,8 @@ class DNSManager {
     static let shared = DNSManager()
     
     var isEnabled: Bool {
-        return manager.isEnabled
+        return NEDNSSettingsManager.shared().isEnabled
     }
-    
-    private let manager = NEDNSSettingsManager.shared()
     
     // MARK: - Initialize -
     
@@ -54,28 +52,34 @@ class DNSManager {
             return
         }
         
-        manager.loadFromPreferences { error in
-            self.manager.dnsSettings = self.getDnsSettings(model: model)
-            self.manager.onDemandRules = self.getOnDemandRules(model: model)
-            self.manager.saveToPreferences { error in
-                completion(error)
+        NEDNSSettingsManager.shared().loadFromPreferences { _ in
+            NEDNSSettingsManager.shared().removeFromPreferences { _ in
+                NEDNSSettingsManager.shared().dnsSettings = self.getDnsSettings(model: model)
+                NEDNSSettingsManager.shared().onDemandRules = self.getOnDemandRules(model: model)
+                NEDNSSettingsManager.shared().saveToPreferences { error in
+                    completion(error)
+                }
             }
         }
     }
     
     func loadProfile(completion: @escaping (Error?) -> Void) {
-        manager.loadFromPreferences { error in
+        NEDNSSettingsManager.shared().loadFromPreferences { error in
             completion(error)
         }
     }
     
     func removeProfile(completion: @escaping (Error?) -> Void) {
-        manager.removeFromPreferences { error in
+        NEDNSSettingsManager.shared().removeFromPreferences { error in
             completion(error)
         }
     }
     
     static func saveResolvedDNS(server: String, key: String) {
+        guard !server.trim().isEmpty else {
+            return
+        }
+        
         DNSResolver.resolve(host: server) { list in
             var addresses: [String] = []
             
@@ -94,6 +98,10 @@ class DNSManager {
                 NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
             default:
                 break
+            }
+            
+            if addresses.isEmpty {
+                NotificationCenter.default.post(name: Notification.Name.ResolvedDNSError, object: nil)
             }
         }
     }

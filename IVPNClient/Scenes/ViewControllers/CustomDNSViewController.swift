@@ -74,6 +74,9 @@ class CustomDNSViewController: UITableViewController {
         hideKeyboardOnTap()
         setupView()
         addObservers()
+        
+        #warning("Added to resolve upgrade disruption from 2.3.0 to 2.3.1")
+        saveAddress()
     }
     
     // MARK: - Methods -
@@ -102,12 +105,14 @@ class CustomDNSViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
-        setupView()
         
         if server.isEmpty {
             UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+            UserDefaults.shared.set([], forKey: UserDefaults.Key.resolvedDNSInsideVPN)
             customDNSSwitch.setOn(false, animated: true)
         }
+        
+        setupView()
     }
     
     @objc func updateResolvedDNS() {
@@ -120,6 +125,7 @@ class CustomDNSViewController: UITableViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
     }
     
     private func setupView() {
@@ -135,6 +141,15 @@ class CustomDNSViewController: UITableViewController {
         typeControl.isEnabled = preferred != .plain
         typeControl.selectedSegmentIndex = preferred == .dot ? 1 : 0
         updateResolvedDNS()
+    }
+    
+    @objc private func resolvedDNSError() {
+        customDNSTextField.text = ""
+        UserDefaults.shared.set("", forKey: UserDefaults.Key.customDNS)
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+        customDNSSwitch.setOn(false, animated: true)
+        setupView()
+        showResolvedDNSError()
     }
     
 }
