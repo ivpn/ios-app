@@ -158,6 +158,14 @@ class VPNServerList {
         return FileSystemManager.pathToDocumentFile(Config.serversListCacheFileName)
     }()
     
+    func getServers() -> [VPNServer] {
+        let filteredServers = servers.filter { (server: VPNServer) -> Bool in
+            return server.hosts.first?.ipv6 != nil
+        }
+        
+        return filteredServers
+    }
+    
     func getServer(byIpAddress ipAddress: String) -> VPNServer? {
         return servers.first { $0.ipAddresses.first { $0 == ipAddress } != nil }
     }
