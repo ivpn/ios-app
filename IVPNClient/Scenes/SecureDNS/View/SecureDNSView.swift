@@ -28,6 +28,9 @@ class SecureDNSView: UITableView {
     // MARK: - @IBOutlets -
     @IBOutlet weak var enableSwitch: UISwitch!
     @IBOutlet weak var serverField: UITextField!
+    @IBOutlet weak var resolvedIPLabel: UILabel!
+    @IBOutlet weak var serverURLLabel: UILabel!
+    @IBOutlet weak var serverNameLabel: UILabel!
     @IBOutlet weak var typeControl: UISegmentedControl!
     @IBOutlet weak var mobileNetworkSwitch: UISwitch!
     @IBOutlet weak var wifiNetworkSwitch: UISwitch!
@@ -43,10 +46,13 @@ class SecureDNSView: UITableView {
     func setupView(model: SecureDNS) {
         let type = DNSProtocolType.init(rawValue: model.type)
         serverField.text = model.address
+        serverURLLabel.text = model.serverURL
+        serverNameLabel.text = model.serverName
         typeControl.selectedSegmentIndex = type == .dot ? 1 : 0
         mobileNetworkSwitch.isOn = model.mobileNetwork
         wifiNetworkSwitch.isOn = model.wifiNetwork
         updateEnableSwitch()
+        updateResolvedDNS()
     }
     
     @objc func updateEnableSwitch() {
@@ -59,6 +65,12 @@ class SecureDNSView: UITableView {
         }
     }
     
+    @objc func updateResolvedDNS() {
+        let resolvedDNS = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNSOutsideVPN) as? [String]
+            ?? []
+        resolvedIPLabel.text = resolvedDNS.map { String($0) }.joined(separator: ",")
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
@@ -67,6 +79,8 @@ class SecureDNSView: UITableView {
         } else {
             NotificationCenter.default.addObserver(self, selector: #selector(updateEnableSwitch), name: UIApplication.didBecomeActiveNotification, object: nil)
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNS, object: nil)
     }
     
 }

@@ -207,7 +207,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 switch DNSProtocolType.preferred() {
                 case .doh:
                     let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS) ?? "")
+                    dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
                     newSettings.dnsSettings = dnsSettings
                 case .dot:
                     let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)

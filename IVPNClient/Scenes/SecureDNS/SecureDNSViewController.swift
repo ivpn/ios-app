@@ -152,13 +152,15 @@ class SecureDNSViewController: UITableViewController {
     }
     
     private func saveAddress() {
-        guard let text = secureDNSView.serverField.text else {
+        guard var server = secureDNSView.serverField.text else {
             return
         }
         
-        model.address = text
+        server = DNSProtocolType.sanitizeServer(address: server)
+        model.address = server
+        secureDNSView.setupView(model: model)
         
-        if text.isEmpty {
+        if server.isEmpty {
             removeDNSProfile()
             secureDNSView.enableSwitch.setOn(false, animated: true)
         }
@@ -171,6 +173,16 @@ class SecureDNSViewController: UITableViewController {
 extension SecureDNSViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let type = DNSProtocolType.init(rawValue: model.type)
+        
+        if type == .dot && indexPath.section == 1 && indexPath.row == 2 {
+            return 0
+        }
+        
+        if type == .doh && indexPath.section == 1 && indexPath.row == 3 {
+            return 0
+        }
+        
         return 45
     }
 
