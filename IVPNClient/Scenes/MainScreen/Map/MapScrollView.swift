@@ -147,7 +147,7 @@ class MapScrollView: UIScrollView {
     }
     
     private func initServerLocationMarkers() {
-        for server in Application.shared.serverList.servers {
+        for server in Application.shared.serverList.getServers() {
             placeMarker(latitude: server.latitude, longitude: server.longitude, city: server.city)
         }
     }
@@ -353,7 +353,7 @@ class MapScrollView: UIScrollView {
     private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
         var servers = Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: selectedServer) ? [selectedServer] : []
         
-        for server in Application.shared.serverList.servers {
+        for server in Application.shared.serverList.getServers() {
             guard server !== selectedServer else { continue }
             guard Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) else { continue }
             

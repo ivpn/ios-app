@@ -45,7 +45,7 @@ class ServerViewController: UITableViewController {
         if isSearchActive {
             list = filteredCollection
         } else {
-            list = Application.shared.serverList.servers
+            list = Application.shared.serverList.getServers()
         }
         
         list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
@@ -273,7 +273,7 @@ extension ServerViewController {
 extension ServerViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let collection = Application.shared.serverList.servers
+        let collection = Application.shared.serverList.getServers()
         
         filteredCollection.removeAll(keepingCapacity: false)
         filteredCollection = collection.filter { (server: VPNServer) -> Bool in

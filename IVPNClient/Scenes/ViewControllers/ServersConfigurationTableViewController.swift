@@ -27,7 +27,7 @@ class ServersConfigurationTableViewController: UITableViewController {
     
     // MARK: - Properties -
     
-    var collection = Application.shared.serverList.servers
+    var collection = Application.shared.serverList.getServers()
     
     // MARK: - View Lifecycle -
     
