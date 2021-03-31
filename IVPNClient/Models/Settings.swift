@@ -26,15 +26,12 @@ import NetworkExtension
 
 class Settings {
     
-    private let defaults = UserDefaults(suiteName: Config.appGroup)
-    
     var selectedServer: VPNServer {
         didSet {
             UserDefaults.standard.set(selectedServer.gateway, forKey: UserDefaults.Key.selectedServerGateway)
             UserDefaults.standard.set(selectedServer.city, forKey: UserDefaults.Key.selectedServerCity)
             UserDefaults.standard.set(selectedServer.fastest, forKey: UserDefaults.Key.selectedServerFastest)
             UserDefaults.standard.set(selectedServer.random, forKey: UserDefaults.Key.selectedServerRandom)
-            UserDefaults.standard.synchronize()
         }
     }
     
@@ -43,18 +40,13 @@ class Settings {
             UserDefaults.standard.set(selectedExitServer.gateway, forKey: UserDefaults.Key.selectedExitServerGateway)
             UserDefaults.standard.set(selectedExitServer.city, forKey: UserDefaults.Key.selectedExitServerCity)
             UserDefaults.standard.set(selectedExitServer.random, forKey: UserDefaults.Key.selectedExitServerRandom)
-            UserDefaults.standard.synchronize()
-            
-            defaults?.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
-            defaults?.synchronize()
+            UserDefaults.shared.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
         }
     }
     
     var connectionProtocol: ConnectionSettings {
         didSet {
-            if let index = Config.supportedProtocols.firstIndex(where: {$0 == connectionProtocol}) {
-                UserDefaults.standard.set(index, forKey: UserDefaults.Key.selectedProtocolIndex)
-            }
+            saveConnectionProtocol()
         }
     }
 
@@ -90,7 +82,8 @@ class Settings {
             }
         }
         
-        defaults?.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
+        UserDefaults.shared.set(selectedExitServer.getLocationFromGateway(), forKey: UserDefaults.Key.exitServerLocation)
+        saveConnectionProtocol()
         
         selectedServer.fastest = UserDefaults.standard.bool(forKey: UserDefaults.Key.selectedServerFastest)
         selectedServer.random = UserDefaults.standard.bool(forKey: UserDefaults.Key.selectedServerRandom)
@@ -120,6 +113,12 @@ class Settings {
         
         if Application.shared.settings.selectedExitServer.random {
             Application.shared.settings.selectedExitServer = Application.shared.serverList.getRandomServer(isExitServer: true)
+        }
+    }
+    
+    private func saveConnectionProtocol() {
+        if let index = Config.supportedProtocols.firstIndex(where: {$0 == connectionProtocol}) {
+            UserDefaults.standard.set(index, forKey: UserDefaults.Key.selectedProtocolIndex)
         }
     }
     
