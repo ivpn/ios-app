@@ -25,6 +25,7 @@ import Foundation
 import UIKit
 import MessageUI
 import JGProgressHUD
+import NetworkExtension
 
 class SettingsViewController: UITableViewController {
     
@@ -219,12 +220,6 @@ class SettingsViewController: UITableViewController {
         
         updateSelectedServer()
         
-        Application.shared.connectionManager.onStatusChanged { status in
-            if status == .disconnected {
-                self.hud.dismiss()
-            }
-        }
-        
         NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
     }
     
@@ -290,6 +285,7 @@ class SettingsViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(agreedToTermsOfService), name: Notification.Name.TermsOfServiceAgreed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(serviceAuthorized), name: Notification.Name.ServiceAuthorized, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdateVpnStatus(_:)), name: Notification.Name.NEVPNStatusDidChange, object: nil)
     }
     
     @objc func turnOffMultiHop() {
@@ -406,6 +402,16 @@ class SettingsViewController: UITableViewController {
             if let indexPath = self.tableView?.indexPath(for: cell) {
                 self.tableView.deselectRow(at: indexPath, animated: true)
             }
+        }
+    }
+    
+    @objc private func onUpdateVpnStatus(_ notification: NSNotification) {
+        guard let vpnConnection = notification.object as? NEVPNConnection else {
+            return
+        }
+        
+        if vpnConnection.status == .disconnected {
+            hud.dismiss()
         }
     }
     
