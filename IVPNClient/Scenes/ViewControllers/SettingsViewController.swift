@@ -128,6 +128,7 @@ class SettingsViewController: UITableViewController {
     @IBAction func toggleShowIPv4Servers(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.showIPv4Servers)
         NotificationCenter.default.post(name: Notification.Name.ServersListUpdated, object: nil)
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
     }
     
     @IBAction func toggleKeepAlive(_ sender: UISwitch) {

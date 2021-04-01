@@ -33,7 +33,7 @@ class VPNServerList {
     open private(set) var servers: [VPNServer]
     
     var filteredFastestServers: [VPNServer] {
-        var serversArray = servers
+        var serversArray = getServers()
         let fastestServerConfigured = UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured)
         
         if fastestServerConfigured {
@@ -160,6 +160,10 @@ class VPNServerList {
     
     func getServers() -> [VPNServer] {
         guard UserDefaults.standard.showIPv4Servers else {
+            if let server = servers.last {
+                return [server]
+            }
+            
             return servers.filter { (server: VPNServer) -> Bool in
                 return server.hosts.first?.ipv6 != nil
             }
@@ -169,15 +173,15 @@ class VPNServerList {
     }
     
     func getServer(byIpAddress ipAddress: String) -> VPNServer? {
-        return servers.first { $0.ipAddresses.first { $0 == ipAddress } != nil }
+        return getServers().first { $0.ipAddresses.first { $0 == ipAddress } != nil }
     }
     
     func getServer(byGateway gateway: String) -> VPNServer? {
-        return servers.first { $0.gateway == gateway }
+        return getServers().first { $0.gateway == gateway }
     }
     
     func getServer(byCity city: String) -> VPNServer? {
-        return servers.first { $0.city == city }
+        return getServers().first { $0.city == city }
     }
     
     func getFastestServer() -> VPNServer? {
