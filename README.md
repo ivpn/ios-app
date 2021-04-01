@@ -31,12 +31,10 @@ These instructions will get you a copy of the project up and running on your loc
 ### Requirements
 
 - iOS 12.0+
-- Xcode 11.0+
+- Xcode 12.0+
 - Swift 5.0+
-- Git (preinstalled with Xcode Command Line Tools)
-- Ruby (preinstalled with macOS)
 - CocoaPods 1.10.0+
-- fastlane 2.137.0+
+- fastlane 2.178.0+
 - Go 1.15+
 
 ### Dev dependencies
@@ -48,16 +46,10 @@ Project dev dependencies:
 * [SwiftLint](https://github.com/realm/SwiftLint)  
 * [Go](https://golang.org)  
 
-Install CocoaPods:  
+Install CocoaPods, fastlane, SwiftLint and Go:  
 
 ```sh
-$ sudo gem install cocoapods
-```
-
-Install fastlane, SwiftLint and Go:  
-
-```sh
-$ brew install fastlane swiftlint go
+$ brew install cocoapods fastlane swiftlint go
 ```
 
 ### Dependencies
@@ -69,14 +61,13 @@ Project dependencies:
 
 * [wireguard-go](https://git.zx2c4.com/wireguard-go/)  
 * [TunnelKit](https://github.com/passepartoutvpn/tunnelkit)  
-* [Bamboo](https://github.com/wordlessj/Bamboo)  
+* [SnapKit](hhttps://github.com/SnapKit/SnapKit)  
 * [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)  
 * [SwiftyStoreKit](https://github.com/bizz84/SwiftyStoreKit)  
 * [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)  
-* [SDCAlertView](https://github.com/sberrevoets/SDCAlertView)  
 * [ActiveLabel](https://github.com/optonaut/ActiveLabel.swift)  
 * [ReachabilitySwift](https://github.com/ashleymills/Reachability.swift)  
-* [Sentry](https://github.com/getsentry/sentry-cocoa)  
+* [FloatingPanel](https://github.com/scenee/FloatingPanel)  
 
 To pull and build dependencies run:  
 
@@ -134,7 +125,7 @@ $ fastlane test
 Alternatively, run tests using xcodebuild:  
 
 ```sh
-$ xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11 Pro'
+$ xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11'
 ```
 
 <a name="deployment"></a>
