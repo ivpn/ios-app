@@ -61,7 +61,7 @@ Project dependencies:
 
 * [wireguard-go](https://git.zx2c4.com/wireguard-go/)  
 * [TunnelKit](https://github.com/passepartoutvpn/tunnelkit)  
-* [SnapKit](hhttps://github.com/SnapKit/SnapKit)  
+* [SnapKit](https://github.com/SnapKit/SnapKit)  
 * [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)  
 * [SwiftyStoreKit](https://github.com/bizz84/SwiftyStoreKit)  
 * [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)  
