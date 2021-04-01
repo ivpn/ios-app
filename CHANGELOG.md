@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.3.1 - 2021-04-01  
+
+[IMPROVED] Support for custom DoH URL input format  
+[FIXED] Location mismatch issue  
+
 ## 2.3.0 - 2021-03-18  
 
 [NEW] Configure custom DNS over HTTPS  
