@@ -51,11 +51,13 @@ class APIRequest {
     var headers: [HTTPHeader]?
     var body: Data?
     var contentType: HTTPContentType
+    var addressType: AddressType?
     
-    init(method: HTTPMethod, path: String, contentType: HTTPContentType = .applicationJSON) {
+    init(method: HTTPMethod, path: String, contentType: HTTPContentType = .applicationJSON, addressType: AddressType? = nil) {
         self.method = method
         self.path = path
         self.contentType = contentType
+        self.addressType = addressType
     }
 }
 
