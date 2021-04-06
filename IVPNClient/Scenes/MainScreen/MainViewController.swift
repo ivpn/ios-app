@@ -132,32 +132,40 @@ class MainViewController: UIViewController {
     }
     
     @objc func updateGeoLocation() {
-        guard let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController else {
+        guard let controlPanel = floatingPanel.contentViewController as? ControlPanelViewController else {
             return
         }
         
-        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
+        controlPanel.controlPanelView.connectionInfoDisplayMode = .loading
         
-        controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .loading
-        
-        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
-            guard let self = self else { return }
-            
+        let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
+        ApiService.shared.request(requestIPv4) { [self] (result: Result<GeoLookup>) in
             switch result {
             case .success(let model):
-                let viewModel = ProofsViewModel(model: model)
-                controlPanelViewController.connectionViewModel = viewModel
-                self.mainView.connectionViewModel = viewModel
-                self.mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
-                self.mainView.updateInfoAlert()
+                controlPanel.connectionViewModel = ProofsViewModel(model: model)
+                mainView.connectionViewModel = ProofsViewModel(model: model)
+                mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
+                mainView.updateInfoAlert()
                 
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model
                 }
             case .failure:
-                controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .error
-                self.mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
-                self.mainView.updateInfoAlert()
+                controlPanel.controlPanelView.connectionInfoDisplayMode = .error
+                mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
+                mainView.updateInfoAlert()
+            }
+        }
+        
+        if UserDefaults.shared.isIPv6 {
+            let requestIPv6 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv6)
+            ApiService.shared.request(requestIPv6) { (result: Result<GeoLookup>) in
+                switch result {
+                case .success:
+                    break
+                case .failure:
+                    break
+                }
             }
         }
     }
