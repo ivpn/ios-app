@@ -141,6 +141,10 @@ class VPNServerList {
                     if let ips = api["ips"] as? [String?] {
                         UserDefaults.shared.set(ips, forKey: UserDefaults.Key.hostNames)
                     }
+                    
+                    if let ips = api["ipv6s"] as? [String?] {
+                        UserDefaults.shared.set(ips, forKey: UserDefaults.Key.ipv6HostNames)
+                    }
                 }
             }
         }
