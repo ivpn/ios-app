@@ -29,6 +29,22 @@ class APIAccessManager {
     
     static let shared = APIAccessManager()
     
+    var ipv4HostName: String {
+        if let host = UserDefaults.shared.hostNames.first {
+            return host
+        }
+        
+        return UserDefaults.shared.apiHostName
+    }
+    
+    var ipv6HostName: String {
+        if let host = UserDefaults.shared.ipv6HostNames.first {
+            return host
+        }
+        
+        return UserDefaults.shared.apiHostName
+    }
+    
     private var hostNames: [String] {
         var hosts = hostNamesCollection
         hosts.move(UserDefaults.shared.apiHostName, to: 0)

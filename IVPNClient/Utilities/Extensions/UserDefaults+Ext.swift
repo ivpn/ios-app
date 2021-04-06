@@ -50,6 +50,7 @@ extension UserDefaults {
         static let wgKeyTimestamp = "wgKeyTimestamp"
         static let wgRegenerationRate = "wgRegenerationRate"
         static let hostNames = "hostNames"
+        static let ipv6HostNames = "ipv6HostNames"
         static let apiHostName = "apiHostName"
         static let hasUserConsent = "hasUserConsent"
         static let sessionsLimit = "sessionsLimit"
@@ -162,6 +163,10 @@ extension UserDefaults {
     
     @objc dynamic var hostNames: [String] {
         return stringArray(forKey: Key.hostNames) ?? []
+    }
+    
+    @objc dynamic var ipv6HostNames: [String] {
+        return stringArray(forKey: Key.ipv6HostNames) ?? []
     }
     
     @objc dynamic var apiHostName: String {
