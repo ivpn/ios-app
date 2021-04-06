@@ -121,6 +121,17 @@ class APIClient: NSObject {
     // MARK: - Methods -
     
     func perform(_ request: APIRequest, _ completion: @escaping APIClientCompletion) {
+        if let addressType = request.addressType {
+            switch addressType {
+            case .IPv4:
+                hostName = APIAccessManager.shared.ipv4HostName
+            case .IPv6:
+                hostName = APIAccessManager.shared.ipv6HostName
+            default:
+                break
+            }
+        }
+        
         var urlComponents = URLComponents()
         urlComponents.scheme = baseURL.scheme
         urlComponents.host = baseURL.host
@@ -174,7 +185,7 @@ class APIClient: NSObject {
         
         let task = session.dataTask(with: urlRequest) { data, response, _ in
             guard let httpResponse = response as? HTTPURLResponse else {
-                if let nextHost = APIAccessManager.shared.nextHostName(failedHostName: self.hostName) {
+                if let nextHost = APIAccessManager.shared.nextHostName(failedHostName: self.hostName), request.addressType == nil {
                     self.retry(request, nextHost: nextHost) { result in
                         completion(result)
                     }
