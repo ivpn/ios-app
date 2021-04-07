@@ -159,10 +159,11 @@ class MainViewController: UIViewController {
         
         if UserDefaults.shared.isIPv6 {
             let requestIPv6 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv6)
-            ApiService.shared.request(requestIPv6) { (result: Result<GeoLookup>) in
+            ApiService.shared.request(requestIPv6) { [self] (result: Result<GeoLookup>) in
                 switch result {
                 case .success(let model):
                     controlPanel.controlPanelView.updateIPV6ConnectionInfo(viewModel: ProofsViewModel(model: model))
+                    mainView.ipv6ConnectionViewModel = ProofsViewModel(model: model)
                 case .failure:
                     break
                 }

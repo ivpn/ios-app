@@ -45,6 +45,12 @@ class MainView: UIView {
         }
     }
     
+    var ipv6ConnectionViewModel: ProofsViewModel! {
+        didSet {
+            
+        }
+    }
+    
     var infoAlertViewModel = InfoAlertViewModel()
     private var localCoordinates: (Double, Double)?
     private var centerMapButton = UIButton()
