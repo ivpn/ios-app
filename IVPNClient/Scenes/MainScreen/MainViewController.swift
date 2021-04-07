@@ -142,7 +142,7 @@ class MainViewController: UIViewController {
         ApiService.shared.request(requestIPv4) { [self] (result: Result<GeoLookup>) in
             switch result {
             case .success(let model):
-                controlPanel.connectionViewModel = ProofsViewModel(model: model)
+                controlPanel.controlPanelView.updateConnectionInfo(viewModel: ProofsViewModel(model: model))
                 mainView.connectionViewModel = ProofsViewModel(model: model)
                 mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
                 mainView.updateInfoAlert()
@@ -161,8 +161,8 @@ class MainViewController: UIViewController {
             let requestIPv6 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv6)
             ApiService.shared.request(requestIPv6) { (result: Result<GeoLookup>) in
                 switch result {
-                case .success:
-                    break
+                case .success(let model):
+                    controlPanel.controlPanelView.updateIPV6ConnectionInfo(viewModel: ProofsViewModel(model: model))
                 case .failure:
                     break
                 }

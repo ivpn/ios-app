@@ -42,12 +42,6 @@ class ControlPanelViewController: UITableViewController {
         return sessionManager
     }
     
-    var connectionViewModel: ProofsViewModel! {
-        didSet {
-            controlPanelView.updateConnectionInfo(viewModel: connectionViewModel)
-        }
-    }
-    
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
     private var lastStatusUpdateDate: Date?
     private var lastVPNStatus: NEVPNStatus = .invalid

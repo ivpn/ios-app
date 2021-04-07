@@ -131,6 +131,10 @@ class ControlPanelView: UITableView {
         providerLabel.text = viewModel.provider
     }
     
+    func updateIPV6ConnectionInfo(viewModel: ProofsViewModel) {
+        
+    }
+    
     func updateVPNStatus(viewModel: VPNStatusViewModel, animated: Bool = true) {
         protectionStatusLabel.text = viewModel.protectionStatusText
         connectSwitch.setOn(viewModel.connectToggleIsOn, animated: animated)
