@@ -47,7 +47,11 @@ class MainView: UIView {
     
     var ipv6ConnectionViewModel: ProofsViewModel! {
         didSet {
-            
+            if connectionViewModel.model.isEqualLocation(to: ipv6ConnectionViewModel.model) {
+                // TODO: Hide IPv4/IPv6 tabs on the Map
+            } else {
+                // TODO: Show IPv4/IPv6 tabs on the Map
+            }
         }
     }
     
