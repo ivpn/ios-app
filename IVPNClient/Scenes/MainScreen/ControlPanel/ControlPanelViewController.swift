@@ -85,17 +85,18 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        guard Application.shared.connectionManager.status.isDisconnected() else {
-            showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender)
-            return
-        }
-        
         let isEnabled = sender == controlPanelView.enableMultiHopButton
         
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: isEnabled)
         
         isMultiHop = isEnabled
         reloadView()
+        
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            showReconnectPrompt(sourceView: sender as UIView) {
+                Application.shared.connectionManager.reconnect()
+            }
+        }
     }
     
     @IBAction func toggleAntiTracker(_ sender: UISwitch) {
@@ -106,14 +107,13 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        guard Application.shared.connectionManager.status.isDisconnected() else {
-            showConnectedAlert(message: "To change AntiTracker settings, please first disconnect", sender: sender) {
-                sender.setOn(UserDefaults.shared.isAntiTracker, animated: true)
-            }
-            return
-        }
-        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
+        
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            showReconnectPrompt(sourceView: sender as UIView) {
+                Application.shared.connectionManager.reconnect()
+            }
+        }
     }
     
     // MARK: - View lifecycle -
