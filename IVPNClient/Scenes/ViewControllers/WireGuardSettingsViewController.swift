@@ -23,6 +23,7 @@
 
 import UIKit
 import JGProgressHUD
+import NetworkExtension
 
 class WireGuardSettingsViewController: UITableViewController {
     
@@ -54,14 +55,12 @@ class WireGuardSettingsViewController: UITableViewController {
     }
     
     @IBAction func regenerateKeys(_ sender: UIButton) {
-        Application.shared.connectionManager.getStatus { _, status in
-            if status == .connected || status == .connecting {
-                self.showFlashNotification(message: "To re-generate keys, please first disconnect", presentInView: self.view)
-                return
-            }
-            
-            self.keyManager.setNewKey()
+        guard Application.shared.connectionManager.status.isDisconnected() else {
+            showConnectedAlert(message: "To re-generate keys, please first disconnect", sender: sender)
+            return
         }
+        
+        keyManager.setNewKey()
     }
     
     // MARK: - View Lifecycle -
@@ -71,6 +70,7 @@ class WireGuardSettingsViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         keyManager.delegate = self
         setupView()
+        addObservers()
     }
     
     // MARK: - Methods -
@@ -81,6 +81,46 @@ class WireGuardSettingsViewController: UITableViewController {
         keyTimestampLabel.text = AppKeyManager.keyTimestamp.formatDate()
         keyExpirationTimestampLabel.text = AppKeyManager.keyExpirationTimestamp.formatDate()
         keyRegenerationTimestampLabel.text = AppKeyManager.keyRegenerationTimestamp.formatDate()
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdateVpnStatus(_:)), name: Notification.Name.NEVPNStatusDidChange, object: nil)
+    }
+    
+    private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
+        if let sourceView = sender as? UIView {
+            showActionSheet(title: message, actions: ["Disconnect"], sourceView: sourceView) { index in
+                if let completion = completion {
+                    completion()
+                }
+                
+                switch index {
+                case 0:
+                    let status = Application.shared.connectionManager.status
+                    guard Application.shared.connectionManager.canDisconnect(status: status) else {
+                        self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
+                        return
+                    }
+                    NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
+                    self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+                    self.hud.detailTextLabel.text = "Disconnecting"
+                    self.hud.show(in: (self.navigationController?.view)!)
+                    self.hud.dismiss(afterDelay: 5)
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
+    @objc private func onUpdateVpnStatus(_ notification: NSNotification) {
+        guard let vpnConnection = notification.object as? NEVPNConnection else {
+            return
+        }
+        
+        if vpnConnection.status == .disconnected {
+            hud.dismiss()
+        }
     }
     
 }
