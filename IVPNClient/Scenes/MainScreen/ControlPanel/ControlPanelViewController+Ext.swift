@@ -83,11 +83,6 @@ extension ControlPanelViewController {
                 return
             }
             
-            guard Application.shared.connectionManager.status.isDisconnected() else {
-                showConnectedAlert(message: "To change protocol, please first disconnect", sender: controlPanelView.protocolLabel)
-                return
-            }
-            
             Application.shared.connectionManager.isOnDemandEnabled { enabled in
                 guard !enabled else {
                     self.showDisableVPNPrompt(sourceView: self.controlPanelView.protocolLabel) {
