@@ -114,7 +114,7 @@ class SettingsViewController: UITableViewController {
     @IBAction func toggleIpv6(_ sender: UISwitch) {
         guard Application.shared.connectionManager.status.isDisconnected() || Application.shared.settings.connectionProtocol.tunnelType() != .wireguard else {
             showConnectedAlert(message: "To change IPv6 settings, please first disconnect", sender: sender) {
-                sender.setOn(UserDefaults.shared.isMultiHop, animated: true)
+                sender.setOn(UserDefaults.shared.isIPv6, animated: true)
             }
             return
         }
