@@ -52,6 +52,7 @@ class CustomDNSViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isCustomDNS)
+        evaluateReconnect(sender: sender)
     }
     
     @IBAction func enableSecureDNS(_ sender: UISwitch) {
@@ -59,12 +60,14 @@ class CustomDNSViewController: UITableViewController {
         let preferred: DNSProtocolType = typeControl.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: sender.isOn ? preferred : .plain)
         tableView.reloadData()
+        evaluateReconnect(sender: sender)
     }
     
     @IBAction func changeType(_ sender: UISegmentedControl) {
         let preferred: DNSProtocolType = sender.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: preferred)
         tableView.reloadData()
+        evaluateReconnect(sender: sender)
     }
     
     // MARK: - View Lifecycle -
@@ -113,6 +116,7 @@ class CustomDNSViewController: UITableViewController {
         }
         
         setupView()
+        evaluateReconnect(sender: customDNSTextField)
     }
     
     @objc func updateResolvedDNS() {
