@@ -254,28 +254,6 @@ class ControlPanelViewController: UITableViewController {
         sessionManager.createSession(force: true)
     }
     
-    func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
-        if let sourceView = sender as? UIView {
-            showActionSheet(title: message, actions: ["Disconnect"], sourceView: sourceView) { index in
-                if let completion = completion {
-                    completion()
-                }
-                
-                switch index {
-                case 0:
-                    let status = Application.shared.connectionManager.status
-                    guard Application.shared.connectionManager.canDisconnect(status: status) else {
-                        self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
-                        return
-                    }
-                    self.disconnect()
-                default:
-                    break
-                }
-            }
-        }
-    }
-    
     func updateStatus(vpnStatus: NEVPNStatus, animated: Bool = true) {
         vpnStatusViewModel.status = vpnStatus
         controlPanelView.updateVPNStatus(viewModel: vpnStatusViewModel, animated: animated)
