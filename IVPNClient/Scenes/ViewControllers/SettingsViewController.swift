@@ -99,18 +99,16 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        guard Application.shared.connectionManager.status.isDisconnected() else {
-            showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender) {
-                sender.setOn(UserDefaults.shared.isMultiHop, animated: true)
-                self.tableView.reloadData()
-            }
-            return
-        }
-        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isMultiHop)
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: sender.isOn)
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
         tableView.reloadData()
+        
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            showReconnectPrompt(sourceView: sender as UIView) {
+                Application.shared.connectionManager.reconnect()
+            }
+        }
     }
     
     @IBAction func toggleIpv6(_ sender: UISwitch) {
@@ -472,21 +470,16 @@ extension SettingsViewController {
                 return
             }
             
-            guard Application.shared.connectionManager.status.isDisconnected() else {
-                showConnectedAlert(message: "To change protocol, please first disconnect", sender: tableView.cellForRow(at: indexPath))
-                return
-            }
-            
-            Application.shared.connectionManager.isOnDemandEnabled { enabled in
-                guard !enabled else {
-                    self.showDisableVPNPrompt(sourceView: tableView.cellForRow(at: indexPath)!) {
+            Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
+                if enabled, Application.shared.connectionManager.status.isDisconnected() {
+                    showDisableVPNPrompt(sourceView: tableView.cellForRow(at: indexPath)!) {
                         Application.shared.connectionManager.resetRulesAndDisconnect()
-                        self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
+                        performSegue(withIdentifier: "SelectProtocol", sender: nil)
                     }
                     return
                 }
                 
-                self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
+                performSegue(withIdentifier: "SelectProtocol", sender: nil)
             }
         }
     }
