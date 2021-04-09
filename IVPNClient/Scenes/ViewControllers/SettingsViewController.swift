@@ -129,14 +129,13 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func toggleKeepAlive(_ sender: UISwitch) {
-        if !Application.shared.connectionManager.status.isDisconnected() {
-            showConnectedAlert(message: "To change Keep alive on sleep settings, please first disconnect", sender: sender) {
-                sender.setOn(UserDefaults.shared.keepAlive, animated: true)
-            }
-            return
-        }
-        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.keepAlive)
+        
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            showReconnectPrompt(sourceView: sender as UIView) {
+                Application.shared.connectionManager.reconnect()
+            }
+        }
     }
     
     @IBAction func toggleLogging(_ sender: UISwitch) {
@@ -261,16 +260,6 @@ class SettingsViewController: UITableViewController {
                 deselectRow(sender: sender)
                 return false
             }
-        }
-        
-        if identifier == "CustomDNS" && !status.isDisconnected() {
-            showConnectedAlert(message: "To specify custom DNS, please first disconnect", sender: sender)
-            return false
-        }
-        
-        if identifier == "AntiTracker" && !status.isDisconnected() {
-            showConnectedAlert(message: "To change AntiTracker settings, please first disconnect", sender: sender)
-            return false
         }
         
         return true
