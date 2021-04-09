@@ -240,8 +240,6 @@ class SettingsViewController: UITableViewController {
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        let status = Application.shared.connectionManager.status
-        
         if identifier == "NetworkProtection" {
             if !Application.shared.authentication.isLoggedIn {
                 authenticate(self)
@@ -302,34 +300,6 @@ class SettingsViewController: UITableViewController {
     }
     
     // MARK: - Methods -
-    
-    private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
-        if let sourceView = sender as? UIView {
-            showActionSheet(title: message, actions: ["Disconnect"], sourceView: sourceView) { index in
-                if let completion = completion {
-                    completion()
-                }
-                
-                switch index {
-                case 0:
-                    let status = Application.shared.connectionManager.status
-                    guard Application.shared.connectionManager.canDisconnect(status: status) else {
-                        self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
-                        return
-                    }
-                    NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
-                    self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-                    self.hud.detailTextLabel.text = "Disconnecting"
-                    self.hud.show(in: (self.navigationController?.view)!)
-                    self.hud.dismiss(afterDelay: 5)
-                default:
-                    break
-                }
-            }
-        }
-        
-        deselectRow(sender: sender)
-    }
     
     private func updateSelectedServer() {
         let serverViewModel = VPNServerViewModel(server: Application.shared.settings.selectedServer)
