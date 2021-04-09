@@ -112,15 +112,14 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func toggleIpv6(_ sender: UISwitch) {
-        guard Application.shared.connectionManager.status.isDisconnected() || Application.shared.settings.connectionProtocol.tunnelType() != .wireguard else {
-            showConnectedAlert(message: "To change IPv6 settings, please first disconnect", sender: sender) {
-                sender.setOn(UserDefaults.shared.isIPv6, animated: true)
-            }
-            return
-        }
-        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isIPv6)
         showIPv4ServersSwitch.isEnabled = sender.isOn
+        
+        if !Application.shared.connectionManager.status.isDisconnected(), Application.shared.settings.connectionProtocol.tunnelType() == .wireguard {
+            showReconnectPrompt(sourceView: sender as UIView) {
+                Application.shared.connectionManager.reconnect()
+            }
+        }
     }
     
     @IBAction func toggleShowIPv4Servers(_ sender: UISwitch) {
