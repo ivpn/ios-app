@@ -39,10 +39,12 @@ class AntiTrackerViewController: UITableViewController {
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
         antiTrackerHardcoreSwitch.isEnabled = sender.isOn
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleAntiTrackerHardcore(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTrackerHardcore)
+        evaluateReconnect(sender: sender as UIView)
     }
     
     override func viewDidLoad() {
@@ -51,6 +53,16 @@ class AntiTrackerViewController: UITableViewController {
         antiTrackerSwitch.setOn(UserDefaults.shared.isAntiTracker, animated: false)
         antiTrackerHardcoreSwitch.setOn(UserDefaults.shared.isAntiTrackerHardcore, animated: false)
         antiTrackerHardcoreSwitch.isEnabled = UserDefaults.shared.isAntiTracker
+    }
+    
+    // MARK: - Private methods -
+    
+    private func evaluateReconnect(sender: UIView) {
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            showReconnectPrompt(sourceView: sender) {
+                Application.shared.connectionManager.reconnect()
+            }
+        }
     }
 
 }

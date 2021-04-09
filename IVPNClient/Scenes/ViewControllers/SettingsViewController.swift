@@ -103,23 +103,13 @@ class SettingsViewController: UITableViewController {
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: sender.isOn)
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
         tableView.reloadData()
-        
-        if !Application.shared.connectionManager.status.isDisconnected() {
-            showReconnectPrompt(sourceView: sender as UIView) {
-                Application.shared.connectionManager.reconnect()
-            }
-        }
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleIpv6(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isIPv6)
         showIPv4ServersSwitch.isEnabled = sender.isOn
-        
-        if !Application.shared.connectionManager.status.isDisconnected(), Application.shared.settings.connectionProtocol.tunnelType() == .wireguard {
-            showReconnectPrompt(sourceView: sender as UIView) {
-                Application.shared.connectionManager.reconnect()
-            }
-        }
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleShowIPv4Servers(_ sender: UISwitch) {
@@ -130,12 +120,7 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func toggleKeepAlive(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.keepAlive)
-        
-        if !Application.shared.connectionManager.status.isDisconnected() {
-            showReconnectPrompt(sourceView: sender as UIView) {
-                Application.shared.connectionManager.reconnect()
-            }
-        }
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleLogging(_ sender: UISwitch) {
@@ -299,7 +284,7 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    // MARK: - Methods -
+    // MARK: - Private methods -
     
     private func updateSelectedServer() {
         let serverViewModel = VPNServerViewModel(server: Application.shared.settings.selectedServer)
@@ -369,6 +354,14 @@ class SettingsViewController: UITableViewController {
         
         if vpnConnection.status == .disconnected {
             hud.dismiss()
+        }
+    }
+    
+    private func evaluateReconnect(sender: UIView) {
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            showReconnectPrompt(sourceView: sender) {
+                Application.shared.connectionManager.reconnect()
+            }
         }
     }
     
