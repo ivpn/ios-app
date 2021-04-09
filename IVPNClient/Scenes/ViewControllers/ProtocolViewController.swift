@@ -125,11 +125,20 @@ class ProtocolViewController: UITableViewController {
         let protocols = connectionProtocol.supportedProtocols(protocols: Config.supportedProtocols)
         let actions = connectionProtocol.supportedProtocolsFormat(protocols: Config.supportedProtocols)
         
-        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol & port", actions: actions, sourceView: view) { index in
-            guard index > -1 else { return }
+        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol & port", actions: actions, sourceView: view) { [self] index in
+            guard index > -1 else {
+                return
+            }
+            
             Application.shared.settings.connectionProtocol = protocols[index]
-            self.tableView.reloadData()
+            tableView.reloadData()
             NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+            
+            if !Application.shared.connectionManager.status.isDisconnected() {
+                showReconnectPrompt(sourceView: view) {
+                    Application.shared.connectionManager.reconnect()
+                }
+            }
         }
     }
     
