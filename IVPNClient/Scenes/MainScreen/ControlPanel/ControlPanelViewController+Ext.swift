@@ -83,16 +83,16 @@ extension ControlPanelViewController {
                 return
             }
             
-            Application.shared.connectionManager.isOnDemandEnabled { enabled in
-                guard !enabled else {
-                    self.showDisableVPNPrompt(sourceView: self.controlPanelView.protocolLabel) {
-                        self.disconnect()
-                        self.presentSelectProtocol()
+            Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
+                if enabled, Application.shared.connectionManager.status.isDisconnected() {
+                    showDisableVPNPrompt(sourceView: controlPanelView.protocolLabel) {
+                        disconnect()
+                        presentSelectProtocol()
                     }
                     return
                 }
                 
-                self.presentSelectProtocol()
+                presentSelectProtocol()
             }
         }
     }

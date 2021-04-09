@@ -330,6 +330,14 @@ extension ProtocolViewController {
         reloadTable(connectionProtocol: connectionProtocol)
         
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+        
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                showReconnectPrompt(sourceView: cell as UIView) {
+                    Application.shared.connectionManager.reconnect()
+                }
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
