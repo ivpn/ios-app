@@ -91,12 +91,7 @@ class ControlPanelViewController: UITableViewController {
         
         isMultiHop = isEnabled
         reloadView()
-        
-        if !Application.shared.connectionManager.status.isDisconnected() {
-            showReconnectPrompt(sourceView: sender as UIView) {
-                Application.shared.connectionManager.reconnect()
-            }
-        }
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleAntiTracker(_ sender: UISwitch) {
@@ -108,12 +103,7 @@ class ControlPanelViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
-        
-        if !Application.shared.connectionManager.status.isDisconnected() {
-            showReconnectPrompt(sourceView: sender as UIView) {
-                Application.shared.connectionManager.reconnect()
-            }
-        }
+        evaluateReconnect(sender: sender as UIView)
     }
     
     // MARK: - View lifecycle -

@@ -160,6 +160,14 @@ extension UIViewController {
         }
     }
     
+    func evaluateReconnect(sender: UIView) {
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            showReconnectPrompt(sourceView: sender) {
+                Application.shared.connectionManager.reconnect()
+            }
+        }
+    }
+    
     func showReconnectPrompt(sourceView: UIView, confirmed: @escaping () -> Void) {
         guard !UserDefaults.shared.notAskToReconnect else {
             confirmed()
