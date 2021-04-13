@@ -159,7 +159,7 @@ class VPNServerList {
     }()
     
     func getServers() -> [VPNServer] {
-        guard UserDefaults.standard.showIPv4Servers else {
+        guard UserDefaults.standard.showIPv4Servers || !UserDefaults.standard.isIPv6 else {
             return servers.filter { (server: VPNServer) -> Bool in
                 return server.hosts.first?.ipv6 != nil
             }
