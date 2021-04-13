@@ -134,7 +134,7 @@ class APIClient: NSObject {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = baseURL.scheme
-        urlComponents.host = baseURL.host
+        urlComponents.host = hostName
         urlComponents.path = baseURL.path
         urlComponents.queryItems = request.queryItems
         

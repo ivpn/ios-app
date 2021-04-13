@@ -79,9 +79,9 @@ class ApiService {
                     
                     completion(.failure(nil))
                     log(info: "\(requestName) parse error")
-                case .failure:
+                case .failure(let error):
                     log(info: "\(requestName) failure")
-                    completion(.failure(nil))
+                    completion(.failure(error))
                 }
             }
         }
