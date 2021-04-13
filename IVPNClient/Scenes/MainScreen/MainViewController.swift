@@ -237,11 +237,15 @@ class MainViewController: UIViewController {
     }
     
     private func startVPNStatusObserver() {
-        Application.shared.connectionManager.getStatus { _, status in
-            self.updateStatus(vpnStatus: status, animated: false)
+        Application.shared.connectionManager.getStatus { [self] _, status in
+            if status == .invalid {
+                updateGeoLocation()
+            }
+            
+            updateStatus(vpnStatus: status, animated: false)
             
             Application.shared.connectionManager.onStatusChanged { status in
-                self.updateStatus(vpnStatus: status)
+                updateStatus(vpnStatus: status)
             }
         }
     }
@@ -254,10 +258,6 @@ class MainViewController: UIViewController {
         if !NetworkManager.shared.isNetworkReachable {
             mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
             mainView.updateInfoAlert()
-        }
-        
-        if Application.shared.connectionManager.status == .invalid {
-            updateGeoLocation()
         }
         
         if UserDefaults.standard.bool(forKey: "-UITests") {
