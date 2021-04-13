@@ -136,13 +136,14 @@ class MainViewController: UIViewController {
             return
         }
         
-        controlPanel.controlPanelView.connectionInfoDisplayMode = .loading
+        controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(displayMode: .loading)
+        controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .loading)
         
         let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
         ApiService.shared.request(requestIPv4) { [self] (result: Result<GeoLookup>) in
             switch result {
             case .success(let model):
-                controlPanel.controlPanelView.updateConnectionInfo(viewModel: ProofsViewModel(model: model))
+                controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(model: model, displayMode: .content)
                 mainView.connectionViewModel = ProofsViewModel(model: model)
                 mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
                 mainView.updateInfoAlert()
@@ -151,7 +152,7 @@ class MainViewController: UIViewController {
                     Application.shared.geoLookup = model
                 }
             case .failure:
-                controlPanel.controlPanelView.connectionInfoDisplayMode = .error
+                controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(displayMode: .error)
                 mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
                 mainView.updateInfoAlert()
             }
@@ -161,10 +162,10 @@ class MainViewController: UIViewController {
         ApiService.shared.request(requestIPv6) { [self] (result: Result<GeoLookup>) in
             switch result {
             case .success(let model):
-                controlPanel.controlPanelView.updateIPV6ConnectionInfo(viewModel: ProofsViewModel(model: model))
+                controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(model: model, displayMode: .content)
                 mainView.ipv6ConnectionViewModel = ProofsViewModel(model: model)
             case .failure:
-                break
+                controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
             }
         }
     }

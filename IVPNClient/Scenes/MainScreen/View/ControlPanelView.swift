@@ -57,40 +57,21 @@ class ControlPanelView: UITableView {
     
     // MARK: - Properties -
     
-    var connectionInfoDisplayMode: ConnectionInfoDisplayMode = .content {
+    var ipv4ViewModel: ProofsViewModel! {
         didSet {
-            switch connectionInfoDisplayMode {
-            case .loading:
-                ipAddressLabel.isHidden = true
-                ipAddressLoader.startAnimating()
-                ipAddressErrorLabel.isHidden = true
-                locationLabel.isHidden = true
-                locationLoader.startAnimating()
-                locationErrorLabel.isHidden = true
-                providerLabel.isHidden = true
-                providerLoader.startAnimating()
-                providerErrorLabel.isHidden = true
-            case .content:
-                ipAddressLabel.isHidden = false
-                ipAddressLoader.stopAnimating()
-                ipAddressErrorLabel.isHidden = true
-                locationLabel.isHidden = false
-                locationLoader.stopAnimating()
-                locationErrorLabel.isHidden = true
-                providerLabel.isHidden = false
-                providerLoader.stopAnimating()
-                providerErrorLabel.isHidden = true
-            case .error:
-                ipAddressLabel.isHidden = true
-                ipAddressLoader.stopAnimating()
-                ipAddressErrorLabel.isHidden = false
-                locationLabel.isHidden = true
-                locationLoader.stopAnimating()
-                locationErrorLabel.isHidden = false
-                providerLabel.isHidden = true
-                providerLoader.stopAnimating()
-                providerErrorLabel.isHidden = false
-            }
+            updateConnectionInfo()
+        }
+    }
+    
+    var ipv6ViewModel: ProofsViewModel! {
+        didSet {
+            updateConnectionInfo()
+        }
+    }
+    
+    var addressType: AddressType = .IPv4 {
+        didSet {
+            updateConnectionInfo()
         }
     }
     
@@ -122,17 +103,6 @@ class ControlPanelView: UITableView {
             protectionStatusLabel.font = protectionStatusLabel.font.withSize(28)
             providerPlaceholderLabel.text = "ISP"
         }
-    }
-    
-    func updateConnectionInfo(viewModel: ProofsViewModel) {
-        connectionInfoDisplayMode = .content
-        ipAddressLabel.text = viewModel.ipAddress
-        locationLabel.text = "\(viewModel.city), \(viewModel.countryCode)"
-        providerLabel.text = viewModel.provider
-    }
-    
-    func updateIPV6ConnectionInfo(viewModel: ProofsViewModel) {
-        
     }
     
     func updateVPNStatus(viewModel: VPNStatusViewModel, animated: Bool = true) {
@@ -189,14 +159,46 @@ class ControlPanelView: UITableView {
         }
     }
     
-}
-
-extension ControlPanelView {
-    
-    enum ConnectionInfoDisplayMode {
-        case loading
-        case content
-        case error
+    private func updateConnectionInfo() {
+        let viewModel = addressType == .IPv6 ? ipv6ViewModel : ipv4ViewModel
+        ipAddressLabel.text = viewModel?.ipAddress
+        locationLabel.text = viewModel?.location
+        providerLabel.text = viewModel?.provider
+        
+        switch viewModel?.displayMode {
+        case .loading:
+            ipAddressLabel.isHidden = true
+            ipAddressLoader.startAnimating()
+            ipAddressErrorLabel.isHidden = true
+            locationLabel.isHidden = true
+            locationLoader.startAnimating()
+            locationErrorLabel.isHidden = true
+            providerLabel.isHidden = true
+            providerLoader.startAnimating()
+            providerErrorLabel.isHidden = true
+        case .content:
+            ipAddressLabel.isHidden = false
+            ipAddressLoader.stopAnimating()
+            ipAddressErrorLabel.isHidden = true
+            locationLabel.isHidden = false
+            locationLoader.stopAnimating()
+            locationErrorLabel.isHidden = true
+            providerLabel.isHidden = false
+            providerLoader.stopAnimating()
+            providerErrorLabel.isHidden = true
+        case .error:
+            ipAddressLabel.isHidden = true
+            ipAddressLoader.stopAnimating()
+            ipAddressErrorLabel.isHidden = false
+            locationLabel.isHidden = true
+            locationLoader.stopAnimating()
+            locationErrorLabel.isHidden = false
+            providerLabel.isHidden = true
+            providerLoader.stopAnimating()
+            providerErrorLabel.isHidden = false
+        case .none:
+            break
+        }
     }
     
 }

@@ -43,7 +43,7 @@ class MapScrollView: UIScrollView {
             
             markerLocalView.viewModel = viewModel
             
-            if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
+            if !viewModel.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
                 updateMapPosition(viewModel: viewModel, animated: oldValue != nil)
                 markerGatewayView.hide(animated: true)
                 markerLocalView.show(animated: oldValue != nil)
@@ -185,7 +185,7 @@ class MapScrollView: UIScrollView {
     }
     
     private func updateMapPosition(viewModel: ProofsViewModel, animated: Bool = false) {
-        updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated, isLocalPosition: true)
+        updateMapPosition(latitude: viewModel.latitude, longitude: viewModel.longitude, animated: animated, isLocalPosition: true)
     }
     
     private func updateMapPositionToGateway(animated: Bool = true) {

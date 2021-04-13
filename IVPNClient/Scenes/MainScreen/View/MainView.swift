@@ -38,16 +38,24 @@ class MainView: UIView {
         didSet {
             mapScrollView.viewModel = connectionViewModel
             
-            if !connectionViewModel.model.isIvpnServer {
-                localCoordinates = (connectionViewModel.model.latitude, connectionViewModel.model.longitude)
-                mapScrollView.localCoordinates = (connectionViewModel.model.latitude, connectionViewModel.model.longitude)
+            guard let model = connectionViewModel.model else {
+                return
+            }
+            
+            if !model.isIvpnServer {
+                localCoordinates = (model.latitude, model.longitude)
+                mapScrollView.localCoordinates = (model.latitude, model.longitude)
             }
         }
     }
     
     var ipv6ConnectionViewModel: ProofsViewModel! {
         didSet {
-            if connectionViewModel.model.isEqualLocation(to: ipv6ConnectionViewModel.model) {
+            guard let model = ipv6ConnectionViewModel.model else {
+                return
+            }
+            
+            if model.isEqualLocation(to: model) {
                 // TODO: Hide IPv4/IPv6 tabs on the Map
             } else {
                 // TODO: Show IPv4/IPv6 tabs on the Map
