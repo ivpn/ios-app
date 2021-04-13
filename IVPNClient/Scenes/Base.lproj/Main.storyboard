@@ -20,7 +20,7 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1192.5" width="414" height="65"/>
+                            <rect key="frame" x="0.0" y="1213.5" width="414" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -1403,14 +1403,14 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="13.5" width="361" height="16"/>
+                                            <rect key="frame" x="16" y="14" width="361" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1419,7 +1419,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="359" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="359" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1441,7 +1441,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.5" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="99" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -2211,28 +2211,51 @@
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                         <accessibility key="accessibilityConfiguration" label="Select protocol"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="236" id="yXQ-dU-5Mc">
-                                        <rect key="frame" x="0.0" y="649" width="414" height="236"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="260" id="yXQ-dU-5Mc">
+                                        <rect key="frame" x="0.0" y="649" width="414" height="260"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yXQ-dU-5Mc" id="8z5-Uk-NCS">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="236"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="odK-gO-Lzu">
-                                                    <rect key="frame" x="30" y="24" width="354" height="188"/>
+                                                    <rect key="frame" x="30" y="24" width="354" height="212"/>
                                                     <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mx0-6b-oNY">
+                                                            <rect key="frame" x="0.0" y="0.0" width="354" height="45.5"/>
+                                                            <subviews>
+                                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LNB-Gv-gUn">
+                                                                    <rect key="frame" x="97" y="0.0" width="160" height="32"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="160" id="5t3-zc-PsR"/>
+                                                                        <constraint firstAttribute="height" constant="31" id="GJp-JN-R4E"/>
+                                                                    </constraints>
+                                                                    <segments>
+                                                                        <segment title="IPv4"/>
+                                                                        <segment title="IPv6"/>
+                                                                    </segments>
+                                                                    <connections>
+                                                                        <action selector="selectIpProtocol:" destination="NB7-vL-gwX" eventType="valueChanged" id="ngm-Zk-JFq"/>
+                                                                    </connections>
+                                                                </segmentedControl>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="LNB-Gv-gUn" firstAttribute="centerX" secondItem="Mx0-6b-oNY" secondAttribute="centerX" id="F2J-MR-hSj"/>
+                                                                <constraint firstItem="LNB-Gv-gUn" firstAttribute="top" secondItem="Mx0-6b-oNY" secondAttribute="top" id="xnW-Ej-CNx"/>
+                                                            </constraints>
+                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ME-0A-Ygf" customClass="ConnectionInfoBoxView" customModule="IVPNClient" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="354" height="56"/>
+                                                            <rect key="frame" x="0.0" y="55.5" width="354" height="45.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-server" translatesAutoresizingMaskIntoConstraints="NO" id="Jxf-yV-NoU">
-                                                                    <rect key="frame" x="18" y="16" width="24" height="24"/>
+                                                                    <rect key="frame" x="18" y="11" width="24" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="24" id="RM5-il-XAD"/>
                                                                         <constraint firstAttribute="height" constant="24" id="aHJ-td-5Cc"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your IP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SC4-oO-20O">
-                                                                    <rect key="frame" x="58" y="18" width="115" height="20"/>
+                                                                    <rect key="frame" x="58" y="13" width="115" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="35Q-zh-ePD"/>
                                                                         <constraint firstAttribute="width" constant="115" id="8hB-jD-eUJ"/>
@@ -2242,24 +2265,24 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ir1-tN-PZC">
-                                                                    <rect key="frame" x="213" y="18" width="125" height="20"/>
+                                                                    <rect key="frame" x="158" y="13" width="180" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="6yJ-se-t7Q"/>
-                                                                        <constraint firstAttribute="width" constant="125" id="q4S-nw-nbX"/>
+                                                                        <constraint firstAttribute="width" constant="180" id="q4S-nw-nbX"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Uyf-JW-zYe">
-                                                                    <rect key="frame" x="318" y="18" width="20" height="20"/>
+                                                                    <rect key="frame" x="318" y="13" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="20" id="AJK-Ps-QkX"/>
                                                                         <constraint firstAttribute="height" constant="20" id="YMx-SY-Sj1"/>
                                                                     </constraints>
                                                                 </activityIndicatorView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection error" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpu-tj-hH1">
-                                                                    <rect key="frame" x="213" y="18" width="125" height="20"/>
+                                                                    <rect key="frame" x="213" y="13" width="125" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="IqT-u4-NL9"/>
                                                                         <constraint firstAttribute="width" constant="125" id="UWb-De-fta"/>
@@ -2298,17 +2321,17 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhB-vb-hH1" customClass="ConnectionInfoBoxView" customModule="IVPNClient" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="66" width="354" height="56"/>
+                                                            <rect key="frame" x="0.0" y="111" width="354" height="45.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-map-pin" translatesAutoresizingMaskIntoConstraints="NO" id="jbi-Lj-XIB">
-                                                                    <rect key="frame" x="18" y="16" width="24" height="24"/>
+                                                                    <rect key="frame" x="18" y="11" width="24" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="24" id="0Pl-Gk-dc7"/>
                                                                         <constraint firstAttribute="height" constant="24" id="tW0-ca-Ku4"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWD-Jo-LI9">
-                                                                    <rect key="frame" x="58" y="18" width="115" height="20"/>
+                                                                    <rect key="frame" x="58" y="13" width="115" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="115" id="S1P-mt-Ibu"/>
                                                                         <constraint firstAttribute="height" constant="20" id="sP0-1w-fbG"/>
@@ -2318,7 +2341,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E6a-2Z-ZUw">
-                                                                    <rect key="frame" x="213" y="18" width="125" height="20"/>
+                                                                    <rect key="frame" x="213" y="13" width="125" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="Dpj-VI-AYO"/>
                                                                         <constraint firstAttribute="width" constant="125" id="NqD-K7-NT6"/>
@@ -2328,14 +2351,14 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="R4n-PY-IGn">
-                                                                    <rect key="frame" x="318" y="18" width="20" height="20"/>
+                                                                    <rect key="frame" x="318" y="13" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="20" id="CDu-Xt-xCC"/>
                                                                         <constraint firstAttribute="height" constant="20" id="htW-rg-aCO"/>
                                                                     </constraints>
                                                                 </activityIndicatorView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection error" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzG-y6-euq">
-                                                                    <rect key="frame" x="213" y="18" width="125" height="20"/>
+                                                                    <rect key="frame" x="213" y="13" width="125" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="6I9-wk-BZK"/>
                                                                         <constraint firstAttribute="width" constant="125" id="s64-0T-1OW"/>
@@ -2374,17 +2397,17 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OpQ-b5-AAg" customClass="ConnectionInfoBoxView" customModule="IVPNClient" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="132" width="354" height="56"/>
+                                                            <rect key="frame" x="0.0" y="166.5" width="354" height="45.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-server" translatesAutoresizingMaskIntoConstraints="NO" id="Bbv-ts-7zP">
-                                                                    <rect key="frame" x="18" y="16" width="24" height="24"/>
+                                                                    <rect key="frame" x="18" y="11" width="24" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="24" id="K6t-iB-kYM"/>
                                                                         <constraint firstAttribute="width" constant="24" id="gh1-UM-WFB"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Internet Provider" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5X-4A-Fpw">
-                                                                    <rect key="frame" x="58" y="18" width="115" height="20"/>
+                                                                    <rect key="frame" x="58" y="13" width="115" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="fKa-Pv-UNe"/>
                                                                         <constraint firstAttribute="width" constant="115" id="rJB-f6-5uw"/>
@@ -2394,7 +2417,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdG-Fb-Gn0">
-                                                                    <rect key="frame" x="213" y="18" width="125" height="20"/>
+                                                                    <rect key="frame" x="213" y="13" width="125" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="125" id="4h6-8t-dey"/>
                                                                         <constraint firstAttribute="height" constant="20" id="Agp-pH-ope"/>
@@ -2404,14 +2427,14 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Qyn-6a-4un">
-                                                                    <rect key="frame" x="318" y="18" width="20" height="20"/>
+                                                                    <rect key="frame" x="318" y="13" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="20" id="fea-vW-KKs"/>
                                                                         <constraint firstAttribute="height" constant="20" id="gdS-ST-kKf"/>
                                                                     </constraints>
                                                                 </activityIndicatorView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection error" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdR-pT-kcI">
-                                                                    <rect key="frame" x="213" y="18" width="125" height="20"/>
+                                                                    <rect key="frame" x="213" y="13" width="125" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="125" id="jx3-sf-jsd"/>
                                                                         <constraint firstAttribute="height" constant="20" id="vie-bx-ys8"/>
@@ -2463,7 +2486,7 @@
                                         <accessibility key="accessibilityConfiguration" label="Connection info details"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="85" id="gmi-FF-akn">
-                                        <rect key="frame" x="0.0" y="885" width="414" height="85"/>
+                                        <rect key="frame" x="0.0" y="909" width="414" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gmi-FF-akn" id="dpg-cm-ETO">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
@@ -2552,7 +2575,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Tj-dt-TNi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-914.39999999999998" y="838.66995073891633"/>
+            <point key="canvasLocation" x="-914.49275362318849" y="838.39285714285711"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="8Je-1b-eM7">
