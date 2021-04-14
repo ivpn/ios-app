@@ -31,6 +31,7 @@ class MainView: UIView {
     
     @IBOutlet weak var infoAlertView: InfoAlertView!
     @IBOutlet weak var mapScrollView: MapScrollView!
+    @IBOutlet weak var ipProtocolView: UIView!
     
     // MARK: - Properties -
     
@@ -66,6 +67,12 @@ class MainView: UIView {
     var infoAlertViewModel = InfoAlertViewModel()
     private var localCoordinates: (Double, Double)?
     private var centerMapButton = UIButton()
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
+        
+    }
     
     // MARK: - View lifecycle -
     

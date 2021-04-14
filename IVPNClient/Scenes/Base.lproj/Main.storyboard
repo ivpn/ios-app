@@ -2585,34 +2585,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="right" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rn8-hf-8bd" customClass="MapScrollView" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="gIR-a7-hcm">
-                                        <rect key="frame" x="0.0" y="0.0" width="5400" height="3942"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="5400" id="O1K-0N-DpT"/>
-                                            <constraint firstAttribute="height" constant="3942" id="Q9A-Wa-2p0"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" name="ivpnGray"/>
-                                <constraints>
-                                    <constraint firstItem="gIR-a7-hcm" firstAttribute="top" secondItem="rn8-hf-8bd" secondAttribute="top" id="41Z-1e-R6N"/>
-                                    <constraint firstAttribute="bottom" secondItem="gIR-a7-hcm" secondAttribute="bottom" id="C33-NB-gbt"/>
-                                    <constraint firstAttribute="bottom" secondItem="gIR-a7-hcm" secondAttribute="bottom" id="CSb-Bk-0Jg"/>
-                                    <constraint firstItem="gIR-a7-hcm" firstAttribute="top" secondItem="rn8-hf-8bd" secondAttribute="top" id="KCh-fQ-UKx"/>
-                                    <constraint firstAttribute="trailing" secondItem="gIR-a7-hcm" secondAttribute="trailing" id="Nn9-M9-yLk"/>
-                                    <constraint firstAttribute="trailing" secondItem="gIR-a7-hcm" secondAttribute="trailing" id="WcI-kR-Gz0"/>
-                                    <constraint firstItem="gIR-a7-hcm" firstAttribute="leading" secondItem="rn8-hf-8bd" secondAttribute="leading" id="e4I-ej-S68"/>
-                                </constraints>
-                                <inset key="scrollIndicatorInsets" minX="395" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="iKt-h8-BW7"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="neB-z0-wKv"/>
-                                <connections>
-                                    <outlet property="mapImageView" destination="gIR-a7-hcm" id="wse-Jj-Ucn"/>
-                                </connections>
-                            </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ah4-aa-ds1" customClass="InfoAlertView" customModule="IVPNClient" customModuleProvider="target">
                                 <rect key="frame" x="34.5" y="793" width="345" height="49"/>
                                 <subviews>
@@ -2672,6 +2644,61 @@
                                     <outlet property="textLabel" destination="IEm-rH-E7M" id="Scq-00-oQB"/>
                                 </connections>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="right" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rn8-hf-8bd" customClass="MapScrollView" customModule="IVPNClient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="gIR-a7-hcm">
+                                        <rect key="frame" x="0.0" y="0.0" width="5400" height="3942"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="5400" id="O1K-0N-DpT"/>
+                                            <constraint firstAttribute="height" constant="3942" id="Q9A-Wa-2p0"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" name="ivpnGray"/>
+                                <constraints>
+                                    <constraint firstItem="gIR-a7-hcm" firstAttribute="top" secondItem="rn8-hf-8bd" secondAttribute="top" id="41Z-1e-R6N"/>
+                                    <constraint firstAttribute="bottom" secondItem="gIR-a7-hcm" secondAttribute="bottom" id="C33-NB-gbt"/>
+                                    <constraint firstAttribute="bottom" secondItem="gIR-a7-hcm" secondAttribute="bottom" id="CSb-Bk-0Jg"/>
+                                    <constraint firstItem="gIR-a7-hcm" firstAttribute="top" secondItem="rn8-hf-8bd" secondAttribute="top" id="KCh-fQ-UKx"/>
+                                    <constraint firstAttribute="trailing" secondItem="gIR-a7-hcm" secondAttribute="trailing" id="Nn9-M9-yLk"/>
+                                    <constraint firstAttribute="trailing" secondItem="gIR-a7-hcm" secondAttribute="trailing" id="WcI-kR-Gz0"/>
+                                    <constraint firstItem="gIR-a7-hcm" firstAttribute="leading" secondItem="rn8-hf-8bd" secondAttribute="leading" id="e4I-ej-S68"/>
+                                </constraints>
+                                <inset key="scrollIndicatorInsets" minX="395" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="iKt-h8-BW7"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="neB-z0-wKv"/>
+                                <connections>
+                                    <outlet property="mapImageView" destination="gIR-a7-hcm" id="wse-Jj-Ucn"/>
+                                </connections>
+                            </scrollView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCq-dU-8Pd">
+                                <rect key="frame" x="141" y="54" width="132" height="54"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jvD-nS-lau">
+                                        <rect key="frame" x="0.0" y="0.0" width="132" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="IPv4"/>
+                                            <segment title="IPv6"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="selectIpProtocol:" destination="ITP-Ne-qOg" eventType="valueChanged" id="Ziq-7s-xxI"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location does not match" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYN-zk-Flw">
+                                        <rect key="frame" x="0.0" y="38" width="132" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" name="ivpnLabelPrimary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="hoj-m1-D2J"/>
+                                    <constraint firstAttribute="width" constant="132" id="mTj-3y-ZzH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ww5-jx-W0A"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2680,15 +2707,18 @@
                             <constraint firstItem="ww5-jx-W0A" firstAttribute="trailing" secondItem="ah4-aa-ds1" secondAttribute="trailing" priority="750" constant="16" id="0Uz-ca-oP5"/>
                             <constraint firstItem="ah4-aa-ds1" firstAttribute="centerX" secondItem="ITP-Ne-qOg" secondAttribute="centerX" id="68P-g7-LLw"/>
                             <constraint firstItem="rn8-hf-8bd" firstAttribute="trailing" secondItem="ww5-jx-W0A" secondAttribute="trailing" id="Jyb-iY-Uwj"/>
+                            <constraint firstItem="pCq-dU-8Pd" firstAttribute="centerX" secondItem="ITP-Ne-qOg" secondAttribute="centerX" id="Njz-vf-5bL"/>
                             <constraint firstItem="ww5-jx-W0A" firstAttribute="bottom" secondItem="ah4-aa-ds1" secondAttribute="bottom" constant="20" id="X5Y-qQ-ab3"/>
                             <constraint firstItem="rn8-hf-8bd" firstAttribute="centerX" secondItem="ITP-Ne-qOg" secondAttribute="centerX" id="ay8-8Q-Vxy"/>
                             <constraint firstAttribute="bottom" secondItem="rn8-hf-8bd" secondAttribute="bottom" id="ktu-zs-W0y"/>
                             <constraint firstItem="rn8-hf-8bd" firstAttribute="centerY" secondItem="ITP-Ne-qOg" secondAttribute="centerY" id="pYn-iH-9PW"/>
+                            <constraint firstItem="pCq-dU-8Pd" firstAttribute="top" secondItem="ww5-jx-W0A" secondAttribute="top" constant="10" id="uCb-qA-FVC"/>
                             <constraint firstItem="rn8-hf-8bd" firstAttribute="top" secondItem="ITP-Ne-qOg" secondAttribute="topMargin" constant="-44" id="upg-3q-Ba3"/>
                             <constraint firstItem="ah4-aa-ds1" firstAttribute="leading" secondItem="ww5-jx-W0A" secondAttribute="leading" priority="750" constant="16" id="wVr-Qb-hx1"/>
                         </constraints>
                         <connections>
                             <outlet property="infoAlertView" destination="ah4-aa-ds1" id="T3a-Bu-NGt"/>
+                            <outlet property="ipProtocolView" destination="pCq-dU-8Pd" id="eWx-wW-But"/>
                             <outlet property="mapScrollView" destination="rn8-hf-8bd" id="UOg-VH-usL"/>
                         </connections>
                     </view>
@@ -2701,7 +2731,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPo-yL-uiu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-914.39999999999998" y="12.561576354679804"/>
+            <point key="canvasLocation" x="-914.49275362318849" y="12.053571428571429"/>
         </scene>
         <!--Configure-->
         <scene sceneID="fZ3-Gg-hfr">
