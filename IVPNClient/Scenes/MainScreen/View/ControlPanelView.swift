@@ -93,9 +93,9 @@ class ControlPanelView: UITableView {
             connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
             connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
         }
-        ipAddressErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
-        locationErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
-        providerErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
+        ipAddressErrorLabel.icon(text: "Not available", imageName: "icon-wifi-off", alignment: .left)
+        locationErrorLabel.icon(text: "Not available", imageName: "icon-wifi-off", alignment: .left)
+        providerErrorLabel.icon(text: "Not available", imageName: "icon-wifi-off", alignment: .left)
         updateConnectSwitch()
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: protectionStatusTableCell)
         
