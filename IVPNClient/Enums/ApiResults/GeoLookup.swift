@@ -35,6 +35,10 @@ struct GeoLookup: Decodable {
     let longitude: Double
     
     func isEqualLocation(to comparingModel: GeoLookup) -> Bool {
+        guard !city.isEmpty, !country.isEmpty, !comparingModel.city.isEmpty, !comparingModel.country.isEmpty else {
+            return true
+        }
+        
         return city == comparingModel.city && country == comparingModel.country
     }
     

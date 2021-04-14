@@ -52,14 +52,14 @@ class MainView: UIView {
     
     var ipv6ConnectionViewModel: ProofsViewModel! {
         didSet {
-            guard let model = ipv6ConnectionViewModel.model else {
+            guard let ipv4Model = connectionViewModel.model, let ipv6Model = ipv6ConnectionViewModel.model else {
                 return
             }
             
-            if model.isEqualLocation(to: model) {
-                // TODO: Hide IPv4/IPv6 tabs on the Map
+            if ipv6Model.isEqualLocation(to: ipv4Model) {
+                ipProtocolView.isHidden = true
             } else {
-                // TODO: Show IPv4/IPv6 tabs on the Map
+                ipProtocolView.isHidden = false
             }
         }
     }
