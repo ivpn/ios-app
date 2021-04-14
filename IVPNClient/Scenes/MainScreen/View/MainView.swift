@@ -32,6 +32,7 @@ class MainView: UIView {
     @IBOutlet weak var infoAlertView: InfoAlertView!
     @IBOutlet weak var mapScrollView: MapScrollView!
     @IBOutlet weak var ipProtocolView: UIView!
+    @IBOutlet weak var ipProtocolControl: UISegmentedControl!
     
     // MARK: - Properties -
     
@@ -52,12 +53,21 @@ class MainView: UIView {
     
     var ipv6ConnectionViewModel: ProofsViewModel! {
         didSet {
+            guard let connectionViewModel = connectionViewModel, let ipv6ConnectionViewModel = ipv6ConnectionViewModel else {
+                ipProtocolView.isHidden = true
+                ipProtocolControl.selectedSegmentIndex = 0
+                return
+            }
+            
             guard let ipv4Model = connectionViewModel.model, let ipv6Model = ipv6ConnectionViewModel.model else {
+                ipProtocolView.isHidden = true
+                ipProtocolControl.selectedSegmentIndex = 0
                 return
             }
             
             if ipv6Model.isEqualLocation(to: ipv4Model) {
                 ipProtocolView.isHidden = true
+                ipProtocolControl.selectedSegmentIndex = 0
             } else {
                 ipProtocolView.isHidden = false
             }
@@ -71,12 +81,18 @@ class MainView: UIView {
     // MARK: - @IBActions -
     
     @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
-        guard let model = sender.selectedSegmentIndex == 1 ? connectionViewModel.model : ipv6ConnectionViewModel.model else {
+        guard let model = sender.selectedSegmentIndex == 1 ? ipv6ConnectionViewModel.model : connectionViewModel.model else {
             return
         }
         
-        mapScrollView.currentCoordinates = (model.latitude, model.longitude)
-        mapScrollView.updateMapPositionToCurrentCoordinates()
+        let isDisconnected = Application.shared.connectionManager.status.isDisconnected()
+        mapScrollView.updateMapPosition(latitude: model.latitude, longitude: model.longitude, animated: true, isLocalPosition: isDisconnected, updateMarkers: true)
+        
+        if isDisconnected {
+            mapScrollView.localCoordinates = (model.latitude, model.longitude)
+        } else {
+            mapScrollView.gatewayCoordinates = (model.latitude, model.longitude)
+        }
     }
     
     // MARK: - View lifecycle -

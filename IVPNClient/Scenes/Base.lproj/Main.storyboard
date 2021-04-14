@@ -2718,6 +2718,7 @@
                         </constraints>
                         <connections>
                             <outlet property="infoAlertView" destination="ah4-aa-ds1" id="T3a-Bu-NGt"/>
+                            <outlet property="ipProtocolControl" destination="jvD-nS-lau" id="fMc-po-eR4"/>
                             <outlet property="ipProtocolView" destination="pCq-dU-8Pd" id="eWx-wW-But"/>
                             <outlet property="mapScrollView" destination="rn8-hf-8bd" id="UOg-VH-usL"/>
                         </connections>

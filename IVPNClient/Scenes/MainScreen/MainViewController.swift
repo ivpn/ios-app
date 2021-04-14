@@ -166,6 +166,7 @@ class MainViewController: UIViewController {
                 mainView.ipv6ConnectionViewModel = ProofsViewModel(model: model)
             case .failure:
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
+                mainView.ipv6ConnectionViewModel = ProofsViewModel(displayMode: .error)
             }
         }
     }
