@@ -2218,7 +2218,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="odK-gO-Lzu">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="odK-gO-Lzu" customClass="ConnectionInfoView" customModule="IVPNClient" customModuleProvider="target">
                                                     <rect key="frame" x="30" y="24" width="354" height="212"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mx0-6b-oNY">
@@ -2473,6 +2473,18 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
+                                                    <connections>
+                                                        <outlet property="ipAddressErrorLabel" destination="Wpu-tj-hH1" id="oSS-iv-jnk"/>
+                                                        <outlet property="ipAddressLabel" destination="ir1-tN-PZC" id="8l1-o0-Ndv"/>
+                                                        <outlet property="ipAddressLoader" destination="Uyf-JW-zYe" id="zyc-xy-751"/>
+                                                        <outlet property="locationErrorLabel" destination="nzG-y6-euq" id="FGv-lq-r3r"/>
+                                                        <outlet property="locationLabel" destination="E6a-2Z-ZUw" id="xaZ-vg-N9s"/>
+                                                        <outlet property="locationLoader" destination="R4n-PY-IGn" id="hbO-wY-OFQ"/>
+                                                        <outlet property="providerErrorLabel" destination="rdR-pT-kcI" id="Udv-mq-Akh"/>
+                                                        <outlet property="providerLabel" destination="LdG-Fb-Gn0" id="ElZ-np-9yV"/>
+                                                        <outlet property="providerLoader" destination="Qyn-6a-4un" id="om5-ec-h3W"/>
+                                                        <outlet property="providerPlaceholderLabel" destination="B5X-4A-Fpw" id="7VO-Sq-Oek"/>
+                                                    </connections>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -2540,6 +2552,7 @@
                         <connections>
                             <outlet property="antiTrackerSwitch" destination="wvL-pi-gS0" id="Rxk-Z3-9UR"/>
                             <outlet property="connectSwitch" destination="yu3-bo-38L" id="cnj-ri-WDh"/>
+                            <outlet property="connectionInfoView" destination="odK-gO-Lzu" id="x5f-ng-Pjy"/>
                             <outlet property="dataSource" destination="NB7-vL-gwX" id="hcq-e0-hfv"/>
                             <outlet property="delegate" destination="NB7-vL-gwX" id="l2n-Zd-Ttg"/>
                             <outlet property="disableMultiHopButton" destination="OqR-DO-cQW" id="8cm-DY-7uM"/>
@@ -2553,20 +2566,10 @@
                             <outlet property="exitServerNameLabel" destination="ctm-zP-IXi" id="FHi-nL-tnB"/>
                             <outlet property="exitServerTableCell" destination="gB4-hN-vYJ" id="gTY-Aq-lp7"/>
                             <outlet property="fastestServerLabel" destination="tn2-Y1-vTK" id="Fre-F1-uPx"/>
-                            <outlet property="ipAddressErrorLabel" destination="Wpu-tj-hH1" id="LXW-Nc-zsS"/>
-                            <outlet property="ipAddressLabel" destination="ir1-tN-PZC" id="qc2-dN-QBO"/>
-                            <outlet property="ipAddressLoader" destination="Uyf-JW-zYe" id="1pD-Yj-CY9"/>
-                            <outlet property="locationErrorLabel" destination="nzG-y6-euq" id="8dG-I7-akZ"/>
-                            <outlet property="locationLabel" destination="E6a-2Z-ZUw" id="ci4-fm-zH0"/>
-                            <outlet property="locationLoader" destination="R4n-PY-IGn" id="Cff-x3-gFe"/>
                             <outlet property="networkView" destination="IWY-FC-eTO" id="8o7-WG-viR"/>
                             <outlet property="protectionStatusLabel" destination="fZx-j5-ahl" id="IPa-ne-fRV"/>
                             <outlet property="protectionStatusTableCell" destination="1dE-Ee-l4r" id="w0o-eH-gFE"/>
                             <outlet property="protocolLabel" destination="mfE-oo-iTV" id="5o9-zb-c3x"/>
-                            <outlet property="providerErrorLabel" destination="rdR-pT-kcI" id="tfT-k8-N5n"/>
-                            <outlet property="providerLabel" destination="LdG-Fb-Gn0" id="h0R-lp-s5c"/>
-                            <outlet property="providerLoader" destination="Qyn-6a-4un" id="Kp9-1Y-xrf"/>
-                            <outlet property="providerPlaceholderLabel" destination="B5X-4A-Fpw" id="8FP-yv-TFY"/>
                         </connections>
                     </tableView>
                     <connections>

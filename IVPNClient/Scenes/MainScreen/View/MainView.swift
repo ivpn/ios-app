@@ -52,7 +52,7 @@ class MainView: UIView {
     
     var ipv6ViewModel: ProofsViewModel! {
         didSet {
-            ipProtocolView.updateView(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel)
+            ipProtocolView.update(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel)
         }
     }
     

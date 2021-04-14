@@ -31,7 +31,7 @@ class IpProtocolView: UIView {
     
     // MARK: - Methods -
     
-    func updateView(ipv4ViewModel: ProofsViewModel?, ipv6ViewModel: ProofsViewModel?) {
+    func update(ipv4ViewModel: ProofsViewModel?, ipv6ViewModel: ProofsViewModel?) {
         guard let ipv4ViewModel = ipv4ViewModel, let ipv6ViewModel = ipv6ViewModel else {
             isHidden = true
             controlView.selectedSegmentIndex = 0

@@ -44,34 +44,25 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var networkView: NetworkViewTableCell!
     @IBOutlet weak var protocolLabel: UILabel!
-    @IBOutlet weak var ipAddressLabel: UILabel!
-    @IBOutlet weak var ipAddressLoader: UIActivityIndicatorView!
-    @IBOutlet weak var ipAddressErrorLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var locationLoader: UIActivityIndicatorView!
-    @IBOutlet weak var locationErrorLabel: UILabel!
-    @IBOutlet weak var providerLabel: UILabel!
-    @IBOutlet weak var providerPlaceholderLabel: UILabel!
-    @IBOutlet weak var providerLoader: UIActivityIndicatorView!
-    @IBOutlet weak var providerErrorLabel: UILabel!
+    @IBOutlet weak var connectionInfoView: ConnectionInfoView!
     
     // MARK: - Properties -
     
     var ipv4ViewModel: ProofsViewModel! {
         didSet {
-            updateConnectionInfo()
+            connectionInfoView.update(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel, addressType: addressType)
         }
     }
     
     var ipv6ViewModel: ProofsViewModel! {
         didSet {
-            updateConnectionInfo()
+            connectionInfoView.update(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel, addressType: addressType)
         }
     }
     
     var addressType: AddressType = .IPv4 {
         didSet {
-            updateConnectionInfo()
+            connectionInfoView.update(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel, addressType: addressType)
         }
     }
     
@@ -93,15 +84,12 @@ class ControlPanelView: UITableView {
             connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
             connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
         }
-        ipAddressErrorLabel.icon(text: "Not available", imageName: "icon-wifi-off", alignment: .left)
-        locationErrorLabel.icon(text: "Not available", imageName: "icon-wifi-off", alignment: .left)
-        providerErrorLabel.icon(text: "Not available", imageName: "icon-wifi-off", alignment: .left)
+        
         updateConnectSwitch()
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: protectionStatusTableCell)
         
         if UIDevice.screenHeightSmallerThan(device: .iPhones66s78) {
             protectionStatusLabel.font = protectionStatusLabel.font.withSize(28)
-            providerPlaceholderLabel.text = "ISP"
         }
     }
     
@@ -156,48 +144,6 @@ class ControlPanelView: UITableView {
     private func updateConnectSwitch() {
         if #available(iOS 13.0, *) {
             connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
-        }
-    }
-    
-    private func updateConnectionInfo() {
-        let viewModel = addressType == .IPv6 ? ipv6ViewModel : ipv4ViewModel
-        ipAddressLabel.text = viewModel?.ipAddress
-        locationLabel.text = viewModel?.location
-        providerLabel.text = viewModel?.provider
-        
-        switch viewModel?.displayMode {
-        case .loading:
-            ipAddressLabel.isHidden = true
-            ipAddressLoader.startAnimating()
-            ipAddressErrorLabel.isHidden = true
-            locationLabel.isHidden = true
-            locationLoader.startAnimating()
-            locationErrorLabel.isHidden = true
-            providerLabel.isHidden = true
-            providerLoader.startAnimating()
-            providerErrorLabel.isHidden = true
-        case .content:
-            ipAddressLabel.isHidden = false
-            ipAddressLoader.stopAnimating()
-            ipAddressErrorLabel.isHidden = true
-            locationLabel.isHidden = false
-            locationLoader.stopAnimating()
-            locationErrorLabel.isHidden = true
-            providerLabel.isHidden = false
-            providerLoader.stopAnimating()
-            providerErrorLabel.isHidden = true
-        case .error:
-            ipAddressLabel.isHidden = true
-            ipAddressLoader.stopAnimating()
-            ipAddressErrorLabel.isHidden = false
-            locationLabel.isHidden = true
-            locationLoader.stopAnimating()
-            locationErrorLabel.isHidden = false
-            providerLabel.isHidden = true
-            providerLoader.stopAnimating()
-            providerErrorLabel.isHidden = false
-        case .none:
-            break
         }
     }
     
