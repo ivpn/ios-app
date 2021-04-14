@@ -2672,7 +2672,7 @@
                                     <outlet property="mapImageView" destination="gIR-a7-hcm" id="wse-Jj-Ucn"/>
                                 </connections>
                             </scrollView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCq-dU-8Pd">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCq-dU-8Pd" customClass="IpProtocolView" customModule="IVPNClient" customModuleProvider="target">
                                 <rect key="frame" x="141" y="54" width="132" height="54"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jvD-nS-lau">
@@ -2698,6 +2698,9 @@
                                     <constraint firstAttribute="height" constant="54" id="hoj-m1-D2J"/>
                                     <constraint firstAttribute="width" constant="132" id="mTj-3y-ZzH"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="controlView" destination="jvD-nS-lau" id="awv-j5-7CW"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ww5-jx-W0A"/>
@@ -2718,8 +2721,7 @@
                         </constraints>
                         <connections>
                             <outlet property="infoAlertView" destination="ah4-aa-ds1" id="T3a-Bu-NGt"/>
-                            <outlet property="ipProtocolControl" destination="jvD-nS-lau" id="fMc-po-eR4"/>
-                            <outlet property="ipProtocolView" destination="pCq-dU-8Pd" id="eWx-wW-But"/>
+                            <outlet property="ipProtocolView" destination="pCq-dU-8Pd" id="XpO-rM-Kh4"/>
                             <outlet property="mapScrollView" destination="rn8-hf-8bd" id="UOg-VH-usL"/>
                         </connections>
                     </view>

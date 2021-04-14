@@ -31,8 +31,7 @@ class MainView: UIView {
     
     @IBOutlet weak var infoAlertView: InfoAlertView!
     @IBOutlet weak var mapScrollView: MapScrollView!
-    @IBOutlet weak var ipProtocolView: UIView!
-    @IBOutlet weak var ipProtocolControl: UISegmentedControl!
+    @IBOutlet weak var ipProtocolView: IpProtocolView!
     
     // MARK: - Properties -
     
@@ -53,24 +52,7 @@ class MainView: UIView {
     
     var ipv6ViewModel: ProofsViewModel! {
         didSet {
-            guard let ipv4ViewModel = ipv4ViewModel, let ipv6ViewModel = ipv6ViewModel else {
-                ipProtocolView.isHidden = true
-                ipProtocolControl.selectedSegmentIndex = 0
-                return
-            }
-            
-            guard let ipv4Model = ipv4ViewModel.model, let ipv6Model = ipv6ViewModel.model else {
-                ipProtocolView.isHidden = true
-                ipProtocolControl.selectedSegmentIndex = 0
-                return
-            }
-            
-            if ipv6Model.isEqualLocation(to: ipv4Model) {
-                ipProtocolView.isHidden = true
-                ipProtocolControl.selectedSegmentIndex = 0
-            } else {
-                ipProtocolView.isHidden = false
-            }
+            ipProtocolView.updateView(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel)
         }
     }
     
