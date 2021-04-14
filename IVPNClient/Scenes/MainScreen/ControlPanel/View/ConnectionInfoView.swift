@@ -56,7 +56,11 @@ class ConnectionInfoView: UIStackView {
         }
     }
     
-    func update(ipv4ViewModel: ProofsViewModel, ipv6ViewModel: ProofsViewModel, addressType: AddressType) {
+    func update(ipv4ViewModel: ProofsViewModel?, ipv6ViewModel: ProofsViewModel?, addressType: AddressType) {
+        guard let ipv4ViewModel = ipv4ViewModel, let ipv6ViewModel = ipv6ViewModel else {
+            return
+        }
+        
         let viewModel = addressType == .IPv6 ? ipv6ViewModel : ipv4ViewModel
         ipAddressLabel.text = viewModel.ipAddress
         locationLabel.text = viewModel.location
