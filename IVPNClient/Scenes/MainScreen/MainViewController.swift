@@ -144,7 +144,7 @@ class MainViewController: UIViewController {
             switch result {
             case .success(let model):
                 controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(model: model, displayMode: .content)
-                mainView.connectionViewModel = ProofsViewModel(model: model)
+                mainView.ipv4ViewModel = ProofsViewModel(model: model)
                 mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
                 mainView.updateInfoAlert()
                 
@@ -163,10 +163,10 @@ class MainViewController: UIViewController {
             switch result {
             case .success(let model):
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(model: model, displayMode: .content)
-                mainView.ipv6ConnectionViewModel = ProofsViewModel(model: model)
+                mainView.ipv6ViewModel = ProofsViewModel(model: model)
             case .failure:
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
-                mainView.ipv6ConnectionViewModel = ProofsViewModel(displayMode: .error)
+                mainView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
             }
         }
     }

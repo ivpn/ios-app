@@ -36,11 +36,11 @@ class MainView: UIView {
     
     // MARK: - Properties -
     
-    var connectionViewModel: ProofsViewModel! {
+    var ipv4ViewModel: ProofsViewModel! {
         didSet {
-            mapScrollView.viewModel = connectionViewModel
+            mapScrollView.viewModel = ipv4ViewModel
             
-            guard let model = connectionViewModel.model else {
+            guard let model = ipv4ViewModel.model else {
                 return
             }
             
@@ -51,15 +51,15 @@ class MainView: UIView {
         }
     }
     
-    var ipv6ConnectionViewModel: ProofsViewModel! {
+    var ipv6ViewModel: ProofsViewModel! {
         didSet {
-            guard let connectionViewModel = connectionViewModel, let ipv6ConnectionViewModel = ipv6ConnectionViewModel else {
+            guard let ipv4ViewModel = ipv4ViewModel, let ipv6ViewModel = ipv6ViewModel else {
                 ipProtocolView.isHidden = true
                 ipProtocolControl.selectedSegmentIndex = 0
                 return
             }
             
-            guard let ipv4Model = connectionViewModel.model, let ipv6Model = ipv6ConnectionViewModel.model else {
+            guard let ipv4Model = ipv4ViewModel.model, let ipv6Model = ipv6ViewModel.model else {
                 ipProtocolView.isHidden = true
                 ipProtocolControl.selectedSegmentIndex = 0
                 return
@@ -81,7 +81,7 @@ class MainView: UIView {
     // MARK: - @IBActions -
     
     @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
-        guard let model = sender.selectedSegmentIndex == 1 ? ipv6ConnectionViewModel.model : connectionViewModel.model else {
+        guard let model = sender.selectedSegmentIndex == 1 ? ipv6ViewModel.model : ipv4ViewModel.model else {
             return
         }
         
