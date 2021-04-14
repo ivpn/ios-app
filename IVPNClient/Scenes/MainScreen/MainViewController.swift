@@ -261,9 +261,9 @@ class MainViewController: UIViewController {
             mainView.updateInfoAlert()
         }
         
-        if UserDefaults.standard.bool(forKey: "-UITests") {
-            updateGeoLocation()
-        }
+        #if targetEnvironment(simulator)
+        updateGeoLocation()
+        #endif
     }
     
 }
