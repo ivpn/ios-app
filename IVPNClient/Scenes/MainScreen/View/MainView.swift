@@ -71,7 +71,12 @@ class MainView: UIView {
     // MARK: - @IBActions -
     
     @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
+        guard let model = sender.selectedSegmentIndex == 1 ? connectionViewModel.model : ipv6ConnectionViewModel.model else {
+            return
+        }
         
+        mapScrollView.currentCoordinates = (model.latitude, model.longitude)
+        mapScrollView.updateMapPositionToCurrentCoordinates()
     }
     
     // MARK: - View lifecycle -
