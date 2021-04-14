@@ -28,6 +28,14 @@ class IpProtocolView: UIView {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var controlView: UISegmentedControl!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var centerXConstraint: NSLayoutConstraint!
+    
+    // MARK: - View lifecycle -
+    
+    override func awakeFromNib() {
+        updateLayout()
+    }
     
     // MARK: - Methods -
     
@@ -49,6 +57,19 @@ class IpProtocolView: UIView {
             controlView.selectedSegmentIndex = 0
         } else {
             isHidden = false
+        }
+    }
+    
+    func updateLayout() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            topConstraint.constant = 40
+            
+            if UIApplication.shared.statusBarOrientation.isLandscape {
+                centerXConstraint.constant = CGFloat(MapConstants.Container.iPadLandscapeLeftAnchor / 2)
+                
+            } else {
+                centerXConstraint.constant = 0
+            }
         }
     }
     
