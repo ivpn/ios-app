@@ -136,14 +136,15 @@ class MainViewController: UIViewController {
             return
         }
         
-        controlPanel.controlPanelView.connectionInfoDisplayMode = .loading
+        controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(displayMode: .loading)
+        controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .loading)
         
         let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
         ApiService.shared.request(requestIPv4) { [self] (result: Result<GeoLookup>) in
             switch result {
             case .success(let model):
-                controlPanel.controlPanelView.updateConnectionInfo(viewModel: ProofsViewModel(model: model))
-                mainView.connectionViewModel = ProofsViewModel(model: model)
+                controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(model: model, displayMode: .content)
+                mainView.ipv4ViewModel = ProofsViewModel(model: model)
                 mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
                 mainView.updateInfoAlert()
                 
@@ -151,22 +152,21 @@ class MainViewController: UIViewController {
                     Application.shared.geoLookup = model
                 }
             case .failure:
-                controlPanel.controlPanelView.connectionInfoDisplayMode = .error
+                controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(displayMode: .error)
                 mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
                 mainView.updateInfoAlert()
             }
         }
         
-        if UserDefaults.shared.isIPv6 {
-            let requestIPv6 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv6)
-            ApiService.shared.request(requestIPv6) { [self] (result: Result<GeoLookup>) in
-                switch result {
-                case .success(let model):
-                    controlPanel.controlPanelView.updateIPV6ConnectionInfo(viewModel: ProofsViewModel(model: model))
-                    mainView.ipv6ConnectionViewModel = ProofsViewModel(model: model)
-                case .failure:
-                    break
-                }
+        let requestIPv6 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv6)
+        ApiService.shared.request(requestIPv6) { [self] (result: Result<GeoLookup>) in
+            switch result {
+            case .success(let model):
+                controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(model: model, displayMode: .content)
+                mainView.ipv6ViewModel = ProofsViewModel(model: model)
+            case .failure:
+                controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
+                mainView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
             }
         }
     }
@@ -238,11 +238,15 @@ class MainViewController: UIViewController {
     }
     
     private func startVPNStatusObserver() {
-        Application.shared.connectionManager.getStatus { _, status in
-            self.updateStatus(vpnStatus: status, animated: false)
+        Application.shared.connectionManager.getStatus { [self] _, status in
+            if status == .invalid {
+                updateGeoLocation()
+            }
+            
+            updateStatus(vpnStatus: status, animated: false)
             
             Application.shared.connectionManager.onStatusChanged { status in
-                self.updateStatus(vpnStatus: status)
+                updateStatus(vpnStatus: status)
             }
         }
     }
@@ -255,10 +259,6 @@ class MainViewController: UIViewController {
         if !NetworkManager.shared.isNetworkReachable {
             mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
             mainView.updateInfoAlert()
-        }
-        
-        if Application.shared.connectionManager.status == .invalid {
-            updateGeoLocation()
         }
         
         if UserDefaults.standard.bool(forKey: "-UITests") {

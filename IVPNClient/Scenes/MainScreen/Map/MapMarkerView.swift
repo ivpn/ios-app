@@ -46,7 +46,7 @@ class MapMarkerView: UIView {
     
     var viewModel: ProofsViewModel? {
         didSet {
-            if markerType == .local && !(viewModel?.model.isIvpnServer ?? false) {
+            if markerType == .local && !(viewModel?.isIvpnServer ?? false) {
                 locationButton.setTitle(viewModel?.city, for: .normal)
                 connectionInfoPopup.viewModel = viewModel
             }

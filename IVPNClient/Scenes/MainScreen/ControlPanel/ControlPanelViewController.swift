@@ -106,6 +106,10 @@ class ControlPanelViewController: UITableViewController {
         evaluateReconnect(sender: sender as UIView)
     }
     
+    @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
+        controlPanelView.addressType = sender.selectedSegmentIndex == 1 ? .IPv6 : .IPv4
+    }
+    
     // MARK: - View lifecycle -
     
     override func viewDidLoad() {

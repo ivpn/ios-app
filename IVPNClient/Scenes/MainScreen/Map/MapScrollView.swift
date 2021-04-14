@@ -43,7 +43,7 @@ class MapScrollView: UIScrollView {
             
             markerLocalView.viewModel = viewModel
             
-            if !viewModel.model.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
+            if !viewModel.isIvpnServer && Application.shared.connectionManager.status.isDisconnected() {
                 updateMapPosition(viewModel: viewModel, animated: oldValue != nil)
                 markerGatewayView.hide(animated: true)
                 markerLocalView.show(animated: oldValue != nil)
@@ -54,6 +54,7 @@ class MapScrollView: UIScrollView {
     let markerLocalView = MapMarkerView(type: .local)
     let markerGatewayView = MapMarkerView(type: .gateway)
     var localCoordinates: (Double, Double)?
+    var gatewayCoordinates: (Double, Double)?
     var currentCoordinates: (Double, Double)?
     
     private var connectToServerPopup = ConnectToServerPopupView()
@@ -105,18 +106,38 @@ class MapScrollView: UIScrollView {
     }
     
     func centerMap() {
-        let vpnStatus = Application.shared.connectionManager.status
-        
-        if vpnStatus.isDisconnected() {
+        if Application.shared.connectionManager.status.isDisconnected() {
             updateMapPositionToLocalCoordinates()
         } else {
-            updateMapPositionToGateway()
+            updateMapPositionToGatewayCoordinates()
         }
     }
     
     func updateMapMarkers() {
         markerLocalView.updateView()
         markerGatewayView.updateView()
+    }
+    
+    func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
+        let halfWidth = Double(UIScreen.main.bounds.width / 2)
+        let halfHeight = Double(UIScreen.main.bounds.height / 2)
+        let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
+        let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
+        let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
+        
+        if animated {
+            UIView.animate(withDuration: 0.55, delay: 0, options: .curveEaseInOut, animations: {
+                self.setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
+            })
+        } else {
+            setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
+        }
+        
+        if updateMarkers {
+            updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
+        }
+        
+        currentCoordinates = (latitude, longitude)
     }
     
     // MARK: - Private methods -
@@ -185,7 +206,7 @@ class MapScrollView: UIScrollView {
     }
     
     private func updateMapPosition(viewModel: ProofsViewModel, animated: Bool = false) {
-        updateMapPosition(latitude: viewModel.model.latitude, longitude: viewModel.model.longitude, animated: animated, isLocalPosition: true)
+        updateMapPosition(latitude: viewModel.latitude, longitude: viewModel.longitude, animated: animated, isLocalPosition: true)
     }
     
     private func updateMapPositionToGateway(animated: Bool = true) {
@@ -195,6 +216,7 @@ class MapScrollView: UIScrollView {
             server = Application.shared.settings.selectedExitServer
         }
         
+        gatewayCoordinates = (server.latitude, server.longitude)
         updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: animated, isLocalPosition: false)
         markerLocalView.hide(animated: animated)
         DispatchQueue.delay(0.25) {
@@ -202,6 +224,12 @@ class MapScrollView: UIScrollView {
             self.markerGatewayView.viewModel = ProofsViewModel(model: model)
             self.markerGatewayView.show(animated: animated)
             self.markerLocalView.hide(animated: false)
+        }
+    }
+    
+    private func updateMapPositionToGatewayCoordinates(animated: Bool = true) {
+        if let gatewayCoordinates = gatewayCoordinates {
+            updateMapPosition(latitude: gatewayCoordinates.0, longitude: gatewayCoordinates.1, animated: animated, isLocalPosition: false)
         }
     }
     
@@ -214,28 +242,6 @@ class MapScrollView: UIScrollView {
                 self.markerGatewayView.hide(animated: false)
             }
         }
-    }
-    
-    private func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
-        let halfWidth = Double(UIScreen.main.bounds.width / 2)
-        let halfHeight = Double(UIScreen.main.bounds.height / 2)
-        let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
-        let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
-        let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
-        
-        if animated {
-            UIView.animate(withDuration: 0.55, delay: 0, options: .curveEaseInOut, animations: {
-                self.setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
-            })
-        } else {
-            setContentOffset(CGPoint(x: point.0 - halfWidth + leftOffset, y: point.1 - halfHeight + bottomOffset), animated: false)
-        }
-        
-        if updateMarkers {
-            updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
-        }
-        
-        currentCoordinates = (latitude, longitude)
     }
     
     private func updateMarkerPosition(x: Double, y: Double, isLocalPosition: Bool) {
