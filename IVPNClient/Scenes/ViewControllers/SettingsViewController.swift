@@ -44,6 +44,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var loggingCell: UITableViewCell!
     @IBOutlet weak var ipv6Switch: UISwitch!
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
+    @IBOutlet weak var askToReconnectSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -130,6 +131,10 @@ class SettingsViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    @IBAction func toggleAskToReconnect(_ sender: UISwitch) {
+        UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.notAskToReconnect)
+    }
+    
     @IBAction func extendSubscription(_ sender: Any) {
         present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
@@ -196,6 +201,7 @@ class SettingsViewController: UITableViewController {
         showIPv4ServersSwitch.isEnabled = UserDefaults.shared.isIPv6
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
+        askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
         updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
