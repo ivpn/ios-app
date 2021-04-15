@@ -109,6 +109,7 @@ class MainView: UIView {
         updateActionButtons()
         mapScrollView.updateMapPositionToCurrentCoordinates()
         mapScrollView.updateMapMarkers()
+        ipProtocolView.updateLayout()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
@@ -117,7 +118,7 @@ class MainView: UIView {
     
     func updateInfoAlert() {
         if infoAlertViewModel.shouldDisplay {
-            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
+            infoAlertView.show(viewModel: infoAlertViewModel)
         } else {
             infoAlertView.hide()
         }

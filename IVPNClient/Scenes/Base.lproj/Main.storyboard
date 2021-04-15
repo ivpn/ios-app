@@ -20,7 +20,7 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1213.5" width="414" height="65"/>
+                            <rect key="frame" x="0.0" y="831" width="414" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -1403,14 +1403,14 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="14" width="361" height="16"/>
+                                            <rect key="frame" x="16" y="13.5" width="361" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1419,7 +1419,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="359" height="21.5"/>
+                                            <rect key="frame" x="16" y="11" width="359" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1441,7 +1441,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="98.5" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -2676,7 +2676,7 @@
                                 </connections>
                             </scrollView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCq-dU-8Pd" customClass="IpProtocolView" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="141" y="54" width="132" height="54"/>
+                                <rect key="frame" x="141" y="58" width="132" height="54"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jvD-nS-lau">
                                         <rect key="frame" x="0.0" y="0.0" width="132" height="32"/>
@@ -2702,7 +2702,9 @@
                                     <constraint firstAttribute="width" constant="132" id="mTj-3y-ZzH"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="centerXConstraint" destination="Njz-vf-5bL" id="oEt-t1-OIF"/>
                                     <outlet property="controlView" destination="jvD-nS-lau" id="awv-j5-7CW"/>
+                                    <outlet property="topConstraint" destination="uCb-qA-FVC" id="IoQ-cA-PO0"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -2718,7 +2720,7 @@
                             <constraint firstItem="rn8-hf-8bd" firstAttribute="centerX" secondItem="ITP-Ne-qOg" secondAttribute="centerX" id="ay8-8Q-Vxy"/>
                             <constraint firstAttribute="bottom" secondItem="rn8-hf-8bd" secondAttribute="bottom" id="ktu-zs-W0y"/>
                             <constraint firstItem="rn8-hf-8bd" firstAttribute="centerY" secondItem="ITP-Ne-qOg" secondAttribute="centerY" id="pYn-iH-9PW"/>
-                            <constraint firstItem="pCq-dU-8Pd" firstAttribute="top" secondItem="ww5-jx-W0A" secondAttribute="top" constant="10" id="uCb-qA-FVC"/>
+                            <constraint firstItem="pCq-dU-8Pd" firstAttribute="top" secondItem="ww5-jx-W0A" secondAttribute="top" constant="14" id="uCb-qA-FVC"/>
                             <constraint firstItem="rn8-hf-8bd" firstAttribute="top" secondItem="ITP-Ne-qOg" secondAttribute="topMargin" constant="-44" id="upg-3q-Ba3"/>
                             <constraint firstItem="ah4-aa-ds1" firstAttribute="leading" secondItem="ww5-jx-W0A" secondAttribute="leading" priority="750" constant="16" id="wVr-Qb-hx1"/>
                         </constraints>
