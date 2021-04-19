@@ -388,22 +388,22 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && indexPath.row == 6 {
+        if indexPath.section == 3 && indexPath.row == 7 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
         
-        if indexPath.section == 3 && indexPath.row == 0 {
+        if indexPath.section == 4 && indexPath.row == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
             openTermsOfService()
         }
         
-        if indexPath.section == 3 && indexPath.row == 1 {
+        if indexPath.section == 4 && indexPath.row == 1 {
             tableView.deselectRow(at: indexPath, animated: true)
             openPrivacyPolicy()
         }
         
-        if indexPath.section == 3 && indexPath.row == 2 {
+        if indexPath.section == 4 && indexPath.row == 2 {
             tableView.deselectRow(at: indexPath, animated: true)
             contactSupport()
         }
