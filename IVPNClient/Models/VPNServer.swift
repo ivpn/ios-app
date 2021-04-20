@@ -58,6 +58,10 @@ class VPNServer {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
     
+    var supportsIPv6: Bool {
+        return hosts.first?.ipv6 != nil
+    }
+    
     private (set) var gateway: String
     private (set) var countryCode: String
     private (set) var country: String
