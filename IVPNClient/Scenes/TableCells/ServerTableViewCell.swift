@@ -26,12 +26,12 @@ import UIKit
 class ServerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var flagImage: FlagImageView!
-    @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var serverLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var serverName: UILabel!
     @IBOutlet weak var pingImage: UIImageView!
     @IBOutlet weak var pingTimeMs: UILabel!
     @IBOutlet weak var configureButton: UIButton!
+    @IBOutlet weak var ipv6Label: UILabel!
     
     var viewModel: VPNServerViewModel! {
         didSet {
@@ -72,6 +72,8 @@ class ServerTableViewCell: UITableViewCell {
                 pingImage.isHidden = true
                 pingTimeMs.isHidden = true
             }
+            
+            ipv6Label.isHidden = !viewModel.showIPv6Label
         }
     }
     
@@ -83,28 +85,6 @@ class ServerTableViewCell: UITableViewCell {
             } else {
                 serverName.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
                 flagImage.alpha = 1
-            }
-        }
-    }
-    
-    var selectedServer: VPNServer! {
-        didSet {
-            checkImage.isHidden = true
-            
-            if !isMultiHop && indexPath.row == 0 && selectedServer.fastest {
-                checkImage.isHidden = false
-            }
-            
-            if !isMultiHop && indexPath.row == 1 && selectedServer.random {
-                checkImage.isHidden = false
-            }
-            
-            if isMultiHop && indexPath.row == 0 && selectedServer.random {
-                checkImage.isHidden = false
-            }
-            
-            if viewModel.server == selectedServer && !selectedServer.fastest && !selectedServer.random {
-                checkImage.isHidden = false
             }
         }
     }
