@@ -103,8 +103,15 @@ struct VPNServerViewModel {
     }
     
     var imageForPingTime: UIImage? {
-        if server.pingMs == nil { return nil }
+        guard server.pingMs != nil else {
+            return nil
+        }
+        
         return UIImage(named: imageNameForPingTime)
+    }
+    
+    var showIPv6Label: Bool {
+        return UserDefaults.standard.showIPv4Servers && UserDefaults.shared.isIPv6 && server.supportsIPv6
     }
     
     // MARK: - Initialize -
