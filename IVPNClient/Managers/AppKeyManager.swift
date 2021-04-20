@@ -91,6 +91,7 @@ class AppKeyManager {
         UserDefaults.shared.set(Date().changeDays(by: -50), forKey: UserDefaults.Key.wgKeyTimestamp)
         KeyChain.wgPrivateKey = nil
         KeyChain.wgPublicKey = nil
+        KeyChain.wgIpAddress = nil
         
         let params = ApiService.authParams + [
             URLQueryItem(name: "public_key", value: interface.publicKey ?? "")
