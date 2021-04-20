@@ -35,10 +35,6 @@ class GeoLookupTests: XCTestCase {
         model1 = GeoLookup(ipAddress: "", countryCode: "", country: "Country 1", city: "City 1", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
         model2 = GeoLookup(ipAddress: "", countryCode: "", country: "Country 1", city: "City 2", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
         XCTAssertFalse(model1.isEqualLocation(to: model2))
-        
-        model1 = GeoLookup(ipAddress: "", countryCode: "", country: "Country 1", city: "City 1", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
-        model2 = GeoLookup(ipAddress: "", countryCode: "", country: "Country 2", city: "City 1", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
-        XCTAssertFalse(model1.isEqualLocation(to: model2))
     }
     
 }
