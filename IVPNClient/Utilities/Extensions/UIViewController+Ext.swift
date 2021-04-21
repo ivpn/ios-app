@@ -174,7 +174,7 @@ extension UIViewController {
             return
         }
         
-        showActionSheet(title: "To apply the new settings, IVPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: sourceView) { index in
+        showActionSheet(title: "To apply the new settings, IVPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: sourceView, disableDismiss: true) { index in
             switch index {
             case 0:
                 confirmed()
@@ -188,7 +188,7 @@ extension UIViewController {
     }
     
     func showDisableVPNPrompt(sourceView: UIView, confirmed: @escaping () -> Void) {
-        showActionSheet(title: "VPN connection is active. Changing this setting will turn off the current VPN connection.", actions: ["Continue"], sourceView: sourceView) { index in
+        showActionSheet(title: "VPN connection is active. Changing this setting will turn off the current VPN connection.", actions: ["Continue"], sourceView: sourceView, disableDismiss: true) { index in
             switch index {
             case 0:
                 confirmed()

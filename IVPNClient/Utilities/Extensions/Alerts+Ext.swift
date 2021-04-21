@@ -46,7 +46,7 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showActionSheet(image: UIImage? = nil, selected: String? = nil, largeText: Bool = false, centered: Bool = false, title message: String = "", actions: [String] = [], cancelAction: String = "Cancel", sourceView: UIView = UIView(), completion: @escaping (_ index: Int) -> Void) {
+    func showActionSheet(image: UIImage? = nil, selected: String? = nil, largeText: Bool = false, centered: Bool = false, title message: String = "", actions: [String] = [], cancelAction: String = "Cancel", sourceView: UIView = UIView(), disableDismiss: Bool = false, completion: @escaping (_ index: Int) -> Void) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
         
         let messageFont: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: largeText ? 17 : 16)]
@@ -84,7 +84,11 @@ extension UIViewController {
             }
         }
 
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true) {
+            if disableDismiss {
+                alert.view.superview?.subviews[0].isUserInteractionEnabled = false
+            }
+        }
     }
     
     func showFlashNotification(message: String, presentInView: UIView = UIView(), dismissAfter: TimeInterval = 2) {
