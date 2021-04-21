@@ -37,6 +37,24 @@ class ConnectionInfoView: UIStackView {
     @IBOutlet weak var providerPlaceholderLabel: UILabel!
     @IBOutlet weak var providerLoader: UIActivityIndicatorView!
     @IBOutlet weak var providerErrorLabel: UILabel!
+    @IBOutlet weak var ipProtocolView: UIView!
+    
+    var ipProtocolIsHidden: Bool = true {
+        didSet {
+            ipProtocolView.isHidden = ipProtocolIsHidden
+            layoutIfNeeded()
+            
+            guard let mainViewController = UIApplication.topViewController() as? MainViewController else {
+                return
+            }
+            
+            guard let controlPanel = mainViewController.floatingPanel.contentViewController as? ControlPanelViewController else {
+                return
+            }
+            
+            controlPanel.tableView.reloadData()
+        }
+    }
     
     // MARK: - View lifecycle -
     
@@ -61,7 +79,9 @@ class ConnectionInfoView: UIStackView {
             return
         }
         
-        let viewModel = addressType == .IPv6 ? ipv6ViewModel : ipv4ViewModel
+        ipProtocolIsHidden = ipv4ViewModel.model == nil || ipv6ViewModel.model == nil
+        
+        let viewModel = addressType == .IPv6 && !ipProtocolIsHidden ? ipv6ViewModel : ipv4ViewModel
         ipAddressLabel.text = viewModel.ipAddress
         locationLabel.text = viewModel.location
         providerLabel.text = viewModel.provider
