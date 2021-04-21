@@ -55,12 +55,27 @@ class WireGuardSettingsViewController: UITableViewController {
     }
     
     @IBAction func regenerateKeys(_ sender: UIButton) {
-        guard Application.shared.connectionManager.status.isDisconnected() else {
-            showConnectedAlert(message: "To re-generate keys, please first disconnect", sender: sender)
+        guard evaluateIsNetworkReachable() else {
             return
         }
         
-        keyManager.setNewKey()
+        Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
+            if enabled, Application.shared.connectionManager.status.isDisconnected() {
+                showDisableVPNPrompt(sourceView: sender) {
+                    Application.shared.connectionManager.removeOnDemandRules {
+                        keyManager.setNewKey()
+                    }
+                }
+                return
+            }
+            
+            guard Application.shared.connectionManager.status.isDisconnected() else {
+                showConnectedAlert(message: "To re-generate keys, please first disconnect", sender: sender)
+                return
+            }
+            
+            keyManager.setNewKey()
+        }
     }
     
     // MARK: - View Lifecycle -
@@ -101,11 +116,7 @@ class WireGuardSettingsViewController: UITableViewController {
                         self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
                         return
                     }
-                    NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
-                    self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-                    self.hud.detailTextLabel.text = "Disconnecting"
-                    self.hud.show(in: (self.navigationController?.view)!)
-                    self.hud.dismiss(afterDelay: 5)
+                    self.disconnect()
                 default:
                     break
                 }
@@ -121,6 +132,14 @@ class WireGuardSettingsViewController: UITableViewController {
         if vpnConnection.status == .disconnected {
             hud.dismiss()
         }
+    }
+    
+    private func disconnect() {
+        NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.detailTextLabel.text = "Disconnecting"
+        hud.show(in: (navigationController?.view)!)
+        hud.dismiss(afterDelay: 5)
     }
     
 }
