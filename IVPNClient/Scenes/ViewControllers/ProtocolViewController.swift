@@ -133,12 +133,7 @@ class ProtocolViewController: UITableViewController {
             Application.shared.settings.connectionProtocol = protocols[index]
             tableView.reloadData()
             NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-            
-            if !Application.shared.connectionManager.status.isDisconnected() {
-                showReconnectPrompt(sourceView: view) {
-                    Application.shared.connectionManager.reconnect()
-                }
-            }
+            evaluateReconnect(sender: view)
         }
     }
     
@@ -340,12 +335,8 @@ extension ProtocolViewController {
         
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
         
-        if !Application.shared.connectionManager.status.isDisconnected() {
-            if let cell = tableView.cellForRow(at: indexPath) {
-                showReconnectPrompt(sourceView: cell as UIView) {
-                    Application.shared.connectionManager.reconnect()
-                }
-            }
+        if let cell = tableView.cellForRow(at: indexPath) {
+            evaluateReconnect(sender: cell as UIView)
         }
     }
     
