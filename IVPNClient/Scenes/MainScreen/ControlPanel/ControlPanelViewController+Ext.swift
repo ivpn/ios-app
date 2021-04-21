@@ -35,7 +35,7 @@ extension ControlPanelViewController {
         if indexPath.row == 3 && !UserDefaults.shared.isMultiHop { return 0 }
         if indexPath.row == 4 { return 52 }
         if indexPath.row == 6 && !UserDefaults.shared.networkProtectionEnabled { return 0 }
-        if indexPath.row == 8 { return 260 }
+        if indexPath.row == 8 { return controlPanelView.connectionInfoView.ipProtocolIsHidden ? 230 : 275 }
         if indexPath.row == 9 { return 0 }
 
         return 85
