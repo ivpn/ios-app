@@ -60,14 +60,20 @@ class CustomDNSViewController: UITableViewController {
         let preferred: DNSProtocolType = typeControl.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: sender.isOn ? preferred : .plain)
         tableView.reloadData()
-        evaluateReconnect(sender: sender)
+        
+        if UserDefaults.shared.isCustomDNS {
+            evaluateReconnect(sender: customDNSTextField)
+        }
     }
     
     @IBAction func changeType(_ sender: UISegmentedControl) {
         let preferred: DNSProtocolType = sender.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: preferred)
         tableView.reloadData()
-        evaluateReconnect(sender: sender)
+        
+        if UserDefaults.shared.isCustomDNS {
+            evaluateReconnect(sender: customDNSTextField)
+        }
     }
     
     // MARK: - View Lifecycle -
