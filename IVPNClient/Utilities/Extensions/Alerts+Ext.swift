@@ -85,7 +85,7 @@ extension UIViewController {
         }
 
         present(alert, animated: true) {
-            if disableDismiss {
+            if disableDismiss && UIDevice.current.userInterfaceIdiom == .phone {
                 alert.view.superview?.subviews[0].isUserInteractionEnabled = false
             }
         }
