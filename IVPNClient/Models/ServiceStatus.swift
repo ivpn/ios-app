@@ -106,7 +106,7 @@ struct ServiceStatus: Codable {
     }
     
     func isActiveUntilValid() -> Bool {
-        return activeUntil != nil && (activeUntil ?? 0) > 0
+        return activeUntil != nil
     }
     
     func activeUntilExpired() -> Bool {
