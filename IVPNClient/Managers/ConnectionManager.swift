@@ -395,7 +395,7 @@ class ConnectionManager {
         return true
     }
     
-    func evaluateConnection(network: Network? = nil, newTrust: String? = nil) {
+    func evaluateConnection(network: Network? = nil, newTrust: String? = nil, completion: @escaping (String?) -> Void) {
         let defaults = UserDefaults.shared
         guard defaults.networkProtectionEnabled else {
             return
@@ -413,6 +413,11 @@ class ConnectionManager {
         switch trust {
         case NetworkTrust.Untrusted.rawValue:
             if defaults.networkProtectionUntrustedConnect && status.isDisconnected() {
+                guard KeyChain.wgPublicKey != nil, KeyChain.wgIpAddress != nil else {
+                    completion("WireGuard keys are missing")
+                    return
+                }
+                
                 resetRulesAndConnect()
                 return
             }

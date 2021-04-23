@@ -189,7 +189,11 @@ extension NetworkProtectionViewController {
                     }
                 }
             } else {
-                Application.shared.connectionManager.evaluateConnection(network: network, newTrust: trust)
+                Application.shared.connectionManager.evaluateConnection(network: network, newTrust: trust) { error in
+                    if error != nil {
+                        showWireGuardKeysMissingError()
+                    }
+                }
             }
         }
         
@@ -237,7 +241,11 @@ extension NetworkProtectionViewController: NetworkProtectionHeaderTableViewCellD
         
         if isOn {
             NetworkManager.shared.startMonitoring {
-                Application.shared.connectionManager.evaluateConnection()
+                Application.shared.connectionManager.evaluateConnection() { [self] error in
+                    if error != nil {
+                        showWireGuardKeysMissingError()
+                    }
+                }
             }
         } else {
             Application.shared.connectionManager.resetOnDemandRules()

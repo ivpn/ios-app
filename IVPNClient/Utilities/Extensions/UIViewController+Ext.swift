@@ -202,6 +202,10 @@ extension UIViewController {
         showErrorAlert(title: "Error", message: "Failed to resolve IP addresses for DNS server")
     }
     
+    func showWireGuardKeysMissingError() {
+        showErrorAlert(title: "Error", message: "Failed to connect to VPN - WireGuard keys are missing. Please generate new keys in the Settings or try to connect to VPN manually.")
+    }
+    
 }
 
 // MARK: - Presenter -
