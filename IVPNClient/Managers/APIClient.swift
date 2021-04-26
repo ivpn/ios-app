@@ -121,12 +121,16 @@ class APIClient: NSObject {
     // MARK: - Methods -
     
     func perform(_ request: APIRequest, nextHost: String? = nil, _ completion: @escaping APIClientCompletion) {
-        if let addressType = request.addressType {
+        if let addressType = request.addressType, nextHost == nil {
             switch addressType {
             case .IPv4:
-                hostName = APIAccessManager.shared.ipv4HostName
+                if let ipv4HostName = APIAccessManager.shared.ipv4HostName {
+                    hostName = ipv4HostName
+                }
             case .IPv6:
-                hostName = APIAccessManager.shared.ipv6HostName
+                if let ipv6HostName = APIAccessManager.shared.ipv6HostName {
+                    hostName = ipv6HostName
+                }
             default:
                 break
             }
