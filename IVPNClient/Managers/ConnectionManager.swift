@@ -431,6 +431,11 @@ class ConnectionManager {
         }
         
         if let network = network, let newTrust = newTrust {
+            guard KeyChain.wgPublicKey != nil, KeyChain.wgIpAddress != nil else {
+                completion("WireGuard keys are missing")
+                return
+            }
+            
             needToInstallOnDemandRules(network: network, newTrust: newTrust)
         }
     }
