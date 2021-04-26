@@ -52,12 +52,23 @@ class APIAccessManager {
     }
     
     private var hostNamesCollection: [String] {
-        return [Config.ApiHostName] + UserDefaults.shared.hostNames
+        return [Config.ApiHostName] + UserDefaults.shared.hostNames + UserDefaults.shared.ipv6HostNames
     }
     
     // MARK: - Methods -
     
-    func nextHostName(failedHostName: String) -> String? {
+    func nextHostName(failedHostName: String, addressType: AddressType? = nil) -> String? {
+        if let addressType = addressType {
+            switch addressType {
+            case .IPv4:
+                return UserDefaults.shared.hostNames.next(item: failedHostName)
+            case .IPv6:
+                return UserDefaults.shared.ipv6HostNames.next(item: failedHostName)
+            default:
+                break
+            }
+        }
+        
         return hostNames.next(item: failedHostName)
     }
     
