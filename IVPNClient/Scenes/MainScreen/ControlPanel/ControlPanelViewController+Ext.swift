@@ -90,7 +90,7 @@ extension ControlPanelViewController {
             Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
                 if enabled, Application.shared.connectionManager.status.isDisconnected() {
                     showDisableVPNPrompt(sourceView: controlPanelView.protocolLabel) {
-                        disconnect()
+                        Application.shared.connectionManager.removeOnDemandRules {}
                         presentSelectProtocol()
                     }
                     return
