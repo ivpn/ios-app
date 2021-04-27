@@ -413,7 +413,7 @@ class ConnectionManager {
         switch trust {
         case NetworkTrust.Untrusted.rawValue:
             if defaults.networkProtectionUntrustedConnect && status.isDisconnected() {
-                guard KeyChain.wgPublicKey != nil, KeyChain.wgIpAddress != nil else {
+                guard Application.shared.settings.connectionProtocol.tunnelType() != .wireguard || KeyChain.wgPublicKey != nil && KeyChain.wgIpAddress != nil else {
                     completion("WireGuard keys are missing")
                     return
                 }
@@ -431,7 +431,7 @@ class ConnectionManager {
         }
         
         if let network = network, let newTrust = newTrust {
-            guard KeyChain.wgPublicKey != nil, KeyChain.wgIpAddress != nil else {
+            guard Application.shared.settings.connectionProtocol.tunnelType() != .wireguard || KeyChain.wgPublicKey != nil && KeyChain.wgIpAddress != nil else {
                 completion("WireGuard keys are missing")
                 return
             }
