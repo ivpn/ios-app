@@ -132,10 +132,30 @@ class LoginViewController: UIViewController {
     }
     
     @objc func newSession() {
+        if let confirmation = loginConfirmation.confirmation {
+            startLoginProcess(confirmation: confirmation)
+            return
+        }
+        
+        if let captcha = loginConfirmation.captcha, let captchaId = loginConfirmation.captchaId {
+            startLoginProcess(captcha: captcha, captchaId: captchaId)
+            return
+        }
+        
         startLoginProcess()
     }
     
     @objc func forceNewSession() {
+        if let confirmation = loginConfirmation.confirmation {
+            startLoginProcess(force: true, confirmation: confirmation)
+            return
+        }
+        
+        if let captcha = loginConfirmation.captcha, let captchaId = loginConfirmation.captchaId {
+            startLoginProcess(force: true, captcha: captcha, captchaId: captchaId)
+            return
+        }
+        
         startLoginProcess(force: true)
     }
     
@@ -422,7 +442,7 @@ extension LoginViewController: TwoFactorViewControllerDelegate {
     
     func codeSubmitted(code: String) {
         loginConfirmation.confirmation = code
-        startLoginProcess(force: false, confirmation: code)
+        startLoginProcess(confirmation: code)
     }
     
 }
@@ -434,7 +454,7 @@ extension LoginViewController: CaptchaViewControllerDelegate {
     func captchaSubmitted(code: String, captchaId: String) {
         loginConfirmation.captcha = code
         loginConfirmation.captchaId = captchaId
-        startLoginProcess(force: false, captcha: code, captchaId: captchaId)
+        startLoginProcess(captcha: code, captchaId: captchaId)
     }
     
 }
