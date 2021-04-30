@@ -51,6 +51,7 @@ class LoginViewController: UIViewController {
     private var loginProcessStarted = false
     private let hud = JGProgressHUD(style: .dark)
     private var actionType: ActionType = .login
+    private var loginConfirmation = LoginConfirmation()
     
     // MARK: - @IBActions -
     
@@ -228,6 +229,7 @@ extension LoginViewController {
     override func createSessionSuccess() {
         hud.dismiss()
         loginProcessStarted = false
+        loginConfirmation.clear()
         
         KeyChain.username = (self.userName.text ?? "").trim()
         
@@ -240,6 +242,7 @@ extension LoginViewController {
     override func createSessionServiceNotActive() {
         hud.dismiss()
         loginProcessStarted = false
+        loginConfirmation.clear()
         
         KeyChain.username = (self.userName.text ?? "").trim()
         
@@ -253,6 +256,7 @@ extension LoginViewController {
     override func createSessionAccountNotActivated(error: Any?) {
         hud.dismiss()
         loginProcessStarted = false
+        loginConfirmation.clear()
         
         KeyChain.tempUsername = (self.userName.text ?? "").trim()
         Application.shared.authentication.removeStoredCredentials()
@@ -287,6 +291,7 @@ extension LoginViewController {
         hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
+        loginConfirmation.clear()
         showErrorAlert(title: "Error", message: "Account ID is incorrect")
     }
     
@@ -300,12 +305,14 @@ extension LoginViewController {
         hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
+        loginConfirmation.clear()
         showErrorAlert(title: "Error", message: message)
     }
     
     override func twoFactorRequired(error: Any?) {
         hud.dismiss()
         loginProcessStarted = false
+        loginConfirmation.clear()
         present(NavigationManager.getTwoFactorViewController(delegate: self), animated: true)
     }
     
@@ -318,28 +325,31 @@ extension LoginViewController {
         
         hud.dismiss()
         loginProcessStarted = false
+        loginConfirmation.clear()
         showErrorAlert(title: "Error", message: message)
     }
     
     override func captchaRequired(error: Any?) {
         hud.dismiss()
         loginProcessStarted = false
+        loginConfirmation.clear()
         presentCaptchaScreen(error: error)
     }
     
     override func captchaIncorrect(error: Any?) {
         hud.dismiss()
         loginProcessStarted = false
+        loginConfirmation.clear()
         presentCaptchaScreen(error: error)
     }
     
     private func showCreateSessionAlert(message: String) {
-        showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { index in
+        showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { [self] index in
             switch index {
             case 0:
-                self.startLoginProcess(force: true)
+                forceNewSession()
             case 1:
-                self.startLoginProcess()
+                newSession()
             default:
                 break
             }
@@ -411,6 +421,7 @@ extension LoginViewController: ScannerViewControllerDelegate {
 extension LoginViewController: TwoFactorViewControllerDelegate {
     
     func codeSubmitted(code: String) {
+        loginConfirmation.confirmation = code
         startLoginProcess(force: false, confirmation: code)
     }
     
@@ -421,6 +432,8 @@ extension LoginViewController: TwoFactorViewControllerDelegate {
 extension LoginViewController: CaptchaViewControllerDelegate {
     
     func captchaSubmitted(code: String, captchaId: String) {
+        loginConfirmation.captcha = code
+        loginConfirmation.captchaId = captchaId
         startLoginProcess(force: false, captcha: code, captchaId: captchaId)
     }
     
