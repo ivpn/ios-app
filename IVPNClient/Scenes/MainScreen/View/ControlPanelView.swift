@@ -36,10 +36,12 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var exitServerConnectionLabel: UILabel!
     @IBOutlet weak var exitServerNameLabel: UILabel!
     @IBOutlet weak var exitServerFlagImage: UIImageView!
+    @IBOutlet weak var exitServerIPv6Label: UILabel!
     @IBOutlet weak var entryServerTableCell: UITableViewCell!
     @IBOutlet weak var entryServerConnectionLabel: UILabel!
     @IBOutlet weak var entryServerNameLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
+    @IBOutlet weak var entryServerIPv6Label: UILabel!
     @IBOutlet weak var fastestServerLabel: UIView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var networkView: NetworkViewTableCell!
@@ -107,8 +109,8 @@ class ControlPanelView: UITableView {
     }
     
     func updateServerNames() {
-        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
-        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
+        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage, ipv6Label: entryServerIPv6Label)
+        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage, ipv6Label: exitServerIPv6Label)
         
         fastestServerLabel.isHidden = !Application.shared.settings.selectedServer.fastest || Application.shared.settings.selectedServer.fastestServerLabelShouldBePresented
     }
@@ -135,10 +137,11 @@ class ControlPanelView: UITableView {
     
     // MARK: - Private methods -
     
-    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
+    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView, ipv6Label: UILabel) {
         let serverViewModel = VPNServerViewModel(server: server)
         label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTimeForMainScreen)
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
+        ipv6Label.isHidden = serverViewModel.showIPv6Label
     }
     
     private func updateConnectSwitch() {
