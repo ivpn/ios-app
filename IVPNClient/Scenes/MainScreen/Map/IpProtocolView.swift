@@ -52,6 +52,12 @@ class IpProtocolView: UIView {
             return
         }
         
+        guard !ipv4Model.isIvpnServer, !ipv6Model.isIvpnServer else {
+            isHidden = true
+            controlView.selectedSegmentIndex = 0
+            return
+        }
+        
         if ipv6Model.isEqualLocation(to: ipv4Model) {
             isHidden = true
             controlView.selectedSegmentIndex = 0
