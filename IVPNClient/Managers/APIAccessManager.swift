@@ -29,20 +29,12 @@ class APIAccessManager {
     
     static let shared = APIAccessManager()
     
-    var ipv4HostName: String {
-        if let host = UserDefaults.shared.hostNames.first {
-            return host
-        }
-        
-        return UserDefaults.shared.apiHostName
+    var ipv4HostName: String? {
+        return UserDefaults.shared.hostNames.first
     }
     
-    var ipv6HostName: String {
-        if let host = UserDefaults.shared.ipv6HostNames.first {
-            return host
-        }
-        
-        return UserDefaults.shared.apiHostName
+    var ipv6HostName: String? {
+        return UserDefaults.shared.ipv6HostNames.first
     }
     
     private var hostNames: [String] {
@@ -52,12 +44,23 @@ class APIAccessManager {
     }
     
     private var hostNamesCollection: [String] {
-        return [Config.ApiHostName] + UserDefaults.shared.hostNames
+        return [Config.ApiHostName] + UserDefaults.shared.hostNames + UserDefaults.shared.ipv6HostNames
     }
     
     // MARK: - Methods -
     
-    func nextHostName(failedHostName: String) -> String? {
+    func nextHostName(failedHostName: String, addressType: AddressType? = nil) -> String? {
+        if let addressType = addressType {
+            switch addressType {
+            case .IPv4:
+                return UserDefaults.shared.hostNames.next(item: failedHostName)
+            case .IPv6:
+                return UserDefaults.shared.ipv6HostNames.next(item: failedHostName)
+            default:
+                break
+            }
+        }
+        
         return hostNames.next(item: failedHostName)
     }
     

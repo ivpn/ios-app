@@ -120,16 +120,24 @@ class APIClient: NSObject {
     
     // MARK: - Methods -
     
-    func perform(_ request: APIRequest, _ completion: @escaping APIClientCompletion) {
-        if let addressType = request.addressType {
+    func perform(_ request: APIRequest, nextHost: String? = nil, _ completion: @escaping APIClientCompletion) {
+        if let addressType = request.addressType, nextHost == nil {
             switch addressType {
             case .IPv4:
-                hostName = APIAccessManager.shared.ipv4HostName
+                if let ipv4HostName = APIAccessManager.shared.ipv4HostName {
+                    hostName = ipv4HostName
+                }
             case .IPv6:
-                hostName = APIAccessManager.shared.ipv6HostName
+                if let ipv6HostName = APIAccessManager.shared.ipv6HostName {
+                    hostName = ipv6HostName
+                }
             default:
                 break
             }
+        }
+        
+        if let nextHost = nextHost {
+            hostName = nextHost
         }
         
         var urlComponents = URLComponents()
@@ -185,8 +193,8 @@ class APIClient: NSObject {
         
         let task = session.dataTask(with: urlRequest) { data, response, _ in
             guard let httpResponse = response as? HTTPURLResponse else {
-                if let nextHost = APIAccessManager.shared.nextHostName(failedHostName: self.hostName), request.addressType == nil {
-                    self.retry(request, nextHost: nextHost) { result in
+                if let nextHost = APIAccessManager.shared.nextHostName(failedHostName: self.hostName, addressType: request.addressType) {
+                    self.retry(request, nextHost: nextHost, addressType: request.addressType) { result in
                         completion(result)
                     }
                     return
@@ -200,12 +208,13 @@ class APIClient: NSObject {
         task.resume()
     }
     
-    func retry(_ request: APIRequest, nextHost: String, _ completion: @escaping APIClientCompletion) {
-        hostName = nextHost
-        perform(request) { result in
+    func retry(_ request: APIRequest, nextHost: String, addressType: AddressType? = nil, _ completion: @escaping APIClientCompletion) {
+        perform(request, nextHost: nextHost) { result in
             switch result {
             case .success:
-                UserDefaults.shared.set(self.hostName, forKey: UserDefaults.Key.apiHostName)
+                if addressType == nil {
+                    UserDefaults.shared.set(nextHost, forKey: UserDefaults.Key.apiHostName)
+                }
             case .failure:
                 break
             }
