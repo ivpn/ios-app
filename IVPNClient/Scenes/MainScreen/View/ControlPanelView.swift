@@ -141,7 +141,7 @@ class ControlPanelView: UITableView {
         let serverViewModel = VPNServerViewModel(server: server)
         label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTimeForMainScreen)
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
-        ipv6Label.isHidden = serverViewModel.showIPv6Label
+        ipv6Label.isHidden = !serverViewModel.showIPv6Label
     }
     
     private func updateConnectSwitch() {
