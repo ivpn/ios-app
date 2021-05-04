@@ -2283,24 +2283,39 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mx0-6b-oNY">
                                                             <rect key="frame" x="0.0" y="0.0" width="354" height="45.5"/>
                                                             <subviews>
-                                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LNB-Gv-gUn">
-                                                                    <rect key="frame" x="97" y="0.0" width="160" height="32"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="iro-w5-vJd">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="354" height="31"/>
+                                                                    <subviews>
+                                                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LNB-Gv-gUn">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="160" height="32"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="160" id="5t3-zc-PsR"/>
+                                                                                <constraint firstAttribute="height" constant="31" id="GJp-JN-R4E"/>
+                                                                            </constraints>
+                                                                            <segments>
+                                                                                <segment title="IPv4"/>
+                                                                                <segment title="IPv6"/>
+                                                                            </segments>
+                                                                            <connections>
+                                                                                <action selector="selectIpProtocol:" destination="NB7-vL-gwX" eventType="valueChanged" id="ngm-Zk-JFq"/>
+                                                                            </connections>
+                                                                        </segmentedControl>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GyR-3U-EdL">
+                                                                            <rect key="frame" x="172" y="0.0" width="182" height="31"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                            <color key="textColor" name="ivpnLabel5"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="160" id="5t3-zc-PsR"/>
-                                                                        <constraint firstAttribute="height" constant="31" id="GJp-JN-R4E"/>
+                                                                        <constraint firstAttribute="height" constant="31" id="IFN-Ip-y9j"/>
                                                                     </constraints>
-                                                                    <segments>
-                                                                        <segment title="IPv4"/>
-                                                                        <segment title="IPv6"/>
-                                                                    </segments>
-                                                                    <connections>
-                                                                        <action selector="selectIpProtocol:" destination="NB7-vL-gwX" eventType="valueChanged" id="ngm-Zk-JFq"/>
-                                                                    </connections>
-                                                                </segmentedControl>
+                                                                </stackView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="LNB-Gv-gUn" firstAttribute="centerX" secondItem="Mx0-6b-oNY" secondAttribute="centerX" id="F2J-MR-hSj"/>
-                                                                <constraint firstItem="LNB-Gv-gUn" firstAttribute="top" secondItem="Mx0-6b-oNY" secondAttribute="top" id="xnW-Ej-CNx"/>
+                                                                <constraint firstAttribute="trailing" secondItem="iro-w5-vJd" secondAttribute="trailing" id="3kb-WU-iVy"/>
+                                                                <constraint firstItem="iro-w5-vJd" firstAttribute="leading" secondItem="Mx0-6b-oNY" secondAttribute="leading" id="exZ-TU-0h4"/>
+                                                                <constraint firstItem="iro-w5-vJd" firstAttribute="top" secondItem="Mx0-6b-oNY" secondAttribute="top" id="zVe-At-aCm"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ME-0A-Ygf" customClass="ConnectionInfoBoxView" customModule="IVPNClient" customModuleProvider="target">
@@ -2513,6 +2528,7 @@
                                                         <outlet property="locationErrorLabel" destination="nzG-y6-euq" id="FGv-lq-r3r"/>
                                                         <outlet property="locationLabel" destination="E6a-2Z-ZUw" id="xaZ-vg-N9s"/>
                                                         <outlet property="locationLoader" destination="R4n-PY-IGn" id="hbO-wY-OFQ"/>
+                                                        <outlet property="locationMismatchLabel" destination="GyR-3U-EdL" id="ayq-MU-jJh"/>
                                                         <outlet property="providerErrorLabel" destination="rdR-pT-kcI" id="Udv-mq-Akh"/>
                                                         <outlet property="providerLabel" destination="LdG-Fb-Gn0" id="ElZ-np-9yV"/>
                                                         <outlet property="providerLoader" destination="Qyn-6a-4un" id="om5-ec-h3W"/>

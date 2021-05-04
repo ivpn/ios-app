@@ -38,6 +38,7 @@ class ConnectionInfoView: UIStackView {
     @IBOutlet weak var providerLoader: UIActivityIndicatorView!
     @IBOutlet weak var providerErrorLabel: UILabel!
     @IBOutlet weak var ipProtocolView: UIView!
+    @IBOutlet weak var locationMismatchLabel: UILabel!
     
     var ipProtocolIsHidden: Bool = true {
         didSet {
@@ -119,6 +120,12 @@ class ConnectionInfoView: UIStackView {
             providerErrorLabel.isHidden = false
         case .none:
             break
+        }
+        
+        if let ipv4Model = ipv4ViewModel.model, let ipv6Model = ipv6ViewModel.model, !ipv4Model.isEqualLocation(to: ipv6Model) {
+            locationMismatchLabel.text = "Location does not match"
+        } else {
+            locationMismatchLabel.text = ""
         }
     }
     
