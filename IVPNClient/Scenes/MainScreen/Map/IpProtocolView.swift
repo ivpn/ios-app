@@ -52,7 +52,7 @@ class IpProtocolView: UIView {
             return
         }
         
-        guard !ipv4Model.isIvpnServer, !ipv6Model.isIvpnServer else {
+        guard Application.shared.connectionManager.status.isDisconnected() else {
             isHidden = true
             controlView.selectedSegmentIndex = 0
             return
