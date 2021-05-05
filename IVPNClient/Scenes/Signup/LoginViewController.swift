@@ -295,6 +295,8 @@ extension LoginViewController {
         
         if let error = error as? ErrorResultSessionNew, let data = error.data {
             if data.upgradable {
+                NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
+                NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
                 NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
                 NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
                 UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
