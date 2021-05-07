@@ -126,10 +126,16 @@ class APIClient: NSObject {
             case .IPv4:
                 if let ipv4HostName = APIAccessManager.shared.ipv4HostName {
                     hostName = ipv4HostName
+                } else {
+                    completion(.failure(.requestFailed))
+                    return
                 }
             case .IPv6:
                 if let ipv6HostName = APIAccessManager.shared.ipv6HostName {
                     hostName = ipv6HostName
+                } else {
+                    completion(.failure(.requestFailed))
+                    return
                 }
             default:
                 break
