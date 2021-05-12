@@ -77,7 +77,7 @@ class WireGuardSettingsViewController: UITableViewController {
     
     private func setupView() {
         ipAddressLabel.text = KeyChain.wgIpAddress
-        publicKeyLabel.text = KeyChain.wgPublicKey        
+        publicKeyLabel.text = KeyChain.wgPublicKey
         keyTimestampLabel.text = AppKeyManager.keyTimestamp.formatDate()
         keyExpirationTimestampLabel.text = AppKeyManager.keyExpirationTimestamp.formatDate()
         keyRegenerationTimestampLabel.text = AppKeyManager.keyRegenerationTimestamp.formatDate()

@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol ServerViewControllerDelegate: class {
+protocol ServerViewControllerDelegate: AnyObject {
     func reconnectToFastestServer()
 }
 
