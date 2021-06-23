@@ -35,7 +35,7 @@ These instructions will get you a copy of the project up and running on your loc
 - Swift 5.0+
 - CocoaPods 1.10.0+
 - fastlane 2.178.0+
-- Go 1.15+
+- Go 1.16+
 
 ### Dev dependencies
 
