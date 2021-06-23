@@ -41,7 +41,7 @@ class ApiService {
     
     func request<T>(_ requestDI: ApiRequestDI, completion: @escaping (Result<T>) -> Void) {
         let requestName = "\(requestDI.method.description) \(requestDI.endpoint)"
-        let request = APIRequest(method: requestDI.method, path: requestDI.endpoint, contentType: requestDI.contentType)
+        let request = APIRequest(method: requestDI.method, path: requestDI.endpoint, contentType: requestDI.contentType, addressType: requestDI.addressType)
         
         if let params = requestDI.params {
             request.queryItems = params
@@ -79,9 +79,9 @@ class ApiService {
                     
                     completion(.failure(nil))
                     log(info: "\(requestName) parse error")
-                case .failure:
+                case .failure(let error):
                     log(info: "\(requestName) failure")
-                    completion(.failure(nil))
+                    completion(.failure(error))
                 }
             }
         }
@@ -89,7 +89,7 @@ class ApiService {
     
     func requestCustomError<T, E>(_ requestDI: ApiRequestDI, completion: @escaping (ResultCustomError<T, E>) -> Void) {
         let requestName = "\(requestDI.method.description) \(requestDI.endpoint)"
-        let request = APIRequest(method: requestDI.method, path: requestDI.endpoint, contentType: requestDI.contentType)
+        let request = APIRequest(method: requestDI.method, path: requestDI.endpoint, contentType: requestDI.contentType, addressType: requestDI.addressType)
         
         if let params = requestDI.params {
             request.queryItems = params

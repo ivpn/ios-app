@@ -31,23 +31,51 @@ class MainView: UIView {
     
     @IBOutlet weak var infoAlertView: InfoAlertView!
     @IBOutlet weak var mapScrollView: MapScrollView!
+    @IBOutlet weak var ipProtocolView: IpProtocolView!
     
     // MARK: - Properties -
     
-    var connectionViewModel: ProofsViewModel! {
+    var ipv4ViewModel: ProofsViewModel! {
         didSet {
-            mapScrollView.viewModel = connectionViewModel
+            mapScrollView.viewModel = ipv4ViewModel
             
-            if !connectionViewModel.model.isIvpnServer {
-                localCoordinates = (connectionViewModel.model.latitude, connectionViewModel.model.longitude)
-                mapScrollView.localCoordinates = (connectionViewModel.model.latitude, connectionViewModel.model.longitude)
+            guard let model = ipv4ViewModel.model else {
+                return
             }
+            
+            if !model.isIvpnServer {
+                localCoordinates = (model.latitude, model.longitude)
+                mapScrollView.localCoordinates = (model.latitude, model.longitude)
+            }
+        }
+    }
+    
+    var ipv6ViewModel: ProofsViewModel! {
+        didSet {
+            ipProtocolView.update(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel)
         }
     }
     
     var infoAlertViewModel = InfoAlertViewModel()
     private var localCoordinates: (Double, Double)?
     private var centerMapButton = UIButton()
+    
+    // MARK: - @IBActions -
+    
+    @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
+        guard let model = sender.selectedSegmentIndex == 1 ? ipv6ViewModel.model : ipv4ViewModel.model else {
+            return
+        }
+        
+        let isDisconnected = Application.shared.connectionManager.status.isDisconnected()
+        mapScrollView.updateMapPosition(latitude: model.latitude, longitude: model.longitude, animated: true, isLocalPosition: isDisconnected, updateMarkers: true)
+        
+        if isDisconnected {
+            mapScrollView.localCoordinates = (model.latitude, model.longitude)
+        } else {
+            mapScrollView.gatewayCoordinates = (model.latitude, model.longitude)
+        }
+    }
     
     // MARK: - View lifecycle -
     
@@ -81,6 +109,7 @@ class MainView: UIView {
         updateActionButtons()
         mapScrollView.updateMapPositionToCurrentCoordinates()
         mapScrollView.updateMapMarkers()
+        ipProtocolView.updateLayout()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus) {
@@ -89,7 +118,7 @@ class MainView: UIView {
     
     func updateInfoAlert() {
         if infoAlertViewModel.shouldDisplay {
-            infoAlertView.show(type: infoAlertViewModel.type, text: infoAlertViewModel.text, actionText: infoAlertViewModel.actionText)
+            infoAlertView.show(viewModel: infoAlertViewModel)
         } else {
             infoAlertView.hide()
         }

@@ -28,11 +28,13 @@ struct ApiRequestDI {
     let endpoint: String
     let params: [URLQueryItem]?
     let contentType: HTTPContentType
+    let addressType: AddressType?
     
-    init(method: HTTPMethod, endpoint: String, params: [URLQueryItem]? = nil, contentType: HTTPContentType = .applicationJSON) {
+    init(method: HTTPMethod, endpoint: String, params: [URLQueryItem]? = nil, contentType: HTTPContentType = .applicationJSON, addressType: AddressType? = nil) {
         self.method = method
         self.endpoint = endpoint
         self.params = params
         self.contentType = contentType
+        self.addressType = addressType
     }
 }

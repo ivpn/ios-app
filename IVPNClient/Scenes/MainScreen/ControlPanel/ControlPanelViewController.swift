@@ -42,12 +42,6 @@ class ControlPanelViewController: UITableViewController {
         return sessionManager
     }
     
-    var connectionViewModel: ProofsViewModel! {
-        didSet {
-            controlPanelView.updateConnectionInfo(viewModel: connectionViewModel)
-        }
-    }
-    
     private var vpnStatusViewModel = VPNStatusViewModel(status: .invalid)
     private var lastStatusUpdateDate: Date?
     private var lastVPNStatus: NEVPNStatus = .invalid
@@ -120,6 +114,10 @@ class ControlPanelViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
+    }
+    
+    @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
+        controlPanelView.addressType = sender.selectedSegmentIndex == 1 ? .IPv6 : .IPv4
     }
     
     // MARK: - View lifecycle -

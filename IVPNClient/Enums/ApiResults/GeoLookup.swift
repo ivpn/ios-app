@@ -24,6 +24,7 @@
 import Foundation
 
 struct GeoLookup: Decodable {
+    
     let ipAddress: String
     let countryCode: String
     let country: String
@@ -32,4 +33,9 @@ struct GeoLookup: Decodable {
     let isp: String
     let latitude: Double
     let longitude: Double
+    
+    func isEqualLocation(to comparingModel: GeoLookup) -> Bool {
+        return city == comparingModel.city && country == comparingModel.country
+    }
+    
 }

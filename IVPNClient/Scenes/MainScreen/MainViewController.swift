@@ -132,32 +132,41 @@ class MainViewController: UIViewController {
     }
     
     @objc func updateGeoLocation() {
-        guard let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController else {
+        guard let controlPanel = floatingPanel.contentViewController as? ControlPanelViewController else {
             return
         }
         
-        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
+        controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(displayMode: .loading)
+        controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .loading)
         
-        controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .loading
-        
-        ApiService.shared.request(request) { [weak self] (result: Result<GeoLookup>) in
-            guard let self = self else { return }
-            
+        let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
+        ApiService.shared.request(requestIPv4) { [self] (result: Result<GeoLookup>) in
             switch result {
             case .success(let model):
-                let viewModel = ProofsViewModel(model: model)
-                controlPanelViewController.connectionViewModel = viewModel
-                self.mainView.connectionViewModel = viewModel
-                self.mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
-                self.mainView.updateInfoAlert()
+                controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(model: model, displayMode: .content)
+                mainView.ipv4ViewModel = ProofsViewModel(model: model)
+                mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
+                mainView.updateInfoAlert()
                 
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model
                 }
             case .failure:
-                controlPanelViewController.controlPanelView.connectionInfoDisplayMode = .error
-                self.mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
-                self.mainView.updateInfoAlert()
+                controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(displayMode: .error)
+                mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
+                mainView.updateInfoAlert()
+            }
+        }
+        
+        let requestIPv6 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv6)
+        ApiService.shared.request(requestIPv6) { [self] (result: Result<GeoLookup>) in
+            switch result {
+            case .success(let model):
+                controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(model: model, displayMode: .content)
+                mainView.ipv6ViewModel = ProofsViewModel(model: model)
+            case .failure:
+                controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
+                mainView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
             }
         }
     }
@@ -229,11 +238,15 @@ class MainViewController: UIViewController {
     }
     
     private func startVPNStatusObserver() {
-        Application.shared.connectionManager.getStatus { _, status in
-            self.updateStatus(vpnStatus: status, animated: false)
+        Application.shared.connectionManager.getStatus { [self] _, status in
+            if status == .invalid {
+                updateGeoLocation()
+            }
+            
+            updateStatus(vpnStatus: status, animated: false)
             
             Application.shared.connectionManager.onStatusChanged { status in
-                self.updateStatus(vpnStatus: status)
+                updateStatus(vpnStatus: status)
             }
         }
     }
@@ -248,13 +261,9 @@ class MainViewController: UIViewController {
             mainView.updateInfoAlert()
         }
         
-        if Application.shared.connectionManager.status == .invalid {
-            updateGeoLocation()
-        }
-        
-        if UserDefaults.standard.bool(forKey: "-UITests") {
-            updateGeoLocation()
-        }
+        #if targetEnvironment(simulator)
+        updateGeoLocation()
+        #endif
     }
     
 }

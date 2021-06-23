@@ -176,7 +176,6 @@ extension ServerViewController {
         cell.indexPath = indexPath
         cell.viewModel = VPNServerViewModel(server: collection[indexPath.row])
         cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
-        cell.selectedServer = isExitServer ? Application.shared.settings.selectedExitServer : Application.shared.settings.selectedServer
         
         return cell
     }

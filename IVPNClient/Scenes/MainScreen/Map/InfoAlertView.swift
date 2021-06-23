@@ -68,11 +68,11 @@ class InfoAlertView: UIView {
     
     // MARK: - Methods -
     
-    func show(type: InfoAlertViewType = .info, text: String = "", actionText: String = "") {
+    func show(viewModel: InfoAlertViewModel) {
         updateAutoLayout()
-        setupAppearance(type: type)
-        setupText(text: text)
-        setupAction(actionText: actionText)
+        setupAppearance(type: viewModel.type)
+        setupText(text: viewModel.text)
+        setupAction(actionText: viewModel.actionText)
         isHidden = false
     }
     
@@ -111,7 +111,7 @@ class InfoAlertView: UIView {
     
     private func updateAutoLayout() {
         if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
-            centerXConstraint.constant = 375 / 2
+            centerXConstraint.constant = CGFloat(MapConstants.Container.iPadLandscapeLeftAnchor / 2)
             bottomConstraint.constant = 20
             return
         }

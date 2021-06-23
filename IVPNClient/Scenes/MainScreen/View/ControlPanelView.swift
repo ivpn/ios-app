@@ -36,61 +36,35 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var exitServerConnectionLabel: UILabel!
     @IBOutlet weak var exitServerNameLabel: UILabel!
     @IBOutlet weak var exitServerFlagImage: UIImageView!
+    @IBOutlet weak var exitServerIPv6Label: UILabel!
     @IBOutlet weak var entryServerTableCell: UITableViewCell!
     @IBOutlet weak var entryServerConnectionLabel: UILabel!
     @IBOutlet weak var entryServerNameLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
+    @IBOutlet weak var entryServerIPv6Label: UILabel!
     @IBOutlet weak var fastestServerLabel: UIView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var networkView: NetworkViewTableCell!
     @IBOutlet weak var protocolLabel: UILabel!
-    @IBOutlet weak var ipAddressLabel: UILabel!
-    @IBOutlet weak var ipAddressLoader: UIActivityIndicatorView!
-    @IBOutlet weak var ipAddressErrorLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var locationLoader: UIActivityIndicatorView!
-    @IBOutlet weak var locationErrorLabel: UILabel!
-    @IBOutlet weak var providerLabel: UILabel!
-    @IBOutlet weak var providerPlaceholderLabel: UILabel!
-    @IBOutlet weak var providerLoader: UIActivityIndicatorView!
-    @IBOutlet weak var providerErrorLabel: UILabel!
+    @IBOutlet weak var connectionInfoView: ConnectionInfoView!
     
     // MARK: - Properties -
     
-    var connectionInfoDisplayMode: ConnectionInfoDisplayMode = .content {
+    var ipv4ViewModel: ProofsViewModel! {
         didSet {
-            switch connectionInfoDisplayMode {
-            case .loading:
-                ipAddressLabel.isHidden = true
-                ipAddressLoader.startAnimating()
-                ipAddressErrorLabel.isHidden = true
-                locationLabel.isHidden = true
-                locationLoader.startAnimating()
-                locationErrorLabel.isHidden = true
-                providerLabel.isHidden = true
-                providerLoader.startAnimating()
-                providerErrorLabel.isHidden = true
-            case .content:
-                ipAddressLabel.isHidden = false
-                ipAddressLoader.stopAnimating()
-                ipAddressErrorLabel.isHidden = true
-                locationLabel.isHidden = false
-                locationLoader.stopAnimating()
-                locationErrorLabel.isHidden = true
-                providerLabel.isHidden = false
-                providerLoader.stopAnimating()
-                providerErrorLabel.isHidden = true
-            case .error:
-                ipAddressLabel.isHidden = true
-                ipAddressLoader.stopAnimating()
-                ipAddressErrorLabel.isHidden = false
-                locationLabel.isHidden = true
-                locationLoader.stopAnimating()
-                locationErrorLabel.isHidden = false
-                providerLabel.isHidden = true
-                providerLoader.stopAnimating()
-                providerErrorLabel.isHidden = false
-            }
+            connectionInfoView.update(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel, addressType: addressType)
+        }
+    }
+    
+    var ipv6ViewModel: ProofsViewModel! {
+        didSet {
+            connectionInfoView.update(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel, addressType: addressType)
+        }
+    }
+    
+    var addressType: AddressType = .IPv4 {
+        didSet {
+            connectionInfoView.update(ipv4ViewModel: ipv4ViewModel, ipv6ViewModel: ipv6ViewModel, addressType: addressType)
         }
     }
     
@@ -112,23 +86,13 @@ class ControlPanelView: UITableView {
             connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
             connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
         }
-        ipAddressErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
-        locationErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
-        providerErrorLabel.icon(text: "Connection error", imageName: "icon-wifi-off", alignment: .left)
+        
         updateConnectSwitch()
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: protectionStatusTableCell)
         
         if UIDevice.screenHeightSmallerThan(device: .iPhones66s78) {
             protectionStatusLabel.font = protectionStatusLabel.font.withSize(28)
-            providerPlaceholderLabel.text = "ISP"
         }
-    }
-    
-    func updateConnectionInfo(viewModel: ProofsViewModel) {
-        connectionInfoDisplayMode = .content
-        ipAddressLabel.text = viewModel.ipAddress
-        locationLabel.text = "\(viewModel.city), \(viewModel.countryCode)"
-        providerLabel.text = viewModel.provider
     }
     
     func updateVPNStatus(viewModel: VPNStatusViewModel, animated: Bool = true) {
@@ -145,8 +109,8 @@ class ControlPanelView: UITableView {
     }
     
     func updateServerNames() {
-        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage)
-        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage)
+        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage, ipv6Label: entryServerIPv6Label)
+        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage, ipv6Label: exitServerIPv6Label)
         
         fastestServerLabel.isHidden = !Application.shared.settings.selectedServer.fastest || Application.shared.settings.selectedServer.fastestServerLabelShouldBePresented
     }
@@ -173,26 +137,17 @@ class ControlPanelView: UITableView {
     
     // MARK: - Private methods -
     
-    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView) {
+    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView, ipv6Label: UILabel) {
         let serverViewModel = VPNServerViewModel(server: server)
         label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTimeForMainScreen)
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
+        ipv6Label.isHidden = !serverViewModel.showIPv6Label
     }
     
     private func updateConnectSwitch() {
         if #available(iOS 13.0, *) {
             connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
         }
-    }
-    
-}
-
-extension ControlPanelView {
-    
-    enum ConnectionInfoDisplayMode {
-        case loading
-        case content
-        case error
     }
     
 }
