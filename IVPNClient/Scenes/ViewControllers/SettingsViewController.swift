@@ -42,6 +42,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var keepAliveSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
+    @IBOutlet weak var ipv6Switch: UISwitch!
     
     // MARK: - Properties -
     
@@ -109,6 +110,10 @@ class SettingsViewController: UITableViewController {
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: sender.isOn)
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
         tableView.reloadData()
+    }
+    
+    @IBAction func toggleIpv6(_ sender: UISwitch) {
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isIPv6)
     }
     
     @IBAction func toggleKeepAlive(_ sender: UISwitch) {
@@ -191,6 +196,10 @@ class SettingsViewController: UITableViewController {
         
         if UserDefaults.shared.isMultiHop {
             multiHopSwitch.setOn(true, animated: false)
+        }
+        
+        if UserDefaults.shared.isIPv6 {
+            ipv6Switch.setOn(true, animated: false)
         }
         
         if !UserDefaults.shared.keepAlive {
@@ -410,11 +419,11 @@ extension SettingsViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 { return 60 }
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
-        if indexPath.section == 2 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 2 && indexPath.row == 5 { return 60 }
-        if indexPath.section == 2 && indexPath.row == 6 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 3 && indexPath.row == 1 { return 60 }
+        if indexPath.section == 3 && indexPath.row == 5 { return 60 }
+        if indexPath.section == 3 && indexPath.row == 6 && !loggingSwitch.isOn { return 0 }
         
-        if indexPath.section == 2 && indexPath.row == 3 {
+        if indexPath.section == 3 && indexPath.row == 3 {
             if #available(iOS 14.0, *) {
                 return UITableView.automaticDimension
             } else {

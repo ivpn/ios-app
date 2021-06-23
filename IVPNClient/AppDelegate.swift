@@ -78,7 +78,9 @@ class AppDelegate: UIResponder {
     }
     
     private func finishIncompletePurchases() {
-        guard Application.shared.authentication.isLoggedIn || KeyChain.tempUsername != nil else { return }
+        guard Application.shared.authentication.isLoggedIn || KeyChain.tempUsername != nil else {
+            return
+        }
         
         IAPManager.shared.finishIncompletePurchases { serviceStatus, _ in
             guard let viewController = UIApplication.topViewController() else { return }
