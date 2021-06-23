@@ -39,10 +39,12 @@ class AntiTrackerViewController: UITableViewController {
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
         antiTrackerHardcoreSwitch.isEnabled = sender.isOn
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleAntiTrackerHardcore(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTrackerHardcore)
+        evaluateReconnect(sender: sender as UIView)
     }
     
     override func viewDidLoad() {

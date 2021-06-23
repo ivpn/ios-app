@@ -59,17 +59,21 @@ extension ControlPanelViewController {
         }
         
         if indexPath.row == 6 && Application.shared.network.type != NetworkType.none.rawValue {
-            selectNetworkTrust(network: Application.shared.network, sourceView: controlPanelView.networkView) { trust in
+            selectNetworkTrust(network: Application.shared.network, sourceView: controlPanelView.networkView) { [self] trust in
+                controlPanelView.networkView.update(trust: trust)
+                
                 if Application.shared.connectionManager.needToReconnect(network: Application.shared.network, newTrust: trust) {
                     if let cell = tableView.cellForRow(at: indexPath) {
-                        self.showReconnectPrompt(sourceView: cell as UIView) {
-                            self.controlPanelView.networkView.update(trust: trust)
+                        showReconnectPrompt(sourceView: cell as UIView) {
                             Application.shared.connectionManager.reconnect()
                         }
                     }
                 } else {
-                    self.controlPanelView.networkView.update(trust: trust)
-                    Application.shared.connectionManager.evaluateConnection(network: Application.shared.network, newTrust: trust)
+                    Application.shared.connectionManager.evaluateConnection(network: Application.shared.network, newTrust: trust) { error in
+                        if error != nil {
+                            showWireGuardKeysMissingError()
+                        }
+                    }
                 }
             }
         }
@@ -83,21 +87,16 @@ extension ControlPanelViewController {
                 return
             }
             
-            guard Application.shared.connectionManager.status.isDisconnected() else {
-                showConnectedAlert(message: "To change protocol, please first disconnect", sender: controlPanelView.protocolLabel)
-                return
-            }
-            
-            Application.shared.connectionManager.isOnDemandEnabled { enabled in
-                guard !enabled else {
-                    self.showDisableVPNPrompt(sourceView: self.controlPanelView.protocolLabel) {
-                        self.disconnect()
-                        self.presentSelectProtocol()
+            Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
+                if enabled, Application.shared.connectionManager.status.isDisconnected() {
+                    showDisableVPNPrompt(sourceView: controlPanelView.protocolLabel) {
+                        Application.shared.connectionManager.removeOnDemandRules {}
+                        presentSelectProtocol()
                     }
                     return
                 }
                 
-                self.presentSelectProtocol()
+                presentSelectProtocol()
             }
         }
     }

@@ -44,6 +44,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var loggingCell: UITableViewCell!
     @IBOutlet weak var ipv6Switch: UISwitch!
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
+    @IBOutlet weak var askToReconnectSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -99,30 +100,17 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        guard Application.shared.connectionManager.status.isDisconnected() else {
-            showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender) {
-                sender.setOn(UserDefaults.shared.isMultiHop, animated: true)
-                self.tableView.reloadData()
-            }
-            return
-        }
-        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isMultiHop)
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: sender.isOn)
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
         tableView.reloadData()
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleIpv6(_ sender: UISwitch) {
-        guard Application.shared.connectionManager.status.isDisconnected() || Application.shared.settings.connectionProtocol.tunnelType() != .wireguard else {
-            showConnectedAlert(message: "To change IPv6 settings, please first disconnect", sender: sender) {
-                sender.setOn(UserDefaults.shared.isIPv6, animated: true)
-            }
-            return
-        }
-        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isIPv6)
         showIPv4ServersSwitch.isEnabled = sender.isOn
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleShowIPv4Servers(_ sender: UISwitch) {
@@ -132,14 +120,8 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func toggleKeepAlive(_ sender: UISwitch) {
-        if !Application.shared.connectionManager.status.isDisconnected() {
-            showConnectedAlert(message: "To change Keep alive on sleep settings, please first disconnect", sender: sender) {
-                sender.setOn(UserDefaults.shared.keepAlive, animated: true)
-            }
-            return
-        }
-        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.keepAlive)
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleLogging(_ sender: UISwitch) {
@@ -147,6 +129,10 @@ class SettingsViewController: UITableViewController {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
         updateCellInset(cell: loggingCell, inset: sender.isOn)
         tableView.reloadData()
+    }
+    
+    @IBAction func toggleAskToReconnect(_ sender: UISwitch) {
+        UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.notAskToReconnect)
     }
     
     @IBAction func extendSubscription(_ sender: Any) {
@@ -215,6 +201,7 @@ class SettingsViewController: UITableViewController {
         showIPv4ServersSwitch.isEnabled = UserDefaults.shared.isIPv6
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
+        askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
         updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
@@ -244,8 +231,6 @@ class SettingsViewController: UITableViewController {
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        let status = Application.shared.connectionManager.status
-        
         if identifier == "NetworkProtection" {
             if !Application.shared.authentication.isLoggedIn {
                 authenticate(self)
@@ -264,16 +249,6 @@ class SettingsViewController: UITableViewController {
                 deselectRow(sender: sender)
                 return false
             }
-        }
-        
-        if identifier == "CustomDNS" && !status.isDisconnected() {
-            showConnectedAlert(message: "To specify custom DNS, please first disconnect", sender: sender)
-            return false
-        }
-        
-        if identifier == "AntiTracker" && !status.isDisconnected() {
-            showConnectedAlert(message: "To change AntiTracker settings, please first disconnect", sender: sender)
-            return false
         }
         
         return true
@@ -315,35 +290,7 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    // MARK: - Methods -
-    
-    private func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
-        if let sourceView = sender as? UIView {
-            showActionSheet(title: message, actions: ["Disconnect"], sourceView: sourceView) { index in
-                if let completion = completion {
-                    completion()
-                }
-                
-                switch index {
-                case 0:
-                    let status = Application.shared.connectionManager.status
-                    guard Application.shared.connectionManager.canDisconnect(status: status) else {
-                        self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
-                        return
-                    }
-                    NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
-                    self.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-                    self.hud.detailTextLabel.text = "Disconnecting"
-                    self.hud.show(in: (self.navigationController?.view)!)
-                    self.hud.dismiss(afterDelay: 5)
-                default:
-                    break
-                }
-            }
-        }
-        
-        deselectRow(sender: sender)
-    }
+    // MARK: - Private methods -
     
     private func updateSelectedServer() {
         let serverViewModel = VPNServerViewModel(server: Application.shared.settings.selectedServer)
@@ -426,8 +373,8 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 0 { return 60 }
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 5 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 6 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 3 && indexPath.row == 6 { return 60 }
+        if indexPath.section == 3 && indexPath.row == 7 && !loggingSwitch.isOn { return 0 }
         
         if indexPath.section == 3 && indexPath.row == 3 {
             if #available(iOS 14.0, *) {
@@ -441,22 +388,22 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && indexPath.row == 6 {
+        if indexPath.section == 3 && indexPath.row == 7 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
         
-        if indexPath.section == 3 && indexPath.row == 0 {
+        if indexPath.section == 4 && indexPath.row == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
             openTermsOfService()
         }
         
-        if indexPath.section == 3 && indexPath.row == 1 {
+        if indexPath.section == 4 && indexPath.row == 1 {
             tableView.deselectRow(at: indexPath, animated: true)
             openPrivacyPolicy()
         }
         
-        if indexPath.section == 3 && indexPath.row == 2 {
+        if indexPath.section == 4 && indexPath.row == 2 {
             tableView.deselectRow(at: indexPath, animated: true)
             contactSupport()
         }
@@ -472,21 +419,16 @@ extension SettingsViewController {
                 return
             }
             
-            guard Application.shared.connectionManager.status.isDisconnected() else {
-                showConnectedAlert(message: "To change protocol, please first disconnect", sender: tableView.cellForRow(at: indexPath))
-                return
-            }
-            
-            Application.shared.connectionManager.isOnDemandEnabled { enabled in
-                guard !enabled else {
-                    self.showDisableVPNPrompt(sourceView: tableView.cellForRow(at: indexPath)!) {
-                        Application.shared.connectionManager.resetRulesAndDisconnect()
-                        self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
+            Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
+                if enabled, Application.shared.connectionManager.status.isDisconnected() {
+                    showDisableVPNPrompt(sourceView: tableView.cellForRow(at: indexPath)!) {
+                        Application.shared.connectionManager.removeOnDemandRules {}
+                        performSegue(withIdentifier: "SelectProtocol", sender: nil)
                     }
                     return
                 }
                 
-                self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
+                performSegue(withIdentifier: "SelectProtocol", sender: nil)
             }
         }
     }

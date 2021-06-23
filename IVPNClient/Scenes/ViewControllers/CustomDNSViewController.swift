@@ -52,6 +52,7 @@ class CustomDNSViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isCustomDNS)
+        evaluateReconnect(sender: sender)
     }
     
     @IBAction func enableSecureDNS(_ sender: UISwitch) {
@@ -59,12 +60,20 @@ class CustomDNSViewController: UITableViewController {
         let preferred: DNSProtocolType = typeControl.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: sender.isOn ? preferred : .plain)
         tableView.reloadData()
+        
+        if UserDefaults.shared.isCustomDNS {
+            evaluateReconnect(sender: customDNSTextField)
+        }
     }
     
     @IBAction func changeType(_ sender: UISegmentedControl) {
         let preferred: DNSProtocolType = sender.selectedSegmentIndex == 1 ? .dot : .doh
         DNSProtocolType.save(preferred: preferred)
         tableView.reloadData()
+        
+        if UserDefaults.shared.isCustomDNS {
+            evaluateReconnect(sender: customDNSTextField)
+        }
     }
     
     // MARK: - View Lifecycle -
@@ -74,9 +83,6 @@ class CustomDNSViewController: UITableViewController {
         hideKeyboardOnTap()
         setupView()
         addObservers()
-        
-        #warning("Added to resolve upgrade disruption from 2.3.0 to 2.3.1")
-        saveAddress()
     }
     
     // MARK: - Methods -
@@ -113,6 +119,10 @@ class CustomDNSViewController: UITableViewController {
         }
         
         setupView()
+        
+        if UserDefaults.shared.isCustomDNS {
+            evaluateReconnect(sender: customDNSTextField)
+        }
     }
     
     @objc func updateResolvedDNS() {

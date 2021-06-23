@@ -160,13 +160,21 @@ extension UIViewController {
         }
     }
     
+    func evaluateReconnect(sender: UIView) {
+        if !Application.shared.connectionManager.status.isDisconnected() {
+            showReconnectPrompt(sourceView: sender) {
+                Application.shared.connectionManager.reconnect()
+            }
+        }
+    }
+    
     func showReconnectPrompt(sourceView: UIView, confirmed: @escaping () -> Void) {
         guard !UserDefaults.shared.notAskToReconnect else {
             confirmed()
             return
         }
         
-        showActionSheet(title: "To apply the new settings, IVPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: sourceView) { index in
+        showActionSheet(title: "To apply the new settings, IVPN needs to be reconnected.", actions: ["Reconnect", "Reconnect + Don't ask next time"], sourceView: sourceView, disableDismiss: true) { index in
             switch index {
             case 0:
                 confirmed()
@@ -180,7 +188,7 @@ extension UIViewController {
     }
     
     func showDisableVPNPrompt(sourceView: UIView, confirmed: @escaping () -> Void) {
-        showActionSheet(title: "VPN connection is active. Changing protocol will turn off the current VPN connection.", actions: ["Continue"], sourceView: sourceView) { index in
+        showActionSheet(title: "VPN connection is active. Changing this setting will turn off the current VPN connection.", actions: ["Continue"], sourceView: sourceView, disableDismiss: true) { index in
             switch index {
             case 0:
                 confirmed()
@@ -192,6 +200,10 @@ extension UIViewController {
     
     @objc func showResolvedDNSError() {
         showErrorAlert(title: "Error", message: "Failed to resolve IP addresses for DNS server")
+    }
+    
+    func showWireGuardKeysMissingError() {
+        showErrorAlert(title: "Error", message: "Failed to connect to VPN - WireGuard keys are missing. Please generate new keys in the Settings or try to connect to VPN manually.")
     }
     
 }

@@ -85,17 +85,13 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        guard Application.shared.connectionManager.status.isDisconnected() else {
-            showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender)
-            return
-        }
-        
         let isEnabled = sender == controlPanelView.enableMultiHopButton
         
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: isEnabled)
         
         isMultiHop = isEnabled
         reloadView()
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleAntiTracker(_ sender: UISwitch) {
@@ -106,14 +102,8 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        guard Application.shared.connectionManager.status.isDisconnected() else {
-            showConnectedAlert(message: "To change AntiTracker settings, please first disconnect", sender: sender) {
-                sender.setOn(UserDefaults.shared.isAntiTracker, animated: true)
-            }
-            return
-        }
-        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
@@ -256,28 +246,6 @@ class ControlPanelViewController: UITableViewController {
     
     @objc func forceNewSession() {
         sessionManager.createSession(force: true)
-    }
-    
-    func showConnectedAlert(message: String, sender: Any?, completion: (() -> Void)? = nil) {
-        if let sourceView = sender as? UIView {
-            showActionSheet(title: message, actions: ["Disconnect"], sourceView: sourceView) { index in
-                if let completion = completion {
-                    completion()
-                }
-                
-                switch index {
-                case 0:
-                    let status = Application.shared.connectionManager.status
-                    guard Application.shared.connectionManager.canDisconnect(status: status) else {
-                        self.showAlert(title: "Cannot disconnect", message: "IVPN cannot disconnect from the current network while it is marked \"Untrusted\"")
-                        return
-                    }
-                    self.disconnect()
-                default:
-                    break
-                }
-            }
-        }
     }
     
     func updateStatus(vpnStatus: NEVPNStatus, animated: Bool = true) {

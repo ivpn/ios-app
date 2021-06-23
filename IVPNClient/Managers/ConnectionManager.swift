@@ -264,22 +264,27 @@ class ConnectionManager {
     }
     
     func installOnDemandRules() {
-        isOnDemandEnabled { enabled in
+        isOnDemandEnabled { [self] enabled in
             guard UserDefaults.shared.networkProtectionEnabled || enabled else {
                 return
             }
             
-            if self.status != .connected && self.status != .invalid {
-                let accessDetails = AccessDetails(
-                    serverAddress: Application.shared.settings.selectedServer.gateway,
-                    ipAddresses: Application.shared.settings.selectedServer.ipAddresses,
-                    username: KeyChain.vpnUsername ?? "",
-                    passwordRef: KeyChain.vpnPasswordRef
-                )
-                let settings = self.settings.connectionProtocol
-                
-                self.vpnManager.installOnDemandRules(settings: settings, accessDetails: accessDetails)
+            guard Application.shared.settings.connectionProtocol.tunnelType() != .wireguard || KeyChain.wgPublicKey != nil && KeyChain.wgIpAddress != nil else {
+                return
             }
+            
+            guard status != .connected && status != .invalid else {
+                return
+            }
+            
+            let accessDetails = AccessDetails(
+                serverAddress: Application.shared.settings.selectedServer.gateway,
+                ipAddresses: Application.shared.settings.selectedServer.ipAddresses,
+                username: KeyChain.vpnUsername ?? "",
+                passwordRef: KeyChain.vpnPasswordRef
+            )
+            let settings = self.settings.connectionProtocol
+            vpnManager.installOnDemandRules(settings: settings, accessDetails: accessDetails)
         }
     }
     
@@ -395,7 +400,7 @@ class ConnectionManager {
         return true
     }
     
-    func evaluateConnection(network: Network? = nil, newTrust: String? = nil) {
+    func evaluateConnection(network: Network? = nil, newTrust: String? = nil, completion: @escaping (String?) -> Void) {
         let defaults = UserDefaults.shared
         guard defaults.networkProtectionEnabled else {
             return
@@ -413,6 +418,11 @@ class ConnectionManager {
         switch trust {
         case NetworkTrust.Untrusted.rawValue:
             if defaults.networkProtectionUntrustedConnect && status.isDisconnected() {
+                guard Application.shared.settings.connectionProtocol.tunnelType() != .wireguard || KeyChain.wgPublicKey != nil && KeyChain.wgIpAddress != nil else {
+                    completion("WireGuard keys are missing")
+                    return
+                }
+                
                 resetRulesAndConnect()
                 return
             }
@@ -426,6 +436,11 @@ class ConnectionManager {
         }
         
         if let network = network, let newTrust = newTrust {
+            guard Application.shared.settings.connectionProtocol.tunnelType() != .wireguard || KeyChain.wgPublicKey != nil && KeyChain.wgIpAddress != nil else {
+                completion("WireGuard keys are missing")
+                return
+            }
+            
             needToInstallOnDemandRules(network: network, newTrust: newTrust)
         }
     }
