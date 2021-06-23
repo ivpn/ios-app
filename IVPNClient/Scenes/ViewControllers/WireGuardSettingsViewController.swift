@@ -121,13 +121,13 @@ extension WireGuardSettingsViewController {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.detailTextLabel.text = "WireGuard keys successfully regenerated and uploaded to IVPN server."
         hud.dismiss(afterDelay: 2)
-        
         setupView()
     }
     
     override func setKeyFail() {
         hud.dismiss()
         showAlert(title: "Failed to regenerate WireGuard keys", message: "There was a problem regenerating and uploading WireGuard keys to IVPN server.")
+        setupView()
     }
     
 }

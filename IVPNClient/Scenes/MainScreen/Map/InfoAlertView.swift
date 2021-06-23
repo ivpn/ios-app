@@ -28,7 +28,7 @@ enum InfoAlertViewType {
     case info
 }
 
-protocol InfoAlertViewDelegate: class {
+protocol InfoAlertViewDelegate: AnyObject {
     func action()
 }
 

@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol TwoFactorViewControllerDelegate: class {
+protocol TwoFactorViewControllerDelegate: AnyObject {
     func codeSubmitted(code: String)
 }
 

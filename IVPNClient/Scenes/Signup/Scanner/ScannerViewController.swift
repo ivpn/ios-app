@@ -24,7 +24,7 @@
 import AVFoundation
 import UIKit
 
-protocol ScannerViewControllerDelegate: class {
+protocol ScannerViewControllerDelegate: AnyObject {
     func qrCodeFound(code: String)
 }
 

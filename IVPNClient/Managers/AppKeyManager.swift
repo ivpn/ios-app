@@ -23,7 +23,7 @@
 
 import Foundation
 
-@objc protocol AppKeyManagerDelegate: class {
+@objc protocol AppKeyManagerDelegate: AnyObject {
     func setKeyStart()
     func setKeySuccess()
     func setKeyFail()
