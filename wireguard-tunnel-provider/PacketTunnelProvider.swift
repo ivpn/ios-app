@@ -50,6 +50,17 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         return config.providerConfiguration![PCKeys.settings.rawValue]! as! String
     }
     
+    private var tunnelFileDescriptor: Int32? {
+        var buf = [CChar](repeating: 0, count: Int(IFNAMSIZ))
+        for fd: Int32 in 0...1024 {
+            var len = socklen_t(buf.count)
+            if getsockopt(fd, 2, 2, &buf, &len) == 0 && String(cString: buf).hasPrefix("utun") {
+                return fd
+            }
+        }
+        return nil
+    }
+    
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         guard let addresses = UserDefaults.shared.isIPv6 ? KeyChain.wgIpAddresses : KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
             tunnelSetupFailed()
@@ -67,8 +78,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         networkMonitor!.pathUpdateHandler = pathUpdate
         networkMonitor!.start(queue: DispatchQueue(label: "NetworkMonitor"))
         
-        let fileDescriptor = (self.packetFlow.value(forKeyPath: "socket.fileDescriptor") as? Int32) ?? -1
-        
         guard let privateKeyHex = wgPrivateKey.base64KeyToHex() else {
             tunnelSetupFailed()
             completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
@@ -76,7 +85,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         
         updatedSettings = settings.updateAttribute(key: "private_key", value: privateKeyHex)
-        let handle = wgTurnOn(settings, fileDescriptor)
+        let handle = wgTurnOn(settings, tunnelFileDescriptor ?? 0)
         
         guard handle >= 0 else {
             tunnelSetupFailed()
