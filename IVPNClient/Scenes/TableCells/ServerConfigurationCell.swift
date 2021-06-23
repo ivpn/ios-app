@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol ServerConfigurationCellDelegate: class {
+protocol ServerConfigurationCellDelegate: AnyObject {
     func toggle(isOn: Bool, gateway: String)
     func showValidation(error: String)
 }

@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol CaptchaViewControllerDelegate: class {
+protocol CaptchaViewControllerDelegate: AnyObject {
     func captchaSubmitted(code: String, captchaId: String)
 }
 

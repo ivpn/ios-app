@@ -59,7 +59,13 @@ class VPNServer {
     }
     
     var supportsIPv6: Bool {
-        return hosts.first?.ipv6 != nil
+        for host in hosts {
+            if !(host.ipv6?.localIP.isEmpty ?? true) {
+                return true
+            }
+        }
+        
+        return false
     }
     
     private (set) var gateway: String
