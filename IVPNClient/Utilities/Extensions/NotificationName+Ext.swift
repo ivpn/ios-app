@@ -52,5 +52,6 @@ extension Notification.Name {
     public static let UpdateResolvedDNS = Notification.Name("updateResolvedDNS")
     public static let UpdateResolvedDNSInsideVPN = Notification.Name("updateResolvedDNSInsideVPN")
     public static let ResolvedDNSError = Notification.Name("resolvedDNSError")
+    public static let ServersListUpdated = Notification.Name("serversListUpdated")
     
 }

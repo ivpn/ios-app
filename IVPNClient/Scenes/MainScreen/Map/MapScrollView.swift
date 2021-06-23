@@ -56,7 +56,6 @@ class MapScrollView: UIScrollView {
     var localCoordinates: (Double, Double)?
     var currentCoordinates: (Double, Double)?
     
-    private var markers: [UIButton] = []
     private var connectToServerPopup = ConnectToServerPopupView()
     
     // MARK: - View lifecycle -
@@ -134,6 +133,7 @@ class MapScrollView: UIScrollView {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateMapPositionToSelectedServer), name: Notification.Name.ShowConnectToServerPopup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideConnectToServerPopup), name: Notification.Name.HideConnectToServerPopup, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadMarkers), name: Notification.Name.ServersListUpdated, object: nil)
     }
     
     private func initGestures() {
@@ -147,9 +147,11 @@ class MapScrollView: UIScrollView {
     }
     
     private func initServerLocationMarkers() {
-        for server in Application.shared.serverList.servers {
+        for server in Application.shared.serverList.getServers() {
             placeMarker(latitude: server.latitude, longitude: server.longitude, city: server.city)
         }
+        
+        sendSubviewToBack(mapImageView)
     }
     
     private func initMarkers() {
@@ -266,11 +268,11 @@ class MapScrollView: UIScrollView {
         button.setTitleColor(UIColor.init(named: Theme.ivpnGray21), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 10, weight: .regular)
         button.addTarget(self, action: #selector(selectServer), for: .touchUpInside)
+        button.tag = 1
         
         let marker = UIView(frame: CGRect(x: 50 - 3, y: 18, width: 6, height: 6))
         marker.layer.cornerRadius = 3
         marker.backgroundColor = UIColor.init(named: Theme.ivpnGray21)
-        marker.tag = 1
         
         if city == "Bratislava" {
             button.titleEdgeInsets = UIEdgeInsets(top: 21, left: 59, bottom: 0, right: 0)
@@ -292,8 +294,20 @@ class MapScrollView: UIScrollView {
         
         button.addSubview(marker)
         addSubview(button)
-        
-        markers.append(button)
+        sendSubviewToBack(button)
+    }
+    
+    private func removeMarkers() {
+        subviews.forEach {
+            if $0.tag == 1 {
+                $0.removeFromSuperview()
+            }
+        }
+    }
+    
+    @objc private func reloadMarkers() {
+        removeMarkers()
+        initServerLocationMarkers()
     }
     
     @objc private func selectServer(_ sender: UIButton) {
@@ -353,7 +367,7 @@ class MapScrollView: UIScrollView {
     private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
         var servers = Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: selectedServer) ? [selectedServer] : []
         
-        for server in Application.shared.serverList.servers {
+        for server in Application.shared.serverList.getServers() {
             guard server !== selectedServer else { continue }
             guard Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) else { continue }
             

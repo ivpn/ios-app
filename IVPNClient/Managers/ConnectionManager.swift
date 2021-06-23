@@ -347,6 +347,12 @@ class ConnectionManager {
     
     func updateSelectedServer(status: NEVPNStatus? = nil) {
         guard Application.shared.settings.selectedServer.fastest else {
+            if !UserDefaults.standard.showIPv4Servers && Application.shared.serverList.getServer(byGateway: Application.shared.settings.selectedServer.gateway) == nil {
+                if let server = Application.shared.serverList.getServers().first {
+                    Application.shared.settings.selectedServer = server
+                }
+            }
+            
             return
         }
         

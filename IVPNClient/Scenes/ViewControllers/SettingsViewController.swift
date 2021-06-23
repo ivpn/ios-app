@@ -43,6 +43,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var loggingSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
     @IBOutlet weak var ipv6Switch: UISwitch!
+    @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -99,10 +100,10 @@ class SettingsViewController: UITableViewController {
         }
         
         guard Application.shared.connectionManager.status.isDisconnected() else {
-            showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender, completion: {
+            showConnectedAlert(message: "To change Multi-Hop settings, please first disconnect", sender: sender) {
                 sender.setOn(UserDefaults.shared.isMultiHop, animated: true)
                 self.tableView.reloadData()
-            })
+            }
             return
         }
         
@@ -113,14 +114,28 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func toggleIpv6(_ sender: UISwitch) {
+        guard Application.shared.connectionManager.status.isDisconnected() || Application.shared.settings.connectionProtocol.tunnelType() != .wireguard else {
+            showConnectedAlert(message: "To change IPv6 settings, please first disconnect", sender: sender) {
+                sender.setOn(UserDefaults.shared.isMultiHop, animated: true)
+            }
+            return
+        }
+        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isIPv6)
+        showIPv4ServersSwitch.isEnabled = sender.isOn
+    }
+    
+    @IBAction func toggleShowIPv4Servers(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.showIPv4Servers)
+        NotificationCenter.default.post(name: Notification.Name.ServersListUpdated, object: nil)
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
     }
     
     @IBAction func toggleKeepAlive(_ sender: UISwitch) {
         if !Application.shared.connectionManager.status.isDisconnected() {
-            showConnectedAlert(message: "To change Keep alive on sleep settings, please first disconnect", sender: sender, completion: {
+            showConnectedAlert(message: "To change Keep alive on sleep settings, please first disconnect", sender: sender) {
                 sender.setOn(UserDefaults.shared.keepAlive, animated: true)
-            })
+            }
             return
         }
         
@@ -194,21 +209,12 @@ class SettingsViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if UserDefaults.shared.isMultiHop {
-            multiHopSwitch.setOn(true, animated: false)
-        }
-        
-        if UserDefaults.shared.isIPv6 {
-            ipv6Switch.setOn(true, animated: false)
-        }
-        
-        if !UserDefaults.shared.keepAlive {
-            keepAliveSwitch.setOn(false, animated: false)
-        }
-        
-        if UserDefaults.shared.isLogging {
-            loggingSwitch.setOn(true, animated: false)
-        }
+        multiHopSwitch.setOn(UserDefaults.shared.isMultiHop, animated: false)
+        ipv6Switch.setOn(UserDefaults.shared.isIPv6, animated: false)
+        showIPv4ServersSwitch.setOn(UserDefaults.standard.showIPv4Servers, animated: false)
+        showIPv4ServersSwitch.isEnabled = UserDefaults.shared.isIPv6
+        keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
+        loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
         updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
