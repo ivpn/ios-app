@@ -30,6 +30,7 @@ class KeyChain {
     private static let wgPublicKeyKey = "WGPublicKey"
     private static let wgPrivateKeyKey = "WGPrivateKey"
     private static let wgIpAddressKey = "WGIpAddressKey"
+    private static let wgIpv6HostKey = "WGIPv6HostKey"
     private static let wgIpAddressesKey = "WGIpAddressesKey"
     private static let sessionTokenKey = "session_token"
     private static let vpnUsernameKey = "vpn_username"
@@ -90,6 +91,15 @@ class KeyChain {
         }
         set {
             KeyChain.bundle[wgIpAddressesKey] = newValue
+        }
+    }
+    
+    class var wgIpv6Host: String? {
+        get {
+            return KeyChain.bundle[wgIpv6HostKey]
+        }
+        set {
+            KeyChain.bundle[wgIpv6HostKey] = newValue
         }
     }
     

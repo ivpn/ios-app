@@ -68,11 +68,18 @@ struct ExtensionKeyManager {
         ApiManager.shared.request(request) { (result: Result<InterfaceResult>) in
             switch result {
             case .success(let model):
+                var ipAddress = model.ipAddress
+                KeyChain.wgIpAddress = ipAddress
+                
+                if UserDefaults.shared.isIPv6 {
+                    ipAddress = Interface.getAddresses(ipv4: model.ipAddress, ipv6: KeyChain.wgIpv6Host)
+                    KeyChain.wgIpAddresses = ipAddress
+                }
+                
                 UserDefaults.shared.set(Date(), forKey: UserDefaults.Key.wgKeyTimestamp)
                 KeyChain.wgPrivateKey = interface.privateKey
                 KeyChain.wgPublicKey = interface.publicKey
-                KeyChain.wgIpAddress = model.ipAddress
-                completion(interface.privateKey, model.ipAddress)
+                completion(interface.privateKey, ipAddress)
             case .failure:
                 completion(nil, nil)
             }
