@@ -123,6 +123,7 @@ extension ControlPanelViewController {
     
     override func setKeyFail() {
         hud.dismiss()
+        controlPanelView.connectSwitch.setOn(false, animated: true)
         
         if AppKeyManager.isKeyExpired {
             showAlert(title: "Failed to automatically rotate WireGuard keys", message: "Cannot connect using WireGuard protocol: rotating WireGuard keys failed. This is likely because of no access to an IVPN API server. You can retry connection, rotate keys manually from preferences, or select another protocol. Please contact support if this error persists.")

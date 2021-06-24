@@ -23,7 +23,7 @@
 
 import Foundation
 
-protocol VPNErrorObserverDelegate: class {
+protocol VPNErrorObserverDelegate: AnyObject {
     func presentError(title: String, message: String)
 }
 

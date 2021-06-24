@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol NetworkProtectionHeaderTableViewCellDelegate: class {
+protocol NetworkProtectionHeaderTableViewCellDelegate: AnyObject {
     func toggle(isOn: Bool)
 }
 

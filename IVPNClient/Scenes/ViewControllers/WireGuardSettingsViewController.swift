@@ -180,7 +180,6 @@ extension WireGuardSettingsViewController {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.detailTextLabel.text = "WireGuard keys successfully regenerated and uploaded to IVPN server."
         hud.dismiss(afterDelay: 2)
-        
         setupView()
     }
     
@@ -188,6 +187,7 @@ extension WireGuardSettingsViewController {
         hud.dismiss()
         showAlert(title: "Failed to regenerate WireGuard keys", message: "There was a problem regenerating and uploading WireGuard keys to IVPN server.")
         Application.shared.connectionManager.removeOnDemandRules {}
+        setupView()
     }
     
 }

@@ -23,7 +23,7 @@
 
 import Foundation
 
-@objc protocol SessionManagerDelegate: class {
+@objc protocol SessionManagerDelegate: AnyObject {
     func createSessionStart()
     func createSessionSuccess()
     func createSessionFailure(error: Any?)
