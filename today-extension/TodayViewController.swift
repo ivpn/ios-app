@@ -37,17 +37,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var connectedLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var ipAddressLabel: UILabel!
+    @IBOutlet weak var ipv6AddressLabel: UILabel!
     
     // MARK: - Properties -
     
-    var viewModel: ViewModel! {
+    var ipv4ViewModel: ViewModel! {
         didSet {
-            let connectionLocation = viewModel.connectionLocation
-            let connectionIpAddress = viewModel.connectionIpAddress
+            let connectionLocation = ipv4ViewModel.connectionLocation
+            let connectionIpAddress = ipv4ViewModel.connectionIpAddress
             locationLabel.text = connectionLocation
             ipAddressLabel.text = connectionIpAddress
             UserDefaults.shared.set(connectionLocation, forKey: UserDefaults.Key.connectionLocation)
             UserDefaults.shared.set(connectionIpAddress, forKey: UserDefaults.Key.connectionIpAddress)
+        }
+    }
+    
+    var ipv6ViewModel: ViewModel! {
+        didSet {
+            ipv6AddressLabel.isHidden = ipv6ViewModel.connectionIpAddress.isEmpty
+            ipv6AddressLabel.text = ipv6ViewModel.connectionIpAddress
         }
     }
     
@@ -172,15 +180,26 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     private func geoLookup(completion: (@escaping (NCUpdateResult) -> Void)) {
-        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
-        
-        ApiManager.shared.request(request) { (result: Result<GeoLookup>) in
+        let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
+        ApiManager.shared.request(requestIPv4) { (result: Result<GeoLookup>) in
             switch result {
             case .success(let model):
-                self.viewModel = ViewModel(model: model)
+                self.ipv4ViewModel = ViewModel(model: model)
                 completion(.newData)
             case .failure:
                 completion(.failed)
+            }
+        }
+        
+        let requestIPv6 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv6)
+        ApiManager.shared.request(requestIPv6) { (result: Result<GeoLookup>) in
+            switch result {
+            case .success(let model):
+                self.ipv6ViewModel = ViewModel(model: model)
+                completion(.newData)
+            case .failure:
+                self.ipv6ViewModel = ViewModel(model: GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0))
+                completion(.newData)
             }
         }
     }
