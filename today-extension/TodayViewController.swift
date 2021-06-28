@@ -54,8 +54,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     var ipv6ViewModel: ViewModel! {
         didSet {
+            let connectionIpv6Address = ipv6ViewModel.connectionIpAddress
             ipv6AddressLabel.isHidden = ipv6ViewModel.connectionIpAddress.isEmpty
-            ipv6AddressLabel.text = ipv6ViewModel.connectionIpAddress
+            ipv6AddressLabel.text = connectionIpv6Address
+            UserDefaults.shared.set(connectionIpv6Address, forKey: UserDefaults.Key.connectionIpv6Address)
         }
     }
     
@@ -176,6 +178,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         displayMode = .connected
         locationLabel.text = UserDefaults.shared.connectionLocation
         ipAddressLabel.text = UserDefaults.shared.connectionIpAddress
+        ipv6AddressLabel.text = UserDefaults.shared.connectionIpv6Address
         geoLookup { _ in }
     }
     
