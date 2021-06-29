@@ -38,13 +38,24 @@ struct ViewModel {
     }
     
     var connectionIpAddress: String {
-        return "IP: \(model.ipAddress)"
+        guard !model.ipAddress.isEmpty else {
+            return ""
+        }
+        
+        if addressType == .IPv6 {
+            return "IPv6: \(model.ipAddress)"
+        }
+        
+        return "IPv4: \(model.ipAddress)"
     }
+    
+    var addressType: AddressType
     
     // MARK: - Initialize -
     
-    init(model: GeoLookup) {
+    init(model: GeoLookup, addressType: AddressType = .IPv4) {
         self.model = model
+        self.addressType = addressType
     }
     
 }

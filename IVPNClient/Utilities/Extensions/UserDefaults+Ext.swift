@@ -58,6 +58,7 @@ extension UserDefaults {
         static let connectionStatus = "connectionStatus"
         static let connectionLocation = "connectionLocation"
         static let connectionIpAddress = "connectionIpAddress"
+        static let connectionIpv6Address = "connectionIpv6Address"
         static let keepAlive = "keepAlive"
         static let serversSort = "serversSort"
         static let notAskToReconnect = "notAskToReconnect"

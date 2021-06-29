@@ -33,7 +33,7 @@ class ApiManager {
     
     func request<T>(_ requestDI: ApiRequestDI, completion: @escaping (Result<T>) -> Void) {
         let requestName = "\(requestDI.method.description) \(requestDI.endpoint)"
-        let request = APIRequest(method: requestDI.method, path: requestDI.endpoint)
+        let request = APIRequest(method: requestDI.method, path: requestDI.endpoint, addressType: requestDI.addressType)
         
         if let params = requestDI.params {
             request.queryItems = params

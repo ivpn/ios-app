@@ -43,4 +43,8 @@ extension UserDefaults {
         return string(forKey: Key.connectionIpAddress) ?? ""
     }
     
+    @objc dynamic var connectionIpv6Address: String {
+        return string(forKey: Key.connectionIpv6Address) ?? ""
+    }
+    
 }
