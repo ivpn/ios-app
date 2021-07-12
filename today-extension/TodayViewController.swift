@@ -33,21 +33,30 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var disconnectedView: UIView!
     @IBOutlet weak var connectedView: UIView!
     @IBOutlet weak var actionButton: UIButton!
-    @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var connectedLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var ipAddressLabel: UILabel!
+    @IBOutlet weak var ipv6AddressLabel: UILabel!
     
     // MARK: - Properties -
     
-    var viewModel: ViewModel! {
+    var ipv4ViewModel: ViewModel! {
         didSet {
-            let connectionLocation = viewModel.connectionLocation
-            let connectionIpAddress = viewModel.connectionIpAddress
+            let connectionLocation = ipv4ViewModel.connectionLocation
+            let connectionIpAddress = ipv4ViewModel.connectionIpAddress
             locationLabel.text = connectionLocation
             ipAddressLabel.text = connectionIpAddress
             UserDefaults.shared.set(connectionLocation, forKey: UserDefaults.Key.connectionLocation)
             UserDefaults.shared.set(connectionIpAddress, forKey: UserDefaults.Key.connectionIpAddress)
+        }
+    }
+    
+    var ipv6ViewModel: ViewModel! {
+        didSet {
+            let connectionIpv6Address = ipv6ViewModel.connectionIpAddress
+            ipv6AddressLabel.isHidden = ipv6ViewModel.connectionIpAddress.isEmpty
+            ipv6AddressLabel.text = connectionIpv6Address
+            UserDefaults.shared.set(connectionIpv6Address, forKey: UserDefaults.Key.connectionIpv6Address)
         }
     }
     
@@ -58,8 +67,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 loginView.isHidden = false
                 disconnectedView.isHidden = true
                 connectedView.isHidden = true
-                actionButton.backgroundColor = UIColor.init(named: "ivpnBlue")
-                logoView.backgroundColor = UIColor.init(named: "ivpnGray")
+                actionButton.backgroundColor = UIColor.init(named: "ivpnGray")
                 UIView.performWithoutAnimation {
                     self.actionButton.setTitle("Log In", for: .normal)
                     self.actionButton.layoutIfNeeded()
@@ -68,8 +76,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 loginView.isHidden = true
                 disconnectedView.isHidden = false
                 connectedView.isHidden = true
-                actionButton.backgroundColor = UIColor.init(named: "ivpnBlue")
-                logoView.backgroundColor = UIColor.init(named: "ivpnGray")
+                actionButton.backgroundColor = UIColor.init(named: "ivpnGray")
                 UIView.performWithoutAnimation {
                     self.actionButton.setTitle("Connect", for: .normal)
                     self.actionButton.layoutIfNeeded()
@@ -78,8 +85,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 loginView.isHidden = true
                 disconnectedView.isHidden = true
                 connectedView.isHidden = false
-                actionButton.backgroundColor = UIColor.init(named: "ivpnGray")
-                logoView.backgroundColor = UIColor.init(named: "ivpnBlue")
+                actionButton.backgroundColor = UIColor.init(named: "ivpnBlue")
                 UIView.performWithoutAnimation {
                     self.actionButton.setTitle("Disconnect", for: .normal)
                     self.actionButton.layoutIfNeeded()
@@ -89,7 +95,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }
             
             actionButton.isHidden = false
-            logoView.isHidden = false
         }
     }
     
@@ -168,19 +173,31 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         displayMode = .connected
         locationLabel.text = UserDefaults.shared.connectionLocation
         ipAddressLabel.text = UserDefaults.shared.connectionIpAddress
+        ipv6AddressLabel.text = UserDefaults.shared.connectionIpv6Address
         geoLookup { _ in }
     }
     
     private func geoLookup(completion: (@escaping (NCUpdateResult) -> Void)) {
-        let request = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup)
-        
-        ApiManager.shared.request(request) { (result: Result<GeoLookup>) in
+        let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
+        ApiManager.shared.request(requestIPv4) { (result: Result<GeoLookup>) in
             switch result {
             case .success(let model):
-                self.viewModel = ViewModel(model: model)
+                self.ipv4ViewModel = ViewModel(model: model, addressType: .IPv4)
                 completion(.newData)
             case .failure:
                 completion(.failed)
+            }
+        }
+        
+        let requestIPv6 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv6)
+        ApiManager.shared.request(requestIPv6) { (result: Result<GeoLookup>) in
+            switch result {
+            case .success(let model):
+                self.ipv6ViewModel = ViewModel(model: model, addressType: .IPv6)
+                completion(.newData)
+            case .failure:
+                self.ipv6ViewModel = ViewModel(model: GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0), addressType: .IPv6)
+                completion(.newData)
             }
         }
     }
