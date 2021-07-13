@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.4.2 - 2021-07-13  
+
+[IMPROVED] Added IPv6 connection info to the Today Widget  
+[FIXED] WireGuard not connecting on iOS 15 Beta  
+
 ## 2.4.1 - 2021-06-29  
 
 [NEW] IPv6 inside WireGuard tunnel  
