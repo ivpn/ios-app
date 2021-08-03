@@ -43,7 +43,7 @@ class MainView: UIView {
                 return
             }
             
-            if !model.isIvpnServer {
+            if Application.shared.connectionManager.status.isDisconnected() {
                 localCoordinates = (model.latitude, model.longitude)
                 mapScrollView.localCoordinates = (model.latitude, model.longitude)
             }
