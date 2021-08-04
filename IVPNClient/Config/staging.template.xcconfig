@@ -3,4 +3,3 @@
 Environment = staging
 ApiHostName = 
 TlsHostName = 
-IAPSharedSecret = 

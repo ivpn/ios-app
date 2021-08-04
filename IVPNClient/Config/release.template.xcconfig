@@ -3,4 +3,3 @@
 Environment = production
 ApiHostName = api.ivpn.net
 TlsHostName = ivpn.net
-IAPSharedSecret = 
