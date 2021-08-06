@@ -398,7 +398,7 @@ extension SettingsViewController {
             }
         }
         
-        if indexPath.section == 3 && indexPath.row == 6 {
+        if indexPath.section == 3 && indexPath.row == 4 {
             if #available(iOS 14.0, *) {
                 return UITableView.automaticDimension
             } else {
