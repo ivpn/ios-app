@@ -482,13 +482,11 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
 extension SettingsViewController: ServerViewControllerDelegate {
     
     func reconnectToFastestServer() {
-        Application.shared.connectionManager.getStatus { _, status in
-            if status == .connected {
-                self.needsToReconnect = true
-                Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
-                DispatchQueue.delay(0.5) {
-                    Pinger.shared.ping()
-                }
+        if Application.shared.connectionManager.status == .connected {
+            needsToReconnect = true
+            Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
+            DispatchQueue.delay(UserDefaults.shared.killSwitch ? 2 : 0.5) {
+                Pinger.shared.ping()
             }
         }
     }
