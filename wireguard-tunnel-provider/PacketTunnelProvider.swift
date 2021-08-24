@@ -1,252 +1,119 @@
-//
-//  PacketTunnelProvider.swift
-//  IVPN iOS app
-//  https://github.com/ivpn/ios-app
-//
-//  Created by Juraj Hilje on 2018-10-12.
-//  Copyright (c) 2020 Privatus Limited.
-//
-//  This file is part of the IVPN iOS app.
-//
-//  The IVPN iOS app is free software: you can redistribute it and/or
-//  modify it under the terms of the GNU General Public License as published by the Free
-//  Software Foundation, either version 3 of the License, or (at your option) any later version.
-//
-//  The IVPN iOS app is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-//  details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
-//
+// SPDX-License-Identifier: MIT
+// Copyright © 2018-2021 WireGuard LLC. All Rights Reserved.
 
-import Network
+import Foundation
 import NetworkExtension
-
-enum PacketTunnelProviderError: Error {
-    case tunnelSetupFailed
-}
+import os
+import WireGuardKit
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
-    
-    private var handle: Int32?
-    private var networkMonitor: NWPathMonitor?
-    private var ifname: String?
-    private var updatedSettings: String?
-    
-    private var config: NETunnelProviderProtocol {
-        return self.protocolConfiguration as! NETunnelProviderProtocol
-    }
-    
-    private var interfaceName: String {
-        return config.providerConfiguration![PCKeys.title.rawValue]! as! String
-    }
-    
-    private var settings: String {
-        if let updatedSettings = updatedSettings {
-            return updatedSettings
+
+    private lazy var adapter: WireGuardAdapter = {
+        return WireGuardAdapter(with: self) { logLevel, message in
+            wg_log(logLevel.osLogLevel, message: message)
         }
-        return config.providerConfiguration![PCKeys.settings.rawValue]! as! String
-    }
-    
-    private var tunnelFileDescriptor: Int32? {
-        var buf = [CChar](repeating: 0, count: Int(IFNAMSIZ))
-        for fd: Int32 in 0...1024 {
-            var len = socklen_t(buf.count)
-            if getsockopt(fd, 2, 2, &buf, &len) == 0 && String(cString: buf).hasPrefix("utun") {
-                return fd
-            }
-        }
-        return nil
-    }
-    
+    }()
+
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        guard let addresses = UserDefaults.shared.isIPv6 ? KeyChain.wgIpAddresses : KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
-            tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+        let activationAttemptId = options?["activationAttemptId"] as? String
+        let errorNotifier = ErrorNotifier(activationAttemptId: activationAttemptId)
+
+        Logger.configureGlobal(tagged: "NET", withFilePath: FileManager.logFileURL?.path)
+
+        wg_log(.info, message: "Starting tunnel from the " + (activationAttemptId == nil ? "OS directly, rather than the app" : "app"))
+
+        guard let tunnelProviderProtocol = self.protocolConfiguration as? NETunnelProviderProtocol,
+              let tunnelConfiguration = tunnelProviderProtocol.asTunnelConfiguration() else {
+            errorNotifier.notify(PacketTunnelProviderError.savedProtocolConfigurationIsInvalid)
+            completionHandler(PacketTunnelProviderError.savedProtocolConfigurationIsInvalid)
             return
         }
-        
-        guard let tunnelSettings = getTunnelSettings(ipAddress: addresses) else {
-            tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
-            return
-        }
-        
-        networkMonitor = NWPathMonitor()
-        networkMonitor!.pathUpdateHandler = pathUpdate
-        networkMonitor!.start(queue: DispatchQueue(label: "NetworkMonitor"))
-        
-        guard let privateKeyHex = wgPrivateKey.base64KeyToHex() else {
-            tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
-            return
-        }
-        
-        updatedSettings = settings.updateAttribute(key: "private_key", value: privateKeyHex)
-        let handle = wgTurnOn(settings, tunnelFileDescriptor ?? 0)
-        
-        guard handle >= 0 else {
-            tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
-            return
-        }
-        
-        self.handle = handle
-        
-        startKeyRegenerationMonitor { error in
-            completionHandler(error)
-        }
-        
-        setTunnelNetworkSettings(tunnelSettings) { error in
-            if error != nil {
-                self.tunnelSetupFailed()
-                completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
-            } else {
+
+        // Start the tunnel
+        adapter.start(tunnelConfiguration: tunnelConfiguration) { adapterError in
+            guard let adapterError = adapterError else {
+                let interfaceName = self.adapter.interfaceName ?? "unknown"
+
+                wg_log(.info, message: "Tunnel interface is \(interfaceName)")
+
                 completionHandler(nil)
+                return
+            }
+
+            switch adapterError {
+            case .cannotLocateTunnelFileDescriptor:
+                wg_log(.error, staticMessage: "Starting tunnel failed: could not determine file descriptor")
+                errorNotifier.notify(PacketTunnelProviderError.couldNotDetermineFileDescriptor)
+                completionHandler(PacketTunnelProviderError.couldNotDetermineFileDescriptor)
+
+            case .dnsResolution(let dnsErrors):
+                let hostnamesWithDnsResolutionFailure = dnsErrors.map { $0.address }
+                    .joined(separator: ", ")
+                wg_log(.error, message: "DNS resolution failed for the following hostnames: \(hostnamesWithDnsResolutionFailure)")
+                errorNotifier.notify(PacketTunnelProviderError.dnsResolutionFailure)
+                completionHandler(PacketTunnelProviderError.dnsResolutionFailure)
+
+            case .setNetworkSettings(let error):
+                wg_log(.error, message: "Starting tunnel failed with setTunnelNetworkSettings returning \(error.localizedDescription)")
+                errorNotifier.notify(PacketTunnelProviderError.couldNotSetNetworkSettings)
+                completionHandler(PacketTunnelProviderError.couldNotSetNetworkSettings)
+
+            case .startWireGuardBackend(let errorCode):
+                wg_log(.error, message: "Starting tunnel failed with wgTurnOn returning \(errorCode)")
+                errorNotifier.notify(PacketTunnelProviderError.couldNotStartBackend)
+                completionHandler(PacketTunnelProviderError.couldNotStartBackend)
+
+            case .invalidState:
+                // Must never happen
+                fatalError()
             }
         }
     }
-    
+
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        networkMonitor?.cancel()
-        networkMonitor = nil
-        
-        if let handle = handle {
-            wgTurnOff(handle)
+        wg_log(.info, staticMessage: "Stopping tunnel")
+
+        adapter.stop { error in
+            ErrorNotifier.removeLastErrorFile()
+
+            if let error = error {
+                wg_log(.error, message: "Failed to stop WireGuard adapter: \(error.localizedDescription)")
+            }
+            completionHandler()
+
+            #if os(macOS)
+            // HACK: This is a filthy hack to work around Apple bug 32073323 (dup'd by us as 47526107).
+            // Remove it when they finally fix this upstream and the fix has been rolled out to
+            // sufficient quantities of users.
+            exit(0)
+            #endif
         }
-        
-        completionHandler()
     }
-    
-    deinit {
-        networkMonitor?.cancel()
-    }
-    
-    private func tunnelSetupFailed() {
-        UserDefaults.shared.set(".tunnelSetupFailed", forKey: UserDefaults.Key.wireguardTunnelProviderError)
-        UserDefaults.shared.synchronize()
-    }
-    
-    private func startKeyRegenerationMonitor(completion: @escaping (Error?) -> Void) {
-        let timer = TimerManager(timeInterval: ExtensionKeyManager.regenerationCheckInterval)
-        timer.eventHandler = {
-            self.regenerateKeys { error in
-                completion(error)
-            }
-            timer.proceed()
-        }
-        timer.resume()
-    }
-    
-    private func regenerateKeys(completion: @escaping (Error?) -> Void) {
-        ExtensionKeyManager.shared.upgradeKey { privateKey, ipAddress in
-            guard let privateKey = privateKey, let ipAddress = ipAddress else {
-                completion(nil)
-                return
-            }
-            
-            guard let tunnelSettings = self.getTunnelSettings(ipAddress: ipAddress) else {
-                completion(PacketTunnelProviderError.tunnelSetupFailed)
-                return
-            }
-            
-            self.setTunnelNetworkSettings(tunnelSettings) { error in
-                if error != nil {
-                    completion(PacketTunnelProviderError.tunnelSetupFailed)
-                } else {
-                    guard let privateKeyHex = privateKey.base64KeyToHex() else {
-                        completion(PacketTunnelProviderError.tunnelSetupFailed)
-                        return
-                    }
-                    
-                    self.updateWgConfig(key: "private_key", value: privateKeyHex)
-                    completion(nil)
+
+    override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)? = nil) {
+        guard let completionHandler = completionHandler else { return }
+
+        if messageData.count == 1 && messageData[0] == 0 {
+            adapter.getRuntimeConfiguration { settings in
+                var data: Data?
+                if let settings = settings {
+                    data = settings.data(using: .utf8)!
                 }
+                completionHandler(data)
             }
+        } else {
+            completionHandler(nil)
         }
     }
-    
-    private func getTunnelSettings(ipAddress: String) -> NEPacketTunnelNetworkSettings? {
-        let validatedEndpoints = (self.config.providerConfiguration?[PCKeys.endpoints.rawValue] as? String ?? "").commaSeparatedToArray().compactMap { ((try? Endpoint(endpointString: String($0))) as Endpoint??) }.compactMap {$0}
-        let validatedAddresses = ipAddress.commaSeparatedToArray().compactMap { ((try? CIDRAddress(stringRepresentation: String($0))) as CIDRAddress??) }.compactMap { $0 }
-        
-        guard let firstEndpoint = validatedEndpoints.first else {
-            return nil
+}
+
+extension WireGuardLogLevel {
+    var osLogLevel: OSLogType {
+        switch self {
+        case .verbose:
+            return .debug
+        case .error:
+            return .error
         }
-        
-        // We use the first endpoint for the ipAddress
-        let newSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: firstEndpoint.ipAddress)
-        newSettings.tunnelOverheadBytes = 80
-        
-        // IPv4 settings
-        let validatedIPv4Addresses = validatedAddresses.filter { $0.addressType == .IPv4 }
-        if validatedIPv4Addresses.count > 0 {
-            let ipv4Settings = NEIPv4Settings(addresses: validatedIPv4Addresses.map { $0.ipAddress }, subnetMasks: validatedIPv4Addresses.map { $0.subnetString })
-            ipv4Settings.includedRoutes = [NEIPv4Route.default()]
-            ipv4Settings.excludedRoutes = validatedEndpoints.filter { $0.addressType == .IPv4 }.map {
-                NEIPv4Route(destinationAddress: $0.ipAddress, subnetMask: "255.255.255.255")}
-            
-            newSettings.ipv4Settings = ipv4Settings
-        }
-        
-        // IPv6 settings
-        let validatedIPv6Addresses = validatedAddresses.filter { $0.addressType == .IPv6 }
-        if validatedIPv6Addresses.count > 0 {
-            let ipv6Settings = NEIPv6Settings(addresses: validatedIPv6Addresses.map { $0.ipAddress }, networkPrefixLengths: validatedIPv6Addresses.map { NSNumber(value: $0.subnet) })
-            ipv6Settings.includedRoutes = [NEIPv6Route.default()]
-            ipv6Settings.excludedRoutes = validatedEndpoints.filter { $0.addressType == .IPv6 }.map { NEIPv6Route(destinationAddress: $0.ipAddress, networkPrefixLength: 128) }
-            
-            newSettings.ipv6Settings = ipv6Settings
-        }
-        
-        if let dns = self.config.providerConfiguration?[PCKeys.dns.rawValue] as? String {
-            newSettings.dnsSettings = NEDNSSettings(servers: dns.commaSeparatedToArray())
-        }
-        
-        if UserDefaults.shared.isAntiTracker {
-            if UserDefaults.shared.isAntiTrackerHardcore {
-                newSettings.dnsSettings = NEDNSSettings(servers: [UserDefaults.shared.antiTrackerHardcoreDNS])
-            } else {
-                newSettings.dnsSettings = NEDNSSettings(servers: [UserDefaults.shared.antiTrackerDNS])
-            }
-        } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty && !UserDefaults.shared.resolvedDNSInsideVPN.isEmpty && UserDefaults.shared.resolvedDNSInsideVPN != [""] {
-            if #available(iOS 14.0, *) {
-                switch DNSProtocolType.preferred() {
-                case .doh:
-                    let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
-                    newSettings.dnsSettings = dnsSettings
-                case .dot:
-                    let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
-                    newSettings.dnsSettings = dnsSettings
-                default:
-                    newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                }
-            } else {
-                newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-            }
-        }
-        
-        if let mtu = self.config.providerConfiguration![PCKeys.mtu.rawValue] as? NSNumber, mtu.intValue > 0 {
-            newSettings.mtu = mtu
-        }
-        
-        return newSettings
     }
-    
-    private func updateWgConfig(key: String, value: String) {
-        guard let handle = handle else { return }
-        let settings = self.settings.updateAttribute(key: key, value: value)
-        updatedSettings = settings
-        wgSetConfig(handle, settings)
-    }
-    
-    private func pathUpdate(path: Network.NWPath) {
-        guard let handle = handle else { return }
-        wgSetConfig(handle, settings)
-    }
-    
 }
