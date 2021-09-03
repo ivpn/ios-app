@@ -55,11 +55,11 @@ public class Logger {
 }
 
 func wg_log(_ type: OSLogType, staticMessage msg: StaticString) {
-    os_log("[PROTON-WG] %{public}s", log: OSLog.default, type: type, String(describing: msg))
+    os_log("[IVPN-WG] %{public}s", log: OSLog.default, type: type, String(describing: msg))
     Logger.global?.log(message: "\(msg)")
 }
 
 func wg_log(_ type: OSLogType, message msg: String) {
-    os_log("[PROTON-WG] %{public}s", log: OSLog.default, type: type, msg)
+    os_log("[IVPN-WG] %{public}s", log: OSLog.default, type: type, msg)
     Logger.global?.log(message: msg)
 }

@@ -18,7 +18,7 @@ extension NETunnelProviderProtocol {
 
         guard let name = tunnelConfiguration.name else { return nil }
         guard let appId = Bundle.main.bundleIdentifier else { return nil }
-        providerBundleIdentifier = Config.wireguardTunnelProvider
+        providerBundleIdentifier = "\(appId).wireguard-tunnel-provider"
         passwordReference = WGKeychain.makeReference(containing: tunnelConfiguration.asWgQuickConfig(), called: name, previouslyReferencedBy: old?.passwordReference)
         if passwordReference == nil {
             return nil
@@ -26,8 +26,6 @@ extension NETunnelProviderProtocol {
         #if os(macOS)
         providerConfiguration = ["UID": getuid()]
         #endif
-
-        setAlwaysRouteViaTunnelIfNeeded()
 
         let endpoints = tunnelConfiguration.peers.compactMap { $0.endpoint }
         if endpoints.count == 1 {
@@ -62,8 +60,6 @@ extension NETunnelProviderProtocol {
 
     @discardableResult
     func migrateConfigurationIfNeeded(called name: String) -> Bool {
-        let didSetAlwaysRouteViaTunnel = setAlwaysRouteViaTunnelIfNeeded()
-
         /* This is how we did things before we switched to putting items
          * in the keychain. But it's still useful to keep the migration
          * around so that .mobileconfig files are easier.
@@ -87,18 +83,6 @@ extension NETunnelProviderProtocol {
             return true
         }
         #endif
-        return didSetAlwaysRouteViaTunnel
-    }
-
-    @discardableResult
-    private func setAlwaysRouteViaTunnelIfNeeded() -> Bool {
-        if #available(iOS 15, macOS 12, *) {
-            if !includeAllNetworks || !excludeLocalNetworks {
-                includeAllNetworks = true
-                excludeLocalNetworks = true
-                return true
-            }
-        }
         return false
     }
 }
