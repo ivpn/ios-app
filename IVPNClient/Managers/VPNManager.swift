@@ -144,13 +144,16 @@ class VPNManager {
     }
     
     private func setupNETunnelProviderManager(manager: NEVPNManager, settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
+        var serverAddress: String?
         switch settings {
         case .ipsec:
             break
         case .openvpn:
             self.setupOpenVPNTunnel(settings: settings, accessDetails: accessDetails, status: status)
+            serverAddress = openvpnManager?.protocolConfiguration?.serverAddress
         case .wireguard:
             self.setupWireGuardTunnel(settings: settings, accessDetails: accessDetails, status: status)
+            serverAddress = wireguardManager?.protocolConfiguration?.serverAddress
         }
         
         manager.saveToPreferences { error in
@@ -160,7 +163,9 @@ class VPNManager {
             }
             
             manager.loadFromPreferences { _ in
-                manager.protocolConfiguration?.serverAddress = accessDetails.serverAddress
+                if let serverAddress = serverAddress {
+                    manager.protocolConfiguration?.serverAddress = serverAddress
+                }
                 manager.saveToPreferences { _ in
                     completion(nil)
                 }
