@@ -114,4 +114,16 @@ struct ServiceStatus: Codable {
         return Date() > activeUntilDate
     }
     
+    func isLegacyAccount() -> Bool {
+        guard let username = username, let currentPlan = currentPlan else {
+            return false
+        }
+        
+        if username.hasPrefix("ivpn") && currentPlan.hasPrefix("IVPN Pro") && currentPlan != "IVPN Pro" {
+            return true
+        }
+        
+        return false
+    }
+    
 }
