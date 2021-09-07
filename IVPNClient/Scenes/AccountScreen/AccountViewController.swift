@@ -45,6 +45,10 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func addMoreTime(_ sender: Any) {
+        guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            return
+        }
+        
         present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
     
