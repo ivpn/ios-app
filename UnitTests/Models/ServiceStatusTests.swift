@@ -90,4 +90,18 @@ class ServiceStatusTests: XCTestCase {
         XCTAssertTrue(model.isActiveUntilValid())
     }
     
+    func test_isLegacyAccount() {
+        model.username = "ivpnXXXXXXXX"
+        model.currentPlan = "IVPN Pro (legacy)"
+        XCTAssertTrue(model.isLegacyAccount())
+        
+        model.username = "ivpnXXXXXXXX"
+        model.currentPlan = "IVPN Pro"
+        XCTAssertFalse(model.isLegacyAccount())
+        
+        model.username = "i-XXXX-XXXX-XXXX"
+        model.currentPlan = "IVPN Pro (legacy)"
+        XCTAssertFalse(model.isLegacyAccount())
+    }
+    
 }

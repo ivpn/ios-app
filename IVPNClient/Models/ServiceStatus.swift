@@ -32,7 +32,7 @@ struct ServiceStatus: Codable {
     var currentPlan: String?
     var activeUntil: Int?
     var isOnFreeTrial: Bool?
-    let username: String?
+    var username: String?
     let upgradeToUrl: String?
     let paymentMethod: String?
     let capabilities: [String]?
