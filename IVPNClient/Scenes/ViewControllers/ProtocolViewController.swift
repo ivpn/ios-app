@@ -361,6 +361,7 @@ extension ProtocolViewController {
         
         let label = ActiveLabel(frame: .zero)
         let customType = ActiveType.custom(pattern: "protocol comparison web page")
+        label.tag = 10
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 13)
         label.enabledTypes = [customType]
@@ -370,6 +371,7 @@ extension ProtocolViewController {
         label.handleCustomTap(for: customType) { _ in
             self.openWebPage("https://www.ivpn.net/pptp-vs-ipsec-ikev2-vs-openvpn-vs-wireguard/")
         }
+        footer.viewWithTag(10)?.removeFromSuperview()
         footer.addSubview(label)
         footer.textLabel?.text = ""
         label.bindFrameToSuperviewBounds(leading: 16, trailing: -16)
