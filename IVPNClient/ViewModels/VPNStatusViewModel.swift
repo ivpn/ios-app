@@ -60,6 +60,10 @@ struct VPNStatusViewModel {
         }
     }
     
+    var connectToExitServerText: String {
+        return "Exit Server"
+    }
+    
     var connectToggleIsOn: Bool {
         switch status {
         case .connected, .connecting, .reasserting:

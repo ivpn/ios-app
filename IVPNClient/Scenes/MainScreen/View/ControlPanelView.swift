@@ -105,7 +105,7 @@ class ControlPanelView: UITableView {
     
     func updateServerLabels(viewModel: VPNStatusViewModel) {
         entryServerConnectionLabel.text = viewModel.connectToServerText
-        exitServerConnectionLabel.text = "Exit Server"
+        exitServerConnectionLabel.text = viewModel.connectToExitServerText
     }
     
     func updateServerNames() {
