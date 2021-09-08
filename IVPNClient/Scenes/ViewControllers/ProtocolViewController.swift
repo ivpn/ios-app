@@ -23,6 +23,7 @@
 
 import UIKit
 import JGProgressHUD
+import ActiveLabel
 
 class ProtocolViewController: UITableViewController {
     
@@ -185,6 +186,8 @@ extension ProtocolViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
+        case 0:
+            return "We recommend the WireGuard protocol for its speed, security and connection reliability. Currently we only support Multi-hop connections using OpenVPN. For more information visit our protocol comparison web page."
         case 1:
             if Application.shared.settings.connectionProtocol.tunnelType() == .wireguard {
                 return "Keys rotation will start automatically in the defined interval. It will also change the internal IP address."
@@ -353,9 +356,23 @@ extension ProtocolViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        if let footer = view as? UITableViewHeaderFooterView {
-            footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
+        let footer = view as! UITableViewHeaderFooterView
+        footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
+        
+        let label = ActiveLabel(frame: .zero)
+        let customType = ActiveType.custom(pattern: "protocol comparison web page")
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.enabledTypes = [customType]
+        label.text = footer.textLabel?.text
+        label.textColor = UIColor.init(named: Theme.ivpnLabel6)
+        label.customColor[customType] = UIColor.init(named: Theme.ivpnBlue)
+        label.handleCustomTap(for: customType) { _ in
+            self.openWebPage("https://www.ivpn.net/pptp-vs-ipsec-ikev2-vs-openvpn-vs-wireguard/")
         }
+        footer.addSubview(label)
+        footer.textLabel?.text = ""
+        label.bindFrameToSuperviewBounds(leading: 16, trailing: -16)
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
