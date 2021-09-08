@@ -45,23 +45,37 @@ struct VPNStatusViewModel {
     
     var connectToServerText: String {
         if UserDefaults.shared.isMultiHop {
-            return "Entry Server"
-        }
-        
-        switch status {
-        case .connecting, .reasserting:
-            return "Connecting to"
-        case .connected:
-            return "Connected to"
-        case .disconnecting:
-        return "Disconnecting from"
-        default:
-            return "Connect to"
+            switch status {
+            case .connected:
+                return "Traffic is routed via entry server"
+            default:
+                return "Entry server is"
+            }
+        } else {
+            switch status {
+            case .connecting, .reasserting:
+                return "Connecting to"
+            case .connected:
+                return "Traffic is routed via server"
+            case .disconnecting:
+            return "Disconnecting from"
+            default:
+                if Application.shared.settings.selectedServer.fastest || Application.shared.settings.selectedServer.fastestServerLabelShouldBePresented {
+                    return "Fastest available server"
+                }
+                
+                return "Selected server"
+            }
         }
     }
     
     var connectToExitServerText: String {
-        return "Exit Server"
+        switch status {
+        case .connected:
+            return "Traffic is routed via exit server"
+        default:
+            return "Exit server is"
+        }
     }
     
     var connectToggleIsOn: Bool {

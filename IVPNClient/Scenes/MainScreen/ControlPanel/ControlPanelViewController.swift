@@ -377,6 +377,7 @@ class ControlPanelViewController: UITableViewController {
         Application.shared.connectionManager.needsToUpdateSelectedServer()
         Application.shared.connectionManager.installOnDemandRules()
         controlPanelView.updateServerNames()
+        controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
     }
     
     @objc private func protocolSelected() {
