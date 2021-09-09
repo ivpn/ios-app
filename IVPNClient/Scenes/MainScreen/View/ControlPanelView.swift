@@ -44,6 +44,7 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var entryServerIPv6Label: UILabel!
     @IBOutlet weak var fastestServerLabel: UIView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
+    @IBOutlet weak var antiTrackerLabel: UILabel!
     @IBOutlet weak var networkView: NetworkViewTableCell!
     @IBOutlet weak var protocolLabel: UILabel!
     @IBOutlet weak var connectionInfoView: ConnectionInfoView!
@@ -115,9 +116,10 @@ class ControlPanelView: UITableView {
         fastestServerLabel.isHidden = !Application.shared.settings.selectedServer.fastest || Application.shared.settings.selectedServer.fastestServerLabelShouldBePresented
     }
     
-    func updateAntiTracker() {
+    func updateAntiTracker(viewModel: VPNStatusViewModel) {
         antiTrackerSwitch.isOn = UserDefaults.shared.isAntiTracker
         antiTrackerSwitch.onTintColor = UserDefaults.shared.isAntiTrackerHardcore ? UIColor.init(named: Theme.ivpnDarkRed) : UIColor.init(named: Theme.ivpnBlue)
+        antiTrackerLabel.text = viewModel.antiTrackerText
     }
     
     func updateProtocol() {

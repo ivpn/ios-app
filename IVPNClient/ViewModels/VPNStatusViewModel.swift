@@ -78,6 +78,19 @@ struct VPNStatusViewModel {
         }
     }
     
+    var antiTrackerText: String {
+        if UserDefaults.shared.isAntiTracker {
+            switch status {
+            case .connected:
+                return "AntiTracker is enabled and actively blocking known trackers"
+            default:
+                return "AntiTracker will be enabled when connected to VPN"
+            }
+        }
+        
+        return "AntiTracker is disabled"
+    }
+    
     var connectToggleIsOn: Bool {
         switch status {
         case .connected, .connecting, .reasserting:
