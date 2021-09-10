@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.4.3 - 2021-09-10  
+
+[IMPROVED] Small UX improvements for the control panel  
+[FIXED] Connect to a random host not working with OpenVPN  
+[FIXED] Incorrect map position when connected to IVPN server with a custom VPN profile  
+
 ## 2.4.2 - 2021-07-13  
 
 [IMPROVED] Added IPv6 connection info to the Today Widget  
