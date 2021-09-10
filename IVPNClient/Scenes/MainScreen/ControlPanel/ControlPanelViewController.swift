@@ -104,6 +104,7 @@ class ControlPanelViewController: UITableViewController {
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
         evaluateReconnect(sender: sender as UIView)
+        controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
     }
     
     @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
@@ -252,6 +253,7 @@ class ControlPanelViewController: UITableViewController {
         vpnStatusViewModel.status = vpnStatus
         controlPanelView.updateVPNStatus(viewModel: vpnStatusViewModel, animated: animated)
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
+        controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
         
         if vpnStatus == .disconnected {
             hud.dismiss()
@@ -350,7 +352,7 @@ class ControlPanelViewController: UITableViewController {
         isMultiHop = UserDefaults.shared.isMultiHop
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
-        controlPanelView.updateAntiTracker()
+        controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
         controlPanelView.updateProtocol()
     }
     
@@ -360,7 +362,7 @@ class ControlPanelViewController: UITableViewController {
         Application.shared.connectionManager.needsToUpdateSelectedServer()
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
-        controlPanelView.updateAntiTracker()
+        controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
         controlPanelView.updateProtocol()
     }
     
@@ -377,6 +379,7 @@ class ControlPanelViewController: UITableViewController {
         Application.shared.connectionManager.needsToUpdateSelectedServer()
         Application.shared.connectionManager.installOnDemandRules()
         controlPanelView.updateServerNames()
+        controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
     }
     
     @objc private func protocolSelected() {
