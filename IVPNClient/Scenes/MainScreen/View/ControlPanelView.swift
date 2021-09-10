@@ -44,6 +44,7 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var entryServerIPv6Label: UILabel!
     @IBOutlet weak var fastestServerLabel: UIView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
+    @IBOutlet weak var antiTrackerLabel: UILabel!
     @IBOutlet weak var networkView: NetworkViewTableCell!
     @IBOutlet weak var protocolLabel: UILabel!
     @IBOutlet weak var connectionInfoView: ConnectionInfoView!
@@ -105,7 +106,7 @@ class ControlPanelView: UITableView {
     
     func updateServerLabels(viewModel: VPNStatusViewModel) {
         entryServerConnectionLabel.text = viewModel.connectToServerText
-        exitServerConnectionLabel.text = "Exit Server"
+        exitServerConnectionLabel.text = viewModel.connectToExitServerText
     }
     
     func updateServerNames() {
@@ -115,9 +116,10 @@ class ControlPanelView: UITableView {
         fastestServerLabel.isHidden = !Application.shared.settings.selectedServer.fastest || Application.shared.settings.selectedServer.fastestServerLabelShouldBePresented
     }
     
-    func updateAntiTracker() {
+    func updateAntiTracker(viewModel: VPNStatusViewModel) {
         antiTrackerSwitch.isOn = UserDefaults.shared.isAntiTracker
         antiTrackerSwitch.onTintColor = UserDefaults.shared.isAntiTrackerHardcore ? UIColor.init(named: Theme.ivpnDarkRed) : UIColor.init(named: Theme.ivpnBlue)
+        antiTrackerLabel.text = viewModel.antiTrackerText
     }
     
     func updateProtocol() {
@@ -139,7 +141,7 @@ class ControlPanelView: UITableView {
     
     private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView, ipv6Label: UILabel) {
         let serverViewModel = VPNServerViewModel(server: server)
-        label.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTimeForMainScreen)
+        label.text = serverViewModel.formattedServerNameForMainScreen
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
         ipv6Label.isHidden = !serverViewModel.showIPv6Label
     }

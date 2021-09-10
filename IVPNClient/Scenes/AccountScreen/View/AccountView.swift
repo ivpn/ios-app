@@ -35,6 +35,7 @@ class AccountView: UITableView {
     @IBOutlet weak var logOutActionButton: UIButton!
     @IBOutlet weak var planLabel: UILabel!
     @IBOutlet weak var planDescriptionHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addMoreTimeButton: UIButton!
     
     // MARK: - Properties -
     
@@ -49,6 +50,7 @@ class AccountView: UITableView {
         subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
         planLabel.textColor = .white
+        addMoreTimeButton.isHidden = Application.shared.serviceStatus.isLegacyAccount()
         
         switch serviceType {
         case .standard:
