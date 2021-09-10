@@ -241,7 +241,7 @@ extension NetworkProtectionViewController: NetworkProtectionHeaderTableViewCellD
         
         if isOn {
             NetworkManager.shared.startMonitoring {
-                Application.shared.connectionManager.evaluateConnection() { [self] error in
+                Application.shared.connectionManager.evaluateConnection { [self] error in
                     if error != nil {
                         showWireGuardKeysMissingError()
                     }

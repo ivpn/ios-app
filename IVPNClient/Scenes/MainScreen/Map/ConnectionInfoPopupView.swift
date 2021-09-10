@@ -83,7 +83,7 @@ class ConnectionInfoPopupView: UIView {
         didSet {
             statusLabel.text = vpnStatusViewModel.popupStatusText
             flagImage.image = UIImage.init(named: viewModel.imageNameForCountryCode)
-            locationLabel.text = "\(viewModel.city), \(viewModel.countryCode)"
+            locationLabel.text = viewModel.location
         }
     }
     
