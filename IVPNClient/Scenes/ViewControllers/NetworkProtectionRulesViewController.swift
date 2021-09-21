@@ -31,7 +31,7 @@ class NetworkProtectionRulesViewController: UITableViewController {
     
     @IBAction func toggleUntrustedConnect(_ sender: UISwitch) {
         defaults.set(sender.isOn, forKey: UserDefaults.Key.networkProtectionUntrustedConnect)
-        Application.shared.connectionManager.evaluateConnection() { [self] error in
+        Application.shared.connectionManager.evaluateConnection { [self] error in
             if error != nil {
                 showWireGuardKeysMissingError()
             }
@@ -40,7 +40,7 @@ class NetworkProtectionRulesViewController: UITableViewController {
     
     @IBAction func toggleTrustedDisconnect(_ sender: UISwitch) {
         defaults.set(sender.isOn, forKey: UserDefaults.Key.networkProtectionTrustedDisconnect)
-        Application.shared.connectionManager.evaluateConnection() { [self] error in
+        Application.shared.connectionManager.evaluateConnection { [self] error in
             if error != nil {
                 showWireGuardKeysMissingError()
             }

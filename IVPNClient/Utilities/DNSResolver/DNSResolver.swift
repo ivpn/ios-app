@@ -39,9 +39,7 @@ final class DNSResolver {
     /// - parameter timeout:    The connection timeout.
     /// - parameter completion: A completion block that will be called both on failure and success with a list
     ///                         of IPs.
-    static func resolve(host: String, timeout: TimeInterval = 8.0,
-                        completion: @escaping ([InternetAddress]) -> Void)
-    {
+    static func resolve(host: String, timeout: TimeInterval = 8.0, completion: @escaping ([InternetAddress]) -> Void) {
         let callback: CFHostClientCallBack = { host, _, _, info in
             guard let info = info else {
                 return

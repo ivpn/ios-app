@@ -2661,7 +2661,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 2.4.1;
+				MARKETING_VERSION = 2.4.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
@@ -2703,7 +2703,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 2.4.1;
+				MARKETING_VERSION = 2.4.4;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3000,7 +3000,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wireguard-go-bridge",
 				);
-				MARKETING_VERSION = 2.4.1;
+				MARKETING_VERSION = 2.4.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.ivpn.clients.ios.wireguard-tunnel-provider";
