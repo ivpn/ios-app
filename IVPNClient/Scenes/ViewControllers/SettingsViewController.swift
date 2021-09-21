@@ -149,6 +149,10 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func extendSubscription(_ sender: Any) {
+        guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            return
+        }
+        
         present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
     
@@ -258,7 +262,7 @@ class SettingsViewController: UITableViewController {
                 return false
             }
             
-            if !Application.shared.serviceStatus.isActive {
+            if !Application.shared.serviceStatus.isActive && !Application.shared.serviceStatus.isLegacyAccount() {
                 present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
                 deselectRow(sender: sender)
                 return false
@@ -285,6 +289,10 @@ class SettingsViewController: UITableViewController {
     }
     
     @objc fileprivate func agreedToTermsOfService() {
+        guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            return
+        }
+        
         present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
     

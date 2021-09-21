@@ -26,7 +26,7 @@ import Foundation
 extension URL {
     
     func getTopLevelSubdomain() -> String {
-        if let hostName = host  {
+        if let hostName = host {
             let subStrings = hostName.components(separatedBy: ".")
             var domainName = ""
             let count = subStrings.count

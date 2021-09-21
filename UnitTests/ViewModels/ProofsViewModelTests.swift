@@ -56,4 +56,12 @@ class ProofsViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.provider, "IVPN")
     }
     
+    func test_location() {
+        viewModel.model = GeoLookup(ipAddress: "0.0.0.0", countryCode: "DE", country: "Germany", city: "Berlin", isIvpnServer: false, isp: "ISP Provider", latitude: 0, longitude: 0)
+        XCTAssertEqual(viewModel.location, "Berlin, DE")
+        
+        viewModel.model = GeoLookup(ipAddress: "0.0.0.0", countryCode: "DE", country: "Germany", city: "", isIvpnServer: false, isp: "ISP Provider", latitude: 0, longitude: 0)
+        XCTAssertEqual(viewModel.location, "Germany")
+    }
+    
 }

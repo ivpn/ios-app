@@ -266,6 +266,10 @@ extension LoginViewController {
         
         KeyChain.username = (self.userName.text ?? "").trim()
         
+        guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            return
+        }
+        
         let viewController = NavigationManager.getSubscriptionViewController()
         viewController.presentationController?.delegate = self
         present(viewController, animated: true, completion: nil)

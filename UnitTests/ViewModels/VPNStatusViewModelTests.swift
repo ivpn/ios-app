@@ -60,13 +60,13 @@ class VPNStatusViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.connectToServerText, "Disconnecting from")
         
         viewModel.status = .connected
-        XCTAssertEqual(viewModel.connectToServerText, "Connected to")
+        XCTAssertEqual(viewModel.connectToServerText, "Traffic is routed via server")
         
         viewModel.status = .disconnected
-        XCTAssertEqual(viewModel.connectToServerText, "Connect to")
+        XCTAssertEqual(viewModel.connectToServerText, "Fastest available server")
         
         viewModel.status = .invalid
-        XCTAssertEqual(viewModel.connectToServerText, "Connect to")
+        XCTAssertEqual(viewModel.connectToServerText, "Fastest available server")
     }
     
     func test_connectToggleIsOn() {

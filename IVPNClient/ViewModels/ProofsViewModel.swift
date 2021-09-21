@@ -60,6 +60,10 @@ struct ProofsViewModel {
             return ""
         }
         
+        guard !model.city.isEmpty else {
+            return model.country
+        }
+        
         return "\(model.city), \(model.countryCode)"
     }
     
