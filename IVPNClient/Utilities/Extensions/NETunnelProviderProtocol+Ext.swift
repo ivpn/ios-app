@@ -149,6 +149,9 @@ extension NETunnelProviderProtocol {
         configuration.serverAddress = peer.endpoint
         configuration.providerConfiguration = tunnel.generateProviderConfiguration()
         configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
+        if #available(iOS 14.0, *) {
+            configuration.includeAllNetworks = UserDefaults.shared.killSwitch
+        }
         
         return configuration
     }
