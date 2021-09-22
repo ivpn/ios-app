@@ -125,56 +125,30 @@ extension NETunnelProviderProtocol {
             KeyChain.wgIpv6Host = ipv6.localIP
         }
         
-//        let peer = Peer(
-//            publicKey: host.publicKey,
-//            allowedIPs: Config.wgPeerAllowedIPs,
-//            endpoint: Peer.endpoint(host: host.host, port: settings.port()),
-//            persistentKeepalive: Config.wgPeerPersistentKeepalive
-//        )
-//        let interface = Interface(
-//            addresses: addresses,
-//            listenPort: Config.wgInterfaceListenPort,
-//            privateKey: KeyChain.wgPrivateKey,
-//            dns: host.localIPAddress()
-//        )
-//        let tunnel = Tunnel(
-//            tunnelIdentifier: UIDevice.uuidString(),
-//            title: Config.wireguardTunnelTitle,
-//            interface: interface,
-//            peers: [peer]
-//        )
+        let peer = Peer(
+            publicKey: host.publicKey,
+            allowedIPs: Config.wgPeerAllowedIPs,
+            endpoint: Peer.endpoint(host: host.host, port: settings.port()),
+            persistentKeepalive: Config.wgPeerPersistentKeepalive
+        )
+        let interface = Interface(
+            addresses: addresses,
+            listenPort: Config.wgInterfaceListenPort,
+            privateKey: KeyChain.wgPrivateKey,
+            dns: host.localIPAddress()
+        )
+        let tunnel = Tunnel(
+            tunnelIdentifier: UIDevice.uuidString(),
+            title: Config.wireguardTunnelTitle,
+            interface: interface,
+            peers: [peer]
+        )
         
-        guard let publicKey = PublicKey(base64Key: host.publicKey) else {
-            return NETunnelProviderProtocol()
-        }
-        guard let privateKey = PrivateKey(base64Key: KeyChain.wgPrivateKey ?? "") else {
-            return NETunnelProviderProtocol()
-        }
-        
-        var peerConfiguration = PeerConfiguration(publicKey: publicKey)
-        let allowedIPs = [IPAddressRange(from: "0.0.0.0/0")!, IPAddressRange(from: "::/0")!]
-        peerConfiguration.allowedIPs = allowedIPs
-        let endpointHost = IPv4Address(host.host)!
-        let endpointPort = NWEndpoint.Port(String(settings.port()))!
-        peerConfiguration.endpoint = Endpoint(host: .ipv4(endpointHost), port: endpointPort)
-        peerConfiguration.persistentKeepAlive = UInt16(Config.wgPeerPersistentKeepalive)
-        
-        var interfaceConfiguration = InterfaceConfiguration(privateKey: privateKey)
-        let addressesRange = [IPAddressRange(from: addresses!)!]
-        interfaceConfiguration.addresses = addressesRange
-        interfaceConfiguration.listenPort = UInt16(Config.wgInterfaceListenPort)
-        let dnsServer = [DNSServer(address: IPv4Address(host.localIPAddress())!)]
-        interfaceConfiguration.dns = dnsServer
-        
-        let tunnelConfiguration = TunnelConfiguration(name: Config.wireguardTunnelTitle, interface: interfaceConfiguration, peers: [peerConfiguration])
-        
-        let configuration = NETunnelProviderProtocol(tunnelConfiguration: tunnelConfiguration, previouslyFrom: NETunnelProviderProtocol()) ?? NETunnelProviderProtocol()
+        let configuration = NETunnelProviderProtocol()
         configuration.providerBundleIdentifier = Config.wireguardTunnelProvider
-        configuration.serverAddress = peerConfiguration.endpoint?.stringRepresentation
+        configuration.serverAddress = peer.endpoint
+        configuration.providerConfiguration = tunnel.generateProviderConfiguration()
         configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
-        if #available(iOS 14.0, *) {
-            configuration.includeAllNetworks = UserDefaults.shared.killSwitch
-        }
         
         return configuration
     }
