@@ -236,6 +236,8 @@
 		82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293BE21CCD49A000B74EC /* NavigationController.swift */; };
 		82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293C221CCDA42000B74EC /* UIColor+Ext.swift */; };
 		82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
+		82C34D6E26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */; };
+		82C34D6F26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */; };
 		82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9739F217DFA9C00CE06D4 /* Host.swift */; };
 		82CE599025ED3C7A0078099D /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE598F25ED3C7A0078099D /* URL+Ext.swift */; };
 		82CE599925ED48D60078099D /* InternetAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE599825ED48D60078099D /* InternetAddress.swift */; };
@@ -594,6 +596,7 @@
 		82C293BE21CCD49A000B74EC /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		82C293C221CCDA42000B74EC /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
+		82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardEndpoint.swift; sourceTree = "<group>"; };
 		82C9739F217DFA9C00CE06D4 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
 		82CE598F25ED3C7A0078099D /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		82CE599825ED48D60078099D /* InternetAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetAddress.swift; sourceTree = "<group>"; };
@@ -1148,6 +1151,7 @@
 				8292E1A82174C11600123538 /* Interface.swift */,
 				8292E1AA2174C12200123538 /* Tunnel.swift */,
 				82F638CB217DC25600410318 /* CIDRAddress.swift */,
+				82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */,
 			);
 			path = WireGuard;
 			sourceTree = "<group>";
@@ -2102,6 +2106,7 @@
 				824B86B926D3D16100D0101A /* FileManager+Extension.swift in Sources */,
 				820EA8692322406000E16B2D /* InterfaceResult.swift in Sources */,
 				824B86BD26D3D16100D0101A /* NETunnelProviderProtocol+Extension.swift in Sources */,
+				82C34D6F26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */,
 				824B86C126D3D16100D0101A /* ErrorNotifier.swift in Sources */,
 				824B86BF26D3D16100D0101A /* ringlogger.c in Sources */,
 				824B86BB26D3D16100D0101A /* NotificationToken.swift in Sources */,
@@ -2285,6 +2290,7 @@
 				82AAF0E92253A4A8005E792F /* StaticWebViewController.swift in Sources */,
 				8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */,
 				824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */,
+				82C34D6E26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */,
 				8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */,
 				82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */,
 				9C6942371DD218A900F9A801 /* AccessDetails.swift in Sources */,
