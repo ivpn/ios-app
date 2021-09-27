@@ -34,7 +34,7 @@ class AccountViewController: UITableViewController {
     
     private let hud = JGProgressHUD(style: .dark)
     private var viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
-    private var serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
+    private var serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
     
     // MARK: - @IBActions -
     

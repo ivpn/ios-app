@@ -39,7 +39,7 @@ class AccountView: UITableView {
     
     // MARK: - Properties -
     
-    private var serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
+    private var serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
     
     // MARK: - Methods -
     

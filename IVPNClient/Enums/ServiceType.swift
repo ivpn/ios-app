@@ -26,4 +26,8 @@ import Foundation
 enum ServiceType {
     case standard
     case pro
+    
+    static func getType(currentPlan: String?) -> ServiceType {
+        return currentPlan?.hasPrefix("IVPN Pro") ?? false ? .pro : .standard
+    }
 }

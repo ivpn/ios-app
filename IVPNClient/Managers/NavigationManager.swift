@@ -46,7 +46,7 @@ class NavigationManager {
         navController?.modalPresentationStyle = .formSheet
         
         if let viewController = navController?.topViewController as? SelectPlanViewController {
-            let serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
+            let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
             viewController.changingPlan = true
             viewController.service = Service(type: serviceType, duration: .month)
         }
@@ -72,7 +72,7 @@ class NavigationManager {
         navController?.modalPresentationStyle = .formSheet
         
         if let viewController = navController?.topViewController as? PaymentViewController {
-            let serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
+            let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
             viewController.extendingService = true
             viewController.service = Service(type: serviceType, duration: .year)
         }
