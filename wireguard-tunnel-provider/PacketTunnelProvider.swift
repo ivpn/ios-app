@@ -26,6 +26,14 @@ import NetworkExtension
 import WireGuardKit
 import os
 
+enum PacketTunnelProviderError: String, Error {
+    case savedProtocolConfigurationIsInvalid
+    case dnsResolutionFailure
+    case couldNotStartBackend
+    case couldNotDetermineFileDescriptor
+    case couldNotSetNetworkSettings
+}
+
 class PacketTunnelProvider: NEPacketTunnelProvider {
     
     private var handle: Int32?
