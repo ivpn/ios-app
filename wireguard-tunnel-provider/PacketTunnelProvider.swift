@@ -97,10 +97,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler(error)
         }
         
-        let activationAttemptId = options?["activationAttemptId"] as? String
         Logger.configureGlobal(tagged: "NET", withFilePath: FileManager.logFileURL?.path)
         setupLogging()
-        wg_log(.info, message: "Starting tunnel from the " + (activationAttemptId == nil ? "OS directly, rather than the app" : "app"))
+        wg_log(.info, message: "Starting WireGuard tunnel")
         
         setTunnelNetworkSettings(tunnelSettings) { error in
             if error != nil {
