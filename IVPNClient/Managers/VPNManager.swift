@@ -406,4 +406,30 @@ class VPNManager {
         completion(nil)
     }
     
+    func getWireGuardLog(completion: @escaping (String?) -> Void) {
+        guard let session = wireguardManager?.connection as? NETunnelProviderSession else {
+            completion("Error")
+            return
+        }
+        
+        do {
+            try session.sendProviderMessage(Message.requestLog.data) { data in
+                completion(nil)
+                return
+            }
+        } catch {
+            completion("Error")
+            return
+        }
+        
+        completion("Error")
+    }
+    
+}
+
+private enum Message: UInt8 {
+    case requestLog = 99
+    var data: Data {
+        return Data([self.rawValue])
+    }
 }

@@ -503,6 +503,12 @@ class ConnectionManager {
         }
     }
     
+    func getWireGuardLog(completion: @escaping (String?) -> Void) {
+        vpnManager.getWireGuardLog { error in
+            completion(error)
+        }
+    }
+    
     func updateOpenVPNLogFile() {
         guard UserDefaults.shared.isLogging else { return }
         guard Application.shared.settings.connectionProtocol.tunnelType() == .openvpn else { return }

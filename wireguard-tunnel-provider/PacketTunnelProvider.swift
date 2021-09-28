@@ -24,6 +24,7 @@
 import Network
 import NetworkExtension
 import WireGuardKit
+import os
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
     
@@ -96,6 +97,11 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler(error)
         }
         
+        let activationAttemptId = options?["activationAttemptId"] as? String
+        Logger.configureGlobal(tagged: "NET", withFilePath: FileManager.logFileURL?.path)
+        setupLogging()
+        wg_log(.info, message: "Starting tunnel from the " + (activationAttemptId == nil ? "OS directly, rather than the app" : "app"))
+        
         setTunnelNetworkSettings(tunnelSettings) { error in
             if error != nil {
                 self.tunnelSetupFailed()
@@ -107,6 +113,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
+        wg_log(.info, staticMessage: "Stopping tunnel")
+        
         networkMonitor?.cancel()
         networkMonitor = nil
         
@@ -115,6 +123,16 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         
         completionHandler()
+    }
+    
+    override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)? = nil) {
+        wg_log(.info, message: "Handle App Message size: \(messageData.count)")
+        
+        if messageData.count == 1 && messageData[0] == 99 {
+            flushLogsToFile()
+        } else {
+            completionHandler?(nil)
+        }
     }
     
     deinit {
@@ -246,4 +264,31 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         wgSetConfig(handle, settings)
     }
     
+    private func setupLogging() {
+        Logger.configureGlobal(tagged: "IVPN-WG", withFilePath: FileManager.logFileURL?.path)
+    }
+    
+    private func flushLogsToFile() {
+        guard let path = FileManager.logTextFileURL?.path else { return }
+        if Logger.global == nil {
+            setupLogging()
+        }
+        if Logger.global?.writeLog(to: path) ?? false {
+            wg_log(.info, message: "flushLogsToFile written to file \(path) ")
+        } else {
+            wg_log(.info, message: "flushLogsToFile error while writing to file \(path) ")
+        }
+    }
+    
+}
+
+extension WireGuardLogLevel {
+    var osLogLevel: OSLogType {
+        switch self {
+        case .verbose:
+            return .debug
+        case .error:
+            return .error
+        }
+    }
 }
