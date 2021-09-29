@@ -408,7 +408,6 @@ class VPNManager {
     
     func getWireGuardLog(completion: @escaping (String?) -> Void) {
         guard let session = wireguardManager?.connection as? NETunnelProviderSession else {
-            completion("Error")
             return
         }
         
@@ -419,10 +418,7 @@ class VPNManager {
             }
         } catch {
             completion("Error")
-            return
         }
-        
-        completion("Error")
     }
     
 }

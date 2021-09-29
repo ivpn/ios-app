@@ -105,9 +105,11 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler(error)
         }
         
-        Logger.configureGlobal(tagged: "NET", withFilePath: FileManager.logFileURL?.path)
+        Logger.configureGlobal(tagged: "INFO", withFilePath: FileManager.logFileURL?.path)
         setupLogging()
-        wg_log(.info, message: "Starting WireGuard tunnel")
+        wg_log(.info, message: "Starting tunnel")
+        wg_log(.info, message: "Public key: \(KeyChain.wgPublicKey ?? "")")
+        wg_log(.info, message: "Addresses: \(addresses)")
         
         setTunnelNetworkSettings(tunnelSettings) { error in
             if error != nil {
@@ -147,6 +149,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func tunnelSetupFailed() {
+        wg_log(.error, message: "Tunnel setup failed")
         UserDefaults.shared.set(".tunnelSetupFailed", forKey: UserDefaults.Key.wireguardTunnelProviderError)
         UserDefaults.shared.synchronize()
     }
@@ -163,6 +166,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func regenerateKeys(completion: @escaping (Error?) -> Void) {
+        wg_log(.info, message: "Rotating keys")
         ExtensionKeyManager.shared.upgradeKey { privateKey, ipAddress in
             guard let privateKey = privateKey, let ipAddress = ipAddress else {
                 completion(nil)
@@ -263,16 +267,18 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         guard let handle = handle else { return }
         let settings = self.settings.updateAttribute(key: key, value: value)
         updatedSettings = settings
+        wg_log(.info, message: "Configuration updated")
         wgSetConfig(handle, settings)
     }
     
     private func pathUpdate(path: Network.NWPath) {
         guard let handle = handle else { return }
+        wg_log(.info, message: "Network change detected: \(path.debugDescription)")
         wgSetConfig(handle, settings)
     }
     
     private func setupLogging() {
-        Logger.configureGlobal(tagged: "IVPN-WG", withFilePath: FileManager.logFileURL?.path)
+        Logger.configureGlobal(tagged: "INFO", withFilePath: FileManager.logFileURL?.path)
     }
     
     private func flushLogsToFile() {
