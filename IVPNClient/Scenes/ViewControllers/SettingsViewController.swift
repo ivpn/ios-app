@@ -343,29 +343,33 @@ class SettingsViewController: UITableViewController {
         }
         
         Application.shared.connectionManager.getWireGuardLog { error in
-            var wireGuardLog = ""
-            let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
-            if let file = NSData(contentsOfFile: filePath) {
-                wireGuardLog = String(data: file as Data, encoding: .utf8) ?? ""
-            }
-            
-            FileSystemManager.updateLogFile(newestLog: wireGuardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-            
             let composer = MFMailComposeViewController()
             composer.mailComposeDelegate = self
             composer.setToRecipients([Config.contactSupportMail])
             
-            let file = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
-            if let fileData = NSData(contentsOfFile: file) {
-                composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName()).txt")
+            if error == nil {
+                var wireGuardLog = ""
+                let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
+                if let file = NSData(contentsOfFile: filePath) {
+                    wireGuardLog = String(data: file as Data, encoding: .utf8) ?? ""
+                }
+                
+                FileSystemManager.updateLogFile(newestLog: wireGuardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+                
+                let logFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
+                if let fileData = NSData(contentsOfFile: logFile) {
+                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "wireguard-")).txt")
+                }
             }
             
             Application.shared.connectionManager.getOpenVPNLog { openVPNLog in
-                FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-                
-                let file = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                if let fileData = NSData(contentsOfFile: file) {
-                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName()).txt")
+                if openVPNLog != nil {
+                    FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+                    
+                    let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
+                    if let fileData = NSData(contentsOfFile: logFile) {
+                        composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "openvpn-")).txt")
+                    }
                 }
                 
                 self.present(composer, animated: true, completion: nil)

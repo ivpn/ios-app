@@ -49,8 +49,6 @@ public class Logger {
         if let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
             appVersion += " (\(appBuild))"
         }
-
-        Logger.global?.log(message: "WG Extension version: \(appVersion)")
     }
 }
 
