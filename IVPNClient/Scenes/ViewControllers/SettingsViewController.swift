@@ -139,6 +139,7 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func toggleLogging(_ sender: UISwitch) {
         FileSystemManager.resetLogFile(name: Config.openVPNLogFile)
+        FileSystemManager.resetLogFile(name: Config.wireGuardLogFile)
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
         updateCellInset(cell: loggingCell, inset: sender.isOn)
         tableView.reloadData()
@@ -341,19 +342,34 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        Application.shared.connectionManager.getOpenVPNLog { log in
-            FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+        Application.shared.connectionManager.getWireGuardLog { error in
+            var wireGuardLog = ""
+            let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
+            if let file = NSData(contentsOfFile: filePath) {
+                wireGuardLog = String(data: file as Data, encoding: .utf8) ?? ""
+            }
+            
+            FileSystemManager.updateLogFile(newestLog: wireGuardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
             
             let composer = MFMailComposeViewController()
             composer.mailComposeDelegate = self
             composer.setToRecipients([Config.contactSupportMail])
             
-            let file = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
+            let file = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
             if let fileData = NSData(contentsOfFile: file) {
                 composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName()).txt")
             }
             
-            self.present(composer, animated: true, completion: nil)
+            Application.shared.connectionManager.getOpenVPNLog { openVPNLog in
+                FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+                
+                let file = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
+                if let fileData = NSData(contentsOfFile: file) {
+                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName()).txt")
+                }
+                
+                self.present(composer, animated: true, completion: nil)
+            }
         }
     }
     

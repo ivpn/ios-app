@@ -72,6 +72,7 @@ class FileSystemManager {
     
     static func clearSession() {
         resetLogFile(name: Config.openVPNLogFile)
+        resetLogFile(name: Config.wireGuardLogFile)
     }
     
     // MARK: - App Group shared files -
@@ -137,6 +138,10 @@ class FileSystemManager {
     static func createLogFiles() {
         if fileExists(name: Config.openVPNLogFile) {
             resetLogFile(name: Config.openVPNLogFile)
+        }
+        
+        if fileExists(name: Config.wireGuardLogFile) {
+            resetLogFile(name: Config.wireGuardLogFile)
         }
     }
     
