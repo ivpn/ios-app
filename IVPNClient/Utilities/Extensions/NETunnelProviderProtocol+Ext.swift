@@ -79,7 +79,7 @@ extension NETunnelProviderProtocol {
             username: credentials.username
         )
         proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
-        if #available(iOS 14.0, *) {
+        if #available(iOS 15.1, *) {
             proto.includeAllNetworks = UserDefaults.shared.killSwitch
         }
         
@@ -147,7 +147,7 @@ extension NETunnelProviderProtocol {
         configuration.serverAddress = peer.endpoint
         configuration.providerConfiguration = tunnel.generateProviderConfiguration()
         configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
-        if #available(iOS 14.0, *) {
+        if #available(iOS 15.1, *) {
             configuration.includeAllNetworks = UserDefaults.shared.killSwitch
         }
         
