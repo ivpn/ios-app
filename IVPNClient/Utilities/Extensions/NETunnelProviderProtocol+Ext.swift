@@ -68,7 +68,7 @@ extension NETunnelProviderProtocol {
         
         var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.shouldDebug = true
-        builder.debugLogFormat = "$Dyyyy-MMM-dd HH:mm:ss$d $L $M"
+        builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss$d $L $M"
         builder.masksPrivateData = true
         
         let configuration = builder.build()
