@@ -290,7 +290,7 @@
 		82F81A41224CF69900CB778B /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A3A224CF69900CB778B /* ArrayTests.swift */; };
 		82F81A42224CF69900CB778B /* UIDeviceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A3B224CF69900CB778B /* UIDeviceTests.swift */; };
 		82F81A43224CF69900CB778B /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A3C224CF69900CB778B /* UserDefaultsTests.swift */; };
-		82F81A49224CFADB00CB778B /* EndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A44224CFADB00CB778B /* EndpointTests.swift */; };
+		82F81A49224CFADB00CB778B /* WireGuardEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A44224CFADB00CB778B /* WireGuardEndpointTests.swift */; };
 		82F81A4A224CFADB00CB778B /* InterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A45224CFADB00CB778B /* InterfaceTests.swift */; };
 		82F81A4B224CFADB00CB778B /* CIDRAddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A46224CFADB00CB778B /* CIDRAddressTests.swift */; };
 		82F81A4C224CFADB00CB778B /* PeerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F81A47224CFADB00CB778B /* PeerTests.swift */; };
@@ -629,7 +629,7 @@
 		82F81A3A224CF69900CB778B /* ArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		82F81A3B224CF69900CB778B /* UIDeviceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceTests.swift; sourceTree = "<group>"; };
 		82F81A3C224CF69900CB778B /* UserDefaultsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
-		82F81A44224CFADB00CB778B /* EndpointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointTests.swift; sourceTree = "<group>"; };
+		82F81A44224CFADB00CB778B /* WireGuardEndpointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WireGuardEndpointTests.swift; sourceTree = "<group>"; };
 		82F81A45224CFADB00CB778B /* InterfaceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceTests.swift; sourceTree = "<group>"; };
 		82F81A46224CFADB00CB778B /* CIDRAddressTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIDRAddressTests.swift; sourceTree = "<group>"; };
 		82F81A47224CFADB00CB778B /* PeerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerTests.swift; sourceTree = "<group>"; };
@@ -1408,7 +1408,7 @@
 			isa = PBXGroup;
 			children = (
 				82F81A46224CFADB00CB778B /* CIDRAddressTests.swift */,
-				82F81A44224CFADB00CB778B /* EndpointTests.swift */,
+				82F81A44224CFADB00CB778B /* WireGuardEndpointTests.swift */,
 				82F81A45224CFADB00CB778B /* InterfaceTests.swift */,
 				82F81A47224CFADB00CB778B /* PeerTests.swift */,
 				82F81A48224CFADB00CB778B /* TunnelTests.swift */,
@@ -1979,7 +1979,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82F81A49224CFADB00CB778B /* EndpointTests.swift in Sources */,
+				82F81A49224CFADB00CB778B /* WireGuardEndpointTests.swift in Sources */,
 				82B81E3B235ED845005986E8 /* KeyChainTests.swift in Sources */,
 				82B81E3A235ED845005986E8 /* SessionManagerTests.swift in Sources */,
 				82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */,
@@ -3345,7 +3345,7 @@
 			repositoryURL = "https://git.zx2c4.com/wireguard-apple";
 			requirement = {
 				kind = revision;
-				revision = 79aeb0be0d0aa3f6c8bd24309aaa8dcf03216fb4;
+				revision = 23618f994f17d8ad8f2f65d79b4a1e8a0830b334;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
