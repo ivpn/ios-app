@@ -94,6 +94,7 @@ class ConnectionManager {
                         return
                     }
                     self.updateOpenVPNLogFile()
+                    self.updateWireGuardLogFile()
                     self.reconnectAutomatically = false
                     if self.actionType == .connect {
                         self.evaluateCloseApp()
@@ -105,6 +106,7 @@ class ConnectionManager {
             
             if status == .disconnecting {
                 self.updateOpenVPNLogFile()
+                self.updateWireGuardLogFile()
             }
             
             if (status == .disconnected || status == .invalid) && self.reconnectAutomatically {
@@ -509,12 +511,27 @@ class ConnectionManager {
         }
     }
     
-    func updateOpenVPNLogFile() {
+    private func updateOpenVPNLogFile() {
         guard UserDefaults.shared.isLogging else { return }
         guard Application.shared.settings.connectionProtocol.tunnelType() == .openvpn else { return }
         
         getOpenVPNLog { log in
             FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+        }
+    }
+    
+    private func updateWireGuardLogFile() {
+        guard UserDefaults.shared.isLogging else { return }
+        guard Application.shared.settings.connectionProtocol.tunnelType() == .wireguard else { return }
+        
+        getWireGuardLog { _ in
+            var wireGuardLog: String? = nil
+            let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
+            if let file = NSData(contentsOfFile: filePath) {
+                wireGuardLog = String(data: file as Data, encoding: .utf8) ?? ""
+            }
+            
+            FileSystemManager.updateLogFile(newestLog: wireGuardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
         }
     }
     
