@@ -164,6 +164,7 @@
 		82774855237596DF0061BD46 /* OpenVPNConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82774854237596DF0061BD46 /* OpenVPNConf.swift */; };
 		8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */; };
 		8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CE2211A602007C6F15 /* GeoLookup.swift */; };
+		8278087D270250080099E5C2 /* ServiceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278087C270250080099E5C2 /* ServiceTypeTests.swift */; };
 		827855B92472B27F00B3B6BD /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827855B82472B27F00B3B6BD /* Account.swift */; };
 		8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */; };
 		8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */; };
@@ -519,6 +520,7 @@
 		82774854237596DF0061BD46 /* OpenVPNConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenVPNConf.swift; sourceTree = "<group>"; };
 		8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofsViewModel.swift; sourceTree = "<group>"; };
 		8277F1CE2211A602007C6F15 /* GeoLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLookup.swift; sourceTree = "<group>"; };
+		8278087C270250080099E5C2 /* ServiceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypeTests.swift; sourceTree = "<group>"; };
 		827855B82472B27F00B3B6BD /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardRegenerationRateCell.swift; sourceTree = "<group>"; };
 		8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCircleLayer.swift; sourceTree = "<group>"; };
@@ -1424,6 +1426,7 @@
 				82F81A35224CF69900CB778B /* ConnectionSettingsTests.swift */,
 				82F81A36224CF69900CB778B /* AddressTypeTests.swift */,
 				824B141B2609D5E700766B05 /* DNSProtocolTypeTests.swift */,
+				8278087C270250080099E5C2 /* ServiceTypeTests.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1981,6 +1984,7 @@
 			files = (
 				82F81A49224CFADB00CB778B /* WireGuardEndpointTests.swift in Sources */,
 				82B81E3B235ED845005986E8 /* KeyChainTests.swift in Sources */,
+				8278087D270250080099E5C2 /* ServiceTypeTests.swift in Sources */,
 				82B81E3A235ED845005986E8 /* SessionManagerTests.swift in Sources */,
 				82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */,
 				82F81A43224CF69900CB778B /* UserDefaultsTests.swift in Sources */,

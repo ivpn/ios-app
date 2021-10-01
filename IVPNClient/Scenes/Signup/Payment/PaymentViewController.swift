@@ -124,7 +124,7 @@ class PaymentViewController: UITableViewController {
         
         if extendingService {
             if Application.shared.authentication.isLoggedIn && !Application.shared.serviceStatus.isNewStyleAccount() {
-                let serviceType: ServiceType = Application.shared.serviceStatus.currentPlan == "IVPN Pro" ? .pro : .standard
+                let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
                 service = Service(type: serviceType, duration: .year)
             }
             
