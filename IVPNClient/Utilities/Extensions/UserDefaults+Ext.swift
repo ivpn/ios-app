@@ -35,6 +35,7 @@ extension UserDefaults {
         static let isMultiHop = "isMultiHop"
         static let exitServerLocation = "exitServerLocation"
         static let isLogging = "isLogging"
+        static let isLoggingWG = "isLoggingWG"
         static let networkProtectionEnabled = "networkProtection.enabled"
         static let networkProtectionUntrustedConnect = "networkProtection.untrusted.connect"
         static let networkProtectionTrustedDisconnect = "networkProtection.trusted.disconnect"
@@ -101,6 +102,10 @@ extension UserDefaults {
     
     @objc dynamic var isLogging: Bool {
         return bool(forKey: Key.isLogging)
+    }
+    
+    @objc dynamic var isLoggingWG: Bool {
+        return bool(forKey: Key.isLoggingWG)
     }
     
     @objc dynamic var networkProtectionEnabled: Bool {
@@ -229,6 +234,7 @@ extension UserDefaults {
     static func clearSession() {
         shared.removeObject(forKey: Key.isMultiHop)
         shared.removeObject(forKey: Key.isLogging)
+        shared.removeObject(forKey: Key.isLoggingWG)
         shared.removeObject(forKey: Key.networkProtectionEnabled)
         shared.removeObject(forKey: Key.networkProtectionUntrustedConnect)
         shared.removeObject(forKey: Key.networkProtectionTrustedDisconnect)
