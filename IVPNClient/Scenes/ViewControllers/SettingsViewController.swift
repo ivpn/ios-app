@@ -138,11 +138,15 @@ class SettingsViewController: UITableViewController {
         evaluateReconnect(sender: sender as UIView)
     }
     
+    @IBAction func toggleWGLogging(_ sender: UISwitch) {
+        FileSystemManager.resetLogFile(name: Config.wireGuardLogFile)
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLoggingWG)
+        tableView.reloadData()
+    }
+    
     @IBAction func toggleLogging(_ sender: UISwitch) {
         FileSystemManager.resetLogFile(name: Config.openVPNLogFile)
-        FileSystemManager.resetLogFile(name: Config.wireGuardLogFile)
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
-        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLoggingWG)
         updateCellInset(cell: loggingCell, inset: sender.isOn)
         tableView.reloadData()
     }
@@ -415,7 +419,8 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
         if indexPath.section == 3 && indexPath.row == 7 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 3 && indexPath.row == 8 { return 60 }
+        if indexPath.section == 3 && indexPath.row == 9 && !(loggingSwitch.isOn || loggingWGSwitch.isOn) { return 0 }
         
         if indexPath.section == 3 && indexPath.row == 3 {
             if #available(iOS 15.1, *) {
