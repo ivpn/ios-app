@@ -66,6 +66,7 @@ class ConnectionInfoView: UIStackView {
     // MARK: - Methods -
     
     func setup() {
+        ipProtocolIsHidden = true
         ipAddressErrorLabel.icon(text: "Not available", imageName: "icon-wifi-off", alignment: .left)
         locationErrorLabel.icon(text: "Not available", imageName: "icon-wifi-off", alignment: .left)
         providerErrorLabel.icon(text: "Not available", imageName: "icon-wifi-off", alignment: .left)
