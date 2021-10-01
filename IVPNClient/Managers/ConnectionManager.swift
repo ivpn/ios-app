@@ -512,8 +512,12 @@ class ConnectionManager {
     }
     
     private func updateOpenVPNLogFile() {
-        guard UserDefaults.shared.isLogging else { return }
-        guard Application.shared.settings.connectionProtocol.tunnelType() == .openvpn else { return }
+        guard UserDefaults.shared.isLogging else {
+            return
+        }
+        guard Application.shared.settings.connectionProtocol.tunnelType() == .openvpn else {
+            return
+        }
         
         getOpenVPNLog { log in
             FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
@@ -521,8 +525,12 @@ class ConnectionManager {
     }
     
     private func updateWireGuardLogFile() {
-        guard UserDefaults.shared.isLogging else { return }
-        guard Application.shared.settings.connectionProtocol.tunnelType() == .wireguard else { return }
+        guard UserDefaults.shared.isLoggingWG else {
+            return
+        }
+        guard Application.shared.settings.connectionProtocol.tunnelType() == .wireguard else {
+            return
+        }
         
         getWireGuardLog { _ in
             var wireGuardLog: String? = nil

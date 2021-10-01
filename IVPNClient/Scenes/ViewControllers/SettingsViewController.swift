@@ -41,6 +41,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var entryServerCell: UITableViewCell!
     @IBOutlet weak var keepAliveSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
+    @IBOutlet weak var loggingWGSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
     @IBOutlet weak var ipv6Switch: UISwitch!
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
@@ -141,6 +142,7 @@ class SettingsViewController: UITableViewController {
         FileSystemManager.resetLogFile(name: Config.openVPNLogFile)
         FileSystemManager.resetLogFile(name: Config.wireGuardLogFile)
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLoggingWG)
         updateCellInset(cell: loggingCell, inset: sender.isOn)
         tableView.reloadData()
     }
@@ -220,6 +222,7 @@ class SettingsViewController: UITableViewController {
         killSwitchSwitch.setOn(UserDefaults.shared.killSwitch, animated: false)
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
+        loggingWGSwitch.setOn(UserDefaults.shared.isLoggingWG, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
