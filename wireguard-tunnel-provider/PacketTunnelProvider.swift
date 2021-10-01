@@ -278,14 +278,25 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func setupLogging() {
+        guard UserDefaults.shared.isLoggingWG else {
+            return
+        }
+        
         Logger.configureGlobal(tagged: "INFO", withFilePath: FileManager.logFileURL?.path)
     }
     
     private func flushLogsToFile() {
-        guard let path = FileManager.logTextFileURL?.path else { return }
+        guard UserDefaults.shared.isLoggingWG else {
+            return
+        }
+        guard let path = FileManager.logTextFileURL?.path else {
+            return
+        }
+        
         if Logger.global == nil {
             setupLogging()
         }
+        
         if Logger.global?.writeLog(to: path) ?? false {
             wg_log(.info, message: "flushLogsToFile written to file \(path) ")
         } else {
