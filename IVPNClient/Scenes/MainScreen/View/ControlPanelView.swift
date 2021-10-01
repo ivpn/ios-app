@@ -113,7 +113,7 @@ class ControlPanelView: UITableView {
         updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage, ipv6Label: entryServerIPv6Label)
         updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage, ipv6Label: exitServerIPv6Label)
         
-        fastestServerLabel.isHidden = !Application.shared.settings.selectedServer.fastest || Application.shared.settings.selectedServer.fastestServerLabelShouldBePresented
+        fastestServerLabel.isHidden = true
     }
     
     func updateAntiTracker(viewModel: VPNStatusViewModel) {
