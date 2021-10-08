@@ -54,12 +54,11 @@ $ brew install cocoapods fastlane swiftlint go
 
 ### Dependencies
 
-Dependencies are installed with [CocoaPods](https://cocoapods.org).  
-WireGuard static library is compiled at Xcode build phase from implementation of [WireGuard in Go](https://git.zx2c4.com/wireguard-go/).
+Dependencies are installed with [Swift Package Manager](https://swift.org/package-manager/) and [CocoaPods](https://cocoapods.org).
 
 Project dependencies:  
 
-* [wireguard-go](https://git.zx2c4.com/wireguard-go/)  
+* [WireGuardKit](https://github.com/WireGuard/wireguard-apple)  
 * [TunnelKit](https://github.com/passepartoutvpn/tunnelkit)  
 * [SnapKit](https://github.com/SnapKit/SnapKit)  
 * [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)  
