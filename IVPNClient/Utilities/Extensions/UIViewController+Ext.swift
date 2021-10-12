@@ -78,10 +78,6 @@ extension UIViewController {
             sessionManager.deleteSession()
         }
         
-        if UserDefaults.shared.networkProtectionEnabled {
-            UserDefaults.clearSession()
-        }
-        
         Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: false)
         DispatchQueue.delay(0.5) {
             Application.shared.connectionManager.removeAll()
