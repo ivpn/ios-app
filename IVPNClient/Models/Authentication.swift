@@ -55,9 +55,12 @@ class Authentication {
     func logOut(deleteSettings: Bool) {
         KeyChain.clearAll()
         FileSystemManager.clearSession()
-        StorageManager.clearSession()
-        UserDefaults.clearSession()
         Application.shared.clearSession()
+        
+        if deleteSettings {
+            StorageManager.clearSession()
+            UserDefaults.clearSession()
+        }
     }
     
     func removeStoredCredentials() {
