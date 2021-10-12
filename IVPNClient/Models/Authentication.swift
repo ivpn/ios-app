@@ -52,7 +52,7 @@ class Authentication {
         KeyChain.save(session: session)
     }
     
-    func logOut() {
+    func logOut(deleteSettings: Bool) {
         KeyChain.clearAll()
         FileSystemManager.clearSession()
         StorageManager.clearSession()
