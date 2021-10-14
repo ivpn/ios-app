@@ -70,7 +70,7 @@ class ProtocolViewController: UITableViewController {
     }
     
     func validateMultiHop(connectionProtocol: ConnectionSettings) -> Bool {
-        if UserDefaults.shared.isMultiHop && connectionProtocol.tunnelType() != .openvpn {
+        if UserDefaults.shared.isMultiHop && connectionProtocol.tunnelType() == .ipsec {
             return false
         }
         
