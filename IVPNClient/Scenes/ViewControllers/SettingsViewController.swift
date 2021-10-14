@@ -416,8 +416,7 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
         if indexPath.section == 3 && indexPath.row == 7 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 8 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 9 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
         
         if indexPath.section == 3 && indexPath.row == 3 {
             if #available(iOS 15.1, *) {
