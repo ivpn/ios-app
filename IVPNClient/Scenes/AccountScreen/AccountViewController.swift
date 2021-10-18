@@ -35,6 +35,7 @@ class AccountViewController: UITableViewController {
     private let hud = JGProgressHUD(style: .dark)
     private var viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
     private var serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+    private var deleteSettings = false
     
     // MARK: - @IBActions -
     
@@ -53,12 +54,17 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func logOut(_ sender: Any) {
-        showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out + Clear settings"], sourceView: sender as! UIView, disableDismiss: true) { index in
+        let sessionManager = SessionManager()
+        sessionManager.delegate = self
+        
+        showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out + Clear settings"], sourceView: sender as! UIView, disableDismiss: true) { [self] index in
             switch index {
             case 0:
-                self.logOut()
+                deleteSettings = false
+                sessionManager.deleteSession()
             case 1:
-                self.logOut(deleteSession: true, deleteSettings: true)
+                deleteSettings = true
+                sessionManager.deleteSession()
             default:
                 break
             }
@@ -146,16 +152,17 @@ extension AccountViewController {
     }
     
     override func deleteSessionSuccess() {
+        logOut(deleteSession: false, deleteSettings: deleteSettings)
         hud.delegate = self
         hud.dismiss()
     }
     
     override func deleteSessionFailure() {
-        hud.delegate = self
-        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        hud.detailTextLabel.text = "There was an error with removing session"
-        hud.show(in: (navigationController?.view)!)
-        hud.dismiss(afterDelay: 2)
+        hud.dismiss()
+        showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", actionHandler: { [self] _ in
+            logOut(deleteSession: false, deleteSettings: deleteSettings)
+            navigationController?.dismiss(animated: true)
+        })
     }
     
     override func deleteSessionSkip() {
