@@ -53,7 +53,7 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func logOut(_ sender: Any) {
-        showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out + Clear settings"], sourceView: sender as! UIView, disableDismiss: true) { index in
+        showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out and clear settings"], sourceView: sender as! UIView, disableDismiss: true) { index in
             switch index {
             case 0:
                 self.logOut()
