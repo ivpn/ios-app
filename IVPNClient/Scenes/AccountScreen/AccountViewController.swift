@@ -53,9 +53,16 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func logOut(_ sender: Any) {
-        showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out", actionHandler: { _ in
-            self.logOut()
-        })
+        showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out + Clear settings"], sourceView: sender as! UIView, disableDismiss: true) { index in
+            switch index {
+            case 0:
+                self.logOut()
+            case 1:
+                self.logOut(deleteSession: true, deleteSettings: true)
+            default:
+                break
+            }
+        }
     }
     
     // MARK: - View Lifecycle -
