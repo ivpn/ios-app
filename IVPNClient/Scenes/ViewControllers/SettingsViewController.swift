@@ -418,14 +418,16 @@ extension SettingsViewController {
         if indexPath.section == 3 && indexPath.row == 7 { return 60 }
         if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
         
+        // Disconnected custom DNS
         if indexPath.section == 3 && indexPath.row == 3 {
-            if #available(iOS 15.1, *) {
+            if #available(iOS 14.0, *) {
                 return UITableView.automaticDimension
             } else {
                 return 0
             }
         }
         
+        // Kill Switch
         if indexPath.section == 3 && indexPath.row == 4 {
             if #available(iOS 15.1, *) {
                 return UITableView.automaticDimension

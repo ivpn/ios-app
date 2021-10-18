@@ -396,11 +396,14 @@ class VPNManager {
                 }
                 
                 completion(newestLog)
+                return
             }
         } catch {
             completion(nil)
+            return
         }
         
+        completion(nil)
     }
     
     func getWireGuardLog(completion: @escaping (String?) -> Void) {
