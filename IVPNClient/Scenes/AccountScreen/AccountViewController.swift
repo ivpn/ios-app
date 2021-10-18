@@ -57,7 +57,7 @@ class AccountViewController: UITableViewController {
         let sessionManager = SessionManager()
         sessionManager.delegate = self
         
-        showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out and clear settings"], sourceView: sender as! UIView, disableDismiss: true) { index in
+        showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out and clear settings"], sourceView: sender as! UIView, disableDismiss: true) { [self] index in
             switch index {
             case 0:
                 deleteSettings = false
