@@ -41,7 +41,6 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var entryServerCell: UITableViewCell!
     @IBOutlet weak var keepAliveSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
-    @IBOutlet weak var loggingWGSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
     @IBOutlet weak var ipv6Switch: UISwitch!
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
@@ -138,14 +137,9 @@ class SettingsViewController: UITableViewController {
         evaluateReconnect(sender: sender as UIView)
     }
     
-    @IBAction func toggleWGLogging(_ sender: UISwitch) {
-        FileSystemManager.resetLogFile(name: Config.wireGuardLogFile)
-        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLoggingWG)
-        tableView.reloadData()
-    }
-    
     @IBAction func toggleLogging(_ sender: UISwitch) {
         FileSystemManager.resetLogFile(name: Config.openVPNLogFile)
+        FileSystemManager.resetLogFile(name: Config.wireGuardLogFile)
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
         updateCellInset(cell: loggingCell, inset: sender.isOn)
         tableView.reloadData()
@@ -165,17 +159,6 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func changePlan(_ sender: Any) {
         present(NavigationManager.getChangePlanViewController(), animated: true, completion: nil)
-    }
-    
-    @IBAction func logOut(_ sender: Any) {
-        guard Application.shared.authentication.isLoggedIn else {
-            authenticate(self)
-            return
-        }
-        
-        showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out") { _ in
-            self.logOut()
-        }
     }
     
     @IBAction func authenticate(_ sender: Any) {
@@ -226,7 +209,6 @@ class SettingsViewController: UITableViewController {
         killSwitchSwitch.setOn(UserDefaults.shared.killSwitch, animated: false)
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
-        loggingWGSwitch.setOn(UserDefaults.shared.isLoggingWG, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
@@ -354,7 +336,7 @@ class SettingsViewController: UITableViewController {
             composer.mailComposeDelegate = self
             composer.setToRecipients([Config.contactSupportMail])
             
-            if UserDefaults.shared.isLoggingWG {
+            if UserDefaults.shared.isLogging {
                 var wireGuardLog: String? = nil
                 let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
                 if let file = NSData(contentsOfFile: filePath) {
@@ -423,17 +405,18 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
         if indexPath.section == 3 && indexPath.row == 7 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 8 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 9 && !(loggingSwitch.isOn || loggingWGSwitch.isOn) { return 0 }
+        if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
         
+        // Disconnected custom DNS
         if indexPath.section == 3 && indexPath.row == 3 {
-            if #available(iOS 15.1, *) {
+            if #available(iOS 14.0, *) {
                 return UITableView.automaticDimension
             } else {
                 return 0
             }
         }
         
+        // Kill Switch
         if indexPath.section == 3 && indexPath.row == 4 {
             if #available(iOS 15.1, *) {
                 return UITableView.automaticDimension
@@ -446,7 +429,7 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 && indexPath.row == 9 {
+        if indexPath.section == 3 && indexPath.row == 8 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }

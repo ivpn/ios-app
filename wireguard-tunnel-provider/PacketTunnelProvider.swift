@@ -278,7 +278,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func setupLogging() {
-        guard UserDefaults.shared.isLoggingWG else {
+        guard UserDefaults.shared.isLogging else {
             return
         }
         
@@ -286,7 +286,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func flushLogsToFile() {
-        guard UserDefaults.shared.isLoggingWG else {
+        guard UserDefaults.shared.isLogging else {
             return
         }
         guard let path = FileManager.logTextFileURL?.path else {
