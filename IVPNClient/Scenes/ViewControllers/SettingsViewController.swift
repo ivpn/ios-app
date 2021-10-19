@@ -342,6 +342,9 @@ class SettingsViewController: UITableViewController {
             return
         }
         
+        var wireguardLogAttached = false
+        var openvpnLogAttached = false
+        
         Application.shared.connectionManager.getWireGuardLog { _ in
             let composer = MFMailComposeViewController()
             composer.mailComposeDelegate = self
@@ -357,8 +360,9 @@ class SettingsViewController: UITableViewController {
                 FileSystemManager.updateLogFile(newestLog: wireGuardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
                 
                 let logFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
-                if let fileData = NSData(contentsOfFile: logFile) {
+                if let fileData = NSData(contentsOfFile: logFile), !wireguardLogAttached {
                     composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "wireguard-")).txt")
+                    wireguardLogAttached = true
                 }
             }
             
@@ -367,8 +371,9 @@ class SettingsViewController: UITableViewController {
                     FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
                     
                     let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                    if let fileData = NSData(contentsOfFile: logFile) {
+                    if let fileData = NSData(contentsOfFile: logFile), !openvpnLogAttached {
                         composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "openvpn-")).txt")
+                        openvpnLogAttached = true
                     }
                 }
                 
