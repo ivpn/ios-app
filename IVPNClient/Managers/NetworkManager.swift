@@ -85,14 +85,16 @@ class NetworkManager {
     private func connectionUpdated(reachability: Reachability) {
         switch reachability.connection {
         case .wifi:
-            if let ssid = UIDevice.wiFiSsid {
-                StorageManager.saveWiFiNetwork(name: ssid)
-                NotificationCenter.default.post(name: Notification.Name.NetworkSaved, object: nil)
-                updateNetwork(name: ssid, type: NetworkType.wifi.rawValue)
-            } else if Application.shared.connectionManager.status == .invalid {
-                self.updateNetwork(name: "Wi-Fi", type: NetworkType.none.rawValue)
-            } else {
-                self.updateNetwork(name: "No network", type: NetworkType.none.rawValue)
+            UIDevice.fetchWiFiSSID { [self] wiFiSSID in
+                if let ssid = wiFiSSID {
+                    StorageManager.saveWiFiNetwork(name: ssid)
+                    NotificationCenter.default.post(name: Notification.Name.NetworkSaved, object: nil)
+                    updateNetwork(name: ssid, type: NetworkType.wifi.rawValue)
+                } else if Application.shared.connectionManager.status == .invalid {
+                    updateNetwork(name: "Wi-Fi", type: NetworkType.none.rawValue)
+                } else {
+                    updateNetwork(name: "No network", type: NetworkType.none.rawValue)
+                }
             }
         case .cellular:
             self.updateNetwork(name: "Mobile data", type: NetworkType.cellular.rawValue)
