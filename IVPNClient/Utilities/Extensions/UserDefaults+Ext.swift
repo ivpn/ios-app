@@ -240,6 +240,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.networkProtectionTrustedDisconnect)
         shared.removeObject(forKey: Key.isCustomDNS)
         shared.removeObject(forKey: Key.customDNS)
+        shared.removeObject(forKey: Key.customDNSProtocol)
         shared.removeObject(forKey: Key.resolvedDNSInsideVPN)
         shared.removeObject(forKey: Key.isAntiTracker)
         shared.removeObject(forKey: Key.isAntiTrackerHardcore)
