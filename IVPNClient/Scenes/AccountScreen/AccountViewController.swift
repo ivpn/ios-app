@@ -36,6 +36,13 @@ class AccountViewController: UITableViewController {
     private var viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
     private var serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
     private var deleteSettings = false
+    private var forceLogOut = false
+    
+    var sessionManager: SessionManager {
+        let sessionManager = SessionManager()
+        sessionManager.delegate = self
+        return sessionManager
+    }
     
     // MARK: - @IBActions -
     
@@ -54,9 +61,6 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func logOut(_ sender: Any) {
-        let sessionManager = SessionManager()
-        sessionManager.delegate = self
-        
         showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out and clear settings"], sourceView: sender as! UIView, disableDismiss: true) { [self] index in
             switch index {
             case 0:
@@ -159,10 +163,16 @@ extension AccountViewController {
     
     override func deleteSessionFailure() {
         hud.dismiss()
-        showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", actionHandler: { [self] _ in
+        
+        if forceLogOut {
             logOut(deleteSession: false, deleteSettings: deleteSettings)
             navigationController?.dismiss(animated: true)
-        })
+        } else {
+            showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", actionHandler: { [self] _ in
+                forceLogOut = true
+                sessionManager.deleteSession()
+            })
+        }
     }
     
     override func deleteSessionSkip() {
