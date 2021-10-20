@@ -207,7 +207,7 @@ extension ServerViewController {
         }
         
         guard Application.shared.serverList.validateServer(firstServer: server, secondServer: secondServer) == true else {
-            showAlert(title: "Unable to set Exit Server", message: "When using Multi-Hop you must select entry and exit servers in different countries.")
+            showAlert(title: isExitServer ? "Unable to set Exit Server" : "Unable to set Entry Server", message: "When using Multi-Hop you must select entry and exit servers in different countries.")
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
