@@ -64,9 +64,11 @@ class AccountViewController: UITableViewController {
         showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out and clear settings"], sourceView: sender as! UIView, disableDismiss: true) { [self] index in
             switch index {
             case 0:
+                Application.shared.connectionManager.removeAll()
                 deleteSettings = false
                 sessionManager.deleteSession()
             case 1:
+                Application.shared.connectionManager.removeAll()
                 deleteSettings = true
                 sessionManager.deleteSession()
             default:
