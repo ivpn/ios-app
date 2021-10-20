@@ -60,11 +60,11 @@ class MapConstants {
                 return iPadLandscapeBottomAnchor
             }
             
-            if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+            if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec && UserDefaults.shared.isMultiHop {
                 return bottomAnchorC
             }
             
-            if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+            if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec {
                 return bottomAnchorB
             }
             
