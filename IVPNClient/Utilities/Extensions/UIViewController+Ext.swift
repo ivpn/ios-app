@@ -78,9 +78,8 @@ extension UIViewController {
             sessionManager.deleteSession()
         }
         
-        Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: false)
+        Application.shared.connectionManager.removeAll()
         DispatchQueue.delay(0.5) {
-            Application.shared.connectionManager.removeAll()
             Application.shared.authentication.logOut(deleteSettings: deleteSettings)
             NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
             NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)

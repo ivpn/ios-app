@@ -56,6 +56,7 @@ class Authentication {
         KeyChain.clearAll()
         FileSystemManager.clearSession()
         Application.shared.clearSession()
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.networkProtectionEnabled)
         
         if deleteSettings {
             StorageManager.clearSession()
