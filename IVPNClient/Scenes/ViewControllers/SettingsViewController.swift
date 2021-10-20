@@ -333,6 +333,7 @@ class SettingsViewController: UITableViewController {
         
         var wireguardLogAttached = false
         var openvpnLogAttached = false
+        var presentMailComposer = true
         
         Application.shared.connectionManager.getWireGuardLog { _ in
             let composer = MFMailComposeViewController()
@@ -366,7 +367,10 @@ class SettingsViewController: UITableViewController {
                     }
                 }
                 
-                self.present(composer, animated: true, completion: nil)
+                if presentMailComposer {
+                    self.present(composer, animated: true, completion: nil)
+                    presentMailComposer = false
+                }
             }
         }
     }
