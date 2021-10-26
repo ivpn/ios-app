@@ -249,6 +249,7 @@ extension UserDefaults {
         standard.removeObject(forKey: Key.selectedServerFastest)
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
+        standard.removeObject(forKey: Key.selectedProtocolIndex)
         standard.synchronize()
     }
     
