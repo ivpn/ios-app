@@ -61,6 +61,8 @@ class Authentication {
         if deleteSettings {
             StorageManager.clearSession()
             UserDefaults.clearSession()
+            Application.shared.settings.connectionProtocol = Config.defaultProtocol
+            Application.shared.settings.saveConnectionProtocol()
         }
     }
     
