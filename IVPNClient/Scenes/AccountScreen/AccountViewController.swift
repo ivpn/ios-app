@@ -110,8 +110,9 @@ class AccountViewController: UITableViewController {
     private func startlogOut(deleteSettings: Bool) {
         self.deleteSettings = deleteSettings
         
-        guard !UserDefaults.shared.networkProtectionEnabled else {
+        guard !UserDefaults.shared.networkProtectionEnabled && !UserDefaults.shared.killSwitch else {
             Application.shared.connectionManager.removeAll()
+            deleteSessionStart()
             DispatchQueue.delay(0.5) { [self] in
                 sessionManager.deleteSession()
             }
@@ -181,7 +182,9 @@ extension AccountViewController {
             logOut(deleteSession: false, deleteSettings: deleteSettings)
             navigationController?.dismiss(animated: true)
         } else {
-            showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", actionHandler: { [self] _ in
+            showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", cancelHandler: { _ in
+                NotificationCenter.default.post(name: Notification.Name.UpdateGeoLocation, object: nil)
+            }, actionHandler: { [self] _ in
                 forceLogOut = true
                 sessionManager.deleteSession()
             })
