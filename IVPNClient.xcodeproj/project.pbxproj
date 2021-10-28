@@ -1892,7 +1892,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "curl -sf \"https://api.ivpn.net/v4/servers.json?pretty=true\" > IVPNClient/Config/servers.json\n";
+			shellScript = "curl -sf \"https://api.ivpn.net/v5/servers.json?pretty=true\" > IVPNClient/Config/servers.json\n";
 			showEnvVarsInLog = 0;
 		};
 		A41DECD8426C6E493395BE8D /* [CP] Check Pods Manifest.lock */ = {
