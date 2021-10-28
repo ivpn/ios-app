@@ -40,7 +40,6 @@ class UserDefaultsTests: XCTestCase {
         XCTAssertNotNil(UserDefaults.shared.isAntiTracker)
         XCTAssertNotNil(UserDefaults.shared.isAntiTrackerHardcore)
         XCTAssertNotNil(UserDefaults.shared.antiTrackerDNS)
-        XCTAssertNotNil(UserDefaults.shared.antiTrackerDNSMultiHop)
         XCTAssertNotNil(UserDefaults.shared.antiTrackerHardcoreDNS)
         XCTAssertNotNil(UserDefaults.shared.antiTrackerHardcoreDNSMultiHop)
         XCTAssertNotNil(UserDefaults.shared.wgKeyTimestamp)
