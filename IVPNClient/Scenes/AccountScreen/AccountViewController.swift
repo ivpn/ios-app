@@ -64,13 +64,9 @@ class AccountViewController: UITableViewController {
         showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out and clear settings"], sourceView: sender as! UIView, disableDismiss: true) { [self] index in
             switch index {
             case 0:
-                Application.shared.connectionManager.removeAll()
-                deleteSettings = false
-                sessionManager.deleteSession()
+                startlogOut(deleteSettings: false)
             case 1:
-                Application.shared.connectionManager.removeAll()
-                deleteSettings = true
-                sessionManager.deleteSession()
+                startlogOut(deleteSettings: true)
             default:
                 break
             }
@@ -109,6 +105,22 @@ class AccountViewController: UITableViewController {
     @objc private func subscriptionActivated() {
         let viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
         accountView.setupView(viewModel: viewModel)
+    }
+    
+    private func startlogOut(deleteSettings: Bool) {
+        self.deleteSettings = deleteSettings
+        
+        guard !UserDefaults.shared.networkProtectionEnabled && !UserDefaults.shared.killSwitch else {
+            Application.shared.connectionManager.removeAll()
+            deleteSessionStart()
+            DispatchQueue.delay(0.5) { [self] in
+                sessionManager.deleteSession()
+            }
+            
+            return
+        }
+        
+        sessionManager.deleteSession()
     }
     
 }
@@ -170,7 +182,9 @@ extension AccountViewController {
             logOut(deleteSession: false, deleteSettings: deleteSettings)
             navigationController?.dismiss(animated: true)
         } else {
-            showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", actionHandler: { [self] _ in
+            showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", cancelHandler: { _ in
+                NotificationCenter.default.post(name: Notification.Name.UpdateGeoLocation, object: nil)
+            }, actionHandler: { [self] _ in
                 forceLogOut = true
                 sessionManager.deleteSession()
             })
