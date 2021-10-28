@@ -90,15 +90,11 @@ extension NETunnelProviderProtocol {
     static func openVPNdnsServers() -> [String]? {
         if UserDefaults.shared.isAntiTracker {
             if UserDefaults.shared.isAntiTrackerHardcore {
-                if UserDefaults.shared.isMultiHop && !UserDefaults.shared.antiTrackerHardcoreDNSMultiHop.isEmpty {
-                    return [UserDefaults.shared.antiTrackerHardcoreDNSMultiHop]
-                } else if !UserDefaults.shared.antiTrackerHardcoreDNS.isEmpty {
+                if !UserDefaults.shared.antiTrackerHardcoreDNS.isEmpty {
                     return [UserDefaults.shared.antiTrackerHardcoreDNS]
                 }
             } else {
-                if UserDefaults.shared.isMultiHop && !UserDefaults.shared.antiTrackerDNSMultiHop.isEmpty {
-                    return [UserDefaults.shared.antiTrackerDNSMultiHop]
-                } else if !UserDefaults.shared.antiTrackerDNS.isEmpty {
+                if !UserDefaults.shared.antiTrackerDNS.isEmpty {
                     return [UserDefaults.shared.antiTrackerDNS]
                 }
             }
