@@ -111,7 +111,7 @@ class ProtocolViewController: UITableViewController {
         return true
     }
     
-    func reloadTable(connectionProtocol: ConnectionSettings) {
+    func reloadTable(connectionProtocol: ConnectionSettings, indexPath: IndexPath) {
         Application.shared.settings.connectionProtocol = connectionProtocol
         Application.shared.serverList = VPNServerList()
         updateCollection(connectionProtocol: connectionProtocol)
@@ -119,6 +119,10 @@ class ProtocolViewController: UITableViewController {
         UserDefaults.shared.set(0, forKey: "LastPingTimestamp")
         Pinger.shared.serverList = Application.shared.serverList
         Pinger.shared.ping()
+        
+        if let cell = tableView.cellForRow(at: indexPath) {
+            evaluateReconnect(sender: cell as UIView)
+        }
     }
     
     func selectPreferredProtocolAndPort(connectionProtocol: ConnectionSettings) {
@@ -334,13 +338,9 @@ extension ProtocolViewController {
             }
         }
         
-        reloadTable(connectionProtocol: connectionProtocol)
+        reloadTable(connectionProtocol: connectionProtocol, indexPath: indexPath)
         
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-        
-        if let cell = tableView.cellForRow(at: indexPath) {
-            evaluateReconnect(sender: cell as UIView)
-        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -397,7 +397,7 @@ extension ProtocolViewController {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.detailTextLabel.text = "WireGuard keys successfully generated and uploaded to IVPN server."
         hud.dismiss(afterDelay: 2)
-        reloadTable(connectionProtocol: ConnectionSettings.wireguard(.udp, 2049))
+        reloadTable(connectionProtocol: ConnectionSettings.wireguard(.udp, 2049), indexPath: IndexPath(row: 0, section: 0))
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
     }
     
