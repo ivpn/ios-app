@@ -56,7 +56,7 @@ struct VPNServerViewModel {
     }
     
     var formattedServerNameForSettings: String {
-        if server.fastest {
+        if server.fastest && !UserDefaults.shared.isMultiHop {
             return "Fastest server"
         }
         
