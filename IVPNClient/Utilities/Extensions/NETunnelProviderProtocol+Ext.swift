@@ -118,6 +118,17 @@ extension NETunnelProviderProtocol {
         }
         
         var addresses = KeyChain.wgIpAddress
+        var publicKey = host.publicKey
+        var endpoint = Peer.endpoint(host: host.host, port: settings.port())
+        
+        if UserDefaults.shared.isMultiHop {
+            guard let exitHost = Application.shared.settings.selectedExitServer.hosts.randomElement() else {
+                return NETunnelProviderProtocol()
+            }
+            
+            publicKey = exitHost.publicKey
+            endpoint = Peer.endpoint(host: host.host, port: Int(exitHost.multihopPort) ?? settings.port())
+        }
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
             addresses = Interface.getAddresses(ipv4: KeyChain.wgIpAddress, ipv6: ipv6.localIP)
@@ -126,9 +137,9 @@ extension NETunnelProviderProtocol {
         }
         
         let peer = Peer(
-            publicKey: host.publicKey,
+            publicKey: publicKey,
             allowedIPs: Config.wgPeerAllowedIPs,
-            endpoint: Peer.endpoint(host: host.host, port: settings.port()),
+            endpoint: endpoint,
             persistentKeepalive: Config.wgPeerPersistentKeepalive
         )
         let interface = Interface(

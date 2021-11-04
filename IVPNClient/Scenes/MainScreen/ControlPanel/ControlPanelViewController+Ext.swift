@@ -30,7 +30,7 @@ extension ControlPanelViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 { return 100 }
-        if indexPath.row == 1 && Application.shared.settings.connectionProtocol.tunnelType() != .openvpn { return 0 }
+        if indexPath.row == 1 && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec { return 0 }
         if indexPath.row == 1 { return 44 }
         if indexPath.row == 3 && !UserDefaults.shared.isMultiHop { return 0 }
         if indexPath.row == 4 { return 0 }

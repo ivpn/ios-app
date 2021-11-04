@@ -94,7 +94,7 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        guard evaluateIsOpenVPN() else {
+        guard evaluateProtocolForMultiHop() else {
             DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
             }

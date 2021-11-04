@@ -56,7 +56,7 @@ struct VPNServerViewModel {
     }
     
     var formattedServerNameForSettings: String {
-        if server.fastest {
+        if server.fastest && !UserDefaults.shared.isMultiHop {
             return "Fastest server"
         }
         
@@ -68,7 +68,7 @@ struct VPNServerViewModel {
     }
     
     var imageForCountryCodeForSettings: UIImage? {
-        if server.fastest {
+        if server.fastest && !UserDefaults.shared.isMultiHop {
             let image = UIImage(named: "icon-fastest-server")
             image?.accessibilityIdentifier = "icon-fastest-server"
             return image

@@ -70,7 +70,7 @@ class ProtocolViewController: UITableViewController {
     }
     
     func validateMultiHop(connectionProtocol: ConnectionSettings) -> Bool {
-        if UserDefaults.shared.isMultiHop && connectionProtocol.tunnelType() != .openvpn {
+        if UserDefaults.shared.isMultiHop && connectionProtocol.tunnelType() == .ipsec {
             return false
         }
         
@@ -130,6 +130,11 @@ class ProtocolViewController: UITableViewController {
     }
     
     func selectPreferredProtocolAndPort(connectionProtocol: ConnectionSettings) {
+        guard !UserDefaults.shared.isMultiHop else {
+            showAlert(title: "", message: "It is not possible to use the preferred port setting when Multi-Hop for is enabled")
+            return
+        }
+        
         let selected = Application.shared.settings.connectionProtocol.formatProtocol()
         let protocols = connectionProtocol.supportedProtocols(protocols: Config.supportedProtocols)
         let actions = connectionProtocol.supportedProtocolsFormat(protocols: Config.supportedProtocols)

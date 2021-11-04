@@ -299,9 +299,9 @@ extension UIViewController {
         return true
     }
     
-    func evaluateIsOpenVPN() -> Bool {
-        if Application.shared.settings.connectionProtocol.tunnelType() != .openvpn {
-            showAlert(title: "Change protocol to OpenVPN", message: "For Multi-Hop connection you must select OpenVPN protocol.") { _ in
+    func evaluateProtocolForMultiHop() -> Bool {
+        if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+            showAlert(title: "Change protocol to WireGuard or OpenVPN", message: "For Multi-Hop connection you must select WireGuard or OpenVPN protocol.") { _ in
             }
             return false
         }

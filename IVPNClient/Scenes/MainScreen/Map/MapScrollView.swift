@@ -212,7 +212,7 @@ class MapScrollView: UIScrollView {
     private func updateMapPositionToGateway(animated: Bool = true) {
         var server = Application.shared.settings.selectedServer
         
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+        if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec && UserDefaults.shared.isMultiHop {
             server = Application.shared.settings.selectedExitServer
         }
         
