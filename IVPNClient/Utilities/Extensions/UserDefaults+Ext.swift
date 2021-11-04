@@ -233,6 +233,9 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.networkProtectionUntrustedConnect)
         shared.removeObject(forKey: Key.networkProtectionTrustedDisconnect)
         shared.removeObject(forKey: Key.isCustomDNS)
+        shared.removeObject(forKey: Key.customDNS)
+        shared.removeObject(forKey: Key.customDNSProtocol)
+        shared.removeObject(forKey: Key.resolvedDNSInsideVPN)
         shared.removeObject(forKey: Key.isAntiTracker)
         shared.removeObject(forKey: Key.isAntiTrackerHardcore)
         shared.removeObject(forKey: Key.wgKeyTimestamp)
@@ -246,6 +249,7 @@ extension UserDefaults {
         standard.removeObject(forKey: Key.selectedServerFastest)
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
+        standard.removeObject(forKey: Key.selectedProtocolIndex)
         standard.synchronize()
     }
     

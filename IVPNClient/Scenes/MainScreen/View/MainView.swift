@@ -72,6 +72,7 @@ class MainView: UIView {
         
         if isDisconnected {
             mapScrollView.localCoordinates = (model.latitude, model.longitude)
+            mapScrollView.markerLocalView.locationButton.setTitle(model.city, for: .normal)
         } else {
             mapScrollView.gatewayCoordinates = (model.latitude, model.longitude)
         }
