@@ -45,6 +45,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var ipv6Switch: UISwitch!
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
+    @IBOutlet weak var killSwitchSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -117,6 +118,18 @@ class SettingsViewController: UITableViewController {
         UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.showIPv4Servers)
         NotificationCenter.default.post(name: Notification.Name.ServersListUpdated, object: nil)
         Application.shared.connectionManager.needsToUpdateSelectedServer()
+    }
+    
+    @IBAction func toggleKillSwitch(_ sender: UISwitch) {
+        if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+            showAlert(title: "IKEv2 not supported", message: "Kill Switch is supported only for OpenVPN and WireGuard protocols.") { _ in
+                sender.setOn(false, animated: true)
+            }
+            return
+        }
+        
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.killSwitch)
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func toggleKeepAlive(_ sender: UISwitch) {
@@ -203,6 +216,7 @@ class SettingsViewController: UITableViewController {
         ipv6Switch.setOn(UserDefaults.shared.isIPv6, animated: false)
         showIPv4ServersSwitch.setOn(UserDefaults.standard.showIPv4Servers, animated: false)
         showIPv4ServersSwitch.isEnabled = UserDefaults.shared.isIPv6
+        killSwitchSwitch.setOn(UserDefaults.shared.killSwitch, animated: false)
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
@@ -381,11 +395,19 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 0 { return 60 }
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 6 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 7 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 3 && indexPath.row == 7 { return 60 }
+        if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
         
         if indexPath.section == 3 && indexPath.row == 3 {
-            if #available(iOS 14.0, *) {
+            if #available(iOS 15.1, *) {
+                return UITableView.automaticDimension
+            } else {
+                return 0
+            }
+        }
+        
+        if indexPath.section == 3 && indexPath.row == 4 {
+            if #available(iOS 15.1, *) {
                 return UITableView.automaticDimension
             } else {
                 return 0
@@ -396,7 +418,7 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 && indexPath.row == 7 {
+        if indexPath.section == 3 && indexPath.row == 8 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
@@ -468,13 +490,11 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
 extension SettingsViewController: ServerViewControllerDelegate {
     
     func reconnectToFastestServer() {
-        Application.shared.connectionManager.getStatus { _, status in
-            if status == .connected {
-                self.needsToReconnect = true
-                Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
-                DispatchQueue.delay(0.5) {
-                    Pinger.shared.ping()
-                }
+        if Application.shared.connectionManager.status == .connected {
+            needsToReconnect = true
+            Application.shared.connectionManager.resetRulesAndDisconnect(reconnectAutomatically: true)
+            DispatchQueue.delay(UserDefaults.shared.killSwitch ? 2 : 0.5) {
+                Pinger.shared.ping()
             }
         }
     }
