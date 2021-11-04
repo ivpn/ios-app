@@ -25,17 +25,17 @@ import Foundation
 
 extension Date {
     
-    private static let logFormat = "yyyy-MMM-dd HH:mm:ss"
-    private static let fileNameFormat = "yyyy-MMM-dd-HHmmss"
-    private static let dateFormat = "yyyy-MMM-dd"
-    private static let dateTimeFormat = "yyyy-MMM-dd HH:mm"
+    private static let logFormat = "yyyy-MM-dd HH:mm:ss"
+    private static let fileNameFormat = "yyyy-MM-dd-HHmmss"
+    private static let dateFormat = "yyyy-MM-dd"
+    private static let dateTimeFormat = "yyyy-MM-dd HH:mm"
     
     static func logTime() -> String {
         return formatted(format: logFormat)
     }
     
-    static func logFileName() -> String {
-        return formatted(format: fileNameFormat)
+    static func logFileName(prefix: String = "") -> String {
+        return "\(prefix)\(formatted(format: fileNameFormat))"
     }
     
     static func changeDays(by days: Int) -> Date {

@@ -55,6 +55,7 @@ struct Config {
     // Files and Directories
     static let serversListCacheFileName = "servers_cache1.json"
     static let openVPNLogFile = "OpenVPNLogs.txt"
+    static let wireGuardLogFile = "WireGuardLogs.txt"
     
     // Contact Support web page
     static let contactSupportMail = "support@ivpn.net"

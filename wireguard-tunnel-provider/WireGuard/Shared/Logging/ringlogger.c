@@ -90,9 +90,9 @@ int write_log_to_file(const char *file_name, const struct log *input_log)
 		if (!localtime_r(&seconds, &tm))
 			goto err;
 
-		if (fprintf(file, "%04d-%02d-%02d %02d:%02d:%02d.%06d: %s\n",
+		if (fprintf(file, "%04d-%02d-%02d %02d:%02d:%02d %s\n",
 				  tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
-				  tm.tm_hour, tm.tm_min, tm.tm_sec, useconds,
+				  tm.tm_hour, tm.tm_min, useconds,
 				  line->line) < 0)
 			goto err;
 

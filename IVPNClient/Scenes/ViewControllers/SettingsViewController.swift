@@ -139,6 +139,7 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func toggleLogging(_ sender: UISwitch) {
         FileSystemManager.resetLogFile(name: Config.openVPNLogFile)
+        FileSystemManager.resetLogFile(name: Config.wireGuardLogFile)
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
         updateCellInset(cell: loggingCell, inset: sender.isOn)
         tableView.reloadData()
@@ -341,19 +342,47 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        Application.shared.connectionManager.getOpenVPNLog { log in
-            FileSystemManager.updateLogFile(newestLog: log, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-            
+        var wireguardLogAttached = false
+        var openvpnLogAttached = false
+        var presentMailComposer = true
+        
+        Application.shared.connectionManager.getWireGuardLog { _ in
             let composer = MFMailComposeViewController()
             composer.mailComposeDelegate = self
             composer.setToRecipients([Config.contactSupportMail])
             
-            let file = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-            if let fileData = NSData(contentsOfFile: file) {
-                composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName()).txt")
+            if UserDefaults.shared.isLogging {
+                var wireGuardLog: String? = nil
+                let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
+                if let file = NSData(contentsOfFile: filePath) {
+                    wireGuardLog = String(data: file as Data, encoding: .utf8) ?? ""
+                }
+                
+                FileSystemManager.updateLogFile(newestLog: wireGuardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+                
+                let logFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
+                if let fileData = NSData(contentsOfFile: logFile), !wireguardLogAttached {
+                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "wireguard-")).txt")
+                    wireguardLogAttached = true
+                }
             }
             
-            self.present(composer, animated: true, completion: nil)
+            Application.shared.connectionManager.getOpenVPNLog { openVPNLog in
+                if UserDefaults.shared.isLogging {
+                    FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+                    
+                    let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
+                    if let fileData = NSData(contentsOfFile: logFile), !openvpnLogAttached {
+                        composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "openvpn-")).txt")
+                        openvpnLogAttached = true
+                    }
+                }
+                
+                if presentMailComposer {
+                    self.present(composer, animated: true, completion: nil)
+                    presentMailComposer = false
+                }
+            }
         }
     }
     
@@ -398,14 +427,16 @@ extension SettingsViewController {
         if indexPath.section == 3 && indexPath.row == 7 { return 60 }
         if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
         
+        // Disconnected custom DNS
         if indexPath.section == 3 && indexPath.row == 3 {
-            if #available(iOS 15.1, *) {
+            if #available(iOS 14.0, *) {
                 return UITableView.automaticDimension
             } else {
                 return 0
             }
         }
         
+        // Kill Switch
         if indexPath.section == 3 && indexPath.row == 4 {
             if #available(iOS 15.1, *) {
                 return UITableView.automaticDimension
