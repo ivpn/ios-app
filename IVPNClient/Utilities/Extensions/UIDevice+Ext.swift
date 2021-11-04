@@ -23,6 +23,7 @@
 
 import UIKit
 import SystemConfiguration.CaptiveNetwork
+import NetworkExtension
 
 extension UIDevice {
     
@@ -103,19 +104,6 @@ extension UIDevice {
         return mapToDevice(identifier: identifier)
     }()
     
-    static var wiFiSsid: String? {
-        var ssid: String?
-        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
-            for interface in interfaces {
-                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
-                    ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
-                    break
-                }
-            }
-        }
-        return ssid
-    }
-    
     static func screenHeightLargerThan(device: ScreenHeight) -> Bool {
         guard UIScreen.main.nativeBounds.height > device.rawValue else { return false }
         return true
@@ -124,6 +112,24 @@ extension UIDevice {
     static func screenHeightSmallerThan(device: ScreenHeight) -> Bool {
         guard UIScreen.main.nativeBounds.height < device.rawValue else { return false }
         return true
+    }
+    
+    static func fetchWiFiSSID(completion: @escaping (String?) -> Void) {
+        if #available(iOS 14.0, *) {
+            NEHotspotNetwork.fetchCurrent { network in
+                completion(network?.ssid)
+            }
+        } else {
+            var ssid: String?
+            if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+                for interface in interfaces {
+                    if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                        ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    }
+                }
+            }
+            completion(ssid)
+        }
     }
     
 }

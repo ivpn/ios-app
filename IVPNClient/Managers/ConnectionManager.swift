@@ -525,7 +525,7 @@ class ConnectionManager {
     }
     
     private func updateWireGuardLogFile() {
-        guard UserDefaults.shared.isLoggingWG else {
+        guard UserDefaults.shared.isLogging else {
             return
         }
         guard Application.shared.settings.connectionProtocol.tunnelType() == .wireguard else {
