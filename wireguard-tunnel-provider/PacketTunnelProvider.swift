@@ -23,10 +23,7 @@
 
 import Network
 import NetworkExtension
-
-enum PacketTunnelProviderError: Error {
-    case tunnelSetupFailed
-}
+import WireGuardKit
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
     
@@ -64,13 +61,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         guard let addresses = UserDefaults.shared.isIPv6 ? KeyChain.wgIpAddresses : KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
             tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+            completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
         
         guard let tunnelSettings = getTunnelSettings(ipAddress: addresses) else {
             tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+            completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
         
@@ -80,7 +77,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         guard let privateKeyHex = wgPrivateKey.base64KeyToHex() else {
             tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+            completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
         
@@ -89,7 +86,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         guard handle >= 0 else {
             tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+            completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
         
@@ -102,7 +99,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         setTunnelNetworkSettings(tunnelSettings) { error in
             if error != nil {
                 self.tunnelSetupFailed()
-                completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+                completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             } else {
                 completionHandler(nil)
             }
@@ -148,16 +145,16 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             }
             
             guard let tunnelSettings = self.getTunnelSettings(ipAddress: ipAddress) else {
-                completion(PacketTunnelProviderError.tunnelSetupFailed)
+                completion(PacketTunnelProviderError.couldNotSetNetworkSettings)
                 return
             }
             
             self.setTunnelNetworkSettings(tunnelSettings) { error in
                 if error != nil {
-                    completion(PacketTunnelProviderError.tunnelSetupFailed)
+                    completion(PacketTunnelProviderError.couldNotSetNetworkSettings)
                 } else {
                     guard let privateKeyHex = privateKey.base64KeyToHex() else {
-                        completion(PacketTunnelProviderError.tunnelSetupFailed)
+                        completion(PacketTunnelProviderError.couldNotSetNetworkSettings)
                         return
                     }
                     
@@ -169,7 +166,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func getTunnelSettings(ipAddress: String) -> NEPacketTunnelNetworkSettings? {
-        let validatedEndpoints = (self.config.providerConfiguration?[PCKeys.endpoints.rawValue] as? String ?? "").commaSeparatedToArray().compactMap { ((try? Endpoint(endpointString: String($0))) as Endpoint??) }.compactMap {$0}
+        let validatedEndpoints = (self.config.providerConfiguration?[PCKeys.endpoints.rawValue] as? String ?? "").commaSeparatedToArray().compactMap { ((try? WireGuardEndpoint(endpointString: String($0))) as WireGuardEndpoint??) }.compactMap {$0}
         let validatedAddresses = ipAddress.commaSeparatedToArray().compactMap { ((try? CIDRAddress(stringRepresentation: String($0))) as CIDRAddress??) }.compactMap { $0 }
         
         guard let firstEndpoint = validatedEndpoints.first else {

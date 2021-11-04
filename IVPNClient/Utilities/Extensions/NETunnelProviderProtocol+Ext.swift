@@ -23,7 +23,9 @@
 
 import Foundation
 import NetworkExtension
+import Network
 import TunnelKit
+import WireGuardKit
 
 extension NETunnelProviderProtocol {
     
