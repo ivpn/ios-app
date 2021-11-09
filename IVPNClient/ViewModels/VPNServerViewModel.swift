@@ -111,7 +111,7 @@ struct VPNServerViewModel {
     }
     
     var showIPv6Label: Bool {
-        return UserDefaults.standard.showIPv4Servers && UserDefaults.shared.isIPv6 && server.supportsIPv6 && !server.random
+        return UserDefaults.standard.showIPv4Servers && UserDefaults.shared.isIPv6 && server.supportsIPv6 && !(server.random && Application.shared.connectionManager.status.isDisconnected())
     }
     
     // MARK: - Initialize -
