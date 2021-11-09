@@ -64,9 +64,9 @@ class AccountViewController: UITableViewController {
         showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out and clear settings"], sourceView: sender as! UIView, disableDismiss: true) { [self] index in
             switch index {
             case 0:
-                startlogOut(deleteSettings: false)
+                startLogOut(deleteSettings: false)
             case 1:
-                startlogOut(deleteSettings: true)
+                startLogOut(deleteSettings: true)
             default:
                 break
             }
@@ -107,11 +107,11 @@ class AccountViewController: UITableViewController {
         accountView.setupView(viewModel: viewModel)
     }
     
-    private func startlogOut(deleteSettings: Bool) {
+    private func startLogOut(deleteSettings: Bool) {
         self.deleteSettings = deleteSettings
+        Application.shared.connectionManager.removeAll()
         
         guard !UserDefaults.shared.networkProtectionEnabled && !UserDefaults.shared.killSwitch else {
-            Application.shared.connectionManager.removeAll()
             deleteSessionStart()
             DispatchQueue.delay(0.5) { [self] in
                 sessionManager.deleteSession()
