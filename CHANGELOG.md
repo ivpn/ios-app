@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.5.0 - 2021-11-10  
+
+[NEW] Multi-Hop for WireGuard protocol  
+[NEW] Native iOS Kill Switch to block all traffic when VPN tunnel is dropped or unavailable  
+[NEW] Keep user settings on log out with an option to clear settings  
+[NEW] WireGuard diagnostic logs  
+[IMPROVED] Migrate to WireGuardKit framework  
+[IMPROVED] Upgrade WireGuard to the latest version  
+[FIXED] Current WiFi name not available, fixed for iOS 15.1+ devices  
+[FIXED] IPV4/IPV6 tabs displayed in connection info when there is no internet connection  
+
 ## 2.4.4 - 2021-09-11  
 
 [FIXED] Not able to connect to VPN for some users  
