@@ -23,9 +23,15 @@
 
 import Network
 import NetworkExtension
+import WireGuardKit
+import os
 
-enum PacketTunnelProviderError: Error {
-    case tunnelSetupFailed
+enum PacketTunnelProviderError: String, Error {
+    case savedProtocolConfigurationIsInvalid
+    case dnsResolutionFailure
+    case couldNotStartBackend
+    case couldNotDetermineFileDescriptor
+    case couldNotSetNetworkSettings
 }
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
@@ -64,13 +70,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         guard let addresses = UserDefaults.shared.isIPv6 ? KeyChain.wgIpAddresses : KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
             tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+            completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
         
         guard let tunnelSettings = getTunnelSettings(ipAddress: addresses) else {
             tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+            completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
         
@@ -80,7 +86,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         guard let privateKeyHex = wgPrivateKey.base64KeyToHex() else {
             tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+            completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
         
@@ -89,7 +95,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         guard handle >= 0 else {
             tunnelSetupFailed()
-            completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+            completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
         
@@ -99,10 +105,16 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler(error)
         }
         
+        Logger.configureGlobal(tagged: "INFO", withFilePath: FileManager.logFileURL?.path)
+        setupLogging()
+        wg_log(.info, message: "Starting tunnel")
+        wg_log(.info, message: "Public key: \(KeyChain.wgPublicKey ?? "")")
+        wg_log(.info, message: "Addresses: \(addresses)")
+        
         setTunnelNetworkSettings(tunnelSettings) { error in
             if error != nil {
                 self.tunnelSetupFailed()
-                completionHandler(PacketTunnelProviderError.tunnelSetupFailed)
+                completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             } else {
                 completionHandler(nil)
             }
@@ -110,6 +122,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
+        wg_log(.info, staticMessage: "Stopping tunnel")
+        
         networkMonitor?.cancel()
         networkMonitor = nil
         
@@ -120,11 +134,22 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         completionHandler()
     }
     
+    override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)? = nil) {
+        wg_log(.info, message: "Handle App Message size: \(messageData.count)")
+        
+        if messageData.count == 1 && messageData[0] == 99 {
+            flushLogsToFile()
+        } else {
+            completionHandler?(nil)
+        }
+    }
+    
     deinit {
         networkMonitor?.cancel()
     }
     
     private func tunnelSetupFailed() {
+        wg_log(.error, message: "Tunnel setup failed")
         UserDefaults.shared.set(".tunnelSetupFailed", forKey: UserDefaults.Key.wireguardTunnelProviderError)
         UserDefaults.shared.synchronize()
     }
@@ -141,6 +166,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func regenerateKeys(completion: @escaping (Error?) -> Void) {
+        wg_log(.info, message: "Rotating keys")
         ExtensionKeyManager.shared.upgradeKey { privateKey, ipAddress in
             guard let privateKey = privateKey, let ipAddress = ipAddress else {
                 completion(nil)
@@ -148,16 +174,16 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             }
             
             guard let tunnelSettings = self.getTunnelSettings(ipAddress: ipAddress) else {
-                completion(PacketTunnelProviderError.tunnelSetupFailed)
+                completion(PacketTunnelProviderError.couldNotSetNetworkSettings)
                 return
             }
             
             self.setTunnelNetworkSettings(tunnelSettings) { error in
                 if error != nil {
-                    completion(PacketTunnelProviderError.tunnelSetupFailed)
+                    completion(PacketTunnelProviderError.couldNotSetNetworkSettings)
                 } else {
                     guard let privateKeyHex = privateKey.base64KeyToHex() else {
-                        completion(PacketTunnelProviderError.tunnelSetupFailed)
+                        completion(PacketTunnelProviderError.couldNotSetNetworkSettings)
                         return
                     }
                     
@@ -169,7 +195,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func getTunnelSettings(ipAddress: String) -> NEPacketTunnelNetworkSettings? {
-        let validatedEndpoints = (self.config.providerConfiguration?[PCKeys.endpoints.rawValue] as? String ?? "").commaSeparatedToArray().compactMap { ((try? Endpoint(endpointString: String($0))) as Endpoint??) }.compactMap {$0}
+        let validatedEndpoints = (self.config.providerConfiguration?[PCKeys.endpoints.rawValue] as? String ?? "").commaSeparatedToArray().compactMap { ((try? WireGuardEndpoint(endpointString: String($0))) as WireGuardEndpoint??) }.compactMap {$0}
         let validatedAddresses = ipAddress.commaSeparatedToArray().compactMap { ((try? CIDRAddress(stringRepresentation: String($0))) as CIDRAddress??) }.compactMap { $0 }
         
         guard let firstEndpoint = validatedEndpoints.first else {
@@ -241,12 +267,52 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         guard let handle = handle else { return }
         let settings = self.settings.updateAttribute(key: key, value: value)
         updatedSettings = settings
+        wg_log(.info, message: "Configuration updated")
         wgSetConfig(handle, settings)
     }
     
     private func pathUpdate(path: Network.NWPath) {
         guard let handle = handle else { return }
+        wg_log(.info, message: "Network change detected: \(path.debugDescription)")
         wgSetConfig(handle, settings)
     }
     
+    private func setupLogging() {
+        guard UserDefaults.shared.isLogging else {
+            return
+        }
+        
+        Logger.configureGlobal(tagged: "INFO", withFilePath: FileManager.logFileURL?.path)
+    }
+    
+    private func flushLogsToFile() {
+        guard UserDefaults.shared.isLogging else {
+            return
+        }
+        guard let path = FileManager.logTextFileURL?.path else {
+            return
+        }
+        
+        if Logger.global == nil {
+            setupLogging()
+        }
+        
+        if Logger.global?.writeLog(to: path) ?? false {
+            wg_log(.info, message: "flushLogsToFile written to file \(path) ")
+        } else {
+            wg_log(.info, message: "flushLogsToFile error while writing to file \(path) ")
+        }
+    }
+    
+}
+
+extension WireGuardLogLevel {
+    var osLogLevel: OSLogType {
+        switch self {
+        case .verbose:
+            return .debug
+        case .error:
+            return .error
+        }
+    }
 }

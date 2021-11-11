@@ -72,6 +72,7 @@ class MainView: UIView {
         
         if isDisconnected {
             mapScrollView.localCoordinates = (model.latitude, model.longitude)
+            mapScrollView.markerLocalView.locationButton.setTitle(model.city, for: .normal)
         } else {
             mapScrollView.gatewayCoordinates = (model.latitude, model.longitude)
         }
@@ -209,7 +210,7 @@ class MainView: UIView {
             bottomOffset = 74
         }
         
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+        if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec && UserDefaults.shared.isMultiHop {
             centerMapButton.snp.remakeConstraints { make in
                 make.size.equalTo(42)
                 make.right.equalTo(-30)
@@ -218,7 +219,7 @@ class MainView: UIView {
             return
         }
 
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+        if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec {
             centerMapButton.snp.remakeConstraints { make in
                 make.size.equalTo(42)
                 make.right.equalTo(-30)

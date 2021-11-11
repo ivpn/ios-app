@@ -71,23 +71,16 @@ extension UIViewController {
     
     // MARK: - Methods -
     
-    func logOut(deleteSession: Bool = true) {
+    func logOut(deleteSession: Bool = true, deleteSettings: Bool = false) {
+        Application.shared.connectionManager.removeAll()
+        Application.shared.authentication.logOut(deleteSettings: deleteSettings)
+        NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
+        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
+        
         if deleteSession {
             let sessionManager = SessionManager()
             sessionManager.delegate = self
             sessionManager.deleteSession()
-        }
-        
-        if UserDefaults.shared.networkProtectionEnabled {
-            UserDefaults.clearSession()
-        }
-        
-        Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: false)
-        DispatchQueue.delay(0.5) {
-            Application.shared.connectionManager.removeAll()
-            Application.shared.authentication.logOut()
-            NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
-            NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
         }
     }
     
@@ -306,9 +299,9 @@ extension UIViewController {
         return true
     }
     
-    func evaluateIsOpenVPN() -> Bool {
-        if Application.shared.settings.connectionProtocol.tunnelType() != .openvpn {
-            showAlert(title: "Change protocol to OpenVPN", message: "For Multi-Hop connection you must select OpenVPN protocol.") { _ in
+    func evaluateProtocolForMultiHop() -> Bool {
+        if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+            showAlert(title: "Change protocol to WireGuard or OpenVPN", message: "For Multi-Hop connection you must select WireGuard or OpenVPN protocol.") { _ in
             }
             return false
         }

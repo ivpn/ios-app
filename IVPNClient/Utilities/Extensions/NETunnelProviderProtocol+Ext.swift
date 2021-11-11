@@ -23,7 +23,9 @@
 
 import Foundation
 import NetworkExtension
+import Network
 import TunnelKit
+import WireGuardKit
 
 extension NETunnelProviderProtocol {
     
@@ -66,7 +68,7 @@ extension NETunnelProviderProtocol {
         
         var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.shouldDebug = true
-        builder.debugLogFormat = "$Dyyyy-MMM-dd HH:mm:ss$d $L $M"
+        builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss$d $L $M"
         builder.masksPrivateData = true
         
         let configuration = builder.build()
@@ -79,6 +81,9 @@ extension NETunnelProviderProtocol {
             username: credentials.username
         )
         proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
+        if #available(iOS 15.1, *) {
+            proto.includeAllNetworks = UserDefaults.shared.killSwitch
+        }
         
         return proto
     }
@@ -113,6 +118,17 @@ extension NETunnelProviderProtocol {
         }
         
         var addresses = KeyChain.wgIpAddress
+        var publicKey = host.publicKey
+        var endpoint = Peer.endpoint(host: host.host, port: settings.port())
+        
+        if UserDefaults.shared.isMultiHop {
+            guard let exitHost = Application.shared.settings.selectedExitServer.hosts.randomElement() else {
+                return NETunnelProviderProtocol()
+            }
+            
+            publicKey = exitHost.publicKey
+            endpoint = Peer.endpoint(host: host.host, port: Int(exitHost.multihopPort) ?? settings.port())
+        }
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
             addresses = Interface.getAddresses(ipv4: KeyChain.wgIpAddress, ipv6: ipv6.localIP)
@@ -121,9 +137,9 @@ extension NETunnelProviderProtocol {
         }
         
         let peer = Peer(
-            publicKey: host.publicKey,
+            publicKey: publicKey,
             allowedIPs: Config.wgPeerAllowedIPs,
-            endpoint: Peer.endpoint(host: host.host, port: settings.port()),
+            endpoint: endpoint,
             persistentKeepalive: Config.wgPeerPersistentKeepalive
         )
         let interface = Interface(
@@ -144,6 +160,9 @@ extension NETunnelProviderProtocol {
         configuration.serverAddress = peer.endpoint
         configuration.providerConfiguration = tunnel.generateProviderConfiguration()
         configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
+        if #available(iOS 15.1, *) {
+            configuration.includeAllNetworks = UserDefaults.shared.killSwitch
+        }
         
         return configuration
     }

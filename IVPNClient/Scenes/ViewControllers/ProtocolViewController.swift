@@ -70,7 +70,7 @@ class ProtocolViewController: UITableViewController {
     }
     
     func validateMultiHop(connectionProtocol: ConnectionSettings) -> Bool {
-        if UserDefaults.shared.isMultiHop && connectionProtocol.tunnelType() != .openvpn {
+        if UserDefaults.shared.isMultiHop && connectionProtocol.tunnelType() == .ipsec {
             return false
         }
         
@@ -101,6 +101,14 @@ class ProtocolViewController: UITableViewController {
         return true
     }
     
+    func validateKillSwitch(connectionProtocol: ConnectionSettings) -> Bool {
+        if UserDefaults.shared.killSwitch && connectionProtocol == .ipsec {
+            return false
+        }
+        
+        return true
+    }
+    
     func validateSecureDNS(connectionProtocol: ConnectionSettings) -> Bool {
         if #available(iOS 14.0, *) {
             if DNSManager.shared.isEnabled && connectionProtocol == .ipsec {
@@ -122,6 +130,11 @@ class ProtocolViewController: UITableViewController {
     }
     
     func selectPreferredProtocolAndPort(connectionProtocol: ConnectionSettings) {
+        guard !UserDefaults.shared.isMultiHop else {
+            showAlert(title: "", message: "It is not possible to use the preferred port setting when Multi-Hop for is enabled")
+            return
+        }
+        
         let selected = Application.shared.settings.connectionProtocol.formatProtocol()
         let protocols = connectionProtocol.supportedProtocols(protocols: Config.supportedProtocols)
         let actions = connectionProtocol.supportedProtocolsFormat(protocols: Config.supportedProtocols)
@@ -164,7 +177,7 @@ extension ProtocolViewController {
         
         cell.setup(connectionProtocol: connectionProtocol, isSettings: indexPath.section > 0)
         
-        if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) || !validateSecureDNS(connectionProtocol: connectionProtocol) {
+        if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) || !validateSecureDNS(connectionProtocol: connectionProtocol) || !validateKillSwitch(connectionProtocol: connectionProtocol) {
             cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabel6)
         } else {
             cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
@@ -284,6 +297,24 @@ extension ProtocolViewController {
                     switch index {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+                        tableView.reloadData()
+                    default:
+                        break
+                    }
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+            return
+        }
+        
+        guard validateKillSwitch(connectionProtocol: connectionProtocol) else {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                showActionSheet(title: "To use IKEv2 protocol you must turn Kill Switch off", actions: ["Turn off"], sourceView: cell as UIView) { index in
+                    switch index {
+                    case 0:
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.killSwitch)
+                        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
                         tableView.reloadData()
                     default:
                         break

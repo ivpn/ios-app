@@ -35,6 +35,14 @@ class AccountViewController: UITableViewController {
     private let hud = JGProgressHUD(style: .dark)
     private var viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
     private var serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+    private var deleteSettings = false
+    private var forceLogOut = false
+    
+    var sessionManager: SessionManager {
+        let sessionManager = SessionManager()
+        sessionManager.delegate = self
+        return sessionManager
+    }
     
     // MARK: - @IBActions -
     
@@ -53,9 +61,16 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func logOut(_ sender: Any) {
-        showActionAlert(title: "Logout", message: "Are you sure you want to log out?", action: "Log out", actionHandler: { _ in
-            self.logOut()
-        })
+        showActionSheet(title: "Are you sure you want to log out?", actions: ["Log out", "Log out and clear settings"], sourceView: sender as! UIView, disableDismiss: true) { [self] index in
+            switch index {
+            case 0:
+                startLogOut(deleteSettings: false)
+            case 1:
+                startLogOut(deleteSettings: true)
+            default:
+                break
+            }
+        }
     }
     
     // MARK: - View Lifecycle -
@@ -90,6 +105,22 @@ class AccountViewController: UITableViewController {
     @objc private func subscriptionActivated() {
         let viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
         accountView.setupView(viewModel: viewModel)
+    }
+    
+    private func startLogOut(deleteSettings: Bool) {
+        self.deleteSettings = deleteSettings
+        Application.shared.connectionManager.removeAll()
+        
+        guard !UserDefaults.shared.networkProtectionEnabled && !UserDefaults.shared.killSwitch else {
+            deleteSessionStart()
+            DispatchQueue.delay(0.5) { [self] in
+                sessionManager.deleteSession()
+            }
+            
+            return
+        }
+        
+        sessionManager.deleteSession()
     }
     
 }
@@ -139,16 +170,25 @@ extension AccountViewController {
     }
     
     override func deleteSessionSuccess() {
+        logOut(deleteSession: false, deleteSettings: deleteSettings)
         hud.delegate = self
         hud.dismiss()
     }
     
     override func deleteSessionFailure() {
-        hud.delegate = self
-        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        hud.detailTextLabel.text = "There was an error with removing session"
-        hud.show(in: (navigationController?.view)!)
-        hud.dismiss(afterDelay: 2)
+        hud.dismiss()
+        
+        if forceLogOut {
+            logOut(deleteSession: false, deleteSettings: deleteSettings)
+            navigationController?.dismiss(animated: true)
+        } else {
+            showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", cancelHandler: { _ in
+                NotificationCenter.default.post(name: Notification.Name.UpdateGeoLocation, object: nil)
+            }, actionHandler: { [self] _ in
+                forceLogOut = true
+                sessionManager.deleteSession()
+            })
+        }
     }
     
     override func deleteSessionSkip() {

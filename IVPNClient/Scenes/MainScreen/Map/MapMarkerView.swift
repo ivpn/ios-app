@@ -78,7 +78,7 @@ class MapMarkerView: UIView {
     var connectionInfoPopup = ConnectionInfoPopupView()
     private var circle1 = UIView()
     private var circle2 = UIView()
-    private var locationButton = UIButton()
+    var locationButton = UIButton()
     private var animatedCircle = UIView()
     private var animatedCircleLayer = AnimatedCircleLayer()
     private var radius1: CGFloat = 98

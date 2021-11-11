@@ -118,12 +118,12 @@ class InfoAlertView: UIView {
         
         centerXConstraint.constant = 0
         
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn && UserDefaults.shared.isMultiHop {
+        if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec && UserDefaults.shared.isMultiHop {
             bottomConstraint.constant = CGFloat(MapConstants.Container.bottomAnchorC + 22) - bottomSafeArea
             return
         }
 
-        if Application.shared.settings.connectionProtocol.tunnelType() == .openvpn {
+        if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec {
             bottomConstraint.constant = CGFloat(MapConstants.Container.bottomAnchorB + 22) - bottomSafeArea
             return
         }
