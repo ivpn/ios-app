@@ -46,6 +46,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
+    @IBOutlet weak var excludeLocalNetworksSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -132,6 +133,11 @@ class SettingsViewController: UITableViewController {
         evaluateReconnect(sender: sender as UIView)
     }
     
+    @IBAction func toggleExcludeLocalNetworks(_ sender: UISwitch) {
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.excludeLocalNetworks)
+        evaluateReconnect(sender: sender as UIView)
+    }
+    
     @IBAction func toggleKeepAlive(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.keepAlive)
         evaluateReconnect(sender: sender as UIView)
@@ -207,6 +213,7 @@ class SettingsViewController: UITableViewController {
         showIPv4ServersSwitch.setOn(UserDefaults.standard.showIPv4Servers, animated: false)
         showIPv4ServersSwitch.isEnabled = UserDefaults.shared.isIPv6
         killSwitchSwitch.setOn(UserDefaults.shared.killSwitch, animated: false)
+        excludeLocalNetworksSwitch.setOn(UserDefaults.shared.excludeLocalNetworks, animated: false)
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
@@ -413,8 +420,8 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 0 { return 60 }
         if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 7 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 3 && indexPath.row == 8 { return 60 }
+        if indexPath.section == 3 && indexPath.row == 9 && !loggingSwitch.isOn { return 0 }
         
         // Disconnected custom DNS
         if indexPath.section == 3 && indexPath.row == 3 {
@@ -427,6 +434,15 @@ extension SettingsViewController {
         
         // Kill Switch
         if indexPath.section == 3 && indexPath.row == 4 {
+            if #available(iOS 15.1, *) {
+                return UITableView.automaticDimension
+            } else {
+                return 0
+            }
+        }
+        
+        // Exclude local network
+        if indexPath.section == 3 && indexPath.row == 5 {
             if #available(iOS 15.1, *) {
                 return UITableView.automaticDimension
             } else {
