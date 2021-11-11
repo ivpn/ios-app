@@ -240,11 +240,10 @@ extension NetworkProtectionViewController: NetworkProtectionHeaderTableViewCellD
         tableView.reloadData()
         
         if isOn {
-            NetworkManager.shared.startMonitoring {
-                Application.shared.connectionManager.evaluateConnection { [self] error in
-                    if error != nil {
-                        showWireGuardKeysMissingError()
-                    }
+            NetworkManager.shared.startMonitoring()
+            Application.shared.connectionManager.evaluateConnection { [self] error in
+                if error != nil {
+                    showWireGuardKeysMissingError()
                 }
             }
         } else {

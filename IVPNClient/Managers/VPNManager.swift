@@ -130,6 +130,9 @@ class VPNManager {
         manager.saveToPreferences { error in
             if let error = error, error.code == 5 {
                 manager.isOnDemandEnabled = false
+                if #available(iOS 15.1, *) {
+                    manager.protocolConfiguration?.includeAllNetworks = false
+                }
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
                 return
             }
@@ -252,6 +255,9 @@ class VPNManager {
         manager.loadFromPreferences { _ in
             manager.onDemandRules = [NEOnDemandRule]()
             manager.isOnDemandEnabled = false
+            if #available(iOS 15.1, *) {
+                manager.protocolConfiguration?.includeAllNetworks = false
+            }
             manager.saveToPreferences { _ in }
         }
     }
@@ -302,6 +308,9 @@ class VPNManager {
             manager.loadFromPreferences { _ in
                 manager.onDemandRules = [NEOnDemandRule]()
                 manager.isOnDemandEnabled = false
+                if #available(iOS 15.1, *) {
+                    manager.protocolConfiguration?.includeAllNetworks = false
+                }
                 manager.saveToPreferences(completionHandler: completion)
             }
         }
@@ -397,4 +406,30 @@ class VPNManager {
         completion(nil)
     }
     
+    func getWireGuardLog(completion: @escaping (String?) -> Void) {
+        guard let session = wireguardManager?.connection as? NETunnelProviderSession else {
+            completion("Error")
+            return
+        }
+        
+        do {
+            try session.sendProviderMessage(Message.requestLog.data) { data in
+                completion(nil)
+                return
+            }
+        } catch {
+            completion("Error")
+            return
+        }
+        
+        completion("Error")
+    }
+    
+}
+
+private enum Message: UInt8 {
+    case requestLog = 99
+    var data: Data {
+        return Data([self.rawValue])
+    }
 }

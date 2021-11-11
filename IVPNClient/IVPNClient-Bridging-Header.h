@@ -1,2 +1,2 @@
-#import "Utilities/Crypto/x25519.h"
-#import "../wireguard-go-bridge/wireguard.h"
+#include "../WireGuardKitC/WireGuardKitC.h"
+#include "../wireguard-tunnel-provider/WireGuard/Shared/Logging/ringlogger.h"

@@ -1,10 +1,10 @@
 //
-//  Endpoint.swift
+//  WireGuardEndpoint.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2018-10-22.
-//  Copyright (c) 2020 Privatus Limited.
+//  Created by Juraj Hilje on 2021-09-22.
+//  Copyright (c) 2021 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -14,7 +14,7 @@
 //
 //  The IVPN iOS app is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 //  details.
 //
 //  You should have received a copy of the GNU General Public License
@@ -23,7 +23,7 @@
 
 import Foundation
 
-struct Endpoint {
+struct WireGuardEndpoint {
     
     var ipAddress: String
     var port: Int32?
@@ -53,7 +53,7 @@ struct Endpoint {
         let ipString: String
         
         if addressType == .other {
-            ipString = Endpoint.convertToipAddress(from: hostString)
+            ipString = WireGuardEndpoint.convertToipAddress(from: hostString)
         } else {
             ipString = hostString
         }
@@ -87,7 +87,7 @@ struct Endpoint {
     
 }
 
-extension Endpoint {
+extension WireGuardEndpoint {
     
     enum EndpointValidationError: Error {
         

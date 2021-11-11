@@ -52,12 +52,18 @@ class Authentication {
         KeyChain.save(session: session)
     }
     
-    func logOut() {
+    func logOut(deleteSettings: Bool) {
         KeyChain.clearAll()
         FileSystemManager.clearSession()
-        StorageManager.clearSession()
-        UserDefaults.clearSession()
         Application.shared.clearSession()
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.networkProtectionEnabled)
+        
+        if deleteSettings {
+            StorageManager.clearSession()
+            UserDefaults.clearSession()
+            Application.shared.settings.connectionProtocol = Config.defaultProtocol
+            Application.shared.settings.saveConnectionProtocol()
+        }
     }
     
     func removeStoredCredentials() {
