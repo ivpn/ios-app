@@ -83,6 +83,7 @@ extension NETunnelProviderProtocol {
         proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
         if #available(iOS 15.1, *) {
             proto.includeAllNetworks = UserDefaults.shared.killSwitch
+            proto.excludeLocalNetworks = UserDefaults.shared.excludeLocalNetworks
         }
         
         return proto
@@ -162,6 +163,7 @@ extension NETunnelProviderProtocol {
         configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
         if #available(iOS 15.1, *) {
             configuration.includeAllNetworks = UserDefaults.shared.killSwitch
+            configuration.excludeLocalNetworks = UserDefaults.shared.excludeLocalNetworks
         }
         
         return configuration
