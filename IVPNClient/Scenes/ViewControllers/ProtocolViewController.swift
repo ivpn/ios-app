@@ -200,7 +200,7 @@ extension ProtocolViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "We recommend the WireGuard protocol for its speed, security and connection reliability. Currently we only support Multi-hop connections using OpenVPN. For more information visit our protocol comparison web page."
+            return "We recommend the WireGuard protocol for its speed, security and connection reliability. For more information visit our protocol comparison web page."
         case 1:
             if Application.shared.settings.connectionProtocol.tunnelType() == .wireguard {
                 return "Keys rotation will start automatically in the defined interval. It will also change the internal IP address."
