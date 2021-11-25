@@ -40,6 +40,12 @@ class AntiTrackerViewController: UITableViewController {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
         antiTrackerHardcoreSwitch.isEnabled = sender.isOn
         evaluateReconnect(sender: sender as UIView)
+        
+        if sender.isOn {
+            registerUserActivity(type: UserActivityType.AntiTrackerEnable, title: UserActivityTitle.AntiTrackerEnable)
+        } else {
+            registerUserActivity(type: UserActivityType.AntiTrackerDisable, title: UserActivityTitle.AntiTrackerDisable)
+        }
     }
     
     @IBAction func toggleAntiTrackerHardcore(_ sender: UISwitch) {
