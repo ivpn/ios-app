@@ -338,16 +338,6 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
-    func reloadView() {
-        tableView.reloadData()
-        isMultiHop = UserDefaults.shared.isMultiHop
-        Application.shared.connectionManager.needsToUpdateSelectedServer()
-        controlPanelView.updateServerNames()
-        controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
-        controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
-        controlPanelView.updateProtocol()
-    }
-    
     // MARK: - Observers -
     
     private func addObservers() {
@@ -358,6 +348,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: Notification.Name.AntiTrackerUpdated, object: nil)
     }
     
     // MARK: - Private methods -
@@ -366,6 +357,16 @@ class ControlPanelViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         isMultiHop = UserDefaults.shared.isMultiHop
+        controlPanelView.updateServerNames()
+        controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
+        controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
+        controlPanelView.updateProtocol()
+    }
+    
+    @objc private func reloadView() {
+        tableView.reloadData()
+        isMultiHop = UserDefaults.shared.isMultiHop
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)

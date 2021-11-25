@@ -142,9 +142,10 @@ class CustomDNSViewController: UITableViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(resolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setupView), name: Notification.Name.CustomDNSUpdated, object: nil)
     }
     
-    private func setupView() {
+    @objc private func setupView() {
         let preferred = DNSProtocolType.preferred()
         let customDNS = UserDefaults.shared.customDNS
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)

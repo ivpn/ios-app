@@ -119,10 +119,6 @@ class MainViewController: UIViewController {
     
     func refreshUI() {
         updateFloatingPanelLayout()
-        
-        if let controlPanelViewController = self.floatingPanel.contentViewController as? ControlPanelViewController {
-            controlPanelViewController.reloadView()
-        }
     }
     
     func updateStatus(vpnStatus: NEVPNStatus, animated: Bool = true) {
