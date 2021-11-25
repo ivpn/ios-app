@@ -105,6 +105,12 @@ class ControlPanelViewController: UITableViewController {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
         evaluateReconnect(sender: sender as UIView)
         controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
+        
+        if sender.isOn {
+            registerUserActivity(type: UserActivityType.AntiTrackerEnable, title: UserActivityTitle.AntiTrackerEnable)
+        } else {
+            registerUserActivity(type: UserActivityType.AntiTrackerDisable, title: UserActivityTitle.AntiTrackerDisable)
+        }
     }
     
     @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
