@@ -236,6 +236,32 @@ extension AppDelegate: UIApplicationDelegate {
                 }
                 Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
             }
+        case UserActivityType.AntiTrackerEnable:
+            DispatchQueue.async { [self] in
+                if let viewController = UIApplication.topViewController() {
+                    if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+                        viewController.showAlert(title: "IKEv2 not supported", message: "AntiTracker is supported only for OpenVPN and WireGuard protocols.") { _ in
+                        }
+                        return
+                    }
+                    
+                    UserDefaults.shared.set(true, forKey: UserDefaults.Key.isAntiTracker)
+                    viewController.evaluateReconnect(sender: viewController.view)
+                    refreshUI()
+                }
+            }
+        case UserActivityType.AntiTrackerDisable:
+            DispatchQueue.async { [self] in
+                if let viewController = UIApplication.topViewController() {
+                    UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
+                    viewController.evaluateReconnect(sender: viewController.view)
+                    refreshUI()
+                }
+            }
+        case UserActivityType.CustomDNSEnable:
+            break
+        case UserActivityType.CustomDNSDisable:
+            break
         default:
             log(info: "No such user activity")
         }
