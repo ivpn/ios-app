@@ -259,9 +259,25 @@ extension AppDelegate: UIApplicationDelegate {
                 }
             }
         case UserActivityType.CustomDNSEnable:
-            break
+            DispatchQueue.async {
+                if let viewController = UIApplication.topViewController() {
+                    if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+                        viewController.showAlert(title: "IKEv2 not supported", message: "Custom DNS is supported only for OpenVPN and WireGuard protocols.") { _ in
+                        }
+                        return
+                    }
+                    
+                    UserDefaults.shared.set(true, forKey: UserDefaults.Key.isCustomDNS)
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
         case UserActivityType.CustomDNSDisable:
-            break
+            DispatchQueue.async {
+                if let viewController = UIApplication.topViewController() {
+                    UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
         default:
             log(info: "No such user activity")
         }
