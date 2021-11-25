@@ -332,6 +332,16 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    func reloadView() {
+        tableView.reloadData()
+        isMultiHop = UserDefaults.shared.isMultiHop
+        Application.shared.connectionManager.needsToUpdateSelectedServer()
+        controlPanelView.updateServerNames()
+        controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
+        controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
+        controlPanelView.updateProtocol()
+    }
+    
     // MARK: - Observers -
     
     private func addObservers() {
@@ -350,16 +360,6 @@ class ControlPanelViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         isMultiHop = UserDefaults.shared.isMultiHop
-        controlPanelView.updateServerNames()
-        controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
-        controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
-        controlPanelView.updateProtocol()
-    }
-    
-    private func reloadView() {
-        tableView.reloadData()
-        isMultiHop = UserDefaults.shared.isMultiHop
-        Application.shared.connectionManager.needsToUpdateSelectedServer()
         controlPanelView.updateServerNames()
         controlPanelView.updateServerLabels(viewModel: vpnStatusViewModel)
         controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)

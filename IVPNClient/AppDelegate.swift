@@ -99,6 +99,12 @@ class AppDelegate: UIResponder {
         URLCache.shared.removeAllCachedResponses()
     }
     
+    private func refreshUI() {
+        if let mainViewController = UIApplication.topViewController() as? MainViewController {
+            mainViewController.refreshUI()
+        }
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         guard let endpoint = url.host else {
             return false
@@ -174,14 +180,13 @@ extension AppDelegate: UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         NetworkManager.shared.stopMonitoring()
-        
-        if let topViewController = UIApplication.topViewController() as? MainViewController {
-            topViewController.refreshUI()
-        }
+        refreshUI()
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else { return }
+        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else {
+            return
+        }
         
         switch shortcutItem.type {
         case "Connect":
@@ -210,7 +215,9 @@ extension AppDelegate: UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else { return false }
+        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else {
+            return false
+        }
         
         switch userActivity.activityType {
         case UserActivityType.Connect:
