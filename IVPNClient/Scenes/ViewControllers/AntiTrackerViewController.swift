@@ -60,6 +60,7 @@ class AntiTrackerViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        addObservers()
     }
     
     // MARK: - Private methods -
