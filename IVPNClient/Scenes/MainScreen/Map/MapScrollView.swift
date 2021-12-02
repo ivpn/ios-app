@@ -226,6 +226,7 @@ class MapScrollView: UIScrollView {
             self.markerGatewayView.viewModel = ProofsViewModel(model: model)
             self.markerGatewayView.show(animated: animated)
             self.markerLocalView.hide(animated: false)
+            self.updateAccessibility()
         }
     }
     
@@ -428,7 +429,7 @@ class MapScrollView: UIScrollView {
         let isDisconnected = Application.shared.connectionManager.status.isDisconnected()
         markerLocalView.accessibilityLabel = "Your status is - disconnected"
         markerLocalView.isAccessibilityElement = isDisconnected
-        markerGatewayView.accessibilityLabel = "Your status is - connected"
+        markerGatewayView.accessibilityLabel = "Your status is - connected to \(markerGatewayView.viewModel?.model?.city ?? "")"
         markerGatewayView.isAccessibilityElement = !isDisconnected
         markerLocalView.tag = 100
         markerGatewayView.tag = 200
