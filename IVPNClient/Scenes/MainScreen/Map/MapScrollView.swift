@@ -433,10 +433,8 @@ class MapScrollView: UIScrollView {
         markerLocalView.tag = 100
         markerGatewayView.tag = 200
         accessibilityElements = [UIView]()
-        for accessibilitySubview in self.subviews {
-            if accessibilitySubview.isAccessibilityElement {
-                self.accessibilityElements?.append(accessibilitySubview)
-            }
+        for accessibilitySubview in subviews where accessibilitySubview.isAccessibilityElement {
+            accessibilityElements?.append(accessibilitySubview)
         }
         accessibilityElements?.sort(by: {($0 as AnyObject).tag > ($1 as AnyObject).tag})
     }
