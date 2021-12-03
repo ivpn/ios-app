@@ -349,6 +349,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: Notification.Name.AntiTrackerUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(evaluateReconnectHandler), name: Notification.Name.EvaluateReconnect, object: nil)
     }
     
     // MARK: - Private methods -
@@ -423,6 +424,10 @@ class ControlPanelViewController: UITableViewController {
     
     @objc private func agreedToTermsOfService() {
         connectionExecute()
+    }
+    
+    @objc private func evaluateReconnectHandler() {
+        evaluateReconnect(sender: controlPanelView)
     }
     
 }

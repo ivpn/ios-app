@@ -246,16 +246,24 @@ extension AppDelegate: UIApplicationDelegate {
                     }
                     
                     UserDefaults.shared.set(true, forKey: UserDefaults.Key.isAntiTracker)
-                    viewController.evaluateReconnect(sender: viewController.view)
                     NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
+                    if let _ = UIApplication.topViewController() as? MainViewController {
+                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                    } else {
+                        viewController.evaluateReconnect(sender: viewController.view)
+                    }
                 }
             }
         case UserActivityType.AntiTrackerDisable:
             DispatchQueue.async {
                 if let viewController = UIApplication.topViewController() {
                     UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
-                    viewController.evaluateReconnect(sender: viewController.view)
                     NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
+                    if let _ = UIApplication.topViewController() as? MainViewController {
+                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                    } else {
+                        viewController.evaluateReconnect(sender: viewController.view)
+                    }
                 }
             }
         case UserActivityType.CustomDNSEnable:
@@ -268,16 +276,24 @@ extension AppDelegate: UIApplicationDelegate {
                     }
                     
                     UserDefaults.shared.set(true, forKey: UserDefaults.Key.isCustomDNS)
-                    viewController.evaluateReconnect(sender: viewController.view)
                     NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
+                    if let _ = UIApplication.topViewController() as? MainViewController {
+                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                    } else {
+                        viewController.evaluateReconnect(sender: viewController.view)
+                    }
                 }
             }
         case UserActivityType.CustomDNSDisable:
             DispatchQueue.async {
                 if let viewController = UIApplication.topViewController() {
                     UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
-                    viewController.evaluateReconnect(sender: viewController.view)
                     NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
+                    if let _ = UIApplication.topViewController() as? MainViewController {
+                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                    } else {
+                        viewController.evaluateReconnect(sender: viewController.view)
+                    }
                 }
             }
         default:
