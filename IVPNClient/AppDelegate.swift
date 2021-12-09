@@ -275,6 +275,11 @@ extension AppDelegate: UIApplicationDelegate {
                         return
                     }
                     
+                    guard !UserDefaults.shared.customDNS.isEmpty else {
+                        viewController.showAlert(title: "", message: "Please enter DNS server info")
+                        return
+                    }
+                    
                     UserDefaults.shared.set(true, forKey: UserDefaults.Key.isCustomDNS)
                     NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
                     if let _ = UIApplication.topViewController() as? MainViewController {
