@@ -252,6 +252,8 @@ extension LoginViewController {
         loginConfirmation.clear()
         
         KeyChain.username = (self.userName.text ?? "").trim()
+        Application.shared.serverList = VPNServerList()
+        Application.shared.settings = Settings(serverList: Application.shared.serverList)
         
         navigationController?.dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: Notification.Name.ServiceAuthorized, object: nil)
