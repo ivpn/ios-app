@@ -69,6 +69,7 @@ class MapScrollView: UIScrollView {
         initMarkers()
         initConnectToServerPopup()
         addObservers()
+        updateAccessibility()
     }
     
     // MARK: - Methods -
@@ -97,6 +98,7 @@ class MapScrollView: UIScrollView {
         }
         
         updateMapPosition(vpnStatus: vpnStatus)
+        updateAccessibility()
     }
     
     func updateMapPositionToCurrentCoordinates() {
@@ -224,6 +226,7 @@ class MapScrollView: UIScrollView {
             self.markerGatewayView.viewModel = ProofsViewModel(model: model)
             self.markerGatewayView.show(animated: animated)
             self.markerLocalView.hide(animated: false)
+            self.updateAccessibility()
         }
     }
     
@@ -299,6 +302,7 @@ class MapScrollView: UIScrollView {
         }
         
         button.addSubview(marker)
+        button.isAccessibilityElement = true
         addSubview(button)
         sendSubviewToBack(button)
     }
@@ -419,6 +423,21 @@ class MapScrollView: UIScrollView {
         y = (bitmapHeight / 2) - (bitmapHeight / 2) * y
         
         return (x, y)
+    }
+    
+    private func updateAccessibility() {
+        let isDisconnected = Application.shared.connectionManager.status.isDisconnected()
+        markerLocalView.accessibilityLabel = "Your status is - disconnected"
+        markerLocalView.isAccessibilityElement = isDisconnected
+        markerGatewayView.accessibilityLabel = "Your status is - connected to \(markerGatewayView.viewModel?.model?.city ?? "")"
+        markerGatewayView.isAccessibilityElement = !isDisconnected
+        markerLocalView.tag = 100
+        markerGatewayView.tag = 200
+        accessibilityElements = [UIView]()
+        for accessibilitySubview in subviews where accessibilitySubview.isAccessibilityElement {
+            accessibilityElements?.append(accessibilitySubview)
+        }
+        accessibilityElements?.sort(by: {($0 as AnyObject).tag > ($1 as AnyObject).tag})
     }
     
 }
