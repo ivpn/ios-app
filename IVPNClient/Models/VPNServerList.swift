@@ -123,16 +123,10 @@ class VPNServerList {
                         if let ipAddress = defaultObj["ip"] as? String {
                             UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.antiTrackerDNS)
                         }
-                        if let ipAddressMultiHop = defaultObj["multihop-ip"] as? String {
-                            UserDefaults.shared.set(ipAddressMultiHop, forKey: UserDefaults.Key.antiTrackerDNSMultiHop)
-                        }
                     }
                     if let hardcore = antitracker["hardcore"] as? [String: Any] {
                         if let ipAddress = hardcore["ip"] as? String {
                             UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.antiTrackerHardcoreDNS)
-                        }
-                        if let ipAddressMultiHop = hardcore["multihop-ip"] as? String {
-                            UserDefaults.shared.set(ipAddressMultiHop, forKey: UserDefaults.Key.antiTrackerHardcoreDNSMultiHop)
                         }
                     }
                 }

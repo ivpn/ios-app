@@ -44,9 +44,7 @@ extension UserDefaults {
         static let isAntiTracker = "isAntiTracker"
         static let isAntiTrackerHardcore = "isAntiTrackerHardcore"
         static let antiTrackerDNS = "antiTrackerDNS"
-        static let antiTrackerDNSMultiHop = "antiTrackerDNSMultiHop"
         static let antiTrackerHardcoreDNS = "antiTrackerHardcoreDNS"
-        static let antiTrackerHardcoreDNSMultiHop = "antiTrackerHardcoreDNSMultiHop"
         static let wgKeyTimestamp = "wgKeyTimestamp"
         static let wgRegenerationRate = "wgRegenerationRate"
         static let hostNames = "hostNames"
@@ -139,16 +137,8 @@ extension UserDefaults {
         return string(forKey: Key.antiTrackerDNS) ?? ""
     }
     
-    @objc dynamic var antiTrackerDNSMultiHop: String {
-        return string(forKey: Key.antiTrackerDNSMultiHop) ?? ""
-    }
-    
     @objc dynamic var antiTrackerHardcoreDNS: String {
         return string(forKey: Key.antiTrackerHardcoreDNS) ?? ""
-    }
-    
-    @objc dynamic var antiTrackerHardcoreDNSMultiHop: String {
-        return string(forKey: Key.antiTrackerHardcoreDNSMultiHop) ?? ""
     }
     
     @objc dynamic var wgKeyTimestamp: Date {
