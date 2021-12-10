@@ -30,7 +30,7 @@ struct Config {
     static let minPingCheckInterval: TimeInterval = 10
     static let appGroup = "group.net.ivpn.clients.ios"
     
-    static let apiServersFile = "/v4/servers.json"
+    static let apiServersFile = "/v5/servers.json"
     static let apiGeoLookup = "/v4/geo-lookup"
     static let apiSessionNew = "/v4/session/new"
     static let apiSessionStatus = "/v4/session/status"

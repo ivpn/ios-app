@@ -32,16 +32,15 @@ extension NETunnelProviderProtocol {
     // MARK: OpenVPN
     
     static func makeOpenVPNProtocol(settings: ConnectionSettings, accessDetails: AccessDetails) -> NETunnelProviderProtocol {
-        var username = accessDetails.username
-        
-        if UserDefaults.shared.isMultiHop && Application.shared.serviceStatus.isEnabled(capability: .multihop) {
-            username += "@\(UserDefaults.shared.exitServerLocation)"
-        }
-        
-        let port = UInt16(settings.port())
+        let username = accessDetails.username
         let socketType: SocketType = settings.protocolType() == "TCP" ? .tcp : .udp
         let credentials = OpenVPN.Credentials(username, KeyChain.vpnPassword ?? "")
         let staticKey = OpenVPN.StaticKey.init(file: OpenVPNConf.tlsAuth, direction: OpenVPN.StaticKey.Direction.client)
+        var port = UInt16(settings.port())
+        
+        if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = Application.shared.settings.selectedExitServer.hosts.randomElement() {
+            port = UInt16(exitHost.multihopPort)
+        }
         
         var sessionBuilder = OpenVPN.ConfigurationBuilder()
         sessionBuilder.ca = OpenVPN.CryptoContainer(pem: OpenVPNConf.caCert)
@@ -91,15 +90,11 @@ extension NETunnelProviderProtocol {
     static func openVPNdnsServers() -> [String]? {
         if UserDefaults.shared.isAntiTracker {
             if UserDefaults.shared.isAntiTrackerHardcore {
-                if UserDefaults.shared.isMultiHop && !UserDefaults.shared.antiTrackerHardcoreDNSMultiHop.isEmpty {
-                    return [UserDefaults.shared.antiTrackerHardcoreDNSMultiHop]
-                } else if !UserDefaults.shared.antiTrackerHardcoreDNS.isEmpty {
+                if !UserDefaults.shared.antiTrackerHardcoreDNS.isEmpty {
                     return [UserDefaults.shared.antiTrackerHardcoreDNS]
                 }
             } else {
-                if UserDefaults.shared.isMultiHop && !UserDefaults.shared.antiTrackerDNSMultiHop.isEmpty {
-                    return [UserDefaults.shared.antiTrackerDNSMultiHop]
-                } else if !UserDefaults.shared.antiTrackerDNS.isEmpty {
+                if !UserDefaults.shared.antiTrackerDNS.isEmpty {
                     return [UserDefaults.shared.antiTrackerDNS]
                 }
             }
@@ -121,13 +116,9 @@ extension NETunnelProviderProtocol {
         var publicKey = host.publicKey
         var endpoint = Peer.endpoint(host: host.host, port: settings.port())
         
-        if UserDefaults.shared.isMultiHop {
-            guard let exitHost = Application.shared.settings.selectedExitServer.hosts.randomElement() else {
-                return NETunnelProviderProtocol()
-            }
-            
+        if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = Application.shared.settings.selectedExitServer.hosts.randomElement() {
             publicKey = exitHost.publicKey
-            endpoint = Peer.endpoint(host: host.host, port: Int(exitHost.multihopPort) ?? settings.port())
+            endpoint = Peer.endpoint(host: host.host, port: Int(exitHost.multihopPort))
         }
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {

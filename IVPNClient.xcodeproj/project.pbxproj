@@ -1892,7 +1892,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "curl -sf \"https://api.ivpn.net/v4/servers.json?pretty=true\" > IVPNClient/Config/servers.json\n";
+			shellScript = "curl -sf \"https://api.ivpn.net/v5/servers.json?pretty=true\" > IVPNClient/Config/servers.json\n";
 			showEnvVarsInLog = 0;
 		};
 		A41DECD8426C6E493395BE8D /* [CP] Check Pods Manifest.lock */ = {
@@ -1955,7 +1955,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/openssl/openssl.framework/openssl",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Apple/openssl.framework/openssl",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
