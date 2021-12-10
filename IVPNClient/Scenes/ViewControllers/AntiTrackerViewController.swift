@@ -29,6 +29,8 @@ class AntiTrackerViewController: UITableViewController {
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var antiTrackerHardcoreSwitch: UISwitch!
     
+    // MARK: - @IBActions -
+    
     @IBAction func toggleAntiTracker(_ sender: UISwitch) {
         if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
             showAlert(title: "IKEv2 not supported", message: "AntiTracker is supported only for OpenVPN and WireGuard protocols.") { _ in
@@ -40,6 +42,12 @@ class AntiTrackerViewController: UITableViewController {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
         antiTrackerHardcoreSwitch.isEnabled = sender.isOn
         evaluateReconnect(sender: sender as UIView)
+        
+        if sender.isOn {
+            registerUserActivity(type: UserActivityType.AntiTrackerEnable, title: UserActivityTitle.AntiTrackerEnable)
+        } else {
+            registerUserActivity(type: UserActivityType.AntiTrackerDisable, title: UserActivityTitle.AntiTrackerDisable)
+        }
     }
     
     @IBAction func toggleAntiTrackerHardcore(_ sender: UISwitch) {
@@ -47,8 +55,21 @@ class AntiTrackerViewController: UITableViewController {
         evaluateReconnect(sender: sender as UIView)
     }
     
+    // MARK: - View Lifecycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        addObservers()
+    }
+    
+    // MARK: - Private methods -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setupView), name: Notification.Name.AntiTrackerUpdated, object: nil)
+    }
+    
+    @objc private func setupView() {
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         antiTrackerSwitch.setOn(UserDefaults.shared.isAntiTracker, animated: false)
         antiTrackerHardcoreSwitch.setOn(UserDefaults.shared.isAntiTrackerHardcore, animated: false)

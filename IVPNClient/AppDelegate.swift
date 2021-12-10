@@ -99,6 +99,12 @@ class AppDelegate: UIResponder {
         URLCache.shared.removeAllCachedResponses()
     }
     
+    private func refreshUI() {
+        if let mainViewController = UIApplication.topViewController() as? MainViewController {
+            mainViewController.refreshUI()
+        }
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         guard let endpoint = url.host else {
             return false
@@ -174,14 +180,13 @@ extension AppDelegate: UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         NetworkManager.shared.stopMonitoring()
-        
-        if let topViewController = UIApplication.topViewController() as? MainViewController {
-            topViewController.refreshUI()
-        }
+        refreshUI()
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else { return }
+        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else {
+            return
+        }
         
         switch shortcutItem.type {
         case "Connect":
@@ -210,7 +215,9 @@ extension AppDelegate: UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else { return false }
+        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else {
+            return false
+        }
         
         switch userActivity.activityType {
         case UserActivityType.Connect:
@@ -228,6 +235,71 @@ extension AppDelegate: UIApplicationDelegate {
                     return
                 }
                 Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
+            }
+        case UserActivityType.AntiTrackerEnable:
+            DispatchQueue.async {
+                if let viewController = UIApplication.topViewController() {
+                    if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+                        viewController.showAlert(title: "IKEv2 not supported", message: "AntiTracker is supported only for OpenVPN and WireGuard protocols.") { _ in
+                        }
+                        return
+                    }
+                    
+                    UserDefaults.shared.set(true, forKey: UserDefaults.Key.isAntiTracker)
+                    NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
+                    if let _ = UIApplication.topViewController() as? MainViewController {
+                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                    } else {
+                        viewController.evaluateReconnect(sender: viewController.view)
+                    }
+                }
+            }
+        case UserActivityType.AntiTrackerDisable:
+            DispatchQueue.async {
+                if let viewController = UIApplication.topViewController() {
+                    UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
+                    NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
+                    if let _ = UIApplication.topViewController() as? MainViewController {
+                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                    } else {
+                        viewController.evaluateReconnect(sender: viewController.view)
+                    }
+                }
+            }
+        case UserActivityType.CustomDNSEnable:
+            DispatchQueue.async {
+                if let viewController = UIApplication.topViewController() {
+                    if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+                        viewController.showAlert(title: "IKEv2 not supported", message: "Custom DNS is supported only for OpenVPN and WireGuard protocols.") { _ in
+                        }
+                        return
+                    }
+                    
+                    guard !UserDefaults.shared.customDNS.isEmpty else {
+                        viewController.showAlert(title: "", message: "Please enter DNS server info")
+                        return
+                    }
+                    
+                    UserDefaults.shared.set(true, forKey: UserDefaults.Key.isCustomDNS)
+                    NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
+                    if let _ = UIApplication.topViewController() as? MainViewController {
+                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                    } else {
+                        viewController.evaluateReconnect(sender: viewController.view)
+                    }
+                }
+            }
+        case UserActivityType.CustomDNSDisable:
+            DispatchQueue.async {
+                if let viewController = UIApplication.topViewController() {
+                    UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+                    NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
+                    if let _ = UIApplication.topViewController() as? MainViewController {
+                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                    } else {
+                        viewController.evaluateReconnect(sender: viewController.view)
+                    }
+                }
             }
         default:
             log(info: "No such user activity")

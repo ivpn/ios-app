@@ -105,6 +105,12 @@ class ControlPanelViewController: UITableViewController {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
         evaluateReconnect(sender: sender as UIView)
         controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
+        
+        if sender.isOn {
+            registerUserActivity(type: UserActivityType.AntiTrackerEnable, title: UserActivityTitle.AntiTrackerEnable)
+        } else {
+            registerUserActivity(type: UserActivityType.AntiTrackerDisable, title: UserActivityTitle.AntiTrackerDisable)
+        }
     }
     
     @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
@@ -342,6 +348,8 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(authenticationDismissed), name: Notification.Name.AuthenticationDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionDismissed), name: Notification.Name.SubscriptionDismissed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: Notification.Name.AntiTrackerUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(evaluateReconnectHandler), name: Notification.Name.EvaluateReconnect, object: nil)
     }
     
     // MARK: - Private methods -
@@ -356,7 +364,7 @@ class ControlPanelViewController: UITableViewController {
         controlPanelView.updateProtocol()
     }
     
-    private func reloadView() {
+    @objc private func reloadView() {
         tableView.reloadData()
         isMultiHop = UserDefaults.shared.isMultiHop
         Application.shared.connectionManager.needsToUpdateSelectedServer()
@@ -416,6 +424,10 @@ class ControlPanelViewController: UITableViewController {
     
     @objc private func agreedToTermsOfService() {
         connectionExecute()
+    }
+    
+    @objc private func evaluateReconnectHandler() {
+        evaluateReconnect(sender: controlPanelView)
     }
     
 }

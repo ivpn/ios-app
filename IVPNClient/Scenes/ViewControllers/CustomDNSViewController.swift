@@ -53,6 +53,12 @@ class CustomDNSViewController: UITableViewController {
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isCustomDNS)
         evaluateReconnect(sender: sender)
+        
+        if sender.isOn {
+            registerUserActivity(type: UserActivityType.CustomDNSEnable, title: UserActivityTitle.CustomDNSEnable)
+        } else {
+            registerUserActivity(type: UserActivityType.CustomDNSDisable, title: UserActivityTitle.CustomDNSDisable)
+        }
     }
     
     @IBAction func enableSecureDNS(_ sender: UISwitch) {
@@ -136,9 +142,10 @@ class CustomDNSViewController: UITableViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(resolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setupView), name: Notification.Name.CustomDNSUpdated, object: nil)
     }
     
-    private func setupView() {
+    @objc private func setupView() {
         let preferred = DNSProtocolType.preferredSettings()
         let customDNS = UserDefaults.shared.customDNS
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
