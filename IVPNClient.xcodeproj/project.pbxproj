@@ -1955,7 +1955,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/openssl/openssl.framework/openssl",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Apple/openssl.framework/openssl",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
