@@ -49,6 +49,7 @@ class ConnectToServerPopupView: UIView {
         let locationLabel = UILabel()
         locationLabel.font = UIFont.systemFont(ofSize: 16)
         locationLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
+        locationLabel.isAccessibilityElement = true
         return locationLabel
     }()
     
@@ -59,6 +60,7 @@ class ConnectToServerPopupView: UIView {
         locationLabel.isHidden = true
         locationLabel.numberOfLines = 0
         locationLabel.text = "Please select a different entry or exit server."
+        locationLabel.isAccessibilityElement = true
         return locationLabel
     }()
     
@@ -69,6 +71,7 @@ class ConnectToServerPopupView: UIView {
         actionButton.backgroundColor = UIColor.init(named: Theme.ivpnBlue)
         actionButton.layer.cornerRadius = 8
         actionButton.addTarget(self, action: #selector(connectAction), for: .touchUpInside)
+        actionButton.isAccessibilityElement = true
         return actionButton
     }()
     
@@ -109,6 +112,7 @@ class ConnectToServerPopupView: UIView {
             let serverViewModel = VPNServerViewModel(server: vpnServer)
             flagImage.image = serverViewModel.imageForCountryCode
             locationLabel.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
+            locationLabel.accessibilityLabel = serverViewModel.server.city
             
             if !Application.shared.connectionManager.status.isDisconnected() && Application.shared.settings.selectedServer == vpnServer {
                 actionButton.setTitle("DISCONNECT", for: .normal)
