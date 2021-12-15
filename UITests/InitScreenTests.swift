@@ -38,9 +38,10 @@ class InitScreenTests: XCTestCase {
 
         XCTAssertTrue(app.isDisplayingMainScreen)
         
-        app.buttons["Vienna"].tap()
+        app.buttons["Zurich"].tap()
         app.otherElements.buttons["CONNECT TO SERVER"].tap()
         app.buttons["Log In"].tap()
+        app.otherElements.buttons["Log In"].tap()
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
     }
     

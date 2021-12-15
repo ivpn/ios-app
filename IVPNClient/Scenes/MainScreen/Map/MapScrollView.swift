@@ -434,8 +434,21 @@ class MapScrollView: UIScrollView {
         markerLocalView.tag = 100
         markerGatewayView.tag = 200
         accessibilityElements = [UIView]()
-        for accessibilitySubview in subviews where accessibilitySubview.isAccessibilityElement {
-            accessibilityElements?.append(accessibilitySubview)
+        for subview in subviews where subview.isAccessibilityElement {
+            accessibilityElements?.append(subview)
+        }
+        for subview in connectToServerPopup.container.subviews where subview.isAccessibilityElement {
+            accessibilityElements?.append(subview)
+        }
+        if isDisconnected {
+            for subview in markerLocalView.connectionInfoPopup.container.subviews where subview.isAccessibilityElement {
+                accessibilityElements?.append(subview)
+            }
+        }
+        if !isDisconnected {
+            for subview in markerGatewayView.connectionInfoPopup.container.subviews where subview.isAccessibilityElement {
+                accessibilityElements?.append(subview)
+            }
         }
         accessibilityElements?.sort(by: {($0 as AnyObject).tag > ($1 as AnyObject).tag})
     }
