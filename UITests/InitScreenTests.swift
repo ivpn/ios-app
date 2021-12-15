@@ -38,11 +38,13 @@ class InitScreenTests: XCTestCase {
 
         XCTAssertTrue(app.isDisplayingMainScreen)
         
-        app.buttons["Zurich"].tap()
+        app.buttons["Vienna"].tap()
         app.otherElements.buttons["CONNECT TO SERVER"].tap()
+        XCTAssertTrue(app.isDisplayingLoginScreen)
+        
         app.buttons["Log In"].tap()
-        app.otherElements.buttons["Log In"].tap()
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
+    
     }
     
     func test_tapSignUpButton() {
@@ -52,6 +54,8 @@ class InitScreenTests: XCTestCase {
         
         app.buttons["Vienna"].tap()
         app.otherElements.buttons["CONNECT TO SERVER"].tap()
+        XCTAssertTrue(app.isDisplayingLoginScreen)
+        
         app.buttons["Create Account"].tap()
         XCTAssertTrue(app.isDisplayingTermsOfServiceScreen)
     }
