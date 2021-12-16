@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.6.1 - 2021-12-16  
+
+[NEW] Shortcuts to enable/disable AntiTracker and Custom DNS  
+[IMPROVED] New implementation for OpenVPN Multi-Hop  
+[IMPROVED] Improved VoiceOver (Accessibility) for the main screen  
+[IMPROVED] Minor UI improvements  
+[IMPROVED] OpenVPN and OpenSSL libraries upgraded to the latest version  
+[FIXED] Not possible to set DNS over HTTPS/TLS when AntiTracker is enabled  
+
 ## 2.5.0 - 2021-11-10  
 
 [NEW] Multi-Hop for WireGuard protocol  
