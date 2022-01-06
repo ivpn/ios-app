@@ -68,19 +68,19 @@ class NavigationManager {
         return navController!
     }
     
-    static func getSubscriptionViewController() -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        let navController = storyBoard.instantiateViewController(withIdentifier: "subscriptionView") as? UINavigationController
-        navController?.modalPresentationStyle = .formSheet
-        
-        if let viewController = navController?.topViewController as? PaymentViewController {
-            let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-            viewController.extendingService = true
-            viewController.service = Service(type: serviceType, duration: .year)
-        }
-        
-        return navController!
-    }
+//    static func getSubscriptionViewController() -> UIViewController {
+//        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
+//        let navController = storyBoard.instantiateViewController(withIdentifier: "subscriptionView") as? UINavigationController
+//        navController?.modalPresentationStyle = .formSheet
+//        
+//        if let viewController = navController?.topViewController as? PaymentViewController {
+//            let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+//            viewController.extendingService = true
+//            viewController.service = Service(type: serviceType, duration: .year)
+//        }
+//        
+//        return navController!
+//    }
     
     static func getStaticWebViewController(resourceName: String, screenTitle: String) -> UIViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)

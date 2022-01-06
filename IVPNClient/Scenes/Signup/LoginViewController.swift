@@ -272,9 +272,9 @@ extension LoginViewController {
             return
         }
         
-        let viewController = NavigationManager.getSubscriptionViewController()
-        viewController.presentationController?.delegate = self
-        present(viewController, animated: true, completion: nil)
+//        let viewController = NavigationManager.getSubscriptionViewController()
+//        viewController.presentationController?.delegate = self
+//        present(viewController, animated: true, completion: nil)
         
         NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
     }

@@ -113,9 +113,10 @@ extension InfoAlertViewModel: InfoAlertViewDelegate {
         
         switch infoAlert {
         case .subscriptionExpiration:
-            if let topViewController = UIApplication.topViewController() as? MainViewController {
-                topViewController.present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
-            }
+//            if let topViewController = UIApplication.topViewController() as? MainViewController {
+//                topViewController.present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+//            }
+            break
         case .connectionInfoFailure:
             NotificationCenter.default.post(name: Notification.Name.UpdateGeoLocation, object: nil)
         }

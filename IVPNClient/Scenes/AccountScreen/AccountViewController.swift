@@ -57,7 +57,7 @@ class AccountViewController: UITableViewController {
             return
         }
         
-        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
+//        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
     
     @IBAction func logOut(_ sender: Any) {

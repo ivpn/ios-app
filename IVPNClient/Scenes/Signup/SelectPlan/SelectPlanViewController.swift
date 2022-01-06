@@ -144,15 +144,15 @@ class SelectPlanViewController: UITableViewController {
     // MARK: - Segues -
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "selectStandardPlan" {
-            let viewController = segue.destination as! PaymentViewController
-            viewController.service = Service(type: .standard, duration: .year)
-        }
-        
-        if segue.identifier == "selectProPlan" {
-            let viewController = segue.destination as! PaymentViewController
-            viewController.service = Service(type: .pro, duration: .year)
-        }
+//        if segue.identifier == "selectStandardPlan" {
+//            let viewController = segue.destination as! PaymentViewController
+//            viewController.service = Service(type: .standard, duration: .year)
+//        }
+//        
+//        if segue.identifier == "selectProPlan" {
+//            let viewController = segue.destination as! PaymentViewController
+//            viewController.service = Service(type: .pro, duration: .year)
+//        }
     }
     
     // MARK: - Private methods -

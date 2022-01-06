@@ -33,16 +33,16 @@ import Foundation
 
 struct ProductIdentifier {
     
-    static let standardWeek = "net.ivpn.subscriptions.standard.1week"
-    static let standardMonth = "net.ivpn.subscriptions.standard.1month"
-    static let standardYear = "net.ivpn.subscriptions.standard.1year"
-    static let standardTwoYears = "net.ivpn.subscriptions.standard.2year"
-    static let standardThreeYears = "net.ivpn.subscriptions.standard.3year"
-    static let proWeek = "net.ivpn.subscriptions.pro.1week"
-    static let proMonth = "net.ivpn.subscriptions.pro.1month"
-    static let proYear = "net.ivpn.subscriptions.pro.1year"
-    static let proTwoYears = "net.ivpn.subscriptions.pro.2year"
-    static let proThreeYears = "net.ivpn.subscriptions.pro.3year"
+    static let standardWeek = ""
+    static let standardMonth = ""
+    static let standardYear = ""
+    static let standardTwoYears = ""
+    static let standardThreeYears = ""
+    static let proWeek = ""
+    static let proMonth = ""
+    static let proYear = ""
+    static let proTwoYears = ""
+    static let proThreeYears = ""
     
     static var all: Set<String> {
         return [
