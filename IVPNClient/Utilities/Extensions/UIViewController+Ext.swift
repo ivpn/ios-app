@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import SafariServices
+import WebKit
 import MessageUI
 
 extension UIDevice {
@@ -114,10 +114,15 @@ extension UIViewController {
             return
         }
         
-        guard let url = URL(string: stringURL) else { return }
+        guard let url = URL(string: stringURL) else {
+            return
+        }
         
-        let safariVC = SFSafariViewController(url: url)
-        present(safariVC, animated: true, completion: nil)
+        let request = URLRequest(url: url)
+        let webView = WKWebView()
+        present(NavigationManager.getWebkitViewController(webView: webView), animated: true) {
+            webView.load(request)
+        }
     }
     
     func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> Void)? = nil) {
