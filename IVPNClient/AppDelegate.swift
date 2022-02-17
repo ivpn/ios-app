@@ -176,11 +176,22 @@ extension AppDelegate: UIApplicationDelegate {
         if UserDefaults.shared.networkProtectionEnabled {
             NetworkManager.shared.startMonitoring()
         }
+        
+        NotificationCenter.default.post(name: Notification.Name.ShowSensitiveUI, object: nil)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         NetworkManager.shared.stopMonitoring()
         refreshUI()
+        NotificationCenter.default.post(name: Notification.Name.ShowSensitiveUI, object: nil)
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        NotificationCenter.default.post(name: Notification.Name.HideSensitiveUI, object: nil)
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        NotificationCenter.default.post(name: Notification.Name.HideSensitiveUI, object: nil)
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
