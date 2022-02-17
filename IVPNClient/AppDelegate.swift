@@ -31,6 +31,17 @@ class AppDelegate: UIResponder {
     
     var window: UIWindow?
     
+    private lazy var securityWindow: UIWindow = {
+        let screen = UIScreen.main
+        let window = UIWindow(frame: screen.bounds)
+        let storyBoard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "launchScreen")
+        window.screen = screen
+        window.rootViewController = viewController
+        window.windowLevel = .alert
+        return window
+    }()
+    
     // MARK: - Methods -
     
     private func evaluateFirstRun() {
@@ -105,6 +116,21 @@ class AppDelegate: UIResponder {
         }
     }
     
+    private func showSecurityScreen() {
+        if let _ = UIApplication.topViewController() as? AccountViewController {
+            securityWindow.isHidden = false
+            return
+        }
+        
+        if let _ = UIApplication.topViewController() as? LoginViewController {
+            securityWindow.isHidden = false
+        }
+    }
+    
+    private func hideSecurityScreen() {
+        securityWindow.isHidden = true
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         guard let endpoint = url.host else {
             return false
@@ -177,21 +203,21 @@ extension AppDelegate: UIApplicationDelegate {
             NetworkManager.shared.startMonitoring()
         }
         
-        NotificationCenter.default.post(name: Notification.Name.ShowSensitiveUI, object: nil)
+        hideSecurityScreen()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        NetworkManager.shared.stopMonitoring()
+        hideSecurityScreen()
         refreshUI()
-        NotificationCenter.default.post(name: Notification.Name.ShowSensitiveUI, object: nil)
+        NetworkManager.shared.stopMonitoring()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: Notification.Name.HideSensitiveUI, object: nil)
+        showSecurityScreen()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        NotificationCenter.default.post(name: Notification.Name.HideSensitiveUI, object: nil)
+        showSecurityScreen()
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
