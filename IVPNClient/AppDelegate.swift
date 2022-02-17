@@ -36,6 +36,7 @@ class AppDelegate: UIResponder {
         let window = UIWindow(frame: screen.bounds)
         let storyBoard = UIStoryboard(name: "LaunchScreen", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "launchScreen")
+        viewController.view.alpha = 0
         window.screen = screen
         window.rootViewController = viewController
         window.windowLevel = .alert
@@ -117,18 +118,34 @@ class AppDelegate: UIResponder {
     }
     
     private func showSecurityScreen() {
+        var showWindow = false
+        
         if let _ = UIApplication.topViewController() as? AccountViewController {
-            securityWindow.isHidden = false
-            return
+            showWindow = true
         }
         
         if let _ = UIApplication.topViewController() as? LoginViewController {
+            showWindow = true
+        }
+        
+        if let _ = UIApplication.topViewController() as? CreateAccountViewController {
+            showWindow = true
+        }
+        
+        if showWindow {
             securityWindow.isHidden = false
+            UIView.animate(withDuration: 0.15, animations: { [self] in
+                securityWindow.rootViewController?.view.alpha = 1
+            })
         }
     }
     
     private func hideSecurityScreen() {
-        securityWindow.isHidden = true
+        UIView.animate(withDuration: 0.15, animations: { [self] in
+            securityWindow.rootViewController?.view.alpha = 0
+        }, completion: { [self] _ in
+            securityWindow.isHidden = true
+        })
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
