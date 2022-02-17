@@ -143,43 +143,6 @@ class AppDelegate: UIResponder {
             break
         }
     }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        guard let endpoint = url.host else {
-            return false
-        }
-        
-        switch endpoint {
-        case Config.urlTypeConnect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                    return
-                }
-                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
-            }
-        case Config.urlTypeDisconnect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                    return
-                }
-                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
-            }
-        case Config.urlTypeLogin:
-            if let topViewController = UIApplication.topViewController() {
-                if #available(iOS 13.0, *) {
-                    topViewController.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-                } else {
-                    topViewController.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-                }
-            }
-        default:
-            break
-        }
-        
-        return true
-    }
 
 }
 
