@@ -33,15 +33,6 @@ class AppDelegate: UIResponder {
     
     // MARK: - Methods -
     
-    private func evaluateFirstRun() {
-        if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil {
-            KeyChain.clearAll()
-            UserDefaults.clearSession()
-            UserDefaults.standard.set(false, forKey: UserDefaults.Key.firstInstall)
-            UserDefaults.standard.synchronize()
-        }
-    }
-    
     private func evaluateUITests() {
         // When running the application for UI Testing we need to remove all the stored data so we can start testing the clear app
         // It is impossible to access the KeyChain from the UI test itself as the test runs in different process
@@ -150,7 +141,6 @@ extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         evaluateUITests()
-        evaluateFirstRun()
         registerUserDefaults()
         finishIncompletePurchases()
         createLogFiles()
