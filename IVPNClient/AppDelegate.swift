@@ -31,6 +31,18 @@ class AppDelegate: UIResponder {
     
     var window: UIWindow?
     
+    private lazy var securityWindow: UIWindow = {
+        let screen = UIScreen.main
+        let window = UIWindow(frame: screen.bounds)
+        let storyBoard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "launchScreen")
+        viewController.view.alpha = 0
+        window.screen = screen
+        window.rootViewController = viewController
+        window.windowLevel = .alert
+        return window
+    }()
+    
     // MARK: - Methods -
     
     private func evaluateUITests() {
@@ -94,6 +106,37 @@ class AppDelegate: UIResponder {
         if let mainViewController = UIApplication.topViewController() as? MainViewController {
             mainViewController.refreshUI()
         }
+    }
+    
+    private func showSecurityScreen() {
+        var showWindow = false
+        
+        if let _ = UIApplication.topViewController() as? AccountViewController {
+            showWindow = true
+        }
+        
+        if let _ = UIApplication.topViewController() as? LoginViewController {
+            showWindow = true
+        }
+        
+        if let _ = UIApplication.topViewController() as? CreateAccountViewController {
+            showWindow = true
+        }
+        
+        if showWindow {
+            securityWindow.isHidden = false
+            UIView.animate(withDuration: 0.15, animations: { [self] in
+                securityWindow.rootViewController?.view.alpha = 1
+            })
+        }
+    }
+    
+    private func hideSecurityScreen() {
+        UIView.animate(withDuration: 0.15, animations: { [self] in
+            securityWindow.rootViewController?.view.alpha = 0
+        }, completion: { [self] _ in
+            securityWindow.isHidden = true
+        })
     }
     
     private func handleURLEndpoint(_ endpoint: String) {
@@ -168,11 +211,22 @@ extension AppDelegate: UIApplicationDelegate {
         if UserDefaults.shared.networkProtectionEnabled {
             NetworkManager.shared.startMonitoring()
         }
+        
+        hideSecurityScreen()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        NetworkManager.shared.stopMonitoring()
+        hideSecurityScreen()
         refreshUI()
+        NetworkManager.shared.stopMonitoring()
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        showSecurityScreen()
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        showSecurityScreen()
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
