@@ -213,7 +213,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             endpoint = Config.urlTypeDisconnect
         }
         
-        let url = URL(string: "ivpn://\(endpoint)")!
+        let url = URL(string: "https://www.ivpn.net/app/\(endpoint)")!
         extensionContext?.open(url) { _ in }
     }
     
