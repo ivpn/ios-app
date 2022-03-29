@@ -45,15 +45,6 @@ class AppDelegate: UIResponder {
     
     // MARK: - Methods -
     
-    private func evaluateFirstRun() {
-        if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil {
-            KeyChain.clearAll()
-            UserDefaults.clearSession()
-            UserDefaults.standard.set(false, forKey: UserDefaults.Key.firstInstall)
-            UserDefaults.standard.synchronize()
-        }
-    }
-    
     private func evaluateUITests() {
         // When running the application for UI Testing we need to remove all the stored data so we can start testing the clear app
         // It is impossible to access the KeyChain from the UI test itself as the test runs in different process
@@ -148,28 +139,32 @@ class AppDelegate: UIResponder {
         })
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        guard let endpoint = url.host else {
-            return false
+    private func handleURLEndpoint(_ endpoint: String) {
+        guard let viewController = UIApplication.topViewController() else {
+            return
         }
         
         switch endpoint {
         case Config.urlTypeConnect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                    return
+            viewController.showActionAlert(title: "Please confirm", message: "Do you want to connect to VPN?", action: "Connect", actionHandler: { _ in
+                DispatchQueue.delay(0.75) {
+                    if UserDefaults.shared.networkProtectionEnabled {
+                        Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
+                        return
+                    }
+                    Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
                 }
-                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
-            }
+            })
         case Config.urlTypeDisconnect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                    return
+            viewController.showActionAlert(title: "Please confirm", message: "Do you want to disconnect from VPN?", action: "Disconnect", actionHandler: { _ in
+                DispatchQueue.delay(0.75) {
+                    if UserDefaults.shared.networkProtectionEnabled {
+                        Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
+                        return
+                    }
+                    Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
                 }
-                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
-            }
+            })
         case Config.urlTypeLogin:
             if let topViewController = UIApplication.topViewController() {
                 if #available(iOS 13.0, *) {
@@ -181,8 +176,6 @@ class AppDelegate: UIResponder {
         default:
             break
         }
-        
-        return true
     }
 
 }
@@ -193,7 +186,6 @@ extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         evaluateUITests()
-        evaluateFirstRun()
         registerUserDefaults()
         finishIncompletePurchases()
         createLogFiles()
@@ -269,6 +261,12 @@ extension AppDelegate: UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if let url = userActivity.webpageURL {
+            let endpoint = url.lastPathComponent
+            handleURLEndpoint(endpoint)
+            return false
+        }
+        
         guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else {
             return false
         }
