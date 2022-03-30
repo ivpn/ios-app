@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.6.2 - 2022-03-29  
+
+[NEW] Hide sensitive UI with privacy overlay when entering background  
+[IMPROVED] Use Universal Links when connecting or disconnecting from the widget  
+[IMPROVED] Use WKWebView instead SFSafariViewController to improve security  
+[IMPROVED] Use more restricted access level for Keychain data  
+[FIXED] In some cases session is removed after the iOS upgrade  
+
 ## 2.6.1 - 2021-12-16  
 
 [NEW] Shortcuts to enable/disable AntiTracker and Custom DNS  
