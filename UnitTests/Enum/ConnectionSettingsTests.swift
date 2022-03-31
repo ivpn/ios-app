@@ -75,12 +75,6 @@ class ConnectionSettingsTests: XCTestCase {
         XCTAssertEqual(protocol4.supportedProtocols(protocols: protocols).count, 1)
     }
     
-    func test_supportedProtocolsFormat() {
-        XCTAssertEqual(protocol1.supportedProtocolsFormat(protocols: protocols).count, 1)
-        XCTAssertEqual(protocol4.supportedProtocols(protocols: protocols).count, 1)
-        XCTAssertEqual(protocol4.supportedProtocolsFormat(protocols: protocols), ["UDP 2049", "UDP 2050", "UDP 53", "UDP 1194", "UDP 30587", "UDP 41893", "UDP 48574", "UDP 58237"])
-    }
-    
     func test_tunnelType() {
         XCTAssertEqual(protocol1.tunnelType(), .ipsec)
         XCTAssertEqual(protocol2.tunnelType(), .openvpn)
