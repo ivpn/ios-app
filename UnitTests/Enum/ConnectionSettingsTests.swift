@@ -50,6 +50,13 @@ class ConnectionSettingsTests: XCTestCase {
         XCTAssertEqual(protocol4.format(), "WireGuard, UDP 48574")
     }
     
+    func test_formatMultiHop() {
+        XCTAssertEqual(protocol1.formatMultiHop(), "IKEv2")
+        XCTAssertEqual(protocol2.formatMultiHop(), "OpenVPN, UDP")
+        XCTAssertEqual(protocol3.formatMultiHop(), "OpenVPN, TCP")
+        XCTAssertEqual(protocol4.formatMultiHop(), "WireGuard, UDP")
+    }
+    
     func test_formatTitle() {
         XCTAssertEqual(protocol1.formatTitle(), "IKEv2")
         XCTAssertEqual(protocol2.formatTitle(), "OpenVPN")

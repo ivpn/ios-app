@@ -45,6 +45,22 @@ enum ConnectionSettings {
         }
     }
     
+    func formatMultiHop() -> String {
+        switch self {
+        case .ipsec:
+            return "IKEv2"
+        case .openvpn(let proto, _):
+            switch proto {
+            case .tcp:
+                return "OpenVPN, TCP"
+            case .udp:
+                return "OpenVPN, UDP"
+           }
+        case .wireguard(_, _):
+            return "WireGuard, UDP"
+        }
+    }
+    
     func formatTitle() -> String {
         switch self {
         case .ipsec:
