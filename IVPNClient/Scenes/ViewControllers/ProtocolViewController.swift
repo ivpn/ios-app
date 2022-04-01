@@ -61,7 +61,11 @@ class ProtocolViewController: UITableViewController {
         collection.append(ConnectionSettings.tunnelTypes(protocols: Config.supportedProtocolTypes))
         
         if connectionProtocol.tunnelType() == .wireguard {
-            collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])
+            if UserDefaults.shared.isMultiHop {
+                collection.append([.wireguard(.udp, 1), .wireguard(.udp, 2)])
+            } else {
+                collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])
+            }
         }
         
         if connectionProtocol.tunnelType() == .openvpn {
