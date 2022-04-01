@@ -240,6 +240,12 @@ extension ProtocolViewController {
             return
         }
         
+        if connectionProtocol == .openvpn(.udp, 0) && UserDefaults.shared.isMultiHop {
+            selectPreferredProtocol(connectionProtocol: connectionProtocol)
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
+        }
+        
         if connectionProtocol == .openvpn(.udp, 0) || connectionProtocol == .wireguard(.udp, 0) {
             selectPreferredProtocolAndPort(connectionProtocol: connectionProtocol)
             tableView.deselectRow(at: indexPath, animated: true)
