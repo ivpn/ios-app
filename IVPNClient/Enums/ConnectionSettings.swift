@@ -109,6 +109,10 @@ enum ConnectionSettings {
         return protocols.map({ $0.formatProtocol() })
     }
     
+    func supportedProtocolsFormatMultiHop() -> [String] {
+        return ["UDP", "TCP"]
+    }
+    
     static func getSavedProtocol() -> ConnectionSettings {
         let protocolIndex = UserDefaults.standard.integer(forKey: UserDefaults.Key.selectedProtocolIndex)
         

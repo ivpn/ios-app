@@ -134,16 +134,28 @@ class ProtocolViewController: UITableViewController {
     }
     
     func selectPreferredProtocolAndPort(connectionProtocol: ConnectionSettings) {
-        guard !UserDefaults.shared.isMultiHop else {
-            showAlert(title: "", message: "It is not possible to use the preferred port setting when Multi-Hop for is enabled")
-            return
-        }
-        
         let selected = Application.shared.settings.connectionProtocol.formatProtocol()
         let protocols = connectionProtocol.supportedProtocols(protocols: Config.supportedProtocols)
         let actions = connectionProtocol.supportedProtocolsFormat(protocols: Config.supportedProtocols)
         
         showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol & port", actions: actions, sourceView: view) { [self] index in
+            guard index > -1 else {
+                return
+            }
+            
+            Application.shared.settings.connectionProtocol = protocols[index]
+            tableView.reloadData()
+            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+            evaluateReconnect(sender: view)
+        }
+    }
+    
+    func selectPreferredProtocol(connectionProtocol: ConnectionSettings) {
+        let selected = Application.shared.settings.connectionProtocol.protocolType()
+        let protocols: [ConnectionSettings] = [.openvpn(.udp, 2049), .openvpn(.tcp, 443)]
+        let actions = connectionProtocol.supportedProtocolsFormatMultiHop()
+        
+        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol", actions: actions, sourceView: view) { [self] index in
             guard index > -1 else {
                 return
             }
