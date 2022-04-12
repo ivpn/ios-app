@@ -7,7 +7,7 @@ PODS:
   - ReachabilitySwift (5.0.0)
   - SnapKit (5.0.1)
   - SwiftyBeaver (1.9.5)
-  - SwiftyStoreKit (0.15.0)
+  - SwiftyStoreKit (0.16.1)
   - TunnelKit (3.5.0):
     - TunnelKit/Protocols/OpenVPN (= 3.5.0)
   - TunnelKit/AppExtension (3.5.0):
@@ -30,7 +30,7 @@ DEPENDENCIES:
   - KeychainAccess (~> 3.2.0)
   - ReachabilitySwift (~> 5.0.0)
   - SnapKit (~> 5.0.1)
-  - SwiftyStoreKit (~> 0.15.0)
+  - SwiftyStoreKit (~> 0.16.1)
   - TunnelKit (~> 3.5.0)
 
 SPEC REPOS:
@@ -55,9 +55,9 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyBeaver: 84069991dd5dca07d7069100985badaca7f0ce82
-  SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
+  SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   TunnelKit: da385bd81f797728f86fcf0f2de2e4c4af415c40
 
-PODFILE CHECKSUM: 5a8a29ce6e1ad1d1bad672451b435632cbccb378
+PODFILE CHECKSUM: 2fb7364c00f6889da4384d1ffc35ed5ac3c93e5a
 
 COCOAPODS: 1.11.2
