@@ -70,6 +70,7 @@ class MainViewController: UIViewController {
         addObservers()
         startServersUpdate()
         startVPNStatusObserver()
+        evaluateFirstRun()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -264,6 +265,19 @@ class MainViewController: UIViewController {
         #if targetEnvironment(simulator)
         updateGeoLocation()
         #endif
+    }
+    
+    private func evaluateFirstRun() {
+        guard UIApplication.shared.isProtectedDataAvailable else {
+            return
+        }
+        
+        if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil {
+            KeyChain.clearAll()
+            UserDefaults.clearSession()
+            UserDefaults.standard.set(false, forKey: UserDefaults.Key.firstInstall)
+            UserDefaults.standard.synchronize()
+        }
     }
     
 }
