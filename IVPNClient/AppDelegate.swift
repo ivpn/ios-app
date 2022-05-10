@@ -46,6 +46,10 @@ class AppDelegate: UIResponder {
     // MARK: - Methods -
     
     private func evaluateFirstRun() {
+        guard UIApplication.shared.isProtectedDataAvailable else {
+            return
+        }
+        
         if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil {
             KeyChain.clearAll()
             UserDefaults.clearSession()
