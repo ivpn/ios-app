@@ -272,10 +272,9 @@ class MainViewController: UIViewController {
             return
         }
         
-        if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil {
-            #warning("Uncomment for the next release")
-            // KeyChain.clearAll()
-            // UserDefaults.clearSession()
+        if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil && UserDefaults.standard.object(forKey: UserDefaults.Key.selectedServerGateway) == nil {
+            KeyChain.clearAll()
+            UserDefaults.clearSession()
             UserDefaults.standard.set(false, forKey: UserDefaults.Key.firstInstall)
             UserDefaults.standard.synchronize()
         }
