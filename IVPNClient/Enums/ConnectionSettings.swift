@@ -45,6 +45,22 @@ enum ConnectionSettings {
         }
     }
     
+    func formatSave() -> String {
+        switch self {
+        case .ipsec:
+            return "ikev2"
+        case .openvpn(let proto, let port):
+            switch proto {
+            case .tcp:
+                return "openvpn-tcp-\(port)"
+            case .udp:
+                return "openvpn-udp-\(port)"
+           }
+        case .wireguard(_, let port):
+            return "wireguard-udp-\(port)"
+        }
+    }
+    
     func formatTitle() -> String {
         switch self {
         case .ipsec:
