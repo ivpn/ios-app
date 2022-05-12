@@ -122,7 +122,7 @@ class Settings {
             UserDefaults.standard.set(index, forKey: UserDefaults.Key.selectedProtocolIndex)
         }
         
-        UserDefaults.standard.set(connectionProtocol.formatSave, forKey: UserDefaults.Key.selectedProtocol)
+        UserDefaults.standard.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
     }
     
 }
