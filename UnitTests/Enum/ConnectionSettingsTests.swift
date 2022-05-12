@@ -50,6 +50,13 @@ class ConnectionSettingsTests: XCTestCase {
         XCTAssertEqual(protocol4.format(), "WireGuard, UDP 48574")
     }
     
+    func test_formatSave() {
+        XCTAssertEqual(protocol1.format(), "ikev2")
+        XCTAssertEqual(protocol2.format(), "openvpn-udp-53")
+        XCTAssertEqual(protocol3.format(), "openvpn-tcp-80")
+        XCTAssertEqual(protocol4.format(), "wireguard-udp-48574")
+    }
+    
     func test_formatTitle() {
         XCTAssertEqual(protocol1.formatTitle(), "IKEv2")
         XCTAssertEqual(protocol2.formatTitle(), "OpenVPN")
