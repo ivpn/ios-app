@@ -65,12 +65,12 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "mainScreen"
+        evaluateFirstRun()
         initErrorObservers()
         initFloatingPanel()
         addObservers()
         startServersUpdate()
         startVPNStatusObserver()
-        evaluateFirstRun()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -275,6 +275,8 @@ class MainViewController: UIViewController {
         if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil && UserDefaults.standard.object(forKey: UserDefaults.Key.selectedServerGateway) == nil {
             KeyChain.clearAll()
             UserDefaults.clearSession()
+            Application.shared.settings.connectionProtocol = Config.defaultProtocol
+            Application.shared.settings.saveConnectionProtocol()
             UserDefaults.standard.set(false, forKey: UserDefaults.Key.firstInstall)
             UserDefaults.standard.synchronize()
         }
