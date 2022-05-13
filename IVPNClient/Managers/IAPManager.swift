@@ -111,7 +111,9 @@ class IAPManager {
                 completion(nil, error)
                 log(error: "Unknown error")
             } else if results.restoredPurchases.count > 0 {
-                self.completeRestoredPurchase(purchase: results.restoredPurchases.first!) { account, error in
+                var purchases = results.restoredPurchases
+                purchases.sort { $0.transaction.transactionDate! > $1.transaction.transactionDate! }
+                self.completeRestoredPurchase(purchase: purchases.first!) { account, error in
                     completion(account, error)
                     log(info: "Purchases are restored.")
                 }

@@ -4,7 +4,7 @@ use_frameworks!
 target 'IVPNClient' do
     pod 'TunnelKit', '~> 3.5.0'
     pod 'KeychainAccess', '~> 3.2.0'
-    pod 'SwiftyStoreKit', '~> 0.15.0'
+    pod 'SwiftyStoreKit', '~> 0.16.1'
     pod 'JGProgressHUD', '~> 2.0.3'
     pod 'ActiveLabel', '~> 1.1.0'
     pod 'ReachabilitySwift', '~> 5.0.0'
