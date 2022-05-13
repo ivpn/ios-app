@@ -65,6 +65,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "mainScreen"
+        evaluateFirstRun()
         initErrorObservers()
         initFloatingPanel()
         addObservers()
@@ -264,6 +265,21 @@ class MainViewController: UIViewController {
         #if targetEnvironment(simulator)
         updateGeoLocation()
         #endif
+    }
+    
+    private func evaluateFirstRun() {
+        guard UIApplication.shared.isProtectedDataAvailable else {
+            return
+        }
+        
+        if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil && UserDefaults.standard.object(forKey: UserDefaults.Key.selectedServerGateway) == nil {
+            KeyChain.clearAll()
+            UserDefaults.clearSession()
+            Application.shared.settings.connectionProtocol = Config.defaultProtocol
+            Application.shared.settings.saveConnectionProtocol()
+            UserDefaults.standard.set(false, forKey: UserDefaults.Key.firstInstall)
+            UserDefaults.standard.synchronize()
+        }
     }
     
 }

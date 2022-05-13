@@ -74,6 +74,7 @@ extension UserDefaults {
         static let selectedExitServerRandom = "SelectedExitServerRandom"
         static let fastestServerPreferred = "FastestServerPreferred"
         static let fastestServerConfigured = "FastestServerConfiguredForOpenVPN"
+        static let firstInstall = "FirstInstall"
         static let secureDNS = "SecureDNS"
         static let serviceStatus = "ServiceStatus"
         static let isIPv6 = "isIPv6"
