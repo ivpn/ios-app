@@ -29,8 +29,19 @@ class ProtocolTableViewCell: UITableViewCell {
     @IBOutlet weak var protocolSettingsLabel: UILabel!
     
     private var protocolLabelText: String {
-        if !UIDevice.screenHeightLargerThan(device: .iPhones55s5cSE) { return "Protocol & port" }
+        if !UIDevice.screenHeightLargerThan(device: .iPhones55s5cSE) {
+            return "Protocol & port"
+        }
+        
         return "Preferred protocol & port"
+    }
+    
+    private var multiHopProtocolLabelText: String {
+        if !UIDevice.screenHeightLargerThan(device: .iPhones55s5cSE) {
+            return "Protocol"
+        }
+        
+        return "Preferred protocol"
     }
     
     // MARK: - Methods -
@@ -44,7 +55,9 @@ class ProtocolTableViewCell: UITableViewCell {
             isChecked = connectionProtocol == Application.shared.settings.connectionProtocol
         }
         
-        if connectionProtocol == .openvpn(.udp, 0) || connectionProtocol == .wireguard(.udp, 0) {
+        if connectionProtocol == .openvpn(.udp, 0) && UserDefaults.shared.isMultiHop {
+            setupSelectAction(title: multiHopProtocolLabelText)
+        } else if connectionProtocol == .openvpn(.udp, 0) || connectionProtocol == .wireguard(.udp, 0) {
             setupSelectAction(title: protocolLabelText)
         } else if connectionProtocol == .wireguard(.udp, 2) {
             setupAction(title: "WireGuard details")
@@ -68,7 +81,7 @@ class ProtocolTableViewCell: UITableViewCell {
     
     private func setupSelectAction(title: String) {
         protocolLabel.text = title
-        protocolSettingsLabel.text = Application.shared.settings.connectionProtocol.formatProtocol()
+        protocolSettingsLabel.text = UserDefaults.shared.isMultiHop ? Application.shared.settings.connectionProtocol.protocolType() : Application.shared.settings.connectionProtocol.formatProtocol()
         accessoryType = .disclosureIndicator
     }
     

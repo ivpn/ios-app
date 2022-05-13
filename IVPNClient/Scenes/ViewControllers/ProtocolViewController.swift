@@ -61,7 +61,11 @@ class ProtocolViewController: UITableViewController {
         collection.append(ConnectionSettings.tunnelTypes(protocols: Config.supportedProtocolTypes))
         
         if connectionProtocol.tunnelType() == .wireguard {
-            collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])
+            if UserDefaults.shared.isMultiHop {
+                collection.append([.wireguard(.udp, 1), .wireguard(.udp, 2)])
+            } else {
+                collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])
+            }
         }
         
         if connectionProtocol.tunnelType() == .openvpn {
@@ -134,16 +138,28 @@ class ProtocolViewController: UITableViewController {
     }
     
     func selectPreferredProtocolAndPort(connectionProtocol: ConnectionSettings) {
-        guard !UserDefaults.shared.isMultiHop else {
-            showAlert(title: "", message: "It is not possible to use the preferred port setting when Multi-Hop for is enabled")
-            return
-        }
-        
         let selected = Application.shared.settings.connectionProtocol.formatProtocol()
         let protocols = connectionProtocol.supportedProtocols(protocols: Config.supportedProtocols)
         let actions = connectionProtocol.supportedProtocolsFormat(protocols: Config.supportedProtocols)
         
         showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol & port", actions: actions, sourceView: view) { [self] index in
+            guard index > -1 else {
+                return
+            }
+            
+            Application.shared.settings.connectionProtocol = protocols[index]
+            tableView.reloadData()
+            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+            evaluateReconnect(sender: view)
+        }
+    }
+    
+    func selectPreferredProtocol(connectionProtocol: ConnectionSettings) {
+        let selected = Application.shared.settings.connectionProtocol.protocolType()
+        let protocols: [ConnectionSettings] = [.openvpn(.udp, 2049), .openvpn(.tcp, 443)]
+        let actions = connectionProtocol.supportedProtocolsFormatMultiHop()
+        
+        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol", actions: actions, sourceView: view) { [self] index in
             guard index > -1 else {
                 return
             }
@@ -225,6 +241,12 @@ extension ProtocolViewController {
         let connectionProtocol = collection[indexPath.section][indexPath.row]
         
         if connectionProtocol == .wireguard(.udp, 1) {
+            return
+        }
+        
+        if connectionProtocol == .openvpn(.udp, 0) && UserDefaults.shared.isMultiHop {
+            selectPreferredProtocol(connectionProtocol: connectionProtocol)
+            tableView.deselectRow(at: indexPath, animated: true)
             return
         }
         

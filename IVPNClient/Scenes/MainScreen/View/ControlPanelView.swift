@@ -124,7 +124,7 @@ class ControlPanelView: UITableView {
     
     func updateProtocol() {
         let selectedProtocol = Application.shared.connectionManager.settings.connectionProtocol
-        protocolLabel.text = selectedProtocol.format()
+        protocolLabel.text = UserDefaults.shared.isMultiHop ? selectedProtocol.formatMultiHop() : selectedProtocol.format()
     }
     
     func updateMultiHopButtons(isMultiHop: Bool) {
