@@ -276,7 +276,8 @@ extension ServerViewController: UISearchBarDelegate {
         
         filteredCollection.removeAll(keepingCapacity: false)
         filteredCollection = collection.filter { (server: VPNServer) -> Bool in
-            return server.city.lowercased().contains(searchBar.text!.lowercased())
+            let location = "\(server.city) \(server.countryCode)".lowercased()
+            return location.contains(searchBar.text!.lowercased())
         }
         
         filteredCollection = VPNServerList.sort(filteredCollection)
