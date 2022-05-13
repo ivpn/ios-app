@@ -50,6 +50,13 @@ class ConnectionSettingsTests: XCTestCase {
         XCTAssertEqual(protocol4.format(), "WireGuard, UDP 48574")
     }
     
+    func test_formatSave() {
+        XCTAssertEqual(protocol1.formatSave(), "ikev2")
+        XCTAssertEqual(protocol2.formatSave(), "openvpn-udp-53")
+        XCTAssertEqual(protocol3.formatSave(), "openvpn-tcp-80")
+        XCTAssertEqual(protocol4.formatSave(), "wireguard-udp-48574")
+    }
+    
     func test_formatTitle() {
         XCTAssertEqual(protocol1.formatTitle(), "IKEv2")
         XCTAssertEqual(protocol2.formatTitle(), "OpenVPN")
@@ -73,12 +80,6 @@ class ConnectionSettingsTests: XCTestCase {
         XCTAssertEqual(protocol2.supportedProtocols(protocols: protocols).count, 6)
         XCTAssertEqual(protocol3.supportedProtocols(protocols: protocols).count, 6)
         XCTAssertEqual(protocol4.supportedProtocols(protocols: protocols).count, 1)
-    }
-    
-    func test_supportedProtocolsFormat() {
-        XCTAssertEqual(protocol1.supportedProtocolsFormat(protocols: protocols).count, 1)
-        XCTAssertEqual(protocol4.supportedProtocols(protocols: protocols).count, 1)
-        XCTAssertEqual(protocol4.supportedProtocolsFormat(protocols: protocols), ["UDP 2049", "UDP 2050", "UDP 53", "UDP 1194", "UDP 30587", "UDP 41893", "UDP 48574", "UDP 58237"])
     }
     
     func test_tunnelType() {
