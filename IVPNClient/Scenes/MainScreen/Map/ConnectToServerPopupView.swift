@@ -79,6 +79,8 @@ class ConnectToServerPopupView: UIView {
         let prevButton = UIButton()
         prevButton.setImage(UIImage.init(named: "icon-arrow-left-gray"), for: .normal)
         prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
+        prevButton.isAccessibilityElement = true
+        prevButton.accessibilityLabel = "Previous server"
         return prevButton
     }()
     
@@ -86,6 +88,8 @@ class ConnectToServerPopupView: UIView {
         let nextButton = UIButton()
         nextButton.setImage(UIImage.init(named: "icon-arrow-right-gray"), for: .normal)
         nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
+        nextButton.isAccessibilityElement = true
+        nextButton.accessibilityLabel = "Next server"
         return nextButton
     }()
     
