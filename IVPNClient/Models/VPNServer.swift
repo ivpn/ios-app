@@ -60,6 +60,16 @@ class VPNServer {
     
     var supportsIPv6: Bool {
         for host in hosts {
+            if host.ipv6 == nil {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    var enabledIPv6: Bool {
+        for host in hosts {
             if !(host.ipv6?.localIP.isEmpty ?? true) {
                 return true
             }

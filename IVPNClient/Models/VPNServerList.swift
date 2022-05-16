@@ -157,9 +157,9 @@ class VPNServerList {
     }()
     
     func getServers() -> [VPNServer] {
-        if Application.shared.settings.connectionProtocol.tunnelType() == .wireguard && UserDefaults.shared.isIPv6 && !UserDefaults.standard.showIPv4Servers {
+        if UserDefaults.shared.isIPv6 && !UserDefaults.standard.showIPv4Servers {
             return servers.filter { (server: VPNServer) -> Bool in
-                return server.supportsIPv6
+                return server.enabledIPv6 || !server.supportsIPv6
             }
         }
         
