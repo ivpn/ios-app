@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.6.3 - 2022-05-17  
+
+[IMPROVED] Option to select UDP or TCP when using OpenVPN MultiHop  
+[IMPROVED] Search servers by country code  
+[IMPROVED] VoiceOver (Accessibility) for the home screen  
+[FIXED] Log out issue on iPadOS  
+[FIXED] Empty OpenVPN servers list  
+
 ## 2.6.2 - 2022-03-29  
 
 [NEW] Hide sensitive UI with privacy overlay when entering background  
