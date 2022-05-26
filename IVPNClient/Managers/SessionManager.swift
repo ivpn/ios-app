@@ -122,6 +122,10 @@ class SessionManager {
         ApiService.shared.request(request) { (result: Result<SessionStatus>) in
             switch result {
             case .success(let model):
+                if Application.shared.serviceStatus.currentPlan != model.serviceStatus.currentPlan {
+                    NotificationCenter.default.post(name: Notification.Name.UpdatePlan, object: nil)
+                }
+                
                 Application.shared.serviceStatus = model.serviceStatus
                 
                 if model.serviceActive {
