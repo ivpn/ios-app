@@ -350,6 +350,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: Notification.Name.AntiTrackerUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(evaluateReconnectHandler), name: Notification.Name.EvaluateReconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePlan), name: Notification.Name.UpdatePlan, object: nil)
     }
     
     // MARK: - Private methods -
@@ -428,6 +429,15 @@ class ControlPanelViewController: UITableViewController {
     
     @objc private func evaluateReconnectHandler() {
         evaluateReconnect(sender: controlPanelView)
+    }
+    
+    @objc private func updatePlan() {
+        if Application.shared.serviceStatus.isEnabled(capability: .multihop) {
+            return
+        }
+        
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isMultiHop)
+        Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: false)
     }
     
 }
