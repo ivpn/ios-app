@@ -56,6 +56,6 @@ extension Notification.Name {
     public static let AntiTrackerUpdated = Notification.Name("antiTrackerUpdatedUpdated")
     public static let CustomDNSUpdated = Notification.Name("customDNSUpdatedUpdated")
     public static let EvaluateReconnect = Notification.Name("evaluateReconnect")
-    public static let UpdatePlan = Notification.Name("updatePlan")
+    public static let PlanUpdate = Notification.Name("planUpdate")
     
 }

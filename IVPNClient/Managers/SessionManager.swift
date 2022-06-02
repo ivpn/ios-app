@@ -123,7 +123,7 @@ class SessionManager {
             switch result {
             case .success(let model):
                 if Application.shared.serviceStatus.currentPlan != model.serviceStatus.currentPlan {
-                    NotificationCenter.default.post(name: Notification.Name.UpdatePlan, object: nil)
+                    NotificationCenter.default.post(name: Notification.Name.PlanUpdate, object: nil)
                 }
                 
                 Application.shared.serviceStatus = model.serviceStatus

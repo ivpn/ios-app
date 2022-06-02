@@ -350,7 +350,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: Notification.Name.AntiTrackerUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(evaluateReconnectHandler), name: Notification.Name.EvaluateReconnect, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updatePlan), name: Notification.Name.UpdatePlan, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(planUpdate), name: Notification.Name.PlanUpdate, object: nil)
     }
     
     // MARK: - Private methods -
@@ -431,13 +431,24 @@ class ControlPanelViewController: UITableViewController {
         evaluateReconnect(sender: controlPanelView)
     }
     
-    @objc private func updatePlan() {
-        if Application.shared.serviceStatus.isEnabled(capability: .multihop) {
+    @objc private func planUpdate() {
+        let isMultiHopEnabled = Application.shared.serviceStatus.isEnabled(capability: .multihop)
+        if isMultiHopEnabled {
             return
         }
         
-        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isMultiHop)
-        Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: false)
+        UserDefaults.shared.set(isMultiHopEnabled, forKey: UserDefaults.Key.isMultiHop)
+        Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: isMultiHopEnabled)
+        updateControlPanel()
+        
+        if Application.shared.connectionManager.status == .connected {
+            showActionAlert(title: "", message: "Active VPN connection is using Pro plan features (MultiHop) and will be disconnected.", action: "Reconnect with SingleHop", cancel: "OK", cancelHandler: { _ in
+                Application.shared.connectionManager.disconnect()
+                
+            }, actionHandler: { _ in
+                Application.shared.connectionManager.reconnect()
+            })
+        }
     }
     
 }
