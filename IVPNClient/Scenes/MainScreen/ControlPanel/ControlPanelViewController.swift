@@ -124,6 +124,7 @@ class ControlPanelViewController: UITableViewController {
         initView()
         addObservers()
         setupGestureRecognizers()
+        startAPIUpdate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -284,7 +285,7 @@ class ControlPanelViewController: UITableViewController {
         lastVPNStatus = vpnStatus
     }
     
-    func refreshServiceStatus() {
+    @objc func refreshServiceStatus() {
         if let lastUpdateDate = lastStatusUpdateDate {
             let now = Date()
             if now.timeIntervalSince(lastUpdateDate) < Config.serviceStatusRefreshMaxIntervalSeconds { return }
@@ -456,6 +457,10 @@ class ControlPanelViewController: UITableViewController {
         UserDefaults.shared.set(false, forKey: UserDefaults.Key.isMultiHop)
         Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: false)
         updateControlPanel()
+    }
+    
+    private func startAPIUpdate() {
+        Timer.scheduledTimer(timeInterval: 60 * 60, target: self, selector: #selector(refreshServiceStatus), userInfo: nil, repeats: true)
     }
     
 }

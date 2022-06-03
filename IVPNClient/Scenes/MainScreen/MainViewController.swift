@@ -35,7 +35,6 @@ class MainViewController: UIViewController {
     
     var floatingPanel: FloatingPanelController!
     private var updateServerListDidComplete = false
-    private var updateServersTimer = Timer()
     private var vpnErrorObserver = VPNErrorObserver()
     
     // MARK: - @IBActions -
@@ -69,7 +68,7 @@ class MainViewController: UIViewController {
         initErrorObservers()
         initFloatingPanel()
         addObservers()
-        startServersUpdate()
+        startAPIUpdate()
         startVPNStatusObserver()
     }
     
@@ -85,7 +84,6 @@ class MainViewController: UIViewController {
     }
     
     deinit {
-        updateServersTimer.invalidate()
         Application.shared.connectionManager.removeStatusChangeUpdates()
     }
     
@@ -225,9 +223,9 @@ class MainViewController: UIViewController {
         floatingPanel.show(animated: true)
     }
     
-    private func startServersUpdate() {
+    private func startAPIUpdate() {
         updateServersList()
-        updateServersTimer = Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
     }
     
     private func startPingService(updateServerListDidComplete: Bool) {
