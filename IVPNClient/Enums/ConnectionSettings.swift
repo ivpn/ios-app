@@ -151,13 +151,13 @@ enum ConnectionSettings {
         var port = 0
         let components = UserDefaults.standard.string(forKey: UserDefaults.Key.selectedProtocol)?.components(separatedBy: "-")
         
-        if let protocolName = components?[0] {
+        if let protocolName = components?[safeIndex: 0] {
             name = protocolName
         }
-        if let protocolProto = components?[1] {
+        if let protocolProto = components?[safeIndex: 1] {
             proto = protocolProto
         }
-        if let protocolPort = components?[2] {
+        if let protocolPort = components?[safeIndex: 2] {
             port = Int(protocolPort) ?? 0
         }
         
