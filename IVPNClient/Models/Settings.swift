@@ -118,10 +118,6 @@ class Settings {
     }
     
     func saveConnectionProtocol() {
-        if let index = Config.supportedProtocols.firstIndex(where: {$0 == connectionProtocol}) {
-            UserDefaults.standard.set(index, forKey: UserDefaults.Key.selectedProtocolIndex)
-        }
-        
         UserDefaults.standard.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
     }
     

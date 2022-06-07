@@ -60,7 +60,6 @@ extension UserDefaults {
         static let keepAlive = "keepAlive"
         static let serversSort = "serversSort"
         static let notAskToReconnect = "notAskToReconnect"
-        static let selectedProtocolIndex = "selectedProtocolIndex"
         static let selectedProtocol = "selectedProtocol"
         static let resolvedDNSInsideVPN = "resolvedDNSInsideVPN"
         static let resolvedDNSOutsideVPN = "resolvedDNSOutsideVPN"
@@ -240,7 +239,6 @@ extension UserDefaults {
         standard.removeObject(forKey: Key.selectedServerFastest)
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
-        standard.removeObject(forKey: Key.selectedProtocolIndex)
         standard.removeObject(forKey: Key.selectedProtocol)
         standard.synchronize()
     }
