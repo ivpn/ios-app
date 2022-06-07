@@ -137,7 +137,7 @@ enum ConnectionSettings {
     }
     
     func supportedProtocolsFormat(protocols: [ConnectionSettings]) -> [String] {
-        let protocols = supportedProtocols(protocols: Config.supportedProtocols)
+        let protocols = supportedProtocols(protocols: protocols)
         return protocols.map({ $0.formatProtocol() })
     }
     
