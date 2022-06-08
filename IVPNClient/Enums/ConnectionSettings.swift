@@ -56,7 +56,7 @@ enum ConnectionSettings {
             case .udp:
                 return "OpenVPN, UDP"
            }
-        case .wireguard(_, _):
+        case .wireguard:
             return "WireGuard, UDP"
         }
     }
