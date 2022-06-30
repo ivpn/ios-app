@@ -148,11 +148,11 @@ class VPNServerList {
                     
                     if let openvpn = portsObj["openvpn"] as? [[String: Any]] {
                         for port in openvpn {
-                            let portNumber = port["port"] as? String ?? "0"
+                            let portNumber = port["port"] as? Int ?? 0
                             if port["type"] as? String == "TCP" {
-                                ports.append(ConnectionSettings.openvpn(.tcp, Int(portNumber) ?? 0))
+                                ports.append(ConnectionSettings.openvpn(.tcp, portNumber))
                             } else {
-                                ports.append(ConnectionSettings.openvpn(.udp, Int(portNumber) ?? 0))
+                                ports.append(ConnectionSettings.openvpn(.udp, portNumber))
                             }
                         }
                     }
