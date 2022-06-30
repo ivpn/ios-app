@@ -113,6 +113,10 @@ class VPNServer {
         return location.distance(from: self.location)
     }
     
+    func getHost(hostName: String) -> Host? {
+        return hosts.first { $0.hostName == hostName }
+    }
+    
     static func == (lhs: VPNServer, rhs: VPNServer) -> Bool {
         return lhs.city == rhs.city && lhs.countryCode == rhs.countryCode
     }

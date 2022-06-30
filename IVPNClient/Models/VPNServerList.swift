@@ -173,7 +173,7 @@ class VPNServerList {
             servers.append(server)
             
             for host in server.hosts {
-                servers.append(VPNServer(gateway: host.hostName, countryCode: "", country: "", city: ""))
+                servers.append(VPNServer(gateway: host.hostName, countryCode: "", country: "", city: server.city))
             }
         }
         

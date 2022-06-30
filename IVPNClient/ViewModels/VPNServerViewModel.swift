@@ -123,7 +123,7 @@ struct VPNServerViewModel {
     // MARK: - Methods -
     
     func formattedServerName(sort: ServersSort) -> String {
-        if server.city == "" && server.countryCode == "" && server.gateway != "" {
+        if server.countryCode == "" && server.gateway != "" {
             return server.gateway
         }
         

@@ -187,10 +187,21 @@ extension ServerViewController {
 extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.row < collection.count else { return }
+        guard indexPath.row < collection.count else {
+            return
+        }
         
+        var selectedHost: Host?
         var server = collection[indexPath.row]
         server.random = false
+        
+        if server.countryCode == "" && server.gateway != "" {
+            let hostName = server.gateway
+            if let serverByCity = Application.shared.serverList.getServer(byCity: server.city) {
+                server = serverByCity
+                selectedHost = server.getHost(hostName: hostName)
+            }
+        }
         
         if (!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0) {
             server = Application.shared.serverList.getRandomServer(isExitServer: isExitServer)
@@ -214,9 +225,11 @@ extension ServerViewController {
         
         if isExitServer {
             Application.shared.settings.selectedExitServer = server
+            Application.shared.settings.selectedExitHost = selectedHost
         } else {
             if UserDefaults.shared.isMultiHop || indexPath.row > 0 || server.random {
                 Application.shared.settings.selectedServer = server
+                Application.shared.settings.selectedHost = selectedHost
                 Application.shared.settings.selectedServer.fastest = false
             } else {
                 if let fastestServer = Application.shared.serverList.getFastestServer() {
@@ -225,6 +238,7 @@ extension ServerViewController {
                     } else {
                         serverDifferentToSelectedServer = true
                         Application.shared.settings.selectedServer = fastestServer
+                        Application.shared.settings.selectedHost = selectedHost
                     }
                 }
                 Application.shared.settings.selectedServer.fastest = true
@@ -233,6 +247,7 @@ extension ServerViewController {
             
             if !UserDefaults.shared.isMultiHop {
                 Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
+                Application.shared.settings.selectedExitHost = selectedHost
             }
             UserDefaults.standard.set(Application.shared.settings.selectedServer.fastest, forKey: UserDefaults.Key.fastestServerPreferred)
         }

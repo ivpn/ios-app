@@ -44,6 +44,9 @@ class Settings {
         }
     }
     
+    var selectedHost: Host?
+    var selectedExitHost: Host?
+    
     var connectionProtocol: ConnectionSettings {
         didSet {
             saveConnectionProtocol()
