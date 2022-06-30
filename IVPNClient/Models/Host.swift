@@ -30,6 +30,7 @@ struct IPv6 {
 struct Host {
     
     var host: String
+    var hostName: String
     var publicKey: String
     var localIP: String
     var ipv6: IPv6?

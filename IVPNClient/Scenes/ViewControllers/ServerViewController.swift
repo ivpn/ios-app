@@ -45,7 +45,7 @@ class ServerViewController: UITableViewController {
         if isSearchActive {
             list = filteredCollection
         } else {
-            list = Application.shared.serverList.getServers()
+            list = Application.shared.serverList.getAllHosts()
         }
         
         list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)

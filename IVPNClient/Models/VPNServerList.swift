@@ -166,6 +166,20 @@ class VPNServerList {
         return servers
     }
     
+    func getAllHosts() -> [VPNServer] {
+        var servers: [VPNServer] = []
+        
+        for server in getServers() {
+            servers.append(server)
+            
+            for host in server.hosts {
+                servers.append(VPNServer(gateway: host.hostName, countryCode: "", country: "", city: ""))
+            }
+        }
+        
+        return servers
+    }
+    
     func getServer(byIpAddress ipAddress: String) -> VPNServer? {
         return getServers().first { $0.ipAddresses.first { $0 == ipAddress } != nil }
     }
@@ -274,6 +288,7 @@ class VPNServerList {
                     
                     var newHost = Host(
                         host: host["host"] as? String ?? "",
+                        hostName: host["hostname"] as? String ?? "",
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
                         multihopPort: host["multihop_port"] as? Int ?? 0
