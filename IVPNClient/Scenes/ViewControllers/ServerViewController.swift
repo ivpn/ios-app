@@ -287,7 +287,7 @@ extension ServerViewController {
 extension ServerViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let collection = Application.shared.serverList.getServers()
+        let collection = Application.shared.serverList.getAllHosts()
         
         filteredCollection.removeAll(keepingCapacity: false)
         filteredCollection = collection.filter { (server: VPNServer) -> Bool in
