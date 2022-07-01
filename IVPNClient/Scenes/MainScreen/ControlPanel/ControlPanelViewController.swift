@@ -435,14 +435,18 @@ class ControlPanelViewController: UITableViewController {
     @objc private func evaluatePlanUpdate() {
         let isMultiHopAvailable = Application.shared.serviceStatus.isEnabled(capability: .multihop)
         let isMultiHopEnabled = UserDefaults.shared.isMultiHop
-        let isVPNConnected = Application.shared.connectionManager.status == .connected
+        let status = Application.shared.connectionManager.status
         
         if !isMultiHopAvailable && isMultiHopEnabled {
-            if isVPNConnected {
+            if status == .connected {
                 let plan = Application.shared.serviceStatus.currentPlan ?? ""
                 showActionAlert(title: "Subscription is changed to \(plan)", message: "Active VPN connection is using Pro plan features (MultiHop) and will be disconnected.", action: "Reconnect with SingleHop VPN", cancel: "OK", cancelHandler: { [self] _ in
                     disableMultiHop()
-                    Application.shared.connectionManager.disconnect()
+                    if Application.shared.connectionManager.canDisconnect(status: status) {
+                        Application.shared.connectionManager.disconnect()
+                    } else {
+                        Application.shared.connectionManager.reconnect()
+                    }
                 }, actionHandler: { [self] _ in
                     disableMultiHop()
                     Application.shared.connectionManager.reconnect()
