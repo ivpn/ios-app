@@ -291,7 +291,8 @@ class VPNServerList {
                         hostName: host["hostname"] as? String ?? "",
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
-                        multihopPort: host["multihop_port"] as? Int ?? 0
+                        multihopPort: host["multihop_port"] as? Int ?? 0,
+                        load: host["load"] as? Float ?? 0.0
                     )
                     
                     if let ipv6 = host["ipv6"] as? [String: Any] {
