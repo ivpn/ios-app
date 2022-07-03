@@ -86,10 +86,11 @@ class VPNServer {
     private (set) var longitude: Double
     private (set) var ipAddresses: [String]
     private (set) var hosts: [Host]
+    private (set) var load: Double?
     
     // MARK: - Initialize -
     
-    init(gateway: String, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false) {
+    init(gateway: String, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0) {
         self.gateway = gateway
         self.countryCode = countryCode
         self.country = country
@@ -99,6 +100,7 @@ class VPNServer {
         self.ipAddresses = ipAddresses
         self.hosts = hosts
         self.fastest = fastest
+        self.load = load
     }
     
     // MARK: - Methods -

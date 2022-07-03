@@ -91,6 +91,10 @@ struct VPNServerViewModel {
     }
     
     var formattedServerName: String {
+        if isHost {
+            return server.gateway
+        }
+        
         return "\(server.city), \(server.countryCode.uppercased())"
     }
     
@@ -114,6 +118,10 @@ struct VPNServerViewModel {
         return UserDefaults.standard.showIPv4Servers && UserDefaults.shared.isIPv6 && server.enabledIPv6 && !(server.random && Application.shared.connectionManager.status.isDisconnected())
     }
     
+    var isHost: Bool {
+        return server.countryCode == "" && server.gateway != ""
+    }
+    
     // MARK: - Initialize -
     
     init(server: VPNServer) {
@@ -123,10 +131,6 @@ struct VPNServerViewModel {
     // MARK: - Methods -
     
     func formattedServerName(sort: ServersSort) -> String {
-        if server.countryCode == "" && server.gateway != "" {
-            return server.gateway
-        }
-        
         guard sort != .country else {
             return "\(server.countryCode.uppercased()), \(server.city)"
         }

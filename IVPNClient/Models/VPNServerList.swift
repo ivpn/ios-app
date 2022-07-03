@@ -173,7 +173,7 @@ class VPNServerList {
             servers.append(server)
             
             for host in server.hosts {
-                servers.append(VPNServer(gateway: host.hostName, countryCode: "", country: "", city: server.city))
+                servers.append(VPNServer(gateway: host.hostName, countryCode: "", country: "", city: server.city, load: host.load))
             }
         }
         
@@ -292,7 +292,7 @@ class VPNServerList {
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
                         multihopPort: host["multihop_port"] as? Int ?? 0,
-                        load: host["load"] as? Float ?? 0.0
+                        load: host["load"] as? Double ?? 0
                     )
                     
                     if let ipv6 = host["ipv6"] as? [String: Any] {

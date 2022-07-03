@@ -41,6 +41,12 @@ class ServerTableViewCell: UITableViewCell {
                 serverName.text = "Fastest server"
                 configureButton.isHidden = false
                 configureButton.isUserInteractionEnabled = true
+            } else if viewModel.isHost {
+                serverName.text = viewModel.formattedServerName
+                configureButton.isHidden = true
+                configureButton.isUserInteractionEnabled = false
+                flagImage.image = nil
+                flagImage.image?.accessibilityIdentifier = ""
             } else if isMultiHop && indexPath.row == 0 || !isMultiHop && indexPath.row == 1 {
                 flagImage.image = UIImage(named: "icon-shuffle")
                 flagImage.image?.accessibilityIdentifier = "icon-shuffle"
@@ -58,7 +64,13 @@ class ServerTableViewCell: UITableViewCell {
             flagImage.updateUpFlagIcon()
             serverName.sizeToFit()
             
-            if let pingMs = viewModel.server.pingMs {
+            if viewModel.isHost {
+                pingImage.isHidden = true
+                if let load = viewModel.server.load {
+                    pingTimeMs.text = "\(load)%"
+                    pingTimeMs.isHidden = false
+                }
+            } else if let pingMs = viewModel.server.pingMs {
                 if pingMs == -1 {
                     pingTimeMs.text = "Offline"
                 } else {

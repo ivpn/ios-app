@@ -35,7 +35,7 @@ struct Host {
     var localIP: String
     var ipv6: IPv6?
     var multihopPort: Int
-    var load: Float
+    var load: Double
     
     func localIPAddress() -> String {
         if let range = localIP.range(of: "/", options: .backwards, range: nil, locale: nil) {
