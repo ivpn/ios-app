@@ -641,7 +641,7 @@
                                         <rect key="frame" x="0.0" y="1189.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jRI-M6-wda" id="zNB-rZ-BcC">
-                                            <rect key="frame" x="0.0" y="0.0" width="397.5" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="395.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySb-bc-aGO">
@@ -666,7 +666,7 @@
                                         <rect key="frame" x="0.0" y="1233.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QbD-lg-XeY" id="AR6-tI-Bcz">
-                                            <rect key="frame" x="0.0" y="0.0" width="397.5" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="395.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="467-bH-Ba8">
@@ -816,6 +816,18 @@
                                                 <constraint firstAttribute="width" constant="8" id="eXn-gY-Od0"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8V-A3-dSv">
+                                            <rect key="frame" x="275" y="17" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="9q0-yC-MN9"/>
+                                                <constraint firstAttribute="width" constant="30" id="DLL-qP-WUa"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="e"/>
+                                            <connections>
+                                                <action selector="expandGateway:" destination="zAv-yM-Pqo" eventType="touchUpInside" id="Mp7-Lq-T6T"/>
+                                            </connections>
+                                        </button>
                                         <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoE-no-GF4">
                                             <rect key="frame" x="366" y="15" width="34" height="34"/>
                                             <accessibility key="accessibilityConfiguration" label="Configure fastest server"/>
@@ -875,14 +887,17 @@
                                         <constraint firstItem="ZoE-no-GF4" firstAttribute="centerY" secondItem="96A-Ox-uPj" secondAttribute="centerY" id="eUE-bf-9pW"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="suR-p9-Gde" secondAttribute="trailing" constant="1" id="g4a-hL-tUV"/>
                                         <constraint firstItem="suR-p9-Gde" firstAttribute="top" secondItem="96A-Ox-uPj" secondAttribute="topMargin" constant="4" id="hDk-7G-uXw"/>
+                                        <constraint firstItem="D8V-A3-dSv" firstAttribute="centerY" secondItem="96A-Ox-uPj" secondAttribute="centerY" id="hKS-Yn-6Y5"/>
                                         <constraint firstItem="jdM-ts-Ng0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4WG-iU-MrA" secondAttribute="trailing" constant="10" id="hTx-JL-hFW"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="suR-p9-Gde" secondAttribute="bottom" constant="2" id="iwa-Bm-Ey7"/>
                                         <constraint firstItem="x0z-oc-9ok" firstAttribute="leading" secondItem="tAR-GC-vmN" secondAttribute="leading" constant="34" id="mKb-yE-Qt8"/>
                                         <constraint firstItem="jdM-ts-Ng0" firstAttribute="centerY" secondItem="96A-Ox-uPj" secondAttribute="centerY" id="oyn-2m-oJR"/>
+                                        <constraint firstItem="jdM-ts-Ng0" firstAttribute="leading" secondItem="D8V-A3-dSv" secondAttribute="trailing" constant="10" id="vdt-Ld-LFH"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="configureButton" destination="ZoE-no-GF4" id="kNF-de-RJf"/>
+                                    <outlet property="expandButton" destination="D8V-A3-dSv" id="Agz-Ip-WSd"/>
                                     <outlet property="flagImage" destination="tAR-GC-vmN" id="CkJ-FC-Py9"/>
                                     <outlet property="ipv6Label" destination="LIC-Iy-VJb" id="QZE-Zc-r9z"/>
                                     <outlet property="pingImage" destination="jdM-ts-Ng0" id="AMI-dS-Zk4"/>
