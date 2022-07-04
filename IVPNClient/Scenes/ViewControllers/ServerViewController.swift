@@ -88,6 +88,23 @@ class ServerViewController: UITableViewController {
         }
     }
     
+    @IBAction func expandGateway(_ sender: Any) {
+        var superview = (sender as AnyObject).superview
+        while let view = superview, !(view is UITableViewCell) {
+            superview = view?.superview
+        }
+        guard let cell = superview as? UITableViewCell else {
+            return
+        }
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        let server = collection[indexPath.row]
+        expandedGateways.append(server.gateway)
+        tableView.reloadData()
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
@@ -162,9 +179,8 @@ class ServerViewController: UITableViewController {
         refreshControl = nil
     }
     
-    private func expandHost(_ host: String) -> Bool {
-        let gateway = host.components(separatedBy: CharacterSet.decimalDigits).joined()
-        return expandedGateways.contains(gateway)
+    private func expandHost(_ server: VPNServer) -> Bool {
+        return expandedGateways.contains(server.hostGateway)
     }
     
 }
@@ -284,6 +300,11 @@ extension ServerViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let server = collection[indexPath.row]
+        if server.isHost && !expandHost(server) {
+            return 0
+        }
+        
         return 64
     }
     

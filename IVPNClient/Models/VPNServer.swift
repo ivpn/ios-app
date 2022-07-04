@@ -78,6 +78,14 @@ class VPNServer {
         return false
     }
     
+    var isHost: Bool {
+        return countryCode == "" && gateway != ""
+    }
+    
+    var hostGateway: String {
+        return gateway.components(separatedBy: CharacterSet.decimalDigits).joined()
+    }
+    
     private (set) var gateway: String
     private (set) var countryCode: String
     private (set) var country: String

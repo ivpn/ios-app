@@ -41,7 +41,7 @@ class ServerTableViewCell: UITableViewCell {
                 serverName.text = "Fastest server"
                 configureButton.isHidden = false
                 configureButton.isUserInteractionEnabled = true
-            } else if viewModel.isHost {
+            } else if viewModel.server.isHost {
                 serverName.text = viewModel.formattedServerName
                 configureButton.isHidden = true
                 configureButton.isUserInteractionEnabled = false
@@ -64,7 +64,7 @@ class ServerTableViewCell: UITableViewCell {
             flagImage.updateUpFlagIcon()
             serverName.sizeToFit()
             
-            if viewModel.isHost {
+            if viewModel.server.isHost {
                 pingImage.isHidden = true
                 if let load = viewModel.server.load {
                     pingTimeMs.text = "\(load)%"

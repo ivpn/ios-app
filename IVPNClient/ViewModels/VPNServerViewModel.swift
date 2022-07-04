@@ -91,7 +91,7 @@ struct VPNServerViewModel {
     }
     
     var formattedServerName: String {
-        if isHost {
+        if server.isHost {
             return server.gateway
         }
         
@@ -116,10 +116,6 @@ struct VPNServerViewModel {
     
     var showIPv6Label: Bool {
         return UserDefaults.standard.showIPv4Servers && UserDefaults.shared.isIPv6 && server.enabledIPv6 && !(server.random && Application.shared.connectionManager.status.isDisconnected())
-    }
-    
-    var isHost: Bool {
-        return server.countryCode == "" && server.gateway != ""
     }
     
     // MARK: - Initialize -
