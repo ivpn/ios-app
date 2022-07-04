@@ -100,8 +100,7 @@ class ServerViewController: UITableViewController {
             return
         }
         
-        let server = collection[indexPath.row]
-        expandedGateways.append(server.gateway)
+        toggleExpandedGateways(collection[indexPath.row])
         tableView.reloadData()
     }
     
@@ -181,6 +180,14 @@ class ServerViewController: UITableViewController {
     
     private func expandHost(_ server: VPNServer) -> Bool {
         return expandedGateways.contains(server.hostGateway)
+    }
+    
+    private func toggleExpandedGateways(_ server: VPNServer) {
+        if expandedGateways.contains(server.hostGateway) {
+            expandedGateways = expandedGateways.filter { $0 != server.gateway }
+        } else {
+            expandedGateways.append(server.gateway)
+        }
     }
     
 }
