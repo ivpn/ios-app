@@ -57,6 +57,8 @@ class ServerViewController: UITableViewController {
         return list
     }
     
+    private var expandedGateways: [String] = []
+    
     private var isSearchActive: Bool {
         return !searchBar.text!.isEmpty
     }
@@ -158,6 +160,11 @@ class ServerViewController: UITableViewController {
     private func disableRefreshControl() {
         refreshControl?.removeTarget(self, action: #selector(self.refresh), for: UIControl.Event.valueChanged)
         refreshControl = nil
+    }
+    
+    private func expandHost(_ host: String) -> Bool {
+        let gateway = host.components(separatedBy: CharacterSet.decimalDigits).joined()
+        return expandedGateways.contains(gateway)
     }
     
 }
