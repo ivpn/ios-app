@@ -324,16 +324,14 @@ extension ServerViewController {
 extension ServerViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let collection = Application.shared.serverList.getAllHosts()
-        
+        let collection = Application.shared.serverList.getServers()
         filteredCollection.removeAll(keepingCapacity: false)
         filteredCollection = collection.filter { (server: VPNServer) -> Bool in
             let location = "\(server.city) \(server.countryCode)".lowercased()
             return location.contains(searchBar.text!.lowercased())
         }
-        
         filteredCollection = VPNServerList.sort(filteredCollection)
-        
+        filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection)
         tableView.reloadData()
     }
     

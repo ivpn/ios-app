@@ -166,18 +166,19 @@ class VPNServerList {
         return servers
     }
     
-    func getAllHosts() -> [VPNServer] {
-        var servers: [VPNServer] = []
+    func getAllHosts(_ servers: [VPNServer]? = nil) -> [VPNServer] {
+        var allHosts: [VPNServer] = []
+        let allServers = servers ?? getServers()
         
-        for server in getServers() {
-            servers.append(server)
+        for server in allServers {
+            allHosts.append(server)
             
             for host in server.hosts {
-                servers.append(VPNServer(gateway: host.hostName, countryCode: "", country: "", city: server.city, load: host.load))
+                allHosts.append(VPNServer(gateway: host.hostName, countryCode: server.countryCode, country: "", city: server.city, load: host.load))
             }
         }
         
-        return servers
+        return allHosts
     }
     
     func getServer(byIpAddress ipAddress: String) -> VPNServer? {
