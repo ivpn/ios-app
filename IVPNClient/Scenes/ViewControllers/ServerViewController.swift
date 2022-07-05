@@ -77,14 +77,15 @@ class ServerViewController: UITableViewController {
         let actions = actionsRawValue.map { $0.camelCaseToCapitalized() ?? "" }
         let selected = UserDefaults.shared.serversSort.camelCaseToCapitalized() ?? ""
         
-        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Sort by", actions: actions, sourceView: tableView) { index in
+        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Sort by", actions: actions, sourceView: tableView) { [self] index in
             guard index > -1 else { return }
             
             let sort = ServersSort.allCases[index]
             UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
             Application.shared.serverList.sortServers()
-            self.filteredCollection = VPNServerList.sort(self.filteredCollection)
-            self.tableView.reloadData()
+            filteredCollection = VPNServerList.sort(filteredCollection)
+            filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection)
+            tableView.reloadData()
         }
     }
     

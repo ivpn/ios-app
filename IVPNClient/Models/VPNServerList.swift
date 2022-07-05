@@ -171,6 +171,10 @@ class VPNServerList {
         let allServers = servers ?? getServers()
         
         for server in allServers {
+            if server.isHost {
+                continue
+            }
+            
             allHosts.append(server)
             
             for host in server.hosts {
