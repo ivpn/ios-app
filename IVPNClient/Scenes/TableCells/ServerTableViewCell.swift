@@ -68,6 +68,8 @@ class ServerTableViewCell: UITableViewCell {
             }
             flagImage.updateUpFlagIcon()
             serverName.sizeToFit()
+            ipv6Label.isHidden = !viewModel.showIPv6Label
+            expandButton.tintColor = UIColor.init(named: Theme.ivpnGray6)
             
             if viewModel.server.isHost {
                 pingImage.isHidden = true
@@ -89,8 +91,6 @@ class ServerTableViewCell: UITableViewCell {
                 pingImage.isHidden = true
                 pingTimeMs.isHidden = true
             }
-            
-            ipv6Label.isHidden = !viewModel.showIPv6Label
         }
     }
     
@@ -111,6 +111,16 @@ class ServerTableViewCell: UITableViewCell {
             if indexPath.row == 0 || !isMultiHop && indexPath.row == 1 {
                 pingImage.isHidden = true
                 pingTimeMs.isHidden = true
+            }
+        }
+    }
+    
+    var expandedGateways: [String]! {
+        didSet {
+            if expandedGateways.contains(viewModel.server.gateway) {
+                expandButton.setImage(UIImage(named: "icon-arrow-up-gray"), for: .normal)
+            } else {
+                expandButton.setImage(UIImage(named: "icon-arrow-down-gray"), for: .normal)
             }
         }
     }

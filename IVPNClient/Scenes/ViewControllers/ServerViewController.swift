@@ -201,11 +201,13 @@ extension ServerViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let server = collection[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServerTableViewCell", for: indexPath) as! ServerTableViewCell
         cell.isMultiHop = UserDefaults.shared.isMultiHop
         cell.indexPath = indexPath
-        cell.viewModel = VPNServerViewModel(server: collection[indexPath.row])
+        cell.viewModel = VPNServerViewModel(server: server)
         cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        cell.expandedGateways = expandedGateways
         
         return cell
     }
