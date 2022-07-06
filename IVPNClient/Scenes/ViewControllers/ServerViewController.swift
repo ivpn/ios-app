@@ -228,7 +228,7 @@ extension ServerViewController {
         var server = collection[indexPath.row]
         server.random = false
         
-        if server.countryCode == "" && server.gateway != "" {
+        if server.isHost {
             let hostName = server.gateway
             if let serverByCity = Application.shared.serverList.getServer(byCity: server.city) {
                 server = serverByCity

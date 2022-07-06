@@ -32,22 +32,22 @@ extension NETunnelProviderProtocol {
     // MARK: OpenVPN
     
     static func makeOpenVPNProtocol(settings: ConnectionSettings, accessDetails: AccessDetails) -> NETunnelProviderProtocol {
+        guard let host = getHost() else {
+            return NETunnelProviderProtocol()
+        }
+        
         let username = accessDetails.username
         let socketType: SocketType = settings.protocolType() == "TCP" ? .tcp : .udp
         let credentials = OpenVPN.Credentials(username, KeyChain.vpnPassword ?? "")
         let staticKey = OpenVPN.StaticKey.init(file: OpenVPNConf.tlsAuth, direction: OpenVPN.StaticKey.Direction.client)
-        var port = UInt16(settings.port())
-        
-        if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = Application.shared.settings.selectedExitServer.hosts.randomElement() {
-            port = UInt16(exitHost.multihopPort)
-        }
+        let port = UInt16(getPort(settings: settings))
         
         var sessionBuilder = OpenVPN.ConfigurationBuilder()
         sessionBuilder.ca = OpenVPN.CryptoContainer(pem: OpenVPNConf.caCert)
         sessionBuilder.cipher = .aes256cbc
         sessionBuilder.compressionFraming = .disabled
         sessionBuilder.endpointProtocols = [EndpointProtocol(socketType, port)]
-        sessionBuilder.hostname = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
+        sessionBuilder.hostname = host.host
         sessionBuilder.tlsWrap = OpenVPN.TLSWrap.init(strategy: .auth, key: staticKey!)
         
         if let dnsServers = openVPNdnsServers(), !dnsServers.isEmpty, dnsServers != [""] {
@@ -108,17 +108,18 @@ extension NETunnelProviderProtocol {
     // MARK: WireGuard
     
     static func makeWireGuardProtocol(settings: ConnectionSettings) -> NETunnelProviderProtocol {
-        guard let host = Application.shared.settings.selectedServer.hosts.randomElement() else {
+        guard let host = getHost() else {
             return NETunnelProviderProtocol()
         }
         
         var addresses = KeyChain.wgIpAddress
         var publicKey = host.publicKey
-        var endpoint = Peer.endpoint(host: host.host, port: settings.port())
+        let port = getPort(settings: settings)
+        var endpoint = Peer.endpoint(host: host.host, port: port)
         
-        if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = Application.shared.settings.selectedExitServer.hosts.randomElement() {
+        if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = getExitHost() {
             publicKey = exitHost.publicKey
-            endpoint = Peer.endpoint(host: host.host, port: Int(exitHost.multihopPort))
+            endpoint = Peer.endpoint(host: host.host, port: port)
         }
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
@@ -156,6 +157,40 @@ extension NETunnelProviderProtocol {
         }
         
         return configuration
+    }
+    
+    // MARK: Methods
+    
+    private static func getHost() -> Host? {
+        if let selectedHost = Application.shared.settings.selectedHost {
+            return selectedHost
+        }
+        
+        if let randomHost = Application.shared.settings.selectedServer.hosts.randomElement() {
+            return randomHost
+        }
+        
+        return nil
+    }
+    
+    private static func getExitHost() -> Host? {
+        if let selectedHost = Application.shared.settings.selectedExitHost {
+            return selectedHost
+        }
+        
+        if let randomHost = Application.shared.settings.selectedExitServer.hosts.randomElement() {
+            return randomHost
+        }
+        
+        return nil
+    }
+    
+    private static func getPort(settings: ConnectionSettings) -> Int {
+        if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = getExitHost() {
+            return exitHost.multihopPort
+        }
+        
+        return settings.port()
     }
     
 }
