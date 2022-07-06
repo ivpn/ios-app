@@ -305,8 +305,8 @@ class SettingsViewController: UITableViewController {
     // MARK: - Private methods -
     
     private func updateSelectedServer() {
-        let serverViewModel = VPNServerViewModel(server: Application.shared.settings.selectedServer)
-        let exitServerViewModel = VPNServerViewModel(server: Application.shared.settings.selectedExitServer)
+        let serverViewModel = VPNServerViewModel(server: Application.shared.settings.selectedServer, selectedHost: Application.shared.settings.selectedHost)
+        let exitServerViewModel = VPNServerViewModel(server: Application.shared.settings.selectedExitServer, selectedHost: Application.shared.settings.selectedExitHost)
         selectedServerName.text = serverViewModel.formattedServerNameForSettings
         selectedServerFlag.image = serverViewModel.imageForCountryCodeForSettings
         selectedExitServerName.text = exitServerViewModel.formattedServerNameForSettings
