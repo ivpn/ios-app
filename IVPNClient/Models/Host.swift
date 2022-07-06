@@ -23,11 +23,11 @@
 
 import Foundation
 
-struct IPv6 {
+struct IPv6: Codable {
     var localIP: String
 }
 
-struct Host {
+struct Host: Codable {
     
     var host: String
     var hostName: String

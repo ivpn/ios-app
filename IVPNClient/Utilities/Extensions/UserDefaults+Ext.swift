@@ -72,6 +72,8 @@ extension UserDefaults {
         static let selectedExitServerCity = "SelectedExitServerCity"
         static let selectedExitServerGateway = "SelectedExitServerGateway"
         static let selectedExitServerRandom = "SelectedExitServerRandom"
+        static let selectedHost = "SelectedHost"
+        static let selectedExitHost = "SelectedExitHost"
         static let fastestServerPreferred = "FastestServerPreferred"
         static let fastestServerConfigured = "FastestServerConfiguredForOpenVPN"
         static let firstInstall = "FirstInstall"
@@ -237,6 +239,9 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.notAskToReconnect)
         shared.removeObject(forKey: Key.isIPv6)
         shared.removeObject(forKey: Key.killSwitch)
+        shared.removeObject(forKey: Key.serviceStatus)
+        shared.removeObject(forKey: Key.selectedHost)
+        shared.removeObject(forKey: Key.selectedExitHost)
         standard.removeObject(forKey: Key.selectedServerFastest)
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
