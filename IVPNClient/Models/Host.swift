@@ -46,4 +46,25 @@ struct Host: Codable {
         return ""
     }
     
+    static func save(_ host: Host?, key: String) {
+        if let host = host {
+            if let encoded = try? JSONEncoder().encode(host) {
+                UserDefaults.standard.set(encoded, forKey: key)
+            }
+        } else {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func load(key: String) -> Host? {
+        if let saved = UserDefaults.standard.object(forKey: key) as? Data {
+            if let loaded = try? JSONDecoder().decode(Host.self, from: saved) {
+                return loaded
+            }
+        }
+        
+        return nil
+    }
+    
 }

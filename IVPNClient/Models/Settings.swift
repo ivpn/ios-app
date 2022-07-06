@@ -48,13 +48,13 @@ class Settings {
     
     var selectedHost: Host? {
         didSet {
-            save(host: selectedHost, key: UserDefaults.Key.selectedHost)
+            Host.save(selectedHost, key: UserDefaults.Key.selectedHost)
         }
     }
     
     var selectedExitHost: Host? {
         didSet {
-            save(host: selectedExitHost, key: UserDefaults.Key.selectedExitHost)
+            Host.save(selectedExitHost, key: UserDefaults.Key.selectedExitHost)
         }
     }
     
@@ -108,27 +108,16 @@ class Settings {
             selectedServer.status = status
         }
         
-        selectedHost = loadHost(key: UserDefaults.Key.selectedHost)
-        selectedExitHost = loadHost(key: UserDefaults.Key.selectedExitHost)
+        if selectedHost == nil {
+            selectedHost = Host.load(key: UserDefaults.Key.selectedHost)
+        }
+        
+        if selectedExitHost == nil {
+            selectedExitHost = Host.load(key: UserDefaults.Key.selectedExitHost)
+        }
     }
     
     // MARK: - Methods -
-    
-    func save(host: Host?, key: String) {
-        if let encoded = try? JSONEncoder().encode(host) {
-            UserDefaults.standard.set(encoded, forKey: key)
-        }
-    }
-    
-    func loadHost(key: String) -> Host? {
-        if let saved = UserDefaults.standard.object(forKey: key) as? Data {
-            if let loaded = try? JSONDecoder().decode(Host.self, from: saved) {
-                return loaded
-            }
-        }
-        
-        return nil
-    }
     
     func updateSelectedServerForMultiHop(isEnabled: Bool) {
         if isEnabled && Application.shared.settings.selectedServer.fastest {
