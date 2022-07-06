@@ -226,6 +226,8 @@ extension ServerViewController {
         
         var selectedHost: Host?
         var server = collection[indexPath.row]
+        var differentSelectedServer = false
+        var differentSelectedHost = false
         server.random = false
         
         if server.isHost {
@@ -233,6 +235,16 @@ extension ServerViewController {
             if let serverByCity = Application.shared.serverList.getServer(byCity: server.city) {
                 server = serverByCity
                 selectedHost = server.getHost(hostName: hostName)
+            }
+            
+            if let selectedHost = Application.shared.settings.selectedHost {
+                differentSelectedHost = hostName != selectedHost.hostName
+            }
+            
+            if isExitServer {
+                if let selectedExitHost = Application.shared.settings.selectedExitHost {
+                    differentSelectedHost = hostName != selectedExitHost.hostName
+                }
             }
         }
         
@@ -243,11 +255,11 @@ extension ServerViewController {
         }
         
         var secondServer = Application.shared.settings.selectedExitServer
-        var serverDifferentToSelectedServer = server !== Application.shared.settings.selectedServer
+        differentSelectedServer = server !== Application.shared.settings.selectedServer
         
         if isExitServer {
             secondServer = Application.shared.settings.selectedServer
-            serverDifferentToSelectedServer = server !== Application.shared.settings.selectedExitServer
+            differentSelectedServer = server !== Application.shared.settings.selectedExitServer
         }
         
         guard Application.shared.serverList.validateServer(firstServer: server, secondServer: secondServer) == true else {
@@ -267,9 +279,9 @@ extension ServerViewController {
             } else {
                 if let fastestServer = Application.shared.serverList.getFastestServer() {
                     if fastestServer == Application.shared.settings.selectedServer {
-                        serverDifferentToSelectedServer = false
+                        differentSelectedServer = false
                     } else {
-                        serverDifferentToSelectedServer = true
+                        differentSelectedServer = true
                         Application.shared.settings.selectedServer = fastestServer
                         Application.shared.settings.selectedHost = selectedHost
                     }
@@ -288,7 +300,7 @@ extension ServerViewController {
         NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
         NotificationCenter.default.post(name: Notification.Name.ShowConnectToServerPopup, object: nil)
         
-        if serverDifferentToSelectedServer || Application.shared.serverList.noPing {
+        if differentSelectedServer || differentSelectedHost || Application.shared.serverList.noPing {
             if Application.shared.settings.selectedServer.fastest && Application.shared.serverList.noPing {
                 serverDelegate?.reconnectToFastestServer()
             } else {
