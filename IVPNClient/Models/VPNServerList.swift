@@ -148,18 +148,20 @@ class VPNServerList {
                     
                     if let openvpn = portsObj["openvpn"] as? [[String: Any]] {
                         for port in openvpn {
-                            let portNumber = port["port"] as? Int ?? 0
-                            if port["type"] as? String == "TCP" {
-                                ports.append(ConnectionSettings.openvpn(.tcp, portNumber))
-                            } else {
-                                ports.append(ConnectionSettings.openvpn(.udp, portNumber))
+                            if let portNumber = port["port"] as? Int {
+                                if port["type"] as? String == "TCP" {
+                                    ports.append(ConnectionSettings.openvpn(.tcp, portNumber))
+                                } else {
+                                    ports.append(ConnectionSettings.openvpn(.udp, portNumber))
+                                }
                             }
                         }
                     }
                     if let openvpn = portsObj["wireguard"] as? [[String: Any]] {
                         for port in openvpn {
-                            let portNumber = port["port"] as? Int ?? 0
-                            ports.append(ConnectionSettings.wireguard(.udp, portNumber))
+                            if let portNumber = port["port"] as? Int {
+                                ports.append(ConnectionSettings.wireguard(.udp, portNumber))
+                            }
                         }
                     }
                 }
