@@ -46,6 +46,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
+    @IBOutlet weak var selectHostSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -149,6 +150,10 @@ class SettingsViewController: UITableViewController {
         UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.notAskToReconnect)
     }
     
+    @IBAction func toggleSelectHost(_ sender: UISwitch) {
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.selectHost)
+    }
+    
     @IBAction func extendSubscription(_ sender: Any) {
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
             return
@@ -210,6 +215,7 @@ class SettingsViewController: UITableViewController {
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
+        selectHostSwitch.setOn(UserDefaults.shared.selectHost, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
         updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
