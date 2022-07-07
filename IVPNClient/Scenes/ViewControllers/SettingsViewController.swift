@@ -417,7 +417,7 @@ extension SettingsViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 { return 60 }
-        if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
+        if indexPath.section == 0 && indexPath.row == 3 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
         if indexPath.section == 3 && indexPath.row == 7 { return 60 }
         if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
