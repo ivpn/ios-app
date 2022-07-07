@@ -152,6 +152,12 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func toggleSelectHost(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.selectHost)
+        
+        if !sender.isOn {
+            Application.shared.settings.selectedHost = nil
+            Application.shared.settings.selectedExitHost = nil
+            updateSelectedServer()
+        }
     }
     
     @IBAction func extendSubscription(_ sender: Any) {
@@ -416,7 +422,7 @@ class SettingsViewController: UITableViewController {
 extension SettingsViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 0 { return 60 }
+        if indexPath.section == 0 && indexPath.row == 1 { return 60 }
         if indexPath.section == 0 && indexPath.row == 3 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
         if indexPath.section == 3 && indexPath.row == 7 { return 60 }
