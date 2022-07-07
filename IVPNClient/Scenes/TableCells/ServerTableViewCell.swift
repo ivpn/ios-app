@@ -118,7 +118,7 @@ class ServerTableViewCell: UITableViewCell {
         serverName.text = viewModel.formattedServerName(sort: sort)
         configureButton.isHidden = true
         configureButton.isUserInteractionEnabled = false
-        expandButton.isHidden = false
+        expandButton.isHidden = !UserDefaults.shared.selectHost
     }
     
     private func setHostServerCell() {
