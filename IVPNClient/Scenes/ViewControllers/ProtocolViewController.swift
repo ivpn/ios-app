@@ -41,11 +41,18 @@ class ProtocolViewController: UITableViewController {
         keyManager.delegate = self
         updateCollection(connectionProtocol: Application.shared.settings.connectionProtocol)
         initNavigationBar()
+        addObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+    
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     // MARK: - Methods -
@@ -168,8 +175,11 @@ class ProtocolViewController: UITableViewController {
             Application.shared.settings.connectionProtocol = protocols[index]
             tableView.reloadData()
             NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-            evaluateReconnect(sender: view)
         }
+    }
+    
+    @objc private func protocolSelected() {
+        evaluateReconnect(sender: view)
     }
     
 }
