@@ -29,16 +29,25 @@ class PortViewController: UITableViewController {
     
     var viewModel = PortViewModel()
     var collection = [ConnectionSettings]()
-    var selectedPort = ConnectionSettings.wireguard(.udp, 0) {
-        didSet {
-            collection = selectedPort.supportedProtocols(protocols: Application.shared.serverList.ports)
-        }
-    }
+    var selectedPort = Application.shared.settings.connectionProtocol
     
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initCollection()
+        setupView()
+    }
+    
+    // MARK: - Methods -
+    
+    private func setupView() {
+        title = "Select Port"
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
+    }
+    
+    private func initCollection() {
+        collection = selectedPort.supportedProtocols(protocols: Application.shared.serverList.ports)
     }
 
 }
@@ -56,9 +65,11 @@ extension PortViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        let port = collection[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PortTableViewCell", for: indexPath)
+        cell.textLabel?.text = "\(port.formatProtocol())"
         
-        if collection[indexPath.row] == selectedPort {
+        if port == selectedPort {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -88,6 +99,22 @@ extension PortViewController {
         Application.shared.settings.connectionProtocol = selectedPort
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
         navigationController?.popViewController(animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if let footer = view as? UITableViewHeaderFooterView {
+            footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
 }

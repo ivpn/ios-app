@@ -145,21 +145,23 @@ class ProtocolViewController: UITableViewController {
     }
     
     func selectPreferredProtocolAndPort(connectionProtocol: ConnectionSettings) {
-        let ports = Application.shared.serverList.ports
-        let selected = Application.shared.settings.connectionProtocol.formatProtocol()
-        let protocols = connectionProtocol.supportedProtocols(protocols: ports)
-        let actions = connectionProtocol.supportedProtocolsFormat(protocols: ports)
+//        let ports = Application.shared.serverList.ports
+//        let selected = Application.shared.settings.connectionProtocol.formatProtocol()
+//        let protocols = connectionProtocol.supportedProtocols(protocols: ports)
+//        let actions = connectionProtocol.supportedProtocolsFormat(protocols: ports)
+//
+//        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol & port", actions: actions, sourceView: view) { [self] index in
+//            guard index > -1 else {
+//                return
+//            }
+//
+//            Application.shared.settings.connectionProtocol = protocols[index]
+//            tableView.reloadData()
+//            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+//            evaluateReconnect(sender: view)
+//        }
         
-        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol & port", actions: actions, sourceView: view) { [self] index in
-            guard index > -1 else {
-                return
-            }
-            
-            Application.shared.settings.connectionProtocol = protocols[index]
-            tableView.reloadData()
-            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-            evaluateReconnect(sender: view)
-        }
+        performSegue(withIdentifier: "PortSettings", sender: self)
     }
     
     func selectPreferredProtocol(connectionProtocol: ConnectionSettings) {
