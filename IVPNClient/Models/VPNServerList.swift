@@ -26,12 +26,19 @@ import CoreData
 import UIKit
 import CoreLocation
 
+struct PortRange {
+    var tunnelType: String
+    var protocolType: String
+    var ranges: [String]
+}
+
 class VPNServerList {
     
     // MARK: - Properties -
     
     open private(set) var servers: [VPNServer]
     open private(set) var ports: [ConnectionSettings]
+    open private(set) var portRanges: [PortRange]
     
     var filteredFastestServers: [VPNServer] {
         var serversArray = getServers()
@@ -86,6 +93,7 @@ class VPNServerList {
     init(withJSONData data: Data?, storeInCache: Bool = false) {
         servers = [VPNServer]()
         ports = [ConnectionSettings]()
+        portRanges = [PortRange]()
         
         if let jsonData = data {
             var serversList: [[String: Any]]?
@@ -147,6 +155,8 @@ class VPNServerList {
                     ports.append(ConnectionSettings.ipsec)
                     
                     if let openvpn = portsObj["openvpn"] as? [[String: Any]] {
+                        var udpRanges = [String]()
+                        var tcpRanges = [String]()
                         for port in openvpn {
                             if let portNumber = port["port"] as? Int {
                                 if port["type"] as? String == "TCP" {
@@ -155,13 +165,33 @@ class VPNServerList {
                                     ports.append(ConnectionSettings.openvpn(.udp, portNumber))
                                 }
                             }
+                            if let range = port["range"] as? String {
+                                if port["type"] as? String == "TCP" {
+                                    tcpRanges.append(range)
+                                } else {
+                                    udpRanges.append(range)
+                                }
+                            }
+                        }
+                        if !udpRanges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "OpenVPN", protocolType: "UDP", ranges: udpRanges))
+                        }
+                        if !tcpRanges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "OpenVPN", protocolType: "TCP", ranges: tcpRanges))
                         }
                     }
-                    if let openvpn = portsObj["wireguard"] as? [[String: Any]] {
-                        for port in openvpn {
+                    if let wireguard = portsObj["wireguard"] as? [[String: Any]] {
+                        var ranges = [String]()
+                        for port in wireguard {
                             if let portNumber = port["port"] as? Int {
                                 ports.append(ConnectionSettings.wireguard(.udp, portNumber))
                             }
+                            if let range = port["range"] as? String {
+                                ranges.append(range)
+                            }
+                        }
+                        if !ranges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "WireGuard", protocolType: "UDP", ranges: ranges))
                         }
                     }
                 }
