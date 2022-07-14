@@ -1964,7 +1964,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PortTableViewCell" rowHeight="44" id="bth-fh-Dwc">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PortTableViewCell" rowHeight="44" id="bth-fh-Dwc" customClass="PortTableViewCell" customModule="IVPNClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="49.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bth-fh-Dwc" id="0ot-ZV-Hf8">
@@ -2005,8 +2005,12 @@
                                         <constraint firstItem="N1u-55-Psg" firstAttribute="leading" secondItem="Z0y-ZX-6OM" secondAttribute="trailing" constant="10" id="nWO-nr-hIO"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="customLabel" destination="N1u-55-Psg" id="nel-yI-oTO"/>
+                                    <outlet property="protocolLabel" destination="Z0y-ZX-6OM" id="u02-06-fY8"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PortTableViewCell" rowHeight="44" id="w7N-iH-7r9">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PortInputTableViewCell" rowHeight="44" id="w7N-iH-7r9" customClass="PortInputTableViewCell" customModule="IVPNClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="93.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w7N-iH-7r9" id="rU7-G6-95g">
@@ -2032,9 +2036,6 @@
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" textContentType="url"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="7IF-sv-8mt" id="beD-gb-wrx"/>
-                                            </connections>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -2044,6 +2045,10 @@
                                         <constraint firstItem="qga-If-1PU" firstAttribute="leading" secondItem="rU7-G6-95g" secondAttribute="leading" constant="16" id="c0s-ER-kqm"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="portInput" destination="tXN-Al-2DJ" id="lbl-qZ-1Nh"/>
+                                    <outlet property="protocolLabel" destination="qga-If-1PU" id="Oc0-we-GWt"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

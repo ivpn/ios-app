@@ -65,16 +65,8 @@ extension PortViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let port = collection[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PortTableViewCell", for: indexPath)
-        cell.textLabel?.text = "\(port.formatProtocol())"
-        
-        if port == selectedPort {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PortTableViewCell", for: indexPath) as! PortTableViewCell
+        cell.setup(port: collection[indexPath.row], selectedPort: selectedPort)
         return cell
     }
     

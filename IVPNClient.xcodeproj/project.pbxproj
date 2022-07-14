@@ -41,6 +41,8 @@
 		821BDE02224A6EC700F592BF /* AppKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */; };
 		821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D6287C5AB20067F70D /* PortViewController.swift */; };
 		821CA2D9287C6A820067F70D /* PortViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D8287C6A820067F70D /* PortViewModel.swift */; };
+		821CA2DB288039670067F70D /* PortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DA288039670067F70D /* PortTableViewCell.swift */; };
+		821CA2DD2880397B0067F70D /* PortInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DC2880397B0067F70D /* PortInputTableViewCell.swift */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
 		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
 		8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */; };
@@ -440,6 +442,8 @@
 		821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyManagerTests.swift; sourceTree = "<group>"; };
 		821CA2D6287C5AB20067F70D /* PortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortViewController.swift; sourceTree = "<group>"; };
 		821CA2D8287C6A820067F70D /* PortViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortViewModel.swift; sourceTree = "<group>"; };
+		821CA2DA288039670067F70D /* PortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortTableViewCell.swift; sourceTree = "<group>"; };
+		821CA2DC2880397B0067F70D /* PortInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortInputTableViewCell.swift; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
 		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
 		8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSViewController.swift; sourceTree = "<group>"; };
@@ -1208,6 +1212,8 @@
 				82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */,
 				82DAB37E2457260000302F4C /* ServiceTableViewCell.swift */,
 				82DAB37C245725E200302F4C /* ServiceTitleTableViewCell.swift */,
+				821CA2DA288039670067F70D /* PortTableViewCell.swift */,
+				821CA2DC2880397B0067F70D /* PortInputTableViewCell.swift */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -2158,6 +2164,7 @@
 				828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */,
 				82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */,
 				8243584E25DAA842005FDEBB /* SecureDNSView.swift in Sources */,
+				821CA2DB288039670067F70D /* PortTableViewCell.swift in Sources */,
 				8206F32124347A8F0056B465 /* MainView.swift in Sources */,
 				9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */,
 				828D8A6D258245AD00CB0E5B /* TwoFactorViewController.swift in Sources */,
@@ -2180,6 +2187,7 @@
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
 				82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */,
 				826C1F8425DBEF1800314C4B /* DNSManager.swift in Sources */,
+				821CA2DD2880397B0067F70D /* PortInputTableViewCell.swift in Sources */,
 				8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */,
 				82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */,
 				9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */,
