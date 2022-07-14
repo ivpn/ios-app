@@ -28,14 +28,14 @@ class PortViewController: UITableViewController {
     // MARK: - Properties -
     
     var viewModel = PortViewModel()
-    var collection = [ConnectionSettings]()
+    var collection = Application.shared.settings.connectionProtocol.supportedProtocols(protocols: Application.shared.serverList.ports)
+    var portRanges = Application.shared.serverList.portRanges
     var selectedPort = Application.shared.settings.connectionProtocol
     
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initCollection()
         setupView()
     }
     
@@ -44,10 +44,6 @@ class PortViewController: UITableViewController {
     private func setupView() {
         title = "Select Port"
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
-    }
-    
-    private func initCollection() {
-        collection = selectedPort.supportedProtocols(protocols: Application.shared.serverList.ports)
     }
 
 }
@@ -74,6 +70,8 @@ extension PortViewController {
         switch section {
         case 0:
             return "Select port"
+        case 1:
+            return "Custom port"
         default:
             return ""
         }
