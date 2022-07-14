@@ -1964,12 +1964,85 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PortTableViewCell" rowHeight="44" id="w7N-iH-7r9">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PortTableViewCell" rowHeight="44" id="bth-fh-Dwc">
                                 <rect key="frame" x="0.0" y="49.5" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bth-fh-Dwc" id="0ot-ZV-Hf8">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UDP 2050" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0y-ZX-6OM">
+                                            <rect key="frame" x="16" y="11" width="79.5" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="B7Y-Pt-XgP"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1u-55-Psg">
+                                            <rect key="frame" x="105.5" y="14" width="42" height="16"/>
+                                            <color key="backgroundColor" name="ivpnGray2"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="16" id="Bqr-gh-RFr"/>
+                                                <constraint firstAttribute="width" constant="42" id="oMh-jp-4Hh"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Z0y-ZX-6OM" firstAttribute="centerY" secondItem="0ot-ZV-Hf8" secondAttribute="centerY" id="18a-Vi-T0c"/>
+                                        <constraint firstItem="Z0y-ZX-6OM" firstAttribute="leading" secondItem="0ot-ZV-Hf8" secondAttribute="leading" constant="16" id="UJe-G6-cXV"/>
+                                        <constraint firstItem="N1u-55-Psg" firstAttribute="centerY" secondItem="0ot-ZV-Hf8" secondAttribute="centerY" id="ber-Wx-0vY"/>
+                                        <constraint firstItem="N1u-55-Psg" firstAttribute="leading" secondItem="Z0y-ZX-6OM" secondAttribute="trailing" constant="10" id="nWO-nr-hIO"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PortTableViewCell" rowHeight="44" id="w7N-iH-7r9">
+                                <rect key="frame" x="0.0" y="93.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w7N-iH-7r9" id="rU7-G6-95g">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UDP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qga-If-1PU">
+                                            <rect key="frame" x="16" y="11" width="100" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="0T5-Dl-I5a"/>
+                                                <constraint firstAttribute="width" constant="100" id="gwf-ig-0bK"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2000:3000, 4000:5000" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tXN-Al-2DJ">
+                                            <rect key="frame" x="138" y="0.0" width="260" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="O6V-fs-Rq7"/>
+                                                <constraint firstAttribute="width" constant="260" id="bvW-oU-yIk"/>
+                                            </constraints>
+                                            <color key="textColor" name="ivpnLabelPrimary"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" textContentType="url"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="7IF-sv-8mt" id="beD-gb-wrx"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qga-If-1PU" firstAttribute="centerY" secondItem="rU7-G6-95g" secondAttribute="centerY" id="D6P-Me-XeR"/>
+                                        <constraint firstAttribute="trailing" secondItem="tXN-Al-2DJ" secondAttribute="trailing" constant="16" id="IRe-44-fsU"/>
+                                        <constraint firstItem="tXN-Al-2DJ" firstAttribute="centerY" secondItem="rU7-G6-95g" secondAttribute="centerY" id="IVu-4A-gUn"/>
+                                        <constraint firstItem="qga-If-1PU" firstAttribute="leading" secondItem="rU7-G6-95g" secondAttribute="leading" constant="16" id="c0s-ER-kqm"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -1982,7 +2055,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pcr-7g-EZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4532" y="728"/>
+            <point key="canvasLocation" x="4531.884057971015" y="727.90178571428567"/>
         </scene>
         <!--Terms of Service-->
         <scene sceneID="AA4-dQ-r5D">
