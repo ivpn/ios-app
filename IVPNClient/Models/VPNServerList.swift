@@ -307,6 +307,10 @@ class VPNServerList {
         servers = VPNServerList.sort(servers)
     }
     
+    func getPortRanges(tunnelType: String) -> [PortRange] {
+        return portRanges.filter { $0.tunnelType == tunnelType }
+    }
+    
     static func sort(_ servers: [VPNServer]) -> [VPNServer] {
         let sort = ServersSort.init(rawValue: UserDefaults.shared.serversSort)
         var servers = servers

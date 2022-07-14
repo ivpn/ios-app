@@ -29,7 +29,7 @@ class PortViewController: UITableViewController {
     
     var viewModel = PortViewModel()
     var collection = Application.shared.settings.connectionProtocol.supportedProtocols(protocols: Application.shared.serverList.ports)
-    var portRanges = Application.shared.serverList.portRanges
+    var portRanges = Application.shared.serverList.getPortRanges(tunnelType: Application.shared.settings.connectionProtocol.formatTitle())
     var selectedPort = Application.shared.settings.connectionProtocol
     
     // MARK: - View Lifecycle -
@@ -53,16 +53,28 @@ class PortViewController: UITableViewController {
 extension PortViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 {
+            return portRanges.count
+        }
+        
         return collection.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 1 {
+            let range = portRanges[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PortInputTableViewCell", for: indexPath) as! PortInputTableViewCell
+            cell.setup(range: range)
+            return cell
+        }
+        
+        let port = collection[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "PortTableViewCell", for: indexPath) as! PortTableViewCell
-        cell.setup(port: collection[indexPath.row], selectedPort: selectedPort)
+        cell.setup(port: port, selectedPort: selectedPort)
         return cell
     }
     

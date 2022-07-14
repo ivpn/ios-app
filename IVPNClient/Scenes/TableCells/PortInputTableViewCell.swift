@@ -27,5 +27,11 @@ class PortInputTableViewCell: UITableViewCell {
     
     @IBOutlet weak var protocolLabel: UILabel!
     @IBOutlet weak var portInput: UITextInput!
+    
+    // MARK: - Methods -
+    
+    func setup(range: PortRange) {
+        protocolLabel.text = range.protocolType
+    }
 
 }
