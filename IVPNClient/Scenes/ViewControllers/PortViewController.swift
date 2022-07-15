@@ -45,6 +45,16 @@ class PortViewController: UITableViewController {
         title = "Select Port"
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
     }
+    
+    @objc func cancelTapped() {
+        // Reload TableView
+        view.endEditing(true)
+    }
+    
+    @objc func saveTapped() {
+        // Save custom port
+        view.endEditing(true)
+    }
 
 }
 
@@ -117,6 +127,33 @@ extension PortViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
+    }
+    
+}
+
+// MARK: - UITextFieldDelegate -
+
+extension PortViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        // Save custom port
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveTapped))
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        navigationItem.hidesBackButton = false
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
+        DispatchQueue.async {
+            // Reload TableView
+        }
     }
     
 }
