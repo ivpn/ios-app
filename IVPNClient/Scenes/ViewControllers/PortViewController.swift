@@ -31,6 +31,8 @@ class PortViewController: UITableViewController {
     var collection = Application.shared.settings.connectionProtocol.supportedProtocols(protocols: Application.shared.serverList.ports)
     var portRanges = Application.shared.serverList.getPortRanges(tunnelType: Application.shared.settings.connectionProtocol.formatTitle())
     var selectedPort = Application.shared.settings.connectionProtocol
+    var selectedPortRange: PortRange?
+    var selectedTextField: UITextField?
     
     // MARK: - View Lifecycle -
     
@@ -46,13 +48,16 @@ class PortViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
     }
     
-    @objc func cancelTapped() {
+    @objc func cancel() {
         // Reload TableView
         view.endEditing(true)
     }
     
-    @objc func saveTapped() {
-        // Save custom port
+    @objc func save() {
+        if let text = selectedTextField?.text {
+            selectedPortRange?.save(port: Int(text) ?? 0)
+        }
+        
         view.endEditing(true)
     }
 
@@ -79,6 +84,7 @@ extension PortViewController {
             let range = portRanges[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "PortInputTableViewCell", for: indexPath) as! PortInputTableViewCell
             cell.setup(range: range)
+            cell.portInput.delegate = self
             return cell
         }
         
@@ -137,20 +143,35 @@ extension PortViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        // Save custom port
-        
+        save()
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(save))
+        
+        var superview = (textField as AnyObject).superview
+        while let view = superview, !(view is UITableViewCell) {
+            superview = view?.superview
+        }
+        guard let cell = superview as? UITableViewCell else {
+            return
+        }
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        selectedPortRange = portRanges[indexPath.row]
+        selectedTextField = textField
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
+        selectedPortRange = nil
+        selectedTextField = nil
         DispatchQueue.async {
             // Reload TableView
         }
