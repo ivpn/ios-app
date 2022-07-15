@@ -30,6 +30,22 @@ struct PortRange {
     var tunnelType: String
     var protocolType: String
     var ranges: [String]
+    
+    var storeKey: String {
+        if tunnelType == "OpenVPN" {
+            if protocolType == "TCP" {
+                return UserDefaults.Key.openvpnTcpCustomPort
+            } else {
+                return UserDefaults.Key.openvpnUdpCustomPort
+            }
+        }
+        
+        return UserDefaults.Key.wireguardCustomPort
+    }
+    
+    func save(port: Int) {
+        UserDefaults.standard.set(port, forKey: storeKey)
+    }
 }
 
 class VPNServerList {

@@ -26,12 +26,13 @@ import UIKit
 class PortInputTableViewCell: UITableViewCell {
     
     @IBOutlet weak var protocolLabel: UILabel!
-    @IBOutlet weak var portInput: UITextInput!
+    @IBOutlet weak var portInput: UITextField!
     
     // MARK: - Methods -
     
     func setup(range: PortRange) {
         protocolLabel.text = range.protocolType
+        portInput.placeholder = range.ranges.joined(separator: ", ")
     }
 
 }

@@ -82,6 +82,9 @@ extension UserDefaults {
         static let showIPv4Servers = "showIPv4Servers"
         static let killSwitch = "killSwitch"
         static let selectHost = "selectHost"
+        static let wireguardCustomPort = "wireguardCustomPort"
+        static let openvpnUdpCustomPort = "openvpnUdpCustomPort"
+        static let openvpnTcpCustomPort = "openvpnTcpCustomPort"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -251,6 +254,9 @@ extension UserDefaults {
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
         standard.removeObject(forKey: Key.selectedProtocol)
+        standard.removeObject(forKey: Key.wireguardCustomPort)
+        standard.removeObject(forKey: Key.openvpnUdpCustomPort)
+        standard.removeObject(forKey: Key.openvpnTcpCustomPort)
         standard.synchronize()
     }
     
