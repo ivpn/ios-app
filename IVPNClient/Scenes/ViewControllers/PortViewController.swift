@@ -28,11 +28,16 @@ class PortViewController: UITableViewController {
     // MARK: - Properties -
     
     var viewModel = PortViewModel()
-    var collection = Application.shared.settings.connectionProtocol.supportedProtocols(protocols: Application.shared.serverList.ports)
     var portRanges = Application.shared.serverList.getPortRanges(tunnelType: Application.shared.settings.connectionProtocol.formatTitle())
     var selectedPort = Application.shared.settings.connectionProtocol
     var selectedPortRange: PortRange?
     var selectedTextField: UITextField?
+    
+    var collection: [ConnectionSettings] {
+        let ports = Application.shared.settings.connectionProtocol.supportedProtocols(protocols: Application.shared.serverList.ports)
+        let customPorts = PortRange.getPorts(from: portRanges, tunnelType: selectedPort.formatTitle())
+        return ports + customPorts
+    }
     
     // MARK: - View Lifecycle -
     
@@ -49,16 +54,24 @@ class PortViewController: UITableViewController {
     }
     
     @objc func cancel() {
-        // Reload TableView
+        tableView.reloadData()
         view.endEditing(true)
     }
     
     @objc func save() {
         if let text = selectedTextField?.text {
-            selectedPortRange?.save(port: Int(text) ?? 0)
+            print("save() text", text)
+            let port = Int(text) ?? 0
+            selectedPortRange?.save(port: port)
+            
+            if port == 0, let firstPort = collection.first {
+                selectedPort = firstPort
+                Application.shared.settings.connectionProtocol = selectedPort
+            }
         }
         
         view.endEditing(true)
+        tableView.reloadData()
     }
 
 }
@@ -113,8 +126,8 @@ extension PortViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPort = collection[indexPath.row]
-        tableView.reloadData()
         Application.shared.settings.connectionProtocol = selectedPort
+        tableView.reloadData()
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
         navigationController?.popViewController(animated: true)
     }
@@ -170,10 +183,10 @@ extension PortViewController: UITextFieldDelegate {
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
-        selectedPortRange = nil
-        selectedTextField = nil
         DispatchQueue.async {
-            // Reload TableView
+            self.selectedPortRange = nil
+            self.selectedTextField = nil
+            self.tableView.reloadData()
         }
     }
     

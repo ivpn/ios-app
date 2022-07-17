@@ -41,6 +41,41 @@ struct PortRange {
     }
     
     func save(port: Int) {
-        UserDefaults.standard.set(port, forKey: storeKey)
+        if port > 0 {
+            UserDefaults.standard.set(port, forKey: storeKey)
+        } else {
+            UserDefaults.standard.removeObject(forKey: storeKey)
+        }
+        UserDefaults.standard.synchronize()
     }
+    
+    func getSavedPort() -> Int? {
+        let port = UserDefaults.standard.integer(forKey: storeKey)
+        return port > 0 ? port : nil
+    }
+    
+    static func getPorts(from portRanges: [PortRange], tunnelType: String) -> [ConnectionSettings] {
+        var ports = [ConnectionSettings]()
+        
+        if tunnelType == "OpenVPN" {
+            let udpPort = UserDefaults.standard.integer(forKey: UserDefaults.Key.openvpnUdpCustomPort)
+            let tcpPort = UserDefaults.standard.integer(forKey: UserDefaults.Key.openvpnTcpCustomPort)
+            if udpPort > 0 {
+                ports.append(ConnectionSettings.openvpn(.udp, udpPort))
+            }
+            if tcpPort > 0 {
+                ports.append(ConnectionSettings.openvpn(.tcp, tcpPort))
+            }
+        }
+        
+        if tunnelType == "WireGuard" {
+            let port = UserDefaults.standard.integer(forKey: UserDefaults.Key.wireguardCustomPort)
+            if port > 0 {
+                ports.append(ConnectionSettings.wireguard(.udp, port))
+            }
+        }
+        
+        return ports
+    }
+    
 }
