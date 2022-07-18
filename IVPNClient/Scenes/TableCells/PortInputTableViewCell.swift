@@ -32,10 +32,12 @@ class PortInputTableViewCell: UITableViewCell {
     
     func setup(range: PortRange) {
         protocolLabel.text = range.protocolType
-        portInput.placeholder = range.ranges.joined(separator: ", ")
+        portInput.placeholder = range.portRangesText
         
         if let savedPort = range.getSavedPort() {
             portInput.text = String(describing: savedPort)
+        } else {
+            portInput.text = nil
         }
     }
 

@@ -40,13 +40,36 @@ struct PortRange {
         return UserDefaults.Key.wireguardCustomPort
     }
     
-    func save(port: Int) {
+    var portRangesText: String {
+        return ranges.joined(separator: ", ")
+    }
+    
+    func save(port: Int) -> String? {
         if port > 0 {
-            UserDefaults.standard.set(port, forKey: storeKey)
+            if isValid(port: port) {
+                UserDefaults.standard.set(port, forKey: storeKey)
+            } else {
+                return "Enter a port number within the range: \(portRangesText)"
+            }
         } else {
             UserDefaults.standard.removeObject(forKey: storeKey)
         }
         UserDefaults.standard.synchronize()
+        
+        return nil
+    }
+    
+    func isValid(port: Int) -> Bool {
+        for range in ranges {
+            if let rangeStart = Int(range.split(separator: ":")[0]), let rangeEnd = Int(range.split(separator: ":")[1]) {
+                let portRange = rangeStart...rangeEnd
+                if portRange.contains(port) {
+                    return true
+                }
+            }
+        }
+        
+        return false
     }
     
     func getSavedPort() -> Int? {

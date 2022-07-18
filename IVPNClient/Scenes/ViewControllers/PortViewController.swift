@@ -54,15 +54,16 @@ class PortViewController: UITableViewController {
     }
     
     @objc func cancel() {
-        tableView.reloadData()
         view.endEditing(true)
+        tableView.reloadData()
     }
     
     @objc func save() {
         if let text = selectedTextField?.text {
-            print("save() text", text)
             let port = Int(text) ?? 0
-            selectedPortRange?.save(port: port)
+            if let error = selectedPortRange?.save(port: port) {
+                showAlert(title: "Error", message: error)
+            }
             
             if port == 0, let firstPort = collection.first {
                 selectedPort = firstPort
