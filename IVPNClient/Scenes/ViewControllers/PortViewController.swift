@@ -30,12 +30,19 @@ class PortViewController: UITableViewController {
     var viewModel = PortViewModel()
     var portRanges = Application.shared.serverList.getPortRanges(tunnelType: Application.shared.settings.connectionProtocol.formatTitle())
     var selectedPort = Application.shared.settings.connectionProtocol
-    var selectedPortRange: PortRange?
-    var selectedTextField: UITextField?
+    var selectedPortIndex = 0
+    var updatedPortRange: PortRange?
+    var updatedTextField: UITextField?
+    
+    var ports: [ConnectionSettings] {
+        return Application.shared.settings.connectionProtocol.supportedProtocols(protocols: Application.shared.serverList.ports)
+    }
+    
+    var customPorts: [ConnectionSettings] {
+        return PortRange.getPorts(from: portRanges, tunnelType: selectedPort.formatTitle())
+    }
     
     var collection: [ConnectionSettings] {
-        let ports = Application.shared.settings.connectionProtocol.supportedProtocols(protocols: Application.shared.serverList.ports)
-        let customPorts = PortRange.getPorts(from: portRanges, tunnelType: selectedPort.formatTitle())
         return ports + customPorts
     }
     
@@ -59,18 +66,20 @@ class PortViewController: UITableViewController {
     }
     
     @objc func save() {
-        if let text = selectedTextField?.text {
+        if let text = updatedTextField?.text {
             let port = Int(text) ?? 0
-            if let error = selectedPortRange?.save(port: port) {
+            if let error = updatedPortRange?.save(port: port) {
                 showAlert(title: "Error", message: error)
             }
             
             if port == 0, let firstPort = collection.first {
                 selectedPort = firstPort
-                Application.shared.settings.connectionProtocol = selectedPort
+            } else {
+                selectedPort = collection[selectedPortIndex]
             }
         }
         
+        Application.shared.settings.connectionProtocol = selectedPort
         view.endEditing(true)
         tableView.reloadData()
     }
@@ -104,7 +113,12 @@ extension PortViewController {
         
         let port = collection[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "PortTableViewCell", for: indexPath) as! PortTableViewCell
-        cell.setup(port: port, selectedPort: selectedPort)
+        cell.setup(port: port, selectedPort: selectedPort, ports: ports)
+        
+        if port == selectedPort {
+            selectedPortIndex = indexPath.row
+        }
+        
         return cell
     }
     
@@ -176,8 +190,8 @@ extension PortViewController: UITextFieldDelegate {
             return
         }
         
-        selectedPortRange = portRanges[indexPath.row]
-        selectedTextField = textField
+        updatedPortRange = portRanges[indexPath.row]
+        updatedTextField = textField
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -185,8 +199,8 @@ extension PortViewController: UITextFieldDelegate {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
         DispatchQueue.async {
-            self.selectedPortRange = nil
-            self.selectedTextField = nil
+            self.updatedPortRange = nil
+            self.updatedTextField = nil
             self.tableView.reloadData()
         }
     }

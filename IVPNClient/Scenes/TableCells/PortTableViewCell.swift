@@ -30,10 +30,20 @@ class PortTableViewCell: UITableViewCell {
     
     // MARK: - Methods -
     
-    func setup(port: ConnectionSettings, selectedPort: ConnectionSettings, isCustom: Bool = false) {
+    func setup(port: ConnectionSettings, selectedPort: ConnectionSettings, ports: [ConnectionSettings]) {
         protocolLabel.text = port.formatProtocol()
-        customLabel.isHidden = !isCustom
+        customLabel.isHidden = !isCustom(port: port, ports: ports)
         accessoryType = port == selectedPort ? .checkmark : .none
+    }
+    
+    private func isCustom(port: ConnectionSettings, ports: [ConnectionSettings]) -> Bool {
+        for portObj in ports {
+            if portObj.port() == port.port() {
+                return false
+            }
+        }
+        
+        return true
     }
 
 }
