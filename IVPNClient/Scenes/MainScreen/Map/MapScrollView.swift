@@ -332,9 +332,11 @@ class MapScrollView: UIScrollView {
                 if UserDefaults.shared.isMultiHop {
                     Application.shared.settings.selectedExitServer = server
                     Application.shared.settings.selectedExitServer.fastest = false
+                    Application.shared.settings.selectedExitHost = nil
                 } else {
                     Application.shared.settings.selectedServer = server
                     Application.shared.settings.selectedServer.fastest = false
+                    Application.shared.settings.selectedHost = nil
                 }
                 
                 Application.shared.connectionManager.needsToUpdateSelectedServer()
