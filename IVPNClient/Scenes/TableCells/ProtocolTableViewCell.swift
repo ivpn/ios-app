@@ -29,8 +29,18 @@ class ProtocolTableViewCell: UITableViewCell {
     @IBOutlet weak var protocolSettingsLabel: UILabel!
     
     private var protocolLabelText: String {
+        let tunnelType = Application.shared.settings.connectionProtocol.tunnelType()
+        
         if !UIDevice.screenHeightLargerThan(device: .iPhones55s5cSE) {
+            if tunnelType == .wireguard {
+                return "Port"
+            }
+            
             return "Protocol & port"
+        }
+        
+        if tunnelType == .wireguard {
+            return "Preferred port"
         }
         
         return "Preferred protocol & port"
