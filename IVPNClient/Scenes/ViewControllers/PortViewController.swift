@@ -127,7 +127,7 @@ extension PortViewController {
         case 0:
             return "Select port"
         case 1:
-            return "Custom port"
+            return "Add custom port"
         default:
             return ""
         }

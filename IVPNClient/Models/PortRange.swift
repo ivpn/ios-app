@@ -41,7 +41,7 @@ struct PortRange {
     }
     
     var portRangesText: String {
-        return ranges.joined(separator: ", ")
+        return ranges.joined(separator: ", ").replacingOccurrences(of: ":", with: "-")
     }
     
     func save(port: Int) -> String? {
