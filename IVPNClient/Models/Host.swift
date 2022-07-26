@@ -46,6 +46,15 @@ struct Host: Codable {
         return ""
     }
     
+    func hostNamePrefix() -> String {
+        let hostNameParts = hostName.components(separatedBy: ".")
+        if let location = hostNameParts.first {
+            return location
+        }
+        
+        return ""
+    }
+    
     static func save(_ host: Host?, key: String) {
         if let host = host {
             if let encoded = try? JSONEncoder().encode(host) {

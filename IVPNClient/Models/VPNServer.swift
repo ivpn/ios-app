@@ -127,6 +127,10 @@ class VPNServer {
         return hosts.first { $0.hostName == hostName }
     }
     
+    func getHost(fromPrefix: String) -> Host? {
+        return hosts.first { $0.hostName.hasPrefix(fromPrefix) }
+    }
+    
     static func == (lhs: VPNServer, rhs: VPNServer) -> Bool {
         return lhs.city == rhs.city && lhs.countryCode == rhs.countryCode
     }

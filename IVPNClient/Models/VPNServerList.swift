@@ -197,6 +197,19 @@ class VPNServerList {
         return getServers().first { $0.city == city }
     }
     
+    func getHost(_ host: Host?) -> Host? {
+        guard let host = host else {
+            return nil
+        }
+        
+        let location = host.hostNamePrefix()
+        if let server = getAllHosts().first(where: { $0.gateway.hasPrefix(location) }) {
+            return server.getHost(fromPrefix: location)
+        }
+        
+        return nil
+    }
+    
     func getFastestServer() -> VPNServer? {
         let servers = filteredFastestServers
         if noPing {
