@@ -126,8 +126,8 @@ class ProtocolViewController: UITableViewController {
     func reloadTable(connectionProtocol: ConnectionSettings, indexPath: IndexPath) {
         Application.shared.settings.connectionProtocol = connectionProtocol
         Application.shared.serverList = VPNServerList()
-        Application.shared.settings.selectedHost = nil
-        Application.shared.settings.selectedExitHost = nil
+        Application.shared.settings.selectedHost = Application.shared.serverList.getHost(Application.shared.settings.selectedHost)
+        Application.shared.settings.selectedExitHost = Application.shared.serverList.getHost(Application.shared.settings.selectedExitHost)
         updateCollection(connectionProtocol: connectionProtocol)
         tableView.reloadData()
         UserDefaults.shared.set(0, forKey: "LastPingTimestamp")

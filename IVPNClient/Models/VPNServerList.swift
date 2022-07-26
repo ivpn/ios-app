@@ -197,14 +197,17 @@ class VPNServerList {
         return getServers().first { $0.city == city }
     }
     
+    func getServer(byPrefix prefix: String) -> VPNServer? {
+        return getAllHosts().first { $0.gateway.hasPrefix(prefix) }
+    }
+    
     func getHost(_ host: Host?) -> Host? {
         guard let host = host else {
             return nil
         }
         
-        let location = host.hostNamePrefix()
-        if let server = getAllHosts().first(where: { $0.gateway.hasPrefix(location) }) {
-            return server.getHost(fromPrefix: location)
+        if let serverHost = getServer(byPrefix: host.hostNamePrefix()), let server = getServer(byCity: serverHost.city) {
+            return server.getHost(fromPrefix: host.hostNamePrefix())
         }
         
         return nil
