@@ -181,7 +181,7 @@ extension ControlPanelViewController {
     
     override func createSessionAuthenticationError() {
         logOut(deleteSession: false)
-        present(NavigationManager.getLoginViewController(), animated: true)
+        showErrorAlert(title: "Error", message: "There was an error creating a new session")
     }
     
     override func createSessionFailure(error: Any?) {
