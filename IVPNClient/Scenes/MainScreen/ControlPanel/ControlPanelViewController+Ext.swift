@@ -158,10 +158,6 @@ extension ControlPanelViewController {
         connect()
     }
     
-    override func createSessionServiceNotActive() {
-        connect()
-    }
-    
     override func createSessionTooManySessions(error: Any?) {
         if let error = error as? ErrorResultSessionNew {
             if let data = error.data {
