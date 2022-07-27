@@ -223,10 +223,6 @@ extension ControlPanelViewController {
         hud.dismiss(afterDelay: 2)
     }
     
-    override func deleteSessionSkip() {
-        present(NavigationManager.getLoginViewController(), animated: true)
-    }
-    
     func showCreateSessionAlert(message: String) {
         showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.controlPanelView.connectSwitch) { index in
             switch index {
