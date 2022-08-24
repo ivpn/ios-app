@@ -155,7 +155,7 @@ class APIClient: NSObject {
         // TODO: Remove when fixed in future iOS versions
         // https://github.com/ivpn/ios-app/issues/276
         if #available(iOS 16.0, *), let addressType = request.addressType, addressType == .IPv6 {
-            urlComponents.host = hostName.replacingOccurrences(of: ":", with: "%3A")
+            urlComponents.host = "[\(hostName)]"
         }
         
         if request.method == .post {
