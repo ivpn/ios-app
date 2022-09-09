@@ -78,6 +78,14 @@ class VPNServer {
         return false
     }
     
+    var isHost: Bool {
+        return country == "" && gateway != ""
+    }
+    
+    var hostGateway: String {
+        return gateway.components(separatedBy: CharacterSet.decimalDigits).joined()
+    }
+    
     private (set) var gateway: String
     private (set) var countryCode: String
     private (set) var country: String
@@ -86,10 +94,11 @@ class VPNServer {
     private (set) var longitude: Double
     private (set) var ipAddresses: [String]
     private (set) var hosts: [Host]
+    private (set) var load: Double?
     
     // MARK: - Initialize -
     
-    init(gateway: String, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false) {
+    init(gateway: String, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0) {
         self.gateway = gateway
         self.countryCode = countryCode
         self.country = country
@@ -99,6 +108,7 @@ class VPNServer {
         self.ipAddresses = ipAddresses
         self.hosts = hosts
         self.fastest = fastest
+        self.load = load
     }
     
     // MARK: - Methods -
@@ -111,6 +121,14 @@ class VPNServer {
     
     func distance(to location: CLLocation) -> CLLocationDistance {
         return location.distance(from: self.location)
+    }
+    
+    func getHost(hostName: String) -> Host? {
+        return hosts.first { $0.hostName == hostName }
+    }
+    
+    func getHost(fromPrefix: String) -> Host? {
+        return hosts.first { $0.hostName.hasPrefix(fromPrefix) }
     }
     
     static func == (lhs: VPNServer, rhs: VPNServer) -> Bool {

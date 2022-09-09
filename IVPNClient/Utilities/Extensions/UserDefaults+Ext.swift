@@ -72,6 +72,8 @@ extension UserDefaults {
         static let selectedExitServerCity = "SelectedExitServerCity"
         static let selectedExitServerGateway = "SelectedExitServerGateway"
         static let selectedExitServerRandom = "SelectedExitServerRandom"
+        static let selectedHost = "SelectedHost"
+        static let selectedExitHost = "SelectedExitHost"
         static let fastestServerPreferred = "FastestServerPreferred"
         static let fastestServerConfigured = "FastestServerConfiguredForOpenVPN"
         static let firstInstall = "FirstInstall"
@@ -80,6 +82,7 @@ extension UserDefaults {
         static let isIPv6 = "isIPv6"
         static let showIPv4Servers = "showIPv4Servers"
         static let killSwitch = "killSwitch"
+        static let selectHost = "selectHost"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -206,6 +209,10 @@ extension UserDefaults {
         return bool(forKey: Key.killSwitch)
     }
     
+    @objc dynamic var selectHost: Bool {
+        return bool(forKey: Key.selectHost)
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
@@ -237,6 +244,10 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.notAskToReconnect)
         shared.removeObject(forKey: Key.isIPv6)
         shared.removeObject(forKey: Key.killSwitch)
+        shared.removeObject(forKey: Key.selectHost)
+        standard.removeObject(forKey: Key.serviceStatus)
+        standard.removeObject(forKey: Key.selectedHost)
+        standard.removeObject(forKey: Key.selectedExitHost)
         standard.removeObject(forKey: Key.selectedServerFastest)
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)

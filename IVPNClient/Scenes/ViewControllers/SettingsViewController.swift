@@ -46,6 +46,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
+    @IBOutlet weak var selectHostSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -149,6 +150,16 @@ class SettingsViewController: UITableViewController {
         UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.notAskToReconnect)
     }
     
+    @IBAction func toggleSelectHost(_ sender: UISwitch) {
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.selectHost)
+        
+        if !sender.isOn {
+            Application.shared.settings.selectedHost = nil
+            Application.shared.settings.selectedExitHost = nil
+            updateSelectedServer()
+        }
+    }
+    
     @IBAction func extendSubscription(_ sender: Any) {
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
             return
@@ -210,6 +221,7 @@ class SettingsViewController: UITableViewController {
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
+        selectHostSwitch.setOn(UserDefaults.shared.selectHost, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
         updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
@@ -305,8 +317,8 @@ class SettingsViewController: UITableViewController {
     // MARK: - Private methods -
     
     private func updateSelectedServer() {
-        let serverViewModel = VPNServerViewModel(server: Application.shared.settings.selectedServer)
-        let exitServerViewModel = VPNServerViewModel(server: Application.shared.settings.selectedExitServer)
+        let serverViewModel = VPNServerViewModel(server: Application.shared.settings.selectedServer, selectedHost: Application.shared.settings.selectedHost)
+        let exitServerViewModel = VPNServerViewModel(server: Application.shared.settings.selectedExitServer, selectedHost: Application.shared.settings.selectedExitHost)
         selectedServerName.text = serverViewModel.formattedServerNameForSettings
         selectedServerFlag.image = serverViewModel.imageForCountryCodeForSettings
         selectedExitServerName.text = exitServerViewModel.formattedServerNameForSettings
@@ -410,8 +422,8 @@ class SettingsViewController: UITableViewController {
 extension SettingsViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 0 { return 60 }
-        if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
+        if indexPath.section == 0 && indexPath.row == 1 { return 60 }
+        if indexPath.section == 0 && indexPath.row == 3 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
         if indexPath.section == 3 && indexPath.row == 7 { return 60 }
         if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }

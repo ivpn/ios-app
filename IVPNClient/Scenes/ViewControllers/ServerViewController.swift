@@ -45,7 +45,7 @@ class ServerViewController: UITableViewController {
         if isSearchActive {
             list = filteredCollection
         } else {
-            list = Application.shared.serverList.getServers()
+            list = Application.shared.serverList.getAllHosts()
         }
         
         list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
@@ -56,6 +56,8 @@ class ServerViewController: UITableViewController {
         
         return list
     }
+    
+    private var expandedGateways: [String] = []
     
     private var isSearchActive: Bool {
         return !searchBar.text!.isEmpty
@@ -75,15 +77,32 @@ class ServerViewController: UITableViewController {
         let actions = actionsRawValue.map { $0.camelCaseToCapitalized() ?? "" }
         let selected = UserDefaults.shared.serversSort.camelCaseToCapitalized() ?? ""
         
-        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Sort by", actions: actions, sourceView: tableView) { index in
+        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Sort by", actions: actions, sourceView: tableView) { [self] index in
             guard index > -1 else { return }
             
             let sort = ServersSort.allCases[index]
             UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
             Application.shared.serverList.sortServers()
-            self.filteredCollection = VPNServerList.sort(self.filteredCollection)
-            self.tableView.reloadData()
+            filteredCollection = VPNServerList.sort(filteredCollection)
+            filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection)
+            tableView.reloadData()
         }
+    }
+    
+    @IBAction func expandGateway(_ sender: Any) {
+        var superview = (sender as AnyObject).superview
+        while let view = superview, !(view is UITableViewCell) {
+            superview = view?.superview
+        }
+        guard let cell = superview as? UITableViewCell else {
+            return
+        }
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        toggleExpandedGateways(collection[indexPath.row])
+        tableView.reloadData()
     }
     
     // MARK: - View Lifecycle -
@@ -160,6 +179,18 @@ class ServerViewController: UITableViewController {
         refreshControl = nil
     }
     
+    private func expandHost(_ server: VPNServer) -> Bool {
+        return expandedGateways.contains(server.hostGateway)
+    }
+    
+    private func toggleExpandedGateways(_ server: VPNServer) {
+        if expandedGateways.contains(server.hostGateway) {
+            expandedGateways = expandedGateways.filter { $0 != server.gateway }
+        } else {
+            expandedGateways.append(server.gateway)
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource -
@@ -171,11 +202,13 @@ extension ServerViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let server = collection[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServerTableViewCell", for: indexPath) as! ServerTableViewCell
         cell.isMultiHop = UserDefaults.shared.isMultiHop
         cell.indexPath = indexPath
-        cell.viewModel = VPNServerViewModel(server: collection[indexPath.row])
+        cell.viewModel = VPNServerViewModel(server: server)
         cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        cell.expandedGateways = expandedGateways
         
         return cell
     }
@@ -187,10 +220,33 @@ extension ServerViewController {
 extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.row < collection.count else { return }
+        guard indexPath.row < collection.count else {
+            return
+        }
         
+        var selectedHost: Host?
         var server = collection[indexPath.row]
+        var differentSelectedServer = false
+        var differentSelectedHost = false
         server.random = false
+        
+        if server.isHost {
+            let hostName = server.gateway
+            if let serverByCity = Application.shared.serverList.getServer(byCity: server.city) {
+                server = serverByCity
+                selectedHost = server.getHost(hostName: hostName)
+            }
+            
+            if let selectedHost = Application.shared.settings.selectedHost {
+                differentSelectedHost = hostName != selectedHost.hostName
+            }
+            
+            if isExitServer {
+                if let selectedExitHost = Application.shared.settings.selectedExitHost {
+                    differentSelectedHost = hostName != selectedExitHost.hostName
+                }
+            }
+        }
         
         if (!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0) {
             server = Application.shared.serverList.getRandomServer(isExitServer: isExitServer)
@@ -199,11 +255,11 @@ extension ServerViewController {
         }
         
         var secondServer = Application.shared.settings.selectedExitServer
-        var serverDifferentToSelectedServer = server !== Application.shared.settings.selectedServer
+        differentSelectedServer = server !== Application.shared.settings.selectedServer
         
         if isExitServer {
             secondServer = Application.shared.settings.selectedServer
-            serverDifferentToSelectedServer = server !== Application.shared.settings.selectedExitServer
+            differentSelectedServer = server !== Application.shared.settings.selectedExitServer
         }
         
         guard Application.shared.serverList.validateServer(firstServer: server, secondServer: secondServer) == true else {
@@ -214,17 +270,20 @@ extension ServerViewController {
         
         if isExitServer {
             Application.shared.settings.selectedExitServer = server
+            Application.shared.settings.selectedExitHost = selectedHost
         } else {
             if UserDefaults.shared.isMultiHop || indexPath.row > 0 || server.random {
                 Application.shared.settings.selectedServer = server
+                Application.shared.settings.selectedHost = selectedHost
                 Application.shared.settings.selectedServer.fastest = false
             } else {
                 if let fastestServer = Application.shared.serverList.getFastestServer() {
                     if fastestServer == Application.shared.settings.selectedServer {
-                        serverDifferentToSelectedServer = false
+                        differentSelectedServer = false
                     } else {
-                        serverDifferentToSelectedServer = true
+                        differentSelectedServer = true
                         Application.shared.settings.selectedServer = fastestServer
+                        Application.shared.settings.selectedHost = selectedHost
                     }
                 }
                 Application.shared.settings.selectedServer.fastest = true
@@ -240,7 +299,7 @@ extension ServerViewController {
         NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
         NotificationCenter.default.post(name: Notification.Name.ShowConnectToServerPopup, object: nil)
         
-        if serverDifferentToSelectedServer || Application.shared.serverList.noPing {
+        if differentSelectedServer || differentSelectedHost || Application.shared.serverList.noPing {
             if Application.shared.settings.selectedServer.fastest && Application.shared.serverList.noPing {
                 serverDelegate?.reconnectToFastestServer()
             } else {
@@ -262,6 +321,11 @@ extension ServerViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let server = collection[indexPath.row]
+        if server.isHost && !expandHost(server) {
+            return 0
+        }
+        
         return 64
     }
     
@@ -273,15 +337,13 @@ extension ServerViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let collection = Application.shared.serverList.getServers()
-        
         filteredCollection.removeAll(keepingCapacity: false)
         filteredCollection = collection.filter { (server: VPNServer) -> Bool in
             let location = "\(server.city) \(server.countryCode)".lowercased()
             return location.contains(searchBar.text!.lowercased())
         }
-        
         filteredCollection = VPNServerList.sort(filteredCollection)
-        
+        filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection)
         tableView.reloadData()
     }
     
