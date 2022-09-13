@@ -71,8 +71,6 @@ struct Config {
         ConnectionSettings.openvpn(.udp, 2050),
         ConnectionSettings.openvpn(.udp, 53),
         ConnectionSettings.openvpn(.udp, 1194),
-        ConnectionSettings.openvpn(.udp, 80),
-        ConnectionSettings.openvpn(.udp, 443),
         ConnectionSettings.openvpn(.tcp, 443),
         ConnectionSettings.openvpn(.tcp, 1443),
         ConnectionSettings.openvpn(.tcp, 80),
@@ -84,8 +82,6 @@ struct Config {
         ConnectionSettings.wireguard(.udp, 41893),
         ConnectionSettings.wireguard(.udp, 48574),
         ConnectionSettings.wireguard(.udp, 58237),
-        ConnectionSettings.wireguard(.udp, 80),
-        ConnectionSettings.wireguard(.udp, 443),
     ]
     
     static let supportedProtocolTypes = [
