@@ -348,8 +348,10 @@ class ConnectToServerPopupView: UIView {
         
         if UserDefaults.shared.isMultiHop {
             Application.shared.settings.selectedExitServer = vpnServer
+            Application.shared.settings.selectedExitHost = nil
         } else {
             Application.shared.settings.selectedServer = vpnServer
+            Application.shared.settings.selectedHost = nil
         }
         
         Application.shared.connectionManager.needsToUpdateSelectedServer()

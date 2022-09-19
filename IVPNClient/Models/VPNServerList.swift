@@ -166,6 +166,25 @@ class VPNServerList {
         return servers
     }
     
+    func getAllHosts(_ servers: [VPNServer]? = nil) -> [VPNServer] {
+        var allHosts: [VPNServer] = []
+        let allServers = servers ?? getServers()
+        
+        for server in allServers {
+            if server.isHost {
+                continue
+            }
+            
+            allHosts.append(server)
+            
+            for host in server.hosts {
+                allHosts.append(VPNServer(gateway: host.hostName, countryCode: server.countryCode, country: "", city: server.city, load: host.load))
+            }
+        }
+        
+        return allHosts
+    }
+    
     func getServer(byIpAddress ipAddress: String) -> VPNServer? {
         return getServers().first { $0.ipAddresses.first { $0 == ipAddress } != nil }
     }
@@ -176,6 +195,22 @@ class VPNServerList {
     
     func getServer(byCity city: String) -> VPNServer? {
         return getServers().first { $0.city == city }
+    }
+    
+    func getServer(byPrefix prefix: String) -> VPNServer? {
+        return getAllHosts().first { $0.gateway.hasPrefix(prefix) }
+    }
+    
+    func getHost(_ host: Host?) -> Host? {
+        guard let host = host else {
+            return nil
+        }
+        
+        if let serverHost = getServer(byPrefix: host.hostNamePrefix()), let server = getServer(byCity: serverHost.city) {
+            return server.getHost(fromPrefix: host.hostNamePrefix())
+        }
+        
+        return nil
     }
     
     func getFastestServer() -> VPNServer? {
@@ -274,9 +309,11 @@ class VPNServerList {
                     
                     var newHost = Host(
                         host: host["host"] as? String ?? "",
+                        hostName: host["hostname"] as? String ?? "",
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
-                        multihopPort: host["multihop_port"] as? Int ?? 0
+                        multihopPort: host["multihop_port"] as? Int ?? 0,
+                        load: host["load"] as? Double ?? 0
                     )
                     
                     if let ipv6 = host["ipv6"] as? [String: Any] {
