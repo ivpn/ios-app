@@ -8,7 +8,6 @@ All notable changes to this project will be documented in this file.
 [IMPROVED] Warning about existing VPN connection(s) when downgrading subscription plan  
 [FIXED] IPv6 connection information not displayed on iOS 16+ devices  
 [FIXED] Port number displayed in the settings when MultiHop is enabled  
-[FIXED] Added missing ports 80, 443  
 
 ## 2.6.3 - 2022-05-17  
 
