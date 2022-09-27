@@ -124,6 +124,7 @@ class ControlPanelViewController: UITableViewController {
         initView()
         addObservers()
         setupGestureRecognizers()
+        startAPIUpdate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -284,7 +285,7 @@ class ControlPanelViewController: UITableViewController {
         lastVPNStatus = vpnStatus
     }
     
-    func refreshServiceStatus() {
+    @objc func refreshServiceStatus() {
         if let lastUpdateDate = lastStatusUpdateDate {
             let now = Date()
             if now.timeIntervalSince(lastUpdateDate) < Config.serviceStatusRefreshMaxIntervalSeconds { return }
@@ -350,6 +351,7 @@ class ControlPanelViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: Notification.Name.AntiTrackerUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(evaluateReconnectHandler), name: Notification.Name.EvaluateReconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(evaluatePlanUpdate), name: Notification.Name.EvaluatePlanUpdate, object: nil)
     }
     
     // MARK: - Private methods -
@@ -428,6 +430,41 @@ class ControlPanelViewController: UITableViewController {
     
     @objc private func evaluateReconnectHandler() {
         evaluateReconnect(sender: controlPanelView)
+    }
+    
+    @objc private func evaluatePlanUpdate() {
+        let isMultiHopAvailable = Application.shared.serviceStatus.isEnabled(capability: .multihop)
+        let isMultiHopEnabled = UserDefaults.shared.isMultiHop
+        let status = Application.shared.connectionManager.status
+        
+        if !isMultiHopAvailable && isMultiHopEnabled {
+            if status == .connected {
+                let plan = Application.shared.serviceStatus.currentPlan ?? ""
+                showActionAlert(title: "Subscription is changed to \(plan)", message: "Active VPN connection is using Pro plan features (MultiHop) and will be disconnected.", action: "Reconnect with SingleHop VPN", cancel: "OK", cancelHandler: { [self] _ in
+                    disableMultiHop()
+                    if Application.shared.connectionManager.canDisconnect(status: status) {
+                        Application.shared.connectionManager.disconnect()
+                    } else {
+                        Application.shared.connectionManager.reconnect()
+                    }
+                }, actionHandler: { [self] _ in
+                    disableMultiHop()
+                    Application.shared.connectionManager.reconnect()
+                })
+            } else {
+                disableMultiHop()
+            }
+        }
+    }
+    
+    private func disableMultiHop() {
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isMultiHop)
+        Application.shared.settings.updateSelectedServerForMultiHop(isEnabled: false)
+        updateControlPanel()
+    }
+    
+    private func startAPIUpdate() {
+        Timer.scheduledTimer(timeInterval: 60 * 60, target: self, selector: #selector(refreshServiceStatus), userInfo: nil, repeats: true)
     }
     
 }
