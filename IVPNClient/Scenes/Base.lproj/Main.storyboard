@@ -2125,7 +2125,10 @@
                                                     </constraints>
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" textContentType="url"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" textContentType="postal-code"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="SVb-yR-JjU" id="5jl-ZF-6ve"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -2185,10 +2188,14 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" style="done" id="x2A-34-IAy">
                             <connections>
-                                <action selector="addPort:" destination="SVb-yR-JjU" id="dlv-pj-ZMt"/>
+                                <action selector="addPort" destination="SVb-yR-JjU" id="g8r-jV-jb6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="portTextField" destination="MX2-Fs-xZU" id="iC2-7a-bpw"/>
+                        <outlet property="typeControl" destination="oPF-z2-6ho" id="5yi-eq-oSJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7FO-5K-NKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

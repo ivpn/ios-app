@@ -49,8 +49,9 @@ class PortViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func addCustomPort(_ sender: Any) {
-        let viewController = NavigationManager.getAddCustomPortViewController(delegate: self, vpnProtocol: "WireGuard")
-        present(viewController, animated: true, completion: nil)
+        let vpnProtocol = Application.shared.settings.connectionProtocol.formatTitle()
+        let viewController = NavigationManager.getAddCustomPortViewController(delegate: self, vpnProtocol: vpnProtocol)
+        present(viewController, animated: true)
     }
     
     // MARK: - View Lifecycle -

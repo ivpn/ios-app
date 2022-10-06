@@ -31,14 +31,45 @@ class AddCustomPortViewController: UITableViewController {
     
     // MARK: - Properties -
     
+    @IBOutlet weak var portTextField: UITextField!
+    @IBOutlet weak var typeControl: UISegmentedControl!
+    
     weak var delegate: AddCustomPortViewControllerDelegate?
     var vpnProtocol = ""
     
     // MARK: - @IBActions -
     
-    @IBAction func addPort(_ sender: Any) {
-        delegate?.customPortAdded(port: .wireguard(.udp, 9999))
+    @IBAction func addPort() {
+        var port: ConnectionSettings
+        let number = Int(portTextField.text ?? "") ?? 0
+        
+        if vpnProtocol == "OpenVPN" {
+            if typeControl.selectedSegmentIndex == 1 {
+                port = .openvpn(.tcp, number)
+            } else {
+                port = .openvpn(.udp, number)
+            }
+        } else {
+            port = .wireguard(.udp, number)
+        }
+        
+        delegate?.customPortAdded(port: port)
         navigationController?.dismiss(animated: true)
     }
 
+}
+
+// MARK: - UITextFieldDelegate -
+
+extension AddCustomPortViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == portTextField {
+            textField.resignFirstResponder()
+            addPort()
+        }
+        
+        return true
+    }
+    
 }
