@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21511" systemVersion="22A5352e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CustomPort" representedClassName="CustomPort" syncable="YES" codeGenerationType="class">
+    <entity name="CustomPort" representedClassName="CustomPort" syncable="YES">
         <attribute name="port" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="vpnProtocol" optional="YES" attributeType="String"/>
