@@ -181,4 +181,17 @@ class NavigationManager {
         return navController!
     }
     
+    static func getAddCustomPortViewController(delegate: AddCustomPortViewControllerDelegate? = nil, vpnProtocol: String) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navController = storyBoard.instantiateViewController(withIdentifier: "addCustomPort") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        
+        if let viewController = navController?.topViewController as? AddCustomPortViewController {
+            viewController.delegate = delegate
+            viewController.vpnProtocol = vpnProtocol
+        }
+        
+        return navController!
+    }
+    
 }

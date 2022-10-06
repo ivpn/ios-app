@@ -83,6 +83,7 @@
 		8243587125DBB73F005FDEBB /* SecureDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243587025DBB73E005FDEBB /* SecureDNS.swift */; };
 		8244CF3F28EDD29700FFEBAC /* CustomPort+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8244CF3E28EDD29700FFEBAC /* CustomPort+CoreDataClass.swift */; };
 		8244CF4028EDD29700FFEBAC /* CustomPort+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8244CF3D28EDD29700FFEBAC /* CustomPort+CoreDataProperties.swift */; };
+		8244CF4228EF295100FFEBAC /* AddCustomPortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8244CF4128EF295000FFEBAC /* AddCustomPortViewController.swift */; };
 		824777E721A6BC3A001EEFAF /* Network+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */; };
 		824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */; };
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
@@ -476,6 +477,7 @@
 		8243587025DBB73E005FDEBB /* SecureDNS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNS.swift; sourceTree = "<group>"; };
 		8244CF3D28EDD29700FFEBAC /* CustomPort+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CustomPort+CoreDataProperties.swift"; path = "/Users/jurajhilje/xcode/ios-app/IVPNClient/Models/CoreData/CustomPort+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		8244CF3E28EDD29700FFEBAC /* CustomPort+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CustomPort+CoreDataClass.swift"; path = "/Users/jurajhilje/xcode/ios-app/IVPNClient/Models/CoreData/CustomPort+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		8244CF4128EF295000FFEBAC /* AddCustomPortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCustomPortViewController.swift; path = "/Users/jurajhilje/xcode/ios-app/IVPNClient/Scenes/ViewControllers/AddCustomPortViewController.swift"; sourceTree = "<absolute>"; };
 		824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataClass.swift"; sourceTree = "<group>"; };
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -1204,6 +1206,7 @@
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
 				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
 				821CA2D6287C5AB20067F70D /* PortViewController.swift */,
+				8244CF4128EF295000FFEBAC /* AddCustomPortViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2179,6 +2182,7 @@
 				828D8A6D258245AD00CB0E5B /* TwoFactorViewController.swift in Sources */,
 				82E716962181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */,
 				82E7168A2181E8E900D6B7C2 /* WireGuardProtocol.swift in Sources */,
+				8244CF4228EF295100FFEBAC /* AddCustomPortViewController.swift in Sources */,
 				828E9C95231E5780001E1FCF /* Data+Ext.swift in Sources */,
 				9C51340A1DE8398400423551 /* Pinger.swift in Sources */,
 				8223C54E22EAE93F00CD283D /* SessionManager.swift in Sources */,

@@ -46,6 +46,13 @@ class PortViewController: UITableViewController {
         return ports + customPorts
     }
     
+    // MARK: - @IBActions -
+    
+    @IBAction func addCustomPort(_ sender: Any) {
+        let viewController = NavigationManager.getAddCustomPortViewController(delegate: self, vpnProtocol: "WireGuard")
+        present(viewController, animated: true, completion: nil)
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
@@ -103,11 +110,16 @@ extension PortViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if indexPath.section == 1 {
+//            let range = portRanges[indexPath.row]
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "PortInputTableViewCell", for: indexPath) as! PortInputTableViewCell
+//            cell.setup(range: range)
+//            cell.portInput.delegate = self
+//            return cell
+//        }
+        
         if indexPath.section == 1 {
-            let range = portRanges[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PortInputTableViewCell", for: indexPath) as! PortInputTableViewCell
-            cell.setup(range: range)
-            cell.portInput.delegate = self
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddPortTableViewCell", for: indexPath)
             return cell
         }
         
@@ -126,8 +138,6 @@ extension PortViewController {
         switch section {
         case 0:
             return "Select port"
-        case 1:
-            return "Add custom port"
         default:
             return ""
         }
@@ -203,6 +213,16 @@ extension PortViewController: UITextFieldDelegate {
             self.updatedTextField = nil
             self.tableView.reloadData()
         }
+    }
+    
+}
+
+// MARK: - AddCustomPortViewControllerDelegate -
+
+extension PortViewController: AddCustomPortViewControllerDelegate {
+    
+    func customPortAdded(port: ConnectionSettings) {
+        print("port", port)
     }
     
 }
