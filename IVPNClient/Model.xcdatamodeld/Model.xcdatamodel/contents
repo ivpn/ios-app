@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21511" systemVersion="22A5352e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CustomPort" representedClassName="CustomPort" syncable="YES" codeGenerationType="class">
+        <attribute name="port" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="vpnProtocol" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Network" representedClassName="Network" syncable="YES">
         <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -10,8 +15,4 @@
         <attribute name="gateway" optional="YES" attributeType="String"/>
         <attribute name="isFastestEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
-    <elements>
-        <element name="Network" positionX="-54" positionY="-9" width="128" height="105"/>
-        <element name="Server" positionX="-54" positionY="18" width="128" height="73"/>
-    </elements>
 </model>

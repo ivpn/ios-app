@@ -81,6 +81,8 @@
 		8243584425DAA7BD005FDEBB /* SecureDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */; };
 		8243584E25DAA842005FDEBB /* SecureDNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243584D25DAA842005FDEBB /* SecureDNSView.swift */; };
 		8243587125DBB73F005FDEBB /* SecureDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243587025DBB73E005FDEBB /* SecureDNS.swift */; };
+		8244CF3F28EDD29700FFEBAC /* CustomPort+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8244CF3E28EDD29700FFEBAC /* CustomPort+CoreDataClass.swift */; };
+		8244CF4028EDD29700FFEBAC /* CustomPort+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8244CF3D28EDD29700FFEBAC /* CustomPort+CoreDataProperties.swift */; };
 		824777E721A6BC3A001EEFAF /* Network+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */; };
 		824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */; };
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
@@ -472,6 +474,8 @@
 		8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSViewController.swift; sourceTree = "<group>"; };
 		8243584D25DAA842005FDEBB /* SecureDNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSView.swift; sourceTree = "<group>"; };
 		8243587025DBB73E005FDEBB /* SecureDNS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNS.swift; sourceTree = "<group>"; };
+		8244CF3D28EDD29700FFEBAC /* CustomPort+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CustomPort+CoreDataProperties.swift"; path = "/Users/jurajhilje/xcode/ios-app/IVPNClient/Models/CoreData/CustomPort+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		8244CF3E28EDD29700FFEBAC /* CustomPort+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CustomPort+CoreDataClass.swift"; path = "/Users/jurajhilje/xcode/ios-app/IVPNClient/Models/CoreData/CustomPort+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataClass.swift"; sourceTree = "<group>"; };
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -1237,6 +1241,8 @@
 				824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */,
 				82A160B8221C4E2000730577 /* Server+CoreDataClass.swift */,
 				82A160B9221C4E2000730577 /* Server+CoreDataProperties.swift */,
+				8244CF3E28EDD29700FFEBAC /* CustomPort+CoreDataClass.swift */,
+				8244CF3D28EDD29700FFEBAC /* CustomPort+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -2230,6 +2236,7 @@
 				9C50959620FCF4C60048DBF2 /* ProtocolViewController.swift in Sources */,
 				9CAE14C020FE453E00D4DAC0 /* VPNManager.swift in Sources */,
 				82D598A321A55210000FABDE /* NetworkProtectionViewController.swift in Sources */,
+				8244CF3F28EDD29700FFEBAC /* CustomPort+CoreDataClass.swift in Sources */,
 				82D598BC21A6949F000FABDE /* StorageManager.swift in Sources */,
 				826FBDA32461847D00B9E464 /* ServiceType.swift in Sources */,
 				821429B922FC2EA40056B8FF /* ApiService+Ext.swift in Sources */,
@@ -2245,6 +2252,7 @@
 				82DAB37B2457013900302F4C /* Service.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
 				824B86CB26D3E8D100D0101A /* ExtensionKeyManager.swift in Sources */,
+				8244CF4028EDD29700FFEBAC /* CustomPort+CoreDataProperties.swift in Sources */,
 				8208525823FD5EB20008C112 /* MainViewController.swift in Sources */,
 				825E836325A4834200938240 /* APIPublicKeyPin.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
