@@ -72,6 +72,19 @@ struct PortRange {
         return false
     }
     
+    func validate(port: Int) -> String? {
+        for range in ranges {
+            if let rangeStart = Int(range.split(separator: ":")[0]), let rangeEnd = Int(range.split(separator: ":")[1]) {
+                let portRange = rangeStart...rangeEnd
+                if portRange.contains(port) {
+                    return nil
+                }
+            }
+        }
+        
+        return "Enter port number in the range: \(portRangesText)"
+    }
+    
     func getSavedPort() -> Int? {
         let port = UserDefaults.standard.integer(forKey: storeKey)
         return port > 0 ? port : nil

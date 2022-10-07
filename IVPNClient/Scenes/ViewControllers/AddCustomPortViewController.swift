@@ -49,14 +49,33 @@ class AddCustomPortViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func addPort() {
-        var vpnProtocol = Application.shared.settings.connectionProtocol.formatTitle().lowercased()
+        if let err = selectedPortRange?.validate(port: port) {
+            showErrorAlert(title: "Invalid input", message: err)
+            return
+        }
+        
+        let vpnProtocol = Application.shared.settings.connectionProtocol.formatTitle().lowercased()
         let customPort = ConnectionSettings.getFrom(portString: "\(vpnProtocol)-\(protocolType)-\(port)")
         delegate?.customPortAdded(port: customPort)
         navigationController?.dismiss(animated: true)
     }
     
     @IBAction func selectType(_ sender: UISegmentedControl) {
+        updateSelectedPortRange()
+    }
+    
+    // MARK: - View Lifecycle -
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateSelectedPortRange()
+    }
+    
+    // MARK: - Methods -
+    
+    private func updateSelectedPortRange() {
         selectedPortRange = portRanges.first(where: { $0.protocolType == protocolType })
+        portTextField.placeholder = selectedPortRange?.portRangesText
     }
 
 }
