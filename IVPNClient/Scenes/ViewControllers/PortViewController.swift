@@ -103,7 +103,7 @@ extension PortViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
-            return portRanges.count
+            return 1
         }
         
         return collection.count

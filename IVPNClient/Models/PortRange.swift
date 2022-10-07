@@ -41,7 +41,7 @@ struct PortRange {
     }
     
     var portRangesText: String {
-        return ranges.joined(separator: ", ").replacingOccurrences(of: ":", with: "-")
+        return ranges.joined(separator: ", ").replacingOccurrences(of: "-", with: " - ")
     }
     
     func save(port: Int) -> String? {
@@ -61,7 +61,7 @@ struct PortRange {
     
     func isValid(port: Int) -> Bool {
         for range in ranges {
-            if let rangeStart = Int(range.split(separator: ":")[0]), let rangeEnd = Int(range.split(separator: ":")[1]) {
+            if let rangeStart = Int(range.split(separator: "-")[0]), let rangeEnd = Int(range.split(separator: "-")[1]) {
                 let portRange = rangeStart...rangeEnd
                 if portRange.contains(port) {
                     return true
@@ -74,7 +74,7 @@ struct PortRange {
     
     func validate(port: Int) -> String? {
         for range in ranges {
-            if let rangeStart = Int(range.split(separator: ":")[0]), let rangeEnd = Int(range.split(separator: ":")[1]) {
+            if let rangeStart = Int(range.split(separator: "-")[0]), let rangeEnd = Int(range.split(separator: "-")[1]) {
                 let portRange = rangeStart...rangeEnd
                 if portRange.contains(port) {
                     return nil

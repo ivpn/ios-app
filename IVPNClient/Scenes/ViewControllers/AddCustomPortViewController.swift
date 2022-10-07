@@ -69,6 +69,7 @@ class AddCustomPortViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateSelectedPortRange()
+        typeControl.isEnabled = Application.shared.settings.connectionProtocol.tunnelType() == .openvpn
     }
     
     // MARK: - Methods -

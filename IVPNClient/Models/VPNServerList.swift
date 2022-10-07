@@ -162,9 +162,9 @@ class VPNServerList {
                             if let range = port["range"] as? [String: Any] {
                                 if let min = range["min"] as? Int, let max = range["max"] as? Int {
                                     if port["type"] as? String == "TCP" {
-                                        tcpRanges.append("\(min),\(max)")
+                                        tcpRanges.append("\(min)-\(max)")
                                     } else {
-                                        udpRanges.append("\(min),\(max)")
+                                        udpRanges.append("\(min)-\(max)")
                                     }
                                 }
                             }
@@ -184,7 +184,7 @@ class VPNServerList {
                             }
                             if let range = port["range"] as? [String: Any] {
                                 if let min = range["min"] as? Int, let max = range["max"] as? Int {
-                                    ranges.append("\(min),\(max)")
+                                    ranges.append("\(min)-\(max)")
                                 }
                             }
                         }
