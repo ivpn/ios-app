@@ -29,32 +29,34 @@ protocol AddCustomPortViewControllerDelegate: AnyObject {
 
 class AddCustomPortViewController: UITableViewController {
     
-    // MARK: - Properties -
+    // MARK: - @IBOutlets -
     
     @IBOutlet weak var portTextField: UITextField!
     @IBOutlet weak var typeControl: UISegmentedControl!
     
+    // MARK: - Properties -
+    
     weak var delegate: AddCustomPortViewControllerDelegate?
-    var vpnProtocol = ""
+    var protocolType: String {
+        return typeControl.selectedSegmentIndex == 1 ? "TCP" : "UDP"
+    }
+    var port: Int {
+        return Int(portTextField.text ?? "") ?? 0
+    }
+    let portRanges = Application.shared.serverList.getPortRanges(tunnelType: Application.shared.settings.connectionProtocol.formatTitle())
+    var selectedPortRange: PortRange?
     
     // MARK: - @IBActions -
     
     @IBAction func addPort() {
-        var port: ConnectionSettings
-        let number = Int(portTextField.text ?? "") ?? 0
-        
-        if vpnProtocol == "OpenVPN" {
-            if typeControl.selectedSegmentIndex == 1 {
-                port = .openvpn(.tcp, number)
-            } else {
-                port = .openvpn(.udp, number)
-            }
-        } else {
-            port = .wireguard(.udp, number)
-        }
-        
-        delegate?.customPortAdded(port: port)
+        var vpnProtocol = Application.shared.settings.connectionProtocol.formatTitle().lowercased()
+        let customPort = ConnectionSettings.getFrom(portString: "\(vpnProtocol)-\(protocolType)-\(port)")
+        delegate?.customPortAdded(port: customPort)
         navigationController?.dismiss(animated: true)
+    }
+    
+    @IBAction func selectType(_ sender: UISegmentedControl) {
+        selectedPortRange = portRanges.first(where: { $0.protocolType == protocolType })
     }
 
 }

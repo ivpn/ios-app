@@ -49,8 +49,7 @@ class PortViewController: UITableViewController {
     // MARK: - @IBActions -
     
     @IBAction func addCustomPort(_ sender: Any) {
-        let vpnProtocol = Application.shared.settings.connectionProtocol.formatTitle()
-        let viewController = NavigationManager.getAddCustomPortViewController(delegate: self, vpnProtocol: vpnProtocol)
+        let viewController = NavigationManager.getAddCustomPortViewController(delegate: self)
         present(viewController, animated: true)
     }
     
