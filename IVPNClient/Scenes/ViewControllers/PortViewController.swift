@@ -223,7 +223,7 @@ extension PortViewController {
 extension PortViewController: AddCustomPortViewControllerDelegate {
     
     func customPortAdded(port: ConnectionSettings) {
-        print("port", port)
+        StorageManager.saveCustomPort(vpnProtocol: port.formatTitle().lowercased(), type: port.formatProtocol().lowercased(), port: port.port())
     }
     
 }
