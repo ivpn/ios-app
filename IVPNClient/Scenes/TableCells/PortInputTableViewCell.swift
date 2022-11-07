@@ -30,15 +30,15 @@ class PortInputTableViewCell: UITableViewCell {
     
     // MARK: - Methods -
     
-    func setup(range: PortRange) {
-        protocolLabel.text = range.protocolType
-        portInput.placeholder = range.portRangesText
-        
-        if let savedPort = range.getSavedPort() {
-            portInput.text = String(describing: savedPort)
-        } else {
-            portInput.text = nil
-        }
-    }
+//    func setup(range: PortRange) {
+//        protocolLabel.text = range.protocolType
+//        portInput.placeholder = range.portRangesText
+//        
+//        if let savedPort = range.getSavedPort() {
+//            portInput.text = String(describing: savedPort)
+//        } else {
+//            portInput.text = nil
+//        }
+//    }
 
 }

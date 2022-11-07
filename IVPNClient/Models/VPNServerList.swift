@@ -149,8 +149,8 @@ class VPNServerList {
                     ports.append(ConnectionSettings.ipsec)
                     
                     if let openvpn = portsObj["openvpn"] as? [[String: Any]] {
-                        var udpRanges = [String]()
-                        var tcpRanges = [String]()
+                        var udpRanges = [CountableClosedRange<Int>]()
+                        var tcpRanges = [CountableClosedRange<Int>]()
                         for port in openvpn {
                             if let portNumber = port["port"] as? Int {
                                 if port["type"] as? String == "TCP" {
@@ -162,9 +162,9 @@ class VPNServerList {
                             if let range = port["range"] as? [String: Any] {
                                 if let min = range["min"] as? Int, let max = range["max"] as? Int {
                                     if port["type"] as? String == "TCP" {
-                                        tcpRanges.append("\(min)-\(max)")
+                                        tcpRanges.append(min...max)
                                     } else {
-                                        udpRanges.append("\(min)-\(max)")
+                                        udpRanges.append(min...max)
                                     }
                                 }
                             }
@@ -177,14 +177,14 @@ class VPNServerList {
                         }
                     }
                     if let wireguard = portsObj["wireguard"] as? [[String: Any]] {
-                        var ranges = [String]()
+                        var ranges = [CountableClosedRange<Int>]()
                         for port in wireguard {
                             if let portNumber = port["port"] as? Int {
                                 ports.append(ConnectionSettings.wireguard(.udp, portNumber))
                             }
                             if let range = port["range"] as? [String: Any] {
                                 if let min = range["min"] as? Int, let max = range["max"] as? Int {
-                                    ranges.append("\(min)-\(max)")
+                                    ranges.append(min...max)
                                 }
                             }
                         }

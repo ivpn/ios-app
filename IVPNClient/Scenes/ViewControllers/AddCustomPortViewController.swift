@@ -55,7 +55,7 @@ class AddCustomPortViewController: UITableViewController {
         }
         
         let vpnProtocol = Application.shared.settings.connectionProtocol.formatTitle().lowercased()
-        let customPort = ConnectionSettings.getFrom(portString: "\(vpnProtocol)-\(protocolType)-\(port)")
+        let customPort = ConnectionSettings.getFrom(portString: "\(vpnProtocol)-\(protocolType.lowercased())-\(port)")
         delegate?.customPortAdded(port: customPort)
         navigationController?.dismiss(animated: true)
     }
