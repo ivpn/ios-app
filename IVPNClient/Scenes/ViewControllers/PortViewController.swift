@@ -27,7 +27,6 @@ class PortViewController: UITableViewController {
     
     // MARK: - Properties -
     
-    var viewModel = PortViewModel()
     var portRanges = Application.shared.serverList.getPortRanges(tunnelType: Application.shared.settings.connectionProtocol.formatTitle())
     var selectedPort = Application.shared.settings.connectionProtocol
     var selectedPortIndex = 0

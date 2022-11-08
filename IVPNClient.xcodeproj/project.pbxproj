@@ -40,9 +40,7 @@
 		821AFA1323602B71001EF617 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821AFA1223602B71001EF617 /* SettingsScreenTests.swift */; };
 		821BDE02224A6EC700F592BF /* AppKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */; };
 		821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D6287C5AB20067F70D /* PortViewController.swift */; };
-		821CA2D9287C6A820067F70D /* PortViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D8287C6A820067F70D /* PortViewModel.swift */; };
 		821CA2DB288039670067F70D /* PortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DA288039670067F70D /* PortTableViewCell.swift */; };
-		821CA2DD2880397B0067F70D /* PortInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DC2880397B0067F70D /* PortInputTableViewCell.swift */; };
 		821CA2DF288143470067F70D /* PortRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DE288143470067F70D /* PortRange.swift */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
 		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
@@ -445,9 +443,7 @@
 		821AFA1223602B71001EF617 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
 		821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyManagerTests.swift; sourceTree = "<group>"; };
 		821CA2D6287C5AB20067F70D /* PortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortViewController.swift; sourceTree = "<group>"; };
-		821CA2D8287C6A820067F70D /* PortViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortViewModel.swift; sourceTree = "<group>"; };
 		821CA2DA288039670067F70D /* PortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortTableViewCell.swift; sourceTree = "<group>"; };
-		821CA2DC2880397B0067F70D /* PortInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortInputTableViewCell.swift; sourceTree = "<group>"; };
 		821CA2DE288143470067F70D /* PortRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortRange.swift; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
 		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
@@ -866,7 +862,6 @@
 				824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */,
 				8270D267241BB3D000B17B65 /* InfoAlertViewModel.swift */,
 				826E6149242A1CA80064F195 /* AccountViewModel.swift */,
-				821CA2D8287C6A820067F70D /* PortViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1223,7 +1218,6 @@
 				82DAB37E2457260000302F4C /* ServiceTableViewCell.swift */,
 				82DAB37C245725E200302F4C /* ServiceTitleTableViewCell.swift */,
 				821CA2DA288039670067F70D /* PortTableViewCell.swift */,
-				821CA2DC2880397B0067F70D /* PortInputTableViewCell.swift */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -2199,7 +2193,6 @@
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
 				82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */,
 				826C1F8425DBEF1800314C4B /* DNSManager.swift in Sources */,
-				821CA2DD2880397B0067F70D /* PortInputTableViewCell.swift in Sources */,
 				8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */,
 				82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */,
 				9C28337B1D9D3F060024C553 /* LoginViewController.swift in Sources */,
@@ -2278,7 +2271,6 @@
 				9CB2CE411DB2594A007A4D2D /* VPNServerList.swift in Sources */,
 				823FFB072338DF1800F91A5D /* Capability.swift in Sources */,
 				82061F65238D2730009DDF4D /* Ping.swift in Sources */,
-				821CA2D9287C6A820067F70D /* PortViewModel.swift in Sources */,
 				82AB0879291A6BB90084625A /* CustomPort+CoreDataProperties.swift in Sources */,
 				82AAF0E92253A4A8005E792F /* StaticWebViewController.swift in Sources */,
 				8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */,
