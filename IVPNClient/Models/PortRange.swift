@@ -24,21 +24,12 @@
 import Foundation
 
 struct PortRange {
+    
+    // MARK: - Properties -
+    
     var tunnelType: String
     var protocolType: String
     var ranges: [CountableClosedRange<Int>]
-    
-//    var storeKey: String {
-//        if tunnelType == "OpenVPN" {
-//            if protocolType == "TCP" {
-//                return UserDefaults.Key.openvpnTcpCustomPort
-//            } else {
-//                return UserDefaults.Key.openvpnUdpCustomPort
-//            }
-//        }
-//        
-//        return UserDefaults.Key.wireguardCustomPort
-//    }
     
     var portRangesText: String {
         let combinedRanges = PortRange.combinedIntervals(intervals: ranges.sorted { $0.lowerBound < $1.lowerBound })
@@ -53,6 +44,8 @@ struct PortRange {
         return textRanges.joined(separator: ", ")
     }
     
+    // MARK: - Methods -
+    
     func validate(port: Int) -> String? {
         for range in ranges {
             if range.contains(port) {
@@ -62,35 +55,6 @@ struct PortRange {
         
         return "Enter port number in the range: \(portRangesText)"
     }
-    
-//    func getSavedPort() -> Int? {
-//        let port = UserDefaults.standard.integer(forKey: storeKey)
-//        return port > 0 ? port : nil
-//    }
-    
-//    static func getPorts(from portRanges: [PortRange], tunnelType: String) -> [ConnectionSettings] {
-//        var ports = [ConnectionSettings]()
-//        
-//        if tunnelType == "OpenVPN" {
-//            let udpPort = UserDefaults.standard.integer(forKey: UserDefaults.Key.openvpnUdpCustomPort)
-//            let tcpPort = UserDefaults.standard.integer(forKey: UserDefaults.Key.openvpnTcpCustomPort)
-//            if udpPort > 0 {
-//                ports.append(ConnectionSettings.openvpn(.udp, udpPort))
-//            }
-//            if tcpPort > 0 {
-//                ports.append(ConnectionSettings.openvpn(.tcp, tcpPort))
-//            }
-//        }
-//        
-//        if tunnelType == "WireGuard" {
-//            let port = UserDefaults.standard.integer(forKey: UserDefaults.Key.wireguardCustomPort)
-//            if port > 0 {
-//                ports.append(ConnectionSettings.wireguard(.udp, port))
-//            }
-//        }
-//        
-//        return ports
-//    }
     
     static func combinedIntervals(intervals: [CountableClosedRange<Int>]) -> [CountableClosedRange<Int>] {
         var combined = [CountableClosedRange<Int>]()
