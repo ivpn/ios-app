@@ -58,6 +58,7 @@ class StorageManager {
     static func clearSession() {
         remove(entityName: "Network")
         remove(entityName: "Server")
+        remove(entityName: "CustomPort")
     }
     
     static func remove(entityName: String) {

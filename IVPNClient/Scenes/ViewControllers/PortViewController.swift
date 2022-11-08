@@ -42,7 +42,7 @@ class PortViewController: UITableViewController {
         var ports = [ConnectionSettings]()
         if let storedCustomPorts = StorageManager.fetchCustomPorts(vpnProtocol: selectedPort.formatTitle().lowercased()) {
             for customPort in storedCustomPorts {
-                let string = "\(String(describing: customPort.vpnProtocol))-\(String(describing: customPort.type))-\(customPort.port)"
+                let string = "\(customPort.vpnProtocol ?? "")-\(customPort.type ?? "")-\(customPort.port)"
                 ports.append(ConnectionSettings.getFrom(portString: string))
             }
         }
@@ -73,6 +73,13 @@ class PortViewController: UITableViewController {
     private func setupView() {
         title = "Select Port"
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
+    }
+    
+    private func setPort(_ port: ConnectionSettings) {
+        selectedPort = port
+        Application.shared.settings.connectionProtocol = port
+        tableView.reloadData()
+        NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
     }
 
 }
@@ -126,10 +133,7 @@ extension PortViewController {
 extension PortViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedPort = collection[indexPath.row]
-        Application.shared.settings.connectionProtocol = selectedPort
-        tableView.reloadData()
-        NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+        setPort(collection[indexPath.row])
         navigationController?.popViewController(animated: true)
     }
     
@@ -156,7 +160,8 @@ extension PortViewController {
 extension PortViewController: AddCustomPortViewControllerDelegate {
     
     func customPortAdded(port: ConnectionSettings) {
-        StorageManager.saveCustomPort(vpnProtocol: port.formatTitle().lowercased(), type: port.formatProtocol().lowercased(), port: port.port())
+        StorageManager.saveCustomPort(vpnProtocol: port.formatTitle().lowercased(), type: port.protocolType().lowercased(), port: port.port())
+        setPort(port)
     }
     
 }
