@@ -56,6 +56,11 @@ class LoginViewController: UIViewController {
     // MARK: - @IBActions -
     
     @IBAction func loginToAccount(_ sender: AnyObject) {
+        guard UIDevice.isPasscodeSet() else {
+            showAlert(title: "Passcode is disabled", message: "Please enable Passcode in the iOS Settings")
+            return
+        }
+        
         guard UserDefaults.shared.hasUserConsent else {
             actionType = .login
             present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
@@ -67,6 +72,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
+        guard UIDevice.isPasscodeSet() else {
+            showAlert(title: "Passcode is disabled", message: "Please enable Passcode in the iOS Settings")
+            return
+        }
+        
         guard UserDefaults.shared.hasUserConsent else {
             actionType = .signup
             present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)

@@ -24,6 +24,7 @@
 import UIKit
 import SystemConfiguration.CaptiveNetwork
 import NetworkExtension
+import LocalAuthentication
 
 extension UIDevice {
     
@@ -130,6 +131,10 @@ extension UIDevice {
             }
             completion(ssid)
         }
+    }
+    
+    static func isPasscodeSet() -> Bool {
+        return LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
     }
     
 }
