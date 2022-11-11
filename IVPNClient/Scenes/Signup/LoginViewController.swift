@@ -56,8 +56,7 @@ class LoginViewController: UIViewController {
     // MARK: - @IBActions -
     
     @IBAction func loginToAccount(_ sender: AnyObject) {
-        guard UIDevice.isPasscodeSet() else {
-            showAlert(title: "Passcode is disabled", message: "Please enable Passcode in the iOS Settings")
+        guard evaluatePasscode() else {
             return
         }
         
@@ -72,8 +71,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
-        guard UIDevice.isPasscodeSet() else {
-            showAlert(title: "Passcode is disabled", message: "Please enable Passcode in the iOS Settings")
+        guard evaluatePasscode() else {
             return
         }
         
@@ -91,7 +89,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func restorePurchases(_ sender: AnyObject) {
-        guard deviceCanMakePurchases() else { return }
+        guard evaluatePasscode() else {
+            return
+        }
+        
+        guard deviceCanMakePurchases() else {
+            return
+        }
         
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Restoring purchases..."
