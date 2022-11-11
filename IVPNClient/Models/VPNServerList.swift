@@ -31,6 +31,7 @@ class VPNServerList {
     // MARK: - Properties -
     
     open private(set) var servers: [VPNServer]
+    open private(set) var ports: [ConnectionSettings]
     
     var filteredFastestServers: [VPNServer] {
         var serversArray = getServers()
@@ -84,6 +85,7 @@ class VPNServerList {
     // and optionally save it to the cache file for later access
     init(withJSONData data: Data?, storeInCache: Bool = false) {
         servers = [VPNServer]()
+        ports = [ConnectionSettings]()
         
         if let jsonData = data {
             var serversList: [[String: Any]]?
@@ -138,6 +140,29 @@ class VPNServerList {
                     
                     if let ips = api["ipv6s"] as? [String?] {
                         UserDefaults.shared.set(ips, forKey: UserDefaults.Key.ipv6HostNames)
+                    }
+                }
+                
+                if let portsObj = config["ports"] as? [String: Any] {
+                    ports.append(ConnectionSettings.ipsec)
+                    
+                    if let openvpn = portsObj["openvpn"] as? [[String: Any]] {
+                        for port in openvpn {
+                            if let portNumber = port["port"] as? Int {
+                                if port["type"] as? String == "TCP" {
+                                    ports.append(ConnectionSettings.openvpn(.tcp, portNumber))
+                                } else {
+                                    ports.append(ConnectionSettings.openvpn(.udp, portNumber))
+                                }
+                            }
+                        }
+                    }
+                    if let openvpn = portsObj["wireguard"] as? [[String: Any]] {
+                        for port in openvpn {
+                            if let portNumber = port["port"] as? Int {
+                                ports.append(ConnectionSettings.wireguard(.udp, portNumber))
+                            }
+                        }
                     }
                 }
             }

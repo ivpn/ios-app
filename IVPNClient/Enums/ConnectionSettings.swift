@@ -60,7 +60,7 @@ enum ConnectionSettings {
             case .udp:
                 return "OpenVPN, UDP"
            }
-        case .wireguard(_, _):
+        case .wireguard:
             return "WireGuard, UDP"
         }
     }
@@ -141,7 +141,7 @@ enum ConnectionSettings {
     }
     
     func supportedProtocolsFormat(protocols: [ConnectionSettings]) -> [String] {
-        let protocols = supportedProtocols(protocols: Config.supportedProtocols)
+        let protocols = supportedProtocols(protocols: protocols)
         return protocols.map({ $0.formatProtocol() })
     }
     
@@ -150,11 +150,36 @@ enum ConnectionSettings {
     }
     
     static func getSavedProtocol() -> ConnectionSettings {
-        let protocolIndex = UserDefaults.standard.integer(forKey: UserDefaults.Key.selectedProtocolIndex)
+        var name = ""
+        var proto = ""
+        var port = 0
+        let components = UserDefaults.standard.string(forKey: UserDefaults.Key.selectedProtocol)?.components(separatedBy: "-")
         
-        if Config.supportedProtocols.indices.contains(protocolIndex) && UserDefaults.standard.object(forKey: UserDefaults.Key.selectedProtocolIndex) != nil || !(KeyChain.sessionToken ?? "").isEmpty {
-            return Config.supportedProtocols[protocolIndex]
-        } else {
+        if let protocolName = components?[safeIndex: 0] {
+            name = protocolName
+        }
+        if let protocolProto = components?[safeIndex: 1] {
+            proto = protocolProto
+        }
+        if let protocolPort = components?[safeIndex: 2] {
+            port = Int(protocolPort) ?? 0
+        }
+        
+        switch name {
+        case "ikev2":
+            return .ipsec
+        case "openvpn":
+            switch proto {
+            case "tcp":
+                return .openvpn(.tcp, port)
+            case "udp":
+                return .openvpn(.udp, port)
+            default:
+                return Config.defaultProtocol
+            }
+        case "wireguard":
+            return .wireguard(.udp, port)
+        default:
             return Config.defaultProtocol
         }
     }
