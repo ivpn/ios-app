@@ -110,8 +110,8 @@ class ControlPanelView: UITableView {
     }
     
     func updateServerNames() {
-        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage, ipv6Label: entryServerIPv6Label)
-        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage, ipv6Label: exitServerIPv6Label)
+        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage, ipv6Label: entryServerIPv6Label, selectedHost: Application.shared.settings.selectedHost)
+        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage, ipv6Label: exitServerIPv6Label, selectedHost: Application.shared.settings.selectedExitHost)
         
         fastestServerLabel.isHidden = true
     }
@@ -124,7 +124,7 @@ class ControlPanelView: UITableView {
     
     func updateProtocol() {
         let selectedProtocol = Application.shared.connectionManager.settings.connectionProtocol
-        protocolLabel.text = UserDefaults.shared.isMultiHop ? selectedProtocol.formatMultiHop() : selectedProtocol.format()
+        protocolLabel.text = selectedProtocol.format()
     }
     
     func updateMultiHopButtons(isMultiHop: Bool) {
@@ -139,8 +139,8 @@ class ControlPanelView: UITableView {
     
     // MARK: - Private methods -
     
-    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView, ipv6Label: UILabel) {
-        let serverViewModel = VPNServerViewModel(server: server)
+    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView, ipv6Label: UILabel, selectedHost: Host? = nil) {
+        let serverViewModel = VPNServerViewModel(server: server, selectedHost: selectedHost)
         label.text = serverViewModel.formattedServerNameForMainScreen
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
         ipv6Label.isHidden = !serverViewModel.showIPv6Label

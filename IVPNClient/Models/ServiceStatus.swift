@@ -60,9 +60,9 @@ struct ServiceStatus: Codable {
     }
     
     static func load() -> ServiceStatus? {
-        if let savedObj = UserDefaults.standard.object(forKey: UserDefaults.Key.serviceStatus) as? Data {
-            if let loadedObj = try? JSONDecoder().decode(ServiceStatus.self, from: savedObj) {
-                return loadedObj
+        if let saved = UserDefaults.standard.object(forKey: UserDefaults.Key.serviceStatus) as? Data {
+            if let loaded = try? JSONDecoder().decode(ServiceStatus.self, from: saved) {
+                return loaded
             }
         }
         

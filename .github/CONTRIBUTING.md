@@ -9,6 +9,7 @@ As a contributor, here are the guidelines we would like you to follow:
 * [Git Workflow](#git)
 * [Commit Message Guidelines](#commit)
 * [Coding Conventions](#conventions)
+* [Beta Program](#beta-program)
 
 <a name="contributing"></a>
 ## Contributing Code
@@ -109,3 +110,17 @@ This projects is using [SwiftLint](https://github.com/realm/SwiftLint) to enforc
 ```sh
 $ fastlane lint
 ```
+
+<a name="beta-program"></a>
+## IVPN iOS App Beta Program
+
+Users with an active IVPN account can join our iOS app beta program:
+
+1. Install the iOS [TestFlight app](https://testflight.apple.com)
+2. Open [https://testflight.apple.com/join/FnmEzHHb](https://testflight.apple.com/join/FnmEzHHb) on your iOS device
+3. You will be presented with detailed instructions on how to install the IVPN iOS beta app
+
+Any feedback will be very useful to us. You can submit feedback either by opening an issue on [GitHub](https://github.com/ivpn/ios-app/issues), or send a direct message to beta@ivpn.net.
+
+**IMPORTANT NOTE:**  
+Do not use IVPN prerelease (beta) apps in situations where you need to protect your privacy or security, but only for testing new unreleased features and improvements.

@@ -30,6 +30,10 @@ enum ConnectionSettings {
     case wireguard(WireGuardProtocol, Int)
     
     func format() -> String {
+        if UserDefaults.shared.isMultiHop {
+            return formatMultiHop()
+        }
+        
         switch self {
         case .ipsec:
             return "IKEv2"

@@ -256,13 +256,13 @@ class Ping : NSObject {
         
         //process the data we read.
         if bytesRead > 0 {
-            var hoststr = CChar()
+            var hoststr = [CChar](repeating: 0, count: Int(INET_ADDRSTRLEN))
             //            char hoststr[INET6_ADDRSTRLEN];
             var sin : sockaddr_in = UnsafeMutableRawPointer(addrSockaddr).bindMemory(to: sockaddr_in.self, capacity: Int(addrLen)).pointee
             inet_ntop(Int32(sin.sin_family), &(sin.sin_addr), &hoststr, socklen_t(INET6_ADDRSTRLEN))
             //            struct sockaddr_in *sin = (struct sockaddr_in *)&addr;
             //            inet_ntop(sin->sin_family, &(sin->sin_addr), hoststr, INET6_ADDRSTRLEN);
-            let host = String(utf8String: &hoststr)
+            let host = String(cString: hoststr)
             
             if(host == hostAddressString) { // only make sense where received packet comes from expected source
                 
