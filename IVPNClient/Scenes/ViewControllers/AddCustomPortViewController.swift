@@ -24,7 +24,7 @@
 import UIKit
 
 protocol AddCustomPortViewControllerDelegate: AnyObject {
-    func customPortAdded(port: ConnectionSettings)
+    func customPortAdded(port: ConnectionSettings) -> Bool
 }
 
 class AddCustomPortViewController: UITableViewController {
@@ -56,8 +56,13 @@ class AddCustomPortViewController: UITableViewController {
         
         let vpnProtocol = Application.shared.settings.connectionProtocol.formatTitle().lowercased()
         let customPort = ConnectionSettings.getFrom(portString: "\(vpnProtocol)-\(protocolType.lowercased())-\(port)")
-        delegate?.customPortAdded(port: customPort)
-        navigationController?.dismiss(animated: true)
+        let success = delegate?.customPortAdded(port: customPort) ?? false
+        
+        if success {
+            navigationController?.dismiss(animated: true)
+        } else {
+            showErrorAlert(title: "Invalid input", message: "Port already exists")
+        }
     }
     
     @IBAction func selectType(_ sender: UISegmentedControl) {

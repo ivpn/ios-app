@@ -158,9 +158,15 @@ extension PortViewController {
 
 extension PortViewController: AddCustomPortViewControllerDelegate {
     
-    func customPortAdded(port: ConnectionSettings) {
+    func customPortAdded(port: ConnectionSettings) -> Bool {
+        if collection.contains(where: { $0 == port }) {
+            return false
+        }
+        
         StorageManager.saveCustomPort(vpnProtocol: port.formatTitle().lowercased(), type: port.protocolType().lowercased(), port: port.port())
         setPort(port)
+        
+        return true
     }
     
 }
