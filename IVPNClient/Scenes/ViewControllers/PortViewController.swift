@@ -164,6 +164,13 @@ extension PortViewController: AddCustomPortViewControllerDelegate {
         }
         
         StorageManager.saveCustomPort(vpnProtocol: port.formatTitle().lowercased(), type: port.protocolType().lowercased(), port: port.port())
+        
+        // Add the same UDP port to other VPN protocol
+        if port.protocolType() == "UDP" {
+            let vpnProtocol = port.tunnelType() == .wireguard ? "openvpn" : "wireguard"
+            StorageManager.saveCustomPort(vpnProtocol: vpnProtocol, type: port.protocolType().lowercased(), port: port.port())
+        }
+        
         setPort(port)
         
         return true

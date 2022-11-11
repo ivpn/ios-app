@@ -61,7 +61,7 @@ class AddCustomPortViewController: UITableViewController {
         if success {
             navigationController?.dismiss(animated: true)
         } else {
-            showErrorAlert(title: "Invalid input", message: "Port already exists")
+            showErrorAlert(title: "Invalid input", message: "Port '\(protocolType) \(port)' already exists")
         }
     }
     
