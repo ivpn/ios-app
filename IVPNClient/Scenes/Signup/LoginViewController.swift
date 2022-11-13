@@ -444,6 +444,10 @@ extension LoginViewController: ScannerViewControllerDelegate {
     func qrCodeFound(code: String) {
         userName.text = code
         
+        guard evaluatePasscode() else {
+            return
+        }
+        
         guard UserDefaults.shared.hasUserConsent else {
             DispatchQueue.async {
                 self.actionType = .login
