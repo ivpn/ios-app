@@ -33,8 +33,6 @@ struct PortRange {
     
     var portRangesText: String {
         let combinedRanges = PortRange.combinedIntervals(intervals: ranges.sorted { $0.lowerBound < $1.lowerBound })
-        print("combinedRanges", combinedRanges)
-        
         var textRanges = [String]()
         
         for range in combinedRanges {
