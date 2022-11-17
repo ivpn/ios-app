@@ -33,7 +33,7 @@ These instructions will get you a copy of the project up and running on your loc
 - iOS 12.0+
 - Xcode 12.0+
 - Swift 5.0+
-- CocoaPods 1.11.0+
+- CocoaPods 1.11.3+
 - fastlane 2.178.0+
 - Go 1.16+
 
