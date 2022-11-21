@@ -78,7 +78,6 @@ class PortViewController: UITableViewController {
         selectedPort = port
         Application.shared.settings.connectionProtocol = port
         tableView.reloadData()
-        NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
     }
 
 }
@@ -133,7 +132,10 @@ extension PortViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         setPort(collection[indexPath.row])
-        navigationController?.popViewController(animated: true)
+        
+        navigationController?.popViewController(animated: true) {
+            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -174,6 +176,12 @@ extension PortViewController: AddCustomPortViewControllerDelegate {
         setPort(port)
         
         return true
+    }
+    
+    func portSelected() {
+        navigationController?.popViewController(animated: true) {
+            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+        }
     }
     
 }

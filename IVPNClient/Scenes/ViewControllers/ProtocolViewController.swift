@@ -163,7 +163,7 @@ class ProtocolViewController: UITableViewController {
     }
     
     @objc private func protocolSelected() {
-        evaluateReconnect(sender: view)
+        evaluateReconnect(sender: navigationController!.navigationBar)
     }
     
 }

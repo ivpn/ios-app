@@ -25,6 +25,7 @@ import UIKit
 
 protocol AddCustomPortViewControllerDelegate: AnyObject {
     func customPortAdded(port: ConnectionSettings) -> Bool
+    func portSelected()
 }
 
 class AddCustomPortViewController: UITableViewController {
@@ -59,7 +60,9 @@ class AddCustomPortViewController: UITableViewController {
         let success = delegate?.customPortAdded(port: customPort) ?? false
         
         if success {
-            navigationController?.dismiss(animated: true)
+            navigationController?.dismiss(animated: true) { [self] in
+                delegate?.portSelected()
+            }
         } else {
             showErrorAlert(title: "Invalid input", message: "Port '\(protocolType) \(port)' already exists")
         }
