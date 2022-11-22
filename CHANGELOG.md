@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 2.7.0 - Unreleased  
 
 [NEW] Ability to connect to a specific host in a location  
+[NEW] Support for custom ports  
 [IMPROVED] Warning about existing VPN connection(s) when downgrading subscription plan  
 [FIXED] IPv6 connection information not displayed on iOS 16+ devices  
 [FIXED] Port number displayed in the settings when MultiHop is enabled  
