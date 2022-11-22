@@ -2,7 +2,7 @@
 
 ## Reporting a security vulnerability to IVPN
 
-If you believe you have found a security vulnerability, **DO NOT CREATE AN ISSUE**. Instead, please send an email to security@ivpn.net. We treat all reports with the highest priority and confidentiality.
+If you believe you have found a security vulnerability, **DO NOT CREATE AN ISSUE**. Instead, please send an email to security@ivpn.net or file a report directly on GitHub with [Private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability). We treat all reports with the highest priority and confidentiality.
 
 ## Incident resolution process
 
