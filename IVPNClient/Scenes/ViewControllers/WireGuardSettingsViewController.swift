@@ -82,7 +82,6 @@ class WireGuardSettingsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         keyManager.delegate = self
         setupView()
         addObservers()
@@ -91,6 +90,7 @@ class WireGuardSettingsViewController: UITableViewController {
     // MARK: - Methods -
     
     private func setupView() {
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         ipAddressLabel.text = KeyChain.wgIpAddress
         publicKeyLabel.text = KeyChain.wgPublicKey
         keyTimestampLabel.text = AppKeyManager.keyTimestamp.formatDate()

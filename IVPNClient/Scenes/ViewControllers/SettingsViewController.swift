@@ -173,11 +173,7 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func authenticate(_ sender: Any) {
-        if #available(iOS 13.0, *) {
-            present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-        } else {
-            present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-        }
+        present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
     }
     
     // MARK: - View Lifecycle -

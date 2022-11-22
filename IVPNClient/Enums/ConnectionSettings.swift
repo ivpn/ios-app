@@ -150,18 +150,23 @@ enum ConnectionSettings {
     }
     
     static func getSavedProtocol() -> ConnectionSettings {
+        let portString = UserDefaults.standard.string(forKey: UserDefaults.Key.selectedProtocol) ?? ""
+        return getFrom(portString: portString)
+    }
+    
+    static func getFrom(portString: String) -> ConnectionSettings {
         var name = ""
         var proto = ""
         var port = 0
-        let components = UserDefaults.standard.string(forKey: UserDefaults.Key.selectedProtocol)?.components(separatedBy: "-")
+        let components = portString.components(separatedBy: "-")
         
-        if let protocolName = components?[safeIndex: 0] {
+        if let protocolName = components[safeIndex: 0] {
             name = protocolName
         }
-        if let protocolProto = components?[safeIndex: 1] {
-            proto = protocolProto
+        if let protocolType = components[safeIndex: 1] {
+            proto = protocolType
         }
-        if let protocolPort = components?[safeIndex: 2] {
+        if let protocolPort = components[safeIndex: 2] {
             port = Int(protocolPort) ?? 0
         }
         

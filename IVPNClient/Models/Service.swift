@@ -146,7 +146,7 @@ struct Service {
         return duration.willBeActiveUntilFrom(date: date)
     }
     
-    // Methods
+    // MARK: - Methods -
     
     static func == (lhs: Service, rhs: Service) -> Bool {
         return (lhs.type == rhs.type && lhs.duration == rhs.duration)

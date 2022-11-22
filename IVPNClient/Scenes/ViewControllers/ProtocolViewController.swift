@@ -41,11 +41,18 @@ class ProtocolViewController: UITableViewController {
         keyManager.delegate = self
         updateCollection(connectionProtocol: Application.shared.settings.connectionProtocol)
         initNavigationBar()
+        addObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+    
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     // MARK: - Methods -
@@ -139,24 +146,6 @@ class ProtocolViewController: UITableViewController {
         }
     }
     
-    func selectPreferredProtocolAndPort(connectionProtocol: ConnectionSettings) {
-        let ports = Application.shared.serverList.ports
-        let selected = Application.shared.settings.connectionProtocol.formatProtocol()
-        let protocols = connectionProtocol.supportedProtocols(protocols: ports)
-        let actions = connectionProtocol.supportedProtocolsFormat(protocols: ports)
-        
-        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol & port", actions: actions, sourceView: view) { [self] index in
-            guard index > -1 else {
-                return
-            }
-            
-            Application.shared.settings.connectionProtocol = protocols[index]
-            tableView.reloadData()
-            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-            evaluateReconnect(sender: view)
-        }
-    }
-    
     func selectPreferredProtocol(connectionProtocol: ConnectionSettings) {
         let selected = Application.shared.settings.connectionProtocol.protocolType()
         let protocols: [ConnectionSettings] = [.openvpn(.udp, 2049), .openvpn(.tcp, 443)]
@@ -170,7 +159,14 @@ class ProtocolViewController: UITableViewController {
             Application.shared.settings.connectionProtocol = protocols[index]
             tableView.reloadData()
             NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-            evaluateReconnect(sender: view)
+        }
+    }
+    
+    @objc private func protocolSelected() {
+        if let navigationController = navigationController {
+            evaluateReconnect(sender: navigationController.navigationBar)
+        } else {
+            evaluateReconnect(sender: tableView.headerView(forSection: 0) ?? tableView)
         }
     }
     
@@ -254,8 +250,7 @@ extension ProtocolViewController {
         }
         
         if connectionProtocol == .openvpn(.udp, 0) || connectionProtocol == .wireguard(.udp, 0) {
-            selectPreferredProtocolAndPort(connectionProtocol: connectionProtocol)
-            tableView.deselectRow(at: indexPath, animated: true)
+            performSegue(withIdentifier: "PortSettings", sender: self)
             return
         }
         

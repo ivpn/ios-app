@@ -58,6 +58,7 @@ class StorageManager {
     static func clearSession() {
         remove(entityName: "Network")
         remove(entityName: "Server")
+        remove(entityName: "CustomPort")
     }
     
     static func remove(entityName: String) {
@@ -152,6 +153,29 @@ extension StorageManager {
                 saveContext()
             }
         }
+    }
+    
+    static func saveCustomPort(vpnProtocol: String = "", type: String = "", port: Int = 0) {
+        let customPort = CustomPort(context: context)
+        customPort.vpnProtocol = vpnProtocol
+        customPort.type = type
+        customPort.port = Int32(port)
+        saveContext()
+    }
+    
+    static func fetchCustomPorts(vpnProtocol: String = "") -> [CustomPort]? {
+        let request: NSFetchRequest<CustomPort> = CustomPort.fetchRequest(vpnProtocol: vpnProtocol)
+        
+        do {
+            let result = try context.fetch(request)
+            if !result.isEmpty {
+                return result
+            }
+        } catch {
+            log(error: "Coult not load collection from StorageManager")
+        }
+        
+        return nil
     }
     
 }

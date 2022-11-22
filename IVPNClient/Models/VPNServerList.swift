@@ -32,6 +32,7 @@ class VPNServerList {
     
     open private(set) var servers: [VPNServer]
     open private(set) var ports: [ConnectionSettings]
+    open private(set) var portRanges: [PortRange]
     
     var filteredFastestServers: [VPNServer] {
         var serversArray = getServers()
@@ -86,6 +87,7 @@ class VPNServerList {
     init(withJSONData data: Data?, storeInCache: Bool = false) {
         servers = [VPNServer]()
         ports = [ConnectionSettings]()
+        portRanges = [PortRange]()
         
         if let jsonData = data {
             var serversList: [[String: Any]]?
@@ -147,6 +149,8 @@ class VPNServerList {
                     ports.append(ConnectionSettings.ipsec)
                     
                     if let openvpn = portsObj["openvpn"] as? [[String: Any]] {
+                        var udpRanges = [CountableClosedRange<Int>]()
+                        var tcpRanges = [CountableClosedRange<Int>]()
                         for port in openvpn {
                             if let portNumber = port["port"] as? Int {
                                 if port["type"] as? String == "TCP" {
@@ -155,13 +159,37 @@ class VPNServerList {
                                     ports.append(ConnectionSettings.openvpn(.udp, portNumber))
                                 }
                             }
+                            if let range = port["range"] as? [String: Any] {
+                                if let min = range["min"] as? Int, let max = range["max"] as? Int {
+                                    if port["type"] as? String == "TCP" {
+                                        tcpRanges.append(min...max)
+                                    } else {
+                                        udpRanges.append(min...max)
+                                    }
+                                }
+                            }
+                        }
+                        if !udpRanges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "OpenVPN", protocolType: "UDP", ranges: udpRanges))
+                        }
+                        if !tcpRanges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "OpenVPN", protocolType: "TCP", ranges: tcpRanges))
                         }
                     }
-                    if let openvpn = portsObj["wireguard"] as? [[String: Any]] {
-                        for port in openvpn {
+                    if let wireguard = portsObj["wireguard"] as? [[String: Any]] {
+                        var ranges = [CountableClosedRange<Int>]()
+                        for port in wireguard {
                             if let portNumber = port["port"] as? Int {
                                 ports.append(ConnectionSettings.wireguard(.udp, portNumber))
                             }
+                            if let range = port["range"] as? [String: Any] {
+                                if let min = range["min"] as? Int, let max = range["max"] as? Int {
+                                    ranges.append(min...max)
+                                }
+                            }
+                        }
+                        if !ranges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "WireGuard", protocolType: "UDP", ranges: ranges))
                         }
                     }
                 }
@@ -291,6 +319,10 @@ class VPNServerList {
     
     func sortServers() {
         servers = VPNServerList.sort(servers)
+    }
+    
+    func getPortRanges(tunnelType: String) -> [PortRange] {
+        return portRanges.filter { $0.tunnelType == tunnelType }
     }
     
     static func sort(_ servers: [VPNServer]) -> [VPNServer] {
