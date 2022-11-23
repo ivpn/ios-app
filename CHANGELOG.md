@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.7.0 - Unreleased  
+## 2.7.0 - 2022-11-23  
 
 [NEW] Ability to connect to a specific host in a location  
 [NEW] Support for custom ports  
