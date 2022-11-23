@@ -56,6 +56,10 @@ class LoginViewController: UIViewController {
     // MARK: - @IBActions -
     
     @IBAction func loginToAccount(_ sender: AnyObject) {
+        guard evaluatePasscode() else {
+            return
+        }
+        
         guard UserDefaults.shared.hasUserConsent else {
             actionType = .login
             present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
@@ -67,6 +71,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
+        guard evaluatePasscode() else {
+            return
+        }
+        
         guard UserDefaults.shared.hasUserConsent else {
             actionType = .signup
             present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
@@ -81,7 +89,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func restorePurchases(_ sender: AnyObject) {
-        guard deviceCanMakePurchases() else { return }
+        guard evaluatePasscode() else {
+            return
+        }
+        
+        guard deviceCanMakePurchases() else {
+            return
+        }
         
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Restoring purchases..."
@@ -429,6 +443,10 @@ extension LoginViewController: ScannerViewControllerDelegate {
     
     func qrCodeFound(code: String) {
         userName.text = code
+        
+        guard evaluatePasscode() else {
+            return
+        }
         
         guard UserDefaults.shared.hasUserConsent else {
             DispatchQueue.async {

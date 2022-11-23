@@ -413,7 +413,7 @@ class VPNManager {
         }
         
         do {
-            try session.sendProviderMessage(Message.requestLog.data) { data in
+            try session.sendProviderMessage(Message.requestLog.data) { _ in
                 completion(nil)
                 return
             }

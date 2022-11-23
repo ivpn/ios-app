@@ -123,6 +123,7 @@ class SessionManager {
             switch result {
             case .success(let model):
                 Application.shared.serviceStatus = model.serviceStatus
+                NotificationCenter.default.post(name: Notification.Name.EvaluatePlanUpdate, object: nil)
                 
                 if model.serviceActive {
                     self.delegate?.sessionStatusSuccess()

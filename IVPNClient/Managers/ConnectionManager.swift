@@ -533,7 +533,7 @@ class ConnectionManager {
         }
         
         getWireGuardLog { _ in
-            var wireGuardLog: String? = nil
+            var wireGuardLog: String?
             let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
             if let file = NSData(contentsOfFile: filePath) {
                 wireGuardLog = String(data: file as Data, encoding: .utf8) ?? ""

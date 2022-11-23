@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.7.0 - 2022-11-23  
+
+[NEW] Ability to connect to a specific host in a location  
+[NEW] Support for custom ports  
+[IMPROVED] Warning about existing VPN connection(s) when downgrading subscription plan  
+[FIXED] IPv6 connection information not displayed on iOS 16+ devices  
+[FIXED] Port number displayed in the settings when MultiHop is enabled  
+
 ## 2.6.3 - 2022-05-17  
 
 [IMPROVED] Option to select UDP or TCP when using OpenVPN MultiHop  

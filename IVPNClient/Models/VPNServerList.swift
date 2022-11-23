@@ -31,6 +31,8 @@ class VPNServerList {
     // MARK: - Properties -
     
     open private(set) var servers: [VPNServer]
+    open private(set) var ports: [ConnectionSettings]
+    open private(set) var portRanges: [PortRange]
     
     var filteredFastestServers: [VPNServer] {
         var serversArray = getServers()
@@ -84,6 +86,8 @@ class VPNServerList {
     // and optionally save it to the cache file for later access
     init(withJSONData data: Data?, storeInCache: Bool = false) {
         servers = [VPNServer]()
+        ports = [ConnectionSettings]()
+        portRanges = [PortRange]()
         
         if let jsonData = data {
             var serversList: [[String: Any]]?
@@ -140,6 +144,55 @@ class VPNServerList {
                         UserDefaults.shared.set(ips, forKey: UserDefaults.Key.ipv6HostNames)
                     }
                 }
+                
+                if let portsObj = config["ports"] as? [String: Any] {
+                    ports.append(ConnectionSettings.ipsec)
+                    
+                    if let openvpn = portsObj["openvpn"] as? [[String: Any]] {
+                        var udpRanges = [CountableClosedRange<Int>]()
+                        var tcpRanges = [CountableClosedRange<Int>]()
+                        for port in openvpn {
+                            if let portNumber = port["port"] as? Int {
+                                if port["type"] as? String == "TCP" {
+                                    ports.append(ConnectionSettings.openvpn(.tcp, portNumber))
+                                } else {
+                                    ports.append(ConnectionSettings.openvpn(.udp, portNumber))
+                                }
+                            }
+                            if let range = port["range"] as? [String: Any] {
+                                if let min = range["min"] as? Int, let max = range["max"] as? Int {
+                                    if port["type"] as? String == "TCP" {
+                                        tcpRanges.append(min...max)
+                                    } else {
+                                        udpRanges.append(min...max)
+                                    }
+                                }
+                            }
+                        }
+                        if !udpRanges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "OpenVPN", protocolType: "UDP", ranges: udpRanges))
+                        }
+                        if !tcpRanges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "OpenVPN", protocolType: "TCP", ranges: tcpRanges))
+                        }
+                    }
+                    if let wireguard = portsObj["wireguard"] as? [[String: Any]] {
+                        var ranges = [CountableClosedRange<Int>]()
+                        for port in wireguard {
+                            if let portNumber = port["port"] as? Int {
+                                ports.append(ConnectionSettings.wireguard(.udp, portNumber))
+                            }
+                            if let range = port["range"] as? [String: Any] {
+                                if let min = range["min"] as? Int, let max = range["max"] as? Int {
+                                    ranges.append(min...max)
+                                }
+                            }
+                        }
+                        if !ranges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "WireGuard", protocolType: "UDP", ranges: ranges))
+                        }
+                    }
+                }
             }
         }
     }
@@ -166,6 +219,25 @@ class VPNServerList {
         return servers
     }
     
+    func getAllHosts(_ servers: [VPNServer]? = nil) -> [VPNServer] {
+        var allHosts: [VPNServer] = []
+        let allServers = servers ?? getServers()
+        
+        for server in allServers {
+            if server.isHost {
+                continue
+            }
+            
+            allHosts.append(server)
+            
+            for host in server.hosts {
+                allHosts.append(VPNServer(gateway: host.hostName, countryCode: server.countryCode, country: "", city: server.city, load: host.load))
+            }
+        }
+        
+        return allHosts
+    }
+    
     func getServer(byIpAddress ipAddress: String) -> VPNServer? {
         return getServers().first { $0.ipAddresses.first { $0 == ipAddress } != nil }
     }
@@ -176,6 +248,22 @@ class VPNServerList {
     
     func getServer(byCity city: String) -> VPNServer? {
         return getServers().first { $0.city == city }
+    }
+    
+    func getServer(byPrefix prefix: String) -> VPNServer? {
+        return getAllHosts().first { $0.gateway.hasPrefix(prefix) }
+    }
+    
+    func getHost(_ host: Host?) -> Host? {
+        guard let host = host else {
+            return nil
+        }
+        
+        if let serverHost = getServer(byPrefix: host.hostNamePrefix()), let server = getServer(byCity: serverHost.city) {
+            return server.getHost(fromPrefix: host.hostNamePrefix())
+        }
+        
+        return nil
     }
     
     func getFastestServer() -> VPNServer? {
@@ -233,6 +321,10 @@ class VPNServerList {
         servers = VPNServerList.sort(servers)
     }
     
+    func getPortRanges(tunnelType: String) -> [PortRange] {
+        return portRanges.filter { $0.tunnelType == tunnelType }
+    }
+    
     static func sort(_ servers: [VPNServer]) -> [VPNServer] {
         let sort = ServersSort.init(rawValue: UserDefaults.shared.serversSort)
         var servers = servers
@@ -274,9 +366,11 @@ class VPNServerList {
                     
                     var newHost = Host(
                         host: host["host"] as? String ?? "",
+                        hostName: host["hostname"] as? String ?? "",
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
-                        multihopPort: host["multihop_port"] as? Int ?? 0
+                        multihopPort: host["multihop_port"] as? Int ?? 0,
+                        load: host["load"] as? Double ?? 0
                     )
                     
                     if let ipv6 = host["ipv6"] as? [String: Any] {
