@@ -25,6 +25,14 @@ import UIKit
 
 extension UIApplication {
     
+    public var isSplitOrSlideOver: Bool {
+        guard let window = self.windows.filter({ $0.isKeyWindow }).first else {
+            return false
+        }
+
+        return !(window.frame.width == window.screen.bounds.width) && !(window.frame.width == window.screen.bounds.height)
+    }
+    
     class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {
             return topViewController(base: nav.visibleViewController)

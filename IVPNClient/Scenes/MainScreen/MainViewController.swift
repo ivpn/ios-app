@@ -110,14 +110,26 @@ class MainViewController: UIViewController {
     // MARK: - Interface Orientations -
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        floatingPanel.updateLayout()
-        mainView.updateLayout()
+        refreshUI()
+    }
+    
+    override func viewLayoutMarginsDidChange() {
+        DispatchQueue.async { [self] in
+            refreshUI()
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        DispatchQueue.async { [self] in
+            refreshUI()
+        }
     }
     
     // MARK: - Methods -
     
     func refreshUI() {
         updateFloatingPanelLayout()
+        mainView.updateLayout()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus, animated: Bool = true) {
@@ -244,7 +256,7 @@ class MainViewController: UIViewController {
             
             updateStatus(vpnStatus: status, animated: false)
             
-            Application.shared.connectionManager.onStatusChanged { status in
+            Application.shared.connectionManager.onStatusChanged { [self] status in
                 updateStatus(vpnStatus: status)
             }
         }

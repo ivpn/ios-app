@@ -75,7 +75,7 @@ class MapScrollView: UIScrollView {
     // MARK: - Methods -
     
     func setupConstraints() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             snp.remakeConstraints { make in
                 make.top.equalTo(MapConstants.Container.iPadLandscapeTopAnchor)
                 make.left.equalTo(MapConstants.Container.iPadLandscapeLeftAnchor)
@@ -121,8 +121,8 @@ class MapScrollView: UIScrollView {
     }
     
     func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
-        let halfWidth = Double(UIScreen.main.bounds.width / 2)
-        let halfHeight = Double(UIScreen.main.bounds.height / 2)
+        let halfWidth = UIApplication.shared.isSplitOrSlideOver ? Double(frame.width / 2) : Double(UIScreen.main.bounds.width / 2)
+        let halfHeight = UIApplication.shared.isSplitOrSlideOver ? Double(frame.height / 2) : Double(UIScreen.main.bounds.height / 2)
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
         let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
         let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
