@@ -48,7 +48,7 @@ class FileSystemManager {
     }
     
     static func loadDataFromResource(resourceName: String, resourceType: String, bundle: Bundle? = nil) -> Data? {
-        let bundle = bundle ?? Bundle.main        
+        let bundle = bundle ?? Bundle.main
         let resource = bundle.path(forResource: resourceName, ofType: resourceType)
         
         guard resource != nil else {
@@ -71,6 +71,7 @@ class FileSystemManager {
     }
     
     static func clearSession() {
+        resetLogFile(name: Config.appLogFile)
         resetLogFile(name: Config.openVPNLogFile)
         resetLogFile(name: Config.wireGuardLogFile)
     }
@@ -136,6 +137,10 @@ class FileSystemManager {
     }
     
     static func createLogFiles() {
+        if fileExists(name: Config.appLogFile) {
+            resetLogFile(name: Config.appLogFile)
+        }
+        
         if fileExists(name: Config.openVPNLogFile) {
             resetLogFile(name: Config.openVPNLogFile)
         }

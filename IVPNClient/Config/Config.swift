@@ -54,6 +54,7 @@ struct Config {
     
     // Files and Directories
     static let serversListCacheFileName = "servers_cache1.json"
+    static let appLogFile = "AppLogs.txt"
     static let openVPNLogFile = "OpenVPNLogs.txt"
     static let wireGuardLogFile = "WireGuardLogs.txt"
     
