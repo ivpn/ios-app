@@ -350,7 +350,7 @@ extension AppDelegate: UIApplicationDelegate {
                 }
             }
         default:
-            log(info: "No such user activity")
+            log(.info, message: "No such user activity")
         }
         
         return false

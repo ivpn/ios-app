@@ -69,7 +69,7 @@ class Authentication {
     func removeStoredCredentials() {
         KeyChain.username = nil
         
-        log(info: "Credentials removed from Key Chain")
+        log(.info, message: "Credentials removed from Key Chain")
     }
     
     func getStoredUsername() -> String {

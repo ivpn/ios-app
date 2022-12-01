@@ -108,7 +108,7 @@ class VPNServerList {
                 }
             } catch {
                 let errorMessage = "Provided data cannot be deserialized: \(error)"
-                log(error: errorMessage)
+                log(.error, message: errorMessage)
                 return
             }
             

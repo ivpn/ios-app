@@ -408,7 +408,7 @@ class ConnectionManager {
             return
         }
         
-        log(info: "Evaluating VPN connection for Network Protection")
+        log(.info, message: "Evaluating VPN connection for Network Protection")
         
         guard let networkTrust = Application.shared.network.trust else {
             return

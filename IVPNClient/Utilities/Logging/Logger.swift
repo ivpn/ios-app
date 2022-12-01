@@ -120,11 +120,3 @@ func wg_log(_ type: OSLogType, message: String) {
     os_log("%{public}s", log: OSLog.default, type: type, log)
     logger.wireguard?.log(message: log)
 }
-
-func log(info: String) {
-    log(.info, message: info)
-}
-
-func log(error: String) {
-    log(.error, message: error)
-}

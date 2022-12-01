@@ -43,7 +43,7 @@ class FileSystemManager {
         do {
             try FileManager.default.removeItem(at: fileNameUrl)
         } catch {
-            log(error: "There was an error deleting file URL \(fileNameUrl). Error: \(error)")
+            log(.error, message: "There was an error deleting file URL \(fileNameUrl). Error: \(error)")
         }
     }
     
@@ -52,7 +52,7 @@ class FileSystemManager {
         let resource = bundle.path(forResource: resourceName, ofType: resourceType)
         
         guard resource != nil else {
-            log(error: "Cannot read defaults file")
+            log(.error, message: "Cannot read defaults file")
             return nil
         }
         
@@ -63,7 +63,7 @@ class FileSystemManager {
         let data = try? Data(contentsOf: resource)
         
         guard data != nil else {
-            log(error: "Cannot initialize data from the resource file: \(resource)")
+            log(.error, message: "Cannot initialize data from the resource file: \(resource)")
             return nil
         }
         
@@ -84,7 +84,7 @@ class FileSystemManager {
         if !FileManager.default.fileExists(atPath: file) {
             FileManager.default.createFile(atPath: file, contents: nil, attributes: nil)
         } else {
-            log(error: "File is already created")
+            log(.error, message: "File is already created")
         }
     }
     
@@ -112,7 +112,7 @@ class FileSystemManager {
         do {
             try textToWrite.write(to: file, atomically: false, encoding: String.Encoding.utf8)
         } catch let error {
-            log(error: "Something went wrong: \(error)")
+            log(.error, message: "Something went wrong: \(error)")
         }
     }
     
