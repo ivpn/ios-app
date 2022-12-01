@@ -56,6 +56,17 @@ class Logger {
         return write_log_to_file(targetFile, self.log) == 0
     }
     
+    static func formatMessage(type: OSLogType, message: String) -> String {
+        switch type {
+        case .debug:
+            return "DEBUG \(message)"
+        case .error:
+            return "ERROR \(message)"
+        default:
+            return "INFO \(message)"
+        }
+    }
+    
 }
 
 struct SharedLogger {
@@ -81,35 +92,39 @@ struct SharedLogger {
 let logger = SharedLogger()
 
 func log(_ type: OSLogType, message: String) {
+    let log = Logger.formatMessage(type: type, message: message)
+    
     guard UserDefaults.shared.isLogging else {
+        #if DEBUG
+        os_log("%{public}s", log: OSLog.default, type: type, log)
+        #endif
+        
         return
     }
     
-    os_log("[INFO] %{public}s", log: OSLog.default, type: type, message)
-    logger.app?.log(message: "\(message)")
+    os_log("%{public}s", log: OSLog.default, type: type, log)
+    logger.app?.log(message: log)
 }
 
 func wg_log(_ type: OSLogType, message: String) {
+    let log = Logger.formatMessage(type: type, message: message)
+    
     guard UserDefaults.shared.isLogging else {
+        #if DEBUG
+        os_log("%{public}s", log: OSLog.default, type: type, log)
+        #endif
+        
         return
     }
-
-    os_log("[INFO] %{public}s", log: OSLog.default, type: type, message)
-    logger.wireguard?.log(message: "\(message)")
+    
+    os_log("%{public}s", log: OSLog.default, type: type, log)
+    logger.wireguard?.log(message: log)
 }
 
 func log(info: String) {
-    #if DEBUG
-    print("[INFO] \(info)")
-    #endif
-    
     log(.info, message: info)
 }
 
 func log(error: String) {
-    #if DEBUG
-    print("[ERROR] \(error)")
-    #endif
-    
     log(.error, message: error)
 }
