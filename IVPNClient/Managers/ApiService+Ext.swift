@@ -32,7 +32,7 @@ extension ApiService {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        log(.info, message:  "Fetching servers list...")
+        log(.info, message:  "Load servers")
         
         APIClient().perform(request) { result in
             switch result {
@@ -47,16 +47,16 @@ extension ApiService {
                     let serversList = VPNServerList(withJSONData: data, storeInCache: storeInCache)
                     
                     if serversList.servers.count > 0 {
-                        log(.info, message: "Fetching servers list completed successfully")
+                        log(.info, message: "Load servers success")
                         completion(.success(serversList))
                         return
                     }
                 }
                 
-                log(.info, message: "Error updating servers list (probably parsing error)")
+                log(.info, message: "Load servers error (probably parsing error)")
                 completion(.error)
             case .failure:
-                log(.info, message: "Error fetching servers list")
+                log(.info, message: "Load servers error")
                 completion(.error)
             }
         }

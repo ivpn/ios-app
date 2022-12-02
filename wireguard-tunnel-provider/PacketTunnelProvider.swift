@@ -175,6 +175,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                         return
                     }
                     
+                    wg_log(.info, message: "Update config with new key")
                     self.updateWgConfig(key: "private_key", value: privateKeyHex)
                     completion(nil)
                 }
