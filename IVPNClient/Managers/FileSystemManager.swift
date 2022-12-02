@@ -121,7 +121,7 @@ class FileSystemManager {
             createSharedFile(name: name)
         }
         
-        writeToSharedFile(text: "\(Date.logTime()) \(UIDevice.logInfo())\n", name: name)
+        writeToSharedFile(text: "\(UIDevice.logInfo())\n", name: name)
     }
     
     static func updateLogFile(newestLog: String?, name: String, isLoggedIn: Bool) {
