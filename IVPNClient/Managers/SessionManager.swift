@@ -75,33 +75,42 @@ class SessionManager {
                 Application.shared.authentication.logIn(session: model)
                 
                 if !model.serviceStatus.isActive {
+                    log(.info, message: "Create session error: createSessionServiceNotActive")
                     self.delegate?.createSessionServiceNotActive()
                     return
                 }
                 
+                log(.info, message: "Create session success")
                 self.delegate?.createSessionSuccess()
             case .failure(let error):
                 if let error = error {                    
                     switch error.status {
                     case 401:
+                        log(.info, message: "Create session error: createSessionAuthenticationError")
                         self.delegate?.createSessionAuthenticationError()
                         return
                     case 602:
+                        log(.info, message: "Create session error: createSessionTooManySessions")
                         self.delegate?.createSessionTooManySessions(error: error)
                         return
                     case 11005:
+                        log(.info, message: "Create session error: createSessionAccountNotActivated")
                         self.delegate?.createSessionAccountNotActivated(error: error)
                         return
                     case 70011:
+                        log(.info, message: "Create session error: twoFactorRequired")
                         self.delegate?.twoFactorRequired(error: error)
                         return
                     case 70012:
+                        log(.info, message: "Create session error: twoFactorIncorrect")
                         self.delegate?.twoFactorIncorrect(error: error)
                         return
                     case 70001:
+                        log(.info, message: "Create session error: captchaRequired")
                         self.delegate?.captchaRequired(error: error)
                         return
                     case 70002:
+                        log(.info, message: "Create session error: captchaIncorrect")
                         self.delegate?.captchaIncorrect(error: error)
                         return
                     default:
@@ -109,6 +118,7 @@ class SessionManager {
                     }
                 }
                 
+                log(.info, message: "Create session error: \(error.debugDescription)")
                 self.delegate?.createSessionFailure(error: error)
             }
         }
@@ -126,11 +136,13 @@ class SessionManager {
                 NotificationCenter.default.post(name: Notification.Name.EvaluatePlanUpdate, object: nil)
                 
                 if model.serviceActive {
+                    log(.info, message: "Session status success, status: active")
                     self.delegate?.sessionStatusSuccess()
                     return
                 }
                 
                 if model.serviceExpired {
+                    log(.info, message: "Session status success, status: expired")
                     self.delegate?.sessionStatusExpired()
                     return
                 }
@@ -138,6 +150,7 @@ class SessionManager {
                 self.delegate?.sessionStatusFailure()
             case .failure(let error):
                 if error?.code == 601 {
+                    log(.info, message: "Session status error: sessionStatusNotFound")
                     self.delegate?.sessionStatusNotFound()
                     return
                 }
@@ -146,6 +159,7 @@ class SessionManager {
                     Application.shared.serviceStatus.isActive = false
                 }
                 
+                log(.info, message: "Session status error: \(error.debugDescription)")
                 self.delegate?.sessionStatusFailure()
             }
         }
@@ -166,11 +180,14 @@ class SessionManager {
             switch result {
             case .success(let model):
                 if model.statusOK {
+                    log(.info, message: "Session delete success, status: \(model.status)")
                     self.delegate?.deleteSessionSuccess()
                 } else {
+                    log(.info, message: "Session delete error, status: \(model.status)")
                     self.delegate?.deleteSessionFailure()
                 }
-            case .failure:
+            case .failure(let error):
+                log(.info, message: "Session delete error: \(error.debugDescription)")
                 self.delegate?.deleteSessionFailure()
             }
         }

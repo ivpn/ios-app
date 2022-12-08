@@ -47,7 +47,7 @@ class ApiManager {
             request.queryItems = params
         }
         
-        log(info: "\(requestName) started")
+        wg_log(.info, message: "\(requestName) started")
         
         APIClient().perform(request) { result in
             switch result {
@@ -59,15 +59,15 @@ class ApiManager {
                     do {
                         let successResponse = try decoder.decode(T.self, from: data)
                         completion(.success(successResponse))
-                        log(info: "\(requestName) success")
+                        wg_log(.info, message: "\(requestName) success")
                         return
                     } catch {}
                 }
                 
                 completion(.failure(nil))
-                log(info: "\(requestName) parse error")
+                wg_log(.info, message: "\(requestName) parse error")
             case .failure:
-                log(info: "\(requestName) failure")
+                wg_log(.info, message: "\(requestName) failure")
                 completion(.failure(nil))
             }
         }

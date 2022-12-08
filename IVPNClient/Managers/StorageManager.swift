@@ -35,7 +35,7 @@ class StorageManager {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores(completionHandler: { _, error in
             if let error = error as NSError? {
-                log(error: "Unresolved error \(error), \(error.userInfo)")
+                log(.error, message: "Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
@@ -50,7 +50,7 @@ class StorageManager {
                 try context.save()
             } catch {
                 let nserror = error as NSError
-                log(error: "Unresolved error \(nserror), \(nserror.userInfo)")
+                log(.error, message: "Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
@@ -108,7 +108,7 @@ extension StorageManager {
                 return result
             }
         } catch {
-            log(error: "Coult not load collection from StorageManager")
+            log(.error, message: "Coult not load collection from StorageManager")
         }
         
         return nil
@@ -172,7 +172,7 @@ extension StorageManager {
                 return result
             }
         } catch {
-            log(error: "Coult not load collection from StorageManager")
+            log(.error, message: "Coult not load collection from StorageManager")
         }
         
         return nil
@@ -347,7 +347,7 @@ extension StorageManager {
                 return result
             }
         } catch {
-            log(error: "Coult not load collection from StorageManager")
+            log(.error, message: "Coult not load collection from StorageManager")
         }
         
         return nil

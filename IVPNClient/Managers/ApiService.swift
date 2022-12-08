@@ -49,7 +49,7 @@ class ApiService {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        log(info: "\(requestName) started")
+        log(.info, message: "\(requestName) started")
         
         APIClient().perform(request) { result in
             DispatchQueue.main.async {
@@ -64,7 +64,7 @@ class ApiService {
                         do {
                             let successResponse = try decoder.decode(T.self, from: data)
                             completion(.success(successResponse))
-                            log(info: "\(requestName) success")
+                            log(.info, message: "\(requestName) success")
                             return
                         } catch {}
                         
@@ -72,15 +72,15 @@ class ApiService {
                             let errorResponse = try decoder.decode(ErrorResult.self, from: data)
                             let error = self.getServiceError(message: errorResponse.message, code: errorResponse.status)
                             completion(.failure(error))
-                            log(info: "\(requestName) error response")
+                            log(.info, message: "\(requestName) error response")
                             return
                         } catch {}
                     }
                     
                     completion(.failure(nil))
-                    log(info: "\(requestName) parse error")
+                    log(.info, message: "\(requestName) parse error")
                 case .failure(let error):
-                    log(info: "\(requestName) failure")
+                    log(.info, message: "\(requestName) failure")
                     completion(.failure(error))
                 }
             }
@@ -97,7 +97,7 @@ class ApiService {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        log(info: "\(requestName) started")
+        log(.info, message: "\(requestName) started")
         
         APIClient().perform(request) { result in
             DispatchQueue.main.async {
@@ -112,22 +112,22 @@ class ApiService {
                         do {
                             let successResponse = try decoder.decode(T.self, from: data)
                             completion(.success(successResponse))
-                            log(info: "\(requestName) success")
+                            log(.info, message: "\(requestName) success")
                             return
                         } catch {}
                         
                         do {
                             let errorResponse = try decoder.decode(E.self, from: data)
                             completion(.failure(errorResponse))
-                            log(info: "\(requestName) error response")
+                            log(.info, message: "\(requestName) error response")
                             return
                         } catch {}
                     }
                     
                     completion(.failure(nil))
-                    log(info: "\(requestName) parse error")
+                    log(.info, message: "\(requestName) parse error")
                 case .failure:
-                    log(info: "\(requestName) failure")
+                    log(.info, message: "\(requestName) failure")
                     completion(.failure(nil))
                 }
             }

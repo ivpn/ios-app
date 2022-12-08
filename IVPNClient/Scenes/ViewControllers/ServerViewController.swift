@@ -307,6 +307,8 @@ extension ServerViewController {
             }
         }
         
+        log(.info, message: "Update selected server = \(Application.shared.settings.selectedServer.city)")
+        
         if isPresentedModally {
             navigationController?.dismiss(animated: true)
         } else {
