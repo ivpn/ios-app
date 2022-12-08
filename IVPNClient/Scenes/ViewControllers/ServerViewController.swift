@@ -180,14 +180,14 @@ class ServerViewController: UITableViewController {
     }
     
     private func expandHost(_ server: VPNServer) -> Bool {
-        return expandedGateways.contains(server.hostGateway)
+        return expandedGateways.contains(server.city)
     }
     
     private func toggleExpandedGateways(_ server: VPNServer) {
-        if expandedGateways.contains(server.hostGateway) {
-            expandedGateways = expandedGateways.filter { $0 != server.gateway }
+        if expandedGateways.contains(server.city) {
+            expandedGateways = expandedGateways.filter { $0 != server.city }
         } else {
-            expandedGateways.append(server.gateway)
+            expandedGateways.append(server.city)
         }
     }
     
@@ -306,6 +306,8 @@ extension ServerViewController {
                 Application.shared.connectionManager.reconnect()
             }
         }
+        
+        log(.info, message: "Update selected server = \(Application.shared.settings.selectedServer.city)")
         
         if isPresentedModally {
             navigationController?.dismiss(animated: true)

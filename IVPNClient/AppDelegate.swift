@@ -166,6 +166,10 @@ class AppDelegate: UIResponder {
                 }
             })
         case Config.urlTypeLogin:
+            if let _ = UIApplication.topViewController() as? LoginViewController {
+                return
+            }
+            
             if let topViewController = UIApplication.topViewController() {
                 topViewController.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
             }
@@ -350,7 +354,7 @@ extension AppDelegate: UIApplicationDelegate {
                 }
             }
         default:
-            log(info: "No such user activity")
+            log(.info, message: "No such user activity")
         }
         
         return false

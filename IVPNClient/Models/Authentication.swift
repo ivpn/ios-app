@@ -69,18 +69,14 @@ class Authentication {
     func removeStoredCredentials() {
         KeyChain.username = nil
         
-        log(info: "Credentials removed from Key Chain")
+        log(.info, message: "Credentials removed from Key Chain")
     }
     
     func getStoredUsername() -> String {
-        log(info: "Username read from Key Chain")
-        
         return KeyChain.username ?? ""
     }
     
     func getStoredSessionToken() -> String {
-        log(info: "Session token read from Key Chain")
-        
         return KeyChain.sessionToken ?? ""
     }
     

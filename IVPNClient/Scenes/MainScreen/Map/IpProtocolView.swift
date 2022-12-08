@@ -67,7 +67,7 @@ class IpProtocolView: UIView {
     }
     
     func updateLayout() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UIDevice.current.userInterfaceIdiom == .pad && !UIApplication.shared.isSplitOrSlideOver {
             topConstraint.constant = 40
             
             if UIApplication.shared.statusBarOrientation.isLandscape {

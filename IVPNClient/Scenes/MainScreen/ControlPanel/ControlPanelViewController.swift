@@ -174,7 +174,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     func connect() {
-        log(info: "Connect VPN")
+        log(.info, message: "Connect VPN")
         
         guard evaluateIsNetworkReachable() else {
             controlPanelView.connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
@@ -227,7 +227,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc func disconnect() {
-        log(info: "Disconnect VPN")
+        log(.info, message: "Disconnect VPN")
         
         let manager = Application.shared.connectionManager
         

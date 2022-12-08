@@ -105,8 +105,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler(error)
         }
         
-        Logger.configureGlobal(tagged: "INFO", withFilePath: FileManager.logFileURL?.path)
-        setupLogging()
         wg_log(.info, message: "Starting tunnel")
         wg_log(.info, message: "Public key: \(KeyChain.wgPublicKey ?? "")")
         wg_log(.info, message: "Addresses: \(addresses)")
@@ -122,7 +120,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        wg_log(.info, staticMessage: "Stopping tunnel")
+        wg_log(.info, message: "Stopping tunnel")
         
         networkMonitor?.cancel()
         networkMonitor = nil
@@ -132,16 +130,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         
         completionHandler()
-    }
-    
-    override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)? = nil) {
-        wg_log(.info, message: "Handle App Message size: \(messageData.count)")
-        
-        if messageData.count == 1 && messageData[0] == 99 {
-            flushLogsToFile()
-        } else {
-            completionHandler?(nil)
-        }
     }
     
     deinit {
@@ -187,6 +175,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                         return
                     }
                     
+                    wg_log(.info, message: "Update config with new key")
                     self.updateWgConfig(key: "private_key", value: privateKeyHex)
                     completion(nil)
                 }
@@ -277,42 +266,4 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         wgSetConfig(handle, settings)
     }
     
-    private func setupLogging() {
-        guard UserDefaults.shared.isLogging else {
-            return
-        }
-        
-        Logger.configureGlobal(tagged: "INFO", withFilePath: FileManager.logFileURL?.path)
-    }
-    
-    private func flushLogsToFile() {
-        guard UserDefaults.shared.isLogging else {
-            return
-        }
-        guard let path = FileManager.logTextFileURL?.path else {
-            return
-        }
-        
-        if Logger.global == nil {
-            setupLogging()
-        }
-        
-        if Logger.global?.writeLog(to: path) ?? false {
-            wg_log(.info, message: "flushLogsToFile written to file \(path) ")
-        } else {
-            wg_log(.info, message: "flushLogsToFile error while writing to file \(path) ")
-        }
-    }
-    
-}
-
-extension WireGuardLogLevel {
-    var osLogLevel: OSLogType {
-        switch self {
-        case .verbose:
-            return .debug
-        case .error:
-            return .error
-        }
-    }
 }

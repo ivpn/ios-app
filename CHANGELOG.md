@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.7.1 - 2022-12-08  
+
+[IMPROVED] Support for Split View and Slide Over mode on iPadOS  
+[IMPROVED] Upgraded app diagnostic logs  
+[FIXED] Crash on app launch caused by Ping service  
+[FIXED] Montreal location not showing all available hosts  
+[FIXED] Minor bug fixes  
+
 ## 2.7.0 - 2022-11-23  
 
 [NEW] Ability to connect to a specific host in a location  
