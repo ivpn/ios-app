@@ -63,7 +63,7 @@ Where <type> can be `epic`, `feature`, `task`, `bugfix`, `hotfix` or `release`.
 
 ### Branches
 
-`master` - The production branch. Clone or fork this repository for the latest copy.  
+`main` - The production branch. Clone or fork this repository for the latest copy.  
 `develop` - The active development branch. Pull requests should be directed to this branch.  
 `<feature branch>` - The feature of fix branch. Pull requests should be made from this branch into `develop` brach.  
 
