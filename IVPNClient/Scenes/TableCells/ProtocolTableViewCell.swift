@@ -81,11 +81,14 @@ class ProtocolTableViewCell: UITableViewCell {
     private func updateLabel(title: String, isChecked: Bool) {
         protocolLabel.text = title
         protocolSettingsLabel.text = ""
+        isUserInteractionEnabled = !isChecked
         
         if isChecked {
             accessoryType = .checkmark
+            selectionStyle = .none
         } else {
             accessoryType = .none
+            selectionStyle = .default
         }
     }
     
