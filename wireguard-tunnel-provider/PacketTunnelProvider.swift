@@ -107,7 +107,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         wg_log(.info, message: "Starting tunnel")
         wg_log(.info, message: "Public key: \(KeyChain.wgPublicKey ?? "")")
-        wg_log(.info, message: "Addresses: \(addresses)")
         
         setTunnelNetworkSettings(tunnelSettings) { error in
             if error != nil {
