@@ -42,7 +42,7 @@ class ServerViewController: UITableViewController {
     private var collection: [VPNServer] {
         var list = [VPNServer]()
         
-        if isSearchActive {
+        if !searchBar.text!.isEmpty {
             list = filteredCollection
         } else {
             list = Application.shared.serverList.getAllHosts()
@@ -58,10 +58,6 @@ class ServerViewController: UITableViewController {
     }
     
     private var expandedGateways: [String] = []
-    
-    private var isSearchActive: Bool {
-        return !searchBar.text!.isEmpty
-    }
     
     // MARK: - IBActions -
     
