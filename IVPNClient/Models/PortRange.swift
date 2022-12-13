@@ -45,10 +45,8 @@ struct PortRange {
     // MARK: - Methods -
     
     func validate(port: Int) -> String? {
-        for range in ranges {
-            if range.contains(port) {
-                return nil
-            }
+        for range in ranges where range.contains(port) {
+            return nil
         }
         
         return "Enter port number in the range: \(portRangesText)"
@@ -58,22 +56,17 @@ struct PortRange {
         var combined = [CountableClosedRange<Int>]()
         var accumulator = (0...0) // empty range
         
-        for interval in intervals.sorted(by: { $0.lowerBound  < $1.lowerBound  } ) {
-            
+        for interval in intervals.sorted(by: { $0.lowerBound  < $1.lowerBound  }) {
             if accumulator == (0...0) {
                 accumulator = interval
             }
             
             if accumulator.upperBound >= interval.upperBound {
                 // interval is already inside accumulator
-            }
-                
-            else if accumulator.upperBound + 1 >= interval.lowerBound  {
+            } else if accumulator.upperBound + 1 >= interval.lowerBound {
                 // interval hangs off the back end of accumulator
                 accumulator = (accumulator.lowerBound...interval.upperBound)
-            }
-                
-            else if accumulator.upperBound <= interval.lowerBound  {
+            } else if accumulator.upperBound <= interval.lowerBound {
                 // interval does not overlap
                 combined.append(accumulator)
                 accumulator = interval

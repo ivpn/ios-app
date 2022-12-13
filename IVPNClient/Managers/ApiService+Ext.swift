@@ -32,7 +32,7 @@ extension ApiService {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        log(.info, message:  "Load servers")
+        log(.info, message: "Load servers")
         
         APIClient().perform(request) { result in
             switch result {

@@ -92,11 +92,9 @@ extension String {
         var array = self.split { $0.isNewline }
         array = array.reversed()
         
-        for line in array {
-            if line.contains(from) {
-                let string = line.substring(from: from, to: to)
-                return string?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-            }
+        for line in array where line.contains(from) {
+            let string = line.substring(from: from, to: to)
+            return string?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         }
         
         return ""
