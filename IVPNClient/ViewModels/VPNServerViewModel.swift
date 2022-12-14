@@ -48,7 +48,7 @@ struct VPNServerViewModel {
             return "\(server.city) (\(hostNameComponents[0]))"
         }
         
-        return formattedServerName
+        return server.city
     }
     
     var imageForCountryCodeForMainScreen: UIImage? {
@@ -106,7 +106,7 @@ struct VPNServerViewModel {
             return server.gateway
         }
         
-        return "\(server.city)"
+        return "\(server.city), \(server.countryCode.uppercased())"
     }
     
     var imageForCountryCode: UIImage? {
