@@ -2983,11 +2983,13 @@
                             <outlet property="disableMultiHopButton" destination="OqR-DO-cQW" id="8cm-DY-7uM"/>
                             <outlet property="enableMultiHopButton" destination="g3l-2N-46o" id="i31-77-ICj"/>
                             <outlet property="entryServerConnectionLabel" destination="XmW-6n-K3I" id="evK-6i-AgV"/>
+                            <outlet property="entryServerCountryLabel" destination="REv-uh-3OR" id="ywD-JI-N11"/>
                             <outlet property="entryServerFlagImage" destination="maa-l9-NZC" id="W0a-Ng-2gh"/>
                             <outlet property="entryServerIPv6Label" destination="yaz-Qm-VKS" id="54h-RW-vlS"/>
                             <outlet property="entryServerNameLabel" destination="03A-CL-eb8" id="4Ps-96-cjw"/>
                             <outlet property="entryServerTableCell" destination="LUl-SD-HiX" id="fSo-MZ-uvY"/>
                             <outlet property="exitServerConnectionLabel" destination="7tt-fV-1FL" id="KeG-c6-k0w"/>
+                            <outlet property="exitServerCountryLabel" destination="9DD-cl-dCi" id="8FW-ze-Zy1"/>
                             <outlet property="exitServerFlagImage" destination="vOo-Yi-Agw" id="RF5-Xe-JQm"/>
                             <outlet property="exitServerIPv6Label" destination="dhc-3C-1aH" id="2qb-KZ-bMi"/>
                             <outlet property="exitServerNameLabel" destination="ctm-zP-IXi" id="FHi-nL-tnB"/>
