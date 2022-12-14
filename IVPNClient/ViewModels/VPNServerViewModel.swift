@@ -45,7 +45,7 @@ struct VPNServerViewModel {
         
         if let selectedHost = selectedHost {
             let hostNameComponents = selectedHost.hostName.components(separatedBy: ".")
-            return "\(server.city) (\(hostNameComponents[0])), \(server.countryCode.uppercased())"
+            return "\(server.city) (\(hostNameComponents[0]))"
         }
         
         return formattedServerName
@@ -106,7 +106,7 @@ struct VPNServerViewModel {
             return server.gateway
         }
         
-        return "\(server.city), \(server.countryCode.uppercased())"
+        return "\(server.city)"
     }
     
     var imageForCountryCode: UIImage? {

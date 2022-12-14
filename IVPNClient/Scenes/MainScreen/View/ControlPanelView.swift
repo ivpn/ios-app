@@ -42,7 +42,6 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var entryServerNameLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
     @IBOutlet weak var entryServerIPv6Label: UILabel!
-    @IBOutlet weak var fastestServerLabel: UIView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var antiTrackerLabel: UILabel!
     @IBOutlet weak var networkView: NetworkViewTableCell!
@@ -112,8 +111,6 @@ class ControlPanelView: UITableView {
     func updateServerNames() {
         updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage, ipv6Label: entryServerIPv6Label, selectedHost: Application.shared.settings.selectedHost)
         updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage, ipv6Label: exitServerIPv6Label, selectedHost: Application.shared.settings.selectedExitHost)
-        
-        fastestServerLabel.isHidden = true
     }
     
     func updateAntiTracker(viewModel: VPNStatusViewModel) {
