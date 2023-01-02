@@ -143,7 +143,7 @@ struct VPNServerViewModel {
             return "\(server.countryCode.uppercased()), \(server.city)"
         }
         
-        return "\(server.city), \(server.countryCode.uppercased())"
+        return server.city
     }
     
 }
