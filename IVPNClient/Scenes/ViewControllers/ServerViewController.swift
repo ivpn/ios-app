@@ -32,6 +32,8 @@ class ServerViewController: UITableViewController {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var emptyView: UIView!
     
     // MARK: - Properties -
     
@@ -146,16 +148,18 @@ class ServerViewController: UITableViewController {
     }
     
     func showEmptyView() {
-        let emptyView = UIView()
-        emptyView.backgroundColor = .systemPink
         tableView.backgroundView = emptyView
         tableView.separatorStyle = .none
+        headerView.frame = CGRectMake(0, 0, headerView.frame.size.width, 41)
+        emptyView.isHidden = false
         searchBar.isHidden = true
     }
     
     func restore() {
         tableView.backgroundView = nil
         tableView.separatorStyle = .singleLine
+        headerView.frame = CGRectMake(0, 0, headerView.frame.size.width, 115)
+        emptyView.isHidden = true
         searchBar.isHidden = false
     }
     
