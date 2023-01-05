@@ -145,6 +145,20 @@ class ServerViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func showEmptyView() {
+        let emptyView = UIView()
+        emptyView.backgroundColor = .systemPink
+        tableView.backgroundView = emptyView
+        tableView.separatorStyle = .none
+        searchBar.isHidden = true
+    }
+    
+    func restore() {
+        tableView.backgroundView = nil
+        tableView.separatorStyle = .singleLine
+        searchBar.isHidden = false
+    }
+    
     // MARK: - Methods -
     
     private func initNavigationBar() {
