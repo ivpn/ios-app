@@ -28,7 +28,6 @@ class ServerTableViewCell: UITableViewCell {
     @IBOutlet weak var flagImage: FlagImageView!
     @IBOutlet weak var serverLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var serverName: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var pingImage: UIImageView!
     @IBOutlet weak var pingTimeMs: UILabel!
     @IBOutlet weak var configureButton: UIButton!
@@ -108,7 +107,6 @@ class ServerTableViewCell: UITableViewCell {
         configureButton.isUserInteractionEnabled = true
         expandButton.isHidden = true
         favoriteButton.isHidden = true
-        countryLabel.isHidden = true
     }
     
     private func setRandomServerCell() {
@@ -119,7 +117,6 @@ class ServerTableViewCell: UITableViewCell {
         configureButton.isUserInteractionEnabled = true
         expandButton.isHidden = true
         favoriteButton.isHidden = true
-        countryLabel.isHidden = true
     }
     
     private func setGatewayServerCell() {
@@ -127,12 +124,10 @@ class ServerTableViewCell: UITableViewCell {
         flagImage.image = viewModel.imageForCountryCode
         flagImage.image?.accessibilityIdentifier = ""
         serverName.text = viewModel.formattedServerName(sort: sort)
-        countryLabel.text = viewModel.server.country
         configureButton.isHidden = true
         configureButton.isUserInteractionEnabled = false
         expandButton.isHidden = !UserDefaults.shared.selectHost
         favoriteButton.isHidden = false
-        countryLabel.isHidden = false
     }
     
     private func setHostServerCell() {
@@ -143,7 +138,6 @@ class ServerTableViewCell: UITableViewCell {
         flagImage.image?.accessibilityIdentifier = ""
         expandButton.isHidden = true
         favoriteButton.isHidden = false
-        countryLabel.isHidden = true
     }
     
     private func setPingTime() {

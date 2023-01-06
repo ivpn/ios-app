@@ -109,6 +109,7 @@ class ServerViewController: UITableViewController {
         initNavigationBar()
         Application.shared.serverList.sortServers()
         tableView.keyboardDismissMode = .onDrag
+        restore()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,16 +150,16 @@ class ServerViewController: UITableViewController {
     
     func showEmptyView() {
         tableView.backgroundView = emptyView
-        tableView.separatorStyle = .none
         headerView.frame = CGRectMake(0, 0, headerView.frame.size.width, 41)
+        emptyView.frame = CGRectMake(0, 0, emptyView.frame.size.width, 320)
         emptyView.isHidden = false
         searchBar.isHidden = true
     }
     
     func restore() {
         tableView.backgroundView = nil
-        tableView.separatorStyle = .singleLine
         headerView.frame = CGRectMake(0, 0, headerView.frame.size.width, 115)
+        emptyView.frame = CGRectMake(0, 0, emptyView.frame.size.width, 0)
         emptyView.isHidden = true
         searchBar.isHidden = false
     }
