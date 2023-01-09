@@ -85,24 +85,23 @@ class ServerTableViewCell: UITableViewCell {
     
     var isMultiHop: Bool!
     
-    var isFavorite: Bool {
-        return StorageManager.isFavorite(server: viewModel.server)
-    }
-    
     // MARK: - IBActions -
     
     @IBAction func toggleFavorite(_ sender: UIButton) {
-        StorageManager.saveServer(gateway: viewModel.server.gateway, isFavorite: isFavorite)
-        sender.setImage(UIImage.init(named: isFavorite ? "icon-star" : "icon-star-on"), for: .normal)
+        let isFavorite = StorageManager.isFavorite(server: viewModel.server)
+        print("isFavorite", isFavorite)
+        StorageManager.saveServer(gateway: viewModel.server.gateway, isFavorite: !isFavorite)
+        sender.setImage(UIImage.init(named: !isFavorite ? "icon-star-on" : "icon-star-off"), for: .normal)
     }
     
     // MARK: - Methods -
     
     private func setCellAppearance() {
+        let isFavorite = StorageManager.isFavorite(server: viewModel.server)
         flagImage.updateUpFlagIcon()
         ipv6Label.isHidden = !viewModel.showIPv6Label
         expandButton.tintColor = UIColor.init(named: Theme.ivpnGray6)
-        favoriteButton.setImage(UIImage.init(named: isFavorite ? "icon-star" : "icon-star-on"), for: .normal)
+        favoriteButton.setImage(UIImage.init(named: isFavorite ? "icon-star-on" : "icon-star-off"), for: .normal)
     }
     
     private func setFastestServerCell() {
