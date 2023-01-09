@@ -85,10 +85,15 @@ class ServerTableViewCell: UITableViewCell {
     
     var isMultiHop: Bool!
     
+    var isFavorite: Bool {
+        return StorageManager.isFavorite(server: viewModel.server)
+    }
+    
     // MARK: - IBActions -
     
     @IBAction func toggleFavorite(_ sender: UIButton) {
-        sender.setImage(UIImage.init(named: "icon-star-on"), for: .normal)
+        StorageManager.saveServer(gateway: viewModel.server.gateway, isFavorite: isFavorite)
+        sender.setImage(UIImage.init(named: isFavorite ? "icon-star" : "icon-star-on"), for: .normal)
     }
     
     // MARK: - Methods -
@@ -97,6 +102,7 @@ class ServerTableViewCell: UITableViewCell {
         flagImage.updateUpFlagIcon()
         ipv6Label.isHidden = !viewModel.showIPv6Label
         expandButton.tintColor = UIColor.init(named: Theme.ivpnGray6)
+        favoriteButton.setImage(UIImage.init(named: isFavorite ? "icon-star" : "icon-star-on"), for: .normal)
     }
     
     private func setFastestServerCell() {
