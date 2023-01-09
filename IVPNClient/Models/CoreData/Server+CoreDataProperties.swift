@@ -28,8 +28,9 @@ extension Server {
     
     @NSManaged public var gateway: String?
     @NSManaged public var isFastestEnabled: Bool
+    @NSManaged public var isFavorite: Bool
     
-    @nonobjc public class func fetchRequest(gateway: String = "", isFastestEnabled: Bool = false) -> NSFetchRequest<Server> {
+    @nonobjc public class func fetchRequest(gateway: String = "", isFastestEnabled: Bool = false, isFavorite: Bool = false) -> NSFetchRequest<Server> {
         let fetchRequest = NSFetchRequest<Server>(entityName: "Server")
         var filters = [NSPredicate]()
         
@@ -39,6 +40,10 @@ extension Server {
         
         if isFastestEnabled {
             filters.append(NSPredicate(format: "isFastestEnabled == %@", NSNumber(value: isFastestEnabled)))
+        }
+        
+        if isFavorite {
+            filters.append(NSPredicate(format: "isFavorite == %@", NSNumber(value: isFavorite)))
         }
         
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: filters)
