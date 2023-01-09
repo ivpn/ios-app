@@ -338,8 +338,20 @@ extension StorageManager {
         saveContext()
     }
     
-    static func fetchServers(gateway: String = "", isFastestEnabled: Bool = false) -> [Server]? {
-        let request: NSFetchRequest<Server> = Server.fetchRequest(gateway: gateway, isFastestEnabled: isFastestEnabled)
+    static func saveServer(gateway: String, isFavorite: Bool) {
+        if let server = fetchServer(gateway: gateway) {
+            server.isFavorite = isFavorite
+        } else {
+            let newServer = Server(context: context)
+            newServer.gateway = gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
+            newServer.isFavorite = isFavorite
+        }
+        
+        saveContext()
+    }
+    
+    static func fetchServers(gateway: String = "", isFastestEnabled: Bool = false, isFavorite: Bool = false) -> [Server]? {
+        let request: NSFetchRequest<Server> = Server.fetchRequest(gateway: gateway, isFastestEnabled: isFastestEnabled, isFavorite: isFavorite)
         
         do {
             let result = try context.fetch(request)
@@ -371,8 +383,18 @@ extension StorageManager {
         return false
     }
     
+    static func isFavorite(server vpnServer: VPNServer) -> Bool {
+        if let server = fetchServer(gateway: vpnServer.gateway) {
+            return server.isFavorite
+        }
+
+        return false
+    }
+    
     static func canUpdateServer(isOn: Bool) -> Bool {
-        guard !isOn else { return true }
+        guard !isOn else {
+            return true
+        }
         
         if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
             if let servers = fetchServers(isFastestEnabled: true) {
