@@ -345,7 +345,7 @@ extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let server = collection[indexPath.row]
-        if server.isHost && !expandHost(server) {
+        if server.isHost && !expandHost(server) && !isFavorite {
             return 0
         }
         
