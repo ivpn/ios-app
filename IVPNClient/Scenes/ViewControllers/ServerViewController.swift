@@ -39,12 +39,9 @@ class ServerViewController: UITableViewController {
     // MARK: - Properties -
     
     var isExitServer = false
+    var isFavorite = false
     var filteredCollection = [VPNServer]()
     weak var serverDelegate: ServerViewControllerDelegate?
-    
-    var isFavorite: Bool {
-        return favoriteControl.selectedSegmentIndex == 1 ? true : false
-    }
     
     private var collection: [VPNServer] {
         var list = [VPNServer]()
@@ -52,7 +49,7 @@ class ServerViewController: UITableViewController {
         if !searchBar.text!.isEmpty {
             list = filteredCollection
         } else {
-            list = Application.shared.serverList.getAllHosts()
+            list = Application.shared.serverList.getAllHosts(isFavorite: isFavorite)
         }
         
         list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
@@ -86,7 +83,7 @@ class ServerViewController: UITableViewController {
             UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
             Application.shared.serverList.sortServers()
             filteredCollection = VPNServerList.sort(filteredCollection)
-            filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection)
+            filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection, isFavorite: isFavorite)
             tableView.reloadData()
         }
     }
@@ -104,6 +101,11 @@ class ServerViewController: UITableViewController {
         }
         
         toggleExpandedGateways(collection[indexPath.row])
+        tableView.reloadData()
+    }
+    
+    @IBAction func toggleFavorite(_ sender: UISegmentedControl) {
+        isFavorite = sender.selectedSegmentIndex == 1
         tableView.reloadData()
     }
     
@@ -364,7 +366,7 @@ extension ServerViewController: UISearchBarDelegate {
             return location.contains(searchBar.text!.lowercased())
         }
         filteredCollection = VPNServerList.sort(filteredCollection)
-        filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection)
+        filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection, isFavorite: isFavorite)
         tableView.reloadData()
     }
     

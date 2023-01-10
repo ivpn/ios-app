@@ -823,6 +823,9 @@
                                                         <segment title="All"/>
                                                         <segment title="Favorites"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="toggleFavorite:" destination="zAv-yM-Pqo" eventType="valueChanged" id="cLT-f0-Z2v"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>

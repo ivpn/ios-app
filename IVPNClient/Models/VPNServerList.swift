@@ -42,10 +42,6 @@ class VPNServerList {
         return getServers()
     }
     
-    var favoriteServers: [VPNServer] {
-        return getAllHosts().filter { StorageManager.isFavorite(server: $0) }
-    }
-    
     var noPing: Bool {
         let serversWithPing = servers.filter { $0.pingMs ?? -1 >= 0 }
         return serversWithPing.isEmpty
@@ -220,7 +216,7 @@ class VPNServerList {
         return servers
     }
     
-    func getAllHosts(_ servers: [VPNServer]? = nil) -> [VPNServer] {
+    func getAllHosts(_ servers: [VPNServer]? = nil, isFavorite: Bool = false) -> [VPNServer] {
         var allHosts: [VPNServer] = []
         let allServers = servers ?? getServers()
         
@@ -234,6 +230,10 @@ class VPNServerList {
             for host in server.hosts {
                 allHosts.append(VPNServer(gateway: host.hostName, countryCode: server.countryCode, country: "", city: server.city, load: host.load))
             }
+        }
+        
+        if isFavorite {
+            return allHosts.filter { StorageManager.isFavorite(server: $0) }
         }
         
         return allHosts

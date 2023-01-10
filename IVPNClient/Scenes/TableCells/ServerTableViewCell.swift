@@ -91,6 +91,10 @@ class ServerTableViewCell: UITableViewCell {
         let isFavorite = StorageManager.isFavorite(server: viewModel.server)
         StorageManager.saveServer(gateway: viewModel.server.gateway, isFavorite: !isFavorite)
         sender.setImage(UIImage.init(named: !isFavorite ? "icon-star-on" : "icon-star-off"), for: .normal)
+        
+        if let tableView = superview as? UITableView {
+            tableView.reloadData()
+        }
     }
     
     // MARK: - Methods -
