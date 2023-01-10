@@ -223,6 +223,12 @@ class ServerViewController: UITableViewController {
 extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFavorite && collection.isEmpty {
+            showEmptyView()
+        } else {
+            restore()
+        }
+        
         return collection.count
     }
     
