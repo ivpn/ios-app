@@ -39,7 +39,9 @@ class ServerViewController: UITableViewController {
     // MARK: - Properties -
     
     var isExitServer = false
-    var isFavorite = false
+    var isFavorite: Bool {
+        return Application.shared.settings.serverListIsFavorite
+    }
     var filteredCollection = [VPNServer]()
     weak var serverDelegate: ServerViewControllerDelegate?
     
@@ -109,7 +111,7 @@ class ServerViewController: UITableViewController {
     }
     
     @IBAction func toggleFavorite(_ sender: UISegmentedControl) {
-        isFavorite = sender.selectedSegmentIndex == 1
+        Application.shared.settings.serverListIsFavorite = sender.selectedSegmentIndex == 1
         tableView.reloadData()
     }
     
@@ -120,6 +122,8 @@ class ServerViewController: UITableViewController {
         initNavigationBar()
         Application.shared.serverList.sortServers()
         tableView.keyboardDismissMode = .onDrag
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
+        favoriteControl.selectedSegmentIndex = Application.shared.settings.serverListIsFavorite ? 1 : 0
         restore()
     }
     

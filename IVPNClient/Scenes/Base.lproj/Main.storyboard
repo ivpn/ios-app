@@ -804,7 +804,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                         <color key="sectionIndexColor" name="ivpnLabelPrimary"/>
-                        <color key="sectionIndexBackgroundColor" name="ivpnBackgroundPrimary"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="mxa-PH-5sr">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="115"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
