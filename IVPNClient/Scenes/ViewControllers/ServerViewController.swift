@@ -52,6 +52,10 @@ class ServerViewController: UITableViewController {
             list = Application.shared.serverList.getAllHosts(isFavorite: isFavorite)
         }
         
+        if isFavorite {
+            return list
+        }
+        
         list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
         
         if !UserDefaults.shared.isMultiHop {
@@ -226,6 +230,7 @@ extension ServerViewController {
         let server = collection[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServerTableViewCell", for: indexPath) as! ServerTableViewCell
         cell.isMultiHop = UserDefaults.shared.isMultiHop
+        cell.isFavorite = isFavorite
         cell.indexPath = indexPath
         cell.viewModel = VPNServerViewModel(server: server)
         cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer

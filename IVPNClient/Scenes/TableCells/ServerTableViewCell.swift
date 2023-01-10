@@ -37,9 +37,9 @@ class ServerTableViewCell: UITableViewCell {
     
     var viewModel: VPNServerViewModel! {
         didSet {
-            if !isMultiHop && indexPath.row == 0 {
+            if !isMultiHop && indexPath.row == 0 && !isFavorite {
                 setFastestServerCell()
-            } else if isMultiHop && indexPath.row == 0 || !isMultiHop && indexPath.row == 1 {
+            } else if (isMultiHop && indexPath.row == 0 || !isMultiHop && indexPath.row == 1) && !isFavorite {
                 setRandomServerCell()
             } else if viewModel.server.isHost {
                 setHostServerCell()
@@ -84,6 +84,7 @@ class ServerTableViewCell: UITableViewCell {
     }
     
     var isMultiHop: Bool!
+    var isFavorite = false
     
     // MARK: - IBActions -
     
@@ -100,11 +101,11 @@ class ServerTableViewCell: UITableViewCell {
     // MARK: - Methods -
     
     private func setCellAppearance() {
-        let isFavorite = StorageManager.isFavorite(server: viewModel.server)
+        let isServerFavorite = StorageManager.isFavorite(server: viewModel.server)
         flagImage.updateUpFlagIcon()
         ipv6Label.isHidden = !viewModel.showIPv6Label
         expandButton.tintColor = UIColor.init(named: Theme.ivpnGray6)
-        favoriteButton.setImage(UIImage.init(named: isFavorite ? "icon-star-on" : "icon-star-off"), for: .normal)
+        favoriteButton.setImage(UIImage.init(named: isServerFavorite ? "icon-star-on" : "icon-star-off"), for: .normal)
     }
     
     private func setFastestServerCell() {
@@ -134,7 +135,7 @@ class ServerTableViewCell: UITableViewCell {
         serverName.text = viewModel.formattedServerName(sort: sort)
         configureButton.isHidden = true
         configureButton.isUserInteractionEnabled = false
-        expandButton.isHidden = !UserDefaults.shared.selectHost
+        expandButton.isHidden = !UserDefaults.shared.selectHost || isFavorite
         favoriteButton.isHidden = false
     }
     
@@ -142,10 +143,15 @@ class ServerTableViewCell: UITableViewCell {
         serverName.text = viewModel.formattedServerName
         configureButton.isHidden = true
         configureButton.isUserInteractionEnabled = false
-        flagImage.image = nil
-        flagImage.image?.accessibilityIdentifier = ""
         expandButton.isHidden = true
         favoriteButton.isHidden = false
+        flagImage.image?.accessibilityIdentifier = ""
+        
+        if isFavorite {
+            flagImage.image = viewModel.imageForCountryCode
+        } else {
+            flagImage.image = nil
+        }
     }
     
     private func setPingTime() {
