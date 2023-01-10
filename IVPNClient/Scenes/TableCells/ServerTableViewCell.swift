@@ -26,7 +26,6 @@ import UIKit
 class ServerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var flagImage: FlagImageView!
-    @IBOutlet weak var serverLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var serverName: UILabel!
     @IBOutlet weak var pingImage: UIImageView!
     @IBOutlet weak var pingTimeMs: UILabel!
