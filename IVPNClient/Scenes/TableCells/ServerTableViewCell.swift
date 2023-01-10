@@ -145,12 +145,7 @@ class ServerTableViewCell: UITableViewCell {
         expandButton.isHidden = true
         favoriteButton.isHidden = false
         flagImage.image?.accessibilityIdentifier = ""
-        
-        if isFavorite {
-            flagImage.image = viewModel.imageForCountryCode
-        } else {
-            flagImage.image = nil
-        }
+        flagImage.image = isFavorite ? viewModel.imageForCountryCode : nil
     }
     
     private func setPingTime() {
