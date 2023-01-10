@@ -32,6 +32,7 @@ class ServerViewController: UITableViewController {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var favoriteControl: UISegmentedControl!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var emptyView: UIView!
     
@@ -40,6 +41,10 @@ class ServerViewController: UITableViewController {
     var isExitServer = false
     var filteredCollection = [VPNServer]()
     weak var serverDelegate: ServerViewControllerDelegate?
+    
+    var isFavorite: Bool {
+        return favoriteControl.selectedSegmentIndex == 1 ? true : false
+    }
     
     private var collection: [VPNServer] {
         var list = [VPNServer]()

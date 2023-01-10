@@ -35,14 +35,15 @@ class VPNServerList {
     open private(set) var portRanges: [PortRange]
     
     var filteredFastestServers: [VPNServer] {
-        var serversArray = getServers()
-        let fastestServerConfigured = UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured)
-        
-        if fastestServerConfigured {
-            serversArray = serversArray.filter { StorageManager.isFastestEnabled(server: $0) }
+        if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
+            return getServers().filter { StorageManager.isFastestEnabled(server: $0) }
         }
         
-        return serversArray
+        return getServers()
+    }
+    
+    var favoriteServers: [VPNServer] {
+        return getAllHosts().filter { StorageManager.isFavorite(server: $0) }
     }
     
     var noPing: Bool {
