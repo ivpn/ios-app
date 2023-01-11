@@ -165,16 +165,16 @@ class ServerViewController: UITableViewController {
     
     func showEmptyView() {
         tableView.backgroundView = emptyView
-        headerView.frame = CGRectMake(0, 0, headerView.frame.size.width, 41)
-        emptyView.frame = CGRectMake(0, 0, emptyView.frame.size.width, 320)
+        headerView.frame = CGRect(x: 0, y: 0, width: headerView.frame.size.width, height: 41)
+        emptyView.frame = CGRect(x: 0, y: 0, width: emptyView.frame.size.width, height: 320)
         emptyView.isHidden = false
         searchBar.isHidden = true
     }
     
     func restore() {
         tableView.backgroundView = nil
-        headerView.frame = CGRectMake(0, 0, headerView.frame.size.width, 115)
-        emptyView.frame = CGRectMake(0, 0, emptyView.frame.size.width, 0)
+        headerView.frame = CGRect(x: 0, y: 0, width: headerView.frame.size.width, height: 115)
+        emptyView.frame = CGRect(x: 0, y: 0, width: emptyView.frame.size.width, height: 0)
         emptyView.isHidden = true
         searchBar.isHidden = false
     }
