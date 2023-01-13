@@ -284,7 +284,7 @@ extension ServerViewController {
             }
         }
         
-        if (!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0) {
+        if ((!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0)) && !isFavorite {
             server = Application.shared.serverList.getRandomServer(isExitServer: isExitServer)
             server.random = true
             server.fastest = false
@@ -308,7 +308,7 @@ extension ServerViewController {
             Application.shared.settings.selectedExitServer = server
             Application.shared.settings.selectedExitHost = selectedHost
         } else {
-            if UserDefaults.shared.isMultiHop || indexPath.row > 0 || server.random {
+            if UserDefaults.shared.isMultiHop || indexPath.row > 0 || server.random || isFavorite {
                 Application.shared.settings.selectedServer = server
                 Application.shared.settings.selectedHost = selectedHost
                 Application.shared.settings.selectedServer.fastest = false
