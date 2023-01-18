@@ -89,7 +89,8 @@ class ServerTableViewCell: UITableViewCell {
     
     @IBAction func toggleFavorite(_ sender: UIButton) {
         let isFavorite = StorageManager.isFavorite(server: viewModel.server)
-        StorageManager.saveServer(gateway: viewModel.server.gateway, isFavorite: !isFavorite)
+        let gateway = viewModel.server.dnsName ?? viewModel.server.gateway
+        StorageManager.saveServer(gateway: gateway, isFavorite: !isFavorite)
         sender.setImage(UIImage.init(named: !isFavorite ? "icon-star-on" : "icon-star-off"), for: .normal)
         
         if let tableView = superview as? UITableView {

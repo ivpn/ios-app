@@ -384,7 +384,8 @@ extension StorageManager {
     }
     
     static func isFavorite(server vpnServer: VPNServer) -> Bool {
-        if let server = fetchServer(gateway: vpnServer.gateway) {
+        let gateway = vpnServer.dnsName ?? vpnServer.gateway
+        if let server = fetchServer(gateway: gateway) {
             return server.isFavorite
         }
 
