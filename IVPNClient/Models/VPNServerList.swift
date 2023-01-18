@@ -314,7 +314,7 @@ class VPNServerList {
     func saveAllServers(exceptionGateway: String) {
         for server in servers {
             let isFastestEnabled = server.gateway != exceptionGateway
-            StorageManager.saveServer(gateway: server.gateway, isFastestEnabled: isFastestEnabled)
+            StorageManager.save(server: server, isFastestEnabled: isFastestEnabled)
         }
     }
     

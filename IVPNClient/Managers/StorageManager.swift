@@ -326,32 +326,32 @@ extension StorageManager {
 
 extension StorageManager {
     
-    static func saveServer(gateway: String, isFastestEnabled: Bool) {
-        if let server = fetchServer(gateway: gateway) {
+    static func save(server: VPNServer, isFastestEnabled: Bool) {
+        if let server = fetchServer(server: server) {
             server.isFastestEnabled = isFastestEnabled
         } else {
             let newServer = Server(context: context)
-            newServer.gateway = gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
+            newServer.gateway = server.gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
             newServer.isFastestEnabled = isFastestEnabled
         }
         
         saveContext()
     }
     
-    static func saveServer(gateway: String, isFavorite: Bool) {
-        if let server = fetchServer(gateway: gateway) {
+    static func save(server: VPNServer, isFavorite: Bool) {
+        if let server = fetchServer(server: server) {
             server.isFavorite = isFavorite
         } else {
             let newServer = Server(context: context)
-            newServer.gateway = gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
+            newServer.gateway = server.dnsName ?? server.gateway
             newServer.isFavorite = isFavorite
         }
         
         saveContext()
     }
     
-    static func fetchServers(gateway: String = "", isFastestEnabled: Bool = false, isFavorite: Bool = false) -> [Server]? {
-        let request: NSFetchRequest<Server> = Server.fetchRequest(gateway: gateway, isFastestEnabled: isFastestEnabled, isFavorite: isFavorite)
+    static func fetchServers(gateway: String = "", isFastestEnabled: Bool = false, isFavorite: Bool = false, isHost: Bool = false) -> [Server]? {
+        let request: NSFetchRequest<Server> = Server.fetchRequest(gateway: gateway, isFastestEnabled: isFastestEnabled, isFavorite: isFavorite, isHost: isHost)
         
         do {
             let result = try context.fetch(request)
@@ -365,8 +365,8 @@ extension StorageManager {
         return nil
     }
     
-    static func fetchServer(gateway: String) -> Server? {
-        if let servers = fetchServers(gateway: gateway) {
+    static func fetchServer(server: VPNServer) -> Server? {
+        if let servers = fetchServers(gateway: server.dnsName ?? server.gateway, isHost: server.isHost) {
             if let server = servers.first {
                 return server
             }
@@ -376,17 +376,16 @@ extension StorageManager {
     }
     
     static func isFastestEnabled(server vpnServer: VPNServer) -> Bool {
-        if let server = fetchServer(gateway: vpnServer.gateway) {
+        if let server = fetchServer(server: vpnServer) {
             return server.isFastestEnabled
         }
 
         return false
     }
     
-    static func isFavorite(server vpnServer: VPNServer) -> Bool {
-        let gateway = vpnServer.dnsName ?? vpnServer.gateway
-        if let server = fetchServer(gateway: gateway) {
-            return server.isFavorite
+    static func isFavorite(server: VPNServer) -> Bool {
+        if let servers = fetchServers(gateway: server.dnsName ?? server.gateway, isFavorite: true, isHost: server.isHost) {
+            return !servers.isEmpty
         }
 
         return false

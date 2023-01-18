@@ -112,11 +112,11 @@ extension ServersConfigurationTableViewController {
 
 extension ServersConfigurationTableViewController: ServerConfigurationCellDelegate {
     
-    func toggle(isOn: Bool, gateway: String) {
+    func toggle(isOn: Bool, server: VPNServer) {
         if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
-            StorageManager.saveServer(gateway: gateway, isFastestEnabled: isOn)
+            StorageManager.save(server: server, isFastestEnabled: isOn)
         } else {
-            Application.shared.serverList.saveAllServers(exceptionGateway: gateway)
+            Application.shared.serverList.saveAllServers(exceptionGateway: server.gateway)
             UserDefaults.standard.set(true, forKey: UserDefaults.Key.fastestServerConfigured)
         }
         

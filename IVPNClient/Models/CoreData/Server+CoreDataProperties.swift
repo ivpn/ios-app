@@ -30,12 +30,16 @@ extension Server {
     @NSManaged public var isFastestEnabled: Bool
     @NSManaged public var isFavorite: Bool
     
-    @nonobjc public class func fetchRequest(gateway: String = "", isFastestEnabled: Bool = false, isFavorite: Bool = false) -> NSFetchRequest<Server> {
+    @nonobjc public class func fetchRequest(gateway: String = "", isFastestEnabled: Bool = false, isFavorite: Bool = false, isHost: Bool = false) -> NSFetchRequest<Server> {
         let fetchRequest = NSFetchRequest<Server>(entityName: "Server")
         var filters = [NSPredicate]()
         
         if !gateway.isEmpty {
-            filters.append(NSPredicate(format: "gateway == %@", gateway.replacingOccurrences(of: ".wg.", with: ".gw.")))
+            if isHost {
+                filters.append(NSPredicate(format: "gateway == %@", gateway))
+            } else {
+                filters.append(NSPredicate(format: "gateway == %@", gateway.replacingOccurrences(of: ".wg.", with: ".gw.")))
+            }
         }
         
         if isFastestEnabled {
