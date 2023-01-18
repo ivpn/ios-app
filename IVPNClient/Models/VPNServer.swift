@@ -83,6 +83,7 @@ class VPNServer {
     }
     
     private (set) var gateway: String
+    private (set) var dnsName: String?
     private (set) var countryCode: String
     private (set) var country: String
     private (set) var city: String
@@ -94,8 +95,9 @@ class VPNServer {
     
     // MARK: - Initialize -
     
-    init(gateway: String, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0) {
+    init(gateway: String, dnsName: String? = nil, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0) {
         self.gateway = gateway
+        self.dnsName = dnsName
         self.countryCode = countryCode
         self.country = country
         self.city = city

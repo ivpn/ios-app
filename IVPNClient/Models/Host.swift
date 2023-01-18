@@ -31,6 +31,7 @@ struct Host: Codable {
     
     var host: String
     var hostName: String
+    var dnsName: String
     var publicKey: String
     var localIP: String
     var ipv6: IPv6?

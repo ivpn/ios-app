@@ -228,7 +228,7 @@ class VPNServerList {
             allHosts.append(server)
             
             for host in server.hosts {
-                allHosts.append(VPNServer(gateway: host.hostName, countryCode: server.countryCode, country: "", city: server.city, load: host.load))
+                allHosts.append(VPNServer(gateway: host.hostName, dnsName: host.dnsName, countryCode: server.countryCode, country: "", city: server.city, load: host.load))
             }
         }
         
@@ -368,6 +368,7 @@ class VPNServerList {
                     var newHost = Host(
                         host: host["host"] as? String ?? "",
                         hostName: host["hostname"] as? String ?? "",
+                        dnsName: host["dns_name"] as? String ?? "",
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
                         multihopPort: host["multihop_port"] as? Int ?? 0,
