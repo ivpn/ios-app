@@ -112,7 +112,7 @@ class ServerViewController: UITableViewController {
     
     @IBAction func toggleFavorite(_ sender: UISegmentedControl) {
         Application.shared.settings.serverListIsFavorite = sender.selectedSegmentIndex == 1
-        tableView.reloadData()
+        searchTextDidChange(searchText: searchBar.text!)
     }
     
     // MARK: - View Lifecycle -
@@ -220,6 +220,23 @@ class ServerViewController: UITableViewController {
         }
     }
     
+    private func searchTextDidChange(searchText: String) {
+        guard !searchText.isEmpty else {
+            tableView.reloadData()
+            return
+        }
+        
+        let collection = Application.shared.serverList.getServers()
+        filteredCollection.removeAll(keepingCapacity: false)
+        filteredCollection = collection.filter { (server: VPNServer) -> Bool in
+            let location = "\(server.city) \(server.countryCode)".lowercased()
+            return location.contains(searchText.lowercased())
+        }
+        filteredCollection = VPNServerList.sort(filteredCollection)
+        filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection, isFavorite: isFavorite)
+        tableView.reloadData()
+    }
+    
 }
 
 // MARK: - UITableViewDataSource -
@@ -227,7 +244,7 @@ class ServerViewController: UITableViewController {
 extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFavorite && collection.isEmpty {
+        if isFavorite && collection.isEmpty && searchBar.text!.isEmpty {
             showEmptyView()
         } else {
             restore()
@@ -374,15 +391,7 @@ extension ServerViewController {
 extension ServerViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let collection = Application.shared.serverList.getServers()
-        filteredCollection.removeAll(keepingCapacity: false)
-        filteredCollection = collection.filter { (server: VPNServer) -> Bool in
-            let location = "\(server.city) \(server.countryCode)".lowercased()
-            return location.contains(searchBar.text!.lowercased())
-        }
-        filteredCollection = VPNServerList.sort(filteredCollection)
-        filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection, isFavorite: isFavorite)
-        tableView.reloadData()
+        searchTextDidChange(searchText: searchBar.text!)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
