@@ -45,29 +45,8 @@ class ServerViewController: UITableViewController {
     var filteredCollection = [VPNServer]()
     weak var serverDelegate: ServerViewControllerDelegate?
     
-    private var collection: [VPNServer] {
-        var list = [VPNServer]()
-        
-        if !searchBar.text!.isEmpty {
-            list = filteredCollection
-        } else {
-            list = Application.shared.serverList.getAllHosts(isFavorite: isFavorite)
-        }
-        
-        if isFavorite {
-            return list
-        }
-        
-        list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
-        
-        if !UserDefaults.shared.isMultiHop {
-            list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true), at: 0)
-        }
-        
-        return list
-    }
-    
-    private var expandedGateways: [String] = []
+    private var collection = [VPNServer]()
+    private var expandedGateways = [String]()
     
     // MARK: - IBActions -
     
@@ -125,6 +104,7 @@ class ServerViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         favoriteControl.selectedSegmentIndex = Application.shared.settings.serverListIsFavorite ? 1 : 0
         restore()
+        collection = getCollection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -180,6 +160,28 @@ class ServerViewController: UITableViewController {
     }
     
     // MARK: - Methods -
+    
+    private func getCollection() -> [VPNServer] {
+        var list = [VPNServer]()
+        
+        if !searchBar.text!.isEmpty {
+            list = filteredCollection
+        } else {
+            list = Application.shared.serverList.getAllHosts(isFavorite: isFavorite)
+        }
+        
+        if isFavorite {
+            return list
+        }
+        
+        list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
+        
+        if !UserDefaults.shared.isMultiHop {
+            list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true), at: 0)
+        }
+        
+        return list
+    }
     
     private func initNavigationBar() {
         title = "Select Server"
@@ -244,6 +246,8 @@ class ServerViewController: UITableViewController {
 extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        collection = getCollection()
+        
         if isFavorite && collection.isEmpty && searchBar.text!.isEmpty {
             showEmptyView()
         } else {
