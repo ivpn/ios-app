@@ -343,7 +343,7 @@ extension StorageManager {
             server.isFavorite = isFavorite
         } else {
             let newServer = Server(context: context)
-            newServer.gateway = server.dnsName ?? server.gateway
+            newServer.gateway = server.dnsName ?? server.gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
             newServer.isFavorite = isFavorite
         }
         
