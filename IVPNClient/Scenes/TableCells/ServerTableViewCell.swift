@@ -146,6 +146,10 @@ class ServerTableViewCell: UITableViewCell {
         favoriteButton.isHidden = false
         flagImage.image?.accessibilityIdentifier = ""
         flagImage.image = isFavorite ? viewModel.imageForCountryCode : nil
+        
+        if let gateway = Application.shared.serverList.getServer(byCity: viewModel.server.city), gateway.hosts.count <= 1 {
+            favoriteButton.isHidden = true
+        }
     }
     
     private func setPingTime() {
