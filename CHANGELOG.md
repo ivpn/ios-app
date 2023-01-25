@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.8.0 - Unreleased  
+
+[NEW] Favorite servers  
+[IMPROVED] Option to search and sort in the fastest server configuration list  
+
 ## 2.7.1 - 2022-12-08  
 
 [IMPROVED] Support for Split View and Slide Over mode on iPadOS  
