@@ -25,14 +25,44 @@ import UIKit
 
 class ServersConfigurationTableViewController: UITableViewController {
     
+    // MARK: - @IBOutlets -
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     // MARK: - Properties -
     
-    var collection = Application.shared.serverList.getServers()
+    private var filteredCollection = [VPNServer]()
+    
+    private var collection: [VPNServer] {
+        if !searchBar.text!.isEmpty {
+            return filteredCollection
+        }
+        
+        return Application.shared.serverList.getServers()
+    }
+    
+    // MARK: - IBActions -
+    
+    @IBAction func sortBy(_ sender: Any) {
+        let actions = ServersSort.actions()
+        let selected = UserDefaults.shared.serversSort.camelCaseToCapitalized() ?? ""
+        
+        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Sort by", actions: actions, sourceView: tableView) { [self] index in
+            guard index > -1 else { return }
+            
+            let sort = ServersSort.allCases[index]
+            UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
+            Application.shared.serverList.sortServers()
+            filteredCollection = VPNServerList.sort(filteredCollection)
+            tableView.reloadData()
+        }
+    }
     
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.keyboardDismissMode = .onDrag
     }
     
 }
@@ -95,6 +125,34 @@ extension ServersConfigurationTableViewController: ServerConfigurationCellDelega
     
     func showValidation(error: String) {
         showAlert(title: "", message: error)
+    }
+    
+}
+
+// MARK: - UISearchBarDelegate -
+
+extension ServersConfigurationTableViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let collection = Application.shared.serverList.getServers()
+        filteredCollection.removeAll(keepingCapacity: false)
+        filteredCollection = collection.filter { (server: VPNServer) -> Bool in
+            let location = "\(server.city) \(server.countryCode)".lowercased()
+            return location.contains(searchBar.text!.lowercased())
+        }
+        filteredCollection = VPNServerList.sort(filteredCollection)
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        tableView.reloadData()
     }
     
 }

@@ -37,10 +37,8 @@ class PortTableViewCell: UITableViewCell {
     }
     
     private func isCustom(port: ConnectionSettings, ports: [ConnectionSettings]) -> Bool {
-        for portObj in ports {
-            if portObj.port() == port.port() {
-                return false
-            }
+        for portObj in ports where portObj.port() == port.port() {
+            return false
         }
         
         return true

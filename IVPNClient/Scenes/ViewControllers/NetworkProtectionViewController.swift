@@ -230,9 +230,9 @@ extension NetworkProtectionViewController {
     
 }
 
-// MARK: - NetworkProtectionHeaderTableViewCellDelegate -
+// MARK: - NetworkProtectionTableCellDelegate -
 
-extension NetworkProtectionViewController: NetworkProtectionHeaderTableViewCellDelegate {
+extension NetworkProtectionViewController: NetworkProtectionTableCellDelegate {
     
     func toggle(isOn: Bool) {
         defaults.set(isOn, forKey: UserDefaults.Key.networkProtectionEnabled)

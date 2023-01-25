@@ -21,7 +21,7 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1340.5" width="414" height="65"/>
+                            <rect key="frame" x="0.0" y="1449.5" width="414" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -2222,13 +2222,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="HWD-ZW-yW1">
                                                             <rect key="frame" x="0.0" y="0.0" width="213.5" height="56.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your status is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqS-im-1xj">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Your status is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqS-im-1xj">
                                                                     <rect key="frame" x="0.0" y="0.0" width="213.5" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <color key="textColor" name="ivpnLabel5"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="disconnected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="fZx-j5-ahl">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="disconnected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="fZx-j5-ahl">
                                                                     <rect key="frame" x="0.0" y="18" width="213.5" height="38.5"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
@@ -3181,30 +3181,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="a4G-c8-WjK">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="115"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disable servers you do not want to be chosen as the fastest server" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHN-fW-Gbj">
-                                    <rect key="frame" x="16" y="16" width="382" height="43"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="d77-cW-ncJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="115"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disable servers you do not want to be chosen as the fastest server" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHN-fW-Gbj">
+                                            <rect key="frame" x="16" y="0.0" width="382" height="45"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" name="ivpnLabel5"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search servers" translatesAutoresizingMaskIntoConstraints="NO" id="LCn-yH-FEp">
+                                            <rect key="frame" x="10" y="45" width="394" height="70"/>
+                                            <color key="tintColor" name="ivpnBlue"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="ELw-vc-l7K" id="Pp7-Ag-vqT"/>
+                                            </connections>
+                                        </searchBar>
+                                    </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="60" id="2ap-vp-IS8"/>
+                                        <constraint firstItem="YHN-fW-Gbj" firstAttribute="leading" secondItem="d77-cW-ncJ" secondAttribute="leading" constant="16" id="U8V-UZ-oUB"/>
+                                        <constraint firstItem="LCn-yH-FEp" firstAttribute="leading" secondItem="d77-cW-ncJ" secondAttribute="leading" constant="10" id="ccH-Ue-k1Z"/>
+                                        <constraint firstAttribute="trailing" secondItem="LCn-yH-FEp" secondAttribute="trailing" constant="10" id="g5M-Gr-hAG"/>
+                                        <constraint firstAttribute="trailing" secondItem="YHN-fW-Gbj" secondAttribute="trailing" constant="16" id="lZi-Hg-xfG"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" name="ivpnLabel5"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="YHN-fW-Gbj" firstAttribute="leading" secondItem="a4G-c8-WjK" secondAttribute="leading" constant="16" id="1bN-DF-KVi"/>
-                                <constraint firstAttribute="trailing" secondItem="YHN-fW-Gbj" secondAttribute="trailing" constant="16" id="6mp-bp-gjr"/>
-                                <constraint firstAttribute="bottom" secondItem="YHN-fW-Gbj" secondAttribute="bottom" constant="16" id="Hfj-6h-m7k"/>
-                                <constraint firstItem="YHN-fW-Gbj" firstAttribute="top" secondItem="a4G-c8-WjK" secondAttribute="top" constant="16" id="apf-Fv-7Td"/>
+                                <constraint firstAttribute="bottom" secondItem="d77-cW-ncJ" secondAttribute="bottom" id="I9X-f6-Nx5"/>
+                                <constraint firstItem="d77-cW-ncJ" firstAttribute="leading" secondItem="a4G-c8-WjK" secondAttribute="leading" id="Oy2-pM-NAc"/>
+                                <constraint firstItem="d77-cW-ncJ" firstAttribute="top" secondItem="a4G-c8-WjK" secondAttribute="top" id="blJ-hd-FI9"/>
+                                <constraint firstAttribute="trailing" secondItem="d77-cW-ncJ" secondAttribute="trailing" id="cXk-CP-oHd"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ServerConfigurationCell" rowHeight="64" id="AO5-vy-Opu" customClass="ServerConfigurationCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="125" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="165" width="414" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AO5-vy-Opu" id="K7C-et-KRe">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -3260,7 +3276,16 @@
                             <outlet property="delegate" destination="ELw-vc-l7K" id="zsO-CR-SCq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Configure" id="7E0-DM-zV2"/>
+                    <navigationItem key="navigationItem" title="Configure" id="7E0-DM-zV2">
+                        <barButtonItem key="rightBarButtonItem" title="Sort by" id="YZC-CY-v3a">
+                            <connections>
+                                <action selector="sortBy:" destination="ELw-vc-l7K" id="P6b-Hn-wCC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="LCn-yH-FEp" id="m1v-ag-ks6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W1e-Sr-wsO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

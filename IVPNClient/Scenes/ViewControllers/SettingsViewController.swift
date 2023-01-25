@@ -362,7 +362,7 @@ class SettingsViewController: UITableViewController {
         var presentMailComposer = true
         
         // App logs
-        var appLog: String? = nil
+        var appLog: String?
         if let file = NSData(contentsOfFile: appLogPath) {
             appLog = String(data: file as Data, encoding: .utf8) ?? ""
         }
@@ -375,7 +375,7 @@ class SettingsViewController: UITableViewController {
         }
         
         // WireGuard tunnel logs
-        var wireguardLog: String? = nil
+        var wireguardLog: String?
         if let file = NSData(contentsOfFile: wireguardLogPath) {
             wireguardLog = String(data: file as Data, encoding: .utf8) ?? ""
         }

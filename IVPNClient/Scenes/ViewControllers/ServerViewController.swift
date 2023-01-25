@@ -42,7 +42,7 @@ class ServerViewController: UITableViewController {
     private var collection: [VPNServer] {
         var list = [VPNServer]()
         
-        if isSearchActive {
+        if !searchBar.text!.isEmpty {
             list = filteredCollection
         } else {
             list = Application.shared.serverList.getAllHosts()
@@ -59,10 +59,6 @@ class ServerViewController: UITableViewController {
     
     private var expandedGateways: [String] = []
     
-    private var isSearchActive: Bool {
-        return !searchBar.text!.isEmpty
-    }
-    
     // MARK: - IBActions -
     
     @IBAction func refresh(_ sender: Any) {
@@ -73,8 +69,7 @@ class ServerViewController: UITableViewController {
     }
     
     @IBAction func sortBy(_ sender: Any) {
-        let actionsRawValue = ServersSort.allCases.map { $0.rawValue }
-        let actions = actionsRawValue.map { $0.camelCaseToCapitalized() ?? "" }
+        let actions = ServersSort.actions()
         let selected = UserDefaults.shared.serversSort.camelCaseToCapitalized() ?? ""
         
         showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Sort by", actions: actions, sourceView: tableView) { [self] index in
