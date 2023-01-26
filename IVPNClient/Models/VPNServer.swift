@@ -71,6 +71,10 @@ class VPNServer {
             return true
         }
         
+        if let ipv6 = ipv6 {
+            return !ipv6.localIP.isEmpty
+        }
+        
         return false
     }
     
@@ -92,10 +96,11 @@ class VPNServer {
     private (set) var ipAddresses: [String]
     private (set) var hosts: [Host]
     private (set) var load: Double?
+    private (set) var ipv6: IPv6?
     
     // MARK: - Initialize -
     
-    init(gateway: String, dnsName: String? = nil, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0) {
+    init(gateway: String, dnsName: String? = nil, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0, ipv6: IPv6? = nil) {
         self.gateway = gateway
         self.dnsName = dnsName
         self.countryCode = countryCode
@@ -107,6 +112,7 @@ class VPNServer {
         self.hosts = hosts
         self.fastest = fastest
         self.load = load
+        self.ipv6 = ipv6
     }
     
     // MARK: - Methods -
