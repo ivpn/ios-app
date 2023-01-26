@@ -102,7 +102,7 @@ class ServerTableViewCell: UITableViewCell {
     private func setCellAppearance() {
         let isServerFavorite = StorageManager.isFavorite(server: viewModel.server)
         flagImage.updateUpFlagIcon()
-        ipv6Label.isHidden = !viewModel.showIPv6Label
+        ipv6Label.isHidden = !viewModel.showIPv6Label || (viewModel.server.isHost && !isFavorite)
         expandButton.tintColor = UIColor.init(named: Theme.ivpnGray6)
         favoriteButton.setImage(UIImage.init(named: isServerFavorite ? "icon-star-on" : "icon-star-off"), for: .normal)
     }
