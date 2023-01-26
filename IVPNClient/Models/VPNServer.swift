@@ -87,7 +87,6 @@ class VPNServer {
     }
     
     private (set) var gateway: String
-    private (set) var dnsName: String?
     private (set) var countryCode: String
     private (set) var country: String
     private (set) var city: String
@@ -97,6 +96,7 @@ class VPNServer {
     private (set) var hosts: [Host]
     private (set) var load: Double?
     private (set) var ipv6: IPv6?
+    var dnsName: String?
     
     // MARK: - Initialize -
     

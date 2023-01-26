@@ -225,7 +225,15 @@ class VPNServerList {
                 continue
             }
             
+            if server.hosts.count == 1 {
+                server.dnsName = server.hosts.first!.dnsName
+            }
+            
             allHosts.append(server)
+            
+            if isFavorite && server.hosts.count == 1 {
+                continue
+            }
             
             for host in server.hosts {
                 allHosts.append(VPNServer(gateway: host.hostName, dnsName: host.dnsName, countryCode: server.countryCode, country: "", city: server.city, load: host.load, ipv6: host.ipv6))
