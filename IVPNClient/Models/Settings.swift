@@ -64,6 +64,8 @@ class Settings {
         }
     }
     
+    var serverListIsFavorite = false
+    
     // MARK: - Initialize -
 
     init(serverList: VPNServerList) {
