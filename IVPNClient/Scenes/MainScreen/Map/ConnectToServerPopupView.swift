@@ -64,7 +64,7 @@ class ConnectToServerPopupView: UIView {
         return locationLabel
     }()
     
-    var actionButton: UIButton = {
+    lazy var actionButton: UIButton = {
         let actionButton = UIButton()
         actionButton.setTitle("CONNECT TO SERVER", for: .normal)
         actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -75,7 +75,7 @@ class ConnectToServerPopupView: UIView {
         return actionButton
     }()
     
-    var prevButton: UIButton = {
+    lazy var prevButton: UIButton = {
         let prevButton = UIButton()
         prevButton.setImage(UIImage.init(named: "icon-arrow-left-gray"), for: .normal)
         prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
@@ -84,7 +84,7 @@ class ConnectToServerPopupView: UIView {
         return prevButton
     }()
     
-    var nextButton: UIButton = {
+    lazy var nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.setImage(UIImage.init(named: "icon-arrow-right-gray"), for: .normal)
         nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)

@@ -114,10 +114,8 @@ enum ConnectionSettings {
         for protocolObj in protocols {
             var containsProtocol = false
             
-            for filteredProtocol in filteredProtocols {
-                if filteredProtocol.tunnelType() == protocolObj.tunnelType() {
-                    containsProtocol = true
-                }
+            for filteredProtocol in filteredProtocols where filteredProtocol.tunnelType() == protocolObj.tunnelType() {
+                containsProtocol = true
             }
             
             if !containsProtocol {
@@ -131,10 +129,8 @@ enum ConnectionSettings {
     func supportedProtocols(protocols: [ConnectionSettings]) -> [ConnectionSettings] {
         var filteredProtocols = [ConnectionSettings]()
         
-        for protocolObj in protocols {
-            if protocolObj.tunnelType() == self.tunnelType() {
-                filteredProtocols.append(protocolObj)
-            }
+        for protocolObj in protocols where protocolObj.tunnelType() == self.tunnelType() {
+            filteredProtocols.append(protocolObj)
         }
         
         return filteredProtocols

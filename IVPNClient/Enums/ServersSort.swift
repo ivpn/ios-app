@@ -24,8 +24,15 @@
 import Foundation
 
 enum ServersSort: String, CaseIterable {
+    
     case city
     case country
     case latency
     case proximity
+    
+    static func actions() -> [String] {
+        let actions = allCases.map { $0.rawValue }
+        return actions.map { $0.camelCaseToCapitalized() ?? "" }
+    }
+    
 }

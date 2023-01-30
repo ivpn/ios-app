@@ -72,7 +72,7 @@ class ConnectionInfoPopupView: UIView {
         return locationLabel
     }()
     
-    var actionButton: UIButton = {
+    lazy var actionButton: UIButton = {
         let actionButton = UIButton()
         actionButton.setImage(UIImage.init(named: "icon-info-2"), for: .normal)
         actionButton.accessibilityLabel = "Connection info details"

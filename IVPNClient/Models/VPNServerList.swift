@@ -35,14 +35,11 @@ class VPNServerList {
     open private(set) var portRanges: [PortRange]
     
     var filteredFastestServers: [VPNServer] {
-        var serversArray = getServers()
-        let fastestServerConfigured = UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured)
-        
-        if fastestServerConfigured {
-            serversArray = serversArray.filter { StorageManager.isFastestEnabled(server: $0) }
+        if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
+            return getServers().filter { StorageManager.isFastestEnabled(server: $0) }
         }
         
-        return serversArray
+        return getServers()
     }
     
     var noPing: Bool {
@@ -219,7 +216,7 @@ class VPNServerList {
         return servers
     }
     
-    func getAllHosts(_ servers: [VPNServer]? = nil) -> [VPNServer] {
+    func getAllHosts(_ servers: [VPNServer]? = nil, isFavorite: Bool = false) -> [VPNServer] {
         var allHosts: [VPNServer] = []
         let allServers = servers ?? getServers()
         
@@ -228,11 +225,23 @@ class VPNServerList {
                 continue
             }
             
+            if server.hosts.count == 1 {
+                server.dnsName = server.hosts.first!.dnsName
+            }
+            
             allHosts.append(server)
             
-            for host in server.hosts {
-                allHosts.append(VPNServer(gateway: host.hostName, countryCode: server.countryCode, country: "", city: server.city, load: host.load))
+            if isFavorite && server.hosts.count == 1 {
+                continue
             }
+            
+            for host in server.hosts {
+                allHosts.append(VPNServer(gateway: host.hostName, dnsName: host.dnsName, countryCode: server.countryCode, country: "", city: server.city, load: host.load, ipv6: host.ipv6))
+            }
+        }
+        
+        if isFavorite {
+            return allHosts.filter { StorageManager.isFavorite(server: $0) }
         }
         
         return allHosts
@@ -313,7 +322,7 @@ class VPNServerList {
     func saveAllServers(exceptionGateway: String) {
         for server in servers {
             let isFastestEnabled = server.gateway != exceptionGateway
-            StorageManager.saveServer(gateway: server.gateway, isFastestEnabled: isFastestEnabled)
+            StorageManager.save(server: server, isFastestEnabled: isFastestEnabled)
         }
     }
     
@@ -367,6 +376,7 @@ class VPNServerList {
                     var newHost = Host(
                         host: host["host"] as? String ?? "",
                         hostName: host["hostname"] as? String ?? "",
+                        dnsName: host["dns_name"] as? String ?? "",
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
                         multihopPort: host["multihop_port"] as? Int ?? 0,

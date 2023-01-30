@@ -35,14 +35,15 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var exitServerTableCell: UITableViewCell!
     @IBOutlet weak var exitServerConnectionLabel: UILabel!
     @IBOutlet weak var exitServerNameLabel: UILabel!
+    @IBOutlet weak var exitServerCountryLabel: UILabel!
     @IBOutlet weak var exitServerFlagImage: UIImageView!
     @IBOutlet weak var exitServerIPv6Label: UILabel!
     @IBOutlet weak var entryServerTableCell: UITableViewCell!
     @IBOutlet weak var entryServerConnectionLabel: UILabel!
     @IBOutlet weak var entryServerNameLabel: UILabel!
+    @IBOutlet weak var entryServerCountryLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
     @IBOutlet weak var entryServerIPv6Label: UILabel!
-    @IBOutlet weak var fastestServerLabel: UIView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var antiTrackerLabel: UILabel!
     @IBOutlet weak var networkView: NetworkViewTableCell!
@@ -113,7 +114,8 @@ class ControlPanelView: UITableView {
         updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage, ipv6Label: entryServerIPv6Label, selectedHost: Application.shared.settings.selectedHost)
         updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage, ipv6Label: exitServerIPv6Label, selectedHost: Application.shared.settings.selectedExitHost)
         
-        fastestServerLabel.isHidden = true
+        entryServerCountryLabel.text = Application.shared.settings.selectedServer.country
+        exitServerCountryLabel.text = Application.shared.settings.selectedExitServer.country
     }
     
     func updateAntiTracker(viewModel: VPNStatusViewModel) {

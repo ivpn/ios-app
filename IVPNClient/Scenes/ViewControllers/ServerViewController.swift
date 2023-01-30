@@ -32,36 +32,21 @@ class ServerViewController: UITableViewController {
     // MARK: - @IBOutlets -
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var favoriteControl: UISegmentedControl!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var emptyView: UIView!
     
     // MARK: - Properties -
     
     var isExitServer = false
+    var isFavorite: Bool {
+        return Application.shared.settings.serverListIsFavorite
+    }
     var filteredCollection = [VPNServer]()
     weak var serverDelegate: ServerViewControllerDelegate?
     
-    private var collection: [VPNServer] {
-        var list = [VPNServer]()
-        
-        if isSearchActive {
-            list = filteredCollection
-        } else {
-            list = Application.shared.serverList.getAllHosts()
-        }
-        
-        list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
-        
-        if !UserDefaults.shared.isMultiHop {
-            list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true), at: 0)
-        }
-        
-        return list
-    }
-    
-    private var expandedGateways: [String] = []
-    
-    private var isSearchActive: Bool {
-        return !searchBar.text!.isEmpty
-    }
+    private var collection = [VPNServer]()
+    private var expandedGateways = [String]()
     
     // MARK: - IBActions -
     
@@ -73,8 +58,7 @@ class ServerViewController: UITableViewController {
     }
     
     @IBAction func sortBy(_ sender: Any) {
-        let actionsRawValue = ServersSort.allCases.map { $0.rawValue }
-        let actions = actionsRawValue.map { $0.camelCaseToCapitalized() ?? "" }
+        let actions = ServersSort.actions()
         let selected = UserDefaults.shared.serversSort.camelCaseToCapitalized() ?? ""
         
         showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Sort by", actions: actions, sourceView: tableView) { [self] index in
@@ -84,7 +68,7 @@ class ServerViewController: UITableViewController {
             UserDefaults.shared.set(sort.rawValue, forKey: UserDefaults.Key.serversSort)
             Application.shared.serverList.sortServers()
             filteredCollection = VPNServerList.sort(filteredCollection)
-            filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection)
+            filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection, isFavorite: isFavorite)
             tableView.reloadData()
         }
     }
@@ -105,6 +89,11 @@ class ServerViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    @IBAction func toggleFavorite(_ sender: UISegmentedControl) {
+        Application.shared.settings.serverListIsFavorite = sender.selectedSegmentIndex == 1
+        searchTextDidChange(searchText: searchBar.text!)
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
@@ -112,6 +101,10 @@ class ServerViewController: UITableViewController {
         initNavigationBar()
         Application.shared.serverList.sortServers()
         tableView.keyboardDismissMode = .onDrag
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
+        favoriteControl.selectedSegmentIndex = Application.shared.settings.serverListIsFavorite ? 1 : 0
+        restore()
+        collection = getCollection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -150,7 +143,45 @@ class ServerViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func showEmptyView() {
+        tableView.backgroundView = emptyView
+        headerView.frame = CGRect(x: 0, y: 0, width: headerView.frame.size.width, height: 41)
+        emptyView.frame = CGRect(x: 0, y: 0, width: emptyView.frame.size.width, height: 320)
+        emptyView.isHidden = false
+        searchBar.isHidden = true
+    }
+    
+    func restore() {
+        tableView.backgroundView = nil
+        headerView.frame = CGRect(x: 0, y: 0, width: headerView.frame.size.width, height: 115)
+        emptyView.frame = CGRect(x: 0, y: 0, width: emptyView.frame.size.width, height: 0)
+        emptyView.isHidden = true
+        searchBar.isHidden = false
+    }
+    
     // MARK: - Methods -
+    
+    private func getCollection() -> [VPNServer] {
+        var list = [VPNServer]()
+        
+        if !searchBar.text!.isEmpty {
+            list = filteredCollection
+        } else {
+            list = Application.shared.serverList.getAllHosts(isFavorite: isFavorite)
+        }
+        
+        if isFavorite {
+            return list
+        }
+        
+        list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: false), at: 0)
+        
+        if !UserDefaults.shared.isMultiHop {
+            list.insert(VPNServer(gateway: "", countryCode: "", country: "", city: "", fastest: true), at: 0)
+        }
+        
+        return list
+    }
     
     private func initNavigationBar() {
         title = "Select Server"
@@ -191,6 +222,23 @@ class ServerViewController: UITableViewController {
         }
     }
     
+    private func searchTextDidChange(searchText: String) {
+        guard !searchText.isEmpty else {
+            tableView.reloadData()
+            return
+        }
+        
+        let collection = Application.shared.serverList.getServers()
+        filteredCollection.removeAll(keepingCapacity: false)
+        filteredCollection = collection.filter { (server: VPNServer) -> Bool in
+            let location = "\(server.city) \(server.countryCode)".lowercased()
+            return location.contains(searchText.lowercased())
+        }
+        filteredCollection = VPNServerList.sort(filteredCollection)
+        filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection, isFavorite: isFavorite)
+        tableView.reloadData()
+    }
+    
 }
 
 // MARK: - UITableViewDataSource -
@@ -198,6 +246,14 @@ class ServerViewController: UITableViewController {
 extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        collection = getCollection()
+        
+        if isFavorite && collection.isEmpty && searchBar.text!.isEmpty {
+            showEmptyView()
+        } else {
+            restore()
+        }
+        
         return collection.count
     }
     
@@ -205,6 +261,7 @@ extension ServerViewController {
         let server = collection[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServerTableViewCell", for: indexPath) as! ServerTableViewCell
         cell.isMultiHop = UserDefaults.shared.isMultiHop
+        cell.isFavorite = isFavorite
         cell.indexPath = indexPath
         cell.viewModel = VPNServerViewModel(server: server)
         cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
@@ -248,7 +305,7 @@ extension ServerViewController {
             }
         }
         
-        if (!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0) {
+        if ((!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0)) && !isFavorite {
             server = Application.shared.serverList.getRandomServer(isExitServer: isExitServer)
             server.random = true
             server.fastest = false
@@ -272,7 +329,7 @@ extension ServerViewController {
             Application.shared.settings.selectedExitServer = server
             Application.shared.settings.selectedExitHost = selectedHost
         } else {
-            if UserDefaults.shared.isMultiHop || indexPath.row > 0 || server.random {
+            if UserDefaults.shared.isMultiHop || indexPath.row > 0 || server.random || isFavorite {
                 Application.shared.settings.selectedServer = server
                 Application.shared.settings.selectedHost = selectedHost
                 Application.shared.settings.selectedServer.fastest = false
@@ -324,7 +381,7 @@ extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let server = collection[indexPath.row]
-        if server.isHost && !expandHost(server) {
+        if server.isHost && !expandHost(server) && !isFavorite {
             return 0
         }
         
@@ -338,15 +395,7 @@ extension ServerViewController {
 extension ServerViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let collection = Application.shared.serverList.getServers()
-        filteredCollection.removeAll(keepingCapacity: false)
-        filteredCollection = collection.filter { (server: VPNServer) -> Bool in
-            let location = "\(server.city) \(server.countryCode)".lowercased()
-            return location.contains(searchBar.text!.lowercased())
-        }
-        filteredCollection = VPNServerList.sort(filteredCollection)
-        filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection)
-        tableView.reloadData()
+        searchTextDidChange(searchText: searchBar.text!)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

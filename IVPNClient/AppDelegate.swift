@@ -111,15 +111,15 @@ class AppDelegate: UIResponder {
     private func showSecurityScreen() {
         var showWindow = false
         
-        if let _ = UIApplication.topViewController() as? AccountViewController {
+        if UIApplication.topViewController() as? AccountViewController != nil {
             showWindow = true
         }
         
-        if let _ = UIApplication.topViewController() as? LoginViewController {
+        if UIApplication.topViewController() as? LoginViewController != nil {
             showWindow = true
         }
         
-        if let _ = UIApplication.topViewController() as? CreateAccountViewController {
+        if UIApplication.topViewController() as? CreateAccountViewController != nil {
             showWindow = true
         }
         
@@ -166,7 +166,7 @@ class AppDelegate: UIResponder {
                 }
             })
         case Config.urlTypeLogin:
-            if let _ = UIApplication.topViewController() as? LoginViewController {
+            if UIApplication.topViewController() as? LoginViewController != nil {
                 return
             }
             
@@ -175,6 +175,99 @@ class AppDelegate: UIResponder {
             }
         default:
             break
+        }
+    }
+    
+    private func userActivityConnect() {
+        DispatchQueue.delay(0.75) {
+            if UserDefaults.shared.networkProtectionEnabled {
+                Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
+                return
+            }
+            Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
+        }
+    }
+    
+    private func userActivityDisconnect() {
+        DispatchQueue.delay(0.75) {
+            if UserDefaults.shared.networkProtectionEnabled {
+                Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
+                return
+            }
+            Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
+        }
+    }
+    
+    private func userActivityAntiTrackerEnable() {
+        DispatchQueue.async {
+            if let viewController = UIApplication.topViewController() {
+                if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+                    viewController.showAlert(title: "IKEv2 not supported", message: "AntiTracker is supported only for OpenVPN and WireGuard protocols.") { _ in
+                    }
+                    return
+                }
+                
+                UserDefaults.shared.set(true, forKey: UserDefaults.Key.isAntiTracker)
+                NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
+                if UIApplication.topViewController() as? MainViewController != nil {
+                    NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                } else {
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
+        }
+    }
+    
+    private func userActivityAntiTrackerDisable() {
+        DispatchQueue.async {
+            if let viewController = UIApplication.topViewController() {
+                UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
+                NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
+                if UIApplication.topViewController() as? MainViewController != nil {
+                    NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                } else {
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
+        }
+    }
+    
+    private func userActivityCustomDNSEnable() {
+        DispatchQueue.async {
+            if let viewController = UIApplication.topViewController() {
+                if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+                    viewController.showAlert(title: "IKEv2 not supported", message: "Custom DNS is supported only for OpenVPN and WireGuard protocols.") { _ in
+                    }
+                    return
+                }
+                
+                guard !UserDefaults.shared.customDNS.isEmpty else {
+                    viewController.showAlert(title: "", message: "Please enter DNS server info")
+                    return
+                }
+                
+                UserDefaults.shared.set(true, forKey: UserDefaults.Key.isCustomDNS)
+                NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
+                if UIApplication.topViewController() as? MainViewController != nil {
+                    NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                } else {
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
+        }
+    }
+    
+    private func userActivityCustomDNSDisable() {
+        DispatchQueue.async {
+            if let viewController = UIApplication.topViewController() {
+                UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+                NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
+                if UIApplication.topViewController() as? MainViewController != nil {
+                    NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                } else {
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
         }
     }
 
@@ -273,86 +366,17 @@ extension AppDelegate: UIApplicationDelegate {
         
         switch userActivity.activityType {
         case UserActivityType.Connect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                    return
-                }
-                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
-            }
+            userActivityConnect()
         case UserActivityType.Disconnect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                    return
-                }
-                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
-            }
+            userActivityDisconnect()
         case UserActivityType.AntiTrackerEnable:
-            DispatchQueue.async {
-                if let viewController = UIApplication.topViewController() {
-                    if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
-                        viewController.showAlert(title: "IKEv2 not supported", message: "AntiTracker is supported only for OpenVPN and WireGuard protocols.") { _ in
-                        }
-                        return
-                    }
-                    
-                    UserDefaults.shared.set(true, forKey: UserDefaults.Key.isAntiTracker)
-                    NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
-                    if let _ = UIApplication.topViewController() as? MainViewController {
-                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
-                    } else {
-                        viewController.evaluateReconnect(sender: viewController.view)
-                    }
-                }
-            }
+            userActivityAntiTrackerEnable()
         case UserActivityType.AntiTrackerDisable:
-            DispatchQueue.async {
-                if let viewController = UIApplication.topViewController() {
-                    UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
-                    NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
-                    if let _ = UIApplication.topViewController() as? MainViewController {
-                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
-                    } else {
-                        viewController.evaluateReconnect(sender: viewController.view)
-                    }
-                }
-            }
+            userActivityAntiTrackerDisable()
         case UserActivityType.CustomDNSEnable:
-            DispatchQueue.async {
-                if let viewController = UIApplication.topViewController() {
-                    if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
-                        viewController.showAlert(title: "IKEv2 not supported", message: "Custom DNS is supported only for OpenVPN and WireGuard protocols.") { _ in
-                        }
-                        return
-                    }
-                    
-                    guard !UserDefaults.shared.customDNS.isEmpty else {
-                        viewController.showAlert(title: "", message: "Please enter DNS server info")
-                        return
-                    }
-                    
-                    UserDefaults.shared.set(true, forKey: UserDefaults.Key.isCustomDNS)
-                    NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
-                    if let _ = UIApplication.topViewController() as? MainViewController {
-                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
-                    } else {
-                        viewController.evaluateReconnect(sender: viewController.view)
-                    }
-                }
-            }
+            userActivityCustomDNSEnable()
         case UserActivityType.CustomDNSDisable:
-            DispatchQueue.async {
-                if let viewController = UIApplication.topViewController() {
-                    UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
-                    NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
-                    if let _ = UIApplication.topViewController() as? MainViewController {
-                        NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
-                    } else {
-                        viewController.evaluateReconnect(sender: viewController.view)
-                    }
-                }
-            }
+            userActivityCustomDNSDisable()
         default:
             log(.info, message: "No such user activity")
         }

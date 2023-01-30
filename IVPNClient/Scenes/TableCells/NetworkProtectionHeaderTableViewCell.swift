@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol NetworkProtectionHeaderTableViewCellDelegate: AnyObject {
+protocol NetworkProtectionTableCellDelegate: AnyObject {
     func toggle(isOn: Bool)
 }
 
@@ -31,7 +31,7 @@ class NetworkProtectionHeaderTableViewCell: UITableViewCell {
     
     @IBOutlet weak var toggleSwitch: UISwitch!
     
-    weak var delegate: NetworkProtectionHeaderTableViewCellDelegate?
+    weak var delegate: NetworkProtectionTableCellDelegate?
     
     @IBAction func toggle(_ sender: UISwitch) {
         delegate?.toggle(isOn: sender.isOn)
