@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.8.0 - Unreleased  
+## 2.8.0 - 2023-01-30  
 
 [NEW] Favorite servers  
 [IMPROVED] Option to search and sort in the fastest server configuration list  
