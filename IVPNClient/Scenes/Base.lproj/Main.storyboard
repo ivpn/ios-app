@@ -617,6 +617,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qLy-5L-tSL">
                                                     <rect key="frame" x="349" y="24.5" width="51" height="31"/>
                                                     <color key="onTintColor" name="ivpnBlue"/>
+                                                    <connections>
+                                                        <action selector="togglePreventSameCountryMultiHop:" destination="5KC-W6-t9Q" eventType="valueChanged" id="jw1-hd-ruh"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MultiHop same country alert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mtm-Pz-WHy">
                                                     <rect key="frame" x="16" y="13" width="321" height="20"/>
@@ -657,6 +660,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Wu9-JY-b9t">
                                                     <rect key="frame" x="349" y="24.5" width="51" height="31"/>
                                                     <color key="onTintColor" name="ivpnBlue"/>
+                                                    <connections>
+                                                        <action selector="togglePreventSameISPMultiHop:" destination="5KC-W6-t9Q" eventType="valueChanged" id="hz1-E0-o1b"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MultiHop same ISP alert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCf-aE-Frw">
                                                     <rect key="frame" x="16" y="13" width="321" height="20"/>
@@ -860,6 +866,8 @@
                         <outlet property="loggingCell" destination="71h-Rn-GiM" id="J5O-aF-7wS"/>
                         <outlet property="loggingSwitch" destination="Kg2-cl-Yhj" id="djz-eJ-IsN"/>
                         <outlet property="multiHopSwitch" destination="v4K-Pp-Bob" id="7H7-pG-9jf"/>
+                        <outlet property="preventSameCountryMultiHopSwitch" destination="qLy-5L-tSL" id="Lvc-LJ-5CZ"/>
+                        <outlet property="preventSameISPMultiHopSwitch" destination="Wu9-JY-b9t" id="Wwk-sD-pSb"/>
                         <outlet property="selectHostSwitch" destination="auv-o7-PP6" id="tfn-zi-JTB"/>
                         <outlet property="selectedExitServerFlag" destination="tYb-vY-fOd" id="Yuz-7z-Ohf"/>
                         <outlet property="selectedExitServerName" destination="zQt-Lf-EwL" id="vPu-KE-QH0"/>

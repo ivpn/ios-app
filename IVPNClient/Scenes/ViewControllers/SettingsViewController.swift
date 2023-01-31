@@ -47,6 +47,8 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
     @IBOutlet weak var selectHostSwitch: UISwitch!
+    @IBOutlet weak var preventSameCountryMultiHopSwitch: UISwitch!
+    @IBOutlet weak var preventSameISPMultiHopSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -159,6 +161,14 @@ class SettingsViewController: UITableViewController {
         }
     }
     
+    @IBAction func togglePreventSameCountryMultiHop(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.preventSameCountryMultiHop)
+    }
+    
+    @IBAction func togglePreventSameISPMultiHop(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.preventSameISPMultiHop)
+    }
+    
     @IBAction func extendSubscription(_ sender: Any) {
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
             return
@@ -217,6 +227,8 @@ class SettingsViewController: UITableViewController {
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
         selectHostSwitch.setOn(UserDefaults.shared.selectHost, animated: false)
+        preventSameCountryMultiHopSwitch.setOn(UserDefaults.standard.preventSameCountryMultiHop, animated: false)
+        preventSameISPMultiHopSwitch.setOn(UserDefaults.standard.preventSameISPMultiHop, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
         updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
