@@ -46,9 +46,7 @@
 		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
 		8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */; };
 		82234B6721BA7F3500B082DE /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82234B6621BA7F3500B082DE /* Logger.swift */; };
-		82234B6E21BA90E400B082DE /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C69422D1DD20FC200F9A801 /* KeyChain.swift */; };
 		8223C53F22326375006C4F14 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82234B6621BA7F3500B082DE /* Logger.swift */; };
-		8223C5402232694E006C4F14 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C69422D1DD20FC200F9A801 /* KeyChain.swift */; };
 		8223C54C22E9E93A00CD283D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54B22E9E93A00CD283D /* Session.swift */; };
 		8223C54E22EAE93F00CD283D /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54D22EAE93F00CD283D /* SessionManager.swift */; };
 		8223C54F22EAEC7000CD283D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54B22E9E93A00CD283D /* Session.swift */; };
@@ -133,7 +131,6 @@
 		826F7F3023A7A89B00777DB9 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		826F7F3123A7A8CE00777DB9 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429B622FC2BE90056B8FF /* Result.swift */; };
 		826F7F3323A7A90200777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */; };
-		826F7F3423A7A91700777DB9 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C69422D1DD20FC200F9A801 /* KeyChain.swift */; };
 		826F7F3523A7A93200777DB9 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8223C54B22E9E93A00CD283D /* Session.swift */; };
 		826F7F3623A7A94000777DB9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
 		826F7F3723A7A95000777DB9 /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
@@ -176,8 +173,12 @@
 		8292E1A72174C10700123538 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A62174C10700123538 /* Peer.swift */; };
 		8292E1A92174C11600123538 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A82174C11600123538 /* Interface.swift */; };
 		8292E1AB2174C12200123538 /* Tunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1AA2174C12200123538 /* Tunnel.swift */; };
-		8294BC8C22A10F4100328932 /* TunnelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8294BC8B22A10F4100328932 /* TunnelKit.framework */; };
-		8294BC8E22A126C900328932 /* TunnelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8294BC8D22A126C900328932 /* TunnelKit.framework */; };
+		82968A32298A970500077E0A /* TunnelKitOpenVPN in Frameworks */ = {isa = PBXBuildFile; productRef = 82968A31298A970500077E0A /* TunnelKitOpenVPN */; };
+		82968A34298A970500077E0A /* TunnelKitOpenVPNAppExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 82968A33298A970500077E0A /* TunnelKitOpenVPNAppExtension */; };
+		82968A35298A98C300077E0A /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C69422D1DD20FC200F9A801 /* KeyChain.swift */; };
+		82968A36298A98C600077E0A /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C69422D1DD20FC200F9A801 /* KeyChain.swift */; };
+		82968A37298A98C900077E0A /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C69422D1DD20FC200F9A801 /* KeyChain.swift */; };
+		82968A38298A98CD00077E0A /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C69422D1DD20FC200F9A801 /* KeyChain.swift */; };
 		82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82989FDD2188981900F7EBE0 /* AppKeyManager.swift */; };
 		829AA4732267372A00037198 /* Designable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AA4722267372A00037198 /* Designable+Ext.swift */; };
 		829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829D2C8121664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift */; };
@@ -319,7 +320,6 @@
 		9C50959A20FCF6850048DBF2 /* ProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C50959920FCF6850048DBF2 /* ProtocolTableViewCell.swift */; };
 		9C51340A1DE8398400423551 /* Pinger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5134091DE8398400423551 /* Pinger.swift */; };
 		9C6942251DD0CBF800F9A801 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6942241DD0CBF800F9A801 /* NetworkExtension.framework */; };
-		9C69422E1DD20FC200F9A801 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C69422D1DD20FC200F9A801 /* KeyChain.swift */; };
 		9C6942371DD218A900F9A801 /* AccessDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6942361DD218A900F9A801 /* AccessDetails.swift */; };
 		9C7840B020CD8A8A00335736 /* openvpn-tunnel-provider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9C7840A820CD8A8A00335736 /* openvpn-tunnel-provider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9CAE14C020FE453E00D4DAC0 /* VPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAE14BF20FE453E00D4DAC0 /* VPNManager.swift */; };
@@ -739,8 +739,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8294BC8C22A10F4100328932 /* TunnelKit.framework in Frameworks */,
 				9CF7E35A20F7A86E008E0EC5 /* NetworkExtension.framework in Frameworks */,
+				82968A34298A970500077E0A /* TunnelKitOpenVPNAppExtension in Frameworks */,
 				08DDD46C7843193A0C8A9F4D /* Pods_openvpn_tunnel_provider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -749,10 +749,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8294BC8E22A126C900328932 /* TunnelKit.framework in Frameworks */,
 				82D598C621A6A5C7000FABDE /* SystemConfiguration.framework in Frameworks */,
 				9CB2CE311DAF9227007A4D2D /* CoreData.framework in Frameworks */,
 				9C6942251DD0CBF800F9A801 /* NetworkExtension.framework in Frameworks */,
+				82968A32298A970500077E0A /* TunnelKitOpenVPN in Frameworks */,
 				9CC29DF01E1560990080F799 /* StoreKit.framework in Frameworks */,
 				824B86DF26D42A4600D0101A /* WireGuardKit in Frameworks */,
 				D661274AA295C4153E1286AB /* Pods_IVPNClient.framework in Frameworks */,
@@ -1612,6 +1612,9 @@
 			dependencies = (
 			);
 			name = "openvpn-tunnel-provider";
+			packageProductDependencies = (
+				82968A33298A970500077E0A /* TunnelKitOpenVPNAppExtension */,
+			);
 			productName = "openvpn-tunnel-provider";
 			productReference = 9C7840A820CD8A8A00335736 /* openvpn-tunnel-provider.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -1638,6 +1641,7 @@
 			name = IVPNClient;
 			packageProductDependencies = (
 				824B86DE26D42A4600D0101A /* WireGuardKit */,
+				82968A31298A970500077E0A /* TunnelKitOpenVPN */,
 			);
 			productName = IVPNClient;
 			productReference = 9CDDD5AB1D9D2F9F00D39924 /* IVPNClient.app */;
@@ -1753,6 +1757,7 @@
 			mainGroup = 9CDDD5A21D9D2F9E00D39924;
 			packageReferences = (
 				824B86DD26D42A4600D0101A /* XCRemoteSwiftPackageReference "wireguard-apple" */,
+				82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */,
 			);
 			productRefGroup = 9CDDD5AC1D9D2F9F00D39924 /* Products */;
 			projectDirPath = "";
@@ -1948,10 +1953,7 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Apple/openssl.framework/openssl",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1961,10 +1963,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2024,7 +2023,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				826F7F3423A7A91700777DB9 /* KeyChain.swift in Sources */,
 				826F7F2323A7A0AB00777DB9 /* ApiManager.swift in Sources */,
 				826F7F3E23A7AA6300777DB9 /* AddressType.swift in Sources */,
 				826F7F2D23A7A86D00777DB9 /* ApiRequestDI.swift in Sources */,
@@ -2050,6 +2048,7 @@
 				826F7F4223A7AAB800777DB9 /* Array+Ext.swift in Sources */,
 				826F7F3323A7A90200777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */,
 				826F7F3023A7A89B00777DB9 /* UserDefaults+Ext.swift in Sources */,
+				82968A38298A98CD00077E0A /* KeyChain.swift in Sources */,
 				825E836525A4834200938240 /* APIPublicKeyPin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2061,7 +2060,6 @@
 				82E7169A2181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */,
 				8205352A2302BEA3007BDD58 /* Array+Ext.swift in Sources */,
 				82E716882181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
-				8223C5402232694E006C4F14 /* KeyChain.swift in Sources */,
 				82F638C5217DA89000410318 /* AddressType.swift in Sources */,
 				82EEB6DB25F961BC00915837 /* URL+Ext.swift in Sources */,
 				822919712182EB1C00978BBA /* String+Ext.swift in Sources */,
@@ -2088,6 +2086,7 @@
 				82CA214429379CEC008BADE8 /* UIDevice+Ext.swift in Sources */,
 				824B86C926D3D7FB00D0101A /* CIDRAddress.swift in Sources */,
 				826C56D422FD551900D2B76A /* ServiceStatus.swift in Sources */,
+				82968A37298A98C900077E0A /* KeyChain.swift in Sources */,
 				824B86C726D3D7B600D0101A /* ApiManager.swift in Sources */,
 				82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */,
 				820EA86C2322430700E16B2D /* Result.swift in Sources */,
@@ -2115,7 +2114,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				823BD9E3231D4C8E002E631D /* ErrorResult.swift in Sources */,
-				82234B6E21BA90E400B082DE /* KeyChain.swift in Sources */,
 				82E7168D2181E8E900D6B7C2 /* WireGuardProtocol.swift in Sources */,
 				9CF7E37820F7ABE3008E0EC5 /* PacketTunnelProvider.swift in Sources */,
 				82D90474216C7DAF0032F3BE /* Date+Ext.swift in Sources */,
@@ -2126,6 +2124,7 @@
 				82E716932181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				823FFB082338E09900F91A5D /* Capability.swift in Sources */,
 				826F7F4323A7AAD200777DB9 /* Array+Ext.swift in Sources */,
+				82968A36298A98C600077E0A /* KeyChain.swift in Sources */,
 				82E716812181E8AF00D6B7C2 /* TunnelType.swift in Sources */,
 				82A208C121BAAC6C00C9AD44 /* Config.swift in Sources */,
 			);
@@ -2284,11 +2283,11 @@
 				82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */,
 				828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */,
 				82E7880C22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift in Sources */,
+				82968A35298A98C300077E0A /* KeyChain.swift in Sources */,
 				82F638C2217DA89000410318 /* AddressType.swift in Sources */,
 				822920A02480FA3600476FC1 /* ServersSort.swift in Sources */,
 				826E61482428F8E60064F195 /* AccountViewController.swift in Sources */,
 				820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */,
-				9C69422E1DD20FC200F9A801 /* KeyChain.swift in Sources */,
 				821429BB22FC36100056B8FF /* ApiRequestDI.swift in Sources */,
 				82AB0877291A6B9C0084625A /* CustomPort+CoreDataClass.swift in Sources */,
 				82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */,
@@ -2515,7 +2514,7 @@
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "today-extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2548,7 +2547,7 @@
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "today-extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2580,7 +2579,7 @@
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "today-extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2617,7 +2616,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "wireguard-tunnel-provider/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2656,7 +2655,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "wireguard-tunnel-provider/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2834,7 +2833,7 @@
 					"$(PROJECT_DIR)/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2915,7 +2914,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2951,7 +2950,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "wireguard-tunnel-provider/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2999,7 +2998,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3044,7 +3043,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "openvpn-tunnel-provider/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3197,7 +3196,7 @@
 					"$(PROJECT_DIR)/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3236,7 +3235,7 @@
 					"$(PROJECT_DIR)/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3353,6 +3352,14 @@
 				revision = 23618f994f17d8ad8f2f65d79b4a1e8a0830b334;
 			};
 		};
+		82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/passepartoutvpn/tunnelkit";
+			requirement = {
+				kind = exactVersion;
+				version = 4.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3365,6 +3372,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 824B86DD26D42A4600D0101A /* XCRemoteSwiftPackageReference "wireguard-apple" */;
 			productName = WireGuardKit;
+		};
+		82968A31298A970500077E0A /* TunnelKitOpenVPN */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */;
+			productName = TunnelKitOpenVPN;
+		};
+		82968A33298A970500077E0A /* TunnelKitOpenVPNAppExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */;
+			productName = TunnelKitOpenVPNAppExtension;
 		};
 /* End XCSwiftPackageProductDependency section */
 

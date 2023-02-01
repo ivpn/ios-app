@@ -24,8 +24,11 @@
 import Foundation
 import NetworkExtension
 import Network
-import TunnelKit
+import TunnelKitCore
+import TunnelKitManager
+import TunnelKitOpenVPN
 import WireGuardKit
+import KeychainAccess
 
 extension NETunnelProviderProtocol {
     
@@ -65,19 +68,19 @@ extension NETunnelProviderProtocol {
             }
         }
         
-        var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
+        var builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.shouldDebug = true
         builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss$d $L $M"
         builder.masksPrivateData = true
         
         let configuration = builder.build()
         let keychain = Keychain(group: Config.appGroup)
-        try? keychain.set(password: credentials.password, for: credentials.username, context: Config.openvpnTunnelProvider)
+        _ = try? keychain.set(password: credentials.password, for: credentials.username, context: Config.openvpnTunnelProvider)
         let proto = try! configuration.generatedTunnelProtocol(
             withBundleIdentifier: Config.openvpnTunnelProvider,
             appGroup: Config.appGroup,
             context: Config.openvpnTunnelProvider,
-            username: credentials.username
+            credentials: credentials
         )
         proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
         if #available(iOS 15.1, *) {
