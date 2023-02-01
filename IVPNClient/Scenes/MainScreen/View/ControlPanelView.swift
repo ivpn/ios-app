@@ -84,11 +84,8 @@ class ControlPanelView: UITableView {
     // MARK: - Methods -
     
     func setupView() {
-        if #available(iOS 13.0, *) {
-            connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
-            connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
-        }
-        
+        connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
+        connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
         updateConnectSwitch()
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: protectionStatusTableCell)
         
@@ -149,9 +146,7 @@ class ControlPanelView: UITableView {
     }
     
     private func updateConnectSwitch() {
-        if #available(iOS 13.0, *) {
-            connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
-        }
+        connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
     }
     
 }

@@ -63,9 +63,7 @@ class TermsOfServiceViewController: UIViewController {
         super.viewWillAppear(animated)
         // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
         // Remove when fixed in future releases
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.setNeedsLayout()
-        }
+        navigationController?.navigationBar.setNeedsLayout()
     }
     
     // MARK: - Methods -

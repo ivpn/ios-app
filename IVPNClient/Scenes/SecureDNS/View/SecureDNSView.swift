@@ -74,12 +74,7 @@ class SecureDNSView: UITableView {
     // MARK: - Observers -
     
     private func addObservers() {
-        if #available(iOS 13.0, *) {
-            NotificationCenter.default.addObserver(self, selector: #selector(updateEnableSwitch), name: UIScene.didActivateNotification, object: nil)
-        } else {
-            NotificationCenter.default.addObserver(self, selector: #selector(updateEnableSwitch), name: UIApplication.didBecomeActiveNotification, object: nil)
-        }
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateEnableSwitch), name: UIScene.didActivateNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNS, object: nil)
     }
     

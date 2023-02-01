@@ -126,9 +126,7 @@ class SelectPlanViewController: UITableViewController {
         super.viewWillAppear(animated)
         // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
         // Remove when fixed in future releases
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.setNeedsLayout()
-        }
+        navigationController?.navigationBar.setNeedsLayout()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -179,10 +177,7 @@ class SelectPlanViewController: UITableViewController {
     }
     
     private func setupView() {
-        if #available(iOS 13.0, *) {
-            isModalInPresentation = true
-        }
-        
+        isModalInPresentation = true
         tableView.separatorStyle = .none
         view.addSubview(spinner)
         view.addSubview(retryButton)
