@@ -24,7 +24,8 @@
 import Foundation
 import NetworkExtension
 import UIKit
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 class VPNManager {
     
@@ -384,7 +385,7 @@ class VPNManager {
         }
         
         do {
-            try session.sendProviderMessage(OpenVPNTunnelProvider.Message.requestLog.data) { data in
+            try session.sendProviderMessage(OpenVPNProvider.Message.requestLog.data) { data in
                 guard let data = data, !data.isEmpty else {
                     completion(nil)
                     return

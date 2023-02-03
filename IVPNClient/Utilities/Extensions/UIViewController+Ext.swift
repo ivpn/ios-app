@@ -61,11 +61,10 @@ extension UIViewController {
     // MARK: - @IBActions -
     
     @IBAction func dismissViewController(_ sender: Any) {
-        if #available(iOS 13.0, *) {
-            if let presentationController = navigationController?.presentationController {
-                presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
-            }
+        if let presentationController = navigationController?.presentationController {
+            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
         }
+        
         navigationController?.dismiss(animated: true)
     }
     
