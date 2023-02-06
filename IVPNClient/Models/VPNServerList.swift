@@ -289,13 +289,6 @@ class VPNServerList {
         }
     }
     
-    func validateServer(firstServer: VPNServer, secondServer: VPNServer) -> Bool {
-        guard UserDefaults.shared.isMultiHop else { return true }
-        guard firstServer.countryCode != secondServer.countryCode else { return false }
-        
-        return true
-    }
-    
     func getExitServer(entryServer: VPNServer) -> VPNServer {
         for server in servers where server.countryCode != entryServer.countryCode {
             return server
@@ -308,7 +301,7 @@ class VPNServerList {
         var list = [VPNServer]()
         let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         
-        list = servers.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
+        list = servers.filter { VPNServer.validMultiHop(first: $0, second: serverToValidate) }
         
         if let randomServer = list.randomElement() {
             randomServer.fastest = false
