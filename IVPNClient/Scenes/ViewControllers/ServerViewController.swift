@@ -319,7 +319,7 @@ extension ServerViewController {
             differentSelectedServer = server !== Application.shared.settings.selectedExitServer
         }
         
-        guard VPNServer.validMultiHop(first: server, second: secondServer) == true else {
+        guard VPNServer.validMultiHop(server, secondServer) else {
             showAlert(title: isExitServer ? "Unable to set Exit Server" : "Unable to set Entry Server", message: "When using Multi-Hop you must select entry and exit servers in different countries.")
             tableView.deselectRow(at: indexPath, animated: true)
             return

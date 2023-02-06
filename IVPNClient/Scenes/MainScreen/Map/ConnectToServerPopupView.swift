@@ -124,7 +124,7 @@ class ConnectToServerPopupView: UIView {
                 actionButton.setTitle("CONNECT TO SERVER", for: .normal)
             }
             
-            if !VPNServer.validMultiHop(first: Application.shared.settings.selectedServer, second: vpnServer) {
+            if !VPNServer.validMultiHop(Application.shared.settings.selectedServer, vpnServer) {
                 actionButton.isHidden = true
                 errorLabel.isHidden = false
             } else {
@@ -418,7 +418,7 @@ extension ConnectToServerPopupView: UIScrollViewDelegate {
         pageControl.currentPage = index
         vpnServer = servers[index]
         
-        if Application.shared.connectionManager.status.isDisconnected() && VPNServer.validMultiHop(first: Application.shared.settings.selectedServer, second: vpnServer) {
+        if Application.shared.connectionManager.status.isDisconnected() && VPNServer.validMultiHop(Application.shared.settings.selectedServer, vpnServer) {
             
             if UserDefaults.shared.isMultiHop {
                 Application.shared.settings.selectedExitServer = vpnServer

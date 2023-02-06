@@ -327,7 +327,7 @@ class MapScrollView: UIScrollView {
             showConnectToServerPopup(server: server)
             updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
             
-            if Application.shared.connectionManager.status.isDisconnected() && VPNServer.validMultiHop(first: Application.shared.settings.selectedServer, second: server) {
+            if Application.shared.connectionManager.status.isDisconnected() && VPNServer.validMultiHop(Application.shared.settings.selectedServer, server) {
                 
                 if UserDefaults.shared.isMultiHop {
                     Application.shared.settings.selectedExitServer = server
@@ -377,11 +377,11 @@ class MapScrollView: UIScrollView {
     }
     
     private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
-        var servers = VPNServer.validMultiHop(first: Application.shared.settings.selectedServer, second: selectedServer) ? [selectedServer] : []
+        var servers = VPNServer.validMultiHop(Application.shared.settings.selectedServer, selectedServer) ? [selectedServer] : []
         
         for server in Application.shared.serverList.getServers() {
             guard server !== selectedServer else { continue }
-            guard VPNServer.validMultiHop(first: Application.shared.settings.selectedServer, second: server) else { continue }
+            guard VPNServer.validMultiHop(Application.shared.settings.selectedServer, server) else { continue }
             
             if isNearByServer(selectedServer, server) {
                 servers.append(server)
