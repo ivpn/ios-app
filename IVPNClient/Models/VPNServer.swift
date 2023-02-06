@@ -166,7 +166,7 @@ class VPNServer {
             return true
         }
         
-        guard first.country != second.country else {
+        guard first.country == second.country else {
             return false
         }
         
@@ -182,7 +182,7 @@ class VPNServer {
             return true
         }
         
-        guard first.country != second.country else {
+        guard first.isp == second.isp else {
             return false
         }
         
