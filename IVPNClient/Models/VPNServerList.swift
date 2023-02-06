@@ -400,6 +400,7 @@ class VPNServerList {
                 city: server["city"] as? String ?? "",
                 latitude: server["latitude"] as? Double ?? 0,
                 longitude: server["longitude"] as? Double ?? 0,
+                isp: server["isp"] as? String ?? "",
                 ipAddresses: serverIpList,
                 hosts: serverHostsList
             )
