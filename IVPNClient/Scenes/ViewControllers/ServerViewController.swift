@@ -239,48 +239,7 @@ class ServerViewController: UITableViewController {
         tableView.reloadData()
     }
     
-}
-
-// MARK: - UITableViewDataSource -
-
-extension ServerViewController {
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        collection = getCollection()
-        
-        if isFavorite && collection.isEmpty && searchBar.text!.isEmpty {
-            showEmptyView()
-        } else {
-            restore()
-        }
-        
-        return collection.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let server = collection[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ServerTableViewCell", for: indexPath) as! ServerTableViewCell
-        cell.isMultiHop = UserDefaults.shared.isMultiHop
-        cell.isFavorite = isFavorite
-        cell.indexPath = indexPath
-        cell.viewModel = VPNServerViewModel(server: server)
-        cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
-        cell.expandedGateways = expandedGateways
-        
-        return cell
-    }
-    
-}
-
-// MARK: - UITableViewDelegate -
-
-extension ServerViewController {
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.row < collection.count else {
-            return
-        }
-        
+    private func selectServer(indexPath: IndexPath, force: Bool = false) {
         var selectedHost: Host?
         var server = collection[indexPath.row]
         var differentSelectedServer = false
@@ -319,8 +278,10 @@ extension ServerViewController {
             differentSelectedServer = server !== Application.shared.settings.selectedExitServer
         }
         
-        guard VPNServer.validMultiHop(server, secondServer) else {
-            showAlert(title: isExitServer ? "Unable to set Exit Server" : "Unable to set Entry Server", message: "When using Multi-Hop you must select entry and exit servers in different countries.")
+        guard VPNServer.validMultiHopCountry(server, secondServer) || force else {
+            showActionAlert(title: "Entry and exit servers located in the same country", message: "Using Multi-Hop servers from the same country may decrease your privacy.", action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+                selectServer(indexPath: indexPath, force: true)
+            })
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
@@ -371,6 +332,51 @@ extension ServerViewController {
         } else {
             navigationController?.popViewController(animated: true)
         }
+    }
+    
+}
+
+// MARK: - UITableViewDataSource -
+
+extension ServerViewController {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        collection = getCollection()
+        
+        if isFavorite && collection.isEmpty && searchBar.text!.isEmpty {
+            showEmptyView()
+        } else {
+            restore()
+        }
+        
+        return collection.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let server = collection[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServerTableViewCell", for: indexPath) as! ServerTableViewCell
+        cell.isMultiHop = UserDefaults.shared.isMultiHop
+        cell.isFavorite = isFavorite
+        cell.indexPath = indexPath
+        cell.viewModel = VPNServerViewModel(server: server)
+        cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        cell.expandedGateways = expandedGateways
+        
+        return cell
+    }
+    
+}
+
+// MARK: - UITableViewDelegate -
+
+extension ServerViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.row < collection.count else {
+            return
+        }
+        
+        selectServer(indexPath: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
