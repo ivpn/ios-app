@@ -141,15 +141,11 @@ class VPNServer {
         return lhs.city == rhs.city && lhs.countryCode == rhs.countryCode
     }
     
-    static func != (lhs: VPNServer, rhs: VPNServer) -> Bool {
-        return lhs.city != rhs.city || lhs.countryCode != rhs.countryCode
-    }
-    
     static func validMultiHop(_ first: VPNServer, _ second: VPNServer) -> Bool {
         guard UserDefaults.shared.isMultiHop else {
             return true
         }
-        guard first != second else {
+        guard !(first == second) else {
             return false
         }
         

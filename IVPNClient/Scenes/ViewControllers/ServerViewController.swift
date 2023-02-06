@@ -381,6 +381,10 @@ extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let server = collection[indexPath.row]
+        let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        guard VPNServer.validMultiHop(server, serverToValidate) else {
+            return 0
+        }
         if server.isHost && !expandHost(server) && !isFavorite {
             return 0
         }
