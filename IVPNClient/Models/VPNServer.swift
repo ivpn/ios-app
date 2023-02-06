@@ -159,7 +159,7 @@ class VPNServer {
         guard UserDefaults.shared.preventSameCountryMultiHop else {
             return true
         }
-        guard first.country == second.country else {
+        guard first.country != second.country else {
             return false
         }
         
@@ -173,7 +173,7 @@ class VPNServer {
         guard UserDefaults.shared.preventSameISPMultiHop else {
             return true
         }
-        guard first.isp == second.isp else {
+        guard first.isp != second.isp else {
             return false
         }
         
