@@ -278,6 +278,14 @@ class ServerViewController: UITableViewController {
             differentSelectedServer = server !== Application.shared.settings.selectedExitServer
         }
         
+        guard VPNServer.validMultiHopISP(server, secondServer) || force else {
+            showActionAlert(title: "Entry and exit servers are operated by the same ISP", message: "Using Multi-Hop servers operated by the same ISP may decrease your privacy.", action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+                selectServer(indexPath: indexPath, force: true)
+            })
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
+        }
+        
         guard VPNServer.validMultiHopCountry(server, secondServer) || force else {
             showActionAlert(title: "Entry and exit servers located in the same country", message: "Using Multi-Hop servers from the same country may decrease your privacy.", action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
                 selectServer(indexPath: indexPath, force: true)
