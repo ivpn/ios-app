@@ -456,8 +456,8 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 1 { return 60 }
         if indexPath.section == 0 && indexPath.row == 3 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 7 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 3 && indexPath.row == 9 { return 60 }
+        if indexPath.section == 3 && indexPath.row == 10 && !loggingSwitch.isOn { return 0 }
         
         // Disconnected custom DNS
         if indexPath.section == 3 && indexPath.row == 3 {
@@ -481,7 +481,7 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 && indexPath.row == 8 {
+        if indexPath.section == 3 && indexPath.row == 10 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
