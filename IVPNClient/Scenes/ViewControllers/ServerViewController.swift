@@ -240,17 +240,17 @@ class ServerViewController: UITableViewController {
     }
     
     private func selectServer(indexPath: IndexPath, force: Bool = false) {
+        var selectedServer = collection[indexPath.row]
         var selectedHost: Host?
-        var server = collection[indexPath.row]
         var differentSelectedServer = false
         var differentSelectedHost = false
-        server.random = false
+        selectedServer.random = false
         
-        if server.isHost {
-            let hostName = server.gateway
-            if let serverByCity = Application.shared.serverList.getServer(byCity: server.city) {
-                server = serverByCity
-                selectedHost = server.getHost(hostName: hostName)
+        if selectedServer.isHost {
+            let hostName = selectedServer.gateway
+            if let serverByCity = Application.shared.serverList.getServer(byCity: selectedServer.city) {
+                selectedServer = serverByCity
+                selectedHost = selectedServer.getHost(hostName: hostName)
             }
             
             if let selectedHost = Application.shared.settings.selectedHost {
@@ -265,20 +265,20 @@ class ServerViewController: UITableViewController {
         }
         
         if ((!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0)) && !isFavorite {
-            server = Application.shared.serverList.getRandomServer(isExitServer: isExitServer)
-            server.random = true
-            server.fastest = false
+            selectedServer = Application.shared.serverList.getRandomServer(isExitServer: isExitServer)
+            selectedServer.random = true
+            selectedServer.fastest = false
         }
         
         var secondServer = Application.shared.settings.selectedExitServer
-        differentSelectedServer = server !== Application.shared.settings.selectedServer
+        differentSelectedServer = selectedServer !== Application.shared.settings.selectedServer
         
         if isExitServer {
             secondServer = Application.shared.settings.selectedServer
-            differentSelectedServer = server !== Application.shared.settings.selectedExitServer
+            differentSelectedServer = selectedServer !== Application.shared.settings.selectedExitServer
         }
         
-        guard VPNServer.validMultiHopISP(server, secondServer) || force else {
+        guard VPNServer.validMultiHopISP(selectedServer, secondServer) || force else {
             showActionAlert(title: "Entry and exit servers are operated by the same ISP", message: "Using Multi-Hop servers operated by the same ISP may decrease your privacy.", action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
                 selectServer(indexPath: indexPath, force: true)
             })
@@ -286,7 +286,7 @@ class ServerViewController: UITableViewController {
             return
         }
         
-        guard VPNServer.validMultiHopCountry(server, secondServer) || force else {
+        guard VPNServer.validMultiHopCountry(selectedServer, secondServer) || force else {
             showActionAlert(title: "Entry and exit servers located in the same country", message: "Using Multi-Hop servers from the same country may decrease your privacy.", action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
                 selectServer(indexPath: indexPath, force: true)
             })
@@ -295,11 +295,11 @@ class ServerViewController: UITableViewController {
         }
         
         if isExitServer {
-            Application.shared.settings.selectedExitServer = server
+            Application.shared.settings.selectedExitServer = selectedServer
             Application.shared.settings.selectedExitHost = selectedHost
         } else {
-            if UserDefaults.shared.isMultiHop || indexPath.row > 0 || server.random || isFavorite {
-                Application.shared.settings.selectedServer = server
+            if UserDefaults.shared.isMultiHop || indexPath.row > 0 || selectedServer.random || isFavorite {
+                Application.shared.settings.selectedServer = selectedServer
                 Application.shared.settings.selectedHost = selectedHost
                 Application.shared.settings.selectedServer.fastest = false
             } else {
@@ -317,7 +317,7 @@ class ServerViewController: UITableViewController {
             }
             
             if !UserDefaults.shared.isMultiHop {
-                Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
+                Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: selectedServer)
             }
             UserDefaults.standard.set(Application.shared.settings.selectedServer.fastest, forKey: UserDefaults.Key.fastestServerPreferred)
         }
