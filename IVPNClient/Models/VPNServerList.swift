@@ -236,7 +236,7 @@ class VPNServerList {
             }
             
             for host in server.hosts {
-                allHosts.append(VPNServer(gateway: host.hostName, dnsName: host.dnsName, countryCode: server.countryCode, country: "", city: server.city, load: host.load, ipv6: host.ipv6))
+                allHosts.append(VPNServer(gateway: host.hostName, dnsName: host.dnsName, countryCode: server.countryCode, country: "", city: server.city, isp: server.isp, load: host.load, ipv6: host.ipv6))
             }
         }
         
