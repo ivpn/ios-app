@@ -281,12 +281,17 @@ class VPNServerList {
             return Application.shared.settings.selectedServer
         }
         
-        return servers.min {
+        var server = servers.min {
             let leftPingMs = $0.pingMs ?? -1
             let rightPingMs = $1.pingMs ?? -1
             if rightPingMs < 0 && leftPingMs >= 0 { return true }
             return leftPingMs < rightPingMs && leftPingMs > -1
         }
+        
+        server?.fastest = true
+        server?.random = false
+        
+        return server
     }
     
     func getExitServer(entryServer: VPNServer) -> VPNServer {
