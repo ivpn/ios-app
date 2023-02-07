@@ -281,7 +281,7 @@ class VPNServerList {
             return Application.shared.settings.selectedServer
         }
         
-        var server = servers.min {
+        let server = servers.min {
             let leftPingMs = $0.pingMs ?? -1
             let rightPingMs = $1.pingMs ?? -1
             if rightPingMs < 0 && leftPingMs >= 0 { return true }

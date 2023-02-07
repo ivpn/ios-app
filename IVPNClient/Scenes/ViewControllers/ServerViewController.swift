@@ -273,16 +273,8 @@ class ServerViewController: UITableViewController {
         return false
     }
     
-    private func multiHopServer() -> VPNServer {
-        if isExitServer {
-            return Application.shared.settings.selectedServer
-        }
-        
-        return Application.shared.settings.selectedExitServer
-    }
-    
     private func validMultiHop(server: VPNServer, indexPath: IndexPath) -> Bool {
-        let secondServer = multiHopServer()
+        let secondServer = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         
         guard VPNServer.validMultiHopISP(server, secondServer) else {
             showActionAlert(title: "Entry and exit servers are operated by the same ISP", message: "Using Multi-Hop servers operated by the same ISP may decrease your privacy.", action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
