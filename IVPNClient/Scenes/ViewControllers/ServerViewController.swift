@@ -273,7 +273,11 @@ class ServerViewController: UITableViewController {
         return false
     }
     
-    private func validMultiHop(server: VPNServer, indexPath: IndexPath) -> Bool {
+    private func validMultiHop(server: VPNServer, indexPath: IndexPath, force: Bool) -> Bool {
+        guard !force else {
+            return true
+        }
+        
         let secondServer = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         
         guard VPNServer.validMultiHopISP(server, secondServer) else {
@@ -358,7 +362,7 @@ class ServerViewController: UITableViewController {
             }
         }
         
-        guard validMultiHop(server: selectedServer, indexPath: indexPath) || force else {
+        guard validMultiHop(server: selectedServer, indexPath: indexPath, force: force) else {
             return
         }
         
