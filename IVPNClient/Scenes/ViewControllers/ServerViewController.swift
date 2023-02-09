@@ -247,7 +247,7 @@ class ServerViewController: UITableViewController {
         return ((!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0)) && !isFavorite
     }
     
-    private func differentSelectedServer(server: VPNServer) -> Bool {
+    private func differentServer(server: VPNServer) -> Bool {
         if isExitServer {
             return server !== Application.shared.settings.selectedExitServer
         }
@@ -255,7 +255,7 @@ class ServerViewController: UITableViewController {
         return server !== Application.shared.settings.selectedServer
     }
     
-    private func differentSelectedHost(host: Host?) -> Bool {
+    private func differentHost(host: Host?) -> Bool {
         guard let host = host else {
             return false
         }
@@ -320,8 +320,8 @@ class ServerViewController: UITableViewController {
         NotificationCenter.default.post(name: Notification.Name.ShowConnectToServerPopup, object: nil)
     }
     
-    private func reconnect(_ differentSelectedServer: Bool, _ differentSelectedHost: Bool) {
-        if differentSelectedServer || differentSelectedHost || Application.shared.serverList.noPing {
+    private func reconnect(_ differentServer: Bool, _ differentHost: Bool) {
+        if differentServer || differentHost || Application.shared.serverList.noPing {
             if Application.shared.settings.selectedServer.fastest && Application.shared.serverList.noPing {
                 serverDelegate?.reconnectToFastestServer()
             } else {
@@ -368,12 +368,11 @@ class ServerViewController: UITableViewController {
             return
         }
         
-        let differentSelectedServer = differentSelectedServer(server: selectedServer)
-        let differentSelectedHost = differentSelectedHost(host: selectedHost)
-        
+        let differentServer = differentServer(server: selectedServer)
+        let differentHost = differentHost(host: selectedHost)
         select(server: selectedServer, host: selectedHost)
         postNotification()
-        reconnect(differentSelectedServer, differentSelectedHost)
+        reconnect(differentServer, differentHost)
         popViewController()
     }
     
