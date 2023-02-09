@@ -309,6 +309,7 @@ class ServerViewController: UITableViewController {
             UserDefaults.standard.set(Application.shared.settings.selectedServer.fastest, forKey: UserDefaults.Key.fastestServerPreferred)
             if !UserDefaults.shared.isMultiHop {
                 Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
+                Application.shared.settings.selectedExitHost = nil
             }
         }
     }
@@ -339,6 +340,7 @@ class ServerViewController: UITableViewController {
     
     private func selected(indexPath: IndexPath, force: Bool = false) {
         var selectedServer = collection[indexPath.row]
+        selectedServer.fastest = false
         var selectedHost: Host?
         let isFastestServer = isFastestServer(indexPath: indexPath)
         let isRandomServer = isRandomServer(indexPath: indexPath)

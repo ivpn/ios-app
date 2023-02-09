@@ -127,6 +127,7 @@ class Settings {
                 server.fastest = false
                 Application.shared.settings.selectedServer = server
                 Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
+                Application.shared.settings.selectedExitHost = nil
             }
         }
         
