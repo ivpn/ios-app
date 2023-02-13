@@ -321,9 +321,43 @@ class MapScrollView: UIScrollView {
     }
     
     @objc private func selectServer(_ sender: UIButton) {
-        let city = sender.titleLabel?.text ?? ""
+        selectServer(city: sender.titleLabel?.text ?? "")
+    }
+    
+    private func validMultiHop(server: VPNServer, force: Bool) -> Bool {
+        guard !force else {
+            return true
+        }
         
+        guard let viewController = UIApplication.topViewController() else {
+            return true
+        }
+        
+        let secondServer = Application.shared.settings.selectedServer
+        
+        guard VPNServer.validMultiHopISP(server, secondServer) else {
+            viewController.showActionAlert(title: "Entry and exit servers are operated by the same ISP", message: "Using Multi-Hop servers operated by the same ISP may decrease your privacy.", action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+                selectServer(city: server.city, force: true)
+            })
+            return false
+        }
+        
+        guard VPNServer.validMultiHopCountry(server, secondServer) else {
+            viewController.showActionAlert(title: "Entry and exit servers located in the same country", message: "Using Multi-Hop servers from the same country may decrease your privacy.", action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+                selectServer(city: server.city, force: true)
+            })
+            return false
+        }
+        
+        return true
+    }
+    
+    private func selectServer(city: String, force: Bool = false) {
         if let server = Application.shared.serverList.getServer(byCity: city) {
+            guard validMultiHop(server: server, force: force) else {
+                return
+            }
+            
             showConnectToServerPopup(server: server)
             updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
             
