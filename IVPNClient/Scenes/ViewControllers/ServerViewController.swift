@@ -307,7 +307,7 @@ class ServerViewController: UITableViewController {
             Application.shared.settings.selectedServer = server
             Application.shared.settings.selectedHost = host
             UserDefaults.standard.set(Application.shared.settings.selectedServer.fastest, forKey: UserDefaults.Key.fastestServerPreferred)
-            if !UserDefaults.shared.isMultiHop {
+            if !UserDefaults.shared.isMultiHop, server == Application.shared.settings.selectedExitServer {
                 Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
                 Application.shared.settings.selectedExitHost = nil
             }
