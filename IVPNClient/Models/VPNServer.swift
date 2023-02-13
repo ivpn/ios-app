@@ -27,6 +27,11 @@ import CoreLocation
 
 class VPNServer {
     
+    static let validMultiHopCountryTitle = "Entry and exit servers located in the same country"
+    static let validMultiHopCountryMessage = "Using Multi-Hop servers from the same country may decrease your privacy."
+    static let validMultiHopISPTitle = "Entry and exit servers are operated by the same ISP"
+    static let validMultiHopISPMessage = "Using Multi-Hop servers operated by the same ISP may decrease your privacy."
+    
     // MARK: - Properties -
     
     var pingMs: Int?
