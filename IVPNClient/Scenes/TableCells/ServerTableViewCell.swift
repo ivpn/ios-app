@@ -61,6 +61,10 @@ class ServerTableViewCell: UITableViewCell {
                 contentView.alpha = 0.55
                 return
             }
+            if isFavorite, viewModel.server.isHost, !VPNServer.validMultiHop(viewModel.server, serverToValidate) {
+                contentView.alpha = 0.55
+                return
+            }
             
             contentView.alpha = 1
         }

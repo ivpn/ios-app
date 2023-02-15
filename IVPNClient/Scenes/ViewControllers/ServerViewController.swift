@@ -280,6 +280,12 @@ class ServerViewController: UITableViewController {
         
         let secondServer = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         
+        guard VPNServer.validMultiHop(server, secondServer) else {
+            showAlert(title: "Entry and exit servers are the same", message: "Please select a different entry or exit server.")
+            tableView.deselectRow(at: indexPath, animated: true)
+            return false
+        }
+        
         guard VPNServer.validMultiHopISP(server, secondServer) else {
             showActionAlert(title: VPNServer.validMultiHopISPTitle, message: VPNServer.validMultiHopISPMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
                 selected(indexPath: indexPath, force: true)
@@ -430,7 +436,7 @@ extension ServerViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let server = collection[indexPath.row]
         let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
-        guard VPNServer.validMultiHop(server, serverToValidate) else {
+        if !VPNServer.validMultiHop(server, serverToValidate) && (!isFavorite || !server.isHost) {
             return 0
         }
         if server.isHost && !expandHost(server) && !isFavorite {
