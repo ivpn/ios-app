@@ -101,6 +101,7 @@ class ControlPanelView: UITableView {
         connectSwitch.accessibilityLabel = viewModel.connectToggleIsOn ? "Switch to disconnect" : "Switch to connect"
         updateConnectSwitch()
         updateServerNames()
+        updatePauseButton(viewModel: viewModel)
     }
     
     func updateServerLabels(viewModel: VPNStatusViewModel) {
@@ -148,6 +149,12 @@ class ControlPanelView: UITableView {
     
     private func updateConnectSwitch() {
         connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
+    }
+    
+    private func updatePauseButton(viewModel: VPNStatusViewModel) {
+        pauseButton.isHidden = viewModel.pauseIsHidden
+        pauseButton.backgroundColor = viewModel.pauseBackgroundColor
+        pauseButton.setImage(UIImage(systemName: viewModel.pauseImage), for: .normal)
     }
     
 }

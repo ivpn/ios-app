@@ -100,6 +100,23 @@ struct VPNStatusViewModel {
         }
     }
     
+    var pauseIsHidden: Bool {
+        switch status {
+        case .connected:
+            return false
+        default:
+            return true
+        }
+    }
+    
+    var pauseBackgroundColor: UIColor {
+        return UIColor.init(named: Theme.ivpnBackgroundTertiary)!
+    }
+    
+    var pauseImage: String {
+        return "pause"
+    }
+    
     var popupStatusText: String {
         switch status {
         case .connecting, .reasserting:
