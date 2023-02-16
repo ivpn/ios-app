@@ -30,6 +30,7 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var protectionStatusTableCell: UITableViewCell!
     @IBOutlet weak var protectionStatusLabel: UILabel!
     @IBOutlet weak var connectSwitch: UISwitch!
+    @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var enableMultiHopButton: UIButton!
     @IBOutlet weak var disableMultiHopButton: UIButton!
     @IBOutlet weak var exitServerTableCell: UITableViewCell!
