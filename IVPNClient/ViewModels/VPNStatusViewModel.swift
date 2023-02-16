@@ -110,7 +110,7 @@ struct VPNStatusViewModel {
     }
     
     var pauseBackgroundColor: UIColor {
-        return UIColor.init(named: Theme.ivpnBackgroundTertiary)!
+        return UIColor.init(named: Theme.ivpnGray8)!
     }
     
     var pauseImage: String {
