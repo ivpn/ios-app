@@ -3225,16 +3225,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				kind = exactVersion;
+				version = 2.2.0;
 			};
 		};
 		82EC883629A12C1F0024CC40 /* XCRemoteSwiftPackageReference "Reachability" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 5.1.0;
 			};
 		};
 		82EC883929A12C7D0024CC40 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
