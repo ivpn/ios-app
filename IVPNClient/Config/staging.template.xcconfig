@@ -1,5 +1,3 @@
-#include "Pods/Target Support Files/Pods-IVPNClient/Pods-IVPNClient.release.xcconfig"
-
 Environment = staging
 ApiHostName = 
 TlsHostName = 
