@@ -16,14 +16,6 @@ jobs:
       with:
         go-version: 1.16
     - uses: actions/checkout@v2
-    - uses: actions/cache@v1
-      with:
-        path: Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-pods-
-    - name: Install dependencies
-      run: pod install
     - name: Set up config files
       run: |
         cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig
@@ -35,4 +27,4 @@ jobs:
         cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
         cp fastlane/Appfile.template fastlane/Appfile
     - name: Build and test
-      run: xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11'
+      run: xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 14'
