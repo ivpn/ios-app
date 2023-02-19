@@ -21,14 +21,13 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 import NetworkExtension
 import Network
 import TunnelKitCore
 import TunnelKitManager
 import TunnelKitOpenVPN
 import WireGuardKit
-import KeychainAccess
 
 extension NETunnelProviderProtocol {
     

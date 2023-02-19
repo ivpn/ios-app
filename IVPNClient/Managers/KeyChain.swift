@@ -21,6 +21,7 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import KeychainAccess
 
 class KeyChain {
