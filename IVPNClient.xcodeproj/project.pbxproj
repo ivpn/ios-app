@@ -893,6 +893,7 @@
 				8206F32224367A240056B465 /* VPNErrorObserver.swift */,
 				825E836225A4834200938240 /* APIPublicKeyPin.swift */,
 				826C1F8325DBEF1800314C4B /* DNSManager.swift */,
+				824B86C326D3D7B600D0101A /* TimerManager.swift */,
 				8279C84329A3DC86006C5261 /* PauseVPNManager.swift */,
 			);
 			path = Managers;
@@ -1230,7 +1231,6 @@
 				82B605252170840C004B40E6 /* PacketTunnelProvider.swift */,
 				824B86C426D3D7B600D0101A /* ApiManager.swift */,
 				824B86C226D3D7B500D0101A /* ExtensionKeyManager.swift */,
-				824B86C326D3D7B600D0101A /* TimerManager.swift */,
 				82B605272170840C004B40E6 /* Info.plist */,
 				82B605282170840C004B40E6 /* wireguard_tunnel_provider.entitlements */,
 			);
