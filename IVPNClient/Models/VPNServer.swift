@@ -157,11 +157,11 @@ class VPNServer {
         return true
     }
     
-    static func validMultiHopCountry(_ first: VPNServer, _ second: VPNServer) -> Bool {
+    static func validMultiHopCountry(_ first: VPNServer, _ second: VPNServer, ignoreSettings: Bool = false) -> Bool {
         guard UserDefaults.shared.isMultiHop else {
             return true
         }
-        guard UserDefaults.standard.preventSameCountryMultiHop else {
+        guard UserDefaults.standard.preventSameCountryMultiHop || ignoreSettings else {
             return true
         }
         guard first.country != second.country else {
@@ -171,11 +171,11 @@ class VPNServer {
         return true
     }
     
-    static func validMultiHopISP(_ first: VPNServer, _ second: VPNServer) -> Bool {
+    static func validMultiHopISP(_ first: VPNServer, _ second: VPNServer, ignoreSettings: Bool = false) -> Bool {
         guard UserDefaults.shared.isMultiHop else {
             return true
         }
-        guard UserDefaults.standard.preventSameISPMultiHop else {
+        guard UserDefaults.standard.preventSameISPMultiHop || ignoreSettings else {
             return true
         }
         guard first.isp != second.isp else {

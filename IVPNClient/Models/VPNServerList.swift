@@ -306,7 +306,11 @@ class VPNServerList {
         var list = [VPNServer]()
         let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         
-        list = servers.filter { VPNServer.validMultiHop($0, serverToValidate) }
+        list = servers.filter {
+            VPNServer.validMultiHop($0, serverToValidate) &&
+            VPNServer.validMultiHopCountry($0, serverToValidate, ignoreSettings: true) &&
+            VPNServer.validMultiHopISP($0, serverToValidate, ignoreSettings: true)
+        }
         
         if let randomServer = list.randomElement() {
             randomServer.fastest = false
