@@ -23,12 +23,17 @@
 
 import Foundation
 
+@objc protocol PauseManagerDelegate: AnyObject {
+    func updateCountdown(text: String)
+}
+
 class PauseManager {
     
     // MARK: - Properties -
     
-    var pausedUntil = Date()
-    var timer = TimerManager(timeInterval: 2)
+    weak var delegate: PauseManagerDelegate?
+    private var pausedUntil = Date()
+    private var timer = TimerManager(timeInterval: 1)
     
     // MARK: - Methods -
     
@@ -40,6 +45,8 @@ class PauseManager {
                 timer.suspend()
             } else {
                 timer.proceed()
+                let countdown = countdownTo(date: pausedUntil)
+                delegate?.updateCountdown(text: countdown)
             }
         }
         timer.resume()
@@ -47,6 +54,15 @@ class PauseManager {
     
     func suspend() {
         timer.suspend()
+    }
+    
+    private func countdownTo(date: Date) -> String {
+        let countdown = Calendar.current.dateComponents([.hour, .minute, .second], from: Date(), to: date)
+        let hours = countdown.hour!
+        let minutes = countdown.minute!
+        let seconds = countdown.second!
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
 }
