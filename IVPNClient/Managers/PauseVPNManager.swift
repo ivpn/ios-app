@@ -33,10 +33,14 @@ class PauseManager {
     // MARK: - Methods -
     
     func pause(for duration: PauseDuration) {
-        self.pausedUntil = duration.pausedUntil()
+        pausedUntil = duration.pausedUntil()
         timer.eventHandler = { [self] in
-            // Connect VPN if Date() > pausedUntil
-            timer.proceed()
+            if Date() > pausedUntil {
+                NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
+                timer.suspend()
+            } else {
+                timer.proceed()
+            }
         }
         timer.resume()
     }
