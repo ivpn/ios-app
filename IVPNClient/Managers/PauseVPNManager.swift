@@ -31,6 +31,10 @@ class PauseManager {
     
     // MARK: - Properties -
     
+    var isPaused: Bool {
+        return pausedUntil > Date()
+    }
+    
     weak var delegate: PauseManagerDelegate?
     private var pausedUntil = Date()
     private var timer = TimerManager(timeInterval: 1)
@@ -53,6 +57,7 @@ class PauseManager {
     }
     
     func suspend() {
+        pausedUntil = Date()
         timer.suspend()
     }
     
