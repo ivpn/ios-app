@@ -43,6 +43,8 @@ class PauseManager {
     
     func pause(for duration: PauseDuration) {
         pausedUntil = duration.pausedUntil()
+        NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
+        
         timer.eventHandler = { [self] in
             if Date() > pausedUntil {
                 NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
