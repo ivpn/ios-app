@@ -158,6 +158,7 @@
 		827855B92472B27F00B3B6BD /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827855B82472B27F00B3B6BD /* Account.swift */; };
 		8279C84429A3DC86006C5261 /* PauseVPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8279C84329A3DC86006C5261 /* PauseVPNManager.swift */; };
 		8279C84529A3E191006C5261 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86C326D3D7B600D0101A /* TimerManager.swift */; };
+		8279C84729A61EF2006C5261 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8279C84629A61EF2006C5261 /* NotificationManager.swift */; };
 		8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */; };
 		8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */; };
 		828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F6221C008100D5E330 /* ServerConfigurationCell.swift */; };
@@ -525,6 +526,7 @@
 		8278087C270250080099E5C2 /* ServiceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypeTests.swift; sourceTree = "<group>"; };
 		827855B82472B27F00B3B6BD /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		8279C84329A3DC86006C5261 /* PauseVPNManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseVPNManager.swift; sourceTree = "<group>"; };
+		8279C84629A61EF2006C5261 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardRegenerationRateCell.swift; sourceTree = "<group>"; };
 		8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCircleLayer.swift; sourceTree = "<group>"; };
 		828772F6221C008100D5E330 /* ServerConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationCell.swift; sourceTree = "<group>"; };
@@ -895,6 +897,7 @@
 				826C1F8325DBEF1800314C4B /* DNSManager.swift */,
 				824B86C326D3D7B600D0101A /* TimerManager.swift */,
 				8279C84329A3DC86006C5261 /* PauseVPNManager.swift */,
+				8279C84629A61EF2006C5261 /* NotificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2032,6 +2035,7 @@
 				822B85D921B941A200715691 /* NotificationName+Ext.swift in Sources */,
 				8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */,
 				82D598C021A6991B000FABDE /* NetworkManager.swift in Sources */,
+				8279C84729A61EF2006C5261 /* NotificationManager.swift in Sources */,
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
 				82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */,
 				826C1F8425DBEF1800314C4B /* DNSManager.swift in Sources */,
