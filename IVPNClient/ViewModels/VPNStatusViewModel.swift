@@ -101,6 +101,10 @@ struct VPNStatusViewModel {
     }
     
     var pauseIsHidden: Bool {
+        if PauseManager.shared.isPaused {
+            return false
+        }
+        
         switch status {
         case .connected:
             return false
@@ -110,10 +114,18 @@ struct VPNStatusViewModel {
     }
     
     var pauseBackgroundColor: UIColor {
+        if PauseManager.shared.isPaused {
+            return UIColor.init(named: Theme.ivpnBlue)!
+        }
+        
         return UIColor.init(named: Theme.ivpnGray8)!
     }
     
     var pauseImage: String {
+        if PauseManager.shared.isPaused {
+            return "play"
+        }
+        
         return "pause"
     }
     

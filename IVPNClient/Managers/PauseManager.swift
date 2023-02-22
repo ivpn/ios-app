@@ -1,5 +1,5 @@
 //
-//  PauseVPNManager.swift
+//  PauseManager.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
@@ -30,6 +30,8 @@ import Foundation
 class PauseManager {
     
     // MARK: - Properties -
+    
+    static let shared = PauseManager()
     
     var isPaused: Bool {
         return pausedUntil > Date()

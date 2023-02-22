@@ -72,6 +72,25 @@ class ControlPanelViewController: UITableViewController {
         }
     }
     
+    @IBAction func pauseVPN(_ sender: UIButton) {
+        showActionSheet(largeText: true, centered: true, title: "Preferred protocol", actions: ["Pause for 5 min", "Pause for 30 min", "Pause for 1 hour", "Pause for 3 hours"], sourceView: sender) { index in
+            guard index > -1 else {
+                return
+            }
+            
+            switch index {
+            case 1:
+                PauseManager.shared.pause(for: .thirtyMinutes)
+            case 2:
+                PauseManager.shared.pause(for: .oneHour)
+            case 3:
+                PauseManager.shared.pause(for: .threeHours)
+            default:
+                PauseManager.shared.pause(for: .fiveMinutes)
+            }
+        }
+    }
+    
     @IBAction func toggleMultiHop(_ sender: UIButton) {
         guard evaluateIsLoggedIn() else {
             return

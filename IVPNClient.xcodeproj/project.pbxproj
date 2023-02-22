@@ -156,7 +156,7 @@
 		8277F1CF2211A602007C6F15 /* GeoLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CE2211A602007C6F15 /* GeoLookup.swift */; };
 		8278087D270250080099E5C2 /* ServiceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278087C270250080099E5C2 /* ServiceTypeTests.swift */; };
 		827855B92472B27F00B3B6BD /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827855B82472B27F00B3B6BD /* Account.swift */; };
-		8279C84429A3DC86006C5261 /* PauseVPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8279C84329A3DC86006C5261 /* PauseVPNManager.swift */; };
+		8279C84429A3DC86006C5261 /* PauseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8279C84329A3DC86006C5261 /* PauseManager.swift */; };
 		8279C84529A3E191006C5261 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86C326D3D7B600D0101A /* TimerManager.swift */; };
 		8279C84729A61EF2006C5261 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8279C84629A61EF2006C5261 /* NotificationManager.swift */; };
 		8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */; };
@@ -525,7 +525,7 @@
 		8277F1CE2211A602007C6F15 /* GeoLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLookup.swift; sourceTree = "<group>"; };
 		8278087C270250080099E5C2 /* ServiceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypeTests.swift; sourceTree = "<group>"; };
 		827855B82472B27F00B3B6BD /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		8279C84329A3DC86006C5261 /* PauseVPNManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseVPNManager.swift; sourceTree = "<group>"; };
+		8279C84329A3DC86006C5261 /* PauseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseManager.swift; sourceTree = "<group>"; };
 		8279C84629A61EF2006C5261 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		82824829225C7312001314F8 /* WireGuardRegenerationRateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardRegenerationRateCell.swift; sourceTree = "<group>"; };
 		8285D252246D28FA0088C00F /* AnimatedCircleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCircleLayer.swift; sourceTree = "<group>"; };
@@ -896,7 +896,7 @@
 				825E836225A4834200938240 /* APIPublicKeyPin.swift */,
 				826C1F8325DBEF1800314C4B /* DNSManager.swift */,
 				824B86C326D3D7B600D0101A /* TimerManager.swift */,
-				8279C84329A3DC86006C5261 /* PauseVPNManager.swift */,
+				8279C84329A3DC86006C5261 /* PauseManager.swift */,
 				8279C84629A61EF2006C5261 /* NotificationManager.swift */,
 			);
 			path = Managers;
@@ -2096,7 +2096,7 @@
 				824B86CB26D3E8D100D0101A /* ExtensionKeyManager.swift in Sources */,
 				8208525823FD5EB20008C112 /* MainViewController.swift in Sources */,
 				825E836325A4834200938240 /* APIPublicKeyPin.swift in Sources */,
-				8279C84429A3DC86006C5261 /* PauseVPNManager.swift in Sources */,
+				8279C84429A3DC86006C5261 /* PauseManager.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
 				9C3031261DB3B6E700C38B0C /* ServersUpdateResult.swift in Sources */,
 				82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */,
