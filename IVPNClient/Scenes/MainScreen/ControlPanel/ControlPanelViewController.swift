@@ -73,6 +73,11 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @IBAction func pauseVPN(_ sender: UIButton) {
+        if PauseManager.shared.isPaused {
+            connect()
+            return
+        }
+        
         showActionSheet(largeText: true, centered: true, title: "Preferred protocol", actions: ["Pause for 5 min", "Pause for 30 min", "Pause for 1 hour", "Pause for 3 hours"], sourceView: sender) { index in
             guard index > -1 else {
                 return
