@@ -286,16 +286,16 @@ class ServerViewController: UITableViewController {
             return false
         }
         
-        guard VPNServer.validMultiHopISP(server, secondServer) else {
-            showActionAlert(title: VPNServer.validMultiHopISPTitle, message: VPNServer.validMultiHopISPMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+        guard VPNServer.validMultiHopCountry(server, secondServer) else {
+            showActionAlert(title: VPNServer.validMultiHopCountryTitle, message: VPNServer.validMultiHopCountryMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
                 selected(indexPath: indexPath, force: true)
             })
             tableView.deselectRow(at: indexPath, animated: true)
             return false
         }
         
-        guard VPNServer.validMultiHopCountry(server, secondServer) else {
-            showActionAlert(title: VPNServer.validMultiHopCountryTitle, message: VPNServer.validMultiHopCountryMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+        guard VPNServer.validMultiHopISP(server, secondServer) else {
+            showActionAlert(title: VPNServer.validMultiHopISPTitle, message: VPNServer.validMultiHopISPMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
                 selected(indexPath: indexPath, force: true)
             })
             tableView.deselectRow(at: indexPath, animated: true)

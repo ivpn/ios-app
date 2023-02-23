@@ -335,15 +335,15 @@ class MapScrollView: UIScrollView {
         
         let secondServer = Application.shared.settings.selectedServer
         
-        guard VPNServer.validMultiHopISP(server, secondServer) else {
-            viewController.showActionAlert(title: VPNServer.validMultiHopISPTitle, message: VPNServer.validMultiHopISPMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+        guard VPNServer.validMultiHopCountry(server, secondServer) else {
+            viewController.showActionAlert(title: VPNServer.validMultiHopCountryTitle, message: VPNServer.validMultiHopCountryMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
                 selectServer(city: server.city, force: true)
             })
             return false
         }
         
-        guard VPNServer.validMultiHopCountry(server, secondServer) else {
-            viewController.showActionAlert(title: VPNServer.validMultiHopCountryTitle, message: VPNServer.validMultiHopCountryMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+        guard VPNServer.validMultiHopISP(server, secondServer) else {
+            viewController.showActionAlert(title: VPNServer.validMultiHopISPTitle, message: VPNServer.validMultiHopISPMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
                 selectServer(city: server.city, force: true)
             })
             return false
