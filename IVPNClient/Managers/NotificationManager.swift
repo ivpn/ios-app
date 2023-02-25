@@ -44,14 +44,14 @@ class NotificationManager {
             let content = UNMutableNotificationContent()
             content.title = title
             content.body = message
-               
+            
             // Create the trigger.
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
             
             // Create the request
             let uuidString = UUID().uuidString
             let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
-
+            
             // Schedule the request with the system.
             UNUserNotificationCenter.current().add(request) { error in
                 if let error = error {

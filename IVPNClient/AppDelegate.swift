@@ -397,7 +397,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
         if #available(iOS 14.0, *) {
-            completionHandler(.banner)
+            completionHandler(.list)
         } else {
             completionHandler(.alert)
         }
