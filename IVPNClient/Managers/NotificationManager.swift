@@ -34,7 +34,7 @@ class NotificationManager {
         }
     }
     
-    func scheduleNotification(title: String, message: String) {
+    func setNotification(title: String, message: String) {
         requestAuthorization { granted in
             guard granted else {
                 return
@@ -49,10 +49,12 @@ class NotificationManager {
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
             
             // Create the request
-            let uuidString = UUID().uuidString
-            let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+            let identifier = "ipvn.notification"
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             
             // Schedule the request with the system.
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
             UNUserNotificationCenter.current().add(request) { error in
                 if let error = error {
                     print("error:", error.localizedDescription)
