@@ -26,6 +26,8 @@ import UserNotifications
 
 class NotificationManager {
     
+    static let shared = NotificationManager()
+    
     func requestAuthorization(completion: @escaping  (Bool) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { granted, _ in
             completion(granted)
@@ -44,18 +46,17 @@ class NotificationManager {
             content.body = message
                
             // Create the trigger.
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
             
             // Create the request
             let uuidString = UUID().uuidString
             let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
 
             // Schedule the request with the system.
-            let notificationCenter = UNUserNotificationCenter.current()
-            notificationCenter.add(request) { error in
-               if error != nil {
-                  // Handle any errors.
-               }
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print("error:", error.localizedDescription)
+                }
             }
         }
     }

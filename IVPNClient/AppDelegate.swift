@@ -270,6 +270,10 @@ class AppDelegate: UIResponder {
             }
         }
     }
+    
+    private func configureUserNotifications() {
+      UNUserNotificationCenter.current().delegate = self
+    }
 
 }
 
@@ -284,6 +288,7 @@ extension AppDelegate: UIApplicationDelegate {
         createLogFiles()
         resetLastPingTimestamp()
         clearURLCache()
+        configureUserNotifications()
         
         if #available(iOS 14.0, *) {
             DNSManager.shared.loadProfile { _ in }
@@ -382,6 +387,20 @@ extension AppDelegate: UIApplicationDelegate {
         }
         
         return false
+    }
+    
+}
+
+// MARK: - UNUserNotificationCenterDelegate
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+        if #available(iOS 14.0, *) {
+            completionHandler(.banner)
+        } else {
+            completionHandler(.alert)
+        }
     }
     
 }
