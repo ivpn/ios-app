@@ -403,4 +403,19 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        switch response.actionIdentifier {
+        case "\(NotificationManager.shared.categoryIdentifier).resume":
+            // Handle resume action
+            print("resume action")
+        case "\(NotificationManager.shared.categoryIdentifier).stop":
+            // Handle stop action
+            print("stop ation")
+        default:
+            break
+        }
+        
+        completionHandler()
+    }
+    
 }

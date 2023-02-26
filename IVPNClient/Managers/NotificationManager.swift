@@ -28,11 +28,22 @@ class NotificationManager {
     
     static let shared = NotificationManager()
     let identifier = "ipvn.notification"
+    let categoryIdentifier = "ipvn.notification.pauseVPN"
     
     func requestAuthorization(completion: @escaping  (Bool) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { granted, _ in
             completion(granted)
         }
+    }
+    
+    func setCategory() {
+        let actions = [
+            UNNotificationAction(identifier: "\(categoryIdentifier).resume", title: "Resume", options: []),
+            UNNotificationAction(identifier: "\(categoryIdentifier).stop", title: "Stop", options: [])
+        ]
+        let pauseVPNCategory = UNNotificationCategory(identifier: categoryIdentifier, actions: actions, intentIdentifiers: [], options: .customDismissAction)
+
+        UNUserNotificationCenter.current().setNotificationCategories([pauseVPNCategory])
     }
     
     func setNotification(title: String, message: String) {
@@ -41,9 +52,12 @@ class NotificationManager {
                 return
             }
             
+            setCategory()
+            
             let content = UNMutableNotificationContent()
             content.title = title
             content.body = message
+            content.categoryIdentifier = categoryIdentifier
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
