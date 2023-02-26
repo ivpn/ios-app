@@ -27,6 +27,7 @@ import UserNotifications
 class NotificationManager {
     
     static let shared = NotificationManager()
+    let identifier = "ipvn.notification"
     
     func requestAuthorization(completion: @escaping  (Bool) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { granted, _ in
@@ -35,24 +36,18 @@ class NotificationManager {
     }
     
     func setNotification(title: String, message: String) {
-        requestAuthorization { granted in
+        requestAuthorization { [self] granted in
             guard granted else {
                 return
             }
             
-            // Configure content.
             let content = UNMutableNotificationContent()
             content.title = title
             content.body = message
             
-            // Create the trigger.
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            
-            // Create the request
-            let identifier = "ipvn.notification"
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             
-            // Schedule the request with the system.
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
             UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
             UNUserNotificationCenter.current().add(request) { error in
