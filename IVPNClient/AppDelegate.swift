@@ -406,11 +406,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         switch response.actionIdentifier {
         case "\(NotificationManager.shared.categoryIdentifier).resume":
-            // Handle resume action
-            print("resume action")
+            NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
+            PauseManager.shared.suspend()
         case "\(NotificationManager.shared.categoryIdentifier).stop":
-            // Handle stop action
-            print("stop ation")
+            NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
+            PauseManager.shared.suspend()
         default:
             break
         }
