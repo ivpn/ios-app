@@ -29,9 +29,10 @@ class NotificationManager {
     static let shared = NotificationManager()
     let identifier = "ipvn.notification"
     let categoryIdentifier = "ipvn.notification.pauseVPN"
+    let notificationCenter = UNUserNotificationCenter.current()
     
     func requestAuthorization(completion: @escaping  (Bool) -> Void) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { granted, _ in
+        notificationCenter.requestAuthorization(options: [.alert]) { granted, _ in
             completion(granted)
         }
     }
@@ -43,7 +44,7 @@ class NotificationManager {
         ]
         let pauseVPNCategory = UNNotificationCategory(identifier: categoryIdentifier, actions: actions, intentIdentifiers: [], options: .customDismissAction)
 
-        UNUserNotificationCenter.current().setNotificationCategories([pauseVPNCategory])
+        notificationCenter.setNotificationCategories([pauseVPNCategory])
     }
     
     func setNotification(title: String, message: String) {
@@ -62,14 +63,19 @@ class NotificationManager {
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
-            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
-            UNUserNotificationCenter.current().add(request) { error in
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+            notificationCenter.removeDeliveredNotifications(withIdentifiers: [identifier])
+            notificationCenter.add(request) { error in
                 if let error = error {
                     print("error:", error.localizedDescription)
                 }
             }
         }
+    }
+    
+    func removeNotifications() {
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+        notificationCenter.removeDeliveredNotifications(withIdentifiers: [identifier])
     }
     
 }
