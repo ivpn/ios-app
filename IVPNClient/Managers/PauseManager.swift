@@ -45,6 +45,7 @@ class PauseManager {
     
     func pause(for duration: PauseDuration) {
         pausedUntil = duration.pausedUntil()
+        NotificationManager.shared.setNotification(title: "Paused", message: "Will resume at \(pausedUntil.formatDate())")
         NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
         
         timer.eventHandler = { [self] in
@@ -63,6 +64,7 @@ class PauseManager {
     func suspend() {
         pausedUntil = Date()
         timer.suspend()
+        NotificationManager.shared.removeNotifications()
     }
     
     private func countdownTo(date: Date) -> String {
