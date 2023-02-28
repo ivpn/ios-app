@@ -248,6 +248,7 @@ class ControlPanelViewController: UITableViewController {
         
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
+        PauseManager.shared.suspend()
     }
     
     @objc func disconnect() {
