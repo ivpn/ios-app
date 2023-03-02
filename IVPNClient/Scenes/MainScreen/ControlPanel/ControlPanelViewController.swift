@@ -192,8 +192,10 @@ class ControlPanelViewController: UITableViewController {
     @objc func connectionExecute() {
         if vpnStatusViewModel.connectToggleIsOn {
             disconnect()
+            registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Disconnect)
         } else {
             connect()
+            registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
         }
     }
     
@@ -244,8 +246,6 @@ class ControlPanelViewController: UITableViewController {
             manager.resetRulesAndConnect()
         }
         
-        registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
-        
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
         PauseManager.shared.suspend()
@@ -261,8 +261,6 @@ class ControlPanelViewController: UITableViewController {
         } else {
             manager.resetRulesAndDisconnect()
         }
-        
-        registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
         
         DispatchQueue.delay(0.5) {
             if Application.shared.connectionManager.status.isDisconnected() {

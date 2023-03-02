@@ -37,6 +37,10 @@ class PauseManager {
         return pausedUntil > Date()
     }
     
+    var countdown: String {
+        return countdownTo(date: pausedUntil)
+    }
+    
     weak var delegate: PauseManagerDelegate?
     private var pausedUntil = Date()
     private var timer = TimerManager(timeInterval: 1)
@@ -46,16 +50,24 @@ class PauseManager {
     func pause(for duration: PauseDuration) {
         pausedUntil = duration.pausedUntil()
         NotificationManager.shared.setNotification(title: "Paused", message: "Will resume at \(pausedUntil.formatTime())")
-        NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
+        
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
+        }
         
         timer.eventHandler = { [self] in
             if Date() > pausedUntil {
-                NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
+                }
+                
                 timer.suspend()
             } else {
                 timer.proceed()
-                let countdown = countdownTo(date: pausedUntil)
-                delegate?.updateCountdown(text: countdown)
+                
+                DispatchQueue.main.async { [self] in
+                    delegate?.updateCountdown(text: countdown)
+                }
             }
         }
         timer.resume()

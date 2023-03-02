@@ -81,10 +81,26 @@ class ConnectionInfoPopupView: UIView {
         return actionButton
     }()
     
+    lazy var resumeButton: UIButton = {
+        let actionButton = UIButton()
+        actionButton.setTitle("RESUME", for: .normal)
+        actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        actionButton.backgroundColor = UIColor.init(named: Theme.ivpnBlue)
+        actionButton.layer.cornerRadius = 8
+        actionButton.addTarget(self, action: #selector(resumeAction), for: .touchUpInside)
+        actionButton.isAccessibilityElement = true
+        return actionButton
+    }()
+    
     // MARK: - Properties -
     
     var viewModel: ProofsViewModel! {
         didSet {
+            guard !PauseManager.shared.isPaused else {
+                setupPauseView()
+                return
+            }
+            
             statusLabel.text = vpnStatusViewModel.popupStatusText
             flagImage.image = UIImage.init(named: viewModel.imageNameForCountryCode)
             locationLabel.text = viewModel.location
@@ -106,6 +122,7 @@ class ConnectionInfoPopupView: UIView {
             case .content:
                 container.isHidden = false
                 errorLabel.isHidden = true
+                setupPauseView()
                 isHidden = false
                 UIView.animate(withDuration: 0.20, animations: { self.alpha = 1 })
             case .error:
@@ -155,9 +172,9 @@ class ConnectionInfoPopupView: UIView {
     // MARK: - Private methods -
     
     private func setupConstraints() {
-        snp.makeConstraints { make in
+        snp.updateConstraints { make in
             make.width.equalTo(270)
-            make.height.equalTo(69)
+            make.height.equalTo(PauseManager.shared.isPaused ? 130 : 69)
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(52)
         }
@@ -175,6 +192,7 @@ class ConnectionInfoPopupView: UIView {
         container.addSubview(flagImage)
         container.addSubview(locationLabel)
         container.addSubview(actionButton)
+        container.addSubview(resumeButton)
         addSubview(arrow)
         addSubview(container)
         addSubview(errorLabel)
@@ -185,46 +203,53 @@ class ConnectionInfoPopupView: UIView {
     }
     
     private func setupLayout() {
-        container.snp.makeConstraints { make in
+        container.snp.updateConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        arrow.snp.makeConstraints { make in
+        arrow.snp.updateConstraints { make in
             make.width.equalTo(14)
             make.height.equalTo(14)
             make.centerX.equalToSuperview()
             make.top.equalTo(-7)
         }
         
-        statusLabel.snp.makeConstraints { make in
+        statusLabel.snp.updateConstraints { make in
             make.left.equalTo(18)
             make.top.equalTo(15)
             make.right.equalTo(-18)
             make.height.equalTo(14)
         }
         
-        flagImage.snp.makeConstraints { make in
+        flagImage.snp.updateConstraints { make in
             make.left.equalTo(18)
             make.bottom.equalTo(-17)
             make.width.equalTo(20)
             make.height.equalTo(15)
         }
         
-        locationLabel.snp.makeConstraints { make in
-            make.left.equalTo(45)
-            make.bottom.equalTo(-15)
+        locationLabel.snp.updateConstraints { make in
+            make.left.equalTo(PauseManager.shared.isPaused ? 18 : 45)
+            make.top.equalTo(34)
             make.right.equalTo(-48)
             make.height.equalTo(19)
         }
         
-        actionButton.snp.makeConstraints { make in
+        actionButton.snp.updateConstraints { make in
             make.width.equalTo(20)
             make.height.equalTo(20)
             make.bottom.equalTo(-15)
             make.right.equalTo(-18)
         }
         
-        errorLabel.snp.makeConstraints { make in
+        resumeButton.snp.updateConstraints { make in
+            make.left.equalTo(18)
+            make.right.equalTo(-18)
+            make.height.equalTo(44)
+            make.bottom.equalTo(-18)
+        }
+        
+        errorLabel.snp.updateConstraints { make in
             make.top.equalTo(10)
             make.right.equalTo(-20)
             make.bottom.equalTo(-10)
@@ -232,10 +257,33 @@ class ConnectionInfoPopupView: UIView {
         }
     }
     
+    private func setupPauseView() {
+        if PauseManager.shared.isPaused {
+            PauseManager.shared.delegate = self
+            locationLabel.text = PauseManager.shared.countdown
+            flagImage.isHidden = true
+            actionButton.isHidden = true
+            resumeButton.isHidden = false
+        } else {
+            PauseManager.shared.delegate = nil
+            flagImage.isHidden = false
+            actionButton.isHidden = false
+            resumeButton.isHidden = true
+        }
+        
+        setupConstraints()
+        setupLayout()
+    }
+    
     @objc private func infoAction() {
         if let topViewController = UIApplication.topViewController() as? MainViewController {
             topViewController.expandFloatingPanel()
         }
+    }
+    
+    @objc private func resumeAction() {
+        NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
+        PauseManager.shared.suspend()
     }
     
     private func initGestures() {
@@ -257,6 +305,16 @@ extension ConnectionInfoPopupView {
         case hidden
         case content
         case error
+    }
+    
+}
+
+// MARK: - PauseManagerDelegate -
+
+extension ConnectionInfoPopupView: PauseManagerDelegate {
+    
+    func updateCountdown(text: String) {
+        locationLabel.text = text
     }
     
 }
