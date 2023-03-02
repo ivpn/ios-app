@@ -39,8 +39,8 @@ class NotificationManager {
     
     func setCategory() {
         let actions = [
-            UNNotificationAction(identifier: "\(categoryIdentifier).resume", title: "Resume", options: []),
-            UNNotificationAction(identifier: "\(categoryIdentifier).stop", title: "Stop", options: [])
+            UNNotificationAction(identifier: "\(categoryIdentifier).resume", title: "Resume", options: [.foreground]),
+            UNNotificationAction(identifier: "\(categoryIdentifier).stop", title: "Stop", options: [.foreground])
         ]
         let pauseVPNCategory = UNNotificationCategory(identifier: categoryIdentifier, actions: actions, intentIdentifiers: [], options: .customDismissAction)
 
