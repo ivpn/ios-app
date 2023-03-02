@@ -29,6 +29,7 @@ extension Date {
     private static let fileNameFormat = "yyyy-MM-dd-HHmmss"
     private static let dateFormat = "yyyy-MM-dd"
     private static let dateTimeFormat = "yyyy-MM-dd HH:mm"
+    private static let timeFormat = "yyyy-MM-dd HH:mm"
     
     static func logTime() -> String {
         return formatted(format: logFormat)
@@ -65,6 +66,12 @@ extension Date {
     func formatDate() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = Date.dateFormat
+        return formatter.string(from: self)
+    }
+    
+    func formatTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = Date.timeFormat
         return formatter.string(from: self)
     }
     
