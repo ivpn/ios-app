@@ -39,6 +39,10 @@ struct VPNStatusViewModel {
         case .connected:
             return "connected"
         default:
+            if PauseManager.shared.isPaused {
+                return "paused"
+            }
+            
             return "disconnected"
         }
     }
@@ -138,6 +142,10 @@ struct VPNStatusViewModel {
         case .connected:
             return "Connected to"
         default:
+            if PauseManager.shared.isPaused {
+                return "Connection will resume automatically in"
+            }
+            
             return "Your current location"
         }
     }
