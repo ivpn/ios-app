@@ -147,9 +147,9 @@ class ControlPanelView: UITableView {
     
     private func updateConnectSwitch(viewModel: VPNStatusViewModel? = nil, animated: Bool = true) {
         if let viewModel = viewModel {
-            connectSwitch.setOn(viewModel.connectToggleIsOn, animated: animated)
-            // connectSwitch.setOn(viewModel.connectToggleIsOn || PauseManager.shared.isPaused, animated: animated)
-            // connectSwitch.alpha = viewModel.connectToggleAlpha
+            connectSwitch.setOn(viewModel.connectToggleIsOn || PauseManager.shared.isPaused, animated: animated)
+            connectSwitch.onTintColor = viewModel.connectToggleColor
+            connectSwitch.isEnabled = viewModel.connectToggleIsEnabled
             connectSwitch.accessibilityLabel = viewModel.connectToggleIsOn ? "Switch to disconnect" : "Switch to connect"
         }
         

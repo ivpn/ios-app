@@ -104,12 +104,20 @@ struct VPNStatusViewModel {
         }
     }
     
-    var connectToggleAlpha: CGFloat {
+    var connectToggleColor: UIColor {
         if PauseManager.shared.isPaused {
-            return 0.5
+            return UIColor.init(named: Theme.ivpnGray8)!
         }
         
-        return 1.0
+        return UIColor.init(named: Theme.ivpnBlue)!
+    }
+    
+    var connectToggleIsEnabled: Bool {
+        if PauseManager.shared.isPaused {
+            return false
+        }
+        
+        return true
     }
     
     var pauseIsHidden: Bool {
