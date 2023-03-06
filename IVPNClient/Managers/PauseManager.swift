@@ -114,6 +114,14 @@ class PauseManager {
     }
     
     private func handleBackgroundTask(task: BGAppRefreshTask) {
+        if Date() > pausedUntil {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
+            }
+            
+            suspend()
+        }
+        
         task.setTaskCompleted(success: true)
     }
     
