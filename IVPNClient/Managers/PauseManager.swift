@@ -99,6 +99,10 @@ class PauseManager {
     }
     
     func scheduleBackgroundTask() {
+        guard isPaused else {
+            return
+        }
+        
         let request = BGAppRefreshTaskRequest(identifier: "ipvn.backgroundTask")
         request.earliestBeginDate = pausedUntil
         

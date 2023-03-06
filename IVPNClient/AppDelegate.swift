@@ -272,7 +272,11 @@ class AppDelegate: UIResponder {
     }
     
     private func configureUserNotifications() {
-      UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+    }
+    
+    private func configurePauseVPN() {
+        PauseManager.shared.registerBackgroundTask()
     }
 
 }
@@ -289,6 +293,7 @@ extension AppDelegate: UIApplicationDelegate {
         resetLastPingTimestamp()
         clearURLCache()
         configureUserNotifications()
+        configurePauseVPN()
         
         if #available(iOS 14.0, *) {
             DNSManager.shared.loadProfile { _ in }
@@ -325,6 +330,7 @@ extension AppDelegate: UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         showSecurityScreen()
+        PauseManager.shared.scheduleBackgroundTask()
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
