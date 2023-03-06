@@ -97,9 +97,7 @@ class ControlPanelView: UITableView {
     
     func updateVPNStatus(viewModel: VPNStatusViewModel, animated: Bool = true) {
         protectionStatusLabel.text = viewModel.protectionStatusText
-        connectSwitch.setOn(viewModel.connectToggleIsOn, animated: animated)
-        connectSwitch.accessibilityLabel = viewModel.connectToggleIsOn ? "Switch to disconnect" : "Switch to connect"
-        updateConnectSwitch()
+        updateConnectSwitch(viewModel: viewModel, animated: animated)
         updateServerNames()
         updatePauseButton(viewModel: viewModel)
     }
@@ -147,7 +145,14 @@ class ControlPanelView: UITableView {
         ipv6Label.isHidden = !serverViewModel.showIPv6Label
     }
     
-    private func updateConnectSwitch() {
+    private func updateConnectSwitch(viewModel: VPNStatusViewModel? = nil, animated: Bool = true) {
+        if let viewModel = viewModel {
+            connectSwitch.setOn(viewModel.connectToggleIsOn, animated: animated)
+            // connectSwitch.setOn(viewModel.connectToggleIsOn || PauseManager.shared.isPaused, animated: animated)
+            // connectSwitch.alpha = viewModel.connectToggleAlpha
+            connectSwitch.accessibilityLabel = viewModel.connectToggleIsOn ? "Switch to disconnect" : "Switch to connect"
+        }
+        
         connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
     }
     

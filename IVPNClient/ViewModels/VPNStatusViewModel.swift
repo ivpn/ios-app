@@ -104,6 +104,14 @@ struct VPNStatusViewModel {
         }
     }
     
+    var connectToggleAlpha: CGFloat {
+        if PauseManager.shared.isPaused {
+            return 0.5
+        }
+        
+        return 1.0
+    }
+    
     var pauseIsHidden: Bool {
         if PauseManager.shared.isPaused {
             return false
