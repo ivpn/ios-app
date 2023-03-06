@@ -22,6 +22,7 @@
 //
 
 import Foundation
+import BackgroundTasks
 
 @objc protocol PauseManagerDelegate: AnyObject {
     func updateCountdown(text: String)
@@ -61,7 +62,7 @@ class PauseManager {
                     NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
                 }
                 
-                timer.suspend()
+                suspend()
             } else {
                 timer.proceed()
                 
@@ -76,6 +77,7 @@ class PauseManager {
     func suspend() {
         pausedUntil = Date()
         timer.suspend()
+        cancelBackgroundTasks()
         NotificationManager.shared.removeNotifications()
     }
     
@@ -86,6 +88,33 @@ class PauseManager {
         let seconds = countdown.second!
         
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    // MARK: - Background Tasks -
+    
+    func registerBackgroundTask() {
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "ipvn.backgroundTask", using: nil) { [self] task in
+            handleBackgroundTask(task: task as! BGAppRefreshTask)
+        }
+    }
+    
+    func scheduleBackgroundTask() {
+        let request = BGAppRefreshTaskRequest(identifier: "ipvn.backgroundTask")
+        request.earliestBeginDate = pausedUntil
+        
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            log(.error, message: "Could not schedule background task: \(error)")
+        }
+    }
+    
+    private func handleBackgroundTask(task: BGAppRefreshTask) {
+        task.setTaskCompleted(success: true)
+    }
+    
+    private func cancelBackgroundTasks() {
+        BGTaskScheduler.shared.cancelAllTaskRequests()
     }
     
 }
