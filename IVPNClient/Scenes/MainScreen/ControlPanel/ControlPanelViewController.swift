@@ -75,6 +75,7 @@ class ControlPanelViewController: UITableViewController {
     @IBAction func pauseVPN(_ sender: UIButton) {
         if PauseManager.shared.isPaused {
             connect()
+            PauseManager.shared.suspend()
             return
         }
         
