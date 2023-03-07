@@ -106,7 +106,7 @@ struct VPNStatusViewModel {
     
     var connectToggleColor: UIColor {
         if PauseManager.shared.isPaused {
-            return UIColor.init(named: Theme.ivpnGray8)!
+            return UIColor.init(named: Theme.ivpnGray5)!
         }
         
         return UIColor.init(named: Theme.ivpnBlue)!
