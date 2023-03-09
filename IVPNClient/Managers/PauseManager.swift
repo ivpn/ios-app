@@ -45,6 +45,7 @@ class PauseManager {
     weak var delegate: PauseManagerDelegate?
     private var pausedUntil = Date()
     private var timer = TimerManager(timeInterval: 1)
+    private let taskIdentifier = "net.ipvn.backgroundTask"
     
     // MARK: - Methods -
     
@@ -93,7 +94,7 @@ class PauseManager {
     // MARK: - Background Tasks -
     
     func registerBackgroundTask() {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "ipvn.backgroundTask", using: nil) { [self] task in
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: taskIdentifier, using: nil) { [self] task in
             handleBackgroundTask(task: task as! BGAppRefreshTask)
         }
     }
@@ -103,10 +104,9 @@ class PauseManager {
             return
         }
         
-        let request = BGAppRefreshTaskRequest(identifier: "ipvn.backgroundTask")
-        request.earliestBeginDate = pausedUntil
-        
         do {
+            let request = BGAppRefreshTaskRequest(identifier: taskIdentifier)
+            request.earliestBeginDate = pausedUntil
             try BGTaskScheduler.shared.submit(request)
         } catch {
             log(.error, message: "Could not schedule background task: \(error)")
@@ -114,15 +114,22 @@ class PauseManager {
     }
     
     private func handleBackgroundTask(task: BGAppRefreshTask) {
+        task.expirationHandler = {
+            task.setTaskCompleted(success: false)
+        }
+        
         if Date() > pausedUntil {
+            // NotificationManager.shared.setNotification(title: "Connecting VPN", message: "At: \(Date().formatTime())")
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: Notification.Name.Connect, object: nil)
+                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
             }
             
             suspend()
         }
         
-        task.setTaskCompleted(success: true)
+        DispatchQueue.delay(5) {
+            task.setTaskCompleted(success: true)
+        }
     }
     
     private func cancelBackgroundTasks() {

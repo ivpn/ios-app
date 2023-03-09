@@ -329,8 +329,8 @@ extension AppDelegate: UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        showSecurityScreen()
         PauseManager.shared.scheduleBackgroundTask()
+        showSecurityScreen()
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
