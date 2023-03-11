@@ -78,7 +78,7 @@ class PauseManager {
     func suspend() {
         pausedUntil = Date()
         timer.suspend()
-        cancelBackgroundTasks()
+        cancelAllBackgroundTasks()
         NotificationManager.shared.removeNotifications()
     }
     
@@ -118,21 +118,18 @@ class PauseManager {
             task.setTaskCompleted(success: false)
         }
         
-        if Date() > pausedUntil {
-            // NotificationManager.shared.setNotification(title: "Connecting VPN", message: "At: \(Date().formatTime())")
-            DispatchQueue.main.async {
-                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
-            }
-            
-            suspend()
+        DispatchQueue.main.async {
+            Application.shared.connectionManager.resetRulesAndConnect()
         }
+        
+        suspend()
         
         DispatchQueue.delay(5) {
             task.setTaskCompleted(success: true)
         }
     }
     
-    private func cancelBackgroundTasks() {
+    func cancelAllBackgroundTasks() {
         BGTaskScheduler.shared.cancelAllTaskRequests()
     }
     
