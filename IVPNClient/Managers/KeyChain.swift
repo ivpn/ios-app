@@ -26,6 +26,8 @@ import KeychainAccess
 
 class KeyChain {
     
+    private static let service = "net.ivpn.clients.ios"
+    private static let accessGroup = "WQXXM75BYN.net.ivpn.IVPN-Client"
     private static let usernameKey = "username"
     private static let tempUsernameKey = "tempUsernameKey"
     private static let wgPublicKeyKey = "WGPublicKey"
@@ -38,7 +40,11 @@ class KeyChain {
     private static let vpnPasswordKey = "vpn_password"
     
     static let bundle: Keychain = {
-        return Keychain(service: "net.ivpn.clients.ios", accessGroup: "WQXXM75BYN.net.ivpn.IVPN-Client").accessibility(.whenPasscodeSetThisDeviceOnly)
+        if UserDefaults.shared.vpnIsPaused {
+            return Keychain(service: service, accessGroup: accessGroup).accessibility(.afterFirstUnlock)
+        }
+        
+        return Keychain(service: service, accessGroup: accessGroup).accessibility(.whenPasscodeSetThisDeviceOnly)
     }()
     
     class var username: String? {
