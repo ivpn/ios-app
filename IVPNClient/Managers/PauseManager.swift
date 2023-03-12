@@ -78,7 +78,6 @@ class PauseManager {
     func suspend() {
         pausedUntil = Date()
         timer.suspend()
-        cancelAllBackgroundTasks()
         NotificationManager.shared.removeNotifications()
     }
     
