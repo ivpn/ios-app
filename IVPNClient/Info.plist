@@ -4,6 +4,10 @@
 <dict>
 	<key>ApiHostName</key>
 	<string>$(ApiHostName)</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>net.ipvn.backgroundTask</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -54,6 +58,10 @@
 			<key>UIApplicationShortcutItemType</key>
 			<string>Disconnect</string>
 		</dict>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
