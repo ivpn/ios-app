@@ -51,7 +51,7 @@ class PauseManager {
     
     func pause(for duration: PauseDuration) {
         pausedUntil = duration.pausedUntil()
-        NotificationManager.shared.setNotification(title: "Paused", message: "Will resume at \(pausedUntil.formatTime())")
+        NotificationManager.shared.setNotification(title: "Paused", message: "Will resume after \(pausedUntil.formatTime())")
         
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: Notification.Name.Disconnect, object: nil)
@@ -117,15 +117,9 @@ class PauseManager {
             task.setTaskCompleted(success: false)
         }
         
-        DispatchQueue.main.async {
-            Application.shared.connectionManager.resetRulesAndConnect()
-        }
-        
+        Application.shared.connectionManager.resetRulesAndConnect()
         suspend()
-        
-        DispatchQueue.delay(5) {
-            task.setTaskCompleted(success: true)
-        }
+        task.setTaskCompleted(success: true)
     }
     
     func cancelAllBackgroundTasks() {
