@@ -51,6 +51,7 @@ class PauseManager {
     
     func pause(for duration: PauseDuration) {
         pausedUntil = duration.pausedUntil()
+        UserDefaults.shared.set(true, forKey: UserDefaults.Key.vpnIsPaused)
         NotificationManager.shared.setNotification(title: "Paused", message: "Will resume after \(pausedUntil.formatTime())")
         
         DispatchQueue.main.async {
@@ -79,6 +80,7 @@ class PauseManager {
         pausedUntil = Date()
         timer.suspend()
         NotificationManager.shared.removeNotifications()
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.vpnIsPaused)
     }
     
     private func countdownTo(date: Date) -> String {
@@ -99,13 +101,13 @@ class PauseManager {
     }
     
     func scheduleBackgroundTask() {
-        guard isPaused else {
+        guard UserDefaults.shared.vpnIsPaused else {
             return
         }
         
         do {
             let request = BGAppRefreshTaskRequest(identifier: taskIdentifier)
-            request.earliestBeginDate = pausedUntil
+            request.earliestBeginDate = pausedUntil - 60
             try BGTaskScheduler.shared.submit(request)
         } catch {
             log(.error, message: "Could not schedule background task: \(error)")
