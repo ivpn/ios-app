@@ -80,7 +80,6 @@ class PauseManager {
         pausedUntil = Date()
         timer.suspend()
         NotificationManager.shared.removeNotifications()
-        UserDefaults.shared.set(false, forKey: UserDefaults.Key.vpnIsPaused)
     }
     
     private func countdownTo(date: Date) -> String {

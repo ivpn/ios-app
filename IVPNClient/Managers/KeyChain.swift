@@ -40,11 +40,7 @@ class KeyChain {
     private static let vpnPasswordKey = "vpn_password"
     
     static let bundle: Keychain = {
-        if UserDefaults.shared.vpnIsPaused {
-            return Keychain(service: service, accessGroup: accessGroup).accessibility(.afterFirstUnlock)
-        }
-        
-        return Keychain(service: service, accessGroup: accessGroup).accessibility(.whenPasscodeSetThisDeviceOnly)
+        return Keychain(service: service, accessGroup: accessGroup)
     }()
     
     class var username: String? {

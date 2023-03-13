@@ -64,6 +64,7 @@ class ControlPanelViewController: UITableViewController {
     
     @IBAction func toggleConnect(_ sender: UISwitch) {
         connectionExecute()
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.vpnIsPaused)
         
         // Disable multiple tap gestures on VPN connect button
         sender.isUserInteractionEnabled = false
@@ -76,6 +77,7 @@ class ControlPanelViewController: UITableViewController {
         if PauseManager.shared.isPaused {
             connect()
             PauseManager.shared.suspend()
+            UserDefaults.shared.set(false, forKey: UserDefaults.Key.vpnIsPaused)
             return
         }
         
