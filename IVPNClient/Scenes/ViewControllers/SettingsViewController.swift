@@ -369,7 +369,7 @@ class SettingsViewController: UITableViewController {
         let logFile = FileSystemManager.sharedFilePath(name: Config.appLogFile).path
         if let fileData = NSData(contentsOfFile: logFile) {
             appLog = String(data: fileData as Data, encoding: .utf8) ?? ""
-            logFiles.append(writeTempFile(text: appLog, fileName: "\(Date.logFileName(prefix: "app-"))"))
+            logFiles.append(FileSystemManager.tempFile(text: appLog, fileName: "\(Date.logFileName(prefix: "app-"))"))
         }
         
         // WireGuard tunnel logs
@@ -383,7 +383,7 @@ class SettingsViewController: UITableViewController {
         let wireguardLogFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
         if let fileData = NSData(contentsOfFile: wireguardLogFile) {
             wireguardLog = String(data: fileData as Data, encoding: .utf8) ?? ""
-            logFiles.append(writeTempFile(text: wireguardLog, fileName: "\(Date.logFileName(prefix: "wireguard-"))"))
+            logFiles.append(FileSystemManager.tempFile(text: wireguardLog, fileName: "\(Date.logFileName(prefix: "wireguard-"))"))
         }
         
         // OpenVPN tunnel logs
@@ -395,7 +395,7 @@ class SettingsViewController: UITableViewController {
                 var openvpnLog = ""
                 if let file = NSData(contentsOfFile: logFile), !openvpnLogAttached {
                     openvpnLog = String(data: file as Data, encoding: .utf8) ?? ""
-                    logFiles.append(self.writeTempFile(text: openvpnLog, fileName: "\(Date.logFileName(prefix: "openvpn-"))"))
+                    logFiles.append(FileSystemManager.tempFile(text: openvpnLog, fileName: "\(Date.logFileName(prefix: "openvpn-"))"))
                     openvpnLogAttached = true
                 }
             }
@@ -408,14 +408,6 @@ class SettingsViewController: UITableViewController {
                 presentMailComposer = false
             }
         }
-    }
-    
-    private func writeTempFile(text: String, fileName: String) -> URL {
-        let url = FileManager.default.temporaryDirectory
-            .appendingPathComponent(fileName)
-            .appendingPathExtension("txt")
-        try? text.write(to: url, atomically: false, encoding: .utf8)
-        return url
     }
     
     private func contactSupport() {
