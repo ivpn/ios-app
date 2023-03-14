@@ -354,15 +354,12 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        let composer = MFMailComposeViewController()
-        composer.mailComposeDelegate = self
-        composer.setToRecipients([Config.contactSupportMail])
-        
+        var logFiles = [URL]()
         var openvpnLogAttached = false
         var presentMailComposer = true
         
         // App logs
-        var appLog: String?
+        var appLog = ""
         if let file = NSData(contentsOfFile: appLogPath) {
             appLog = String(data: file as Data, encoding: .utf8) ?? ""
         }
@@ -371,11 +368,12 @@ class SettingsViewController: UITableViewController {
         
         let logFile = FileSystemManager.sharedFilePath(name: Config.appLogFile).path
         if let fileData = NSData(contentsOfFile: logFile) {
-            composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "app-")).txt")
+            appLog = String(data: fileData as Data, encoding: .utf8) ?? ""
+            logFiles.append(writeTempFile(text: appLog, fileName: "\(Date.logFileName(prefix: "app-"))"))
         }
         
         // WireGuard tunnel logs
-        var wireguardLog: String?
+        var wireguardLog = ""
         if let file = NSData(contentsOfFile: wireguardLogPath) {
             wireguardLog = String(data: file as Data, encoding: .utf8) ?? ""
         }
@@ -384,7 +382,8 @@ class SettingsViewController: UITableViewController {
         
         let wireguardLogFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
         if let fileData = NSData(contentsOfFile: wireguardLogFile) {
-            composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "wireguard-")).txt")
+            wireguardLog = String(data: fileData as Data, encoding: .utf8) ?? ""
+            logFiles.append(writeTempFile(text: wireguardLog, fileName: "\(Date.logFileName(prefix: "wireguard-"))"))
         }
         
         // OpenVPN tunnel logs
@@ -393,17 +392,30 @@ class SettingsViewController: UITableViewController {
                 FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
                 
                 let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                if let fileData = NSData(contentsOfFile: logFile), !openvpnLogAttached {
-                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "openvpn-")).txt")
+                var openvpnLog = ""
+                if let file = NSData(contentsOfFile: logFile), !openvpnLogAttached {
+                    openvpnLog = String(data: file as Data, encoding: .utf8) ?? ""
+                    logFiles.append(self.writeTempFile(text: openvpnLog, fileName: "\(Date.logFileName(prefix: "openvpn-"))"))
                     openvpnLogAttached = true
                 }
             }
             
             if presentMailComposer {
-                self.present(composer, animated: true, completion: nil)
+                let activityView = UIActivityViewController(activityItems: logFiles, applicationActivities: nil)
+                activityView.popoverPresentationController?.sourceView = self.view
+                activityView.excludedActivityTypes = [.postToFacebook]
+                self.present(activityView, animated: true, completion: nil)
                 presentMailComposer = false
             }
         }
+    }
+    
+    private func writeTempFile(text: String, fileName: String) -> URL {
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent(fileName)
+            .appendingPathExtension("txt")
+        try? text.write(to: url, atomically: false, encoding: .utf8)
+        return url
     }
     
     private func contactSupport() {
