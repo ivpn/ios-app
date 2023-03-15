@@ -34,6 +34,7 @@ class WireGuardSettingsViewController: UITableViewController {
     @IBOutlet weak var keyTimestampLabel: UILabel!
     @IBOutlet weak var keyExpirationTimestampLabel: UILabel!
     @IBOutlet weak var keyRegenerationTimestampLabel: UILabel!
+    @IBOutlet weak var mtuLabel: UILabel!
     
     // MARK: - Properties -
     
@@ -101,6 +102,8 @@ class WireGuardSettingsViewController: UITableViewController {
         keyTimestampLabel.text = AppKeyManager.keyTimestamp.formatDate()
         keyExpirationTimestampLabel.text = AppKeyManager.keyExpirationTimestamp.formatDate()
         keyRegenerationTimestampLabel.text = AppKeyManager.keyRegenerationTimestamp.formatDate()
+        let mtu = UserDefaults.standard.wgMtu
+        mtuLabel.text = mtu > 0 ? String(mtu) : "Leave blank to use default value"
     }
     
     private func addObservers() {
@@ -202,7 +205,7 @@ extension WireGuardSettingsViewController {
 extension WireGuardSettingsViewController: MTUViewControllerDelegate {
     
     func mtuSaved() {
-        
+        setupView()
     }
     
 }

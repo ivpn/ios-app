@@ -65,15 +65,13 @@ class MTUViewController: UITableViewController {
     // MARK: - Methods -
     
     private func setupView() {
-        mtuTextField.placeholder = "576 - 65535"
         let mtu = UserDefaults.standard.wgMtu
-        if mtu > 0 {
-            mtuTextField.text = String(mtu)
-        }
+        mtuTextField.text = mtu > 0 ? String(mtu) : nil
+        mtuTextField.placeholder = "576 - 65535"
     }
     
     private func isValid(mtu: Int) -> Bool {
-        return mtu >= 576 && mtu <= 65535
+        return (mtu >= 576 && mtu <= 65535) || mtu == 0
     }
 
 }
