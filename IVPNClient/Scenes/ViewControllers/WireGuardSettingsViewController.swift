@@ -78,6 +78,11 @@ class WireGuardSettingsViewController: UITableViewController {
         }
     }
     
+    @IBAction func configureMtu(_ sender: Any) {
+        let viewController = NavigationManager.getMTUViewController(delegate: self)
+        present(viewController, animated: true)
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
@@ -188,6 +193,16 @@ extension WireGuardSettingsViewController {
         showAlert(title: "Failed to regenerate WireGuard keys", message: "There was a problem regenerating and uploading WireGuard keys to IVPN server.")
         Application.shared.connectionManager.removeOnDemandRules {}
         setupView()
+    }
+    
+}
+
+// MARK: - MTUViewControllerDelegate -
+
+extension WireGuardSettingsViewController: MTUViewControllerDelegate {
+    
+    func mtuSaved() {
+        
     }
     
 }
