@@ -11,6 +11,7 @@
 		8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */; };
 		8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5032356536B008C83DB /* UpgradePlanViewController.swift */; };
 		820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */; };
+		82052E5629C1D83700227CF9 /* MTUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82052E5529C1D83700227CF9 /* MTUViewController.swift */; };
 		820535282302B9D7007BDD58 /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
 		820535292302BE8F007BDD58 /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
 		8205352A2302BEA3007BDD58 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
@@ -413,6 +414,7 @@
 		8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResultSessionNew.swift; sourceTree = "<group>"; };
 		8201A5032356536B008C83DB /* UpgradePlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradePlanViewController.swift; sourceTree = "<group>"; };
 		820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardSettingsViewController.swift; sourceTree = "<group>"; };
+		82052E5529C1D83700227CF9 /* MTUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUViewController.swift; sourceTree = "<group>"; };
 		820535272302B9D7007BDD58 /* APIAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManager.swift; sourceTree = "<group>"; };
 		8205963C2245264300011091 /* UITableViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewController+Ext.swift"; sourceTree = "<group>"; };
 		82061F60238D2730009DDF4D /* PingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingResult.swift; sourceTree = "<group>"; };
@@ -1154,6 +1156,7 @@
 				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
 				821CA2D6287C5AB20067F70D /* PortViewController.swift */,
 				82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */,
+				82052E5529C1D83700227CF9 /* MTUViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2115,6 +2118,7 @@
 				824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */,
 				82C34D6E26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */,
 				8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */,
+				82052E5629C1D83700227CF9 /* MTUViewController.swift in Sources */,
 				82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */,
 				9C6942371DD218A900F9A801 /* AccessDetails.swift in Sources */,
 				82D598B421A5A7A3000FABDE /* NetworkTrust.swift in Sources */,
