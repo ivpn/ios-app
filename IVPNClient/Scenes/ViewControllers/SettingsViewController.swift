@@ -369,7 +369,7 @@ class SettingsViewController: UITableViewController {
         let logFile = FileSystemManager.sharedFilePath(name: Config.appLogFile).path
         if let fileData = NSData(contentsOfFile: logFile) {
             appLog = String(data: fileData as Data, encoding: .utf8) ?? ""
-            logFiles.append(FileSystemManager.tempFile(text: appLog, fileName: "\(Date.logFileName(prefix: "app-"))"))
+            logFiles.append(FileSystemManager.tempFile(text: appLog, fileName: "app-\(Date.logFileName())"))
         }
         
         // WireGuard tunnel logs
@@ -383,7 +383,7 @@ class SettingsViewController: UITableViewController {
         let wireguardLogFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
         if let fileData = NSData(contentsOfFile: wireguardLogFile) {
             wireguardLog = String(data: fileData as Data, encoding: .utf8) ?? ""
-            logFiles.append(FileSystemManager.tempFile(text: wireguardLog, fileName: "\(Date.logFileName(prefix: "wireguard-"))"))
+            logFiles.append(FileSystemManager.tempFile(text: wireguardLog, fileName: "wireguard-\(Date.logFileName())"))
         }
         
         // OpenVPN tunnel logs
@@ -395,7 +395,7 @@ class SettingsViewController: UITableViewController {
                 var openvpnLog = ""
                 if let file = NSData(contentsOfFile: logFile), !openvpnLogAttached {
                     openvpnLog = String(data: file as Data, encoding: .utf8) ?? ""
-                    logFiles.append(FileSystemManager.tempFile(text: openvpnLog, fileName: "\(Date.logFileName(prefix: "openvpn-"))"))
+                    logFiles.append(FileSystemManager.tempFile(text: openvpnLog, fileName: "openvpn-\(Date.logFileName())"))
                     openvpnLogAttached = true
                 }
             }
@@ -403,7 +403,6 @@ class SettingsViewController: UITableViewController {
             if presentMailComposer {
                 let activityView = UIActivityViewController(activityItems: logFiles, applicationActivities: nil)
                 activityView.popoverPresentationController?.sourceView = self.view
-                activityView.excludedActivityTypes = [.postToFacebook]
                 self.present(activityView, animated: true, completion: nil)
                 presentMailComposer = false
             }
