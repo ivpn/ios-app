@@ -139,6 +139,7 @@ extension NETunnelProviderProtocol {
         let interface = Interface(
             addresses: addresses,
             listenPort: Config.wgInterfaceListenPort,
+            mtu: UserDefaults.standard.wgMtu,
             privateKey: KeyChain.wgPrivateKey,
             dns: host.localIPAddress()
         )
