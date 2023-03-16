@@ -4406,10 +4406,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Configure MTU" id="hwc-4w-bPf">
+                            <tableViewSection id="hwc-4w-bPf">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="M80-7X-McU">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="18" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M80-7X-McU" id="FR8-66-jnG">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -4461,7 +4461,7 @@
                                 <action selector="dismissViewController:" destination="MXS-EA-dK2" id="dWQ-jk-QGM"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add" style="done" id="471-6Q-56l">
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="471-6Q-56l">
                             <connections>
                                 <action selector="saveMtu" destination="MXS-EA-dK2" id="3zt-0a-aLn"/>
                             </connections>
