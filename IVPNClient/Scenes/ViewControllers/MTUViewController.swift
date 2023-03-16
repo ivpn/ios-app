@@ -37,15 +37,18 @@ class MTUViewController: UITableViewController {
     
     weak var delegate: MTUViewControllerDelegate?
     
-    var getMtu: Int {
+    private var getMtu: Int {
         return Int(mtuTextField.text ?? "") ?? 0
     }
+    
+    private let mtuLowerBound = 576
+    private let mtuUpperBound = 65535
     
     // MARK: - @IBActions -
     
     @IBAction func saveMtu() {
         guard isValid(mtu: getMtu) else {
-            showErrorAlert(title: "Error", message: "Expected value: [576 - 65535]")
+            showErrorAlert(title: "Error", message: "Expected value: [\(mtuLowerBound) - \(mtuUpperBound)]")
             return
         }
         
@@ -67,11 +70,11 @@ class MTUViewController: UITableViewController {
     private func setupView() {
         let mtu = UserDefaults.standard.wgMtu
         mtuTextField.text = mtu > 0 ? String(mtu) : nil
-        mtuTextField.placeholder = "576 - 65535"
+        mtuTextField.placeholder = "\(mtuLowerBound) - \(mtuUpperBound)"
     }
     
     private func isValid(mtu: Int) -> Bool {
-        return (mtu >= 576 && mtu <= 65535) || mtu == 0
+        return (mtu >= mtuLowerBound && mtu <= mtuUpperBound) || mtu == 0
     }
 
 }
