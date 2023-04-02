@@ -60,7 +60,7 @@ struct Interface {
         if let ipAddress = dict.value(forKey: "ip_address") as? String {
             self.addresses = ipAddress
         } else {
-            log(error: "Cannot create Interface: no 'ip_address' field specified")
+            log(.error, message: "Cannot create Interface: no 'ip_address' field specified")
             return nil
         }
         

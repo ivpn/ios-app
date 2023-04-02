@@ -59,13 +59,31 @@ class VPNServer {
     }
     
     var supportsIPv6: Bool {
-        for host in hosts {
-            if !(host.ipv6?.localIP.isEmpty ?? true) {
-                return true
-            }
+        for host in hosts where host.ipv6 == nil {
+            return false
+        }
+        
+        return true
+    }
+    
+    var enabledIPv6: Bool {
+        for host in hosts where !(host.ipv6?.localIP.isEmpty ?? true) {
+            return true
+        }
+        
+        if let ipv6 = ipv6 {
+            return !ipv6.localIP.isEmpty
         }
         
         return false
+    }
+    
+    var isHost: Bool {
+        return country == "" && gateway != ""
+    }
+    
+    var hostGateway: String {
+        return gateway.components(separatedBy: CharacterSet.decimalDigits).joined()
     }
     
     private (set) var gateway: String
@@ -76,11 +94,15 @@ class VPNServer {
     private (set) var longitude: Double
     private (set) var ipAddresses: [String]
     private (set) var hosts: [Host]
+    private (set) var load: Double?
+    private (set) var ipv6: IPv6?
+    var dnsName: String?
     
     // MARK: - Initialize -
     
-    init(gateway: String, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false) {
+    init(gateway: String, dnsName: String? = nil, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0, ipv6: IPv6? = nil) {
         self.gateway = gateway
+        self.dnsName = dnsName
         self.countryCode = countryCode
         self.country = country
         self.city = city
@@ -89,6 +111,8 @@ class VPNServer {
         self.ipAddresses = ipAddresses
         self.hosts = hosts
         self.fastest = fastest
+        self.load = load
+        self.ipv6 = ipv6
     }
     
     // MARK: - Methods -
@@ -101,6 +125,14 @@ class VPNServer {
     
     func distance(to location: CLLocation) -> CLLocationDistance {
         return location.distance(from: self.location)
+    }
+    
+    func getHost(hostName: String) -> Host? {
+        return hosts.first { $0.hostName == hostName }
+    }
+    
+    func getHost(fromPrefix: String) -> Host? {
+        return hosts.first { $0.hostName.hasPrefix(fromPrefix) }
     }
     
     static func == (lhs: VPNServer, rhs: VPNServer) -> Bool {

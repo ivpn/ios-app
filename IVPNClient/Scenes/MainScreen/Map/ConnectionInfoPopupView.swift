@@ -50,6 +50,7 @@ class ConnectionInfoPopupView: UIView {
         errorLabel.textAlignment = .center
         errorLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
         errorLabel.numberOfLines = 0
+        errorLabel.isAccessibilityElement = true
         return errorLabel
     }()
     
@@ -57,6 +58,7 @@ class ConnectionInfoPopupView: UIView {
         let statusLabel = UILabel()
         statusLabel.font = UIFont.systemFont(ofSize: 12)
         statusLabel.textColor = UIColor.init(named: Theme.ivpnLabel5)
+        statusLabel.isAccessibilityElement = true
         return statusLabel
     }()
     
@@ -66,14 +68,16 @@ class ConnectionInfoPopupView: UIView {
         let locationLabel = UILabel()
         locationLabel.font = UIFont.systemFont(ofSize: 16)
         locationLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
+        locationLabel.isAccessibilityElement = true
         return locationLabel
     }()
     
-    var actionButton: UIButton = {
+    lazy var actionButton: UIButton = {
         let actionButton = UIButton()
         actionButton.setImage(UIImage.init(named: "icon-info-2"), for: .normal)
         actionButton.accessibilityLabel = "Connection info details"
         actionButton.addTarget(self, action: #selector(infoAction), for: .touchUpInside)
+        actionButton.isAccessibilityElement = true
         return actionButton
     }()
     
@@ -84,6 +88,7 @@ class ConnectionInfoPopupView: UIView {
             statusLabel.text = vpnStatusViewModel.popupStatusText
             flagImage.image = UIImage.init(named: viewModel.imageNameForCountryCode)
             locationLabel.text = viewModel.location
+            locationLabel.accessibilityLabel = viewModel.city
         }
     }
     
@@ -140,7 +145,7 @@ class ConnectionInfoPopupView: UIView {
     }
     
     func updateView() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             actionButton.isHidden = true
         } else {
             actionButton.isHidden = false

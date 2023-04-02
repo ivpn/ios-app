@@ -53,6 +53,12 @@ class CustomDNSViewController: UITableViewController {
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isCustomDNS)
         evaluateReconnect(sender: sender)
+        
+        if sender.isOn {
+            registerUserActivity(type: UserActivityType.CustomDNSEnable, title: UserActivityTitle.CustomDNSEnable)
+        } else {
+            registerUserActivity(type: UserActivityType.CustomDNSDisable, title: UserActivityTitle.CustomDNSDisable)
+        }
     }
     
     @IBAction func enableSecureDNS(_ sender: UISwitch) {
@@ -136,10 +142,11 @@ class CustomDNSViewController: UITableViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(resolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setupView), name: Notification.Name.CustomDNSUpdated, object: nil)
     }
     
-    private func setupView() {
-        let preferred = DNSProtocolType.preferred()
+    @objc private func setupView() {
+        let preferred = DNSProtocolType.preferredSettings()
         let customDNS = UserDefaults.shared.customDNS
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         customDNSSwitch.isOn = UserDefaults.shared.isCustomDNS
@@ -171,7 +178,7 @@ extension CustomDNSViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 && indexPath.row > 0 {
             if #available(iOS 14.0, *) {
-                let type = DNSProtocolType.preferred()
+                let type = DNSProtocolType.preferredSettings()
                 
                 if type != .doh && indexPath.row == 3 {
                     return 0

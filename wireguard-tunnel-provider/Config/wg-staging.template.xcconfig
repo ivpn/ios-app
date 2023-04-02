@@ -1,4 +1,2 @@
-#include "Pods/Target Support Files/Pods-wireguard-tunnel-provider/Pods-wireguard-tunnel-provider.staging.xcconfig"
-
 ApiHostName = 
 TlsHostName = 

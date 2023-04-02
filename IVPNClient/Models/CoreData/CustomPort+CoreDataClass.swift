@@ -1,10 +1,10 @@
 //
-//  Logging.swift
+//  CustomPort+CoreDataClass.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Fedir Nepyyvoda on 2016-10-06.
-//  Copyright (c) 2020 Privatus Limited.
+//  Created by Juraj Hilje on 2022-10-05.
+//  Copyright (c) 2022 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -14,7 +14,7 @@
 //
 //  The IVPN iOS app is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 //  details.
 //
 //  You should have received a copy of the GNU General Public License
@@ -22,15 +22,9 @@
 //
 
 import Foundation
+import CoreData
 
-func log(info: @autoclosure () -> String) {
-    #if DEBUG
-    print("Info: \(info())")
-    #endif
-}
+@objc(CustomPort)
+public class CustomPort: NSManagedObject {
 
-func log(error: @autoclosure () -> String) {
-    #if DEBUG
-    print("Error: \(error())")
-    #endif
 }

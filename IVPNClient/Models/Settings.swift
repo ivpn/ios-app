@@ -26,6 +26,8 @@ import NetworkExtension
 
 class Settings {
     
+    // MARK: - Properties -
+    
     var selectedServer: VPNServer {
         didSet {
             UserDefaults.standard.set(selectedServer.gateway, forKey: UserDefaults.Key.selectedServerGateway)
@@ -44,11 +46,27 @@ class Settings {
         }
     }
     
+    var selectedHost: Host? {
+        didSet {
+            Host.save(selectedHost, key: UserDefaults.Key.selectedHost)
+        }
+    }
+    
+    var selectedExitHost: Host? {
+        didSet {
+            Host.save(selectedExitHost, key: UserDefaults.Key.selectedExitHost)
+        }
+    }
+    
     var connectionProtocol: ConnectionSettings {
         didSet {
             saveConnectionProtocol()
         }
     }
+    
+    var serverListIsFavorite = false
+    
+    // MARK: - Initialize -
 
     init(serverList: VPNServerList) {
         connectionProtocol = ConnectionSettings.getSavedProtocol()
@@ -91,7 +109,17 @@ class Settings {
         if let status = NEVPNStatus.init(rawValue: UserDefaults.standard.integer(forKey: UserDefaults.Key.selectedServerStatus)) {
             selectedServer.status = status
         }
+        
+        if selectedHost == nil {
+            selectedHost = Host.load(key: UserDefaults.Key.selectedHost)
+        }
+        
+        if selectedExitHost == nil {
+            selectedExitHost = Host.load(key: UserDefaults.Key.selectedExitHost)
+        }
     }
+    
+    // MARK: - Methods -
     
     func updateSelectedServerForMultiHop(isEnabled: Bool) {
         if isEnabled && Application.shared.settings.selectedServer.fastest {
@@ -118,9 +146,7 @@ class Settings {
     }
     
     func saveConnectionProtocol() {
-        if let index = Config.supportedProtocols.firstIndex(where: {$0 == connectionProtocol}) {
-            UserDefaults.standard.set(index, forKey: UserDefaults.Key.selectedProtocolIndex)
-        }
+        UserDefaults.standard.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
     }
     
 }

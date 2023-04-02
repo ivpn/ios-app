@@ -35,7 +35,7 @@ class StorageManager {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores(completionHandler: { _, error in
             if let error = error as NSError? {
-                log(error: "Unresolved error \(error), \(error.userInfo)")
+                log(.error, message: "Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
@@ -50,7 +50,7 @@ class StorageManager {
                 try context.save()
             } catch {
                 let nserror = error as NSError
-                log(error: "Unresolved error \(nserror), \(nserror.userInfo)")
+                log(.error, message: "Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
@@ -58,6 +58,7 @@ class StorageManager {
     static func clearSession() {
         remove(entityName: "Network")
         remove(entityName: "Server")
+        remove(entityName: "CustomPort")
     }
     
     static func remove(entityName: String) {
@@ -107,7 +108,7 @@ extension StorageManager {
                 return result
             }
         } catch {
-            log(error: "Coult not load collection from StorageManager")
+            log(.error, message: "Coult not load collection from StorageManager")
         }
         
         return nil
@@ -152,6 +153,29 @@ extension StorageManager {
                 saveContext()
             }
         }
+    }
+    
+    static func saveCustomPort(vpnProtocol: String = "", type: String = "", port: Int = 0) {
+        let customPort = CustomPort(context: context)
+        customPort.vpnProtocol = vpnProtocol
+        customPort.type = type
+        customPort.port = Int32(port)
+        saveContext()
+    }
+    
+    static func fetchCustomPorts(vpnProtocol: String = "") -> [CustomPort]? {
+        let request: NSFetchRequest<CustomPort> = CustomPort.fetchRequest(vpnProtocol: vpnProtocol)
+        
+        do {
+            let result = try context.fetch(request)
+            if !result.isEmpty {
+                return result
+            }
+        } catch {
+            log(.error, message: "Coult not load collection from StorageManager")
+        }
+        
+        return nil
     }
     
 }
@@ -302,20 +326,32 @@ extension StorageManager {
 
 extension StorageManager {
     
-    static func saveServer(gateway: String, isFastestEnabled: Bool) {
-        if let server = fetchServer(gateway: gateway) {
+    static func save(server: VPNServer, isFastestEnabled: Bool) {
+        if let server = fetchServer(server: server) {
             server.isFastestEnabled = isFastestEnabled
         } else {
             let newServer = Server(context: context)
-            newServer.gateway = gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
+            newServer.gateway = server.gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
             newServer.isFastestEnabled = isFastestEnabled
         }
         
         saveContext()
     }
     
-    static func fetchServers(gateway: String = "", isFastestEnabled: Bool = false) -> [Server]? {
-        let request: NSFetchRequest<Server> = Server.fetchRequest(gateway: gateway, isFastestEnabled: isFastestEnabled)
+    static func save(server: VPNServer, isFavorite: Bool) {
+        if let server = fetchServer(server: server) {
+            server.isFavorite = isFavorite
+        } else {
+            let newServer = Server(context: context)
+            newServer.gateway = server.dnsName ?? server.gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
+            newServer.isFavorite = isFavorite
+        }
+        
+        saveContext()
+    }
+    
+    static func fetchServers(gateway: String = "", isFastestEnabled: Bool = false, isFavorite: Bool = false, isHost: Bool = false) -> [Server]? {
+        let request: NSFetchRequest<Server> = Server.fetchRequest(gateway: gateway, isFastestEnabled: isFastestEnabled, isFavorite: isFavorite, isHost: isHost)
         
         do {
             let result = try context.fetch(request)
@@ -323,14 +359,14 @@ extension StorageManager {
                 return result
             }
         } catch {
-            log(error: "Coult not load collection from StorageManager")
+            log(.error, message: "Coult not load collection from StorageManager")
         }
         
         return nil
     }
     
-    static func fetchServer(gateway: String) -> Server? {
-        if let servers = fetchServers(gateway: gateway) {
+    static func fetchServer(server: VPNServer) -> Server? {
+        if let servers = fetchServers(gateway: server.dnsName ?? server.gateway, isHost: server.isHost) {
             if let server = servers.first {
                 return server
             }
@@ -340,15 +376,25 @@ extension StorageManager {
     }
     
     static func isFastestEnabled(server vpnServer: VPNServer) -> Bool {
-        if let server = fetchServer(gateway: vpnServer.gateway) {
+        if let server = fetchServer(server: vpnServer) {
             return server.isFastestEnabled
         }
 
         return false
     }
     
+    static func isFavorite(server: VPNServer) -> Bool {
+        if let servers = fetchServers(gateway: server.dnsName ?? server.gateway, isFavorite: true, isHost: server.isHost) {
+            return !servers.isEmpty
+        }
+
+        return false
+    }
+    
     static func canUpdateServer(isOn: Bool) -> Bool {
-        guard !isOn else { return true }
+        guard !isOn else {
+            return true
+        }
         
         if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
             if let servers = fetchServers(isFastestEnabled: true) {

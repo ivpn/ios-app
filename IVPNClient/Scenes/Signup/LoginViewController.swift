@@ -56,6 +56,10 @@ class LoginViewController: UIViewController {
     // MARK: - @IBActions -
     
     @IBAction func loginToAccount(_ sender: AnyObject) {
+        guard evaluatePasscode() else {
+            return
+        }
+        
         guard UserDefaults.shared.hasUserConsent else {
             actionType = .login
             present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
@@ -67,6 +71,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
+        guard evaluatePasscode() else {
+            return
+        }
+        
         guard UserDefaults.shared.hasUserConsent else {
             actionType = .signup
             present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
@@ -81,7 +89,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func restorePurchases(_ sender: AnyObject) {
-        guard deviceCanMakePurchases() else { return }
+        guard evaluatePasscode() else {
+            return
+        }
+        
+        guard deviceCanMakePurchases() else {
+            return
+        }
         
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Restoring purchases..."
@@ -118,9 +132,7 @@ class LoginViewController: UIViewController {
         
         // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
         // Remove when fixed in future releases
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.setNeedsLayout()
-        }
+        navigationController?.navigationBar.setNeedsLayout()
     }
     
     // MARK: - Observers -
@@ -252,6 +264,8 @@ extension LoginViewController {
         loginConfirmation.clear()
         
         KeyChain.username = (self.userName.text ?? "").trim()
+        Application.shared.serverList = VPNServerList()
+        Application.shared.settings = Settings(serverList: Application.shared.serverList)
         
         navigationController?.dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: Notification.Name.ServiceAuthorized, object: nil)
@@ -427,6 +441,10 @@ extension LoginViewController: ScannerViewControllerDelegate {
     
     func qrCodeFound(code: String) {
         userName.text = code
+        
+        guard evaluatePasscode() else {
+            return
+        }
         
         guard UserDefaults.shared.hasUserConsent else {
             DispatchQueue.async {

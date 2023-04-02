@@ -21,6 +21,7 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import UIKit
 import FloatingPanel
 
 // MARK: - FloatingPanelControllerDelegate -
@@ -28,11 +29,27 @@ import FloatingPanel
 extension MainViewController: FloatingPanelControllerDelegate {
     
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+        updateAccessibilityLabel(vc: vc)
+        
         return FloatingPanelMainLayout()
     }
     
     func floatingPanelShouldBeginDragging(_ vc: FloatingPanelController) -> Bool {
-        return UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape ? false : true
+        return UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver ? false : true
+    }
+    
+    func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
+        updateAccessibilityLabel(vc: vc)
+    }
+    
+    func updateAccessibilityLabel(vc: FloatingPanelController) {
+        if let controlPanelViewController = floatingPanel.contentViewController, UIDevice.current.userInterfaceIdiom != .pad {
+            if vc.position == .full {
+                controlPanelViewController.view.accessibilityLabel = "Swipe down to collapse control panel"
+            } else {
+                controlPanelViewController.view.accessibilityLabel = "Swipe up to expan control panel"
+            }
+        }
     }
     
 }

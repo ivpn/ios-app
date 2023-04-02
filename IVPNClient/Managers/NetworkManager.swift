@@ -60,7 +60,7 @@ class NetworkManager {
         do {
             try reachability.startNotifier()
         } catch {
-            log(info: "Unable to start reachability notifier")
+            log(.info, message: "Unable to start reachability notifier")
         }
         
         #warning("Remove network signal check after issue with VPN connections is resolved in Reachability.swift library")

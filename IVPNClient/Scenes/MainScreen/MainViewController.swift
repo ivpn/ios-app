@@ -35,7 +35,6 @@ class MainViewController: UIViewController {
     
     var floatingPanel: FloatingPanelController!
     private var updateServerListDidComplete = false
-    private var updateServersTimer = Timer()
     private var vpnErrorObserver = VPNErrorObserver()
     
     // MARK: - @IBActions -
@@ -65,10 +64,11 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "mainScreen"
+        evaluateFirstRun()
         initErrorObservers()
         initFloatingPanel()
         addObservers()
-        startServersUpdate()
+        startAPIUpdate()
         startVPNStatusObserver()
     }
     
@@ -84,7 +84,6 @@ class MainViewController: UIViewController {
     }
     
     deinit {
-        updateServersTimer.invalidate()
         Application.shared.connectionManager.removeStatusChangeUpdates()
     }
     
@@ -111,14 +110,26 @@ class MainViewController: UIViewController {
     // MARK: - Interface Orientations -
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        floatingPanel.updateLayout()
-        mainView.updateLayout()
+        refreshUI()
+    }
+    
+    override func viewLayoutMarginsDidChange() {
+        DispatchQueue.async { [self] in
+            refreshUI()
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        DispatchQueue.async { [self] in
+            refreshUI()
+        }
     }
     
     // MARK: - Methods -
     
     func refreshUI() {
         updateFloatingPanelLayout()
+        mainView.updateLayout()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus, animated: Bool = true) {
@@ -224,9 +235,9 @@ class MainViewController: UIViewController {
         floatingPanel.show(animated: true)
     }
     
-    private func startServersUpdate() {
+    private func startAPIUpdate() {
         updateServersList()
-        updateServersTimer = Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
     }
     
     private func startPingService(updateServerListDidComplete: Bool) {
@@ -245,7 +256,7 @@ class MainViewController: UIViewController {
             
             updateStatus(vpnStatus: status, animated: false)
             
-            Application.shared.connectionManager.onStatusChanged { status in
+            Application.shared.connectionManager.onStatusChanged { [self] status in
                 updateStatus(vpnStatus: status)
             }
         }
@@ -264,6 +275,21 @@ class MainViewController: UIViewController {
         #if targetEnvironment(simulator)
         updateGeoLocation()
         #endif
+    }
+    
+    private func evaluateFirstRun() {
+        guard UIApplication.shared.isProtectedDataAvailable else {
+            return
+        }
+        
+        if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil && UserDefaults.standard.object(forKey: UserDefaults.Key.selectedServerGateway) == nil {
+            KeyChain.clearAll()
+            UserDefaults.clearSession()
+            Application.shared.settings.connectionProtocol = Config.defaultProtocol
+            Application.shared.settings.saveConnectionProtocol()
+            UserDefaults.standard.set(false, forKey: UserDefaults.Key.firstInstall)
+            UserDefaults.standard.synchronize()
+        }
     }
     
 }

@@ -64,7 +64,7 @@ class Pinger {
             PingMannager.shared.startPing()
         }
 
-        log(info: "Pinger service started")
+        log(.info, message: "Pinger service started")
     }
     
     // MARK: - Private methods -
@@ -130,7 +130,7 @@ extension Pinger: PingDelegate {
             if pingsCount > 0 {
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: Notification.Name.PingDidComplete, object: nil)
-                    log(info: "Pinger service finished")
+                    log(.info, message: "Pinger service finished")
                 }
             }
         }

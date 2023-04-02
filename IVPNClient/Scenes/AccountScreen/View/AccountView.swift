@@ -33,8 +33,6 @@ class AccountView: UITableView {
     @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
-    @IBOutlet weak var planLabel: UILabel!
-    @IBOutlet weak var planDescriptionHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addMoreTimeButton: UIButton!
     
     // MARK: - Properties -
@@ -49,17 +47,7 @@ class AccountView: UITableView {
         statusLabel.backgroundColor = viewModel.statusColor
         subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
-        planLabel.textColor = .white
         addMoreTimeButton.isHidden = Application.shared.serviceStatus.isLegacyAccount()
-        
-        switch serviceType {
-        case .standard:
-            break
-        case .pro:
-            planLabel.text = "Login to the website to change subscription plan"
-            planLabel.font = .systemFont(ofSize: 12, weight: .regular)
-            planDescriptionHeightConstraint.constant = 58
-        }
     }
     
     func initQRCode(viewModel: AccountViewModel) {

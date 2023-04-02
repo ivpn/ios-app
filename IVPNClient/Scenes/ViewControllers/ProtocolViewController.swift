@@ -41,11 +41,18 @@ class ProtocolViewController: UITableViewController {
         keyManager.delegate = self
         updateCollection(connectionProtocol: Application.shared.settings.connectionProtocol)
         initNavigationBar()
+        addObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+    
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     // MARK: - Methods -
@@ -61,7 +68,11 @@ class ProtocolViewController: UITableViewController {
         collection.append(ConnectionSettings.tunnelTypes(protocols: Config.supportedProtocolTypes))
         
         if connectionProtocol.tunnelType() == .wireguard {
-            collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])
+            if UserDefaults.shared.isMultiHop {
+                collection.append([.wireguard(.udp, 1), .wireguard(.udp, 2)])
+            } else {
+                collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])
+            }
         }
         
         if connectionProtocol.tunnelType() == .openvpn {
@@ -119,27 +130,28 @@ class ProtocolViewController: UITableViewController {
         return true
     }
     
-    func reloadTable(connectionProtocol: ConnectionSettings) {
+    func reloadTable(connectionProtocol: ConnectionSettings, indexPath: IndexPath) {
         Application.shared.settings.connectionProtocol = connectionProtocol
         Application.shared.serverList = VPNServerList()
+        Application.shared.settings.selectedHost = Application.shared.serverList.getHost(Application.shared.settings.selectedHost)
+        Application.shared.settings.selectedExitHost = Application.shared.serverList.getHost(Application.shared.settings.selectedExitHost)
         updateCollection(connectionProtocol: connectionProtocol)
         tableView.reloadData()
         UserDefaults.shared.set(0, forKey: "LastPingTimestamp")
         Pinger.shared.serverList = Application.shared.serverList
         Pinger.shared.ping()
+        
+        if let cell = tableView.cellForRow(at: indexPath) {
+            evaluateReconnect(sender: cell as UIView)
+        }
     }
     
-    func selectPreferredProtocolAndPort(connectionProtocol: ConnectionSettings) {
-        guard !UserDefaults.shared.isMultiHop else {
-            showAlert(title: "", message: "It is not possible to use the preferred port setting when Multi-Hop for is enabled")
-            return
-        }
+    func selectPreferredProtocol(connectionProtocol: ConnectionSettings) {
+        let selected = Application.shared.settings.connectionProtocol.protocolType()
+        let protocols: [ConnectionSettings] = [.openvpn(.udp, 2049), .openvpn(.tcp, 443)]
+        let actions = connectionProtocol.supportedProtocolsFormatMultiHop()
         
-        let selected = Application.shared.settings.connectionProtocol.formatProtocol()
-        let protocols = connectionProtocol.supportedProtocols(protocols: Config.supportedProtocols)
-        let actions = connectionProtocol.supportedProtocolsFormat(protocols: Config.supportedProtocols)
-        
-        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol & port", actions: actions, sourceView: view) { [self] index in
+        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol", actions: actions, sourceView: view) { [self] index in
             guard index > -1 else {
                 return
             }
@@ -147,7 +159,14 @@ class ProtocolViewController: UITableViewController {
             Application.shared.settings.connectionProtocol = protocols[index]
             tableView.reloadData()
             NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-            evaluateReconnect(sender: view)
+        }
+    }
+    
+    @objc private func protocolSelected() {
+        if let navigationController = navigationController {
+            evaluateReconnect(sender: navigationController.navigationBar)
+        } else {
+            evaluateReconnect(sender: tableView.headerView(forSection: 0) ?? tableView)
         }
     }
     
@@ -200,7 +219,7 @@ extension ProtocolViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "We recommend the WireGuard protocol for its speed, security and connection reliability. Currently we only support Multi-hop connections using OpenVPN. For more information visit our protocol comparison web page."
+            return "We recommend the WireGuard protocol for its speed, security and connection reliability. For more information visit our protocol comparison web page."
         case 1:
             if Application.shared.settings.connectionProtocol.tunnelType() == .wireguard {
                 return "Keys rotation will start automatically in the defined interval. It will also change the internal IP address."
@@ -224,9 +243,14 @@ extension ProtocolViewController {
             return
         }
         
-        if connectionProtocol == .openvpn(.udp, 0) || connectionProtocol == .wireguard(.udp, 0) {
-            selectPreferredProtocolAndPort(connectionProtocol: connectionProtocol)
+        if connectionProtocol == .openvpn(.udp, 0) && UserDefaults.shared.isMultiHop {
+            selectPreferredProtocol(connectionProtocol: connectionProtocol)
             tableView.deselectRow(at: indexPath, animated: true)
+            return
+        }
+        
+        if connectionProtocol == .openvpn(.udp, 0) || connectionProtocol == .wireguard(.udp, 0) {
+            performSegue(withIdentifier: "PortSettings", sender: self)
             return
         }
         
@@ -365,13 +389,9 @@ extension ProtocolViewController {
             }
         }
         
-        reloadTable(connectionProtocol: connectionProtocol)
+        reloadTable(connectionProtocol: connectionProtocol, indexPath: indexPath)
         
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-        
-        if let cell = tableView.cellForRow(at: indexPath) {
-            evaluateReconnect(sender: cell as UIView)
-        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -428,7 +448,7 @@ extension ProtocolViewController {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.detailTextLabel.text = "WireGuard keys successfully generated and uploaded to IVPN server."
         hud.dismiss(afterDelay: 2)
-        reloadTable(connectionProtocol: ConnectionSettings.wireguard(.udp, 2049))
+        reloadTable(connectionProtocol: ConnectionSettings.wireguard(.udp, 2049), indexPath: IndexPath(row: 0, section: 0))
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
     }
     

@@ -21,6 +21,7 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import KeychainAccess
 
 class KeyChain {
@@ -37,7 +38,7 @@ class KeyChain {
     private static let vpnPasswordKey = "vpn_password"
     
     static let bundle: Keychain = {
-        return Keychain(service: "net.ivpn.clients.ios", accessGroup: "WQXXM75BYN.net.ivpn.IVPN-Client")
+        return Keychain(service: "net.ivpn.clients.ios", accessGroup: "WQXXM75BYN.net.ivpn.IVPN-Client").accessibility(.whenPasscodeSetThisDeviceOnly)
     }()
     
     class var username: String? {

@@ -31,16 +31,19 @@ class AppDelegate: UIResponder {
     
     var window: UIWindow?
     
-    // MARK: - Methods -
+    private lazy var securityWindow: UIWindow = {
+        let screen = UIScreen.main
+        let window = UIWindow(frame: screen.bounds)
+        let storyBoard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "launchScreen")
+        viewController.view.alpha = 0
+        window.screen = screen
+        window.rootViewController = viewController
+        window.windowLevel = .alert
+        return window
+    }()
     
-    private func evaluateFirstRun() {
-        if UserDefaults.standard.object(forKey: UserDefaults.Key.firstInstall) == nil {
-            KeyChain.clearAll()
-            UserDefaults.clearSession()
-            UserDefaults.standard.set(false, forKey: UserDefaults.Key.firstInstall)
-            UserDefaults.standard.synchronize()
-        }
-    }
+    // MARK: - Methods -
     
     private func evaluateUITests() {
         // When running the application for UI Testing we need to remove all the stored data so we can start testing the clear app
@@ -99,41 +102,173 @@ class AppDelegate: UIResponder {
         URLCache.shared.removeAllCachedResponses()
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        guard let endpoint = url.host else {
-            return false
+    private func refreshUI() {
+        if let mainViewController = UIApplication.topViewController() as? MainViewController {
+            mainViewController.refreshUI()
+        }
+    }
+    
+    private func showSecurityScreen() {
+        var showWindow = false
+        
+        if UIApplication.topViewController() as? AccountViewController != nil {
+            showWindow = true
+        }
+        
+        if UIApplication.topViewController() as? LoginViewController != nil {
+            showWindow = true
+        }
+        
+        if UIApplication.topViewController() as? CreateAccountViewController != nil {
+            showWindow = true
+        }
+        
+        if showWindow {
+            securityWindow.isHidden = false
+            UIView.animate(withDuration: 0.15, animations: { [self] in
+                securityWindow.rootViewController?.view.alpha = 1
+            })
+        }
+    }
+    
+    private func hideSecurityScreen() {
+        UIView.animate(withDuration: 0.15, animations: { [self] in
+            securityWindow.rootViewController?.view.alpha = 0
+        }, completion: { [self] _ in
+            securityWindow.isHidden = true
+        })
+    }
+    
+    private func handleURLEndpoint(_ endpoint: String) {
+        guard let viewController = UIApplication.topViewController() else {
+            return
         }
         
         switch endpoint {
         case Config.urlTypeConnect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                    return
+            viewController.showActionAlert(title: "Please confirm", message: "Do you want to connect to VPN?", action: "Connect", actionHandler: { _ in
+                DispatchQueue.delay(0.75) {
+                    if UserDefaults.shared.networkProtectionEnabled {
+                        Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
+                        return
+                    }
+                    Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
                 }
-                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
-            }
+            })
         case Config.urlTypeDisconnect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                    return
+            viewController.showActionAlert(title: "Please confirm", message: "Do you want to disconnect from VPN?", action: "Disconnect", actionHandler: { _ in
+                DispatchQueue.delay(0.75) {
+                    if UserDefaults.shared.networkProtectionEnabled {
+                        Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
+                        return
+                    }
+                    Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
                 }
-                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
-            }
+            })
         case Config.urlTypeLogin:
+            if UIApplication.topViewController() as? LoginViewController != nil {
+                return
+            }
+            
             if let topViewController = UIApplication.topViewController() {
-                if #available(iOS 13.0, *) {
-                    topViewController.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-                } else {
-                    topViewController.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-                }
+                topViewController.present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
             }
         default:
             break
         }
-        
-        return true
+    }
+    
+    private func userActivityConnect() {
+        DispatchQueue.delay(0.75) {
+            if UserDefaults.shared.networkProtectionEnabled {
+                Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
+                return
+            }
+            Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
+        }
+    }
+    
+    private func userActivityDisconnect() {
+        DispatchQueue.delay(0.75) {
+            if UserDefaults.shared.networkProtectionEnabled {
+                Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
+                return
+            }
+            Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
+        }
+    }
+    
+    private func userActivityAntiTrackerEnable() {
+        DispatchQueue.async {
+            if let viewController = UIApplication.topViewController() {
+                if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+                    viewController.showAlert(title: "IKEv2 not supported", message: "AntiTracker is supported only for OpenVPN and WireGuard protocols.") { _ in
+                    }
+                    return
+                }
+                
+                UserDefaults.shared.set(true, forKey: UserDefaults.Key.isAntiTracker)
+                NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
+                if UIApplication.topViewController() as? MainViewController != nil {
+                    NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                } else {
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
+        }
+    }
+    
+    private func userActivityAntiTrackerDisable() {
+        DispatchQueue.async {
+            if let viewController = UIApplication.topViewController() {
+                UserDefaults.shared.set(false, forKey: UserDefaults.Key.isAntiTracker)
+                NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
+                if UIApplication.topViewController() as? MainViewController != nil {
+                    NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                } else {
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
+        }
+    }
+    
+    private func userActivityCustomDNSEnable() {
+        DispatchQueue.async {
+            if let viewController = UIApplication.topViewController() {
+                if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+                    viewController.showAlert(title: "IKEv2 not supported", message: "Custom DNS is supported only for OpenVPN and WireGuard protocols.") { _ in
+                    }
+                    return
+                }
+                
+                guard !UserDefaults.shared.customDNS.isEmpty else {
+                    viewController.showAlert(title: "", message: "Please enter DNS server info")
+                    return
+                }
+                
+                UserDefaults.shared.set(true, forKey: UserDefaults.Key.isCustomDNS)
+                NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
+                if UIApplication.topViewController() as? MainViewController != nil {
+                    NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                } else {
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
+        }
+    }
+    
+    private func userActivityCustomDNSDisable() {
+        DispatchQueue.async {
+            if let viewController = UIApplication.topViewController() {
+                UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+                NotificationCenter.default.post(name: Notification.Name.CustomDNSUpdated, object: nil)
+                if UIApplication.topViewController() as? MainViewController != nil {
+                    NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                } else {
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
+        }
     }
 
 }
@@ -144,7 +279,6 @@ extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         evaluateUITests()
-        evaluateFirstRun()
         registerUserDefaults()
         finishIncompletePurchases()
         createLogFiles()
@@ -170,18 +304,28 @@ extension AppDelegate: UIApplicationDelegate {
         if UserDefaults.shared.networkProtectionEnabled {
             NetworkManager.shared.startMonitoring()
         }
+        
+        hideSecurityScreen()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
+        hideSecurityScreen()
+        refreshUI()
         NetworkManager.shared.stopMonitoring()
-        
-        if let topViewController = UIApplication.topViewController() as? MainViewController {
-            topViewController.refreshUI()
-        }
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        showSecurityScreen()
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        showSecurityScreen()
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else { return }
+        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else {
+            return
+        }
         
         switch shortcutItem.type {
         case "Connect":
@@ -210,27 +354,31 @@ extension AppDelegate: UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else { return false }
+        if let url = userActivity.webpageURL {
+            let endpoint = url.lastPathComponent
+            handleURLEndpoint(endpoint)
+            return false
+        }
+        
+        guard Application.shared.authentication.isLoggedIn, Application.shared.serviceStatus.isActive else {
+            return false
+        }
         
         switch userActivity.activityType {
         case UserActivityType.Connect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                    return
-                }
-                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
-            }
+            userActivityConnect()
         case UserActivityType.Disconnect:
-            DispatchQueue.delay(0.75) {
-                if UserDefaults.shared.networkProtectionEnabled {
-                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                    return
-                }
-                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
-            }
+            userActivityDisconnect()
+        case UserActivityType.AntiTrackerEnable:
+            userActivityAntiTrackerEnable()
+        case UserActivityType.AntiTrackerDisable:
+            userActivityAntiTrackerDisable()
+        case UserActivityType.CustomDNSEnable:
+            userActivityCustomDNSEnable()
+        case UserActivityType.CustomDNSDisable:
+            userActivityCustomDNSDisable()
         default:
-            log(info: "No such user activity")
+            log(.info, message: "No such user activity")
         }
         
         return false

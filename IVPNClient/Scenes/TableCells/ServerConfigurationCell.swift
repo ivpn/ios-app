@@ -24,7 +24,7 @@
 import UIKit
 
 protocol ServerConfigurationCellDelegate: AnyObject {
-    func toggle(isOn: Bool, gateway: String)
+    func toggle(isOn: Bool, server: VPNServer)
     func showValidation(error: String)
 }
 
@@ -43,7 +43,7 @@ class ServerConfigurationCell: UITableViewCell {
             return
         }
         
-        delegate?.toggle(isOn: sender.isOn, gateway: viewModel.server.gateway)
+        delegate?.toggle(isOn: sender.isOn, server: viewModel.server)
     }
     
     var viewModel: VPNServerViewModel! {

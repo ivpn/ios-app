@@ -21,10 +21,12 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 import NetworkExtension
 import Network
-import TunnelKit
+import TunnelKitCore
+import TunnelKitManager
+import TunnelKitOpenVPN
 import WireGuardKit
 
 extension NETunnelProviderProtocol {
@@ -32,23 +34,22 @@ extension NETunnelProviderProtocol {
     // MARK: OpenVPN
     
     static func makeOpenVPNProtocol(settings: ConnectionSettings, accessDetails: AccessDetails) -> NETunnelProviderProtocol {
-        var username = accessDetails.username
-        
-        if UserDefaults.shared.isMultiHop && Application.shared.serviceStatus.isEnabled(capability: .multihop) {
-            username += "@\(UserDefaults.shared.exitServerLocation)"
+        guard let host = getHost() else {
+            return NETunnelProviderProtocol()
         }
         
-        let port = UInt16(settings.port())
+        let username = accessDetails.username
         let socketType: SocketType = settings.protocolType() == "TCP" ? .tcp : .udp
         let credentials = OpenVPN.Credentials(username, KeyChain.vpnPassword ?? "")
         let staticKey = OpenVPN.StaticKey.init(file: OpenVPNConf.tlsAuth, direction: OpenVPN.StaticKey.Direction.client)
+        let port = UInt16(getPort(settings: settings))
         
         var sessionBuilder = OpenVPN.ConfigurationBuilder()
         sessionBuilder.ca = OpenVPN.CryptoContainer(pem: OpenVPNConf.caCert)
         sessionBuilder.cipher = .aes256cbc
         sessionBuilder.compressionFraming = .disabled
         sessionBuilder.endpointProtocols = [EndpointProtocol(socketType, port)]
-        sessionBuilder.hostname = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
+        sessionBuilder.hostname = host.host
         sessionBuilder.tlsWrap = OpenVPN.TLSWrap.init(strategy: .auth, key: staticKey!)
         
         if let dnsServers = openVPNdnsServers(), !dnsServers.isEmpty, dnsServers != [""] {
@@ -66,19 +67,19 @@ extension NETunnelProviderProtocol {
             }
         }
         
-        var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
+        var builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.shouldDebug = true
         builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss$d $L $M"
         builder.masksPrivateData = true
         
         let configuration = builder.build()
         let keychain = Keychain(group: Config.appGroup)
-        try? keychain.set(password: credentials.password, for: credentials.username, context: Config.openvpnTunnelProvider)
+        _ = try? keychain.set(password: credentials.password, for: credentials.username, context: Config.openvpnTunnelProvider)
         let proto = try! configuration.generatedTunnelProtocol(
             withBundleIdentifier: Config.openvpnTunnelProvider,
             appGroup: Config.appGroup,
             context: Config.openvpnTunnelProvider,
-            username: credentials.username
+            credentials: credentials
         )
         proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
         if #available(iOS 15.1, *) {
@@ -92,15 +93,11 @@ extension NETunnelProviderProtocol {
     static func openVPNdnsServers() -> [String]? {
         if UserDefaults.shared.isAntiTracker {
             if UserDefaults.shared.isAntiTrackerHardcore {
-                if UserDefaults.shared.isMultiHop && !UserDefaults.shared.antiTrackerHardcoreDNSMultiHop.isEmpty {
-                    return [UserDefaults.shared.antiTrackerHardcoreDNSMultiHop]
-                } else if !UserDefaults.shared.antiTrackerHardcoreDNS.isEmpty {
+                if !UserDefaults.shared.antiTrackerHardcoreDNS.isEmpty {
                     return [UserDefaults.shared.antiTrackerHardcoreDNS]
                 }
             } else {
-                if UserDefaults.shared.isMultiHop && !UserDefaults.shared.antiTrackerDNSMultiHop.isEmpty {
-                    return [UserDefaults.shared.antiTrackerDNSMultiHop]
-                } else if !UserDefaults.shared.antiTrackerDNS.isEmpty {
+                if !UserDefaults.shared.antiTrackerDNS.isEmpty {
                     return [UserDefaults.shared.antiTrackerDNS]
                 }
             }
@@ -114,21 +111,18 @@ extension NETunnelProviderProtocol {
     // MARK: WireGuard
     
     static func makeWireGuardProtocol(settings: ConnectionSettings) -> NETunnelProviderProtocol {
-        guard let host = Application.shared.settings.selectedServer.hosts.randomElement() else {
+        guard let host = getHost() else {
             return NETunnelProviderProtocol()
         }
         
         var addresses = KeyChain.wgIpAddress
         var publicKey = host.publicKey
-        var endpoint = Peer.endpoint(host: host.host, port: settings.port())
+        let port = getPort(settings: settings)
+        var endpoint = Peer.endpoint(host: host.host, port: port)
         
-        if UserDefaults.shared.isMultiHop {
-            guard let exitHost = Application.shared.settings.selectedExitServer.hosts.randomElement() else {
-                return NETunnelProviderProtocol()
-            }
-            
+        if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = getExitHost() {
             publicKey = exitHost.publicKey
-            endpoint = Peer.endpoint(host: host.host, port: Int(exitHost.multihopPort) ?? settings.port())
+            endpoint = Peer.endpoint(host: host.host, port: port)
         }
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
@@ -167,6 +161,40 @@ extension NETunnelProviderProtocol {
         }
         
         return configuration
+    }
+    
+    // MARK: Methods
+    
+    private static func getHost() -> Host? {
+        if let selectedHost = Application.shared.settings.selectedHost {
+            return selectedHost
+        }
+        
+        if let randomHost = Application.shared.settings.selectedServer.hosts.randomElement() {
+            return randomHost
+        }
+        
+        return nil
+    }
+    
+    private static func getExitHost() -> Host? {
+        if let selectedHost = Application.shared.settings.selectedExitHost {
+            return selectedHost
+        }
+        
+        if let randomHost = Application.shared.settings.selectedExitServer.hosts.randomElement() {
+            return randomHost
+        }
+        
+        return nil
+    }
+    
+    private static func getPort(settings: ConnectionSettings) -> Int {
+        if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = getExitHost() {
+            return exitHost.multihopPort
+        }
+        
+        return settings.port()
     }
     
 }

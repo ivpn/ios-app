@@ -30,7 +30,7 @@ struct Config {
     static let minPingCheckInterval: TimeInterval = 10
     static let appGroup = "group.net.ivpn.clients.ios"
     
-    static let apiServersFile = "/v4/servers.json"
+    static let apiServersFile = "/v5/servers.json"
     static let apiGeoLookup = "/v4/geo-lookup"
     static let apiSessionNew = "/v4/session/new"
     static let apiSessionStatus = "/v4/session/status"
@@ -54,6 +54,7 @@ struct Config {
     
     // Files and Directories
     static let serversListCacheFileName = "servers_cache1.json"
+    static let appLogFile = "AppLogs.txt"
     static let openVPNLogFile = "OpenVPNLogs.txt"
     static let wireGuardLogFile = "WireGuardLogs.txt"
     
@@ -65,25 +66,6 @@ struct Config {
     static let stableVPNStatusInterval: TimeInterval = 0.5
     
     static let defaultProtocol = ConnectionSettings.wireguard(.udp, 2049)
-    static let supportedProtocols = [
-        ConnectionSettings.ipsec,
-        ConnectionSettings.openvpn(.udp, 2049),
-        ConnectionSettings.openvpn(.udp, 2050),
-        ConnectionSettings.openvpn(.udp, 53),
-        ConnectionSettings.openvpn(.udp, 1194),
-        ConnectionSettings.openvpn(.tcp, 443),
-        ConnectionSettings.openvpn(.tcp, 1443),
-        ConnectionSettings.openvpn(.tcp, 80),
-        ConnectionSettings.wireguard(.udp, 2049),
-        ConnectionSettings.wireguard(.udp, 2050),
-        ConnectionSettings.wireguard(.udp, 53),
-        ConnectionSettings.wireguard(.udp, 1194),
-        ConnectionSettings.wireguard(.udp, 30587),
-        ConnectionSettings.wireguard(.udp, 41893),
-        ConnectionSettings.wireguard(.udp, 48574),
-        ConnectionSettings.wireguard(.udp, 58237)
-    ]
-    
     static let supportedProtocolTypes = [
         ConnectionSettings.wireguard(.udp, 2049),
         ConnectionSettings.ipsec,

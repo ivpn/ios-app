@@ -24,7 +24,8 @@
 import Foundation
 import NetworkExtension
 import UIKit
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 class VPNManager {
     
@@ -43,7 +44,7 @@ class VPNManager {
     private func loadTunnelProviderManager(tunnelTitle: String, completion: @escaping (NETunnelProviderManager) -> Void) {
         NETunnelProviderManager.loadAllFromPreferences { managers, error in
             guard error == nil else {
-                log(error: "Error loading VPN configuration: \(error?.localizedDescription ?? "Unkonwn")")
+                log(.error, message: "Error loading VPN configuration: \(error?.localizedDescription ?? "Unkonwn")")
                 return
             }
             
@@ -109,7 +110,7 @@ class VPNManager {
     func setup(settings: ConnectionSettings, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
         getManagerFor(tunnelType: settings.tunnelType()) { manager in
             guard manager.connection.status.isDisconnected() else {
-                log(error: "Trying to setup new VPN protocol, while previous connection is not disconnected")
+                log(.error, message: "Trying to setup new VPN protocol, while previous connection is not disconnected")
                 completion(nil)
                 return
             }
@@ -279,25 +280,25 @@ class VPNManager {
             do {
                 try manager.connection.startVPNTunnel()
             } catch NEVPNError.configurationInvalid {
-                log(error: "Error connecting to VPN: configuration is invalid")
+                log(.error, message: "Error connecting to VPN: configuration is invalid")
                 manager.isOnDemandEnabled = false
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
             } catch NEVPNError.configurationDisabled {
-                log(error: "Error connecting to VPN: configuration is disabled")
+                log(.error, message: "Error connecting to VPN: configuration is disabled")
                 manager.isOnDemandEnabled = false
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
             } catch NEVPNError.configurationReadWriteFailed {
-                log(error: "Error connecting to VPN: configuration read write failed")
+                log(.error, message: "Error connecting to VPN: configuration read write failed")
                 manager.isOnDemandEnabled = false
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
             } catch NEVPNError.configurationStale {
-                log(error: "Error connecting to VPN: configuration is stale")
+                log(.error, message: "Error connecting to VPN: configuration is stale")
             } catch NEVPNError.configurationUnknown {
-                log(error: "Error connecting to VPN: configuration is unknown")
+                log(.error, message: "Error connecting to VPN: configuration is unknown")
             } catch NEVPNError.connectionFailed {
-                log(error: "Error connecting to VPN: connecting failed")
+                log(.error, message: "Error connecting to VPN: connecting failed")
             } catch let error as NSError {
-                log(error: "Error connecting to VPN: \(error.localizedDescription)")
+                log(.error, message: "Error connecting to VPN: \(error.localizedDescription)")
                 NotificationCenter.default.post(name: Notification.Name.NEVPNStatusDidChange, object: nil)
             }
         }
@@ -347,8 +348,8 @@ class VPNManager {
             self.ipsecObserver = NotificationCenter.default.addObserver(
                 forName: NSNotification.Name.NEVPNStatusDidChange,
                 object: manager.connection, queue: OperationQueue.main) { _ in
-                    log(info: "IKEv2 connection status changed.")
-                    log(info: "IKEv2 status: \(manager.connection.status.rawValue)")
+                    log(.info, message: "IKEv2 connection status changed.")
+                    log(.info, message: "IKEv2 status: \(manager.connection.status.rawValue)")
                     
                     event(TunnelType.ipsec, manager, manager.connection.status)
             }
@@ -358,8 +359,8 @@ class VPNManager {
             self.openvpnObserver = NotificationCenter.default.addObserver(
                 forName: NSNotification.Name.NEVPNStatusDidChange,
                 object: manager.connection, queue: OperationQueue.main) { _ in
-                    log(info: "OpenVPN connection status changed.")
-                    log(info: "openvpn status: \(manager.connection.status.rawValue)")
+                    log(.info, message: "OpenVPN connection status changed.")
+                    log(.info, message: "openvpn status: \(manager.connection.status.rawValue)")
                     
                     event(TunnelType.openvpn, manager, manager.connection.status)
             }
@@ -369,8 +370,8 @@ class VPNManager {
             self.wireguardObserver = NotificationCenter.default.addObserver(
                 forName: NSNotification.Name.NEVPNStatusDidChange,
                 object: manager.connection, queue: OperationQueue.main) { _ in
-                    log(info: "WireGuard connection status changed.")
-                    log(info: "WireGuard status: \(manager.connection.status.rawValue)")
+                    log(.info, message: "WireGuard connection status changed.")
+                    log(.info, message: "WireGuard status: \(manager.connection.status.rawValue)")
                     
                     event(TunnelType.wireguard, manager, manager.connection.status)
             }
@@ -384,7 +385,7 @@ class VPNManager {
         }
         
         do {
-            try session.sendProviderMessage(OpenVPNTunnelProvider.Message.requestLog.data) { data in
+            try session.sendProviderMessage(OpenVPNProvider.Message.requestLog.data) { data in
                 guard let data = data, !data.isEmpty else {
                     completion(nil)
                     return
@@ -413,7 +414,7 @@ class VPNManager {
         }
         
         do {
-            try session.sendProviderMessage(Message.requestLog.data) { data in
+            try session.sendProviderMessage(Message.requestLog.data) { _ in
                 completion(nil)
                 return
             }

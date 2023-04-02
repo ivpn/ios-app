@@ -39,8 +39,6 @@ class ApiManager {
             request.queryItems = params
         }
         
-        log(info: "\(requestName) started")
-        
         APIClient().perform(request) { result in
             DispatchQueue.main.async {
                 switch result {
@@ -52,15 +50,12 @@ class ApiManager {
                         do {
                             let successResponse = try decoder.decode(T.self, from: data)
                             completion(.success(successResponse))
-                            log(info: "\(requestName) success")
                             return
                         } catch {}
                     }
                     
                     completion(.failure(nil))
-                    log(info: "\(requestName) parse error")
                 case .failure:
-                    log(info: "\(requestName) failure")
                     completion(.failure(nil))
                 }
             }

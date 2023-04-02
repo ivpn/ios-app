@@ -30,10 +30,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Requirements
 
-- iOS 12.0+
+- iOS 13.0+
 - Xcode 12.0+
 - Swift 5.0+
-- CocoaPods 1.10.0+
 - fastlane 2.178.0+
 - Go 1.16+
 
@@ -41,20 +40,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 Project dev dependencies:  
 
-* [CocoaPods](https://cocoapods.org)  
 * [fastlane](https://fastlane.tools)  
 * [SwiftLint](https://github.com/realm/SwiftLint)  
 * [Go](https://golang.org)  
 
-Install CocoaPods, fastlane, SwiftLint and Go:  
+Install fastlane, SwiftLint and Go:  
 
 ```sh
-$ brew install cocoapods fastlane swiftlint go
+$ brew install fastlane swiftlint go
 ```
 
 ### Dependencies
 
-Dependencies are installed with [Swift Package Manager](https://swift.org/package-manager/) and [CocoaPods](https://cocoapods.org).
+Dependencies are installed with [Swift Package Manager](https://swift.org/package-manager/).
 
 Project dependencies:  
 
@@ -67,13 +65,6 @@ Project dependencies:
 * [ActiveLabel](https://github.com/optonaut/ActiveLabel.swift)  
 * [ReachabilitySwift](https://github.com/ashleymills/Reachability.swift)  
 * [FloatingPanel](https://github.com/scenee/FloatingPanel)  
-
-To pull and build dependencies run:  
-
-```sh
-$ pod install  
-$ open IVPNClient.xcworkspace  
-```
 
 ### Xcode build configurations
 
@@ -124,7 +115,7 @@ $ fastlane test
 Alternatively, run tests using xcodebuild:  
 
 ```sh
-$ xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11'
+$ xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 14'
 ```
 
 <a name="deployment"></a>

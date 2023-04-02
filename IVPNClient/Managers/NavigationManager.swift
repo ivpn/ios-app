@@ -22,6 +22,8 @@
 //
 
 import UIKit
+import WebKit
+import SnapKit
 
 class NavigationManager {
     
@@ -157,6 +159,35 @@ class NavigationManager {
             viewController.delegate = delegate
             viewController.imageData = imageData
             viewController.captchaId = captchaId
+        }
+        
+        return navController!
+    }
+    
+    static func getWebkitViewController(webView: WKWebView) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
+        let navController = storyBoard.instantiateViewController(withIdentifier: "webkitView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        
+        if let viewController = navController?.topViewController {
+            viewController.view.addSubview(webView)
+            viewController.navigationController?.navigationBar.prefersLargeTitles = false
+            webView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+                make.top.equalToSuperview()
+            }
+        }
+        
+        return navController!
+    }
+    
+    static func getAddCustomPortViewController(delegate: AddCustomPortViewControllerDelegate? = nil) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navController = storyBoard.instantiateViewController(withIdentifier: "addCustomPort") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        
+        if let viewController = navController?.topViewController as? AddCustomPortViewController {
+            viewController.delegate = delegate
         }
         
         return navController!

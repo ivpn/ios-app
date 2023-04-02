@@ -44,9 +44,7 @@ extension UserDefaults {
         static let isAntiTracker = "isAntiTracker"
         static let isAntiTrackerHardcore = "isAntiTrackerHardcore"
         static let antiTrackerDNS = "antiTrackerDNS"
-        static let antiTrackerDNSMultiHop = "antiTrackerDNSMultiHop"
         static let antiTrackerHardcoreDNS = "antiTrackerHardcoreDNS"
-        static let antiTrackerHardcoreDNSMultiHop = "antiTrackerHardcoreDNSMultiHop"
         static let wgKeyTimestamp = "wgKeyTimestamp"
         static let wgRegenerationRate = "wgRegenerationRate"
         static let hostNames = "hostNames"
@@ -62,7 +60,7 @@ extension UserDefaults {
         static let keepAlive = "keepAlive"
         static let serversSort = "serversSort"
         static let notAskToReconnect = "notAskToReconnect"
-        static let selectedProtocolIndex = "selectedProtocolIndex"
+        static let selectedProtocol = "selectedProtocol"
         static let resolvedDNSInsideVPN = "resolvedDNSInsideVPN"
         static let resolvedDNSOutsideVPN = "resolvedDNSOutsideVPN"
         static let selectedServerCity = "SelectedServerCity"
@@ -73,6 +71,8 @@ extension UserDefaults {
         static let selectedExitServerCity = "SelectedExitServerCity"
         static let selectedExitServerGateway = "SelectedExitServerGateway"
         static let selectedExitServerRandom = "SelectedExitServerRandom"
+        static let selectedHost = "SelectedHost"
+        static let selectedExitHost = "SelectedExitHost"
         static let fastestServerPreferred = "FastestServerPreferred"
         static let fastestServerConfigured = "FastestServerConfiguredForOpenVPN"
         static let firstInstall = "FirstInstall"
@@ -82,6 +82,7 @@ extension UserDefaults {
         static let showIPv4Servers = "showIPv4Servers"
         static let killSwitch = "killSwitch"
         static let excludeLocalNetworks = "excludeLocalNetworks"
+        static let selectHost = "selectHost"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -140,16 +141,8 @@ extension UserDefaults {
         return string(forKey: Key.antiTrackerDNS) ?? ""
     }
     
-    @objc dynamic var antiTrackerDNSMultiHop: String {
-        return string(forKey: Key.antiTrackerDNSMultiHop) ?? ""
-    }
-    
     @objc dynamic var antiTrackerHardcoreDNS: String {
         return string(forKey: Key.antiTrackerHardcoreDNS) ?? ""
-    }
-    
-    @objc dynamic var antiTrackerHardcoreDNSMultiHop: String {
-        return string(forKey: Key.antiTrackerHardcoreDNSMultiHop) ?? ""
     }
     
     @objc dynamic var wgKeyTimestamp: Date {
@@ -219,6 +212,10 @@ extension UserDefaults {
     @objc dynamic var excludeLocalNetworks: Bool {
         return bool(forKey: Key.excludeLocalNetworks)
     }
+
+    @objc dynamic var selectHost: Bool {
+        return bool(forKey: Key.selectHost)
+    }
     
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
@@ -252,10 +249,14 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.isIPv6)
         shared.removeObject(forKey: Key.killSwitch)
         shared.removeObject(forKey: Key.excludeLocalNetworks)
+        shared.removeObject(forKey: Key.selectHost)
+        standard.removeObject(forKey: Key.serviceStatus)
+        standard.removeObject(forKey: Key.selectedHost)
+        standard.removeObject(forKey: Key.selectedExitHost)
         standard.removeObject(forKey: Key.selectedServerFastest)
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
-        standard.removeObject(forKey: Key.selectedProtocolIndex)
+        standard.removeObject(forKey: Key.selectedProtocol)
         standard.synchronize()
     }
     

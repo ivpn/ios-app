@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.8.0 - 2023-01-30  
+
+[NEW] Favorite servers  
+[IMPROVED] Option to search and sort in the fastest server configuration list  
+
+## 2.7.1 - 2022-12-08  
+
+[IMPROVED] Support for Split View and Slide Over mode on iPadOS  
+[IMPROVED] Upgraded app diagnostic logs  
+[FIXED] Crash on app launch caused by Ping service  
+[FIXED] Montreal location not showing all available hosts  
+[FIXED] Minor bug fixes  
+
+## 2.7.0 - 2022-11-23  
+
+[NEW] Ability to connect to a specific host in a location  
+[NEW] Support for custom ports  
+[IMPROVED] Warning about existing VPN connection(s) when downgrading subscription plan  
+[FIXED] IPv6 connection information not displayed on iOS 16+ devices  
+[FIXED] Port number displayed in the settings when MultiHop is enabled  
+
+## 2.6.3 - 2022-05-17  
+
+[IMPROVED] Option to select UDP or TCP when using OpenVPN MultiHop  
+[IMPROVED] Search servers by country code  
+[IMPROVED] VoiceOver (Accessibility) for the home screen  
+[FIXED] Log out issue on iPadOS  
+[FIXED] Empty OpenVPN servers list  
+
+## 2.6.2 - 2022-03-29  
+
+[NEW] Hide sensitive UI with privacy overlay when entering background  
+[IMPROVED] Use Universal Links when connecting or disconnecting from the widget  
+[IMPROVED] Use WKWebView instead SFSafariViewController to improve security  
+[IMPROVED] Use more restricted access level for Keychain data  
+[FIXED] In some cases session is removed after the iOS upgrade  
+
+## 2.6.1 - 2021-12-16  
+
+[NEW] Shortcuts to enable/disable AntiTracker and Custom DNS  
+[IMPROVED] New implementation for OpenVPN Multi-Hop  
+[IMPROVED] Improved VoiceOver (Accessibility) for the main screen  
+[IMPROVED] Minor UI improvements  
+[IMPROVED] OpenVPN and OpenSSL libraries upgraded to the latest version  
+[FIXED] Not possible to set DNS over HTTPS/TLS when AntiTracker is enabled  
+
 ## 2.5.0 - 2021-11-10  
 
 [NEW] Multi-Hop for WireGuard protocol  

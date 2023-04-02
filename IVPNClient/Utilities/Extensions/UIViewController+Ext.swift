@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import SafariServices
+import WebKit
 import MessageUI
 
 extension UIDevice {
@@ -61,11 +61,10 @@ extension UIViewController {
     // MARK: - @IBActions -
     
     @IBAction func dismissViewController(_ sender: Any) {
-        if #available(iOS 13.0, *) {
-            if let presentationController = navigationController?.presentationController {
-                presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
-            }
+        if let presentationController = navigationController?.presentationController {
+            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
         }
+        
         navigationController?.dismiss(animated: true)
     }
     
@@ -114,10 +113,15 @@ extension UIViewController {
             return
         }
         
-        guard let url = URL(string: stringURL) else { return }
+        guard let url = URL(string: stringURL) else {
+            return
+        }
         
-        let safariVC = SFSafariViewController(url: url)
-        present(safariVC, animated: true, completion: nil)
+        let request = URLRequest(url: url)
+        let webView = WKWebView()
+        present(NavigationManager.getWebkitViewController(webView: webView), animated: true) {
+            webView.load(request)
+        }
     }
     
     func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> Void)? = nil) {
@@ -197,6 +201,15 @@ extension UIViewController {
     
     func showWireGuardKeysMissingError() {
         showErrorAlert(title: "Error", message: "Failed to connect to VPN - WireGuard keys are missing. Please generate new keys in the Settings or try to connect to VPN manually.")
+    }
+    
+    func evaluatePasscode() -> Bool {
+        guard UIDevice.isPasscodeSet() else {
+            showAlert(title: "Passcode is disabled", message: "Please enable Passcode in the iOS Settings")
+            return false
+        }
+        
+        return true
     }
     
 }

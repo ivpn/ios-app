@@ -49,6 +49,7 @@ class ConnectToServerPopupView: UIView {
         let locationLabel = UILabel()
         locationLabel.font = UIFont.systemFont(ofSize: 16)
         locationLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
+        locationLabel.isAccessibilityElement = true
         return locationLabel
     }()
     
@@ -59,30 +60,36 @@ class ConnectToServerPopupView: UIView {
         locationLabel.isHidden = true
         locationLabel.numberOfLines = 0
         locationLabel.text = "Please select a different entry or exit server."
+        locationLabel.isAccessibilityElement = true
         return locationLabel
     }()
     
-    var actionButton: UIButton = {
+    lazy var actionButton: UIButton = {
         let actionButton = UIButton()
         actionButton.setTitle("CONNECT TO SERVER", for: .normal)
         actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         actionButton.backgroundColor = UIColor.init(named: Theme.ivpnBlue)
         actionButton.layer.cornerRadius = 8
         actionButton.addTarget(self, action: #selector(connectAction), for: .touchUpInside)
+        actionButton.isAccessibilityElement = true
         return actionButton
     }()
     
-    var prevButton: UIButton = {
+    lazy var prevButton: UIButton = {
         let prevButton = UIButton()
         prevButton.setImage(UIImage.init(named: "icon-arrow-left-gray"), for: .normal)
         prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
+        prevButton.isAccessibilityElement = true
+        prevButton.accessibilityLabel = "Previous server"
         return prevButton
     }()
     
-    var nextButton: UIButton = {
+    lazy var nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.setImage(UIImage.init(named: "icon-arrow-right-gray"), for: .normal)
         nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
+        nextButton.isAccessibilityElement = true
+        nextButton.accessibilityLabel = "Next server"
         return nextButton
     }()
     
@@ -109,6 +116,7 @@ class ConnectToServerPopupView: UIView {
             let serverViewModel = VPNServerViewModel(server: vpnServer)
             flagImage.image = serverViewModel.imageForCountryCode
             locationLabel.icon(text: serverViewModel.formattedServerNameForMainScreen, imageName: serverViewModel.imageNameForPingTime)
+            locationLabel.accessibilityLabel = serverViewModel.server.city
             
             if !Application.shared.connectionManager.status.isDisconnected() && Application.shared.settings.selectedServer == vpnServer {
                 actionButton.setTitle("DISCONNECT", for: .normal)
@@ -340,8 +348,10 @@ class ConnectToServerPopupView: UIView {
         
         if UserDefaults.shared.isMultiHop {
             Application.shared.settings.selectedExitServer = vpnServer
+            Application.shared.settings.selectedExitHost = nil
         } else {
             Application.shared.settings.selectedServer = vpnServer
+            Application.shared.settings.selectedHost = nil
         }
         
         Application.shared.connectionManager.needsToUpdateSelectedServer()

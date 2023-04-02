@@ -35,14 +35,15 @@ class ControlPanelView: UITableView {
     @IBOutlet weak var exitServerTableCell: UITableViewCell!
     @IBOutlet weak var exitServerConnectionLabel: UILabel!
     @IBOutlet weak var exitServerNameLabel: UILabel!
+    @IBOutlet weak var exitServerCountryLabel: UILabel!
     @IBOutlet weak var exitServerFlagImage: UIImageView!
     @IBOutlet weak var exitServerIPv6Label: UILabel!
     @IBOutlet weak var entryServerTableCell: UITableViewCell!
     @IBOutlet weak var entryServerConnectionLabel: UILabel!
     @IBOutlet weak var entryServerNameLabel: UILabel!
+    @IBOutlet weak var entryServerCountryLabel: UILabel!
     @IBOutlet weak var entryServerFlagImage: UIImageView!
     @IBOutlet weak var entryServerIPv6Label: UILabel!
-    @IBOutlet weak var fastestServerLabel: UIView!
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var antiTrackerLabel: UILabel!
     @IBOutlet weak var networkView: NetworkViewTableCell!
@@ -83,11 +84,8 @@ class ControlPanelView: UITableView {
     // MARK: - Methods -
     
     func setupView() {
-        if #available(iOS 13.0, *) {
-            connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
-            connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
-        }
-        
+        connectSwitch.thumbTintColor = UIColor.init(named: Theme.ivpnGray17)
+        connectSwitch.onTintColor = UIColor.init(named: Theme.ivpnBlue)
         updateConnectSwitch()
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: protectionStatusTableCell)
         
@@ -110,10 +108,11 @@ class ControlPanelView: UITableView {
     }
     
     func updateServerNames() {
-        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage, ipv6Label: entryServerIPv6Label)
-        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage, ipv6Label: exitServerIPv6Label)
+        updateServerName(server: Application.shared.settings.selectedServer, label: entryServerNameLabel, flag: entryServerFlagImage, ipv6Label: entryServerIPv6Label, selectedHost: Application.shared.settings.selectedHost)
+        updateServerName(server: Application.shared.settings.selectedExitServer, label: exitServerNameLabel, flag: exitServerFlagImage, ipv6Label: exitServerIPv6Label, selectedHost: Application.shared.settings.selectedExitHost)
         
-        fastestServerLabel.isHidden = true
+        entryServerCountryLabel.text = Application.shared.settings.selectedServer.country
+        exitServerCountryLabel.text = Application.shared.settings.selectedExitServer.country
     }
     
     func updateAntiTracker(viewModel: VPNStatusViewModel) {
@@ -139,17 +138,15 @@ class ControlPanelView: UITableView {
     
     // MARK: - Private methods -
     
-    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView, ipv6Label: UILabel) {
-        let serverViewModel = VPNServerViewModel(server: server)
+    private func updateServerName(server: VPNServer, label: UILabel, flag: UIImageView, ipv6Label: UILabel, selectedHost: Host? = nil) {
+        let serverViewModel = VPNServerViewModel(server: server, selectedHost: selectedHost)
         label.text = serverViewModel.formattedServerNameForMainScreen
         flag.image = serverViewModel.imageForCountryCodeForMainScreen
         ipv6Label.isHidden = !serverViewModel.showIPv6Label
     }
     
     private func updateConnectSwitch() {
-        if #available(iOS 13.0, *) {
-            connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
-        }
+        connectSwitch.subviews[0].subviews[0].backgroundColor = UIColor.init(named: Theme.ivpnRedOff)
     }
     
 }

@@ -69,12 +69,13 @@ class MapScrollView: UIScrollView {
         initMarkers()
         initConnectToServerPopup()
         addObservers()
+        updateAccessibility()
     }
     
     // MARK: - Methods -
     
     func setupConstraints() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             snp.remakeConstraints { make in
                 make.top.equalTo(MapConstants.Container.iPadLandscapeTopAnchor)
                 make.left.equalTo(MapConstants.Container.iPadLandscapeLeftAnchor)
@@ -97,6 +98,7 @@ class MapScrollView: UIScrollView {
         }
         
         updateMapPosition(vpnStatus: vpnStatus)
+        updateAccessibility()
     }
     
     func updateMapPositionToCurrentCoordinates() {
@@ -119,8 +121,8 @@ class MapScrollView: UIScrollView {
     }
     
     func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
-        let halfWidth = Double(UIScreen.main.bounds.width / 2)
-        let halfHeight = Double(UIScreen.main.bounds.height / 2)
+        let halfWidth = UIApplication.shared.isSplitOrSlideOver ? Double(frame.width / 2) : Double(UIScreen.main.bounds.width / 2)
+        let halfHeight = UIApplication.shared.isSplitOrSlideOver ? Double(frame.height / 2) : Double(UIScreen.main.bounds.height / 2)
         let point = getCoordinatesBy(latitude: latitude, longitude: longitude)
         let bottomOffset = Double((MapConstants.Container.getBottomAnchor() / 2) - MapConstants.Container.getTopAnchor())
         let leftOffset = Double((MapConstants.Container.getLeftAnchor()) / 2)
@@ -224,6 +226,7 @@ class MapScrollView: UIScrollView {
             self.markerGatewayView.viewModel = ProofsViewModel(model: model)
             self.markerGatewayView.show(animated: animated)
             self.markerLocalView.hide(animated: false)
+            self.updateAccessibility()
         }
     }
     
@@ -299,6 +302,7 @@ class MapScrollView: UIScrollView {
         }
         
         button.addSubview(marker)
+        button.isAccessibilityElement = true
         addSubview(button)
         sendSubviewToBack(button)
     }
@@ -328,9 +332,11 @@ class MapScrollView: UIScrollView {
                 if UserDefaults.shared.isMultiHop {
                     Application.shared.settings.selectedExitServer = server
                     Application.shared.settings.selectedExitServer.fastest = false
+                    Application.shared.settings.selectedExitHost = nil
                 } else {
                     Application.shared.settings.selectedServer = server
                     Application.shared.settings.selectedServer.fastest = false
+                    Application.shared.settings.selectedHost = nil
                 }
                 
                 Application.shared.connectionManager.needsToUpdateSelectedServer()
@@ -419,6 +425,34 @@ class MapScrollView: UIScrollView {
         y = (bitmapHeight / 2) - (bitmapHeight / 2) * y
         
         return (x, y)
+    }
+    
+    private func updateAccessibility() {
+        let isDisconnected = Application.shared.connectionManager.status.isDisconnected()
+        markerLocalView.accessibilityLabel = "Your status is - disconnected"
+        markerLocalView.isAccessibilityElement = isDisconnected
+        markerGatewayView.accessibilityLabel = "Your status is - connected to \(markerGatewayView.viewModel?.model?.city ?? "")"
+        markerGatewayView.isAccessibilityElement = !isDisconnected
+        markerLocalView.tag = 100
+        markerGatewayView.tag = 200
+        accessibilityElements = [UIView]()
+        for subview in subviews where subview.isAccessibilityElement {
+            accessibilityElements?.append(subview)
+        }
+        for subview in connectToServerPopup.container.subviews where subview.isAccessibilityElement {
+            accessibilityElements?.append(subview)
+        }
+        if isDisconnected {
+            for subview in markerLocalView.connectionInfoPopup.container.subviews where subview.isAccessibilityElement {
+                accessibilityElements?.append(subview)
+            }
+        }
+        if !isDisconnected {
+            for subview in markerGatewayView.connectionInfoPopup.container.subviews where subview.isAccessibilityElement {
+                accessibilityElements?.append(subview)
+            }
+        }
+        accessibilityElements?.sort(by: {($0 as AnyObject).tag > ($1 as AnyObject).tag})
     }
     
 }

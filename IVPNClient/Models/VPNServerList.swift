@@ -31,16 +31,15 @@ class VPNServerList {
     // MARK: - Properties -
     
     open private(set) var servers: [VPNServer]
+    open private(set) var ports: [ConnectionSettings]
+    open private(set) var portRanges: [PortRange]
     
     var filteredFastestServers: [VPNServer] {
-        var serversArray = getServers()
-        let fastestServerConfigured = UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured)
-        
-        if fastestServerConfigured {
-            serversArray = serversArray.filter { StorageManager.isFastestEnabled(server: $0) }
+        if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
+            return getServers().filter { StorageManager.isFastestEnabled(server: $0) }
         }
         
-        return serversArray
+        return getServers()
     }
     
     var noPing: Bool {
@@ -84,6 +83,8 @@ class VPNServerList {
     // and optionally save it to the cache file for later access
     init(withJSONData data: Data?, storeInCache: Bool = false) {
         servers = [VPNServer]()
+        ports = [ConnectionSettings]()
+        portRanges = [PortRange]()
         
         if let jsonData = data {
             var serversList: [[String: Any]]?
@@ -104,7 +105,7 @@ class VPNServerList {
                 }
             } catch {
                 let errorMessage = "Provided data cannot be deserialized: \(error)"
-                log(error: errorMessage)
+                log(.error, message: errorMessage)
                 return
             }
             
@@ -123,16 +124,10 @@ class VPNServerList {
                         if let ipAddress = defaultObj["ip"] as? String {
                             UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.antiTrackerDNS)
                         }
-                        if let ipAddressMultiHop = defaultObj["multihop-ip"] as? String {
-                            UserDefaults.shared.set(ipAddressMultiHop, forKey: UserDefaults.Key.antiTrackerDNSMultiHop)
-                        }
                     }
                     if let hardcore = antitracker["hardcore"] as? [String: Any] {
                         if let ipAddress = hardcore["ip"] as? String {
                             UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.antiTrackerHardcoreDNS)
-                        }
-                        if let ipAddressMultiHop = hardcore["multihop-ip"] as? String {
-                            UserDefaults.shared.set(ipAddressMultiHop, forKey: UserDefaults.Key.antiTrackerHardcoreDNSMultiHop)
                         }
                     }
                 }
@@ -144,6 +139,55 @@ class VPNServerList {
                     
                     if let ips = api["ipv6s"] as? [String?] {
                         UserDefaults.shared.set(ips, forKey: UserDefaults.Key.ipv6HostNames)
+                    }
+                }
+                
+                if let portsObj = config["ports"] as? [String: Any] {
+                    ports.append(ConnectionSettings.ipsec)
+                    
+                    if let openvpn = portsObj["openvpn"] as? [[String: Any]] {
+                        var udpRanges = [CountableClosedRange<Int>]()
+                        var tcpRanges = [CountableClosedRange<Int>]()
+                        for port in openvpn {
+                            if let portNumber = port["port"] as? Int {
+                                if port["type"] as? String == "TCP" {
+                                    ports.append(ConnectionSettings.openvpn(.tcp, portNumber))
+                                } else {
+                                    ports.append(ConnectionSettings.openvpn(.udp, portNumber))
+                                }
+                            }
+                            if let range = port["range"] as? [String: Any] {
+                                if let min = range["min"] as? Int, let max = range["max"] as? Int {
+                                    if port["type"] as? String == "TCP" {
+                                        tcpRanges.append(min...max)
+                                    } else {
+                                        udpRanges.append(min...max)
+                                    }
+                                }
+                            }
+                        }
+                        if !udpRanges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "OpenVPN", protocolType: "UDP", ranges: udpRanges))
+                        }
+                        if !tcpRanges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "OpenVPN", protocolType: "TCP", ranges: tcpRanges))
+                        }
+                    }
+                    if let wireguard = portsObj["wireguard"] as? [[String: Any]] {
+                        var ranges = [CountableClosedRange<Int>]()
+                        for port in wireguard {
+                            if let portNumber = port["port"] as? Int {
+                                ports.append(ConnectionSettings.wireguard(.udp, portNumber))
+                            }
+                            if let range = port["range"] as? [String: Any] {
+                                if let min = range["min"] as? Int, let max = range["max"] as? Int {
+                                    ranges.append(min...max)
+                                }
+                            }
+                        }
+                        if !ranges.isEmpty {
+                            portRanges.append(PortRange(tunnelType: "WireGuard", protocolType: "UDP", ranges: ranges))
+                        }
                     }
                 }
             }
@@ -163,13 +207,44 @@ class VPNServerList {
     }()
     
     func getServers() -> [VPNServer] {
-        guard UserDefaults.standard.showIPv4Servers || !UserDefaults.shared.isIPv6 else {
+        if UserDefaults.shared.isIPv6 && !UserDefaults.standard.showIPv4Servers {
             return servers.filter { (server: VPNServer) -> Bool in
-                return server.supportsIPv6
+                return server.enabledIPv6 || !server.supportsIPv6
             }
         }
         
         return servers
+    }
+    
+    func getAllHosts(_ servers: [VPNServer]? = nil, isFavorite: Bool = false) -> [VPNServer] {
+        var allHosts: [VPNServer] = []
+        let allServers = servers ?? getServers()
+        
+        for server in allServers {
+            if server.isHost {
+                continue
+            }
+            
+            if server.hosts.count == 1 {
+                server.dnsName = server.hosts.first!.dnsName
+            }
+            
+            allHosts.append(server)
+            
+            if isFavorite && server.hosts.count == 1 {
+                continue
+            }
+            
+            for host in server.hosts {
+                allHosts.append(VPNServer(gateway: host.hostName, dnsName: host.dnsName, countryCode: server.countryCode, country: "", city: server.city, load: host.load, ipv6: host.ipv6))
+            }
+        }
+        
+        if isFavorite {
+            return allHosts.filter { StorageManager.isFavorite(server: $0) }
+        }
+        
+        return allHosts
     }
     
     func getServer(byIpAddress ipAddress: String) -> VPNServer? {
@@ -182,6 +257,22 @@ class VPNServerList {
     
     func getServer(byCity city: String) -> VPNServer? {
         return getServers().first { $0.city == city }
+    }
+    
+    func getServer(byPrefix prefix: String) -> VPNServer? {
+        return getAllHosts().first { $0.gateway.hasPrefix(prefix) }
+    }
+    
+    func getHost(_ host: Host?) -> Host? {
+        guard let host = host else {
+            return nil
+        }
+        
+        if let serverHost = getServer(byPrefix: host.hostNamePrefix()), let server = getServer(byCity: serverHost.city) {
+            return server.getHost(fromPrefix: host.hostNamePrefix())
+        }
+        
+        return nil
     }
     
     func getFastestServer() -> VPNServer? {
@@ -231,12 +322,16 @@ class VPNServerList {
     func saveAllServers(exceptionGateway: String) {
         for server in servers {
             let isFastestEnabled = server.gateway != exceptionGateway
-            StorageManager.saveServer(gateway: server.gateway, isFastestEnabled: isFastestEnabled)
+            StorageManager.save(server: server, isFastestEnabled: isFastestEnabled)
         }
     }
     
     func sortServers() {
         servers = VPNServerList.sort(servers)
+    }
+    
+    func getPortRanges(tunnelType: String) -> [PortRange] {
+        return portRanges.filter { $0.tunnelType == tunnelType }
     }
     
     static func sort(_ servers: [VPNServer]) -> [VPNServer] {
@@ -280,9 +375,12 @@ class VPNServerList {
                     
                     var newHost = Host(
                         host: host["host"] as? String ?? "",
+                        hostName: host["hostname"] as? String ?? "",
+                        dnsName: host["dns_name"] as? String ?? "",
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
-                        multihopPort: host["multihop_port"] as? Int ?? 0
+                        multihopPort: host["multihop_port"] as? Int ?? 0,
+                        load: host["load"] as? Double ?? 0
                     )
                     
                     if let ipv6 = host["ipv6"] as? [String: Any] {

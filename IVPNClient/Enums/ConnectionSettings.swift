@@ -30,6 +30,10 @@ enum ConnectionSettings {
     case wireguard(WireGuardProtocol, Int)
     
     func format() -> String {
+        if UserDefaults.shared.isMultiHop {
+            return formatMultiHop()
+        }
+        
         switch self {
         case .ipsec:
             return "IKEv2"
@@ -42,6 +46,38 @@ enum ConnectionSettings {
            }
         case .wireguard(_, let port):
             return "WireGuard, UDP \(port)"
+        }
+    }
+    
+    func formatMultiHop() -> String {
+        switch self {
+        case .ipsec:
+            return "IKEv2"
+        case .openvpn(let proto, _):
+            switch proto {
+            case .tcp:
+                return "OpenVPN, TCP"
+            case .udp:
+                return "OpenVPN, UDP"
+           }
+        case .wireguard:
+            return "WireGuard, UDP"
+        }
+    }
+    
+    func formatSave() -> String {
+        switch self {
+        case .ipsec:
+            return "ikev2"
+        case .openvpn(let proto, let port):
+            switch proto {
+            case .tcp:
+                return "openvpn-tcp-\(port)"
+            case .udp:
+                return "openvpn-udp-\(port)"
+           }
+        case .wireguard(_, let port):
+            return "wireguard-udp-\(port)"
         }
     }
     
@@ -78,10 +114,8 @@ enum ConnectionSettings {
         for protocolObj in protocols {
             var containsProtocol = false
             
-            for filteredProtocol in filteredProtocols {
-                if filteredProtocol.tunnelType() == protocolObj.tunnelType() {
-                    containsProtocol = true
-                }
+            for filteredProtocol in filteredProtocols where filteredProtocol.tunnelType() == protocolObj.tunnelType() {
+                containsProtocol = true
             }
             
             if !containsProtocol {
@@ -95,26 +129,58 @@ enum ConnectionSettings {
     func supportedProtocols(protocols: [ConnectionSettings]) -> [ConnectionSettings] {
         var filteredProtocols = [ConnectionSettings]()
         
-        for protocolObj in protocols {
-            if protocolObj.tunnelType() == self.tunnelType() {
-                filteredProtocols.append(protocolObj)
-            }
+        for protocolObj in protocols where protocolObj.tunnelType() == self.tunnelType() {
+            filteredProtocols.append(protocolObj)
         }
         
         return filteredProtocols
     }
     
     func supportedProtocolsFormat(protocols: [ConnectionSettings]) -> [String] {
-        let protocols = supportedProtocols(protocols: Config.supportedProtocols)
+        let protocols = supportedProtocols(protocols: protocols)
         return protocols.map({ $0.formatProtocol() })
     }
     
+    func supportedProtocolsFormatMultiHop() -> [String] {
+        return ["UDP", "TCP"]
+    }
+    
     static func getSavedProtocol() -> ConnectionSettings {
-        let protocolIndex = UserDefaults.standard.integer(forKey: UserDefaults.Key.selectedProtocolIndex)
+        let portString = UserDefaults.standard.string(forKey: UserDefaults.Key.selectedProtocol) ?? ""
+        return getFrom(portString: portString)
+    }
+    
+    static func getFrom(portString: String) -> ConnectionSettings {
+        var name = ""
+        var proto = ""
+        var port = 0
+        let components = portString.components(separatedBy: "-")
         
-        if Config.supportedProtocols.indices.contains(protocolIndex) && UserDefaults.standard.object(forKey: UserDefaults.Key.selectedProtocolIndex) != nil || !(KeyChain.sessionToken ?? "").isEmpty {
-            return Config.supportedProtocols[protocolIndex]
-        } else {
+        if let protocolName = components[safeIndex: 0] {
+            name = protocolName
+        }
+        if let protocolType = components[safeIndex: 1] {
+            proto = protocolType
+        }
+        if let protocolPort = components[safeIndex: 2] {
+            port = Int(protocolPort) ?? 0
+        }
+        
+        switch name {
+        case "ikev2":
+            return .ipsec
+        case "openvpn":
+            switch proto {
+            case "tcp":
+                return .openvpn(.tcp, port)
+            case "udp":
+                return .openvpn(.udp, port)
+            default:
+                return Config.defaultProtocol
+            }
+        case "wireguard":
+            return .wireguard(.udp, port)
+        default:
             return Config.defaultProtocol
         }
     }

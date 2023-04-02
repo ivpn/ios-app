@@ -47,6 +47,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
     @IBOutlet weak var excludeLocalNetworksSwitch: UISwitch!
+    @IBOutlet weak var selectHostSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -144,15 +145,24 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func toggleLogging(_ sender: UISwitch) {
-        FileSystemManager.resetLogFile(name: Config.openVPNLogFile)
-        FileSystemManager.resetLogFile(name: Config.wireGuardLogFile)
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
+        FileSystemManager.clearSession()
         updateCellInset(cell: loggingCell, inset: sender.isOn)
         tableView.reloadData()
     }
     
     @IBAction func toggleAskToReconnect(_ sender: UISwitch) {
         UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.notAskToReconnect)
+    }
+    
+    @IBAction func toggleSelectHost(_ sender: UISwitch) {
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.selectHost)
+        
+        if !sender.isOn {
+            Application.shared.settings.selectedHost = nil
+            Application.shared.settings.selectedExitHost = nil
+            updateSelectedServer()
+        }
     }
     
     @IBAction func extendSubscription(_ sender: Any) {
@@ -168,11 +178,7 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func authenticate(_ sender: Any) {
-        if #available(iOS 13.0, *) {
-            present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-        } else {
-            present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-        }
+        present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
     }
     
     // MARK: - View Lifecycle -
@@ -217,6 +223,7 @@ class SettingsViewController: UITableViewController {
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
+        selectHostSwitch.setOn(UserDefaults.shared.selectHost, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
         updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
@@ -312,8 +319,8 @@ class SettingsViewController: UITableViewController {
     // MARK: - Private methods -
     
     private func updateSelectedServer() {
-        let serverViewModel = VPNServerViewModel(server: Application.shared.settings.selectedServer)
-        let exitServerViewModel = VPNServerViewModel(server: Application.shared.settings.selectedExitServer)
+        let serverViewModel = VPNServerViewModel(server: Application.shared.settings.selectedServer, selectedHost: Application.shared.settings.selectedHost)
+        let exitServerViewModel = VPNServerViewModel(server: Application.shared.settings.selectedExitServer, selectedHost: Application.shared.settings.selectedExitHost)
         selectedServerName.text = serverViewModel.formattedServerNameForSettings
         selectedServerFlag.image = serverViewModel.imageForCountryCodeForSettings
         selectedExitServerName.text = exitServerViewModel.formattedServerNameForSettings
@@ -337,47 +344,71 @@ class SettingsViewController: UITableViewController {
         guard evaluateMailCompose() else {
             return
         }
+
+        guard let appLogPath = FileManager.logTextFileURL?.path else {
+            return
+        }
         
-        var wireguardLogAttached = false
+        guard let wireguardLogPath = FileManager.wgLogTextFileURL?.path else {
+            return
+        }
+        
+        guard logger.app?.writeLog(to: appLogPath) ?? false else {
+            return
+        }
+        
+        guard logger.wireguard?.writeLog(to: wireguardLogPath) ?? false else {
+            return
+        }
+        
+        let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
+        composer.setToRecipients([Config.contactSupportMail])
+        
         var openvpnLogAttached = false
         var presentMailComposer = true
         
-        Application.shared.connectionManager.getWireGuardLog { _ in
-            let composer = MFMailComposeViewController()
-            composer.mailComposeDelegate = self
-            composer.setToRecipients([Config.contactSupportMail])
-            
+        // App logs
+        var appLog: String?
+        if let file = NSData(contentsOfFile: appLogPath) {
+            appLog = String(data: file as Data, encoding: .utf8) ?? ""
+        }
+        
+        FileSystemManager.updateLogFile(newestLog: appLog, name: Config.appLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+        
+        let logFile = FileSystemManager.sharedFilePath(name: Config.appLogFile).path
+        if let fileData = NSData(contentsOfFile: logFile) {
+            composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "app-")).txt")
+        }
+        
+        // WireGuard tunnel logs
+        var wireguardLog: String?
+        if let file = NSData(contentsOfFile: wireguardLogPath) {
+            wireguardLog = String(data: file as Data, encoding: .utf8) ?? ""
+        }
+        
+        FileSystemManager.updateLogFile(newestLog: wireguardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
+        
+        let wireguardLogFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
+        if let fileData = NSData(contentsOfFile: wireguardLogFile) {
+            composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "wireguard-")).txt")
+        }
+        
+        // OpenVPN tunnel logs
+        Application.shared.connectionManager.getOpenVPNLog { openVPNLog in
             if UserDefaults.shared.isLogging {
-                var wireGuardLog: String? = nil
-                let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
-                if let file = NSData(contentsOfFile: filePath) {
-                    wireGuardLog = String(data: file as Data, encoding: .utf8) ?? ""
-                }
+                FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
                 
-                FileSystemManager.updateLogFile(newestLog: wireGuardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-                
-                let logFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
-                if let fileData = NSData(contentsOfFile: logFile), !wireguardLogAttached {
-                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "wireguard-")).txt")
-                    wireguardLogAttached = true
+                let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
+                if let fileData = NSData(contentsOfFile: logFile), !openvpnLogAttached {
+                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "openvpn-")).txt")
+                    openvpnLogAttached = true
                 }
             }
             
-            Application.shared.connectionManager.getOpenVPNLog { openVPNLog in
-                if UserDefaults.shared.isLogging {
-                    FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-                    
-                    let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                    if let fileData = NSData(contentsOfFile: logFile), !openvpnLogAttached {
-                        composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "openvpn-")).txt")
-                        openvpnLogAttached = true
-                    }
-                }
-                
-                if presentMailComposer {
-                    self.present(composer, animated: true, completion: nil)
-                    presentMailComposer = false
-                }
+            if presentMailComposer {
+                self.present(composer, animated: true, completion: nil)
+                presentMailComposer = false
             }
         }
     }
@@ -417,8 +448,8 @@ class SettingsViewController: UITableViewController {
 extension SettingsViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 0 { return 60 }
-        if indexPath.section == 0 && indexPath.row == 2 && !multiHopSwitch.isOn { return 0 }
+        if indexPath.section == 0 && indexPath.row == 1 { return 60 }
+        if indexPath.section == 0 && indexPath.row == 3 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
         if indexPath.section == 3 && indexPath.row == 8 { return 60 }
         if indexPath.section == 3 && indexPath.row == 9 && !loggingSwitch.isOn { return 0 }

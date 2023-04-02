@@ -28,6 +28,7 @@ struct VPNServerViewModel {
     // MARK: - Properties -
     
     var server: VPNServer
+    var selectedHost: Host?
     
     var imageNameForPingTimeForMainScreen: String {
         if server.randomServerLabelShouldBePresented {
@@ -40,6 +41,11 @@ struct VPNServerViewModel {
     var formattedServerNameForMainScreen: String {
         if server.randomServerLabelShouldBePresented {
             return "Random server"
+        }
+        
+        if let selectedHost = selectedHost {
+            let hostNameComponents = selectedHost.hostName.components(separatedBy: ".")
+            return "\(server.city) (\(hostNameComponents[0])), \(server.countryCode.uppercased())"
         }
         
         return formattedServerName
@@ -62,6 +68,11 @@ struct VPNServerViewModel {
         
         if server.random {
             return "Random server"
+        }
+        
+        if let selectedHost = selectedHost {
+            let hostNameComponents = selectedHost.hostName.components(separatedBy: ".")
+            return "\(server.city) (\(hostNameComponents[0])), \(server.countryCode.uppercased())"
         }
         
         return formattedServerName
@@ -91,6 +102,10 @@ struct VPNServerViewModel {
     }
     
     var formattedServerName: String {
+        if server.isHost {
+            return server.gateway
+        }
+        
         return "\(server.city), \(server.countryCode.uppercased())"
     }
     
@@ -111,13 +126,14 @@ struct VPNServerViewModel {
     }
     
     var showIPv6Label: Bool {
-        return UserDefaults.standard.showIPv4Servers && UserDefaults.shared.isIPv6 && server.supportsIPv6 && !server.random
+        return UserDefaults.standard.showIPv4Servers && UserDefaults.shared.isIPv6 && server.enabledIPv6 && !(server.random && Application.shared.connectionManager.status.isDisconnected())
     }
     
     // MARK: - Initialize -
     
-    init(server: VPNServer) {
+    init(server: VPNServer, selectedHost: Host? = nil) {
         self.server = server
+        self.selectedHost = selectedHost
     }
     
     // MARK: - Methods -

@@ -53,5 +53,9 @@ extension Notification.Name {
     public static let UpdateResolvedDNSInsideVPN = Notification.Name("updateResolvedDNSInsideVPN")
     public static let ResolvedDNSError = Notification.Name("resolvedDNSError")
     public static let ServersListUpdated = Notification.Name("serversListUpdated")
+    public static let AntiTrackerUpdated = Notification.Name("antiTrackerUpdatedUpdated")
+    public static let CustomDNSUpdated = Notification.Name("customDNSUpdatedUpdated")
+    public static let EvaluateReconnect = Notification.Name("evaluateReconnect")
+    public static let EvaluatePlanUpdate = Notification.Name("evaluatePlanUpdate")
     
 }

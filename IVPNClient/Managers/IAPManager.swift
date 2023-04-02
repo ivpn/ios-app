@@ -54,13 +54,13 @@ class IAPManager {
             if !result.retrievedProducts.isEmpty {
                 self.products = Array(result.retrievedProducts)
                 completion(Array(result.retrievedProducts), nil)
-                log(info: "Products successfully fetched from App Store.")
+                log(.info, message: "Products successfully fetched from App Store.")
             } else if !result.invalidProductIDs.isEmpty {
                 completion(nil, "Invalid product identifier")
-                log(info: "Invalid App Store product identifier.")
+                log(.info, message: "Invalid App Store product identifier.")
             } else {
                 completion(nil, String(describing: result.error))
-                log(info: "There was an error with fetching products from App Store.")
+                log(.info, message: "There was an error with fetching products from App Store.")
             }
         }
     }
@@ -70,7 +70,7 @@ class IAPManager {
             switch result {
             case .success(let purchase):
                 completion(purchase, nil)
-                log(info: "Product was successfully purchased.")
+                log(.info, message: "Product was successfully purchased.")
             case .error(let error):
                 switch error.code {
                 case .unknown: completion(nil, "Unknown error. Please contact support")
@@ -84,7 +84,7 @@ class IAPManager {
                 case .cloudServiceRevoked: completion(nil, "User has revoked permission to use this cloud service")
                 default: completion(nil, (error as NSError).localizedDescription)
                 }
-                log(error: "There was an error with purchase.")
+                log(.error, message: "There was an error with purchase.")
             }
         }
     }
@@ -103,22 +103,24 @@ class IAPManager {
                 if let restoreError = results.restoreFailedPurchases.first {
                     let error = ErrorResult(status: 500, message: restoreError.0.localizedDescription)
                     completion(nil, error)
-                    log(error: restoreError.0.localizedDescription)
+                    log(.error, message: restoreError.0.localizedDescription)
                     return
                 }
                 
                 let error = ErrorResult(status: 500, message: "Unknown error")
                 completion(nil, error)
-                log(error: "Unknown error")
+                log(.error, message: "Unknown error")
             } else if results.restoredPurchases.count > 0 {
-                self.completeRestoredPurchase(purchase: results.restoredPurchases.first!) { account, error in
+                var purchases = results.restoredPurchases
+                purchases.sort { $0.transaction.transactionDate! > $1.transaction.transactionDate! }
+                self.completeRestoredPurchase(purchase: purchases.first!) { account, error in
                     completion(account, error)
-                    log(info: "Purchases are restored.")
+                    log(.info, message: "Purchases are restored.")
                 }
             } else {
                 let error = ErrorResult(status: 500, message: "There are no purchases to restore.")
                 completion(nil, error)
-                log(error: "There are no purchases to restore.")
+                log(.error, message: "There are no purchases to restore.")
             }
         }
     }
@@ -136,18 +138,18 @@ class IAPManager {
                 }
                 Application.shared.serviceStatus = sessionStatus.serviceStatus
                 completion(sessionStatus.serviceStatus, nil)
-                log(info: "Purchase was successfully finished.")
+                log(.info, message: "Purchase was successfully finished.")
             case .failure(let error):
                 let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
                 completion(nil, error ?? defaultErrorResult)
-                log(error: "There was an error with purchase completion: \(error?.message ?? "")")
+                log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
             }
         }
     }
     
     func completePurchases(products: [Purchase], endpoint: String, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         if let product = products.last {
-            log(info: "Found incomplete purchase. Completing purchase...")
+            log(.info, message: "Found incomplete purchase. Completing purchase...")
             
             switch product.transaction.transactionState {
             case .purchased, .restored:
@@ -161,11 +163,11 @@ class IAPManager {
                             SwiftyStoreKit.finishTransaction(product.transaction)
                             Application.shared.serviceStatus = sessionStatus.serviceStatus
                             completion(sessionStatus.serviceStatus, nil)
-                            log(info: "Purchase was successfully finished.")
+                            log(.info, message: "Purchase was successfully finished.")
                         case .failure(let error):
                             let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
                             completion(nil, error ?? defaultErrorResult)
-                            log(error: "There was an error with purchase completion: \(error?.message ?? "")")
+                            log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
                         }
                     }
                 }
@@ -189,11 +191,11 @@ class IAPManager {
                 }
                 KeyChain.username = account.accountId
                 completion(account, nil)
-                log(info: "Purchase was successfully finished.")
+                log(.info, message: "Purchase was successfully finished.")
             case .failure(let error):
                 let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was restored but service cannot be activated. Restart application to retry.")
                 completion(nil, error ?? defaultErrorResult)
-                log(error: "There was an error with purchase completion: \(error?.message ?? "")")
+                log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
             }
         }
     }

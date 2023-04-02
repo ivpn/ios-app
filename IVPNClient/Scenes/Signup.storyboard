@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -334,7 +334,7 @@
                             <tableViewSection id="Lj8-rs-5LY">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="226" id="88p-3D-F4q">
-                                        <rect key="frame" x="0.0" y="93" width="414" height="226"/>
+                                        <rect key="frame" x="0.0" y="109.5" width="414" height="226"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="88p-3D-F4q" id="Grr-60-n61">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="226"/>
@@ -483,7 +483,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="286" id="GrT-ru-LnQ">
-                                        <rect key="frame" x="0.0" y="319" width="414" height="286"/>
+                                        <rect key="frame" x="0.0" y="335.5" width="414" height="286"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GrT-ru-LnQ" id="Uc3-Xd-uPE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="286"/>
@@ -743,7 +743,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="3fw-Yl-V8z">
-                            <rect key="frame" x="0.0" y="224" width="414" height="60"/>
+                            <rect key="frame" x="0.0" y="235" width="414" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLD-yW-M4d" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
@@ -788,7 +788,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ServiceTitleTableViewCell" rowHeight="64" id="yp4-DA-nL9" customClass="ServiceTitleTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="68" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="84.5" width="414" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yp4-DA-nL9" id="81z-wZ-CTY">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -842,7 +842,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServiceTableViewCell" rowHeight="64" id="4VZ-0C-Lig" customClass="ServiceTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="132" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="148.5" width="414" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4VZ-0C-Lig" id="1CO-CW-g3H">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -1011,7 +1011,7 @@
                     <navigationItem key="navigationItem" title="Scan QR code" id="46Q-1E-UBo">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="Fls-Ak-HAz">
                             <connections>
-                                <action selector="dismissViewController:" destination="YcU-dg-mBO" id="xco-NT-yrE"/>
+                                <action selector="dismissViewController:" destination="YcU-dg-mBO" id="vhT-OJ-8qe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1026,7 +1026,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Ec5-yl-wa5">
             <objects>
-                <navigationController storyboardIdentifier="scannerView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pfo-b9-U3n" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="scannerView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pfo-b9-U3n" sceneMemberID="viewController">
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2DR-73-ZHo">
@@ -1353,6 +1353,28 @@
             </objects>
             <point key="canvasLocation" x="1287" y="2028"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="ZdE-ru-5NW">
+            <objects>
+                <viewController id="QMX-SL-DXP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mHz-rd-gKm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="q0B-Tm-iCJ"/>
+                        <color key="backgroundColor" name="ivpnBackgroundBase"/>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="uCM-XV-9G2">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="cML-TU-6BB">
+                            <connections>
+                                <action selector="dismissViewController:" destination="QMX-SL-DXP" id="DQJ-4G-Bie"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p1F-23-PRD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1287" y="2790"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="aIw-ln-iUM">
             <objects>
@@ -1391,6 +1413,25 @@
             </objects>
             <point key="canvasLocation" x="364" y="2028"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JNl-ew-SPn">
+            <objects>
+                <navigationController storyboardIdentifier="webkitView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NFL-54-hlZ" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9l-K7-EBj">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QMX-SL-DXP" kind="relationship" relationship="rootViewController" id="naR-Aq-xSy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ejK-Py-ciw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364" y="2790"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="uYX-O5-UET"/>
@@ -1403,6 +1444,9 @@
         <image name="icon-step-1" width="48" height="8"/>
         <image name="icon-step-2" width="48" height="8"/>
         <image name="icon-step-3" width="48" height="8"/>
+        <namedColor name="ivpnBackgroundBase">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ivpnBackgroundPrimary">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
