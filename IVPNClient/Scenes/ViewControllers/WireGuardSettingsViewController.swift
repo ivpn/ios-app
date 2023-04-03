@@ -206,6 +206,7 @@ extension WireGuardSettingsViewController: MTUViewControllerDelegate {
     
     func mtuSaved() {
         setupView()
+        evaluateReconnect(sender: mtuLabel)
     }
     
 }
