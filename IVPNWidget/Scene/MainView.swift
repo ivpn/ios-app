@@ -21,7 +21,7 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import SwiftUI#imageLiteral(resourceName: "simulator_screenshot_E6984FB1-195C-4B52-BD35-D31CAD439050.png")
+import SwiftUI
 
 struct MainView: View {
     var body: some View {
