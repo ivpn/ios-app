@@ -54,17 +54,11 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
 }
 
-struct IVPNWidgetEntryView : View {
+struct EntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        ZStack {
-            ContainerRelativeShape()
-                .fill(.background)
-            VStack {
-                Text(entry.date, style: .time)
-            }
-        }
+        MainView()
     }
 }
 
@@ -73,17 +67,17 @@ struct IVPNWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            IVPNWidgetEntryView(entry: entry)
+            EntryView(entry: entry)
         }
         .configurationDisplayName("IVPN")
         .description("Quickly connect and disconnect VPN.")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemMedium])
     }
 }
 
 struct IVPNWidget_Previews: PreviewProvider {
     static var previews: some View {
-        IVPNWidgetEntryView(entry: SimpleEntry(date: Date()))
+        EntryView(entry: SimpleEntry(date: Date()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

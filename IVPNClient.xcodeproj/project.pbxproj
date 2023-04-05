@@ -230,6 +230,7 @@
 		82E3B21129DDCC6400998F67 /* IVPNWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E3B21029DDCC6400998F67 /* IVPNWidget.swift */; };
 		82E3B21329DDCC6500998F67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82E3B21229DDCC6500998F67 /* Assets.xcassets */; };
 		82E3B21729DDCC6500998F67 /* IVPNWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 82E3B20A29DDCC6300998F67 /* IVPNWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E3B21D29DDD32B00998F67 /* MainView.swift */; };
 		82E4FCB023D71FDF00BEBA1A /* UIApplication+ExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */; };
 		82E5449224EE584E006DEF8D /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */; };
 		82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
@@ -581,6 +582,7 @@
 		82E3B21029DDCC6400998F67 /* IVPNWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IVPNWidget.swift; sourceTree = "<group>"; };
 		82E3B21229DDCC6500998F67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82E3B21429DDCC6500998F67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82E3B21D29DDD32B00998F67 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ExtTests.swift"; sourceTree = "<group>"; };
 		82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunnelType.swift; sourceTree = "<group>"; };
@@ -1317,12 +1319,21 @@
 		82E3B20D29DDCC6400998F67 /* IVPNWidget */ = {
 			isa = PBXGroup;
 			children = (
+				82E3B21C29DDD2E800998F67 /* Scene */,
 				82E3B20E29DDCC6400998F67 /* IVPNWidgetBundle.swift */,
 				82E3B21029DDCC6400998F67 /* IVPNWidget.swift */,
 				82E3B21229DDCC6500998F67 /* Assets.xcassets */,
 				82E3B21429DDCC6500998F67 /* Info.plist */,
 			);
 			path = IVPNWidget;
+			sourceTree = "<group>";
+		};
+		82E3B21C29DDD2E800998F67 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				82E3B21D29DDD32B00998F67 /* MainView.swift */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		82E81AE52449C42C00D81FB7 /* View */ = {
@@ -1895,6 +1906,7 @@
 			files = (
 				82E3B21129DDCC6400998F67 /* IVPNWidget.swift in Sources */,
 				82E3B20F29DDCC6400998F67 /* IVPNWidgetBundle.swift in Sources */,
+				82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
