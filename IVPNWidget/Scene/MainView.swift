@@ -32,11 +32,23 @@ struct MainView: View {
                 Text("IVPN")
                     .foregroundColor(.red)
                     .fontWeight(.bold)
-                Text("Your status is")
-                    .foregroundColor(.secondary)
-                    .font(.footnote)
-                Text("Disconnected")
-                    .font(.headline)
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Your status is")
+                            .foregroundColor(.secondary)
+                            .font(.footnote)
+                            .padding(.bottom, -5)
+                        Text("Disconnected")
+                            .font(.system(size: 16, weight: .medium))
+                    }
+                    Spacer()
+                    Label("Connect", systemImage: "lock.fill")
+                        .labelStyle(.titleOnly)
+                        .foregroundColor(.white)
+                        .padding(14)
+                        .background(.gray)
+                        .cornerRadius(8)
+                }
                 Spacer()
             }
             .frame(maxWidth: .infinity, alignment: .topLeading)
