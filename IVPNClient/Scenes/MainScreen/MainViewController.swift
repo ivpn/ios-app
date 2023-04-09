@@ -24,6 +24,7 @@
 import UIKit
 import FloatingPanel
 import NetworkExtension
+import WidgetKit
 
 class MainViewController: UIViewController {
     
@@ -140,6 +141,8 @@ class MainViewController: UIViewController {
         }
         
         Application.shared.connectionManager.statusModificationDate = Date()
+        
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     @objc func updateGeoLocation() {
