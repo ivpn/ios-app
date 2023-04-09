@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2023-04-09.
-//  Copyright (c) 2021 Privatus Limited.
+//  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -23,22 +23,6 @@
 
 import Foundation
 import NetworkExtension
-
-extension UserDefaults {
-    
-    static var shared: UserDefaults {
-        return UserDefaults(suiteName: "group.net.ivpn.clients.ios")!
-    }
-    
-    struct Key {
-        static let connectionStatus = "connectionStatus"
-    }
-
-    @objc dynamic var connectionStatus: Int {
-        return integer(forKey: Key.connectionStatus)
-    }
-    
-}
 
 class Status {
     

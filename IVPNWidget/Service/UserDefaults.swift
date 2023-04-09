@@ -1,9 +1,9 @@
 //
-//  IVPNWidgetBundle.swift
+//  UserDefaults.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-04-05.
+//  Created by Juraj Hilje on 2023-04-09.
 //  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -21,12 +21,20 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import WidgetKit
-import SwiftUI
+import Foundation
 
-@main
-struct IVPNWidgetBundle: WidgetBundle {
-    var body: some Widget {
-        IVPNWidget()
+extension UserDefaults {
+    
+    static var shared: UserDefaults {
+        return UserDefaults(suiteName: "group.net.ivpn.clients.ios")!
     }
+    
+    struct Key {
+        static let connectionStatus = "connectionStatus"
+    }
+
+    @objc dynamic var connectionStatus: Int {
+        return integer(forKey: Key.connectionStatus)
+    }
+    
 }

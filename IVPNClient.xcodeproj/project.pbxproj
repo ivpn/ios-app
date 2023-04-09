@@ -166,6 +166,7 @@
 		82A38A0C29E2D17700C88372 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A38A0A29E2D12B00C88372 /* StatusView.swift */; };
 		82A38A0E29E2D2D800C88372 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A38A0D29E2D2D800C88372 /* Status.swift */; };
 		82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A38A0F29E2D46000C88372 /* StatusViewModel.swift */; };
+		82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A38A1A29E3201F00C88372 /* UserDefaults.swift */; };
 		82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */; };
 		82A7F10523C8661B0015A357 /* ServiceStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */; };
 		82AA8818231E330A00E18ECB /* SessionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AA8817231E330A00E18ECB /* SessionStatus.swift */; };
@@ -519,6 +520,7 @@
 		82A38A0D29E2D2D800C88372 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		82A38A0F29E2D46000C88372 /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
 		82A38A1229E2D89400C88372 /* IVPNWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IVPNWidgetExtension.entitlements; sourceTree = "<group>"; };
+		82A38A1A29E3201F00C88372 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectToServerPopupView.swift; sourceTree = "<group>"; };
 		82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatusTests.swift; sourceTree = "<group>"; };
 		82A9E8C323471EBE007BCA7E /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
@@ -1170,6 +1172,14 @@
 			path = Status;
 			sourceTree = "<group>";
 		};
+		82A38A1929E3200000C88372 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				82A38A1A29E3201F00C88372 /* UserDefaults.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		82A7F10323C865F90015A357 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1337,6 +1347,7 @@
 			isa = PBXGroup;
 			children = (
 				82E3B21C29DDD2E800998F67 /* Scene */,
+				82A38A1929E3200000C88372 /* Service */,
 				82E3B20E29DDCC6400998F67 /* IVPNWidgetBundle.swift */,
 				82E3B21029DDCC6400998F67 /* IVPNWidget.swift */,
 				82E3B21229DDCC6500998F67 /* Assets.xcassets */,
@@ -1928,6 +1939,7 @@
 				82E3B20F29DDCC6400998F67 /* IVPNWidgetBundle.swift in Sources */,
 				82A38A0C29E2D17700C88372 /* StatusView.swift in Sources */,
 				82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */,
+				82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */,
 				82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
