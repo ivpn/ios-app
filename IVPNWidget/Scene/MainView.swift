@@ -28,31 +28,7 @@ struct MainView: View {
         ZStack {
             ContainerRelativeShape()
                 .fill(.background)
-            VStack(alignment: .leading) {
-                Text("IVPN")
-                    .foregroundColor(.red)
-                    .fontWeight(.bold)
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Your status is")
-                            .foregroundColor(.secondary)
-                            .font(.footnote)
-                            .padding(.bottom, -5)
-                        Text("Disconnected")
-                            .font(.system(size: 16, weight: .medium))
-                    }
-                    Spacer()
-                    Label("Connect", systemImage: "lock.fill")
-                        .labelStyle(.titleOnly)
-                        .foregroundColor(.white)
-                        .padding(14)
-                        .background(.gray)
-                        .cornerRadius(8)
-                }
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, alignment: .topLeading)
-            .padding()
+            StatusView()
         }
     }
 }
