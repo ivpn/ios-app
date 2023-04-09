@@ -24,6 +24,12 @@
 import SwiftUI
 
 struct StatusView: View {
+    @StateObject var viewModel: ViewModel
+    
+    init(viewModel: ViewModel = .init()) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("IVPN")
@@ -35,7 +41,7 @@ struct StatusView: View {
                         .foregroundColor(.secondary)
                         .font(.footnote)
                         .padding(.bottom, -5)
-                    Text("Disconnected")
+                    Text(viewModel.status.statusText)
                         .font(.system(size: 16, weight: .medium))
                 }
                 Spacer()
