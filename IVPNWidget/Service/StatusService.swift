@@ -1,9 +1,9 @@
 //
-//  Status.swift
+//  StatusService.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-04-09.
+//  Created by Juraj Hilje on 2023-04-11.
 //  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -23,6 +23,15 @@
 
 import NetworkExtension
 
-struct Status {
-    var vpnStatus: NEVPNStatus
+protocol StatusService {
+    func getStatus() -> NEVPNStatus
+}
+
+class WidgetStatusService: StatusService {
+    
+    func getStatus() -> NEVPNStatus {
+        let rawValue = UserDefaults.shared.connectionStatus
+        return NEVPNStatus.init(rawValue: rawValue) ?? .disconnected
+    }
+    
 }

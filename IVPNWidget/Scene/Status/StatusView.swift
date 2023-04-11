@@ -50,7 +50,7 @@ struct StatusView: View {
                 .padding(14)
                 .foregroundColor(.white)
                 .background(viewModel.buttonColor())
-                .cornerRadius(8)
+                .cornerRadius(10)
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding()

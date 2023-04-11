@@ -26,7 +26,11 @@ import SwiftUI
 extension StatusView {
     class ViewModel: ObservableObject {
         
-        @Published var status = Status()
+        @Published var status: Status
+        
+        init(statusService: StatusService = WidgetStatusService()) {
+            status = Status(vpnStatus: statusService.getStatus())
+        }
         
         func statusText() -> String {
             switch status.vpnStatus {

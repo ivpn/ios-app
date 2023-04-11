@@ -40,6 +40,7 @@
 		821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D6287C5AB20067F70D /* PortViewController.swift */; };
 		821CA2DB288039670067F70D /* PortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DA288039670067F70D /* PortTableViewCell.swift */; };
 		821CA2DF288143470067F70D /* PortRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DE288143470067F70D /* PortRange.swift */; };
+		821E35B229E5D60E00ABD219 /* StatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E35B129E5D60E00ABD219 /* StatusService.swift */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
 		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
 		8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */; };
@@ -415,6 +416,7 @@
 		821CA2D6287C5AB20067F70D /* PortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortViewController.swift; sourceTree = "<group>"; };
 		821CA2DA288039670067F70D /* PortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortTableViewCell.swift; sourceTree = "<group>"; };
 		821CA2DE288143470067F70D /* PortRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortRange.swift; sourceTree = "<group>"; };
+		821E35B129E5D60E00ABD219 /* StatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusService.swift; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
 		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
 		8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSViewController.swift; sourceTree = "<group>"; };
@@ -1176,6 +1178,7 @@
 			isa = PBXGroup;
 			children = (
 				82A38A1A29E3201F00C88372 /* UserDefaults.swift */,
+				821E35B129E5D60E00ABD219 /* StatusService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1937,6 +1940,7 @@
 				82E3B21129DDCC6400998F67 /* IVPNWidget.swift in Sources */,
 				82A38A0E29E2D2D800C88372 /* Status.swift in Sources */,
 				82E3B20F29DDCC6400998F67 /* IVPNWidgetBundle.swift in Sources */,
+				821E35B229E5D60E00ABD219 /* StatusService.swift in Sources */,
 				82A38A0C29E2D17700C88372 /* StatusView.swift in Sources */,
 				82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */,
 				82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */,
