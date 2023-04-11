@@ -32,9 +32,11 @@ struct StatusView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("IVPN")
-                .foregroundColor(.red)
-                .fontWeight(.bold)
+            Image("ivpn-logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 44)
+                .padding(.bottom, 5)
             Text("Your status is")
                 .foregroundColor(.secondary)
                 .font(.footnote)

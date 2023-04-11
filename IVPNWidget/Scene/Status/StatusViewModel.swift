@@ -57,10 +57,10 @@ extension StatusView {
         
         func buttonColor() -> Color {
             if status.vpnStatus == .connected {
-                return .cyan
+                return Color(red: 57 / 255, green: 143 / 255, blue: 230 / 255)
             }
             
-            return .gray
+            return Color(.systemGray2)
         }
         
         func buttonLink() -> String {
