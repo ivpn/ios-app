@@ -52,6 +52,7 @@ struct StatusView: View {
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding()
+        .widgetURL(URL(string: "https://www.ivpn.net/app/\(viewModel.buttonLink())"))
     }
 }
 
