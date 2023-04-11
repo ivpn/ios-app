@@ -24,6 +24,7 @@
 import SwiftUI
 
 struct StatusView: View {
+    
     @StateObject var viewModel: ViewModel
     
     init(viewModel: ViewModel = .init()) {
@@ -56,6 +57,7 @@ struct StatusView: View {
         .padding()
         .widgetURL(URL(string: "https://www.ivpn.net/app/\(viewModel.buttonLink())"))
     }
+    
 }
 
 struct StatusView_Previews: PreviewProvider {
