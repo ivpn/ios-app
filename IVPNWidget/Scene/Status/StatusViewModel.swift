@@ -26,5 +26,24 @@ import Foundation
 extension StatusView {
     class ViewModel: ObservableObject {
         @Published var status = Status()
+        
+        func statusText() -> String {
+            switch status.vpnStatus {
+            case .invalid:
+                return "Invalid"
+            case .disconnected:
+                return "Disconnected"
+            case .connecting:
+                return "Connecting"
+            case .connected:
+                return "Connected"
+            case .reasserting:
+                return "Reasserting"
+            case .disconnecting:
+                return "Disconnecting"
+            @unknown default:
+                return ""
+            }
+        }
     }
 }

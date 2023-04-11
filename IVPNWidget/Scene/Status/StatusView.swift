@@ -41,7 +41,7 @@ struct StatusView: View {
                         .foregroundColor(.secondary)
                         .font(.footnote)
                         .padding(.bottom, -5)
-                    Text(viewModel.status.statusText)
+                    Text(viewModel.statusText())
                         .font(.system(size: 16, weight: .medium))
                 }
                 Spacer()

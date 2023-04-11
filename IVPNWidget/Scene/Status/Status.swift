@@ -24,34 +24,11 @@
 import Foundation
 import NetworkExtension
 
-class Status {
+struct Status {
     
-    var status: NEVPNStatus {
+    var vpnStatus: NEVPNStatus {
         let rawValue = UserDefaults.shared.connectionStatus
         return NEVPNStatus.init(rawValue: rawValue) ?? .invalid
-    }
-    
-    var statusText: String {
-        switch status {
-        case .invalid:
-            return "invalid"
-        case .disconnected:
-            return "disconnected"
-        case .connecting:
-            return "connecting"
-        case .connected:
-            return "connected"
-        case .reasserting:
-            return "reasserting"
-        case .disconnecting:
-            return "disconnecting"
-        @unknown default:
-            return ""
-        }
-    }
-    
-    init() {
-        
     }
     
 }
