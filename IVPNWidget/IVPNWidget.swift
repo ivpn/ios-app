@@ -71,7 +71,7 @@ struct IVPNWidget: Widget {
         }
         .configurationDisplayName("IVPN")
         .description("Quickly connect and disconnect VPN.")
-        .supportedFamilies([.systemMedium])
+        .supportedFamilies([.systemSmall])
     }
 }
 

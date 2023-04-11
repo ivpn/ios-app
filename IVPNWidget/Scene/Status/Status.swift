@@ -28,7 +28,7 @@ struct Status {
     
     var vpnStatus: NEVPNStatus {
         let rawValue = UserDefaults.shared.connectionStatus
-        return NEVPNStatus.init(rawValue: rawValue) ?? .invalid
+        return NEVPNStatus.init(rawValue: rawValue) ?? .disconnected
     }
     
 }
