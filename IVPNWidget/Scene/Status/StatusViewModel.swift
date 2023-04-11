@@ -31,7 +31,7 @@ extension StatusView {
         func statusText() -> String {
             switch status.vpnStatus {
             case .invalid:
-                return "Invalid"
+                return "Disconnected"
             case .disconnected:
                 return "Disconnected"
             case .connecting:
@@ -39,7 +39,7 @@ extension StatusView {
             case .connected:
                 return "Connected"
             case .reasserting:
-                return "Reasserting"
+                return "Connecting"
             case .disconnecting:
                 return "Disconnecting"
             @unknown default:
