@@ -21,10 +21,11 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
 extension StatusView {
     class ViewModel: ObservableObject {
+        
         @Published var status = Status()
         
         func statusText() -> String {
@@ -45,5 +46,30 @@ extension StatusView {
                 return ""
             }
         }
+        
+        func buttonText() -> String {
+            if status.vpnStatus == .connected {
+                return "Disconnect"
+            }
+            
+            return "Connect"
+        }
+        
+        func buttonColor() -> Color {
+            if status.vpnStatus == .connected {
+                return .cyan
+            }
+            
+            return .gray
+        }
+        
+        func buttonLink() -> String {
+            if status.vpnStatus == .connected {
+                return "disconnect"
+            }
+            
+            return "connect"
+        }
+        
     }
 }
