@@ -67,12 +67,12 @@ extension StatusView {
             return Color(.systemGray2)
         }
         
-        func buttonLink() -> String {
+        func actionLink() -> URL {
             if status.vpnStatus == .connected {
-                return "disconnect"
+                return URL(string: "https://www.ivpn.net/app/disconnect")!
             }
             
-            return "connect"
+            return URL(string: "https://www.ivpn.net/app/connect")!
         }
         
     }
