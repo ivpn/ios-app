@@ -142,7 +142,9 @@ class MainViewController: UIViewController {
         
         Application.shared.connectionManager.statusModificationDate = Date()
         
-        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        if vpnStatus == .connected || vpnStatus == .disconnected {
+            WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        }
     }
     
     @objc func updateGeoLocation() {
