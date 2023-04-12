@@ -38,7 +38,7 @@ struct StatusView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 44)
-                .padding(.bottom, 5)
+                .padding(.bottom, 2)
             switch family {
             case .systemSmall:
                 Text("Your status is")
@@ -69,7 +69,7 @@ struct StatusView: View {
                     Label(viewModel.buttonText(), systemImage: "lock.fill")
                         .frame(maxWidth: .infinity)
                         .labelStyle(.titleOnly)
-                        .padding(14)
+                        .padding(10)
                         .foregroundColor(.white)
                         .background(viewModel.buttonColor())
                         .cornerRadius(10)

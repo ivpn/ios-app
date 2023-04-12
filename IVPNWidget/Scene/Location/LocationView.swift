@@ -1,9 +1,9 @@
 //
-//  MainView.swift
+//  LocationView.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-04-05.
+//  Created by Juraj Hilje on 2023-04-12.
 //  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -23,28 +23,27 @@
 
 import SwiftUI
 
-struct MainView: View {
-    
-    @Environment(\.widgetFamily) var family
-    
+struct LocationView: View {
     var body: some View {
-        ZStack {
-            ContainerRelativeShape()
-                .fill(.background)
-            VStack(alignment: .leading) {
-                StatusView()
-                if family != .systemSmall {
-                    Divider()
-                        .padding(.top, -10)
-                    LocationView()
-                }
+        VStack(alignment: .leading) {
+            Text("Your current location")
+                .foregroundColor(.secondary)
+                .font(.footnote)
+                .padding(.bottom, -5)
+            HStack {
+                Image("NL")
+                Text("Amsterdam, NL")
+                    .font(.system(size: 16, weight: .medium))
             }
         }
+        .padding(.horizontal)
+        .padding(.top, -8)
+        .padding(.bottom, 12)
     }
 }
 
-struct EntryView_Previews: PreviewProvider {
+struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        LocationView()
     }
 }

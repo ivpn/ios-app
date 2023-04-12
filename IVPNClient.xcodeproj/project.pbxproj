@@ -199,6 +199,7 @@
 		82C34D6E26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */; };
 		82C34D6F26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */; };
 		82C61D9629E6ADEF00AF972A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B51D9D2F9F00D39924 /* Assets.xcassets */; };
+		82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61D9829E6B4C600AF972A /* LocationView.swift */; };
 		82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9739F217DFA9C00CE06D4 /* Host.swift */; };
 		82CA214329379CCD008BADE8 /* FileSystemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE371DB0F860007A4D2D /* FileSystemManager.swift */; };
 		82CA214429379CEC008BADE8 /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
@@ -560,6 +561,7 @@
 		82C293C221CCDA42000B74EC /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
 		82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardEndpoint.swift; sourceTree = "<group>"; };
+		82C61D9829E6B4C600AF972A /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		82C9739F217DFA9C00CE06D4 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
 		82CE598F25ED3C7A0078099D /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		82CE599825ED48D60078099D /* InternetAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetAddress.swift; sourceTree = "<group>"; };
@@ -1267,6 +1269,14 @@
 			path = ControlPanel;
 			sourceTree = "<group>";
 		};
+		82C61D9729E6B4AC00AF972A /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				82C61D9829E6B4C600AF972A /* LocationView.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		82CE599725ED48AB0078099D /* DNSResolver */ = {
 			isa = PBXGroup;
 			children = (
@@ -1364,6 +1374,7 @@
 			isa = PBXGroup;
 			children = (
 				82A38A0929E2D11A00C88372 /* Status */,
+				82C61D9729E6B4AC00AF972A /* Location */,
 				82E3B21D29DDD32B00998F67 /* MainView.swift */,
 			);
 			path = Scene;
@@ -1946,6 +1957,7 @@
 				82A38A0C29E2D17700C88372 /* StatusView.swift in Sources */,
 				82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */,
 				82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */,
+				82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */,
 				82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
