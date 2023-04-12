@@ -26,6 +26,7 @@ import SwiftUI
 struct StatusView: View {
     
     @StateObject var viewModel: ViewModel
+    @Environment(\.widgetFamily) var family
     
     init(viewModel: ViewModel = .init()) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -38,20 +39,43 @@ struct StatusView: View {
                 .scaledToFit()
                 .frame(width: 44)
                 .padding(.bottom, 5)
-            Text("Your status is")
-                .foregroundColor(.secondary)
-                .font(.footnote)
-                .padding(.bottom, -5)
-            Text(viewModel.statusText())
-                .font(.system(size: 16, weight: .medium))
-            Spacer()
-            Label(viewModel.buttonText(), systemImage: "lock.fill")
-                .frame(maxWidth: .infinity)
-                .labelStyle(.titleOnly)
-                .padding(14)
-                .foregroundColor(.white)
-                .background(viewModel.buttonColor())
-                .cornerRadius(10)
+            switch family {
+            case .systemSmall:
+                Text("Your status is")
+                    .foregroundColor(.secondary)
+                    .font(.footnote)
+                    .padding(.bottom, -5)
+                Text(viewModel.statusText())
+                    .font(.system(size: 16, weight: .medium))
+                Spacer()
+                Label(viewModel.buttonText(), systemImage: "lock.fill")
+                    .frame(maxWidth: .infinity)
+                    .labelStyle(.titleOnly)
+                    .padding(14)
+                    .foregroundColor(.white)
+                    .background(viewModel.buttonColor())
+                    .cornerRadius(10)
+            default:
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Your status is")
+                            .foregroundColor(.secondary)
+                            .font(.footnote)
+                            .padding(.bottom, -5)
+                        Text(viewModel.statusText())
+                            .font(.system(size: 16, weight: .medium))
+                    }
+                    Spacer()
+                    Label(viewModel.buttonText(), systemImage: "lock.fill")
+                        .frame(maxWidth: .infinity)
+                        .labelStyle(.titleOnly)
+                        .padding(14)
+                        .foregroundColor(.white)
+                        .background(viewModel.buttonColor())
+                        .cornerRadius(10)
+                        .frame(maxWidth: 120)
+                }
+            }
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding()
