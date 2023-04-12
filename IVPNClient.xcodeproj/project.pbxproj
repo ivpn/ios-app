@@ -200,6 +200,26 @@
 		82C34D6F26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */; };
 		82C61D9629E6ADEF00AF972A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B51D9D2F9F00D39924 /* Assets.xcassets */; };
 		82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61D9829E6B4C600AF972A /* LocationView.swift */; };
+		82C61D9B29E6C24700AF972A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61D9A29E6C24700AF972A /* Location.swift */; };
+		82C61D9D29E6C2D200AF972A /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61D9C29E6C2D200AF972A /* APIService.swift */; };
+		82C61D9E29E6C32400AF972A /* ApiRequestDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429BA22FC36100056B8FF /* ApiRequestDI.swift */; };
+		82C61D9F29E6C33700AF972A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429B622FC2BE90056B8FF /* Result.swift */; };
+		82C61DA029E6C37300AF972A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
+		82C61DA229E6C3F100AF972A /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
+		82C61DA329E6C45100AF972A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833781D9D3F060024C553 /* Config.swift */; };
+		82C61DA429E6C46900AF972A /* ConnectionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7168F2181E90500D6B7C2 /* ConnectionSettings.swift */; };
+		82C61DA529E6C48100AF972A /* OpenVPNProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E716952181E96F00D6B7C2 /* OpenVPNProtocol.swift */; };
+		82C61DA629E6C48700AF972A /* WireGuardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E716892181E8E900D6B7C2 /* WireGuardProtocol.swift */; };
+		82C61DA729E6C49100AF972A /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
+		82C61DA929E6C53C00AF972A /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
+		82C61DAA29E6C55100AF972A /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
+		82C61DAB29E6C56400AF972A /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
+		82C61DB029E6C5E700AF972A /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
+		82C61DB129E6C61500AF972A /* UserDefaultsTodayExtension+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */; };
+		82C61DB229E6C6F600AF972A /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638C1217DA89000410318 /* AddressType.swift */; };
+		82C61DB429E6C72700AF972A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61DB329E6C72700AF972A /* LocationViewModel.swift */; };
+		82C61DBA29E6CA7600AF972A /* widget-staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */; };
+		82C61DBC29E6CA7600AF972A /* widget-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82C61DB829E6CA7600AF972A /* widget-release.xcconfig */; };
 		82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9739F217DFA9C00CE06D4 /* Host.swift */; };
 		82CA214329379CCD008BADE8 /* FileSystemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE371DB0F860007A4D2D /* FileSystemManager.swift */; };
 		82CA214429379CEC008BADE8 /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
@@ -562,6 +582,12 @@
 		82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
 		82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardEndpoint.swift; sourceTree = "<group>"; };
 		82C61D9829E6B4C600AF972A /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		82C61D9A29E6C24700AF972A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		82C61D9C29E6C2D200AF972A /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		82C61DA829E6C4CF00AF972A /* Widget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Widget-Bridging-Header.h"; sourceTree = "<group>"; };
+		82C61DB329E6C72700AF972A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "widget-staging.xcconfig"; sourceTree = "<group>"; };
+		82C61DB829E6CA7600AF972A /* widget-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "widget-release.xcconfig"; sourceTree = "<group>"; };
 		82C9739F217DFA9C00CE06D4 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
 		82CE598F25ED3C7A0078099D /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		82CE599825ED48D60078099D /* InternetAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetAddress.swift; sourceTree = "<group>"; };
@@ -1182,6 +1208,7 @@
 			children = (
 				82A38A1A29E3201F00C88372 /* UserDefaults.swift */,
 				821E35B129E5D60E00ABD219 /* StatusService.swift */,
+				82C61D9C29E6C2D200AF972A /* APIService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1273,8 +1300,19 @@
 			isa = PBXGroup;
 			children = (
 				82C61D9829E6B4C600AF972A /* LocationView.swift */,
+				82C61DB329E6C72700AF972A /* LocationViewModel.swift */,
+				82C61D9A29E6C24700AF972A /* Location.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		82C61DB529E6CA7600AF972A /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */,
+				82C61DB829E6CA7600AF972A /* widget-release.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		82CE599725ED48AB0078099D /* DNSResolver */ = {
@@ -1360,12 +1398,14 @@
 		82E3B20D29DDCC6400998F67 /* IVPNWidget */ = {
 			isa = PBXGroup;
 			children = (
+				82C61DB529E6CA7600AF972A /* Config */,
 				82E3B21C29DDD2E800998F67 /* Scene */,
 				82A38A1929E3200000C88372 /* Service */,
 				82E3B20E29DDCC6400998F67 /* IVPNWidgetBundle.swift */,
 				82E3B21029DDCC6400998F67 /* IVPNWidget.swift */,
 				82E3B21229DDCC6500998F67 /* Assets.xcassets */,
 				82E3B21429DDCC6500998F67 /* Info.plist */,
+				82C61DA829E6C4CF00AF972A /* Widget-Bridging-Header.h */,
 			);
 			path = IVPNWidget;
 			sourceTree = "<group>";
@@ -1797,6 +1837,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				82C61D9629E6ADEF00AF972A /* Assets.xcassets in Resources */,
+				82C61DBA29E6CA7600AF972A /* widget-staging.xcconfig in Resources */,
+				82C61DBC29E6CA7600AF972A /* widget-release.xcconfig in Resources */,
 				82E3B21329DDCC6500998F67 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1951,13 +1993,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				82E3B21129DDCC6400998F67 /* IVPNWidget.swift in Sources */,
+				82C61DA029E6C37300AF972A /* APIClient.swift in Sources */,
+				82C61DB229E6C6F600AF972A /* AddressType.swift in Sources */,
+				82C61DAA29E6C55100AF972A /* APIAccessManager.swift in Sources */,
+				82C61D9F29E6C33700AF972A /* Result.swift in Sources */,
 				82A38A0E29E2D2D800C88372 /* Status.swift in Sources */,
+				82C61DA329E6C45100AF972A /* Config.swift in Sources */,
+				82C61DA229E6C3F100AF972A /* UserDefaults+Ext.swift in Sources */,
+				82C61D9B29E6C24700AF972A /* Location.swift in Sources */,
 				82E3B20F29DDCC6400998F67 /* IVPNWidgetBundle.swift in Sources */,
+				82C61DAB29E6C56400AF972A /* APIPublicKeyPin.swift in Sources */,
+				82C61DA529E6C48100AF972A /* OpenVPNProtocol.swift in Sources */,
+				82C61DA429E6C46900AF972A /* ConnectionSettings.swift in Sources */,
+				82C61D9D29E6C2D200AF972A /* APIService.swift in Sources */,
+				82C61D9E29E6C32400AF972A /* ApiRequestDI.swift in Sources */,
 				821E35B229E5D60E00ABD219 /* StatusService.swift in Sources */,
+				82C61DB429E6C72700AF972A /* LocationViewModel.swift in Sources */,
+				82C61DA629E6C48700AF972A /* WireGuardProtocol.swift in Sources */,
 				82A38A0C29E2D17700C88372 /* StatusView.swift in Sources */,
+				82C61DA729E6C49100AF972A /* TunnelType.swift in Sources */,
+				82C61DB029E6C5E700AF972A /* Date+Ext.swift in Sources */,
+				82C61DA929E6C53C00AF972A /* Array+Ext.swift in Sources */,
 				82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */,
 				82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */,
 				82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */,
+				82C61DB129E6C61500AF972A /* UserDefaultsTodayExtension+Ext.swift in Sources */,
 				82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2716,6 +2776,7 @@
 		};
 		82E3B21929DDCC6500998F67 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82C61DB829E6CA7600AF972A /* widget-release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -2746,6 +2807,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/IVPNWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2753,6 +2815,7 @@
 		};
 		82E3B21A29DDCC6500998F67 /* Staging */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -2782,6 +2845,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/IVPNWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2789,6 +2853,7 @@
 		};
 		82E3B21B29DDCC6500998F67 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82C61DB829E6CA7600AF972A /* widget-release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -2818,6 +2883,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/IVPNWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

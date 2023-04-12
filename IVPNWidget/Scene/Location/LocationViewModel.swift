@@ -1,5 +1,5 @@
 //
-//  LocationView.swift
+//  LocationViewModel.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
@@ -23,36 +23,30 @@
 
 import SwiftUI
 
-struct LocationView: View {
-    
-    @StateObject var viewModel: ViewModel
-    @Environment(\.widgetFamily) var family
-    
-    init(viewModel: ViewModel = .init()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Your current location")
-                .foregroundColor(.secondary)
-                .font(.footnote)
-                .padding(.bottom, -5)
-            HStack {
-                Image("DE")
-                Text("Berlin")
-                    .font(.system(size: 16, weight: .medium))
+extension LocationView {
+    class ViewModel: ObservableObject {
+        
+        @Published var location: Location?
+        let apiService: APIService
+        
+        init(apiService: APIService = WidgetAPIService()) {
+            self.apiService = apiService
+        }
+        
+        func geoLookup() {
+            print("🌱 geoLookup()")
+            let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
+            apiService.request(requestIPv4) { (result: Result<Location>) in
+                switch result {
+                case .success(let model):
+                    self.location = model
+                    print("🍀 model", model)
+                case .failure:
+                    print("❌ failure")
+                    break
+                }
             }
         }
-        .padding(.horizontal)
-        .padding(.top, -8)
-        .padding(.bottom, 12)
-    }
-    
-}
-
-struct LocationView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationView()
+        
     }
 }

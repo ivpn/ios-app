@@ -1,9 +1,9 @@
 //
-//  UserDefaults.swift
+//  Location.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-04-09.
+//  Created by Juraj Hilje on 2023-04-12.
 //  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -23,28 +23,11 @@
 
 import Foundation
 
-extension UserDefaults {
-
-//    @objc dynamic var isLoggedIn: Bool {
-//        let username = KeyChain.username ?? ""
-//        let sessionToken = KeyChain.sessionToken ?? ""
-//        return !username.isEmpty || !sessionToken.isEmpty
-//    }
-//    
-//    @objc dynamic var connectionStatus: Int {
-//        return integer(forKey: Key.connectionStatus)
-//    }
-//    
-//    @objc dynamic var connectionLocation: String {
-//        return string(forKey: Key.connectionLocation) ?? ""
-//    }
-//    
-//    @objc dynamic var connectionIpAddress: String {
-//        return string(forKey: Key.connectionIpAddress) ?? ""
-//    }
-//    
-//    @objc dynamic var connectionIpv6Address: String {
-//        return string(forKey: Key.connectionIpv6Address) ?? ""
-//    }
-    
+struct Location: Decodable {
+    let ipAddress: String
+    let countryCode: String
+    let country: String
+    let city: String
+    let isIvpnServer: Bool
+    let isp: String
 }
