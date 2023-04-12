@@ -164,6 +164,7 @@ class MainViewController: UIViewController {
                 UserDefaults.shared.set(mainView.ipv4ViewModel.location, forKey: UserDefaults.Key.connectionLocation)
                 UserDefaults.shared.set(model.countryCode, forKey: UserDefaults.Key.connectionCountryCode)
                 UserDefaults.shared.set(model.ipAddress, forKey: UserDefaults.Key.connectionIpAddress)
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
                 
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model
@@ -182,6 +183,7 @@ class MainViewController: UIViewController {
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(model: model, displayMode: .content)
                 mainView.ipv6ViewModel = ProofsViewModel(model: model)
                 UserDefaults.shared.set(model.ipAddress, forKey: UserDefaults.Key.connectionIpv6Address)
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
             case .failure:
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
                 mainView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
