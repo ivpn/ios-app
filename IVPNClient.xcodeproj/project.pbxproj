@@ -40,7 +40,7 @@
 		821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D6287C5AB20067F70D /* PortViewController.swift */; };
 		821CA2DB288039670067F70D /* PortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DA288039670067F70D /* PortTableViewCell.swift */; };
 		821CA2DF288143470067F70D /* PortRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DE288143470067F70D /* PortRange.swift */; };
-		821E35B229E5D60E00ABD219 /* StatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E35B129E5D60E00ABD219 /* StatusService.swift */; };
+		821E35B229E5D60E00ABD219 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E35B129E5D60E00ABD219 /* DataService.swift */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
 		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
 		8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */; };
@@ -65,6 +65,8 @@
 		823ACC292626E69F006F69AB /* GeoLookupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC282626E69F006F69AB /* GeoLookupTests.swift */; };
 		823ACC312626FF3E006F69AB /* IpProtocolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC302626FF3E006F69AB /* IpProtocolView.swift */; };
 		823ACC3926270330006F69AB /* ConnectionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC3826270330006F69AB /* ConnectionInfoView.swift */; };
+		823BA40029E6E423004B07B4 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BA3FF29E6E423004B07B4 /* Location.swift */; };
+		823BA40229E6E466004B07B4 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BA40129E6E466004B07B4 /* LocationViewModel.swift */; };
 		823BD9E3231D4C8E002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823BD9E4231D4C8F002E631D /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		823DA733215E3CCB00DAFE37 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
@@ -418,7 +420,7 @@
 		821CA2D6287C5AB20067F70D /* PortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortViewController.swift; sourceTree = "<group>"; };
 		821CA2DA288039670067F70D /* PortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortTableViewCell.swift; sourceTree = "<group>"; };
 		821CA2DE288143470067F70D /* PortRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortRange.swift; sourceTree = "<group>"; };
-		821E35B129E5D60E00ABD219 /* StatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusService.swift; sourceTree = "<group>"; };
+		821E35B129E5D60E00ABD219 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
 		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
 		8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSViewController.swift; sourceTree = "<group>"; };
@@ -440,6 +442,8 @@
 		823ACC3826270330006F69AB /* ConnectionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoView.swift; sourceTree = "<group>"; };
 		823AD1F32158F55E00BE0EBA /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = ../Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		823AD1F52158F56300BE0EBA /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = ../Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
+		823BA3FF29E6E423004B07B4 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		823BA40129E6E466004B07B4 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		823DA732215E3CCB00DAFE37 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		823FFB062338DF1800F91A5D /* Capability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capability.swift; sourceTree = "<group>"; };
 		8243584325DAA7BD005FDEBB /* SecureDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDNSViewController.swift; sourceTree = "<group>"; };
@@ -1181,7 +1185,7 @@
 			isa = PBXGroup;
 			children = (
 				82A38A1A29E3201F00C88372 /* UserDefaults.swift */,
-				821E35B129E5D60E00ABD219 /* StatusService.swift */,
+				821E35B129E5D60E00ABD219 /* DataService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1273,6 +1277,8 @@
 			isa = PBXGroup;
 			children = (
 				82C61D9829E6B4C600AF972A /* LocationView.swift */,
+				823BA40129E6E466004B07B4 /* LocationViewModel.swift */,
+				823BA3FF29E6E423004B07B4 /* Location.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -1952,8 +1958,10 @@
 			files = (
 				82E3B21129DDCC6400998F67 /* IVPNWidget.swift in Sources */,
 				82A38A0E29E2D2D800C88372 /* Status.swift in Sources */,
+				823BA40029E6E423004B07B4 /* Location.swift in Sources */,
 				82E3B20F29DDCC6400998F67 /* IVPNWidgetBundle.swift in Sources */,
-				821E35B229E5D60E00ABD219 /* StatusService.swift in Sources */,
+				821E35B229E5D60E00ABD219 /* DataService.swift in Sources */,
+				823BA40229E6E466004B07B4 /* LocationViewModel.swift in Sources */,
 				82A38A0C29E2D17700C88372 /* StatusView.swift in Sources */,
 				82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */,
 				82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */,

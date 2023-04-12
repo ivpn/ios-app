@@ -55,6 +55,7 @@ extension UserDefaults {
         static let upgradeToUrl = "upgradeToUrl"
         static let connectionStatus = "connectionStatus"
         static let connectionLocation = "connectionLocation"
+        static let connectionCountryCode = "connectionCountryCode"
         static let connectionIpAddress = "connectionIpAddress"
         static let connectionIpv6Address = "connectionIpv6Address"
         static let keepAlive = "keepAlive"

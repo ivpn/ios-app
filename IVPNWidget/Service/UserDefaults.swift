@@ -31,10 +31,30 @@ extension UserDefaults {
     
     struct Key {
         static let connectionStatus = "connectionStatus"
+        static let connectionLocation = "connectionLocation"
+        static let connectionCountryCode = "connectionCountryCode"
+        static let connectionIpAddress = "connectionIpAddress"
+        static let connectionIpv6Address = "connectionIpv6Address"
     }
 
     @objc dynamic var connectionStatus: Int {
         return integer(forKey: Key.connectionStatus)
+    }
+    
+    @objc dynamic var connectionLocation: String {
+        return string(forKey: Key.connectionLocation) ?? ""
+    }
+    
+    @objc dynamic var connectionCountryCode: String {
+        return string(forKey: Key.connectionCountryCode) ?? ""
+    }
+    
+    @objc dynamic var connectionIpAddress: String {
+        return string(forKey: Key.connectionIpAddress) ?? ""
+    }
+    
+    @objc dynamic var connectionIpv6Address: String {
+        return string(forKey: Key.connectionIpv6Address) ?? ""
     }
     
 }

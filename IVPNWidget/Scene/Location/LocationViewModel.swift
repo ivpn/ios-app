@@ -1,9 +1,9 @@
 //
-//  StatusService.swift
+//  LocationViewModel.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-04-11.
+//  Created by Juraj Hilje on 2023-04-12.
 //  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -21,17 +21,25 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import NetworkExtension
+import SwiftUI
 
-protocol StatusService {
-    func getStatus() -> NEVPNStatus
-}
-
-class WidgetStatusService: StatusService {
-    
-    func getStatus() -> NEVPNStatus {
-        let rawValue = UserDefaults.shared.connectionStatus
-        return NEVPNStatus.init(rawValue: rawValue) ?? .disconnected
+extension LocationView {
+    class ViewModel: ObservableObject {
+        
+        @Published var location: Location
+        
+        init(dataService: DataService = WidgetDataService()) {
+            location = Location(location: dataService.getLocation(), countryCode: dataService.getLocationCountryCode())
+        }
+        
+        func getLocation() -> String {
+            return location.location
+        }
+        
+        func getLocationCountryCode() -> String {
+            return location.countryCode
+        }
+        
     }
-    
 }
+

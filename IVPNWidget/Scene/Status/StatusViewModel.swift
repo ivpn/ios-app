@@ -28,8 +28,8 @@ extension StatusView {
         
         @Published var status: Status
         
-        init(statusService: StatusService = WidgetStatusService()) {
-            status = Status(vpnStatus: statusService.getStatus())
+        init(dataService: DataService = WidgetDataService()) {
+            status = Status(vpnStatus: dataService.getStatus())
         }
         
         func statusText() -> String {

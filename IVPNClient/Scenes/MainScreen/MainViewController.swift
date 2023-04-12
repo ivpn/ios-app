@@ -161,6 +161,9 @@ class MainViewController: UIViewController {
                 mainView.ipv4ViewModel = ProofsViewModel(model: model)
                 mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
                 mainView.updateInfoAlert()
+                UserDefaults.shared.set(mainView.ipv4ViewModel.location, forKey: UserDefaults.Key.connectionLocation)
+                UserDefaults.shared.set(model.countryCode, forKey: UserDefaults.Key.connectionCountryCode)
+                UserDefaults.shared.set(model.ipAddress, forKey: UserDefaults.Key.connectionIpAddress)
                 
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model
@@ -178,6 +181,7 @@ class MainViewController: UIViewController {
             case .success(let model):
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(model: model, displayMode: .content)
                 mainView.ipv6ViewModel = ProofsViewModel(model: model)
+                UserDefaults.shared.set(model.ipAddress, forKey: UserDefaults.Key.connectionIpv6Address)
             case .failure:
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
                 mainView.ipv6ViewModel = ProofsViewModel(displayMode: .error)

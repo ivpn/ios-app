@@ -24,6 +24,13 @@
 import SwiftUI
 
 struct LocationView: View {
+    
+    @StateObject var viewModel: ViewModel
+    
+    init(viewModel: ViewModel = .init()) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Your current location")
@@ -31,8 +38,8 @@ struct LocationView: View {
                 .font(.footnote)
                 .padding(.bottom, -5)
             HStack {
-                Image("NL")
-                Text("Amsterdam, NL")
+                Image(viewModel.getLocationCountryCode())
+                Text(viewModel.getLocation())
                     .font(.system(size: 16, weight: .medium))
             }
         }
@@ -40,6 +47,7 @@ struct LocationView: View {
         .padding(.top, -8)
         .padding(.bottom, 12)
     }
+    
 }
 
 struct LocationView_Previews: PreviewProvider {
