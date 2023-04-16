@@ -40,13 +40,14 @@ struct LocationView: View {
                 .padding(.bottom, -5)
             HStack {
                 Image("DE")
-                Text("Berlin")
+                Text(viewModel.getLocation())
                     .font(.system(size: 16, weight: .medium))
             }
         }
         .padding(.horizontal)
         .padding(.top, -8)
         .padding(.bottom, 12)
+        .onAppear(perform: viewModel.geoLookup)
     }
     
 }

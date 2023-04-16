@@ -47,4 +47,12 @@ extension UserDefaults {
         return string(forKey: Key.connectionIpv6Address) ?? ""
     }
     
+    @objc dynamic var lastWidgetUpdate: Date {
+        if let date = object(forKey: Key.lastWidgetUpdate) as? Date {
+            return date
+        }
+        
+        return Date().addingTimeInterval(TimeInterval(-60))
+    }
+    
 }

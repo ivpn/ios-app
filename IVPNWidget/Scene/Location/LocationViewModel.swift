@@ -22,6 +22,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 extension LocationView {
     class ViewModel: ObservableObject {
@@ -33,16 +34,25 @@ extension LocationView {
             self.apiService = apiService
         }
         
+        func getLocation() -> String {
+            return UserDefaults.shared.connectionLocation
+        }
+        
         func geoLookup() {
-            print("🌱 geoLookup()")
+            guard Date().timeIntervalSince(UserDefaults.shared.lastWidgetUpdate) > 5 else {
+                return
+            }
+            
+            UserDefaults.shared.set(Date(), forKey: UserDefaults.Key.lastWidgetUpdate)
+            
             let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
             apiService.request(requestIPv4) { (result: Result<Location>) in
                 switch result {
                 case .success(let model):
                     self.location = model
-                    print("🍀 model", model)
+                    UserDefaults.shared.set(model.country, forKey: UserDefaults.Key.connectionLocation)
+                    WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
                 case .failure:
-                    print("❌ failure")
                     break
                 }
             }
