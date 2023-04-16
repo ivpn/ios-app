@@ -66,20 +66,22 @@ struct StatusView: View {
                             .font(.system(size: 16, weight: .medium))
                     }
                     Spacer()
-                    Label(viewModel.buttonText(), systemImage: "lock.fill")
-                        .frame(maxWidth: .infinity)
-                        .labelStyle(.titleOnly)
-                        .padding(10)
-                        .foregroundColor(.white)
-                        .background(viewModel.buttonColor())
-                        .cornerRadius(10)
-                        .frame(maxWidth: 120)
+                    Link(destination: viewModel.actionLink(), label: {
+                        Label(viewModel.buttonText(), systemImage: "lock.fill")
+                            .frame(maxWidth: .infinity)
+                            .labelStyle(.titleOnly)
+                            .padding(10)
+                            .foregroundColor(.white)
+                            .background(viewModel.buttonColor())
+                            .cornerRadius(10)
+                            .frame(maxWidth: 120)
+                    })
                 }
             }
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding()
-        .widgetURL(viewModel.actionLink())
+        .widgetURL(family == .systemSmall ? viewModel.actionLink() : nil)
     }
     
 }
