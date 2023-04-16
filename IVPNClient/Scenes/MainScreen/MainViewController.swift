@@ -161,6 +161,8 @@ class MainViewController: UIViewController {
                 mainView.ipv4ViewModel = ProofsViewModel(model: model)
                 mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
                 mainView.updateInfoAlert()
+                model.save()
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
                 
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model

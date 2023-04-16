@@ -39,7 +39,7 @@ struct LocationView: View {
                 .font(.footnote)
                 .padding(.bottom, -5)
             HStack {
-                Image("DE")
+                Image(viewModel.getCountryCode())
                 Text(viewModel.getLocation())
                     .font(.system(size: 16, weight: .medium))
             }

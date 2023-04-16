@@ -23,7 +23,7 @@
 
 import Foundation
 
-struct GeoLookup: Decodable {
+struct GeoLookup: Codable {
     
     let ipAddress: String
     let countryCode: String
@@ -36,6 +36,12 @@ struct GeoLookup: Decodable {
     
     func isEqualLocation(to comparingModel: GeoLookup) -> Bool {
         return city == comparingModel.city && country == comparingModel.country
+    }
+    
+    func save() {
+        if let encoded = try? JSONEncoder().encode(self) {
+            UserDefaults.shared.set(encoded, forKey: UserDefaults.Key.geoLookup)
+        }
     }
     
 }

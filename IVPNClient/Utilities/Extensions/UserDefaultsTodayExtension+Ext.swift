@@ -55,4 +55,14 @@ extension UserDefaults {
         return Date().addingTimeInterval(TimeInterval(-60))
     }
     
+    var geoLookup: GeoLookup? {
+        if let saved = UserDefaults.shared.object(forKey: UserDefaults.Key.geoLookup) as? Data {
+            if let loaded = try? JSONDecoder().decode(GeoLookup.self, from: saved) {
+                return loaded
+            }
+        }
+        
+        return nil
+    }
+    
 }

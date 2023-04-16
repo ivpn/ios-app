@@ -27,7 +27,6 @@ import WidgetKit
 extension LocationView {
     class ViewModel: ObservableObject {
         
-        @Published var location: Location?
         let apiService: APIService
         
         init(apiService: APIService = WidgetAPIService()) {
@@ -35,22 +34,37 @@ extension LocationView {
         }
         
         func getLocation() -> String {
-            return UserDefaults.shared.connectionLocation
+            guard let model = UserDefaults.shared.geoLookup else {
+                return ""
+            }
+            
+            guard !model.city.isEmpty else {
+                return model.country
+            }
+            
+            return "\(model.city), \(model.countryCode)"
+        }
+        
+        func getCountryCode() -> String {
+            guard let model = UserDefaults.shared.geoLookup else {
+                return ""
+            }
+            
+            return model.countryCode.uppercased()
         }
         
         func geoLookup() {
-            guard Date().timeIntervalSince(UserDefaults.shared.lastWidgetUpdate) > 5 else {
+            guard Date().timeIntervalSince(UserDefaults.shared.lastWidgetUpdate) > 3 else {
                 return
             }
             
             UserDefaults.shared.set(Date(), forKey: UserDefaults.Key.lastWidgetUpdate)
             
             let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
-            apiService.request(requestIPv4) { (result: Result<Location>) in
+            apiService.request(requestIPv4) { (result: Result<GeoLookup>) in
                 switch result {
                 case .success(let model):
-                    self.location = model
-                    UserDefaults.shared.set(model.country, forKey: UserDefaults.Key.connectionLocation)
+                    model.save()
                     WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
                 case .failure:
                     break
