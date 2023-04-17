@@ -35,6 +35,10 @@ extension LocationView {
             self.model = UserDefaults.shared.geoLookup
         }
         
+        func update() {
+            model = UserDefaults.shared.geoLookup
+        }
+        
         func getLocation() -> String {
             guard !model.city.isEmpty else {
                 return model.country

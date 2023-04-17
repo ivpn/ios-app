@@ -49,7 +49,7 @@ struct LocationView: View {
         .padding(.top, -8)
         .padding(.bottom, 12)
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.GeoLookup)) { _ in
-            viewModel.model = UserDefaults.shared.geoLookup
+            viewModel.update()
         }
     }
     
