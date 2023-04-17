@@ -26,8 +26,7 @@ import NetworkExtension
 protocol DataService {
     func getStatus() -> Status
     func getLocation() -> GeoLookup
-    func getAntiTracker() -> Bool
-    func getProtocol() -> String
+    func getConnectionInfo() -> ConnectionInfo
 }
 
 class WidgetDataService: DataService {
@@ -46,6 +45,10 @@ class WidgetDataService: DataService {
         }
         
         return GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
+    }
+    
+    func getConnectionInfo() -> ConnectionInfo {
+        return ConnectionInfo(antiTracker: getAntiTracker(), selectedProtocol: getProtocol(), geoLookup: getLocation())
     }
     
     func getAntiTracker() -> Bool {

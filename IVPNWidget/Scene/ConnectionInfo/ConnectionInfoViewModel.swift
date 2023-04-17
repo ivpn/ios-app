@@ -31,11 +31,11 @@ extension ConnectionInfoView {
         
         init(dataService: DataService = WidgetDataService()) {
             self.dataService = dataService
-            self.model = ConnectionInfo(antiTracker: dataService.getAntiTracker(), selectedProtocol: dataService.getProtocol(), geoLookup: dataService.getLocation())
+            self.model = dataService.getConnectionInfo()
         }
         
         func update() {
-            model = ConnectionInfo(antiTracker: dataService.getAntiTracker(), selectedProtocol: dataService.getProtocol(), geoLookup: dataService.getLocation())
+            model = dataService.getConnectionInfo()
         }
         
         func getIpAddress() -> String {

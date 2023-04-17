@@ -832,8 +832,8 @@
 			isa = PBXGroup;
 			children = (
 				8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */,
-				8206BB0029ED7BEE00F916B7 /* ConnectionInfo.swift */,
 				8206BB0229ED7C3700F916B7 /* ConnectionInfoViewModel.swift */,
+				8206BB0029ED7BEE00F916B7 /* ConnectionInfo.swift */,
 			);
 			path = ConnectionInfo;
 			sourceTree = "<group>";
