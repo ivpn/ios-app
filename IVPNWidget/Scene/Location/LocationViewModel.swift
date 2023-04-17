@@ -28,10 +28,8 @@ extension LocationView {
     class ViewModel: ObservableObject {
         
         @Published var model: GeoLookup
-        let apiService: APIService
         
-        init(apiService: APIService = WidgetAPIService()) {
-            self.apiService = apiService
+        init() {
             self.model = UserDefaults.shared.geoLookup
         }
         
