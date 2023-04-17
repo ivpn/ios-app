@@ -25,26 +25,38 @@ import Foundation
 
 extension UserDefaults {
 
-//    @objc dynamic var isLoggedIn: Bool {
-//        let username = KeyChain.username ?? ""
-//        let sessionToken = KeyChain.sessionToken ?? ""
-//        return !username.isEmpty || !sessionToken.isEmpty
-//    }
-//    
-//    @objc dynamic var connectionStatus: Int {
-//        return integer(forKey: Key.connectionStatus)
-//    }
-//    
-//    @objc dynamic var connectionLocation: String {
-//        return string(forKey: Key.connectionLocation) ?? ""
-//    }
-//    
-//    @objc dynamic var connectionIpAddress: String {
-//        return string(forKey: Key.connectionIpAddress) ?? ""
-//    }
-//    
-//    @objc dynamic var connectionIpv6Address: String {
-//        return string(forKey: Key.connectionIpv6Address) ?? ""
-//    }
+    @objc dynamic var connectionStatus: Int {
+        return integer(forKey: Key.connectionStatus)
+    }
+    
+    @objc dynamic var connectionLocation: String {
+        return string(forKey: Key.connectionLocation) ?? ""
+    }
+    
+    @objc dynamic var connectionIpAddress: String {
+        return string(forKey: Key.connectionIpAddress) ?? ""
+    }
+    
+    @objc dynamic var connectionIpv6Address: String {
+        return string(forKey: Key.connectionIpv6Address) ?? ""
+    }
+    
+    @objc dynamic var lastWidgetUpdate: Date {
+        if let date = object(forKey: Key.lastWidgetUpdate) as? Date {
+            return date
+        }
+        
+        return Date().addingTimeInterval(TimeInterval(-60))
+    }
+    
+    var geoLookup: GeoLookup {
+        if let saved = UserDefaults.shared.object(forKey: UserDefaults.Key.geoLookup) as? Data {
+            if let loaded = try? JSONDecoder().decode(GeoLookup.self, from: saved) {
+                return loaded
+            }
+        }
+        
+        return GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
+    }
     
 }

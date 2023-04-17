@@ -115,7 +115,6 @@
 		826E61482428F8E60064F195 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E61472428F8E60064F195 /* AccountViewController.swift */; };
 		826E614A242A1CA80064F195 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E6149242A1CA80064F195 /* AccountViewModel.swift */; };
 		826E614C242A61380064F195 /* AccountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826E614B242A61380064F195 /* AccountViewModelTests.swift */; };
-		826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */; };
 		826F7F4323A7AAD200777DB9 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823DA732215E3CCB00DAFE37 /* Array+Ext.swift */; };
 		826FBDA32461847D00B9E464 /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826FBDA22461847D00B9E464 /* ServiceType.swift */; };
 		826FBDA52461848A00B9E464 /* ServiceDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826FBDA42461848A00B9E464 /* ServiceDuration.swift */; };
@@ -216,7 +215,6 @@
 		82C61DAA29E6C55100AF972A /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
 		82C61DAB29E6C56400AF972A /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
 		82C61DB029E6C5E700AF972A /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
-		82C61DB129E6C61500AF972A /* UserDefaultsTodayExtension+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */; };
 		82C61DB229E6C6F600AF972A /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638C1217DA89000410318 /* AddressType.swift */; };
 		82C61DB429E6C72700AF972A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61DB329E6C72700AF972A /* LocationViewModel.swift */; };
 		82C61DBA29E6CA7600AF972A /* widget-staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */; };
@@ -501,7 +499,6 @@
 		826E61472428F8E60064F195 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		826E6149242A1CA80064F195 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		826E614B242A61380064F195 /* AccountViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelTests.swift; sourceTree = "<group>"; };
-		826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaultsTodayExtension+Ext.swift"; sourceTree = "<group>"; };
 		826F7F1223A7A05F00777DB9 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		826FBDA22461847D00B9E464 /* ServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
 		826FBDA42461848A00B9E464 /* ServiceDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDuration.swift; sourceTree = "<group>"; };
@@ -1020,7 +1017,6 @@
 				82E7880B22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift */,
 				828E9C94231E5780001E1FCF /* Data+Ext.swift */,
 				82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */,
-				826F7F0B23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift */,
 				829DF2812497953C000DC2DB /* UIButton+Ext.swift */,
 				82A3422424AB6AF700761AB0 /* Double+Ext.swift */,
 				82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */,
@@ -2019,7 +2015,6 @@
 				82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */,
 				82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */,
 				82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */,
-				82C61DB129E6C61500AF972A /* UserDefaultsTodayExtension+Ext.swift in Sources */,
 				82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2212,7 +2207,6 @@
 				821CA2DF288143470067F70D /* PortRange.swift in Sources */,
 				821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */,
 				82061F66238D2730009DDF4D /* ICMPHeader.swift in Sources */,
-				826F7F0C23A79F1500777DB9 /* UserDefaultsTodayExtension+Ext.swift in Sources */,
 				824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */,
 				8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */,
 				829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */,
