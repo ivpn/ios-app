@@ -42,8 +42,8 @@ extension ConnectionInfoView {
             return model.geoLookup.ipAddress
         }
         
-        func getISP() -> String {
-            return model.geoLookup.isp
+        func getProvider() -> String {
+            return model.geoLookup.isIvpnServer ? "IVPN" : model.geoLookup.isp
         }
         
         func getProtocol() -> String {

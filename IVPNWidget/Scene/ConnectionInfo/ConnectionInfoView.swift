@@ -52,7 +52,7 @@ struct ConnectionInfoView: View {
             VStack(alignment: .trailing, spacing: 22) {
                 Text(viewModel.getIpAddress())
                     .font(.footnote)
-                Text(viewModel.getISP())
+                Text(viewModel.getProvider())
                     .font(.footnote)
                 Text(viewModel.getProtocol())
                     .font(.footnote)
