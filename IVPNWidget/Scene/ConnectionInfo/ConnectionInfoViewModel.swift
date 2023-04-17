@@ -1,9 +1,9 @@
 //
-//  LocationViewModel.swift
+//  ConnectionInfoViewModel.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-04-12.
+//  Created by Juraj Hilje on 2023-04-17.
 //  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -23,31 +23,35 @@
 
 import SwiftUI
 
-extension LocationView {
+extension ConnectionInfoView {
     class ViewModel: ObservableObject {
         
-        @Published var model: GeoLookup
+        @Published var model: ConnectionInfo
         var dataService: DataService
         
         init(dataService: DataService = WidgetDataService()) {
             self.dataService = dataService
-            self.model = dataService.getLocation()
+            self.model = ConnectionInfo(antiTracker: dataService.getAntiTracker(), selectedProtocol: dataService.getProtocol(), geoLookup: dataService.getLocation())
         }
         
         func update() {
-            model = dataService.getLocation()
+            model = ConnectionInfo(antiTracker: dataService.getAntiTracker(), selectedProtocol: dataService.getProtocol(), geoLookup: dataService.getLocation())
         }
         
-        func getLocation() -> String {
-            guard !model.city.isEmpty else {
-                return model.country
-            }
-            
-            return "\(model.city), \(model.countryCode)"
+        func getIpAddress() -> String {
+            return model.geoLookup.ipAddress
         }
         
-        func getCountryCode() -> String {
-            return model.countryCode.uppercased()
+        func getISP() -> String {
+            return model.geoLookup.isp
+        }
+        
+        func getProtocol() -> String {
+            return model.selectedProtocol
+        }
+        
+        func getAntiTracker() -> String {
+            return model.antiTracker ? "ON" : "OFF"
         }
         
     }

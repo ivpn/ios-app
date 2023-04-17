@@ -25,6 +25,12 @@ import SwiftUI
 
 struct ConnectionInfoView: View {
     
+    @StateObject var viewModel: ViewModel
+    
+    init(viewModel: ViewModel = .init()) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 22) {
@@ -44,19 +50,22 @@ struct ConnectionInfoView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, 10)
             VStack(alignment: .trailing, spacing: 22) {
-                Text("192.168.0.11")
+                Text(viewModel.getIpAddress())
                     .font(.footnote)
-                Text("A1 Croatia")
+                Text(viewModel.getISP())
                     .font(.footnote)
-                Text("OpenVPN, UDP 2049")
+                Text(viewModel.getProtocol())
                     .font(.footnote)
-                Text("OFF")
+                Text(viewModel.getAntiTracker())
                     .font(.footnote)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.bottom, 10)
         }
         .padding()
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.UpdateWidget)) { _ in
+            viewModel.update()
+        }
     }
     
 }

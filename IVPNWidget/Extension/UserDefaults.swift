@@ -49,4 +49,8 @@ extension UserDefaults {
         return Date().addingTimeInterval(TimeInterval(-60))
     }
     
+    @objc dynamic var selectedProtocol: String {
+        return string(forKey: Key.selectedProtocol) ?? ""
+    }
+    
 }

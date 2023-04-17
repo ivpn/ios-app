@@ -1,9 +1,9 @@
 //
-//  Location.swift
+//  ConnectionInfo.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-04-12.
+//  Created by Juraj Hilje on 2023-04-17.
 //  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -23,11 +23,8 @@
 
 import Foundation
 
-struct Location: Decodable {
-    let ipAddress: String
-    let countryCode: String
-    let country: String
-    let city: String
-    let isIvpnServer: Bool
-    let isp: String
+struct ConnectionInfo {
+    var antiTracker: Bool
+    var selectedProtocol: String
+    var geoLookup: GeoLookup
 }

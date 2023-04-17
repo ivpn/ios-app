@@ -22,6 +22,8 @@
 		8206BAFA29ED69D300F916B7 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAF929ED69D300F916B7 /* DataService.swift */; };
 		8206BAFC29ED6C9600F916B7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAFB29ED6C9600F916B7 /* Notification.swift */; };
 		8206BAFF29ED6FFF00F916B7 /* ConnectionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */; };
+		8206BB0129ED7BEE00F916B7 /* ConnectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BB0029ED7BEE00F916B7 /* ConnectionInfo.swift */; };
+		8206BB0329ED7C3700F916B7 /* ConnectionInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BB0229ED7C3700F916B7 /* ConnectionInfoViewModel.swift */; };
 		8206E5D022967E37003119AF /* UserActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5CF22967E37003119AF /* UserActivityType.swift */; };
 		8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5D122967EAF003119AF /* UserActivityTitle.swift */; };
 		8206F32124347A8F0056B465 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32024347A8F0056B465 /* MainView.swift */; };
@@ -202,7 +204,6 @@
 		82C34D6F26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */; };
 		82C61D9629E6ADEF00AF972A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B51D9D2F9F00D39924 /* Assets.xcassets */; };
 		82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61D9829E6B4C600AF972A /* LocationView.swift */; };
-		82C61D9B29E6C24700AF972A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61D9A29E6C24700AF972A /* Location.swift */; };
 		82C61D9D29E6C2D200AF972A /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61D9C29E6C2D200AF972A /* APIService.swift */; };
 		82C61D9E29E6C32400AF972A /* ApiRequestDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429BA22FC36100056B8FF /* ApiRequestDI.swift */; };
 		82C61D9F29E6C33700AF972A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429B622FC2BE90056B8FF /* Result.swift */; };
@@ -424,6 +425,8 @@
 		8206BAF929ED69D300F916B7 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		8206BAFB29ED6C9600F916B7 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoView.swift; sourceTree = "<group>"; };
+		8206BB0029ED7BEE00F916B7 /* ConnectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfo.swift; sourceTree = "<group>"; };
+		8206BB0229ED7C3700F916B7 /* ConnectionInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoViewModel.swift; sourceTree = "<group>"; };
 		8206E5CF22967E37003119AF /* UserActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityType.swift; sourceTree = "<group>"; };
 		8206E5D122967EAF003119AF /* UserActivityTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityTitle.swift; sourceTree = "<group>"; };
 		8206F32024347A8F0056B465 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -584,7 +587,6 @@
 		82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
 		82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardEndpoint.swift; sourceTree = "<group>"; };
 		82C61D9829E6B4C600AF972A /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
-		82C61D9A29E6C24700AF972A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		82C61D9C29E6C2D200AF972A /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		82C61DA829E6C4CF00AF972A /* Widget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Widget-Bridging-Header.h"; sourceTree = "<group>"; };
 		82C61DB329E6C72700AF972A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
@@ -830,6 +832,8 @@
 			isa = PBXGroup;
 			children = (
 				8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */,
+				8206BB0029ED7BEE00F916B7 /* ConnectionInfo.swift */,
+				8206BB0229ED7C3700F916B7 /* ConnectionInfoViewModel.swift */,
 			);
 			path = ConnectionInfo;
 			sourceTree = "<group>";
@@ -1318,7 +1322,6 @@
 			children = (
 				82C61D9829E6B4C600AF972A /* LocationView.swift */,
 				82C61DB329E6C72700AF972A /* LocationViewModel.swift */,
-				82C61D9A29E6C24700AF972A /* Location.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -2015,11 +2018,11 @@
 				82C61DA029E6C37300AF972A /* APIClient.swift in Sources */,
 				82C61DB229E6C6F600AF972A /* AddressType.swift in Sources */,
 				82C61DAA29E6C55100AF972A /* APIAccessManager.swift in Sources */,
+				8206BB0129ED7BEE00F916B7 /* ConnectionInfo.swift in Sources */,
 				82C61D9F29E6C33700AF972A /* Result.swift in Sources */,
 				82A38A0E29E2D2D800C88372 /* Status.swift in Sources */,
 				82C61DA329E6C45100AF972A /* Config.swift in Sources */,
 				82C61DA229E6C3F100AF972A /* UserDefaults+Ext.swift in Sources */,
-				82C61D9B29E6C24700AF972A /* Location.swift in Sources */,
 				8206BAFF29ED6FFF00F916B7 /* ConnectionInfoView.swift in Sources */,
 				82E3B20F29DDCC6400998F67 /* IVPNWidgetBundle.swift in Sources */,
 				82C61DAB29E6C56400AF972A /* APIPublicKeyPin.swift in Sources */,
@@ -2031,6 +2034,7 @@
 				82C61DB429E6C72700AF972A /* LocationViewModel.swift in Sources */,
 				82C61DA629E6C48700AF972A /* WireGuardProtocol.swift in Sources */,
 				82A38A0C29E2D17700C88372 /* StatusView.swift in Sources */,
+				8206BB0329ED7C3700F916B7 /* ConnectionInfoViewModel.swift in Sources */,
 				823BA40329EC5A01004B07B4 /* GeoLookup.swift in Sources */,
 				82C61DA729E6C49100AF972A /* TunnelType.swift in Sources */,
 				82C61DB029E6C5E700AF972A /* Date+Ext.swift in Sources */,
