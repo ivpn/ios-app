@@ -25,6 +25,7 @@ import Network
 import NetworkExtension
 import WireGuardKit
 import os
+import WidgetKit
 
 enum PacketTunnelProviderError: String, Error {
     case savedProtocolConfigurationIsInvalid
@@ -113,6 +114,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 self.tunnelSetupFailed()
                 completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             } else {
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
                 completionHandler(nil)
             }
         }
@@ -128,6 +130,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             wgTurnOff(handle)
         }
         
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         completionHandler()
     }
     

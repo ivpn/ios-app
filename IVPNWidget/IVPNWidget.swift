@@ -25,7 +25,7 @@ import WidgetKit
 import SwiftUI
 
 extension Notification.Name {
-    static let GeoLookup = Notification.Name("GeoLookup")
+    static let UpdateLocation = Notification.Name("UpdateLocation")
 }
 
 struct Provider: TimelineProvider {
@@ -68,7 +68,7 @@ struct Provider: TimelineProvider {
             switch result {
             case .success(let model):
                 model.save()
-                NotificationCenter.default.post(name: Notification.Name.GeoLookup, object: "GeoLookup")
+                NotificationCenter.default.post(name: Notification.Name.UpdateLocation, object: "UpdateLocation")
                 completion(timeline)
             case .failure:
                 completion(timeline)
