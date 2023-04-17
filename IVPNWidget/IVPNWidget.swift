@@ -24,6 +24,10 @@
 import WidgetKit
 import SwiftUI
 
+extension Notification.Name {
+    static let GeoLookup = Notification.Name("GeoLookup")
+}
+
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
@@ -35,6 +39,10 @@ struct Provider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        geoLookup(completion: completion)
+    }
+    
+    func geoLookup(completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
@@ -46,7 +54,27 @@ struct Provider: TimelineProvider {
         }
         
         let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+        
+        guard Date().timeIntervalSince(UserDefaults.shared.lastWidgetUpdate) > 2 else {
+            completion(timeline)
+            return
+        }
+        
+        UserDefaults.shared.set(Date(), forKey: UserDefaults.Key.lastWidgetUpdate)
+        
+        let apiService = WidgetAPIService()
+        let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
+        apiService.request(requestIPv4) { (result: Result<GeoLookup>) in
+            switch result {
+            case .success(let model):
+                model.save()
+                NotificationCenter.default.post(name: Notification.Name.GeoLookup, object: "GeoLookup")
+                completion(timeline)
+            case .failure:
+                completion(timeline)
+                break
+            }
+        }
     }
 }
 

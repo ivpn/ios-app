@@ -22,6 +22,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct LocationView: View {
     
@@ -47,7 +48,9 @@ struct LocationView: View {
         .padding(.horizontal)
         .padding(.top, -8)
         .padding(.bottom, 12)
-        .onAppear(perform: viewModel.geoLookup)
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.GeoLookup)) { _ in
+            viewModel.model = UserDefaults.shared.geoLookup
+        }
     }
     
 }
