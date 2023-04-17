@@ -47,7 +47,27 @@ extension ConnectionInfoView {
         }
         
         func getProtocol() -> String {
-            return model.selectedProtocol
+            var name = ""
+            var proto = ""
+            var port = 0
+            let components = model.selectedProtocol.components(separatedBy: "-")
+            
+            if let protocolName = components[safeIndex: 0] {
+                if protocolName == "wireguard" {
+                    name = "WireGuard"
+                }
+                if protocolName == "openvpn" {
+                    name = "OpenVPN"
+                }
+            }
+            if let protocolType = components[safeIndex: 1] {
+                proto = protocolType.uppercased()
+            }
+            if let protocolPort = components[safeIndex: 2] {
+                port = Int(protocolPort) ?? 0
+            }
+            
+            return "\(name), \(proto) \(port)"
         }
         
         func getAntiTracker() -> String {

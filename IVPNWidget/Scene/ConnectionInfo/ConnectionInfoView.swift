@@ -33,7 +33,7 @@ struct ConnectionInfoView: View {
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 22) {
+            VStack(alignment: .leading, spacing: 20) {
                 Text("IP Address")
                     .foregroundColor(.secondary)
                     .font(.footnote)
@@ -49,7 +49,7 @@ struct ConnectionInfoView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, 10)
-            VStack(alignment: .trailing, spacing: 22) {
+            VStack(alignment: .trailing, spacing: 20) {
                 Text(viewModel.getIpAddress())
                     .font(.footnote)
                 Text(viewModel.getProvider())
