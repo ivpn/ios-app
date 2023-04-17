@@ -48,7 +48,7 @@ struct LocationView: View {
         .padding(.horizontal)
         .padding(.top, -8)
         .padding(.bottom, 12)
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.UpdateLocation)) { _ in
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.UpdateWidget)) { _ in
             viewModel.update()
         }
     }

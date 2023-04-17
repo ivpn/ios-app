@@ -27,8 +27,14 @@ extension StatusView {
     class ViewModel: ObservableObject {
         
         @Published var model: Status
+        var statusService: StatusService
         
         init(statusService: StatusService = WidgetStatusService()) {
+            self.statusService = statusService
+            self.model = Status(vpnStatus: statusService.getStatus())
+        }
+        
+        func update() {
             model = Status(vpnStatus: statusService.getStatus())
         }
         

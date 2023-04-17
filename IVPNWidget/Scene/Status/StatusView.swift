@@ -82,6 +82,9 @@ struct StatusView: View {
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding()
         .widgetURL(family == .systemSmall ? viewModel.actionLink() : nil)
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.UpdateWidget)) { _ in
+            viewModel.update()
+        }
     }
     
 }

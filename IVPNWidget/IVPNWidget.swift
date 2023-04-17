@@ -23,9 +23,10 @@
 
 import WidgetKit
 import SwiftUI
+import NetworkExtension
 
 extension Notification.Name {
-    static let UpdateLocation = Notification.Name("UpdateLocation")
+    static let UpdateWidget = Notification.Name("UpdateWidget")
 }
 
 struct Provider: TimelineProvider {
@@ -67,8 +68,10 @@ struct Provider: TimelineProvider {
         apiService.request(requestIPv4) { (result: Result<GeoLookup>) in
             switch result {
             case .success(let model):
+                let status: NEVPNStatus = model.isIvpnServer ? .connected : .disconnected
+                UserDefaults.shared.set(status.rawValue, forKey: UserDefaults.Key.connectionStatus)
                 model.save()
-                NotificationCenter.default.post(name: Notification.Name.UpdateLocation, object: "UpdateLocation")
+                NotificationCenter.default.post(name: Notification.Name.UpdateWidget, object: "UpdateWidget")
                 completion(timeline)
             case .failure:
                 completion(timeline)
