@@ -21,6 +21,7 @@
 		82061F67238D2730009DDF4D /* PingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82061F63238D2730009DDF4D /* PingManager.swift */; };
 		8206BAFA29ED69D300F916B7 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAF929ED69D300F916B7 /* DataService.swift */; };
 		8206BAFC29ED6C9600F916B7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAFB29ED6C9600F916B7 /* Notification.swift */; };
+		8206BAFF29ED6FFF00F916B7 /* ConnectionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */; };
 		8206E5D022967E37003119AF /* UserActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5CF22967E37003119AF /* UserActivityType.swift */; };
 		8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5D122967EAF003119AF /* UserActivityTitle.swift */; };
 		8206F32124347A8F0056B465 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32024347A8F0056B465 /* MainView.swift */; };
@@ -422,6 +423,7 @@
 		82061F63238D2730009DDF4D /* PingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingManager.swift; sourceTree = "<group>"; };
 		8206BAF929ED69D300F916B7 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		8206BAFB29ED6C9600F916B7 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoView.swift; sourceTree = "<group>"; };
 		8206E5CF22967E37003119AF /* UserActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityType.swift; sourceTree = "<group>"; };
 		8206E5D122967EAF003119AF /* UserActivityTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityTitle.swift; sourceTree = "<group>"; };
 		8206F32024347A8F0056B465 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -822,6 +824,14 @@
 				8206BAFB29ED6C9600F916B7 /* Notification.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8206BAFD29ED6FDC00F916B7 /* ConnectionInfo */ = {
+			isa = PBXGroup;
+			children = (
+				8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */,
+			);
+			path = ConnectionInfo;
 			sourceTree = "<group>";
 		};
 		8206F31F24347A360056B465 /* View */ = {
@@ -1423,6 +1433,7 @@
 			children = (
 				82A38A0929E2D11A00C88372 /* Status */,
 				82C61D9729E6B4AC00AF972A /* Location */,
+				8206BAFD29ED6FDC00F916B7 /* ConnectionInfo */,
 				82E3B21D29DDD32B00998F67 /* MainView.swift */,
 			);
 			path = Scene;
@@ -2009,6 +2020,7 @@
 				82C61DA329E6C45100AF972A /* Config.swift in Sources */,
 				82C61DA229E6C3F100AF972A /* UserDefaults+Ext.swift in Sources */,
 				82C61D9B29E6C24700AF972A /* Location.swift in Sources */,
+				8206BAFF29ED6FFF00F916B7 /* ConnectionInfoView.swift in Sources */,
 				82E3B20F29DDCC6400998F67 /* IVPNWidgetBundle.swift in Sources */,
 				82C61DAB29E6C56400AF972A /* APIPublicKeyPin.swift in Sources */,
 				82C61DA529E6C48100AF972A /* OpenVPNProtocol.swift in Sources */,

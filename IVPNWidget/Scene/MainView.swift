@@ -38,6 +38,11 @@ struct MainView: View {
                         .padding(.top, -10)
                     LocationView()
                 }
+                if family == .systemLarge {
+                    Divider()
+                        .padding(.top, -5)
+                    ConnectionInfoView()
+                }
             }
         }
     }
