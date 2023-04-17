@@ -40,7 +40,7 @@ struct MainView: View {
                 }
                 if family == .systemLarge {
                     Divider()
-                        .padding(.top, -5)
+                        .padding(.top, -6)
                     ConnectionInfoView()
                 }
             }
