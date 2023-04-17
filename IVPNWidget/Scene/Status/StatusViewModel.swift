@@ -26,14 +26,14 @@ import SwiftUI
 extension StatusView {
     class ViewModel: ObservableObject {
         
-        @Published var status: Status
+        @Published var model: Status
         
         init(statusService: StatusService = WidgetStatusService()) {
-            status = Status(vpnStatus: statusService.getStatus())
+            model = Status(vpnStatus: statusService.getStatus())
         }
         
         func statusText() -> String {
-            switch status.vpnStatus {
+            switch model.vpnStatus {
             case .invalid:
                 return "disconnected"
             case .disconnected:
@@ -52,7 +52,7 @@ extension StatusView {
         }
         
         func buttonText() -> String {
-            if status.vpnStatus == .connected {
+            if model.vpnStatus == .connected {
                 return "Disconnect"
             }
             
@@ -60,7 +60,7 @@ extension StatusView {
         }
         
         func buttonColor() -> Color {
-            if status.vpnStatus == .connected {
+            if model.vpnStatus == .connected {
                 return Color(red: 57 / 255, green: 143 / 255, blue: 230 / 255)
             }
             
@@ -68,7 +68,7 @@ extension StatusView {
         }
         
         func actionLink() -> URL {
-            if status.vpnStatus == .connected {
+            if model.vpnStatus == .connected {
                 return URL(string: "https://www.ivpn.net/app/disconnect")!
             }
             
