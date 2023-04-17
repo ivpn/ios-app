@@ -25,10 +25,6 @@ import WidgetKit
 import SwiftUI
 import NetworkExtension
 
-extension Notification.Name {
-    static let UpdateWidget = Notification.Name("UpdateWidget")
-}
-
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())

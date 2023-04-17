@@ -20,6 +20,7 @@
 		82061F66238D2730009DDF4D /* ICMPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82061F62238D2730009DDF4D /* ICMPHeader.swift */; };
 		82061F67238D2730009DDF4D /* PingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82061F63238D2730009DDF4D /* PingManager.swift */; };
 		8206BAFA29ED69D300F916B7 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAF929ED69D300F916B7 /* DataService.swift */; };
+		8206BAFC29ED6C9600F916B7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAFB29ED6C9600F916B7 /* Notification.swift */; };
 		8206E5D022967E37003119AF /* UserActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5CF22967E37003119AF /* UserActivityType.swift */; };
 		8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5D122967EAF003119AF /* UserActivityTitle.swift */; };
 		8206F32124347A8F0056B465 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32024347A8F0056B465 /* MainView.swift */; };
@@ -420,6 +421,7 @@
 		82061F62238D2730009DDF4D /* ICMPHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICMPHeader.swift; sourceTree = "<group>"; };
 		82061F63238D2730009DDF4D /* PingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingManager.swift; sourceTree = "<group>"; };
 		8206BAF929ED69D300F916B7 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		8206BAFB29ED6C9600F916B7 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		8206E5CF22967E37003119AF /* UserActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityType.swift; sourceTree = "<group>"; };
 		8206E5D122967EAF003119AF /* UserActivityTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityTitle.swift; sourceTree = "<group>"; };
 		8206F32024347A8F0056B465 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -817,6 +819,7 @@
 			isa = PBXGroup;
 			children = (
 				82A38A1A29E3201F00C88372 /* UserDefaults.swift */,
+				8206BAFB29ED6C9600F916B7 /* Notification.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2021,6 +2024,7 @@
 				82C61DB029E6C5E700AF972A /* Date+Ext.swift in Sources */,
 				82C61DA929E6C53C00AF972A /* Array+Ext.swift in Sources */,
 				82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */,
+				8206BAFC29ED6C9600F916B7 /* Notification.swift in Sources */,
 				82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */,
 				82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */,
 				82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */,
