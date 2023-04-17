@@ -27,15 +27,15 @@ extension StatusView {
     class ViewModel: ObservableObject {
         
         @Published var model: Status
-        var statusService: StatusService
+        var dataService: DataService
         
-        init(statusService: StatusService = WidgetStatusService()) {
-            self.statusService = statusService
-            self.model = Status(vpnStatus: statusService.getStatus())
+        init(dataService: DataService = WidgetDataService()) {
+            self.dataService = dataService
+            self.model = dataService.getStatus()
         }
         
         func update() {
-            model = Status(vpnStatus: statusService.getStatus())
+            model = dataService.getStatus()
         }
         
         func statusText() -> String {

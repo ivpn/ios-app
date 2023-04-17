@@ -1,9 +1,9 @@
 //
-//  StatusService.swift
+//  DataService.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-04-11.
+//  Created by Juraj Hilje on 2023-04-17.
 //  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -23,15 +23,27 @@
 
 import NetworkExtension
 
-protocol StatusService {
-    func getStatus() -> NEVPNStatus
+protocol DataService {
+    func getStatus() -> Status
+    func getLocation() -> GeoLookup
 }
 
-class WidgetStatusService: StatusService {
+class WidgetDataService: DataService {
     
-    func getStatus() -> NEVPNStatus {
+    func getStatus() -> Status {
         let rawValue = UserDefaults.shared.connectionStatus
-        return NEVPNStatus.init(rawValue: rawValue) ?? .disconnected
+        let vpnStatus = NEVPNStatus.init(rawValue: rawValue) ?? .disconnected
+        return Status(vpnStatus: vpnStatus)
+    }
+    
+    func getLocation() -> GeoLookup {
+        if let saved = UserDefaults.shared.object(forKey: UserDefaults.Key.geoLookup) as? Data {
+            if let loaded = try? JSONDecoder().decode(GeoLookup.self, from: saved) {
+                return loaded
+            }
+        }
+        
+        return GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
     }
     
 }

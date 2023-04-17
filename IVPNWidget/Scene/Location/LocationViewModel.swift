@@ -28,13 +28,15 @@ extension LocationView {
     class ViewModel: ObservableObject {
         
         @Published var model: GeoLookup
+        var dataService: DataService
         
-        init() {
-            self.model = UserDefaults.shared.geoLookup
+        init(dataService: DataService = WidgetDataService()) {
+            self.dataService = dataService
+            self.model = dataService.getLocation()
         }
         
         func update() {
-            model = UserDefaults.shared.geoLookup
+            model = dataService.getLocation()
         }
         
         func getLocation() -> String {

@@ -19,6 +19,7 @@
 		82061F65238D2730009DDF4D /* Ping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82061F61238D2730009DDF4D /* Ping.swift */; };
 		82061F66238D2730009DDF4D /* ICMPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82061F62238D2730009DDF4D /* ICMPHeader.swift */; };
 		82061F67238D2730009DDF4D /* PingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82061F63238D2730009DDF4D /* PingManager.swift */; };
+		8206BAFA29ED69D300F916B7 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAF929ED69D300F916B7 /* DataService.swift */; };
 		8206E5D022967E37003119AF /* UserActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5CF22967E37003119AF /* UserActivityType.swift */; };
 		8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5D122967EAF003119AF /* UserActivityTitle.swift */; };
 		8206F32124347A8F0056B465 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32024347A8F0056B465 /* MainView.swift */; };
@@ -40,7 +41,6 @@
 		821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D6287C5AB20067F70D /* PortViewController.swift */; };
 		821CA2DB288039670067F70D /* PortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DA288039670067F70D /* PortTableViewCell.swift */; };
 		821CA2DF288143470067F70D /* PortRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DE288143470067F70D /* PortRange.swift */; };
-		821E35B229E5D60E00ABD219 /* StatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E35B129E5D60E00ABD219 /* StatusService.swift */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
 		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
 		8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */; };
@@ -419,6 +419,7 @@
 		82061F61238D2730009DDF4D /* Ping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ping.swift; sourceTree = "<group>"; };
 		82061F62238D2730009DDF4D /* ICMPHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICMPHeader.swift; sourceTree = "<group>"; };
 		82061F63238D2730009DDF4D /* PingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingManager.swift; sourceTree = "<group>"; };
+		8206BAF929ED69D300F916B7 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		8206E5CF22967E37003119AF /* UserActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityType.swift; sourceTree = "<group>"; };
 		8206E5D122967EAF003119AF /* UserActivityTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityTitle.swift; sourceTree = "<group>"; };
 		8206F32024347A8F0056B465 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -437,7 +438,6 @@
 		821CA2D6287C5AB20067F70D /* PortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortViewController.swift; sourceTree = "<group>"; };
 		821CA2DA288039670067F70D /* PortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortTableViewCell.swift; sourceTree = "<group>"; };
 		821CA2DE288143470067F70D /* PortRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortRange.swift; sourceTree = "<group>"; };
-		821E35B129E5D60E00ABD219 /* StatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusService.swift; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
 		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
 		8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSViewController.swift; sourceTree = "<group>"; };
@@ -811,6 +811,14 @@
 				82061F63238D2730009DDF4D /* PingManager.swift */,
 			);
 			path = PingManager;
+			sourceTree = "<group>";
+		};
+		8206BAF829ED65C600F916B7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				82A38A1A29E3201F00C88372 /* UserDefaults.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		8206F31F24347A360056B465 /* View */ = {
@@ -1203,8 +1211,7 @@
 		82A38A1929E3200000C88372 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				82A38A1A29E3201F00C88372 /* UserDefaults.swift */,
-				821E35B129E5D60E00ABD219 /* StatusService.swift */,
+				8206BAF929ED69D300F916B7 /* DataService.swift */,
 				82C61D9C29E6C2D200AF972A /* APIService.swift */,
 			);
 			path = Service;
@@ -1398,6 +1405,7 @@
 				82C61DB529E6CA7600AF972A /* Config */,
 				82E3B21C29DDD2E800998F67 /* Scene */,
 				82A38A1929E3200000C88372 /* Service */,
+				8206BAF829ED65C600F916B7 /* Extension */,
 				82E3B20E29DDCC6400998F67 /* IVPNWidgetBundle.swift */,
 				82E3B21029DDCC6400998F67 /* IVPNWidget.swift */,
 				82E3B21229DDCC6500998F67 /* Assets.xcassets */,
@@ -2004,7 +2012,7 @@
 				82C61DA429E6C46900AF972A /* ConnectionSettings.swift in Sources */,
 				82C61D9D29E6C2D200AF972A /* APIService.swift in Sources */,
 				82C61D9E29E6C32400AF972A /* ApiRequestDI.swift in Sources */,
-				821E35B229E5D60E00ABD219 /* StatusService.swift in Sources */,
+				8206BAFA29ED69D300F916B7 /* DataService.swift in Sources */,
 				82C61DB429E6C72700AF972A /* LocationViewModel.swift in Sources */,
 				82C61DA629E6C48700AF972A /* WireGuardProtocol.swift in Sources */,
 				82A38A0C29E2D17700C88372 /* StatusView.swift in Sources */,
