@@ -38,7 +38,19 @@ extension StatusView {
             model = dataService.getStatus()
         }
         
+        func statusTitle() -> String {
+            if !model.isLoggedIn {
+                return "You need to log in to start using IVPN"
+            }
+            
+            return "Your status is"
+        }
+        
         func statusText() -> String {
+            if !model.isLoggedIn {
+                return ""
+            }
+            
             switch model.vpnStatus {
             case .invalid:
                 return "disconnected"
@@ -58,6 +70,10 @@ extension StatusView {
         }
         
         func buttonText() -> String {
+            if !model.isLoggedIn {
+                return "Log In"
+            }
+            
             if model.vpnStatus == .connected {
                 return "Disconnect"
             }
