@@ -82,7 +82,7 @@ extension StatusView {
         }
         
         func buttonColor() -> Color {
-            if model.vpnStatus == .connected {
+            if model.vpnStatus == .connected && model.isLoggedIn {
                 return Color(red: 57 / 255, green: 143 / 255, blue: 230 / 255)
             }
             

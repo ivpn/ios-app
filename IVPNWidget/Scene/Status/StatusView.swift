@@ -61,6 +61,7 @@ struct StatusView: View {
                         Text(viewModel.statusTitle())
                             .foregroundColor(.secondary)
                             .font(.footnote)
+                            .fixedSize(horizontal: false, vertical: true)
                             .padding(.bottom, -5)
                         Text(viewModel.statusText())
                             .font(.system(size: 16, weight: .medium))
