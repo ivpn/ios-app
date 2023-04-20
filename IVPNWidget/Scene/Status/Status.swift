@@ -25,4 +25,5 @@ import NetworkExtension
 
 struct Status {
     var vpnStatus: NEVPNStatus
+    var isLoggedIn: Bool
 }

@@ -34,7 +34,8 @@ class WidgetDataService: DataService {
     func getStatus() -> Status {
         let rawValue = UserDefaults.shared.connectionStatus
         let vpnStatus = NEVPNStatus.init(rawValue: rawValue) ?? .disconnected
-        return Status(vpnStatus: vpnStatus)
+        let isLoggedIn = UserDefaults.shared.isLoggedIn
+        return Status(vpnStatus: vpnStatus, isLoggedIn: isLoggedIn)
     }
     
     func getLocation() -> GeoLookup {
