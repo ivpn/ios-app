@@ -41,6 +41,7 @@
 		821429B922FC2EA40056B8FF /* ApiService+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429B822FC2EA40056B8FF /* ApiService+Ext.swift */; };
 		821429BB22FC36100056B8FF /* ApiRequestDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429BA22FC36100056B8FF /* ApiRequestDI.swift */; };
 		82152C9929F14B4C007FCECC /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82152C9829F14B4C007FCECC /* KeyChain.swift */; };
+		82152C9B29F17568007FCECC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 82152C9A29F17568007FCECC /* KeychainAccess */; };
 		821AFA1323602B71001EF617 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821AFA1223602B71001EF617 /* SettingsScreenTests.swift */; };
 		821BDE02224A6EC700F592BF /* AppKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */; };
 		821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D6287C5AB20067F70D /* PortViewController.swift */; };
@@ -737,6 +738,7 @@
 			files = (
 				82E3B20C29DDCC6300998F67 /* SwiftUI.framework in Frameworks */,
 				82E3B20B29DDCC6300998F67 /* WidgetKit.framework in Frameworks */,
+				82152C9B29F17568007FCECC /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1644,6 +1646,9 @@
 			dependencies = (
 			);
 			name = IVPNWidgetExtension;
+			packageProductDependencies = (
+				82152C9A29F17568007FCECC /* KeychainAccess */,
+			);
 			productName = IVPNWidgetExtension;
 			productReference = 82E3B20A29DDCC6300998F67 /* IVPNWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -3356,6 +3361,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		82152C9A29F17568007FCECC /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 829F5FC529A13CAE009E1AD3 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
 		824B86DE26D42A4600D0101A /* WireGuardKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 824B86DD26D42A4600D0101A /* XCRemoteSwiftPackageReference "wireguard-apple" */;
