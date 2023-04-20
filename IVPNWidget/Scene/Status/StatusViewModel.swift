@@ -74,11 +74,19 @@ extension StatusView {
         }
         
         func actionLink() -> URL {
+            if !model.isLoggedIn {
+                return URL(string: "https://www.ivpn.net/app/login")!
+            }
+            
             if model.vpnStatus == .connected {
                 return URL(string: "https://www.ivpn.net/app/disconnect")!
             }
             
             return URL(string: "https://www.ivpn.net/app/connect")!
+        }
+        
+        func isLoggedIn() -> Bool {
+            return model.isLoggedIn
         }
         
     }
