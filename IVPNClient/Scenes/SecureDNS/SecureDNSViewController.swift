@@ -100,10 +100,6 @@ class SecureDNSViewController: UITableViewController {
     }
     
     private func saveDNSProfile() {
-        guard #available(iOS 14.0, *) else {
-            return
-        }
-        
         let validation = model.validation()
         
         guard validation.0 else {
@@ -136,18 +132,10 @@ class SecureDNSViewController: UITableViewController {
     }
     
     @objc private func updateDNSProfile() {
-        guard #available(iOS 14.0, *) else {
-            return
-        }
-        
         DNSManager.shared.saveProfile(model: model) { _ in }
     }
     
     private func removeDNSProfile() {
-        guard #available(iOS 14.0, *) else {
-            return
-        }
-        
         DNSManager.shared.removeProfile { _ in
             DNSManager.shared.loadProfile { _ in
                 

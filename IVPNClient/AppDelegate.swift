@@ -284,10 +284,7 @@ extension AppDelegate: UIApplicationDelegate {
         createLogFiles()
         resetLastPingTimestamp()
         clearURLCache()
-        
-        if #available(iOS 14.0, *) {
-            DNSManager.shared.loadProfile { _ in }
-        }
+        DNSManager.shared.loadProfile { _ in }
         
         return true
     }

@@ -111,10 +111,8 @@ class CustomDNSViewController: UITableViewController {
         server = DNSProtocolType.sanitizeServer(address: server)
         customDNSTextField.text = server
         
-        if #available(iOS 14.0, *) {
-            let serverToResolve = DNSProtocolType.getServerToResolve(address: server)
-            DNSManager.saveResolvedDNS(server: serverToResolve, key: UserDefaults.Key.resolvedDNSInsideVPN)
-        }
+        let serverToResolve = DNSProtocolType.getServerToResolve(address: server)
+        DNSManager.saveResolvedDNS(server: serverToResolve, key: UserDefaults.Key.resolvedDNSInsideVPN)
         
         UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
         
@@ -177,25 +175,21 @@ extension CustomDNSViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 && indexPath.row > 0 {
-            if #available(iOS 14.0, *) {
-                let type = DNSProtocolType.preferredSettings()
-                
-                if type != .doh && indexPath.row == 3 {
-                    return 0
-                }
-                
-                if type != .dot && indexPath.row == 4 {
-                    return 0
-                }
-                
-                if type == .plain && indexPath.row == 5 {
-                    return 0
-                }
-                
-                return UITableView.automaticDimension
-            } else {
+            let type = DNSProtocolType.preferredSettings()
+            
+            if type != .doh && indexPath.row == 3 {
                 return 0
             }
+            
+            if type != .dot && indexPath.row == 4 {
+                return 0
+            }
+            
+            if type == .plain && indexPath.row == 5 {
+                return 0
+            }
+            
+            return UITableView.automaticDimension
         }
         
         return UITableView.automaticDimension

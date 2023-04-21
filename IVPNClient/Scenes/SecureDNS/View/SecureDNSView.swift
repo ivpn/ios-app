@@ -56,10 +56,6 @@ class SecureDNSView: UITableView {
     }
     
     @objc func updateEnableSwitch() {
-        guard #available(iOS 14.0, *) else {
-            return
-        }
-        
         DNSManager.shared.loadProfile { _ in
             self.enableSwitch.isOn = DNSManager.shared.isEnabled
         }

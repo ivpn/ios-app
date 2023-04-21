@@ -229,20 +229,16 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 newSettings.dnsSettings = NEDNSSettings(servers: [UserDefaults.shared.antiTrackerDNS])
             }
         } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty && !UserDefaults.shared.resolvedDNSInsideVPN.isEmpty && UserDefaults.shared.resolvedDNSInsideVPN != [""] {
-            if #available(iOS 14.0, *) {
-                switch DNSProtocolType.preferred() {
-                case .doh:
-                    let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
-                    newSettings.dnsSettings = dnsSettings
-                case .dot:
-                    let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
-                    newSettings.dnsSettings = dnsSettings
-                default:
-                    newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                }
-            } else {
+            switch DNSProtocolType.preferred() {
+            case .doh:
+                let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+                dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
+                newSettings.dnsSettings = dnsSettings
+            case .dot:
+                let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+                dnsSettings.serverName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
+                newSettings.dnsSettings = dnsSettings
+            default:
                 newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
             }
         }
