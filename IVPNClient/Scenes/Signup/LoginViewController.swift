@@ -23,6 +23,7 @@
 
 import UIKit
 import JGProgressHUD
+import WidgetKit
 
 class LoginViewController: UIViewController {
 
@@ -266,6 +267,8 @@ extension LoginViewController {
         KeyChain.username = (self.userName.text ?? "").trim()
         Application.shared.serverList = VPNServerList()
         Application.shared.settings = Settings(serverList: Application.shared.serverList)
+        
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         
         navigationController?.dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: Notification.Name.ServiceAuthorized, object: nil)

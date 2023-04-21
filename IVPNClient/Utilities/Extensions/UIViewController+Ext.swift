@@ -24,6 +24,7 @@
 import UIKit
 import WebKit
 import MessageUI
+import WidgetKit
 
 extension UIDevice {
     var hasNotch: Bool {
@@ -75,6 +76,7 @@ extension UIViewController {
         Application.shared.authentication.logOut(deleteSettings: deleteSettings)
         NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
         NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         
         if deleteSession {
             let sessionManager = SessionManager()
