@@ -25,6 +25,13 @@ import UIKit
 
 extension UIWindow {
     
+    static var interfaceOrientation: UIInterfaceOrientation {
+        return UIApplication.shared.windows
+            .first?
+            .windowScene?
+            .interfaceOrientation ?? .portrait
+    }
+    
     static var isLandscape: Bool {
         return UIApplication.shared.windows
             .first?
