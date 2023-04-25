@@ -27,10 +27,12 @@ import MessageUI
 import WidgetKit
 
 extension UIDevice {
+    
     var hasNotch: Bool {
-        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        let bottom = UIWindow.keyWindow?.safeAreaInsets.bottom ?? 0
         return bottom > 0
     }
+    
 }
 
 extension UIViewController {
