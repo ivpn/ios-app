@@ -46,7 +46,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     
     // MARK: - Private properties -
     
-    private let bottomSafeArea = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+    private let bottomSafeArea = UIWindow.keyWindow?.safeAreaInsets.bottom ?? 0
     
     private var halfHeight: CGFloat {
         if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec && UserDefaults.shared.isMultiHop {
