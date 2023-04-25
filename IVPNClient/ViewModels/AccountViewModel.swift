@@ -43,7 +43,7 @@ struct AccountViewModel {
     }
     
     var subscriptionText: String {
-        return serviceStatus.currentPlan ?? ""
+        return serviceStatus.currentPlan
     }
     
     var activeUntilText: String {
