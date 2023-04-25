@@ -500,7 +500,7 @@ extension SettingsViewController {
                 if enabled, Application.shared.connectionManager.status.isDisconnected() {
                     showDisableVPNPrompt(sourceView: tableView.cellForRow(at: indexPath)!) {
                         Application.shared.connectionManager.removeOnDemandRules {}
-                        performSegue(withIdentifier: "SelectProtocol", sender: nil)
+                        self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
                     }
                     return
                 }

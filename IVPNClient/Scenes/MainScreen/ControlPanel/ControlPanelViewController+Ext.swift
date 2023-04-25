@@ -71,7 +71,7 @@ extension ControlPanelViewController {
                 } else {
                     Application.shared.connectionManager.evaluateConnection(network: Application.shared.network, newTrust: trust) { error in
                         if error != nil {
-                            showWireGuardKeysMissingError()
+                            self.showWireGuardKeysMissingError()
                         }
                     }
                 }

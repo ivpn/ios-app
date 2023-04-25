@@ -191,7 +191,7 @@ extension NetworkProtectionViewController {
             } else {
                 Application.shared.connectionManager.evaluateConnection(network: network, newTrust: trust) { error in
                     if error != nil {
-                        showWireGuardKeysMissingError()
+                        self.showWireGuardKeysMissingError()
                     }
                 }
             }
