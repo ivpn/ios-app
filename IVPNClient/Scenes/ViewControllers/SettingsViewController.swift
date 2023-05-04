@@ -47,6 +47,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
     @IBOutlet weak var selectHostSwitch: UISwitch!
+    @IBOutlet weak var sendLogsLabel: UILabel!
     
     // MARK: - Properties -
     
@@ -333,10 +334,6 @@ class SettingsViewController: UITableViewController {
         guard evaluateIsLoggedIn() else {
             return
         }
-        
-        guard evaluateMailCompose() else {
-            return
-        }
 
         guard let appLogPath = FileManager.logTextFileURL?.path else {
             return
@@ -404,6 +401,9 @@ class SettingsViewController: UITableViewController {
                 let activityView = UIActivityViewController(activityItems: logFiles, applicationActivities: nil)
                 activityView.popoverPresentationController?.sourceView = self.view
                 self.present(activityView, animated: true, completion: nil)
+                if let popOver = activityView.popoverPresentationController {
+                    popOver.sourceView = self.sendLogsLabel
+                }
                 presentMailComposer = false
             }
         }
