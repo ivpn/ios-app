@@ -1,5 +1,3 @@
-#include "Pods/Target Support Files/Pods-IVPNClient/Pods-IVPNClient.release.xcconfig"
-
 Environment = production
 ApiHostName = api.ivpn.net
 TlsHostName = ivpn.net

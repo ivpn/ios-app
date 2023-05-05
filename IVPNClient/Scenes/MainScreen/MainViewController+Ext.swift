@@ -21,6 +21,7 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import UIKit
 import FloatingPanel
 
 // MARK: - FloatingPanelControllerDelegate -
