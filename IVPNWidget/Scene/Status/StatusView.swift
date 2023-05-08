@@ -37,20 +37,21 @@ struct StatusView: View {
             Image("ivpn-logo")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 44)
-                .padding(.bottom, 2)
+                .frame(width: 44, height: 15)
             switch family {
             case .systemSmall:
                 Text(viewModel.statusTitle())
                     .foregroundColor(.secondary)
                     .font(.footnote)
+                    .minimumScaleFactor(0.9)
                     .padding(.bottom, -5)
                 Text(viewModel.statusText())
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.system(size: 15, weight: .medium))
                 Spacer()
                 Label(viewModel.buttonText(), systemImage: "lock.fill")
                     .frame(maxWidth: .infinity)
                     .labelStyle(.titleOnly)
+                    .minimumScaleFactor(0.9)
                     .padding(14)
                     .foregroundColor(.white)
                     .background(viewModel.buttonColor())
@@ -64,7 +65,7 @@ struct StatusView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.bottom, -5)
                         Text(viewModel.statusText())
-                            .font(.system(size: 16, weight: .medium))
+                            .font(.system(size: 15, weight: .medium))
                     }
                     Spacer()
                     Link(destination: viewModel.actionLink(), label: {

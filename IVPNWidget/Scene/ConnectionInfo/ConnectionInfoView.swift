@@ -33,31 +33,41 @@ struct ConnectionInfoView: View {
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading) {
                 Text("IP Address")
                     .foregroundColor(.secondary)
                     .font(.footnote)
+                Spacer()
                 Text("Internet Provider")
                     .foregroundColor(.secondary)
                     .font(.footnote)
+                Spacer()
                 Text("Protocol, Port")
                     .foregroundColor(.secondary)
                     .font(.footnote)
+                Spacer()
                 Text("AntiTracker")
                     .foregroundColor(.secondary)
                     .font(.footnote)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, 10)
-            VStack(alignment: .trailing, spacing: 20) {
+            VStack(alignment: .trailing) {
                 Text(viewModel.getIpAddress())
                     .font(.footnote)
+                    .minimumScaleFactor(0.9)
+                Spacer()
                 Text(viewModel.getProvider())
                     .font(.footnote)
+                    .minimumScaleFactor(0.9)
+                Spacer()
                 Text(viewModel.getProtocol())
                     .font(.footnote)
+                    .minimumScaleFactor(0.9)
+                Spacer()
                 Text(viewModel.getAntiTracker())
                     .font(.footnote)
+                    .minimumScaleFactor(0.9)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.bottom, 10)

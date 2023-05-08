@@ -42,7 +42,7 @@ struct LocationView: View {
             HStack {
                 Image(viewModel.getCountryCode())
                 Text(viewModel.getLocation())
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.system(size: 15, weight: .medium))
             }
         }
         .padding(.horizontal)
