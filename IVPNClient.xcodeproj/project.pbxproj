@@ -128,6 +128,7 @@
 		8270753722AFC7E70067C323 /* StringProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */; };
 		8270D266241A477900B17B65 /* InfoAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270D265241A477900B17B65 /* InfoAlertView.swift */; };
 		8270D268241BB3D100B17B65 /* InfoAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270D267241BB3D000B17B65 /* InfoAlertViewModel.swift */; };
+		8271D2E32A092F7B0052AF61 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8271D2E22A092F7B0052AF61 /* UIDevice.swift */; };
 		827694F3263C04C40058B4DC /* LoginConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827694F2263C04C40058B4DC /* LoginConfirmation.swift */; };
 		82774855237596DF0061BD46 /* OpenVPNConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82774854237596DF0061BD46 /* OpenVPNConf.swift */; };
 		8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */; };
@@ -516,6 +517,7 @@
 		8270753522AFC5B90067C323 /* StringProtocol+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Ext.swift"; sourceTree = "<group>"; };
 		8270D265241A477900B17B65 /* InfoAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertView.swift; sourceTree = "<group>"; };
 		8270D267241BB3D000B17B65 /* InfoAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewModel.swift; sourceTree = "<group>"; };
+		8271D2E22A092F7B0052AF61 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		827694F2263C04C40058B4DC /* LoginConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfirmation.swift; sourceTree = "<group>"; };
 		82774854237596DF0061BD46 /* OpenVPNConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenVPNConf.swift; sourceTree = "<group>"; };
 		8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofsViewModel.swift; sourceTree = "<group>"; };
@@ -831,6 +833,7 @@
 				82A38A1A29E3201F00C88372 /* UserDefaults.swift */,
 				8206BAFB29ED6C9600F916B7 /* Notification.swift */,
 				82152C9829F14B4C007FCECC /* KeyChain.swift */,
+				8271D2E22A092F7B0052AF61 /* UIDevice.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2048,6 +2051,7 @@
 				82A38A0C29E2D17700C88372 /* StatusView.swift in Sources */,
 				8206BB0329ED7C3700F916B7 /* ConnectionInfoViewModel.swift in Sources */,
 				823BA40329EC5A01004B07B4 /* GeoLookup.swift in Sources */,
+				8271D2E32A092F7B0052AF61 /* UIDevice.swift in Sources */,
 				82C61DA729E6C49100AF972A /* TunnelType.swift in Sources */,
 				82C61DB029E6C5E700AF972A /* Date+Ext.swift in Sources */,
 				82C61DA929E6C53C00AF972A /* Array+Ext.swift in Sources */,
