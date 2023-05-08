@@ -47,14 +47,10 @@ class ApiService {
             request.queryItems = params
         }
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
         log(.info, message: "\(requestName) started")
         
         APIClient().perform(request) { result in
             DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                
                 switch result {
                 case .success(let response):
                     if let data = response.body {
@@ -95,14 +91,10 @@ class ApiService {
             request.queryItems = params
         }
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
         log(.info, message: "\(requestName) started")
         
         APIClient().perform(request) { result in
             DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                
                 switch result {
                 case .success(let response):
                     if let data = response.body {

@@ -181,6 +181,7 @@
 		82AB0875291A6B5F0084625A /* AddCustomPortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */; };
 		82AB0877291A6B9C0084625A /* CustomPort+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AB0876291A6B9C0084625A /* CustomPort+CoreDataClass.swift */; };
 		82AB0879291A6BB90084625A /* CustomPort+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AB0878291A6BB90084625A /* CustomPort+CoreDataProperties.swift */; };
+		82B329CB29F7C9F400F3ED9B /* UIWindow+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B329CA29F7C9F400F3ED9B /* UIWindow+Ext.swift */; };
 		82B51CDF21DE3E31005CC9C9 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B51CDE21DE3E31005CC9C9 /* UITableView+Ext.swift */; };
 		82B605262170840C004B40E6 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B605252170840C004B40E6 /* PacketTunnelProvider.swift */; };
 		82B6052B2170840C004B40E6 /* wireguard-tunnel-provider.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 82B605232170840C004B40E6 /* wireguard-tunnel-provider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -564,6 +565,7 @@
 		82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomPortViewController.swift; sourceTree = "<group>"; };
 		82AB0876291A6B9C0084625A /* CustomPort+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomPort+CoreDataClass.swift"; sourceTree = "<group>"; };
 		82AB0878291A6BB90084625A /* CustomPort+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomPort+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		82B329CA29F7C9F400F3ED9B /* UIWindow+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Ext.swift"; sourceTree = "<group>"; };
 		82B51CDE21DE3E31005CC9C9 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		82B605232170840C004B40E6 /* wireguard-tunnel-provider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "wireguard-tunnel-provider.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82B605252170840C004B40E6 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
@@ -1051,6 +1053,7 @@
 				82A3422424AB6AF700761AB0 /* Double+Ext.swift */,
 				82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */,
 				82CE598F25ED3C7A0078099D /* URL+Ext.swift */,
+				82B329CA29F7C9F400F3ED9B /* UIWindow+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2146,6 +2149,7 @@
 				82FF0D442315587000440E5D /* UITextFieldPadding.swift in Sources */,
 				8243584425DAA7BD005FDEBB /* SecureDNSViewController.swift in Sources */,
 				82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */,
+				82B329CB29F7C9F400F3ED9B /* UIWindow+Ext.swift in Sources */,
 				8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */,
 				82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */,
 				82A160BA221C4E2000730577 /* Server+CoreDataClass.swift in Sources */,
@@ -2394,11 +2398,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = UnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios.UnitTests;
@@ -2423,11 +2423,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = UnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2458,11 +2454,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "wireguard-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 2.7.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -2498,11 +2490,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "wireguard-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 2.7.0;
 				MTL_FAST_MATH = YES;
@@ -2529,11 +2517,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios.UITests;
@@ -2556,11 +2540,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios.UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2582,11 +2562,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios.UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2707,11 +2683,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = UnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios.UnitTests;
@@ -2788,11 +2760,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "wireguard-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 2.7.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -2828,11 +2796,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = IVPNWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 IVPN. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -2867,11 +2831,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = IVPNWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 IVPN. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios.IVPNWidget;
@@ -2905,11 +2865,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = IVPNWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 IVPN. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.ivpn.clients.ios.IVPNWidget;
@@ -3187,7 +3143,6 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"$(SRCROOT)/Carthage/Build/iOS",
 				);
 				MARKETING_VERSION = 2.7.0;
 				ONLY_ACTIVE_ARCH = YES;

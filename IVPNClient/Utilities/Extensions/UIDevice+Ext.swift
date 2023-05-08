@@ -116,20 +116,8 @@ extension UIDevice {
     }
     
     static func fetchWiFiSSID(completion: @escaping (String?) -> Void) {
-        if #available(iOS 14.0, *) {
-            NEHotspotNetwork.fetchCurrent { network in
-                completion(network?.ssid)
-            }
-        } else {
-            var ssid: String?
-            if let interfaces = CNCopySupportedInterfaces() as NSArray? {
-                for interface in interfaces {
-                    if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
-                        ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
-                    }
-                }
-            }
-            completion(ssid)
+        NEHotspotNetwork.fetchCurrent { network in
+            completion(network?.ssid)
         }
     }
     

@@ -439,7 +439,7 @@ class ControlPanelViewController: UITableViewController {
         
         if !isMultiHopAvailable && isMultiHopEnabled {
             if status == .connected {
-                let plan = Application.shared.serviceStatus.currentPlan ?? ""
+                let plan = Application.shared.serviceStatus.currentPlan
                 showActionAlert(title: "Subscription is changed to \(plan)", message: "Active VPN connection is using Pro plan features (MultiHop) and will be disconnected.", action: "Reconnect with SingleHop VPN", cancel: "OK", cancelHandler: { [self] _ in
                     disableMultiHop()
                     if Application.shared.connectionManager.canDisconnect(status: status) {

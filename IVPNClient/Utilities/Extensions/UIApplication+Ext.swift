@@ -33,22 +33,15 @@ extension UIApplication {
         return !(window.frame.width == window.screen.bounds.width) && !(window.frame.width == window.screen.bounds.height)
     }
     
-    class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-        if let nav = base as? UINavigationController {
-            return topViewController(base: nav.visibleViewController)
-        }
+    class func topViewController() -> UIViewController? {
+        let vc = UIApplication.shared.connectedScenes.filter { $0.activationState == .foregroundActive }
+            .first(where: { $0 is UIWindowScene })
+            .flatMap( { $0 as? UIWindowScene })?.windows
+            .first(where: \.isKeyWindow)?
+            .rootViewController?
+            .topMostViewController()
         
-        if let tab = base as? UITabBarController {
-            if let selected = tab.selectedViewController {
-                return topViewController(base: selected)
-            }
-        }
-        
-        if let presented = base?.presentedViewController {
-            return topViewController(base: presented)
-        }
-        
-        return base
+        return vc
     }
     
     class func isValidURL(urlString: String?) -> Bool {

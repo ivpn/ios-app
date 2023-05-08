@@ -75,7 +75,7 @@ class MapScrollView: UIScrollView {
     // MARK: - Methods -
     
     func setupConstraints() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             snp.remakeConstraints { make in
                 make.top.equalTo(MapConstants.Container.iPadLandscapeTopAnchor)
                 make.left.equalTo(MapConstants.Container.iPadLandscapeLeftAnchor)

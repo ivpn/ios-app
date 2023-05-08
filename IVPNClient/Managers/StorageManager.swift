@@ -327,14 +327,17 @@ extension StorageManager {
 extension StorageManager {
     
     static func save(server: VPNServer, isFastestEnabled: Bool) {
-        if let server = fetchServer(server: server) {
-            server.isFastestEnabled = isFastestEnabled
-        } else {
-            let newServer = Server(context: context)
-            newServer.gateway = server.gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
-            newServer.isFastestEnabled = isFastestEnabled
+        if let servers = fetchServers(gateway: server.gateway, isHost: false) {
+            if let server = servers.first {
+                server.isFastestEnabled = isFastestEnabled
+                saveContext()
+                return
+            }
         }
         
+        let newServer = Server(context: context)
+        newServer.gateway = server.gateway.replacingOccurrences(of: ".wg.", with: ".gw.")
+        newServer.isFastestEnabled = isFastestEnabled
         saveContext()
     }
     
@@ -376,8 +379,10 @@ extension StorageManager {
     }
     
     static func isFastestEnabled(server vpnServer: VPNServer) -> Bool {
-        if let server = fetchServer(server: vpnServer) {
-            return server.isFastestEnabled
+        if let servers = fetchServers(gateway: vpnServer.gateway, isHost: false) {
+            if let server = servers.first {
+                return server.isFastestEnabled
+            }
         }
 
         return false

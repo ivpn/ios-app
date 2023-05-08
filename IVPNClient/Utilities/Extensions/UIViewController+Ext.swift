@@ -27,10 +27,12 @@ import MessageUI
 import WidgetKit
 
 extension UIDevice {
+    
     var hasNotch: Bool {
-        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        let bottom = UIWindow.keyWindow?.safeAreaInsets.bottom ?? 0
         return bottom > 0
     }
+    
 }
 
 extension UIViewController {
@@ -212,6 +214,26 @@ extension UIViewController {
         }
         
         return true
+    }
+    
+    func topMostViewController() -> UIViewController {
+        if self.presentedViewController == nil {
+            return self
+        }
+        
+        if let navigation = self.presentedViewController as? UINavigationController {
+            return navigation.visibleViewController!.topMostViewController()
+        }
+        
+        if let tab = self.presentedViewController as? UITabBarController {
+            if let selectedTab = tab.selectedViewController {
+                return selectedTab.topMostViewController()
+            }
+            
+            return tab.topMostViewController()
+        }
+        
+        return self.presentedViewController!.topMostViewController()
     }
     
 }
