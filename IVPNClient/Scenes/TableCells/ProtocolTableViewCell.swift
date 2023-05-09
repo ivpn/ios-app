@@ -104,6 +104,8 @@ class ProtocolTableViewCell: UITableViewCell {
         protocolLabel.text = title
         protocolSettingsLabel.text = ""
         accessoryType = .disclosureIndicator
+        isUserInteractionEnabled = true
+        selectionStyle = .default
     }
     
 }
