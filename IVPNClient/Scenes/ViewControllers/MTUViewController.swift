@@ -24,7 +24,7 @@
 import UIKit
 
 protocol MTUViewControllerDelegate: AnyObject {
-    func mtuSaved()
+    func mtuSaved(isUpdated: Bool)
 }
 
 class MTUViewController: UITableViewController {
@@ -52,9 +52,10 @@ class MTUViewController: UITableViewController {
             return
         }
         
+        let isUpdated = UserDefaults.standard.wgMtu != getMtu
         UserDefaults.standard.setValue(getMtu, forKey: UserDefaults.Key.wgMtu)
         navigationController?.dismiss(animated: true) { [self] in
-            delegate?.mtuSaved()
+            delegate?.mtuSaved(isUpdated: isUpdated)
         }
     }
     
