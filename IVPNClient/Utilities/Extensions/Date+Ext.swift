@@ -34,8 +34,8 @@ extension Date {
         return formatted(format: logFormat)
     }
     
-    static func logFileName(prefix: String = "") -> String {
-        return "\(prefix)\(formatted(format: fileNameFormat))"
+    static func logFileName() -> String {
+        return "\(formatted(format: fileNameFormat))"
     }
     
     static func changeDays(by days: Int) -> Date {

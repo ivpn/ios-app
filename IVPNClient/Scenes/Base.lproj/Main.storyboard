@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -874,6 +874,7 @@
                         <outlet property="selectedProtocol" destination="R5e-Wk-dkz" id="aFg-ce-fcQ"/>
                         <outlet property="selectedServerFlag" destination="Dq7-2f-uog" id="RhA-Wq-cGd"/>
                         <outlet property="selectedServerName" destination="CPE-CP-JAE" id="l57-wo-Jil"/>
+                        <outlet property="sendLogsLabel" destination="Jpg-3d-dAU" id="O30-Iy-J2F"/>
                         <outlet property="showIPv4ServersSwitch" destination="hV9-LW-jwe" id="NzW-gv-njt"/>
                         <outlet property="versionLabel" destination="gBW-V1-BW0" id="Xo2-nd-tuj"/>
                         <segue destination="C8Y-kZ-eYV" kind="show" identifier="SelectProtocol" id="oZ9-fT-UYA"/>

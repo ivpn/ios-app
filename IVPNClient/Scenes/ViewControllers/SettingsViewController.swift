@@ -47,6 +47,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
     @IBOutlet weak var selectHostSwitch: UISwitch!
+    @IBOutlet weak var sendLogsLabel: UILabel!
     @IBOutlet weak var preventSameCountryMultiHopSwitch: UISwitch!
     @IBOutlet weak var preventSameISPMultiHopSwitch: UISwitch!
     
@@ -345,10 +346,6 @@ class SettingsViewController: UITableViewController {
         guard evaluateIsLoggedIn() else {
             return
         }
-        
-        guard evaluateMailCompose() else {
-            return
-        }
 
         guard let appLogPath = FileManager.logTextFileURL?.path else {
             return
@@ -366,15 +363,12 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        let composer = MFMailComposeViewController()
-        composer.mailComposeDelegate = self
-        composer.setToRecipients([Config.contactSupportMail])
-        
+        var logFiles = [URL]()
         var openvpnLogAttached = false
         var presentMailComposer = true
         
         // App logs
-        var appLog: String?
+        var appLog = ""
         if let file = NSData(contentsOfFile: appLogPath) {
             appLog = String(data: file as Data, encoding: .utf8) ?? ""
         }
@@ -383,11 +377,12 @@ class SettingsViewController: UITableViewController {
         
         let logFile = FileSystemManager.sharedFilePath(name: Config.appLogFile).path
         if let fileData = NSData(contentsOfFile: logFile) {
-            composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "app-")).txt")
+            appLog = String(data: fileData as Data, encoding: .utf8) ?? ""
+            logFiles.append(FileSystemManager.tempFile(text: appLog, fileName: "app-\(Date.logFileName())"))
         }
         
         // WireGuard tunnel logs
-        var wireguardLog: String?
+        var wireguardLog = ""
         if let file = NSData(contentsOfFile: wireguardLogPath) {
             wireguardLog = String(data: file as Data, encoding: .utf8) ?? ""
         }
@@ -396,7 +391,8 @@ class SettingsViewController: UITableViewController {
         
         let wireguardLogFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
         if let fileData = NSData(contentsOfFile: wireguardLogFile) {
-            composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "wireguard-")).txt")
+            wireguardLog = String(data: fileData as Data, encoding: .utf8) ?? ""
+            logFiles.append(FileSystemManager.tempFile(text: wireguardLog, fileName: "wireguard-\(Date.logFileName())"))
         }
         
         // OpenVPN tunnel logs
@@ -405,14 +401,21 @@ class SettingsViewController: UITableViewController {
                 FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
                 
                 let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                if let fileData = NSData(contentsOfFile: logFile), !openvpnLogAttached {
-                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "openvpn-")).txt")
+                var openvpnLog = ""
+                if let file = NSData(contentsOfFile: logFile), !openvpnLogAttached {
+                    openvpnLog = String(data: file as Data, encoding: .utf8) ?? ""
+                    logFiles.append(FileSystemManager.tempFile(text: openvpnLog, fileName: "openvpn-\(Date.logFileName())"))
                     openvpnLogAttached = true
                 }
             }
             
             if presentMailComposer {
-                self.present(composer, animated: true, completion: nil)
+                let activityView = UIActivityViewController(activityItems: logFiles, applicationActivities: nil)
+                activityView.popoverPresentationController?.sourceView = self.view
+                self.present(activityView, animated: true, completion: nil)
+                if let popOver = activityView.popoverPresentationController {
+                    popOver.sourceView = self.sendLogsLabel
+                }
                 presentMailComposer = false
             }
         }
