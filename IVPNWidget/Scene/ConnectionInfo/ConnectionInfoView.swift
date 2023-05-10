@@ -42,7 +42,7 @@ struct ConnectionInfoView: View {
                     .foregroundColor(.secondary)
                     .font(.footnote)
                 Spacer()
-                Text("Protocol, Port")
+                Text(viewModel.getProtocolPortTitle())
                     .foregroundColor(.secondary)
                     .font(.footnote)
                 Spacer()

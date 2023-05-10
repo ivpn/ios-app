@@ -46,6 +46,18 @@ extension ConnectionInfoView {
             return model.geoLookup.isIvpnServer ? "IVPN" : model.geoLookup.isp
         }
         
+        func getProtocolPortTitle() -> String {
+            let components = model.selectedProtocol.components(separatedBy: "-")
+            
+            if let protocolName = components[safeIndex: 0] {
+                if protocolName == "ikev2" {
+                    return "Protocol"
+                }
+            }
+            
+            return "Protocol, Port"
+        }
+        
         func getProtocol() -> String {
             var name = ""
             var proto = ""
