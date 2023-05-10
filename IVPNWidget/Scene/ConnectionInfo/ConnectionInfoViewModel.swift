@@ -59,12 +59,19 @@ extension ConnectionInfoView {
                 if protocolName == "openvpn" {
                     name = "OpenVPN"
                 }
+                if protocolName == "ikev2" {
+                    return "IKEv2"
+                }
             }
             if let protocolType = components[safeIndex: 1] {
                 proto = protocolType.uppercased()
             }
             if let protocolPort = components[safeIndex: 2] {
                 port = Int(protocolPort) ?? 0
+            }
+            
+            if model.multiHop {
+                return "\(name), \(proto)"
             }
             
             return "\(name), \(proto) \(port)"

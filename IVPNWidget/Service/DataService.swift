@@ -49,11 +49,15 @@ class WidgetDataService: DataService {
     }
     
     func getConnectionInfo() -> ConnectionInfo {
-        return ConnectionInfo(antiTracker: getAntiTracker(), selectedProtocol: getProtocol(), geoLookup: getLocation())
+        return ConnectionInfo(antiTracker: getAntiTracker(), multiHop: getMultiHop(), selectedProtocol: getProtocol(), geoLookup: getLocation())
     }
     
     func getAntiTracker() -> Bool {
         return UserDefaults.shared.isAntiTracker
+    }
+    
+    func getMultiHop() -> Bool {
+        return UserDefaults.shared.isMultiHop
     }
     
     func getProtocol() -> String {

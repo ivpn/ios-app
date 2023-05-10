@@ -25,6 +25,7 @@ import Foundation
 
 struct ConnectionInfo {
     var antiTracker: Bool
+    var multiHop: Bool
     var selectedProtocol: String
     var geoLookup: GeoLookup
 }
