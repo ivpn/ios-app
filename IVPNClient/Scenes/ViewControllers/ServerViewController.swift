@@ -139,7 +139,8 @@ class ServerViewController: UITableViewController {
     
     @objc func pingDidComplete() {
         Application.shared.serverList.sortServers()
-        filteredCollection = VPNServerList.sort(self.filteredCollection)
+        filteredCollection = VPNServerList.sort(filteredCollection)
+        filteredCollection = Application.shared.serverList.getAllHosts(filteredCollection, isFavorite: isFavorite)
         tableView.reloadData()
     }
     
