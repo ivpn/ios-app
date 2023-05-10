@@ -236,7 +236,7 @@ class VPNServerList {
             }
             
             for host in server.hosts {
-                allHosts.append(VPNServer(gateway: host.hostName, dnsName: host.dnsName, countryCode: server.countryCode, country: "", city: server.city, load: host.load, ipv6: host.ipv6))
+                allHosts.append(VPNServer(gateway: host.hostName, dnsName: host.dnsName, countryCode: server.countryCode, country: "", city: server.city, isp: server.isp, load: host.load, ipv6: host.ipv6))
             }
         }
         
@@ -281,19 +281,17 @@ class VPNServerList {
             return Application.shared.settings.selectedServer
         }
         
-        return servers.min {
+        let server = servers.min {
             let leftPingMs = $0.pingMs ?? -1
             let rightPingMs = $1.pingMs ?? -1
             if rightPingMs < 0 && leftPingMs >= 0 { return true }
             return leftPingMs < rightPingMs && leftPingMs > -1
         }
-    }
-    
-    func validateServer(firstServer: VPNServer, secondServer: VPNServer) -> Bool {
-        guard UserDefaults.shared.isMultiHop else { return true }
-        guard firstServer.countryCode != secondServer.countryCode else { return false }
         
-        return true
+        server?.fastest = true
+        server?.random = false
+        
+        return server
     }
     
     func getExitServer(entryServer: VPNServer) -> VPNServer {
@@ -308,7 +306,11 @@ class VPNServerList {
         var list = [VPNServer]()
         let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         
-        list = servers.filter { Application.shared.serverList.validateServer(firstServer: $0, secondServer: serverToValidate) }
+        list = servers.filter {
+            VPNServer.validMultiHop($0, serverToValidate) &&
+            VPNServer.validMultiHopCountry($0, serverToValidate, ignoreSettings: true) &&
+            VPNServer.validMultiHopISP($0, serverToValidate, ignoreSettings: true)
+        }
         
         if let randomServer = list.randomElement() {
             randomServer.fastest = false
@@ -400,6 +402,7 @@ class VPNServerList {
                 city: server["city"] as? String ?? "",
                 latitude: server["latitude"] as? Double ?? 0,
                 longitude: server["longitude"] as? Double ?? 0,
+                isp: server["isp"] as? String ?? "",
                 ipAddresses: serverIpList,
                 hosts: serverHostsList
             )

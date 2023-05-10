@@ -47,6 +47,9 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
     @IBOutlet weak var selectHostSwitch: UISwitch!
+    @IBOutlet weak var sendLogsLabel: UILabel!
+    @IBOutlet weak var preventSameCountryMultiHopSwitch: UISwitch!
+    @IBOutlet weak var preventSameISPMultiHopSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -159,6 +162,14 @@ class SettingsViewController: UITableViewController {
         }
     }
     
+    @IBAction func togglePreventSameCountryMultiHop(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.preventSameCountryMultiHop)
+    }
+    
+    @IBAction func togglePreventSameISPMultiHop(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.preventSameISPMultiHop)
+    }
+    
     @IBAction func extendSubscription(_ sender: Any) {
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
             return
@@ -217,6 +228,8 @@ class SettingsViewController: UITableViewController {
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
         selectHostSwitch.setOn(UserDefaults.shared.selectHost, animated: false)
+        preventSameCountryMultiHopSwitch.setOn(UserDefaults.standard.preventSameCountryMultiHop, animated: false)
+        preventSameISPMultiHopSwitch.setOn(UserDefaults.standard.preventSameISPMultiHop, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
         updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
@@ -333,10 +346,6 @@ class SettingsViewController: UITableViewController {
         guard evaluateIsLoggedIn() else {
             return
         }
-        
-        guard evaluateMailCompose() else {
-            return
-        }
 
         guard let appLogPath = FileManager.logTextFileURL?.path else {
             return
@@ -354,15 +363,12 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        let composer = MFMailComposeViewController()
-        composer.mailComposeDelegate = self
-        composer.setToRecipients([Config.contactSupportMail])
-        
+        var logFiles = [URL]()
         var openvpnLogAttached = false
         var presentMailComposer = true
         
         // App logs
-        var appLog: String?
+        var appLog = ""
         if let file = NSData(contentsOfFile: appLogPath) {
             appLog = String(data: file as Data, encoding: .utf8) ?? ""
         }
@@ -371,11 +377,12 @@ class SettingsViewController: UITableViewController {
         
         let logFile = FileSystemManager.sharedFilePath(name: Config.appLogFile).path
         if let fileData = NSData(contentsOfFile: logFile) {
-            composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "app-")).txt")
+            appLog = String(data: fileData as Data, encoding: .utf8) ?? ""
+            logFiles.append(FileSystemManager.tempFile(text: appLog, fileName: "app-\(Date.logFileName())"))
         }
         
         // WireGuard tunnel logs
-        var wireguardLog: String?
+        var wireguardLog = ""
         if let file = NSData(contentsOfFile: wireguardLogPath) {
             wireguardLog = String(data: file as Data, encoding: .utf8) ?? ""
         }
@@ -384,7 +391,8 @@ class SettingsViewController: UITableViewController {
         
         let wireguardLogFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
         if let fileData = NSData(contentsOfFile: wireguardLogFile) {
-            composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "wireguard-")).txt")
+            wireguardLog = String(data: fileData as Data, encoding: .utf8) ?? ""
+            logFiles.append(FileSystemManager.tempFile(text: wireguardLog, fileName: "wireguard-\(Date.logFileName())"))
         }
         
         // OpenVPN tunnel logs
@@ -393,14 +401,21 @@ class SettingsViewController: UITableViewController {
                 FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
                 
                 let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                if let fileData = NSData(contentsOfFile: logFile), !openvpnLogAttached {
-                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "openvpn-")).txt")
+                var openvpnLog = ""
+                if let file = NSData(contentsOfFile: logFile), !openvpnLogAttached {
+                    openvpnLog = String(data: file as Data, encoding: .utf8) ?? ""
+                    logFiles.append(FileSystemManager.tempFile(text: openvpnLog, fileName: "openvpn-\(Date.logFileName())"))
                     openvpnLogAttached = true
                 }
             }
             
             if presentMailComposer {
-                self.present(composer, animated: true, completion: nil)
+                let activityView = UIActivityViewController(activityItems: logFiles, applicationActivities: nil)
+                activityView.popoverPresentationController?.sourceView = self.view
+                self.present(activityView, animated: true, completion: nil)
+                if let popOver = activityView.popoverPresentationController {
+                    popOver.sourceView = self.sendLogsLabel
+                }
                 presentMailComposer = false
             }
         }
@@ -444,8 +459,8 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 1 { return 60 }
         if indexPath.section == 0 && indexPath.row == 3 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 7 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
+        if indexPath.section == 3 && indexPath.row == 9 { return 60 }
+        if indexPath.section == 3 && indexPath.row == 10 && !loggingSwitch.isOn { return 0 }
         
         // Disconnected custom DNS
         if indexPath.section == 3 && indexPath.row == 3 {
@@ -465,7 +480,7 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 && indexPath.row == 8 {
+        if indexPath.section == 3 && indexPath.row == 10 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
