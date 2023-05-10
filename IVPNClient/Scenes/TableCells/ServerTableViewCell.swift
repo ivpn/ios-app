@@ -53,13 +53,20 @@ class ServerTableViewCell: UITableViewCell {
     
     var serverToValidate: VPNServer! {
         didSet {
-            if !Application.shared.serverList.validateServer(firstServer: viewModel.server, secondServer: serverToValidate) {
-                serverName.textColor = UIColor.init(named: Theme.ivpnLabel6)
-                flagImage.alpha = 0.5
-            } else {
-                serverName.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
-                flagImage.alpha = 1
+            guard VPNServer.validMultiHopCountry(viewModel.server, serverToValidate) else {
+                contentView.alpha = 0.55
+                return
             }
+            guard VPNServer.validMultiHopISP(viewModel.server, serverToValidate) else {
+                contentView.alpha = 0.55
+                return
+            }
+            if isFavorite, viewModel.server.isHost, !VPNServer.validMultiHop(viewModel.server, serverToValidate) {
+                contentView.alpha = 0.55
+                return
+            }
+            
+            contentView.alpha = 1
         }
     }
     

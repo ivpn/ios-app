@@ -122,11 +122,13 @@ class Settings {
     // MARK: - Methods -
     
     func updateSelectedServerForMultiHop(isEnabled: Bool) {
-        if isEnabled && Application.shared.settings.selectedServer.fastest {
+        let selectedServer = Application.shared.settings.selectedServer
+        if isEnabled, selectedServer.fastest, selectedServer == Application.shared.settings.selectedExitServer {
             if let server = Application.shared.serverList.getServers().first {
                 server.fastest = false
                 Application.shared.settings.selectedServer = server
                 Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
+                Application.shared.settings.selectedExitHost = nil
             }
         }
         

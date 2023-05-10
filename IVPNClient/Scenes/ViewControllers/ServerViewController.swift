@@ -239,6 +239,149 @@ class ServerViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    private func isFastestServer(indexPath: IndexPath) -> Bool {
+        return !UserDefaults.shared.isMultiHop && !isFavorite && indexPath.row == 0
+    }
+    
+    private func isRandomServer(indexPath: IndexPath) -> Bool {
+        return ((!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0)) && !isFavorite
+    }
+    
+    private func differentServer(server: VPNServer) -> Bool {
+        if isExitServer {
+            return server !== Application.shared.settings.selectedExitServer
+        }
+        
+        return server !== Application.shared.settings.selectedServer
+    }
+    
+    private func differentHost(host: Host?) -> Bool {
+        guard let host = host else {
+            return false
+        }
+        
+        if isExitServer {
+            if let selectedExitHost = Application.shared.settings.selectedExitHost {
+                return host.hostName != selectedExitHost.hostName
+            }
+        }
+        
+        if let selectedHost = Application.shared.settings.selectedHost {
+            return host.hostName != selectedHost.hostName
+        }
+        
+        return false
+    }
+    
+    private func validMultiHop(server: VPNServer, indexPath: IndexPath, force: Bool) -> Bool {
+        guard !force else {
+            return true
+        }
+        
+        let secondServer = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        
+        guard VPNServer.validMultiHop(server, secondServer) else {
+            showAlert(title: "Entry and exit servers are the same", message: "Please select a different entry or exit server.")
+            tableView.deselectRow(at: indexPath, animated: true)
+            return false
+        }
+        
+        guard VPNServer.validMultiHopCountry(server, secondServer) else {
+            showActionAlert(title: VPNServer.validMultiHopCountryTitle, message: VPNServer.validMultiHopCountryMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+                selected(indexPath: indexPath, force: true)
+            })
+            tableView.deselectRow(at: indexPath, animated: true)
+            return false
+        }
+        
+        guard VPNServer.validMultiHopISP(server, secondServer) else {
+            showActionAlert(title: VPNServer.validMultiHopISPTitle, message: VPNServer.validMultiHopISPMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+                selected(indexPath: indexPath, force: true)
+            })
+            tableView.deselectRow(at: indexPath, animated: true)
+            return false
+        }
+        
+        return true
+    }
+    
+    private func select(server: VPNServer, host: Host?) {
+        if isExitServer {
+            Application.shared.settings.selectedExitServer = server
+            Application.shared.settings.selectedExitHost = host
+        } else {
+            Application.shared.settings.selectedServer = server
+            Application.shared.settings.selectedHost = host
+            UserDefaults.standard.set(Application.shared.settings.selectedServer.fastest, forKey: UserDefaults.Key.fastestServerPreferred)
+            if !UserDefaults.shared.isMultiHop, server == Application.shared.settings.selectedExitServer {
+                Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
+                Application.shared.settings.selectedExitHost = nil
+            }
+        }
+    }
+    
+    private func postNotification() {
+        log(.info, message: "Update selected server = \(Application.shared.settings.selectedServer.city)")
+        NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
+        NotificationCenter.default.post(name: Notification.Name.ShowConnectToServerPopup, object: nil)
+    }
+    
+    private func reconnect(_ differentServer: Bool, _ differentHost: Bool) {
+        if differentServer || differentHost || Application.shared.serverList.noPing {
+            if Application.shared.settings.selectedServer.fastest && Application.shared.serverList.noPing {
+                serverDelegate?.reconnectToFastestServer()
+            } else {
+                Application.shared.connectionManager.reconnect()
+            }
+        }
+    }
+    
+    private func popViewController() {
+        if isPresentedModally {
+            navigationController?.dismiss(animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    private func selected(indexPath: IndexPath, force: Bool = false) {
+        var selectedServer = collection[indexPath.row]
+        selectedServer.fastest = false
+        var selectedHost: Host?
+        let isFastestServer = isFastestServer(indexPath: indexPath)
+        let isRandomServer = isRandomServer(indexPath: indexPath)
+        let isHost = selectedServer.isHost
+        let gateway = selectedServer.gateway
+        
+        if isFastestServer {
+            if let fastestServer = Application.shared.serverList.getFastestServer() {
+                selectedServer = fastestServer
+            }
+        }
+        
+        if isRandomServer {
+            selectedServer = Application.shared.serverList.getRandomServer(isExitServer: isExitServer)
+        }
+        
+        if isHost {
+            if let serverByCity = Application.shared.serverList.getServer(byCity: selectedServer.city) {
+                selectedServer = serverByCity
+                selectedHost = serverByCity.getHost(hostName: gateway)
+            }
+        }
+        
+        guard validMultiHop(server: selectedServer, indexPath: indexPath, force: force) else {
+            return
+        }
+        
+        let differentServer = differentServer(server: selectedServer)
+        let differentHost = differentHost(host: selectedHost)
+        select(server: selectedServer, host: selectedHost)
+        postNotification()
+        reconnect(differentServer, differentHost)
+        popViewController()
+    }
+    
 }
 
 // MARK: - UITableViewDataSource -
@@ -281,96 +424,7 @@ extension ServerViewController {
             return
         }
         
-        var selectedHost: Host?
-        var server = collection[indexPath.row]
-        var differentSelectedServer = false
-        var differentSelectedHost = false
-        server.random = false
-        
-        if server.isHost {
-            let hostName = server.gateway
-            if let serverByCity = Application.shared.serverList.getServer(byCity: server.city) {
-                server = serverByCity
-                selectedHost = server.getHost(hostName: hostName)
-            }
-            
-            if let selectedHost = Application.shared.settings.selectedHost {
-                differentSelectedHost = hostName != selectedHost.hostName
-            }
-            
-            if isExitServer {
-                if let selectedExitHost = Application.shared.settings.selectedExitHost {
-                    differentSelectedHost = hostName != selectedExitHost.hostName
-                }
-            }
-        }
-        
-        if ((!UserDefaults.shared.isMultiHop && indexPath.row == 1) || (UserDefaults.shared.isMultiHop && indexPath.row == 0)) && !isFavorite {
-            server = Application.shared.serverList.getRandomServer(isExitServer: isExitServer)
-            server.random = true
-            server.fastest = false
-        }
-        
-        var secondServer = Application.shared.settings.selectedExitServer
-        differentSelectedServer = server !== Application.shared.settings.selectedServer
-        
-        if isExitServer {
-            secondServer = Application.shared.settings.selectedServer
-            differentSelectedServer = server !== Application.shared.settings.selectedExitServer
-        }
-        
-        guard Application.shared.serverList.validateServer(firstServer: server, secondServer: secondServer) == true else {
-            showAlert(title: isExitServer ? "Unable to set Exit Server" : "Unable to set Entry Server", message: "When using Multi-Hop you must select entry and exit servers in different countries.")
-            tableView.deselectRow(at: indexPath, animated: true)
-            return
-        }
-        
-        if isExitServer {
-            Application.shared.settings.selectedExitServer = server
-            Application.shared.settings.selectedExitHost = selectedHost
-        } else {
-            if UserDefaults.shared.isMultiHop || indexPath.row > 0 || server.random || isFavorite {
-                Application.shared.settings.selectedServer = server
-                Application.shared.settings.selectedHost = selectedHost
-                Application.shared.settings.selectedServer.fastest = false
-            } else {
-                if let fastestServer = Application.shared.serverList.getFastestServer() {
-                    if fastestServer == Application.shared.settings.selectedServer {
-                        differentSelectedServer = false
-                    } else {
-                        differentSelectedServer = true
-                        Application.shared.settings.selectedServer = fastestServer
-                        Application.shared.settings.selectedHost = selectedHost
-                    }
-                }
-                Application.shared.settings.selectedServer.fastest = true
-                Application.shared.settings.selectedServer.random = false
-            }
-            
-            if !UserDefaults.shared.isMultiHop {
-                Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
-            }
-            UserDefaults.standard.set(Application.shared.settings.selectedServer.fastest, forKey: UserDefaults.Key.fastestServerPreferred)
-        }
-        
-        NotificationCenter.default.post(name: Notification.Name.ServerSelected, object: nil)
-        NotificationCenter.default.post(name: Notification.Name.ShowConnectToServerPopup, object: nil)
-        
-        if differentSelectedServer || differentSelectedHost || Application.shared.serverList.noPing {
-            if Application.shared.settings.selectedServer.fastest && Application.shared.serverList.noPing {
-                serverDelegate?.reconnectToFastestServer()
-            } else {
-                Application.shared.connectionManager.reconnect()
-            }
-        }
-        
-        log(.info, message: "Update selected server = \(Application.shared.settings.selectedServer.city)")
-        
-        if isPresentedModally {
-            navigationController?.dismiss(animated: true)
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
+        selected(indexPath: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -381,6 +435,10 @@ extension ServerViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let server = collection[indexPath.row]
+        let serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        if !VPNServer.validMultiHop(server, serverToValidate) && (!isFavorite || !server.isHost) {
+            return 0
+        }
         if server.isHost && !expandHost(server) && !isFavorite {
             return 0
         }
