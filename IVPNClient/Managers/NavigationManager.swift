@@ -193,4 +193,16 @@ class NavigationManager {
         return navController!
     }
     
+    static func getMTUViewController(delegate: MTUViewControllerDelegate? = nil) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navController = storyBoard.instantiateViewController(withIdentifier: "configureMtu") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        
+        if let viewController = navController?.topViewController as? MTUViewController {
+            viewController.delegate = delegate
+        }
+        
+        return navController!
+    }
+    
 }

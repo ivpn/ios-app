@@ -49,6 +49,7 @@ extension UserDefaults {
         static let antiTrackerHardcoreDNS = "antiTrackerHardcoreDNS"
         static let wgKeyTimestamp = "wgKeyTimestamp"
         static let wgRegenerationRate = "wgRegenerationRate"
+        static let wgMtu = "wgMtu"
         static let hostNames = "hostNames"
         static let ipv6HostNames = "ipv6HostNames"
         static let apiHostName = "apiHostName"
@@ -158,6 +159,10 @@ extension UserDefaults {
         return integer(forKey: Key.wgRegenerationRate)
     }
     
+    @objc dynamic var wgMtu: Int {
+        return integer(forKey: Key.wgMtu)
+    }
+    
     @objc dynamic var hostNames: [String] {
         return stringArray(forKey: Key.hostNames) ?? []
     }
@@ -262,6 +267,7 @@ extension UserDefaults {
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
         standard.removeObject(forKey: Key.selectedProtocol)
+        standard.removeObject(forKey: Key.wgMtu)
         standard.removeObject(forKey: Key.preventSameCountryMultiHop)
         standard.removeObject(forKey: Key.preventSameISPMultiHop)
         standard.synchronize()

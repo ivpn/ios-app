@@ -34,6 +34,7 @@ class WireGuardSettingsViewController: UITableViewController {
     @IBOutlet weak var keyTimestampLabel: UILabel!
     @IBOutlet weak var keyExpirationTimestampLabel: UILabel!
     @IBOutlet weak var keyRegenerationTimestampLabel: UILabel!
+    @IBOutlet weak var mtuLabel: UILabel!
     
     // MARK: - Properties -
     
@@ -78,6 +79,11 @@ class WireGuardSettingsViewController: UITableViewController {
         }
     }
     
+    @IBAction func configureMtu(_ sender: Any) {
+        let viewController = NavigationManager.getMTUViewController(delegate: self)
+        present(viewController, animated: true)
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
@@ -96,6 +102,8 @@ class WireGuardSettingsViewController: UITableViewController {
         keyTimestampLabel.text = AppKeyManager.keyTimestamp.formatDate()
         keyExpirationTimestampLabel.text = AppKeyManager.keyExpirationTimestamp.formatDate()
         keyRegenerationTimestampLabel.text = AppKeyManager.keyRegenerationTimestamp.formatDate()
+        let mtu = UserDefaults.standard.wgMtu
+        mtuLabel.text = mtu > 0 ? String(mtu) : "Leave blank to use default value"
     }
     
     private func addObservers() {
@@ -188,6 +196,20 @@ extension WireGuardSettingsViewController {
         showAlert(title: "Failed to regenerate WireGuard keys", message: "There was a problem regenerating and uploading WireGuard keys to IVPN server.")
         Application.shared.connectionManager.removeOnDemandRules {}
         setupView()
+    }
+    
+}
+
+// MARK: - MTUViewControllerDelegate -
+
+extension WireGuardSettingsViewController: MTUViewControllerDelegate {
+    
+    func mtuSaved(isUpdated: Bool) {
+        setupView()
+        
+        if isUpdated {
+            evaluateReconnect(sender: mtuLabel)
+        }
     }
     
 }
