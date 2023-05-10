@@ -321,13 +321,47 @@ class MapScrollView: UIScrollView {
     }
     
     @objc private func selectServer(_ sender: UIButton) {
-        let city = sender.titleLabel?.text ?? ""
+        selectServer(city: sender.titleLabel?.text ?? "")
+    }
+    
+    private func validMultiHop(server: VPNServer, force: Bool) -> Bool {
+        guard !force else {
+            return true
+        }
         
+        guard let viewController = UIApplication.topViewController() else {
+            return true
+        }
+        
+        let secondServer = Application.shared.settings.selectedServer
+        
+        guard VPNServer.validMultiHopCountry(server, secondServer) else {
+            viewController.showActionAlert(title: VPNServer.validMultiHopCountryTitle, message: VPNServer.validMultiHopCountryMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+                selectServer(city: server.city, force: true)
+            })
+            return false
+        }
+        
+        guard VPNServer.validMultiHopISP(server, secondServer) else {
+            viewController.showActionAlert(title: VPNServer.validMultiHopISPTitle, message: VPNServer.validMultiHopISPMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
+                selectServer(city: server.city, force: true)
+            })
+            return false
+        }
+        
+        return true
+    }
+    
+    private func selectServer(city: String, force: Bool = false) {
         if let server = Application.shared.serverList.getServer(byCity: city) {
+            guard validMultiHop(server: server, force: force) else {
+                return
+            }
+            
             showConnectToServerPopup(server: server)
             updateMapPosition(latitude: server.latitude, longitude: server.longitude, animated: true, isLocalPosition: false, updateMarkers: false)
             
-            if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) {
+            if Application.shared.connectionManager.status.isDisconnected() && VPNServer.validMultiHop(Application.shared.settings.selectedServer, server) {
                 
                 if UserDefaults.shared.isMultiHop {
                     Application.shared.settings.selectedExitServer = server
@@ -377,11 +411,11 @@ class MapScrollView: UIScrollView {
     }
     
     private func getNearByServers(server selectedServer: VPNServer) -> [VPNServer] {
-        var servers = Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: selectedServer) ? [selectedServer] : []
+        var servers = VPNServer.validMultiHop(Application.shared.settings.selectedServer, selectedServer) ? [selectedServer] : []
         
         for server in Application.shared.serverList.getServers() {
             guard server !== selectedServer else { continue }
-            guard Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: server) else { continue }
+            guard VPNServer.validMultiHop(Application.shared.settings.selectedServer, server) else { continue }
             
             if isNearByServer(selectedServer, server) {
                 servers.append(server)

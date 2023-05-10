@@ -27,6 +27,11 @@ import CoreLocation
 
 class VPNServer {
     
+    static let validMultiHopCountryTitle = "Entry and exit servers located in the same country"
+    static let validMultiHopCountryMessage = "Using Multi-Hop servers from the same country may decrease your privacy."
+    static let validMultiHopISPTitle = "Entry and exit servers are operated by the same ISP"
+    static let validMultiHopISPMessage = "Using Multi-Hop servers operated by the same ISP may decrease your privacy."
+    
     // MARK: - Properties -
     
     var pingMs: Int?
@@ -92,6 +97,7 @@ class VPNServer {
     private (set) var city: String
     private (set) var latitude: Double
     private (set) var longitude: Double
+    private (set) var isp: String
     private (set) var ipAddresses: [String]
     private (set) var hosts: [Host]
     private (set) var load: Double?
@@ -100,7 +106,7 @@ class VPNServer {
     
     // MARK: - Initialize -
     
-    init(gateway: String, dnsName: String? = nil, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0, ipv6: IPv6? = nil) {
+    init(gateway: String, dnsName: String? = nil, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, isp: String = "", ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0, ipv6: IPv6? = nil) {
         self.gateway = gateway
         self.dnsName = dnsName
         self.countryCode = countryCode
@@ -108,6 +114,7 @@ class VPNServer {
         self.city = city
         self.latitude = latitude
         self.longitude = longitude
+        self.isp = isp
         self.ipAddresses = ipAddresses
         self.hosts = hosts
         self.fastest = fastest
@@ -137,6 +144,45 @@ class VPNServer {
     
     static func == (lhs: VPNServer, rhs: VPNServer) -> Bool {
         return lhs.city == rhs.city && lhs.countryCode == rhs.countryCode
+    }
+    
+    static func validMultiHop(_ first: VPNServer, _ second: VPNServer) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard !(first == second) else {
+            return false
+        }
+        
+        return true
+    }
+    
+    static func validMultiHopCountry(_ first: VPNServer, _ second: VPNServer, ignoreSettings: Bool = false) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard UserDefaults.standard.preventSameCountryMultiHop || ignoreSettings else {
+            return true
+        }
+        guard first.country != second.country else {
+            return false
+        }
+        
+        return true
+    }
+    
+    static func validMultiHopISP(_ first: VPNServer, _ second: VPNServer, ignoreSettings: Bool = false) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard UserDefaults.standard.preventSameISPMultiHop || ignoreSettings else {
+            return true
+        }
+        guard first.isp != second.isp else {
+            return false
+        }
+        
+        return true
     }
 
 }

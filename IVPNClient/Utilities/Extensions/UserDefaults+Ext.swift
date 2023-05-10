@@ -33,6 +33,8 @@ extension UserDefaults {
         static let wireguardTunnelProviderError = "wireguardTunnelProviderError"
         static let openvpnTunnelProviderError = "TunnelKitLastError"
         static let isMultiHop = "isMultiHop"
+        static let preventSameCountryMultiHop = "preventSameCountryMultiHop"
+        static let preventSameISPMultiHop = "preventSameISPMultiHop"
         static let exitServerLocation = "exitServerLocation"
         static let isLogging = "isLogging"
         static let networkProtectionEnabled = "networkProtection.enabled"
@@ -212,15 +214,24 @@ extension UserDefaults {
         return bool(forKey: Key.selectHost)
     }
     
+    @objc dynamic var preventSameCountryMultiHop: Bool {
+        return bool(forKey: Key.preventSameCountryMultiHop)
+    }
+    
+    @objc dynamic var preventSameISPMultiHop: Bool {
+        return bool(forKey: Key.preventSameISPMultiHop)
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
         shared.register(defaults: [Key.keepAlive: true])
         shared.register(defaults: [Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
         shared.register(defaults: [Key.wgKeyTimestamp: Date()])
+        shared.register(defaults: [Key.serversSort: "city"])
         standard.register(defaults: [Key.selectedServerFastest: true])
         standard.register(defaults: [Key.showIPv4Servers: true])
-        shared.register(defaults: [Key.serversSort: "city"])
+        standard.register(defaults: [Key.preventSameCountryMultiHop: true])
     }
     
     static func clearSession() {
@@ -251,6 +262,8 @@ extension UserDefaults {
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
         standard.removeObject(forKey: Key.selectedProtocol)
+        standard.removeObject(forKey: Key.preventSameCountryMultiHop)
+        standard.removeObject(forKey: Key.preventSameISPMultiHop)
         standard.synchronize()
     }
     
