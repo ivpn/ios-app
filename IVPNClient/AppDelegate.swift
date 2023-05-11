@@ -147,23 +147,19 @@ class AppDelegate: UIResponder {
         switch endpoint {
         case Config.urlTypeConnect:
             viewController.showActionAlert(title: "Please confirm", message: "Do you want to connect to VPN?", action: "Connect", actionHandler: { _ in
-                DispatchQueue.delay(0.75) {
-                    if UserDefaults.shared.networkProtectionEnabled {
-                        Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                        return
-                    }
-                    Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
+                    return
                 }
+                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
             })
         case Config.urlTypeDisconnect:
             viewController.showActionAlert(title: "Please confirm", message: "Do you want to disconnect from VPN?", action: "Disconnect", actionHandler: { _ in
-                DispatchQueue.delay(0.75) {
-                    if UserDefaults.shared.networkProtectionEnabled {
-                        Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                        return
-                    }
-                    Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
+                    return
                 }
+                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
             })
         case Config.urlTypeLogin:
             if UIApplication.topViewController() as? LoginViewController != nil {
