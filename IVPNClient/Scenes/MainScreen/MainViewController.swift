@@ -141,11 +141,11 @@ class MainViewController: UIViewController {
         }
         
         Application.shared.connectionManager.statusModificationDate = Date()
-        
-        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     @objc func updateGeoLocation() {
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        
         guard let controlPanel = floatingPanel.contentViewController as? ControlPanelViewController else {
             return
         }
@@ -162,7 +162,6 @@ class MainViewController: UIViewController {
                 mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
                 mainView.updateInfoAlert()
                 model.save()
-                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
                 
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model

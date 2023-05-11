@@ -24,6 +24,7 @@
 import UIKit
 import JGProgressHUD
 import ActiveLabel
+import WidgetKit
 
 class ProtocolViewController: UITableViewController {
     
@@ -386,6 +387,7 @@ extension ProtocolViewController {
         reloadTable(connectionProtocol: connectionProtocol, indexPath: indexPath)
         
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

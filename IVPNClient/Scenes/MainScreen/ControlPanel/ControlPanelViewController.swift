@@ -24,6 +24,7 @@
 import UIKit
 import NetworkExtension
 import JGProgressHUD
+import WidgetKit
 
 class ControlPanelViewController: UITableViewController {
     
@@ -92,6 +93,7 @@ class ControlPanelViewController: UITableViewController {
         isMultiHop = isEnabled
         reloadView()
         evaluateReconnect(sender: sender as UIView)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     @IBAction func toggleAntiTracker(_ sender: UISwitch) {
@@ -103,6 +105,7 @@ class ControlPanelViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         evaluateReconnect(sender: sender as UIView)
         controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
         

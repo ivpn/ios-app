@@ -26,6 +26,7 @@ import UIKit
 import MessageUI
 import JGProgressHUD
 import NetworkExtension
+import WidgetKit
 
 class SettingsViewController: UITableViewController {
     
@@ -110,6 +111,7 @@ class SettingsViewController: UITableViewController {
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
         tableView.reloadData()
         evaluateReconnect(sender: sender as UIView)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     @IBAction func toggleIpv6(_ sender: UISwitch) {
