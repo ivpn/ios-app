@@ -40,7 +40,7 @@ struct StatusView: View {
                 .frame(width: 44, height: 15)
             switch family {
             case .systemSmall:
-                Text(viewModel.statusTitle())
+                Text(viewModel.statusTitleCompact())
                     .foregroundColor(.secondary)
                     .font(.footnote)
                     .minimumScaleFactor(0.9)

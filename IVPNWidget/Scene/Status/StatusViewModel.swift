@@ -46,6 +46,14 @@ extension StatusView {
             return "Your status is"
         }
         
+        func statusTitleCompact() -> String {
+            if !model.isLoggedIn {
+                return "You need to log in"
+            }
+            
+            return "Your status is"
+        }
+        
         func statusText() -> String {
             if !model.isLoggedIn {
                 return ""
