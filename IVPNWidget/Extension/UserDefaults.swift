@@ -24,12 +24,6 @@
 import Foundation
 
 extension UserDefaults {
-
-    @objc dynamic var isLoggedIn: Bool {
-        let username = KeyChain.username ?? ""
-        let sessionToken = KeyChain.sessionToken ?? ""
-        return !username.isEmpty || !sessionToken.isEmpty
-    }
     
     @objc dynamic var connectionStatus: Int {
         return integer(forKey: Key.connectionStatus)

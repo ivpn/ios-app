@@ -87,6 +87,7 @@ extension UserDefaults {
         static let showIPv4Servers = "showIPv4Servers"
         static let killSwitch = "killSwitch"
         static let selectHost = "selectHost"
+        static let isLoggedIn = "isLoggedIn"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -229,6 +230,10 @@ extension UserDefaults {
         return bool(forKey: Key.preventSameISPMultiHop)
     }
     
+    @objc dynamic var isLoggedIn: Bool {
+        return bool(forKey: Key.isLoggedIn)
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
@@ -262,6 +267,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.isIPv6)
         shared.removeObject(forKey: Key.killSwitch)
         shared.removeObject(forKey: Key.selectHost)
+        shared.removeObject(forKey: Key.isLoggedIn)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)
         standard.removeObject(forKey: Key.selectedExitHost)
