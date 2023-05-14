@@ -26,6 +26,7 @@ import UIKit
 import MessageUI
 import JGProgressHUD
 import NetworkExtension
+import WidgetKit
 
 class SettingsViewController: UITableViewController {
     
@@ -110,6 +111,7 @@ class SettingsViewController: UITableViewController {
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
         tableView.reloadData()
         evaluateReconnect(sender: sender as UIView)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     @IBAction func toggleIpv6(_ sender: UISwitch) {
@@ -464,11 +466,7 @@ extension SettingsViewController {
         
         // Disconnected custom DNS
         if indexPath.section == 3 && indexPath.row == 3 {
-            if #available(iOS 14.0, *) {
-                return UITableView.automaticDimension
-            } else {
-                return 0
-            }
+            return UITableView.automaticDimension
         }
         
         // Kill Switch
@@ -519,7 +517,7 @@ extension SettingsViewController {
                 if enabled, Application.shared.connectionManager.status.isDisconnected() {
                     showDisableVPNPrompt(sourceView: tableView.cellForRow(at: indexPath)!) {
                         Application.shared.connectionManager.removeOnDemandRules {}
-                        performSegue(withIdentifier: "SelectProtocol", sender: nil)
+                        self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
                     }
                     return
                 }

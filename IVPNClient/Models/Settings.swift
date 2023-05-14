@@ -149,6 +149,7 @@ class Settings {
     
     func saveConnectionProtocol() {
         UserDefaults.standard.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
+        UserDefaults.shared.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
     }
     
 }

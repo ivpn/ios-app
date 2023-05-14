@@ -21,6 +21,21 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import TunnelKitOpenVPNAppExtension
+import NetworkExtension
+import WidgetKit
 
-class PacketTunnelProvider: OpenVPNTunnelProvider {}
+class PacketTunnelProvider: OpenVPNTunnelProvider {
+    
+    override func startTunnel(options: [String: NSObject]? = nil) async throws {
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        try await super.startTunnel(options: options)
+    }
+    
+    override func stopTunnel(with reason: NEProviderStopReason) async {
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        await super.stopTunnel(with: reason)
+    }
+    
+}

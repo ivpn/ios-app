@@ -145,7 +145,7 @@ class ConnectionInfoPopupView: UIView {
     }
     
     func updateView() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             actionButton.isHidden = true
         } else {
             actionButton.isHidden = false

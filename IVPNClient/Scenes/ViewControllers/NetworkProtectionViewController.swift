@@ -191,7 +191,7 @@ extension NetworkProtectionViewController {
             } else {
                 Application.shared.connectionManager.evaluateConnection(network: network, newTrust: trust) { error in
                     if error != nil {
-                        showWireGuardKeysMissingError()
+                        self.showWireGuardKeysMissingError()
                     }
                 }
             }
@@ -216,16 +216,13 @@ extension NetworkProtectionViewController {
         cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        guard indexPath.section > 1 else {
-            return []
-        }
-        
-        let delete = UITableViewRowAction(style: .destructive, title: "Remove") { _, indexPath in
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let contextItem = UIContextualAction(style: .destructive, title: "Remove") { (contextualAction, view, boolValue) in
             self.removeNetwork(indexPath: indexPath)
         }
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
         
-        return [delete]
+        return swipeActions
     }
     
 }

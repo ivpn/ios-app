@@ -83,10 +83,7 @@ class Ping : NSObject {
         
     }
     deinit {
-        
         Ping.pingThreadCount -= 1
-        
-        //        NSLog("PingCount:"+Ping.pingThreadCount.description)
     }
     let INET6_ADDRSTRLEN = 64
     
@@ -482,11 +479,6 @@ class Ping : NSObject {
                         err = Int(ENOBUFS)    // This is not a hugely descriptor error, alas.
                     }
                     
-                    //little log
-                    if (self.debug) {
-                        NSLog("GBPing: failed to send packet with error code: %d", err)
-                    }
-                    
                     //change status
                     newPingResult.pingStatus = .fail
                     let pingReultCopyAfterFailure : PingResult = newPingResult.copy()
@@ -500,18 +492,12 @@ class Ping : NSObject {
     func setup(_ callBack: @escaping (_ success:Bool,_ error:Error?)->Void) {
         //error out of its already setup
         if self.isReady{
-            if self.debug{
-                NSLog("GBPing: Can't setup, already setup.")
-            }
             callBack(false,nil)
             return
         }
         
         //error out if no host is set
         if self.host == nil{
-            if self.debug{
-                NSLog("GBPing: set host before attempting to start.")
-            }
             callBack(false,nil)
             return
         }

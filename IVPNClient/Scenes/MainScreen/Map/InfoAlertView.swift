@@ -110,7 +110,7 @@ class InfoAlertView: UIView {
     }
     
     private func updateAutoLayout() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             centerXConstraint.constant = CGFloat(MapConstants.Container.iPadLandscapeLeftAnchor / 2)
             bottomConstraint.constant = 20
             return

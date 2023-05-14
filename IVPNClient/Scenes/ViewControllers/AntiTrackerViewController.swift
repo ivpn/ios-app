@@ -23,6 +23,7 @@
 
 import UIKit
 import ActiveLabel
+import WidgetKit
 
 class AntiTrackerViewController: UITableViewController {
     
@@ -40,6 +41,7 @@ class AntiTrackerViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         antiTrackerHardcoreSwitch.isEnabled = sender.isOn
         evaluateReconnect(sender: sender as UIView)
         

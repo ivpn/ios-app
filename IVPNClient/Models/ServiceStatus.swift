@@ -28,8 +28,7 @@ struct ServiceStatus: Codable {
     // MARK: - Properties -
     
     var isActive: Bool
-    #warning("currentPlan should not be optional, change this after API is fixed")
-    var currentPlan: String?
+    var currentPlan: String
     var activeUntil: Int?
     var isOnFreeTrial: Bool?
     var username: String?
@@ -42,7 +41,7 @@ struct ServiceStatus: Codable {
     init() {
         let service = ServiceStatus.load()
         isActive = service?.isActive ?? true
-        currentPlan = service?.currentPlan ?? nil
+        currentPlan = service?.currentPlan ?? ""
         activeUntil = service?.activeUntil ?? nil
         isOnFreeTrial = service?.isOnFreeTrial ?? false
         username = service?.username ?? nil
@@ -116,9 +115,6 @@ struct ServiceStatus: Codable {
     
     func isLegacyAccount() -> Bool {
         let accountId = KeyChain.username ?? ""
-        guard let currentPlan = currentPlan else {
-            return false
-        }
         
         if accountId.hasPrefix("ivpn") && currentPlan.hasPrefix("IVPN Pro") && currentPlan != "IVPN Pro" {
             return true

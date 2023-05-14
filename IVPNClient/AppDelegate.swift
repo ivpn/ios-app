@@ -147,23 +147,19 @@ class AppDelegate: UIResponder {
         switch endpoint {
         case Config.urlTypeConnect:
             viewController.showActionAlert(title: "Please confirm", message: "Do you want to connect to VPN?", action: "Connect", actionHandler: { _ in
-                DispatchQueue.delay(0.75) {
-                    if UserDefaults.shared.networkProtectionEnabled {
-                        Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                        return
-                    }
-                    Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
+                    return
                 }
+                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
             })
         case Config.urlTypeDisconnect:
             viewController.showActionAlert(title: "Please confirm", message: "Do you want to disconnect from VPN?", action: "Disconnect", actionHandler: { _ in
-                DispatchQueue.delay(0.75) {
-                    if UserDefaults.shared.networkProtectionEnabled {
-                        Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                        return
-                    }
-                    Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
+                    return
                 }
+                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
             })
         case Config.urlTypeLogin:
             if UIApplication.topViewController() as? LoginViewController != nil {
@@ -284,10 +280,7 @@ extension AppDelegate: UIApplicationDelegate {
         createLogFiles()
         resetLastPingTimestamp()
         clearURLCache()
-        
-        if #available(iOS 14.0, *) {
-            DNSManager.shared.loadProfile { _ in }
-        }
+        DNSManager.shared.loadProfile { _ in }
         
         return true
     }
@@ -351,6 +344,12 @@ extension AppDelegate: UIApplicationDelegate {
         default:
             completionHandler(false)
         }
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let endpoint = url.lastPathComponent
+        handleURLEndpoint(endpoint)
+        return true
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {

@@ -30,8 +30,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Requirements
 
-- iOS 13.0+
-- Xcode 12.0+
+- iOS 14.0+
+- Xcode 14.0+
 - Swift 5.0+
 - fastlane 2.178.0+
 - Go 1.16+
@@ -77,8 +77,8 @@ $ cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xccon
 $ cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig  
 $ cp wireguard-tunnel-provider/Config/wg-staging.template.xcconfig wireguard-tunnel-provider/Config/wg-staging.xcconfig   
 $ cp wireguard-tunnel-provider/Config/wg-release.template.xcconfig wireguard-tunnel-provider/Config/wg-release.xcconfig  
-$ cp today-extension/Config/today-extension-staging.template.xcconfig today-extension/Config/today-extension-staging.xcconfig  
-$ cp today-extension/Config/today-extension-release.template.xcconfig today-extension/Config/today-extension-release.xcconfig   
+$ cp IVPNWidget/Config/widget-staging.template.xcconfig IVPNWidget/Config/widget-staging.xcconfig  
+$ cp IVPNWidget/Config/widget-release.template.xcconfig IVPNWidget/Config/widget-release.xcconfig   
 ```
 
 ### OpenVPN configuration

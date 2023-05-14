@@ -63,7 +63,7 @@ class WireGuardSettingsViewController: UITableViewController {
         Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
             if enabled, Application.shared.connectionManager.status.isDisconnected() {
                 showDisableVPNPrompt(sourceView: sender) {
-                    Application.shared.connectionManager.removeOnDemandRules {
+                    Application.shared.connectionManager.removeOnDemandRules { [self] in
                         keyManager.setNewKey()
                     }
                 }
