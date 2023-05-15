@@ -87,7 +87,9 @@ struct ExtensionKeyManager {
     }
     
     static func needToRegenerate() -> Bool {
-        guard Date() > UserDefaults.shared.wgKeyTimestamp.addingTimeInterval(ExtensionKeyManager.regenerationInterval) else { return false }
+        guard Date() > UserDefaults.shared.wgKeyTimestamp.addingTimeInterval(ExtensionKeyManager.regenerationInterval) else {
+            return false
+        }
         
         return true
     }
