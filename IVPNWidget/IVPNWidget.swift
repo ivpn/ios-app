@@ -59,7 +59,6 @@ struct Provider: TimelineProvider {
         
         UserDefaults.shared.set(Date(), forKey: UserDefaults.Key.lastWidgetUpdate)
         
-        let apiService = WidgetAPIService()
         let requestIPv4 = ApiRequestDI(method: .get, endpoint: Config.apiGeoLookup, addressType: .IPv4)
         ApiService.shared.request(requestIPv4) { (result: Result<GeoLookup>) in
             switch result {

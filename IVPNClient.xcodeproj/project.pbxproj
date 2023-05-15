@@ -211,7 +211,6 @@
 		82C34D6F26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */; };
 		82C61D9629E6ADEF00AF972A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CDDD5B51D9D2F9F00D39924 /* Assets.xcassets */; };
 		82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61D9829E6B4C600AF972A /* LocationView.swift */; };
-		82C61D9D29E6C2D200AF972A /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61D9C29E6C2D200AF972A /* APIService.swift */; };
 		82C61D9E29E6C32400AF972A /* ApiRequestDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429BA22FC36100056B8FF /* ApiRequestDI.swift */; };
 		82C61D9F29E6C33700AF972A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429B622FC2BE90056B8FF /* Result.swift */; };
 		82C61DA029E6C37300AF972A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
@@ -598,7 +597,6 @@
 		82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
 		82C34D6D26FB02F900F06016 /* WireGuardEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardEndpoint.swift; sourceTree = "<group>"; };
 		82C61D9829E6B4C600AF972A /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
-		82C61D9C29E6C2D200AF972A /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		82C61DA829E6C4CF00AF972A /* Widget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Widget-Bridging-Header.h"; sourceTree = "<group>"; };
 		82C61DB329E6C72700AF972A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "widget-staging.xcconfig"; sourceTree = "<group>"; };
@@ -1245,7 +1243,6 @@
 			isa = PBXGroup;
 			children = (
 				8206BAF929ED69D300F916B7 /* DataService.swift */,
-				82C61D9C29E6C2D200AF972A /* APIService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -2048,7 +2045,6 @@
 				82C61DAB29E6C56400AF972A /* APIPublicKeyPin.swift in Sources */,
 				82C61DA529E6C48100AF972A /* OpenVPNProtocol.swift in Sources */,
 				82C61DA429E6C46900AF972A /* ConnectionSettings.swift in Sources */,
-				82C61D9D29E6C2D200AF972A /* APIService.swift in Sources */,
 				82152C9929F14B4C007FCECC /* KeyChain.swift in Sources */,
 				82C61D9E29E6C32400AF972A /* ApiRequestDI.swift in Sources */,
 				8271D2E42A1224530052AF61 /* ApiService.swift in Sources */,
