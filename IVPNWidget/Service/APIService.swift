@@ -23,12 +23,12 @@
 
 import Foundation
 
-protocol APIService {
+protocol APIServiceProtocol {
     func request<T>(_ requestDI: ApiRequestDI, completion: @escaping (Result<T>) -> Void)
     func getServiceError(message: String, code: Int) -> NSError
 }
 
-class WidgetAPIService: APIService {
+class WidgetAPIService: APIServiceProtocol {
     
     func request<T>(_ requestDI: ApiRequestDI, completion: @escaping (Result<T>) -> Void) {
         let request = APIRequest(method: requestDI.method, path: requestDI.endpoint, addressType: requestDI.addressType)

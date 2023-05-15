@@ -193,7 +193,7 @@ class APIClient: NSObject {
                 
                 do {
                     urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-                } catch let error {
+                } catch {
                     
                 }
                 

@@ -40,14 +40,11 @@ class ApiService {
     // MARK: - Methods -
     
     func request<T>(_ requestDI: ApiRequestDI, completion: @escaping (Result<T>) -> Void) {
-        let requestName = "\(requestDI.method.description) \(requestDI.endpoint)"
         let request = APIRequest(method: requestDI.method, path: requestDI.endpoint, contentType: requestDI.contentType, addressType: requestDI.addressType)
         
         if let params = requestDI.params {
             request.queryItems = params
         }
-        
-        log(.info, message: "\(requestName) started")
         
         APIClient().perform(request) { result in
             DispatchQueue.main.async {
@@ -60,7 +57,6 @@ class ApiService {
                         do {
                             let successResponse = try decoder.decode(T.self, from: data)
                             completion(.success(successResponse))
-                            log(.info, message: "\(requestName) success")
                             return
                         } catch {}
                         
@@ -68,15 +64,12 @@ class ApiService {
                             let errorResponse = try decoder.decode(ErrorResult.self, from: data)
                             let error = self.getServiceError(message: errorResponse.message, code: errorResponse.status)
                             completion(.failure(error))
-                            log(.info, message: "\(requestName) error response")
                             return
                         } catch {}
                     }
                     
                     completion(.failure(nil))
-                    log(.info, message: "\(requestName) parse error")
                 case .failure(let error):
-                    log(.info, message: "\(requestName) failure")
                     completion(.failure(error))
                 }
             }
@@ -84,14 +77,11 @@ class ApiService {
     }
     
     func requestCustomError<T, E>(_ requestDI: ApiRequestDI, completion: @escaping (ResultCustomError<T, E>) -> Void) {
-        let requestName = "\(requestDI.method.description) \(requestDI.endpoint)"
         let request = APIRequest(method: requestDI.method, path: requestDI.endpoint, contentType: requestDI.contentType, addressType: requestDI.addressType)
         
         if let params = requestDI.params {
             request.queryItems = params
         }
-        
-        log(.info, message: "\(requestName) started")
         
         APIClient().perform(request) { result in
             DispatchQueue.main.async {
@@ -104,22 +94,18 @@ class ApiService {
                         do {
                             let successResponse = try decoder.decode(T.self, from: data)
                             completion(.success(successResponse))
-                            log(.info, message: "\(requestName) success")
                             return
                         } catch {}
                         
                         do {
                             let errorResponse = try decoder.decode(E.self, from: data)
                             completion(.failure(errorResponse))
-                            log(.info, message: "\(requestName) error response")
                             return
                         } catch {}
                     }
                     
                     completion(.failure(nil))
-                    log(.info, message: "\(requestName) parse error")
                 case .failure:
-                    log(.info, message: "\(requestName) failure")
                     completion(.failure(nil))
                 }
             }

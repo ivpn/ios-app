@@ -130,6 +130,8 @@
 		8270D266241A477900B17B65 /* InfoAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270D265241A477900B17B65 /* InfoAlertView.swift */; };
 		8270D268241BB3D100B17B65 /* InfoAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270D267241BB3D000B17B65 /* InfoAlertViewModel.swift */; };
 		8271D2E32A092F7B0052AF61 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8271D2E22A092F7B0052AF61 /* UIDevice.swift */; };
+		8271D2E42A1224530052AF61 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2833891D9D41A60024C553 /* ApiService.swift */; };
+		8271D2E52A1224A70052AF61 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		827694F3263C04C40058B4DC /* LoginConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827694F2263C04C40058B4DC /* LoginConfirmation.swift */; };
 		82774855237596DF0061BD46 /* OpenVPNConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82774854237596DF0061BD46 /* OpenVPNConf.swift */; };
 		8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8277F1CC22118D08007C6F15 /* ProofsViewModel.swift */; };
@@ -2042,12 +2044,14 @@
 				82C61DA229E6C3F100AF972A /* UserDefaults+Ext.swift in Sources */,
 				8206BAFF29ED6FFF00F916B7 /* ConnectionInfoView.swift in Sources */,
 				82E3B20F29DDCC6400998F67 /* IVPNWidgetBundle.swift in Sources */,
+				8271D2E52A1224A70052AF61 /* ErrorResult.swift in Sources */,
 				82C61DAB29E6C56400AF972A /* APIPublicKeyPin.swift in Sources */,
 				82C61DA529E6C48100AF972A /* OpenVPNProtocol.swift in Sources */,
 				82C61DA429E6C46900AF972A /* ConnectionSettings.swift in Sources */,
 				82C61D9D29E6C2D200AF972A /* APIService.swift in Sources */,
 				82152C9929F14B4C007FCECC /* KeyChain.swift in Sources */,
 				82C61D9E29E6C32400AF972A /* ApiRequestDI.swift in Sources */,
+				8271D2E42A1224530052AF61 /* ApiService.swift in Sources */,
 				8206BAFA29ED69D300F916B7 /* DataService.swift in Sources */,
 				82C61DB429E6C72700AF972A /* LocationViewModel.swift in Sources */,
 				82C61DA629E6C48700AF972A /* WireGuardProtocol.swift in Sources */,
