@@ -58,14 +58,14 @@ struct ExtensionKeyManager {
         var interface = Interface()
         interface.privateKey = Interface.generatePrivateKey()
         
-        let params = ApiManager.authParams + [
+        let params = ApiService.authParams + [
             URLQueryItem(name: "connected_public_key", value: KeyChain.wgPublicKey ?? ""),
             URLQueryItem(name: "public_key", value: interface.publicKey ?? "")
         ]
         
         let request = ApiRequestDI(method: .post, endpoint: Config.apiSessionWGKeySet, params: params)
         
-        ApiManager.shared.request(request) { (result: Result<InterfaceResult>) in
+        ApiService.shared.request(request) { (result: Result<InterfaceResult>) in
             switch result {
             case .success(let model):
                 var ipAddress = model.ipAddress
