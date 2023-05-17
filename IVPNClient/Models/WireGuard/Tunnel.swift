@@ -51,6 +51,7 @@ struct Tunnel {
         providerConfiguration[PCKeys.endpoints.rawValue] = peers?.array.compactMap {($0 as? Peer)?.endpoint}.joined(separator: ", ")
         providerConfiguration[PCKeys.dns.rawValue] = interface?.dns
         providerConfiguration[PCKeys.addresses.rawValue] = interface?.addresses
+        providerConfiguration[PCKeys.mtu.rawValue] = interface?.mtu
         
         var settingsString = "replace_peers=true\n"
         

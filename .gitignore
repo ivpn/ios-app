@@ -60,8 +60,8 @@ staging.xcconfig
 release.xcconfig
 wg-staging.xcconfig
 wg-release.xcconfig
-today-extension-staging.xcconfig
-today-extension-release.xcconfig
+widget-staging.xcconfig
+widget-release.xcconfig
 
 # Rules for .swift files
 OpenVPNConf.swift

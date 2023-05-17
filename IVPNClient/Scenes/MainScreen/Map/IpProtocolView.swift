@@ -70,7 +70,7 @@ class IpProtocolView: UIView {
         if UIDevice.current.userInterfaceIdiom == .pad && !UIApplication.shared.isSplitOrSlideOver {
             topConstraint.constant = 40
             
-            if UIApplication.shared.statusBarOrientation.isLandscape {
+            if UIWindow.isLandscape {
                 centerXConstraint.constant = CGFloat(MapConstants.Container.iPadLandscapeLeftAnchor / 2)
                 
             } else {

@@ -194,7 +194,7 @@ class APIClient: NSObject {
                 do {
                     urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
                 } catch let error {
-                    print(error.localizedDescription)
+                    
                 }
                 
                 urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")

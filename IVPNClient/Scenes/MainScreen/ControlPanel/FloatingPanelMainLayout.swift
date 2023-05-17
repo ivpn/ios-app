@@ -29,7 +29,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     // MARK: - Override public properties -
     
     public var initialPosition: FloatingPanelPosition {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             return .full
         }
         
@@ -37,7 +37,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     }
     
     public var supportedPositions: Set<FloatingPanelPosition> {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             return [.full]
         }
         
@@ -46,7 +46,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     
     // MARK: - Private properties -
     
-    private let bottomSafeArea = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+    private let bottomSafeArea = UIWindow.keyWindow?.safeAreaInsets.bottom ?? 0
     
     private var halfHeight: CGFloat {
         if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec && UserDefaults.shared.isMultiHop {
@@ -63,7 +63,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     // MARK: - Override public methods -
 
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             switch position {
             case .full:
                 return -20
@@ -84,7 +84,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
 
     public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
         if let surfaceView = surfaceView as? FloatingPanelSurfaceView {
-            if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+            if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
                 surfaceView.grabberHandle.isHidden = true
                 surfaceView.cornerRadius = 0
             } else {
@@ -93,14 +93,14 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
             }
         }
         
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             return [
                 surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0),
                 surfaceView.widthAnchor.constraint(equalToConstant: 375)
             ]
         }
         
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isPortrait && !UIApplication.shared.isSplitOrSlideOver {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isPortrait && !UIApplication.shared.isSplitOrSlideOver {
             return [
                 surfaceView.widthAnchor.constraint(equalToConstant: 520),
                 surfaceView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
@@ -114,7 +114,7 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     }
     
     public func backdropAlphaFor(position: FloatingPanelPosition) -> CGFloat {
-        if position == .full && (UIDevice.current.userInterfaceIdiom == .phone || UIApplication.shared.statusBarOrientation.isPortrait) {
+        if position == .full && (UIDevice.current.userInterfaceIdiom == .phone || UIWindow.isPortrait) {
             return 0.3
         }
         

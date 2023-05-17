@@ -33,6 +33,8 @@ extension UserDefaults {
         static let wireguardTunnelProviderError = "wireguardTunnelProviderError"
         static let openvpnTunnelProviderError = "TunnelKitLastError"
         static let isMultiHop = "isMultiHop"
+        static let preventSameCountryMultiHop = "preventSameCountryMultiHop"
+        static let preventSameISPMultiHop = "preventSameISPMultiHop"
         static let exitServerLocation = "exitServerLocation"
         static let isLogging = "isLogging"
         static let networkProtectionEnabled = "networkProtection.enabled"
@@ -47,6 +49,7 @@ extension UserDefaults {
         static let antiTrackerHardcoreDNS = "antiTrackerHardcoreDNS"
         static let wgKeyTimestamp = "wgKeyTimestamp"
         static let wgRegenerationRate = "wgRegenerationRate"
+        static let wgMtu = "wgMtu"
         static let hostNames = "hostNames"
         static let ipv6HostNames = "ipv6HostNames"
         static let apiHostName = "apiHostName"
@@ -57,6 +60,8 @@ extension UserDefaults {
         static let connectionLocation = "connectionLocation"
         static let connectionIpAddress = "connectionIpAddress"
         static let connectionIpv6Address = "connectionIpv6Address"
+        static let lastWidgetUpdate = "lastWidgetUpdate"
+        static let geoLookup = "geoLookup"
         static let keepAlive = "keepAlive"
         static let serversSort = "serversSort"
         static let notAskToReconnect = "notAskToReconnect"
@@ -82,6 +87,7 @@ extension UserDefaults {
         static let showIPv4Servers = "showIPv4Servers"
         static let killSwitch = "killSwitch"
         static let selectHost = "selectHost"
+        static let isLoggedIn = "isLoggedIn"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -156,6 +162,10 @@ extension UserDefaults {
         return integer(forKey: Key.wgRegenerationRate)
     }
     
+    @objc dynamic var wgMtu: Int {
+        return integer(forKey: Key.wgMtu)
+    }
+    
     @objc dynamic var hostNames: [String] {
         return stringArray(forKey: Key.hostNames) ?? []
     }
@@ -212,15 +222,28 @@ extension UserDefaults {
         return bool(forKey: Key.selectHost)
     }
     
+    @objc dynamic var preventSameCountryMultiHop: Bool {
+        return bool(forKey: Key.preventSameCountryMultiHop)
+    }
+    
+    @objc dynamic var preventSameISPMultiHop: Bool {
+        return bool(forKey: Key.preventSameISPMultiHop)
+    }
+    
+    @objc dynamic var isLoggedIn: Bool {
+        return bool(forKey: Key.isLoggedIn)
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
         shared.register(defaults: [Key.keepAlive: true])
         shared.register(defaults: [Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
         shared.register(defaults: [Key.wgKeyTimestamp: Date()])
+        shared.register(defaults: [Key.serversSort: "city"])
         standard.register(defaults: [Key.selectedServerFastest: true])
         standard.register(defaults: [Key.showIPv4Servers: true])
-        shared.register(defaults: [Key.serversSort: "city"])
+        standard.register(defaults: [Key.preventSameCountryMultiHop: true])
     }
     
     static func clearSession() {
@@ -244,6 +267,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.isIPv6)
         shared.removeObject(forKey: Key.killSwitch)
         shared.removeObject(forKey: Key.selectHost)
+        shared.removeObject(forKey: Key.isLoggedIn)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)
         standard.removeObject(forKey: Key.selectedExitHost)
@@ -251,6 +275,9 @@ extension UserDefaults {
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
         standard.removeObject(forKey: Key.selectedProtocol)
+        standard.removeObject(forKey: Key.wgMtu)
+        standard.removeObject(forKey: Key.preventSameCountryMultiHop)
+        standard.removeObject(forKey: Key.preventSameISPMultiHop)
         standard.synchronize()
     }
     

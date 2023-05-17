@@ -32,12 +32,12 @@ class ServiceStatusTests: XCTestCase {
     override func setUp() {
         model.activeUntil = 1578643221
         model.isActive = false
-        model.currentPlan = nil
+        model.currentPlan = "IVPN Pro"
     }
     
     override func tearDown() {
         model.isActive = false
-        model.currentPlan = nil
+        model.currentPlan = "IVPN Pro"
     }
     
     func test_activeUntilString() {

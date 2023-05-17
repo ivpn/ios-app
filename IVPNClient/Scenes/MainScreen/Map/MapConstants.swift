@@ -36,7 +36,7 @@ class MapConstants {
         static let iPadLandscapeBottomAnchor = 0
         
         static func getTopAnchor() -> Int {
-            if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+            if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
                 return iPadLandscapeTopAnchor
             }
             
@@ -48,7 +48,7 @@ class MapConstants {
         }
         
         static func getLeftAnchor() -> Int {
-            if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+            if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
                 return iPadLandscapeLeftAnchor
             }
             
@@ -56,7 +56,7 @@ class MapConstants {
         }
         
         static func getBottomAnchor() -> Int {
-            if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+            if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
                 return iPadLandscapeBottomAnchor
             }
             
