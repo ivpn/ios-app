@@ -79,9 +79,9 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startPingService(updateServerListDidComplete: updateServerListDidComplete)
         refreshUI()
         initConnectionInfo()
+        startPingService()
     }
     
     deinit {
@@ -244,7 +244,7 @@ class MainViewController: UIViewController {
         Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
     }
     
-    private func startPingService(updateServerListDidComplete: Bool) {
+    private func startPingService() {
         if updateServerListDidComplete {
             DispatchQueue.delay(0.5) {
                 Pinger.shared.ping()
