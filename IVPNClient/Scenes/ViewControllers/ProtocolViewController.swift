@@ -24,6 +24,7 @@
 import UIKit
 import JGProgressHUD
 import ActiveLabel
+import WidgetKit
 
 class ProtocolViewController: UITableViewController {
     
@@ -121,10 +122,8 @@ class ProtocolViewController: UITableViewController {
     }
     
     func validateSecureDNS(connectionProtocol: ConnectionSettings) -> Bool {
-        if #available(iOS 14.0, *) {
-            if DNSManager.shared.isEnabled && connectionProtocol == .ipsec {
-                return false
-            }
+        if DNSManager.shared.isEnabled && connectionProtocol == .ipsec {
+            return false
         }
         
         return true
@@ -355,11 +354,9 @@ extension ProtocolViewController {
                 showActionSheet(title: "To use IKEv2 protocol you must disable DNS over HTTTPS/TLS", actions: ["Disable"], sourceView: cell as UIView) { index in
                     switch index {
                     case 0:
-                        if #available(iOS 14.0, *) {
-                            DNSManager.shared.removeProfile { _ in
-                                DNSManager.shared.loadProfile { _ in
-                                    self.tableView.reloadData()
-                                }
+                        DNSManager.shared.removeProfile { _ in
+                            DNSManager.shared.loadProfile { _ in
+                                self.tableView.reloadData()
                             }
                         }
                     default:
@@ -379,12 +376,10 @@ extension ProtocolViewController {
             }
         }
         
-        if #available(iOS 14.0, *) {
-            if connectionProtocol.tunnelType() == .ipsec {
-                DNSManager.shared.removeProfile { _ in
-                    DNSManager.shared.loadProfile { _ in
-                        
-                    }
+        if connectionProtocol.tunnelType() == .ipsec {
+            DNSManager.shared.removeProfile { _ in
+                DNSManager.shared.loadProfile { _ in
+                    
                 }
             }
         }
@@ -392,6 +387,7 @@ extension ProtocolViewController {
         reloadTable(connectionProtocol: connectionProtocol, indexPath: indexPath)
         
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

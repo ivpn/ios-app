@@ -24,7 +24,8 @@
 import Foundation
 import NetworkExtension
 import UIKit
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 class VPNManager {
     
@@ -239,13 +240,17 @@ class VPNManager {
         case .openvpn:
             self.disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .wireguard) { _ in
-                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in }
+                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
+                        self.disconnect(tunnelType: .openvpn)
+                    }
                 }
             }
         case .wireguard:
             self.disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .openvpn) { _ in
-                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in }
+                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
+                        self.disconnect(tunnelType: .wireguard)
+                    }
                 }
             }
         }
@@ -264,7 +269,9 @@ class VPNManager {
     
     func disconnect(tunnelType: TunnelType, reconnectAutomatically: Bool = false) {
         getManagerFor(tunnelType: tunnelType) { manager in
-            manager.connection.stopVPNTunnel()
+            DispatchQueue.async {
+                manager.connection.stopVPNTunnel()
+            }
             
             if !UserDefaults.shared.networkProtectionEnabled || reconnectAutomatically {
                 self.removeOnDemandRule(manager: manager)
@@ -384,7 +391,7 @@ class VPNManager {
         }
         
         do {
-            try session.sendProviderMessage(OpenVPNTunnelProvider.Message.requestLog.data) { data in
+            try session.sendProviderMessage(OpenVPNProvider.Message.requestLog.data) { data in
                 guard let data = data, !data.isEmpty else {
                     completion(nil)
                     return

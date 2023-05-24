@@ -71,7 +71,7 @@ extension ControlPanelViewController {
                 } else {
                     Application.shared.connectionManager.evaluateConnection(network: Application.shared.network, newTrust: trust) { error in
                         if error != nil {
-                            showWireGuardKeysMissingError()
+                            self.showWireGuardKeysMissingError()
                         }
                     }
                 }
@@ -89,7 +89,7 @@ extension ControlPanelViewController {
             
             Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
                 if enabled, Application.shared.connectionManager.status.isDisconnected() {
-                    showDisableVPNPrompt(sourceView: controlPanelView.protocolLabel) {
+                    showDisableVPNPrompt(sourceView: controlPanelView.protocolLabel) { [self] in
                         Application.shared.connectionManager.removeOnDemandRules {}
                         presentSelectProtocol()
                     }

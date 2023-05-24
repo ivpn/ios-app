@@ -30,6 +30,7 @@ struct Interface {
     
     var addresses: String?
     var listenPort: Int
+    var mtu: Int?
     var privateKey: String?
     var dns: String?
     
@@ -49,9 +50,10 @@ struct Interface {
     
     // MARK: - Initialize -
     
-    init(addresses: String? = nil, listenPort: Int = 0, privateKey: String? = nil, dns: String? = nil) {
+    init(addresses: String? = nil, listenPort: Int = 0, mtu: Int = 0, privateKey: String? = nil, dns: String? = nil) {
         self.addresses = addresses
         self.listenPort = listenPort
+        self.mtu = mtu
         self.privateKey = privateKey
         self.dns = dns
     }

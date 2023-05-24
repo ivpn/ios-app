@@ -158,4 +158,13 @@ class FileSystemManager {
         return directory.appendingPathComponent(name)
     }
     
+    static func tempFile(text: String, fileName: String) -> URL {
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent(fileName)
+            .appendingPathExtension("txt")
+        try? text.write(to: url, atomically: false, encoding: .utf8)
+        
+        return url
+    }
+    
 }

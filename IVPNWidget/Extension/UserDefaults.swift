@@ -1,10 +1,10 @@
 //
-//  UserDefaultsTodayExtension+Ext.swift
+//  UserDefaults.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2019-09-17.
-//  Copyright (c) 2020 Privatus Limited.
+//  Created by Juraj Hilje on 2023-04-09.
+//  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -14,7 +14,7 @@
 //
 //  The IVPN iOS app is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 //  details.
 //
 //  You should have received a copy of the GNU General Public License
@@ -24,12 +24,6 @@
 import Foundation
 
 extension UserDefaults {
-    
-    @objc dynamic var isLoggedIn: Bool {
-        let username = KeyChain.username ?? ""
-        let sessionToken = KeyChain.sessionToken ?? ""
-        return !username.isEmpty || !sessionToken.isEmpty
-    }
     
     @objc dynamic var connectionStatus: Int {
         return integer(forKey: Key.connectionStatus)
@@ -45,6 +39,18 @@ extension UserDefaults {
     
     @objc dynamic var connectionIpv6Address: String {
         return string(forKey: Key.connectionIpv6Address) ?? ""
+    }
+    
+    @objc dynamic var lastWidgetUpdate: Date {
+        if let date = object(forKey: Key.lastWidgetUpdate) as? Date {
+            return date
+        }
+        
+        return Date().addingTimeInterval(TimeInterval(-60))
+    }
+    
+    @objc dynamic var selectedProtocol: String {
+        return string(forKey: Key.selectedProtocol) ?? ""
     }
     
 }

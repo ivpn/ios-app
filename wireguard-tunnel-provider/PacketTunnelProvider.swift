@@ -25,6 +25,7 @@ import Network
 import NetworkExtension
 import WireGuardKit
 import os
+import WidgetKit
 
 enum PacketTunnelProviderError: String, Error {
     case savedProtocolConfigurationIsInvalid
@@ -113,6 +114,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 self.tunnelSetupFailed()
                 completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             } else {
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
                 completionHandler(nil)
             }
         }
@@ -128,6 +130,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             wgTurnOff(handle)
         }
         
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         completionHandler()
     }
     
@@ -226,26 +229,23 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 newSettings.dnsSettings = NEDNSSettings(servers: [UserDefaults.shared.antiTrackerDNS])
             }
         } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty && !UserDefaults.shared.resolvedDNSInsideVPN.isEmpty && UserDefaults.shared.resolvedDNSInsideVPN != [""] {
-            if #available(iOS 14.0, *) {
-                switch DNSProtocolType.preferred() {
-                case .doh:
-                    let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
-                    newSettings.dnsSettings = dnsSettings
-                case .dot:
-                    let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
-                    newSettings.dnsSettings = dnsSettings
-                default:
-                    newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                }
-            } else {
+            switch DNSProtocolType.preferred() {
+            case .doh:
+                let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+                dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
+                newSettings.dnsSettings = dnsSettings
+            case .dot:
+                let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+                dnsSettings.serverName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
+                newSettings.dnsSettings = dnsSettings
+            default:
                 newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
             }
         }
         
         if let mtu = self.config.providerConfiguration![PCKeys.mtu.rawValue] as? NSNumber, mtu.intValue > 0 {
             newSettings.mtu = mtu
+            wg_log(.info, message: "MTU: \(mtu)")
         }
         
         return newSettings

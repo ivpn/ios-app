@@ -56,10 +56,6 @@ class SecureDNSView: UITableView {
     }
     
     @objc func updateEnableSwitch() {
-        guard #available(iOS 14.0, *) else {
-            return
-        }
-        
         DNSManager.shared.loadProfile { _ in
             self.enableSwitch.isOn = DNSManager.shared.isEnabled
         }
@@ -74,12 +70,7 @@ class SecureDNSView: UITableView {
     // MARK: - Observers -
     
     private func addObservers() {
-        if #available(iOS 13.0, *) {
-            NotificationCenter.default.addObserver(self, selector: #selector(updateEnableSwitch), name: UIScene.didActivateNotification, object: nil)
-        } else {
-            NotificationCenter.default.addObserver(self, selector: #selector(updateEnableSwitch), name: UIApplication.didBecomeActiveNotification, object: nil)
-        }
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateEnableSwitch), name: UIScene.didActivateNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNS, object: nil)
     }
     

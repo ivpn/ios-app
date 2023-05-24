@@ -30,17 +30,11 @@ extension ApiService {
     func getServersList(storeInCache: Bool, completion: @escaping (ServersUpdateResult) -> Void) {
         let request = APIRequest(method: .get, path: Config.apiServersFile)
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
         log(.info, message: "Load servers")
         
         APIClient().perform(request) { result in
             switch result {
             case .success(let response):
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                }
-                
                 guard Config.useDebugServers == false else { return }
                 
                 if let data = response.body {

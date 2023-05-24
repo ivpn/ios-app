@@ -47,8 +47,11 @@ class Authentication {
     // MARK: - Methods -
     
     func logIn(session: Session) {
-        guard session.token != nil, session.vpnUsername != nil, session.vpnPassword != nil else { return }
+        guard session.token != nil, session.vpnUsername != nil, session.vpnPassword != nil else {
+            return
+        }
         
+        UserDefaults.shared.set(true, forKey: UserDefaults.Key.isLoggedIn)
         KeyChain.save(session: session)
     }
     
@@ -57,6 +60,7 @@ class Authentication {
         FileSystemManager.clearSession()
         Application.shared.clearSession()
         UserDefaults.shared.set(false, forKey: UserDefaults.Key.networkProtectionEnabled)
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isLoggedIn)
         
         if deleteSettings {
             StorageManager.clearSession()

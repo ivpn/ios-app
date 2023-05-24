@@ -2,9 +2,7 @@ name: CI
 
 on:
   push:
-    branches:
-      - "main"
-      - "develop"
+    branches: [ "main", "develop" ]
   pull_request:
 
 jobs:
@@ -16,23 +14,15 @@ jobs:
       with:
         go-version: 1.16
     - uses: actions/checkout@v2
-    - uses: actions/cache@v1
-      with:
-        path: Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-pods-
-    - name: Install dependencies
-      run: pod install
     - name: Set up config files
       run: |
         cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig
         cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig
         cp wireguard-tunnel-provider/Config/wg-staging.template.xcconfig wireguard-tunnel-provider/Config/wg-staging.xcconfig
         cp wireguard-tunnel-provider/Config/wg-release.template.xcconfig wireguard-tunnel-provider/Config/wg-release.xcconfig
-        cp today-extension/Config/today-extension-staging.template.xcconfig today-extension/Config/today-extension-staging.xcconfig
-        cp today-extension/Config/today-extension-release.template.xcconfig today-extension/Config/today-extension-release.xcconfig
+        cp IVPNWidget/Config/widget-staging.template.xcconfig IVPNWidget/Config/widget-staging.xcconfig
+        cp IVPNWidget/Config/widget-release.template.xcconfig IVPNWidget/Config/widget-release.xcconfig
         cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
         cp fastlane/Appfile.template fastlane/Appfile
     - name: Build and test
-      run: xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11'
+      run: xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 14'

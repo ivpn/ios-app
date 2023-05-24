@@ -24,6 +24,7 @@
 import UIKit
 import FloatingPanel
 import NetworkExtension
+import WidgetKit
 
 class MainViewController: UIViewController {
     
@@ -78,9 +79,9 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startPingService(updateServerListDidComplete: updateServerListDidComplete)
         refreshUI()
         initConnectionInfo()
+        startPingService()
     }
     
     deinit {
@@ -143,6 +144,8 @@ class MainViewController: UIViewController {
     }
     
     @objc func updateGeoLocation() {
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        
         guard let controlPanel = floatingPanel.contentViewController as? ControlPanelViewController else {
             return
         }
@@ -158,6 +161,7 @@ class MainViewController: UIViewController {
                 mainView.ipv4ViewModel = ProofsViewModel(model: model)
                 mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
                 mainView.updateInfoAlert()
+                model.save()
                 
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model
@@ -240,7 +244,7 @@ class MainViewController: UIViewController {
         Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
     }
     
-    private func startPingService(updateServerListDidComplete: Bool) {
+    private func startPingService() {
         if updateServerListDidComplete {
             DispatchQueue.delay(0.5) {
                 Pinger.shared.ping()

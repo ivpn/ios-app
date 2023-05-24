@@ -137,6 +137,7 @@ class SessionManager {
                 
                 if model.serviceActive {
                     log(.info, message: "Session status success, status: active")
+                    UserDefaults.shared.set(true, forKey: UserDefaults.Key.isLoggedIn)
                     self.delegate?.sessionStatusSuccess()
                     return
                 }

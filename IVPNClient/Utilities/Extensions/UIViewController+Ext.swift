@@ -24,12 +24,15 @@
 import UIKit
 import WebKit
 import MessageUI
+import WidgetKit
 
 extension UIDevice {
+    
     var hasNotch: Bool {
-        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        let bottom = UIWindow.keyWindow?.safeAreaInsets.bottom ?? 0
         return bottom > 0
     }
+    
 }
 
 extension UIViewController {
@@ -61,11 +64,10 @@ extension UIViewController {
     // MARK: - @IBActions -
     
     @IBAction func dismissViewController(_ sender: Any) {
-        if #available(iOS 13.0, *) {
-            if let presentationController = navigationController?.presentationController {
-                presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
-            }
+        if let presentationController = navigationController?.presentationController {
+            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
         }
+        
         navigationController?.dismiss(animated: true)
     }
     
@@ -76,6 +78,7 @@ extension UIViewController {
         Application.shared.authentication.logOut(deleteSettings: deleteSettings)
         NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
         NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         
         if deleteSession {
             let sessionManager = SessionManager()
@@ -211,6 +214,26 @@ extension UIViewController {
         }
         
         return true
+    }
+    
+    func topMostViewController() -> UIViewController {
+        if self.presentedViewController == nil {
+            return self
+        }
+        
+        if let navigation = self.presentedViewController as? UINavigationController {
+            return navigation.visibleViewController!.topMostViewController()
+        }
+        
+        if let tab = self.presentedViewController as? UITabBarController {
+            if let selectedTab = tab.selectedViewController {
+                return selectedTab.topMostViewController()
+            }
+            
+            return tab.topMostViewController()
+        }
+        
+        return self.presentedViewController!.topMostViewController()
     }
     
 }

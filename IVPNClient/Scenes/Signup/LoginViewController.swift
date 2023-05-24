@@ -23,6 +23,7 @@
 
 import UIKit
 import JGProgressHUD
+import WidgetKit
 
 class LoginViewController: UIViewController {
 
@@ -132,9 +133,7 @@ class LoginViewController: UIViewController {
         
         // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
         // Remove when fixed in future releases
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.setNeedsLayout()
-        }
+        navigationController?.navigationBar.setNeedsLayout()
     }
     
     // MARK: - Observers -
@@ -264,11 +263,8 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         loginConfirmation.clear()
-        
         KeyChain.username = (self.userName.text ?? "").trim()
-        Application.shared.serverList = VPNServerList()
-        Application.shared.settings = Settings(serverList: Application.shared.serverList)
-        
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         navigationController?.dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: Notification.Name.ServiceAuthorized, object: nil)
             NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)

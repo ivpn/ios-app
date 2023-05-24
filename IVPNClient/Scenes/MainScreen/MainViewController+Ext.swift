@@ -21,6 +21,7 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import UIKit
 import FloatingPanel
 
 // MARK: - FloatingPanelControllerDelegate -
@@ -34,7 +35,7 @@ extension MainViewController: FloatingPanelControllerDelegate {
     }
     
     func floatingPanelShouldBeginDragging(_ vc: FloatingPanelController) -> Bool {
-        return UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape && !UIApplication.shared.isSplitOrSlideOver ? false : true
+        return UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver ? false : true
     }
     
     func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {

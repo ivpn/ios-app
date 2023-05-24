@@ -1,10 +1,10 @@
 //
-//  ApiManager.swift
+//  APIService.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2019-09-17.
-//  Copyright (c) 2020 Privatus Limited.
+//  Created by Juraj Hilje on 2023-04-12.
+//  Copyright (c) 2023 Privatus Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -14,7 +14,7 @@
 //
 //  The IVPN iOS app is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 //  details.
 //
 //  You should have received a copy of the GNU General Public License
@@ -23,16 +23,14 @@
 
 import Foundation
 
-class ApiManager {
-    
-    // MARK: - Properties -
-    
-    static let shared = ApiManager()
-    
-    // MARK: - Methods -
+protocol APIService {
+    func request<T>(_ requestDI: ApiRequestDI, completion: @escaping (Result<T>) -> Void)
+    func getServiceError(message: String, code: Int) -> NSError
+}
+
+class WidgetAPIService: APIService {
     
     func request<T>(_ requestDI: ApiRequestDI, completion: @escaping (Result<T>) -> Void) {
-        let requestName = "\(requestDI.method.description) \(requestDI.endpoint)"
         let request = APIRequest(method: requestDI.method, path: requestDI.endpoint, addressType: requestDI.addressType)
         
         if let params = requestDI.params {
@@ -61,8 +59,6 @@ class ApiManager {
             }
         }
     }
-    
-    // MARK: - Helper methods -
     
     func getServiceError(message: String, code: Int = 99) -> NSError {
         return NSError(

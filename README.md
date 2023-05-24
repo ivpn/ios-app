@@ -30,10 +30,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Requirements
 
-- iOS 12.0+
-- Xcode 12.0+
+- iOS 14.0+
+- Xcode 14.0+
 - Swift 5.0+
-- CocoaPods 1.11.3+
 - fastlane 2.178.0+
 - Go 1.16+
 
@@ -41,20 +40,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 Project dev dependencies:  
 
-* [CocoaPods](https://cocoapods.org)  
 * [fastlane](https://fastlane.tools)  
 * [SwiftLint](https://github.com/realm/SwiftLint)  
 * [Go](https://golang.org)  
 
-Install CocoaPods, fastlane, SwiftLint and Go:  
+Install fastlane, SwiftLint and Go:  
 
 ```sh
-$ brew install cocoapods fastlane swiftlint go
+$ brew install fastlane swiftlint go
 ```
 
 ### Dependencies
 
-Dependencies are installed with [Swift Package Manager](https://swift.org/package-manager/) and [CocoaPods](https://cocoapods.org).
+Dependencies are installed with [Swift Package Manager](https://swift.org/package-manager/).
 
 Project dependencies:  
 
@@ -68,13 +66,6 @@ Project dependencies:
 * [ReachabilitySwift](https://github.com/ashleymills/Reachability.swift)  
 * [FloatingPanel](https://github.com/scenee/FloatingPanel)  
 
-To pull and build dependencies run:  
-
-```sh
-$ pod install  
-$ open IVPNClient.xcworkspace  
-```
-
 ### Xcode build configurations
 
 There are different build configurations: Staging and Release. 
@@ -86,8 +77,8 @@ $ cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xccon
 $ cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig  
 $ cp wireguard-tunnel-provider/Config/wg-staging.template.xcconfig wireguard-tunnel-provider/Config/wg-staging.xcconfig   
 $ cp wireguard-tunnel-provider/Config/wg-release.template.xcconfig wireguard-tunnel-provider/Config/wg-release.xcconfig  
-$ cp today-extension/Config/today-extension-staging.template.xcconfig today-extension/Config/today-extension-staging.xcconfig  
-$ cp today-extension/Config/today-extension-release.template.xcconfig today-extension/Config/today-extension-release.xcconfig   
+$ cp IVPNWidget/Config/widget-staging.template.xcconfig IVPNWidget/Config/widget-staging.xcconfig  
+$ cp IVPNWidget/Config/widget-release.template.xcconfig IVPNWidget/Config/widget-release.xcconfig   
 ```
 
 ### OpenVPN configuration
@@ -124,7 +115,7 @@ $ fastlane test
 Alternatively, run tests using xcodebuild:  
 
 ```sh
-$ xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11'
+$ xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 14'
 ```
 
 <a name="deployment"></a>
