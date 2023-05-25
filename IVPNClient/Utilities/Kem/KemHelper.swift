@@ -24,7 +24,7 @@
 import Foundation
 import CryptoKit
 
-enum KemAlgorithm: String {
+enum KemAlgorithm: String, CaseIterable {
     case Kyber1024 = "Kyber1024"
     case ClassicMcEliece348864 = "Classic-McEliece-348864"
 }
@@ -46,13 +46,13 @@ struct KemHelper {
     
     // MARK: - Initialize -
     
-    init(algorithms: [KemAlgorithm]) throws {
+    init(algorithms: [KemAlgorithm] = KemAlgorithm.allCases) throws {
+        self.algorithms = algorithms
         guard !algorithms.isEmpty else {
             throw KemHelperError.initError
         }
         
         generateKeys()
-        
         guard !privateKeys.isEmpty, !publicKeys.isEmpty else {
             throw KemHelperError.generateKeysError
         }
