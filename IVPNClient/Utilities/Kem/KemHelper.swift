@@ -86,7 +86,7 @@ struct KemHelper {
     }
     
     private func generateKeys(algorithm: KemAlgorithm) -> (String, String) {
-        var kem = algorithm == .Kyber1024 ? OQS_KEM_kyber_1024_new() : OQS_KEM_classic_mceliece_348864_new()
+        let kem = algorithm == .Kyber1024 ? OQS_KEM_kyber_1024_new() : OQS_KEM_classic_mceliece_348864_new()
         let publicKey = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(kem?.pointee.length_public_key ?? 0))
         let secretKey = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(kem?.pointee.length_secret_key ?? 0))
         OQS_KEM_keypair(kem, publicKey, secretKey)
@@ -112,10 +112,23 @@ struct KemHelper {
         
         return (privateKeys, publicKeys)
     }
-    
     private func decodeCipher(algorithm: KemAlgorithm, privateKeyBase64: String, cipherBase64: String) -> String {
-        // TODO: Implement decodeCipher()
-        return ""
+        let kem = algorithm == .Kyber1024 ? OQS_KEM_kyber_1024_new() : OQS_KEM_classic_mceliece_348864_new()
+        let secret = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(kem?.pointee.length_shared_secret ?? 0))
+        let cipherData = Data(base64Encoded: cipherBase64)
+        let privateKeyData = Data(base64Encoded: privateKeyBase64)
+        let cipherPtr = cipherData?.withUnsafeBytes { $0.bindMemory(to: UInt8.self).baseAddress }
+        let privateKeyPtr = privateKeyData?.withUnsafeBytes { $0.bindMemory(to: UInt8.self).baseAddress }
+        OQS_KEM_decaps(kem, secret, cipherPtr, privateKeyPtr)
+        
+        let secretData = Data(bytes: secret, count: Int(kem?.pointee.length_shared_secret ?? 0))
+        
+        OQS_KEM_free(kem)
+        secret.deallocate()
+        cipherPtr?.deallocate()
+        privateKeyPtr?.deallocate()
+        
+        return secretData.base64EncodedString()
     }
     
     private mutating func decodeCipherMulti(algorithms: [KemAlgorithm], privateKeys: [String], ciphers: [String]) -> [String] {
@@ -146,7 +159,7 @@ struct KemHelper {
             hasher.update(data: sDecoded)
         }
         let hash = hasher.finalize()
-        return Data(hasher.finalize()).base64EncodedString()
+        return Data(hash).base64EncodedString()
     }
     
 }
