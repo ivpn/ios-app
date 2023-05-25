@@ -86,8 +86,19 @@ struct KemHelper {
     }
     
     private func generateKeys(algorithm: KemAlgorithm) -> (String, String) {
-        // TODO: Implement generateKeys()
-        return ("", "")
+        var kem = algorithm == .Kyber1024 ? OQS_KEM_kyber_1024_new() : OQS_KEM_classic_mceliece_348864_new()
+        let publicKey = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(kem?.pointee.length_public_key ?? 0))
+        let secretKey = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(kem?.pointee.length_secret_key ?? 0))
+        OQS_KEM_keypair(kem, publicKey, secretKey)
+        
+        let publicKeyData = Data(bytes: publicKey, count: Int(kem?.pointee.length_public_key ?? 0))
+        let secretKeyData = Data(bytes: secretKey, count: Int(kem?.pointee.length_secret_key ?? 0))
+        
+        OQS_KEM_free(kem)
+        publicKey.deallocate()
+        secretKey.deallocate()
+
+        return (publicKeyData.base64EncodedString(), secretKeyData.base64EncodedString())
     }
     
     private mutating func generateKeysMulti(algorithms: [KemAlgorithm]) -> ([String], [String]) {
