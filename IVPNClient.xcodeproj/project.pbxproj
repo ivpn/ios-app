@@ -194,6 +194,7 @@
 		82B81E4F235F2614005986E8 /* XCUIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B81E4E235F2614005986E8 /* XCUIApplication+Ext.swift */; };
 		82B81E51235F2A13005986E8 /* InitScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B81E50235F2A13005986E8 /* InitScreenTests.swift */; };
 		82BA8AC122E5DC93004E8D8D /* NETunnelProviderProtocol+ExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA8AC022E5DC93004E8D8D /* NETunnelProviderProtocol+ExtTests.swift */; };
+		82BBD9CF2A1F4F9D00375252 /* liboqs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82BBD9CE2A1F4F9D00375252 /* liboqs.a */; };
 		82BBF25921AC799A00589766 /* NetworkProtectionRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF25821AC799A00589766 /* NetworkProtectionRulesViewController.swift */; };
 		82BBF26121AD213500589766 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26021AD213500589766 /* Theme.swift */; };
 		82BBF26921AE802400589766 /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */; };
@@ -583,6 +584,19 @@
 		82B81E4E235F2614005986E8 /* XCUIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Ext.swift"; sourceTree = "<group>"; };
 		82B81E50235F2A13005986E8 /* InitScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitScreenTests.swift; sourceTree = "<group>"; };
 		82BA8AC022E5DC93004E8D8D /* NETunnelProviderProtocol+ExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NETunnelProviderProtocol+ExtTests.swift"; sourceTree = "<group>"; };
+		82BBD9CE2A1F4F9D00375252 /* liboqs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liboqs.a; sourceTree = "<group>"; };
+		82BBD9E02A1F503F00375252 /* sha3x4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha3x4.h; sourceTree = "<group>"; };
+		82BBD9E12A1F503F00375252 /* kem_classic_mceliece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kem_classic_mceliece.h; sourceTree = "<group>"; };
+		82BBD9E22A1F503F00375252 /* oqsconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oqsconfig.h; sourceTree = "<group>"; };
+		82BBD9E32A1F503F00375252 /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
+		82BBD9E42A1F503F00375252 /* sha2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha2.h; sourceTree = "<group>"; };
+		82BBD9E52A1F503F00375252 /* sig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sig.h; sourceTree = "<group>"; };
+		82BBD9E62A1F503F00375252 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		82BBD9E72A1F503F00375252 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		82BBD9E82A1F503F00375252 /* rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rand.h; sourceTree = "<group>"; };
+		82BBD9E92A1F503F00375252 /* kem_kyber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kem_kyber.h; sourceTree = "<group>"; };
+		82BBD9EA2A1F503F00375252 /* kem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kem.h; sourceTree = "<group>"; };
+		82BBD9EB2A1F503F00375252 /* oqs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oqs.h; sourceTree = "<group>"; };
 		82BBF25821AC799A00589766 /* NetworkProtectionRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionRulesViewController.swift; sourceTree = "<group>"; };
 		82BBF26021AD213500589766 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Ext.swift"; sourceTree = "<group>"; };
@@ -765,6 +779,7 @@
 				82D598C621A6A5C7000FABDE /* SystemConfiguration.framework in Frameworks */,
 				9CB2CE311DAF9227007A4D2D /* CoreData.framework in Frameworks */,
 				9C6942251DD0CBF800F9A801 /* NetworkExtension.framework in Frameworks */,
+				82BBD9CF2A1F4F9D00375252 /* liboqs.a in Frameworks */,
 				82EC884729A12D510024CC40 /* SnapKit in Frameworks */,
 				82EC883B29A12C7D0024CC40 /* SwiftyStoreKit in Frameworks */,
 				829F5FC729A13CAE009E1AD3 /* KeychainAccess in Frameworks */,
@@ -1296,6 +1311,42 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		82BBD9BB2A1E563700375252 /* liboqs */ = {
+			isa = PBXGroup;
+			children = (
+				82BBD9CE2A1F4F9D00375252 /* liboqs.a */,
+				82BBD9DE2A1F503F00375252 /* include */,
+			);
+			path = liboqs;
+			sourceTree = "<group>";
+		};
+		82BBD9DE2A1F503F00375252 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				82BBD9DF2A1F503F00375252 /* oqs */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		82BBD9DF2A1F503F00375252 /* oqs */ = {
+			isa = PBXGroup;
+			children = (
+				82BBD9E02A1F503F00375252 /* sha3x4.h */,
+				82BBD9E12A1F503F00375252 /* kem_classic_mceliece.h */,
+				82BBD9E22A1F503F00375252 /* oqsconfig.h */,
+				82BBD9E32A1F503F00375252 /* sha3.h */,
+				82BBD9E42A1F503F00375252 /* sha2.h */,
+				82BBD9E52A1F503F00375252 /* sig.h */,
+				82BBD9E62A1F503F00375252 /* common.h */,
+				82BBD9E72A1F503F00375252 /* aes.h */,
+				82BBD9E82A1F503F00375252 /* rand.h */,
+				82BBD9E92A1F503F00375252 /* kem_kyber.h */,
+				82BBD9EA2A1F503F00375252 /* kem.h */,
+				82BBD9EB2A1F503F00375252 /* oqs.h */,
+			);
+			path = oqs;
+			sourceTree = "<group>";
+		};
 		82BF32F424484E3800248E4F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1546,6 +1597,7 @@
 		9CDDD5AD1D9D2F9F00D39924 /* IVPNClient */ = {
 			isa = PBXGroup;
 			children = (
+				82BBD9BB2A1E563700375252 /* liboqs */,
 				82234B6121BA7ACA00B082DE /* Config */,
 				8286638C21524D9F00C4D068 /* Enums */,
 				82234B7521BAA13D00B082DE /* Models */,
@@ -2659,11 +2711,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/IVPNClient/liboqs/include\"";
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
 				MARKETING_VERSION = 2.7.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3112,11 +3169,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/IVPNClient/liboqs/include\"";
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
 				MARKETING_VERSION = 2.7.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3146,11 +3208,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/IVPNClient/liboqs/include\"";
 				INFOPLIST_FILE = "$(SRCROOT)/IVPNClient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
 				MARKETING_VERSION = 2.7.0;
 				ONLY_ACTIVE_ARCH = YES;
