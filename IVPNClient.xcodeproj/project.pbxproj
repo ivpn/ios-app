@@ -195,6 +195,7 @@
 		82B81E51235F2A13005986E8 /* InitScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B81E50235F2A13005986E8 /* InitScreenTests.swift */; };
 		82BA8AC122E5DC93004E8D8D /* NETunnelProviderProtocol+ExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA8AC022E5DC93004E8D8D /* NETunnelProviderProtocol+ExtTests.swift */; };
 		82BBD9CF2A1F4F9D00375252 /* liboqs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82BBD9CE2A1F4F9D00375252 /* liboqs.a */; };
+		82BBD9EE2A1F5FA100375252 /* KemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBD9ED2A1F5FA100375252 /* KemHelper.swift */; };
 		82BBF25921AC799A00589766 /* NetworkProtectionRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF25821AC799A00589766 /* NetworkProtectionRulesViewController.swift */; };
 		82BBF26121AD213500589766 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26021AD213500589766 /* Theme.swift */; };
 		82BBF26921AE802400589766 /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */; };
@@ -597,6 +598,7 @@
 		82BBD9E92A1F503F00375252 /* kem_kyber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kem_kyber.h; sourceTree = "<group>"; };
 		82BBD9EA2A1F503F00375252 /* kem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kem.h; sourceTree = "<group>"; };
 		82BBD9EB2A1F503F00375252 /* oqs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oqs.h; sourceTree = "<group>"; };
+		82BBD9ED2A1F5FA100375252 /* KemHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KemHelper.swift; sourceTree = "<group>"; };
 		82BBF25821AC799A00589766 /* NetworkProtectionRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtectionRulesViewController.swift; sourceTree = "<group>"; };
 		82BBF26021AD213500589766 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		82BBF26821AE802400589766 /* DispatchQueue+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Ext.swift"; sourceTree = "<group>"; };
@@ -915,6 +917,7 @@
 		82234B6421BA7EB500B082DE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				82BBD9EC2A1F5F9000375252 /* Kem */,
 				82CE599725ED48AB0078099D /* DNSResolver */,
 				825A43FB215CCFC10076131F /* Extensions */,
 				82234B6521BA7F3500B082DE /* Logging */,
@@ -1345,6 +1348,14 @@
 				82BBD9EB2A1F503F00375252 /* oqs.h */,
 			);
 			path = oqs;
+			sourceTree = "<group>";
+		};
+		82BBD9EC2A1F5F9000375252 /* Kem */ = {
+			isa = PBXGroup;
+			children = (
+				82BBD9ED2A1F5FA100375252 /* KemHelper.swift */,
+			);
+			path = Kem;
 			sourceTree = "<group>";
 		};
 		82BF32F424484E3800248E4F /* View */ = {
@@ -2244,6 +2255,7 @@
 				9CB2CE2B1DABD120007A4D2D /* NavigationManager.swift in Sources */,
 				82BBF25921AC799A00589766 /* NetworkProtectionRulesViewController.swift in Sources */,
 				82DAB37D245725E200302F4C /* ServiceTitleTableViewCell.swift in Sources */,
+				82BBD9EE2A1F5FA100375252 /* KemHelper.swift in Sources */,
 				82C293C321CCDA42000B74EC /* UIColor+Ext.swift in Sources */,
 				828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */,
 				825E834F25A327EB00938240 /* CaptchaViewController.swift in Sources */,
