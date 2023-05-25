@@ -62,7 +62,7 @@ struct KemHelper {
     
     func getPublicKey(algorithm: KemAlgorithm) -> String {
         let index = getIndex(algorithm: algorithm)
-        return publicKeys[getIndex(algorithm: algorithm)]
+        return publicKeys[index]
     }
     
     mutating func setCipher(algorithm: KemAlgorithm, cipher: String) {
@@ -112,6 +112,7 @@ struct KemHelper {
         
         return (privateKeys, publicKeys)
     }
+    
     private func decodeCipher(algorithm: KemAlgorithm, privateKeyBase64: String, cipherBase64: String) -> String {
         let kem = algorithm == .Kyber1024 ? OQS_KEM_kyber_1024_new() : OQS_KEM_classic_mceliece_348864_new()
         let secret = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(kem?.pointee.length_shared_secret ?? 0))
