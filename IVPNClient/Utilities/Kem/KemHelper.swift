@@ -46,16 +46,9 @@ struct KemHelper {
     
     // MARK: - Initialize -
     
-    init(algorithms: [KemAlgorithm] = KemAlgorithm.allCases) throws {
+    init(algorithms: [KemAlgorithm] = KemAlgorithm.allCases) {
         self.algorithms = algorithms
-        guard !algorithms.isEmpty else {
-            throw KemHelperError.initError
-        }
-        
         generateKeys()
-        guard !privateKeys.isEmpty, !publicKeys.isEmpty else {
-            throw KemHelperError.generateKeysError
-        }
     }
     
     // MARK: - Methods -
@@ -151,7 +144,7 @@ struct KemHelper {
         return -1
     }
     
-    func hashSecrets(secrets: [String]) -> String? {
+    private func hashSecrets(secrets: [String]) -> String? {
         var hasher = SHA256()
         for secret in secrets {
             guard let sDecoded = Data(base64Encoded: secret) else {
