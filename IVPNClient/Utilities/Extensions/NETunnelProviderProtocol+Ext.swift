@@ -132,6 +132,7 @@ extension NETunnelProviderProtocol {
         
         let peer = Peer(
             publicKey: publicKey,
+            presharedKey: KeyChain.wgPresharedKey,
             allowedIPs: Config.wgPeerAllowedIPs,
             endpoint: endpoint,
             persistentKeepalive: Config.wgPeerPersistentKeepalive
