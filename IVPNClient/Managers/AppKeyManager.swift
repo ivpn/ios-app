@@ -93,10 +93,8 @@ class AppKeyManager {
         
         var kemHelper = KemHelper()
         params = params + [
-            URLQueryItem(name: "kem_public_key1", value: kemHelper.getPublicKey(algorithm: .Kyber1024)),
-            URLQueryItem(name: "kem_public_key2", value: kemHelper.getPublicKey(algorithm: .ClassicMcEliece348864))
+            URLQueryItem(name: "kem_public_key1", value: kemHelper.getPublicKey(algorithm: .Kyber1024))
         ]
-        
         let request = ApiRequestDI(method: .post, endpoint: Config.apiSessionWGKeySet, params: params)
         
         delegate?.setKeyStart()
@@ -109,7 +107,6 @@ class AppKeyManager {
                 KeyChain.wgPublicKey = interface.publicKey
                 KeyChain.wgIpAddress = model.ipAddress
                 kemHelper.setCipher(algorithm: .Kyber1024, cipher: model.kemCipher1)
-                kemHelper.setCipher(algorithm: .ClassicMcEliece348864, cipher: model.kemCipher2)
                 KeyChain.wgPresharedKey = kemHelper.calculatePresharedKey()
                 self.delegate?.setKeySuccess()
             case .failure:

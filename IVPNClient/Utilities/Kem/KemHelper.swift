@@ -26,7 +26,6 @@ import CryptoKit
 
 enum KemAlgorithm: String, CaseIterable {
     case Kyber1024 = "Kyber1024"
-    case ClassicMcEliece348864 = "Classic-McEliece-348864"
 }
 
 enum KemHelperError: Error {
@@ -46,7 +45,7 @@ struct KemHelper {
     
     // MARK: - Initialize -
     
-    init(algorithms: [KemAlgorithm] = KemAlgorithm.allCases) {
+    init(algorithms: [KemAlgorithm] = [KemAlgorithm.Kyber1024]) {
         self.algorithms = algorithms
         generateKeys()
     }
@@ -79,13 +78,16 @@ struct KemHelper {
     }
     
     private func generateKeys(algorithm: KemAlgorithm) -> (String, String) {
-        let kem = algorithm == .Kyber1024 ? OQS_KEM_kyber_1024_new() : OQS_KEM_classic_mceliece_348864_new()
-        let publicKey = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(kem?.pointee.length_public_key ?? 0))
-        let secretKey = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(kem?.pointee.length_secret_key ?? 0))
+        let kem = OQS_KEM_kyber_1024_new()
+        let publicKeyLength = OQS_KEM_kyber_1024_length_public_key
+        let secretKeyLength = OQS_KEM_kyber_1024_length_secret_key
+        let publicKey = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(publicKeyLength))
+        let secretKey = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(secretKeyLength))
+        
         OQS_KEM_keypair(kem, publicKey, secretKey)
         
-        let publicKeyData = Data(bytes: publicKey, count: Int(kem?.pointee.length_public_key ?? 0))
-        let secretKeyData = Data(bytes: secretKey, count: Int(kem?.pointee.length_secret_key ?? 0))
+        let publicKeyData = Data(bytes: publicKey, count: Int(publicKeyLength))
+        let secretKeyData = Data(bytes: secretKey, count: Int(secretKeyLength))
         
         OQS_KEM_free(kem)
         publicKey.deallocate()
@@ -98,29 +100,31 @@ struct KemHelper {
         var privateKeys = [String]()
         var publicKeys = [String]()
         for algo in algorithms {
-            let (priv, pub) = generateKeys(algorithm: algo)
-            privateKeys.append(priv)
+            let (pub, priv) = generateKeys(algorithm: algo)
             publicKeys.append(pub)
+            privateKeys.append(priv)
         }
         
         return (privateKeys, publicKeys)
     }
     
     private func decodeCipher(algorithm: KemAlgorithm, privateKeyBase64: String, cipherBase64: String) -> String {
-        let kem = algorithm == .Kyber1024 ? OQS_KEM_kyber_1024_new() : OQS_KEM_classic_mceliece_348864_new()
-        let secret = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(kem?.pointee.length_shared_secret ?? 0))
+        let kem = OQS_KEM_kyber_1024_new()
+        let sharedSecretLength = OQS_KEM_kyber_1024_length_shared_secret
+        let sharedSecret = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(sharedSecretLength))
         let cipherData = Data(base64Encoded: cipherBase64)
         let privateKeyData = Data(base64Encoded: privateKeyBase64)
-        let cipherPtr = cipherData?.withUnsafeBytes { $0.bindMemory(to: UInt8.self).baseAddress }
-        let privateKeyPtr = privateKeyData?.withUnsafeBytes { $0.bindMemory(to: UInt8.self).baseAddress }
-        OQS_KEM_decaps(kem, secret, cipherPtr, privateKeyPtr)
+        let cipher = cipherData?.withUnsafeBytes { $0.bindMemory(to: UInt8.self).baseAddress }
+        let privateKey = privateKeyData?.withUnsafeBytes { $0.bindMemory(to: UInt8.self).baseAddress }
         
-        let secretData = Data(bytes: secret, count: Int(kem?.pointee.length_shared_secret ?? 0))
+        OQS_KEM_decaps(kem, sharedSecret, cipher, privateKey)
+        
+        let secretData = Data(bytes: sharedSecret, count: Int(sharedSecretLength))
         
         OQS_KEM_free(kem)
-        secret.deallocate()
-        cipherPtr?.deallocate()
-        privateKeyPtr?.deallocate()
+        sharedSecret.deallocate()
+        cipher?.deallocate()
+        privateKey?.deallocate()
         
         return secretData.base64EncodedString()
     }

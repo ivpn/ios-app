@@ -69,8 +69,8 @@
 
 ///// OQS_COPY_FROM_UPSTREAM_FRAGMENT_ADD_ALG_ENABLE_DEFINES_START
 
-#define OQS_ENABLE_KEM_CLASSIC_MCELIECE 1
-#define OQS_ENABLE_KEM_classic_mceliece_348864 1
+/* #undef OQS_ENABLE_KEM_CLASSIC_MCELIECE */
+/* #undef OQS_ENABLE_KEM_classic_mceliece_348864 */
 /* #undef OQS_ENABLE_KEM_classic_mceliece_348864_avx */
 /* #undef OQS_ENABLE_KEM_classic_mceliece_348864f */
 /* #undef OQS_ENABLE_KEM_classic_mceliece_348864f_avx */
