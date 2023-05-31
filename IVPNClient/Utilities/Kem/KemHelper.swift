@@ -45,7 +45,7 @@ struct KemHelper {
     
     // MARK: - Initialize -
     
-    init(algorithms: [KemAlgorithm] = [KemAlgorithm.Kyber1024]) {
+    init(algorithms: [KemAlgorithm] = [.Kyber1024]) {
         self.algorithms = algorithms
         generateKeys()
     }
@@ -53,13 +53,12 @@ struct KemHelper {
     // MARK: - Methods -
     
     func getPublicKey(algorithm: KemAlgorithm) -> String {
-        let index = getIndex(algorithm: algorithm)
+        let index = algorithms.firstIndex(of: algorithm) ?? 0
         return publicKeys[index]
     }
     
     mutating func setCipher(algorithm: KemAlgorithm, cipher: String) {
-        let index = getIndex(algorithm: algorithm)
-        ciphers[index] = cipher
+        ciphers.append(cipher)
     }
     
     mutating func calculatePresharedKey() -> String? {
@@ -123,8 +122,6 @@ struct KemHelper {
         
         OQS_KEM_free(kem)
         sharedSecret.deallocate()
-        cipher?.deallocate()
-        privateKey?.deallocate()
         
         return secretData.base64EncodedString()
     }
@@ -136,16 +133,6 @@ struct KemHelper {
         }
         
         return secrets
-    }
-    
-    private func getIndex(algorithm: KemAlgorithm) -> Int {
-        for (index, algo) in algorithms.enumerated() {
-            if algo == algorithm {
-                return index
-            }
-        }
-        
-        return -1
     }
     
     private func hashSecrets(secrets: [String]) -> String? {
