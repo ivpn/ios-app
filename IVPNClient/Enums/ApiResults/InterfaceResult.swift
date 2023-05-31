@@ -25,6 +25,5 @@ import Foundation
 
 struct InterfaceResult: Decodable {
     var ipAddress: String
-    let kemCipher1: String
-    let kemCipher2: String
+    let kemCipher1: String?
 }
