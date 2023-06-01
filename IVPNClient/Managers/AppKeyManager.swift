@@ -106,8 +106,12 @@ class AppKeyManager {
                 KeyChain.wgPrivateKey = interface.privateKey
                 KeyChain.wgPublicKey = interface.publicKey
                 KeyChain.wgIpAddress = model.ipAddress
-                kemHelper.setCipher(algorithm: .Kyber1024, cipher: model.kemCipher1)
-                KeyChain.wgPresharedKey = kemHelper.calculatePresharedKey()
+                if let kemCipher1 = model.kemCipher1 {
+                    kemHelper.setCipher(algorithm: .Kyber1024, cipher: kemCipher1)
+                    KeyChain.wgPresharedKey = kemHelper.calculatePresharedKey()
+                } else {
+                    KeyChain.wgPresharedKey = nil
+                }
                 self.delegate?.setKeySuccess()
             case .failure:
                 self.delegate?.setKeyFail()
