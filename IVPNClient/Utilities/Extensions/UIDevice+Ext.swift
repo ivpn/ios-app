@@ -121,10 +121,6 @@ extension UIDevice {
         }
     }
     
-    static func isPasscodeSet() -> Bool {
-        return LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
-    }
-    
 }
 
 extension UIDevice {

@@ -207,15 +207,6 @@ extension UIViewController {
         showErrorAlert(title: "Error", message: "Failed to connect to VPN - WireGuard keys are missing. Please generate new keys in the Settings or try to connect to VPN manually.")
     }
     
-    func evaluatePasscode() -> Bool {
-        guard UIDevice.isPasscodeSet() else {
-            showAlert(title: "Passcode is disabled", message: "Please enable Passcode in the iOS Settings")
-            return false
-        }
-        
-        return true
-    }
-    
     func topMostViewController() -> UIViewController {
         if self.presentedViewController == nil {
             return self
