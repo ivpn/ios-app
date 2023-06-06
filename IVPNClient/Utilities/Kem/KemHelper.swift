@@ -33,7 +33,7 @@ enum KemHelperError: Error {
     case generateKeysError
 }
 
-struct KemHelper {
+struct KEM {
     
     // MARK: - Properties -
     
