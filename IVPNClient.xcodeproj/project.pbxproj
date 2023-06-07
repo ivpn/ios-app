@@ -202,6 +202,8 @@
 		82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF26C21AE95C000589766 /* UIApplication+Ext.swift */; };
 		82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBF27021AECC8100589766 /* UILabel+Ext.swift */; };
 		82BF32F624484E5100248E4F /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BF32F524484E5100248E4F /* CreateAccountView.swift */; };
+		82BF79622A2F8DDC00061972 /* liboqs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82486FAC2A277058009B53F4 /* liboqs.a */; };
+		82BF79752A2F98C500061972 /* KemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BBD9ED2A1F5FA100375252 /* KemHelper.swift */; };
 		82C1D5BC23FE78570059A915 /* MapScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BB23FE78570059A915 /* MapScrollView.swift */; };
 		82C1D5BF23FE8C6D0059A915 /* ControlPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1D5BE23FE8C6D0059A915 /* ControlPanelViewController.swift */; };
 		82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C293BE21CCD49A000B74EC /* NavigationController.swift */; };
@@ -741,6 +743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82B6052F21708575004B40E6 /* NetworkExtension.framework in Frameworks */,
+				82BF79622A2F8DDC00061972 /* liboqs.a in Frameworks */,
 				824B86E126D42A5700D0101A /* WireGuardKit in Frameworks */,
 				829F5FCB29A13CF2009E1AD3 /* KeychainAccess in Frameworks */,
 			);
@@ -2058,6 +2061,7 @@
 				820EA86B232242F800E16B2D /* ApiRequestDI.swift in Sources */,
 				8270753722AFC7E70067C323 /* StringProtocol+Ext.swift in Sources */,
 				82B605262170840C004B40E6 /* PacketTunnelProvider.swift in Sources */,
+				82BF79752A2F98C500061972 /* KemHelper.swift in Sources */,
 				82E7168E2181E8E900D6B7C2 /* WireGuardProtocol.swift in Sources */,
 				8292E19B21748B0500123538 /* UserDefaults+Ext.swift in Sources */,
 				82CA214329379CCD008BADE8 /* FileSystemManager.swift in Sources */,
@@ -2522,10 +2526,14 @@
 					"$(PROJECT_DIR)/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/IVPNClient/liboqs/include\"";
 				INFOPLIST_FILE = "wireguard-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IVPNClient/liboqs",
+				);
 				MARKETING_VERSION = 2.7.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -2558,10 +2566,14 @@
 					"$(PROJECT_DIR)/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/IVPNClient/liboqs/include\"";
 				INFOPLIST_FILE = "wireguard-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IVPNClient/liboqs",
+				);
 				MARKETING_VERSION = 2.7.0;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2833,10 +2845,14 @@
 					"$(PROJECT_DIR)/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/IVPNClient/liboqs/include\"";
 				INFOPLIST_FILE = "wireguard-tunnel-provider/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IVPNClient/liboqs",
+				);
 				MARKETING_VERSION = 2.7.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;

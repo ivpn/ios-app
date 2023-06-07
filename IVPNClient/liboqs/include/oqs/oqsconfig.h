@@ -18,9 +18,9 @@
 /* #undef USE_SANITIZER */
 /* #undef CMAKE_BUILD_TYPE */
 
-#define OQS_USE_OPENSSL 1
-#define OQS_USE_AES_OPENSSL 1
-#define OQS_USE_SHA2_OPENSSL 1
+/* #undef OQS_USE_OPENSSL */
+/* #undef OQS_USE_AES_OPENSSL */
+/* #undef OQS_USE_SHA2_OPENSSL */
 /* #undef OQS_USE_SHA3_OPENSSL */
 
 /* #undef OQS_USE_PTHREADS_IN_TESTS */
