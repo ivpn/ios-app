@@ -2,6 +2,10 @@
 build/
 DerivedData/
 
+## Static libraries
+IVPNClient/liboqs/liboqs-iphoneos.a
+IVPNClient/liboqs/liboqs-iphonesimulator.a
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
