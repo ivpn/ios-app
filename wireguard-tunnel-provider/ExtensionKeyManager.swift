@@ -58,11 +58,12 @@ struct ExtensionKeyManager {
         var interface = Interface()
         interface.privateKey = Interface.generatePrivateKey()
         
-        let params = ApiManager.authParams + [
+        var params = ApiManager.authParams + [
             URLQueryItem(name: "connected_public_key", value: KeyChain.wgPublicKey ?? ""),
             URLQueryItem(name: "public_key", value: interface.publicKey ?? "")
         ]
-        
+        var kem = KEM()
+        params = params + [URLQueryItem(name: "kem_public_key1", value: kem.getPublicKey(algorithm: .Kyber1024))]
         let request = ApiRequestDI(method: .post, endpoint: Config.apiSessionWGKeySet, params: params)
         
         ApiManager.shared.request(request) { (result: Result<InterfaceResult>) in
@@ -79,6 +80,12 @@ struct ExtensionKeyManager {
                 UserDefaults.shared.set(Date(), forKey: UserDefaults.Key.wgKeyTimestamp)
                 KeyChain.wgPrivateKey = interface.privateKey
                 KeyChain.wgPublicKey = interface.publicKey
+                if let kemCipher1 = model.kemCipher1 {
+                    kem.setCipher(algorithm: .Kyber1024, cipher: kemCipher1)
+                    KeyChain.wgPresharedKey = kem.calculatePresharedKey()
+                } else {
+                    KeyChain.wgPresharedKey = nil
+                }
                 completion(interface.privateKey, ipAddress)
             case .failure:
                 completion(nil, nil)
