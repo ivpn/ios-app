@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1739,14 +1739,14 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="383.5" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383.5" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="14" width="361.5" height="16"/>
+                                            <rect key="frame" x="16" y="13.5" width="361.5" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -1755,7 +1755,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="359.5" height="21.5"/>
+                                            <rect key="frame" x="16" y="11" width="359.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -1777,7 +1777,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="98.5" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -2068,8 +2068,48 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="kyR-6G-Jra">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="A7k-S9-BKV">
                                         <rect key="frame" x="0.0" y="355.5" width="414" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A7k-S9-BKV" id="E0q-JA-op2">
+                                            <rect key="frame" x="0.0" y="0.0" width="383.5" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HK8-HG-901">
+                                                    <rect key="frame" x="16" y="34" width="351.5" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="UeF-Il-FKW"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" name="ivpnLabel5"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantum Resistance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ujb-H4-dvc">
+                                                    <rect key="frame" x="16" y="10" width="351.5" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="EI6-Z6-Asz"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Ujb-H4-dvc" secondAttribute="trailing" constant="16" id="OdS-RE-rwx"/>
+                                                <constraint firstItem="HK8-HG-901" firstAttribute="leading" secondItem="E0q-JA-op2" secondAttribute="leading" constant="16" id="Z9F-cP-U8K"/>
+                                                <constraint firstAttribute="trailing" secondItem="HK8-HG-901" secondAttribute="trailing" constant="16" id="fCl-yy-Ryh"/>
+                                                <constraint firstItem="Ujb-H4-dvc" firstAttribute="leading" secondItem="E0q-JA-op2" secondAttribute="leading" constant="16" id="gdb-qA-2fP"/>
+                                                <constraint firstItem="HK8-HG-901" firstAttribute="top" secondItem="Ujb-H4-dvc" secondAttribute="bottom" constant="3" id="uZo-78-dUo"/>
+                                                <constraint firstItem="Ujb-H4-dvc" firstAttribute="top" secondItem="E0q-JA-op2" secondAttribute="top" constant="10" id="x2B-GM-1Qt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" name="ivpnBlue"/>
+                                        <connections>
+                                            <segue destination="ocV-OR-MsS" kind="show" id="PQd-Mv-PiN"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="kyR-6G-Jra">
+                                        <rect key="frame" x="0.0" y="415.5" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kyR-6G-Jra" id="hM9-ym-gKn">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -2101,7 +2141,7 @@
                             <tableViewSection headerTitle="MTU" footerTitle="Valid range [576 - 65535]. Please note that changing this value make affect the proper functioning of the VPN tunnel." id="w1I-l7-d5p">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="1GV-kH-Y46">
-                                        <rect key="frame" x="0.0" y="523" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="583" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1GV-kH-Y46" id="oDP-pC-QIF">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -2137,7 +2177,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Vvc-ic-vgv">
-                                        <rect key="frame" x="0.0" y="583" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="643" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vvc-ic-vgv" id="Ubn-TA-KP4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -2374,7 +2414,7 @@
                             <outlet property="delegate" destination="SVb-yR-JjU" id="6Re-LG-c0d"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Custom Port" id="z1y-Ye-m24">
+                    <navigationItem key="navigationItem" title="Add Custom Port" largeTitleDisplayMode="never" id="z1y-Ye-m24">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="kUg-Ry-AET">
                             <connections>
                                 <action selector="dismissViewController:" destination="SVb-yR-JjU" id="e24-MD-Y6r"/>
@@ -2773,13 +2813,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="QWM-1S-ZSK">
                                                             <rect key="frame" x="0.0" y="0.0" width="79" height="34.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wi-Fi network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EZ-JE-Wek">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Wi-Fi network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EZ-JE-Wek">
                                                                     <rect key="frame" x="0.0" y="0.0" width="79" height="14.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" name="ivpnLabel5"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULG-XZ-rT5">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULG-XZ-rT5">
                                                                     <rect key="frame" x="0.0" y="17.5" width="79" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
@@ -4456,7 +4496,7 @@
                             <outlet property="delegate" destination="MXS-EA-dK2" id="M1F-Ie-1H6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Configure MTU" id="lce-jG-9lX">
+                    <navigationItem key="navigationItem" title="Configure MTU" largeTitleDisplayMode="never" id="lce-jG-9lX">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="zOz-lx-2BS">
                             <connections>
                                 <action selector="dismissViewController:" destination="MXS-EA-dK2" id="dWQ-jk-QGM"/>
@@ -4476,6 +4516,55 @@
             </objects>
             <point key="canvasLocation" x="6294" y="12"/>
         </scene>
+        <!--Quantum Resistance-->
+        <scene sceneID="2OJ-Qb-AeN">
+            <objects>
+                <viewController id="jBV-as-muh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KWO-yD-5W2"/>
+                        <viewControllerLayoutGuide type="bottom" id="oqe-EB-HzC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oVs-Y4-qqM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcf-fz-46K">
+                                <rect key="frame" x="20" y="214" width="374" height="107.5"/>
+                                <string key="text">When Enabled, a Pre-shared key has been securely exchanged between your device and the server using post-quantum Key Encapsulation Mechanism (KEM) algorithms. If Disabled, the current VPN connection, while secure under today's standards, does not include this extra layer of quantum resistance.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" name="ivpnLabelPrimary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHL-iy-7GY">
+                                <rect key="frame" x="20" y="117" width="374" height="72"/>
+                                <string key="text">Quantum Resistance: Indicates whether your current WireGuard VPN connection is using additional protection measures against potential future quantum computer attacks.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" name="ivpnLabelPrimary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hHL-iy-7GY" firstAttribute="leading" secondItem="oVs-Y4-qqM" secondAttribute="leadingMargin" id="824-uz-szo"/>
+                            <constraint firstItem="hHL-iy-7GY" firstAttribute="trailing" secondItem="oVs-Y4-qqM" secondAttribute="trailingMargin" id="LYn-JQ-3mr"/>
+                            <constraint firstItem="mcf-fz-46K" firstAttribute="trailing" secondItem="oVs-Y4-qqM" secondAttribute="trailingMargin" id="ahX-9K-FxV"/>
+                            <constraint firstItem="hHL-iy-7GY" firstAttribute="top" secondItem="KWO-yD-5W2" secondAttribute="bottom" constant="25" id="aoE-Y8-gGz"/>
+                            <constraint firstItem="mcf-fz-46K" firstAttribute="leading" secondItem="oVs-Y4-qqM" secondAttribute="leadingMargin" id="cB6-zV-UrB"/>
+                            <constraint firstItem="mcf-fz-46K" firstAttribute="top" secondItem="hHL-iy-7GY" secondAttribute="bottom" constant="25" id="eYe-LJ-J9p"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Quantum Resistance" largeTitleDisplayMode="never" id="hjh-rq-38P">
+                        <barButtonItem key="rightBarButtonItem" title="Close" style="done" id="b7J-85-FeF">
+                            <connections>
+                                <action selector="dismissViewController:" destination="jBV-as-muh" id="eeQ-G9-PXi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nfN-dM-IE6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8037.6811594202909" y="12.723214285714285"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="jBO-kh-cLX">
             <objects>
@@ -4494,6 +4583,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNl-QT-RxD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5414" y="13"/>
+        </scene>
+        <!--Quantum Resistance-->
+        <scene sceneID="bHb-5a-3sN">
+            <objects>
+                <navigationController title="Quantum Resistance" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="ocV-OR-MsS" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Ou1-C2-U5d"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="98Z-fD-wte">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jBV-as-muh" kind="relationship" relationship="rootViewController" id="5sH-ND-Rbk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Mx-t1-BTV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7180" y="13"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
