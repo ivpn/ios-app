@@ -49,9 +49,9 @@ struct ExtensionKeyManager {
         return TimeInterval(regenerationRate * 60 * 60 * 24)
     }
     
-    func upgradeKey(completion: @escaping (String?, String?) -> Void) {
+    func upgradeKey(completion: @escaping (String?, String?, String?) -> Void) {
         guard ExtensionKeyManager.needToRegenerate() else {
-            completion(nil, nil)
+            completion(nil, nil, nil)
             return
         }
         
@@ -83,12 +83,13 @@ struct ExtensionKeyManager {
                 if let kemCipher1 = model.kemCipher1 {
                     kem.setCipher(algorithm: .Kyber1024, cipher: kemCipher1)
                     KeyChain.wgPresharedKey = kem.calculatePresharedKey()
+                    completion(interface.privateKey, ipAddress, KeyChain.wgPresharedKey)
                 } else {
                     KeyChain.wgPresharedKey = nil
+                    completion(interface.privateKey, ipAddress, nil)
                 }
-                completion(interface.privateKey, ipAddress)
             case .failure:
-                completion(nil, nil)
+                completion(nil, nil, nil)
             }
         }
     }

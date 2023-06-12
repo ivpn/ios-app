@@ -157,7 +157,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     
     private func regenerateKeys(completion: @escaping (Error?) -> Void) {
         wg_log(.info, message: "Rotating keys")
-        ExtensionKeyManager.shared.upgradeKey { privateKey, ipAddress in
+        ExtensionKeyManager.shared.upgradeKey { privateKey, ipAddress, presharedKey in
             guard let privateKey = privateKey, let ipAddress = ipAddress else {
                 completion(nil)
                 return
@@ -179,6 +179,11 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                     
                     wg_log(.info, message: "Update config with new key")
                     self.updateWgConfig(key: "private_key", value: privateKeyHex)
+                    
+                    if let hexPresharedKey = presharedKey?.base64KeyToHex() {
+                        self.updateWgConfig(key: "preshared_key", value: hexPresharedKey)
+                    }
+                    
                     completion(nil)
                 }
             }
