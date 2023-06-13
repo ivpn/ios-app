@@ -77,7 +77,7 @@ struct KEM {
     }
     
     private func generateKeys(algorithm: KemAlgorithm) -> (String, String) {
-        let kem = OQS_KEM_kyber_1024_new()
+        let kem = OQS_KEM_new(algorithm.rawValue)
         let publicKeyLength = OQS_KEM_kyber_1024_length_public_key
         let secretKeyLength = OQS_KEM_kyber_1024_length_secret_key
         let publicKey = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(publicKeyLength))
@@ -108,7 +108,7 @@ struct KEM {
     }
     
     private func decodeCipher(algorithm: KemAlgorithm, privateKeyBase64: String, cipherBase64: String) -> String {
-        let kem = OQS_KEM_kyber_1024_new()
+        let kem = OQS_KEM_new(algorithm.rawValue)
         let sharedSecretLength = OQS_KEM_kyber_1024_length_shared_secret
         let sharedSecret = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(sharedSecretLength))
         let cipherData = Data(base64Encoded: cipherBase64)
