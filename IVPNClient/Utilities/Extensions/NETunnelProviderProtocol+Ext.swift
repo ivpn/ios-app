@@ -121,7 +121,7 @@ extension NETunnelProviderProtocol {
         
         if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = getExitHost() {
             publicKey = exitHost.publicKey
-            endpoint = Peer.endpoint(host: host.host, port: port)
+            endpoint = Peer.endpoint(host: host.host, port: exitHost.multihopPort)
         }
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
