@@ -58,7 +58,7 @@ struct ExtensionKeyManager {
         var interface = Interface()
         interface.privateKey = Interface.generatePrivateKey()
         
-        var params = ApiManager.authParams + [
+        let params = ApiService.authParams + [
             URLQueryItem(name: "connected_public_key", value: KeyChain.wgPublicKey ?? ""),
             URLQueryItem(name: "public_key", value: interface.publicKey ?? "")
         ]
@@ -66,7 +66,7 @@ struct ExtensionKeyManager {
         params = params + [URLQueryItem(name: "kem_public_key1", value: kem.getPublicKey(algorithm: .Kyber1024))]
         let request = ApiRequestDI(method: .post, endpoint: Config.apiSessionWGKeySet, params: params)
         
-        ApiManager.shared.request(request) { (result: Result<InterfaceResult>) in
+        ApiService.shared.request(request) { (result: Result<InterfaceResult>) in
             switch result {
             case .success(let model):
                 var ipAddress = model.ipAddress
@@ -95,7 +95,9 @@ struct ExtensionKeyManager {
     }
     
     static func needToRegenerate() -> Bool {
-        guard Date() > UserDefaults.shared.wgKeyTimestamp.addingTimeInterval(ExtensionKeyManager.regenerationInterval) else { return false }
+        guard Date() > UserDefaults.shared.wgKeyTimestamp.addingTimeInterval(ExtensionKeyManager.regenerationInterval) else {
+            return false
+        }
         
         return true
     }
