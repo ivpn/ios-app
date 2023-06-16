@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.9.0 - 2023-05-24  
+
+[NEW] New Widget implemented with WidgetKit  
+[NEW] Option to prevent a Multi-Hop chain with the same provider  
+[NEW] MTU configuration for WireGuard  
+[IMPROVED] Upgraded OpenVPN and OpenSSL libraries  
+[IMPROVED] Alternative method to obtain diagnostic logs  
+[FIXED] Servers mismatch when selecting individual servers  
+[FIXED] Unable to change the port when switching from WireGuard to OpenVPN  
+[FIXED] Fastest server settings list automatically toggling servers off  
+[FIXED] App remains in "disconnecting" state when using Network Protection  
+[FIXED] Server latency not displayed after logging in  
+[NOTE] Removed support for iOS 12 and 13  
+
 ## 2.8.0 - 2023-01-30  
 
 [NEW] Favorite servers  
