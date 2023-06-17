@@ -91,11 +91,9 @@
 		824B141C2609D5E700766B05 /* DNSProtocolTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B141B2609D5E700766B05 /* DNSProtocolTypeTests.swift */; };
 		824B86B926D3D16100D0101A /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86AD26D3D16100D0101A /* FileManager+Extension.swift */; };
 		824B86BF26D3D16100D0101A /* ringlogger.c in Sources */ = {isa = PBXBuildFile; fileRef = 824B86B526D3D16100D0101A /* ringlogger.c */; };
-		824B86C526D3D7B600D0101A /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86C226D3D7B500D0101A /* ExtensionKeyManager.swift */; };
 		824B86C626D3D7B600D0101A /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86C326D3D7B600D0101A /* TimerManager.swift */; };
 		824B86C826D3D7DE00D0101A /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A82174C11600123538 /* Interface.swift */; };
 		824B86C926D3D7FB00D0101A /* CIDRAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638CB217DC25600410318 /* CIDRAddress.swift */; };
-		824B86CB26D3E8D100D0101A /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86C226D3D7B500D0101A /* ExtensionKeyManager.swift */; };
 		824B86D226D40E7800D0101A /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86AD26D3D16100D0101A /* FileManager+Extension.swift */; };
 		824B86D426D40E9700D0101A /* ringlogger.c in Sources */ = {isa = PBXBuildFile; fileRef = 824B86B526D3D16100D0101A /* ringlogger.c */; };
 		824B86DF26D42A4600D0101A /* WireGuardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 824B86DE26D42A4600D0101A /* WireGuardKit */; };
@@ -311,7 +309,6 @@
 		82ED17542A1261A000E7926D /* x25519.c in Sources */ = {isa = PBXBuildFile; fileRef = 82ED17512A1261A000E7926D /* x25519.c */; };
 		82ED17552A1262BA00E7926D /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A82174C11600123538 /* Interface.swift */; };
 		82ED17592A1262F800E7926D /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
-		82ED175A2A12632700E7926D /* ExtensionKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86C226D3D7B500D0101A /* ExtensionKeyManager.swift */; };
 		82EEB6C625F9398600915837 /* DNSProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EEB6C525F9398600915837 /* DNSProtocolType.swift */; };
 		82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EEB6C525F9398600915837 /* DNSProtocolType.swift */; };
 		82EEB6DB25F961BC00915837 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CE598F25ED3C7A0078099D /* URL+Ext.swift */; };
@@ -520,7 +517,6 @@
 		824B86AD26D3D16100D0101A /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		824B86B526D3D16100D0101A /* ringlogger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ringlogger.c; sourceTree = "<group>"; };
 		824B86B726D3D16100D0101A /* ringlogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ringlogger.h; sourceTree = "<group>"; };
-		824B86C226D3D7B500D0101A /* ExtensionKeyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionKeyManager.swift; sourceTree = "<group>"; };
 		824B86C326D3D7B600D0101A /* TimerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModel.swift; sourceTree = "<group>"; };
 		824F56072233FE6F00BCDD5C /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libwg-go.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1331,7 +1327,6 @@
 				824B86AA26D3D16100D0101A /* WireGuard */,
 				829FCCDE230D23FE009C63DF /* Config */,
 				82B605252170840C004B40E6 /* PacketTunnelProvider.swift */,
-				824B86C226D3D7B500D0101A /* ExtensionKeyManager.swift */,
 				824B86C326D3D7B600D0101A /* TimerManager.swift */,
 				82B605272170840C004B40E6 /* Info.plist */,
 				82B605282170840C004B40E6 /* wireguard_tunnel_provider.entitlements */,
@@ -2102,7 +2097,6 @@
 				82968A37298A98C900077E0A /* KeyChain.swift in Sources */,
 				82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */,
 				820EA86C2322430700E16B2D /* Result.swift in Sources */,
-				824B86C526D3D7B600D0101A /* ExtensionKeyManager.swift in Sources */,
 				823FFB092338E09A00F91A5D /* Capability.swift in Sources */,
 				82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */,
 				825E836425A4834200938240 /* APIPublicKeyPin.swift in Sources */,
@@ -2172,7 +2166,6 @@
 				9CF7E37820F7ABE3008E0EC5 /* PacketTunnelProvider.swift in Sources */,
 				82D90474216C7DAF0032F3BE /* Date+Ext.swift in Sources */,
 				82E716992181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */,
-				82ED175A2A12632700E7926D /* ExtensionKeyManager.swift in Sources */,
 				822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */,
 				8223C54F22EAEC7000CD283D /* Session.swift in Sources */,
 				82ED17432A12596E00E7926D /* AddressType.swift in Sources */,
@@ -2288,7 +2281,6 @@
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
 				82DAB37B2457013900302F4C /* Service.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
-				824B86CB26D3E8D100D0101A /* ExtensionKeyManager.swift in Sources */,
 				8208525823FD5EB20008C112 /* MainViewController.swift in Sources */,
 				825E836325A4834200938240 /* APIPublicKeyPin.swift in Sources */,
 				82E716842181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
