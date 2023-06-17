@@ -23,9 +23,9 @@
 
 import Foundation
 
-struct ExtensionKeyManager {
+struct ExtensionKeyManagerLegacy {
     
-    static let shared = ExtensionKeyManager()
+    static let shared = ExtensionKeyManagerLegacy()
     
     static var regenerationCheckInterval: TimeInterval {
         if Config.useDebugWireGuardKeyUpgrade {
@@ -50,7 +50,7 @@ struct ExtensionKeyManager {
     }
     
     func upgradeKey(completion: @escaping (String?, String?, String?) -> Void) {
-        guard ExtensionKeyManager.needToRegenerate() else {
+        guard ExtensionKeyManagerLegacy.needToRegenerate() else {
             completion(nil, nil, nil)
             return
         }
@@ -58,7 +58,7 @@ struct ExtensionKeyManager {
         var interface = Interface()
         interface.privateKey = Interface.generatePrivateKey()
         
-        let params = ApiService.authParams + [
+        var params = ApiService.authParams + [
             URLQueryItem(name: "connected_public_key", value: KeyChain.wgPublicKey ?? ""),
             URLQueryItem(name: "public_key", value: interface.publicKey ?? "")
         ]
@@ -95,7 +95,7 @@ struct ExtensionKeyManager {
     }
     
     static func needToRegenerate() -> Bool {
-        guard Date() > UserDefaults.shared.wgKeyTimestamp.addingTimeInterval(ExtensionKeyManager.regenerationInterval) else {
+        guard Date() > UserDefaults.shared.wgKeyTimestamp.addingTimeInterval(ExtensionKeyManagerLegacy.regenerationInterval) else {
             return false
         }
         

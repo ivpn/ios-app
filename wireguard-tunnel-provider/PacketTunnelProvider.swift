@@ -145,10 +145,12 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func startKeyRegenerationMonitor(completion: @escaping (Error?) -> Void) {
-        let timer = TimerManager(timeInterval: ExtensionKeyManager.regenerationCheckInterval)
+        let timer = TimerManager(timeInterval: AppKeyManager.regenerationCheckInterval)
         timer.eventHandler = {
-            self.regenerateKeys { error in
-                completion(error)
+            if AppKeyManager.needToRegenerate() {
+                self.regenerateKeys { error in
+                    completion(error)
+                }
             }
             timer.proceed()
         }
@@ -157,7 +159,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     
     private func regenerateKeys(completion: @escaping (Error?) -> Void) {
         wg_log(.info, message: "Rotating keys")
-        ExtensionKeyManager.shared.upgradeKey { privateKey, ipAddress, presharedKey in
+        AppKeyManager.shared.setNewKey { privateKey, ipAddress, presharedKey in
             guard let privateKey = privateKey, let ipAddress = ipAddress else {
                 completion(nil)
                 return

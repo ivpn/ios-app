@@ -34,6 +34,7 @@ class AppKeyManager {
     // MARK: - Properties -
     
     weak var delegate: AppKeyManagerDelegate?
+    static let shared = AppKeyManager()
     
     static var keyTimestamp: Date {
         return UserDefaults.shared.wgKeyTimestamp
@@ -70,8 +71,26 @@ class AppKeyManager {
         return true
     }
     
-    static var isKeyPairRequired: Bool {
-        return Application.shared.settings.connectionProtocol.tunnelType() == .wireguard
+    static var regenerationCheckInterval: TimeInterval {
+        if Config.useDebugWireGuardKeyUpgrade {
+            return TimeInterval(10)
+        }
+        
+        return TimeInterval(60 * 60)
+    }
+    
+    static var regenerationInterval: TimeInterval {
+        var regenerationRate = UserDefaults.shared.wgRegenerationRate
+        
+        if regenerationRate <= 0 {
+            regenerationRate = 1
+        }
+        
+        if Config.useDebugWireGuardKeyUpgrade {
+            return TimeInterval(regenerationRate * 60)
+        }
+        
+        return TimeInterval(regenerationRate * 60 * 60 * 24)
     }
     
     // MARK: - Methods -
@@ -84,7 +103,7 @@ class AppKeyManager {
         KeyChain.wgPublicKey = interface.publicKey
     }
     
-    func setNewKey() {
+    func setNewKey(completion: @escaping (String?, String?, String?) -> Void) {
         var interface = Interface()
         interface.privateKey = Interface.generatePrivateKey()
         var params = ApiService.authParams + [
@@ -107,14 +126,25 @@ class AppKeyManager {
                 if let kemCipher1 = model.kemCipher1 {
                     kem.setCipher(algorithm: .Kyber1024, cipher: kemCipher1)
                     KeyChain.wgPresharedKey = kem.calculatePresharedKey()
+                    completion(interface.privateKey, model.ipAddress, KeyChain.wgPresharedKey)
                 } else {
                     KeyChain.wgPresharedKey = nil
+                    completion(interface.privateKey, model.ipAddress, nil)
                 }
                 self.delegate?.setKeySuccess()
             case .failure:
                 self.delegate?.setKeyFail()
+                completion(nil, nil, nil)
             }
         }
+    }
+    
+    static func needToRegenerate() -> Bool {
+        guard Date() > UserDefaults.shared.wgKeyTimestamp.addingTimeInterval(regenerationInterval) else {
+            return false
+        }
+        
+        return true
     }
     
 }
