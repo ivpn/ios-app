@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.9.1 - 2023-06-29  
+
+[NOTE] Removed references to Port Forwarding  
+
 ## 2.9.0 - 2023-05-24  
 
 [NEW] New Widget implemented with WidgetKit  
