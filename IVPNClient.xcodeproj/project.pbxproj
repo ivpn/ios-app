@@ -106,6 +106,7 @@
 		825E834F25A327EB00938240 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E834E25A327EB00938240 /* CaptchaViewController.swift */; };
 		825E836325A4834200938240 /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
 		825E836425A4834200938240 /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
+		825ECB2C2A5582570032E986 /* AntiTrackerDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */; };
 		826470C42446F67100403A14 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826470C32446F67100403A14 /* Signup.storyboard */; };
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */; };
@@ -529,6 +530,7 @@
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		825E834E25A327EB00938240 /* CaptchaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaViewController.swift; sourceTree = "<group>"; };
 		825E836225A4834200938240 /* APIPublicKeyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPublicKeyPin.swift; sourceTree = "<group>"; };
+		825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerDns.swift; sourceTree = "<group>"; };
 		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
 		8269CD8E2164A8C700D083A1 /* servers-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "servers-dev.json"; sourceTree = "<group>"; };
@@ -995,6 +997,7 @@
 				8243587025DBB73E005FDEBB /* SecureDNS.swift */,
 				827694F2263C04C40058B4DC /* LoginConfirmation.swift */,
 				821CA2DE288143470067F70D /* PortRange.swift */,
+				825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2280,6 +2283,7 @@
 				9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */,
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
 				82DAB37B2457013900302F4C /* Service.swift in Sources */,
+				825ECB2C2A5582570032E986 /* AntiTrackerDns.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
 				8208525823FD5EB20008C112 /* MainViewController.swift in Sources */,
 				825E836325A4834200938240 /* APIPublicKeyPin.swift in Sources */,
