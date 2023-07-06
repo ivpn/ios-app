@@ -95,7 +95,7 @@ extension AntiTrackerViewController {
         let footer = view as! UITableViewHeaderFooterView
         footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         
-        let urlString = section > 0 ? "https://www.ivpn.net/antitracker/hardcore" : "https://www.ivpn.net/antitracker"
+        let urlString = section > 0 ? "https://www.ivpn.net/knowledgebase/general/antitracker-faq/" : "https://www.ivpn.net/knowledgebase/antitracker/blocklists/"
         
         let label = ActiveLabel(frame: .zero)
         let customType = ActiveType.custom(pattern: "Learn more")
