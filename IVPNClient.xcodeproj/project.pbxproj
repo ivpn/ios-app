@@ -164,6 +164,7 @@
 		829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27B2497949A000DC2DB /* PlanLabel.swift */; };
 		829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27C2497949A000DC2DB /* SelectPlanView.swift */; };
 		829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF2812497953C000DC2DB /* UIButton+Ext.swift */; };
+		829F5EAF2A56E067005919AF /* AntiTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */; };
 		829F5FC729A13CAE009E1AD3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 829F5FC629A13CAE009E1AD3 /* KeychainAccess */; };
 		829F5FC929A13CEA009E1AD3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 829F5FC829A13CEA009E1AD3 /* KeychainAccess */; };
 		829F5FCB29A13CF2009E1AD3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 829F5FCA29A13CF2009E1AD3 /* KeychainAccess */; };
@@ -576,6 +577,7 @@
 		829DF27B2497949A000DC2DB /* PlanLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanLabel.swift; sourceTree = "<group>"; };
 		829DF27C2497949A000DC2DB /* SelectPlanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPlanView.swift; sourceTree = "<group>"; };
 		829DF2812497953C000DC2DB /* UIButton+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
+		829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerListViewController.swift; sourceTree = "<group>"; };
 		82A160B8221C4E2000730577 /* Server+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataClass.swift"; sourceTree = "<group>"; };
 		82A160B9221C4E2000730577 /* Server+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		82A3422224AB660C00761AB0 /* ApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTests.swift; sourceTree = "<group>"; };
@@ -1242,6 +1244,7 @@
 				821CA2D6287C5AB20067F70D /* PortViewController.swift */,
 				82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */,
 				82052E5529C1D83700227CF9 /* MTUViewController.swift */,
+				829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2330,6 +2333,7 @@
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
 				82061F67238D2730009DDF4D /* PingManager.swift in Sources */,
 				9CDDD5AF1D9D2F9F00D39924 /* AppDelegate.swift in Sources */,
+				829F5EAF2A56E067005919AF /* AntiTrackerListViewController.swift in Sources */,
 				82CE59A725ED491B0078099D /* DNSResolver.swift in Sources */,
 				82BBF26121AD213500589766 /* Theme.swift in Sources */,
 				829AA4732267372A00037198 /* Designable+Ext.swift in Sources */,

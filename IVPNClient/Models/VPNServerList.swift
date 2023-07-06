@@ -35,6 +35,8 @@ class VPNServerList {
     open private(set) var portRanges: [PortRange]
     open private(set) var antiTrackerList: [AntiTrackerDns]
     
+    private let antiTrackerBasicListNames = ["Basic", "Comprehensive", "Restrictive"]
+    
     var filteredFastestServers: [VPNServer] {
         if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
             return getServers().filter { StorageManager.isFastestEnabled(server: $0) }
@@ -46,6 +48,14 @@ class VPNServerList {
     var noPing: Bool {
         let serversWithPing = servers.filter { $0.pingMs ?? -1 >= 0 }
         return serversWithPing.isEmpty
+    }
+    
+    var antiTrackerBasicList: [AntiTrackerDns] {
+        return antiTrackerList.filter { antiTrackerBasicListNames.contains($0.name) }
+    }
+    
+    var antiTrackerIndividualList: [AntiTrackerDns] {
+        return antiTrackerList.filter { !antiTrackerBasicListNames.contains($0.name) }
     }
     
     // MARK: - Initialize -

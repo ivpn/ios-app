@@ -29,6 +29,7 @@ class AntiTrackerViewController: UITableViewController {
     
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var antiTrackerHardcoreSwitch: UISwitch!
+    @IBOutlet weak var antiTrackerList: UILabel!
     
     // MARK: - @IBActions -
     
@@ -65,6 +66,11 @@ class AntiTrackerViewController: UITableViewController {
         addObservers()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.deselectRow(at: IndexPath(row: 1, section: 0), animated: true)
+        setupView()
+    }
+    
     // MARK: - Private methods -
     
     private func addObservers() {
@@ -76,6 +82,7 @@ class AntiTrackerViewController: UITableViewController {
         antiTrackerSwitch.setOn(UserDefaults.shared.isAntiTracker, animated: false)
         antiTrackerHardcoreSwitch.setOn(UserDefaults.shared.isAntiTrackerHardcore, animated: false)
         antiTrackerHardcoreSwitch.isEnabled = UserDefaults.shared.isAntiTracker
+        antiTrackerList.text = AntiTrackerDns.load()?.description
     }
 
 }

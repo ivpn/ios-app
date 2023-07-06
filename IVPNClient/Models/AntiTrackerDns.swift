@@ -43,7 +43,11 @@ struct AntiTrackerDns: Codable {
             }
         }
         
-        return nil
+        return Application.shared.serverList.antiTrackerList.first
+    }
+    
+    static func == (lhs: AntiTrackerDns, rhs: AntiTrackerDns) -> Bool {
+        return lhs.name == rhs.name && lhs.normal == rhs.normal
     }
     
 }
