@@ -33,6 +33,7 @@ class VPNServerList {
     open private(set) var servers: [VPNServer]
     open private(set) var ports: [ConnectionSettings]
     open private(set) var portRanges: [PortRange]
+    open private(set) var antiTrackerList: [AntiTrackerDns]
     
     var filteredFastestServers: [VPNServer] {
         if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
@@ -85,6 +86,7 @@ class VPNServerList {
         servers = [VPNServer]()
         ports = [ConnectionSettings]()
         portRanges = [PortRange]()
+        antiTrackerList = [AntiTrackerDns]()
         
         if let jsonData = data {
             var serversList: [[String: Any]]?
@@ -129,6 +131,21 @@ class VPNServerList {
                         if let ipAddress = hardcore["ip"] as? String {
                             UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.antiTrackerHardcoreDNS)
                         }
+                    }
+                }
+                
+                if let antiTrackerPlus = config["antitracker_plus"] as? [String: Any] {
+                    if let jsonList = antiTrackerPlus["DnsServers"] as? [[String: Any]] {
+                        var list = [AntiTrackerDns]()
+                        for dns in jsonList {
+                            list.append(AntiTrackerDns(
+                                name: dns["Name"] as? String ?? "",
+                                description: dns["Description"] as? String ?? "",
+                                normal: dns["Normal"] as? String ?? "",
+                                hardcore: dns["Hardcore"] as? String ?? ""
+                            ))
+                        }
+                        antiTrackerList = list
                     }
                 }
                 

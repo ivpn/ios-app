@@ -66,8 +66,6 @@ class Application {
     
     var geoLookup = GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
     
-    var antiTrackerList: [AntiTrackerDns]
-    
     static var isKeyPairRequired: Bool {
         return shared.settings.connectionProtocol.tunnelType() == .wireguard
     }
@@ -80,7 +78,6 @@ class Application {
         authentication = Authentication()
         settings = Settings(serverList: serverList)
         connectionManager = ConnectionManager(settings: settings, authentication: authentication, vpnManager: VPNManager())
-        antiTrackerList = []
     }
     
     // MARK: - Methods -
