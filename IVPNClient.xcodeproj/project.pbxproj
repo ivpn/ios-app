@@ -288,7 +288,6 @@
 		82E7169A2181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E716952181E96F00D6B7C2 /* OpenVPNProtocol.swift */; };
 		82E7880C22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7880B22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift */; };
 		82E81AE72449C44F00D81FB7 /* PaymentComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E81AE62449C44F00D81FB7 /* PaymentComponentView.swift */; };
-		82E96A4B224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E96A4A224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift */; };
 		82EA857A21DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */; };
 		82EC883529A12BD30024CC40 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 82EC883429A12BD30024CC40 /* JGProgressHUD */; };
 		82EC883829A12C1F0024CC40 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 82EC883729A12C1F0024CC40 /* Reachability */; };
@@ -673,7 +672,6 @@
 		82E716952181E96F00D6B7C2 /* OpenVPNProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenVPNProtocol.swift; sourceTree = "<group>"; };
 		82E7880B22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NETunnelProviderProtocol+Ext.swift"; sourceTree = "<group>"; };
 		82E81AE62449C44F00D81FB7 /* PaymentComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentComponentView.swift; sourceTree = "<group>"; };
-		82E96A4A224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionKeyManagerTests.swift; sourceTree = "<group>"; };
 		82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StorageManager+OnDemandRuleTests.swift"; sourceTree = "<group>"; };
 		82ED17452A1259CB00E7926D /* OpenVPNNetworkExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVPNNetworkExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		82ED17512A1261A000E7926D /* x25519.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x25519.c; sourceTree = "<group>"; };
@@ -1557,7 +1555,6 @@
 				82F81A47224CFADB00CB778B /* PeerTests.swift */,
 				82F81A48224CFADB00CB778B /* TunnelTests.swift */,
 				821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */,
-				82E96A4A224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift */,
 			);
 			path = WireGuard;
 			sourceTree = "<group>";
@@ -2042,7 +2039,6 @@
 				82A3422B24AB7F8600761AB0 /* VPNServerViewModelTests.swift in Sources */,
 				82F81A41224CF69900CB778B /* ArrayTests.swift in Sources */,
 				82F81A4A224CFADB00CB778B /* InterfaceTests.swift in Sources */,
-				82E96A4B224BA1B3004FC1D6 /* ExtensionKeyManagerTests.swift in Sources */,
 				82555005220ACAAF004763A7 /* VPNServersTests.swift in Sources */,
 				82F81A40224CF69900CB778B /* StringTests.swift in Sources */,
 				82A3422324AB660C00761AB0 /* ApplicationTests.swift in Sources */,
