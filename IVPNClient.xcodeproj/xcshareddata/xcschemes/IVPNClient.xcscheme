@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Link liboqs"
-               scriptText = "if [ &quot;${PLATFORM_NAME}&quot; == &quot;iphoneos&quot; ]; then&#10;  LIBOQS_LIB=&quot;liboqs-iphoneos.a&quot;&#10;else&#10;  LIBOQS_LIB=&quot;liboqs-iphonesimulator.a&quot;&#10;fi&#10;&#10;cp &quot;${SRCROOT}/IVPNClient/liboqs/${LIBOQS_LIB}&quot; &quot;${SRCROOT}/IVPNClient/liboqs/liboqs.a&quot;&#10;">
+               scriptText = "if [ &quot;${PLATFORM_NAME}&quot; == &quot;iphoneos&quot; ]; then&#10;  LIBOQS_LIB=&quot;liboqs-iphoneos.a&quot;&#10;else&#10;  LIBOQS_LIB=&quot;liboqs-iphonesimulator.a&quot;&#10;fi&#10;&#10;if test -f &quot;${SRCROOT}/IVPNClient/liboqs/${LIBOQS_LIB}&quot;; then&#10;    cp &quot;${SRCROOT}/IVPNClient/liboqs/${LIBOQS_LIB}&quot; &quot;${SRCROOT}/IVPNClient/liboqs/liboqs.a&quot;&#10;fi&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
