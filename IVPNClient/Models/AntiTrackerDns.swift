@@ -24,8 +24,26 @@
 import Foundation
 
 struct AntiTrackerDns: Codable {
+    
     let name: String
     let description: String
     let normal: String
     let hardcore: String
+    
+    func save() {
+        if let encoded = try? JSONEncoder().encode(self) {
+            UserDefaults.standard.set(encoded, forKey: UserDefaults.Key.antiTrackerDns)
+        }
+    }
+    
+    static func load() -> AntiTrackerDns? {
+        if let saved = UserDefaults.standard.object(forKey: UserDefaults.Key.antiTrackerDns) as? Data {
+            if let loaded = try? JSONDecoder().decode(AntiTrackerDns.self, from: saved) {
+                return loaded
+            }
+        }
+        
+        return nil
+    }
+    
 }

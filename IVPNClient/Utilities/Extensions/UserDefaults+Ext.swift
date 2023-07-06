@@ -88,6 +88,7 @@ extension UserDefaults {
         static let killSwitch = "killSwitch"
         static let selectHost = "selectHost"
         static let isLoggedIn = "isLoggedIn"
+        static let antiTrackerDns = "antiTrackerDns"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
