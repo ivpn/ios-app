@@ -279,6 +279,7 @@ extension UserDefaults {
         standard.removeObject(forKey: Key.wgMtu)
         standard.removeObject(forKey: Key.preventSameCountryMultiHop)
         standard.removeObject(forKey: Key.preventSameISPMultiHop)
+        standard.removeObject(forKey: Key.antiTrackerDns)
         standard.synchronize()
     }
     

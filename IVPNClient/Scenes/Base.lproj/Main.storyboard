@@ -3846,7 +3846,7 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="e8G-su-I9T">
-                                <string key="footerTitle">AntiTracker uses our private DNS to block ads, malicious website and third-party trackers such as Google Analytics. Supported only for OpenVPN and WireGuard protocols. Learn more</string>
+                                <string key="footerTitle">Block lists refer to DNS blocking lists used by our AntiTracker. The 'Basic', 'Comprehensive', and 'Restrictive' options are combinations of individual lists, each offering a different level of protection. You also have the freedom to select from individual lists for a more tailored AntiTracker experience. Learn more</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="2xI-KL-qZa">
                                         <rect key="frame" x="0.0" y="18" width="414" height="43.5"/>
@@ -3924,10 +3924,10 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Hardcore Mode" id="sDr-JP-6yn">
-                                <string key="footerTitle">Hardcore Mode blocks the leading companies with business models relying on user surveillance (currently: Google and Facebook). Learn more</string>
+                                <string key="footerTitle">Hardcode mode blocks the leading companies with business models relying on user surveillance (currently: Google and Facebook). Learn more</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="UYO-Vy-onE">
-                                        <rect key="frame" x="0.0" y="245" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="277" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UYO-Vy-onE" id="yDV-X9-eO8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
