@@ -111,7 +111,7 @@ class AppKeyManager {
         ]
         
         var kem = KEM()
-        params = params + [URLQueryItem(name: "kem_public_key1", value: kem.getPublicKey(algorithm: .Kyber1024))]
+        params += [URLQueryItem(name: "kem_public_key1", value: kem.getPublicKey(algorithm: .Kyber1024))]
         let request = ApiRequestDI(method: .post, endpoint: Config.apiSessionWGKeySet, params: params)
         
         delegate?.setKeyStart()
