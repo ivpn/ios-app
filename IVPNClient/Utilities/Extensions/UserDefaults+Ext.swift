@@ -144,11 +144,11 @@ extension UserDefaults {
     }
     
     @objc dynamic var antiTrackerDNS: String {
-        return string(forKey: Key.antiTrackerDNS) ?? ""
+        return AntiTrackerDns.load()?.normal ?? ""
     }
     
     @objc dynamic var antiTrackerHardcoreDNS: String {
-        return string(forKey: Key.antiTrackerHardcoreDNS) ?? ""
+        return AntiTrackerDns.load()?.hardcore ?? ""
     }
     
     @objc dynamic var wgKeyTimestamp: Date {

@@ -131,19 +131,6 @@ class VPNServerList {
             }
             
             if let config = config {
-                if let antitracker = config["antitracker"] as? [String: Any] {
-                    if let defaultObj = antitracker["default"] as? [String: Any] {
-                        if let ipAddress = defaultObj["ip"] as? String {
-                            UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.antiTrackerDNS)
-                        }
-                    }
-                    if let hardcore = antitracker["hardcore"] as? [String: Any] {
-                        if let ipAddress = hardcore["ip"] as? String {
-                            UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.antiTrackerHardcoreDNS)
-                        }
-                    }
-                }
-                
                 if let antiTrackerPlus = config["antitracker_plus"] as? [String: Any] {
                     if let jsonList = antiTrackerPlus["DnsServers"] as? [[String: Any]] {
                         var list = [AntiTrackerDns]()
@@ -156,6 +143,10 @@ class VPNServerList {
                             ))
                         }
                         antiTrackerList = list
+                        
+                        if AntiTrackerDns.load() == nil {
+                            antiTrackerList.first?.save()
+                        }
                     }
                 }
                 

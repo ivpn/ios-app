@@ -165,6 +165,9 @@
 		829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27C2497949A000DC2DB /* SelectPlanView.swift */; };
 		829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF2812497953C000DC2DB /* UIButton+Ext.swift */; };
 		829F5EAF2A56E067005919AF /* AntiTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */; };
+		829F5EB02A570322005919AF /* AntiTrackerDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */; };
+		829F5EB12A570323005919AF /* AntiTrackerDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */; };
+		829F5EB22A570323005919AF /* AntiTrackerDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */; };
 		829F5FC729A13CAE009E1AD3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 829F5FC629A13CAE009E1AD3 /* KeychainAccess */; };
 		829F5FC929A13CEA009E1AD3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 829F5FC829A13CEA009E1AD3 /* KeychainAccess */; };
 		829F5FCB29A13CF2009E1AD3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 829F5FCA29A13CF2009E1AD3 /* KeychainAccess */; };
@@ -2104,6 +2107,7 @@
 				82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */,
 				820EA86C2322430700E16B2D /* Result.swift in Sources */,
 				823FFB092338E09A00F91A5D /* Capability.swift in Sources */,
+				829F5EB12A570323005919AF /* AntiTrackerDns.swift in Sources */,
 				82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */,
 				825E836425A4834200938240 /* APIPublicKeyPin.swift in Sources */,
 				823BD9E4231D4C8F002E631D /* ErrorResult.swift in Sources */,
@@ -2155,6 +2159,7 @@
 				82C61DA929E6C53C00AF972A /* Array+Ext.swift in Sources */,
 				82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */,
 				8206BAFC29ED6C9600F916B7 /* Notification.swift in Sources */,
+				829F5EB22A570323005919AF /* AntiTrackerDns.swift in Sources */,
 				82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */,
 				82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */,
 				82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */,
@@ -2179,6 +2184,7 @@
 				82E716932181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				82ED17592A1262F800E7926D /* Data+Ext.swift in Sources */,
 				823FFB082338E09900F91A5D /* Capability.swift in Sources */,
+				829F5EB02A570322005919AF /* AntiTrackerDns.swift in Sources */,
 				82ED17482A125C9100E7926D /* TimerManager.swift in Sources */,
 				826F7F4323A7AAD200777DB9 /* Array+Ext.swift in Sources */,
 				82ED17542A1261A000E7926D /* x25519.c in Sources */,
