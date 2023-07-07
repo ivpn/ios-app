@@ -30,6 +30,8 @@ struct AntiTrackerDns: Codable {
     let normal: String
     let hardcore: String
     
+    static let basicList = ["Basic", "Comprehensive", "Restrictive"]
+    
     func save() {
         if let encoded = try? JSONEncoder().encode(self) {
             UserDefaults.standard.set(encoded, forKey: UserDefaults.Key.antiTrackerDns)
