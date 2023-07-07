@@ -1,28 +1,30 @@
 name: CI
 
-on:
-  push:
-    branches: [ "main", "develop" ]
-  pull_request:
+# This action is disabled until we can run it on Apple Silicon powered macOS runners - https://github.com/github/roadmap/issues/528
 
-jobs:
-  test:
-    name: Unit and UI Tests
-    runs-on: macOS-latest
-    steps:
-    - uses: actions/setup-go@v2
-      with:
-        go-version: 1.16
-    - uses: actions/checkout@v2
-    - name: Set up config files
-      run: |
-        cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig
-        cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig
-        cp wireguard-tunnel-provider/Config/wg-staging.template.xcconfig wireguard-tunnel-provider/Config/wg-staging.xcconfig
-        cp wireguard-tunnel-provider/Config/wg-release.template.xcconfig wireguard-tunnel-provider/Config/wg-release.xcconfig
-        cp IVPNWidget/Config/widget-staging.template.xcconfig IVPNWidget/Config/widget-staging.xcconfig
-        cp IVPNWidget/Config/widget-release.template.xcconfig IVPNWidget/Config/widget-release.xcconfig
-        cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
-        cp fastlane/Appfile.template fastlane/Appfile
-    - name: Build and test
-      run: xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 14'
+# on:
+#   push:
+#     branches: [ "main", "develop" ]
+#   pull_request:
+
+# jobs:
+#   test:
+#     name: Unit and UI Tests
+#     runs-on: macOS-latest
+#     steps:
+#     - uses: actions/setup-go@v2
+#       with:
+#         go-version: 1.16
+#     - uses: actions/checkout@v2
+#     - name: Set up config files
+#       run: |
+#         cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig
+#         cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig
+#         cp wireguard-tunnel-provider/Config/wg-staging.template.xcconfig wireguard-tunnel-provider/Config/wg-staging.xcconfig
+#         cp wireguard-tunnel-provider/Config/wg-release.template.xcconfig wireguard-tunnel-provider/Config/wg-release.xcconfig
+#         cp IVPNWidget/Config/widget-staging.template.xcconfig IVPNWidget/Config/widget-staging.xcconfig
+#         cp IVPNWidget/Config/widget-release.template.xcconfig IVPNWidget/Config/widget-release.xcconfig
+#         cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
+#         cp fastlane/Appfile.template fastlane/Appfile
+#     - name: Build and test
+#       run: xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 14'
