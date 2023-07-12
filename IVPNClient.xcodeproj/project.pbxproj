@@ -2479,7 +2479,7 @@
 		};
 		82B6052D2170840C004B40E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82A9E8C723471FB2007BCA7E /* wg-release.xcconfig */;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2515,7 +2515,7 @@
 		};
 		82B6052E2170840C004B40E6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82A9E8C723471FB2007BCA7E /* wg-release.xcconfig */;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2740,6 +2740,7 @@
 		};
 		82D2D80022CA404C004BCC52 /* Staging */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82A9E8C423471EBE007BCA7E /* staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -2786,7 +2787,7 @@
 		};
 		82D2D80122CA404C004BCC52 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82A9E8C823471FB2007BCA7E /* wg-staging.xcconfig */;
+			baseConfigurationReference = 82A9E8C423471EBE007BCA7E /* staging.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2822,7 +2823,7 @@
 		};
 		82E3B21929DDCC6500998F67 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82C61DB829E6CA7600AF972A /* widget-release.xcconfig */;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -2857,7 +2858,7 @@
 		};
 		82E3B21A29DDCC6500998F67 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */;
+			baseConfigurationReference = 82A9E8C423471EBE007BCA7E /* staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -2891,7 +2892,7 @@
 		};
 		82E3B21B29DDCC6500998F67 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82C61DB829E6CA7600AF972A /* widget-release.xcconfig */;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -2925,6 +2926,7 @@
 		};
 		9C7840B220CD8A8A00335736 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -2971,6 +2973,7 @@
 		};
 		9C7840B320CD8A8A00335736 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
