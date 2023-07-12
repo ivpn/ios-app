@@ -34,7 +34,7 @@ These instructions will get you a copy of the project up and running on your loc
 - Xcode 14.0+
 - Swift 5.0+
 - fastlane 2.178.0+
-- Go 1.16+
+- Go 1.18+
 
 ### Dev dependencies
 
