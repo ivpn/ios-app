@@ -75,10 +75,6 @@ Rename and populate `.xcconfig` files:
 ```sh
 $ cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig  
 $ cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig  
-$ cp wireguard-tunnel-provider/Config/wg-staging.template.xcconfig wireguard-tunnel-provider/Config/wg-staging.xcconfig   
-$ cp wireguard-tunnel-provider/Config/wg-release.template.xcconfig wireguard-tunnel-provider/Config/wg-release.xcconfig  
-$ cp IVPNWidget/Config/widget-staging.template.xcconfig IVPNWidget/Config/widget-staging.xcconfig  
-$ cp IVPNWidget/Config/widget-release.template.xcconfig IVPNWidget/Config/widget-release.xcconfig   
 ```
 
 ### OpenVPN configuration

@@ -235,8 +235,6 @@
 		82C61DB029E6C5E700AF972A /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		82C61DB229E6C6F600AF972A /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638C1217DA89000410318 /* AddressType.swift */; };
 		82C61DB429E6C72700AF972A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C61DB329E6C72700AF972A /* LocationViewModel.swift */; };
-		82C61DBA29E6CA7600AF972A /* widget-staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */; };
-		82C61DBC29E6CA7600AF972A /* widget-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 82C61DB829E6CA7600AF972A /* widget-release.xcconfig */; };
 		82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9739F217DFA9C00CE06D4 /* Host.swift */; };
 		82CA214329379CCD008BADE8 /* FileSystemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2CE371DB0F860007A4D2D /* FileSystemManager.swift */; };
 		82CA214429379CEC008BADE8 /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C2E5DE21620FF100C5A09F /* UIDevice+Ext.swift */; };
@@ -596,8 +594,6 @@
 		82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatusTests.swift; sourceTree = "<group>"; };
 		82A9E8C323471EBE007BCA7E /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		82A9E8C423471EBE007BCA7E /* staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = staging.xcconfig; sourceTree = "<group>"; };
-		82A9E8C723471FB2007BCA7E /* wg-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "wg-release.xcconfig"; sourceTree = "<group>"; };
-		82A9E8C823471FB2007BCA7E /* wg-staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "wg-staging.xcconfig"; sourceTree = "<group>"; };
 		82AA8817231E330A00E18ECB /* SessionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatus.swift; sourceTree = "<group>"; };
 		82AAF0E82253A4A8005E792F /* StaticWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticWebViewController.swift; sourceTree = "<group>"; };
 		82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomPortViewController.swift; sourceTree = "<group>"; };
@@ -633,8 +629,6 @@
 		82C61D9829E6B4C600AF972A /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		82C61DA829E6C4CF00AF972A /* Widget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Widget-Bridging-Header.h"; sourceTree = "<group>"; };
 		82C61DB329E6C72700AF972A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
-		82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "widget-staging.xcconfig"; sourceTree = "<group>"; };
-		82C61DB829E6CA7600AF972A /* widget-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "widget-release.xcconfig"; sourceTree = "<group>"; };
 		82C9739F217DFA9C00CE06D4 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
 		82CE598F25ED3C7A0078099D /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		82CE599825ED48D60078099D /* InternetAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetAddress.swift; sourceTree = "<group>"; };
@@ -1199,15 +1193,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		829FCCDE230D23FE009C63DF /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				82A9E8C723471FB2007BCA7E /* wg-release.xcconfig */,
-				82A9E8C823471FB2007BCA7E /* wg-staging.xcconfig */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		82A208B321BAA4C500C9AD44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1332,7 +1317,6 @@
 			isa = PBXGroup;
 			children = (
 				824B86AA26D3D16100D0101A /* WireGuard */,
-				829FCCDE230D23FE009C63DF /* Config */,
 				82B605252170840C004B40E6 /* PacketTunnelProvider.swift */,
 				824B86C326D3D7B600D0101A /* TimerManager.swift */,
 				82B605272170840C004B40E6 /* Info.plist */,
@@ -1422,15 +1406,6 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
-		82C61DB529E6CA7600AF972A /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */,
-				82C61DB829E6CA7600AF972A /* widget-release.xcconfig */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		82CE599725ED48AB0078099D /* DNSResolver */ = {
 			isa = PBXGroup;
 			children = (
@@ -1514,7 +1489,6 @@
 		82E3B20D29DDCC6400998F67 /* IVPNWidget */ = {
 			isa = PBXGroup;
 			children = (
-				82C61DB529E6CA7600AF972A /* Config */,
 				82E3B21C29DDD2E800998F67 /* Scene */,
 				82A38A1929E3200000C88372 /* Service */,
 				8206BAF829ED65C600F916B7 /* Extension */,
@@ -1969,8 +1943,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				82C61D9629E6ADEF00AF972A /* Assets.xcassets in Resources */,
-				82C61DBA29E6CA7600AF972A /* widget-staging.xcconfig in Resources */,
-				82C61DBC29E6CA7600AF972A /* widget-release.xcconfig in Resources */,
 				82E3B21329DDCC6500998F67 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2567,7 +2539,7 @@
 		};
 		82B6052D2170840C004B40E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82A9E8C723471FB2007BCA7E /* wg-release.xcconfig */;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2607,7 +2579,7 @@
 		};
 		82B6052E2170840C004B40E6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82A9E8C723471FB2007BCA7E /* wg-release.xcconfig */;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2865,6 +2837,7 @@
 		};
 		82D2D80022CA404C004BCC52 /* Staging */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82A9E8C423471EBE007BCA7E /* staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -2916,7 +2889,7 @@
 		};
 		82D2D80122CA404C004BCC52 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82A9E8C823471FB2007BCA7E /* wg-staging.xcconfig */;
+			baseConfigurationReference = 82A9E8C423471EBE007BCA7E /* staging.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2956,7 +2929,7 @@
 		};
 		82E3B21929DDCC6500998F67 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82C61DB829E6CA7600AF972A /* widget-release.xcconfig */;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -2991,7 +2964,7 @@
 		};
 		82E3B21A29DDCC6500998F67 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82C61DB629E6CA7600AF972A /* widget-staging.xcconfig */;
+			baseConfigurationReference = 82A9E8C423471EBE007BCA7E /* staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -3025,7 +2998,7 @@
 		};
 		82E3B21B29DDCC6500998F67 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82C61DB829E6CA7600AF972A /* widget-release.xcconfig */;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -3059,6 +3032,7 @@
 		};
 		9C7840B220CD8A8A00335736 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -3110,6 +3084,7 @@
 		};
 		9C7840B320CD8A8A00335736 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82A9E8C323471EBE007BCA7E /* release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
