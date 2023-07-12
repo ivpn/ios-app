@@ -34,12 +34,12 @@ struct AntiTrackerDns: Codable {
     
     func save() {
         if let encoded = try? JSONEncoder().encode(self) {
-            UserDefaults.standard.set(encoded, forKey: UserDefaults.Key.antiTrackerDns)
+            UserDefaults.shared.set(encoded, forKey: UserDefaults.Key.antiTrackerDns)
         }
     }
     
     static func load() -> AntiTrackerDns? {
-        if let saved = UserDefaults.standard.object(forKey: UserDefaults.Key.antiTrackerDns) as? Data {
+        if let saved = UserDefaults.shared.object(forKey: UserDefaults.Key.antiTrackerDns) as? Data {
             if let loaded = try? JSONDecoder().decode(AntiTrackerDns.self, from: saved) {
                 return loaded
             }

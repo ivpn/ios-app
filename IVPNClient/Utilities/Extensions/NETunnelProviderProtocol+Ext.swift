@@ -54,6 +54,7 @@ extension NETunnelProviderProtocol {
         
         if let dnsServers = openVPNdnsServers(), !dnsServers.isEmpty, dnsServers != [""] {
             sessionBuilder.dnsServers = dnsServers
+            log(.info, message: "DNS server: \(dnsServers)")
             
             switch DNSProtocolType.preferred() {
             case .doh:

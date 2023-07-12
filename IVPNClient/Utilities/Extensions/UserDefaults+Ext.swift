@@ -269,6 +269,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.killSwitch)
         shared.removeObject(forKey: Key.selectHost)
         shared.removeObject(forKey: Key.isLoggedIn)
+        shared.removeObject(forKey: Key.antiTrackerDns)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)
         standard.removeObject(forKey: Key.selectedExitHost)
@@ -279,7 +280,6 @@ extension UserDefaults {
         standard.removeObject(forKey: Key.wgMtu)
         standard.removeObject(forKey: Key.preventSameCountryMultiHop)
         standard.removeObject(forKey: Key.preventSameISPMultiHop)
-        standard.removeObject(forKey: Key.antiTrackerDns)
         standard.synchronize()
     }
     
