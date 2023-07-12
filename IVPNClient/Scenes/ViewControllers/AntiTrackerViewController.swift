@@ -45,6 +45,7 @@ class AntiTrackerViewController: UITableViewController {
         WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         antiTrackerHardcoreSwitch.isEnabled = sender.isOn
         evaluateReconnect(sender: sender as UIView)
+        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
         
         if sender.isOn {
             registerUserActivity(type: UserActivityType.AntiTrackerEnable, title: UserActivityTitle.AntiTrackerEnable)
@@ -56,6 +57,7 @@ class AntiTrackerViewController: UITableViewController {
     @IBAction func toggleAntiTrackerHardcore(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTrackerHardcore)
         evaluateReconnect(sender: sender as UIView)
+        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
     }
     
     // MARK: - View Lifecycle -
@@ -63,6 +65,7 @@ class AntiTrackerViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        initNavigationBar()
         addObservers()
     }
     
@@ -72,6 +75,12 @@ class AntiTrackerViewController: UITableViewController {
     }
     
     // MARK: - Private methods -
+    
+    private func initNavigationBar() {
+        if isPresentedModally {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController(_:)))
+        }
+    }
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(setupView), name: Notification.Name.AntiTrackerUpdated, object: nil)
