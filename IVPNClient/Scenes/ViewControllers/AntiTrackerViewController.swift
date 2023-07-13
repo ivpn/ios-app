@@ -70,7 +70,7 @@ class AntiTrackerViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.deselectRow(at: IndexPath(row: 1, section: 0), animated: true)
+        tableView.deselectRow(at: IndexPath(row: 0, section: 1), animated: true)
         setupView()
     }
     
@@ -104,7 +104,15 @@ extension AntiTrackerViewController {
         let footer = view as! UITableViewHeaderFooterView
         footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         
-        let urlString = section > 0 ? "https://www.ivpn.net/knowledgebase/general/antitracker-faq/" : "https://www.ivpn.net/knowledgebase/antitracker/blocklists/"
+        var urlString = ""
+        switch section {
+        case 1:
+            urlString = "https://www.ivpn.net/knowledgebase/antitracker/blocklists/"
+        case 2:
+            urlString = "https://www.ivpn.net/knowledgebase/general/antitracker-faq/"
+        default:
+            urlString = "https://www.ivpn.net/antitracker/"
+        }
         
         let label = ActiveLabel(frame: .zero)
         let customType = ActiveType.custom(pattern: "Learn more")
