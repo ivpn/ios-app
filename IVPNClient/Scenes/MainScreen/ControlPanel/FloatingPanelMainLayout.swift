@@ -62,6 +62,10 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
         if let surfaceView = surfaceView as? SurfaceView {
             let appearance = SurfaceAppearance()
+            let shadow = SurfaceAppearance.Shadow()
+            shadow.color = .clear
+            appearance.shadows = [shadow]
+            appearance.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
             
             if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
                 surfaceView.grabberHandle.isHidden = true
