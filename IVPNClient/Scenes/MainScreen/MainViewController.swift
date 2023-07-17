@@ -202,7 +202,7 @@ class MainViewController: UIViewController {
     // MARK: - Private methods -
     
     @objc private func updateFloatingPanelLayout() {
-        floatingPanel.updateLayout()
+        floatingPanel.invalidateLayout()
         mainView.setupView(animated: false)
     }
     
@@ -237,6 +237,7 @@ class MainViewController: UIViewController {
         floatingPanel.delegate = self
         floatingPanel.addPanel(toParent: self)
         floatingPanel.show(animated: true)
+        floatingPanel.behavior = MainFloatingPanelBehavior()
     }
     
     private func startAPIUpdate() {

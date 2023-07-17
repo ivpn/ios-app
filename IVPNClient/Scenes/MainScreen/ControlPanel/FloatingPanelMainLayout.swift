@@ -26,9 +26,9 @@ import FloatingPanel
 
 class FloatingPanelMainLayout: FloatingPanelLayout {
     
-    // MARK: - Override public properties -
+    var position: FloatingPanelPosition { .bottom }
     
-    public var initialPosition: FloatingPanelPosition {
+    var initialState: FloatingPanelState {
         if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             return .full
         }
@@ -36,12 +36,11 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
         return .half
     }
     
-    public var supportedPositions: Set<FloatingPanelPosition> {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
-            return [.full]
-        }
-        
-        return [.full, .half]
+    var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+        return [
+            .full: FloatingPanelLayoutAnchor(absoluteInset: 0, edge: .top, referenceGuide: .safeArea),
+            .half: FloatingPanelLayoutAnchor(absoluteInset: halfHeight, edge: .bottom, referenceGuide: .safeArea)
+        ]
     }
     
     // MARK: - Private properties -
@@ -60,37 +59,19 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
         return 230 - bottomSafeArea
     }
     
-    // MARK: - Override public methods -
-
-    public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
-            switch position {
-            case .full:
-                return -20
-            default:
-                return nil
-            }
-        }
-        
-        switch position {
-        case .full:
-            return 10
-        case .half:
-            return halfHeight
-        default:
-            return nil
-        }
-    }
-
     public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
-        if let surfaceView = surfaceView as? FloatingPanelSurfaceView {
+        if let surfaceView = surfaceView as? SurfaceView {
+            let appearance = SurfaceAppearance()
+            
             if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
                 surfaceView.grabberHandle.isHidden = true
-                surfaceView.cornerRadius = 0
+                appearance.cornerRadius = 0
             } else {
                 surfaceView.grabberHandle.isHidden = false
-                surfaceView.cornerRadius = 15
+                appearance.cornerRadius = 15
             }
+            
+            surfaceView.appearance = appearance
         }
         
         if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
@@ -113,8 +94,8 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
         ]
     }
     
-    public func backdropAlphaFor(position: FloatingPanelPosition) -> CGFloat {
-        if position == .full && (UIDevice.current.userInterfaceIdiom == .phone || UIWindow.isPortrait) {
+    public func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+        if state == .full && (UIDevice.current.userInterfaceIdiom == .phone || UIWindow.isPortrait) {
             return 0.3
         }
         
@@ -122,3 +103,115 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     }
     
 }
+
+class MainFloatingPanelBehavior: FloatingPanelBehavior {
+    
+    func allowsRubberBanding(for edge: UIRectEdge) -> Bool {
+        return false
+    }
+    
+    func shouldProjectMomentum(_ fpc: FloatingPanelController, to proposedTargetPosition: FloatingPanelState) -> Bool {
+        return false
+    }
+    
+}
+
+//class FloatingPanelMainLayout: FloatingPanelLayout {
+//    
+//    // MARK: - Override public properties -
+//    
+//    public var initialPosition: FloatingPanelPosition {
+//        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+//            return .full
+//        }
+//        
+//        return .half
+//    }
+//    
+//    public var supportedPositions: Set<FloatingPanelPosition> {
+//        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+//            return [.full]
+//        }
+//        
+//        return [.full, .half]
+//    }
+//    
+//    // MARK: - Private properties -
+//    
+//    private let bottomSafeArea = UIWindow.keyWindow?.safeAreaInsets.bottom ?? 0
+//    
+//    private var halfHeight: CGFloat {
+//        if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec && UserDefaults.shared.isMultiHop {
+//            return 359 - bottomSafeArea
+//        }
+//        
+//        if Application.shared.settings.connectionProtocol.tunnelType() != .ipsec {
+//            return 274 - bottomSafeArea
+//        }
+//        
+//        return 230 - bottomSafeArea
+//    }
+//    
+//    // MARK: - Override public methods -
+//
+//    public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
+//        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+//            switch position {
+//            case .full:
+//                return -20
+//            default:
+//                return nil
+//            }
+//        }
+//        
+//        switch position {
+//        case .full:
+//            return 10
+//        case .half:
+//            return halfHeight
+//        default:
+//            return nil
+//        }
+//    }
+//
+//    public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
+//        if let surfaceView = surfaceView as? FloatingPanelSurfaceView {
+//            if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+//                surfaceView.grabberHandle.isHidden = true
+//                surfaceView.cornerRadius = 0
+//            } else {
+//                surfaceView.grabberHandle.isHidden = false
+//                surfaceView.cornerRadius = 15
+//            }
+//        }
+//        
+//        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+//            return [
+//                surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0),
+//                surfaceView.widthAnchor.constraint(equalToConstant: 375)
+//            ]
+//        }
+//        
+//        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isPortrait && !UIApplication.shared.isSplitOrSlideOver {
+//            return [
+//                surfaceView.widthAnchor.constraint(equalToConstant: 520),
+//                surfaceView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+//            ]
+//        }
+//        
+//        return [
+//            surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0),
+//            surfaceView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0)
+//        ]
+//    }
+//    
+//    public func backdropAlphaFor(position: FloatingPanelPosition) -> CGFloat {
+//        if position == .full && (UIDevice.current.userInterfaceIdiom == .phone || UIWindow.isPortrait) {
+//            return 0.3
+//        }
+//        
+//        return 0
+//    }
+//    
+//}
+
