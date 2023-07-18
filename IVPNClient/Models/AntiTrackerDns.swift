@@ -30,7 +30,9 @@ struct AntiTrackerDns: Codable {
     let normal: String
     let hardcore: String
     
-    static let basicList = ["Basic", "Comprehensive", "Restrictive"]
+    static let basicLists = ["Basic", "Comprehensive", "Restrictive"]
+    static let basicList = "Basic"
+    static let oisdbigList = "Oisdbig"
     
     func save() {
         if let encoded = try? JSONEncoder().encode(self) {
@@ -50,6 +52,16 @@ struct AntiTrackerDns: Codable {
     
     static func == (lhs: AntiTrackerDns, rhs: AntiTrackerDns) -> Bool {
         return lhs.name == rhs.name && lhs.normal == rhs.normal
+    }
+    
+    static func defaultList(lists: [AntiTrackerDns]) -> AntiTrackerDns? {
+        if !(KeyChain.sessionToken ?? "").isEmpty || UserDefaults.shared.isAntiTracker || UserDefaults.shared.isAntiTrackerHardcore {
+            let filteredList = lists.filter { $0.name == oisdbigList }
+            return filteredList.first
+        }
+        
+        let filteredList = lists.filter { $0.name == basicList }
+        return filteredList.first
     }
     
 }

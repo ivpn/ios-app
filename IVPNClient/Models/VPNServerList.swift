@@ -49,11 +49,11 @@ class VPNServerList {
     }
     
     var antiTrackerBasicList: [AntiTrackerDns] {
-        return antiTrackerList.filter { AntiTrackerDns.basicList.contains($0.name) }
+        return antiTrackerList.filter { AntiTrackerDns.basicLists.contains($0.name) }
     }
     
     var antiTrackerIndividualList: [AntiTrackerDns] {
-        return antiTrackerList.filter { !AntiTrackerDns.basicList.contains($0.name) }
+        return antiTrackerList.filter { !AntiTrackerDns.basicLists.contains($0.name) }
     }
     
     // MARK: - Initialize -
@@ -143,7 +143,8 @@ class VPNServerList {
                         antiTrackerList = list
                         
                         if AntiTrackerDns.load() == nil {
-                            antiTrackerList.first?.save()
+                            let defaultDns = AntiTrackerDns.defaultList(lists: antiTrackerList)
+                            defaultDns?.save()
                         }
                     }
                 }
