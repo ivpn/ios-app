@@ -152,4 +152,9 @@ class Settings {
         UserDefaults.shared.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
     }
     
+    func saveDefaultAntiTrackerDns() {
+        let defaultDns = AntiTrackerDns.defaultList(lists: Application.shared.serverList.antiTrackerList)
+        defaultDns?.save()
+    }
+    
 }
