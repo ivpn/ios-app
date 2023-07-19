@@ -107,7 +107,7 @@ extension AntiTrackerViewController {
         var urlString = ""
         switch section {
         case 1:
-            urlString = "https://www.ivpn.net/knowledgebase/antitracker/blocklists/"
+            urlString = "https://www.ivpn.net/knowledgebase/general/antitracker-plus-lists-explained/"
         case 2:
             urlString = "https://www.ivpn.net/knowledgebase/general/antitracker-faq/"
         default:
