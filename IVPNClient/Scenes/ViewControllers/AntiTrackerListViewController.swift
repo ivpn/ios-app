@@ -93,7 +93,9 @@ extension AntiTrackerListViewController {
         selectedDns = dns
         selectedDns?.save()
         tableView.reloadData()
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true) {
+            NotificationCenter.default.post(name: Notification.Name.AntiTrackerListUpdated, object: nil)
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

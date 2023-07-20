@@ -84,6 +84,7 @@ class AntiTrackerViewController: UITableViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(setupView), name: Notification.Name.AntiTrackerUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(listUpdated), name: Notification.Name.AntiTrackerListUpdated, object: nil)
     }
     
     @objc private func setupView() {
@@ -92,6 +93,10 @@ class AntiTrackerViewController: UITableViewController {
         antiTrackerHardcoreSwitch.setOn(UserDefaults.shared.isAntiTrackerHardcore, animated: false)
         antiTrackerHardcoreSwitch.isEnabled = UserDefaults.shared.isAntiTracker
         antiTrackerList.text = AntiTrackerDns.load()?.description
+    }
+    
+    @objc private func listUpdated() {
+        evaluateReconnect(sender: antiTrackerList)
     }
 
 }
