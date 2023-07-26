@@ -202,8 +202,8 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        if AppKeyManager.isKeyPairRequired && ExtensionKeyManager.needToRegenerate() {
-            keyManager.setNewKey()
+        if Application.isKeyPairRequired && AppKeyManager.needToRegenerate() {
+            keyManager.setNewKey { _, _, _ in }
             return
         }
         

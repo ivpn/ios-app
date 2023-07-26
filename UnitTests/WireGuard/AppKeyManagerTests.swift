@@ -63,4 +63,11 @@ class AppKeyManagerTests: XCTestCase {
         XCTAssertTrue(KeyChain.wgPublicKey != nil)
     }
     
+    func test_regenerationInterval() {
+        UserDefaults.shared.set(Config.wgKeyRegenerationRate, forKey: UserDefaults.Key.wgRegenerationRate)
+        let regenerationCheckInterval = AppKeyManager.regenerationCheckInterval
+        let regenerationInterval = AppKeyManager.regenerationInterval
+        XCTAssertTrue(regenerationInterval > regenerationCheckInterval)
+    }
+    
 }

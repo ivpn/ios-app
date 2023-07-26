@@ -35,6 +35,7 @@ class WireGuardSettingsViewController: UITableViewController {
     @IBOutlet weak var keyExpirationTimestampLabel: UILabel!
     @IBOutlet weak var keyRegenerationTimestampLabel: UILabel!
     @IBOutlet weak var mtuLabel: UILabel!
+    @IBOutlet weak var qrLabel: UILabel!
     
     // MARK: - Properties -
     
@@ -64,7 +65,7 @@ class WireGuardSettingsViewController: UITableViewController {
             if enabled, Application.shared.connectionManager.status.isDisconnected() {
                 showDisableVPNPrompt(sourceView: sender) {
                     Application.shared.connectionManager.removeOnDemandRules { [self] in
-                        keyManager.setNewKey()
+                        keyManager.setNewKey { _, _, _ in }
                     }
                 }
                 return
@@ -75,7 +76,7 @@ class WireGuardSettingsViewController: UITableViewController {
                 return
             }
             
-            keyManager.setNewKey()
+            keyManager.setNewKey { _, _, _ in }
         }
     }
     
@@ -104,6 +105,7 @@ class WireGuardSettingsViewController: UITableViewController {
         keyRegenerationTimestampLabel.text = AppKeyManager.keyRegenerationTimestamp.formatDate()
         let mtu = UserDefaults.standard.wgMtu
         mtuLabel.text = mtu > 0 ? String(mtu) : "Leave blank to use default value"
+        qrLabel.text = KeyChain.wgPresharedKey == nil ? "Disabled" : "Enabled"
     }
     
     private func addObservers() {

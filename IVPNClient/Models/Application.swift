@@ -66,6 +66,10 @@ class Application {
     
     var geoLookup = GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
     
+    static var isKeyPairRequired: Bool {
+        return shared.settings.connectionProtocol.tunnelType() == .wireguard
+    }
+    
     // MARK: - Initialize -
     
     private init() {
