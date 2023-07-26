@@ -40,9 +40,11 @@ class PacketTunnelProvider: OpenVPNTunnelProvider {
     }
     
     private func startKeyRotation() {
-        let timer = TimerManager(timeInterval: ExtensionKeyManager.regenerationCheckInterval)
+        let timer = TimerManager(timeInterval: AppKeyManager.regenerationCheckInterval)
         timer.eventHandler = {
-            ExtensionKeyManager.shared.upgradeKey { _, _ in }
+            if AppKeyManager.needToRegenerate() {
+                AppKeyManager.shared.setNewKey { _, _, _ in }
+            }
             timer.proceed()
         }
         timer.resume()

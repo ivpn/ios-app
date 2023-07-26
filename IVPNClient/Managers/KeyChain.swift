@@ -33,6 +33,7 @@ class KeyChain {
     private static let wgIpAddressKey = "WGIpAddressKey"
     private static let wgIpv6HostKey = "WGIPv6HostKey"
     private static let wgIpAddressesKey = "WGIpAddressesKey"
+    private static let wgPresharedKeyKey = "WGPresharedKey"
     private static let sessionTokenKey = "session_token"
     private static let vpnUsernameKey = "vpn_username"
     private static let vpnPasswordKey = "vpn_password"
@@ -95,6 +96,15 @@ class KeyChain {
         }
     }
     
+    class var wgPresharedKey: String? {
+        get {
+            return KeyChain.bundle[wgPresharedKeyKey]
+        }
+        set {
+            KeyChain.bundle[wgPresharedKeyKey] = newValue
+        }
+    }
+    
     class var wgIpv6Host: String? {
         get {
             return KeyChain.bundle[wgIpv6HostKey]
@@ -152,6 +162,7 @@ class KeyChain {
         wgPublicKey = nil
         wgIpAddress = nil
         wgIpAddresses = nil
+        wgPresharedKey = nil
         sessionToken = nil
         vpnUsername = nil
         vpnPassword = nil
