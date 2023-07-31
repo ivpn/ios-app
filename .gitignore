@@ -70,3 +70,6 @@ OpenVPNConf.swift
 fastlane/test_output
 fastlane/report.xml
 fastlane/Appfile
+
+# Frameworks
+Frameworks
