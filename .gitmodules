@@ -1,0 +1,3 @@
+[submodule "vendor/v2ray-core"]
+	path = vendor/v2ray-core
+	url = https://github.com/v2ray/v2ray-core
