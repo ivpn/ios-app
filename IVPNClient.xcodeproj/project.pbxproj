@@ -44,6 +44,9 @@
 		82152C9929F14B4C007FCECC /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82152C9829F14B4C007FCECC /* KeyChain.swift */; };
 		82152C9B29F17568007FCECC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 82152C9A29F17568007FCECC /* KeychainAccess */; };
 		821AFA1323602B71001EF617 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821AFA1223602B71001EF617 /* SettingsScreenTests.swift */; };
+		821BB5C02A7CF0C9005D9D64 /* V2Ray.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821BB5BF2A7CF0C9005D9D64 /* V2Ray.xcframework */; };
+		821BB5C12A7CF0C9005D9D64 /* V2Ray.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821BB5BF2A7CF0C9005D9D64 /* V2Ray.xcframework */; };
+		821BB5C22A7CF0C9005D9D64 /* V2Ray.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821BB5BF2A7CF0C9005D9D64 /* V2Ray.xcframework */; };
 		821BDE02224A6EC700F592BF /* AppKeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */; };
 		821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D6287C5AB20067F70D /* PortViewController.swift */; };
 		821CA2DB288039670067F70D /* PortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DA288039670067F70D /* PortTableViewCell.swift */; };
@@ -468,6 +471,7 @@
 		821429BA22FC36100056B8FF /* ApiRequestDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestDI.swift; sourceTree = "<group>"; };
 		82152C9829F14B4C007FCECC /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		821AFA1223602B71001EF617 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
+		821BB5BF2A7CF0C9005D9D64 /* V2Ray.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = V2Ray.xcframework; path = Frameworks/V2Ray.xcframework; sourceTree = "<group>"; };
 		821BDE01224A6EC700F592BF /* AppKeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyManagerTests.swift; sourceTree = "<group>"; };
 		821CA2D6287C5AB20067F70D /* PortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortViewController.swift; sourceTree = "<group>"; };
 		821CA2DA288039670067F70D /* PortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortTableViewCell.swift; sourceTree = "<group>"; };
@@ -756,6 +760,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82B6052F21708575004B40E6 /* NetworkExtension.framework in Frameworks */,
+				821BB5C22A7CF0C9005D9D64 /* V2Ray.xcframework in Frameworks */,
 				82BF79622A2F8DDC00061972 /* liboqs.a in Frameworks */,
 				824B86E126D42A5700D0101A /* WireGuardKit in Frameworks */,
 				829F5FCB29A13CF2009E1AD3 /* KeychainAccess in Frameworks */,
@@ -784,6 +789,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CF7E35A20F7A86E008E0EC5 /* NetworkExtension.framework in Frameworks */,
+				821BB5C12A7CF0C9005D9D64 /* V2Ray.xcframework in Frameworks */,
 				829407C12A3DCE9200E6B68E /* liboqs.a in Frameworks */,
 				82968A34298A970500077E0A /* TunnelKitOpenVPNAppExtension in Frameworks */,
 				829F5FC929A13CEA009E1AD3 /* KeychainAccess in Frameworks */,
@@ -795,6 +801,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82D598C621A6A5C7000FABDE /* SystemConfiguration.framework in Frameworks */,
+				821BB5C02A7CF0C9005D9D64 /* V2Ray.xcframework in Frameworks */,
 				9CB2CE311DAF9227007A4D2D /* CoreData.framework in Frameworks */,
 				9C6942251DD0CBF800F9A801 /* NetworkExtension.framework in Frameworks */,
 				82486FAD2A277058009B53F4 /* liboqs.a in Frameworks */,
@@ -817,6 +824,7 @@
 		584496306C3B9383149618CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				821BB5BF2A7CF0C9005D9D64 /* V2Ray.xcframework */,
 				8294BC8D22A126C900328932 /* TunnelKit.framework */,
 				8294BC8B22A10F4100328932 /* TunnelKit.framework */,
 				824F56072233FE6F00BCDD5C /* libwg-go.a */,
