@@ -38,6 +38,9 @@
 		820EA86B232242F800E16B2D /* ApiRequestDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429BA22FC36100056B8FF /* ApiRequestDI.swift */; };
 		820EA86C2322430700E16B2D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429B622FC2BE90056B8FF /* Result.swift */; };
 		820EA86E232264EC00E16B2D /* SuccessResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EA86D232264EC00E16B2D /* SuccessResult.swift */; };
+		8210A3342A7E2ACA001907E0 /* VmessEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8210A3332A7E2AC9001907E0 /* VmessEndpoint.swift */; };
+		8210A3352A7E2ACA001907E0 /* VmessEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8210A3332A7E2AC9001907E0 /* VmessEndpoint.swift */; };
+		8210A3362A7E2ACA001907E0 /* VmessEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8210A3332A7E2AC9001907E0 /* VmessEndpoint.swift */; };
 		821429B722FC2BE90056B8FF /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429B622FC2BE90056B8FF /* Result.swift */; };
 		821429B922FC2EA40056B8FF /* ApiService+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429B822FC2EA40056B8FF /* ApiService+Ext.swift */; };
 		821429BB22FC36100056B8FF /* ApiRequestDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821429BA22FC36100056B8FF /* ApiRequestDI.swift */; };
@@ -472,6 +475,7 @@
 		8208525B23FD64160008C112 /* MainViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Ext.swift"; sourceTree = "<group>"; };
 		820EA86723223F7900E16B2D /* InterfaceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceResult.swift; sourceTree = "<group>"; };
 		820EA86D232264EC00E16B2D /* SuccessResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResult.swift; sourceTree = "<group>"; };
+		8210A3332A7E2AC9001907E0 /* VmessEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VmessEndpoint.swift; sourceTree = "<group>"; };
 		821429B622FC2BE90056B8FF /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		821429B822FC2EA40056B8FF /* ApiService+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiService+Ext.swift"; sourceTree = "<group>"; };
 		821429BA22FC36100056B8FF /* ApiRequestDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestDI.swift; sourceTree = "<group>"; };
@@ -924,6 +928,7 @@
 			isa = PBXGroup;
 			children = (
 				8247C05F2A7CF54300A7C02F /* V2RayConfig.swift */,
+				8210A3332A7E2AC9001907E0 /* VmessEndpoint.swift */,
 			);
 			path = V2Ray;
 			sourceTree = "<group>";
@@ -2069,6 +2074,7 @@
 				82E7169A2181E96F00D6B7C2 /* OpenVPNProtocol.swift in Sources */,
 				8205352A2302BEA3007BDD58 /* Array+Ext.swift in Sources */,
 				82E716882181E8E100D6B7C2 /* ProviderConfigurationKeys.swift in Sources */,
+				8210A3362A7E2ACA001907E0 /* VmessEndpoint.swift in Sources */,
 				8247C0622A7CF54300A7C02F /* V2RayConfig.swift in Sources */,
 				82F638C5217DA89000410318 /* AddressType.swift in Sources */,
 				82EEB6DB25F961BC00915837 /* URL+Ext.swift in Sources */,
@@ -2195,6 +2201,7 @@
 				8247C0612A7CF54300A7C02F /* V2RayConfig.swift in Sources */,
 				82ED17552A1262BA00E7926D /* Interface.swift in Sources */,
 				82E716812181E8AF00D6B7C2 /* TunnelType.swift in Sources */,
+				8210A3352A7E2ACA001907E0 /* VmessEndpoint.swift in Sources */,
 				82A208C121BAAC6C00C9AD44 /* Config.swift in Sources */,
 				82ED174B2A125D0900E7926D /* InterfaceResult.swift in Sources */,
 			);
@@ -2313,6 +2320,7 @@
 				82A160BB221C4E2000730577 /* Server+CoreDataProperties.swift in Sources */,
 				8270753622AFC5B90067C323 /* StringProtocol+Ext.swift in Sources */,
 				82526BEF24123D2900E00880 /* NetworkViewTableCell.swift in Sources */,
+				8210A3342A7E2ACA001907E0 /* VmessEndpoint.swift in Sources */,
 				82DEF021244714F000CCB5CD /* ScannerView.swift in Sources */,
 				826FBDA52461848A00B9E464 /* ServiceDuration.swift in Sources */,
 				9CB2CE411DB2594A007A4D2D /* VPNServerList.swift in Sources */,
