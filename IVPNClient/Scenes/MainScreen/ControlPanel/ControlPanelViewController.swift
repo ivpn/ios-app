@@ -336,6 +336,12 @@ class ControlPanelViewController: UITableViewController {
         })
     }
     
+    func presentAntiTracker() {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
+            topViewController.performSegue(withIdentifier: "MainScreenAntiTracker", sender: nil)
+        }
+    }
+    
     func presentSelectProtocol() {
         if let topViewController = UIApplication.topViewController() as? MainViewController {
             topViewController.performSegue(withIdentifier: "MainScreenSelectProtocol", sender: nil)

@@ -78,6 +78,10 @@ extension ControlPanelViewController {
             }
         }
         
+        if indexPath.row == 5 {
+            presentAntiTracker()
+        }
+        
         if indexPath.row == 7 {
             guard evaluateIsLoggedIn() else {
                 return

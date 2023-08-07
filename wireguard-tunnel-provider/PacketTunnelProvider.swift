@@ -250,6 +250,10 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             }
         }
         
+        if let dnsSettings = newSettings.dnsSettings {
+            wg_log(.info, message: "DNS server: \(String(describing: dnsSettings.servers))")
+        }
+        
         if let mtu = self.config.providerConfiguration![PCKeys.mtu.rawValue] as? NSNumber, mtu.intValue > 0 {
             newSettings.mtu = mtu
             wg_log(.info, message: "MTU: \(mtu)")
