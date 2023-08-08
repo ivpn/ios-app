@@ -370,8 +370,8 @@ extension ProtocolViewController {
         }
         
         if connectionProtocol.tunnelType() != Application.shared.settings.connectionProtocol.tunnelType() && connectionProtocol.tunnelType() == .wireguard {
-            if  KeyChain.wgPublicKey == nil || ExtensionKeyManager.needToRegenerate() {
-                keyManager.setNewKey()
+            if  KeyChain.wgPublicKey == nil || AppKeyManager.needToRegenerate() {
+                keyManager.setNewKey { _, _, _ in }
                 return
             }
         }

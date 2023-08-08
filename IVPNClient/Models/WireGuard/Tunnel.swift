@@ -91,8 +91,8 @@ struct Tunnel {
             settingsString += "public_key=\(hexPublicKey)\n"
         }
         
-        if let presharedKey = peer.presharedKey {
-            settingsString += "preshared_key=\(presharedKey)\n"
+        if let hexPresharedKey = peer.presharedKey?.base64KeyToHex() {
+            settingsString += "preshared_key=\(hexPresharedKey)\n"
         }
         
         if let endpoint = peer.endpoint {

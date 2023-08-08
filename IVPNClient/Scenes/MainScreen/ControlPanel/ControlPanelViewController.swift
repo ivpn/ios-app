@@ -202,8 +202,8 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        if AppKeyManager.isKeyPairRequired && ExtensionKeyManager.needToRegenerate() {
-            keyManager.setNewKey()
+        if Application.isKeyPairRequired && AppKeyManager.needToRegenerate() {
+            keyManager.setNewKey { _, _, _ in }
             return
         }
         
@@ -334,6 +334,12 @@ class ControlPanelViewController: UITableViewController {
             textField.text = ".gw.ivpn.net"
             textField.selectedTextRange = textField.textRange(from: beginning, to: beginning)
         })
+    }
+    
+    func presentAntiTracker() {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
+            topViewController.performSegue(withIdentifier: "MainScreenAntiTracker", sender: nil)
+        }
     }
     
     func presentSelectProtocol() {

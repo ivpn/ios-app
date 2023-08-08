@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.10.0 - 2023-08-08  
+
+[NEW] Post-Quantum Resistant WireGuard Connections  
+[NEW] AntiTracker Plus additional block lists  
+[IMPROVED] WireGuard keys rotation when connected with OpenVPN  
+[NOTE] Kill Switch is removed for iOS 16+ devices; Disable Kill Switch before upgrading to avoid connection issues 
+
 ## 2.9.1 - 2023-06-29  
 
 [NOTE] Removed references to Port Forwarding  

@@ -67,6 +67,7 @@ class Authentication {
             UserDefaults.clearSession()
             Application.shared.settings.connectionProtocol = Config.defaultProtocol
             Application.shared.settings.saveConnectionProtocol()
+            Application.shared.settings.saveDefaultAntiTrackerDns()
         }
     }
     

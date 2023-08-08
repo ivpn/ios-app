@@ -29,6 +29,7 @@ import WidgetKit
 class PacketTunnelProvider: OpenVPNTunnelProvider {
     
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
+        startKeyRotation()
         WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         try await super.startTunnel(options: options)
     }
@@ -36,6 +37,17 @@ class PacketTunnelProvider: OpenVPNTunnelProvider {
     override func stopTunnel(with reason: NEProviderStopReason) async {
         WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         await super.stopTunnel(with: reason)
+    }
+    
+    private func startKeyRotation() {
+        let timer = TimerManager(timeInterval: AppKeyManager.regenerationCheckInterval)
+        timer.eventHandler = {
+            if AppKeyManager.needToRegenerate() {
+                AppKeyManager.shared.setNewKey { _, _, _ in }
+            }
+            timer.proceed()
+        }
+        timer.resume()
     }
     
 }

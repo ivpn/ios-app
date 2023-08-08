@@ -27,6 +27,7 @@ struct WireGuardResult: Codable {
     let status: Int?
     let message: String?
     let ipAddress: String?
+    let kemCipher1: String?
 }
 
 struct Session: Decodable {

@@ -2,6 +2,10 @@
 build/
 DerivedData/
 
+## Static libraries
+IVPNClient/liboqs/liboqs-iphoneos.a
+IVPNClient/liboqs/liboqs-iphonesimulator.a
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
@@ -58,10 +62,6 @@ Carthage/Build
 # Rules for .xcconfig files
 staging.xcconfig
 release.xcconfig
-wg-staging.xcconfig
-wg-release.xcconfig
-widget-staging.xcconfig
-widget-release.xcconfig
 
 # Rules for .swift files
 OpenVPNConf.swift

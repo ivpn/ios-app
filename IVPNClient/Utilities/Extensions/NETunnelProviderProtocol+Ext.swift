@@ -54,6 +54,7 @@ extension NETunnelProviderProtocol {
         
         if let dnsServers = openVPNdnsServers(), !dnsServers.isEmpty, dnsServers != [""] {
             sessionBuilder.dnsServers = dnsServers
+            log(.info, message: "DNS server: \(dnsServers)")
             
             switch DNSProtocolType.preferred() {
             case .doh:
@@ -83,7 +84,9 @@ extension NETunnelProviderProtocol {
         )
         proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
         if #available(iOS 15.1, *) {
-            proto.includeAllNetworks = UserDefaults.shared.killSwitch
+            if #available(iOS 16, *) { } else {
+                proto.includeAllNetworks = UserDefaults.shared.killSwitch
+            }
         }
         
         return proto
@@ -121,7 +124,7 @@ extension NETunnelProviderProtocol {
         
         if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = getExitHost() {
             publicKey = exitHost.publicKey
-            endpoint = Peer.endpoint(host: host.host, port: port)
+            endpoint = Peer.endpoint(host: host.host, port: exitHost.multihopPort)
         }
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
@@ -132,6 +135,7 @@ extension NETunnelProviderProtocol {
         
         let peer = Peer(
             publicKey: publicKey,
+            presharedKey: KeyChain.wgPresharedKey,
             allowedIPs: Config.wgPeerAllowedIPs,
             endpoint: endpoint,
             persistentKeepalive: Config.wgPeerPersistentKeepalive
@@ -156,7 +160,9 @@ extension NETunnelProviderProtocol {
         configuration.providerConfiguration = tunnel.generateProviderConfiguration()
         configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
         if #available(iOS 15.1, *) {
-            configuration.includeAllNetworks = UserDefaults.shared.killSwitch
+            if #available(iOS 16, *) { } else {
+                configuration.includeAllNetworks = UserDefaults.shared.killSwitch
+            }
         }
         
         return configuration

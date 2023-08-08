@@ -13,7 +13,7 @@ platform :ios do
   desc "Runs tests"
   lane :test do
     swiftlint
-    scan(workspace: "IVPNClient.xcworkspace", devices: ["iPhone 11 Pro"], scheme: "IVPNClient")
+    scan(devices: ["iPhone 14"], scheme: "IVPNClient")
     notification(message: "test finished successfully")
   end
 
@@ -41,9 +41,9 @@ platform :ios do
   private_lane :test_flight_beta do |options|
     configuration = options[:configuration]
     swiftlint
-    scan(workspace: "IVPNClient.xcworkspace", devices: ["iPhone 11 Pro"], scheme: "IVPNClient")
+    scan(devices: ["iPhone 14"], scheme: "IVPNClient")
     increment_build_number(xcodeproj: "IVPNClient.xcodeproj")
-    build_app(workspace: "IVPNClient.xcworkspace", configuration: configuration, scheme: "IVPNClient")
+    build_app(configuration: configuration, scheme: "IVPNClient")
     upload_to_testflight(skip_waiting_for_build_processing: true)
   end
 
