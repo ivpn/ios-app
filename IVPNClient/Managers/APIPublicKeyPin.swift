@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2021-01-05.
-//  Copyright (c) 2021 Privatus Limited.
+//  Copyright (c) 2021 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
