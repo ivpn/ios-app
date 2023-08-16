@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2018-07-18.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -132,7 +132,9 @@ class VPNManager {
             if let error = error, error.code == 5 {
                 manager.isOnDemandEnabled = false
                 if #available(iOS 15.1, *) {
-                    manager.protocolConfiguration?.includeAllNetworks = false
+                    if #available(iOS 16, *) { } else {
+                        manager.protocolConfiguration?.includeAllNetworks = false
+                    }
                 }
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
                 return
@@ -261,7 +263,9 @@ class VPNManager {
             manager.onDemandRules = [NEOnDemandRule]()
             manager.isOnDemandEnabled = false
             if #available(iOS 15.1, *) {
-                manager.protocolConfiguration?.includeAllNetworks = false
+                if #available(iOS 16, *) { } else {
+                    manager.protocolConfiguration?.includeAllNetworks = false
+                }
             }
             manager.saveToPreferences { _ in }
         }
@@ -316,7 +320,9 @@ class VPNManager {
                 manager.onDemandRules = [NEOnDemandRule]()
                 manager.isOnDemandEnabled = false
                 if #available(iOS 15.1, *) {
-                    manager.protocolConfiguration?.includeAllNetworks = false
+                    if #available(iOS 16, *) { } else {
+                        manager.protocolConfiguration?.includeAllNetworks = false
+                    }
                 }
                 manager.saveToPreferences(completionHandler: completion)
             }

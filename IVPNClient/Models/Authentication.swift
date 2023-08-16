@@ -12,7 +12,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-10-09.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -67,6 +67,7 @@ class Authentication {
             UserDefaults.clearSession()
             Application.shared.settings.connectionProtocol = Config.defaultProtocol
             Application.shared.settings.saveConnectionProtocol()
+            Application.shared.settings.saveDefaultAntiTrackerDns()
         }
     }
     

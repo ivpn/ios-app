@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-22.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -88,6 +88,7 @@ extension UserDefaults {
         static let killSwitch = "killSwitch"
         static let selectHost = "selectHost"
         static let isLoggedIn = "isLoggedIn"
+        static let antiTrackerDns = "antiTrackerDns"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -143,11 +144,11 @@ extension UserDefaults {
     }
     
     @objc dynamic var antiTrackerDNS: String {
-        return string(forKey: Key.antiTrackerDNS) ?? ""
+        return AntiTrackerDns.load()?.normal ?? ""
     }
     
     @objc dynamic var antiTrackerHardcoreDNS: String {
-        return string(forKey: Key.antiTrackerHardcoreDNS) ?? ""
+        return AntiTrackerDns.load()?.hardcore ?? ""
     }
     
     @objc dynamic var wgKeyTimestamp: Date {
@@ -268,6 +269,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.killSwitch)
         shared.removeObject(forKey: Key.selectHost)
         shared.removeObject(forKey: Key.isLoggedIn)
+        shared.removeObject(forKey: Key.antiTrackerDns)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)
         standard.removeObject(forKey: Key.selectedExitHost)

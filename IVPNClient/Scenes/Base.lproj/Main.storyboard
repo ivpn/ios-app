@@ -21,7 +21,7 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1609.5" width="414" height="65"/>
+                            <rect key="frame" x="0.0" y="1428.5" width="414" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -399,7 +399,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="dcq-sZ-1Jx" kind="show" identifier="AntiTracker" id="aIr-He-1uf"/>
+                                            <segue destination="dcq-sZ-1Jx" kind="show" identifier="AntiTracker" id="ai1-08-AGB"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="80" id="SJt-iu-O9l">
@@ -1628,7 +1628,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ztW-fk-tmt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7179.7101449275369" y="-735.26785714285711"/>
+            <point key="canvasLocation" x="8038" y="-735"/>
         </scene>
         <!--Network Protection Rules-->
         <scene sceneID="VeL-oj-dpX">
@@ -2753,27 +2753,27 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="ivpnBackgroundPrimary"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="85" id="wEd-NG-hu6">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="85" id="wEd-NG-hu6">
                                         <rect key="frame" x="0.0" y="364.00000011920929" width="414" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wEd-NG-hu6" id="P3v-IR-MHl">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383.5" height="85"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CRU-5b-DFa">
-                                                    <rect key="frame" x="30" y="24" width="290" height="37"/>
+                                                    <rect key="frame" x="30" y="24" width="269.5" height="37"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="NdK-IB-dFc">
-                                                            <rect key="frame" x="0.0" y="0.0" width="290" height="37"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="269.5" height="37"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AntiTracker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THp-3k-ikZ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="290" height="19.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="269.5" height="19.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AntiTracker is disabled" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mrr-72-e3Z">
-                                                                    <rect key="frame" x="0.0" y="22.5" width="290" height="14.5"/>
+                                                                    <rect key="frame" x="0.0" y="22.5" width="269.5" height="14.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" name="ivpnLabel5"/>
                                                                     <nil key="highlightedColor"/>
@@ -2783,7 +2783,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wvL-pi-gS0">
-                                                    <rect key="frame" x="335" y="27" width="51" height="31"/>
+                                                    <rect key="frame" x="314.5" y="27" width="51" height="31"/>
                                                     <color key="onTintColor" name="ivpnBlue"/>
                                                     <connections>
                                                         <action selector="toggleAntiTracker:" destination="NB7-vL-gwX" eventType="valueChanged" id="tQU-QG-Vga"/>
@@ -2794,7 +2794,7 @@
                                                 <constraint firstItem="wvL-pi-gS0" firstAttribute="leading" secondItem="CRU-5b-DFa" secondAttribute="trailing" constant="15" id="SWO-E0-eqn"/>
                                                 <constraint firstItem="CRU-5b-DFa" firstAttribute="top" secondItem="P3v-IR-MHl" secondAttribute="top" constant="24" id="Z1o-TD-hXG"/>
                                                 <constraint firstItem="CRU-5b-DFa" firstAttribute="leading" secondItem="P3v-IR-MHl" secondAttribute="leading" constant="30" id="jd5-Tk-cwu"/>
-                                                <constraint firstAttribute="trailing" secondItem="wvL-pi-gS0" secondAttribute="trailing" constant="30" id="qGM-pm-OQ9"/>
+                                                <constraint firstAttribute="trailing" secondItem="wvL-pi-gS0" secondAttribute="trailing" constant="20" id="qGM-pm-OQ9"/>
                                                 <constraint firstItem="wvL-pi-gS0" firstAttribute="centerY" secondItem="P3v-IR-MHl" secondAttribute="centerY" id="sYe-PQ-ogF"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -2874,13 +2874,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="E3R-Ez-ZjT">
                                                             <rect key="frame" x="0.0" y="0.0" width="338.5" height="34.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol, Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBm-y5-gNO">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Protocol, Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBm-y5-gNO">
                                                                     <rect key="frame" x="0.0" y="0.0" width="338.5" height="14.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" name="ivpnLabel5"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfE-oo-iTV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfE-oo-iTV">
                                                                     <rect key="frame" x="0.0" y="17.5" width="338.5" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
@@ -3435,6 +3435,7 @@
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectServer" id="s0z-do-bnX"/>
                         <segue destination="OOw-15-c1e" kind="show" identifier="ControlPanelSelectExitServer" id="fnd-go-o5i"/>
                         <segue destination="IeW-p4-xm9" kind="show" identifier="MainScreenSelectProtocol" id="yv9-Ml-p11"/>
+                        <segue destination="dkF-gx-3Dz" kind="show" identifier="MainScreenAntiTracker" id="FD2-E1-hz9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPo-yL-uiu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3845,55 +3846,100 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection id="e8G-su-I9T">
-                                <string key="footerTitle">AntiTracker uses our private DNS to block ads, malicious website and third-party trackers such as Google Analytics. Supported only for OpenVPN and WireGuard protocols. Learn more</string>
+                            <tableViewSection id="8lf-qE-iVa">
+                                <string key="footerTitle">When AntiTracker is enabled, IVPN blocks ads, malicious websites, and third-party trackers using our private DNS servers. Learn more</string>
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="2xI-KL-qZa">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="oQ6-LO-0ny">
                                         <rect key="frame" x="0.0" y="18" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2xI-KL-qZa" id="5gM-fr-R3A">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oQ6-LO-0ny" id="8jN-s9-Sb0">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQP-fm-TuE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzi-q8-leQ">
                                                     <rect key="frame" x="16" y="11.5" width="325" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="LcZ-y9-P6J"/>
+                                                        <constraint firstAttribute="height" constant="21" id="7dK-RO-1JI"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ayn-kr-8Ii">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ylN-Yn-ypd">
                                                     <rect key="frame" x="349" y="6.5" width="51" height="31"/>
                                                     <color key="onTintColor" name="ivpnBlue"/>
                                                     <connections>
-                                                        <action selector="toggleAntiTracker:" destination="dcq-sZ-1Jx" eventType="valueChanged" id="Rvx-72-OmR"/>
+                                                        <action selector="toggleAntiTracker:" destination="dcq-sZ-1Jx" eventType="valueChanged" id="uBq-cu-8C8"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="eQP-fm-TuE" firstAttribute="leading" secondItem="5gM-fr-R3A" secondAttribute="leading" constant="16" id="D7d-J5-7V0"/>
-                                                <constraint firstItem="eQP-fm-TuE" firstAttribute="centerY" secondItem="5gM-fr-R3A" secondAttribute="centerY" id="GVo-nM-m0e"/>
-                                                <constraint firstAttribute="trailing" secondItem="ayn-kr-8Ii" secondAttribute="trailing" constant="16" id="JET-GR-TDk"/>
-                                                <constraint firstItem="ayn-kr-8Ii" firstAttribute="leading" secondItem="eQP-fm-TuE" secondAttribute="trailing" constant="8" id="aBp-gs-MDB"/>
-                                                <constraint firstItem="ayn-kr-8Ii" firstAttribute="centerY" secondItem="5gM-fr-R3A" secondAttribute="centerY" id="wbK-bg-Kaj"/>
+                                                <constraint firstItem="ylN-Yn-ypd" firstAttribute="centerY" secondItem="8jN-s9-Sb0" secondAttribute="centerY" id="0uc-75-1XM"/>
+                                                <constraint firstItem="Bzi-q8-leQ" firstAttribute="leading" secondItem="8jN-s9-Sb0" secondAttribute="leading" constant="16" id="Ktb-Sz-hZR"/>
+                                                <constraint firstItem="ylN-Yn-ypd" firstAttribute="leading" secondItem="Bzi-q8-leQ" secondAttribute="trailing" constant="8" id="RYe-yb-Xhz"/>
+                                                <constraint firstItem="Bzi-q8-leQ" firstAttribute="centerY" secondItem="8jN-s9-Sb0" secondAttribute="centerY" id="U5F-Wm-Lr7"/>
+                                                <constraint firstAttribute="trailing" secondItem="ylN-Yn-ypd" secondAttribute="trailing" constant="16" id="fcQ-LR-cDH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Hardcore Mode" id="sDr-JP-6yn">
-                                <string key="footerTitle">Hardcore mode blocks the leading companies with business models relying on user surveillance (currently: Google and Facebook). Learn more</string>
+                            <tableViewSection id="e8G-su-I9T">
+                                <string key="footerTitle">Block lists refer to DNS blocking lists used by our AntiTracker. The 'Basic', 'Comprehensive', and 'Restrictive' options are combinations of individual lists, each offering a different level of protection. You also have the freedom to select from individual lists for a more tailored AntiTracker experience. Learn more</string>
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="60" id="pV2-j0-rNo">
+                                        <rect key="frame" x="0.0" y="141.5" width="414" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pV2-j0-rNo" id="VLJ-pv-Adf">
+                                            <rect key="frame" x="0.0" y="0.0" width="383.5" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCj-fS-NVi">
+                                                    <rect key="frame" x="16" y="34" width="351.5" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="ryb-zO-vRB"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" name="ivpnLabel5"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhI-Q0-eDe">
+                                                    <rect key="frame" x="16" y="10" width="351.5" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Y07-Ut-tgS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="gCj-fS-NVi" secondAttribute="trailing" constant="16" id="3yX-Y2-jP7"/>
+                                                <constraint firstItem="gCj-fS-NVi" firstAttribute="top" secondItem="DhI-Q0-eDe" secondAttribute="bottom" constant="3" id="7VH-87-jLh"/>
+                                                <constraint firstItem="gCj-fS-NVi" firstAttribute="leading" secondItem="VLJ-pv-Adf" secondAttribute="leading" constant="16" id="dnm-T2-U35"/>
+                                                <constraint firstItem="DhI-Q0-eDe" firstAttribute="top" secondItem="VLJ-pv-Adf" secondAttribute="top" constant="10" id="gkw-7U-Xiq"/>
+                                                <constraint firstItem="DhI-Q0-eDe" firstAttribute="leading" secondItem="VLJ-pv-Adf" secondAttribute="leading" constant="16" id="rVa-it-bnh"/>
+                                                <constraint firstAttribute="trailing" secondItem="DhI-Q0-eDe" secondAttribute="trailing" constant="16" id="zBy-we-jwH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" name="ivpnBlue"/>
+                                        <connections>
+                                            <segue destination="GhF-xv-sZq" kind="show" id="3KH-OL-zkE"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="sDr-JP-6yn">
+                                <string key="footerTitle">Adding Hardcore mode will block the leading companies with business models relying on user surveillance (currently: Google and Facebook). Learn more</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="UYO-Vy-onE">
-                                        <rect key="frame" x="0.0" y="185" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="329.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UYO-Vy-onE" id="yDV-X9-eO8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hardcore mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSe-dn-Ms4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hardcore Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSe-dn-Ms4">
                                                     <rect key="frame" x="16" y="11.5" width="325" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="7zj-bJ-dJO"/>
@@ -3930,12 +3976,42 @@
                     <navigationItem key="navigationItem" title="AntiTracker" id="q6l-3A-LwN"/>
                     <connections>
                         <outlet property="antiTrackerHardcoreSwitch" destination="xlE-hr-FAs" id="fRD-Q0-aZu"/>
-                        <outlet property="antiTrackerSwitch" destination="ayn-kr-8Ii" id="1yv-C5-IN0"/>
+                        <outlet property="antiTrackerList" destination="gCj-fS-NVi" id="nJc-7N-Wu3"/>
+                        <outlet property="antiTrackerSwitch" destination="ylN-Yn-ypd" id="QSG-5X-bHZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lKI-3X-0iV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6295.1999999999998" y="-734.48275862068965"/>
+            <point key="canvasLocation" x="6293" y="-1468"/>
+        </scene>
+        <!--Block List-->
+        <scene sceneID="WDU-Qr-yfE">
+            <objects>
+                <tableViewController id="GhF-xv-sZq" customClass="AntiTrackerListViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="30" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="pXz-DV-J8m">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AntiTrackerListCell" rowHeight="46" id="Rb9-wV-p76">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rb9-wV-p76" id="fhN-8V-wLA">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="GhF-xv-sZq" id="GAO-fV-gpE"/>
+                            <outlet property="delegate" destination="GhF-xv-sZq" id="7ch-pR-bwi"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Block List" id="Xp0-An-u2T"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K3q-H0-kyv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7180" y="-1468"/>
         </scene>
         <!--Switch to IVPN Pro-->
         <scene sceneID="fZQ-ut-wkh">
@@ -4605,9 +4681,29 @@
             </objects>
             <point key="canvasLocation" x="7180" y="13"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EPO-MU-jc9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dkF-gx-3Dz" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="hLF-et-JhJ"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MUi-YY-dSA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dcq-sZ-1Jx" kind="relationship" relationship="rootViewController" id="fCt-Id-3nf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EEi-76-D4e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5413" y="-1468"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="s0z-do-bnX"/>
+        <segue reference="ai1-08-AGB"/>
         <segue reference="oZ9-fT-UYA"/>
         <segue reference="bcT-Xg-B45"/>
     </inferredMetricsTieBreakers>

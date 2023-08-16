@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-10-15.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -33,6 +33,7 @@ class VPNServerList {
     open private(set) var servers: [VPNServer]
     open private(set) var ports: [ConnectionSettings]
     open private(set) var portRanges: [PortRange]
+    open private(set) var antiTrackerList: [AntiTrackerDns]
     
     var filteredFastestServers: [VPNServer] {
         if UserDefaults.standard.bool(forKey: UserDefaults.Key.fastestServerConfigured) {
@@ -45,6 +46,14 @@ class VPNServerList {
     var noPing: Bool {
         let serversWithPing = servers.filter { $0.pingMs ?? -1 >= 0 }
         return serversWithPing.isEmpty
+    }
+    
+    var antiTrackerBasicList: [AntiTrackerDns] {
+        return antiTrackerList.filter { AntiTrackerDns.basicLists.contains($0.name) }
+    }
+    
+    var antiTrackerIndividualList: [AntiTrackerDns] {
+        return antiTrackerList.filter { !AntiTrackerDns.basicLists.contains($0.name) }
     }
     
     // MARK: - Initialize -
@@ -85,6 +94,7 @@ class VPNServerList {
         servers = [VPNServer]()
         ports = [ConnectionSettings]()
         portRanges = [PortRange]()
+        antiTrackerList = [AntiTrackerDns]()
         
         if let jsonData = data {
             var serversList: [[String: Any]]?
@@ -119,15 +129,22 @@ class VPNServerList {
             }
             
             if let config = config {
-                if let antitracker = config["antitracker"] as? [String: Any] {
-                    if let defaultObj = antitracker["default"] as? [String: Any] {
-                        if let ipAddress = defaultObj["ip"] as? String {
-                            UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.antiTrackerDNS)
+                if let antiTrackerPlus = config["antitracker_plus"] as? [String: Any] {
+                    if let jsonList = antiTrackerPlus["DnsServers"] as? [[String: Any]] {
+                        var list = [AntiTrackerDns]()
+                        for dns in jsonList {
+                            list.append(AntiTrackerDns(
+                                name: dns["Name"] as? String ?? "",
+                                description: dns["Description"] as? String ?? "",
+                                normal: dns["Normal"] as? String ?? "",
+                                hardcore: dns["Hardcore"] as? String ?? ""
+                            ))
                         }
-                    }
-                    if let hardcore = antitracker["hardcore"] as? [String: Any] {
-                        if let ipAddress = hardcore["ip"] as? String {
-                            UserDefaults.shared.set(ipAddress, forKey: UserDefaults.Key.antiTrackerHardcoreDNS)
+                        antiTrackerList = list
+                        
+                        if AntiTrackerDns.load() == nil {
+                            let defaultDns = AntiTrackerDns.defaultList(lists: antiTrackerList)
+                            defaultDns?.save()
                         }
                     }
                 }

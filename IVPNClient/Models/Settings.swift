@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2018-07-20.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -150,6 +150,11 @@ class Settings {
     func saveConnectionProtocol() {
         UserDefaults.standard.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
         UserDefaults.shared.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
+    }
+    
+    func saveDefaultAntiTrackerDns() {
+        let defaultDns = AntiTrackerDns.defaultList(lists: Application.shared.serverList.antiTrackerList)
+        defaultDns?.save()
     }
     
 }

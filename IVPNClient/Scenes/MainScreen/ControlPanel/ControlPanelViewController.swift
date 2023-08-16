@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-02-20.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -334,6 +334,12 @@ class ControlPanelViewController: UITableViewController {
             textField.text = ".gw.ivpn.net"
             textField.selectedTextRange = textField.textRange(from: beginning, to: beginning)
         })
+    }
+    
+    func presentAntiTracker() {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
+            topViewController.performSegue(withIdentifier: "MainScreenAntiTracker", sender: nil)
+        }
     }
     
     func presentSelectProtocol() {

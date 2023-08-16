@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-12.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -248,6 +248,10 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             default:
                 newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
             }
+        }
+        
+        if let dnsSettings = newSettings.dnsSettings {
+            wg_log(.info, message: "DNS server: \(String(describing: dnsSettings.servers))")
         }
         
         if let mtu = self.config.providerConfiguration![PCKeys.mtu.rawValue] as? NSNumber, mtu.intValue > 0 {

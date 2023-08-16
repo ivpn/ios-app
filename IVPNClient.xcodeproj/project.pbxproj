@@ -106,6 +106,7 @@
 		825E834F25A327EB00938240 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E834E25A327EB00938240 /* CaptchaViewController.swift */; };
 		825E836325A4834200938240 /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
 		825E836425A4834200938240 /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
+		825ECB2C2A5582570032E986 /* AntiTrackerDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */; };
 		826470C42446F67100403A14 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826470C32446F67100403A14 /* Signup.storyboard */; };
 		8264CFFC22422F6700E1721E /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D90470216C7DAF0032F3BE /* Date+Ext.swift */; };
 		8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */; };
@@ -163,6 +164,10 @@
 		829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27B2497949A000DC2DB /* PlanLabel.swift */; };
 		829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27C2497949A000DC2DB /* SelectPlanView.swift */; };
 		829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF2812497953C000DC2DB /* UIButton+Ext.swift */; };
+		829F5EAF2A56E067005919AF /* AntiTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */; };
+		829F5EB02A570322005919AF /* AntiTrackerDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */; };
+		829F5EB12A570323005919AF /* AntiTrackerDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */; };
+		829F5EB22A570323005919AF /* AntiTrackerDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */; };
 		829F5FC729A13CAE009E1AD3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 829F5FC629A13CAE009E1AD3 /* KeychainAccess */; };
 		829F5FC929A13CEA009E1AD3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 829F5FC829A13CEA009E1AD3 /* KeychainAccess */; };
 		829F5FCB29A13CF2009E1AD3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 829F5FCA29A13CF2009E1AD3 /* KeychainAccess */; };
@@ -526,6 +531,7 @@
 		825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		825E834E25A327EB00938240 /* CaptchaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaViewController.swift; sourceTree = "<group>"; };
 		825E836225A4834200938240 /* APIPublicKeyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPublicKeyPin.swift; sourceTree = "<group>"; };
+		825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerDns.swift; sourceTree = "<group>"; };
 		826470C32446F67100403A14 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerViewController.swift; sourceTree = "<group>"; };
 		8269CD8E2164A8C700D083A1 /* servers-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "servers-dev.json"; sourceTree = "<group>"; };
@@ -571,6 +577,7 @@
 		829DF27B2497949A000DC2DB /* PlanLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanLabel.swift; sourceTree = "<group>"; };
 		829DF27C2497949A000DC2DB /* SelectPlanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPlanView.swift; sourceTree = "<group>"; };
 		829DF2812497953C000DC2DB /* UIButton+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
+		829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerListViewController.swift; sourceTree = "<group>"; };
 		82A160B8221C4E2000730577 /* Server+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataClass.swift"; sourceTree = "<group>"; };
 		82A160B9221C4E2000730577 /* Server+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		82A3422224AB660C00761AB0 /* ApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTests.swift; sourceTree = "<group>"; };
@@ -987,6 +994,7 @@
 				8243587025DBB73E005FDEBB /* SecureDNS.swift */,
 				827694F2263C04C40058B4DC /* LoginConfirmation.swift */,
 				821CA2DE288143470067F70D /* PortRange.swift */,
+				825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1222,6 +1230,7 @@
 				821CA2D6287C5AB20067F70D /* PortViewController.swift */,
 				82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */,
 				82052E5529C1D83700227CF9 /* MTUViewController.swift */,
+				829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2066,6 +2075,7 @@
 				82EEB6CD25F9422900915837 /* DNSProtocolType.swift in Sources */,
 				820EA86C2322430700E16B2D /* Result.swift in Sources */,
 				823FFB092338E09A00F91A5D /* Capability.swift in Sources */,
+				829F5EB12A570323005919AF /* AntiTrackerDns.swift in Sources */,
 				82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */,
 				825E836425A4834200938240 /* APIPublicKeyPin.swift in Sources */,
 				823BD9E4231D4C8F002E631D /* ErrorResult.swift in Sources */,
@@ -2117,6 +2127,7 @@
 				82C61DA929E6C53C00AF972A /* Array+Ext.swift in Sources */,
 				82A38A1029E2D46000C88372 /* StatusViewModel.swift in Sources */,
 				8206BAFC29ED6C9600F916B7 /* Notification.swift in Sources */,
+				829F5EB22A570323005919AF /* AntiTrackerDns.swift in Sources */,
 				82A38A1B29E3201F00C88372 /* UserDefaults.swift in Sources */,
 				82C61D9929E6B4C600AF972A /* LocationView.swift in Sources */,
 				82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */,
@@ -2141,6 +2152,7 @@
 				82E716932181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				82ED17592A1262F800E7926D /* Data+Ext.swift in Sources */,
 				823FFB082338E09900F91A5D /* Capability.swift in Sources */,
+				829F5EB02A570322005919AF /* AntiTrackerDns.swift in Sources */,
 				82ED17482A125C9100E7926D /* TimerManager.swift in Sources */,
 				826F7F4323A7AAD200777DB9 /* Array+Ext.swift in Sources */,
 				82ED17542A1261A000E7926D /* x25519.c in Sources */,
@@ -2248,6 +2260,7 @@
 				9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */,
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
 				82DAB37B2457013900302F4C /* Service.swift in Sources */,
+				825ECB2C2A5582570032E986 /* AntiTrackerDns.swift in Sources */,
 				82C2E5DF21620FF100C5A09F /* UIDevice+Ext.swift in Sources */,
 				8208525823FD5EB20008C112 /* MainViewController.swift in Sources */,
 				825E836325A4834200938240 /* APIPublicKeyPin.swift in Sources */,
@@ -2294,6 +2307,7 @@
 				82C293BF21CCD49A000B74EC /* NavigationController.swift in Sources */,
 				82061F67238D2730009DDF4D /* PingManager.swift in Sources */,
 				9CDDD5AF1D9D2F9F00D39924 /* AppDelegate.swift in Sources */,
+				829F5EAF2A56E067005919AF /* AntiTrackerListViewController.swift in Sources */,
 				82CE59A725ED491B0078099D /* DNSResolver.swift in Sources */,
 				82BBF26121AD213500589766 /* Theme.swift in Sources */,
 				829AA4732267372A00037198 /* Designable+Ext.swift in Sources */,

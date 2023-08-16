@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-10-17.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -472,10 +472,11 @@ extension SettingsViewController {
         // Kill Switch
         if indexPath.section == 3 && indexPath.row == 4 {
             if #available(iOS 15.1, *) {
-                return UITableView.automaticDimension
-            } else {
-                return 0
+                if #available(iOS 16, *) { } else {
+                    return UITableView.automaticDimension
+                }
             }
+            return 0
         }
         
         return UITableView.automaticDimension

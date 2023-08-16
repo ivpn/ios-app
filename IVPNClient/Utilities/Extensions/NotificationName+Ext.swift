@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-11-06.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -53,7 +53,8 @@ extension Notification.Name {
     public static let UpdateResolvedDNSInsideVPN = Notification.Name("updateResolvedDNSInsideVPN")
     public static let ResolvedDNSError = Notification.Name("resolvedDNSError")
     public static let ServersListUpdated = Notification.Name("serversListUpdated")
-    public static let AntiTrackerUpdated = Notification.Name("antiTrackerUpdatedUpdated")
+    public static let AntiTrackerUpdated = Notification.Name("antiTrackerUpdated")
+    public static let AntiTrackerListUpdated = Notification.Name("antiTrackerListUpdated")
     public static let CustomDNSUpdated = Notification.Name("customDNSUpdatedUpdated")
     public static let EvaluateReconnect = Notification.Name("evaluateReconnect")
     public static let EvaluatePlanUpdate = Notification.Name("evaluatePlanUpdate")
