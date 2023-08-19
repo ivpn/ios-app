@@ -479,6 +479,14 @@ extension SettingsViewController {
             return 0
         }
         
+        // Experimental
+        if indexPath.section == 3 && indexPath.row == 11 {
+            if #available(iOS 15.1, *) {
+                return UITableView.automaticDimension
+            }
+            return 0
+        }
+        
         return UITableView.automaticDimension
     }
     
@@ -488,17 +496,17 @@ extension SettingsViewController {
             sendLogs()
         }
         
-        if indexPath.section == 4 && indexPath.row == 0 {
+        if indexPath.section == 5 && indexPath.row == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
             openTermsOfService()
         }
         
-        if indexPath.section == 4 && indexPath.row == 1 {
+        if indexPath.section == 5 && indexPath.row == 1 {
             tableView.deselectRow(at: indexPath, animated: true)
             openPrivacyPolicy()
         }
         
-        if indexPath.section == 4 && indexPath.row == 2 {
+        if indexPath.section == 5 && indexPath.row == 2 {
             tableView.deselectRow(at: indexPath, animated: true)
             contactSupport()
         }
