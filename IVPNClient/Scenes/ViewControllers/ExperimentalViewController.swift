@@ -17,7 +17,6 @@ class ExperimentalViewController: UITableViewController {
     
     @IBAction func toggleDisableLanAccess(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.disableLanAccess)
-        disableLanAccessSwitch.isEnabled = sender.isOn
         evaluateReconnect(sender: sender as UIView)
     }
     
