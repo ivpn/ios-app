@@ -1349,7 +1349,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
                             <tableViewSection id="xSk-Nz-aXI">
-                                <string key="footerTitle">When enabled, LAN traffic will not go outside the VPN tunnel. This option is implemented with includeAllNetworks API (aka Kill Switch) and can cause connectivity issues. Learn more</string>
+                                <string key="footerTitle">This option disables LAN traffic when VPN is connected. The option is implemented with includeAllNetworks API (aka Kill Switch) and can cause connectivity issues. Learn more</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="PQO-ry-hFA">
                                         <rect key="frame" x="0.0" y="18" width="414" height="43.5"/>
