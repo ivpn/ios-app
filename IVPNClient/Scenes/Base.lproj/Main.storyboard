@@ -702,7 +702,6 @@
                         <outlet property="selectedProtocol" destination="R5e-Wk-dkz" id="aFg-ce-fcQ"/>
                         <outlet property="selectedServerFlag" destination="Dq7-2f-uog" id="RhA-Wq-cGd"/>
                         <outlet property="selectedServerName" destination="CPE-CP-JAE" id="l57-wo-Jil"/>
-                        <outlet property="sendLogsLabel" destination="Jpg-3d-dAU" id="O30-Iy-J2F"/>
                         <outlet property="showIPv4ServersSwitch" destination="hV9-LW-jwe" id="NzW-gv-njt"/>
                         <outlet property="versionLabel" destination="gBW-V1-BW0" id="Xo2-nd-tuj"/>
                         <segue destination="C8Y-kZ-eYV" kind="show" identifier="SelectProtocol" id="oZ9-fT-UYA"/>
@@ -1403,11 +1402,11 @@
                     <connections>
                         <outlet property="askToReconnectSwitch" destination="0GS-AB-Vd5" id="PGq-5x-xyQ"/>
                         <outlet property="disableLanAccessSwitch" destination="h9L-WL-mhk" id="Ohr-JE-bka"/>
-                        <outlet property="loggingCell" destination="71h-Rn-GiM" id="6Wu-3c-oX4"/>
+                        <outlet property="loggingCell" destination="OOg-Pf-x1z" id="6b0-9X-Sof"/>
                         <outlet property="loggingSwitch" destination="Kg2-cl-Yhj" id="3pm-gp-1Yw"/>
                         <outlet property="preventSameCountryMultiHopSwitch" destination="qLy-5L-tSL" id="e7Q-2p-1Rt"/>
                         <outlet property="preventSameISPMultiHopSwitch" destination="Wu9-JY-b9t" id="wEY-jh-j26"/>
-                        <outlet property="sendLogsLabel" destination="4Qy-I2-3kS" id="xPI-71-COL"/>
+                        <outlet property="sendLogsLabel" destination="Jpg-3d-dAU" id="OKr-90-Yxf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EnU-E8-7lP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -56,8 +56,7 @@ class AdvancedViewController: UITableViewController {
     @IBAction func toggleLogging(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
         FileSystemManager.clearSession()
-        updateCellInset(cell: loggingCell, inset: sender.isOn)
-        tableView.reloadData()
+        setupLoggingView()
     }
     
     // MARK: - View Lifecycle -
@@ -76,6 +75,13 @@ class AdvancedViewController: UITableViewController {
         preventSameCountryMultiHopSwitch.setOn(UserDefaults.standard.preventSameCountryMultiHop, animated: false)
         preventSameISPMultiHopSwitch.setOn(UserDefaults.standard.preventSameISPMultiHop, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
+        setupLoggingView()
+    }
+    
+    private func setupLoggingView() {
+        loggingCell.isUserInteractionEnabled = UserDefaults.shared.isLogging ? true : false
+        sendLogsLabel.alpha = UserDefaults.shared.isLogging ? 1 : 0.65
+        sendLogsLabel.textColor = UserDefaults.shared.isLogging ? UIColor.init(named: Theme.ivpnBlue) : UIColor.init(named: Theme.ivpnLabel5)
     }
     
     private func sendLogs() {
@@ -166,10 +172,6 @@ extension AdvancedViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 2 && indexPath.row == 0 {
             return 60
-        }
-        
-        if indexPath.section == 2 && indexPath.row == 1 && !loggingSwitch.isOn {
-            return 0
         }
         
         return UITableView.automaticDimension
