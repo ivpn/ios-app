@@ -266,7 +266,7 @@
 		82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0292447288100CCB5CD /* PaymentViewController.swift */; };
 		82DEFFA62452DE5100ECB482 /* MapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEFFA52452DE5100ECB482 /* MapConstants.swift */; };
 		82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */; };
-		82E0E9072A90CB110008BD3F /* ExperimentalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E0E9062A90CB110008BD3F /* ExperimentalViewController.swift */; };
+		82E0E9072A90CB110008BD3F /* AdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E0E9062A90CB110008BD3F /* AdvancedViewController.swift */; };
 		82E3B20B29DDCC6300998F67 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82E3B1EF29DDC91C00998F67 /* WidgetKit.framework */; };
 		82E3B20C29DDCC6300998F67 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82E3B1F129DDC91C00998F67 /* SwiftUI.framework */; };
 		82E3B20F29DDCC6400998F67 /* IVPNWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E3B20E29DDCC6400998F67 /* IVPNWidgetBundle.swift */; };
@@ -657,7 +657,7 @@
 		82DEF0292447288100CCB5CD /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		82DEFFA52452DE5100ECB482 /* MapConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConstants.swift; sourceTree = "<group>"; };
 		82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManagerTests.swift; sourceTree = "<group>"; };
-		82E0E9062A90CB110008BD3F /* ExperimentalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentalViewController.swift; sourceTree = "<group>"; };
+		82E0E9062A90CB110008BD3F /* AdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedViewController.swift; sourceTree = "<group>"; };
 		82E3B1EF29DDC91C00998F67 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		82E3B1F129DDC91C00998F67 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		82E3B20A29DDCC6300998F67 /* IVPNWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IVPNWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1217,7 +1217,7 @@
 			isa = PBXGroup;
 			children = (
 				9C3031361DB4307D00C38B0C /* SettingsViewController.swift */,
-				82E0E9062A90CB110008BD3F /* ExperimentalViewController.swift */,
+				82E0E9062A90CB110008BD3F /* AdvancedViewController.swift */,
 				9C50959520FCF4C60048DBF2 /* ProtocolViewController.swift */,
 				820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */,
 				82D598A221A55210000FABDE /* NetworkProtectionViewController.swift */,
@@ -2331,7 +2331,7 @@
 				82E7880C22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift in Sources */,
 				82968A35298A98C300077E0A /* KeyChain.swift in Sources */,
 				82F638C2217DA89000410318 /* AddressType.swift in Sources */,
-				82E0E9072A90CB110008BD3F /* ExperimentalViewController.swift in Sources */,
+				82E0E9072A90CB110008BD3F /* AdvancedViewController.swift in Sources */,
 				822920A02480FA3600476FC1 /* ServersSort.swift in Sources */,
 				826E61482428F8E60064F195 /* AccountViewController.swift in Sources */,
 				820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */,
