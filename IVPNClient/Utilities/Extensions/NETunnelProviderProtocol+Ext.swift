@@ -90,7 +90,7 @@ extension NETunnelProviderProtocol {
             }
         }
         
-        if #available(iOS 15.1, *) {
+        if #available(iOS 14.2, *) {
             proto.includeAllNetworks = UserDefaults.shared.disableLanAccess
             proto.excludeLocalNetworks = !UserDefaults.shared.disableLanAccess
         }
@@ -172,7 +172,7 @@ extension NETunnelProviderProtocol {
             }
         }
         
-        if #available(iOS 15.1, *) {
+        if #available(iOS 14.2, *) {
             configuration.includeAllNetworks = UserDefaults.shared.disableLanAccess
             configuration.excludeLocalNetworks = !UserDefaults.shared.disableLanAccess
         }

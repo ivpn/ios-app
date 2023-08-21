@@ -367,14 +367,6 @@ extension SettingsViewController {
             return 0
         }
         
-        // Experimental
-        if indexPath.section == 3 && indexPath.row == 11 {
-            if #available(iOS 15.1, *) {
-                return UITableView.automaticDimension
-            }
-            return 0
-        }
-        
         return UITableView.automaticDimension
     }
     
