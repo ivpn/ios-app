@@ -41,16 +41,10 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var multiHopSwitch: UISwitch!
     @IBOutlet weak var entryServerCell: UITableViewCell!
     @IBOutlet weak var keepAliveSwitch: UISwitch!
-    @IBOutlet weak var loggingSwitch: UISwitch!
-    @IBOutlet weak var loggingCell: UITableViewCell!
     @IBOutlet weak var ipv6Switch: UISwitch!
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
-    @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
     @IBOutlet weak var selectHostSwitch: UISwitch!
-    @IBOutlet weak var sendLogsLabel: UILabel!
-    @IBOutlet weak var preventSameCountryMultiHopSwitch: UISwitch!
-    @IBOutlet weak var preventSameISPMultiHopSwitch: UISwitch!
     
     // MARK: - Properties -
     
@@ -143,17 +137,6 @@ class SettingsViewController: UITableViewController {
         evaluateReconnect(sender: sender as UIView)
     }
     
-    @IBAction func toggleLogging(_ sender: UISwitch) {
-        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
-        FileSystemManager.clearSession()
-        updateCellInset(cell: loggingCell, inset: sender.isOn)
-        tableView.reloadData()
-    }
-    
-    @IBAction func toggleAskToReconnect(_ sender: UISwitch) {
-        UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.notAskToReconnect)
-    }
-    
     @IBAction func toggleSelectHost(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.selectHost)
         
@@ -162,14 +145,6 @@ class SettingsViewController: UITableViewController {
             Application.shared.settings.selectedExitHost = nil
             updateSelectedServer()
         }
-    }
-    
-    @IBAction func togglePreventSameCountryMultiHop(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.preventSameCountryMultiHop)
-    }
-    
-    @IBAction func togglePreventSameISPMultiHop(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.preventSameISPMultiHop)
     }
     
     @IBAction func extendSubscription(_ sender: Any) {
@@ -227,15 +202,9 @@ class SettingsViewController: UITableViewController {
         showIPv4ServersSwitch.isEnabled = UserDefaults.shared.isIPv6
         killSwitchSwitch.setOn(UserDefaults.shared.killSwitch, animated: false)
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
-        loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
-        askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
         selectHostSwitch.setOn(UserDefaults.shared.selectHost, animated: false)
-        preventSameCountryMultiHopSwitch.setOn(UserDefaults.standard.preventSameCountryMultiHop, animated: false)
-        preventSameISPMultiHopSwitch.setOn(UserDefaults.standard.preventSameISPMultiHop, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
-        updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
-        
         updateSelectedServer()
         
         NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
@@ -344,85 +313,6 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    private func sendLogs() {
-        guard evaluateIsLoggedIn() else {
-            return
-        }
-
-        guard let appLogPath = FileManager.logTextFileURL?.path else {
-            return
-        }
-        
-        guard let wireguardLogPath = FileManager.wgLogTextFileURL?.path else {
-            return
-        }
-        
-        guard logger.app?.writeLog(to: appLogPath) ?? false else {
-            return
-        }
-        
-        guard logger.wireguard?.writeLog(to: wireguardLogPath) ?? false else {
-            return
-        }
-        
-        var logFiles = [URL]()
-        var openvpnLogAttached = false
-        var presentMailComposer = true
-        
-        // App logs
-        var appLog = ""
-        if let file = NSData(contentsOfFile: appLogPath) {
-            appLog = String(data: file as Data, encoding: .utf8) ?? ""
-        }
-        
-        FileSystemManager.updateLogFile(newestLog: appLog, name: Config.appLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-        
-        let logFile = FileSystemManager.sharedFilePath(name: Config.appLogFile).path
-        if let fileData = NSData(contentsOfFile: logFile) {
-            appLog = String(data: fileData as Data, encoding: .utf8) ?? ""
-            logFiles.append(FileSystemManager.tempFile(text: appLog, fileName: "app-\(Date.logFileName())"))
-        }
-        
-        // WireGuard tunnel logs
-        var wireguardLog = ""
-        if let file = NSData(contentsOfFile: wireguardLogPath) {
-            wireguardLog = String(data: file as Data, encoding: .utf8) ?? ""
-        }
-        
-        FileSystemManager.updateLogFile(newestLog: wireguardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-        
-        let wireguardLogFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
-        if let fileData = NSData(contentsOfFile: wireguardLogFile) {
-            wireguardLog = String(data: fileData as Data, encoding: .utf8) ?? ""
-            logFiles.append(FileSystemManager.tempFile(text: wireguardLog, fileName: "wireguard-\(Date.logFileName())"))
-        }
-        
-        // OpenVPN tunnel logs
-        Application.shared.connectionManager.getOpenVPNLog { openVPNLog in
-            if UserDefaults.shared.isLogging {
-                FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-                
-                let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                var openvpnLog = ""
-                if let file = NSData(contentsOfFile: logFile), !openvpnLogAttached {
-                    openvpnLog = String(data: file as Data, encoding: .utf8) ?? ""
-                    logFiles.append(FileSystemManager.tempFile(text: openvpnLog, fileName: "openvpn-\(Date.logFileName())"))
-                    openvpnLogAttached = true
-                }
-            }
-            
-            if presentMailComposer {
-                let activityView = UIActivityViewController(activityItems: logFiles, applicationActivities: nil)
-                activityView.popoverPresentationController?.sourceView = self.view
-                self.present(activityView, animated: true, completion: nil)
-                if let popOver = activityView.popoverPresentationController {
-                    popOver.sourceView = self.sendLogsLabel
-                }
-                presentMailComposer = false
-            }
-        }
-    }
-    
     private func contactSupport() {
         guard evaluateMailCompose() else {
             return
@@ -461,8 +351,6 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 1 { return 60 }
         if indexPath.section == 0 && indexPath.row == 3 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 9 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 10 && !loggingSwitch.isOn { return 0 }
         
         // Disconnected custom DNS
         if indexPath.section == 3 && indexPath.row == 3 {
@@ -491,11 +379,6 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 && indexPath.row == 10 {
-            tableView.deselectRow(at: indexPath, animated: true)
-            sendLogs()
-        }
-        
         if indexPath.section == 5 && indexPath.row == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
             openTermsOfService()

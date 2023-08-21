@@ -27,6 +27,7 @@ import ActiveLabel
 class AdvancedViewController: UITableViewController {
     
     @IBOutlet weak var disableLanAccessSwitch: UISwitch!
+    @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var preventSameCountryMultiHopSwitch: UISwitch!
     @IBOutlet weak var preventSameISPMultiHopSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
@@ -38,6 +39,10 @@ class AdvancedViewController: UITableViewController {
     @IBAction func toggleDisableLanAccess(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.disableLanAccess)
         evaluateReconnect(sender: sender as UIView)
+    }
+    
+    @IBAction func toggleAskToReconnect(_ sender: UISwitch) {
+        UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.notAskToReconnect)
     }
     
     @IBAction func togglePreventSameCountryMultiHop(_ sender: UISwitch) {
@@ -59,13 +64,19 @@ class AdvancedViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupView()
+    }
+    
+    // MARK: - Methods -
+    
+    private func setupView() {
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         disableLanAccessSwitch.setOn(UserDefaults.shared.disableLanAccess, animated: false)
+        askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
         preventSameCountryMultiHopSwitch.setOn(UserDefaults.standard.preventSameCountryMultiHop, animated: false)
         preventSameISPMultiHopSwitch.setOn(UserDefaults.standard.preventSameISPMultiHop, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
     }
-    
-    // MARK: - Methods -
     
     private func sendLogs() {
         guard evaluateIsLoggedIn() else {
@@ -153,6 +164,10 @@ class AdvancedViewController: UITableViewController {
 extension AdvancedViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 2 && indexPath.row == 0 {
+            return 60
+        }
+        
         if indexPath.section == 2 && indexPath.row == 1 && !loggingSwitch.isOn {
             return 0
         }
