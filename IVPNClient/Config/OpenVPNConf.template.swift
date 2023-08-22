@@ -3,7 +3,7 @@
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
