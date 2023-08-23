@@ -1,0 +1,8 @@
+{
+    "policy": {},
+    "log": {},
+    "inbounds": [],
+    "outbounds": [],
+    "dns": {},
+    "routing": {}
+}

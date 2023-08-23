@@ -55,6 +55,7 @@
 		821CA2DB288039670067F70D /* PortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DA288039670067F70D /* PortTableViewCell.swift */; };
 		821CA2DF288143470067F70D /* PortRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DE288143470067F70D /* PortRange.swift */; };
 		821E35582A95DCD200AEE5C7 /* V2RayCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E35572A95DCD200AEE5C7 /* V2RayCore.swift */; };
+		821E355A2A95F77700AEE5C7 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 821E35592A95F77700AEE5C7 /* config.json */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
 		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
 		8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */; };
@@ -488,6 +489,7 @@
 		821CA2DA288039670067F70D /* PortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortTableViewCell.swift; sourceTree = "<group>"; };
 		821CA2DE288143470067F70D /* PortRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortRange.swift; sourceTree = "<group>"; };
 		821E35572A95DCD200AEE5C7 /* V2RayCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V2RayCore.swift; sourceTree = "<group>"; };
+		821E35592A95F77700AEE5C7 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
 		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
 		8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSViewController.swift; sourceTree = "<group>"; };
@@ -932,6 +934,7 @@
 				8247C05F2A7CF54300A7C02F /* V2RayConfig.swift */,
 				8210A3332A7E2AC9001907E0 /* VmessEndpoint.swift */,
 				821E35572A95DCD200AEE5C7 /* V2RayCore.swift */,
+				821E35592A95F77700AEE5C7 /* config.json */,
 			);
 			path = V2Ray;
 			sourceTree = "<group>";
@@ -1994,6 +1997,7 @@
 			files = (
 				9CDDD5B91D9D2F9F00D39924 /* LaunchScreen.storyboard in Resources */,
 				9CDDD5B61D9D2F9F00D39924 /* Assets.xcassets in Resources */,
+				821E355A2A95F77700AEE5C7 /* config.json in Resources */,
 				9CB2CE541DB2A999007A4D2D /* servers.json in Resources */,
 				8269CD8F2164A8C700D083A1 /* servers-dev.json in Resources */,
 				9CDDD5B41D9D2F9F00D39924 /* Main.storyboard in Resources */,
