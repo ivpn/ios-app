@@ -46,6 +46,7 @@ class V2RayCore {
         
         do {
             let config = CoreConfig.init()
+            try config.xxX_Marshal(configData, deterministic: true)
             core = CoreNew(config, nil)
             try core?.start()
             self.serverPoint = serverPoint
