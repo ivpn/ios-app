@@ -141,7 +141,7 @@ struct V2RayConfig: Codable {
         }
     }
     
-    func createFromTemplate(outboundIp: String, outboundPort: Int, inboundIp: String, inboundPort: Int, outboundUserId: String) -> V2RayConfig {
+    static func createFromTemplate(outboundIp: String, outboundPort: Int, inboundIp: String, inboundPort: Int, outboundUserId: String) -> V2RayConfig {
         var config = V2RayConfig.parse(fromJsonFile: "config")!
         config.inbounds[0].settings.address = inboundIp
         config.inbounds[0].settings.port = inboundPort
@@ -152,7 +152,7 @@ struct V2RayConfig: Codable {
         return config
     }
     
-    func createQuick(outboundIp: String, outboundPort: Int, inboundIp: String, inboundPort: Int, outboundUserId: String, tlsSrvName: String) -> V2RayConfig {
+    static func createQuick(outboundIp: String, outboundPort: Int, inboundIp: String, inboundPort: Int, outboundUserId: String, tlsSrvName: String) -> V2RayConfig {
         var config = createFromTemplate(outboundIp: outboundIp, outboundPort: outboundPort, inboundIp: inboundIp, inboundPort: inboundPort, outboundUserId: outboundUserId)
         config.outbounds[0].streamSettings.network = "quic"
         config.outbounds[0].streamSettings.tcpSettings = nil
@@ -161,7 +161,7 @@ struct V2RayConfig: Codable {
         return config
     }
     
-    func createTcp(outboundIp: String, outboundPort: Int, inboundIp: String, inboundPort: Int, outboundUserId: String) -> V2RayConfig {
+    static func createTcp(outboundIp: String, outboundPort: Int, inboundIp: String, inboundPort: Int, outboundUserId: String) -> V2RayConfig {
         var config = createFromTemplate(outboundIp: outboundIp, outboundPort: outboundPort, inboundIp: inboundIp, inboundPort: inboundPort, outboundUserId: outboundUserId)
         config.outbounds[0].streamSettings.network = "tcp"
         config.outbounds[0].streamSettings.security = ""
