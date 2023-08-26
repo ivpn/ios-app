@@ -32,9 +32,9 @@ class AddressTypeTests: XCTestCase {
         let ipAddress2 = "::1"
         let ipAddress3 = "-"
         
-        XCTAssertEqual(AddressType.validateIpAddress(ipToValidate: ipAddress1), .IPv4)
-        XCTAssertEqual(AddressType.validateIpAddress(ipToValidate: ipAddress2), .IPv6)
-        XCTAssertEqual(AddressType.validateIpAddress(ipToValidate: ipAddress3), .other)
+        XCTAssertEqual(AddressType.validateIpAddress(ipAddress1), .IPv4)
+        XCTAssertEqual(AddressType.validateIpAddress(ipAddress2), .IPv6)
+        XCTAssertEqual(AddressType.validateIpAddress(ipAddress3), .other)
     }
     
 }
