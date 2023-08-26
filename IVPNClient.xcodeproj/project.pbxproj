@@ -321,7 +321,6 @@
 		82ED17472A125A4700E7926D /* APIPublicKeyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E836225A4834200938240 /* APIPublicKeyPin.swift */; };
 		82ED17482A125C9100E7926D /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86C326D3D7B600D0101A /* TimerManager.swift */; };
 		82ED174B2A125D0900E7926D /* InterfaceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EA86723223F7900E16B2D /* InterfaceResult.swift */; };
-		82ED17542A1261A000E7926D /* x25519.c in Sources */ = {isa = PBXBuildFile; fileRef = 82ED17512A1261A000E7926D /* x25519.c */; };
 		82ED17552A1262BA00E7926D /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A82174C11600123538 /* Interface.swift */; };
 		82ED17592A1262F800E7926D /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		82EEB6C625F9398600915837 /* DNSProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EEB6C525F9398600915837 /* DNSProtocolType.swift */; };
@@ -704,8 +703,6 @@
 		82E81AE62449C44F00D81FB7 /* PaymentComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentComponentView.swift; sourceTree = "<group>"; };
 		82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StorageManager+OnDemandRuleTests.swift"; sourceTree = "<group>"; };
 		82ED17452A1259CB00E7926D /* OpenVPNNetworkExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVPNNetworkExtension-Bridging-Header.h"; sourceTree = "<group>"; };
-		82ED17512A1261A000E7926D /* x25519.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x25519.c; sourceTree = "<group>"; };
-		82ED17522A1261A000E7926D /* x25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x25519.h; sourceTree = "<group>"; };
 		82EEB6C525F9398600915837 /* DNSProtocolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSProtocolType.swift; sourceTree = "<group>"; };
 		82F189A1225CE8A90038ABA0 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		82F638C1217DA89000410318 /* AddressType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressType.swift; sourceTree = "<group>"; };
@@ -1565,15 +1562,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		82ED17502A12618E00E7926D /* Curve25519 */ = {
-			isa = PBXGroup;
-			children = (
-				82ED17512A1261A000E7926D /* x25519.c */,
-				82ED17522A1261A000E7926D /* x25519.h */,
-			);
-			path = Curve25519;
-			sourceTree = "<group>";
-		};
 		82F81A33224CF36000CB778B /* WireGuard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1617,7 +1605,6 @@
 		9C7840A920CD8A8A00335736 /* openvpn-tunnel-provider */ = {
 			isa = PBXGroup;
 			children = (
-				82ED17502A12618E00E7926D /* Curve25519 */,
 				9C7840AA20CD8A8A00335736 /* PacketTunnelProvider.swift */,
 				9C7840AC20CD8A8A00335736 /* Info.plist */,
 				82ED17452A1259CB00E7926D /* OpenVPNNetworkExtension-Bridging-Header.h */,
@@ -2205,7 +2192,6 @@
 				829F5EB02A570322005919AF /* AntiTrackerDns.swift in Sources */,
 				82ED17482A125C9100E7926D /* TimerManager.swift in Sources */,
 				826F7F4323A7AAD200777DB9 /* Array+Ext.swift in Sources */,
-				82ED17542A1261A000E7926D /* x25519.c in Sources */,
 				82ED17402A1258EA00E7926D /* ApiService.swift in Sources */,
 				82968A36298A98C600077E0A /* KeyChain.swift in Sources */,
 				82ED17462A125A3000E7926D /* APIAccessManager.swift in Sources */,
