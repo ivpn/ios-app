@@ -15,5 +15,5 @@ PATH=$PATH:~/go/bin
 go get golang.org/x/mobile/cmd/gomobile
 
 echo "=> 🍏 Build iOS library.."
-gomobile bind -trimpath -ldflags "-s -w" --target=ios -o ../../build/ios/V2Ray.xcframework
+gomobile bind -trimpath -ldflags "-s -w" --target=ios -o ../../Frameworks/V2Ray.xcframework
 echo "=> ✅ iOS build completed"
