@@ -110,7 +110,6 @@
 		824B86C926D3D7FB00D0101A /* CIDRAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F638CB217DC25600410318 /* CIDRAddress.swift */; };
 		824B86D226D40E7800D0101A /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86AD26D3D16100D0101A /* FileManager+Extension.swift */; };
 		824B86D426D40E9700D0101A /* ringlogger.c in Sources */ = {isa = PBXBuildFile; fileRef = 824B86B526D3D16100D0101A /* ringlogger.c */; };
-		824B86DF26D42A4600D0101A /* WireGuardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 824B86DE26D42A4600D0101A /* WireGuardKit */; };
 		824B86E126D42A5700D0101A /* WireGuardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 824B86E026D42A5700D0101A /* WireGuardKit */; };
 		824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */; };
 		82526BEF24123D2900E00880 /* NetworkViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */; };
@@ -840,7 +839,6 @@
 				82EC884129A12D170024CC40 /* ActiveLabel in Frameworks */,
 				82EC883529A12BD30024CC40 /* JGProgressHUD in Frameworks */,
 				9CC29DF01E1560990080F799 /* StoreKit.framework in Frameworks */,
-				824B86DF26D42A4600D0101A /* WireGuardKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1817,7 +1815,6 @@
 			);
 			name = IVPNClient;
 			packageProductDependencies = (
-				824B86DE26D42A4600D0101A /* WireGuardKit */,
 				82968A31298A970500077E0A /* TunnelKitOpenVPN */,
 				82EC883429A12BD30024CC40 /* JGProgressHUD */,
 				82EC883729A12C1F0024CC40 /* Reachability */,
@@ -3555,11 +3552,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 829F5FC529A13CAE009E1AD3 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
-		};
-		824B86DE26D42A4600D0101A /* WireGuardKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 824B86DD26D42A4600D0101A /* XCRemoteSwiftPackageReference "wireguard-apple" */;
-			productName = WireGuardKit;
 		};
 		824B86E026D42A5700D0101A /* WireGuardKit */ = {
 			isa = XCSwiftPackageProductDependency;

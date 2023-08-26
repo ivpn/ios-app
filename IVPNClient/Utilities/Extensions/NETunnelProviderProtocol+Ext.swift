@@ -27,7 +27,6 @@ import Network
 import TunnelKitCore
 import TunnelKitManager
 import TunnelKitOpenVPN
-import WireGuardKit
 
 extension NETunnelProviderProtocol {
     
