@@ -129,6 +129,14 @@ class ProtocolViewController: UITableViewController {
         return true
     }
     
+    func validateDisableLanTraffic(connectionProtocol: ConnectionSettings) -> Bool {
+        if UserDefaults.shared.disableLanAccess && connectionProtocol == .ipsec {
+            return false
+        }
+        
+        return true
+    }
+    
     func reloadTable(connectionProtocol: ConnectionSettings, indexPath: IndexPath) {
         Application.shared.settings.connectionProtocol = connectionProtocol
         Application.shared.serverList = VPNServerList()
@@ -359,6 +367,23 @@ extension ProtocolViewController {
                                 self.tableView.reloadData()
                             }
                         }
+                    default:
+                        break
+                    }
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+            return
+        }
+        
+        guard validateDisableLanTraffic(connectionProtocol: connectionProtocol) else {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                showActionSheet(title: "To use IKEv2 protocol you must turn Disable LAN traffic off", actions: ["Turn off"], sourceView: cell as UIView) { index in
+                    switch index {
+                    case 0:
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.disableLanAccess)
+                        tableView.reloadData()
                     default:
                         break
                     }
