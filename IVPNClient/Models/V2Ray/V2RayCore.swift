@@ -29,12 +29,11 @@ class V2RayCore {
     // MARK: - Properties -
     
     static let shared = V2RayCore()
-    var serverPoint: VmessEndpoint?
     private var core: CoreInstance?
     
     // MARK: - Methods -
     
-    func start(serverPoint: VmessEndpoint, completion: ((_ error: Error?) -> Void)?) {
+    func start(completion: ((_ error: Error?) -> Void)?) {
         if core != nil {
             try? core?.close()
             core = nil
@@ -49,10 +48,8 @@ class V2RayCore {
             try config.xxX_Marshal(configData, deterministic: true)
             core = CoreNew(config, nil)
             try core?.start()
-            self.serverPoint = serverPoint
         } catch let error {
             startError = error
-            self.serverPoint = nil
         }
         
         completion?(startError)
@@ -64,7 +61,6 @@ class V2RayCore {
         }
         
         try? core?.close()
-        serverPoint = nil
     }
     
 }
