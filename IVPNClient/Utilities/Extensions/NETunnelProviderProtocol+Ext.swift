@@ -82,10 +82,16 @@ extension NETunnelProviderProtocol {
             credentials: credentials
         )
         proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
+        
         if #available(iOS 15.1, *) {
             if #available(iOS 16, *) { } else {
                 proto.includeAllNetworks = UserDefaults.shared.killSwitch
             }
+        }
+        
+        if #available(iOS 14.2, *) {
+            proto.includeAllNetworks = UserDefaults.shared.disableLanAccess
+            proto.excludeLocalNetworks = !UserDefaults.shared.disableLanAccess
         }
         
         return proto
@@ -158,10 +164,16 @@ extension NETunnelProviderProtocol {
         configuration.serverAddress = peer.endpoint
         configuration.providerConfiguration = tunnel.generateProviderConfiguration()
         configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
+        
         if #available(iOS 15.1, *) {
             if #available(iOS 16, *) { } else {
                 configuration.includeAllNetworks = UserDefaults.shared.killSwitch
             }
+        }
+        
+        if #available(iOS 14.2, *) {
+            configuration.includeAllNetworks = UserDefaults.shared.disableLanAccess
+            configuration.excludeLocalNetworks = !UserDefaults.shared.disableLanAccess
         }
         
         return configuration
