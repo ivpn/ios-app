@@ -89,6 +89,7 @@ extension UserDefaults {
         static let selectHost = "selectHost"
         static let isLoggedIn = "isLoggedIn"
         static let antiTrackerDns = "antiTrackerDns"
+        static let disableLanAccess = "disableLanAccess"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -235,6 +236,10 @@ extension UserDefaults {
         return bool(forKey: Key.isLoggedIn)
     }
     
+    @objc dynamic var disableLanAccess: Bool {
+        return bool(forKey: Key.disableLanAccess)
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
@@ -270,6 +275,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.selectHost)
         shared.removeObject(forKey: Key.isLoggedIn)
         shared.removeObject(forKey: Key.antiTrackerDns)
+        shared.removeObject(forKey: Key.disableLanAccess)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)
         standard.removeObject(forKey: Key.selectedExitHost)
