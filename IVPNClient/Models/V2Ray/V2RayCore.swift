@@ -39,13 +39,10 @@ class V2RayCore {
             core = nil
         }
         
-        let config = V2RayConfig.parse(fromJsonFile: "config")!
-        let configData = try? JSONEncoder().encode(config)
         var startError: Error? = nil
         
         do {
-            let config = CoreConfig.init()
-            try config.xxX_Marshal(configData, deterministic: true)
+            let config = CoreConfig()
             core = CoreNew(config, nil)
             try core?.start()
         } catch let error {
