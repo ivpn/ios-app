@@ -30,20 +30,34 @@ class V2RayCore {
     
     static let shared = V2RayCore()
     private var core: CoreInstance?
+    private let configFile = "config.json"
     
     // MARK: - Methods -
     
     func start(completion: ((_ error: Error?) -> Void)?) {
-        if core != nil {
-            try? core?.close()
-            core = nil
-        }
-        
         var startError: Error? = nil
         
+        if let core = core {
+            do {
+                try core.close()
+                self.core = nil
+            } catch let error {
+                startError = error
+            }
+        }
+        
+        var configError: NSError?
+        let coreConfig = CoreLoadConfigFromJsonFile(configFile, &configError)
+        if configError != nil {
+            startError = configError as Error?
+        }
+        
         do {
-            let config = CoreConfig()
-            core = CoreNew(config, nil)
+            var initError: NSError?
+            core = CoreNew(coreConfig, &initError)
+            if initError != nil {
+                startError = initError as Error?
+            }
             try core?.start()
         } catch let error {
             startError = error
