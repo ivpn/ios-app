@@ -30,7 +30,7 @@ class V2RayCore {
     
     static let shared = V2RayCore()
     private var core: CoreInstance?
-    private let configFile = "config.json"
+    private let configFile = "configv5.json"
     
     // MARK: - Methods -
     
@@ -50,6 +50,8 @@ class V2RayCore {
         let coreConfig = CoreLoadConfigFromJsonFile(configFile, &configError)
         if configError != nil {
             startError = configError as Error?
+            completion?(startError)
+            return
         }
         
         do {
