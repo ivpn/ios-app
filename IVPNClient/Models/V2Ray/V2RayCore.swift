@@ -22,58 +22,42 @@
 //
 
 import Foundation
-import V2Ray
+import V2RayControl
 
 class V2RayCore {
     
     // MARK: - Properties -
     
     static let shared = V2RayCore()
-    private var core: CoreInstance?
-    private let configFile = "config.json"
     
     // MARK: - Methods -
     
-    func start(completion: ((_ error: Error?) -> Void)?) {
-        var startError: Error? = nil
+    func start() -> Error? {
+        let _ = close()
         
-        if let core = core {
-            do {
-                try core.close()
-                self.core = nil
-            } catch let error {
-                startError = error
-            }
+        var error: Error? = nil
+        var startError: NSError?
+        
+        V2rayControlStart("{}", &startError)
+        
+        if startError != nil {
+            error = startError as Error?
         }
         
-        var configError: NSError?
-        let coreConfig = CoreLoadConfigFromJsonFile(configFile, &configError)
-        if configError != nil {
-            startError = configError as Error?
-            completion?(startError)
-            return
-        }
-        
-        do {
-            var initError: NSError?
-            core = CoreNew(coreConfig, &initError)
-            if initError != nil {
-                startError = initError as Error?
-            }
-            try core?.start()
-        } catch let error {
-            startError = error
-        }
-        
-        completion?(startError)
+        return error
     }
     
-    func close() {
-        guard core != nil else {
-            return
+    func close() -> Error? {
+        var error: Error? = nil
+        var stopError: NSError?
+        
+        V2rayControlStop(&stopError)
+        
+        if stopError != nil {
+            error = stopError as Error?
         }
         
-        try? core?.close()
+        return error
     }
     
 }

@@ -53,9 +53,6 @@
 		821CA2DF288143470067F70D /* PortRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DE288143470067F70D /* PortRange.swift */; };
 		821E35582A95DCD200AEE5C7 /* V2RayCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E35572A95DCD200AEE5C7 /* V2RayCore.swift */; };
 		821E355A2A95F77700AEE5C7 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 821E35592A95F77700AEE5C7 /* config.json */; };
-		821E355F2A96234B00AEE5C7 /* V2Ray.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821E355E2A96234B00AEE5C7 /* V2Ray.xcframework */; };
-		821E35602A96234B00AEE5C7 /* V2Ray.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821E355E2A96234B00AEE5C7 /* V2Ray.xcframework */; };
-		821E35612A96234B00AEE5C7 /* V2Ray.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821E355E2A96234B00AEE5C7 /* V2Ray.xcframework */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
 		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
 		8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */; };
@@ -114,6 +111,7 @@
 		824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC465240906ED00A61B29 /* VPNStatusViewModel.swift */; };
 		82526BEF24123D2900E00880 /* NetworkViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */; };
 		8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8252747D21F1F80400D4B8B5 /* ServerViewController.swift */; };
+		8254476A2AB0B5B300D710B8 /* V2RayControl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825447692AB0B5B300D710B8 /* V2RayControl.xcframework */; };
 		82555005220ACAAF004763A7 /* VPNServersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82555004220ACAAF004763A7 /* VPNServersTests.swift */; };
 		82589A2B21FB5A580009CC6C /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82589A2A21FB5A580009CC6C /* UIImage+Ext.swift */; };
 		825E834F25A327EB00938240 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825E834E25A327EB00938240 /* CaptchaViewController.swift */; };
@@ -498,7 +496,6 @@
 		821CA2DE288143470067F70D /* PortRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortRange.swift; sourceTree = "<group>"; };
 		821E35572A95DCD200AEE5C7 /* V2RayCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V2RayCore.swift; sourceTree = "<group>"; };
 		821E35592A95F77700AEE5C7 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
-		821E355E2A96234B00AEE5C7 /* V2Ray.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = V2Ray.xcframework; path = Frameworks/V2Ray.xcframework; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
 		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
 		8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDNSViewController.swift; sourceTree = "<group>"; };
@@ -553,6 +550,7 @@
 		824F56072233FE6F00BCDD5C /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libwg-go.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82526BEE24123D2900E00880 /* NetworkViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewTableCell.swift; sourceTree = "<group>"; };
 		8252747D21F1F80400D4B8B5 /* ServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerViewController.swift; sourceTree = "<group>"; };
+		825447692AB0B5B300D710B8 /* V2RayControl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = V2RayControl.xcframework; path = Frameworks/V2RayControl.xcframework; sourceTree = "<group>"; };
 		82555004220ACAAF004763A7 /* VPNServersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServersTests.swift; sourceTree = "<group>"; };
 		8258649C2237A0830081DC4B /* SDCAlertView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDCAlertView.framework; path = ../Carthage/Build/iOS/SDCAlertView.framework; sourceTree = "<group>"; };
 		825864A02237B1060081DC4B /* Bamboo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bamboo.framework; path = ../Carthage/Build/iOS/Bamboo.framework; sourceTree = "<group>"; };
@@ -784,7 +782,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				82B6052F21708575004B40E6 /* NetworkExtension.framework in Frameworks */,
-				821E35612A96234B00AEE5C7 /* V2Ray.xcframework in Frameworks */,
 				82BF79622A2F8DDC00061972 /* liboqs.a in Frameworks */,
 				824B86E126D42A5700D0101A /* WireGuardKit in Frameworks */,
 				829F5FCB29A13CF2009E1AD3 /* KeychainAccess in Frameworks */,
@@ -813,7 +810,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CF7E35A20F7A86E008E0EC5 /* NetworkExtension.framework in Frameworks */,
-				821E35602A96234B00AEE5C7 /* V2Ray.xcframework in Frameworks */,
 				829407C12A3DCE9200E6B68E /* liboqs.a in Frameworks */,
 				82968A34298A970500077E0A /* TunnelKitOpenVPNAppExtension in Frameworks */,
 				829F5FC929A13CEA009E1AD3 /* KeychainAccess in Frameworks */,
@@ -825,11 +821,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				82D598C621A6A5C7000FABDE /* SystemConfiguration.framework in Frameworks */,
-				821E355F2A96234B00AEE5C7 /* V2Ray.xcframework in Frameworks */,
 				9CB2CE311DAF9227007A4D2D /* CoreData.framework in Frameworks */,
 				9C6942251DD0CBF800F9A801 /* NetworkExtension.framework in Frameworks */,
 				82486FAD2A277058009B53F4 /* liboqs.a in Frameworks */,
 				82EC884729A12D510024CC40 /* SnapKit in Frameworks */,
+				8254476A2AB0B5B300D710B8 /* V2RayControl.xcframework in Frameworks */,
 				82EC883B29A12C7D0024CC40 /* SwiftyStoreKit in Frameworks */,
 				829F5FC729A13CAE009E1AD3 /* KeychainAccess in Frameworks */,
 				82968A32298A970500077E0A /* TunnelKitOpenVPN in Frameworks */,
@@ -847,7 +843,7 @@
 		584496306C3B9383149618CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				821E355E2A96234B00AEE5C7 /* V2Ray.xcframework */,
+				825447692AB0B5B300D710B8 /* V2RayControl.xcframework */,
 				8294BC8D22A126C900328932 /* TunnelKit.framework */,
 				8294BC8B22A10F4100328932 /* TunnelKit.framework */,
 				824F56072233FE6F00BCDD5C /* libwg-go.a */,
