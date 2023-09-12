@@ -30,7 +30,7 @@ class V2RayCore {
     
     static let shared = V2RayCore()
     private var core: CoreInstance?
-    private let configFile = "configv5.json"
+    private let configFile = "config.json"
     
     // MARK: - Methods -
     
