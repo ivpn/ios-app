@@ -4,12 +4,13 @@
     },
     "inbounds":[
         {
+            "tag":"vpn",
             "port":"16661",
             "protocol":"dokodemo-door",
             "settings":{
                 "address":"",
                 "port":0,
-                "network":"udp"
+                "network":"udp,tcp"
             }
         }
     ],
