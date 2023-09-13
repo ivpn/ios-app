@@ -170,4 +170,16 @@ struct V2RayConfig: Codable {
         return nil
     }
     
+    func jsonString() -> String {
+        var configString = "{}"
+        do {
+            let data = try JSONEncoder().encode(self)
+            if let json = String(data: data, encoding: .utf8) {
+                configString = json
+            }
+        } catch {}
+        
+        return configString
+    }
+    
 }
