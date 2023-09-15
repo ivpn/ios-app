@@ -29,17 +29,16 @@ class V2RayCore {
     // MARK: - Properties -
     
     static let shared = V2RayCore()
+    var instance: V2rayControlInstance?
     
     // MARK: - Methods -
     
     func start() -> Error? {
         let _ = close()
-        
         var error: Error? = nil
+        
         var startError: NSError?
-        
-        V2rayControlStart("{}", &startError)
-        
+        instance = V2rayControlStart("{}", &startError)
         if startError != nil {
             error = startError as Error?
         }
@@ -49,14 +48,15 @@ class V2RayCore {
     
     func close() -> Error? {
         var error: Error? = nil
-        var stopError: NSError?
         
-        V2rayControlStop(&stopError)
-        
-        if stopError != nil {
-            error = stopError as Error?
+        if let instance = instance {
+            var stopError: NSError?
+            V2rayControlStop(instance, &stopError)
+            if stopError != nil {
+                error = stopError as Error?
+            }
         }
-        
+
         return error
     }
     
