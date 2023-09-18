@@ -1,5 +1,5 @@
 //
-//  V2RayPorts.swift
+//  V2RaySettings.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
@@ -23,22 +23,39 @@
 
 import Foundation
 
-struct V2RayPorts: Codable {
+struct V2RaySettings: Codable {
     
-    let id: String
-    var port: Int
-    var host: V2RayHost
-    let wireguard: [V2RayPort]
+    var id: String
+    var outboundIp: String
+    var outboundPort: Int
+    var inboundIp: String
+    var inboundPort: Int
+    var dnsName: String
+    var wireguard: [V2RayPort]
+    
+    init(id: String = "", outboundIp: String = "", outboundPort: Int = 0, inboundIp: String = "", inboundPort: Int = 0, dnsName: String = "", wireguard: [V2RayPort] = []) {
+        self.id = id
+        self.outboundIp = outboundIp
+        self.outboundPort = outboundPort
+        self.inboundIp = inboundIp
+        self.inboundPort = inboundPort
+        self.dnsName = dnsName
+        self.wireguard = wireguard
+    }
     
     func save() {
         if let encoded = try? JSONEncoder().encode(self) {
-            UserDefaults.shared.set(encoded, forKey: UserDefaults.Key.v2RayPorts)
+            UserDefaults.shared.set(encoded, forKey: UserDefaults.Key.v2raySettings)
         }
     }
     
-    static func load() -> V2RayPorts? {
-        if let saved = UserDefaults.shared.object(forKey: UserDefaults.Key.v2RayPorts) as? Data {
-            if let loaded = try? JSONDecoder().decode(V2RayPorts.self, from: saved) {
+    func tlsSrvName() -> String {
+        return dnsName.replacingOccurrences(of: "ivpn.net", with: "inet-telecom.com")
+    }
+    
+    static func load() -> V2RaySettings? {
+        if let saved = UserDefaults.shared.object(forKey: UserDefaults.Key.v2raySettings) as? Data {
+            if let loaded = try? JSONDecoder().decode(V2RaySettings.self, from: saved) {
                 return loaded
             }
         }
@@ -51,10 +68,4 @@ struct V2RayPorts: Codable {
 struct V2RayPort: Codable {
     let type: String
     let port: Int
-}
-
-struct V2RayHost: Codable {
-    let host: String
-    let dnsName: String
-    let v2ray: String
 }

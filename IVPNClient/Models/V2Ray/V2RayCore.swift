@@ -65,20 +65,18 @@ class V2RayCore {
     }
     
     func makeConfig() -> V2RayConfig? {
-        guard let v2rayPorts = V2RayPorts.load() else {
+        guard let settings = V2RaySettings.load() else {
             return nil
         }
         
-        let host = v2rayPorts.host
-        let outboundIp = host.v2ray
-        let outboundPort = v2rayPorts.port
-        let inboundIp = host.host
-        let inboundPort = v2rayPorts.wireguard.first?.port ?? 0
-        let outboundUserId = v2rayPorts.id
-        let tlsSrvName = host.dnsName.replacingOccurrences(of: "ivpn.net", with: "inet-telecom.com")
-        let config = V2RayConfig.createQuick(outboundIp: outboundIp, outboundPort: outboundPort, inboundIp: inboundIp, inboundPort: inboundPort, outboundUserId: outboundUserId, tlsSrvName: tlsSrvName)
-        
-        return config
+        return V2RayConfig.createQuick(
+            outboundIp: settings.outboundIp,
+            outboundPort: settings.outboundPort,
+            inboundIp: settings.inboundIp,
+            inboundPort: settings.inboundPort,
+            outboundUserId: settings.id,
+            tlsSrvName: settings.tlsSrvName()
+        )
     }
     
 }

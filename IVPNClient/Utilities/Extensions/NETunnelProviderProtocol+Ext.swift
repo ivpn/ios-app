@@ -126,13 +126,15 @@ extension NETunnelProviderProtocol {
         var publicKey = host.publicKey
         let port = getPort(settings: settings)
         var endpoint = Peer.endpoint(host: host.host, port: port)
-        var v2rayHost = host
-        var v2rayPort = port
+        var v2rayInboundIp = host.host
+        var v2rayOutboundIp = host.v2ray
+        var v2rayOutboundPort = port
+        var v2rayDnsName = host.dnsName
         
         if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = getExitHost() {
             publicKey = exitHost.publicKey
             endpoint = Peer.endpoint(host: host.host, port: exitHost.multihopPort)
-            v2rayHost = exitHost
+            v2rayInboundIp = exitHost.host
         }
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
@@ -144,10 +146,12 @@ extension NETunnelProviderProtocol {
         // If V2Ray is enabled
         if (false) {
             endpoint = Peer.endpoint(host: Config.v2rayHost, port: Config.v2rayPort)
-            if var v2rayPorts = V2RayPorts.load() {
-                v2rayPorts.port = v2rayPort
-                v2rayPorts.host = V2RayHost(host: v2rayHost.host, dnsName: v2rayHost.dnsName, v2ray: v2rayHost.v2ray)
-                v2rayPorts.save()
+            if var v2raySettings = V2RaySettings.load() {
+                v2raySettings.inboundIp = v2rayInboundIp
+                v2raySettings.outboundIp = v2rayOutboundIp
+                v2raySettings.outboundPort = v2rayOutboundPort
+                v2raySettings.dnsName = v2rayDnsName
+                v2raySettings.save()
             }
         }
         

@@ -211,15 +211,16 @@ class VPNServerList {
                     if let v2ray = portsObj["v2ray"] as? [String: Any] {
                         if let wireguard = v2ray["wireguard"] as? [[String: Any]] {
                             var ports = [V2RayPort]()
+                            var inboundPort = 0
                             for port in wireguard {
                                 let type = port["type"] as? String ?? ""
                                 let port = port["port"] as? Int ?? 0
                                 ports.append(V2RayPort(type: type, port: port))
+                                inboundPort = port
                             }
                             let id = v2ray["id"] as? String ?? ""
-                            let v2rayHost = V2RayHost(host: "", dnsName: "", v2ray: "")
-                            let v2rayPorts = V2RayPorts(id: id, port: 0, host: v2rayHost, wireguard: ports)
-                            v2rayPorts.save()
+                            let v2raySettings = V2RaySettings(id: id, inboundPort: inboundPort, wireguard: ports)
+                            v2raySettings.save()
                         }
                     }
                 }

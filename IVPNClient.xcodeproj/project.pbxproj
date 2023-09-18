@@ -75,7 +75,7 @@
 		82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */; };
 		82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */; };
 		82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */; };
-		82365E7F2AB86020006434C3 /* V2RayPorts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82365E7E2AB86020006434C3 /* V2RayPorts.swift */; };
+		82365E7F2AB86020006434C3 /* V2RaySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82365E7E2AB86020006434C3 /* V2RaySettings.swift */; };
 		823ACC292626E69F006F69AB /* GeoLookupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC282626E69F006F69AB /* GeoLookupTests.swift */; };
 		823ACC312626FF3E006F69AB /* IpProtocolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC302626FF3E006F69AB /* IpProtocolView.swift */; };
 		823ACC3926270330006F69AB /* ConnectionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC3826270330006F69AB /* ConnectionInfoView.swift */; };
@@ -509,7 +509,7 @@
 		82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerView.swift; sourceTree = "<group>"; };
 		82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoPopupView.swift; sourceTree = "<group>"; };
-		82365E7E2AB86020006434C3 /* V2RayPorts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V2RayPorts.swift; sourceTree = "<group>"; };
+		82365E7E2AB86020006434C3 /* V2RaySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V2RaySettings.swift; sourceTree = "<group>"; };
 		823ACC282626E69F006F69AB /* GeoLookupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLookupTests.swift; sourceTree = "<group>"; };
 		823ACC302626FF3E006F69AB /* IpProtocolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpProtocolView.swift; sourceTree = "<group>"; };
 		823ACC3826270330006F69AB /* ConnectionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoView.swift; sourceTree = "<group>"; };
@@ -931,7 +931,7 @@
 			isa = PBXGroup;
 			children = (
 				8247C05F2A7CF54300A7C02F /* V2RayConfig.swift */,
-				82365E7E2AB86020006434C3 /* V2RayPorts.swift */,
+				82365E7E2AB86020006434C3 /* V2RaySettings.swift */,
 				821E35572A95DCD200AEE5C7 /* V2RayCore.swift */,
 				821E35592A95F77700AEE5C7 /* config.json */,
 			);
@@ -2287,7 +2287,7 @@
 				822563922431E03A00AE7F8D /* AccountView.swift in Sources */,
 				9CBFF02C21021D2100FE1757 /* ConnectionManager.swift in Sources */,
 				82D598C821A6ADF1000FABDE /* NetworkType.swift in Sources */,
-				82365E7F2AB86020006434C3 /* V2RayPorts.swift in Sources */,
+				82365E7F2AB86020006434C3 /* V2RaySettings.swift in Sources */,
 				9CC29DF81E1D59E90080F799 /* Alerts+Ext.swift in Sources */,
 				9CB2CE1F1DAA5258007A4D2D /* Authentication.swift in Sources */,
 				82DAB37B2457013900302F4C /* Service.swift in Sources */,
