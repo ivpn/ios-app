@@ -37,6 +37,7 @@ struct Host: Codable {
     var ipv6: IPv6?
     var multihopPort: Int
     var load: Double
+    var v2ray: String
     
     func localIPAddress() -> String {
         if let range = localIP.range(of: "/", options: .backwards, range: nil, locale: nil) {
