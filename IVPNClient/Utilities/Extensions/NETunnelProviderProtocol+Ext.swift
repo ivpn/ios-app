@@ -142,7 +142,7 @@ extension NETunnelProviderProtocol {
         }
         
         // If V2Ray is enabled
-        if (true) {
+        if (false) {
             endpoint = Peer.endpoint(host: Config.v2rayHost, port: Config.v2rayPort)
             if var v2rayPorts = V2RayPorts.load() {
                 v2rayPorts.port = v2rayPort
