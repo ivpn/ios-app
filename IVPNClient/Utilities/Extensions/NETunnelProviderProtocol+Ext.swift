@@ -127,9 +127,9 @@ extension NETunnelProviderProtocol {
         let port = getPort(settings: settings)
         var endpoint = Peer.endpoint(host: host.host, port: port)
         var v2rayInboundIp = host.host
-        var v2rayOutboundIp = host.v2ray
-        var v2rayOutboundPort = port
-        var v2rayDnsName = host.dnsName
+        let v2rayOutboundIp = host.v2ray
+        let v2rayOutboundPort = port
+        let v2rayDnsName = host.dnsName
         
         if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = getExitHost() {
             publicKey = exitHost.publicKey
