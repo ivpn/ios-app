@@ -37,8 +37,12 @@ class V2RayCore {
         let _ = close()
         var error: Error? = nil
         
+        guard let config = makeConfig() else {
+            return NSError(domain: "", code: 99, userInfo: [NSLocalizedDescriptionKey: "V2Ray configuration cannot be loaded"])
+        }
+        
         var startError: NSError?
-        instance = V2rayControlStart("{}", &startError)
+        instance = V2rayControlStart(config.jsonString(), &startError)
         if startError != nil {
             error = startError as Error?
         }
@@ -58,6 +62,23 @@ class V2RayCore {
         }
 
         return error
+    }
+    
+    func makeConfig() -> V2RayConfig? {
+        guard let v2rayPorts = V2RayPorts.load() else {
+            return nil
+        }
+        
+        let host = v2rayPorts.host
+        let outboundIp = host.v2ray
+        let outboundPort = v2rayPorts.port
+        let inboundIp = host.host
+        let inboundPort = v2rayPorts.wireguard.first?.port ?? 0
+        let outboundUserId = v2rayPorts.id
+        let tlsSrvName = host.dnsName.replacingOccurrences(of: "ivpn.net", with: "inet-telecom.com")
+        let config = V2RayConfig.createQuick(outboundIp: outboundIp, outboundPort: outboundPort, inboundIp: inboundIp, inboundPort: inboundPort, outboundUserId: outboundUserId, tlsSrvName: tlsSrvName)
+        
+        return config
     }
     
 }

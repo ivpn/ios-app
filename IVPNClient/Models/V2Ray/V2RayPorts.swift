@@ -26,7 +26,8 @@ import Foundation
 struct V2RayPorts: Codable {
     
     let id: String
-    let openvpn: [V2RayPort]
+    var port: Int
+    var host: V2RayHost
     let wireguard: [V2RayPort]
     
     func save() {
@@ -50,4 +51,10 @@ struct V2RayPorts: Codable {
 struct V2RayPort: Codable {
     let type: String
     let port: Int
+}
+
+struct V2RayHost: Codable {
+    let host: String
+    let dnsName: String
+    let v2ray: String
 }

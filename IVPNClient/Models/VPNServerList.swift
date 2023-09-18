@@ -217,7 +217,8 @@ class VPNServerList {
                                 ports.append(V2RayPort(type: type, port: port))
                             }
                             let id = v2ray["id"] as? String ?? ""
-                            let v2rayPorts = V2RayPorts(id: id, openvpn: [], wireguard: ports)
+                            let v2rayHost = V2RayHost(host: "", dnsName: "", v2ray: "")
+                            let v2rayPorts = V2RayPorts(id: id, port: 0, host: v2rayHost, wireguard: ports)
                             v2rayPorts.save()
                         }
                     }
