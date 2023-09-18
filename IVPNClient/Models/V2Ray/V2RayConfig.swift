@@ -75,6 +75,7 @@ struct V2RayConfig: Codable {
             var security: String?
             var quicSettings: QuicSettings?
             var tlsSettings: TlsSettings?
+            var tcpSettings: TcpSettings?
             
             struct QuicSettings: Codable {
                 let security: String
@@ -88,6 +89,38 @@ struct V2RayConfig: Codable {
             
             struct TlsSettings: Codable {
                 var serverName: String
+            }
+            
+            struct TcpSettings: Codable {
+                let header: Header
+                
+                struct Header: Codable {
+                    let type: String
+                    let request: Request
+                    
+                    struct Request: Codable {
+                        let version: String
+                        let method: String
+                        let path: [String]
+                        let headers: Headers
+                        
+                        struct Headers: Codable {
+                            let host: [String]
+                            let userAgent: [String]
+                            let acceptEncoding: [String]
+                            let connection: [String]
+                            let pragma: String
+                            
+                            enum CodingKeys : String, CodingKey {
+                                case host = "Host"
+                                case userAgent = "User-Agent"
+                                case acceptEncoding = "Accept-Encoding"
+                                case connection = "Connection"
+                                case pragma = "Pragma"
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -131,6 +164,7 @@ struct V2RayConfig: Codable {
     static func createQuick(outboundIp: String, outboundPort: Int, inboundIp: String, inboundPort: Int, outboundUserId: String, tlsSrvName: String) -> V2RayConfig {
         var config = createFromTemplate(outboundIp: outboundIp, outboundPort: outboundPort, inboundIp: inboundIp, inboundPort: inboundPort, outboundUserId: outboundUserId)
         config.outbounds[0].streamSettings.network = "quic"
+        config.outbounds[0].streamSettings.tcpSettings = nil
         config.outbounds[0].streamSettings.tlsSettings?.serverName = tlsSrvName
         
         return config
