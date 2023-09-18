@@ -75,7 +75,7 @@ class V2RayCore {
             inboundIp: settings.inboundIp,
             inboundPort: settings.inboundPort,
             outboundUserId: settings.id,
-            tlsSrvName: settings.tlsSrvName()
+            tlsSrvName: settings.tlsSrvName
         )
     }
     

@@ -33,6 +33,14 @@ struct V2RaySettings: Codable {
     var dnsName: String
     var wireguard: [V2RayPort]
     
+    var tlsSrvName: String {
+        return dnsName.replacingOccurrences(of: "ivpn.net", with: "inet-telecom.com")
+    }
+    
+    var singleHopInboundPort: Int {
+        return wireguard.first?.port ?? 0
+    }
+    
     init(id: String = "", outboundIp: String = "", outboundPort: Int = 0, inboundIp: String = "", inboundPort: Int = 0, dnsName: String = "", wireguard: [V2RayPort] = []) {
         self.id = id
         self.outboundIp = outboundIp
@@ -47,10 +55,6 @@ struct V2RaySettings: Codable {
         if let encoded = try? JSONEncoder().encode(self) {
             UserDefaults.shared.set(encoded, forKey: UserDefaults.Key.v2raySettings)
         }
-    }
-    
-    func tlsSrvName() -> String {
-        return dnsName.replacingOccurrences(of: "ivpn.net", with: "inet-telecom.com")
     }
     
     static func load() -> V2RaySettings? {
