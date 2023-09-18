@@ -90,6 +90,7 @@ extension UserDefaults {
         static let isLoggedIn = "isLoggedIn"
         static let antiTrackerDns = "antiTrackerDns"
         static let disableLanAccess = "disableLanAccess"
+        static let v2RayPorts = "v2RayPorts"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -276,6 +277,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.isLoggedIn)
         shared.removeObject(forKey: Key.antiTrackerDns)
         shared.removeObject(forKey: Key.disableLanAccess)
+        shared.removeObject(forKey: Key.v2RayPorts)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)
         standard.removeObject(forKey: Key.selectedExitHost)
