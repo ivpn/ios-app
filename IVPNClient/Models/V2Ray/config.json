@@ -6,6 +6,7 @@
         {
             "tag":"vpn",
             "port":"16661",
+            "listen":"127.0.0.1",
             "protocol":"dokodemo-door",
             "settings":{
                 "address":"",

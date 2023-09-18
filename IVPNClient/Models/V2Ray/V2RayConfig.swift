@@ -38,6 +38,7 @@ struct V2RayConfig: Codable {
     struct Inbound: Codable {
         var tag: String
         var port: String
+        var listen: String
         var `protocol`: String
         var settings: Settings
         
