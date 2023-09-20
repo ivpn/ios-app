@@ -59,6 +59,7 @@ class V2RayCore {
             if stopError != nil {
                 error = stopError as Error?
             }
+            self.instance = nil
         }
 
         return error
