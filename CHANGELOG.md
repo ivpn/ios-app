@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.10.1 - 2023-09-04  
+
+[NEW] Option to disable LAN traffic when connected to VPN  
+[IMPROVED] Added "Advanced" section in the Settings 
+
 ## 2.10.0 - 2023-08-08  
 
 [NEW] Post-Quantum Resistant WireGuard Connections  
