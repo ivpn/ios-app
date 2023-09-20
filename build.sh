@@ -1,19 +1,17 @@
 #!/bin/bash
 
-# Exit immediately if a command exits with a non-zero status.
 set -e
 
-V2RAY_VER=v4.35.0
-
-echo "=> ⬇️  Clone V2Ray sources.."
-git submodule update --init
-
-echo "=> ⬇️  Get gomobile.."
-cd vendor/v2ray
-git checkout ${V2RAY_VER}
+echo "=> Get gomobile.."
+cd V2RayControl
 PATH=$PATH:~/go/bin
 go get golang.org/x/mobile/cmd/gomobile
 
-echo "=> 🍏 Build iOS library.."
-gomobile bind -trimpath -ldflags "-s -w" --target=ios -o ../../Frameworks/V2Ray.xcframework
-echo "=> ✅ iOS build completed"
+echo "=> Build iOS library.."
+OUT_XCFRAMEWORK=../Frameworks/V2RayControl.xcframework
+gomobile bind -trimpath -ldflags "-s -w" --target=ios -o ${OUT_XCFRAMEWORK}
+echo "=> iOS build completed (out: ${OUT_XCFRAMEWORK})"
+echo " !!!!!!!!!!!!!!!! "
+echo " NOTE! The iOS project required the 'libresolv.tbd' library to be added to the project when using ${OUT_XCFRAMEWORK}"
+echo " (Project->Build Phases->Link Binary With Libraries->Add Other->/usr/lib/libresolv.tbd)"
+echo " !!!!!!!!!!!!!!!! "
