@@ -100,6 +100,14 @@ class ConnectionManager {
                         self.evaluateCloseApp()
                     }
                 }
+                DispatchQueue.delay(2.5) {
+                    if V2RayCore.shared.isV2ray && !V2RayCore.shared.reconnectWithV2ray {
+                        V2RayCore.shared.reconnectWithV2ray = true
+                        self.reconnect()
+                    } else {
+                        V2RayCore.shared.reconnectWithV2ray = false
+                    }
+                }
             } else {
                 self.connected = false
             }
@@ -247,7 +255,22 @@ class ConnectionManager {
                 return
             }
             
-            self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
+            if V2RayCore.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let error = V2RayCore.shared.start()
+                    if error != nil {
+                        log(.error, message: error?.localizedDescription ?? "")
+                    } else {
+                        log(.info, message: "V2Ray start OK")
+                    }
+                }
+                
+                DispatchQueue.delay(2) {
+                    self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
+                }
+            } else {
+                self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
+            }
         }
     }
     
@@ -260,6 +283,17 @@ class ConnectionManager {
             if UserDefaults.shared.networkProtectionEnabled && !reconnectAutomatically {
                 DispatchQueue.delay(2) {
                     self.installOnDemandRules()
+                }
+            }
+        }
+        
+        if V2RayCore.shared.isV2ray {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let error = V2RayCore.shared.close()
+                if error != nil {
+                    log(.error, message: error?.localizedDescription ?? "")
+                } else {
+                    log(.info, message: "V2Ray stop OK")
                 }
             }
         }
