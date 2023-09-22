@@ -101,7 +101,7 @@ class ConnectionManager {
                     }
                 }
                 DispatchQueue.delay(2.5) {
-                    if V2RayCore.shared.isV2ray && !V2RayCore.shared.reconnectWithV2ray {
+                    if UserDefaults.shared.isV2ray && !V2RayCore.shared.reconnectWithV2ray {
                         V2RayCore.shared.reconnectWithV2ray = true
                         self.reconnect()
                     } else {
@@ -255,7 +255,7 @@ class ConnectionManager {
                 return
             }
             
-            if V2RayCore.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
+            if UserDefaults.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
                 DispatchQueue.global(qos: .userInitiated).async {
                     let error = V2RayCore.shared.start()
                     if error != nil {
@@ -287,7 +287,7 @@ class ConnectionManager {
             }
         }
         
-        if V2RayCore.shared.isV2ray {
+        if UserDefaults.shared.isV2ray {
             DispatchQueue.global(qos: .userInitiated).async {
                 let error = V2RayCore.shared.close()
                 if error != nil {

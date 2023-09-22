@@ -146,7 +146,7 @@ extension NETunnelProviderProtocol {
             KeyChain.wgIpv6Host = ipv6.localIP
         }
         
-        if V2RayCore.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
+        if UserDefaults.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
             endpoint = Peer.endpoint(host: Config.v2rayHost, port: Config.v2rayPort)
             v2raySettings?.inboundIp = v2rayInboundIp
             v2raySettings?.inboundPort = v2rayInboundPort

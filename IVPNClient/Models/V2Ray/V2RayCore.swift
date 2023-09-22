@@ -30,7 +30,6 @@ class V2RayCore {
     
     static let shared = V2RayCore()
     var instance: V2rayControlInstance?
-    var isV2ray = true
     var reconnectWithV2ray = false
     
     // MARK: - Methods -
