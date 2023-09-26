@@ -225,7 +225,14 @@ extension AdvancedViewController {
         let footer = view as! UITableViewHeaderFooterView
         footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         
-        let urlString = "https://www.ivpn.net/knowledgebase/ios/known-issues-with-native-ios-kill-switch/"
+        var urlString = ""
+        switch section {
+        case 1:
+            urlString = "https://www.ivpn.net/"
+        default:
+            urlString = "https://www.ivpn.net/knowledgebase/ios/known-issues-with-native-ios-kill-switch/"
+        }
+        
         let label = ActiveLabel(frame: .zero)
         let customType = ActiveType.custom(pattern: "Learn more")
         label.numberOfLines = 0
