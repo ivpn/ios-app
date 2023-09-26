@@ -244,7 +244,7 @@ extension UserDefaults {
     }
     
     @objc dynamic var v2rayProtocol: String {
-        return string(forKey: Key.v2rayProtocol) ?? ""
+        return string(forKey: Key.v2rayProtocol) ?? "quic"
     }
     
     @objc dynamic var isV2ray: Bool {
