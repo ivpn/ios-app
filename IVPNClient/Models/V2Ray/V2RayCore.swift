@@ -71,6 +71,16 @@ class V2RayCore {
             return nil
         }
         
+        if UserDefaults.shared.v2rayProtocol == "tcp" {
+            return V2RayConfig.createTcp(
+                outboundIp: settings.outboundIp,
+                outboundPort: settings.outboundPort,
+                inboundIp: settings.inboundIp,
+                inboundPort: settings.inboundPort,
+                outboundUserId: settings.id
+            )
+        }
+        
         return V2RayConfig.createQuick(
             outboundIp: settings.outboundIp,
             outboundPort: settings.outboundPort,
