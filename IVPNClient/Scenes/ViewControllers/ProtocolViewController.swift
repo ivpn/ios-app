@@ -137,6 +137,14 @@ class ProtocolViewController: UITableViewController {
         return true
     }
     
+    func validateV2ray(connectionProtocol: ConnectionSettings) -> Bool {
+        if UserDefaults.shared.isV2ray && connectionProtocol.tunnelType() != .wireguard {
+            return false
+        }
+        
+        return true
+    }
+    
     func reloadTable(connectionProtocol: ConnectionSettings, indexPath: IndexPath) {
         Application.shared.settings.connectionProtocol = connectionProtocol
         Application.shared.serverList = VPNServerList()
@@ -383,6 +391,23 @@ extension ProtocolViewController {
                     switch index {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.disableLanAccess)
+                        tableView.reloadData()
+                    default:
+                        break
+                    }
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+            return
+        }
+        
+        guard validateV2ray(connectionProtocol: connectionProtocol) else {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                showActionSheet(title: "To use OpenVPN or IKEv2 protocols you must turn V2Ray off", actions: ["Turn off"], sourceView: cell as UIView) { index in
+                    switch index {
+                    case 0:
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isV2ray)
                         tableView.reloadData()
                     default:
                         break
