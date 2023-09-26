@@ -26,6 +26,8 @@ import ActiveLabel
 
 class AdvancedViewController: UITableViewController {
     
+    // MARK: - @IBOutlets -
+    
     @IBOutlet weak var disableLanAccessSwitch: UISwitch!
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var preventSameCountryMultiHopSwitch: UISwitch!
@@ -33,6 +35,14 @@ class AdvancedViewController: UITableViewController {
     @IBOutlet weak var loggingSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
     @IBOutlet weak var sendLogsLabel: UILabel!
+    @IBOutlet weak var v2raySwitch: UISwitch!
+    @IBOutlet weak var v2rayProtocolControl: UISegmentedControl!
+    
+    // MARK: - Properties -
+    
+    var protocolType: String {
+        return v2rayProtocolControl.selectedSegmentIndex == 1 ? "tcp" : "quic"
+    }
     
     // MARK: - @IBActions -
     
@@ -45,6 +55,24 @@ class AdvancedViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.disableLanAccess)
+        evaluateReconnect(sender: sender as UIView)
+    }
+    
+    @IBAction func toggleV2ray(_ sender: UISwitch) {
+        if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() != .wireguard {
+            showAlert(title: "OpenVPN and IKEv2 not supported", message: "V2Ray is supported only for WireGuard protocol.") { _ in
+                sender.setOn(false, animated: true)
+            }
+            return
+        }
+        
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isV2ray)
+        evaluateReconnect(sender: sender as UIView)
+    }
+    
+    @IBAction func selectV2rayProtocol(_ sender: UISegmentedControl) {
+        let v2rayProtocol = sender.selectedSegmentIndex == 1 ? "tcp" : "quic"
+        UserDefaults.shared.set(v2rayProtocol, forKey: UserDefaults.Key.v2rayProtocol)
         evaluateReconnect(sender: sender as UIView)
     }
     
@@ -82,6 +110,8 @@ class AdvancedViewController: UITableViewController {
         preventSameCountryMultiHopSwitch.setOn(UserDefaults.standard.preventSameCountryMultiHop, animated: false)
         preventSameISPMultiHopSwitch.setOn(UserDefaults.standard.preventSameISPMultiHop, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
+        v2raySwitch.setOn(UserDefaults.shared.isV2ray, animated: false)
+        v2rayProtocolControl.selectedSegmentIndex = UserDefaults.shared.v2rayProtocol == "tcp" ? 1 : 0
         setupLoggingView()
     }
     
