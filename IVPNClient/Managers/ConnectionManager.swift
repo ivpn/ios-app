@@ -264,13 +264,9 @@ class ConnectionManager {
                         log(.info, message: "V2Ray start OK")
                     }
                 }
-                
-                DispatchQueue.delay(2) {
-                    self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
-                }
-            } else {
-                self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
             }
+            
+            self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
         }
     }
     
