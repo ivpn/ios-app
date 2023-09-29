@@ -82,6 +82,9 @@ class MainViewController: UIViewController {
         refreshUI()
         initConnectionInfo()
         startPingService()
+        DispatchQueue.async { [self] in
+            showFloatingPanel()
+        }
     }
     
     deinit {
@@ -202,6 +205,10 @@ class MainViewController: UIViewController {
     // MARK: - Private methods -
     
     @objc private func updateFloatingPanelLayout() {
+        guard floatingPanel != nil else {
+            return
+        }
+        
         floatingPanel.invalidateLayout()
         mainView.setupView(animated: false)
     }
@@ -238,6 +245,10 @@ class MainViewController: UIViewController {
         floatingPanel.addPanel(toParent: self)
         floatingPanel.show(animated: true)
         floatingPanel.behavior = MainFloatingPanelBehavior()
+    }
+    
+    private func showFloatingPanel() {
+        floatingPanel.show(animated: true)
     }
     
     private func startAPIUpdate() {
