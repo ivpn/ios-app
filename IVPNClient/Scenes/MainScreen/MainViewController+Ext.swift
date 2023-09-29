@@ -52,6 +52,13 @@ extension MainViewController: FloatingPanelControllerDelegate {
         }
     }
     
+    func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+        let loc = fpc.surfaceLocation
+        let minY = fpc.surfaceLocation(for: .full).y - 6.0
+        let maxY = fpc.surfaceLocation(for: .half).y + 6.0
+        fpc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
+    }
+    
 }
 
 // MARK: - UIAdaptivePresentationControllerDelegate -
