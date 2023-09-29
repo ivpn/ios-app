@@ -26,7 +26,13 @@ import FloatingPanel
 
 class FloatingPanelMainLayout: FloatingPanelLayout {
     
-    var position: FloatingPanelPosition { .bottom }
+    var position: FloatingPanelPosition {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+            return .top
+        }
+        
+        return .bottom
+    }
     
     var initialState: FloatingPanelState {
         if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
@@ -37,6 +43,12 @@ class FloatingPanelMainLayout: FloatingPanelLayout {
     }
     
     var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
+            return [
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 0, edge: .bottom, referenceGuide: .superview)
+            ]
+        }
+        
         return [
             .full: FloatingPanelLayoutAnchor(absoluteInset: 0, edge: .top, referenceGuide: .safeArea),
             .half: FloatingPanelLayoutAnchor(absoluteInset: halfHeight, edge: .bottom, referenceGuide: .safeArea)
