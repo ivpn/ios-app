@@ -22,7 +22,7 @@ As a contributor, here are the guidelines we would like you to follow:
 ## Creating an Issue
 
 * If you want to report a security problem **DO NOT CREATE AN ISSUE**, please read our [Security Policy](/.github/SECURITY.md) on how to submit a security vulnerability.
-* When creating a new issue, chose a "Bug report" or "Feature request" template and fill the required information.
+* When creating a new issue, choose a "Bug report" or "Feature request" template and fill the required information.
 * Please describe the steps necessary to reproduce the issue you are running into.
 
 <a name="pr"></a>
