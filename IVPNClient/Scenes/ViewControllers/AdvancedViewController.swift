@@ -73,7 +73,10 @@ class AdvancedViewController: UITableViewController {
     @IBAction func selectV2rayProtocol(_ sender: UISegmentedControl) {
         let v2rayProtocol = sender.selectedSegmentIndex == 1 ? "tcp" : "quic"
         UserDefaults.shared.set(v2rayProtocol, forKey: UserDefaults.Key.v2rayProtocol)
-        evaluateReconnect(sender: sender as UIView)
+        
+        if UserDefaults.shared.isV2ray {
+            evaluateReconnect(sender: sender as UIView)
+        }
     }
     
     @IBAction func toggleAskToReconnect(_ sender: UISwitch) {
