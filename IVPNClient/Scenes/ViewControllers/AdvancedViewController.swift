@@ -228,7 +228,7 @@ extension AdvancedViewController {
         var urlString = ""
         switch section {
         case 1:
-            urlString = "https://www.ivpn.net/"
+            urlString = "https://www.ivpn.net/knowledgebase/ios/v2ray/"
         default:
             urlString = "https://www.ivpn.net/knowledgebase/ios/known-issues-with-native-ios-kill-switch/"
         }
