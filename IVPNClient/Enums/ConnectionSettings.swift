@@ -45,7 +45,7 @@ enum ConnectionSettings {
                 return "OpenVPN, UDP \(port)"
            }
         case .wireguard(_, let port):
-            return "WireGuard, UDP \(port)"
+            return "WireGuard, \(wireguardProtocol()) \(port)"
         }
     }
     
@@ -61,7 +61,7 @@ enum ConnectionSettings {
                 return "OpenVPN, UDP"
            }
         case .wireguard:
-            return "WireGuard, UDP"
+            return "WireGuard, \(wireguardProtocol())"
         }
     }
     
@@ -104,7 +104,7 @@ enum ConnectionSettings {
                 return "UDP \(port)"
             }
         case .wireguard(_, let port):
-            return "UDP \(port)"
+            return "\(wireguardProtocol()) \(port)"
         }
     }
     
@@ -227,8 +227,16 @@ enum ConnectionSettings {
                 return "UDP"
             }
         case .wireguard:
-            return "UDP"
+            return wireguardProtocol()
         }
+    }
+    
+    func wireguardProtocol() -> String {
+        if UserDefaults.shared.isV2ray && UserDefaults.shared.v2rayProtocol == "tcp" {
+            return "TCP"
+        }
+        
+        return "UDP"
     }
     
     static func == (lhs: ConnectionSettings, rhs: ConnectionSettings) -> Bool {
