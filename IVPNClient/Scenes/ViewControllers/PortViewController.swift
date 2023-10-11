@@ -87,6 +87,10 @@ class PortViewController: UITableViewController {
 extension PortViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        if UserDefaults.shared.isV2ray {
+            return 1
+        }
+        
         return 2
     }
     
