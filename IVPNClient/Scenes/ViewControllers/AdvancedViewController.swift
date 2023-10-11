@@ -73,7 +73,10 @@ class AdvancedViewController: UITableViewController {
     @IBAction func selectV2rayProtocol(_ sender: UISegmentedControl) {
         let v2rayProtocol = sender.selectedSegmentIndex == 1 ? "tcp" : "quic"
         UserDefaults.shared.set(v2rayProtocol, forKey: UserDefaults.Key.v2rayProtocol)
-        evaluateReconnect(sender: sender as UIView)
+        
+        if UserDefaults.shared.isV2ray {
+            evaluateReconnect(sender: sender as UIView)
+        }
     }
     
     @IBAction func toggleAskToReconnect(_ sender: UISwitch) {
@@ -207,7 +210,7 @@ class AdvancedViewController: UITableViewController {
 extension AdvancedViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 2 && indexPath.row == 0 {
+        if indexPath.section == 3 && indexPath.row == 0 {
             return 60
         }
         
@@ -215,7 +218,7 @@ extension AdvancedViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && indexPath.row == 1 {
+        if indexPath.section == 3 && indexPath.row == 1 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
@@ -228,7 +231,7 @@ extension AdvancedViewController {
         var urlString = ""
         switch section {
         case 1:
-            urlString = "https://www.ivpn.net/"
+            urlString = "https://www.ivpn.net/knowledgebase/ios/v2ray/"
         default:
             urlString = "https://www.ivpn.net/knowledgebase/ios/known-issues-with-native-ios-kill-switch/"
         }
