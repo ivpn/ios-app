@@ -33,7 +33,7 @@ class AccountView: UITableView {
     @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
-    @IBOutlet weak var addMoreTimeButton: UIButton!
+    @IBOutlet weak var activeUntilCell: UITableViewCell!
     
     // MARK: - Properties -
     
@@ -47,7 +47,7 @@ class AccountView: UITableView {
         statusLabel.backgroundColor = viewModel.statusColor
         subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
-        addMoreTimeButton.isHidden = Application.shared.serviceStatus.isLegacyAccount()
+        activeUntilCell.isHidden = Application.shared.serviceStatus.isLegacyAccount()
     }
     
     func initQRCode(viewModel: AccountViewModel) {
