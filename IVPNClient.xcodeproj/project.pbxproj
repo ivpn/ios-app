@@ -3456,7 +3456,7 @@
 			repositoryURL = "https://git.zx2c4.com/wireguard-apple";
 			requirement = {
 				kind = revision;
-				revision = 23618f994f17d8ad8f2f65d79b4a1e8a0830b334;
+				revision = ccc7472fd7d1c7c19584e6a30c45a56b8ba57790;
 			};
 		};
 		82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */ = {
