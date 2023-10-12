@@ -3504,7 +3504,7 @@
 			repositoryURL = "https://github.com/optonaut/ActiveLabel.swift";
 			requirement = {
 				kind = exactVersion;
-				version = 1.1.0;
+				version = 1.1.5;
 			};
 		};
 		82EC884229A12D370024CC40 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
