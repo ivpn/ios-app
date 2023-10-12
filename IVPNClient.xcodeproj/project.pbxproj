@@ -3520,7 +3520,7 @@
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
 				kind = exactVersion;
-				version = 5.0.1;
+				version = 5.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
