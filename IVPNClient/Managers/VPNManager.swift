@@ -242,13 +242,21 @@ class VPNManager {
         case .openvpn:
             disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .wireguard) { _ in
-                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in }
+                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
+                        DispatchQueue.async {
+                            self.openvpnManager?.connection.stopVPNTunnel()
+                        }
+                    }
                 }
             }
         case .wireguard:
             disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .openvpn) { _ in
-                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in }
+                    self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
+                        DispatchQueue.async {
+                            self.wireguardManager?.connection.stopVPNTunnel()
+                        }
+                    }
                 }
             }
         }
@@ -270,7 +278,10 @@ class VPNManager {
     func disconnect(tunnelType: TunnelType, reconnectAutomatically: Bool = false) {
         getManagerFor(tunnelType: tunnelType) { [self] manager in
             manager.connection.stopVPNTunnel()
-            removeOnDemandRule(manager: manager)
+            
+            if !UserDefaults.shared.networkProtectionEnabled || reconnectAutomatically {
+                removeOnDemandRule(manager: manager)
+            }
         }
     }
     
