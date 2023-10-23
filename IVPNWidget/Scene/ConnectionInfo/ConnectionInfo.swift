@@ -28,4 +28,6 @@ struct ConnectionInfo {
     var multiHop: Bool
     var selectedProtocol: String
     var geoLookup: GeoLookup
+    var isV2ray: Bool
+    var v2rayProtocol: String
 }

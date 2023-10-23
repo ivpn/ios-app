@@ -64,9 +64,18 @@ extension ConnectionInfoView {
             var port = 0
             let components = model.selectedProtocol.components(separatedBy: "-")
             
+            if let protocolType = components[safeIndex: 1] {
+                proto = protocolType.uppercased()
+            }
+            
+            if let protocolPort = components[safeIndex: 2] {
+                port = Int(protocolPort) ?? 0
+            }
+            
             if let protocolName = components[safeIndex: 0] {
                 if protocolName == "wireguard" {
                     name = "WireGuard"
+                    proto = wireguardProtocol()
                 }
                 if protocolName == "openvpn" {
                     name = "OpenVPN"
@@ -74,12 +83,6 @@ extension ConnectionInfoView {
                 if protocolName == "ikev2" {
                     return "IKEv2"
                 }
-            }
-            if let protocolType = components[safeIndex: 1] {
-                proto = protocolType.uppercased()
-            }
-            if let protocolPort = components[safeIndex: 2] {
-                port = Int(protocolPort) ?? 0
             }
             
             if model.multiHop {
@@ -91,6 +94,14 @@ extension ConnectionInfoView {
         
         func getAntiTracker() -> String {
             return model.antiTracker ? "ON" : "OFF"
+        }
+        
+        func wireguardProtocol() -> String {
+            if model.isV2ray && model.v2rayProtocol == "tcp" {
+                return "TCP"
+            }
+            
+            return "UDP"
         }
         
     }
