@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1196,7 +1196,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V2Ray" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDH-0C-siS">
-                                                    <rect key="frame" x="16" y="11.5" width="325" height="21"/>
+                                                    <rect key="frame" x="16" y="11.5" width="49" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="nED-3J-nRG"/>
                                                     </constraints>
@@ -1211,13 +1211,31 @@
                                                         <action selector="toggleV2ray:" destination="cNW-I9-ie7" eventType="valueChanged" id="ugU-fh-B04"/>
                                                     </connections>
                                                 </switch>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd7-6O-Ich">
+                                                    <rect key="frame" x="75" y="14" width="32" height="16"/>
+                                                    <color key="backgroundColor" name="ivpnGray2"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="JHD-8Z-Wmu"/>
+                                                        <constraint firstAttribute="height" constant="16" id="tzT-s5-5sB"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="SDH-0C-siS" firstAttribute="centerY" secondItem="xoX-Ra-ju2" secondAttribute="centerY" id="05O-Ec-eek"/>
                                                 <constraint firstItem="3O9-H5-CkI" firstAttribute="centerY" secondItem="xoX-Ra-ju2" secondAttribute="centerY" id="6qN-Q1-2Q6"/>
                                                 <constraint firstItem="SDH-0C-siS" firstAttribute="leading" secondItem="xoX-Ra-ju2" secondAttribute="leading" constant="16" id="7Y0-7b-tqV"/>
+                                                <constraint firstItem="hd7-6O-Ich" firstAttribute="centerY" secondItem="xoX-Ra-ju2" secondAttribute="centerY" id="9yL-vP-BYi"/>
                                                 <constraint firstAttribute="trailing" secondItem="3O9-H5-CkI" secondAttribute="trailing" constant="16" id="OEA-b9-ckz"/>
-                                                <constraint firstItem="3O9-H5-CkI" firstAttribute="leading" secondItem="SDH-0C-siS" secondAttribute="trailing" constant="8" id="zbN-xY-h6s"/>
+                                                <constraint firstItem="hd7-6O-Ich" firstAttribute="leading" secondItem="SDH-0C-siS" secondAttribute="trailing" constant="10" id="oDJ-Tb-LzH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2497,7 +2515,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pcr-7g-EZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4532" y="838"/>
+            <point key="canvasLocation" x="3649" y="838"/>
         </scene>
         <!--Add Custom Port-->
         <scene sceneID="kpi-MB-fGc">
@@ -2672,13 +2690,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="HWD-ZW-yW1">
                                                             <rect key="frame" x="0.0" y="0.0" width="213.5" height="56.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your status is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqS-im-1xj">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Your status is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqS-im-1xj">
                                                                     <rect key="frame" x="0.0" y="0.0" width="213.5" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <color key="textColor" name="ivpnLabel5"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="disconnected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="fZx-j5-ahl">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="disconnected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="fZx-j5-ahl">
                                                                     <rect key="frame" x="0.0" y="18" width="213.5" height="38.5"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
