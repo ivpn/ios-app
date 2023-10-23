@@ -23,6 +23,7 @@
 
 import UIKit
 import ActiveLabel
+import WidgetKit
 
 class AdvancedViewController: UITableViewController {
     
@@ -68,6 +69,7 @@ class AdvancedViewController: UITableViewController {
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isV2ray)
         evaluateReconnect(sender: sender as UIView)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     @IBAction func selectV2rayProtocol(_ sender: UISegmentedControl) {
@@ -76,6 +78,7 @@ class AdvancedViewController: UITableViewController {
         
         if UserDefaults.shared.isV2ray {
             evaluateReconnect(sender: sender as UIView)
+            WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         }
     }
     
