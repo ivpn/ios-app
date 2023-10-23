@@ -279,6 +279,9 @@ extension LoginViewController {
         KeyChain.username = (self.userName.text ?? "").trim()
         
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            navigationController?.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+            })
             return
         }
         
