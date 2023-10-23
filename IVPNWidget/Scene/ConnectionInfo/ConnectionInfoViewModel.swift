@@ -76,6 +76,9 @@ extension ConnectionInfoView {
                 if protocolName == "wireguard" {
                     name = "WireGuard"
                     proto = wireguardProtocol()
+                    if model.multiHop && model.isV2ray {
+                        return "\(name), \(proto) \(port)"
+                    }
                 }
                 if protocolName == "openvpn" {
                     name = "OpenVPN"
