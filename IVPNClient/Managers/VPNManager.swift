@@ -243,7 +243,7 @@ class VPNManager {
             disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .wireguard) { _ in
                     self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
-                        DispatchQueue.async {
+                        DispatchQueue.delay(1) {
                             self.openvpnManager?.connection.stopVPNTunnel()
                         }
                     }
@@ -253,7 +253,7 @@ class VPNManager {
             disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .openvpn) { _ in
                     self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
-                        DispatchQueue.async {
+                        DispatchQueue.delay(1) {
                             self.wireguardManager?.connection.stopVPNTunnel()
                         }
                     }
