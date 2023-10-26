@@ -232,7 +232,7 @@ class VPNManager {
     func installOnDemandRules(settings: ConnectionSettings, accessDetails: AccessDetails) {
         switch settings {
         case .ipsec:
-            self.disable(tunnelType: .openvpn) { _ in
+            disable(tunnelType: .openvpn) { _ in
                 self.disable(tunnelType: .wireguard) { _ in
                     self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
                         self.disconnect(tunnelType: .ipsec)
@@ -240,18 +240,22 @@ class VPNManager {
                 }
             }
         case .openvpn:
-            self.disable(tunnelType: .ipsec) { _ in
+            disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .wireguard) { _ in
                     self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
-                        self.disconnect(tunnelType: .openvpn)
+                        DispatchQueue.delay(1) {
+                            self.openvpnManager?.connection.stopVPNTunnel()
+                        }
                     }
                 }
             }
         case .wireguard:
-            self.disable(tunnelType: .ipsec) { _ in
+            disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .openvpn) { _ in
                     self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
-                        self.disconnect(tunnelType: .wireguard)
+                        DispatchQueue.delay(1) {
+                            self.wireguardManager?.connection.stopVPNTunnel()
+                        }
                     }
                 }
             }
@@ -272,13 +276,11 @@ class VPNManager {
     }
     
     func disconnect(tunnelType: TunnelType, reconnectAutomatically: Bool = false) {
-        getManagerFor(tunnelType: tunnelType) { manager in
-            DispatchQueue.async {
-                manager.connection.stopVPNTunnel()
-            }
+        getManagerFor(tunnelType: tunnelType) { [self] manager in
+            manager.connection.stopVPNTunnel()
             
             if !UserDefaults.shared.networkProtectionEnabled || reconnectAutomatically {
-                self.removeOnDemandRule(manager: manager)
+                removeOnDemandRule(manager: manager)
             }
         }
     }
