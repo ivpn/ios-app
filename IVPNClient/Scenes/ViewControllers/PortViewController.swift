@@ -41,6 +41,10 @@ class PortViewController: UITableViewController {
         var ports = [ConnectionSettings]()
         if let storedCustomPorts = StorageManager.fetchCustomPorts(vpnProtocol: selectedPort.formatTitle().lowercased()) {
             for customPort in storedCustomPorts {
+                if UserDefaults.shared.isV2ray && Application.shared.settings.connectionProtocol.tunnelType() == .wireguard && UserDefaults.shared.v2rayProtocol != customPort.type {
+                    continue
+                }
+                
                 let string = "\(customPort.vpnProtocol ?? "")-\(customPort.type ?? "")-\(customPort.port)"
                 ports.append(ConnectionSettings.getFrom(portString: string))
             }

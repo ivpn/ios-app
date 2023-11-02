@@ -42,7 +42,7 @@ class AdvancedViewController: UITableViewController {
     // MARK: - Properties -
     
     var protocolType: String {
-        return v2rayProtocolControl.selectedSegmentIndex == 1 ? "tcp" : "quic"
+        return v2rayProtocolControl.selectedSegmentIndex == 1 ? "tcp" : "udp"
     }
     
     // MARK: - @IBActions -
@@ -73,7 +73,7 @@ class AdvancedViewController: UITableViewController {
     }
     
     @IBAction func selectV2rayProtocol(_ sender: UISegmentedControl) {
-        let v2rayProtocol = sender.selectedSegmentIndex == 1 ? "tcp" : "quic"
+        let v2rayProtocol = sender.selectedSegmentIndex == 1 ? "tcp" : "udp"
         UserDefaults.shared.set(v2rayProtocol, forKey: UserDefaults.Key.v2rayProtocol)
         
         if UserDefaults.shared.isV2ray {
