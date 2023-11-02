@@ -154,7 +154,13 @@ enum ConnectionSettings {
         var filteredProtocols = [ConnectionSettings]()
         
         for protocolObj in protocols where protocolObj.tunnelType() == self.tunnelType() {
-            filteredProtocols.append(protocolObj)
+            if UserDefaults.shared.isV2ray && tunnelType() == .wireguard && UserDefaults.shared.v2rayProtocol == protocolObj.storedProtocolType().lowercased() {
+                if UserDefaults.shared.v2rayProtocol == protocolObj.storedProtocolType().lowercased() {
+                    filteredProtocols.append(protocolObj)
+                }
+            } else {
+                filteredProtocols.append(protocolObj)
+            }
         }
         
         return filteredProtocols
@@ -252,6 +258,22 @@ enum ConnectionSettings {
             }
         case .wireguard:
             return wireguardProtocol()
+        }
+    }
+    
+    func storedProtocolType() -> String {
+        switch self {
+        case .ipsec:
+            return "IKEv2"
+        case .openvpn(let proto, _):
+            switch proto {
+            case .tcp:
+                return "TCP"
+            case .udp:
+                return "UDP"
+            }
+        case .wireguard:
+            return "UDP"
         }
     }
     
