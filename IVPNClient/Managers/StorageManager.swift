@@ -300,21 +300,35 @@ extension StorageManager {
         return nil
     }
     
+    private static func probeURL() -> URL? {
+        let isNetworkProtection = UserDefaults.shared.networkProtectionEnabled
+        let probeURL = URL(string: "https://\(Config.ApiHostName)\(Config.apiServersFile)")
+        return isNetworkProtection ? probeURL : nil
+    }
+    
     private static func getDefaultOnDemandRule(status: NEVPNStatus) -> NEOnDemandRule? {
         let defaultTrust = getDefaultTrust()
         
         if defaultTrust == NetworkTrust.Untrusted.rawValue {
-            return NEOnDemandRuleConnect()
+            let onDemandRule = NEOnDemandRuleConnect()
+            onDemandRule.probeURL = probeURL()
+            return onDemandRule
         }
         if defaultTrust == NetworkTrust.Trusted.rawValue {
-            return NEOnDemandRuleDisconnect()
+            let onDemandRule = NEOnDemandRuleDisconnect()
+            onDemandRule.probeURL = probeURL()
+            return onDemandRule
         }
         
         switch status {
         case .connected:
-            return NEOnDemandRuleConnect()
+            let onDemandRule = NEOnDemandRuleConnect()
+            onDemandRule.probeURL = probeURL()
+            return onDemandRule
         case .disconnected, .invalid:
-            return NEOnDemandRuleDisconnect()
+            let onDemandRule = NEOnDemandRuleDisconnect()
+            onDemandRule.probeURL = probeURL()
+            return onDemandRule
         default:
             return nil
         }

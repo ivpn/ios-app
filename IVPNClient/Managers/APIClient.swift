@@ -98,7 +98,15 @@ class APIClient: NSObject {
     private var hostName = UserDefaults.shared.apiHostName
     
     private var baseURL: URL {
-        return URL(string: "https://\(hostName)")!
+        if let url = URL(string: "https://\(hostName)") {
+            return url
+        }
+        
+        if let url = URL(string: "https://[\(hostName)]") {
+            return url
+        }
+        
+        return URL(string: "https://\(Config.ApiHostName)")!
     }
     
     private var userAgent: String {

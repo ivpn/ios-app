@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -3512,7 +3512,7 @@
 			repositoryURL = "https://github.com/scenee/FloatingPanel";
 			requirement = {
 				kind = exactVersion;
-				version = 1.7.2;
+				version = 2.6.3;
 			};
 		};
 		82EC884529A12D510024CC40 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
