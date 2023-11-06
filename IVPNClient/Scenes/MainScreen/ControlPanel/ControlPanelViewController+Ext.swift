@@ -29,6 +29,9 @@ import JGProgressHUD
 extension ControlPanelViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        controlPanelView.networkView.isHidden = !UserDefaults.shared.networkProtectionEnabled
+        controlPanelView.exitServerTableCell.isHidden = !UserDefaults.shared.isMultiHop
+        
         if indexPath.row == 0 { return 100 }
         if indexPath.row == 1 && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec { return 0 }
         if indexPath.row == 1 { return 44 }

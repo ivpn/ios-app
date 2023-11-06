@@ -28,7 +28,7 @@ import FloatingPanel
 
 extension MainViewController: FloatingPanelControllerDelegate {
     
-    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
         updateAccessibilityLabel(vc: vc)
         
         return FloatingPanelMainLayout()
@@ -44,12 +44,19 @@ extension MainViewController: FloatingPanelControllerDelegate {
     
     func updateAccessibilityLabel(vc: FloatingPanelController) {
         if let controlPanelViewController = floatingPanel.contentViewController, UIDevice.current.userInterfaceIdiom != .pad {
-            if vc.position == .full {
+            if vc.state == .full {
                 controlPanelViewController.view.accessibilityLabel = "Swipe down to collapse control panel"
             } else {
                 controlPanelViewController.view.accessibilityLabel = "Swipe up to expan control panel"
             }
         }
+    }
+    
+    func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+        let loc = fpc.surfaceLocation
+        let minY = fpc.surfaceLocation(for: .full).y - 6.0
+        let maxY = fpc.surfaceLocation(for: .half).y + 6.0
+        fpc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
     }
     
 }
@@ -59,7 +66,7 @@ extension MainViewController: FloatingPanelControllerDelegate {
 extension MainViewController: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        floatingPanel.updateLayout()
+        floatingPanel.invalidateLayout()
         NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
     }
     
