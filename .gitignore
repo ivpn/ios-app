@@ -1,6 +1,10 @@
 ## Build generated
 build/
 DerivedData/
+Frameworks/
+
+## Source / dependencies
+submodules/
 
 ## Static libraries
 IVPNClient/liboqs/liboqs-iphoneos.a
@@ -70,6 +74,3 @@ OpenVPNConf.swift
 fastlane/test_output
 fastlane/report.xml
 fastlane/Appfile
-
-# Frameworks
-Frameworks
