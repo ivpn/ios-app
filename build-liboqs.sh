@@ -9,8 +9,11 @@ set -e
 
 # Clone liboqs
 echo "=> Clone liboqs"
+mkdir -p submodules
 cd submodules
-git clone  --depth 1 --branch ${BRANCH} https://github.com/ivpn/liboqs
+if [ ! -d "liboqs" ] ; then
+    git clone  --depth 1 --branch ${BRANCH} https://github.com/ivpn/liboqs
+fi
 cd liboqs
 
 # liboqs for iphoneos
