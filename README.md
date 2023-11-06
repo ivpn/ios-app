@@ -90,7 +90,22 @@ cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.sw
 Build `V2RayControl.xcframework`:
 
 ```sh
-./build.sh
+./build-v2ray.sh
+```
+
+### Build liboqs.a
+
+To compile  [liboqs](https://github.com/open-quantum-safe/liboqs), additional packages are required:  
+
+``` 
+brew install cmake ninja openssl@1.1 wget doxygen graphviz astyle valgrind
+pip3 install pytest pytest-xdist pyyaml
+```
+
+Build `liboqs.a`:  
+
+```sh
+./build-liboqs.sh
 ```
 
 ### Fastlane configuration
