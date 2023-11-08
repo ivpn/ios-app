@@ -78,6 +78,7 @@ class AddCustomPortViewController: UITableViewController {
         super.viewDidLoad()
         updateSelectedPortRange()
         typeControl.isEnabled = Application.shared.settings.connectionProtocol.tunnelType() == .openvpn
+        typeControl.selectedSegmentIndex = UserDefaults.shared.isV2ray && UserDefaults.shared.v2rayProtocol == "tcp" && Application.shared.settings.connectionProtocol.tunnelType() == .wireguard ? 1 : 0
     }
     
     // MARK: - Methods -

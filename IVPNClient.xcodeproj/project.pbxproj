@@ -3456,7 +3456,7 @@
 			repositoryURL = "https://git.zx2c4.com/wireguard-apple";
 			requirement = {
 				kind = revision;
-				revision = 23618f994f17d8ad8f2f65d79b4a1e8a0830b334;
+				revision = ccc7472fd7d1c7c19584e6a30c45a56b8ba57790;
 			};
 		};
 		82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */ = {
@@ -3472,7 +3472,7 @@
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
 			requirement = {
 				kind = exactVersion;
-				version = 3.2.0;
+				version = 4.2.2;
 			};
 		};
 		82EC883329A12BD30024CC40 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
@@ -3504,7 +3504,7 @@
 			repositoryURL = "https://github.com/optonaut/ActiveLabel.swift";
 			requirement = {
 				kind = exactVersion;
-				version = 1.1.0;
+				version = 1.1.5;
 			};
 		};
 		82EC884229A12D370024CC40 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
@@ -3520,7 +3520,7 @@
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
 				kind = exactVersion;
-				version = 5.0.1;
+				version = 5.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

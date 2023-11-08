@@ -45,6 +45,10 @@ class PortViewController: UITableViewController {
                     continue
                 }
                 
+                if !UserDefaults.shared.isV2ray && Application.shared.settings.connectionProtocol.tunnelType() == .wireguard && customPort.type == "tcp" {
+                    continue
+                }
+                
                 let string = "\(customPort.vpnProtocol ?? "")-\(customPort.type ?? "")-\(customPort.port)"
                 ports.append(ConnectionSettings.getFrom(portString: string))
             }
