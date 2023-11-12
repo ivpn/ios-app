@@ -56,8 +56,10 @@ class AntiTrackerViewController: UITableViewController {
     
     @IBAction func toggleAntiTrackerHardcore(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTrackerHardcore)
-        evaluateReconnect(sender: sender as UIView)
         NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
+        if UserDefaults.shared.isAntiTracker {
+            evaluateReconnect(sender: sender as UIView)
+        }
     }
     
     // MARK: - View Lifecycle -
@@ -96,7 +98,9 @@ class AntiTrackerViewController: UITableViewController {
     }
     
     @objc private func listUpdated() {
-        evaluateReconnect(sender: antiTrackerList)
+        if UserDefaults.shared.isAntiTracker {
+            evaluateReconnect(sender: antiTrackerList)
+        }
     }
 
 }

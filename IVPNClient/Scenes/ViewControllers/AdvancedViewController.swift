@@ -67,6 +67,10 @@ class AdvancedViewController: UITableViewController {
             return
         }
         
+        if !sender.isOn {
+            Application.shared.settings.connectionProtocol = Config.defaultProtocol
+        }
+        
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isV2ray)
         evaluateReconnect(sender: sender as UIView)
         WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
