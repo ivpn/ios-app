@@ -98,6 +98,7 @@ struct IVPNWidget: Widget {
         .configurationDisplayName("IVPN")
         .description("Quickly connect and disconnect VPN.")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .disableContentMarginsIfNeeded()
     }
 }
 
@@ -105,5 +106,15 @@ struct IVPNWidget_Previews: PreviewProvider {
     static var previews: some View {
         EntryView(entry: SimpleEntry(date: Date()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}
+
+extension WidgetConfiguration {
+    func disableContentMarginsIfNeeded() -> some WidgetConfiguration {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return self.contentMarginsDisabled()
+        } else {
+            return self
+        }
     }
 }

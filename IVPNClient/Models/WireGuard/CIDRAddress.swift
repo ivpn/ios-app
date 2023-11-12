@@ -58,7 +58,7 @@ struct CIDRAddress {
             subnetString = ""
         }
         
-        let addressType = AddressType.validateIpAddress(ipToValidate: ipAddress)
+        let addressType = AddressType.validateIpAddress(ipAddress)
         
         guard addressType == .IPv4 || addressType == .IPv6 else {
             throw CIDRAddressValidationError.invalidIP(ipAddress)

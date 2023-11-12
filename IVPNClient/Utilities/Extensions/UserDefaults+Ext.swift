@@ -90,6 +90,9 @@ extension UserDefaults {
         static let isLoggedIn = "isLoggedIn"
         static let antiTrackerDns = "antiTrackerDns"
         static let disableLanAccess = "disableLanAccess"
+        static let v2raySettings = "v2raySettings"
+        static let v2rayProtocol = "v2rayProtocol"
+        static let isV2ray = "isV2ray"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -240,6 +243,14 @@ extension UserDefaults {
         return bool(forKey: Key.disableLanAccess)
     }
     
+    @objc dynamic var v2rayProtocol: String {
+        return string(forKey: Key.v2rayProtocol) ?? "udp"
+    }
+    
+    @objc dynamic var isV2ray: Bool {
+        return bool(forKey: Key.isV2ray)
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
@@ -276,6 +287,9 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.isLoggedIn)
         shared.removeObject(forKey: Key.antiTrackerDns)
         shared.removeObject(forKey: Key.disableLanAccess)
+        shared.removeObject(forKey: Key.v2raySettings)
+        shared.removeObject(forKey: Key.v2rayProtocol)
+        shared.removeObject(forKey: Key.isV2ray)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)
         standard.removeObject(forKey: Key.selectedExitHost)

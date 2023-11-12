@@ -49,7 +49,14 @@ class WidgetDataService: DataService {
     }
     
     func getConnectionInfo() -> ConnectionInfo {
-        return ConnectionInfo(antiTracker: getAntiTracker(), multiHop: getMultiHop(), selectedProtocol: getProtocol(), geoLookup: getLocation())
+        return ConnectionInfo(
+            antiTracker: getAntiTracker(),
+            multiHop: getMultiHop(),
+            selectedProtocol: getProtocol(),
+            geoLookup: getLocation(),
+            isV2ray: getIsV2ray(),
+            v2rayProtocol: getV2rayProtocol()
+        )
     }
     
     func getAntiTracker() -> Bool {
@@ -62,6 +69,14 @@ class WidgetDataService: DataService {
     
     func getProtocol() -> String {
         return UserDefaults.shared.selectedProtocol
+    }
+    
+    func getIsV2ray() -> Bool {
+        return UserDefaults.shared.isV2ray
+    }
+    
+    func getV2rayProtocol() -> String {
+        return UserDefaults.shared.v2rayProtocol
     }
     
 }

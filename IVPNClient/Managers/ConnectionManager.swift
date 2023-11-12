@@ -100,6 +100,14 @@ class ConnectionManager {
                         self.evaluateCloseApp()
                     }
                 }
+                DispatchQueue.delay(2.5) {
+                    if UserDefaults.shared.isV2ray && !V2RayCore.shared.reconnectWithV2ray {
+                        V2RayCore.shared.reconnectWithV2ray = true
+                        self.reconnect()
+                    } else {
+                        V2RayCore.shared.reconnectWithV2ray = false
+                    }
+                }
             } else {
                 self.connected = false
             }
@@ -247,6 +255,17 @@ class ConnectionManager {
                 return
             }
             
+            if UserDefaults.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let error = V2RayCore.shared.start()
+                    if error != nil {
+                        log(.error, message: error?.localizedDescription ?? "")
+                    } else {
+                        log(.info, message: "V2Ray start OK")
+                    }
+                }
+            }
+            
             self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
         }
     }
@@ -260,6 +279,17 @@ class ConnectionManager {
             if UserDefaults.shared.networkProtectionEnabled && !reconnectAutomatically {
                 DispatchQueue.delay(2) {
                     self.installOnDemandRules()
+                }
+            }
+        }
+        
+        if UserDefaults.shared.isV2ray {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let error = V2RayCore.shared.close()
+                if error != nil {
+                    log(.error, message: error?.localizedDescription ?? "")
+                } else {
+                    log(.info, message: "V2Ray stop OK")
                 }
             }
         }

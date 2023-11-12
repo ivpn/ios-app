@@ -49,7 +49,7 @@ struct WireGuardEndpoint {
         }
         
         hostString = hostString.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
-        var addressType = AddressType.validateIpAddress(ipToValidate: hostString)
+        var addressType = AddressType.validateIpAddress(hostString)
         let ipString: String
         
         if addressType == .other {
@@ -59,7 +59,7 @@ struct WireGuardEndpoint {
         }
         
         ipAddress = String(ipString)
-        addressType = AddressType.validateIpAddress(ipToValidate: ipAddress)
+        addressType = AddressType.validateIpAddress(ipAddress)
         
         guard addressType == .IPv4 || addressType == .IPv6 else {
             throw EndpointValidationError.invalidIP(ipAddress)

@@ -386,6 +386,15 @@ extension SettingsViewController {
             contactSupport()
         }
         
+        if indexPath.section == 4 && indexPath.row == 0 {
+            guard evaluateIsLoggedIn() else {
+                tableView.deselectRow(at: indexPath, animated: true)
+                return
+            }
+            
+            performSegue(withIdentifier: "SelectAdvanced", sender: nil)
+        }
+        
         if indexPath.section == 1 && indexPath.row == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
             

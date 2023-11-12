@@ -23,6 +23,7 @@
 
 import Foundation
 import Network
+import CryptoKit
 
 struct Interface {
     
@@ -35,14 +36,10 @@ struct Interface {
     var dns: String?
     
     var publicKey: String? {
-        if let privateKeyString = privateKey, let privateKey = Data(base64Encoded: privateKeyString) {
-            var publicKey = Data(count: 32)
-            privateKey.withUnsafeUInt8Bytes { privateKeyBytes in
-                publicKey.withUnsafeMutableUInt8Bytes { mutableBytes in
-                    curve25519_derive_public_key(mutableBytes, privateKeyBytes)
-                }
-            }
-            return publicKey.base64EncodedString()
+        if let privateKeyString = privateKey, let privateKey = Data(base64Encoded: privateKeyString),
+           let privateKeyBytes = try? Curve25519.KeyAgreement.PrivateKey(rawRepresentation: privateKey) {
+            let publicKey = privateKeyBytes.publicKey
+            return publicKey.rawRepresentation.base64EncodedString()
         } else {
             return nil
         }
@@ -71,12 +68,8 @@ struct Interface {
     // MARK: - Methods -
     
     static func generatePrivateKey() -> String {
-        var privateKey = Data(count: 32)
-        privateKey.withUnsafeMutableUInt8Bytes { mutableBytes in
-            curve25519_generate_private_key(mutableBytes)
-        }
-        
-        return privateKey.base64EncodedString()
+        let privateKey = Curve25519.KeyAgreement.PrivateKey()
+        return privateKey.rawRepresentation.base64EncodedString()
     }
     
     static func getAddresses(ipv4: String?, ipv6: String?) -> String {

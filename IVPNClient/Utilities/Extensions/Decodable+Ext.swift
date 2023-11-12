@@ -1,9 +1,9 @@
 //
-//  AddressTypeTests.swift
+//  Decodable+Ext.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2020-02-11.
+//  Created by Juraj Hilje on 2023-08-04.
 //  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -14,27 +14,24 @@
 //
 //  The IVPN iOS app is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-//  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 //  details.
 //
 //  You should have received a copy of the GNU General Public License
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import XCTest
+import Foundation
 
-@testable import IVPNClient
-
-class AddressTypeTests: XCTestCase {
+extension Decodable {
     
-    func test_validateIpAddress() {
-        let ipAddress1 = "127.0.0.1"
-        let ipAddress2 = "::1"
-        let ipAddress3 = "-"
-        
-        XCTAssertEqual(AddressType.validateIpAddress(ipAddress1), .IPv4)
-        XCTAssertEqual(AddressType.validateIpAddress(ipAddress2), .IPv6)
-        XCTAssertEqual(AddressType.validateIpAddress(ipAddress3), .other)
+    static func parse(fromJsonFile: String) -> Self? {
+        guard let url = Bundle.main.url(forResource: fromJsonFile, withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let output = try? JSONDecoder().decode(self, from: data) else {
+            return nil
+        }
+        return output
     }
     
 }

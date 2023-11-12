@@ -47,7 +47,7 @@ Project dev dependencies:
 Install fastlane, SwiftLint and Go:  
 
 ```sh
-$ brew install fastlane swiftlint go
+brew install fastlane swiftlint go
 ```
 
 ### Dependencies
@@ -73,8 +73,8 @@ There are different build configurations: Staging and Release.
 Rename and populate `.xcconfig` files: 
 
 ```sh
-$ cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig  
-$ cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig  
+cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig  
+cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig  
 ```
 
 ### OpenVPN configuration
@@ -82,7 +82,15 @@ $ cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xccon
 Rename and populate `OpenVPNConf.swift` file: 
 
 ```sh
-$ cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
+cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
+```
+
+### Build V2RayControl.xcframework
+
+Build `V2RayControl.xcframework`:
+
+```sh
+./build.sh
 ```
 
 ### Fastlane configuration
@@ -90,7 +98,7 @@ $ cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.
 Rename and populate `Appfile` files: 
 
 ```sh
-$ cp fastlane/Appfile.template fastlane/Appfile
+cp fastlane/Appfile.template fastlane/Appfile
 ```
 
 <a name="testing"></a>
@@ -99,19 +107,19 @@ $ cp fastlane/Appfile.template fastlane/Appfile
 Run code linter using fastlane:  
 
 ```sh
-$ fastlane lint
+fastlane lint
 ```
 
 Run tests using fastlane:  
 
 ```sh
-$ fastlane test
+fastlane test
 ```
 
 Alternatively, run tests using xcodebuild:  
 
 ```sh
-$ xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 14'
+xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 14'
 ```
 
 <a name="deployment"></a>
@@ -120,19 +128,19 @@ $ xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=i
 To build and deploy beta build to TestFlight:  
 
 ```sh
-$ fastlane beta
+fastlane beta
 ```
 
 To build and deploy staging build to TestFlight:  
 
 ```sh
-$ fastlane staging
+fastlane staging
 ```
 
 To build and deploy App Store release build to TestFlight:  
 
 ```sh
-$ fastlane release
+fastlane release
 ```
 
 <a name="versioning"></a>
