@@ -53,7 +53,9 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func deleteAccount(_ sender: UIButton) {
-        openAccountSettings()
+        if let url = URL(string: "https://www.ivpn.net/account/settings") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     @IBAction func addMoreTime(_ sender: Any) {
