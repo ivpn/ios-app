@@ -95,6 +95,10 @@ extension UIViewController {
         openWebPage("https://www.ivpn.net/privacy-mobile-app/")
     }
     
+    func openAccountSettings() {
+        openWebPage("https://www.ivpn.net/account/settings")
+    }
+    
     func registerUserActivity(type: String, title: String) {
         let activity = NSUserActivity(activityType: type)
         activity.title = title

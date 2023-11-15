@@ -52,6 +52,10 @@ class AccountViewController: UITableViewController {
         showFlashNotification(message: "Account ID copied to clipboard", presentInView: (navigationController?.view)!)
     }
     
+    @IBAction func deleteAccount(_ sender: UIButton) {
+        openAccountSettings()
+    }
+    
     @IBAction func addMoreTime(_ sender: Any) {
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
             return
