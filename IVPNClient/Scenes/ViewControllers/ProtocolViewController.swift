@@ -69,7 +69,7 @@ class ProtocolViewController: UITableViewController {
         collection.append(ConnectionSettings.tunnelTypes(protocols: Config.supportedProtocolTypes))
         
         if connectionProtocol.tunnelType() == .wireguard {
-            if UserDefaults.shared.isMultiHop {
+            if UserDefaults.shared.isMultiHop && !UserDefaults.shared.isV2ray {
                 collection.append([.wireguard(.udp, 1), .wireguard(.udp, 2)])
             } else {
                 collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])
@@ -131,6 +131,14 @@ class ProtocolViewController: UITableViewController {
     
     func validateDisableLanTraffic(connectionProtocol: ConnectionSettings) -> Bool {
         if UserDefaults.shared.disableLanAccess && connectionProtocol == .ipsec {
+            return false
+        }
+        
+        return true
+    }
+    
+    func validateV2ray(connectionProtocol: ConnectionSettings) -> Bool {
+        if UserDefaults.shared.isV2ray && connectionProtocol.tunnelType() != .wireguard {
             return false
         }
         
@@ -203,7 +211,7 @@ extension ProtocolViewController {
         
         cell.setup(connectionProtocol: connectionProtocol, isSettings: indexPath.section > 0)
         
-        if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) || !validateSecureDNS(connectionProtocol: connectionProtocol) || !validateKillSwitch(connectionProtocol: connectionProtocol) {
+        if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) || !validateSecureDNS(connectionProtocol: connectionProtocol) || !validateKillSwitch(connectionProtocol: connectionProtocol) || !validateV2ray(connectionProtocol: connectionProtocol) {
             cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabel6)
         } else {
             cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
@@ -383,6 +391,23 @@ extension ProtocolViewController {
                     switch index {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.disableLanAccess)
+                        tableView.reloadData()
+                    default:
+                        break
+                    }
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+            return
+        }
+        
+        guard validateV2ray(connectionProtocol: connectionProtocol) else {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                showActionSheet(title: "To use OpenVPN or IKEv2 protocols you must turn V2Ray off", actions: ["Turn off"], sourceView: cell as UIView) { index in
+                    switch index {
+                    case 0:
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isV2ray)
                         tableView.reloadData()
                     default:
                         break

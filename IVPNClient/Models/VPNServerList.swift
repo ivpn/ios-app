@@ -190,6 +190,7 @@ class VPNServerList {
                             portRanges.append(PortRange(tunnelType: "OpenVPN", protocolType: "TCP", ranges: tcpRanges))
                         }
                     }
+                    
                     if let wireguard = portsObj["wireguard"] as? [[String: Any]] {
                         var ranges = [CountableClosedRange<Int>]()
                         for port in wireguard {
@@ -204,6 +205,22 @@ class VPNServerList {
                         }
                         if !ranges.isEmpty {
                             portRanges.append(PortRange(tunnelType: "WireGuard", protocolType: "UDP", ranges: ranges))
+                        }
+                    }
+                    
+                    if let v2ray = portsObj["v2ray"] as? [String: Any] {
+                        if let wireguard = v2ray["wireguard"] as? [[String: Any]] {
+                            var ports = [V2RayPort]()
+                            var inboundPort = 0
+                            for port in wireguard {
+                                let type = port["type"] as? String ?? ""
+                                let port = port["port"] as? Int ?? 0
+                                ports.append(V2RayPort(type: type, port: port))
+                                inboundPort = port
+                            }
+                            let id = v2ray["id"] as? String ?? ""
+                            let v2raySettings = V2RaySettings(id: id, inboundPort: inboundPort, wireguard: ports)
+                            v2raySettings.save()
                         }
                     }
                 }
@@ -399,7 +416,8 @@ class VPNServerList {
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
                         multihopPort: host["multihop_port"] as? Int ?? 0,
-                        load: host["load"] as? Double ?? 0
+                        load: host["load"] as? Double ?? 0,
+                        v2ray: host["v2ray"] as? String ?? ""
                     )
                     
                     if let ipv6 = host["ipv6"] as? [String: Any] {

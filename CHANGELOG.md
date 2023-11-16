@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.11.0 - 2023-11-16  
+
+[NEW] Obfuscation with V2Ray for WireGuard connections  
+[IMPROVED] Update WireGuard to the latest version  
+[IMPROVED] Update packages/dependencies to the latest version  
+[FIXED] Repeatedly connecting and disconnecting when Network Protection is enabled  
+
 ## 2.10.1 - 2023-09-04  
 
 [NEW] Option to disable LAN traffic when connected to VPN  

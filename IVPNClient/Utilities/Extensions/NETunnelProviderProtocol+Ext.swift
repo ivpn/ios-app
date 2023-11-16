@@ -27,7 +27,6 @@ import Network
 import TunnelKitCore
 import TunnelKitManager
 import TunnelKitOpenVPN
-import WireGuardKit
 
 extension NETunnelProviderProtocol {
     
@@ -127,16 +126,34 @@ extension NETunnelProviderProtocol {
         var publicKey = host.publicKey
         let port = getPort(settings: settings)
         var endpoint = Peer.endpoint(host: host.host, port: port)
+        var v2raySettings = V2RaySettings.load()
+        var v2rayInboundIp = host.host
+        var v2rayInboundPort = v2raySettings?.singleHopInboundPort ?? 0
+        let v2rayOutboundIp = host.v2ray
+        let v2rayOutboundPort = port
+        let v2rayDnsName = host.dnsName
         
         if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop), let exitHost = getExitHost() {
             publicKey = exitHost.publicKey
             endpoint = Peer.endpoint(host: host.host, port: exitHost.multihopPort)
+            v2rayInboundIp = exitHost.host
+            v2rayInboundPort = exitHost.multihopPort
         }
         
         if let ipv6 = host.ipv6, UserDefaults.shared.isIPv6 {
             addresses = Interface.getAddresses(ipv4: KeyChain.wgIpAddress, ipv6: ipv6.localIP)
             KeyChain.wgIpAddresses = addresses
             KeyChain.wgIpv6Host = ipv6.localIP
+        }
+        
+        if UserDefaults.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
+            endpoint = Peer.endpoint(host: Config.v2rayHost, port: Config.v2rayPort)
+            v2raySettings?.inboundIp = v2rayInboundIp
+            v2raySettings?.inboundPort = v2rayInboundPort
+            v2raySettings?.outboundIp = v2rayOutboundIp
+            v2raySettings?.outboundPort = v2rayOutboundPort
+            v2raySettings?.dnsName = v2rayDnsName
+            v2raySettings?.save()
         }
         
         let peer = Peer(

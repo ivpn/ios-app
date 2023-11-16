@@ -23,8 +23,11 @@
 
 import UIKit
 import ActiveLabel
+import WidgetKit
 
 class AdvancedViewController: UITableViewController {
+    
+    // MARK: - @IBOutlets -
     
     @IBOutlet weak var disableLanAccessSwitch: UISwitch!
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
@@ -33,6 +36,14 @@ class AdvancedViewController: UITableViewController {
     @IBOutlet weak var loggingSwitch: UISwitch!
     @IBOutlet weak var loggingCell: UITableViewCell!
     @IBOutlet weak var sendLogsLabel: UILabel!
+    @IBOutlet weak var v2raySwitch: UISwitch!
+    @IBOutlet weak var v2rayProtocolControl: UISegmentedControl!
+    
+    // MARK: - Properties -
+    
+    var protocolType: String {
+        return v2rayProtocolControl.selectedSegmentIndex == 1 ? "tcp" : "udp"
+    }
     
     // MARK: - @IBActions -
     
@@ -46,6 +57,34 @@ class AdvancedViewController: UITableViewController {
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.disableLanAccess)
         evaluateReconnect(sender: sender as UIView)
+    }
+    
+    @IBAction func toggleV2ray(_ sender: UISwitch) {
+        if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() != .wireguard {
+            showAlert(title: "OpenVPN and IKEv2 not supported", message: "V2Ray is supported only for WireGuard protocol.") { _ in
+                sender.setOn(false, animated: true)
+            }
+            return
+        }
+        
+        if !sender.isOn {
+            Application.shared.settings.connectionProtocol = Config.defaultProtocol
+        }
+        
+        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isV2ray)
+        evaluateReconnect(sender: sender as UIView)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+    }
+    
+    @IBAction func selectV2rayProtocol(_ sender: UISegmentedControl) {
+        let v2rayProtocol = sender.selectedSegmentIndex == 1 ? "tcp" : "udp"
+        UserDefaults.shared.set(v2rayProtocol, forKey: UserDefaults.Key.v2rayProtocol)
+        
+        if UserDefaults.shared.isV2ray {
+            Application.shared.settings.connectionProtocol = Config.defaultProtocol
+            evaluateReconnect(sender: sender as UIView)
+            WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        }
     }
     
     @IBAction func toggleAskToReconnect(_ sender: UISwitch) {
@@ -82,6 +121,8 @@ class AdvancedViewController: UITableViewController {
         preventSameCountryMultiHopSwitch.setOn(UserDefaults.standard.preventSameCountryMultiHop, animated: false)
         preventSameISPMultiHopSwitch.setOn(UserDefaults.standard.preventSameISPMultiHop, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
+        v2raySwitch.setOn(UserDefaults.shared.isV2ray, animated: false)
+        v2rayProtocolControl.selectedSegmentIndex = UserDefaults.shared.v2rayProtocol == "tcp" ? 1 : 0
         setupLoggingView()
     }
     
@@ -177,7 +218,7 @@ class AdvancedViewController: UITableViewController {
 extension AdvancedViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 2 && indexPath.row == 0 {
+        if indexPath.section == 3 && indexPath.row == 0 {
             return 60
         }
         
@@ -185,7 +226,7 @@ extension AdvancedViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && indexPath.row == 1 {
+        if indexPath.section == 3 && indexPath.row == 1 {
             tableView.deselectRow(at: indexPath, animated: true)
             sendLogs()
         }
@@ -195,7 +236,14 @@ extension AdvancedViewController {
         let footer = view as! UITableViewHeaderFooterView
         footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         
-        let urlString = "https://www.ivpn.net/knowledgebase/ios/known-issues-with-native-ios-kill-switch/"
+        var urlString = ""
+        switch section {
+        case 1:
+            urlString = "https://www.ivpn.net/knowledgebase/ios/v2ray/"
+        default:
+            urlString = "https://www.ivpn.net/knowledgebase/ios/known-issues-with-native-ios-kill-switch/"
+        }
+        
         let label = ActiveLabel(frame: .zero)
         let customType = ActiveType.custom(pattern: "Learn more")
         label.numberOfLines = 0

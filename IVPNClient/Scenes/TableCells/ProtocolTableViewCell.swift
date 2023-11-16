@@ -94,7 +94,7 @@ class ProtocolTableViewCell: UITableViewCell {
     
     private func setupSelectAction(title: String) {
         protocolLabel.text = title
-        protocolSettingsLabel.text = UserDefaults.shared.isMultiHop ? Application.shared.settings.connectionProtocol.protocolType() : Application.shared.settings.connectionProtocol.formatProtocol()
+        protocolSettingsLabel.text = UserDefaults.shared.isMultiHop ? Application.shared.settings.connectionProtocol.formatProtocolMultiHop() : Application.shared.settings.connectionProtocol.formatProtocol()
         accessoryType = .disclosureIndicator
         isUserInteractionEnabled = true
         selectionStyle = .default

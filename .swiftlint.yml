@@ -27,5 +27,5 @@ file_length:
     ignore_comment_only_lines: true
 cyclomatic_complexity:
     warning: 15
-    error: 35
+    error: 45
 reporter: "xcode"

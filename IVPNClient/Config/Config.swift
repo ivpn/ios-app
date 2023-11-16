@@ -80,6 +80,11 @@ struct Config {
     static let wgKeyExpirationDays = 30
     static let wgKeyRegenerationRate = 1
     
+    // MARK: V2Ray
+    
+    static let v2rayHost = "127.0.0.1"
+    static let v2rayPort = 16661
+    
     // MARK: ENV variables
     
     static var Environment: String {

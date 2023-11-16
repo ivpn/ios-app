@@ -52,6 +52,12 @@ class AccountViewController: UITableViewController {
         showFlashNotification(message: "Account ID copied to clipboard", presentInView: (navigationController?.view)!)
     }
     
+    @IBAction func deleteAccount(_ sender: UIButton) {
+        if let url = URL(string: "https://www.ivpn.net/account/settings") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     @IBAction func addMoreTime(_ sender: Any) {
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
             return

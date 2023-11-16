@@ -1,10 +1,13 @@
 ## Build generated
 build/
 DerivedData/
+Frameworks/
+
+## Source / dependencies
+submodules/
 
 ## Static libraries
-IVPNClient/liboqs/liboqs-iphoneos.a
-IVPNClient/liboqs/liboqs-iphonesimulator.a
+IVPNClient/liboqs/*.a
 
 ## Various settings
 *.pbxuser
