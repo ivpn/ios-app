@@ -49,7 +49,7 @@ class AdvancedViewController: UITableViewController {
     
     @IBAction func toggleDisableLanAccess(_ sender: UISwitch) {
         if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
-            showAlert(title: "IKEv2 not supported", message: "Disable LAN traffic is supported only for OpenVPN and WireGuard protocols.") { _ in
+            showAlert(title: "IKEv2 not supported", message: "Block LAN traffic is supported only for OpenVPN and WireGuard protocols.") { _ in
                 sender.setOn(false, animated: true)
             }
             return

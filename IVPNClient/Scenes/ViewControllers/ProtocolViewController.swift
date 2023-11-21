@@ -134,6 +134,10 @@ class ProtocolViewController: UITableViewController {
             return false
         }
         
+        if UserDefaults.shared.networkProtectionUntrustedBlockLan && connectionProtocol == .ipsec {
+            return false
+        }
+        
         return true
     }
     
