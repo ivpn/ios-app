@@ -2306,15 +2306,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="A7k-S9-BKV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="A7k-S9-BKV">
                                         <rect key="frame" x="0.0" y="355.5" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A7k-S9-BKV" id="E0q-JA-op2">
-                                            <rect key="frame" x="0.0" y="0.0" width="383.5" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HK8-HG-901">
-                                                    <rect key="frame" x="16" y="34" width="351.5" height="16"/>
+                                                    <rect key="frame" x="16" y="34" width="382" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="UeF-Il-FKW"/>
                                                     </constraints>
@@ -2323,7 +2323,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantum Resistance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ujb-H4-dvc">
-                                                    <rect key="frame" x="16" y="10" width="351.5" height="21"/>
+                                                    <rect key="frame" x="16" y="10" width="382" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="EI6-Z6-Asz"/>
                                                     </constraints>
@@ -2331,20 +2331,27 @@
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBJ-vO-JKH">
+                                                    <rect key="frame" x="356" y="13" width="50" height="34"/>
+                                                    <color key="tintColor" name="ivpnBlue"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                    <connections>
+                                                        <action selector="quantumInfo:" destination="BYK-jY-KqR" eventType="touchUpInside" id="yDp-xR-jN3"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="CBJ-vO-JKH" secondAttribute="trailing" constant="8" id="Jwf-sE-1sw"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ujb-H4-dvc" secondAttribute="trailing" constant="16" id="OdS-RE-rwx"/>
                                                 <constraint firstItem="HK8-HG-901" firstAttribute="leading" secondItem="E0q-JA-op2" secondAttribute="leading" constant="16" id="Z9F-cP-U8K"/>
                                                 <constraint firstAttribute="trailing" secondItem="HK8-HG-901" secondAttribute="trailing" constant="16" id="fCl-yy-Ryh"/>
                                                 <constraint firstItem="Ujb-H4-dvc" firstAttribute="leading" secondItem="E0q-JA-op2" secondAttribute="leading" constant="16" id="gdb-qA-2fP"/>
+                                                <constraint firstItem="CBJ-vO-JKH" firstAttribute="centerY" secondItem="E0q-JA-op2" secondAttribute="centerY" id="gln-BV-d7F"/>
                                                 <constraint firstItem="HK8-HG-901" firstAttribute="top" secondItem="Ujb-H4-dvc" secondAttribute="bottom" constant="3" id="uZo-78-dUo"/>
                                                 <constraint firstItem="Ujb-H4-dvc" firstAttribute="top" secondItem="E0q-JA-op2" secondAttribute="top" constant="10" id="x2B-GM-1Qt"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="tintColor" name="ivpnBlue"/>
-                                        <connections>
-                                            <segue destination="ocV-OR-MsS" kind="show" id="PQd-Mv-PiN"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="kyR-6G-Jra">
                                         <rect key="frame" x="0.0" y="415.5" width="414" height="60"/>
@@ -4804,55 +4811,6 @@
             </objects>
             <point key="canvasLocation" x="6294" y="12"/>
         </scene>
-        <!--Quantum Resistance-->
-        <scene sceneID="2OJ-Qb-AeN">
-            <objects>
-                <viewController id="jBV-as-muh" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="KWO-yD-5W2"/>
-                        <viewControllerLayoutGuide type="bottom" id="oqe-EB-HzC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="oVs-Y4-qqM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcf-fz-46K">
-                                <rect key="frame" x="20" y="214" width="374" height="107.5"/>
-                                <string key="text">When Enabled, a Pre-shared key has been securely exchanged between your device and the server using post-quantum Key Encapsulation Mechanism (KEM) algorithms. If Disabled, the current VPN connection, while secure under today's standards, does not include this extra layer of quantum resistance.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="ivpnLabelPrimary"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHL-iy-7GY">
-                                <rect key="frame" x="20" y="117" width="374" height="72"/>
-                                <string key="text">Quantum Resistance: Indicates whether your current WireGuard VPN connection is using additional protection measures against potential future quantum computer attacks.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="ivpnLabelPrimary"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="hHL-iy-7GY" firstAttribute="leading" secondItem="oVs-Y4-qqM" secondAttribute="leadingMargin" id="824-uz-szo"/>
-                            <constraint firstItem="hHL-iy-7GY" firstAttribute="trailing" secondItem="oVs-Y4-qqM" secondAttribute="trailingMargin" id="LYn-JQ-3mr"/>
-                            <constraint firstItem="mcf-fz-46K" firstAttribute="trailing" secondItem="oVs-Y4-qqM" secondAttribute="trailingMargin" id="ahX-9K-FxV"/>
-                            <constraint firstItem="hHL-iy-7GY" firstAttribute="top" secondItem="KWO-yD-5W2" secondAttribute="bottom" constant="25" id="aoE-Y8-gGz"/>
-                            <constraint firstItem="mcf-fz-46K" firstAttribute="leading" secondItem="oVs-Y4-qqM" secondAttribute="leadingMargin" id="cB6-zV-UrB"/>
-                            <constraint firstItem="mcf-fz-46K" firstAttribute="top" secondItem="hHL-iy-7GY" secondAttribute="bottom" constant="25" id="eYe-LJ-J9p"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Quantum Resistance" largeTitleDisplayMode="never" id="hjh-rq-38P">
-                        <barButtonItem key="rightBarButtonItem" title="Close" style="done" id="b7J-85-FeF">
-                            <connections>
-                                <action selector="dismissViewController:" destination="jBV-as-muh" id="eeQ-G9-PXi"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nfN-dM-IE6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="8037.6811594202909" y="12.723214285714285"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="jBO-kh-cLX">
             <objects>
@@ -4871,26 +4829,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNl-QT-RxD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5414" y="13"/>
-        </scene>
-        <!--Quantum Resistance-->
-        <scene sceneID="bHb-5a-3sN">
-            <objects>
-                <navigationController title="Quantum Resistance" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="ocV-OR-MsS" customClass="NavigationController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Ou1-C2-U5d"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="98Z-fD-wte">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="jBV-as-muh" kind="relationship" relationship="rootViewController" id="5sH-ND-Rbk"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Mx-t1-BTV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7180" y="13"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EPO-MU-jc9">
