@@ -40,7 +40,12 @@ class NetworkProtectionRulesViewController: UITableViewController {
     }
     
     @IBAction func toggleUntrustedBlockLan(_ sender: UISwitch) {
-        
+        defaults.set(sender.isOn, forKey: UserDefaults.Key.networkProtectionUntrustedBlockLan)
+        Application.shared.connectionManager.evaluateConnection { [self] error in
+            if error != nil {
+                showWireGuardKeysMissingError()
+            }
+        }
     }
     
     @IBAction func blockLanInfo(_ sender: UIButton) {
@@ -60,6 +65,7 @@ class NetworkProtectionRulesViewController: UITableViewController {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         untrustedConnectSwitch.setOn(defaults.networkProtectionUntrustedConnect, animated: false)
+        untrustedBlockLanSwitch.setOn(defaults.networkProtectionUntrustedBlockLan, animated: false)
         trustedDisconnectSwitch.setOn(defaults.networkProtectionTrustedDisconnect, animated: false)
     }
     

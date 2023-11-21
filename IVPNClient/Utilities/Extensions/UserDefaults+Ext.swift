@@ -39,6 +39,7 @@ extension UserDefaults {
         static let isLogging = "isLogging"
         static let networkProtectionEnabled = "networkProtection.enabled"
         static let networkProtectionUntrustedConnect = "networkProtection.untrusted.connect"
+        static let networkProtectionUntrustedBlockLan = "networkProtection.untrusted.blockLan"
         static let networkProtectionTrustedDisconnect = "networkProtection.trusted.disconnect"
         static let isCustomDNS = "isCustomDNS"
         static let customDNSProtocol = "customDNSProtocol"
@@ -121,6 +122,10 @@ extension UserDefaults {
     
     @objc dynamic var networkProtectionUntrustedConnect: Bool {
         return bool(forKey: Key.networkProtectionUntrustedConnect)
+    }
+    
+    @objc dynamic var networkProtectionUntrustedBlockLan: Bool {
+        return bool(forKey: Key.networkProtectionUntrustedBlockLan)
     }
     
     @objc dynamic var networkProtectionTrustedDisconnect: Bool {
@@ -268,6 +273,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.isLogging)
         shared.removeObject(forKey: Key.networkProtectionEnabled)
         shared.removeObject(forKey: Key.networkProtectionUntrustedConnect)
+        shared.removeObject(forKey: Key.networkProtectionUntrustedBlockLan)
         shared.removeObject(forKey: Key.networkProtectionTrustedDisconnect)
         shared.removeObject(forKey: Key.isCustomDNS)
         shared.removeObject(forKey: Key.customDNS)
