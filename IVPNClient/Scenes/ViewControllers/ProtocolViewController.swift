@@ -395,6 +395,7 @@ extension ProtocolViewController {
                     switch index {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.disableLanAccess)
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.networkProtectionUntrustedBlockLan)
                         tableView.reloadData()
                     default:
                         break
