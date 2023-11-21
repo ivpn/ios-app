@@ -26,6 +26,7 @@ import UIKit
 class NetworkProtectionRulesViewController: UITableViewController {
     
     @IBOutlet weak var untrustedConnectSwitch: UISwitch!
+    @IBOutlet weak var untrustedBlockLanSwitch: UISwitch!
     @IBOutlet weak var trustedDisconnectSwitch: UISwitch!
     let defaults = UserDefaults.shared
     
@@ -36,6 +37,14 @@ class NetworkProtectionRulesViewController: UITableViewController {
                 showWireGuardKeysMissingError()
             }
         }
+    }
+    
+    @IBAction func toggleUntrustedBlockLan(_ sender: UISwitch) {
+        
+    }
+    
+    @IBAction func blockLanInfo(_ sender: UIButton) {
+        showAlert(title: "", message: "When enabled, it overrides the 'Block LAN traffic' option in Advanced Settings.")
     }
     
     @IBAction func toggleTrustedDisconnect(_ sender: UISwitch) {
