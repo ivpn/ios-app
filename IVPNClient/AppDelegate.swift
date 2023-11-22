@@ -146,6 +146,15 @@ class AppDelegate: UIResponder {
         
         switch endpoint {
         case Config.urlTypeConnect:
+            guard !UserDefaults.shared.disableWidgetPrompt else {
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
+                    return
+                }
+                Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
+                return
+            }
+            
             viewController.showActionAlert(title: "Please confirm", message: "Do you want to connect to VPN?", action: "Connect", actionHandler: { _ in
                 if UserDefaults.shared.networkProtectionEnabled {
                     Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
@@ -154,6 +163,15 @@ class AppDelegate: UIResponder {
                 Application.shared.connectionManager.connectShortcut(closeApp: true, actionType: .connect)
             })
         case Config.urlTypeDisconnect:
+            guard !UserDefaults.shared.disableWidgetPrompt else {
+                if UserDefaults.shared.networkProtectionEnabled {
+                    Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
+                    return
+                }
+                Application.shared.connectionManager.disconnectShortcut(closeApp: true, actionType: .disconnect)
+                return
+            }
+            
             viewController.showActionAlert(title: "Please confirm", message: "Do you want to disconnect from VPN?", action: "Disconnect", actionHandler: { _ in
                 if UserDefaults.shared.networkProtectionEnabled {
                     Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
