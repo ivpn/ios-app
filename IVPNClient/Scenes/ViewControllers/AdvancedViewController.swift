@@ -31,6 +31,7 @@ class AdvancedViewController: UITableViewController {
     
     @IBOutlet weak var disableLanAccessSwitch: UISwitch!
     @IBOutlet weak var askToReconnectSwitch: UISwitch!
+    @IBOutlet weak var widgetPromptSwitch: UISwitch!
     @IBOutlet weak var preventSameCountryMultiHopSwitch: UISwitch!
     @IBOutlet weak var preventSameISPMultiHopSwitch: UISwitch!
     @IBOutlet weak var loggingSwitch: UISwitch!
@@ -91,6 +92,10 @@ class AdvancedViewController: UITableViewController {
         UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.notAskToReconnect)
     }
     
+    @IBAction func toggleWidgetPrompt(_ sender: UISwitch) {
+        UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.disableWidgetPrompt)
+    }
+    
     @IBAction func togglePreventSameCountryMultiHop(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: UserDefaults.Key.preventSameCountryMultiHop)
     }
@@ -118,6 +123,7 @@ class AdvancedViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         disableLanAccessSwitch.setOn(UserDefaults.shared.disableLanAccess, animated: false)
         askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
+        widgetPromptSwitch.setOn(!UserDefaults.shared.disableWidgetPrompt, animated: false)
         preventSameCountryMultiHopSwitch.setOn(UserDefaults.standard.preventSameCountryMultiHop, animated: false)
         preventSameISPMultiHopSwitch.setOn(UserDefaults.standard.preventSameISPMultiHop, animated: false)
         loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
