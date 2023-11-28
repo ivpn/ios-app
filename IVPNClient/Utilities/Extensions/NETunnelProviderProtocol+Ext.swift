@@ -232,7 +232,11 @@ extension NETunnelProviderProtocol {
     }
     
     private static func disableLanAccess() -> Bool {
-        if UserDefaults.shared.networkProtectionEnabled && UserDefaults.shared.networkProtectionUntrustedBlockLan {
+        let defaultTrust = StorageManager.getDefaultTrust()
+        let networkTrust = Application.shared.network.trust ?? NetworkTrust.Default.rawValue
+        let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
+        
+        if UserDefaults.shared.networkProtectionEnabled && UserDefaults.shared.networkProtectionUntrustedBlockLan && trust == NetworkTrust.Untrusted.rawValue {
             return true
         }
         

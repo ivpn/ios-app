@@ -21,7 +21,7 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1287.5" width="414" height="65"/>
+                            <rect key="frame" x="0.0" y="1365.5" width="414" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -1171,11 +1171,20 @@
                                                         <action selector="toggleDisableLanAccess:" destination="cNW-I9-ie7" eventType="valueChanged" id="uJi-6C-UW1"/>
                                                     </connections>
                                                 </switch>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s80-hQ-qbA">
+                                                    <rect key="frame" x="294" y="5" width="50" height="34"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                    <connections>
+                                                        <action selector="blockLanInfo:" destination="cNW-I9-ie7" eventType="touchUpInside" id="sfH-67-Npm"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="h9L-WL-mhk" firstAttribute="leading" secondItem="s80-hQ-qbA" secondAttribute="trailing" constant="5" id="78J-Zf-3ef"/>
                                                 <constraint firstItem="h9L-WL-mhk" firstAttribute="centerY" secondItem="6vF-rC-vq5" secondAttribute="centerY" id="LkW-x2-YNK"/>
                                                 <constraint firstItem="6Px-e7-mel" firstAttribute="leading" secondItem="6vF-rC-vq5" secondAttribute="leading" constant="16" id="Vsx-3A-pEO"/>
                                                 <constraint firstItem="h9L-WL-mhk" firstAttribute="leading" secondItem="6Px-e7-mel" secondAttribute="trailing" constant="8" id="WXj-OF-tYc"/>
+                                                <constraint firstItem="s80-hQ-qbA" firstAttribute="centerY" secondItem="6vF-rC-vq5" secondAttribute="centerY" id="ZpE-F5-LNu"/>
                                                 <constraint firstAttribute="trailing" secondItem="h9L-WL-mhk" secondAttribute="trailing" constant="16" id="gHx-M2-VOc"/>
                                                 <constraint firstItem="6Px-e7-mel" firstAttribute="centerY" secondItem="6vF-rC-vq5" secondAttribute="centerY" id="iv3-tP-Ucz"/>
                                             </constraints>
