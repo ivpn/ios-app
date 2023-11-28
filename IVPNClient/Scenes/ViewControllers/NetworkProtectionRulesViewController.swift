@@ -48,11 +48,7 @@ class NetworkProtectionRulesViewController: UITableViewController {
         }
         
         defaults.set(sender.isOn, forKey: UserDefaults.Key.networkProtectionUntrustedBlockLan)
-        Application.shared.connectionManager.evaluateConnection { [self] error in
-            if error != nil {
-                showWireGuardKeysMissingError()
-            }
-        }
+        evaluateReconnect(sender: sender as UIView)
     }
     
     @IBAction func blockLanInfo(_ sender: UIButton) {
