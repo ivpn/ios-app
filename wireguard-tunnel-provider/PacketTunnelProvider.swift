@@ -145,7 +145,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func startKeyRegenerationMonitor(completion: @escaping (Error?) -> Void) {
-        evaluateKeyRotation(completion)
         let timer = TimerManager(timeInterval: AppKeyManager.regenerationCheckInterval)
         timer.eventHandler = {
             self.evaluateKeyRotation(completion)
