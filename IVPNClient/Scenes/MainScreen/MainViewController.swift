@@ -75,6 +75,7 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        showFloatingPanel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,9 +83,6 @@ class MainViewController: UIViewController {
         refreshUI()
         initConnectionInfo()
         startPingService()
-        DispatchQueue.async { [self] in
-            showFloatingPanel()
-        }
     }
     
     deinit {
@@ -248,7 +246,7 @@ class MainViewController: UIViewController {
     }
     
     private func showFloatingPanel() {
-        floatingPanel.show(animated: true)
+        floatingPanel.show(animated: false)
     }
     
     private func startAPIUpdate() {
