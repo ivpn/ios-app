@@ -236,6 +236,10 @@ class VPNManager {
                 self.disable(tunnelType: .wireguard) { _ in
                     self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
                         self.disconnect(tunnelType: .ipsec)
+                        // Fix for iOS 16+ bug where VPN status is .disconnecting for active on-demand rules and disconnected VPN
+                        DispatchQueue.delay(1) {
+                            self.ipsecManager?.connection.stopVPNTunnel()
+                        }
                     }
                 }
             }
@@ -243,6 +247,7 @@ class VPNManager {
             disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .wireguard) { _ in
                     self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
+                        // Fix for iOS 16+ bug where VPN status is .disconnecting for active on-demand rules and disconnected VPN
                         DispatchQueue.delay(1) {
                             self.openvpnManager?.connection.stopVPNTunnel()
                         }
@@ -253,6 +258,7 @@ class VPNManager {
             disable(tunnelType: .ipsec) { _ in
                 self.disable(tunnelType: .openvpn) { _ in
                     self.setup(settings: settings, accessDetails: accessDetails, status: .disconnected) { _ in
+                        // Fix for iOS 16+ bug where VPN status is .disconnecting for active on-demand rules and disconnected VPN
                         DispatchQueue.delay(1) {
                             self.wireguardManager?.connection.stopVPNTunnel()
                         }
