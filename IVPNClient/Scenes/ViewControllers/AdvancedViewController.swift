@@ -110,10 +110,6 @@ class AdvancedViewController: UITableViewController {
         setupLoggingView()
     }
     
-    @IBAction func blockLanInfo(_ sender: UIButton) {
-        showAlert(title: "Info", message: "'Network Protection' actions for untrusted networks will override this option.")
-    }
-    
     // MARK: - View Lifecycle -
     
     override func viewWillAppear(_ animated: Bool) {
