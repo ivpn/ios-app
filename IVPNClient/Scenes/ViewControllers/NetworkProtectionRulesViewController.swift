@@ -52,7 +52,7 @@ class NetworkProtectionRulesViewController: UITableViewController {
     }
     
     @IBAction func blockLanInfo(_ sender: UIButton) {
-        showAlert(title: "Info", message: "When enabled, it overrides the 'Block LAN traffic' option in Advanced Settings.")
+        showAlert(title: "Info", message: "When enabled, it overrides the 'Block LAN traffic' option in Advanced Settings, when connected to an untrusted network.")
     }
     
     @IBAction func toggleTrustedDisconnect(_ sender: UISwitch) {
