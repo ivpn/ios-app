@@ -76,7 +76,7 @@ class AppKeyManager {
             return TimeInterval(10)
         }
         
-        return TimeInterval(60 * 60)
+        return TimeInterval(60 * 10)
     }
     
     static var regenerationInterval: TimeInterval {
