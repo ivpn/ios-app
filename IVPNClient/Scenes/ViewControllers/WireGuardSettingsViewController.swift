@@ -85,6 +85,10 @@ class WireGuardSettingsViewController: UITableViewController {
         present(viewController, animated: true)
     }
     
+    @IBAction func quantumInfo(_ sender: UIButton) {
+        showAlert(title: "Info", message: "Quantum Resistance: Indicates whether your current WireGuard VPN connection is using additional protection measures against potential future quantum computer attacks.\n\nWhen Enabled, a Pre-shared key has been securely exchanged between your device and the server using post-quantum Key Encapsulation Mechanism (KEM) algorithms. If Disabled, the current VPN connection, while secure under today's standards, does not include this extra layer of quantum resistance.")
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
