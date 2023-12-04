@@ -95,7 +95,7 @@
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8247C0602A7CF54300A7C02F /* V2RayConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247C05F2A7CF54300A7C02F /* V2RayConfig.swift */; };
 		8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1D922686217006C0C08 /* IAPManager.swift */; };
-		8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */; };
+		8247E1DE22687C28006C0C08 /* ProductId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DD22687C28006C0C08 /* ProductId.swift */; };
 		82486FAD2A277058009B53F4 /* liboqs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82486FAC2A277058009B53F4 /* liboqs.a */; };
 		824B141C2609D5E700766B05 /* DNSProtocolTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B141B2609D5E700766B05 /* DNSProtocolTypeTests.swift */; };
 		824B86B926D3D16100D0101A /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B86AD26D3D16100D0101A /* FileManager+Extension.swift */; };
@@ -526,7 +526,7 @@
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247C05F2A7CF54300A7C02F /* V2RayConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V2RayConfig.swift; sourceTree = "<group>"; };
 		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
-		8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdentifier.swift; sourceTree = "<group>"; };
+		8247E1DD22687C28006C0C08 /* ProductId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductId.swift; sourceTree = "<group>"; };
 		82486FAC2A277058009B53F4 /* liboqs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liboqs.a; sourceTree = "<group>"; };
 		82486FB02A27705F009B53F4 /* sha3x4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha3x4.h; sourceTree = "<group>"; };
 		82486FB12A27705F009B53F4 /* oqsconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oqsconfig.h; sourceTree = "<group>"; };
@@ -1024,7 +1024,7 @@
 				82C9739F217DFA9C00CE06D4 /* Host.swift */,
 				9C6942361DD218A900F9A801 /* AccessDetails.swift */,
 				9C3031341DB42EF900C38B0C /* Application.swift */,
-				8247E1DD22687C28006C0C08 /* ProductIdentifier.swift */,
+				8247E1DD22687C28006C0C08 /* ProductId.swift */,
 				9CB2CE1E1DAA5258007A4D2D /* Authentication.swift */,
 				9CBFF02F2102254800FE1757 /* Settings.swift */,
 				826C56D122FD4F2600D2B76A /* ServiceStatus.swift */,
@@ -2379,7 +2379,7 @@
 				821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */,
 				82061F66238D2730009DDF4D /* ICMPHeader.swift in Sources */,
 				824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */,
-				8247E1DE22687C28006C0C08 /* ProductIdentifier.swift in Sources */,
+				8247E1DE22687C28006C0C08 /* ProductId.swift in Sources */,
 				829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */,
 				82234B6721BA7F3500B082DE /* Logger.swift in Sources */,
 				82DB75EC239E75EB0073E846 /* NEVPNStatus+Ext.swift in Sources */,

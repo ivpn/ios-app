@@ -50,7 +50,7 @@ class IAPManager {
     // MARK: - Methods -
     
     func fetchProducts(completion: @escaping ([SKProduct]?, String?) -> Void) {
-        SwiftyStoreKit.retrieveProductsInfo(ProductIdentifier.all) { result in
+        SwiftyStoreKit.retrieveProductsInfo(ProductId.all) { result in
             if !result.retrievedProducts.isEmpty {
                 self.products = Array(result.retrievedProducts)
                 completion(Array(result.retrievedProducts), nil)

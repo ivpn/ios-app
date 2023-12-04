@@ -37,7 +37,7 @@ class PurchaseManager: NSObject {
     // MARK: - Methods -
     
     func loadProducts() async throws {
-        products = try await Product.products(for: ProductIdentifier.all)
+        products = try await Product.products(for: ProductId.all)
     }
     
     func purchase(_ product: Product) async throws {
