@@ -27,14 +27,19 @@ class PurchaseManager: NSObject {
     
     // MARK: - Properties -
     
-    private(set) var products: [Product] = []
+    static let shared = PurchaseManager()
     
-    override init() {
-        super.init()
-        SKPaymentQueue.default().add(self)
+    var canMakePurchases: Bool {
+        return SKPaymentQueue.canMakePayments()
     }
     
+    private(set) var products: [Product] = []
+    
     // MARK: - Methods -
+    
+    func startObserver() {
+        SKPaymentQueue.default().add(self)
+    }
     
     func loadProducts() async throws {
         products = try await Product.products(for: ProductId.all)
@@ -61,6 +66,14 @@ class PurchaseManager: NSObject {
         @unknown default:
             break
         }
+    }
+    
+    func getProduct(id: String) -> Product? {
+        for product in products where product.id == id {
+            return product
+        }
+        
+        return nil
     }
     
 }

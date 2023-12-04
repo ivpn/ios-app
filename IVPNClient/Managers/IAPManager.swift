@@ -216,10 +216,6 @@ class IAPManager {
         return formatter.string(from: product.price) ?? ""
     }
     
-    func completeTransactions() {
-        SwiftyStoreKit.completeTransactions(atomically: true) { _ in }
-    }
-    
     // MARK: - Private methods -
     
     private func purchaseParams(purchase: PurchaseDetails, endpoint: String) -> [URLQueryItem] {
