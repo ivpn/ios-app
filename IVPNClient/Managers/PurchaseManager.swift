@@ -35,6 +35,18 @@ class PurchaseManager: NSObject {
     
     private(set) var products: [Product] = []
     
+    private var apiEndpoint: String {
+        if KeyChain.sessionToken != nil {
+            if !Application.shared.serviceStatus.isNewStyleAccount() {
+                return Config.apiPaymentAddLegacy
+            }
+            
+            return Config.apiPaymentAdd
+        }
+        
+        return Config.apiPaymentInitial
+    }
+    
     // MARK: - Methods -
     
     func startObserver() {
@@ -68,12 +80,85 @@ class PurchaseManager: NSObject {
         }
     }
     
+    func finishPurchase(transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        let endpoint = apiEndpoint
+        let params = purchaseParams(transaction: transaction, endpoint: endpoint)
+        let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
+        
+        ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
+            switch result {
+            case .success(let sessionStatus):
+                Application.shared.serviceStatus = sessionStatus.serviceStatus
+                // try await transaction.finish()
+                completion(sessionStatus.serviceStatus, nil)
+                log(.info, message: "Purchase was successfully finished.")
+            case .failure(let error):
+                let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
+                completion(nil, error ?? defaultErrorResult)
+                log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
+            }
+        }
+    }
+    
     func getProduct(id: String) -> Product? {
         for product in products where product.id == id {
             return product
         }
         
         return nil
+    }
+    
+    // MARK: - Private methods -
+    
+    private func base64receipt() -> String {
+        if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
+            do {
+                let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
+                return receiptData.base64EncodedString(options: [])
+            }
+            catch {
+                log(.error, message: "Couldn't read receipt data with error: \(error.localizedDescription)")
+            }
+        }
+        
+        return ""
+    }
+    
+    private func purchaseParams(transaction: Transaction, endpoint: String) -> [URLQueryItem] {
+        let productId = transaction.productID
+        let transactionId = transaction.id.formatted()
+        let receipt = base64receipt()
+        
+        switch endpoint {
+        case Config.apiPaymentInitial:
+            return [
+                URLQueryItem(name: "account_id", value: KeyChain.tempUsername ?? ""),
+                URLQueryItem(name: "product_id", value: productId),
+                URLQueryItem(name: "transaction_id", value: transactionId),
+                URLQueryItem(name: "receipt", value: receipt)
+            ]
+        case Config.apiPaymentAdd:
+            return [
+                URLQueryItem(name: "session_token", value: KeyChain.sessionToken ?? ""),
+                URLQueryItem(name: "product_id", value: productId),
+                URLQueryItem(name: "transaction_id", value: transactionId),
+                URLQueryItem(name: "receipt", value: receipt)
+            ]
+        case Config.apiPaymentAddLegacy:
+            return [
+                URLQueryItem(name: "username", value: KeyChain.username ?? ""),
+                URLQueryItem(name: "productId", value: productId),
+                URLQueryItem(name: "transactionId", value: transactionId),
+                URLQueryItem(name: "receiptData", value: receipt)
+            ]
+        default:
+            return []
+        }
+    }
+    
+    private func restorePurchaseParams() -> [URLQueryItem] {
+        let receipt = base64receipt()
+        return [URLQueryItem(name: "receipt", value: receipt)]
     }
     
 }
