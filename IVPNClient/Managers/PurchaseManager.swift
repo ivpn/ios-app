@@ -23,6 +23,58 @@
 
 import StoreKit
 
-class PurchaseManager {
+class PurchaseManager: NSObject {
+    
+    // MARK: - Properties -
+    
+    private(set) var products: [Product] = []
+    
+    override init() {
+        super.init()
+        SKPaymentQueue.default().add(self)
+    }
+    
+    // MARK: - Methods -
+    
+    func loadProducts() async throws {
+        products = try await Product.products(for: ProductIdentifier.all)
+    }
+    
+    func purchase(_ product: Product) async throws {
+        let result = try await product.purchase()
+
+        switch result {
+        case let .success(.verified(transaction)):
+            // Successful purchase
+            await transaction.finish()
+        case .success(.unverified(_, _)):
+            // Successful purchase but transaction/receipt can't be verified
+            // Could be a jailbroken phone
+            break
+        case .pending:
+            // Transaction waiting on SCA (Strong Customer Authentication) or
+            // approval from Ask to Buy
+            break
+        case .userCancelled:
+            // ^^^
+            break
+        @unknown default:
+            break
+        }
+    }
+    
+}
+
+// MARK: - SKPaymentTransactionObserver -
+
+extension PurchaseManager: SKPaymentTransactionObserver {
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+
+    }
+
+    func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+        return true
+    }
     
 }
