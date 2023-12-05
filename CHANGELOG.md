@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.11.1 - 2023-12-05  
+
+[NEW] Option to Block LAN traffic when connected to an untrusted network  
+[NEW] Option to turn off the prompt when connecting or disconnecting VPN from the Widget  
+[FIXED] Control panel not rendering when launching the app in landscape mode on iPad  
+[FIXED] Removed redundant entitlements for V2Ray connections  
+[FIXED] Minor UI fixes and improvements  
+
 ## 2.11.0 - 2023-11-16  
 
 [NEW] Obfuscation with V2Ray for WireGuard connections  
