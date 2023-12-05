@@ -134,6 +134,10 @@ class ProtocolViewController: UITableViewController {
             return false
         }
         
+        if UserDefaults.shared.networkProtectionUntrustedBlockLan && connectionProtocol == .ipsec {
+            return false
+        }
+        
         return true
     }
     
@@ -391,6 +395,7 @@ extension ProtocolViewController {
                     switch index {
                     case 0:
                         UserDefaults.shared.set(false, forKey: UserDefaults.Key.disableLanAccess)
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.networkProtectionUntrustedBlockLan)
                         tableView.reloadData()
                     default:
                         break

@@ -90,8 +90,8 @@ extension NETunnelProviderProtocol {
         }
         
         if #available(iOS 14.2, *) {
-            proto.includeAllNetworks = UserDefaults.shared.disableLanAccess
-            proto.excludeLocalNetworks = !UserDefaults.shared.disableLanAccess
+            proto.includeAllNetworks = disableLanAccess()
+            proto.excludeLocalNetworks = !disableLanAccess()
         }
         
         return proto
@@ -190,8 +190,8 @@ extension NETunnelProviderProtocol {
         }
         
         if #available(iOS 14.2, *) {
-            configuration.includeAllNetworks = UserDefaults.shared.disableLanAccess
-            configuration.excludeLocalNetworks = !UserDefaults.shared.disableLanAccess
+            configuration.includeAllNetworks = disableLanAccess()
+            configuration.excludeLocalNetworks = !disableLanAccess()
         }
         
         return configuration
@@ -229,6 +229,18 @@ extension NETunnelProviderProtocol {
         }
         
         return settings.port()
+    }
+    
+    private static func disableLanAccess() -> Bool {
+        let defaultTrust = StorageManager.getDefaultTrust()
+        let networkTrust = Application.shared.network.trust ?? NetworkTrust.Default.rawValue
+        let trust = StorageManager.trustValue(trust: networkTrust, defaultTrust: defaultTrust)
+        
+        if UserDefaults.shared.networkProtectionEnabled && UserDefaults.shared.networkProtectionUntrustedBlockLan && trust == NetworkTrust.Untrusted.rawValue {
+            return true
+        }
+        
+        return UserDefaults.shared.disableLanAccess
     }
     
 }
