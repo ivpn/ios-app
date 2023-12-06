@@ -54,7 +54,7 @@ class PaymentViewController: UITableViewController {
     
     lazy var retryButton: UIButton = {
         let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(loadProducts), for: .touchUpInside)
+        button.addTarget(self, action: #selector(load), for: .touchUpInside)
         button.setTitle("Retry", for: .normal)
         button.sizeToFit()
         button.isHidden = true
@@ -128,11 +128,7 @@ class PaymentViewController: UITableViewController {
                 service = Service(type: serviceType, duration: .year)
             }
             
-            Task { @MainActor in
-                do {
-                    await loadProducts()
-                }
-            }
+            load()
         }
     }
     
@@ -179,7 +175,15 @@ class PaymentViewController: UITableViewController {
         }
     }
     
-    @objc private func loadProducts() async {
+    @objc private func load() {
+        Task { @MainActor in
+            do {
+                await loadProducts()
+            }
+        }
+    }
+    
+    private func loadProducts() async {
         displayMode = .loading
         
         do {
