@@ -33,9 +33,11 @@ struct Service {
     // MARK: - Computed properties -
     
     var priceText: String {
-        guard !IAPManager.shared.products.isEmpty else { return "" }
-        guard let product = IAPManager.shared.getProduct(identifier: productId) else { return "" }
-        return IAPManager.shared.productPrice(product: product)
+        guard let product = PurchaseManager.shared.getProduct(id: productId) else {
+            return ""
+        }
+        
+        return product.displayPrice
     }
     
     var durationText: String {

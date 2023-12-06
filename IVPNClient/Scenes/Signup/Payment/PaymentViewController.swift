@@ -54,7 +54,7 @@ class PaymentViewController: UITableViewController {
     
     lazy var retryButton: UIButton = {
         let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(fetchProducts), for: .touchUpInside)
+        button.addTarget(self, action: #selector(loadProducts), for: .touchUpInside)
         button.setTitle("Retry", for: .normal)
         button.sizeToFit()
         button.isHidden = true
@@ -128,7 +128,11 @@ class PaymentViewController: UITableViewController {
                 service = Service(type: serviceType, duration: .year)
             }
             
-            fetchProducts()
+            Task { @MainActor in
+                do {
+                    await loadProducts()
+                }
+            }
         }
     }
     
@@ -175,21 +179,15 @@ class PaymentViewController: UITableViewController {
         }
     }
     
-    @objc private func fetchProducts() {
+    @objc private func loadProducts() async {
         displayMode = .loading
         
-        IAPManager.shared.fetchProducts { [weak self] products, error in
-            guard let self = self else { return }
-            
-            if error != nil {
-                self.showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
-                self.displayMode = .error
-                return
-            }
-            
-            if products != nil {
-                self.displayMode = .content
-            }
+        do {
+            try await PurchaseManager.shared.loadProducts()
+            displayMode = .content
+        } catch {
+            showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
+            displayMode = .error
         }
     }
     
