@@ -110,8 +110,8 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            if account != nil {
-                self.userName.text = account?.accountId
+            if let account = account {
+                self.userName.text = account.accountId
                 self.sessionManager.createSession()
             }
         }
