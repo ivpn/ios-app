@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import SwiftyStoreKit
+import StoreKit
 import SnapKit
 import JGProgressHUD
 
@@ -101,7 +101,11 @@ class PaymentViewController: UITableViewController {
     }
     
     @IBAction func purchase(_ sender: UIButton) {
-        purchaseProduct(identifier: service.productId)
+        Task { @MainActor in
+            do {
+                await purchaseProduct(identifier: service.productId)
+            }
+        }
     }
     
     @IBAction func close() {
@@ -195,31 +199,30 @@ class PaymentViewController: UITableViewController {
         }
     }
     
-    private func purchaseProduct(identifier: String) {
-        guard deviceCanMakePurchases() else { return }
+    private func purchaseProduct(identifier: String) async {
+        guard deviceCanMakePurchases() else {
+            return
+        }
         
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Processing payment..."
         hud.show(in: (navigationController?.view)!)
         
-        IAPManager.shared.purchaseProduct(identifier: identifier) { [weak self] purchase, error in
-            guard let self = self else { return }
-            
-            if let error = error {
-                self.showErrorAlert(title: "Error", message: error)
-                self.hud.dismiss()
-                return
+        do {
+            if let transaction = try await PurchaseManager.shared.purchase(identifier) {
+                completePurchase(transaction: transaction)
             }
-            
-            if let purchase = purchase {
-                self.completePurchase(purchase: purchase)
-            }
+        } catch {
+            showErrorAlert(title: "Error", message: error.localizedDescription)
+            hud.dismiss()
         }
     }
     
-    private func completePurchase(purchase: PurchaseDetails) {
-        IAPManager.shared.completePurchase(purchase: purchase) { [weak self] serviceStatus, error in
-            guard let self = self else { return }
+    private func completePurchase(transaction: Transaction) {
+        PurchaseManager.shared.completePurchase(transaction: transaction) { [weak self] serviceStatus, error in
+            guard let self = self else {
+                return
+            }
             
             self.hud.dismiss()
             

@@ -57,13 +57,18 @@ class PurchaseManager: NSObject {
         products = try await Product.products(for: ProductId.all)
     }
     
-    func purchase(_ product: Product) async throws {
+    func purchase(_ productId: String) async throws -> Transaction? {
+        guard let product = getProduct(id: productId) else {
+            return nil
+        }
+        
         let result = try await product.purchase()
 
         switch result {
         case let .success(.verified(transaction)):
             // Successful purchase
-            await transaction.finish()
+            // await transaction.finish()
+            return transaction
         case .success(.unverified(_, _)):
             // Successful purchase but transaction/receipt can't be verified
             // Could be a jailbroken phone
@@ -78,9 +83,11 @@ class PurchaseManager: NSObject {
         @unknown default:
             break
         }
+        
+        return nil
     }
     
-    func finishPurchase(transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func completePurchase(transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         let endpoint = apiEndpoint
         let params = purchaseParams(transaction: transaction, endpoint: endpoint)
         let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
@@ -89,13 +96,21 @@ class PurchaseManager: NSObject {
             switch result {
             case .success(let sessionStatus):
                 Application.shared.serviceStatus = sessionStatus.serviceStatus
-                // try await transaction.finish()
+                self.finishTransaction(transaction)
                 completion(sessionStatus.serviceStatus, nil)
                 log(.info, message: "Purchase was successfully finished.")
             case .failure(let error):
                 let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
                 completion(nil, error ?? defaultErrorResult)
                 log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
+            }
+        }
+    }
+    
+    func finishTransaction(_ transaction: Transaction) {
+        Task { @MainActor in
+            do {
+                await transaction.finish()
             }
         }
     }
