@@ -108,10 +108,8 @@ class PurchaseManager: NSObject {
     }
     
     func finishTransaction(_ transaction: Transaction) {
-        Task { @MainActor in
-            do {
-                await transaction.finish()
-            }
+        Task {
+            await transaction.finish()
         }
     }
     

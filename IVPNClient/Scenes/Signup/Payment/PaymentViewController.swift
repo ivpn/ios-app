@@ -101,10 +101,8 @@ class PaymentViewController: UITableViewController {
     }
     
     @IBAction func purchase(_ sender: UIButton) {
-        Task { @MainActor in
-            do {
-                await purchaseProduct(identifier: service.productId)
-            }
+        Task {
+            await purchaseProduct(identifier: service.productId)
         }
     }
     
@@ -180,10 +178,8 @@ class PaymentViewController: UITableViewController {
     }
     
     @objc private func load() {
-        Task { @MainActor in
-            do {
-                await loadProducts()
-            }
+        Task {
+            await loadProducts()
         }
     }
     
