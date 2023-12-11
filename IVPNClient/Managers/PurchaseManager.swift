@@ -87,6 +87,23 @@ class PurchaseManager: NSObject {
         return nil
     }
     
+    func restorePurchases(completion: @escaping (Account?, ErrorResult?) -> Void) {
+        Task {
+            for await result in Transaction.currentEntitlements {
+                guard case .verified(let transaction) = result else {
+                    continue
+                }
+                
+                if transaction.revocationDate == nil {
+                    self.completeRestoredPurchase(transaction: transaction) { account, error in
+                        completion(account, error)
+                        log(.info, message: "Purchases are restored.")
+                    }
+                }
+            }
+        }
+    }
+    
     func completePurchase(transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         let endpoint = apiEndpoint
         let params = purchaseParams(transaction: transaction, endpoint: endpoint)
@@ -105,6 +122,29 @@ class PurchaseManager: NSObject {
                 log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
             }
         }
+    }
+    
+    func completeRestoredPurchase(transaction: Transaction, completion: @escaping (Account?, ErrorResult?) -> Void) {
+        let params = restorePurchaseParams()
+        let request = ApiRequestDI(method: .post, endpoint: Config.apiPaymentRestore, params: params)
+        
+        ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Account, ErrorResult>) in
+            switch result {
+            case .success(let account):
+                self.finishTransaction(transaction)
+                KeyChain.username = account.accountId
+                completion(account, nil)
+                log(.info, message: "Purchase was successfully restored.")
+            case .failure(let error):
+                let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was restored but service cannot be activated. Restart application to retry.")
+                completion(nil, error ?? defaultErrorResult)
+                log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
+            }
+        }
+    }
+    
+    func sync() async -> Bool {
+        return ((try? await AppStore.sync()) != nil)
     }
     
     func finishTransaction(_ transaction: Transaction) {
