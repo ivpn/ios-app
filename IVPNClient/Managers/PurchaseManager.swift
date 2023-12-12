@@ -95,7 +95,7 @@ class PurchaseManager: NSObject {
                 }
                 
                 if transaction.revocationDate == nil {
-                    self.completeRestoredPurchase(transaction: transaction) { account, error in
+                    self.getAccountFor(transaction: transaction) { account, error in
                         completion(account, error)
                         log(.info, message: "Purchases are restored.")
                     }
@@ -104,7 +104,23 @@ class PurchaseManager: NSObject {
         }
     }
     
-    func completePurchase(transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func completeUnfinishedTransactions(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        Task {
+            for await result in Transaction.unfinished {
+                guard case .verified(let transaction) = result else {
+                    continue
+                }
+                
+                if transaction.revocationDate == nil {
+                    complete(transaction: transaction) { serviceStatus, error in
+                        completion(serviceStatus, error)
+                    }
+                }
+            }
+        }
+    }
+    
+    func complete(transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         let endpoint = apiEndpoint
         let params = purchaseParams(transaction: transaction, endpoint: endpoint)
         let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
@@ -124,7 +140,7 @@ class PurchaseManager: NSObject {
         }
     }
     
-    func completeRestoredPurchase(transaction: Transaction, completion: @escaping (Account?, ErrorResult?) -> Void) {
+    func getAccountFor(transaction: Transaction, completion: @escaping (Account?, ErrorResult?) -> Void) {
         let params = restorePurchaseParams()
         let request = ApiRequestDI(method: .post, endpoint: Config.apiPaymentRestore, params: params)
         
@@ -141,10 +157,6 @@ class PurchaseManager: NSObject {
                 log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
             }
         }
-    }
-    
-    func sync() async -> Bool {
-        return ((try? await AppStore.sync()) != nil)
     }
     
     func finishTransaction(_ transaction: Transaction) {

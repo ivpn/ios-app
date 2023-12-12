@@ -215,7 +215,7 @@ class PaymentViewController: UITableViewController {
     }
     
     private func completePurchase(transaction: Transaction) {
-        PurchaseManager.shared.completePurchase(transaction: transaction) { [weak self] serviceStatus, error in
+        PurchaseManager.shared.complete(transaction: transaction) { [weak self] serviceStatus, error in
             guard let self = self else {
                 return
             }

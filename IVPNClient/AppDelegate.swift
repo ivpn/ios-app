@@ -85,7 +85,7 @@ class AppDelegate: UIResponder {
             return
         }
         
-        IAPManager.shared.finishIncompletePurchases { serviceStatus, _ in
+        PurchaseManager.shared.completeUnfinishedTransactions { serviceStatus, _ in
             guard let viewController = UIApplication.topViewController() else { return }
 
             if let serviceStatus = serviceStatus {
