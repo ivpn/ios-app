@@ -49,14 +49,22 @@ class PurchaseManager: NSObject {
         return Config.apiPaymentInitial
     }
     
-    // MARK: - Methods -
-    
-    func listenTransactionUpdates() {
-        updateListenerTask = listenForTransactions()
+    deinit {
+        updateListenerTask?.cancel()
     }
+    
+    // MARK: - Methods -
     
     func loadProducts() async throws {
         products = try await Product.products(for: ProductId.all)
+    }
+    
+    func getProduct(id: String) -> Product? {
+        for product in products where product.id == id {
+            return product
+        }
+        
+        return nil
     }
     
     func purchase(_ productId: String) async throws -> Transaction? {
@@ -89,15 +97,17 @@ class PurchaseManager: NSObject {
         return nil
     }
     
-    func listenForTransactions() -> Task<Void, Error> {
-        return Task {
+    func listenTransactionUpdates(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        updateListenerTask = Task {
             for await result in Transaction.updates {
                 guard case .verified(let transaction) = result else {
                     continue
                 }
                 
                 if transaction.revocationDate == nil {
-                    complete(transaction: transaction) { _, _ in }
+                    complete(transaction) { serviceStatus, error in
+                        completion(serviceStatus, error)
+                    }
                 }
             }
         }
@@ -111,7 +121,7 @@ class PurchaseManager: NSObject {
                 }
                 
                 if transaction.revocationDate == nil {
-                    complete(transaction: transaction) { serviceStatus, error in
+                    complete(transaction) { serviceStatus, error in
                         completion(serviceStatus, error)
                     }
                 }
@@ -141,13 +151,7 @@ class PurchaseManager: NSObject {
         }
     }
     
-    func finishTransaction(_ transaction: Transaction) {
-        Task {
-            await transaction.finish()
-        }
-    }
-    
-    func complete(transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func complete(_ transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
         let defaultError = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
         let endpoint = apiEndpoint
         
@@ -172,7 +176,15 @@ class PurchaseManager: NSObject {
         }
     }
     
-    func getAccountFor(transaction: Transaction, completion: @escaping (Account?, ErrorResult?) -> Void) {
+    // MARK: - Private methods -
+    
+    private func finishTransaction(_ transaction: Transaction) {
+        Task {
+            await transaction.finish()
+        }
+    }
+    
+    private func getAccountFor(transaction: Transaction, completion: @escaping (Account?, ErrorResult?) -> Void) {
         let defaultError = ErrorResult(status: 500, message: "Purchase was restored but service cannot be activated. Restart application to retry.")
         guard let params = restorePurchaseParams() else {
             completion(nil, defaultError)
@@ -194,16 +206,6 @@ class PurchaseManager: NSObject {
             }
         }
     }
-    
-    func getProduct(id: String) -> Product? {
-        for product in products where product.id == id {
-            return product
-        }
-        
-        return nil
-    }
-    
-    // MARK: - Private methods -
     
     private func base64receipt() -> String? {
         if let receiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: receiptURL.path) {

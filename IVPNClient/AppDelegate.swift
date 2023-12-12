@@ -86,7 +86,9 @@ class AppDelegate: UIResponder {
         }
         
         PurchaseManager.shared.completeUnfinishedTransactions { serviceStatus, _ in
-            guard let viewController = UIApplication.topViewController() else { return }
+            guard let viewController = UIApplication.topViewController() else {
+                return
+            }
 
             if let serviceStatus = serviceStatus {
                 viewController.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
@@ -95,7 +97,15 @@ class AppDelegate: UIResponder {
     }
     
     private func listenTransactionUpdates() {
-        PurchaseManager.shared.listenTransactionUpdates()
+        PurchaseManager.shared.listenTransactionUpdates { serviceStatus, _ in
+            guard let viewController = UIApplication.topViewController() else {
+                return
+            }
+
+            if let serviceStatus = serviceStatus {
+                viewController.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
+            }
+        }
     }
     
     private func resetLastPingTimestamp() {
