@@ -33,6 +33,8 @@ class PurchaseManager: NSObject {
         return SKPaymentQueue.canMakePayments()
     }
     
+    var updateListenerTask: Task<Void, Error>? = nil
+    
     private(set) var products: [Product] = []
     
     private var apiEndpoint: String {
@@ -48,6 +50,10 @@ class PurchaseManager: NSObject {
     }
     
     // MARK: - Methods -
+    
+    func listenTransactionUpdates() {
+        updateListenerTask = listenForTransactions()
+    }
     
     func loadProducts() async throws {
         products = try await Product.products(for: ProductId.all)
@@ -83,6 +89,36 @@ class PurchaseManager: NSObject {
         return nil
     }
     
+    func listenForTransactions() -> Task<Void, Error> {
+        return Task {
+            for await result in Transaction.updates {
+                guard case .verified(let transaction) = result else {
+                    continue
+                }
+                
+                if transaction.revocationDate == nil {
+                    complete(transaction: transaction) { _, _ in }
+                }
+            }
+        }
+    }
+    
+    func completeUnfinishedTransactions(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        Task {
+            for await result in Transaction.unfinished {
+                guard case .verified(let transaction) = result else {
+                    continue
+                }
+                
+                if transaction.revocationDate == nil {
+                    complete(transaction: transaction) { serviceStatus, error in
+                        completion(serviceStatus, error)
+                    }
+                }
+            }
+        }
+    }
+    
     func restorePurchases(completion: @escaping (Account?, ErrorResult?) -> Void) {
         Task {
             for await result in Transaction.currentEntitlements {
@@ -105,25 +141,21 @@ class PurchaseManager: NSObject {
         }
     }
     
-    func completeUnfinishedTransactions(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func finishTransaction(_ transaction: Transaction) {
         Task {
-            for await result in Transaction.unfinished {
-                guard case .verified(let transaction) = result else {
-                    continue
-                }
-                
-                if transaction.revocationDate == nil {
-                    complete(transaction: transaction) { serviceStatus, error in
-                        completion(serviceStatus, error)
-                    }
-                }
-            }
+            await transaction.finish()
         }
     }
     
     func complete(transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        let defaultError = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
         let endpoint = apiEndpoint
-        let params = purchaseParams(transaction: transaction, endpoint: endpoint)
+        
+        guard let params = purchaseParams(transaction: transaction, endpoint: endpoint) else {
+            completion(nil, defaultError)
+            return
+        }
+        
         let request = ApiRequestDI(method: .post, endpoint: endpoint, params: params)
         
         ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
@@ -134,15 +166,19 @@ class PurchaseManager: NSObject {
                 completion(sessionStatus.serviceStatus, nil)
                 log(.info, message: "Purchase was successfully finished.")
             case .failure(let error):
-                let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
-                completion(nil, error ?? defaultErrorResult)
+                completion(nil, error ?? defaultError)
                 log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
             }
         }
     }
     
     func getAccountFor(transaction: Transaction, completion: @escaping (Account?, ErrorResult?) -> Void) {
-        let params = restorePurchaseParams()
+        let defaultError = ErrorResult(status: 500, message: "Purchase was restored but service cannot be activated. Restart application to retry.")
+        guard let params = restorePurchaseParams() else {
+            completion(nil, defaultError)
+            return
+        }
+        
         let request = ApiRequestDI(method: .post, endpoint: Config.apiPaymentRestore, params: params)
         
         ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Account, ErrorResult>) in
@@ -153,16 +189,9 @@ class PurchaseManager: NSObject {
                 completion(account, nil)
                 log(.info, message: "Purchase was successfully restored.")
             case .failure(let error):
-                let defaultErrorResult = ErrorResult(status: 500, message: "Purchase was restored but service cannot be activated. Restart application to retry.")
-                completion(nil, error ?? defaultErrorResult)
+                completion(nil, error ?? defaultError)
                 log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
             }
-        }
-    }
-    
-    func finishTransaction(_ transaction: Transaction) {
-        Task {
-            await transaction.finish()
         }
     }
     
@@ -176,10 +205,10 @@ class PurchaseManager: NSObject {
     
     // MARK: - Private methods -
     
-    private func base64receipt() -> String {
-        if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
+    private func base64receipt() -> String? {
+        if let receiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: receiptURL.path) {
             do {
-                let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
+                let receiptData = try Data(contentsOf: receiptURL, options: .alwaysMapped)
                 return receiptData.base64EncodedString(options: [])
             }
             catch {
@@ -187,32 +216,43 @@ class PurchaseManager: NSObject {
             }
         }
         
-        return ""
+        return nil
     }
     
-    private func purchaseParams(transaction: Transaction, endpoint: String) -> [URLQueryItem] {
+    private func purchaseParams(transaction: Transaction, endpoint: String) -> [URLQueryItem]? {
         let productId = transaction.productID
         let transactionId = transaction.id.formatted()
-        let receipt = base64receipt()
+        guard let receipt = base64receipt() else {
+            return nil
+        }
         
         switch endpoint {
         case Config.apiPaymentInitial:
+            guard let tempUsername = KeyChain.tempUsername else {
+                return nil
+            }
             return [
-                URLQueryItem(name: "account_id", value: KeyChain.tempUsername ?? ""),
+                URLQueryItem(name: "account_id", value: tempUsername),
                 URLQueryItem(name: "product_id", value: productId),
                 URLQueryItem(name: "transaction_id", value: transactionId),
                 URLQueryItem(name: "receipt", value: receipt)
             ]
         case Config.apiPaymentAdd:
+            guard let sessionToken = KeyChain.sessionToken else {
+                return nil
+            }
             return [
-                URLQueryItem(name: "session_token", value: KeyChain.sessionToken ?? ""),
+                URLQueryItem(name: "session_token", value: sessionToken),
                 URLQueryItem(name: "product_id", value: productId),
                 URLQueryItem(name: "transaction_id", value: transactionId),
                 URLQueryItem(name: "receipt", value: receipt)
             ]
         case Config.apiPaymentAddLegacy:
+            guard let username = KeyChain.username else {
+                return nil
+            }
             return [
-                URLQueryItem(name: "username", value: KeyChain.username ?? ""),
+                URLQueryItem(name: "username", value: username),
                 URLQueryItem(name: "productId", value: productId),
                 URLQueryItem(name: "transactionId", value: transactionId),
                 URLQueryItem(name: "receiptData", value: receipt)
@@ -222,8 +262,11 @@ class PurchaseManager: NSObject {
         }
     }
     
-    private func restorePurchaseParams() -> [URLQueryItem] {
-        let receipt = base64receipt()
+    private func restorePurchaseParams() -> [URLQueryItem]? {
+        guard let receipt = base64receipt() else {
+            return nil
+        }
+        
         return [URLQueryItem(name: "receipt", value: receipt)]
     }
     

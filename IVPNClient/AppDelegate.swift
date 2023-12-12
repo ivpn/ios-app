@@ -94,6 +94,10 @@ class AppDelegate: UIResponder {
         }
     }
     
+    private func listenTransactionUpdates() {
+        PurchaseManager.shared.listenTransactionUpdates()
+    }
+    
     private func resetLastPingTimestamp() {
         UserDefaults.shared.set(0, forKey: "LastPingTimestamp")
     }
@@ -295,6 +299,7 @@ extension AppDelegate: UIApplicationDelegate {
         evaluateUITests()
         registerUserDefaults()
         finishIncompletePurchases()
+        listenTransactionUpdates()
         createLogFiles()
         resetLastPingTimestamp()
         clearURLCache()
