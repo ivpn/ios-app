@@ -96,11 +96,16 @@ class PurchaseManager: NSObject {
                 
                 if transaction.revocationDate == nil {
                     self.getAccountFor(transaction: transaction) { account, error in
+                        log(.info, message: "Purchase is restored.")
                         completion(account, error)
-                        log(.info, message: "Purchases are restored.")
+                        return
                     }
                 }
             }
+            
+            let error = ErrorResult(status: 500, message: "There are no purchases to restore.")
+            log(.error, message: "There are no purchases to restore.")
+            completion(nil, error)
         }
     }
     
