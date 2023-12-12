@@ -49,10 +49,6 @@ class PurchaseManager: NSObject {
     
     // MARK: - Methods -
     
-    func startObserver() {
-        SKPaymentQueue.default().add(self)
-    }
-    
     func loadProducts() async throws {
         products = try await Product.products(for: ProductId.all)
     }
@@ -229,20 +225,6 @@ class PurchaseManager: NSObject {
     private func restorePurchaseParams() -> [URLQueryItem] {
         let receipt = base64receipt()
         return [URLQueryItem(name: "receipt", value: receipt)]
-    }
-    
-}
-
-// MARK: - SKPaymentTransactionObserver -
-
-extension PurchaseManager: SKPaymentTransactionObserver {
-    
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-
-    }
-
-    func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
-        return true
     }
     
 }
