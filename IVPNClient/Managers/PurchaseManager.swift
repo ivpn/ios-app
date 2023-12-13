@@ -38,15 +38,11 @@ class PurchaseManager: NSObject {
     private(set) var products: [Product] = []
     
     private var apiEndpoint: String {
-        if KeyChain.sessionToken != nil {
-            if !Application.shared.serviceStatus.isNewStyleAccount() {
-                return Config.apiPaymentAddLegacy
-            }
-            
-            return Config.apiPaymentAdd
+        guard let _ = KeyChain.sessionToken else {
+            return Config.apiPaymentInitial
         }
         
-        return Config.apiPaymentInitial
+        return Application.shared.serviceStatus.isNewStyleAccount() ? Config.apiPaymentAdd : Config.apiPaymentAddLegacy
     }
     
     deinit {
@@ -77,18 +73,21 @@ class PurchaseManager: NSObject {
         switch result {
         case let .success(.verified(transaction)):
             // Successful purchase
-            // await transaction.finish()
+            log(.info, message: "Purchase \(productId): success")
             return transaction
         case .success(.unverified(_, _)):
             // Successful purchase but transaction/receipt can't be verified
             // Could be a jailbroken phone
+            log(.info, message: "Purchase \(productId): success, unverified")
             break
         case .pending:
             // Transaction waiting on SCA (Strong Customer Authentication) or
             // approval from Ask to Buy
+            log(.info, message: "Purchase \(productId): pending")
             break
         case .userCancelled:
             // ^^^
+            log(.info, message: "Purchase \(productId): userCancelled")
             break
         @unknown default:
             break
@@ -105,6 +104,7 @@ class PurchaseManager: NSObject {
                 }
                 
                 if transaction.revocationDate == nil {
+                    log(.info, message: "Completing updated transaction.")
                     complete(transaction) { serviceStatus, error in
                         completion(serviceStatus, error)
                     }
@@ -121,6 +121,7 @@ class PurchaseManager: NSObject {
                 }
                 
                 if transaction.revocationDate == nil {
+                    log(.info, message: "Completing unfinished transaction.")
                     complete(transaction) { serviceStatus, error in
                         completion(serviceStatus, error)
                     }
@@ -260,7 +261,7 @@ class PurchaseManager: NSObject {
                 URLQueryItem(name: "receiptData", value: receipt)
             ]
         default:
-            return []
+            return nil
         }
     }
     
