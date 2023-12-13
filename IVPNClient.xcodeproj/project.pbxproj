@@ -194,7 +194,6 @@
 		82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6D74924A3780B00D6C0E1 /* ConnectToServerPopupView.swift */; };
 		82A7F10523C8661B0015A357 /* ServiceStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A7F10423C8661B0015A357 /* ServiceStatusTests.swift */; };
 		82AA8818231E330A00E18ECB /* SessionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AA8817231E330A00E18ECB /* SessionStatus.swift */; };
-		82AAF0E92253A4A8005E792F /* StaticWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AAF0E82253A4A8005E792F /* StaticWebViewController.swift */; };
 		82AB0875291A6B5F0084625A /* AddCustomPortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */; };
 		82AB0877291A6B9C0084625A /* CustomPort+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AB0876291A6B9C0084625A /* CustomPort+CoreDataClass.swift */; };
 		82AB0879291A6BB90084625A /* CustomPort+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AB0878291A6BB90084625A /* CustomPort+CoreDataProperties.swift */; };
@@ -618,7 +617,6 @@
 		82A9E8C323471EBE007BCA7E /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		82A9E8C423471EBE007BCA7E /* staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = staging.xcconfig; sourceTree = "<group>"; };
 		82AA8817231E330A00E18ECB /* SessionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatus.swift; sourceTree = "<group>"; };
-		82AAF0E82253A4A8005E792F /* StaticWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticWebViewController.swift; sourceTree = "<group>"; };
 		82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomPortViewController.swift; sourceTree = "<group>"; };
 		82AB0876291A6B9C0084625A /* CustomPort+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomPort+CoreDataClass.swift"; sourceTree = "<group>"; };
 		82AB0878291A6BB90084625A /* CustomPort+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomPort+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -1260,7 +1258,6 @@
 				8252747D21F1F80400D4B8B5 /* ServerViewController.swift */,
 				828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */,
 				8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */,
-				82AAF0E82253A4A8005E792F /* StaticWebViewController.swift */,
 				8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */,
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
 				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
@@ -2319,7 +2316,6 @@
 				823FFB072338DF1800F91A5D /* Capability.swift in Sources */,
 				82061F65238D2730009DDF4D /* Ping.swift in Sources */,
 				82AB0879291A6BB90084625A /* CustomPort+CoreDataProperties.swift in Sources */,
-				82AAF0E92253A4A8005E792F /* StaticWebViewController.swift in Sources */,
 				8282482A225C7312001314F8 /* WireGuardRegenerationRateCell.swift in Sources */,
 				824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */,
 				82C34D6E26FB02F900F06016 /* WireGuardEndpoint.swift in Sources */,
