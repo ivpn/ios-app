@@ -681,7 +681,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="uz9-96-zU2">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="done" id="S2o-wm-CfB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="S2o-wm-CfB">
                             <connections>
                                 <action selector="close:" destination="5KC-W6-t9Q" id="rzK-5h-C82"/>
                             </connections>
