@@ -63,7 +63,7 @@ class PurchaseManager: NSObject {
         return nil
     }
     
-    func purchase(_ productId: String) async throws -> Transaction? {
+    func purchase(_ productId: String) async throws -> Product.PurchaseResult? {
         guard let product = getProduct(id: productId) else {
             return nil
         }
@@ -71,10 +71,10 @@ class PurchaseManager: NSObject {
         let result = try await product.purchase()
 
         switch result {
-        case let .success(.verified(transaction)):
+        case .success(.verified(_)):
             // Successful purchase
             log(.info, message: "[Store] Purchase \(productId): success")
-            return transaction
+            break
         case .success(.unverified(_, _)):
             // Successful purchase but transaction/receipt can't be verified
             // Could be a jailbroken phone
@@ -93,7 +93,7 @@ class PurchaseManager: NSObject {
             break
         }
         
-        return nil
+        return result
     }
     
     func listenTransactionUpdates(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
