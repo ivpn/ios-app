@@ -156,6 +156,7 @@
 		828E9C95231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8290195E243CB27500777B6E /* ControlPanelView.swift */; };
+		8292D0FC2B45AEE8001EA123 /* TunnelKit+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292D0FB2B45AEE8001EA123 /* TunnelKit+Ext.swift */; };
 		8292E19B21748B0500123538 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8292E1A72174C10700123538 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A62174C10700123538 /* Peer.swift */; };
 		8292E1A92174C11600123538 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292E1A82174C11600123538 /* Interface.swift */; };
@@ -591,6 +592,7 @@
 		828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorViewController.swift; sourceTree = "<group>"; };
 		828E9C94231E5780001E1FCF /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		8290195E243CB27500777B6E /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
+		8292D0FB2B45AEE8001EA123 /* TunnelKit+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKit+Ext.swift"; sourceTree = "<group>"; };
 		8292E1A62174C10700123538 /* Peer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
 		8292E1A82174C11600123538 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
 		8292E1AA2174C12200123538 /* Tunnel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tunnel.swift; sourceTree = "<group>"; };
@@ -1159,6 +1161,7 @@
 				82CE598F25ED3C7A0078099D /* URL+Ext.swift */,
 				82B329CA29F7C9F400F3ED9B /* UIWindow+Ext.swift */,
 				822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */,
+				8292D0FB2B45AEE8001EA123 /* TunnelKit+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2263,6 +2266,7 @@
 				8277F1CD22118D08007C6F15 /* ProofsViewModel.swift in Sources */,
 				8269CAC32264962F00CF488A /* AntiTrackerViewController.swift in Sources */,
 				82E5449224EE584E006DEF8D /* UIImageView+Ext.swift in Sources */,
+				8292D0FC2B45AEE8001EA123 /* TunnelKit+Ext.swift in Sources */,
 				82E81AE72449C44F00D81FB7 /* PaymentComponentView.swift in Sources */,
 				8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */,
 				820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */,
