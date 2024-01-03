@@ -80,13 +80,15 @@ class AppDelegate: UIResponder {
         FileSystemManager.createLogFiles()
     }
     
-    private func finishIncompletePurchases() {
-        guard Application.shared.authentication.isLoggedIn || KeyChain.tempUsername != nil else {
-            return
-        }
-        
-        IAPManager.shared.finishIncompletePurchases { serviceStatus, _ in
-            guard let viewController = UIApplication.topViewController() else { return }
+    private func listenTransactionUpdates() {
+        PurchaseManager.shared.listenTransactionUpdates { serviceStatus, error in
+            guard let viewController = UIApplication.topViewController() else {
+                return
+            }
+            
+            if let error = error {
+                viewController.showErrorAlert(title: "Error", message: error.message)
+            }
 
             if let serviceStatus = serviceStatus {
                 viewController.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
@@ -294,7 +296,7 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         evaluateUITests()
         registerUserDefaults()
-        finishIncompletePurchases()
+        listenTransactionUpdates()
         createLogFiles()
         resetLastPingTimestamp()
         clearURLCache()

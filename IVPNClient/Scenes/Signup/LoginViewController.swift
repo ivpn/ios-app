@@ -102,7 +102,7 @@ class LoginViewController: UIViewController {
         hud.detailTextLabel.text = "Restoring purchases..."
         hud.show(in: (navigationController?.view)!)
         
-        IAPManager.shared.restorePurchases { account, error in
+        PurchaseManager.shared.restorePurchases { account, error in
             self.hud.dismiss()
             
             if let error = error {
@@ -110,8 +110,8 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            if account != nil {
-                self.userName.text = account?.accountId
+            if let account = account {
+                self.userName.text = account.accountId
                 self.sessionManager.createSession()
             }
         }
