@@ -33,55 +33,44 @@ extension NETunnelProviderProtocol {
     // MARK: OpenVPN
     
     static func makeOpenVPNProtocol(settings: ConnectionSettings, accessDetails: AccessDetails) -> NETunnelProviderProtocol {
+        var proto = NETunnelProviderProtocol()
+        
         guard let host = getHost() else {
-            return NETunnelProviderProtocol()
+            return proto
         }
         
-        let username = accessDetails.username
-        let socketType: SocketType = settings.protocolType() == "TCP" ? .tcp : .udp
-        let credentials = OpenVPN.Credentials(username, KeyChain.vpnPassword ?? "")
-        let staticKey = OpenVPN.StaticKey.init(file: OpenVPNConf.tlsAuth, direction: OpenVPN.StaticKey.Direction.client)
-        let port = UInt16(getPort(settings: settings))
+        let credentials = OpenVPN.Credentials(accessDetails.username, KeyChain.vpnPassword ?? "")
         
-        var sessionBuilder = OpenVPN.ConfigurationBuilder()
-        sessionBuilder.ca = OpenVPN.CryptoContainer(pem: OpenVPNConf.caCert)
-        sessionBuilder.cipher = .aes256cbc
-        sessionBuilder.compressionFraming = .disabled
-        sessionBuilder.endpointProtocols = [EndpointProtocol(socketType, port)]
-        sessionBuilder.hostname = host.host
-        sessionBuilder.tlsWrap = OpenVPN.TLSWrap.init(strategy: .auth, key: staticKey!)
-        
-        if let dnsServers = openVPNdnsServers(), !dnsServers.isEmpty, dnsServers != [""] {
-            sessionBuilder.dnsServers = dnsServers
-            log(.info, message: "DNS server: \(dnsServers)")
-            
-            switch DNSProtocolType.preferred() {
-            case .doh:
-                sessionBuilder.dnsProtocol = .https
-                sessionBuilder.dnsHTTPSURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
-            case .dot:
-                sessionBuilder.dnsProtocol = .tls
-                sessionBuilder.dnsTLSServerName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
-            default:
-                sessionBuilder.dnsProtocol = .plain
-            }
-        }
-        
-        var builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
-        builder.shouldDebug = true
-        builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss$d $L $M"
-        builder.masksPrivateData = true
-        
-        let configuration = builder.build()
-        let keychain = Keychain(group: Config.appGroup)
-        _ = try? keychain.set(password: credentials.password, for: credentials.username, context: Config.openvpnTunnelProvider)
-        let proto = try! configuration.generatedTunnelProtocol(
-            withBundleIdentifier: Config.openvpnTunnelProvider,
+        let params = OpenVPN.Config.Parameters(
+            title: Config.openvpnTunnelTitle,
             appGroup: Config.appGroup,
-            context: Config.openvpnTunnelProvider,
-            credentials: credentials
+            hostname: host.host,
+            port: UInt16(getPort(settings: settings)),
+            socketType: settings.protocolType() == "TCP" ? .tcp : .udp,
+            dnsServers: openVPNdnsServers(),
+            dnsProtocol: DNSProtocolType.preferred(),
+            customDNS: UserDefaults.shared.customDNS
         )
-        proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
+        
+        var cfg = OpenVPN.Config.make(params: params)
+        cfg.username = credentials.username
+        
+        let keychain = Keychain(group: Config.appGroup)
+        var passwordReference = Data()
+        do {
+            passwordReference = try keychain.set(password: credentials.password, for: credentials.username, context: Config.openvpnTunnelProvider)
+        } catch {
+            log(.error, message: "Keychain failure: \(error)")
+        }
+        
+        var extra = NetworkExtensionExtra()
+        extra.passwordReference = passwordReference
+        
+        do {
+            proto = try cfg.asTunnelProtocol(withBundleIdentifier: Config.openvpnTunnelProvider, extra: extra)
+        } catch {
+            log(.error, message: "Keychain failure: \(error)")
+        }
         
         if #available(iOS 16, *) { } else {
             proto.includeAllNetworks = UserDefaults.shared.killSwitch
@@ -89,6 +78,7 @@ extension NETunnelProviderProtocol {
         
         proto.includeAllNetworks = disableLanAccess()
         proto.excludeLocalNetworks = !disableLanAccess()
+        proto.disconnectOnSleep = !UserDefaults.shared.keepAlive
         
         return proto
     }
