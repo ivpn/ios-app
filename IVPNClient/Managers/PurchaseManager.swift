@@ -63,7 +63,7 @@ class PurchaseManager: NSObject {
         return nil
     }
     
-    func purchase(_ productId: String) async throws -> Transaction? {
+    func purchase(_ productId: String) async throws -> Product.PurchaseResult? {
         guard let product = getProduct(id: productId) else {
             return nil
         }
@@ -71,29 +71,29 @@ class PurchaseManager: NSObject {
         let result = try await product.purchase()
 
         switch result {
-        case let .success(.verified(transaction)):
+        case .success(.verified(_)):
             // Successful purchase
-            log(.info, message: "Purchase \(productId): success")
-            return transaction
+            log(.info, message: "[Store] Purchase \(productId): success")
+            break
         case .success(.unverified(_, _)):
             // Successful purchase but transaction/receipt can't be verified
             // Could be a jailbroken phone
-            log(.info, message: "Purchase \(productId): success, unverified")
+            log(.info, message: "[Store] Purchase \(productId): success, unverified")
             break
         case .pending:
             // Transaction waiting on SCA (Strong Customer Authentication) or
             // approval from Ask to Buy
-            log(.info, message: "Purchase \(productId): pending")
+            log(.info, message: "[Store] Purchase \(productId): pending")
             break
         case .userCancelled:
             // ^^^
-            log(.info, message: "Purchase \(productId): userCancelled")
+            log(.info, message: "[Store] Purchase \(productId): userCancelled")
             break
         @unknown default:
             break
         }
         
-        return nil
+        return result
     }
     
     func listenTransactionUpdates(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
@@ -104,24 +104,7 @@ class PurchaseManager: NSObject {
                 }
                 
                 if transaction.revocationDate == nil {
-                    log(.info, message: "Completing updated transaction.")
-                    complete(transaction) { serviceStatus, error in
-                        completion(serviceStatus, error)
-                    }
-                }
-            }
-        }
-    }
-    
-    func completeUnfinishedTransactions(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
-        Task {
-            for await result in Transaction.unfinished {
-                guard case .verified(let transaction) = result else {
-                    continue
-                }
-                
-                if transaction.revocationDate == nil {
-                    log(.info, message: "Completing unfinished transaction.")
+                    log(.info, message: "[Store] Completing updated transaction.")
                     complete(transaction) { serviceStatus, error in
                         completion(serviceStatus, error)
                     }
@@ -139,7 +122,7 @@ class PurchaseManager: NSObject {
                 
                 if transaction.revocationDate == nil {
                     self.getAccountFor(transaction: transaction) { account, error in
-                        log(.info, message: "Purchase is restored.")
+                        log(.info, message: "[Store] Purchase is restored.")
                         completion(account, error)
                         return
                     }
@@ -147,7 +130,7 @@ class PurchaseManager: NSObject {
             }
             
             let error = ErrorResult(status: 500, message: "There are no purchases to restore.")
-            log(.error, message: "There are no purchases to restore.")
+            log(.error, message: "[Store] There are no purchases to restore.")
             completion(nil, error)
         }
     }
@@ -169,10 +152,10 @@ class PurchaseManager: NSObject {
                 Application.shared.serviceStatus = sessionStatus.serviceStatus
                 self.finishTransaction(transaction)
                 completion(sessionStatus.serviceStatus, nil)
-                log(.info, message: "Purchase was successfully finished.")
+                log(.info, message: "[Store] Purchase was successfully finished.")
             case .failure(let error):
                 completion(nil, error ?? defaultError)
-                log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
+                log(.error, message: "[Store] There was an error with purchase completion: \(error?.message ?? "")")
             }
         }
     }
@@ -200,10 +183,10 @@ class PurchaseManager: NSObject {
                 self.finishTransaction(transaction)
                 KeyChain.username = account.accountId
                 completion(account, nil)
-                log(.info, message: "Purchase was successfully restored.")
+                log(.info, message: "[Store] Purchase was successfully restored.")
             case .failure(let error):
                 completion(nil, error ?? defaultError)
-                log(.error, message: "There was an error with purchase completion: \(error?.message ?? "")")
+                log(.error, message: "[Store] There was an error with purchase completion: \(error?.message ?? "")")
             }
         }
     }
@@ -215,10 +198,11 @@ class PurchaseManager: NSObject {
                 return receiptData.base64EncodedString(options: [])
             }
             catch {
-                log(.error, message: "Couldn't read receipt data with error: \(error.localizedDescription)")
+                log(.error, message: "[Store] Couldn't read receipt with error: \(error.localizedDescription)")
             }
         }
         
+        log(.error, message: "[Store] Couldn't read receipt")
         return nil
     }
     

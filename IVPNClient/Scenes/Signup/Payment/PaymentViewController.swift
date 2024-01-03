@@ -205,9 +205,24 @@ class PaymentViewController: UITableViewController {
         hud.show(in: (navigationController?.view)!)
         
         do {
-            if let transaction = try await PurchaseManager.shared.purchase(identifier) {
-                completePurchase(transaction: transaction)
+            if let result = try await PurchaseManager.shared.purchase(identifier) {
+                switch result {
+                case let .success(.verified(transaction)):
+                    completePurchase(transaction: transaction)
+                    return
+                case .success(.unverified(_, _)):
+                    showErrorAlert(title: "Error", message: "Payment failed verification checks")
+                case .pending:
+                    showAlert(title: "Pending payment", message: "Payment is pending for approval. We will complete the transaction as soon as payment is approved.")
+                    return
+                case .userCancelled:
+                    break
+                @unknown default:
+                    break
+                }
             }
+            
+            hud.dismiss()
         } catch {
             showErrorAlert(title: "Error", message: error.localizedDescription)
             hud.dismiss()
