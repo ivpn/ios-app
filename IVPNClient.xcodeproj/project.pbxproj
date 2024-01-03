@@ -3464,7 +3464,7 @@
 			repositoryURL = "https://github.com/passepartoutvpn/tunnelkit";
 			requirement = {
 				kind = exactVersion;
-				version = 4.1.0;
+				version = 6.2.0;
 			};
 		};
 		829F5FC529A13CAE009E1AD3 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
