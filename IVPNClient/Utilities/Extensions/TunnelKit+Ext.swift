@@ -72,6 +72,7 @@ extension OpenVPN {
             configuration.shouldDebug = true
             configuration.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss$d $L $M"
             configuration.masksPrivateData = true
+            configuration.debugLogPath = FileManager.openvpnLogTextFileURL?.lastPathComponent
             
             return configuration
         }
