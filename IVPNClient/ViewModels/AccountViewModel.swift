@@ -50,6 +50,18 @@ struct AccountViewModel {
         return serviceStatus.isActive ? serviceStatus.activeUntilString() : "No active subscription"
     }
     
+    var deviceManagement: Bool {
+        return serviceStatus.deviceManagement
+    }
+    
+    var deviceName: String? {
+        return KeyChain.deviceName
+    }
+    
+    var showDeviceName: Bool {
+        return deviceManagement && deviceName != nil
+    }
+    
     // MARK: - Initialize -
     
     init(serviceStatus: ServiceStatus, authentication: Authentication) {
