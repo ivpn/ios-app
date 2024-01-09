@@ -141,6 +141,7 @@ class SessionManager {
             switch result {
             case .success(let model):
                 Application.shared.serviceStatus = model.serviceStatus
+                KeyChain.deviceName = model.deviceName
                 NotificationCenter.default.post(name: Notification.Name.EvaluatePlanUpdate, object: nil)
                 
                 if model.serviceActive {
