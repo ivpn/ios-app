@@ -34,6 +34,7 @@ struct Session: Decodable {
     let token: String?
     let vpnUsername: String?
     let vpnPassword: String?
+    let deviceName: String?
     let serviceStatus: ServiceStatus
     let wireguard: WireGuardResult?
 }
