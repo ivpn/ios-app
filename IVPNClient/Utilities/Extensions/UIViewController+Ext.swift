@@ -128,6 +128,12 @@ extension UIViewController {
         }
     }
     
+    func openWebPageInBrowser(_ stringURL: String) {
+        if let url = URL(string: stringURL) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> Void)? = nil) {
         showAlert(
             title: "Thank you!",
