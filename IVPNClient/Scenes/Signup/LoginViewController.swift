@@ -311,21 +311,7 @@ extension LoginViewController {
         hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
-        
-        if let error = error as? ErrorResultSessionNew, let data = error.data {
-            if data.upgradable {
-                NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
-                NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
-                NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
-                NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
-                UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
-                UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
-                return
-            }
-        }
-        
-        showCreateSessionAlert(message: "You've reached the maximum number of connected devices")
+        showTooManySessionsAlert(error: error as? ErrorResultSessionNew)
     }
     
     override func createSessionAuthenticationError() {
@@ -384,16 +370,116 @@ extension LoginViewController {
         presentCaptchaScreen(error: error)
     }
     
-    private func showCreateSessionAlert(message: String) {
-        showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { [self] index in
-            switch index {
-            case 0:
-                forceNewSession()
-            case 1:
-                newSession()
-            default:
-                break
+    private func showTooManySessionsAlert(error: ErrorResultSessionNew?) {
+        let message = "You've reached the maximum number of connected devices"
+        
+        // Default
+        guard let error = error, let data = error.data else {
+            showActionSheet(title: message, actions: [
+                "Log out all devices",
+                "Retry"
+            ], sourceView: self.userName) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    newSession()
+                default:
+                    break
+                }
             }
+            
+            return
+        }
+        
+        let service = ServiceType.getType(currentPlan: data.currentPlan)
+        
+        // Device Management enabled, Pro plan
+        if data.deviceManagement && service == .pro {
+            showActionSheet(title: message, actions: [
+                "Log out all devices",
+                "Visit Device Management",
+                "Retry (I have removed the device)",
+            ], sourceView: self.userName) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management disabled, Pro plan
+        if !data.deviceManagement && service == .pro {
+            showActionSheet(title: message, actions: [
+                "Log out all devices",
+                "Enable Device Management"
+            ], sourceView: self.userName) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management enabled, Standard plan
+        if data.deviceManagement && service == .standard {
+            showActionSheet(title: message, actions: [
+                "Log out all devices",
+                "Visit Device Management",
+                "Retry (I have removed the device)",
+                "Upgrade for 7 devices"
+            ], sourceView: self.userName) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                case 3:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management disabled, Standard plan
+        if !data.deviceManagement && service == .standard {
+            showActionSheet(title: message, actions: [
+                "Log out all devices",
+                "Enable Device Management",
+                "Upgrade for 7 devices"
+            ], sourceView: self.userName) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
         }
     }
     
