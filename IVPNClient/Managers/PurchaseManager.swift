@@ -170,7 +170,7 @@ class PurchaseManager: NSObject {
     
     private func getAccountFor(transaction: Transaction, completion: @escaping (Account?, ErrorResult?) -> Void) {
         let defaultError = ErrorResult(status: 500, message: "Purchase was restored but service cannot be activated. Restart application to retry.")
-        guard let params = restorePurchaseParams() else {
+        guard let params = restorePurchaseParams(transaction) else {
             completion(nil, defaultError)
             return
         }
@@ -249,12 +249,9 @@ class PurchaseManager: NSObject {
         }
     }
     
-    private func restorePurchaseParams() -> [URLQueryItem]? {
-        guard let receipt = base64receipt() else {
-            return nil
-        }
-        
-        return [URLQueryItem(name: "receipt", value: receipt)]
+    private func restorePurchaseParams(_ transaction: Transaction) -> [URLQueryItem]? {
+        let transactionId = transaction.id.formatted()
+        return [URLQueryItem(name: "transactionId", value: transactionId)]
     }
     
 }
