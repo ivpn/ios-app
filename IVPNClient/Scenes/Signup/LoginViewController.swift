@@ -103,18 +103,20 @@ class LoginViewController: UIViewController {
         hud.show(in: (navigationController?.view)!)
         
         PurchaseManager.shared.restorePurchases { account, error in
-            self.hud.dismiss()
-            
-            if let error = error {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                self.hud.dismiss()
+                
+                if let error = error {
+                    
                     self.showErrorAlert(title: "Restore failed", message: error.message)
+                    
+                    return
                 }
-                return
-            }
-            
-            if let account = account {
-                self.userName.text = account.accountId
-                self.sessionManager.createSession()
+                
+                if let account = account {
+                    self.userName.text = account.accountId
+                    self.sessionManager.createSession()
+                }
             }
         }
     }

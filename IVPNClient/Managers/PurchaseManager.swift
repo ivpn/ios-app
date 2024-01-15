@@ -126,6 +126,7 @@ class PurchaseManager: NSObject {
                         completion(account, error)
                         return
                     }
+                    break
                 }
             }
             

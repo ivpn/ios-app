@@ -82,16 +82,18 @@ class AppDelegate: UIResponder {
     
     private func listenTransactionUpdates() {
         PurchaseManager.shared.listenTransactionUpdates { serviceStatus, error in
-            guard let viewController = UIApplication.topViewController() else {
-                return
-            }
-            
-            if let error = error {
-                viewController.showErrorAlert(title: "Error", message: error.message)
-            }
+            DispatchQueue.main.async {
+                guard let viewController = UIApplication.topViewController() else {
+                    return
+                }
+                
+                if let error = error {
+                    viewController.showErrorAlert(title: "Error", message: error.message)
+                }
 
-            if let serviceStatus = serviceStatus {
-                viewController.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
+                if let serviceStatus = serviceStatus {
+                    viewController.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
+                }
             }
         }
     }
