@@ -37,10 +37,10 @@ struct Config {
     static let apiSessionDelete = "/v4/session/delete"
     static let apiSessionWGKeySet = "/v4/session/wg/set"
     static let apiAccountNew = "/v4/account/new"
-    static let apiPaymentInitial = "/v4/account/payment/ios/initial"
-    static let apiPaymentAdd = "/v4/account/payment/ios/add"
+    static let apiPaymentInitial = "/v5/account/payment/ios/initial"
+    static let apiPaymentAdd = "/v5/account/payment/ios/add"
+    static let apiPaymentRestore = "/v5/account/payment/ios/restore"
     static let apiPaymentAddLegacy = "/v2/mobile/ios/subscription-purchased"
-    static let apiPaymentRestore = "/v4/account/payment/ios/restore"
     
     static let urlTypeLogin = "login"
     static let urlTypeConnect = "connect"

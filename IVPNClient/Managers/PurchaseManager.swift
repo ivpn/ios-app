@@ -180,7 +180,6 @@ class PurchaseManager: NSObject {
         ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Account, ErrorResult>) in
             switch result {
             case .success(let account):
-                self.finishTransaction(transaction)
                 KeyChain.username = account.accountId
                 completion(account, nil)
                 log(.info, message: "[Store] Purchase was successfully restored.")
@@ -191,27 +190,9 @@ class PurchaseManager: NSObject {
         }
     }
     
-    private func base64receipt() -> String? {
-        if let receiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: receiptURL.path) {
-            do {
-                let receiptData = try Data(contentsOf: receiptURL, options: .alwaysMapped)
-                return receiptData.base64EncodedString(options: [])
-            }
-            catch {
-                log(.error, message: "[Store] Couldn't read receipt with error: \(error.localizedDescription)")
-            }
-        }
-        
-        log(.error, message: "[Store] Couldn't read receipt")
-        return nil
-    }
-    
     private func purchaseParams(transaction: Transaction, endpoint: String) -> [URLQueryItem]? {
         let productId = transaction.productID
         let transactionId = transaction.id.formatted()
-        guard let receipt = base64receipt() else {
-            return nil
-        }
         
         switch endpoint {
         case Config.apiPaymentInitial:
@@ -221,8 +202,7 @@ class PurchaseManager: NSObject {
             return [
                 URLQueryItem(name: "account_id", value: tempUsername),
                 URLQueryItem(name: "product_id", value: productId),
-                URLQueryItem(name: "transaction_id", value: transactionId),
-                URLQueryItem(name: "receipt", value: receipt)
+                URLQueryItem(name: "transaction_id", value: transactionId)
             ]
         case Config.apiPaymentAdd:
             guard let sessionToken = KeyChain.sessionToken else {
@@ -231,8 +211,7 @@ class PurchaseManager: NSObject {
             return [
                 URLQueryItem(name: "session_token", value: sessionToken),
                 URLQueryItem(name: "product_id", value: productId),
-                URLQueryItem(name: "transaction_id", value: transactionId),
-                URLQueryItem(name: "receipt", value: receipt)
+                URLQueryItem(name: "transaction_id", value: transactionId)
             ]
         case Config.apiPaymentAddLegacy:
             guard let username = KeyChain.username else {
@@ -241,8 +220,7 @@ class PurchaseManager: NSObject {
             return [
                 URLQueryItem(name: "username", value: username),
                 URLQueryItem(name: "productId", value: productId),
-                URLQueryItem(name: "transactionId", value: transactionId),
-                URLQueryItem(name: "receiptData", value: receipt)
+                URLQueryItem(name: "transactionId", value: transactionId)
             ]
         default:
             return nil
@@ -251,7 +229,7 @@ class PurchaseManager: NSObject {
     
     private func restorePurchaseParams(_ transaction: Transaction) -> [URLQueryItem]? {
         let transactionId = transaction.id.formatted()
-        return [URLQueryItem(name: "transactionId", value: transactionId)]
+        return [URLQueryItem(name: "transaction_id", value: transactionId)]
     }
     
 }
