@@ -376,9 +376,9 @@ extension LoginViewController {
         // Default
         guard let error = error, let data = error.data else {
             showActionSheet(title: message, actions: [
-                "Log out all devices",
+                "Log out from all devices",
                 "Retry"
-            ], sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
@@ -397,10 +397,10 @@ extension LoginViewController {
         // Device Management enabled, Pro plan
         if data.deviceManagement && service == .pro {
             showActionSheet(title: message, actions: [
-                "Log out all devices",
+                "Log out from all devices",
                 "Visit Device Management",
                 "Retry (I have removed the device)",
-            ], sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
@@ -419,9 +419,9 @@ extension LoginViewController {
         // Device Management disabled, Pro plan
         if !data.deviceManagement && service == .pro {
             showActionSheet(title: message, actions: [
-                "Log out all devices",
+                "Log out from all devices",
                 "Enable Device Management"
-            ], sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
@@ -438,11 +438,11 @@ extension LoginViewController {
         // Device Management enabled, Standard plan
         if data.deviceManagement && service == .standard {
             showActionSheet(title: message, actions: [
-                "Log out all devices",
+                "Log out from all devices",
                 "Visit Device Management",
                 "Retry (I have removed the device)",
                 "Upgrade for 7 devices"
-            ], sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
@@ -463,10 +463,10 @@ extension LoginViewController {
         // Device Management disabled, Standard plan
         if !data.deviceManagement && service == .standard {
             showActionSheet(title: message, actions: [
-                "Log out all devices",
+                "Log out from all devices",
                 "Enable Device Management",
                 "Upgrade for 7 devices"
-            ], sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
