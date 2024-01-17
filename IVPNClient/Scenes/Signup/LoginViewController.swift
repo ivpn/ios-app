@@ -399,7 +399,7 @@ extension LoginViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
-                "Retry (I have removed the device)",
+                "Retry",
             ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
                 switch index {
                 case 0:
@@ -440,7 +440,7 @@ extension LoginViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
-                "Retry (I have removed the device)",
+                "Retry",
                 "Upgrade for 7 devices"
             ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
                 switch index {

@@ -188,7 +188,9 @@ extension ControlPanelViewController {
     override func sessionStatusNotFound() {
         guard !UserDefaults.standard.bool(forKey: "-UITests") else { return }
         logOut(deleteSession: false)
-        present(NavigationManager.getLoginViewController(), animated: true)
+        showErrorAlert(title: "You are logged out", message: "You have been redirected to the login page to re-enter your credentials.") { [self] _ in
+            present(NavigationManager.getLoginViewController(), animated: true)
+        }
     }
     
     override func deleteSessionStart() {
@@ -250,7 +252,7 @@ extension ControlPanelViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
-                "Retry (I have removed the device)",
+                "Retry",
             ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
                 switch index {
                 case 0:
@@ -291,7 +293,7 @@ extension ControlPanelViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
-                "Retry (I have removed the device)",
+                "Retry",
                 "Upgrade for 7 devices"
             ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
                 switch index {
