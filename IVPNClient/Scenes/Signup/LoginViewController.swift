@@ -383,7 +383,7 @@ extension LoginViewController {
         let message = "You've reached the maximum number of connected devices"
         
         // Default
-        guard let error = error, let data = error.data else {
+        guard let error = error, let data = error.data, data.paymentMethod == "prepaid" else {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Retry"
@@ -402,9 +402,10 @@ extension LoginViewController {
         }
         
         let service = ServiceType.getType(currentPlan: data.currentPlan)
+        let deviceManagement = data.deviceManagement
         
         // Device Management enabled, Pro plan
-        if data.deviceManagement && service == .pro {
+        if deviceManagement && service == .pro {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
@@ -426,7 +427,7 @@ extension LoginViewController {
         }
         
         // Device Management disabled, Pro plan
-        if !data.deviceManagement && service == .pro {
+        if !deviceManagement && service == .pro {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Enable Device Management",
@@ -448,7 +449,7 @@ extension LoginViewController {
         }
         
         // Device Management enabled, Standard plan
-        if data.deviceManagement && service == .standard {
+        if deviceManagement && service == .standard {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
@@ -473,7 +474,7 @@ extension LoginViewController {
         }
         
         // Device Management disabled, Standard plan
-        if !data.deviceManagement && service == .standard {
+        if !deviceManagement && service == .standard {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Enable Device Management",
