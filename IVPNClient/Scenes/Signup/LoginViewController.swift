@@ -43,6 +43,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties -
     
+    var showLogoutAlert: Bool = false
+    
     private lazy var sessionManager: SessionManager = {
         let sessionManager = SessionManager()
         sessionManager.delegate = self
@@ -134,6 +136,13 @@ class LoginViewController: UIViewController {
         // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
         // Remove when fixed in future releases
         navigationController?.navigationBar.setNeedsLayout()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if showLogoutAlert {
+            showErrorAlert(title: "You are logged out", message: "You have been redirected to the login page to re-enter your credentials.")
+        }
     }
     
     // MARK: - Observers -

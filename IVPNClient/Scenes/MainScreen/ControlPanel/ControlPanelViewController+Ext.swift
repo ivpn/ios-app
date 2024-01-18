@@ -188,9 +188,7 @@ extension ControlPanelViewController {
     override func sessionStatusNotFound() {
         guard !UserDefaults.standard.bool(forKey: "-UITests") else { return }
         logOut(deleteSession: false)
-        showErrorAlert(title: "You are logged out", message: "You have been redirected to the login page to re-enter your credentials.") { [self] _ in
-            present(NavigationManager.getLoginViewController(), animated: true)
-        }
+        present(NavigationManager.getLoginViewController(showLogoutAlert: true), animated: true)
     }
     
     override func deleteSessionStart() {
