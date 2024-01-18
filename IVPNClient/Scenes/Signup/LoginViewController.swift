@@ -387,7 +387,7 @@ extension LoginViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Retry"
-            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
@@ -410,7 +410,7 @@ extension LoginViewController {
                 "Log out from all devices",
                 "Visit Device Management",
                 "Retry",
-            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
@@ -432,7 +432,7 @@ extension LoginViewController {
                 "Log out from all devices",
                 "Enable Device Management",
                 "Retry",
-            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
@@ -455,7 +455,7 @@ extension LoginViewController {
                 "Visit Device Management",
                 "Retry",
                 "Upgrade for 7 devices"
-            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
@@ -480,7 +480,7 @@ extension LoginViewController {
                 "Enable Device Management",
                 "Retry",
                 "Upgrade for 7 devices"
-            ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
