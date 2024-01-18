@@ -429,13 +429,16 @@ extension LoginViewController {
         if !data.deviceManagement && service == .pro {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
-                "Enable Device Management"
+                "Enable Device Management",
+                "Retry",
             ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
                 case 1:
                     openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
                 default:
                     break
                 }
@@ -474,6 +477,7 @@ extension LoginViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Enable Device Management",
+                "Retry",
                 "Upgrade for 7 devices"
             ], cancelAction: "Cancel login", sourceView: self.userName) { [self] index in
                 switch index {
@@ -482,6 +486,8 @@ extension LoginViewController {
                 case 1:
                     openWebPageInBrowser(data.deviceManagementUrl)
                 case 2:
+                    newSession()
+                case 3:
                     openWebPageInBrowser(data.upgradeToUrl)
                 default:
                     break
