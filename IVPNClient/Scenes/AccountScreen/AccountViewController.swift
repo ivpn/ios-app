@@ -90,6 +90,7 @@ class AccountViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         accountView.initQRCode(viewModel: viewModel)
+        sessionManager.getSessionStatus()
     }
     
     // MARK: - Observers -
@@ -192,6 +193,11 @@ extension AccountViewController {
         showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out") { _ in
             self.navigationController?.dismiss(animated: true)
         }
+    }
+    
+    override func sessionStatusSuccess() {
+        let viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
+        accountView.setupView(viewModel: viewModel)
     }
     
 }
