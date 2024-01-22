@@ -97,6 +97,7 @@ class AccountViewController: UITableViewController {
     
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.ServiceAuthorized, object: nil)
     }
     
     // MARK: - Private methods -
@@ -196,8 +197,12 @@ extension AccountViewController {
     }
     
     override func sessionStatusSuccess() {
-        let viewModel = AccountViewModel(serviceStatus: Application.shared.serviceStatus, authentication: Application.shared.authentication)
-        accountView.setupView(viewModel: viewModel)
+        subscriptionActivated()
+    }
+    
+    override func sessionStatusNotFound() {
+        logOut(deleteSession: false)
+        present(NavigationManager.getLoginViewController(showLogoutAlert: true), animated: true)
     }
     
 }
