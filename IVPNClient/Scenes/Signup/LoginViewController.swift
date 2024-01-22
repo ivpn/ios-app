@@ -382,8 +382,8 @@ extension LoginViewController {
     private func showTooManySessionsAlert(error: ErrorResultSessionNew?) {
         let message = "You've reached the maximum number of connected devices"
         
-        // Default
-        guard let error = error, let data = error.data, data.paymentMethod == "prepaid" else {
+        // Legacy account, Pro plan
+        guard let error = error, let data = error.data else {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Retry"
@@ -393,6 +393,28 @@ extension LoginViewController {
                     forceNewSession()
                 case 1:
                     newSession()
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Legacy account, Standard plan
+        guard data.paymentMethod == "prepaid" else {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Retry",
+                "Switch to IVPN Pro"
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    newSession()
+                case 2:
+                    openWebPageInBrowser(data.upgradeToUrl)
                 default:
                     break
                 }
