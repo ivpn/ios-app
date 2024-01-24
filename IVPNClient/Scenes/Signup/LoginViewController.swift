@@ -107,9 +107,7 @@ class LoginViewController: UIViewController {
                 self.hud.dismiss()
                 
                 if let error = error {
-                    
                     self.showErrorAlert(title: "Restore failed", message: error.message)
-                    
                     return
                 }
                 
