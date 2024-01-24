@@ -40,7 +40,7 @@ struct Config {
     static let apiPaymentInitial = "/v5/account/payment/ios/initial"
     static let apiPaymentAdd = "/v5/account/payment/ios/add"
     static let apiPaymentRestore = "/v5/account/payment/ios/restore"
-    static let apiPaymentAddLegacy = "/v2/mobile/ios/subscription-purchased"
+    static let apiPaymentAddLegacy = "/v2/mobile/ios/subscription-purchased-v2"
     
     static let urlTypeLogin = "login"
     static let urlTypeConnect = "connect"
