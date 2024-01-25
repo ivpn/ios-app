@@ -186,7 +186,7 @@ class PurchaseManager: NSObject {
                 log(.info, message: "[Store] Purchase was successfully restored.")
             case .failure(let error):
                 completion(nil, error ?? defaultError)
-                log(.error, message: "[Store] There was an error with purchase completion: \(error?.message ?? "")")
+                log(.error, message: "[Store] There was an error with restoring purchase: \(error?.message ?? "")")
             }
         }
     }
