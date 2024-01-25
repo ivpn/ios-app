@@ -56,6 +56,8 @@ class AccountView: UITableView {
         deviceName.isHidden = !viewModel.showDeviceName
         let headerHeight = viewModel.showDeviceName ? 270 : 210
         header.frame = CGRect(x: 0, y: 0, width: Int(header.frame.width), height: headerHeight)
+        reloadData()
+        layoutIfNeeded()
     }
     
     func initQRCode(viewModel: AccountViewModel) {
