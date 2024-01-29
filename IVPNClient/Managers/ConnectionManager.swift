@@ -239,9 +239,10 @@ class ConnectionManager {
     func connect() {
         updateSelectedServer(status: .connecting)
         
+        let host = NETunnelProviderProtocol.getHost()
         let accessDetails = AccessDetails(
-            serverAddress: settings.selectedServer.gateway,
-            ipAddresses: settings.selectedServer.ipAddresses,
+            ipAddress: host?.host ?? settings.selectedServer.gateway,
+            gateway: settings.selectedServer.gateway,
             username: KeyChain.vpnUsername ?? "",
             passwordRef: KeyChain.vpnPasswordRef
         )
@@ -309,9 +310,10 @@ class ConnectionManager {
                 return
             }
             
+            let host = NETunnelProviderProtocol.getHost()
             let accessDetails = AccessDetails(
-                serverAddress: Application.shared.settings.selectedServer.gateway,
-                ipAddresses: Application.shared.settings.selectedServer.ipAddresses,
+                ipAddress: host?.host ?? settings.selectedServer.gateway,
+                gateway: settings.selectedServer.gateway,
                 username: KeyChain.vpnUsername ?? "",
                 passwordRef: KeyChain.vpnPasswordRef
             )

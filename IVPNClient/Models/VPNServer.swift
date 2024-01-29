@@ -98,7 +98,6 @@ class VPNServer {
     private (set) var latitude: Double
     private (set) var longitude: Double
     private (set) var isp: String
-    private (set) var ipAddresses: [String]
     private (set) var hosts: [Host]
     private (set) var load: Double?
     private (set) var ipv6: IPv6?
@@ -106,7 +105,7 @@ class VPNServer {
     
     // MARK: - Initialize -
     
-    init(gateway: String, dnsName: String? = nil, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, isp: String = "", ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0, ipv6: IPv6? = nil) {
+    init(gateway: String, dnsName: String? = nil, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, isp: String = "", hosts: [Host] = [], fastest: Bool = false, load: Double = 0, ipv6: IPv6? = nil) {
         self.gateway = gateway
         self.dnsName = dnsName
         self.countryCode = countryCode
@@ -115,7 +114,6 @@ class VPNServer {
         self.latitude = latitude
         self.longitude = longitude
         self.isp = isp
-        self.ipAddresses = ipAddresses
         self.hosts = hosts
         self.fastest = fastest
         self.load = load

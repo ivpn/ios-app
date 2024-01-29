@@ -25,14 +25,14 @@ import Foundation
 
 class AccessDetails {
     
-    var serverAddress: String
-    var ipAddresses: [String]
+    var ipAddress: String
+    var gateway: String
     var username: String
     var passwordRef: Data?
     
-    init(serverAddress: String, ipAddresses: [String], username: String, passwordRef: Data?) {
-        self.serverAddress = serverAddress
-        self.ipAddresses = ipAddresses
+    init(ipAddress: String, gateway: String, username: String, passwordRef: Data?) {
+        self.ipAddress = ipAddress
+        self.gateway = gateway
         self.username = username
         self.passwordRef = passwordRef
     }
