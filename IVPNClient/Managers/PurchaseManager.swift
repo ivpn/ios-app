@@ -124,9 +124,8 @@ class PurchaseManager: NSObject {
                     self.getAccountFor(transaction: transaction) { account, error in
                         log(.info, message: "[Store] Purchase is restored.")
                         completion(account, error)
-                        return
                     }
-                    break
+                    return
                 }
             }
             
