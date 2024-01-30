@@ -214,7 +214,6 @@ class PaymentViewController: UITableViewController {
                     showErrorAlert(title: "Error", message: "Payment failed verification checks")
                 case .pending:
                     showAlert(title: "Pending payment", message: "Payment is pending for approval. We will complete the transaction as soon as payment is approved.")
-                    return
                 case .userCancelled:
                     break
                 @unknown default:
