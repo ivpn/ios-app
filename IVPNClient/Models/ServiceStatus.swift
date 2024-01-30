@@ -91,7 +91,15 @@ struct ServiceStatus: Codable {
     }
     
     func isNewStyleAccount() -> Bool {
-        return paymentMethod == "prepaid"
+        guard let username = username else {
+            return true
+        }
+        
+        return username.hasPrefix("i-")
+    }
+    
+    static func isNewStyleAccount(username: String) -> Bool {
+        return username.hasPrefix("i-")
     }
     
     func daysUntilSubscriptionExpiration() -> Int {

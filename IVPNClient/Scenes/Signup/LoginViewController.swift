@@ -316,11 +316,11 @@ extension LoginViewController {
         NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
     }
     
-    override func createSessionTooManySessions(error: Any?) {
+    override func createSessionTooManySessions(error: Any?, isNewStyleAccount: Bool) {
         hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
-        showTooManySessionsAlert(error: error as? ErrorResultSessionNew)
+        showTooManySessionsAlert(error: error as? ErrorResultSessionNew, isNewStyleAccount: isNewStyleAccount)
     }
     
     override func createSessionAuthenticationError() {
@@ -379,11 +379,11 @@ extension LoginViewController {
         presentCaptchaScreen(error: error)
     }
     
-    private func showTooManySessionsAlert(error: ErrorResultSessionNew?) {
+    private func showTooManySessionsAlert(error: ErrorResultSessionNew?, isNewStyleAccount: Bool) {
         let message = "You've reached the maximum number of connected devices"
         
         // Legacy account, Pro plan
-        guard let error = error, let data = error.data else {
+        guard let error = error, let data = error.data, data.upgradable else {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Retry"
@@ -402,7 +402,7 @@ extension LoginViewController {
         }
         
         // Legacy account, Standard plan
-        guard data.paymentMethod == "prepaid" else {
+        guard isNewStyleAccount else {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Retry",
