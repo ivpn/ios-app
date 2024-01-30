@@ -193,7 +193,7 @@ class PurchaseManager: NSObject {
     
     private func purchaseParams(transaction: Transaction, endpoint: String) -> [URLQueryItem]? {
         let productId = transaction.productID
-        let transactionId = transaction.id.formatted()
+        let transactionId = String(transaction.id)
         
         switch endpoint {
         case Config.apiPaymentInitial:
@@ -229,7 +229,7 @@ class PurchaseManager: NSObject {
     }
     
     private func restorePurchaseParams(_ transaction: Transaction) -> [URLQueryItem]? {
-        let transactionId = transaction.id.formatted()
+        let transactionId = String(transaction.id)
         return [URLQueryItem(name: "transaction_id", value: transactionId)]
     }
     
