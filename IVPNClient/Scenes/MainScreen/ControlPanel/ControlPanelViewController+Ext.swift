@@ -225,7 +225,7 @@ extension ControlPanelViewController {
         let message = "You've reached the maximum number of connected devices"
         
         // Legacy account, Pro plan
-        guard let error = error, let data = error.data, data.upgradable else {
+        guard let error = error, let data = error.data, (isNewStyleAccount || data.upgradable) else {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Retry"
