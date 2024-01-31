@@ -282,7 +282,7 @@ class VPNServerList {
     }
     
     func getServer(byIpAddress ipAddress: String) -> VPNServer? {
-        return getServers().first { $0.ipAddresses.first { $0 == ipAddress } != nil }
+        return getServers().first { $0.hosts.first?.host == ipAddress }
     }
     
     func getServer(byGateway gateway: String) -> VPNServer? {
@@ -394,21 +394,10 @@ class VPNServerList {
         servers.removeAll()
         
         for server in serversList {
-            var serverIpList = [String]()
             var serverHostsList = [Host]()
-            
-            if let ipAddressList = server["ip_addresses"] as? [String?] {
-                for ipAddress in ipAddressList where ipAddress != nil {
-                    serverIpList.append(ipAddress!)
-                }
-            }
             
             if let hostsList = server["hosts"] as? [[String: Any]] {
                 for host in hostsList {
-                    if let hostIp = host["host"] as? String {
-                        serverIpList.append(hostIp)
-                    }
-                    
                     var newHost = Host(
                         host: host["host"] as? String ?? "",
                         hostName: host["hostname"] as? String ?? "",
@@ -438,7 +427,6 @@ class VPNServerList {
                 latitude: server["latitude"] as? Double ?? 0,
                 longitude: server["longitude"] as? Double ?? 0,
                 isp: server["isp"] as? String ?? "",
-                ipAddresses: serverIpList,
                 hosts: serverHostsList
             )
             
