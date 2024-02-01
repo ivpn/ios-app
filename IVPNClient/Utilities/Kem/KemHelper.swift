@@ -25,7 +25,7 @@ import Foundation
 import CryptoKit
 
 enum KemAlgorithm: String, CaseIterable {
-    case Kyber1024 = "Kyber1024"
+    case Kyber1024
 }
 
 enum KemHelperError: Error {
