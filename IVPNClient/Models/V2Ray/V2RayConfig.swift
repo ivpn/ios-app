@@ -112,7 +112,7 @@ struct V2RayConfig: Codable {
                             let connection: [String]
                             let pragma: String
                             
-                            enum CodingKeys : String, CodingKey {
+                            enum CodingKeys: String, CodingKey {
                                 case host = "Host"
                                 case userAgent = "User-Agent"
                                 case acceptEncoding = "Accept-Encoding"
