@@ -30,16 +30,16 @@ struct Provider: TimelineProvider {
         SimpleEntry(date: Date())
     }
     
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(date: Date())
         completion(entry)
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         geoLookup(completion: completion)
     }
     
-    func geoLookup(completion: @escaping (Timeline<Entry>) -> ()) {
+    func geoLookup(completion: @escaping (Timeline<Entry>) -> Void) {
         var entries: [SimpleEntry] = []
         
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
@@ -70,7 +70,6 @@ struct Provider: TimelineProvider {
                 completion(timeline)
             case .failure:
                 completion(timeline)
-                break
             }
         }
     }
@@ -80,7 +79,7 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
 }
 
-struct EntryView : View {
+struct EntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
