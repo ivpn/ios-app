@@ -180,7 +180,7 @@ extension AccountViewController {
             logOut(deleteSession: false, deleteSettings: deleteSettings)
             navigationController?.dismiss(animated: true)
         } else {
-            showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", cancelHandler: { _ in
+            showActionAlert(title: "Unable to contact server to log out", message: "Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", cancelHandler: { _ in
                 NotificationCenter.default.post(name: Notification.Name.UpdateGeoLocation, object: nil)
             }, actionHandler: { [self] _ in
                 forceLogOut = true
