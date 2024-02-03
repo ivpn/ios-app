@@ -295,7 +295,7 @@ class MapScrollView: UIScrollView {
             marker.frame = CGRect(x: 55 - 3, y: 18, width: 6, height: 6)
         }
         
-        if city == "New Jersey, NJ" {
+        if city == "Secaucus, NJ" {
             button.titleEdgeInsets = UIEdgeInsets(top: 22, left: 93, bottom: 0, right: 0)
             button.frame = CGRect(x: point.0 - 85, y: point.1 - 21, width: 170, height: 20)
             marker.frame = CGRect(x: 85 - 3, y: 18, width: 6, height: 6)
