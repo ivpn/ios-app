@@ -34,6 +34,9 @@ class AccountView: UITableView {
     @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
     @IBOutlet weak var activeUntilCell: UITableViewCell!
+    @IBOutlet weak var deviceNameTitle: UILabel!
+    @IBOutlet weak var deviceName: UILabel!
+    @IBOutlet weak var header: UIView!
     
     // MARK: - Properties -
     
@@ -48,6 +51,13 @@ class AccountView: UITableView {
         subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
         activeUntilCell.isHidden = Application.shared.serviceStatus.isLegacyAccount()
+        deviceName.text = viewModel.deviceName
+        deviceNameTitle.isHidden = !viewModel.showDeviceName
+        deviceName.isHidden = !viewModel.showDeviceName
+        let headerHeight = viewModel.showDeviceName ? 270 : 210
+        header.frame = CGRect(x: 0, y: 0, width: Int(header.frame.width), height: headerHeight)
+        reloadData()
+        layoutIfNeeded()
     }
     
     func initQRCode(viewModel: AccountViewModel) {

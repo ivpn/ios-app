@@ -35,6 +35,7 @@ struct ServiceStatus: Codable {
     let upgradeToUrl: String?
     let paymentMethod: String?
     let capabilities: [String]?
+    let deviceManagement: Bool
     
     // MARK: - Initialize -
     
@@ -48,6 +49,7 @@ struct ServiceStatus: Codable {
         upgradeToUrl = service?.upgradeToUrl ?? nil
         paymentMethod = service?.paymentMethod ?? nil
         capabilities = service?.capabilities ?? nil
+        deviceManagement = service?.deviceManagement ?? false
     }
     
     // MARK: - Methods -
@@ -89,7 +91,15 @@ struct ServiceStatus: Codable {
     }
     
     func isNewStyleAccount() -> Bool {
-        return paymentMethod == "prepaid"
+        guard let username = username else {
+            return true
+        }
+        
+        return username.hasPrefix("i-")
+    }
+    
+    static func isNewStyleAccount(username: String) -> Bool {
+        return username.hasPrefix("i-")
     }
     
     func daysUntilSubscriptionExpiration() -> Int {

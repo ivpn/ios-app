@@ -30,9 +30,9 @@ enum AddressType {
     case other
     
     static func validateIpAddress(_ address: String) -> AddressType {
-        if let _ = IPv4Address(address) {
+        if IPv4Address(address) != nil {
             return .IPv4
-        } else if let _ = IPv6Address(address) {
+        } else if IPv6Address(address) != nil {
             return .IPv6
         } else {
             return .other

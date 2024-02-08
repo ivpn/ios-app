@@ -37,6 +37,7 @@ class KeyChain {
     private static let sessionTokenKey = "session_token"
     private static let vpnUsernameKey = "vpn_username"
     private static let vpnPasswordKey = "vpn_password"
+    private static let deviceNameKey = "deviceName"
     
     static let bundle: Keychain = {
         return Keychain(service: "net.ivpn.clients.ios", accessGroup: "WQXXM75BYN.net.ivpn.IVPN-Client").accessibility(.whenPasscodeSetThisDeviceOnly)
@@ -149,9 +150,19 @@ class KeyChain {
         sessionToken = session.token
         vpnUsername = session.vpnUsername
         vpnPassword = session.vpnPassword
+        deviceName = session.deviceName
         
         if let wireguardResult = session.wireguard, let ipAddress = wireguardResult.ipAddress {
             KeyChain.wgIpAddress = ipAddress
+        }
+    }
+    
+    class var deviceName: String? {
+        get {
+            return KeyChain.bundle[deviceNameKey]
+        }
+        set {
+            KeyChain.bundle[deviceNameKey] = newValue
         }
     }
     
@@ -166,6 +177,7 @@ class KeyChain {
         sessionToken = nil
         vpnUsername = nil
         vpnPassword = nil
+        deviceName = nil
     }
     
 }

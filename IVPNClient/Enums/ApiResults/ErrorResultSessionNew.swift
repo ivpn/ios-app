@@ -30,6 +30,8 @@ struct SessionLimitData: Decodable {
     let upgradeToPlan: String
     let upgradeToUrl: String
     let paymentMethod: String
+    let deviceManagement: Bool
+    let deviceManagementUrl: String
 }
 
 struct ErrorResultSessionNew: Decodable {
