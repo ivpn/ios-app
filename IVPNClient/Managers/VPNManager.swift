@@ -126,8 +126,7 @@ class VPNManager {
     }
     
     private func setupNEVPNManager(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
-        let serverAddress = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
-        self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
+        self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
         manager.saveToPreferences { error in
             if let error = error, error.code == 5 {
                 manager.isOnDemandEnabled = false
@@ -141,7 +140,7 @@ class VPNManager {
             }
             
             manager.loadFromPreferences { _ in
-                self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
+                self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
                 manager.saveToPreferences { _ in
                     completion(nil)
                 }
@@ -179,11 +178,11 @@ class VPNManager {
         }
     }
     
-    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails, serverAddress: String, status: NEVPNStatus? = nil) {
+    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil) {
         let configuration = NEVPNProtocolIKEv2()
-        configuration.remoteIdentifier = accessDetails.serverAddress
+        configuration.remoteIdentifier = accessDetails.gateway
         configuration.localIdentifier = accessDetails.username
-        configuration.serverAddress = serverAddress
+        configuration.serverAddress = accessDetails.ipAddress
         configuration.username = accessDetails.username
         configuration.passwordReference = accessDetails.passwordRef
         configuration.authenticationMethod = .none

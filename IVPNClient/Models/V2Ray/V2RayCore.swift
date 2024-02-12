@@ -36,7 +36,7 @@ class V2RayCore {
     
     func start() -> Error? {
         let _ = close()
-        var error: Error? = nil
+        var error: Error?
         
         guard let config = makeConfig() else {
             return NSError(domain: "", code: 99, userInfo: [NSLocalizedDescriptionKey: "V2Ray configuration cannot be loaded"])
@@ -52,7 +52,7 @@ class V2RayCore {
     }
     
     func close() -> Error? {
-        var error: Error? = nil
+        var error: Error?
         
         if let instance = instance {
             var stopError: NSError?

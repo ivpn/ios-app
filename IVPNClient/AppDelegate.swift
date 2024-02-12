@@ -364,7 +364,7 @@ extension AppDelegate: UIApplicationDelegate {
         }
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         let endpoint = url.lastPathComponent
         handleURLEndpoint(endpoint)
         return true

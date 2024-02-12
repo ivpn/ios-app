@@ -43,6 +43,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties -
     
+    var showLogoutAlert: Bool = false
+    
     private lazy var sessionManager: SessionManager = {
         let sessionManager = SessionManager()
         sessionManager.delegate = self
@@ -134,6 +136,13 @@ class LoginViewController: UIViewController {
         // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
         // Remove when fixed in future releases
         navigationController?.navigationBar.setNeedsLayout()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if showLogoutAlert {
+            showErrorAlert(title: "You are logged out", message: "You have been redirected to the login page to re-enter your credentials.")
+        }
     }
     
     // MARK: - Observers -
@@ -307,25 +316,11 @@ extension LoginViewController {
         NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
     }
     
-    override func createSessionTooManySessions(error: Any?) {
+    override func createSessionTooManySessions(error: Any?, isNewStyleAccount: Bool) {
         hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
-        
-        if let error = error as? ErrorResultSessionNew, let data = error.data {
-            if data.upgradable {
-                NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
-                NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
-                NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
-                NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
-                UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
-                UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
-                return
-            }
-        }
-        
-        showCreateSessionAlert(message: "You've reached the maximum number of connected devices")
+        showTooManySessionsAlert(error: error as? ErrorResultSessionNew, isNewStyleAccount: isNewStyleAccount)
     }
     
     override func createSessionAuthenticationError() {
@@ -384,16 +379,145 @@ extension LoginViewController {
         presentCaptchaScreen(error: error)
     }
     
-    private func showCreateSessionAlert(message: String) {
-        showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { [self] index in
-            switch index {
-            case 0:
-                forceNewSession()
-            case 1:
-                newSession()
-            default:
-                break
+    private func showTooManySessionsAlert(error: ErrorResultSessionNew?, isNewStyleAccount: Bool) {
+        let message = "You've reached the maximum number of connected devices"
+        
+        // Legacy account, Pro plan
+        guard let error = error, let data = error.data, (isNewStyleAccount || data.upgradable) else {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Retry"
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    newSession()
+                default:
+                    break
+                }
             }
+            
+            return
+        }
+        
+        // Legacy account, Standard plan
+        guard isNewStyleAccount else {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Retry",
+                "Switch to IVPN Pro"
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    newSession()
+                case 2:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        let service = ServiceType.getType(currentPlan: data.currentPlan)
+        let deviceManagement = data.deviceManagement
+        
+        // Device Management enabled, Pro plan
+        if deviceManagement && service == .pro {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Visit Device Management",
+                "Retry",
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management disabled, Pro plan
+        if !deviceManagement && service == .pro {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Enable Device Management",
+                "Retry",
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management enabled, Standard plan
+        if deviceManagement && service == .standard {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Visit Device Management",
+                "Retry",
+                "Switch to IVPN Pro"
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                case 3:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management disabled, Standard plan
+        if !deviceManagement && service == .standard {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Enable Device Management",
+                "Retry",
+                "Switch to IVPN Pro"
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                case 3:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
         }
     }
     

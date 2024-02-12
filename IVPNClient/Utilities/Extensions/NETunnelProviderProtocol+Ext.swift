@@ -199,7 +199,7 @@ extension NETunnelProviderProtocol {
     
     // MARK: Methods
     
-    private static func getHost() -> Host? {
+    static func getHost() -> Host? {
         if let selectedHost = Application.shared.settings.selectedHost {
             return selectedHost
         }
