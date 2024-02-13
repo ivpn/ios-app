@@ -130,10 +130,8 @@ class VPNManager {
         manager.saveToPreferences { error in
             if let error = error, error.code == 5 {
                 manager.isOnDemandEnabled = false
-                if #available(iOS 15.1, *) {
-                    if #available(iOS 16, *) { } else {
-                        manager.protocolConfiguration?.includeAllNetworks = false
-                    }
+                if #available(iOS 16, *) { } else {
+                    manager.protocolConfiguration?.includeAllNetworks = false
                 }
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
                 return
@@ -271,10 +269,8 @@ class VPNManager {
         manager.loadFromPreferences { _ in
             manager.onDemandRules = [NEOnDemandRule]()
             manager.isOnDemandEnabled = false
-            if #available(iOS 15.1, *) {
-                if #available(iOS 16, *) { } else {
-                    manager.protocolConfiguration?.includeAllNetworks = false
-                }
+            if #available(iOS 16, *) { } else {
+                manager.protocolConfiguration?.includeAllNetworks = false
             }
             manager.saveToPreferences { _ in }
         }
@@ -326,10 +322,8 @@ class VPNManager {
             manager.loadFromPreferences { _ in
                 manager.onDemandRules = [NEOnDemandRule]()
                 manager.isOnDemandEnabled = false
-                if #available(iOS 15.1, *) {
-                    if #available(iOS 16, *) { } else {
-                        manager.protocolConfiguration?.includeAllNetworks = false
-                    }
+                if #available(iOS 16, *) { } else {
+                    manager.protocolConfiguration?.includeAllNetworks = false
                 }
                 manager.saveToPreferences(completionHandler: completion)
             }

@@ -72,10 +72,8 @@ extension NETunnelProviderProtocol {
             log(.error, message: "Keychain failure: \(error)")
         }
         
-        if #available(iOS 15.1, *) {
-            if #available(iOS 16, *) { } else {
-                proto.includeAllNetworks = UserDefaults.shared.killSwitch
-            }
+        if #available(iOS 16, *) { } else {
+            proto.includeAllNetworks = UserDefaults.shared.killSwitch
         }
         
         proto.includeAllNetworks = disableLanAccess()
@@ -171,16 +169,12 @@ extension NETunnelProviderProtocol {
         configuration.providerConfiguration = tunnel.generateProviderConfiguration()
         configuration.disconnectOnSleep = !UserDefaults.shared.keepAlive
         
-        if #available(iOS 15.1, *) {
-            if #available(iOS 16, *) { } else {
-                configuration.includeAllNetworks = UserDefaults.shared.killSwitch
-            }
+        if #available(iOS 16, *) { } else {
+            configuration.includeAllNetworks = UserDefaults.shared.killSwitch
         }
-        
-        if #available(iOS 14.2, *) {
-            configuration.includeAllNetworks = disableLanAccess()
-            configuration.excludeLocalNetworks = !disableLanAccess()
-        }
+    
+        configuration.includeAllNetworks = disableLanAccess()
+        configuration.excludeLocalNetworks = !disableLanAccess()
         
         return configuration
     }
