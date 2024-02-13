@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import SwiftyStoreKit
+import StoreKit
 import SnapKit
 import JGProgressHUD
 
@@ -54,7 +54,7 @@ class PaymentViewController: UITableViewController {
     
     lazy var retryButton: UIButton = {
         let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(fetchProducts), for: .touchUpInside)
+        button.addTarget(self, action: #selector(load), for: .touchUpInside)
         button.setTitle("Retry", for: .normal)
         button.sizeToFit()
         button.isHidden = true
@@ -101,7 +101,9 @@ class PaymentViewController: UITableViewController {
     }
     
     @IBAction func purchase(_ sender: UIButton) {
-        purchaseProduct(identifier: service.productId)
+        Task {
+            await purchaseProduct(identifier: service.productId)
+        }
     }
     
     @IBAction func close() {
@@ -128,7 +130,7 @@ class PaymentViewController: UITableViewController {
                 service = Service(type: serviceType, duration: .year)
             }
             
-            fetchProducts()
+            load()
         }
     }
     
@@ -175,49 +177,62 @@ class PaymentViewController: UITableViewController {
         }
     }
     
-    @objc private func fetchProducts() {
-        displayMode = .loading
-        
-        IAPManager.shared.fetchProducts { [weak self] products, error in
-            guard let self = self else { return }
-            
-            if error != nil {
-                self.showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
-                self.displayMode = .error
-                return
-            }
-            
-            if products != nil {
-                self.displayMode = .content
-            }
+    @objc private func load() {
+        Task {
+            await loadProducts()
         }
     }
     
-    private func purchaseProduct(identifier: String) {
-        guard deviceCanMakePurchases() else { return }
+    private func loadProducts() async {
+        displayMode = .loading
+        
+        do {
+            try await PurchaseManager.shared.loadProducts()
+            displayMode = .content
+        } catch {
+            showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
+            displayMode = .error
+        }
+    }
+    
+    private func purchaseProduct(identifier: String) async {
+        guard deviceCanMakePurchases() else {
+            return
+        }
         
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Processing payment..."
         hud.show(in: (navigationController?.view)!)
         
-        IAPManager.shared.purchaseProduct(identifier: identifier) { [weak self] purchase, error in
-            guard let self = self else { return }
-            
-            if let error = error {
-                self.showErrorAlert(title: "Error", message: error)
-                self.hud.dismiss()
-                return
+        do {
+            if let result = try await PurchaseManager.shared.purchase(identifier) {
+                switch result {
+                case let .success(.verified(transaction)):
+                    completePurchase(transaction: transaction)
+                    return
+                case .success(.unverified(_, _)):
+                    showErrorAlert(title: "Error", message: "Payment failed verification checks")
+                case .pending:
+                    showAlert(title: "Pending payment", message: "Payment is pending for approval. We will complete the transaction as soon as payment is approved.")
+                case .userCancelled:
+                    break
+                @unknown default:
+                    break
+                }
             }
             
-            if let purchase = purchase {
-                self.completePurchase(purchase: purchase)
-            }
+            hud.dismiss()
+        } catch {
+            showErrorAlert(title: "Error", message: error.localizedDescription)
+            hud.dismiss()
         }
     }
     
-    private func completePurchase(purchase: PurchaseDetails) {
-        IAPManager.shared.completePurchase(purchase: purchase) { [weak self] serviceStatus, error in
-            guard let self = self else { return }
+    private func completePurchase(transaction: Transaction) {
+        PurchaseManager.shared.complete(transaction) { [weak self] serviceStatus, error in
+            guard let self = self else {
+                return
+            }
             
             self.hud.dismiss()
             
