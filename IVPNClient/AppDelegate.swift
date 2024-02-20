@@ -80,24 +80,6 @@ class AppDelegate: UIResponder {
         FileSystemManager.createLogFiles()
     }
     
-    private func listenTransactionUpdates() {
-        PurchaseManager.shared.listenTransactionUpdates { serviceStatus, error in
-            DispatchQueue.main.async {
-                guard let viewController = UIApplication.topViewController() else {
-                    return
-                }
-                
-                if let error = error {
-                    viewController.showErrorAlert(title: "Error", message: error.message)
-                }
-
-                if let serviceStatus = serviceStatus {
-                    viewController.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
-                }
-            }
-        }
-    }
-    
     private func resetLastPingTimestamp() {
         UserDefaults.shared.set(0, forKey: "LastPingTimestamp")
     }
@@ -298,7 +280,6 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         evaluateUITests()
         registerUserDefaults()
-        listenTransactionUpdates()
         createLogFiles()
         resetLastPingTimestamp()
         clearURLCache()

@@ -58,5 +58,7 @@ extension Notification.Name {
     public static let CustomDNSUpdated = Notification.Name("customDNSUpdatedUpdated")
     public static let EvaluateReconnect = Notification.Name("evaluateReconnect")
     public static let EvaluatePlanUpdate = Notification.Name("evaluatePlanUpdate")
+    public static let StartPurchaseObserver = Notification.Name("startPurchaseObserver")
+    public static let StopPurchaseObserver = Notification.Name("stopPurchaseObserver")
     
 }
