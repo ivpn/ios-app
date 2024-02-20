@@ -33,7 +33,7 @@ class PurchaseManager: NSObject {
         return SKPaymentQueue.canMakePayments()
     }
     
-    var updateListenerTask: Task<Void, Error>? = nil
+    var observerTask: Task<Void, Error>? = nil
     
     private(set) var products: [Product] = []
     
@@ -46,7 +46,7 @@ class PurchaseManager: NSObject {
     }
     
     deinit {
-        updateListenerTask?.cancel()
+        observerTask?.cancel()
     }
     
     // MARK: - Methods -
@@ -96,8 +96,8 @@ class PurchaseManager: NSObject {
         return result
     }
     
-    func listenTransactionUpdates(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
-        updateListenerTask = Task {
+    func startObserver(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+        observerTask = Task {
             for await result in Transaction.updates {
                 guard case .verified(let transaction) = result else {
                     continue
@@ -111,6 +111,10 @@ class PurchaseManager: NSObject {
                 }
             }
         }
+    }
+    
+    func stopObserver() {
+        observerTask?.cancel()
     }
     
     func restorePurchases(completion: @escaping (Account?, ErrorResult?) -> Void) {

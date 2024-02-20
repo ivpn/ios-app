@@ -200,6 +200,7 @@ class PaymentViewController: UITableViewController {
             return
         }
         
+        NotificationCenter.default.post(name: Notification.Name.StopPurchaseObserver, object: nil)
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Processing payment..."
         hud.show(in: (navigationController?.view)!)
@@ -221,9 +222,11 @@ class PaymentViewController: UITableViewController {
                 }
             }
             
+            NotificationCenter.default.post(name: Notification.Name.StartPurchaseObserver, object: nil)
             hud.dismiss()
         } catch {
             showErrorAlert(title: "Error", message: error.localizedDescription)
+            NotificationCenter.default.post(name: Notification.Name.StartPurchaseObserver, object: nil)
             hud.dismiss()
         }
     }
@@ -242,6 +245,7 @@ class PaymentViewController: UITableViewController {
                         self.navigationController?.dismiss(animated: true, completion: nil)
                     }
                 }
+                NotificationCenter.default.post(name: Notification.Name.StartPurchaseObserver, object: nil)
                 return
             }
             
