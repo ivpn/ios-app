@@ -270,6 +270,11 @@ class AppDelegate: UIResponder {
             }
         }
     }
+    
+    private func startPurchaseObserver() {
+        PurchaseManager.shared.delegate = self
+        PurchaseManager.shared.startObserver()
+    }
 
 }
 
@@ -283,6 +288,7 @@ extension AppDelegate: UIApplicationDelegate {
         createLogFiles()
         resetLastPingTimestamp()
         clearURLCache()
+        startPurchaseObserver()
         DNSManager.shared.loadProfile { _ in }
         
         return true
@@ -384,6 +390,50 @@ extension AppDelegate: UIApplicationDelegate {
         }
         
         return false
+    }
+    
+}
+
+// MARK: - PurchaseManagerDelegate -
+
+extension AppDelegate: PurchaseManagerDelegate {
+    
+    func purchaseStart() {
+        
+    }
+    
+    func purchasePending() {
+        DispatchQueue.main.async {
+            guard let viewController = UIApplication.topViewController() else {
+                return
+            }
+
+            viewController.showAlert(title: "Pending payment", message: "Payment is pending for approval. We will complete the transaction as soon as payment is approved.")
+        }
+    }
+    
+    func purchaseSuccess(service: Any?) {
+        DispatchQueue.main.async {
+            guard let viewController = UIApplication.topViewController() else {
+                return
+            }
+
+            if let service = service as? ServiceStatus {
+                viewController.showSubscriptionActivatedAlert(serviceStatus: service)
+            }
+        }
+    }
+    
+    func purchaseError(error: Any?) {
+        DispatchQueue.main.async {
+            guard let viewController = UIApplication.topViewController() else {
+                return
+            }
+            
+            if let error = error as? ErrorResult {
+                viewController.showErrorAlert(title: "Error", message: error.message)
+            }
+        }
     }
     
 }

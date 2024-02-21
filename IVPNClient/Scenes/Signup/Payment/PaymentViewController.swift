@@ -121,8 +121,16 @@ class PaymentViewController: UITableViewController {
         setupView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        PurchaseManager.shared.delegate = appDelegate
+        super.viewDidDisappear(animated)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        PurchaseManager.shared.delegate = self
         
         if extendingService {
             if Application.shared.authentication.isLoggedIn && !Application.shared.serviceStatus.isNewStyleAccount() {
@@ -200,69 +208,10 @@ class PaymentViewController: UITableViewController {
             return
         }
         
-        NotificationCenter.default.post(name: Notification.Name.StopPurchaseObserver, object: nil)
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        hud.detailTextLabel.text = "Processing payment..."
-        hud.show(in: (navigationController?.view)!)
-        
         do {
-            if let result = try await PurchaseManager.shared.purchase(identifier) {
-                switch result {
-                case let .success(.verified(transaction)):
-                    completePurchase(transaction: transaction)
-                    return
-                case .success(.unverified(_, _)):
-                    showErrorAlert(title: "Error", message: "Payment failed verification checks")
-                case .pending:
-                    showAlert(title: "Pending payment", message: "Payment is pending for approval. We will complete the transaction as soon as payment is approved.")
-                case .userCancelled:
-                    break
-                @unknown default:
-                    break
-                }
-            }
-            
-            NotificationCenter.default.post(name: Notification.Name.StartPurchaseObserver, object: nil)
-            hud.dismiss()
+            _ = try await PurchaseManager.shared.purchase(identifier)
         } catch {
             showErrorAlert(title: "Error", message: error.localizedDescription)
-            NotificationCenter.default.post(name: Notification.Name.StartPurchaseObserver, object: nil)
-            hud.dismiss()
-        }
-    }
-    
-    private func completePurchase(transaction: Transaction) {
-        PurchaseManager.shared.complete(transaction) { [weak self] serviceStatus, error in
-            guard let self = self else {
-                return
-            }
-            
-            self.hud.dismiss()
-            
-            if let error = error {
-                self.showErrorAlert(title: "Error", message: error.message) { _ in
-                    if error.status == 400 {
-                        self.navigationController?.dismiss(animated: true, completion: nil)
-                    }
-                }
-                NotificationCenter.default.post(name: Notification.Name.StartPurchaseObserver, object: nil)
-                return
-            }
-            
-            if let serviceStatus = serviceStatus {
-                self.showSubscriptionActivatedAlert(serviceStatus: serviceStatus) {
-                    if KeyChain.sessionToken == nil {
-                        KeyChain.username = KeyChain.tempUsername
-                        KeyChain.tempUsername = nil
-                        self.sessionManager.createSession()
-                        return
-                    }
-                    
-                    self.navigationController?.dismiss(animated: true) {
-                        NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
-                    }
-                }
-            }
         }
     }
     
@@ -314,6 +263,66 @@ extension PaymentViewController {
         guard indexPath.row > 0 else { return }
         service = service.collection[indexPath.row - 1]
         tableView.reloadData()
+    }
+    
+}
+
+// MARK: - PurchaseManagerDelegate -
+
+extension PaymentViewController: PurchaseManagerDelegate {
+    
+    func purchaseStart() {
+        DispatchQueue.main.async { [self] in
+            hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+            hud.detailTextLabel.text = "Processing payment..."
+            hud.show(in: (navigationController?.view)!)
+        }
+    }
+    
+    func purchasePending() {
+        DispatchQueue.main.async { [self] in
+            hud.dismiss()
+            showAlert(title: "Pending payment", message: "Payment is pending for approval. We will complete the transaction as soon as payment is approved.")
+        }
+    }
+    
+    func purchaseSuccess(service: Any?) {
+        DispatchQueue.main.async { [self] in
+            hud.dismiss()
+            
+            guard let service = service as? ServiceStatus else {
+                return
+            }
+            
+            showSubscriptionActivatedAlert(serviceStatus: service) {
+                if KeyChain.sessionToken == nil {
+                    KeyChain.username = KeyChain.tempUsername
+                    KeyChain.tempUsername = nil
+                    self.sessionManager.createSession()
+                    return
+                }
+                
+                self.navigationController?.dismiss(animated: true) {
+                    NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
+                }
+            }
+        }
+    }
+    
+    func purchaseError(error: Any?) {
+        DispatchQueue.main.async { [self] in
+            hud.dismiss()
+            
+            guard let error = error as? ErrorResult else {
+                return
+            }
+            
+            showErrorAlert(title: "Error", message: error.message) { _ in
+                if error.status == 400 {
+                    self.navigationController?.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
     }
     
 }

@@ -71,7 +71,6 @@ class MainViewController: UIViewController {
         addObservers()
         startAPIUpdate()
         startVPNStatusObserver()
-        startPurchaseObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -199,8 +198,6 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(vpnConfigurationDisabled), name: Notification.Name.VPNConfigurationDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateGeoLocation), name: Notification.Name.UpdateGeoLocation, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(startPurchaseObserver), name: Notification.Name.StartPurchaseObserver, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(stopPurchaseObserver), name: Notification.Name.StopPurchaseObserver, object: nil)
     }
     
     // MARK: - Private methods -
@@ -237,28 +234,6 @@ class MainViewController: UIViewController {
     @objc private func subscriptionActivated() {
         mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
         mainView.updateInfoAlert()
-    }
-    
-    @objc private func startPurchaseObserver() {
-        PurchaseManager.shared.startObserver { serviceStatus, error in
-            DispatchQueue.main.async {
-                guard let viewController = UIApplication.topViewController() else {
-                    return
-                }
-                
-                if let error = error {
-                    viewController.showErrorAlert(title: "Error", message: error.message)
-                }
-
-                if let serviceStatus = serviceStatus {
-                    viewController.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
-                }
-            }
-        }
-    }
-    
-    @objc private func stopPurchaseObserver() {
-        PurchaseManager.shared.stopObserver()
     }
     
     private func initFloatingPanel() {

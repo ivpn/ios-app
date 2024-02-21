@@ -23,11 +23,20 @@
 
 import StoreKit
 
+@objc protocol PurchaseManagerDelegate: AnyObject {
+    func purchaseStart()
+    func purchasePending()
+    func purchaseSuccess(service: Any?)
+    func purchaseError(error: Any?)
+}
+
 class PurchaseManager: NSObject {
     
     // MARK: - Properties -
     
     static let shared = PurchaseManager()
+    
+    weak var delegate: PurchaseManagerDelegate?
     
     var canMakePurchases: Bool {
         return SKPaymentQueue.canMakePayments()
@@ -46,7 +55,7 @@ class PurchaseManager: NSObject {
     }
     
     deinit {
-        observerTask?.cancel()
+        stopObserver()
     }
     
     // MARK: - Methods -
@@ -68,26 +77,31 @@ class PurchaseManager: NSObject {
             return nil
         }
         
+        delegate?.purchaseStart()
         let result = try await product.purchase()
 
         switch result {
-        case .success(.verified(_)):
+        case let .success(.verified(transaction)):
             // Successful purchase
-            log(.info, message: "[Store] Purchase \(productId): success")
+            log(.info, message: "[Store] Completing in-app transaction \(productId).")
+            self.complete(transaction)
             break
         case .success(.unverified(_, _)):
             // Successful purchase but transaction/receipt can't be verified
             // Could be a jailbroken phone
             log(.info, message: "[Store] Purchase \(productId): success, unverified")
+            delegate?.purchaseError(error: ErrorResult(status: 500, message: "Purchase is unverified."))
             break
         case .pending:
             // Transaction waiting on SCA (Strong Customer Authentication) or
             // approval from Ask to Buy
             log(.info, message: "[Store] Purchase \(productId): pending")
+            delegate?.purchasePending()
             break
         case .userCancelled:
             // ^^^
             log(.info, message: "[Store] Purchase \(productId): userCancelled")
+            delegate?.purchaseError(error: ErrorResult(status: 500, message: "User canelled the purchase."))
             break
         @unknown default:
             break
@@ -96,7 +110,7 @@ class PurchaseManager: NSObject {
         return result
     }
     
-    func startObserver(completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func startObserver() {
         observerTask = Task {
             for await result in Transaction.updates {
                 guard case .verified(let transaction) = result else {
@@ -105,9 +119,7 @@ class PurchaseManager: NSObject {
                 
                 if transaction.revocationDate == nil {
                     log(.info, message: "[Store] Completing updated transaction.")
-                    complete(transaction) { serviceStatus, error in
-                        completion(serviceStatus, error)
-                    }
+                    complete(transaction)
                 }
             }
         }
@@ -139,12 +151,12 @@ class PurchaseManager: NSObject {
         }
     }
     
-    func complete(_ transaction: Transaction, completion: @escaping (ServiceStatus?, ErrorResult?) -> Void) {
+    func complete(_ transaction: Transaction) {
         let defaultError = ErrorResult(status: 500, message: "Purchase was completed but service cannot be activated. Restart application to retry.")
         let endpoint = apiEndpoint
         
         guard let params = purchaseParams(transaction: transaction, endpoint: endpoint) else {
-            completion(nil, defaultError)
+            delegate?.purchaseError(error: defaultError)
             return
         }
         
@@ -155,10 +167,11 @@ class PurchaseManager: NSObject {
             case .success(let sessionStatus):
                 Application.shared.serviceStatus = sessionStatus.serviceStatus
                 self.finishTransaction(transaction)
-                completion(sessionStatus.serviceStatus, nil)
-                log(.info, message: "[Store] Purchase was successfully finished.")
+                self.delegate?.purchaseSuccess(service: sessionStatus.serviceStatus)
+                log(.info, message: "[Store] Purchase was completed successfully.")
             case .failure(let error):
-                completion(nil, error ?? defaultError)
+                self.finishTransaction(transaction)
+                self.delegate?.purchaseError(error: error ?? defaultError)
                 log(.error, message: "[Store] There was an error with purchase completion: \(error?.message ?? "")")
             }
         }
