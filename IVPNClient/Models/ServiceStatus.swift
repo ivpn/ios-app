@@ -91,7 +91,7 @@ struct ServiceStatus: Codable {
     }
     
     func isNewStyleAccount() -> Bool {
-        guard let username = username else {
+        guard let username = KeyChain.username else {
             return true
         }
         
