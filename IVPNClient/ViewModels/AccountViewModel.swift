@@ -51,7 +51,7 @@ struct AccountViewModel {
     }
     
     var deviceManagement: Bool {
-        return serviceStatus.deviceManagement
+        return serviceStatus.deviceManagement ?? false
     }
     
     var deviceName: String? {

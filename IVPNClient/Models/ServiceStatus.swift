@@ -35,7 +35,7 @@ struct ServiceStatus: Codable {
     let upgradeToUrl: String?
     let paymentMethod: String?
     let capabilities: [String]?
-    let deviceManagement: Bool
+    let deviceManagement: Bool?
     
     // MARK: - Initialize -
     
