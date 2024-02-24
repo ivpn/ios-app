@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.12.1 - 2024-02-24  
+
+[FIXED] In-app payments for legacy accounts  
+
 ## 2.12.0 - 2024-02-12  
 
 [NEW] Device Management  

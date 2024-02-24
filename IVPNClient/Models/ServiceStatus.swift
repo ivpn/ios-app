@@ -35,7 +35,7 @@ struct ServiceStatus: Codable {
     let upgradeToUrl: String?
     let paymentMethod: String?
     let capabilities: [String]?
-    let deviceManagement: Bool
+    let deviceManagement: Bool?
     
     // MARK: - Initialize -
     
@@ -91,7 +91,7 @@ struct ServiceStatus: Codable {
     }
     
     func isNewStyleAccount() -> Bool {
-        guard let username = username else {
+        guard let username = KeyChain.username else {
             return true
         }
         
