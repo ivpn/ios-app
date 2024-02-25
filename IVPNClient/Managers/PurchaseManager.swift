@@ -83,7 +83,7 @@ class PurchaseManager: NSObject {
         switch result {
         case let .success(.verified(transaction)):
             // Successful purchase
-            log(.info, message: "[Store] Completing in-app transaction \(productId).")
+            log(.info, message: "[Store] Purchase success \(productId), completing transaction")
             self.complete(transaction)
             break
         case .success(.unverified(_, _)):
@@ -113,14 +113,18 @@ class PurchaseManager: NSObject {
     func startObserver() {
         observerTask = Task {
             for await result in Transaction.updates {
-                guard case .verified(let transaction) = result else {
-                    continue
+                for await result in Transaction.unfinished {
+                    guard case .verified(let transaction) = result else {
+                        continue
+                    }
+                    
+                    if transaction.revocationDate == nil {
+                        log(.info, message: "[Store] Completing updated transaction \(transaction.productID)")
+                        complete(transaction)
+                    }
                 }
                 
-                if transaction.revocationDate == nil {
-                    log(.info, message: "[Store] Completing updated transaction.")
-                    complete(transaction)
-                }
+                break
             }
         }
     }
@@ -166,11 +170,12 @@ class PurchaseManager: NSObject {
             switch result {
             case .success(let sessionStatus):
                 Application.shared.serviceStatus = sessionStatus.serviceStatus
-                self.finishTransaction(transaction)
-                self.delegate?.purchaseSuccess(service: sessionStatus.serviceStatus)
-                log(.info, message: "[Store] Purchase was completed successfully.")
+                Task {
+                    await transaction.finish()
+                    self.delegate?.purchaseSuccess(service: sessionStatus.serviceStatus)
+                    log(.info, message: "[Store] Purchase was completed successfully.")
+                }
             case .failure(let error):
-                self.finishTransaction(transaction)
                 self.delegate?.purchaseError(error: error ?? defaultError)
                 log(.error, message: "[Store] There was an error with purchase completion: \(error?.message ?? "")")
             }
@@ -178,12 +183,6 @@ class PurchaseManager: NSObject {
     }
     
     // MARK: - Private methods -
-    
-    private func finishTransaction(_ transaction: Transaction) {
-        Task {
-            await transaction.finish()
-        }
-    }
     
     private func getAccountFor(transaction: Transaction, completion: @escaping (Account?, ErrorResult?) -> Void) {
         let defaultError = ErrorResult(status: 500, message: "Purchase was restored but service cannot be activated. Restart application to retry.")
