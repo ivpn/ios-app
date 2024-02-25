@@ -94,7 +94,6 @@
 		824777EA21A6BC3A001EEFAF /* Network+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */; };
 		8247A5ED215D037600E8D680 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8247C0602A7CF54300A7C02F /* V2RayConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247C05F2A7CF54300A7C02F /* V2RayConfig.swift */; };
-		8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1D922686217006C0C08 /* IAPManager.swift */; };
 		8247E1DE22687C28006C0C08 /* ProductId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1DD22687C28006C0C08 /* ProductId.swift */; };
 		82486FAD2A277058009B53F4 /* liboqs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82486FAC2A277058009B53F4 /* liboqs.a */; };
 		824B141C2609D5E700766B05 /* DNSProtocolTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824B141B2609D5E700766B05 /* DNSProtocolTypeTests.swift */; };
@@ -526,7 +525,6 @@
 		824777E521A6BC3A001EEFAF /* Network+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataClass.swift"; sourceTree = "<group>"; };
 		824777E621A6BC3A001EEFAF /* Network+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8247C05F2A7CF54300A7C02F /* V2RayConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V2RayConfig.swift; sourceTree = "<group>"; };
-		8247E1D922686217006C0C08 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		8247E1DD22687C28006C0C08 /* ProductId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductId.swift; sourceTree = "<group>"; };
 		82486FAC2A277058009B53F4 /* liboqs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liboqs.a; sourceTree = "<group>"; };
 		82486FB02A27705F009B53F4 /* sha3x4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha3x4.h; sourceTree = "<group>"; };
@@ -1004,7 +1002,6 @@
 				82D598BF21A6991B000FABDE /* NetworkManager.swift */,
 				9CB2CE371DB0F860007A4D2D /* FileSystemManager.swift */,
 				9C69422D1DD20FC200F9A801 /* KeyChain.swift */,
-				8247E1D922686217006C0C08 /* IAPManager.swift */,
 				820535272302B9D7007BDD58 /* APIAccessManager.swift */,
 				8223C54D22EAE93F00CD283D /* SessionManager.swift */,
 				8206F32224367A240056B465 /* VPNErrorObserver.swift */,
@@ -2278,7 +2275,6 @@
 				8243584425DAA7BD005FDEBB /* SecureDNSViewController.swift in Sources */,
 				82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */,
 				82B329CB29F7C9F400F3ED9B /* UIWindow+Ext.swift in Sources */,
-				8247E1DA22686217006C0C08 /* IAPManager.swift in Sources */,
 				82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */,
 				82A160BA221C4E2000730577 /* Server+CoreDataClass.swift in Sources */,
 				9CB2CE381DB0F860007A4D2D /* FileSystemManager.swift in Sources */,
