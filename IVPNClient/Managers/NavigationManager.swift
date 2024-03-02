@@ -87,15 +87,6 @@ class NavigationManager {
         return navController!
     }
     
-    static func getStaticWebViewController(resourceName: String, screenTitle: String) -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "staticWebView") as! StaticWebViewController
-        viewController.resourceName = resourceName
-        viewController.screenTitle = screenTitle
-        
-        return viewController
-    }
-    
     static func getTermsOfServiceViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
         
