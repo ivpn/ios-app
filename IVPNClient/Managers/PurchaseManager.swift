@@ -46,6 +46,8 @@ class PurchaseManager: NSObject {
     
     private(set) var products: [Product] = []
     
+    private var purchasing = false
+    
     private var apiEndpoint: String {
         guard let _ = KeyChain.sessionToken else {
             return Config.apiPaymentInitial
@@ -78,12 +80,13 @@ class PurchaseManager: NSObject {
         }
         
         delegate?.purchaseStart()
+        purchasing = true
         let result = try await product.purchase()
 
         switch result {
         case let .success(.verified(transaction)):
             // Successful purchase
-            log(.info, message: "[Store] Purchase success \(productId), completing transaction")
+            log(.info, message: "[Store] Completing successful in-app purchase \(productId)")
             self.complete(transaction)
             break
         case .success(.unverified(_, _)):
@@ -91,17 +94,20 @@ class PurchaseManager: NSObject {
             // Could be a jailbroken phone
             log(.info, message: "[Store] Purchase \(productId): success, unverified")
             delegate?.purchaseError(error: ErrorResult(status: 500, message: "Purchase is unverified."))
+            purchasing = false
             break
         case .pending:
             // Transaction waiting on SCA (Strong Customer Authentication) or
             // approval from Ask to Buy
             log(.info, message: "[Store] Purchase \(productId): pending")
             delegate?.purchasePending()
+            purchasing = false
             break
         case .userCancelled:
             // ^^^
             log(.info, message: "[Store] Purchase \(productId): userCancelled")
             delegate?.purchaseError(error: ErrorResult(status: 500, message: "User canelled the purchase."))
+            purchasing = false
             break
         @unknown default:
             break
@@ -111,15 +117,19 @@ class PurchaseManager: NSObject {
     }
     
     func startObserver() {
-        observerTask = Task {
-            for await result in Transaction.updates {
+        observerTask = Task(priority: .background) {
+            for await _ in Transaction.updates {
+                guard !purchasing else {
+                    break
+                }
+                
                 for await result in Transaction.unfinished {
                     guard case .verified(let transaction) = result else {
                         continue
                     }
                     
                     if transaction.revocationDate == nil {
-                        log(.info, message: "[Store] Completing updated transaction \(transaction.productID)")
+                        log(.info, message: "[Store] Completing unfinished purchase \(transaction.productID)")
                         complete(transaction)
                     }
                 }
@@ -142,7 +152,6 @@ class PurchaseManager: NSObject {
                 
                 if transaction.revocationDate == nil {
                     self.getAccountFor(transaction: transaction) { account, error in
-                        log(.info, message: "[Store] Purchase is restored.")
                         completion(account, error)
                     }
                     return
@@ -150,7 +159,7 @@ class PurchaseManager: NSObject {
             }
             
             let error = ErrorResult(status: 500, message: "There are no purchases to restore.")
-            log(.error, message: "[Store] There are no purchases to restore.")
+            log(.error, message: "[Store] There are no purchases to restore")
             completion(nil, error)
         }
     }
@@ -173,10 +182,12 @@ class PurchaseManager: NSObject {
                 Task {
                     await transaction.finish()
                     self.delegate?.purchaseSuccess(service: sessionStatus.serviceStatus)
-                    log(.info, message: "[Store] Purchase was completed successfully.")
+                    self.purchasing = false
+                    log(.info, message: "[Store] Purchase \(transaction.productID) completed successfully")
                 }
             case .failure(let error):
                 self.delegate?.purchaseError(error: error ?? defaultError)
+                self.purchasing = false
                 log(.error, message: "[Store] There was an error with purchase completion: \(error?.message ?? "")")
             }
         }
@@ -198,7 +209,7 @@ class PurchaseManager: NSObject {
             case .success(let account):
                 KeyChain.username = account.accountId
                 completion(account, nil)
-                log(.info, message: "[Store] Purchase was successfully restored.")
+                log(.info, message: "[Store] Purchase restored successfully")
             case .failure(let error):
                 completion(nil, error ?? defaultError)
                 log(.error, message: "[Store] There was an error with restoring purchase: \(error?.message ?? "")")
