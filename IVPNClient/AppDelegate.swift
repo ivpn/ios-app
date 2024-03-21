@@ -412,7 +412,11 @@ extension AppDelegate: PurchaseManagerDelegate {
         }
     }
     
-    func purchaseSuccess(service: Any?) {
+    func purchaseSuccess(service: Any?, extended: Bool) {
+        guard extended else {
+            return
+        }
+        
         DispatchQueue.main.async {
             guard let viewController = UIApplication.topViewController() else {
                 return
