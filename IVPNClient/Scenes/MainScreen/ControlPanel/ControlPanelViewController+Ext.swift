@@ -169,21 +169,8 @@ extension ControlPanelViewController {
         connect()
     }
     
-    override func createSessionTooManySessions(error: Any?) {
-        if let error = error as? ErrorResultSessionNew {
-            if let data = error.data {
-                if data.upgradable {
-                    NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
-                    NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
-                    UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
-                    UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                    present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
-                    return
-                }
-            }
-        }
-        
-        showCreateSessionAlert(message: "You've reached the maximum number of connected devices")
+    override func createSessionTooManySessions(error: Any?, isNewStyleAccount: Bool) {
+        showTooManySessionsAlert(error: error as? ErrorResultSessionNew, isNewStyleAccount: isNewStyleAccount)
     }
     
     override func createSessionAuthenticationError() {
@@ -201,7 +188,7 @@ extension ControlPanelViewController {
     override func sessionStatusNotFound() {
         guard !UserDefaults.standard.bool(forKey: "-UITests") else { return }
         logOut(deleteSession: false)
-        present(NavigationManager.getLoginViewController(), animated: true)
+        present(NavigationManager.getLoginViewController(showLogoutAlert: true), animated: true)
     }
     
     override func deleteSessionStart() {
@@ -234,16 +221,145 @@ extension ControlPanelViewController {
         present(NavigationManager.getLoginViewController(), animated: true)
     }
     
-    func showCreateSessionAlert(message: String) {
-        showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.controlPanelView.connectSwitch) { index in
-            switch index {
-            case 0:
-                self.sessionManager.createSession(force: true)
-            case 1:
-                self.sessionManager.createSession()
-            default:
-                break
+    private func showTooManySessionsAlert(error: ErrorResultSessionNew?, isNewStyleAccount: Bool) {
+        let message = "You've reached the maximum number of connected devices"
+        
+        // Legacy account, Pro plan
+        guard let error = error, let data = error.data, (isNewStyleAccount || data.upgradable) else {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Retry"
+            ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    newSession()
+                default:
+                    break
+                }
             }
+            
+            return
+        }
+        
+        // Legacy account, Standard plan
+        guard isNewStyleAccount else {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Retry",
+                "Switch to IVPN Pro"
+            ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    newSession()
+                case 2:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        let service = ServiceType.getType(currentPlan: data.currentPlan)
+        let deviceManagement = data.deviceManagement
+        
+        // Device Management enabled, Pro plan
+        if deviceManagement && service == .pro {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Visit Device Management",
+                "Retry",
+            ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management disabled, Pro plan
+        if !deviceManagement && service == .pro {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Enable Device Management",
+                "Retry",
+            ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management enabled, Standard plan
+        if deviceManagement && service == .standard {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Visit Device Management",
+                "Retry",
+                "Upgrade for 7 devices"
+            ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                case 3:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management disabled, Standard plan
+        if !deviceManagement && service == .standard {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Enable Device Management",
+                "Retry",
+                "Upgrade for 7 devices"
+            ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                case 3:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
         }
     }
     

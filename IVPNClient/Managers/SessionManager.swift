@@ -27,7 +27,7 @@ import Foundation
     func createSessionStart()
     func createSessionSuccess()
     func createSessionFailure(error: Any?)
-    func createSessionTooManySessions(error: Any?)
+    func createSessionTooManySessions(error: Any?, isNewStyleAccount: Bool)
     func createSessionAuthenticationError()
     func createSessionServiceNotActive()
     func createSessionAccountNotActivated(error: Any?)
@@ -67,6 +67,7 @@ class SessionManager {
         
         var kem = KEM()
         let params = sessionNewParams(force: force, username: username, confirmation: confirmation, captcha: captcha, captchaId: captchaId, kem: kem)
+        let isNewStyleAccount = ServiceStatus.isNewStyleAccount(username: username ?? "")
         let request = ApiRequestDI(method: .post, endpoint: Config.apiSessionNew, params: params)
         
         ApiService.shared.requestCustomError(request) { (result: ResultCustomError<Session, ErrorResultSessionNew>) in
@@ -99,7 +100,7 @@ class SessionManager {
                         return
                     case 602:
                         log(.info, message: "Create session error: createSessionTooManySessions")
-                        self.delegate?.createSessionTooManySessions(error: error)
+                        self.delegate?.createSessionTooManySessions(error: error, isNewStyleAccount: isNewStyleAccount)
                         return
                     case 11005:
                         log(.info, message: "Create session error: createSessionAccountNotActivated")
@@ -141,6 +142,7 @@ class SessionManager {
             switch result {
             case .success(let model):
                 Application.shared.serviceStatus = model.serviceStatus
+                KeyChain.deviceName = model.deviceName
                 NotificationCenter.default.post(name: Notification.Name.EvaluatePlanUpdate, object: nil)
                 
                 if model.serviceActive {

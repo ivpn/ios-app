@@ -25,6 +25,7 @@ import Foundation
 
 struct SessionStatus: Decodable {
     let status: Int
+    let deviceName: String?
     let serviceStatus: ServiceStatus
     
     var serviceActive: Bool {

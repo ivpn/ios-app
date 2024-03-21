@@ -128,6 +128,12 @@ extension UIViewController {
         }
     }
     
+    func openWebPageInBrowser(_ stringURL: String) {
+        if let url = URL(string: stringURL) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> Void)? = nil) {
         showAlert(
             title: "Thank you!",
@@ -276,7 +282,7 @@ extension UIViewController: SessionManagerDelegate {
     func createSessionStart() {}
     func createSessionSuccess() {}
     func createSessionFailure(error: Any?) {}
-    func createSessionTooManySessions(error: Any?) {}
+    func createSessionTooManySessions(error: Any?, isNewStyleAccount: Bool) {}
     func createSessionAuthenticationError() {}
     func createSessionServiceNotActive() {}
     func createSessionAccountNotActivated(error: Any?) {}

@@ -59,7 +59,7 @@ In case when there is no issue:
 <type>/<short-summary-or-description>
 ```
 
-Where <type> can be `epic`, `feature`, `task`, `bugfix`, `hotfix` or `release`.
+Where `<type>` can be `epic`, `feature`, `task`, `bugfix`, `hotfix` or `release`.
 
 ### Branches
 

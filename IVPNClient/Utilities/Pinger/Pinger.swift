@@ -48,7 +48,7 @@ class Pinger {
         UserDefaults.shared.set(Date().timeIntervalSince1970, forKey: "LastPingTimestamp")
         
         for server in serverList.getServers() {
-            if let ipAddress = server.ipAddresses.first {
+            if let ipAddress = server.hosts.first?.host {
                 guard !ipAddress.isEmpty else { continue }
                 let ping = Ping()
                 ping.delegate = self
