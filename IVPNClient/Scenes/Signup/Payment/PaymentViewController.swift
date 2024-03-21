@@ -286,7 +286,12 @@ extension PaymentViewController: PurchaseManagerDelegate {
         }
     }
     
-    func purchaseSuccess(service: Any?) {
+    func purchaseSuccess(service: Any?, extended: Bool) {
+        guard extended else {
+            hud.dismiss()
+            return
+        }
+        
         DispatchQueue.main.async { [self] in
             hud.dismiss()
             
