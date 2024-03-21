@@ -262,7 +262,7 @@ extension UIViewController {
     }
     
     func deviceCanMakePurchases() -> Bool {
-        guard IAPManager.shared.canMakePurchases else {
+        guard PurchaseManager.shared.canMakePurchases else {
             showAlert(title: "Error", message: "In-App Purchases are not available on your device.")
             return false
         }

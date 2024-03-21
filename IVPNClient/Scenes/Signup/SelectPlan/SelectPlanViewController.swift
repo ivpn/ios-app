@@ -59,7 +59,7 @@ class SelectPlanViewController: UITableViewController {
     
     lazy var retryButton: UIButton = {
         let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(fetchProducts), for: .touchUpInside)
+        button.addTarget(self, action: #selector(load), for: .touchUpInside)
         button.setTitle("Retry", for: .normal)
         button.sizeToFit()
         button.isHidden = true
@@ -133,7 +133,7 @@ class SelectPlanViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         if displayMode == .loading {
-            fetchProducts()
+            load()
         }
         
         segueStarted = false
@@ -197,22 +197,22 @@ class SelectPlanViewController: UITableViewController {
         }
     }
     
-    @objc private func fetchProducts() {
+    @objc private func load() {
+        Task {
+            await loadProducts()
+        }
+    }
+    
+    private func loadProducts() async {
         displayMode = .loading
         
-        IAPManager.shared.fetchProducts { [weak self] products, error in
-            guard let self = self else { return }
-            
-            if error != nil {
-                self.showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
-                self.displayMode = .error
-                return
-            }
-            
-            if products != nil {
-                self.updateSubscriptions()
-                self.displayMode = .content
-            }
+        do {
+            try await PurchaseManager.shared.loadProducts()
+            updateSubscriptions()
+            displayMode = .content
+        } catch {
+            showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
+            displayMode = .error
         }
     }
     

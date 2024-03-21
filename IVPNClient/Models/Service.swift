@@ -33,9 +33,11 @@ struct Service {
     // MARK: - Computed properties -
     
     var priceText: String {
-        guard !IAPManager.shared.products.isEmpty else { return "" }
-        guard let product = IAPManager.shared.getProduct(identifier: productId) else { return "" }
-        return IAPManager.shared.productPrice(product: product)
+        guard let product = PurchaseManager.shared.getProduct(id: productId) else {
+            return ""
+        }
+        
+        return product.displayPrice
     }
     
     var durationText: String {
@@ -89,28 +91,28 @@ struct Service {
         case .standard:
             switch duration {
             case .week:
-                return ProductIdentifier.standardWeek
+                return ProductId.standardWeek
             case .month:
-                return ProductIdentifier.standardMonth
+                return ProductId.standardMonth
             case .year:
-                return ProductIdentifier.standardYear
+                return ProductId.standardYear
             case .twoYears:
-                return ProductIdentifier.standardTwoYears
+                return ProductId.standardTwoYears
             case .threeYears:
-                return ProductIdentifier.standardThreeYears
+                return ProductId.standardThreeYears
             }
         case .pro:
             switch duration {
             case .week:
-                return ProductIdentifier.proWeek
+                return ProductId.proWeek
             case .month:
-                return ProductIdentifier.proMonth
+                return ProductId.proMonth
             case .year:
-                return ProductIdentifier.proYear
+                return ProductId.proYear
             case .twoYears:
-                return ProductIdentifier.proTwoYears
+                return ProductId.proTwoYears
             case .threeYears:
-                return ProductIdentifier.proThreeYears
+                return ProductId.proThreeYears
             }
         }
     }
