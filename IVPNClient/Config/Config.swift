@@ -109,4 +109,8 @@ struct Config {
         return value
     }
     
+    // MARK: Log files
+    
+    static let maxBytes = 100000
+    
 }
