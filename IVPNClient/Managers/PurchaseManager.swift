@@ -26,7 +26,7 @@ import StoreKit
 @objc protocol PurchaseManagerDelegate: AnyObject {
     func purchaseStart()
     func purchasePending()
-    func purchaseSuccess(service: Any?, extended: Bool)
+    func purchaseSuccess(activeUntil: String, extended: Bool)
     func purchaseError(error: Any?)
 }
 
@@ -167,7 +167,7 @@ class PurchaseManager: NSObject {
                 Application.shared.serviceStatus = sessionStatus.serviceStatus
                 Task {
                     await transaction.finish()
-                    self.delegate?.purchaseSuccess(service: sessionStatus.serviceStatus, extended: sessionStatus.extended ?? false)
+                    self.delegate?.purchaseSuccess(activeUntil: sessionStatus.serviceStatus.activeUntilString(), extended: sessionStatus.extended ?? !sessionStatus.serviceStatus.isNewStyleAccount())
                     log(.info, message: "[Store] Purchase \(transaction.productID) completed successfully")
                 }
             case .failure(let error):

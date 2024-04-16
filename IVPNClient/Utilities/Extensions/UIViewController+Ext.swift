@@ -134,10 +134,10 @@ extension UIViewController {
         }
     }
     
-    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> Void)? = nil) {
+    func showSubscriptionActivatedAlert(activeUntil: String, completion: (() -> Void)? = nil) {
         showAlert(
             title: "Thank you!",
-            message: "The payment was successfully processed.\nService is active until: " + serviceStatus.activeUntilString(),
+            message: "The payment was successfully processed.\nService is active until: " + activeUntil,
             handler: { _ in
                 if let completion = completion {
                     completion()

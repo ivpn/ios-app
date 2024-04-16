@@ -412,7 +412,7 @@ extension AppDelegate: PurchaseManagerDelegate {
         }
     }
     
-    func purchaseSuccess(service: Any?, extended: Bool) {
+    func purchaseSuccess(activeUntil: String, extended: Bool) {
         guard extended else {
             return
         }
@@ -422,9 +422,7 @@ extension AppDelegate: PurchaseManagerDelegate {
                 return
             }
 
-            if let service = service as? ServiceStatus {
-                viewController.showSubscriptionActivatedAlert(serviceStatus: service)
-            }
+            viewController.showSubscriptionActivatedAlert(activeUntil: activeUntil)
         }
     }
     
