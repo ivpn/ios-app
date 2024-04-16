@@ -286,7 +286,7 @@ extension PaymentViewController: PurchaseManagerDelegate {
         }
     }
     
-    func purchaseSuccess(service: Any?, extended: Bool) {
+    func purchaseSuccess(activeUntil: String, extended: Bool) {
         guard extended else {
             hud.dismiss()
             return
@@ -295,11 +295,7 @@ extension PaymentViewController: PurchaseManagerDelegate {
         DispatchQueue.main.async { [self] in
             hud.dismiss()
             
-            guard let service = service as? ServiceStatus else {
-                return
-            }
-            
-            showSubscriptionActivatedAlert(serviceStatus: service) {
+            showSubscriptionActivatedAlert(activeUntil: activeUntil) {
                 if KeyChain.sessionToken == nil {
                     KeyChain.username = KeyChain.tempUsername
                     KeyChain.tempUsername = nil
