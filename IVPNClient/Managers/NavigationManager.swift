@@ -35,11 +35,16 @@ class NavigationManager {
         return viewController
     }
     
-    static func getLoginViewController() -> UIViewController {
+    static func getLoginViewController(showLogoutAlert: Bool = false) -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "loginView")
+        let navController = storyBoard.instantiateViewController(withIdentifier: "loginView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
         
-        return viewController
+        if let viewController = navController?.topViewController as? LoginViewController {
+            viewController.showLogoutAlert = showLogoutAlert
+        }
+        
+        return navController!
     }
     
     static func getChangePlanViewController() -> UIViewController {

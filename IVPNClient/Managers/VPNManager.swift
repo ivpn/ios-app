@@ -126,8 +126,7 @@ class VPNManager {
     }
     
     private func setupNEVPNManager(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil, completion: @escaping (Error?) -> Void) {
-        let serverAddress = accessDetails.ipAddresses.randomElement() ?? accessDetails.serverAddress
-        self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
+        self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
         manager.saveToPreferences { error in
             if let error = error, error.code == 5 {
                 manager.isOnDemandEnabled = false
@@ -139,7 +138,7 @@ class VPNManager {
             }
             
             manager.loadFromPreferences { _ in
-                self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, serverAddress: serverAddress, status: status)
+                self.setupIKEv2Tunnel(manager: manager, accessDetails: accessDetails, status: status)
                 manager.saveToPreferences { _ in
                     completion(nil)
                 }
@@ -177,11 +176,11 @@ class VPNManager {
         }
     }
     
-    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails, serverAddress: String, status: NEVPNStatus? = nil) {
+    private func setupIKEv2Tunnel(manager: NEVPNManager, accessDetails: AccessDetails, status: NEVPNStatus? = nil) {
         let configuration = NEVPNProtocolIKEv2()
-        configuration.remoteIdentifier = accessDetails.serverAddress
+        configuration.remoteIdentifier = accessDetails.gateway
         configuration.localIdentifier = accessDetails.username
-        configuration.serverAddress = serverAddress
+        configuration.serverAddress = accessDetails.ipAddress
         configuration.username = accessDetails.username
         configuration.passwordReference = accessDetails.passwordRef
         configuration.authenticationMethod = .none
@@ -393,32 +392,15 @@ class VPNManager {
     }
     
     func getOpenVPNLog(completion: @escaping (String?) -> Void) {
-        guard let session = openvpnManager?.connection as? NETunnelProviderSession else {
+        let maxBytes = UInt64(Config.maxBytes)
+        
+        guard let url = FileManager.openvpnLogTextFileURL else {
             completion(nil)
             return
         }
         
-        do {
-            try session.sendProviderMessage(OpenVPNProvider.Message.requestLog.data) { data in
-                guard let data = data, !data.isEmpty else {
-                    completion(nil)
-                    return
-                }
-                
-                guard let newestLog = String(data: data, encoding: .utf8), !newestLog.isEmpty else {
-                    completion(nil)
-                    return
-                }
-                
-                completion(newestLog)
-                return
-            }
-        } catch {
-            completion(nil)
-            return
-        }
-        
-        completion(nil)
+        let lines = url.trailingLines(bytes: maxBytes)
+        completion(lines.joined(separator: "\n"))
     }
     
     func getWireGuardLog(completion: @escaping (String?) -> Void) {

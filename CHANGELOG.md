@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.12.1 - 2024-02-24  
+
+[FIXED] In-app payments for legacy accounts  
+
+## 2.12.0 - 2024-02-12  
+
+[NEW] Device Management  
+[FIXED] Selecting individual servers with IKEv2  
+[FIXED] Minor UI issues on the server map  
+
 ## 2.11.1 - 2023-12-05  
 
 [NEW] Option to Block LAN traffic when connected to an untrusted network  

@@ -46,7 +46,7 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showActionSheet(image: UIImage? = nil, selected: String? = nil, largeText: Bool = false, centered: Bool = false, title message: String = "", actions: [String] = [], cancelAction: String = "Cancel", sourceView: UIView = UIView(), disableDismiss: Bool = false, completion: @escaping (_ index: Int) -> Void) {
+    func showActionSheet(image: UIImage? = nil, selected: String? = nil, largeText: Bool = false, centered: Bool = false, title message: String = "", actions: [String] = [], cancelAction: String = "Cancel", sourceView: UIView = UIView(), disableDismiss: Bool = false, permittedArrowDirections: UIPopoverArrowDirection = [.any], completion: @escaping (_ index: Int) -> Void) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
         
         let messageFont: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: largeText ? 17 : 16)]
@@ -79,6 +79,7 @@ extension UIViewController {
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = sourceView
             popoverController.sourceRect = sourceView.bounds
+            popoverController.permittedArrowDirections = permittedArrowDirections
             if centered {
                 popoverController.permittedArrowDirections = []
             }
