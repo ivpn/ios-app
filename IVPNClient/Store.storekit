@@ -1,0 +1,385 @@
+{
+  "identifier" : "57E4D561",
+  "nonRenewingSubscriptions" : [
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "1193681555",
+      "localizations" : [
+        {
+          "description" : "This In-App purchase will extend VPN subscription for 1 month. \nSubscription can be purchased multiple times by customer. Each purchase will add additional month to the account.",
+          "displayName" : "1 Month",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.1month",
+      "referenceName" : "1 Month",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "1515476683",
+      "localizations" : [
+        {
+          "description" : "IVPN Pro service 1 month non-renewing",
+          "displayName" : "IVPN Pro 1 month",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.pro.1month",
+      "referenceName" : "1 month non-renewing IVPN Pro subscription",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "5.99",
+      "familyShareable" : false,
+      "internalID" : "1515475932",
+      "localizations" : [
+        {
+          "description" : "IVPN Standard service 1 month non-renewing",
+          "displayName" : "IVPN Standard 1 month",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.standard.1month",
+      "referenceName" : "1 month non-renewing IVPN Standard subscription",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "1515476549",
+      "localizations" : [
+        {
+          "description" : "IVPN Pro service 1 week non-renewing",
+          "displayName" : "IVPN Pro 1 week",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.pro.1week",
+      "referenceName" : "1 week non-renewing IVPN Pro subscription",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "1515475821",
+      "localizations" : [
+        {
+          "description" : "IVPN Standard service 1 week non-renewing",
+          "displayName" : "IVPN Standard 1 week",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.standard.1week",
+      "referenceName" : "1 week non-renewing IVPN Standard subscription",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "99.99",
+      "familyShareable" : false,
+      "internalID" : "1515476688",
+      "localizations" : [
+        {
+          "description" : "IVPN Pro service 1 year non-renewing",
+          "displayName" : "IVPN Pro 1 year",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.pro.1year",
+      "referenceName" : "1 year non-renewing IVPN Pro subscription",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "59.99",
+      "familyShareable" : false,
+      "internalID" : "1515475940",
+      "localizations" : [
+        {
+          "description" : "IVPN Standard service 1 year non-renewing",
+          "displayName" : "IVPN Standard 1 year",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.standard.1year",
+      "referenceName" : "1 year non-renewing IVPN Standard subscription",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "99.99",
+      "familyShareable" : false,
+      "internalID" : "1193684808",
+      "localizations" : [
+        {
+          "description" : "This In-App purchase will extend VPN subscription for 12 months. \nSubscription can be purchased multiple times by customer. Each purchase will add additional month to the account.",
+          "displayName" : "12 Months",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.12month",
+      "referenceName" : "12 Months",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "159.99",
+      "familyShareable" : false,
+      "internalID" : "1515476948",
+      "localizations" : [
+        {
+          "description" : "IVPN Pro service 2 years non-renewing",
+          "displayName" : "IVPN Pro 2 years",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.pro.2year",
+      "referenceName" : "2 years non-renewing IVPN Pro subscription",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "99.99",
+      "familyShareable" : false,
+      "internalID" : "1515476287",
+      "localizations" : [
+        {
+          "description" : "IVPN Standard service 2 years non-renewing",
+          "displayName" : "IVPN Standard 2 years",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.standard.2year",
+      "referenceName" : "2 years non-renewing IVPN Standard subscription",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "219.99",
+      "familyShareable" : false,
+      "internalID" : "1515477187",
+      "localizations" : [
+        {
+          "description" : "IVPN Pro service 3 years non-renewing",
+          "displayName" : "IVPN Pro 3 years",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.pro.3year",
+      "referenceName" : "3 years non-renewing IVPN Pro subscription",
+      "type" : "NonRenewingSubscription"
+    },
+    {
+      "displayPrice" : "139.99",
+      "familyShareable" : false,
+      "internalID" : "1515476242",
+      "localizations" : [
+        {
+          "description" : "IVPN Standard service 3 years non-renewing",
+          "displayName" : "IVPN Standard 3 years",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "net.ivpn.subscriptions.standard.3year",
+      "referenceName" : "3 years non-renewing IVPN Standard subscription",
+      "type" : "NonRenewingSubscription"
+    }
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1193122683",
+    "_askToBuyEnabled" : false,
+    "_developerTeamID" : "WQXXM75BYN",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 724332316.402367,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : {
+          "index" : 1,
+          "type" : "purchase"
+        },
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "20519080",
+      "localizations" : [
+
+      ],
+      "name" : "IVPN Service",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "1459483527",
+          "introductoryOffer" : {
+            "internalID" : "C2DE8327",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "1 month of IVPN Pro service subscription",
+              "displayName" : "1 month IVPN Pro service",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "net.ivpn.autosubscriptions.1month",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "1 month auto-renewable IVPN Pro subscription",
+          "subscriptionGroupID" : "20519080",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "5.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "1460132096",
+          "introductoryOffer" : {
+            "internalID" : "ADA414D2",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "1 month IVPN Standard service subscription",
+              "displayName" : "1 month IVPN Standard service",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "net.ivpn.autosubscriptions.standard.1month",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "1 month auto-renewable IVPN Standard subscription",
+          "subscriptionGroupID" : "20519080",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "99.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "1459482414",
+          "introductoryOffer" : {
+            "internalID" : "50C20442",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "1 year of IVPN Pro service subscription",
+              "displayName" : "1 year IVPN Pro service",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "net.ivpn.autosubscriptions.12month",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "12 months auto-renewable IVPN Pro subscription",
+          "subscriptionGroupID" : "20519080",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "59.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "1460131621",
+          "introductoryOffer" : {
+            "internalID" : "6D20BF20",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "1 year IVPN Standard service subscription",
+              "displayName" : "1 year IVPN Standard service",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "net.ivpn.autosubscriptions.standard.12month",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "12 months auto-renewable IVPN Standard subscription",
+          "subscriptionGroupID" : "20519080",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

@@ -54,10 +54,15 @@ extension FileManager {
         return sharedFolderURL?.appendingPathComponent("WireGuard.log")
     }
     
+    static var openvpnLogTextFileURL: URL? {
+        return sharedFolderURL?.appendingPathComponent("Tunnel.log")
+    }
+    
     static func deleteFile(at url: URL) -> Bool {
         do {
             try FileManager.default.removeItem(at: url)
         } catch {
+            log(.error, message: error.localizedDescription)
             return false
         }
         return true
