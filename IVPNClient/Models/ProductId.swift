@@ -1,13 +1,5 @@
 //
-//  ProductIdentifier.swift
-//  IVPNClient
-//
-//  Created by Juraj Hilje on 18/04/2019.
-//  Copyright © 2019 IVPN. All rights reserved.
-//
-
-//
-//  ProductIdentifier.swift
+//  ProductId.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
@@ -31,7 +23,7 @@
 
 import Foundation
 
-struct ProductIdentifier {
+struct ProductId {
     
     static let standardWeek = "net.ivpn.subscriptions.standard.1week"
     static let standardMonth = "net.ivpn.subscriptions.standard.1month"
