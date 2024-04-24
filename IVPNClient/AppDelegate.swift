@@ -80,20 +80,6 @@ class AppDelegate: UIResponder {
         FileSystemManager.createLogFiles()
     }
     
-    private func finishIncompletePurchases() {
-        guard Application.shared.authentication.isLoggedIn || KeyChain.tempUsername != nil else {
-            return
-        }
-        
-        IAPManager.shared.finishIncompletePurchases { serviceStatus, _ in
-            guard let viewController = UIApplication.topViewController() else { return }
-
-            if let serviceStatus = serviceStatus {
-                viewController.showSubscriptionActivatedAlert(serviceStatus: serviceStatus)
-            }
-        }
-    }
-    
     private func resetLastPingTimestamp() {
         UserDefaults.shared.set(0, forKey: "LastPingTimestamp")
     }
@@ -284,6 +270,11 @@ class AppDelegate: UIResponder {
             }
         }
     }
+    
+    private func startPurchaseObserver() {
+        PurchaseManager.shared.delegate = self
+        PurchaseManager.shared.startObserver()
+    }
 
 }
 
@@ -294,10 +285,10 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         evaluateUITests()
         registerUserDefaults()
-        finishIncompletePurchases()
         createLogFiles()
         resetLastPingTimestamp()
         clearURLCache()
+        startPurchaseObserver()
         DNSManager.shared.loadProfile { _ in }
         
         return true
@@ -399,6 +390,52 @@ extension AppDelegate: UIApplicationDelegate {
         }
         
         return false
+    }
+    
+}
+
+// MARK: - PurchaseManagerDelegate -
+
+extension AppDelegate: PurchaseManagerDelegate {
+    
+    func purchaseStart() {
+        
+    }
+    
+    func purchasePending() {
+        DispatchQueue.main.async {
+            guard let viewController = UIApplication.topViewController() else {
+                return
+            }
+
+            viewController.showAlert(title: "Pending payment", message: "Payment is pending for approval. We will complete the transaction as soon as payment is approved.")
+        }
+    }
+    
+    func purchaseSuccess(activeUntil: String, extended: Bool) {
+        guard extended else {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            guard let viewController = UIApplication.topViewController() else {
+                return
+            }
+
+            viewController.showSubscriptionActivatedAlert(activeUntil: activeUntil)
+        }
+    }
+    
+    func purchaseError(error: Any?) {
+        DispatchQueue.main.async {
+            guard let viewController = UIApplication.topViewController() else {
+                return
+            }
+            
+            if let error = error as? ErrorResult {
+                viewController.showErrorAlert(title: "Error", message: error.message)
+            }
+        }
     }
     
 }

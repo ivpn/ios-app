@@ -130,10 +130,8 @@ class VPNManager {
         manager.saveToPreferences { error in
             if let error = error, error.code == 5 {
                 manager.isOnDemandEnabled = false
-                if #available(iOS 15.1, *) {
-                    if #available(iOS 16, *) { } else {
-                        manager.protocolConfiguration?.includeAllNetworks = false
-                    }
+                if #available(iOS 16, *) { } else {
+                    manager.protocolConfiguration?.includeAllNetworks = false
                 }
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
                 return
@@ -271,10 +269,8 @@ class VPNManager {
         manager.loadFromPreferences { _ in
             manager.onDemandRules = [NEOnDemandRule]()
             manager.isOnDemandEnabled = false
-            if #available(iOS 15.1, *) {
-                if #available(iOS 16, *) { } else {
-                    manager.protocolConfiguration?.includeAllNetworks = false
-                }
+            if #available(iOS 16, *) { } else {
+                manager.protocolConfiguration?.includeAllNetworks = false
             }
             manager.saveToPreferences { _ in }
         }
@@ -326,10 +322,8 @@ class VPNManager {
             manager.loadFromPreferences { _ in
                 manager.onDemandRules = [NEOnDemandRule]()
                 manager.isOnDemandEnabled = false
-                if #available(iOS 15.1, *) {
-                    if #available(iOS 16, *) { } else {
-                        manager.protocolConfiguration?.includeAllNetworks = false
-                    }
+                if #available(iOS 16, *) { } else {
+                    manager.protocolConfiguration?.includeAllNetworks = false
                 }
                 manager.saveToPreferences(completionHandler: completion)
             }
@@ -398,32 +392,15 @@ class VPNManager {
     }
     
     func getOpenVPNLog(completion: @escaping (String?) -> Void) {
-        guard let session = openvpnManager?.connection as? NETunnelProviderSession else {
+        let maxBytes = UInt64(Config.maxBytes)
+        
+        guard let url = FileManager.openvpnLogTextFileURL else {
             completion(nil)
             return
         }
         
-        do {
-            try session.sendProviderMessage(OpenVPNProvider.Message.requestLog.data) { data in
-                guard let data = data, !data.isEmpty else {
-                    completion(nil)
-                    return
-                }
-                
-                guard let newestLog = String(data: data, encoding: .utf8), !newestLog.isEmpty else {
-                    completion(nil)
-                    return
-                }
-                
-                completion(newestLog)
-                return
-            }
-        } catch {
-            completion(nil)
-            return
-        }
-        
-        completion(nil)
+        let lines = url.trailingLines(bytes: maxBytes)
+        completion(lines.joined(separator: "\n"))
     }
     
     func getWireGuardLog(completion: @escaping (String?) -> Void) {

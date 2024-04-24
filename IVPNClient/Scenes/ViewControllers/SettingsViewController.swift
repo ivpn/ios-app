@@ -359,11 +359,10 @@ extension SettingsViewController {
         
         // Kill Switch
         if indexPath.section == 3 && indexPath.row == 4 {
-            if #available(iOS 15.1, *) {
-                if #available(iOS 16, *) { } else {
-                    return UITableView.automaticDimension
-                }
+            if #available(iOS 16, *) { } else {
+                return UITableView.automaticDimension
             }
+            
             return 0
         }
         
