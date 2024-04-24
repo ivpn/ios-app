@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.12.2 - 2024-04-24  
+
+[IMPROVED] Support for pending payments  
+[IMPROVED] Upgraded payments to StoreKit 2  
+[IMPROVED] Upgraded OpenVPN and OpenSSL libraries  
+[NOTE] Removed support for iOS 14  
+
 ## 2.12.1 - 2024-02-24  
 
 [FIXED] In-app payments for legacy accounts  
