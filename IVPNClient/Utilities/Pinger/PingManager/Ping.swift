@@ -83,10 +83,7 @@ class Ping : NSObject {
         
     }
     deinit {
-        
         Ping.pingThreadCount -= 1
-        
-        //        NSLog("PingCount:"+Ping.pingThreadCount.description)
     }
     let INET6_ADDRSTRLEN = 64
     
@@ -256,13 +253,18 @@ class Ping : NSObject {
         
         //process the data we read.
         if bytesRead > 0 {
-            var hoststr = CChar()
+            var hoststr = [CChar](repeating: 0, count: Int(INET6_ADDRSTRLEN))
             //            char hoststr[INET6_ADDRSTRLEN];
             var sin : sockaddr_in = UnsafeMutableRawPointer(addrSockaddr).bindMemory(to: sockaddr_in.self, capacity: Int(addrLen)).pointee
             inet_ntop(Int32(sin.sin_family), &(sin.sin_addr), &hoststr, socklen_t(INET6_ADDRSTRLEN))
             //            struct sockaddr_in *sin = (struct sockaddr_in *)&addr;
             //            inet_ntop(sin->sin_family, &(sin->sin_addr), hoststr, INET6_ADDRSTRLEN);
-            let host = String(utf8String: &hoststr)
+            
+            guard hoststr.count > 0 else {
+                return
+            }
+            
+            let host = String(cString: hoststr)
             
             if(host == hostAddressString) { // only make sense where received packet comes from expected source
                 
@@ -477,11 +479,6 @@ class Ping : NSObject {
                         err = Int(ENOBUFS)    // This is not a hugely descriptor error, alas.
                     }
                     
-                    //little log
-                    if (self.debug) {
-                        NSLog("GBPing: failed to send packet with error code: %d", err)
-                    }
-                    
                     //change status
                     newPingResult.pingStatus = .fail
                     let pingReultCopyAfterFailure : PingResult = newPingResult.copy()
@@ -495,18 +492,12 @@ class Ping : NSObject {
     func setup(_ callBack: @escaping (_ success:Bool,_ error:Error?)->Void) {
         //error out of its already setup
         if self.isReady{
-            if self.debug{
-                NSLog("GBPing: Can't setup, already setup.")
-            }
             callBack(false,nil)
             return
         }
         
         //error out if no host is set
         if self.host == nil{
-            if self.debug{
-                NSLog("GBPing: set host before attempting to start.")
-            }
             callBack(false,nil)
             return
         }

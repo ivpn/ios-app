@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-22.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -33,10 +33,13 @@ extension UserDefaults {
         static let wireguardTunnelProviderError = "wireguardTunnelProviderError"
         static let openvpnTunnelProviderError = "TunnelKitLastError"
         static let isMultiHop = "isMultiHop"
+        static let preventSameCountryMultiHop = "preventSameCountryMultiHop"
+        static let preventSameISPMultiHop = "preventSameISPMultiHop"
         static let exitServerLocation = "exitServerLocation"
         static let isLogging = "isLogging"
         static let networkProtectionEnabled = "networkProtection.enabled"
         static let networkProtectionUntrustedConnect = "networkProtection.untrusted.connect"
+        static let networkProtectionUntrustedBlockLan = "networkProtection.untrusted.blockLan"
         static let networkProtectionTrustedDisconnect = "networkProtection.trusted.disconnect"
         static let isCustomDNS = "isCustomDNS"
         static let customDNSProtocol = "customDNSProtocol"
@@ -47,6 +50,7 @@ extension UserDefaults {
         static let antiTrackerHardcoreDNS = "antiTrackerHardcoreDNS"
         static let wgKeyTimestamp = "wgKeyTimestamp"
         static let wgRegenerationRate = "wgRegenerationRate"
+        static let wgMtu = "wgMtu"
         static let hostNames = "hostNames"
         static let ipv6HostNames = "ipv6HostNames"
         static let apiHostName = "apiHostName"
@@ -57,10 +61,11 @@ extension UserDefaults {
         static let connectionLocation = "connectionLocation"
         static let connectionIpAddress = "connectionIpAddress"
         static let connectionIpv6Address = "connectionIpv6Address"
+        static let lastWidgetUpdate = "lastWidgetUpdate"
+        static let geoLookup = "geoLookup"
         static let keepAlive = "keepAlive"
         static let serversSort = "serversSort"
         static let notAskToReconnect = "notAskToReconnect"
-        static let selectedProtocolIndex = "selectedProtocolIndex"
         static let selectedProtocol = "selectedProtocol"
         static let resolvedDNSInsideVPN = "resolvedDNSInsideVPN"
         static let resolvedDNSOutsideVPN = "resolvedDNSOutsideVPN"
@@ -83,6 +88,13 @@ extension UserDefaults {
         static let showIPv4Servers = "showIPv4Servers"
         static let killSwitch = "killSwitch"
         static let selectHost = "selectHost"
+        static let isLoggedIn = "isLoggedIn"
+        static let antiTrackerDns = "antiTrackerDns"
+        static let disableLanAccess = "disableLanAccess"
+        static let v2raySettings = "v2raySettings"
+        static let v2rayProtocol = "v2rayProtocol"
+        static let isV2ray = "isV2ray"
+        static let disableWidgetPrompt = "disableWidgetPrompt"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -113,6 +125,10 @@ extension UserDefaults {
         return bool(forKey: Key.networkProtectionUntrustedConnect)
     }
     
+    @objc dynamic var networkProtectionUntrustedBlockLan: Bool {
+        return bool(forKey: Key.networkProtectionUntrustedBlockLan)
+    }
+    
     @objc dynamic var networkProtectionTrustedDisconnect: Bool {
         return bool(forKey: Key.networkProtectionTrustedDisconnect)
     }
@@ -138,11 +154,11 @@ extension UserDefaults {
     }
     
     @objc dynamic var antiTrackerDNS: String {
-        return string(forKey: Key.antiTrackerDNS) ?? ""
+        return AntiTrackerDns.load()?.normal ?? ""
     }
     
     @objc dynamic var antiTrackerHardcoreDNS: String {
-        return string(forKey: Key.antiTrackerHardcoreDNS) ?? ""
+        return AntiTrackerDns.load()?.hardcore ?? ""
     }
     
     @objc dynamic var wgKeyTimestamp: Date {
@@ -155,6 +171,10 @@ extension UserDefaults {
     
     @objc dynamic var wgRegenerationRate: Int {
         return integer(forKey: Key.wgRegenerationRate)
+    }
+    
+    @objc dynamic var wgMtu: Int {
+        return integer(forKey: Key.wgMtu)
     }
     
     @objc dynamic var hostNames: [String] {
@@ -213,15 +233,44 @@ extension UserDefaults {
         return bool(forKey: Key.selectHost)
     }
     
+    @objc dynamic var preventSameCountryMultiHop: Bool {
+        return bool(forKey: Key.preventSameCountryMultiHop)
+    }
+    
+    @objc dynamic var preventSameISPMultiHop: Bool {
+        return bool(forKey: Key.preventSameISPMultiHop)
+    }
+    
+    @objc dynamic var isLoggedIn: Bool {
+        return bool(forKey: Key.isLoggedIn)
+    }
+    
+    @objc dynamic var disableLanAccess: Bool {
+        return bool(forKey: Key.disableLanAccess)
+    }
+    
+    @objc dynamic var v2rayProtocol: String {
+        return string(forKey: Key.v2rayProtocol) ?? "udp"
+    }
+    
+    @objc dynamic var isV2ray: Bool {
+        return bool(forKey: Key.isV2ray)
+    }
+    
+    @objc dynamic var disableWidgetPrompt: Bool {
+        return bool(forKey: Key.disableWidgetPrompt)
+    }
+    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
         shared.register(defaults: [Key.keepAlive: true])
         shared.register(defaults: [Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
         shared.register(defaults: [Key.wgKeyTimestamp: Date()])
+        shared.register(defaults: [Key.serversSort: "city"])
         standard.register(defaults: [Key.selectedServerFastest: true])
         standard.register(defaults: [Key.showIPv4Servers: true])
-        shared.register(defaults: [Key.serversSort: "city"])
+        standard.register(defaults: [Key.preventSameCountryMultiHop: true])
     }
     
     static func clearSession() {
@@ -229,6 +278,7 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.isLogging)
         shared.removeObject(forKey: Key.networkProtectionEnabled)
         shared.removeObject(forKey: Key.networkProtectionUntrustedConnect)
+        shared.removeObject(forKey: Key.networkProtectionUntrustedBlockLan)
         shared.removeObject(forKey: Key.networkProtectionTrustedDisconnect)
         shared.removeObject(forKey: Key.isCustomDNS)
         shared.removeObject(forKey: Key.customDNS)
@@ -245,14 +295,23 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.isIPv6)
         shared.removeObject(forKey: Key.killSwitch)
         shared.removeObject(forKey: Key.selectHost)
+        shared.removeObject(forKey: Key.isLoggedIn)
+        shared.removeObject(forKey: Key.antiTrackerDns)
+        shared.removeObject(forKey: Key.disableLanAccess)
+        shared.removeObject(forKey: Key.v2raySettings)
+        shared.removeObject(forKey: Key.v2rayProtocol)
+        shared.removeObject(forKey: Key.isV2ray)
+        shared.removeObject(forKey: Key.disableWidgetPrompt)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)
         standard.removeObject(forKey: Key.selectedExitHost)
         standard.removeObject(forKey: Key.selectedServerFastest)
         standard.removeObject(forKey: Key.fastestServerConfigured)
         standard.removeObject(forKey: Key.showIPv4Servers)
-        standard.removeObject(forKey: Key.selectedProtocolIndex)
         standard.removeObject(forKey: Key.selectedProtocol)
+        standard.removeObject(forKey: Key.wgMtu)
+        standard.removeObject(forKey: Key.preventSameCountryMultiHop)
+        standard.removeObject(forKey: Key.preventSameISPMultiHop)
         standard.synchronize()
     }
     

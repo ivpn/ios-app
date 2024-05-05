@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-08-09.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -28,27 +28,28 @@ struct ServiceStatus: Codable {
     // MARK: - Properties -
     
     var isActive: Bool
-    #warning("currentPlan should not be optional, change this after API is fixed")
-    var currentPlan: String?
+    var currentPlan: String
     var activeUntil: Int?
     var isOnFreeTrial: Bool?
     var username: String?
     let upgradeToUrl: String?
     let paymentMethod: String?
     let capabilities: [String]?
+    let deviceManagement: Bool?
     
     // MARK: - Initialize -
     
     init() {
         let service = ServiceStatus.load()
         isActive = service?.isActive ?? true
-        currentPlan = service?.currentPlan ?? nil
+        currentPlan = service?.currentPlan ?? ""
         activeUntil = service?.activeUntil ?? nil
         isOnFreeTrial = service?.isOnFreeTrial ?? false
         username = service?.username ?? nil
         upgradeToUrl = service?.upgradeToUrl ?? nil
         paymentMethod = service?.paymentMethod ?? nil
         capabilities = service?.capabilities ?? nil
+        deviceManagement = service?.deviceManagement ?? false
     }
     
     // MARK: - Methods -
@@ -90,7 +91,15 @@ struct ServiceStatus: Codable {
     }
     
     func isNewStyleAccount() -> Bool {
-        return paymentMethod == "prepaid"
+        guard let username = KeyChain.username else {
+            return true
+        }
+        
+        return username.hasPrefix("i-")
+    }
+    
+    static func isNewStyleAccount(username: String) -> Bool {
+        return username.hasPrefix("i-")
     }
     
     func daysUntilSubscriptionExpiration() -> Int {
@@ -116,11 +125,8 @@ struct ServiceStatus: Codable {
     
     func isLegacyAccount() -> Bool {
         let accountId = KeyChain.username ?? ""
-        guard let currentPlan = currentPlan else {
-            return false
-        }
         
-        if accountId.hasPrefix("ivpn") && currentPlan.hasPrefix("IVPN Pro") && currentPlan != "IVPN Pro" {
+        if accountId.hasPrefix("ivpn") && currentPlan.contains("VPN Pro") && currentPlan != "IVPN Pro" {
             return true
         }
         

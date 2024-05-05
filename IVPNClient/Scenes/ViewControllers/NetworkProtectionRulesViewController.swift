@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-11-26.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -26,6 +26,7 @@ import UIKit
 class NetworkProtectionRulesViewController: UITableViewController {
     
     @IBOutlet weak var untrustedConnectSwitch: UISwitch!
+    @IBOutlet weak var untrustedBlockLanSwitch: UISwitch!
     @IBOutlet weak var trustedDisconnectSwitch: UISwitch!
     let defaults = UserDefaults.shared
     
@@ -36,6 +37,22 @@ class NetworkProtectionRulesViewController: UITableViewController {
                 showWireGuardKeysMissingError()
             }
         }
+    }
+    
+    @IBAction func toggleUntrustedBlockLan(_ sender: UISwitch) {
+        if sender.isOn && Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+            showAlert(title: "IKEv2 not supported", message: "Block LAN traffic is supported only for OpenVPN and WireGuard protocols.") { _ in
+                sender.setOn(false, animated: true)
+            }
+            return
+        }
+        
+        defaults.set(sender.isOn, forKey: UserDefaults.Key.networkProtectionUntrustedBlockLan)
+        evaluateReconnect(sender: sender as UIView)
+    }
+    
+    @IBAction func blockLanInfo(_ sender: UIButton) {
+        showAlert(title: "Info", message: "When enabled, LAN traffic will be blocked when connected to an untrusted network.")
     }
     
     @IBAction func toggleTrustedDisconnect(_ sender: UISwitch) {
@@ -51,6 +68,7 @@ class NetworkProtectionRulesViewController: UITableViewController {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         untrustedConnectSwitch.setOn(defaults.networkProtectionUntrustedConnect, animated: false)
+        untrustedBlockLanSwitch.setOn(defaults.networkProtectionUntrustedBlockLan, animated: false)
         trustedDisconnectSwitch.setOn(defaults.networkProtectionTrustedDisconnect, animated: false)
     }
     

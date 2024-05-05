@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-10-16.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -26,19 +26,19 @@ import UIKit
 class ServerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var flagImage: FlagImageView!
-    @IBOutlet weak var serverLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var serverName: UILabel!
     @IBOutlet weak var pingImage: UIImageView!
     @IBOutlet weak var pingTimeMs: UILabel!
     @IBOutlet weak var configureButton: UIButton!
     @IBOutlet weak var ipv6Label: UILabel!
     @IBOutlet weak var expandButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var viewModel: VPNServerViewModel! {
         didSet {
-            if !isMultiHop && indexPath.row == 0 {
+            if !isMultiHop && indexPath.row == 0 && !isFavorite {
                 setFastestServerCell()
-            } else if isMultiHop && indexPath.row == 0 || !isMultiHop && indexPath.row == 1 {
+            } else if (isMultiHop && indexPath.row == 0 || !isMultiHop && indexPath.row == 1) && !isFavorite {
                 setRandomServerCell()
             } else if viewModel.server.isHost {
                 setHostServerCell()
@@ -53,13 +53,20 @@ class ServerTableViewCell: UITableViewCell {
     
     var serverToValidate: VPNServer! {
         didSet {
-            if !Application.shared.serverList.validateServer(firstServer: viewModel.server, secondServer: serverToValidate) {
-                serverName.textColor = UIColor.init(named: Theme.ivpnLabel6)
-                flagImage.alpha = 0.5
-            } else {
-                serverName.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
-                flagImage.alpha = 1
+            guard VPNServer.validMultiHopCountry(viewModel.server, serverToValidate) else {
+                contentView.alpha = 0.55
+                return
             }
+            guard VPNServer.validMultiHopISP(viewModel.server, serverToValidate) else {
+                contentView.alpha = 0.55
+                return
+            }
+            if isFavorite, viewModel.server.isHost, !VPNServer.validMultiHop(viewModel.server, serverToValidate) {
+                contentView.alpha = 0.55
+                return
+            }
+            
+            contentView.alpha = 1
         }
     }
     
@@ -83,14 +90,28 @@ class ServerTableViewCell: UITableViewCell {
     }
     
     var isMultiHop: Bool!
+    var isFavorite = false
+    
+    // MARK: - IBActions -
+    
+    @IBAction func toggleFavorite(_ sender: UIButton) {
+        let isFavorite = StorageManager.isFavorite(server: viewModel.server)
+        sender.setImage(UIImage.init(named: !isFavorite ? "icon-star-on" : "icon-star-off"), for: .normal)
+        StorageManager.save(server: viewModel.server, isFavorite: !isFavorite)
+        
+        if let tableView = superview as? UITableView {
+            tableView.reloadData()
+        }
+    }
     
     // MARK: - Methods -
     
     private func setCellAppearance() {
+        let isServerFavorite = StorageManager.isFavorite(server: viewModel.server)
         flagImage.updateUpFlagIcon()
-        serverName.sizeToFit()
-        ipv6Label.isHidden = !viewModel.showIPv6Label
+        ipv6Label.isHidden = !viewModel.showIPv6Label || (viewModel.server.isHost && !isFavorite)
         expandButton.tintColor = UIColor.init(named: Theme.ivpnGray6)
+        favoriteButton.setImage(UIImage.init(named: isServerFavorite ? "icon-star-on" : "icon-star-off"), for: .normal)
     }
     
     private func setFastestServerCell() {
@@ -100,6 +121,7 @@ class ServerTableViewCell: UITableViewCell {
         configureButton.isHidden = false
         configureButton.isUserInteractionEnabled = true
         expandButton.isHidden = true
+        favoriteButton.isHidden = true
     }
     
     private func setRandomServerCell() {
@@ -109,6 +131,7 @@ class ServerTableViewCell: UITableViewCell {
         configureButton.isHidden = true
         configureButton.isUserInteractionEnabled = true
         expandButton.isHidden = true
+        favoriteButton.isHidden = true
     }
     
     private func setGatewayServerCell() {
@@ -118,16 +141,22 @@ class ServerTableViewCell: UITableViewCell {
         serverName.text = viewModel.formattedServerName(sort: sort)
         configureButton.isHidden = true
         configureButton.isUserInteractionEnabled = false
-        expandButton.isHidden = !UserDefaults.shared.selectHost
+        expandButton.isHidden = !UserDefaults.shared.selectHost || isFavorite
+        favoriteButton.isHidden = false
     }
     
     private func setHostServerCell() {
         serverName.text = viewModel.formattedServerName
         configureButton.isHidden = true
         configureButton.isUserInteractionEnabled = false
-        flagImage.image = nil
-        flagImage.image?.accessibilityIdentifier = ""
         expandButton.isHidden = true
+        favoriteButton.isHidden = false
+        flagImage.image?.accessibilityIdentifier = ""
+        flagImage.image = isFavorite ? viewModel.imageForCountryCode : nil
+        
+        if let gateway = Application.shared.serverList.getServer(byCity: viewModel.server.city), gateway.hosts.count <= 1 {
+            favoriteButton.isHidden = true
+        }
     }
     
     private func setPingTime() {

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2021-02-15.
-//  Copyright (c) 2021 Privatus Limited.
+//  Copyright (c) 2021 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -75,9 +75,6 @@ class SecureDNSViewController: UITableViewController {
         secureDNSView.setupView(model: model)
         addObservers()
         hideKeyboardOnTap()
-        
-        #warning("Added to resolve upgrade disruption from 2.3.0 to 2.3.1")
-        saveAddress()
     }
     
     // MARK: - Methods -
@@ -100,10 +97,6 @@ class SecureDNSViewController: UITableViewController {
     }
     
     private func saveDNSProfile() {
-        guard #available(iOS 14.0, *) else {
-            return
-        }
-        
         let validation = model.validation()
         
         guard validation.0 else {
@@ -136,18 +129,10 @@ class SecureDNSViewController: UITableViewController {
     }
     
     @objc private func updateDNSProfile() {
-        guard #available(iOS 14.0, *) else {
-            return
-        }
-        
         DNSManager.shared.saveProfile(model: model) { _ in }
     }
     
     private func removeDNSProfile() {
-        guard #available(iOS 14.0, *) else {
-            return
-        }
-        
         DNSManager.shared.removeProfile { _ in
             DNSManager.shared.loadProfile { _ in
                 

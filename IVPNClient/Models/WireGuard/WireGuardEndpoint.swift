@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2021-09-22.
-//  Copyright (c) 2021 Privatus Limited.
+//  Copyright (c) 2021 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -49,7 +49,7 @@ struct WireGuardEndpoint {
         }
         
         hostString = hostString.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
-        var addressType = AddressType.validateIpAddress(ipToValidate: hostString)
+        var addressType = AddressType.validateIpAddress(hostString)
         let ipString: String
         
         if addressType == .other {
@@ -59,7 +59,7 @@ struct WireGuardEndpoint {
         }
         
         ipAddress = String(ipString)
-        addressType = AddressType.validateIpAddress(ipToValidate: ipAddress)
+        addressType = AddressType.validateIpAddress(ipAddress)
         
         guard addressType == .IPv4 || addressType == .IPv6 else {
             throw EndpointValidationError.invalidIP(ipAddress)

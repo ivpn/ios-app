@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-15.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -51,6 +51,7 @@ struct Tunnel {
         providerConfiguration[PCKeys.endpoints.rawValue] = peers?.array.compactMap {($0 as? Peer)?.endpoint}.joined(separator: ", ")
         providerConfiguration[PCKeys.dns.rawValue] = interface?.dns
         providerConfiguration[PCKeys.addresses.rawValue] = interface?.addresses
+        providerConfiguration[PCKeys.mtu.rawValue] = interface?.mtu
         
         var settingsString = "replace_peers=true\n"
         
@@ -90,8 +91,8 @@ struct Tunnel {
             settingsString += "public_key=\(hexPublicKey)\n"
         }
         
-        if let presharedKey = peer.presharedKey {
-            settingsString += "preshared_key=\(presharedKey)\n"
+        if let hexPresharedKey = peer.presharedKey?.base64KeyToHex() {
+            settingsString += "preshared_key=\(hexPresharedKey)\n"
         }
         
         if let endpoint = peer.endpoint {

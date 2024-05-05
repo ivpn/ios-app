@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-11-28.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -24,6 +24,22 @@
 import UIKit
 
 extension UIApplication {
+    
+    var keyWindow: UIWindow? {
+        return self.connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .first(where: { $0 is UIWindowScene })
+            .flatMap({ $0 as? UIWindowScene })?.windows
+            .first(where: \.isKeyWindow)
+    }
+    
+    public var isSplitOrSlideOver: Bool {
+        guard let window = keyWindow else {
+            return false
+        }
+
+        return !(window.frame.width == window.screen.bounds.width) && !(window.frame.width == window.screen.bounds.height)
+    }
     
     class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {

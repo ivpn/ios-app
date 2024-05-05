@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-03-24.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -43,11 +43,23 @@ struct AccountViewModel {
     }
     
     var subscriptionText: String {
-        return serviceStatus.currentPlan ?? ""
+        return serviceStatus.currentPlan
     }
     
     var activeUntilText: String {
         return serviceStatus.isActive ? serviceStatus.activeUntilString() : "No active subscription"
+    }
+    
+    var deviceManagement: Bool {
+        return serviceStatus.deviceManagement ?? false
+    }
+    
+    var deviceName: String? {
+        return KeyChain.deviceName
+    }
+    
+    var showDeviceName: Bool {
+        return deviceManagement && deviceName != nil
     }
     
     // MARK: - Initialize -

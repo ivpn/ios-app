@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-02-19.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -27,8 +27,7 @@ import FloatingPanel
 extension FloatingPanelController {
     
     func setup() {
-        surfaceView.shadowHidden = true
-        surfaceView.contentInsets = .init(top: 20, left: 0, bottom: 0, right: 0)
+        surfaceView.contentPadding = .init(top: 20, left: 0, bottom: 0, right: 0)
         surfaceView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         
         let contentViewController = NavigationManager.getControlPanelViewController()

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-04-24.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -36,7 +36,7 @@ class MapConstants {
         static let iPadLandscapeBottomAnchor = 0
         
         static func getTopAnchor() -> Int {
-            if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
+            if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
                 return iPadLandscapeTopAnchor
             }
             
@@ -48,7 +48,7 @@ class MapConstants {
         }
         
         static func getLeftAnchor() -> Int {
-            if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
+            if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
                 return iPadLandscapeLeftAnchor
             }
             
@@ -56,7 +56,7 @@ class MapConstants {
         }
         
         static func getBottomAnchor() -> Int {
-            if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
+            if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
                 return iPadLandscapeBottomAnchor
             }
             

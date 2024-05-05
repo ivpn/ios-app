@@ -12,7 +12,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2018-07-20.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -98,6 +98,14 @@ class ConnectionManager {
                     self.reconnectAutomatically = false
                     if self.actionType == .connect {
                         self.evaluateCloseApp()
+                    }
+                }
+                DispatchQueue.delay(2.5) {
+                    if UserDefaults.shared.isV2ray && !V2RayCore.shared.reconnectWithV2ray {
+                        V2RayCore.shared.reconnectWithV2ray = true
+                        self.reconnect()
+                    } else {
+                        V2RayCore.shared.reconnectWithV2ray = false
                     }
                 }
             } else {
@@ -231,9 +239,10 @@ class ConnectionManager {
     func connect() {
         updateSelectedServer(status: .connecting)
         
+        let host = NETunnelProviderProtocol.getHost()
         let accessDetails = AccessDetails(
-            serverAddress: settings.selectedServer.gateway,
-            ipAddresses: settings.selectedServer.ipAddresses,
+            ipAddress: host?.host ?? settings.selectedServer.gateway,
+            gateway: settings.selectedServer.gateway,
             username: KeyChain.vpnUsername ?? "",
             passwordRef: KeyChain.vpnPasswordRef
         )
@@ -245,6 +254,17 @@ class ConnectionManager {
             guard error == nil else {
                 NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
                 return
+            }
+            
+            if UserDefaults.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let error = V2RayCore.shared.start()
+                    if error != nil {
+                        log(.error, message: error?.localizedDescription ?? "")
+                    } else {
+                        log(.info, message: "V2Ray start OK")
+                    }
+                }
             }
             
             self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
@@ -260,6 +280,17 @@ class ConnectionManager {
             if UserDefaults.shared.networkProtectionEnabled && !reconnectAutomatically {
                 DispatchQueue.delay(2) {
                     self.installOnDemandRules()
+                }
+            }
+        }
+        
+        if UserDefaults.shared.isV2ray {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let error = V2RayCore.shared.close()
+                if error != nil {
+                    log(.error, message: error?.localizedDescription ?? "")
+                } else {
+                    log(.info, message: "V2Ray stop OK")
                 }
             }
         }
@@ -279,9 +310,10 @@ class ConnectionManager {
                 return
             }
             
+            let host = NETunnelProviderProtocol.getHost()
             let accessDetails = AccessDetails(
-                serverAddress: Application.shared.settings.selectedServer.gateway,
-                ipAddresses: Application.shared.settings.selectedServer.ipAddresses,
+                ipAddress: host?.host ?? settings.selectedServer.gateway,
+                gateway: settings.selectedServer.gateway,
                 username: KeyChain.vpnUsername ?? "",
                 passwordRef: KeyChain.vpnPasswordRef
             )
@@ -408,7 +440,7 @@ class ConnectionManager {
             return
         }
         
-        log(info: "Evaluating VPN connection for Network Protection")
+        log(.info, message: "Evaluating VPN connection for Network Protection")
         
         guard let networkTrust = Application.shared.network.trust else {
             return
@@ -533,7 +565,7 @@ class ConnectionManager {
         }
         
         getWireGuardLog { _ in
-            var wireGuardLog: String? = nil
+            var wireGuardLog: String?
             let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
             if let file = NSData(contentsOfFile: filePath) {
                 wireGuardLog = String(data: file as Data, encoding: .utf8) ?? ""

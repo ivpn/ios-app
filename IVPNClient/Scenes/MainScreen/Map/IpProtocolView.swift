@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2021-04-14.
-//  Copyright (c) 2021 Privatus Limited.
+//  Copyright (c) 2021 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -67,10 +67,10 @@ class IpProtocolView: UIView {
     }
     
     func updateLayout() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UIDevice.current.userInterfaceIdiom == .pad && !UIApplication.shared.isSplitOrSlideOver {
             topConstraint.constant = 40
             
-            if UIApplication.shared.statusBarOrientation.isLandscape {
+            if UIWindow.isLandscape {
                 centerXConstraint.constant = CGFloat(MapConstants.Container.iPadLandscapeLeftAnchor / 2)
                 
             } else {

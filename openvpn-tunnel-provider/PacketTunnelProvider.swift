@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-11-06.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -21,6 +21,33 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import TunnelKit
+import Foundation
+import TunnelKitOpenVPNAppExtension
+import NetworkExtension
+import WidgetKit
 
-class PacketTunnelProvider: OpenVPNTunnelProvider {}
+class PacketTunnelProvider: OpenVPNTunnelProvider {
+    
+    override func startTunnel(options: [String: NSObject]? = nil) async throws {
+        startKeyRotation()
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        try await super.startTunnel(options: options)
+    }
+    
+    override func stopTunnel(with reason: NEProviderStopReason) async {
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        await super.stopTunnel(with: reason)
+    }
+    
+    private func startKeyRotation() {
+        let timer = TimerManager(timeInterval: AppKeyManager.regenerationCheckInterval)
+        timer.eventHandler = {
+            if AppKeyManager.needToRegenerate() {
+                AppKeyManager.shared.setNewKey { _, _, _ in }
+            }
+            timer.proceed()
+        }
+        timer.resume()
+    }
+    
+}

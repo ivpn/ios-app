@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-07-25.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -27,12 +27,14 @@ struct WireGuardResult: Codable {
     let status: Int?
     let message: String?
     let ipAddress: String?
+    let kemCipher1: String?
 }
 
 struct Session: Decodable {
     let token: String?
     let vpnUsername: String?
     let vpnPassword: String?
+    let deviceName: String?
     let serviceStatus: ServiceStatus
     let wireguard: WireGuardResult?
 }

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-24.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -92,11 +92,9 @@ extension String {
         var array = self.split { $0.isNewline }
         array = array.reversed()
         
-        for line in array {
-            if line.contains(from) {
-                let string = line.substring(from: from, to: to)
-                return string?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-            }
+        for line in array where line.contains(from) {
+            let string = line.substring(from: from, to: to)
+            return string?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         }
         
         return ""

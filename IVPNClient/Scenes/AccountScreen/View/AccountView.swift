@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-03-30.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -33,7 +33,10 @@ class AccountView: UITableView {
     @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
-    @IBOutlet weak var addMoreTimeButton: UIButton!
+    @IBOutlet weak var activeUntilCell: UITableViewCell!
+    @IBOutlet weak var deviceNameTitle: UILabel!
+    @IBOutlet weak var deviceName: UILabel!
+    @IBOutlet weak var header: UIView!
     
     // MARK: - Properties -
     
@@ -47,7 +50,14 @@ class AccountView: UITableView {
         statusLabel.backgroundColor = viewModel.statusColor
         subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
-        addMoreTimeButton.isHidden = Application.shared.serviceStatus.isLegacyAccount()
+        activeUntilCell.isHidden = Application.shared.serviceStatus.isLegacyAccount()
+        deviceName.text = viewModel.deviceName
+        deviceNameTitle.isHidden = !viewModel.showDeviceName
+        deviceName.isHidden = !viewModel.showDeviceName
+        let headerHeight = viewModel.showDeviceName ? 270 : 210
+        header.frame = CGRect(x: 0, y: 0, width: Int(header.frame.width), height: headerHeight)
+        reloadData()
+        layoutIfNeeded()
     }
     
     func initQRCode(viewModel: AccountViewModel) {

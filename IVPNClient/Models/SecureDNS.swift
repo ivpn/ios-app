@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2021-02-16.
-//  Copyright (c) 2021 Privatus Limited.
+//  Copyright (c) 2021 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -30,9 +30,7 @@ struct SecureDNS: Codable {
             if let address = address {
                 serverURL = DNSProtocolType.getServerURL(address: address)
                 serverName = DNSProtocolType.getServerName(address: address)
-                if #available(iOS 14.0, *) {
-                    DNSManager.saveResolvedDNS(server: DNSProtocolType.getServerToResolve(address: address), key: UserDefaults.Key.resolvedDNSOutsideVPN)
-                }
+                DNSManager.saveResolvedDNS(server: DNSProtocolType.getServerToResolve(address: address), key: UserDefaults.Key.resolvedDNSOutsideVPN)
             } else {
                 serverURL = nil
                 serverName = nil

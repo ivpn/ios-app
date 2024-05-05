@@ -12,7 +12,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-10-17.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -65,6 +65,10 @@ class Application {
     }
     
     var geoLookup = GeoLookup(ipAddress: "", countryCode: "", country: "", city: "", isIvpnServer: false, isp: "", latitude: 0, longitude: 0)
+    
+    static var isKeyPairRequired: Bool {
+        return shared.settings.connectionProtocol.tunnelType() == .wireguard
+    }
     
     // MARK: - Initialize -
     

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-04-15.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -23,11 +23,13 @@
 
 import UIKit
 import ActiveLabel
+import WidgetKit
 
 class AntiTrackerViewController: UITableViewController {
     
     @IBOutlet weak var antiTrackerSwitch: UISwitch!
     @IBOutlet weak var antiTrackerHardcoreSwitch: UISwitch!
+    @IBOutlet weak var antiTrackerList: UILabel!
     
     // MARK: - @IBActions -
     
@@ -40,8 +42,10 @@ class AntiTrackerViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         antiTrackerHardcoreSwitch.isEnabled = sender.isOn
         evaluateReconnect(sender: sender as UIView)
+        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
         
         if sender.isOn {
             registerUserActivity(type: UserActivityType.AntiTrackerEnable, title: UserActivityTitle.AntiTrackerEnable)
@@ -52,7 +56,10 @@ class AntiTrackerViewController: UITableViewController {
     
     @IBAction func toggleAntiTrackerHardcore(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTrackerHardcore)
-        evaluateReconnect(sender: sender as UIView)
+        NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
+        if UserDefaults.shared.isAntiTracker {
+            evaluateReconnect(sender: sender as UIView)
+        }
     }
     
     // MARK: - View Lifecycle -
@@ -60,13 +67,26 @@ class AntiTrackerViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        initNavigationBar()
         addObservers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.deselectRow(at: IndexPath(row: 0, section: 1), animated: true)
+        setupView()
     }
     
     // MARK: - Private methods -
     
+    private func initNavigationBar() {
+        if isPresentedModally {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController(_:)))
+        }
+    }
+    
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(setupView), name: Notification.Name.AntiTrackerUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(listUpdated), name: Notification.Name.AntiTrackerListUpdated, object: nil)
     }
     
     @objc private func setupView() {
@@ -74,6 +94,13 @@ class AntiTrackerViewController: UITableViewController {
         antiTrackerSwitch.setOn(UserDefaults.shared.isAntiTracker, animated: false)
         antiTrackerHardcoreSwitch.setOn(UserDefaults.shared.isAntiTrackerHardcore, animated: false)
         antiTrackerHardcoreSwitch.isEnabled = UserDefaults.shared.isAntiTracker
+        antiTrackerList.text = AntiTrackerDns.load()?.description
+    }
+    
+    @objc private func listUpdated() {
+        if UserDefaults.shared.isAntiTracker {
+            evaluateReconnect(sender: antiTrackerList)
+        }
     }
 
 }
@@ -86,7 +113,15 @@ extension AntiTrackerViewController {
         let footer = view as! UITableViewHeaderFooterView
         footer.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
         
-        let urlString = section > 0 ? "https://www.ivpn.net/antitracker/hardcore" : "https://www.ivpn.net/antitracker"
+        var urlString = ""
+        switch section {
+        case 1:
+            urlString = "https://www.ivpn.net/knowledgebase/general/antitracker-plus-lists-explained/"
+        case 2:
+            urlString = "https://www.ivpn.net/knowledgebase/general/antitracker-faq/"
+        default:
+            urlString = "https://www.ivpn.net/antitracker/"
+        }
         
         let label = ActiveLabel(frame: .zero)
         let customType = ActiveType.custom(pattern: "Learn more")

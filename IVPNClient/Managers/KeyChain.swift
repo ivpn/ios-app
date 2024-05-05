@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-11-08.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -21,6 +21,7 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import KeychainAccess
 
 class KeyChain {
@@ -32,9 +33,11 @@ class KeyChain {
     private static let wgIpAddressKey = "WGIpAddressKey"
     private static let wgIpv6HostKey = "WGIPv6HostKey"
     private static let wgIpAddressesKey = "WGIpAddressesKey"
+    private static let wgPresharedKeyKey = "WGPresharedKey"
     private static let sessionTokenKey = "session_token"
     private static let vpnUsernameKey = "vpn_username"
     private static let vpnPasswordKey = "vpn_password"
+    private static let deviceNameKey = "deviceName"
     
     static let bundle: Keychain = {
         return Keychain(service: "net.ivpn.clients.ios", accessGroup: "WQXXM75BYN.net.ivpn.IVPN-Client").accessibility(.whenPasscodeSetThisDeviceOnly)
@@ -94,6 +97,15 @@ class KeyChain {
         }
     }
     
+    class var wgPresharedKey: String? {
+        get {
+            return KeyChain.bundle[wgPresharedKeyKey]
+        }
+        set {
+            KeyChain.bundle[wgPresharedKeyKey] = newValue
+        }
+    }
+    
     class var wgIpv6Host: String? {
         get {
             return KeyChain.bundle[wgIpv6HostKey]
@@ -138,9 +150,19 @@ class KeyChain {
         sessionToken = session.token
         vpnUsername = session.vpnUsername
         vpnPassword = session.vpnPassword
+        deviceName = session.deviceName
         
         if let wireguardResult = session.wireguard, let ipAddress = wireguardResult.ipAddress {
             KeyChain.wgIpAddress = ipAddress
+        }
+    }
+    
+    class var deviceName: String? {
+        get {
+            return KeyChain.bundle[deviceNameKey]
+        }
+        set {
+            KeyChain.bundle[deviceNameKey] = newValue
         }
     }
     
@@ -151,9 +173,11 @@ class KeyChain {
         wgPublicKey = nil
         wgIpAddress = nil
         wgIpAddresses = nil
+        wgPresharedKey = nil
         sessionToken = nil
         vpnUsername = nil
         vpnPassword = nil
+        deviceName = nil
     }
     
 }

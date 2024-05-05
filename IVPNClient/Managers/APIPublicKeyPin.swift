@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2021-01-05.
-//  Copyright (c) 2021 Privatus Limited.
+//  Copyright (c) 2021 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -77,21 +77,7 @@ class APIPublicKeyPin {
         var keyWithHeader = Data(rsa4096Asn1Header)
         keyWithHeader.append(data)
         
-        if #available(iOS 13, *) {
-            return Data(SHA256.hash(data: keyWithHeader)).base64EncodedString()
-        } else {
-            return sha256(keyWithHeader)?.base64EncodedString() ?? ""
-        }
-    }
-    
-    private func sha256(_ data: Data) -> Data? {
-        guard let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH)) else {
-            return nil
-        }
-        
-        CC_SHA256((data as NSData).bytes, CC_LONG(data.count), res.mutableBytes.assumingMemoryBound(to: UInt8.self))
-        
-        return res as Data
+        return Data(SHA256.hash(data: keyWithHeader)).base64EncodedString()
     }
     
 }

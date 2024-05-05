@@ -2,9 +2,85 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.7.0 - Unreleased  
+## 2.12.2 - 2024-04-24  
+
+[IMPROVED] Support for pending payments  
+[IMPROVED] Upgraded payments to StoreKit 2  
+[IMPROVED] Upgraded OpenVPN and OpenSSL libraries  
+[NOTE] Removed support for iOS 14  
+
+## 2.12.1 - 2024-02-24  
+
+[FIXED] In-app payments for legacy accounts  
+
+## 2.12.0 - 2024-02-12  
+
+[NEW] Device Management  
+[FIXED] Selecting individual servers with IKEv2  
+[FIXED] Minor UI issues on the server map  
+
+## 2.11.1 - 2023-12-05  
+
+[NEW] Option to Block LAN traffic when connected to an untrusted network  
+[NEW] Option to turn off the prompt when connecting or disconnecting VPN from the Widget  
+[FIXED] Control panel not rendering when launching the app in landscape mode on iPad  
+[FIXED] Removed redundant entitlements for V2Ray connections  
+[FIXED] Minor UI fixes and improvements  
+
+## 2.11.0 - 2023-11-16  
+
+[NEW] Obfuscation with V2Ray for WireGuard connections  
+[IMPROVED] Update WireGuard to the latest version  
+[IMPROVED] Update packages/dependencies to the latest version  
+[FIXED] Repeatedly connecting and disconnecting when Network Protection is enabled  
+
+## 2.10.1 - 2023-09-04  
+
+[NEW] Option to disable LAN traffic when connected to VPN  
+[IMPROVED] Added "Advanced" section in the Settings 
+
+## 2.10.0 - 2023-08-08  
+
+[NEW] Post-Quantum Resistant WireGuard Connections  
+[NEW] AntiTracker Plus additional block lists  
+[IMPROVED] WireGuard keys rotation when connected with OpenVPN  
+[NOTE] Kill Switch is removed for iOS 16+ devices; Disable Kill Switch before upgrading to avoid connection issues 
+
+## 2.9.1 - 2023-06-29  
+
+[NOTE] Removed references to Port Forwarding  
+
+## 2.9.0 - 2023-05-24  
+
+[NEW] New Widget implemented with WidgetKit  
+[NEW] Option to prevent a Multi-Hop chain with the same provider  
+[NEW] MTU configuration for WireGuard  
+[IMPROVED] Upgraded OpenVPN and OpenSSL libraries  
+[IMPROVED] Alternative method to obtain diagnostic logs  
+[FIXED] Servers mismatch when selecting individual servers  
+[FIXED] Unable to change the port when switching from WireGuard to OpenVPN  
+[FIXED] Fastest server settings list automatically toggling servers off  
+[FIXED] App remains in "disconnecting" state when using Network Protection  
+[FIXED] Server latency not displayed after logging in  
+[NOTE] Removed support for iOS 12 and 13  
+
+## 2.8.0 - 2023-01-30  
+
+[NEW] Favorite servers  
+[IMPROVED] Option to search and sort in the fastest server configuration list  
+
+## 2.7.1 - 2022-12-08  
+
+[IMPROVED] Support for Split View and Slide Over mode on iPadOS  
+[IMPROVED] Upgraded app diagnostic logs  
+[FIXED] Crash on app launch caused by Ping service  
+[FIXED] Montreal location not showing all available hosts  
+[FIXED] Minor bug fixes  
+
+## 2.7.0 - 2022-11-23  
 
 [NEW] Ability to connect to a specific host in a location  
+[NEW] Support for custom ports  
 [IMPROVED] Warning about existing VPN connection(s) when downgrading subscription plan  
 [FIXED] IPv6 connection information not displayed on iOS 16+ devices  
 [FIXED] Port number displayed in the settings when MultiHop is enabled  

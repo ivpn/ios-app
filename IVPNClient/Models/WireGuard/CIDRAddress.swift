@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-22.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -58,7 +58,7 @@ struct CIDRAddress {
             subnetString = ""
         }
         
-        let addressType = AddressType.validateIpAddress(ipToValidate: ipAddress)
+        let addressType = AddressType.validateIpAddress(ipAddress)
         
         guard addressType == .IPv4 || addressType == .IPv6 else {
             throw CIDRAddressValidationError.invalidIP(ipAddress)

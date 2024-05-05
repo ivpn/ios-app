@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-04-15.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -22,7 +22,7 @@
 //
 
 import UIKit
-import SwiftyStoreKit
+import StoreKit
 import SnapKit
 import JGProgressHUD
 
@@ -54,7 +54,7 @@ class PaymentViewController: UITableViewController {
     
     lazy var retryButton: UIButton = {
         let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(fetchProducts), for: .touchUpInside)
+        button.addTarget(self, action: #selector(load), for: .touchUpInside)
         button.setTitle("Retry", for: .normal)
         button.sizeToFit()
         button.isHidden = true
@@ -101,7 +101,9 @@ class PaymentViewController: UITableViewController {
     }
     
     @IBAction func purchase(_ sender: UIButton) {
-        purchaseProduct(identifier: service.productId)
+        Task {
+            await purchaseProduct(identifier: service.productId)
+        }
     }
     
     @IBAction func close() {
@@ -119,8 +121,16 @@ class PaymentViewController: UITableViewController {
         setupView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        PurchaseManager.shared.delegate = appDelegate
+        super.viewDidDisappear(animated)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        PurchaseManager.shared.delegate = self
         
         if extendingService {
             if Application.shared.authentication.isLoggedIn && !Application.shared.serviceStatus.isNewStyleAccount() {
@@ -128,7 +138,7 @@ class PaymentViewController: UITableViewController {
                 service = Service(type: serviceType, duration: .year)
             }
             
-            fetchProducts()
+            load()
         }
     }
     
@@ -150,10 +160,7 @@ class PaymentViewController: UITableViewController {
     }
     
     private func setupView() {
-        if #available(iOS 13.0, *) {
-            isModalInPresentation = true
-        }
-        
+        isModalInPresentation = true
         view.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
         payButton?.set(title: "Pay", subtitle: "")
         
@@ -178,75 +185,33 @@ class PaymentViewController: UITableViewController {
         }
     }
     
-    @objc private func fetchProducts() {
+    @objc private func load() {
+        Task {
+            await loadProducts()
+        }
+    }
+    
+    private func loadProducts() async {
         displayMode = .loading
         
-        IAPManager.shared.fetchProducts { [weak self] products, error in
-            guard let self = self else { return }
-            
-            if error != nil {
-                self.showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
-                self.displayMode = .error
-                return
-            }
-            
-            if products != nil {
-                self.displayMode = .content
-            }
+        do {
+            try await PurchaseManager.shared.loadProducts()
+            displayMode = .content
+        } catch {
+            showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
+            displayMode = .error
         }
     }
     
-    private func purchaseProduct(identifier: String) {
-        guard deviceCanMakePurchases() else { return }
-        
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        hud.detailTextLabel.text = "Processing payment..."
-        hud.show(in: (navigationController?.view)!)
-        
-        IAPManager.shared.purchaseProduct(identifier: identifier) { [weak self] purchase, error in
-            guard let self = self else { return }
-            
-            if let error = error {
-                self.showErrorAlert(title: "Error", message: error)
-                self.hud.dismiss()
-                return
-            }
-            
-            if let purchase = purchase {
-                self.completePurchase(purchase: purchase)
-            }
+    private func purchaseProduct(identifier: String) async {
+        guard deviceCanMakePurchases() else {
+            return
         }
-    }
-    
-    private func completePurchase(purchase: PurchaseDetails) {
-        IAPManager.shared.completePurchase(purchase: purchase) { [weak self] serviceStatus, error in
-            guard let self = self else { return }
-            
-            self.hud.dismiss()
-            
-            if let error = error {
-                self.showErrorAlert(title: "Error", message: error.message) { _ in
-                    if error.status == 400 {
-                        self.navigationController?.dismiss(animated: true, completion: nil)
-                    }
-                }
-                return
-            }
-            
-            if let serviceStatus = serviceStatus {
-                self.showSubscriptionActivatedAlert(serviceStatus: serviceStatus) {
-                    if KeyChain.sessionToken == nil {
-                        KeyChain.username = KeyChain.tempUsername
-                        KeyChain.tempUsername = nil
-                        self.sessionManager.createSession()
-                        return
-                    }
-                    
-                    self.navigationController?.dismiss(animated: true) {
-                        NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
-                    }
-                }
-            }
+        
+        do {
+            _ = try await PurchaseManager.shared.purchase(identifier)
+        } catch {
+            showErrorAlert(title: "Error", message: error.localizedDescription)
         }
     }
     
@@ -298,6 +263,67 @@ extension PaymentViewController {
         guard indexPath.row > 0 else { return }
         service = service.collection[indexPath.row - 1]
         tableView.reloadData()
+    }
+    
+}
+
+// MARK: - PurchaseManagerDelegate -
+
+extension PaymentViewController: PurchaseManagerDelegate {
+    
+    func purchaseStart() {
+        DispatchQueue.main.async { [self] in
+            hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+            hud.detailTextLabel.text = "Processing payment..."
+            hud.show(in: (navigationController?.view)!)
+        }
+    }
+    
+    func purchasePending() {
+        DispatchQueue.main.async { [self] in
+            hud.dismiss()
+            showAlert(title: "Pending payment", message: "Payment is pending for approval. We will complete the transaction as soon as payment is approved.")
+        }
+    }
+    
+    func purchaseSuccess(activeUntil: String, extended: Bool) {
+        guard extended else {
+            hud.dismiss()
+            return
+        }
+        
+        DispatchQueue.main.async { [self] in
+            hud.dismiss()
+            
+            showSubscriptionActivatedAlert(activeUntil: activeUntil) {
+                if KeyChain.sessionToken == nil {
+                    KeyChain.username = KeyChain.tempUsername
+                    KeyChain.tempUsername = nil
+                    self.sessionManager.createSession()
+                    return
+                }
+                
+                self.navigationController?.dismiss(animated: true) {
+                    NotificationCenter.default.post(name: Notification.Name.SubscriptionActivated, object: nil)
+                }
+            }
+        }
+    }
+    
+    func purchaseError(error: Any?) {
+        DispatchQueue.main.async { [self] in
+            hud.dismiss()
+            
+            guard let error = error as? ErrorResult else {
+                return
+            }
+            
+            showErrorAlert(title: "Error", message: error.message) { _ in
+                if error.status == 400 {
+                    self.navigationController?.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
     }
     
 }

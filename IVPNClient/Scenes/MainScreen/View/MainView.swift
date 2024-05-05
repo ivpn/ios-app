@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-04-01.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -58,6 +58,8 @@ class MainView: UIView {
     
     var infoAlertViewModel = InfoAlertViewModel()
     private var localCoordinates: (Double, Double)?
+    private var accountButton = UIButton()
+    private var settingsButton = UIButton()
     private var centerMapButton = UIButton()
     
     // MARK: - @IBActions -
@@ -134,7 +136,6 @@ class MainView: UIView {
     }
     
     private func initSettingsAction() {
-        let settingsButton = UIButton()
         addSubview(settingsButton)
         
         settingsButton.snp.makeConstraints { make in
@@ -148,23 +149,7 @@ class MainView: UIView {
         settingsButton.accessibilityLabel = "Settings"
         settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
         
-        let accountButton = UIButton()
         addSubview(accountButton)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            accountButton.snp.makeConstraints { make in
-                make.width.equalTo(42)
-                make.height.equalTo(42)
-                make.top.equalTo(55)
-                make.right.equalTo(-100)
-            }
-        } else {
-            accountButton.snp.makeConstraints { make in
-                make.width.equalTo(42)
-                make.height.equalTo(42)
-                make.top.equalTo(55)
-                make.left.equalTo(30)
-            }
-        }
         accountButton.setupIcon(imageName: "icon-user")
         accountButton.accessibilityLabel = "Account"
         accountButton.addTarget(self, action: #selector(openAccountInfo), for: .touchUpInside)
@@ -195,7 +180,23 @@ class MainView: UIView {
     }
     
     private func updateActionButtons() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UIDevice.current.userInterfaceIdiom == .pad && !UIApplication.shared.isSplitOrSlideOver {
+            accountButton.snp.remakeConstraints { make in
+                make.width.equalTo(42)
+                make.height.equalTo(42)
+                make.top.equalTo(55)
+                make.right.equalTo(-100)
+            }
+        } else {
+            accountButton.snp.remakeConstraints { make in
+                make.width.equalTo(42)
+                make.height.equalTo(42)
+                make.top.equalTo(55)
+                make.left.equalTo(30)
+            }
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad && !UIApplication.shared.isSplitOrSlideOver {
             centerMapButton.snp.remakeConstraints { make in
                 make.size.equalTo(42)
                 make.right.equalTo(-170)

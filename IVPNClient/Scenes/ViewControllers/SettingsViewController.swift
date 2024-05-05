@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-10-17.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -26,6 +26,7 @@ import UIKit
 import MessageUI
 import JGProgressHUD
 import NetworkExtension
+import WidgetKit
 
 class SettingsViewController: UITableViewController {
     
@@ -40,11 +41,8 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var multiHopSwitch: UISwitch!
     @IBOutlet weak var entryServerCell: UITableViewCell!
     @IBOutlet weak var keepAliveSwitch: UISwitch!
-    @IBOutlet weak var loggingSwitch: UISwitch!
-    @IBOutlet weak var loggingCell: UITableViewCell!
     @IBOutlet weak var ipv6Switch: UISwitch!
     @IBOutlet weak var showIPv4ServersSwitch: UISwitch!
-    @IBOutlet weak var askToReconnectSwitch: UISwitch!
     @IBOutlet weak var killSwitchSwitch: UISwitch!
     @IBOutlet weak var selectHostSwitch: UISwitch!
     
@@ -107,6 +105,7 @@ class SettingsViewController: UITableViewController {
         updateCellInset(cell: entryServerCell, inset: sender.isOn)
         tableView.reloadData()
         evaluateReconnect(sender: sender as UIView)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     @IBAction func toggleIpv6(_ sender: UISwitch) {
@@ -138,18 +137,6 @@ class SettingsViewController: UITableViewController {
         evaluateReconnect(sender: sender as UIView)
     }
     
-    @IBAction func toggleLogging(_ sender: UISwitch) {
-        FileSystemManager.resetLogFile(name: Config.openVPNLogFile)
-        FileSystemManager.resetLogFile(name: Config.wireGuardLogFile)
-        UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isLogging)
-        updateCellInset(cell: loggingCell, inset: sender.isOn)
-        tableView.reloadData()
-    }
-    
-    @IBAction func toggleAskToReconnect(_ sender: UISwitch) {
-        UserDefaults.shared.set(!sender.isOn, forKey: UserDefaults.Key.notAskToReconnect)
-    }
-    
     @IBAction func toggleSelectHost(_ sender: UISwitch) {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.selectHost)
         
@@ -173,11 +160,7 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func authenticate(_ sender: Any) {
-        if #available(iOS 13.0, *) {
-            present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-        } else {
-            present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
-        }
+        present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
     }
     
     // MARK: - View Lifecycle -
@@ -219,13 +202,9 @@ class SettingsViewController: UITableViewController {
         showIPv4ServersSwitch.isEnabled = UserDefaults.shared.isIPv6
         killSwitchSwitch.setOn(UserDefaults.shared.killSwitch, animated: false)
         keepAliveSwitch.setOn(UserDefaults.shared.keepAlive, animated: false)
-        loggingSwitch.setOn(UserDefaults.shared.isLogging, animated: false)
-        askToReconnectSwitch.setOn(!UserDefaults.shared.notAskToReconnect, animated: false)
         selectHostSwitch.setOn(UserDefaults.shared.selectHost, animated: false)
         
         updateCellInset(cell: entryServerCell, inset: UserDefaults.shared.isMultiHop)
-        updateCellInset(cell: loggingCell, inset: UserDefaults.shared.isLogging)
-        
         updateSelectedServer()
         
         NotificationCenter.default.addObserver(self, selector: #selector(pingDidComplete), name: Notification.Name.PingDidComplete, object: nil)
@@ -334,59 +313,6 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    private func sendLogs() {
-        guard evaluateIsLoggedIn() else {
-            return
-        }
-        
-        guard evaluateMailCompose() else {
-            return
-        }
-        
-        var wireguardLogAttached = false
-        var openvpnLogAttached = false
-        var presentMailComposer = true
-        
-        Application.shared.connectionManager.getWireGuardLog { _ in
-            let composer = MFMailComposeViewController()
-            composer.mailComposeDelegate = self
-            composer.setToRecipients([Config.contactSupportMail])
-            
-            if UserDefaults.shared.isLogging {
-                var wireGuardLog: String? = nil
-                let filePath = FileSystemManager.sharedFilePath(name: "WireGuard.log").path
-                if let file = NSData(contentsOfFile: filePath) {
-                    wireGuardLog = String(data: file as Data, encoding: .utf8) ?? ""
-                }
-                
-                FileSystemManager.updateLogFile(newestLog: wireGuardLog, name: Config.wireGuardLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-                
-                let logFile = FileSystemManager.sharedFilePath(name: Config.wireGuardLogFile).path
-                if let fileData = NSData(contentsOfFile: logFile), !wireguardLogAttached {
-                    composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "wireguard-")).txt")
-                    wireguardLogAttached = true
-                }
-            }
-            
-            Application.shared.connectionManager.getOpenVPNLog { openVPNLog in
-                if UserDefaults.shared.isLogging {
-                    FileSystemManager.updateLogFile(newestLog: openVPNLog, name: Config.openVPNLogFile, isLoggedIn: Application.shared.authentication.isLoggedIn)
-                    
-                    let logFile = FileSystemManager.sharedFilePath(name: Config.openVPNLogFile).path
-                    if let fileData = NSData(contentsOfFile: logFile), !openvpnLogAttached {
-                        composer.addAttachmentData(fileData as Data, mimeType: "text/txt", fileName: "\(Date.logFileName(prefix: "openvpn-")).txt")
-                        openvpnLogAttached = true
-                    }
-                }
-                
-                if presentMailComposer {
-                    self.present(composer, animated: true, completion: nil)
-                    presentMailComposer = false
-                }
-            }
-        }
-    }
-    
     private func contactSupport() {
         guard evaluateMailCompose() else {
             return
@@ -425,49 +351,47 @@ extension SettingsViewController {
         if indexPath.section == 0 && indexPath.row == 1 { return 60 }
         if indexPath.section == 0 && indexPath.row == 3 && !multiHopSwitch.isOn { return 0 }
         if indexPath.section == 3 && indexPath.row == 1 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 7 { return 60 }
-        if indexPath.section == 3 && indexPath.row == 8 && !loggingSwitch.isOn { return 0 }
         
         // Disconnected custom DNS
         if indexPath.section == 3 && indexPath.row == 3 {
-            if #available(iOS 14.0, *) {
-                return UITableView.automaticDimension
-            } else {
-                return 0
-            }
+            return UITableView.automaticDimension
         }
         
         // Kill Switch
         if indexPath.section == 3 && indexPath.row == 4 {
-            if #available(iOS 15.1, *) {
+            if #available(iOS 16, *) { } else {
                 return UITableView.automaticDimension
-            } else {
-                return 0
             }
+            
+            return 0
         }
         
         return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 && indexPath.row == 8 {
-            tableView.deselectRow(at: indexPath, animated: true)
-            sendLogs()
-        }
-        
-        if indexPath.section == 4 && indexPath.row == 0 {
+        if indexPath.section == 5 && indexPath.row == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
             openTermsOfService()
         }
         
-        if indexPath.section == 4 && indexPath.row == 1 {
+        if indexPath.section == 5 && indexPath.row == 1 {
             tableView.deselectRow(at: indexPath, animated: true)
             openPrivacyPolicy()
         }
         
-        if indexPath.section == 4 && indexPath.row == 2 {
+        if indexPath.section == 5 && indexPath.row == 2 {
             tableView.deselectRow(at: indexPath, animated: true)
             contactSupport()
+        }
+        
+        if indexPath.section == 4 && indexPath.row == 0 {
+            guard evaluateIsLoggedIn() else {
+                tableView.deselectRow(at: indexPath, animated: true)
+                return
+            }
+            
+            performSegue(withIdentifier: "SelectAdvanced", sender: nil)
         }
         
         if indexPath.section == 1 && indexPath.row == 0 {
@@ -485,7 +409,7 @@ extension SettingsViewController {
                 if enabled, Application.shared.connectionManager.status.isDisconnected() {
                     showDisableVPNPrompt(sourceView: tableView.cellForRow(at: indexPath)!) {
                         Application.shared.connectionManager.removeOnDemandRules {}
-                        performSegue(withIdentifier: "SelectProtocol", sender: nil)
+                        self.performSegue(withIdentifier: "SelectProtocol", sender: nil)
                     }
                     return
                 }

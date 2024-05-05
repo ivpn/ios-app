@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-08-20.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -28,11 +28,7 @@ extension UIImageView {
     func setFlagIconBorder() {
         layer.cornerRadius = 2.0
         layer.shadowRadius = 0.5
-        if #available(iOS 13.0, *) {
-            layer.shadowColor = UIColor.label.cgColor
-        } else {
-            layer.shadowColor = UIColor.black.cgColor
-        }
+        layer.shadowColor = UIColor.label.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowOpacity = 0.3
         backgroundColor = UIColor.clear

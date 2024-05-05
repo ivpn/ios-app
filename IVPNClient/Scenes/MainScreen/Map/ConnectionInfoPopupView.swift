@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-03-18.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -72,7 +72,7 @@ class ConnectionInfoPopupView: UIView {
         return locationLabel
     }()
     
-    var actionButton: UIButton = {
+    lazy var actionButton: UIButton = {
         let actionButton = UIButton()
         actionButton.setImage(UIImage.init(named: "icon-info-2"), for: .normal)
         actionButton.accessibilityLabel = "Connection info details"
@@ -145,7 +145,7 @@ class ConnectionInfoPopupView: UIView {
     }
     
     func updateView() {
-        if UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver {
             actionButton.isHidden = true
         } else {
             actionButton.isHidden = false

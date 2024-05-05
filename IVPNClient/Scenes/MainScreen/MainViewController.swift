@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-02-19.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -24,6 +24,7 @@
 import UIKit
 import FloatingPanel
 import NetworkExtension
+import WidgetKit
 
 class MainViewController: UIViewController {
     
@@ -74,13 +75,14 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        showFloatingPanel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startPingService(updateServerListDidComplete: updateServerListDidComplete)
         refreshUI()
         initConnectionInfo()
+        startPingService()
     }
     
     deinit {
@@ -110,14 +112,26 @@ class MainViewController: UIViewController {
     // MARK: - Interface Orientations -
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        floatingPanel.updateLayout()
-        mainView.updateLayout()
+        refreshUI()
+    }
+    
+    override func viewLayoutMarginsDidChange() {
+        DispatchQueue.async { [self] in
+            refreshUI()
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        DispatchQueue.async { [self] in
+            refreshUI()
+        }
     }
     
     // MARK: - Methods -
     
     func refreshUI() {
         updateFloatingPanelLayout()
+        mainView.updateLayout()
     }
     
     func updateStatus(vpnStatus: NEVPNStatus, animated: Bool = true) {
@@ -131,6 +145,8 @@ class MainViewController: UIViewController {
     }
     
     @objc func updateGeoLocation() {
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+        
         guard let controlPanel = floatingPanel.contentViewController as? ControlPanelViewController else {
             return
         }
@@ -146,6 +162,7 @@ class MainViewController: UIViewController {
                 mainView.ipv4ViewModel = ProofsViewModel(model: model)
                 mainView.infoAlertViewModel.infoAlert = .subscriptionExpiration
                 mainView.updateInfoAlert()
+                model.save()
                 
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model
@@ -186,7 +203,11 @@ class MainViewController: UIViewController {
     // MARK: - Private methods -
     
     @objc private func updateFloatingPanelLayout() {
-        floatingPanel.updateLayout()
+        guard floatingPanel != nil else {
+            return
+        }
+        
+        floatingPanel.invalidateLayout()
         mainView.setupView(animated: false)
     }
     
@@ -221,6 +242,11 @@ class MainViewController: UIViewController {
         floatingPanel.delegate = self
         floatingPanel.addPanel(toParent: self)
         floatingPanel.show(animated: true)
+        floatingPanel.behavior = MainFloatingPanelBehavior()
+    }
+    
+    private func showFloatingPanel() {
+        floatingPanel.show(animated: false)
     }
     
     private func startAPIUpdate() {
@@ -228,7 +254,7 @@ class MainViewController: UIViewController {
         Timer.scheduledTimer(timeInterval: 60 * 15, target: self, selector: #selector(updateServersList), userInfo: nil, repeats: true)
     }
     
-    private func startPingService(updateServerListDidComplete: Bool) {
+    private func startPingService() {
         if updateServerListDidComplete {
             DispatchQueue.delay(0.5) {
                 Pinger.shared.ping()
@@ -244,7 +270,7 @@ class MainViewController: UIViewController {
             
             updateStatus(vpnStatus: status, animated: false)
             
-            Application.shared.connectionManager.onStatusChanged { status in
+            Application.shared.connectionManager.onStatusChanged { [self] status in
                 updateStatus(vpnStatus: status)
             }
         }

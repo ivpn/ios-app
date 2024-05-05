@@ -12,7 +12,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-10-09.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -47,8 +47,11 @@ class Authentication {
     // MARK: - Methods -
     
     func logIn(session: Session) {
-        guard session.token != nil, session.vpnUsername != nil, session.vpnPassword != nil else { return }
+        guard session.token != nil, session.vpnUsername != nil, session.vpnPassword != nil else {
+            return
+        }
         
+        UserDefaults.shared.set(true, forKey: UserDefaults.Key.isLoggedIn)
         KeyChain.save(session: session)
     }
     
@@ -57,30 +60,28 @@ class Authentication {
         FileSystemManager.clearSession()
         Application.shared.clearSession()
         UserDefaults.shared.set(false, forKey: UserDefaults.Key.networkProtectionEnabled)
+        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isLoggedIn)
         
         if deleteSettings {
             StorageManager.clearSession()
             UserDefaults.clearSession()
             Application.shared.settings.connectionProtocol = Config.defaultProtocol
             Application.shared.settings.saveConnectionProtocol()
+            Application.shared.settings.saveDefaultAntiTrackerDns()
         }
     }
     
     func removeStoredCredentials() {
         KeyChain.username = nil
         
-        log(info: "Credentials removed from Key Chain")
+        log(.info, message: "Credentials removed from Key Chain")
     }
     
     func getStoredUsername() -> String {
-        log(info: "Username read from Key Chain")
-        
         return KeyChain.username ?? ""
     }
     
     func getStoredSessionToken() -> String {
-        log(info: "Session token read from Key Chain")
-        
         return KeyChain.sessionToken ?? ""
     }
     

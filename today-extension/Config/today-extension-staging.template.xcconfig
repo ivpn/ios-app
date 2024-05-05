@@ -1,4 +1,0 @@
-#include "Pods/Target Support Files/Pods-today-extension/Pods-today-extension.staging.xcconfig"
-
-ApiHostName = 
-TlsHostName = 

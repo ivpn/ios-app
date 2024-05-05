@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-07-12.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -23,6 +23,7 @@
 
 import UIKit
 import JGProgressHUD
+import WidgetKit
 
 class LoginViewController: UIViewController {
 
@@ -42,6 +43,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties -
     
+    var showLogoutAlert: Bool = false
+    
     private lazy var sessionManager: SessionManager = {
         let sessionManager = SessionManager()
         sessionManager.delegate = self
@@ -56,6 +59,10 @@ class LoginViewController: UIViewController {
     // MARK: - @IBActions -
     
     @IBAction func loginToAccount(_ sender: AnyObject) {
+        guard evaluatePasscode() else {
+            return
+        }
+        
         guard UserDefaults.shared.hasUserConsent else {
             actionType = .login
             present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
@@ -67,6 +74,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
+        guard evaluatePasscode() else {
+            return
+        }
+        
         guard UserDefaults.shared.hasUserConsent else {
             actionType = .signup
             present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
@@ -81,23 +92,31 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func restorePurchases(_ sender: AnyObject) {
-        guard deviceCanMakePurchases() else { return }
+        guard evaluatePasscode() else {
+            return
+        }
+        
+        guard deviceCanMakePurchases() else {
+            return
+        }
         
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
         hud.detailTextLabel.text = "Restoring purchases..."
         hud.show(in: (navigationController?.view)!)
         
-        IAPManager.shared.restorePurchases { account, error in
-            self.hud.dismiss()
-            
-            if let error = error {
-                self.showErrorAlert(title: "Restore failed", message: error.message)
-                return
-            }
-            
-            if account != nil {
-                self.userName.text = account?.accountId
-                self.sessionManager.createSession()
+        PurchaseManager.shared.restorePurchases { account, error in
+            DispatchQueue.main.async {
+                self.hud.dismiss()
+                
+                if let error = error {
+                    self.showErrorAlert(title: "Restore failed", message: error.message)
+                    return
+                }
+                
+                if let account = account {
+                    self.userName.text = account.accountId
+                    self.sessionManager.createSession()
+                }
             }
         }
     }
@@ -118,8 +137,13 @@ class LoginViewController: UIViewController {
         
         // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
         // Remove when fixed in future releases
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.setNeedsLayout()
+        navigationController?.navigationBar.setNeedsLayout()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if showLogoutAlert {
+            showErrorAlert(title: "You are logged out", message: "You have been redirected to the login page to re-enter your credentials.")
         }
     }
     
@@ -250,11 +274,8 @@ extension LoginViewController {
         hud.dismiss()
         loginProcessStarted = false
         loginConfirmation.clear()
-        
         KeyChain.username = (self.userName.text ?? "").trim()
-        Application.shared.serverList = VPNServerList()
-        Application.shared.settings = Settings(serverList: Application.shared.serverList)
-        
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         navigationController?.dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: Notification.Name.ServiceAuthorized, object: nil)
             NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
@@ -269,6 +290,9 @@ extension LoginViewController {
         KeyChain.username = (self.userName.text ?? "").trim()
         
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            navigationController?.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+            })
             return
         }
         
@@ -294,25 +318,11 @@ extension LoginViewController {
         NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
     }
     
-    override func createSessionTooManySessions(error: Any?) {
+    override func createSessionTooManySessions(error: Any?, isNewStyleAccount: Bool) {
         hud.dismiss()
         Application.shared.authentication.removeStoredCredentials()
         loginProcessStarted = false
-        
-        if let error = error as? ErrorResultSessionNew, let data = error.data {
-            if data.upgradable {
-                NotificationCenter.default.removeObserver(self, name: Notification.Name.NewSession, object: nil)
-                NotificationCenter.default.removeObserver(self, name: Notification.Name.ForceNewSession, object: nil)
-                NotificationCenter.default.addObserver(self, selector: #selector(newSession), name: Notification.Name.NewSession, object: nil)
-                NotificationCenter.default.addObserver(self, selector: #selector(forceNewSession), name: Notification.Name.ForceNewSession, object: nil)
-                UserDefaults.shared.set(data.limit, forKey: UserDefaults.Key.sessionsLimit)
-                UserDefaults.shared.set(data.upgradeToUrl, forKey: UserDefaults.Key.upgradeToUrl)
-                present(NavigationManager.getUpgradePlanViewController(), animated: true, completion: nil)
-                return
-            }
-        }
-        
-        showCreateSessionAlert(message: "You've reached the maximum number of connected devices")
+        showTooManySessionsAlert(error: error as? ErrorResultSessionNew, isNewStyleAccount: isNewStyleAccount)
     }
     
     override func createSessionAuthenticationError() {
@@ -371,16 +381,145 @@ extension LoginViewController {
         presentCaptchaScreen(error: error)
     }
     
-    private func showCreateSessionAlert(message: String) {
-        showActionSheet(title: message, actions: ["Log out from all other devices", "Try again"], sourceView: self.userName) { [self] index in
-            switch index {
-            case 0:
-                forceNewSession()
-            case 1:
-                newSession()
-            default:
-                break
+    private func showTooManySessionsAlert(error: ErrorResultSessionNew?, isNewStyleAccount: Bool) {
+        let message = "You've reached the maximum number of connected devices"
+        
+        // Legacy account, Pro plan
+        guard let error = error, let data = error.data, (isNewStyleAccount || data.upgradable) else {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Retry"
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    newSession()
+                default:
+                    break
+                }
             }
+            
+            return
+        }
+        
+        // Legacy account, Standard plan
+        guard isNewStyleAccount else {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Retry",
+                "Switch to IVPN Pro"
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    newSession()
+                case 2:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        let service = ServiceType.getType(currentPlan: data.currentPlan)
+        let deviceManagement = data.deviceManagement
+        
+        // Device Management enabled, Pro plan
+        if deviceManagement && service == .pro {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Visit Device Management",
+                "Retry",
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management disabled, Pro plan
+        if !deviceManagement && service == .pro {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Enable Device Management",
+                "Retry",
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management enabled, Standard plan
+        if deviceManagement && service == .standard {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Visit Device Management",
+                "Retry",
+                "Switch to IVPN Pro"
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                case 3:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
+        }
+        
+        // Device Management disabled, Standard plan
+        if !deviceManagement && service == .standard {
+            showActionSheet(title: message, actions: [
+                "Log out from all devices",
+                "Enable Device Management",
+                "Retry",
+                "Switch to IVPN Pro"
+            ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
+                switch index {
+                case 0:
+                    forceNewSession()
+                case 1:
+                    openWebPageInBrowser(data.deviceManagementUrl)
+                case 2:
+                    newSession()
+                case 3:
+                    openWebPageInBrowser(data.upgradeToUrl)
+                default:
+                    break
+                }
+            }
+            
+            return
         }
     }
     
@@ -429,6 +568,10 @@ extension LoginViewController: ScannerViewControllerDelegate {
     
     func qrCodeFound(code: String) {
         userName.text = code
+        
+        guard evaluatePasscode() else {
+            return
+        }
         
         guard UserDefaults.shared.hasUserConsent else {
             DispatchQueue.async {

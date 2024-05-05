@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-15.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -23,6 +23,7 @@
 
 import Foundation
 import Network
+import CryptoKit
 
 struct Interface {
     
@@ -30,18 +31,15 @@ struct Interface {
     
     var addresses: String?
     var listenPort: Int
+    var mtu: Int?
     var privateKey: String?
     var dns: String?
     
     var publicKey: String? {
-        if let privateKeyString = privateKey, let privateKey = Data(base64Encoded: privateKeyString) {
-            var publicKey = Data(count: 32)
-            privateKey.withUnsafeUInt8Bytes { privateKeyBytes in
-                publicKey.withUnsafeMutableUInt8Bytes { mutableBytes in
-                    curve25519_derive_public_key(mutableBytes, privateKeyBytes)
-                }
-            }
-            return publicKey.base64EncodedString()
+        if let privateKeyString = privateKey, let privateKey = Data(base64Encoded: privateKeyString),
+           let privateKeyBytes = try? Curve25519.KeyAgreement.PrivateKey(rawRepresentation: privateKey) {
+            let publicKey = privateKeyBytes.publicKey
+            return publicKey.rawRepresentation.base64EncodedString()
         } else {
             return nil
         }
@@ -49,9 +47,10 @@ struct Interface {
     
     // MARK: - Initialize -
     
-    init(addresses: String? = nil, listenPort: Int = 0, privateKey: String? = nil, dns: String? = nil) {
+    init(addresses: String? = nil, listenPort: Int = 0, mtu: Int = 0, privateKey: String? = nil, dns: String? = nil) {
         self.addresses = addresses
         self.listenPort = listenPort
+        self.mtu = mtu
         self.privateKey = privateKey
         self.dns = dns
     }
@@ -60,7 +59,6 @@ struct Interface {
         if let ipAddress = dict.value(forKey: "ip_address") as? String {
             self.addresses = ipAddress
         } else {
-            log(error: "Cannot create Interface: no 'ip_address' field specified")
             return nil
         }
         
@@ -70,12 +68,8 @@ struct Interface {
     // MARK: - Methods -
     
     static func generatePrivateKey() -> String {
-        var privateKey = Data(count: 32)
-        privateKey.withUnsafeMutableUInt8Bytes { mutableBytes in
-            curve25519_generate_private_key(mutableBytes)
-        }
-        
-        return privateKey.base64EncodedString()
+        let privateKey = Curve25519.KeyAgreement.PrivateKey()
+        return privateKey.rawRepresentation.base64EncodedString()
     }
     
     static func getAddresses(ipv4: String?, ipv6: String?) -> String {

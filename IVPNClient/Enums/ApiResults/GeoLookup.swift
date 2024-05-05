@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-02-11.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -23,7 +23,7 @@
 
 import Foundation
 
-struct GeoLookup: Decodable {
+struct GeoLookup: Codable {
     
     let ipAddress: String
     let countryCode: String
@@ -36,6 +36,12 @@ struct GeoLookup: Decodable {
     
     func isEqualLocation(to comparingModel: GeoLookup) -> Bool {
         return city == comparingModel.city && country == comparingModel.country
+    }
+    
+    func save() {
+        if let encoded = try? JSONEncoder().encode(self) {
+            UserDefaults.shared.set(encoded, forKey: UserDefaults.Key.geoLookup)
+        }
     }
     
 }

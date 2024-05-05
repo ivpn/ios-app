@@ -1,6 +1,13 @@
 ## Build generated
 build/
 DerivedData/
+Frameworks/
+
+## Source / dependencies
+submodules/
+
+## Static libraries
+IVPNClient/liboqs/*.a
 
 ## Various settings
 *.pbxuser
@@ -58,10 +65,6 @@ Carthage/Build
 # Rules for .xcconfig files
 staging.xcconfig
 release.xcconfig
-wg-staging.xcconfig
-wg-release.xcconfig
-today-extension-staging.xcconfig
-today-extension-release.xcconfig
 
 # Rules for .swift files
 OpenVPNConf.swift

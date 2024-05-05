@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-06-24.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -64,7 +64,7 @@ class ConnectToServerPopupView: UIView {
         return locationLabel
     }()
     
-    var actionButton: UIButton = {
+    lazy var actionButton: UIButton = {
         let actionButton = UIButton()
         actionButton.setTitle("CONNECT TO SERVER", for: .normal)
         actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -75,7 +75,7 @@ class ConnectToServerPopupView: UIView {
         return actionButton
     }()
     
-    var prevButton: UIButton = {
+    lazy var prevButton: UIButton = {
         let prevButton = UIButton()
         prevButton.setImage(UIImage.init(named: "icon-arrow-left-gray"), for: .normal)
         prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
@@ -84,7 +84,7 @@ class ConnectToServerPopupView: UIView {
         return prevButton
     }()
     
-    var nextButton: UIButton = {
+    lazy var nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.setImage(UIImage.init(named: "icon-arrow-right-gray"), for: .normal)
         nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
@@ -124,7 +124,7 @@ class ConnectToServerPopupView: UIView {
                 actionButton.setTitle("CONNECT TO SERVER", for: .normal)
             }
             
-            if !Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: vpnServer) {
+            if !VPNServer.validMultiHop(Application.shared.settings.selectedServer, vpnServer) {
                 actionButton.isHidden = true
                 errorLabel.isHidden = false
             } else {
@@ -418,7 +418,7 @@ extension ConnectToServerPopupView: UIScrollViewDelegate {
         pageControl.currentPage = index
         vpnServer = servers[index]
         
-        if Application.shared.connectionManager.status.isDisconnected() && Application.shared.serverList.validateServer(firstServer: Application.shared.settings.selectedServer, secondServer: vpnServer) {
+        if Application.shared.connectionManager.status.isDisconnected() && VPNServer.validMultiHop(Application.shared.settings.selectedServer, vpnServer) {
             
             if UserDefaults.shared.isMultiHop {
                 Application.shared.settings.selectedExitServer = vpnServer

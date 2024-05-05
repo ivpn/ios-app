@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-30.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -34,6 +34,7 @@ class AppKeyManager {
     // MARK: - Properties -
     
     weak var delegate: AppKeyManagerDelegate?
+    static let shared = AppKeyManager()
     
     static var keyTimestamp: Date {
         return UserDefaults.shared.wgKeyTimestamp
@@ -70,8 +71,26 @@ class AppKeyManager {
         return true
     }
     
-    static var isKeyPairRequired: Bool {
-        return Application.shared.settings.connectionProtocol.tunnelType() == .wireguard
+    static var regenerationCheckInterval: TimeInterval {
+        if Config.useDebugWireGuardKeyUpgrade {
+            return TimeInterval(10)
+        }
+        
+        return TimeInterval(60 * 10)
+    }
+    
+    static var regenerationInterval: TimeInterval {
+        var regenerationRate = UserDefaults.shared.wgRegenerationRate
+        
+        if regenerationRate <= 0 {
+            regenerationRate = 1
+        }
+        
+        if Config.useDebugWireGuardKeyUpgrade {
+            return TimeInterval(regenerationRate * 60)
+        }
+        
+        return TimeInterval(regenerationRate * 60 * 60 * 24)
     }
     
     // MARK: - Methods -
@@ -84,14 +103,15 @@ class AppKeyManager {
         KeyChain.wgPublicKey = interface.publicKey
     }
     
-    func setNewKey() {
+    func setNewKey(completion: @escaping (String?, String?, String?) -> Void) {
         var interface = Interface()
         interface.privateKey = Interface.generatePrivateKey()
-        
-        let params = ApiService.authParams + [
+        var params = ApiService.authParams + [
             URLQueryItem(name: "public_key", value: interface.publicKey ?? "")
         ]
         
+        var kem = KEM()
+        params += [URLQueryItem(name: "kem_public_key1", value: kem.getPublicKey(algorithm: .Kyber1024))]
         let request = ApiRequestDI(method: .post, endpoint: Config.apiSessionWGKeySet, params: params)
         
         delegate?.setKeyStart()
@@ -103,11 +123,28 @@ class AppKeyManager {
                 KeyChain.wgPrivateKey = interface.privateKey
                 KeyChain.wgPublicKey = interface.publicKey
                 KeyChain.wgIpAddress = model.ipAddress
+                if let kemCipher1 = model.kemCipher1 {
+                    kem.setCipher(algorithm: .Kyber1024, cipher: kemCipher1)
+                    KeyChain.wgPresharedKey = kem.calculatePresharedKey()
+                    completion(interface.privateKey, model.ipAddress, KeyChain.wgPresharedKey)
+                } else {
+                    KeyChain.wgPresharedKey = nil
+                    completion(interface.privateKey, model.ipAddress, nil)
+                }
                 self.delegate?.setKeySuccess()
             case .failure:
                 self.delegate?.setKeyFail()
+                completion(nil, nil, nil)
             }
         }
+    }
+    
+    static func needToRegenerate() -> Bool {
+        guard Date() > UserDefaults.shared.wgKeyTimestamp.addingTimeInterval(regenerationInterval) else {
+            return false
+        }
+        
+        return true
     }
     
 }

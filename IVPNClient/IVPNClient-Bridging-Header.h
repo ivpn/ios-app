@@ -1,2 +1,2 @@
-#include "../WireGuardKitC/WireGuardKitC.h"
-#include "../wireguard-tunnel-provider/WireGuard/Shared/Logging/ringlogger.h"
+#include "Utilities/Logging/ringlogger.h"
+#include "liboqs/include/oqs/oqs.h"

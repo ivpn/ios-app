@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-10-16.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -26,6 +26,11 @@ import NetworkExtension
 import CoreLocation
 
 class VPNServer {
+    
+    static let validMultiHopCountryTitle = "Entry and exit servers located in the same country"
+    static let validMultiHopCountryMessage = "Using Multi-Hop servers from the same country may decrease your privacy."
+    static let validMultiHopISPTitle = "Entry and exit servers are operated by the same ISP"
+    static let validMultiHopISPMessage = "Using Multi-Hop servers operated by the same ISP may decrease your privacy."
     
     // MARK: - Properties -
     
@@ -59,20 +64,20 @@ class VPNServer {
     }
     
     var supportsIPv6: Bool {
-        for host in hosts {
-            if host.ipv6 == nil {
-                return false
-            }
+        for host in hosts where host.ipv6 == nil {
+            return false
         }
         
         return true
     }
     
     var enabledIPv6: Bool {
-        for host in hosts {
-            if !(host.ipv6?.localIP.isEmpty ?? true) {
-                return true
-            }
+        for host in hosts where !(host.ipv6?.localIP.isEmpty ?? true) {
+            return true
+        }
+        
+        if let ipv6 = ipv6 {
+            return !ipv6.localIP.isEmpty
         }
         
         return false
@@ -92,23 +97,27 @@ class VPNServer {
     private (set) var city: String
     private (set) var latitude: Double
     private (set) var longitude: Double
-    private (set) var ipAddresses: [String]
+    private (set) var isp: String
     private (set) var hosts: [Host]
     private (set) var load: Double?
+    private (set) var ipv6: IPv6?
+    var dnsName: String?
     
     // MARK: - Initialize -
     
-    init(gateway: String, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, ipAddresses: [String] = [], hosts: [Host] = [], fastest: Bool = false, load: Double = 0) {
+    init(gateway: String, dnsName: String? = nil, countryCode: String, country: String, city: String, latitude: Double = 0, longitude: Double = 0, isp: String = "", hosts: [Host] = [], fastest: Bool = false, load: Double = 0, ipv6: IPv6? = nil) {
         self.gateway = gateway
+        self.dnsName = dnsName
         self.countryCode = countryCode
         self.country = country
         self.city = city
         self.latitude = latitude
         self.longitude = longitude
-        self.ipAddresses = ipAddresses
+        self.isp = isp
         self.hosts = hosts
         self.fastest = fastest
         self.load = load
+        self.ipv6 = ipv6
     }
     
     // MARK: - Methods -
@@ -133,6 +142,45 @@ class VPNServer {
     
     static func == (lhs: VPNServer, rhs: VPNServer) -> Bool {
         return lhs.city == rhs.city && lhs.countryCode == rhs.countryCode
+    }
+    
+    static func validMultiHop(_ first: VPNServer, _ second: VPNServer) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard !(first == second) else {
+            return false
+        }
+        
+        return true
+    }
+    
+    static func validMultiHopCountry(_ first: VPNServer, _ second: VPNServer, ignoreSettings: Bool = false) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard UserDefaults.standard.preventSameCountryMultiHop || ignoreSettings else {
+            return true
+        }
+        guard first.country != second.country else {
+            return false
+        }
+        
+        return true
+    }
+    
+    static func validMultiHopISP(_ first: VPNServer, _ second: VPNServer, ignoreSettings: Bool = false) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard UserDefaults.standard.preventSameISPMultiHop || ignoreSettings else {
+            return true
+        }
+        guard first.isp != second.isp else {
+            return false
+        }
+        
+        return true
     }
 
 }

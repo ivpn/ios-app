@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2018-07-16.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -24,6 +24,7 @@
 import UIKit
 import JGProgressHUD
 import ActiveLabel
+import WidgetKit
 
 class ProtocolViewController: UITableViewController {
     
@@ -41,11 +42,18 @@ class ProtocolViewController: UITableViewController {
         keyManager.delegate = self
         updateCollection(connectionProtocol: Application.shared.settings.connectionProtocol)
         initNavigationBar()
+        addObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+    
+    // MARK: - Observers -
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(protocolSelected), name: Notification.Name.ProtocolSelected, object: nil)
     }
     
     // MARK: - Methods -
@@ -61,7 +69,7 @@ class ProtocolViewController: UITableViewController {
         collection.append(ConnectionSettings.tunnelTypes(protocols: Config.supportedProtocolTypes))
         
         if connectionProtocol.tunnelType() == .wireguard {
-            if UserDefaults.shared.isMultiHop {
+            if UserDefaults.shared.isMultiHop && !UserDefaults.shared.isV2ray {
                 collection.append([.wireguard(.udp, 1), .wireguard(.udp, 2)])
             } else {
                 collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])
@@ -114,10 +122,28 @@ class ProtocolViewController: UITableViewController {
     }
     
     func validateSecureDNS(connectionProtocol: ConnectionSettings) -> Bool {
-        if #available(iOS 14.0, *) {
-            if DNSManager.shared.isEnabled && connectionProtocol == .ipsec {
-                return false
-            }
+        if DNSManager.shared.isEnabled && connectionProtocol == .ipsec {
+            return false
+        }
+        
+        return true
+    }
+    
+    func validateDisableLanTraffic(connectionProtocol: ConnectionSettings) -> Bool {
+        if UserDefaults.shared.disableLanAccess && connectionProtocol == .ipsec {
+            return false
+        }
+        
+        if UserDefaults.shared.networkProtectionUntrustedBlockLan && connectionProtocol == .ipsec {
+            return false
+        }
+        
+        return true
+    }
+    
+    func validateV2ray(connectionProtocol: ConnectionSettings) -> Bool {
+        if UserDefaults.shared.isV2ray && connectionProtocol.tunnelType() != .wireguard {
+            return false
         }
         
         return true
@@ -139,23 +165,6 @@ class ProtocolViewController: UITableViewController {
         }
     }
     
-    func selectPreferredProtocolAndPort(connectionProtocol: ConnectionSettings) {
-        let selected = Application.shared.settings.connectionProtocol.formatProtocol()
-        let protocols = connectionProtocol.supportedProtocols(protocols: Config.supportedProtocols)
-        let actions = connectionProtocol.supportedProtocolsFormat(protocols: Config.supportedProtocols)
-        
-        showActionSheet(image: nil, selected: selected, largeText: true, centered: true, title: "Preferred protocol & port", actions: actions, sourceView: view) { [self] index in
-            guard index > -1 else {
-                return
-            }
-            
-            Application.shared.settings.connectionProtocol = protocols[index]
-            tableView.reloadData()
-            NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-            evaluateReconnect(sender: view)
-        }
-    }
-    
     func selectPreferredProtocol(connectionProtocol: ConnectionSettings) {
         let selected = Application.shared.settings.connectionProtocol.protocolType()
         let protocols: [ConnectionSettings] = [.openvpn(.udp, 2049), .openvpn(.tcp, 443)]
@@ -169,7 +178,14 @@ class ProtocolViewController: UITableViewController {
             Application.shared.settings.connectionProtocol = protocols[index]
             tableView.reloadData()
             NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
-            evaluateReconnect(sender: view)
+        }
+    }
+    
+    @objc private func protocolSelected() {
+        if let navigationController = navigationController {
+            evaluateReconnect(sender: navigationController.navigationBar)
+        } else {
+            evaluateReconnect(sender: tableView.headerView(forSection: 0) ?? tableView)
         }
     }
     
@@ -199,7 +215,7 @@ extension ProtocolViewController {
         
         cell.setup(connectionProtocol: connectionProtocol, isSettings: indexPath.section > 0)
         
-        if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) || !validateSecureDNS(connectionProtocol: connectionProtocol) || !validateKillSwitch(connectionProtocol: connectionProtocol) {
+        if !validateMultiHop(connectionProtocol: connectionProtocol) || !validateCustomDNS(connectionProtocol: connectionProtocol) || !validateAntiTracker(connectionProtocol: connectionProtocol) || !validateSecureDNS(connectionProtocol: connectionProtocol) || !validateKillSwitch(connectionProtocol: connectionProtocol) || !validateV2ray(connectionProtocol: connectionProtocol) {
             cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabel6)
         } else {
             cell.protocolLabel.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
@@ -253,8 +269,7 @@ extension ProtocolViewController {
         }
         
         if connectionProtocol == .openvpn(.udp, 0) || connectionProtocol == .wireguard(.udp, 0) {
-            selectPreferredProtocolAndPort(connectionProtocol: connectionProtocol)
-            tableView.deselectRow(at: indexPath, animated: true)
+            performSegue(withIdentifier: "PortSettings", sender: self)
             return
         }
         
@@ -359,11 +374,9 @@ extension ProtocolViewController {
                 showActionSheet(title: "To use IKEv2 protocol you must disable DNS over HTTTPS/TLS", actions: ["Disable"], sourceView: cell as UIView) { index in
                     switch index {
                     case 0:
-                        if #available(iOS 14.0, *) {
-                            DNSManager.shared.removeProfile { _ in
-                                DNSManager.shared.loadProfile { _ in
-                                    self.tableView.reloadData()
-                                }
+                        DNSManager.shared.removeProfile { _ in
+                            DNSManager.shared.loadProfile { _ in
+                                self.tableView.reloadData()
                             }
                         }
                     default:
@@ -376,19 +389,52 @@ extension ProtocolViewController {
             return
         }
         
+        guard validateDisableLanTraffic(connectionProtocol: connectionProtocol) else {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                showActionSheet(title: "To use IKEv2 protocol you must turn Disable LAN traffic off", actions: ["Turn off"], sourceView: cell as UIView) { index in
+                    switch index {
+                    case 0:
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.disableLanAccess)
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.networkProtectionUntrustedBlockLan)
+                        tableView.reloadData()
+                    default:
+                        break
+                    }
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+            return
+        }
+        
+        guard validateV2ray(connectionProtocol: connectionProtocol) else {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                showActionSheet(title: "To use OpenVPN or IKEv2 protocols you must turn V2Ray off", actions: ["Turn off"], sourceView: cell as UIView) { index in
+                    switch index {
+                    case 0:
+                        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isV2ray)
+                        tableView.reloadData()
+                    default:
+                        break
+                    }
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+            return
+        }
+        
         if connectionProtocol.tunnelType() != Application.shared.settings.connectionProtocol.tunnelType() && connectionProtocol.tunnelType() == .wireguard {
-            if  KeyChain.wgPublicKey == nil || ExtensionKeyManager.needToRegenerate() {
-                keyManager.setNewKey()
+            if  KeyChain.wgPublicKey == nil || AppKeyManager.needToRegenerate() {
+                keyManager.setNewKey { _, _, _ in }
                 return
             }
         }
         
-        if #available(iOS 14.0, *) {
-            if connectionProtocol.tunnelType() == .ipsec {
-                DNSManager.shared.removeProfile { _ in
-                    DNSManager.shared.loadProfile { _ in
-                        
-                    }
+        if connectionProtocol.tunnelType() == .ipsec {
+            DNSManager.shared.removeProfile { _ in
+                DNSManager.shared.loadProfile { _ in
+                    
                 }
             }
         }
@@ -396,6 +442,7 @@ extension ProtocolViewController {
         reloadTable(connectionProtocol: connectionProtocol, indexPath: indexPath)
         
         NotificationCenter.default.post(name: Notification.Name.ProtocolSelected, object: nil)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-11-21.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol NetworkProtectionHeaderTableViewCellDelegate: AnyObject {
+protocol NetworkProtectionTableCellDelegate: AnyObject {
     func toggle(isOn: Bool)
 }
 
@@ -31,7 +31,7 @@ class NetworkProtectionHeaderTableViewCell: UITableViewCell {
     
     @IBOutlet weak var toggleSwitch: UISwitch!
     
-    weak var delegate: NetworkProtectionHeaderTableViewCellDelegate?
+    weak var delegate: NetworkProtectionTableCellDelegate?
     
     @IBAction func toggle(_ sender: UISwitch) {
         delegate?.toggle(isOn: sender.isOn)

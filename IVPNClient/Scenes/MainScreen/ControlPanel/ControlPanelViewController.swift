@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-02-20.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -24,6 +24,7 @@
 import UIKit
 import NetworkExtension
 import JGProgressHUD
+import WidgetKit
 
 class ControlPanelViewController: UITableViewController {
     
@@ -92,6 +93,7 @@ class ControlPanelViewController: UITableViewController {
         isMultiHop = isEnabled
         reloadView()
         evaluateReconnect(sender: sender as UIView)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
     
     @IBAction func toggleAntiTracker(_ sender: UISwitch) {
@@ -103,6 +105,7 @@ class ControlPanelViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         evaluateReconnect(sender: sender as UIView)
         controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
         
@@ -174,7 +177,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     func connect() {
-        log(info: "Connect VPN")
+        log(.info, message: "Connect VPN")
         
         guard evaluateIsNetworkReachable() else {
             controlPanelView.connectSwitch.setOn(vpnStatusViewModel.connectToggleIsOn, animated: true)
@@ -199,8 +202,8 @@ class ControlPanelViewController: UITableViewController {
             return
         }
         
-        if AppKeyManager.isKeyPairRequired && ExtensionKeyManager.needToRegenerate() {
-            keyManager.setNewKey()
+        if Application.isKeyPairRequired && AppKeyManager.needToRegenerate() {
+            keyManager.setNewKey { _, _, _ in }
             return
         }
         
@@ -227,7 +230,7 @@ class ControlPanelViewController: UITableViewController {
     }
     
     @objc func disconnect() {
-        log(info: "Disconnect VPN")
+        log(.info, message: "Disconnect VPN")
         
         let manager = Application.shared.connectionManager
         
@@ -331,6 +334,12 @@ class ControlPanelViewController: UITableViewController {
             textField.text = ".gw.ivpn.net"
             textField.selectedTextRange = textField.textRange(from: beginning, to: beginning)
         })
+    }
+    
+    func presentAntiTracker() {
+        if let topViewController = UIApplication.topViewController() as? MainViewController {
+            topViewController.performSegue(withIdentifier: "MainScreenAntiTracker", sender: nil)
+        }
     }
     
     func presentSelectProtocol() {
@@ -439,7 +448,7 @@ class ControlPanelViewController: UITableViewController {
         
         if !isMultiHopAvailable && isMultiHopEnabled {
             if status == .connected {
-                let plan = Application.shared.serviceStatus.currentPlan ?? ""
+                let plan = Application.shared.serviceStatus.currentPlan
                 showActionAlert(title: "Subscription is changed to \(plan)", message: "Active VPN connection is using Pro plan features (MultiHop) and will be disconnected.", action: "Reconnect with SingleHop VPN", cancel: "OK", cancelHandler: { [self] _ in
                     disableMultiHop()
                     if Application.shared.connectionManager.canDisconnect(status: status) {

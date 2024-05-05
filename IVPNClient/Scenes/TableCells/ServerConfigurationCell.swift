@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-02-19.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -24,7 +24,7 @@
 import UIKit
 
 protocol ServerConfigurationCellDelegate: AnyObject {
-    func toggle(isOn: Bool, gateway: String)
+    func toggle(isOn: Bool, server: VPNServer)
     func showValidation(error: String)
 }
 
@@ -43,7 +43,7 @@ class ServerConfigurationCell: UITableViewCell {
             return
         }
         
-        delegate?.toggle(isOn: sender.isOn, gateway: viewModel.server.gateway)
+        delegate?.toggle(isOn: sender.isOn, server: viewModel.server)
     }
     
     var viewModel: VPNServerViewModel! {

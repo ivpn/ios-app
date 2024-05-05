@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-04-15.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -59,7 +59,7 @@ class SelectPlanViewController: UITableViewController {
     
     lazy var retryButton: UIButton = {
         let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(fetchProducts), for: .touchUpInside)
+        button.addTarget(self, action: #selector(load), for: .touchUpInside)
         button.setTitle("Retry", for: .normal)
         button.sizeToFit()
         button.isHidden = true
@@ -126,16 +126,14 @@ class SelectPlanViewController: UITableViewController {
         super.viewWillAppear(animated)
         // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
         // Remove when fixed in future releases
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.setNeedsLayout()
-        }
+        navigationController?.navigationBar.setNeedsLayout()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if displayMode == .loading {
-            fetchProducts()
+            load()
         }
         
         segueStarted = false
@@ -179,10 +177,7 @@ class SelectPlanViewController: UITableViewController {
     }
     
     private func setupView() {
-        if #available(iOS 13.0, *) {
-            isModalInPresentation = true
-        }
-        
+        isModalInPresentation = true
         tableView.separatorStyle = .none
         view.addSubview(spinner)
         view.addSubview(retryButton)
@@ -202,22 +197,22 @@ class SelectPlanViewController: UITableViewController {
         }
     }
     
-    @objc private func fetchProducts() {
+    @objc private func load() {
+        Task {
+            await loadProducts()
+        }
+    }
+    
+    private func loadProducts() async {
         displayMode = .loading
         
-        IAPManager.shared.fetchProducts { [weak self] products, error in
-            guard let self = self else { return }
-            
-            if error != nil {
-                self.showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
-                self.displayMode = .error
-                return
-            }
-            
-            if products != nil {
-                self.updateSubscriptions()
-                self.displayMode = .content
-            }
+        do {
+            try await PurchaseManager.shared.loadProducts()
+            updateSubscriptions()
+            displayMode = .content
+        } catch {
+            showAlert(title: "iTunes Store error", message: "Cannot connect to iTunes Store")
+            displayMode = .error
         }
     }
     
@@ -262,7 +257,7 @@ extension SelectPlanViewController {
         }
         
         if indexPath.row == 1 {
-            return 286
+            return 260
         }
         
         return 226

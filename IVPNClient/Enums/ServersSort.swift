@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-05-29.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -24,8 +24,15 @@
 import Foundation
 
 enum ServersSort: String, CaseIterable {
+    
     case city
     case country
     case latency
     case proximity
+    
+    static func actions() -> [String] {
+        let actions = allCases.map { $0.rawValue }
+        return actions.map { $0.camelCaseToCapitalized() ?? "" }
+    }
+    
 }

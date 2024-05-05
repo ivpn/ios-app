@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-10-10.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -35,11 +35,16 @@ class NavigationManager {
         return viewController
     }
     
-    static func getLoginViewController() -> UIViewController {
+    static func getLoginViewController(showLogoutAlert: Bool = false) -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "loginView")
+        let navController = storyBoard.instantiateViewController(withIdentifier: "loginView") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
         
-        return viewController
+        if let viewController = navController?.topViewController as? LoginViewController {
+            viewController.showLogoutAlert = showLogoutAlert
+        }
+        
+        return navController!
     }
     
     static func getChangePlanViewController() -> UIViewController {
@@ -81,15 +86,6 @@ class NavigationManager {
 //        
 //        return navController!
 //    }
-    
-    static func getStaticWebViewController(resourceName: String, screenTitle: String) -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "staticWebView") as! StaticWebViewController
-        viewController.resourceName = resourceName
-        viewController.screenTitle = screenTitle
-        
-        return viewController
-    }
     
     static func getTermsOfServiceViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
@@ -176,6 +172,30 @@ class NavigationManager {
                 make.edges.equalToSuperview()
                 make.top.equalToSuperview()
             }
+        }
+        
+        return navController!
+    }
+    
+    static func getAddCustomPortViewController(delegate: AddCustomPortViewControllerDelegate? = nil) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navController = storyBoard.instantiateViewController(withIdentifier: "addCustomPort") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        
+        if let viewController = navController?.topViewController as? AddCustomPortViewController {
+            viewController.delegate = delegate
+        }
+        
+        return navController!
+    }
+    
+    static func getMTUViewController(delegate: MTUViewControllerDelegate? = nil) -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navController = storyBoard.instantiateViewController(withIdentifier: "configureMtu") as? UINavigationController
+        navController?.modalPresentationStyle = .formSheet
+        
+        if let viewController = navController?.topViewController as? MTUViewController {
+            viewController.delegate = delegate
         }
         
         return navController!

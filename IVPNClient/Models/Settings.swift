@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2018-07-20.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -64,6 +64,8 @@ class Settings {
         }
     }
     
+    var serverListIsFavorite = false
+    
     // MARK: - Initialize -
 
     init(serverList: VPNServerList) {
@@ -120,11 +122,13 @@ class Settings {
     // MARK: - Methods -
     
     func updateSelectedServerForMultiHop(isEnabled: Bool) {
-        if isEnabled && Application.shared.settings.selectedServer.fastest {
+        let selectedServer = Application.shared.settings.selectedServer
+        if isEnabled, selectedServer.fastest, selectedServer == Application.shared.settings.selectedExitServer {
             if let server = Application.shared.serverList.getServers().first {
                 server.fastest = false
                 Application.shared.settings.selectedServer = server
                 Application.shared.settings.selectedExitServer = Application.shared.serverList.getExitServer(entryServer: server)
+                Application.shared.settings.selectedExitHost = nil
             }
         }
         
@@ -144,11 +148,13 @@ class Settings {
     }
     
     func saveConnectionProtocol() {
-        if let index = Config.supportedProtocols.firstIndex(where: {$0 == connectionProtocol}) {
-            UserDefaults.standard.set(index, forKey: UserDefaults.Key.selectedProtocolIndex)
-        }
-        
         UserDefaults.standard.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
+        UserDefaults.shared.set(connectionProtocol.formatSave(), forKey: UserDefaults.Key.selectedProtocol)
+    }
+    
+    func saveDefaultAntiTrackerDns() {
+        let defaultDns = AntiTrackerDns.defaultList(lists: Application.shared.serverList.antiTrackerList)
+        defaultDns?.save()
     }
     
 }

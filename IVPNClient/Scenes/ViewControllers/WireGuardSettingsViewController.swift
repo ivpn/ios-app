@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-29.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -34,6 +34,8 @@ class WireGuardSettingsViewController: UITableViewController {
     @IBOutlet weak var keyTimestampLabel: UILabel!
     @IBOutlet weak var keyExpirationTimestampLabel: UILabel!
     @IBOutlet weak var keyRegenerationTimestampLabel: UILabel!
+    @IBOutlet weak var mtuLabel: UILabel!
+    @IBOutlet weak var qrLabel: UILabel!
     
     // MARK: - Properties -
     
@@ -62,8 +64,8 @@ class WireGuardSettingsViewController: UITableViewController {
         Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
             if enabled, Application.shared.connectionManager.status.isDisconnected() {
                 showDisableVPNPrompt(sourceView: sender) {
-                    Application.shared.connectionManager.removeOnDemandRules {
-                        keyManager.setNewKey()
+                    Application.shared.connectionManager.removeOnDemandRules { [self] in
+                        keyManager.setNewKey { _, _, _ in }
                     }
                 }
                 return
@@ -74,15 +76,23 @@ class WireGuardSettingsViewController: UITableViewController {
                 return
             }
             
-            keyManager.setNewKey()
+            keyManager.setNewKey { _, _, _ in }
         }
+    }
+    
+    @IBAction func configureMtu(_ sender: Any) {
+        let viewController = NavigationManager.getMTUViewController(delegate: self)
+        present(viewController, animated: true)
+    }
+    
+    @IBAction func quantumInfo(_ sender: UIButton) {
+        showAlert(title: "Info", message: "Quantum Resistance: Indicates whether your current WireGuard VPN connection is using additional protection measures against potential future quantum computer attacks.\n\nWhen Enabled, a Pre-shared key has been securely exchanged between your device and the server using post-quantum Key Encapsulation Mechanism (KEM) algorithms. If Disabled, the current VPN connection, while secure under today's standards, does not include this extra layer of quantum resistance.")
     }
     
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         keyManager.delegate = self
         setupView()
         addObservers()
@@ -91,11 +101,15 @@ class WireGuardSettingsViewController: UITableViewController {
     // MARK: - Methods -
     
     private func setupView() {
+        tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         ipAddressLabel.text = KeyChain.wgIpAddress
         publicKeyLabel.text = KeyChain.wgPublicKey
         keyTimestampLabel.text = AppKeyManager.keyTimestamp.formatDate()
         keyExpirationTimestampLabel.text = AppKeyManager.keyExpirationTimestamp.formatDate()
         keyRegenerationTimestampLabel.text = AppKeyManager.keyRegenerationTimestamp.formatDate()
+        let mtu = UserDefaults.standard.wgMtu
+        mtuLabel.text = mtu > 0 ? String(mtu) : "Leave blank to use default value"
+        qrLabel.text = KeyChain.wgPresharedKey == nil ? "Disabled" : "Enabled"
     }
     
     private func addObservers() {
@@ -188,6 +202,20 @@ extension WireGuardSettingsViewController {
         showAlert(title: "Failed to regenerate WireGuard keys", message: "There was a problem regenerating and uploading WireGuard keys to IVPN server.")
         Application.shared.connectionManager.removeOnDemandRules {}
         setupView()
+    }
+    
+}
+
+// MARK: - MTUViewControllerDelegate -
+
+extension WireGuardSettingsViewController: MTUViewControllerDelegate {
+    
+    func mtuSaved(isUpdated: Bool) {
+        setupView()
+        
+        if isUpdated {
+            evaluateReconnect(sender: mtuLabel)
+        }
     }
     
 }

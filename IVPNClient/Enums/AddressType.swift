@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-28.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -21,24 +21,22 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Network
+
 enum AddressType {
     
     case IPv6
     case IPv4
     case other
     
-    static func validateIpAddress(ipToValidate: String) -> AddressType {
-        var sin = sockaddr_in()
-        if ipToValidate.withCString({ cstring in inet_pton(AF_INET, cstring, &sin.sin_addr) }) == 1 {
+    static func validateIpAddress(_ address: String) -> AddressType {
+        if IPv4Address(address) != nil {
             return .IPv4
-        }
-        
-        var sin6 = sockaddr_in6()
-        if ipToValidate.withCString({ cstring in inet_pton(AF_INET6, cstring, &sin6.sin6_addr) }) == 1 {
+        } else if IPv6Address(address) != nil {
             return .IPv6
+        } else {
+            return .other
         }
-        
-        return .other
     }
     
 }

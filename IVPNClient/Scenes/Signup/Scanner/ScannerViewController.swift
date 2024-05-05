@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-03-27.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -54,9 +54,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         // iOS 13 UIKit bug: https://forums.developer.apple.com/thread/121861
         // Remove when fixed in future releases
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.setNeedsLayout()
-        }
+        navigationController?.navigationBar.setNeedsLayout()
         
         evaluateCameraAccess()
         startCaptureSession()
@@ -78,7 +76,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             return
         }
         
-        previewLayer.connection?.videoOrientation = UIApplication.shared.statusBarOrientation.asAVCaptureVideoOrientation()
+        previewLayer.connection?.videoOrientation = UIWindow.interfaceOrientation.asAVCaptureVideoOrientation()
     }
     
     // MARK: - Private methods -
@@ -122,7 +120,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
-        previewLayer.connection?.videoOrientation = UIApplication.shared.statusBarOrientation.asAVCaptureVideoOrientation()
+        previewLayer.connection?.videoOrientation = UIWindow.interfaceOrientation.asAVCaptureVideoOrientation()
         scannerView.qrView.layer.addSublayer(previewLayer)
     }
     

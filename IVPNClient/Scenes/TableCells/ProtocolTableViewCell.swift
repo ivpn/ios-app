@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -29,8 +29,18 @@ class ProtocolTableViewCell: UITableViewCell {
     @IBOutlet weak var protocolSettingsLabel: UILabel!
     
     private var protocolLabelText: String {
+        let tunnelType = Application.shared.settings.connectionProtocol.tunnelType()
+        
         if !UIDevice.screenHeightLargerThan(device: .iPhones55s5cSE) {
+            if tunnelType == .wireguard {
+                return "Port"
+            }
+            
             return "Protocol & port"
+        }
+        
+        if tunnelType == .wireguard {
+            return "Preferred port"
         }
         
         return "Preferred protocol & port"
@@ -71,24 +81,31 @@ class ProtocolTableViewCell: UITableViewCell {
     private func updateLabel(title: String, isChecked: Bool) {
         protocolLabel.text = title
         protocolSettingsLabel.text = ""
+        isUserInteractionEnabled = !isChecked
         
         if isChecked {
             accessoryType = .checkmark
+            selectionStyle = .none
         } else {
             accessoryType = .none
+            selectionStyle = .default
         }
     }
     
     private func setupSelectAction(title: String) {
         protocolLabel.text = title
-        protocolSettingsLabel.text = UserDefaults.shared.isMultiHop ? Application.shared.settings.connectionProtocol.protocolType() : Application.shared.settings.connectionProtocol.formatProtocol()
+        protocolSettingsLabel.text = UserDefaults.shared.isMultiHop ? Application.shared.settings.connectionProtocol.formatProtocolMultiHop() : Application.shared.settings.connectionProtocol.formatProtocol()
         accessoryType = .disclosureIndicator
+        isUserInteractionEnabled = true
+        selectionStyle = .default
     }
     
     private func setupAction(title: String) {
         protocolLabel.text = title
         protocolSettingsLabel.text = ""
         accessoryType = .disclosureIndicator
+        isUserInteractionEnabled = true
+        selectionStyle = .default
     }
     
 }

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-22.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -31,11 +31,13 @@ struct Host: Codable {
     
     var host: String
     var hostName: String
+    var dnsName: String
     var publicKey: String
     var localIP: String
     var ipv6: IPv6?
     var multihopPort: Int
     var load: Double
+    var v2ray: String
     
     func localIPAddress() -> String {
         if let range = localIP.range(of: "/", options: .backwards, range: nil, locale: nil) {

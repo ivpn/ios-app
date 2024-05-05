@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-02-19.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -21,20 +21,21 @@
 //  along with the IVPN iOS app. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import UIKit
 import FloatingPanel
 
 // MARK: - FloatingPanelControllerDelegate -
 
 extension MainViewController: FloatingPanelControllerDelegate {
     
-    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
         updateAccessibilityLabel(vc: vc)
         
         return FloatingPanelMainLayout()
     }
     
     func floatingPanelShouldBeginDragging(_ vc: FloatingPanelController) -> Bool {
-        return UIDevice.current.userInterfaceIdiom == .pad && UIApplication.shared.statusBarOrientation.isLandscape ? false : true
+        return UIDevice.current.userInterfaceIdiom == .pad && UIWindow.isLandscape && !UIApplication.shared.isSplitOrSlideOver ? false : true
     }
     
     func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
@@ -43,12 +44,19 @@ extension MainViewController: FloatingPanelControllerDelegate {
     
     func updateAccessibilityLabel(vc: FloatingPanelController) {
         if let controlPanelViewController = floatingPanel.contentViewController, UIDevice.current.userInterfaceIdiom != .pad {
-            if vc.position == .full {
+            if vc.state == .full {
                 controlPanelViewController.view.accessibilityLabel = "Swipe down to collapse control panel"
             } else {
                 controlPanelViewController.view.accessibilityLabel = "Swipe up to expan control panel"
             }
         }
+    }
+    
+    func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+        let loc = fpc.surfaceLocation
+        let minY = fpc.surfaceLocation(for: .full).y - 6.0
+        let maxY = fpc.surfaceLocation(for: .half).y + 6.0
+        fpc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
     }
     
 }
@@ -58,7 +66,7 @@ extension MainViewController: FloatingPanelControllerDelegate {
 extension MainViewController: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        floatingPanel.updateLayout()
+        floatingPanel.invalidateLayout()
         NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
     }
     

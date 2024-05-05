@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-12-21.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -31,22 +31,15 @@ class NavigationController: UINavigationController {
         UINavigationBar.appearance().tintColor = UIColor.init(named: Theme.ivpnBlue)
         navigationBar.prefersLargeTitles = true
         
-        if #available(iOS 13.0, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold), NSAttributedString.Key.foregroundColor: UIColor.init(named: Theme.ivpnLabelPrimary)!]
-            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(named: Theme.ivpnLabelPrimary)!]
-            appearance.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)!
-            appearance.shadowImage = nil
-            appearance.shadowColor = nil
-            navigationBar.standardAppearance = appearance
-            navigationBar.scrollEdgeAppearance = appearance
-        } else {
-            navigationBar.barTintColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
-            navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold), NSAttributedString.Key.foregroundColor: UIColor.init(named: Theme.ivpnLabelPrimary)!]
-            navigationBar.shadowImage = UIImage()
-            navigationBar.barTintColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)!
-        }
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold), NSAttributedString.Key.foregroundColor: UIColor.init(named: Theme.ivpnLabelPrimary)!]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(named: Theme.ivpnLabelPrimary)!]
+        appearance.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)!
+        appearance.shadowImage = nil
+        appearance.shadowColor = nil
+        navigationBar.standardAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +47,22 @@ class NavigationController: UINavigationController {
         
         DispatchQueue.main.async { [weak self] in
             self?.navigationBar.sizeToFit()
+        }
+    }
+    
+}
+
+extension UINavigationController {
+    
+    func popViewController(animated: Bool, completion: @escaping () -> Void) {
+        popViewController(animated: animated)
+
+        if animated, let coordinator = transitionCoordinator {
+            coordinator.animate(alongsideTransition: nil) { _ in
+                completion()
+            }
+        } else {
+            completion()
         }
     }
     

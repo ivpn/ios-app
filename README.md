@@ -30,31 +30,29 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Requirements
 
-- iOS 12.0+
-- Xcode 12.0+
+- iOS 14.0+
+- Xcode 14.0+
 - Swift 5.0+
-- CocoaPods 1.11.0+
 - fastlane 2.178.0+
-- Go 1.16+
+- Go 1.18+
 
 ### Dev dependencies
 
 Project dev dependencies:  
 
-* [CocoaPods](https://cocoapods.org)  
 * [fastlane](https://fastlane.tools)  
 * [SwiftLint](https://github.com/realm/SwiftLint)  
 * [Go](https://golang.org)  
 
-Install CocoaPods, fastlane, SwiftLint and Go:  
+Install fastlane, SwiftLint and Go:  
 
 ```sh
-$ brew install cocoapods fastlane swiftlint go
+brew install fastlane swiftlint go
 ```
 
 ### Dependencies
 
-Dependencies are installed with [Swift Package Manager](https://swift.org/package-manager/) and [CocoaPods](https://cocoapods.org).
+Dependencies are installed with [Swift Package Manager](https://swift.org/package-manager/).
 
 Project dependencies:  
 
@@ -68,13 +66,6 @@ Project dependencies:
 * [ReachabilitySwift](https://github.com/ashleymills/Reachability.swift)  
 * [FloatingPanel](https://github.com/scenee/FloatingPanel)  
 
-To pull and build dependencies run:  
-
-```sh
-$ pod install  
-$ open IVPNClient.xcworkspace  
-```
-
 ### Xcode build configurations
 
 There are different build configurations: Staging and Release. 
@@ -82,12 +73,8 @@ There are different build configurations: Staging and Release.
 Rename and populate `.xcconfig` files: 
 
 ```sh
-$ cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig  
-$ cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig  
-$ cp wireguard-tunnel-provider/Config/wg-staging.template.xcconfig wireguard-tunnel-provider/Config/wg-staging.xcconfig   
-$ cp wireguard-tunnel-provider/Config/wg-release.template.xcconfig wireguard-tunnel-provider/Config/wg-release.xcconfig  
-$ cp today-extension/Config/today-extension-staging.template.xcconfig today-extension/Config/today-extension-staging.xcconfig  
-$ cp today-extension/Config/today-extension-release.template.xcconfig today-extension/Config/today-extension-release.xcconfig   
+cp IVPNClient/Config/staging.template.xcconfig IVPNClient/Config/staging.xcconfig  
+cp IVPNClient/Config/release.template.xcconfig IVPNClient/Config/release.xcconfig  
 ```
 
 ### OpenVPN configuration
@@ -95,7 +82,30 @@ $ cp today-extension/Config/today-extension-release.template.xcconfig today-exte
 Rename and populate `OpenVPNConf.swift` file: 
 
 ```sh
-$ cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
+cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
+```
+
+### Build V2RayControl.xcframework
+
+Build `V2RayControl.xcframework`:
+
+```sh
+./build-v2ray.sh
+```
+
+### Build liboqs.a
+
+To compile  [liboqs](https://github.com/open-quantum-safe/liboqs), additional packages are required:  
+
+``` 
+brew install cmake ninja openssl@1.1 wget doxygen graphviz astyle valgrind
+pip3 install pytest pytest-xdist pyyaml
+```
+
+Build `liboqs.a`:  
+
+```sh
+./build-liboqs.sh
 ```
 
 ### Fastlane configuration
@@ -103,7 +113,7 @@ $ cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.
 Rename and populate `Appfile` files: 
 
 ```sh
-$ cp fastlane/Appfile.template fastlane/Appfile
+cp fastlane/Appfile.template fastlane/Appfile
 ```
 
 <a name="testing"></a>
@@ -112,19 +122,19 @@ $ cp fastlane/Appfile.template fastlane/Appfile
 Run code linter using fastlane:  
 
 ```sh
-$ fastlane lint
+fastlane lint
 ```
 
 Run tests using fastlane:  
 
 ```sh
-$ fastlane test
+fastlane test
 ```
 
 Alternatively, run tests using xcodebuild:  
 
 ```sh
-$ xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 11'
+xcodebuild test -scheme IVPNClient -destination 'platform=iOS Simulator,name=iPhone 14'
 ```
 
 <a name="deployment"></a>
@@ -133,19 +143,19 @@ $ xcodebuild test -workspace IVPNClient.xcworkspace -scheme IVPNClient -destinat
 To build and deploy beta build to TestFlight:  
 
 ```sh
-$ fastlane beta
+fastlane beta
 ```
 
 To build and deploy staging build to TestFlight:  
 
 ```sh
-$ fastlane staging
+fastlane staging
 ```
 
 To build and deploy App Store release build to TestFlight:  
 
 ```sh
-$ fastlane release
+fastlane release
 ```
 
 <a name="versioning"></a>

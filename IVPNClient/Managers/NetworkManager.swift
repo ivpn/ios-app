@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-11-22.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -60,7 +60,7 @@ class NetworkManager {
         do {
             try reachability.startNotifier()
         } catch {
-            log(info: "Unable to start reachability notifier")
+            log(.info, message: "Unable to start reachability notifier")
         }
         
         #warning("Remove network signal check after issue with VPN connections is resolved in Reachability.swift library")

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2020-03-23.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -52,6 +52,10 @@ class AccountViewController: UITableViewController {
         showFlashNotification(message: "Account ID copied to clipboard", presentInView: (navigationController?.view)!)
     }
     
+    @IBAction func deleteAccount(_ sender: UIButton) {
+        openWebPageInBrowser("https://www.ivpn.net/account/settings")
+    }
+    
     @IBAction func addMoreTime(_ sender: Any) {
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
             return
@@ -86,12 +90,14 @@ class AccountViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         accountView.initQRCode(viewModel: viewModel)
+        sessionManager.getSessionStatus()
     }
     
     // MARK: - Observers -
     
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.ServiceAuthorized, object: nil)
     }
     
     // MARK: - Private methods -
@@ -174,7 +180,7 @@ extension AccountViewController {
             logOut(deleteSession: false, deleteSettings: deleteSettings)
             navigationController?.dismiss(animated: true)
         } else {
-            showActionAlert(title: "Error with removing session", message: "Unable to contact server to log out. Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", cancelHandler: { _ in
+            showActionAlert(title: "Unable to contact server to log out", message: "Please check Internet connectivity. Do you want to force log out? This device will continue to count towards your device limit.", action: "Force log out", cancelHandler: { _ in
                 NotificationCenter.default.post(name: Notification.Name.UpdateGeoLocation, object: nil)
             }, actionHandler: { [self] _ in
                 forceLogOut = true
@@ -188,6 +194,15 @@ extension AccountViewController {
         showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out") { _ in
             self.navigationController?.dismiss(animated: true)
         }
+    }
+    
+    override func sessionStatusSuccess() {
+        subscriptionActivated()
+    }
+    
+    override func sessionStatusNotFound() {
+        logOut(deleteSession: false)
+        present(NavigationManager.getLoginViewController(showLogoutAlert: true), animated: true)
     }
     
 }

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2021-03-01.
-//  Copyright (c) 2021 Privatus Limited.
+//  Copyright (c) 2021 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -41,6 +41,55 @@ extension URL {
         }
         
         return ""
+    }
+    
+    func trailingContent(bytes: UInt64) -> String {
+        var file: FileHandle?
+        
+        defer {
+            try? file?.close()
+        }
+        
+        do {
+            file = try FileHandle(forReadingFrom: self)
+            
+            guard let size = try file?.seekToEnd() else {
+                log(.error, message: "Cannot seek")
+                return ""
+            }
+            
+            var offset: UInt64
+            if bytes < size {
+                offset = size - bytes
+            } else {
+                offset = 0
+            }
+            
+            try file?.seek(toOffset: offset)
+            
+            guard let data = try file?.readToEnd() else {
+                log(.error, message: "No data")
+                return ""
+            }
+            
+            guard let string = String(data: data, encoding: .utf8) else {
+                log(.error, message: "Cannot encode string")
+                return ""
+            }
+            
+            return string
+        } catch {
+            log(.error, message: "Error while reading file: \(error)")
+            return ""
+        }
+    }
+    
+    func trailingLines(bytes: UInt64) -> [String] {
+        return trailingContent(bytes: bytes)
+            .components(separatedBy: "\n")
+            .filter {
+                !$0.isEmpty
+            }
     }
     
 }

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-06-13.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -98,7 +98,15 @@ class APIClient: NSObject {
     private var hostName = UserDefaults.shared.apiHostName
     
     private var baseURL: URL {
-        return URL(string: "https://\(hostName)")!
+        if let url = URL(string: "https://\(hostName)") {
+            return url
+        }
+        
+        if let url = URL(string: "https://[\(hostName)]") {
+            return url
+        }
+        
+        return URL(string: "https://\(Config.ApiHostName)")!
     }
     
     private var userAgent: String {
@@ -193,8 +201,8 @@ class APIClient: NSObject {
                 
                 do {
                     urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-                } catch let error {
-                    print(error.localizedDescription)
+                } catch {
+                    
                 }
                 
                 urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-10.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -24,12 +24,15 @@
 import UIKit
 import WebKit
 import MessageUI
+import WidgetKit
 
 extension UIDevice {
+    
     var hasNotch: Bool {
-        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        let bottom = UIWindow.keyWindow?.safeAreaInsets.bottom ?? 0
         return bottom > 0
     }
+    
 }
 
 extension UIViewController {
@@ -61,11 +64,10 @@ extension UIViewController {
     // MARK: - @IBActions -
     
     @IBAction func dismissViewController(_ sender: Any) {
-        if #available(iOS 13.0, *) {
-            if let presentationController = navigationController?.presentationController {
-                presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
-            }
+        if let presentationController = navigationController?.presentationController {
+            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
         }
+        
         navigationController?.dismiss(animated: true)
     }
     
@@ -76,6 +78,7 @@ extension UIViewController {
         Application.shared.authentication.logOut(deleteSettings: deleteSettings)
         NotificationCenter.default.post(name: Notification.Name.VPNConfigurationDisabled, object: nil)
         NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         
         if deleteSession {
             let sessionManager = SessionManager()
@@ -125,10 +128,16 @@ extension UIViewController {
         }
     }
     
-    func showSubscriptionActivatedAlert(serviceStatus: ServiceStatus, completion: (() -> Void)? = nil) {
+    func openWebPageInBrowser(_ stringURL: String) {
+        if let url = URL(string: stringURL) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func showSubscriptionActivatedAlert(activeUntil: String, completion: (() -> Void)? = nil) {
         showAlert(
             title: "Thank you!",
-            message: "The payment was successfully processed.\nService is active until: " + serviceStatus.activeUntilString(),
+            message: "The payment was successfully processed.\nService is active until: " + activeUntil,
             handler: { _ in
                 if let completion = completion {
                     completion()
@@ -204,6 +213,35 @@ extension UIViewController {
         showErrorAlert(title: "Error", message: "Failed to connect to VPN - WireGuard keys are missing. Please generate new keys in the Settings or try to connect to VPN manually.")
     }
     
+    func evaluatePasscode() -> Bool {
+        guard UIDevice.isPasscodeSet() else {
+            showAlert(title: "Passcode is disabled", message: "Please enable Passcode in the iOS Settings")
+            return false
+        }
+        
+        return true
+    }
+    
+    func topMostViewController() -> UIViewController {
+        if self.presentedViewController == nil {
+            return self
+        }
+        
+        if let navigation = self.presentedViewController as? UINavigationController {
+            return navigation.visibleViewController!.topMostViewController()
+        }
+        
+        if let tab = self.presentedViewController as? UITabBarController {
+            if let selectedTab = tab.selectedViewController {
+                return selectedTab.topMostViewController()
+            }
+            
+            return tab.topMostViewController()
+        }
+        
+        return self.presentedViewController!.topMostViewController()
+    }
+    
 }
 
 // MARK: - Presenter -
@@ -224,7 +262,7 @@ extension UIViewController {
     }
     
     func deviceCanMakePurchases() -> Bool {
-        guard IAPManager.shared.canMakePurchases else {
+        guard PurchaseManager.shared.canMakePurchases else {
             showAlert(title: "Error", message: "In-App Purchases are not available on your device.")
             return false
         }
@@ -244,7 +282,7 @@ extension UIViewController: SessionManagerDelegate {
     func createSessionStart() {}
     func createSessionSuccess() {}
     func createSessionFailure(error: Any?) {}
-    func createSessionTooManySessions(error: Any?) {}
+    func createSessionTooManySessions(error: Any?, isNewStyleAccount: Bool) {}
     func createSessionAuthenticationError() {}
     func createSessionServiceNotActive() {}
     func createSessionAccountNotActivated(error: Any?) {}

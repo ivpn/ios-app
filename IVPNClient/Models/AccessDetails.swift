@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Fedir Nepyyvoda on 2016-11-08.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -25,14 +25,14 @@ import Foundation
 
 class AccessDetails {
     
-    var serverAddress: String
-    var ipAddresses: [String]
+    var ipAddress: String
+    var gateway: String
     var username: String
     var passwordRef: Data?
     
-    init(serverAddress: String, ipAddresses: [String], username: String, passwordRef: Data?) {
-        self.serverAddress = serverAddress
-        self.ipAddresses = ipAddresses
+    init(ipAddress: String, gateway: String, username: String, passwordRef: Data?) {
+        self.ipAddress = ipAddress
+        self.gateway = gateway
         self.username = username
         self.passwordRef = passwordRef
     }

@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-08-08.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -30,33 +30,27 @@ extension ApiService {
     func getServersList(storeInCache: Bool, completion: @escaping (ServersUpdateResult) -> Void) {
         let request = APIRequest(method: .get, path: Config.apiServersFile)
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
-        log(info: "Fetching servers list...")
+        log(.info, message: "Load servers")
         
         APIClient().perform(request) { result in
             switch result {
             case .success(let response):
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                }
-                
                 guard Config.useDebugServers == false else { return }
                 
                 if let data = response.body {
                     let serversList = VPNServerList(withJSONData: data, storeInCache: storeInCache)
                     
                     if serversList.servers.count > 0 {
-                        log(info: "Fetching servers list completed successfully")
+                        log(.info, message: "Load servers success")
                         completion(.success(serversList))
                         return
                     }
                 }
                 
-                log(info: "Error updating servers list (probably parsing error)")
+                log(.info, message: "Load servers error (probably parsing error)")
                 completion(.error)
             case .failure:
-                log(info: "Error fetching servers list")
+                log(.info, message: "Load servers error")
                 completion(.error)
             }
         }

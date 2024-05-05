@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-11-26.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -48,7 +48,7 @@ class Pinger {
         UserDefaults.shared.set(Date().timeIntervalSince1970, forKey: "LastPingTimestamp")
         
         for server in serverList.getServers() {
-            if let ipAddress = server.ipAddresses.first {
+            if let ipAddress = server.hosts.first?.host {
                 guard !ipAddress.isEmpty else { continue }
                 let ping = Ping()
                 ping.delegate = self
@@ -64,7 +64,7 @@ class Pinger {
             PingMannager.shared.startPing()
         }
 
-        log(info: "Pinger service started")
+        log(.info, message: "Pinger service started")
     }
     
     // MARK: - Private methods -
@@ -130,7 +130,7 @@ extension Pinger: PingDelegate {
             if pingsCount > 0 {
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: Notification.Name.PingDidComplete, object: nil)
-                    log(info: "Pinger service finished")
+                    log(.info, message: "Pinger service finished")
                 }
             }
         }

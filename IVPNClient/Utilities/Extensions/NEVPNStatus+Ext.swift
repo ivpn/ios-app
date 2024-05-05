@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2019-12-09.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -26,6 +26,11 @@ import NetworkExtension
 extension NEVPNStatus {
     
     func isDisconnected() -> Bool {
+        // Fix for iOS 16+ bug where VPN status is .disconnecting for active on-demand rules and disconnected VPN
+        if UserDefaults.shared.networkProtectionEnabled {
+            return self == .disconnected || self == .disconnecting || self == .invalid
+        }
+        
         return self == .disconnected || self == .invalid
     }
     

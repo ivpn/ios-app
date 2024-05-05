@@ -22,7 +22,7 @@ As a contributor, here are the guidelines we would like you to follow:
 ## Creating an Issue
 
 * If you want to report a security problem **DO NOT CREATE AN ISSUE**, please read our [Security Policy](/.github/SECURITY.md) on how to submit a security vulnerability.
-* When creating a new issue, chose a "Bug report" or "Feature request" template and fill the required information.
+* When creating a new issue, choose a "Bug report" or "Feature request" template and fill the required information.
 * Please describe the steps necessary to reproduce the issue you are running into.
 
 <a name="pr"></a>
@@ -59,11 +59,11 @@ In case when there is no issue:
 <type>/<short-summary-or-description>
 ```
 
-Where <type> can be `epic`, `feature`, `task`, `bugfix`, `hotfix` or `release`.
+Where `<type>` can be `epic`, `feature`, `task`, `bugfix`, `hotfix` or `release`.
 
 ### Branches
 
-`master` - The production branch. Clone or fork this repository for the latest copy.  
+`main` - The production branch. Clone or fork this repository for the latest copy.  
 `develop` - The active development branch. Pull requests should be directed to this branch.  
 `<feature branch>` - The feature of fix branch. Pull requests should be made from this branch into `develop` brach.  
 

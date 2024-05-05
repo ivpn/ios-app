@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-11-21.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -158,7 +158,7 @@ extension NetworkProtectionViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "On iOS 13 and above, current Wi-Fi name is available only when IVPN profile is saved in iOS VPN Configurations."
+            return "Current Wi-Fi name is available only when IVPN profile is saved in iOS VPN Configurations."
         default:
             return nil
         }
@@ -191,7 +191,7 @@ extension NetworkProtectionViewController {
             } else {
                 Application.shared.connectionManager.evaluateConnection(network: network, newTrust: trust) { error in
                     if error != nil {
-                        showWireGuardKeysMissingError()
+                        self.showWireGuardKeysMissingError()
                     }
                 }
             }
@@ -216,23 +216,20 @@ extension NetworkProtectionViewController {
         cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        guard indexPath.section > 1 else {
-            return []
-        }
-        
-        let delete = UITableViewRowAction(style: .destructive, title: "Remove") { _, indexPath in
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let contextItem = UIContextualAction(style: .destructive, title: "Remove") { (contextualAction, view, boolValue) in
             self.removeNetwork(indexPath: indexPath)
         }
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
         
-        return [delete]
+        return swipeActions
     }
     
 }
 
-// MARK: - NetworkProtectionHeaderTableViewCellDelegate -
+// MARK: - NetworkProtectionTableCellDelegate -
 
-extension NetworkProtectionViewController: NetworkProtectionHeaderTableViewCellDelegate {
+extension NetworkProtectionViewController: NetworkProtectionTableCellDelegate {
     
     func toggle(isOn: Bool) {
         defaults.set(isOn, forKey: UserDefaults.Key.networkProtectionEnabled)

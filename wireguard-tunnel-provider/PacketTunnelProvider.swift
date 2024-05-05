@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-10-12.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -25,6 +25,7 @@ import Network
 import NetworkExtension
 import WireGuardKit
 import os
+import WidgetKit
 
 enum PacketTunnelProviderError: String, Error {
     case savedProtocolConfigurationIsInvalid
@@ -105,24 +106,22 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler(error)
         }
         
-        Logger.configureGlobal(tagged: "INFO", withFilePath: FileManager.logFileURL?.path)
-        setupLogging()
         wg_log(.info, message: "Starting tunnel")
         wg_log(.info, message: "Public key: \(KeyChain.wgPublicKey ?? "")")
-        wg_log(.info, message: "Addresses: \(addresses)")
         
         setTunnelNetworkSettings(tunnelSettings) { error in
             if error != nil {
                 self.tunnelSetupFailed()
                 completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             } else {
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
                 completionHandler(nil)
             }
         }
     }
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        wg_log(.info, staticMessage: "Stopping tunnel")
+        wg_log(.info, message: "Stopping tunnel")
         
         networkMonitor?.cancel()
         networkMonitor = nil
@@ -131,17 +130,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             wgTurnOff(handle)
         }
         
+        WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         completionHandler()
-    }
-    
-    override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)? = nil) {
-        wg_log(.info, message: "Handle App Message size: \(messageData.count)")
-        
-        if messageData.count == 1 && messageData[0] == 99 {
-            flushLogsToFile()
-        } else {
-            completionHandler?(nil)
-        }
     }
     
     deinit {
@@ -155,19 +145,25 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     private func startKeyRegenerationMonitor(completion: @escaping (Error?) -> Void) {
-        let timer = TimerManager(timeInterval: ExtensionKeyManager.regenerationCheckInterval)
+        let timer = TimerManager(timeInterval: AppKeyManager.regenerationCheckInterval)
         timer.eventHandler = {
-            self.regenerateKeys { error in
-                completion(error)
-            }
+            self.evaluateKeyRotation(completion)
             timer.proceed()
         }
         timer.resume()
     }
     
+    private func evaluateKeyRotation(_ completion: @escaping (Error?) -> Void) {
+        if AppKeyManager.needToRegenerate() {
+            self.regenerateKeys { error in
+                completion(error)
+            }
+        }
+    }
+    
     private func regenerateKeys(completion: @escaping (Error?) -> Void) {
         wg_log(.info, message: "Rotating keys")
-        ExtensionKeyManager.shared.upgradeKey { privateKey, ipAddress in
+        AppKeyManager.shared.setNewKey { privateKey, ipAddress, presharedKey in
             guard let privateKey = privateKey, let ipAddress = ipAddress else {
                 completion(nil)
                 return
@@ -187,7 +183,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                         return
                     }
                     
+                    wg_log(.info, message: "Update config with new key")
                     self.updateWgConfig(key: "private_key", value: privateKeyHex)
+                    
+                    if let hexPresharedKey = presharedKey?.base64KeyToHex() {
+                        self.updateWgConfig(key: "preshared_key", value: hexPresharedKey)
+                    }
+                    
                     completion(nil)
                 }
             }
@@ -238,26 +240,27 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 newSettings.dnsSettings = NEDNSSettings(servers: [UserDefaults.shared.antiTrackerDNS])
             }
         } else if UserDefaults.shared.isCustomDNS && !UserDefaults.shared.customDNS.isEmpty && !UserDefaults.shared.resolvedDNSInsideVPN.isEmpty && UserDefaults.shared.resolvedDNSInsideVPN != [""] {
-            if #available(iOS 14.0, *) {
-                switch DNSProtocolType.preferred() {
-                case .doh:
-                    let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
-                    newSettings.dnsSettings = dnsSettings
-                case .dot:
-                    let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                    dnsSettings.serverName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
-                    newSettings.dnsSettings = dnsSettings
-                default:
-                    newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
-                }
-            } else {
+            switch DNSProtocolType.preferred() {
+            case .doh:
+                let dnsSettings = NEDNSOverHTTPSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+                dnsSettings.serverURL = URL.init(string: DNSProtocolType.getServerURL(address: UserDefaults.shared.customDNS))
+                newSettings.dnsSettings = dnsSettings
+            case .dot:
+                let dnsSettings = NEDNSOverTLSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
+                dnsSettings.serverName = DNSProtocolType.getServerName(address: UserDefaults.shared.customDNS)
+                newSettings.dnsSettings = dnsSettings
+            default:
                 newSettings.dnsSettings = NEDNSSettings(servers: UserDefaults.shared.resolvedDNSInsideVPN)
             }
         }
         
+        if let dnsSettings = newSettings.dnsSettings {
+            wg_log(.info, message: "DNS server: \(String(describing: dnsSettings.servers))")
+        }
+        
         if let mtu = self.config.providerConfiguration![PCKeys.mtu.rawValue] as? NSNumber, mtu.intValue > 0 {
             newSettings.mtu = mtu
+            wg_log(.info, message: "MTU: \(mtu)")
         }
         
         return newSettings
@@ -277,42 +280,4 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         wgSetConfig(handle, settings)
     }
     
-    private func setupLogging() {
-        guard UserDefaults.shared.isLogging else {
-            return
-        }
-        
-        Logger.configureGlobal(tagged: "INFO", withFilePath: FileManager.logFileURL?.path)
-    }
-    
-    private func flushLogsToFile() {
-        guard UserDefaults.shared.isLogging else {
-            return
-        }
-        guard let path = FileManager.logTextFileURL?.path else {
-            return
-        }
-        
-        if Logger.global == nil {
-            setupLogging()
-        }
-        
-        if Logger.global?.writeLog(to: path) ?? false {
-            wg_log(.info, message: "flushLogsToFile written to file \(path) ")
-        } else {
-            wg_log(.info, message: "flushLogsToFile error while writing to file \(path) ")
-        }
-    }
-    
-}
-
-extension WireGuardLogLevel {
-    var osLogLevel: OSLogType {
-        switch self {
-        case .verbose:
-            return .debug
-        case .error:
-            return .error
-        }
-    }
 }

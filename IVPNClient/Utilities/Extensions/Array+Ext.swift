@@ -4,7 +4,7 @@
 //  https://github.com/ivpn/ios-app
 //
 //  Created by Juraj Hilje on 2018-09-28.
-//  Copyright (c) 2020 Privatus Limited.
+//  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -40,6 +40,14 @@ extension Array where Element: Equatable {
     
     mutating func move(at index: Index, to newIndex: Index) {
         insert(remove(at: index), at: newIndex)
+    }
+    
+    public subscript(safeIndex index: Int) -> Element? {
+        guard index >= 0, index < endIndex else {
+            return nil
+        }
+        
+        return self[index]
     }
     
 }
