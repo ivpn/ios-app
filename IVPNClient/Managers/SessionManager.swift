@@ -208,7 +208,10 @@ class SessionManager {
     
     private func sessionNewParams(force: Bool = false, username: String? = nil, confirmation: String? = nil, captcha: String? = nil, captchaId: String? = nil, kem: KEM) -> [URLQueryItem] {
         let username = username ?? Application.shared.authentication.getStoredUsername()
-        var params = [URLQueryItem(name: "username", value: username)]
+        var params = [
+            URLQueryItem(name: "username", value: username),
+            URLQueryItem(name: "kem_library_version", value: "0.10.0")
+        ]
         
         if let wgPublicKey = KeyChain.wgPublicKey {
             params.append(URLQueryItem(name: "wg_public_key", value: wgPublicKey))
