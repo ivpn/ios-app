@@ -273,7 +273,7 @@ extension ControlPanelViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
-                "Retry",
+                "Retry"
             ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
                 switch index {
                 case 0:
@@ -295,7 +295,7 @@ extension ControlPanelViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Enable Device Management",
-                "Retry",
+                "Retry"
             ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
                 switch index {
                 case 0:
