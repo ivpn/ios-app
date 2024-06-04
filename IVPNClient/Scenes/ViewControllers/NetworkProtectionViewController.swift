@@ -217,7 +217,7 @@ extension NetworkProtectionViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let contextItem = UIContextualAction(style: .destructive, title: "Remove") { (contextualAction, view, boolValue) in
+        let contextItem = UIContextualAction(style: .destructive, title: "Remove") { (_, _, _) in
             self.removeNetwork(indexPath: indexPath)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
