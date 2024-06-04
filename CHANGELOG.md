@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.12.3 - Unreleased
+## 2.12.3 - 2024-06-04  
 
 [IMPROVED] Post-Quantum library updated to the latest version  
 
