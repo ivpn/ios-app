@@ -107,7 +107,8 @@ class AppKeyManager {
         var interface = Interface()
         interface.privateKey = Interface.generatePrivateKey()
         var params = ApiService.authParams + [
-            URLQueryItem(name: "public_key", value: interface.publicKey ?? "")
+            URLQueryItem(name: "public_key", value: interface.publicKey ?? ""),
+            URLQueryItem(name: "kem_library_version", value: "0.10.0")
         ]
         
         var kem = KEM()
