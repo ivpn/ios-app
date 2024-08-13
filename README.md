@@ -97,7 +97,7 @@ Build `V2RayControl.xcframework`:
 
 To compile  [liboqs](https://github.com/open-quantum-safe/liboqs), additional packages are required:  
 
-``` 
+```sh
 brew install cmake ninja openssl@1.1 wget doxygen graphviz astyle valgrind
 pip3 install pytest pytest-xdist pyyaml
 ```
