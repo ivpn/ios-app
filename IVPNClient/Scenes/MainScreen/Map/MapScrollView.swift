@@ -118,6 +118,9 @@ class MapScrollView: UIScrollView {
     func updateMapMarkers() {
         markerLocalView.updateView()
         markerGatewayView.updateView()
+        if let viewModel = viewModel {
+            updateMapPosition(viewModel: viewModel, animated: true)
+        }
     }
     
     func updateMapPosition(latitude: Double, longitude: Double, animated: Bool = false, isLocalPosition: Bool, updateMarkers: Bool = true) {
