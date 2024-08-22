@@ -139,7 +139,7 @@ class MapScrollView: UIScrollView {
         }
         
         if updateMarkers {
-            updateMarkerPosition(x: point.0 - 49, y: point.1 - 49, isLocalPosition: isLocalPosition)
+            updateMarkerPosition(x: point.0, y: point.1, isLocalPosition: isLocalPosition)
         }
         
         currentCoordinates = (latitude, longitude)
@@ -252,7 +252,7 @@ class MapScrollView: UIScrollView {
     
     private func updateMarkerPosition(x: Double, y: Double, isLocalPosition: Bool) {
         if isLocalPosition {
-            markerLocalView.snp.updateConstraints { make in
+            markerLocalView.snp.remakeConstraints { make in
                 make.left.equalTo(x)
                 make.top.equalTo(y)
             }
@@ -261,7 +261,7 @@ class MapScrollView: UIScrollView {
                 self.layoutIfNeeded()
             }
         } else {
-            markerGatewayView.snp.updateConstraints { make in
+            markerGatewayView.snp.remakeConstraints { make in
                 make.left.equalTo(x)
                 make.top.equalTo(y)
             }
