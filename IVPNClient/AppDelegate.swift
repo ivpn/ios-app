@@ -96,16 +96,9 @@ class AppDelegate: UIResponder {
     
     private func showSecurityScreen() {
         var showWindow = false
+        let topVC = UIApplication.topViewController()
         
-        if UIApplication.topViewController() as? AccountViewController != nil {
-            showWindow = true
-        }
-        
-        if UIApplication.topViewController() as? LoginViewController != nil {
-            showWindow = true
-        }
-        
-        if UIApplication.topViewController() as? CreateAccountViewController != nil {
+        if topVC is AccountViewController || topVC is LoginViewController || topVC is CreateAccountViewController {
             showWindow = true
         }
         
