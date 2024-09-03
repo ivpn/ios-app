@@ -115,7 +115,7 @@ class LoginViewController: UIViewController {
                 
                 if let account = account {
                     self.userName.text = account.accountId
-                    self.sessionManager.createSession()
+                    self.startLoginProcess()
                 }
             }
         }
