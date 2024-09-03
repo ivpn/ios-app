@@ -117,6 +117,10 @@ class PurchaseManager: NSObject {
                     continue
                 }
                 
+                guard ProductId.all.contains(transaction.productID) else {
+                    continue
+                }
+                
                 if transaction.revocationDate == nil {
                     log(.info, message: "[Store] Completing unfinished purchase \(transaction.productID)")
                     complete(transaction)
