@@ -151,6 +151,7 @@
 		828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F6221C008100D5E330 /* ServerConfigurationCell.swift */; };
 		828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */; };
 		828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772FA221C28E000D5E330 /* FlagImageView.swift */; };
+		828C45692C88772E0064F365 /* AppIntentsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828C45682C8877290064F365 /* AppIntentsHandler.swift */; };
 		828D8A6D258245AD00CB0E5B /* TwoFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */; };
 		828E9C95231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
@@ -588,6 +589,7 @@
 		828772F6221C008100D5E330 /* ServerConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationCell.swift; sourceTree = "<group>"; };
 		828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersConfigurationTableViewController.swift; sourceTree = "<group>"; };
 		828772FA221C28E000D5E330 /* FlagImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagImageView.swift; sourceTree = "<group>"; };
+		828C45682C8877290064F365 /* AppIntentsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntentsHandler.swift; sourceTree = "<group>"; };
 		828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorViewController.swift; sourceTree = "<group>"; };
 		828E9C94231E5780001E1FCF /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		8290195E243CB27500777B6E /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
@@ -927,6 +929,7 @@
 				82C1D5BD23FE8BD90059A915 /* ControlPanel */,
 				8208525723FD5EB20008C112 /* MainViewController.swift */,
 				8208525B23FD64160008C112 /* MainViewController+Ext.swift */,
+				828C45682C8877290064F365 /* AppIntentsHandler.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -2337,6 +2340,7 @@
 				8292E1A92174C11600123538 /* Interface.swift in Sources */,
 				82F638CC217DC25600410318 /* CIDRAddress.swift in Sources */,
 				824B86D226D40E7800D0101A /* FileManager+Extension.swift in Sources */,
+				828C45692C88772E0064F365 /* AppIntentsHandler.swift in Sources */,
 				8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */,
 				821429B722FC2BE90056B8FF /* Result.swift in Sources */,
 				827855B92472B27F00B3B6BD /* Account.swift in Sources */,

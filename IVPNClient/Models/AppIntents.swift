@@ -25,13 +25,37 @@
 import AppIntents
 
 @available(iOS 16, *)
+struct Connect: AppIntent {
+    static var title = LocalizedStringResource("Connect")
+    static var description = IntentDescription("Connect to the VPN")
+    
+    func perform() async throws -> some IntentResult {
+        log(.info, message: "App Intent handler: Connect")
+        NotificationCenter.default.post(name: Notification.Name.IntentConnect, object: nil)
+        return .result()
+    }
+}
+
+@available(iOS 16, *)
+struct Disconnect: AppIntent {
+    static var title = LocalizedStringResource("Disconnect")
+    static var description = IntentDescription("Disconnect from the VPN")
+    
+    func perform() async throws -> some IntentResult {
+        log(.info, message: "App Intent handler: Disconnect")
+        NotificationCenter.default.post(name: Notification.Name.IntentDisconnect, object: nil)
+        return .result()
+    }
+}
+
+@available(iOS 16, *)
 struct AntiTrackerEnable: AppIntent {
     static var title = LocalizedStringResource("Enable AntiTracker")
     static var description = IntentDescription("Enables the AntiTracker")
 
     func perform() async throws -> some IntentResult {
         log(.info, message: "App Intent handler: EnableAntiTracker")
-        NotificationCenter.default.post(name: Notification.Name.IntentEnaableAntiTracker, object: nil)
+        NotificationCenter.default.post(name: Notification.Name.IntentAntiTrackerEnable, object: nil)
         return .result()
     }
 }
@@ -43,7 +67,31 @@ struct AntiTrackerDisable: AppIntent {
     
     func perform() async throws -> some IntentResult {
         log(.info, message: "App Intent handler: DisableAntiTracker")
-        NotificationCenter.default.post(name: Notification.Name.IntentDisableAntiTracker, object: nil)
+        NotificationCenter.default.post(name: Notification.Name.IntentAntiTrackerDisable, object: nil)
+        return .result()
+    }
+}
+
+@available(iOS 16, *)
+struct CustomDNSEnable: AppIntent {
+    static var title = LocalizedStringResource("Enable Custom DNS")
+    static var description = IntentDescription("Enables the Custom DNS")
+    
+    func perform() async throws -> some IntentResult {
+        log(.info, message: "App Intent handler: EnableCustomDNS")
+        NotificationCenter.default.post(name: Notification.Name.IntentCustomDNSEnable, object: nil)
+        return .result()
+    }
+}
+
+@available(iOS 16, *)
+struct CustomDNSDisable: AppIntent {
+    static var title = LocalizedStringResource("Disable Custom DNS")
+    static var description = IntentDescription("Disables the Custom DNS")
+    
+    func perform() async throws -> some IntentResult {
+        log(.info, message: "App Intent handler: DisableCustomDNS")
+        NotificationCenter.default.post(name: Notification.Name.IntentCustomDNSDisable, object: nil)
         return .result()
     }
 }
