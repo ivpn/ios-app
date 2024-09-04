@@ -53,12 +53,6 @@ class CustomDNSViewController: UITableViewController {
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isCustomDNS)
         evaluateReconnect(sender: sender)
-        
-        if sender.isOn {
-            registerUserActivity(type: UserActivityType.CustomDNSEnable, title: UserActivityTitle.CustomDNSEnable)
-        } else {
-            registerUserActivity(type: UserActivityType.CustomDNSDisable, title: UserActivityTitle.CustomDNSDisable)
-        }
     }
     
     @IBAction func enableSecureDNS(_ sender: UISwitch) {

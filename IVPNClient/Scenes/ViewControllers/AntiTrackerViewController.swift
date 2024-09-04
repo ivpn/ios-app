@@ -46,12 +46,6 @@ class AntiTrackerViewController: UITableViewController {
         antiTrackerHardcoreSwitch.isEnabled = sender.isOn
         evaluateReconnect(sender: sender as UIView)
         NotificationCenter.default.post(name: Notification.Name.UpdateControlPanel, object: nil)
-        
-        if sender.isOn {
-            registerUserActivity(type: UserActivityType.AntiTrackerEnable, title: UserActivityTitle.AntiTrackerEnable)
-        } else {
-            registerUserActivity(type: UserActivityType.AntiTrackerDisable, title: UserActivityTitle.AntiTrackerDisable)
-        }
     }
     
     @IBAction func toggleAntiTrackerHardcore(_ sender: UISwitch) {
