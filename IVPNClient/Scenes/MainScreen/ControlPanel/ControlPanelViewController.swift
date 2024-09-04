@@ -108,12 +108,6 @@ class ControlPanelViewController: UITableViewController {
         WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         evaluateReconnect(sender: sender as UIView)
         controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
-        
-        if sender.isOn {
-            registerUserActivity(type: UserActivityType.AntiTrackerEnable, title: UserActivityTitle.AntiTrackerEnable)
-        } else {
-            registerUserActivity(type: UserActivityType.AntiTrackerDisable, title: UserActivityTitle.AntiTrackerDisable)
-        }
     }
     
     @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
@@ -223,8 +217,6 @@ class ControlPanelViewController: UITableViewController {
             manager.resetRulesAndConnect()
         }
         
-        registerUserActivity(type: UserActivityType.Connect, title: UserActivityTitle.Connect)
-        
         NotificationCenter.default.removeObserver(self, name: Notification.Name.ServiceAuthorized, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.SubscriptionActivated, object: nil)
     }
@@ -239,8 +231,6 @@ class ControlPanelViewController: UITableViewController {
         } else {
             manager.resetRulesAndDisconnect()
         }
-        
-        registerUserActivity(type: UserActivityType.Disconnect, title: UserActivityTitle.Disconnect)
         
         DispatchQueue.delay(0.5) {
             if Application.shared.connectionManager.status.isDisconnected() {

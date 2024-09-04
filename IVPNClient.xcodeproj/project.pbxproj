@@ -25,8 +25,6 @@
 		8206BAFF29ED6FFF00F916B7 /* ConnectionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */; };
 		8206BB0129ED7BEE00F916B7 /* ConnectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BB0029ED7BEE00F916B7 /* ConnectionInfo.swift */; };
 		8206BB0329ED7C3700F916B7 /* ConnectionInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BB0229ED7C3700F916B7 /* ConnectionInfoViewModel.swift */; };
-		8206E5D022967E37003119AF /* UserActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5CF22967E37003119AF /* UserActivityType.swift */; };
-		8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5D122967EAF003119AF /* UserActivityTitle.swift */; };
 		8206F32124347A8F0056B465 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32024347A8F0056B465 /* MainView.swift */; };
 		8206F32324367A240056B465 /* VPNErrorObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32224367A240056B465 /* VPNErrorObserver.swift */; };
 		8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */; };
@@ -473,8 +471,6 @@
 		8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoView.swift; sourceTree = "<group>"; };
 		8206BB0029ED7BEE00F916B7 /* ConnectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfo.swift; sourceTree = "<group>"; };
 		8206BB0229ED7C3700F916B7 /* ConnectionInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoViewModel.swift; sourceTree = "<group>"; };
-		8206E5CF22967E37003119AF /* UserActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityType.swift; sourceTree = "<group>"; };
-		8206E5D122967EAF003119AF /* UserActivityTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityTitle.swift; sourceTree = "<group>"; };
 		8206F32024347A8F0056B465 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8206F32224367A240056B465 /* VPNErrorObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNErrorObserver.swift; sourceTree = "<group>"; };
 		8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelMainLayout.swift; sourceTree = "<group>"; };
@@ -1198,8 +1194,6 @@
 				82E716832181E8E100D6B7C2 /* ProviderConfigurationKeys.swift */,
 				82D598B321A5A7A3000FABDE /* NetworkTrust.swift */,
 				82D598C721A6ADF1000FABDE /* NetworkType.swift */,
-				8206E5CF22967E37003119AF /* UserActivityType.swift */,
-				8206E5D122967EAF003119AF /* UserActivityTitle.swift */,
 				823FFB062338DF1800F91A5D /* Capability.swift */,
 				8229209F2480FA3600476FC1 /* ServersSort.swift */,
 				826FBDA22461847D00B9E464 /* ServiceType.swift */,
@@ -2291,7 +2285,6 @@
 				82D598BC21A6949F000FABDE /* StorageManager.swift in Sources */,
 				826FBDA32461847D00B9E464 /* ServiceType.swift in Sources */,
 				821429B922FC2EA40056B8FF /* ApiService+Ext.swift in Sources */,
-				8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */,
 				82E716902181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				8223C54C22E9E93A00CD283D /* Session.swift in Sources */,
 				822563922431E03A00AE7F8D /* AccountView.swift in Sources */,
@@ -2364,7 +2357,6 @@
 				82A3422524AB6AF700761AB0 /* Double+Ext.swift in Sources */,
 				8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */,
 				9C3031351DB42EF900C38B0C /* Application.swift in Sources */,
-				8206E5D022967E37003119AF /* UserActivityType.swift in Sources */,
 				82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */,
 				828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */,
 				8228C8D22B1DE906005977D3 /* PurchaseManager.swift in Sources */,
