@@ -6,6 +6,8 @@
 //  Copyright © 2024 IVPN. All rights reserved.
 //
 
+import UIKit
+
 extension MainViewController {
     
     // MARK: - App Intents -
