@@ -267,6 +267,7 @@
 		82DB75EE239E766A0073E846 /* NEVPNStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */; };
 		82DC75BC22B277D200D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
 		82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
+		82DE85712C8861CB00501935 /* AppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DE85702C8861CB00501935 /* AppIntents.swift */; };
 		82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF01D244714D900CCB5CD /* ScannerViewController.swift */; };
 		82DEF021244714F000CCB5CD /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF020244714F000CCB5CD /* ScannerView.swift */; };
 		82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */; };
@@ -674,6 +675,7 @@
 		82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NEVPNStatus+Ext.swift"; sourceTree = "<group>"; };
 		82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEVPNStatusTests.swift; sourceTree = "<group>"; };
 		82DC75BB22B277D200D3C73C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		82DE85702C8861CB00501935 /* AppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntents.swift; sourceTree = "<group>"; };
 		82DEF01D244714D900CCB5CD /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		82DEF020244714F000CCB5CD /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -1032,6 +1034,7 @@
 				827694F2263C04C40058B4DC /* LoginConfirmation.swift */,
 				821CA2DE288143470067F70D /* PortRange.swift */,
 				825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */,
+				82DE85702C8861CB00501935 /* AppIntents.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2392,6 +2395,7 @@
 				82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */,
 				8270D268241BB3D100B17B65 /* InfoAlertViewModel.swift in Sources */,
 				826E614A242A1CA80064F195 /* AccountViewModel.swift in Sources */,
+				82DE85712C8861CB00501935 /* AppIntents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

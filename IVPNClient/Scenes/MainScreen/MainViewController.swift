@@ -198,6 +198,29 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(vpnConfigurationDisabled), name: Notification.Name.VPNConfigurationDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateGeoLocation), name: Notification.Name.UpdateGeoLocation, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(intentAntiTrackerEnable), name: Notification.Name.IntentAntiTrackerEnable, object: nil)
+    }
+    
+    // MARK: - App Intents -
+    
+    @objc func intentAntiTrackerEnable() {
+        DispatchQueue.async {
+            if let viewController = UIApplication.topViewController() {
+                if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
+                    viewController.showAlert(title: "IKEv2 not supported", message: "AntiTracker is supported only for OpenVPN and WireGuard protocols.") { _ in
+                    }
+                    return
+                }
+                
+                UserDefaults.shared.set(true, forKey: UserDefaults.Key.isAntiTracker)
+                NotificationCenter.default.post(name: Notification.Name.AntiTrackerUpdated, object: nil)
+                if UIApplication.topViewController() as? MainViewController != nil {
+                    NotificationCenter.default.post(name: Notification.Name.EvaluateReconnect, object: nil)
+                } else {
+                    viewController.evaluateReconnect(sender: viewController.view)
+                }
+            }
+        }
     }
     
     // MARK: - Private methods -
