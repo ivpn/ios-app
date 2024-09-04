@@ -439,3 +439,12 @@ extension AppDelegate: PurchaseManagerDelegate {
     }
     
 }
+
+enum UserActivityType {
+    static let Connect = "net.ivpn.clients.ios.Connect"
+    static let Disconnect = "net.ivpn.clients.ios.Disconnect"
+    static let AntiTrackerEnable = "net.ivpn.clients.ios.AntiTracker.enable"
+    static let AntiTrackerDisable = "net.ivpn.clients.ios.AntiTracker.disable"
+    static let CustomDNSEnable = "net.ivpn.clients.ios.CustomDNS.enable"
+    static let CustomDNSDisable = "net.ivpn.clients.ios.CustomDNS.disable"
+}
