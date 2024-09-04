@@ -26,7 +26,7 @@ import AppIntents
 
 @available(iOS 16, *)
 struct Connect: AppIntent {
-    static var title = LocalizedStringResource("Connect")
+    static var title = LocalizedStringResource("Connect VPN")
     static var description = IntentDescription("Connect to the VPN")
     
     func perform() async throws -> some IntentResult {
@@ -38,7 +38,7 @@ struct Connect: AppIntent {
 
 @available(iOS 16, *)
 struct Disconnect: AppIntent {
-    static var title = LocalizedStringResource("Disconnect")
+    static var title = LocalizedStringResource("Disconnect VPN")
     static var description = IntentDescription("Disconnect from the VPN")
     
     func perform() async throws -> some IntentResult {
