@@ -13,23 +13,11 @@ extension MainViewController {
     // MARK: - App Intents -
     
     @objc func intentConnect() {
-        DispatchQueue.delay(0.75) {
-            if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndConnectShortcut(closeApp: true, actionType: .connect)
-                return
-            }
-            Application.shared.connectionManager.connect()
-        }
+        Application.shared.connectionManager.resetRulesAndConnect()
     }
     
     @objc func intentDisconnect() {
-        DispatchQueue.delay(0.75) {
-            if UserDefaults.shared.networkProtectionEnabled {
-                Application.shared.connectionManager.resetRulesAndDisconnectShortcut(closeApp: true, actionType: .disconnect)
-                return
-            }
-            Application.shared.connectionManager.disconnect()
-        }
+        Application.shared.connectionManager.resetRulesAndDisconnect()
     }
     
     @objc func intentAntiTrackerEnable() {
