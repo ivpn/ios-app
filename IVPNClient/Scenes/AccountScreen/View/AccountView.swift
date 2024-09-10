@@ -37,6 +37,7 @@ class AccountView: UITableView {
     @IBOutlet weak var deviceNameTitle: UILabel!
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var header: UIView!
+    @IBOutlet weak var hideAccountButton: UIButton!
     
     // MARK: - Properties -
     
