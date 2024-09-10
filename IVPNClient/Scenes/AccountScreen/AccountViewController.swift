@@ -37,7 +37,6 @@ class AccountViewController: UITableViewController {
     private var serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
     private var deleteSettings = false
     private var forceLogOut = false
-    private var accountHidden = false
     
     var sessionManager: SessionManager {
         let sessionManager = SessionManager()
@@ -79,8 +78,9 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func toggleAccountHidden(_ sender: Any) {
-        accountView.toggleAccountVisibility(hide: accountHidden)
-        accountHidden = !accountHidden
+        let hidden = UserDefaults.shared.isAccountHidden
+        accountView.toggleAccountVisibility(hide: hidden)
+        UserDefaults.shared.set(!hidden, forKey: UserDefaults.Key.isAccountHidden)
     }
     
     // MARK: - View Lifecycle -
@@ -96,6 +96,7 @@ class AccountViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         accountView.initQRCode(viewModel: viewModel)
+        accountView.toggleAccountVisibility(hide: UserDefaults.shared.isAccountHidden)
         sessionManager.getSessionStatus()
     }
     
