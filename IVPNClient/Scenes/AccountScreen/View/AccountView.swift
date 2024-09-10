@@ -59,25 +59,29 @@ class AccountView: UITableView {
         header.frame = CGRect(x: 0, y: 0, width: Int(header.frame.width), height: headerHeight)
         reloadData()
         layoutIfNeeded()
+        toggleAccountVisibility(hide: UserDefaults.shared.isAccountHidden)
     }
     
     func initQRCode(viewModel: AccountViewModel) {
         qrCodeImage.image = UIImage.generateQRCode(from: viewModel.accountId)
+        toggleAccountVisibility(hide: UserDefaults.shared.isAccountHidden)
     }
     
     func toggleAccountVisibility(hide: Bool) {
         if hide {
+            hideAccountButton.setImage(UIImage.init(systemName: "eye.slash.fill"), for: .normal)
+            accountIdLabel.removeBlur()
+            accountIdLabel.addBlur(2)
+            accountIdLabel.alpha = 0.7
+            qrCodeImage.removeBlur()
+            qrCodeImage.addBlur(2)
+            qrCodeImage.alpha = 0.5
+        } else {
             hideAccountButton.setImage(UIImage.init(systemName: "eye.fill"), for: .normal)
             accountIdLabel.removeBlur()
             accountIdLabel.alpha = 1
             qrCodeImage.removeBlur()
             qrCodeImage.alpha = 1
-        } else {
-            hideAccountButton.setImage(UIImage.init(systemName: "eye.slash.fill"), for: .normal)
-            accountIdLabel.addBlur(2)
-            accountIdLabel.alpha = 0.7
-            qrCodeImage.addBlur(2)
-            qrCodeImage.alpha = 0.5
         }
     }
     
