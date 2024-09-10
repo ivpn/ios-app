@@ -77,6 +77,12 @@ class AccountViewController: UITableViewController {
         }
     }
     
+    @IBAction func toggleAccountHidden(_ sender: Any) {
+        let hidden = UserDefaults.shared.isAccountHidden
+        accountView.toggleAccountVisibility(hide: hidden)
+        UserDefaults.shared.set(!hidden, forKey: UserDefaults.Key.isAccountHidden)
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
@@ -90,6 +96,7 @@ class AccountViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         accountView.initQRCode(viewModel: viewModel)
+        accountView.toggleAccountVisibility(hide: UserDefaults.shared.isAccountHidden)
         sessionManager.getSessionStatus()
     }
     

@@ -37,6 +37,7 @@ class AccountView: UITableView {
     @IBOutlet weak var deviceNameTitle: UILabel!
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var header: UIView!
+    @IBOutlet weak var hideAccountButton: UIButton!
     
     // MARK: - Properties -
     
@@ -62,6 +63,22 @@ class AccountView: UITableView {
     
     func initQRCode(viewModel: AccountViewModel) {
         qrCodeImage.image = UIImage.generateQRCode(from: viewModel.accountId)
+    }
+    
+    func toggleAccountVisibility(hide: Bool) {
+        if hide {
+            hideAccountButton.setImage(UIImage.init(systemName: "eye.fill"), for: .normal)
+            accountIdLabel.removeBlur()
+            accountIdLabel.alpha = 1
+            qrCodeImage.removeBlur()
+            qrCodeImage.alpha = 1
+        } else {
+            hideAccountButton.setImage(UIImage.init(systemName: "eye.slash.fill"), for: .normal)
+            accountIdLabel.addBlur(2)
+            accountIdLabel.alpha = 0.7
+            qrCodeImage.addBlur(2)
+            qrCodeImage.alpha = 0.5
+        }
     }
     
 }
