@@ -79,20 +79,7 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func toggleAccountHidden(_ sender: Any) {
-        if accountHidden {
-            accountView.hideAccountButton.setImage(UIImage.init(systemName: "eye.fill"), for: .normal)
-            accountView.accountIdLabel.removeBlur()
-            accountView.accountIdLabel.alpha = 1
-            accountView.qrCodeImage.removeBlur()
-            accountView.qrCodeImage.alpha = 1
-        } else {
-            accountView.hideAccountButton.setImage(UIImage.init(systemName: "eye.slash.fill"), for: .normal)
-            accountView.accountIdLabel.addBlur(2)
-            accountView.accountIdLabel.alpha = 0.7
-            accountView.qrCodeImage.addBlur(2)
-            accountView.qrCodeImage.alpha = 0.5
-        }
-        
+        accountView.toggleAccountVisibility(hide: accountHidden)
         accountHidden = !accountHidden
     }
     
@@ -234,68 +221,6 @@ extension AccountViewController: JGProgressHUDDelegate {
         tableView.reloadData()
         showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out") { _ in
             self.navigationController?.dismiss(animated: true)
-        }
-    }
-    
-}
-
-class BlurEffectView: UIVisualEffectView {
-    
-    var animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
-    
-    var intensity = 1.0
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        frame = superview?.bounds ?? CGRect.zero
-        setupBlur()
-    }
-    
-    override func didMoveToSuperview() {
-        guard superview != nil else { return }
-        backgroundColor = .clear
-        setupBlur()
-    }
-    
-    private func setupBlur() {
-        animator.stopAnimation(true)
-        effect = nil
-
-        animator.addAnimations { [weak self] in
-            self?.effect = UIBlurEffect(style: .regular)
-        }
-        
-        if intensity > 0 && intensity <= 10 {
-            
-            let value = CGFloat(intensity)/10
-            animator.fractionComplete = value
-            
-        }
-        else {
-            animator.fractionComplete = 0.05
-        }
-        
-    }
-    
-    deinit {
-        animator.stopAnimation(true)
-    }
-    
-}
-
-extension UIView {
-    
-    func addBlur(_ intensity: Double = 1.0) {
-        let blurEffectView = BlurEffectView()
-        blurEffectView.intensity = intensity
-        self.addSubview(blurEffectView)
-    }
-    
-    func removeBlur() {
-        for subview in self.subviews {
-            if subview is UIVisualEffectView {
-                subview.removeFromSuperview()
-            }
         }
     }
     
