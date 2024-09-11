@@ -67,10 +67,10 @@
 		822BC68B2A7CF3A700C733DF /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */; };
 		822BC68C2A7CF3A700C733DF /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */; };
 		822EBCA22C91947700E708F6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA12C91947700E708F6 /* PrivacyInfo.xcprivacy */; };
-		822EBCA42C91AADA00E708F6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA32C91AADA00E708F6 /* PrivacyInfo.xcprivacy */; };
-		822EBCA62C91AB3800E708F6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA52C91AB3800E708F6 /* PrivacyInfo.xcprivacy */; };
-		822EBCA82C91AB5900E708F6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA72C91AB5900E708F6 /* PrivacyInfo.xcprivacy */; };
-		822EBCA92C91AB5900E708F6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA72C91AB5900E708F6 /* PrivacyInfo.xcprivacy */; };
+		822EBCA42C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA32C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy */; };
+		822EBCA62C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA52C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy */; };
+		822EBCA82C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */; };
+		822EBCA92C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */; };
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF52240E40F006B81D2 /* Error+Ext.swift */; };
@@ -508,9 +508,9 @@
 		822B85D821B941A200715691 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+Ext.swift"; sourceTree = "<group>"; };
 		822EBCA12C91947700E708F6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		822EBCA32C91AADA00E708F6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		822EBCA52C91AB3800E708F6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		822EBCA72C91AB5900E708F6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		822EBCA32C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo-IVPNWidget.xcprivacy"; sourceTree = "<group>"; };
+		822EBCA52C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo-openvpn-tunnel-provider.xcprivacy"; sourceTree = "<group>"; };
+		822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo-wireguard-tunnel-provider.xcprivacy"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		8232FBF52240E40F006B81D2 /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
 		8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = V2RayControl.xcframework; path = Frameworks/V2RayControl.xcframework; sourceTree = "<group>"; };
@@ -1369,7 +1369,7 @@
 				824B86C326D3D7B600D0101A /* TimerManager.swift */,
 				82B605272170840C004B40E6 /* Info.plist */,
 				82B605282170840C004B40E6 /* wireguard_tunnel_provider.entitlements */,
-				822EBCA72C91AB5900E708F6 /* PrivacyInfo.xcprivacy */,
+				822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */,
 			);
 			path = "wireguard-tunnel-provider";
 			sourceTree = "<group>";
@@ -1546,7 +1546,7 @@
 				82E3B21229DDCC6500998F67 /* Assets.xcassets */,
 				82E3B21429DDCC6500998F67 /* Info.plist */,
 				82C61DA829E6C4CF00AF972A /* Widget-Bridging-Header.h */,
-				822EBCA32C91AADA00E708F6 /* PrivacyInfo.xcprivacy */,
+				822EBCA32C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy */,
 			);
 			path = IVPNWidget;
 			sourceTree = "<group>";
@@ -1617,7 +1617,7 @@
 				9C7840AC20CD8A8A00335736 /* Info.plist */,
 				82ED17452A1259CB00E7926D /* OpenVPNNetworkExtension-Bridging-Header.h */,
 				9C7840AD20CD8A8A00335736 /* openvpn_tunnel_provider.entitlements */,
-				822EBCA52C91AB3800E708F6 /* PrivacyInfo.xcprivacy */,
+				822EBCA52C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy */,
 			);
 			path = "openvpn-tunnel-provider";
 			sourceTree = "<group>";
@@ -1971,7 +1971,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				822EBCA92C91AB5900E708F6 /* PrivacyInfo.xcprivacy in Resources */,
+				822EBCA92C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1986,7 +1986,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				822EBCA42C91AADA00E708F6 /* PrivacyInfo.xcprivacy in Resources */,
+				822EBCA42C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy in Resources */,
 				82C61D9629E6ADEF00AF972A /* Assets.xcassets in Resources */,
 				82E3B21329DDCC6500998F67 /* Assets.xcassets in Resources */,
 			);
@@ -1996,8 +1996,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				822EBCA82C91AB5900E708F6 /* PrivacyInfo.xcprivacy in Resources */,
-				822EBCA62C91AB3800E708F6 /* PrivacyInfo.xcprivacy in Resources */,
+				822EBCA82C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy in Resources */,
+				822EBCA62C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
