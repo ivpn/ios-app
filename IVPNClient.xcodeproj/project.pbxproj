@@ -68,6 +68,7 @@
 		822BC68A2A7CF3A700C733DF /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */; };
 		822BC68B2A7CF3A700C733DF /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */; };
 		822BC68C2A7CF3A700C733DF /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */; };
+		822EBCA22C91947700E708F6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA12C91947700E708F6 /* PrivacyInfo.xcprivacy */; };
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF52240E40F006B81D2 /* Error+Ext.swift */; };
@@ -504,6 +505,7 @@
 		8229209F2480FA3600476FC1 /* ServersSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersSort.swift; sourceTree = "<group>"; };
 		822B85D821B941A200715691 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+Ext.swift"; sourceTree = "<group>"; };
+		822EBCA12C91947700E708F6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		8232FBF52240E40F006B81D2 /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
 		8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = V2RayControl.xcframework; path = Frameworks/V2RayControl.xcframework; sourceTree = "<group>"; };
@@ -1657,6 +1659,7 @@
 				9CB2CE261DAA6C1B007A4D2D /* IVPNClient.entitlements */,
 				9CB2CE321DAF9283007A4D2D /* Model.xcdatamodeld */,
 				825443972B2A1B8F00D77095 /* Store.storekit */,
+				822EBCA12C91947700E708F6 /* PrivacyInfo.xcprivacy */,
 			);
 			path = IVPNClient;
 			sourceTree = "<group>";
@@ -1989,6 +1992,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CDDD5B91D9D2F9F00D39924 /* LaunchScreen.storyboard in Resources */,
+				822EBCA22C91947700E708F6 /* PrivacyInfo.xcprivacy in Resources */,
 				9CDDD5B61D9D2F9F00D39924 /* Assets.xcassets in Resources */,
 				821E355A2A95F77700AEE5C7 /* config.json in Resources */,
 				9CB2CE541DB2A999007A4D2D /* servers.json in Resources */,
