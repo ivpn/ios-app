@@ -41,6 +41,7 @@ class AccountView: UITableView {
     
     // MARK: - Properties -
     
+    var isAccountHidden = true
     private var serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
     
     // MARK: - Methods -
@@ -59,12 +60,12 @@ class AccountView: UITableView {
         header.frame = CGRect(x: 0, y: 0, width: Int(header.frame.width), height: headerHeight)
         reloadData()
         layoutIfNeeded()
-        toggleAccountVisibility(hide: UserDefaults.shared.isAccountHidden)
+        toggleAccountVisibility(hide: isAccountHidden)
     }
     
     func initQRCode(viewModel: AccountViewModel) {
         qrCodeImage.image = UIImage.generateQRCode(from: viewModel.accountId)
-        toggleAccountVisibility(hide: UserDefaults.shared.isAccountHidden)
+        toggleAccountVisibility(hide: isAccountHidden)
     }
     
     func toggleAccountVisibility(hide: Bool) {

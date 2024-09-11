@@ -78,9 +78,9 @@ class AccountViewController: UITableViewController {
     }
     
     @IBAction func toggleAccountHidden(_ sender: Any) {
-        let hidden = UserDefaults.shared.isAccountHidden
+        let hidden = accountView.isAccountHidden
         accountView.toggleAccountVisibility(hide: !hidden)
-        UserDefaults.shared.set(!hidden, forKey: UserDefaults.Key.isAccountHidden)
+        accountView.isAccountHidden = !hidden
     }
     
     // MARK: - View Lifecycle -
