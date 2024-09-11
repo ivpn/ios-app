@@ -95,7 +95,6 @@ extension UserDefaults {
         static let v2rayProtocol = "v2rayProtocol"
         static let isV2ray = "isV2ray"
         static let disableWidgetPrompt = "disableWidgetPrompt"
-        static let isAccountHidden = "isAccountHidden"
     }
     
     @objc dynamic var wireguardTunnelProviderError: String {
@@ -262,10 +261,6 @@ extension UserDefaults {
         return bool(forKey: Key.disableWidgetPrompt)
     }
     
-    @objc dynamic var isAccountHidden: Bool {
-        return bool(forKey: Key.isAccountHidden)
-    }
-    
     static func registerUserDefaults() {
         shared.register(defaults: [Key.networkProtectionUntrustedConnect: true])
         shared.register(defaults: [Key.networkProtectionTrustedDisconnect: true])
@@ -273,7 +268,6 @@ extension UserDefaults {
         shared.register(defaults: [Key.wgRegenerationRate: Config.wgKeyRegenerationRate])
         shared.register(defaults: [Key.wgKeyTimestamp: Date()])
         shared.register(defaults: [Key.serversSort: "city"])
-        shared.register(defaults: [Key.isAccountHidden: true])
         standard.register(defaults: [Key.selectedServerFastest: true])
         standard.register(defaults: [Key.showIPv4Servers: true])
         standard.register(defaults: [Key.preventSameCountryMultiHop: true])
@@ -308,7 +302,6 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.v2rayProtocol)
         shared.removeObject(forKey: Key.isV2ray)
         shared.removeObject(forKey: Key.disableWidgetPrompt)
-        shared.removeObject(forKey: Key.isAccountHidden)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)
         standard.removeObject(forKey: Key.selectedExitHost)
