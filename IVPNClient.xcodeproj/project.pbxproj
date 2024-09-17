@@ -25,8 +25,6 @@
 		8206BAFF29ED6FFF00F916B7 /* ConnectionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */; };
 		8206BB0129ED7BEE00F916B7 /* ConnectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BB0029ED7BEE00F916B7 /* ConnectionInfo.swift */; };
 		8206BB0329ED7C3700F916B7 /* ConnectionInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206BB0229ED7C3700F916B7 /* ConnectionInfoViewModel.swift */; };
-		8206E5D022967E37003119AF /* UserActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5CF22967E37003119AF /* UserActivityType.swift */; };
-		8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206E5D122967EAF003119AF /* UserActivityTitle.swift */; };
 		8206F32124347A8F0056B465 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32024347A8F0056B465 /* MainView.swift */; };
 		8206F32324367A240056B465 /* VPNErrorObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8206F32224367A240056B465 /* VPNErrorObserver.swift */; };
 		8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */; };
@@ -68,6 +66,11 @@
 		822BC68A2A7CF3A700C733DF /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */; };
 		822BC68B2A7CF3A700C733DF /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */; };
 		822BC68C2A7CF3A700C733DF /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */; };
+		822EBCA22C91947700E708F6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA12C91947700E708F6 /* PrivacyInfo.xcprivacy */; };
+		822EBCA42C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA32C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy */; };
+		822EBCA62C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA52C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy */; };
+		822EBCA82C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */; };
+		822EBCA92C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */; };
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF52240E40F006B81D2 /* Error+Ext.swift */; };
@@ -151,6 +154,7 @@
 		828772F7221C008100D5E330 /* ServerConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F6221C008100D5E330 /* ServerConfigurationCell.swift */; };
 		828772F9221C01C300D5E330 /* ServersConfigurationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */; };
 		828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828772FA221C28E000D5E330 /* FlagImageView.swift */; };
+		828C45692C88772E0064F365 /* AppIntentsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828C45682C8877290064F365 /* AppIntentsHandler.swift */; };
 		828D8A6D258245AD00CB0E5B /* TwoFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */; };
 		828E9C95231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
 		828E9C96231E5780001E1FCF /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E9C94231E5780001E1FCF /* Data+Ext.swift */; };
@@ -267,6 +271,7 @@
 		82DB75EE239E766A0073E846 /* NEVPNStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */; };
 		82DC75BC22B277D200D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
 		82DC75BD22B7647500D3C73C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DC75BB22B277D200D3C73C /* APIClient.swift */; };
+		82DE85712C8861CB00501935 /* AppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DE85702C8861CB00501935 /* AppIntents.swift */; };
 		82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF01D244714D900CCB5CD /* ScannerViewController.swift */; };
 		82DEF021244714F000CCB5CD /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF020244714F000CCB5CD /* ScannerView.swift */; };
 		82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */; };
@@ -471,8 +476,6 @@
 		8206BAFE29ED6FFF00F916B7 /* ConnectionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoView.swift; sourceTree = "<group>"; };
 		8206BB0029ED7BEE00F916B7 /* ConnectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfo.swift; sourceTree = "<group>"; };
 		8206BB0229ED7C3700F916B7 /* ConnectionInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoViewModel.swift; sourceTree = "<group>"; };
-		8206E5CF22967E37003119AF /* UserActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityType.swift; sourceTree = "<group>"; };
-		8206E5D122967EAF003119AF /* UserActivityTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityTitle.swift; sourceTree = "<group>"; };
 		8206F32024347A8F0056B465 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8206F32224367A240056B465 /* VPNErrorObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNErrorObserver.swift; sourceTree = "<group>"; };
 		8208525523FD56870008C112 /* FloatingPanelMainLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelMainLayout.swift; sourceTree = "<group>"; };
@@ -504,6 +507,10 @@
 		8229209F2480FA3600476FC1 /* ServersSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersSort.swift; sourceTree = "<group>"; };
 		822B85D821B941A200715691 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		822BC6892A7CF3A700C733DF /* Decodable+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+Ext.swift"; sourceTree = "<group>"; };
+		822EBCA12C91947700E708F6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		822EBCA32C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo-IVPNWidget.xcprivacy"; sourceTree = "<group>"; };
+		822EBCA52C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo-openvpn-tunnel-provider.xcprivacy"; sourceTree = "<group>"; };
+		822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo-wireguard-tunnel-provider.xcprivacy"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		8232FBF52240E40F006B81D2 /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
 		8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = V2RayControl.xcframework; path = Frameworks/V2RayControl.xcframework; sourceTree = "<group>"; };
@@ -587,6 +594,7 @@
 		828772F6221C008100D5E330 /* ServerConfigurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationCell.swift; sourceTree = "<group>"; };
 		828772F8221C01C300D5E330 /* ServersConfigurationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersConfigurationTableViewController.swift; sourceTree = "<group>"; };
 		828772FA221C28E000D5E330 /* FlagImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagImageView.swift; sourceTree = "<group>"; };
+		828C45682C8877290064F365 /* AppIntentsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntentsHandler.swift; sourceTree = "<group>"; };
 		828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorViewController.swift; sourceTree = "<group>"; };
 		828E9C94231E5780001E1FCF /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		8290195E243CB27500777B6E /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
@@ -674,6 +682,7 @@
 		82DB75EB239E75EB0073E846 /* NEVPNStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NEVPNStatus+Ext.swift"; sourceTree = "<group>"; };
 		82DB75ED239E766A0073E846 /* NEVPNStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEVPNStatusTests.swift; sourceTree = "<group>"; };
 		82DC75BB22B277D200D3C73C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		82DE85702C8861CB00501935 /* AppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntents.swift; sourceTree = "<group>"; };
 		82DEF01D244714D900CCB5CD /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		82DEF020244714F000CCB5CD /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -925,6 +934,7 @@
 				82C1D5BD23FE8BD90059A915 /* ControlPanel */,
 				8208525723FD5EB20008C112 /* MainViewController.swift */,
 				8208525B23FD64160008C112 /* MainViewController+Ext.swift */,
+				828C45682C8877290064F365 /* AppIntentsHandler.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -1032,6 +1042,7 @@
 				827694F2263C04C40058B4DC /* LoginConfirmation.swift */,
 				821CA2DE288143470067F70D /* PortRange.swift */,
 				825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */,
+				82DE85702C8861CB00501935 /* AppIntents.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1192,8 +1203,6 @@
 				82E716832181E8E100D6B7C2 /* ProviderConfigurationKeys.swift */,
 				82D598B321A5A7A3000FABDE /* NetworkTrust.swift */,
 				82D598C721A6ADF1000FABDE /* NetworkType.swift */,
-				8206E5CF22967E37003119AF /* UserActivityType.swift */,
-				8206E5D122967EAF003119AF /* UserActivityTitle.swift */,
 				823FFB062338DF1800F91A5D /* Capability.swift */,
 				8229209F2480FA3600476FC1 /* ServersSort.swift */,
 				826FBDA22461847D00B9E464 /* ServiceType.swift */,
@@ -1360,6 +1369,7 @@
 				824B86C326D3D7B600D0101A /* TimerManager.swift */,
 				82B605272170840C004B40E6 /* Info.plist */,
 				82B605282170840C004B40E6 /* wireguard_tunnel_provider.entitlements */,
+				822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */,
 			);
 			path = "wireguard-tunnel-provider";
 			sourceTree = "<group>";
@@ -1536,6 +1546,7 @@
 				82E3B21229DDCC6500998F67 /* Assets.xcassets */,
 				82E3B21429DDCC6500998F67 /* Info.plist */,
 				82C61DA829E6C4CF00AF972A /* Widget-Bridging-Header.h */,
+				822EBCA32C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy */,
 			);
 			path = IVPNWidget;
 			sourceTree = "<group>";
@@ -1606,6 +1617,7 @@
 				9C7840AC20CD8A8A00335736 /* Info.plist */,
 				82ED17452A1259CB00E7926D /* OpenVPNNetworkExtension-Bridging-Header.h */,
 				9C7840AD20CD8A8A00335736 /* openvpn_tunnel_provider.entitlements */,
+				822EBCA52C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy */,
 			);
 			path = "openvpn-tunnel-provider";
 			sourceTree = "<group>";
@@ -1657,6 +1669,7 @@
 				9CB2CE261DAA6C1B007A4D2D /* IVPNClient.entitlements */,
 				9CB2CE321DAF9283007A4D2D /* Model.xcdatamodeld */,
 				825443972B2A1B8F00D77095 /* Store.storekit */,
+				822EBCA12C91947700E708F6 /* PrivacyInfo.xcprivacy */,
 			);
 			path = IVPNClient;
 			sourceTree = "<group>";
@@ -1922,7 +1935,7 @@
 			mainGroup = 9CDDD5A21D9D2F9E00D39924;
 			packageReferences = (
 				824B86DD26D42A4600D0101A /* XCRemoteSwiftPackageReference "wireguard-apple" */,
-				82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */,
+				82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */,
 				82EC883329A12BD30024CC40 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				82EC883629A12C1F0024CC40 /* XCRemoteSwiftPackageReference "Reachability" */,
 				82EC883929A12C7D0024CC40 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
@@ -1958,6 +1971,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				822EBCA92C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1972,6 +1986,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				822EBCA42C91AADA00E708F6 /* PrivacyInfo-IVPNWidget.xcprivacy in Resources */,
 				82C61D9629E6ADEF00AF972A /* Assets.xcassets in Resources */,
 				82E3B21329DDCC6500998F67 /* Assets.xcassets in Resources */,
 			);
@@ -1981,6 +1996,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				822EBCA82C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy in Resources */,
+				822EBCA62C91AB3800E708F6 /* PrivacyInfo-openvpn-tunnel-provider.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1989,6 +2006,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CDDD5B91D9D2F9F00D39924 /* LaunchScreen.storyboard in Resources */,
+				822EBCA22C91947700E708F6 /* PrivacyInfo.xcprivacy in Resources */,
 				9CDDD5B61D9D2F9F00D39924 /* Assets.xcassets in Resources */,
 				821E355A2A95F77700AEE5C7 /* config.json in Resources */,
 				9CB2CE541DB2A999007A4D2D /* servers.json in Resources */,
@@ -2285,7 +2303,6 @@
 				82D598BC21A6949F000FABDE /* StorageManager.swift in Sources */,
 				826FBDA32461847D00B9E464 /* ServiceType.swift in Sources */,
 				821429B922FC2EA40056B8FF /* ApiService+Ext.swift in Sources */,
-				8206E5D222967EAF003119AF /* UserActivityTitle.swift in Sources */,
 				82E716902181E90500D6B7C2 /* ConnectionSettings.swift in Sources */,
 				8223C54C22E9E93A00CD283D /* Session.swift in Sources */,
 				822563922431E03A00AE7F8D /* AccountView.swift in Sources */,
@@ -2334,6 +2351,7 @@
 				8292E1A92174C11600123538 /* Interface.swift in Sources */,
 				82F638CC217DC25600410318 /* CIDRAddress.swift in Sources */,
 				824B86D226D40E7800D0101A /* FileManager+Extension.swift in Sources */,
+				828C45692C88772E0064F365 /* AppIntentsHandler.swift in Sources */,
 				8208525A23FD5F670008C112 /* FloatingPanelController+Ext.swift in Sources */,
 				821429B722FC2BE90056B8FF /* Result.swift in Sources */,
 				827855B92472B27F00B3B6BD /* Account.swift in Sources */,
@@ -2357,7 +2375,6 @@
 				82A3422524AB6AF700761AB0 /* Double+Ext.swift in Sources */,
 				8221377B2227E75E001E1BF5 /* CustomDNSViewController.swift in Sources */,
 				9C3031351DB42EF900C38B0C /* Application.swift in Sources */,
-				8206E5D022967E37003119AF /* UserActivityType.swift in Sources */,
 				82A6D74A24A3780B00D6C0E1 /* ConnectToServerPopupView.swift in Sources */,
 				828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */,
 				8228C8D22B1DE906005977D3 /* PurchaseManager.swift in Sources */,
@@ -2392,6 +2409,7 @@
 				82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */,
 				8270D268241BB3D100B17B65 /* InfoAlertViewModel.swift in Sources */,
 				826E614A242A1CA80064F195 /* AccountViewModel.swift in Sources */,
+				82DE85712C8861CB00501935 /* AppIntents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2812,7 +2830,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2830,7 +2848,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
-				MARKETING_VERSION = 2.12.2;
+				MARKETING_VERSION = 2.12.4;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -3301,7 +3319,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3319,7 +3337,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
-				MARKETING_VERSION = 2.12.2;
+				MARKETING_VERSION = 2.12.4;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -3340,7 +3358,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3358,7 +3376,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
-				MARKETING_VERSION = 2.12.2;
+				MARKETING_VERSION = 2.12.4;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
@@ -3463,12 +3481,12 @@
 				revision = ccc7472fd7d1c7c19584e6a30c45a56b8ba57790;
 			};
 		};
-		82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */ = {
+		82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/passepartoutvpn/tunnelkit";
+			repositoryURL = "https://github.com/mrstao/Tunnelkit";
 			requirement = {
-				kind = exactVersion;
-				version = 6.2.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		829F5FC529A13CAE009E1AD3 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
@@ -3516,7 +3534,7 @@
 			repositoryURL = "https://github.com/scenee/FloatingPanel";
 			requirement = {
 				kind = exactVersion;
-				version = 2.6.3;
+				version = 2.8.3;
 			};
 		};
 		82EC884529A12D510024CC40 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -3542,12 +3560,12 @@
 		};
 		82968A31298A970500077E0A /* TunnelKitOpenVPN */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */;
+			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */;
 			productName = TunnelKitOpenVPN;
 		};
 		82968A33298A970500077E0A /* TunnelKitOpenVPNAppExtension */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */;
+			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */;
 			productName = TunnelKitOpenVPNAppExtension;
 		};
 		829F5FC629A13CAE009E1AD3 /* KeychainAccess */ = {

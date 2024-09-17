@@ -86,11 +86,11 @@ class PurchaseManager: NSObject {
             log(.info, message: "[Store] Completing successful in-app purchase \(productId)")
             self.complete(transaction)
             break
-        case .success(.unverified(_, _)):
+        case .success(.unverified(_, let result)):
             // Successful purchase but transaction/receipt can't be verified
             // Could be a jailbroken phone
             log(.info, message: "[Store] Purchase \(productId): success, unverified")
-            delegate?.purchaseError(error: ErrorResult(status: 500, message: "Purchase is unverified."))
+            delegate?.purchaseError(error: ErrorResult(status: 500, message: "Purchase is unverified: \(result.localizedDescription)."))
             break
         case .pending:
             // Transaction waiting on SCA (Strong Customer Authentication) or
@@ -114,6 +114,10 @@ class PurchaseManager: NSObject {
         observerTask = Task(priority: .background) {
             for await result in Transaction.updates {
                 guard case .verified(let transaction) = result else {
+                    continue
+                }
+                
+                guard ProductId.all.contains(transaction.productID) else {
                     continue
                 }
                 

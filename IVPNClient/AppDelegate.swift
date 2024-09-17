@@ -96,16 +96,9 @@ class AppDelegate: UIResponder {
     
     private func showSecurityScreen() {
         var showWindow = false
+        let topVC = UIApplication.topViewController()
         
-        if UIApplication.topViewController() as? AccountViewController != nil {
-            showWindow = true
-        }
-        
-        if UIApplication.topViewController() as? LoginViewController != nil {
-            showWindow = true
-        }
-        
-        if UIApplication.topViewController() as? CreateAccountViewController != nil {
+        if topVC is AccountViewController || topVC is LoginViewController || topVC is CreateAccountViewController {
             showWindow = true
         }
         
@@ -438,4 +431,13 @@ extension AppDelegate: PurchaseManagerDelegate {
         }
     }
     
+}
+
+enum UserActivityType {
+    static let Connect = "net.ivpn.clients.ios.Connect"
+    static let Disconnect = "net.ivpn.clients.ios.Disconnect"
+    static let AntiTrackerEnable = "net.ivpn.clients.ios.AntiTracker.enable"
+    static let AntiTrackerDisable = "net.ivpn.clients.ios.AntiTracker.disable"
+    static let CustomDNSEnable = "net.ivpn.clients.ios.CustomDNS.enable"
+    static let CustomDNSDisable = "net.ivpn.clients.ios.CustomDNS.disable"
 }

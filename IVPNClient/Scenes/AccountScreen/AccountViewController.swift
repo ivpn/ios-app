@@ -77,11 +77,18 @@ class AccountViewController: UITableViewController {
         }
     }
     
+    @IBAction func toggleAccountHidden(_ sender: Any) {
+        let hidden = accountView.isAccountHidden
+        accountView.toggleAccountVisibility(hide: !hidden)
+        accountView.isAccountHidden = !hidden
+    }
+    
     // MARK: - View Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         initNavigationBar()
         addObservers()
         accountView.setupView(viewModel: viewModel)
@@ -91,6 +98,10 @@ class AccountViewController: UITableViewController {
         super.viewDidAppear(animated)
         accountView.initQRCode(viewModel: viewModel)
         sessionManager.getSessionStatus()
+    }
+    
+    @objc func willEnterForeground(notification: NSNotification) {
+        accountView.setupView(viewModel: viewModel)
     }
     
     // MARK: - Observers -

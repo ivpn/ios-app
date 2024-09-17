@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.12.4 - 2024-09-17  
+
+[NEW] Option to show/hide Account ID  
+[IMPROVED] Error handling for in-app purchases  
+[FIXED] Location marker disappearing when the app wakes up from the background (iOS 18)  
+[FIXED] Privacy overlay not working (iOS 18)  
+[FIXED] Widget actions to Connect/Disconnect not working (iOS 18)  
+[FIXED] Actions not appearing in the Shortcuts app (iOS 18)  
+
 ## 2.12.3 - 2024-06-04  
 
 [IMPROVED] Post-Quantum library updated to the latest version  

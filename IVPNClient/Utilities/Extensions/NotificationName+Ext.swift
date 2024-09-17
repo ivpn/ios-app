@@ -58,5 +58,11 @@ extension Notification.Name {
     public static let CustomDNSUpdated = Notification.Name("customDNSUpdatedUpdated")
     public static let EvaluateReconnect = Notification.Name("evaluateReconnect")
     public static let EvaluatePlanUpdate = Notification.Name("evaluatePlanUpdate")
+    public static let IntentConnect = Notification.Name("intentConnect")
+    public static let IntentDisconnect = Notification.Name("intentDisconnect")
+    public static let IntentAntiTrackerEnable = Notification.Name("intentAntiTrackerEnable")
+    public static let IntentAntiTrackerDisable = Notification.Name("intentAntiTrackerDisable")
+    public static let IntentCustomDNSEnable = Notification.Name("intentCustomDNSEnable")
+    public static let IntentCustomDNSDisable = Notification.Name("intentCustomDNSDisable")
     
 }

@@ -48,3 +48,65 @@ extension UIView {
     }
     
 }
+
+extension UIView {
+    
+    func addBlur(_ intensity: Double = 1.0) {
+        let blurEffectView = BlurEffectView()
+        blurEffectView.intensity = intensity
+        self.addSubview(blurEffectView)
+    }
+    
+    func removeBlur() {
+        for subview in self.subviews {
+            if subview is UIVisualEffectView {
+                subview.removeFromSuperview()
+            }
+        }
+    }
+    
+}
+
+class BlurEffectView: UIVisualEffectView {
+    
+    var animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
+    
+    var intensity = 1.0
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        frame = superview?.bounds ?? CGRect.zero
+        setupBlur()
+    }
+    
+    override func didMoveToSuperview() {
+        guard superview != nil else { return }
+        backgroundColor = .clear
+        setupBlur()
+    }
+    
+    private func setupBlur() {
+        animator.stopAnimation(true)
+        effect = nil
+
+        animator.addAnimations { [weak self] in
+            self?.effect = UIBlurEffect(style: .regular)
+        }
+        
+        if intensity > 0 && intensity <= 10 {
+            
+            let value = CGFloat(intensity)/10
+            animator.fractionComplete = value
+            
+        }
+        else {
+            animator.fractionComplete = 0.05
+        }
+        
+    }
+    
+    deinit {
+        animator.stopAnimation(true)
+    }
+    
+}

@@ -167,6 +167,9 @@ class MainViewController: UIViewController {
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model
                 }
+                
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+                Application.shared.connectionManager.evaluateCloseApp()
             case .failure:
                 controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(displayMode: .error)
                 mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
@@ -180,6 +183,8 @@ class MainViewController: UIViewController {
             case .success(let model):
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(model: model, displayMode: .content)
                 mainView.ipv6ViewModel = ProofsViewModel(model: model)
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+                Application.shared.connectionManager.evaluateCloseApp()
             case .failure:
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
                 mainView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
@@ -198,6 +203,12 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(vpnConfigurationDisabled), name: Notification.Name.VPNConfigurationDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionActivated), name: Notification.Name.SubscriptionActivated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateGeoLocation), name: Notification.Name.UpdateGeoLocation, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(intentConnect), name: Notification.Name.IntentConnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(intentDisconnect), name: Notification.Name.IntentDisconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(intentAntiTrackerEnable), name: Notification.Name.IntentAntiTrackerEnable, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(intentAntiTrackerDisable), name: Notification.Name.IntentAntiTrackerDisable, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(intentCustomDNSEnable), name: Notification.Name.IntentCustomDNSEnable, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(intentCustomDNSDisable), name: Notification.Name.IntentCustomDNSDisable, object: nil)
     }
     
     // MARK: - Private methods -
