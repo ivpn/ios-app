@@ -1922,7 +1922,7 @@
 			mainGroup = 9CDDD5A21D9D2F9E00D39924;
 			packageReferences = (
 				824B86DD26D42A4600D0101A /* XCRemoteSwiftPackageReference "wireguard-apple" */,
-				82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */,
+				82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */,
 				82EC883329A12BD30024CC40 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				82EC883629A12C1F0024CC40 /* XCRemoteSwiftPackageReference "Reachability" */,
 				82EC883929A12C7D0024CC40 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
@@ -3463,12 +3463,12 @@
 				revision = ccc7472fd7d1c7c19584e6a30c45a56b8ba57790;
 			};
 		};
-		82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */ = {
+		82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/passepartoutvpn/tunnelkit";
+			repositoryURL = "https://github.com/mrstao/Tunnelkit";
 			requirement = {
-				kind = exactVersion;
-				version = 6.2.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		829F5FC529A13CAE009E1AD3 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
@@ -3516,7 +3516,7 @@
 			repositoryURL = "https://github.com/scenee/FloatingPanel";
 			requirement = {
 				kind = exactVersion;
-				version = 2.6.3;
+				version = 2.8.3;
 			};
 		};
 		82EC884529A12D510024CC40 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -3542,12 +3542,12 @@
 		};
 		82968A31298A970500077E0A /* TunnelKitOpenVPN */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */;
+			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */;
 			productName = TunnelKitOpenVPN;
 		};
 		82968A33298A970500077E0A /* TunnelKitOpenVPNAppExtension */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "tunnelkit" */;
+			package = 82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */;
 			productName = TunnelKitOpenVPNAppExtension;
 		};
 		829F5FC629A13CAE009E1AD3 /* KeychainAccess */ = {
