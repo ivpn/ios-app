@@ -95,16 +95,6 @@ extension UIViewController {
         openWebPage("https://www.ivpn.net/privacy-mobile-app/")
     }
     
-    func registerUserActivity(type: String, title: String) {
-        let activity = NSUserActivity(activityType: type)
-        activity.title = title
-        activity.isEligibleForSearch = true
-        activity.isEligibleForPrediction = true
-        
-        userActivity = activity
-        userActivity?.becomeCurrent()
-    }
-    
     func hideKeyboardOnTap() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
