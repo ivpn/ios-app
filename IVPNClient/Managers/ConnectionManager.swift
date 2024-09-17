@@ -96,9 +96,6 @@ class ConnectionManager {
                     self.updateOpenVPNLogFile()
                     self.updateWireGuardLogFile()
                     self.reconnectAutomatically = false
-                    if self.actionType == .connect {
-                        self.evaluateCloseApp()
-                    }
                 }
                 DispatchQueue.delay(2.5) {
                     if UserDefaults.shared.isV2ray && !V2RayCore.shared.reconnectWithV2ray {
@@ -127,10 +124,6 @@ class ConnectionManager {
                         self.connect()
                     }
                 }
-            }
-
-            if status == .disconnected && self.actionType == .disconnect {
-                self.evaluateCloseApp()
             }
             
             completion(status)
@@ -575,12 +568,10 @@ class ConnectionManager {
         }
     }
     
-    private func evaluateCloseApp() {
+    func evaluateCloseApp() {
         if closeApp {
             closeApp = false
-            DispatchQueue.delay(1.5) {
-                UIControl().sendAction(#selector(NSXPCConnection.suspend), to: UIApplication.shared, for: nil)
-            }
+            UIControl().sendAction(#selector(NSXPCConnection.suspend), to: UIApplication.shared, for: nil)
         }
     }
     

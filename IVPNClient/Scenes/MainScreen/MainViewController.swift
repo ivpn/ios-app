@@ -167,6 +167,9 @@ class MainViewController: UIViewController {
                 if !model.isIvpnServer {
                     Application.shared.geoLookup = model
                 }
+                
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+                Application.shared.connectionManager.evaluateCloseApp()
             case .failure:
                 controlPanel.controlPanelView.ipv4ViewModel = ProofsViewModel(displayMode: .error)
                 mainView.infoAlertViewModel.infoAlert = .connectionInfoFailure
@@ -180,6 +183,8 @@ class MainViewController: UIViewController {
             case .success(let model):
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(model: model, displayMode: .content)
                 mainView.ipv6ViewModel = ProofsViewModel(model: model)
+                WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
+                Application.shared.connectionManager.evaluateCloseApp()
             case .failure:
                 controlPanel.controlPanelView.ipv6ViewModel = ProofsViewModel(displayMode: .error)
                 mainView.ipv6ViewModel = ProofsViewModel(displayMode: .error)

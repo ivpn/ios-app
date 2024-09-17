@@ -27,7 +27,7 @@ extension UIApplication {
     
     var keyWindow: UIWindow? {
         return self.connectedScenes
-            .filter { $0.activationState == .foregroundActive }
+            .filter { $0.activationState == .foregroundActive || $0.activationState == .foregroundInactive }
             .first(where: { $0 is UIWindowScene })
             .flatMap({ $0 as? UIWindowScene })?.windows
             .first(where: \.isKeyWindow)
