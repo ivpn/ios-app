@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23091" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23079"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -3069,13 +3069,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="QWM-1S-ZSK">
                                                             <rect key="frame" x="0.0" y="0.0" width="79" height="34.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wi-Fi network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EZ-JE-Wek">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Wi-Fi network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EZ-JE-Wek">
                                                                     <rect key="frame" x="0.0" y="0.0" width="79" height="14.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" name="ivpnLabel5"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULG-XZ-rT5">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULG-XZ-rT5">
                                                                     <rect key="frame" x="0.0" y="17.5" width="79" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
@@ -4397,7 +4397,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i-XXXX-XXXX-XXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="c74-BR-YIO">
-                                    <rect key="frame" x="16" y="45" width="286" height="30"/>
+                                    <rect key="frame" x="16" y="45" width="213.5" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="aei-xZ-pFh"/>
                                     </constraints>
@@ -4489,6 +4489,19 @@
                                         <action selector="copyAccountID:" destination="obv-bO-Y0X" eventType="touchUpInside" id="Lhv-x8-chW"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIx-tg-Wv3">
+                                    <rect key="frame" x="241.5" y="49" width="26" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="22" id="FhX-Qr-CCZ"/>
+                                        <constraint firstAttribute="width" constant="26" id="Q0B-zO-uev"/>
+                                    </constraints>
+                                    <color key="tintColor" name="ivpnLabel5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="eye.fill" catalog="system"/>
+                                    <connections>
+                                        <action selector="toggleAccountHidden:" destination="obv-bO-Y0X" eventType="touchUpInside" id="Hij-XQ-f1M"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
@@ -4501,6 +4514,8 @@
                                 <constraint firstAttribute="bottom" secondItem="TIt-eF-ZjP" secondAttribute="bottom" constant="25" id="9yQ-eq-MkD"/>
                                 <constraint firstItem="sab-r6-VYm" firstAttribute="leading" secondItem="TIt-eF-ZjP" secondAttribute="trailing" constant="20" id="Glw-cn-DLh"/>
                                 <constraint firstItem="aiI-Bc-SA3" firstAttribute="top" secondItem="Ih4-NF-SZy" secondAttribute="bottom" id="I3u-jk-3T1"/>
+                                <constraint firstItem="wIx-tg-Wv3" firstAttribute="top" secondItem="8cm-8U-jrW" secondAttribute="top" constant="49" id="IGT-KF-1SW"/>
+                                <constraint firstItem="wIx-tg-Wv3" firstAttribute="leading" secondItem="c74-BR-YIO" secondAttribute="trailing" constant="12" id="MCQ-4S-A59"/>
                                 <constraint firstItem="c74-BR-YIO" firstAttribute="top" secondItem="uMT-Cg-UIi" secondAttribute="bottom" constant="1" id="OZJ-Aa-R0F"/>
                                 <constraint firstItem="LDZ-oO-5ye" firstAttribute="top" secondItem="8cm-8U-jrW" secondAttribute="top" constant="17" id="RX5-NP-8dX"/>
                                 <constraint firstItem="aiI-Bc-SA3" firstAttribute="leading" secondItem="8cm-8U-jrW" secondAttribute="leading" constant="16" id="XtG-IG-3St"/>
@@ -4510,7 +4525,6 @@
                                 <constraint firstItem="TIt-eF-ZjP" firstAttribute="leading" secondItem="8cm-8U-jrW" secondAttribute="leading" constant="16" id="ijP-vF-FGo"/>
                                 <constraint firstItem="Ih4-NF-SZy" firstAttribute="leading" secondItem="8cm-8U-jrW" secondAttribute="leading" constant="16" id="nwJ-ZP-OwX"/>
                                 <constraint firstItem="Ih4-NF-SZy" firstAttribute="top" secondItem="hky-B3-yLX" secondAttribute="bottom" constant="20" id="wy8-Ye-lom"/>
-                                <constraint firstItem="LDZ-oO-5ye" firstAttribute="leading" secondItem="c74-BR-YIO" secondAttribute="trailing" constant="10" id="xdH-P3-p9x"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="NhI-pa-20D">
@@ -4641,6 +4655,7 @@
                             <outlet property="deviceName" destination="aiI-Bc-SA3" id="Uwe-km-a63"/>
                             <outlet property="deviceNameTitle" destination="Ih4-NF-SZy" id="8I3-du-gxf"/>
                             <outlet property="header" destination="8cm-8U-jrW" id="DkE-cF-DxN"/>
+                            <outlet property="hideAccountButton" destination="wIx-tg-Wv3" id="mrl-BA-EXQ"/>
                             <outlet property="logOutActionButton" destination="MVS-Nm-wlG" id="Yqw-Wn-PH0"/>
                             <outlet property="qrCodeImage" destination="LDZ-oO-5ye" id="a4A-eq-b9i"/>
                             <outlet property="statusLabel" destination="hky-B3-yLX" id="42L-ka-GMJ"/>
@@ -4894,6 +4909,7 @@
         <segue reference="bcT-Xg-B45"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="eye.fill" catalog="system" width="128" height="80"/>
         <image name="favorite-server" width="343" height="108"/>
         <image name="icon-alert-dark-yellow" width="16" height="16"/>
         <image name="icon-arrow-down-gray" width="24" height="24"/>
