@@ -163,6 +163,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     
     private func regenerateKeys(completion: @escaping (Error?) -> Void) {
         wg_log(.info, message: "Rotating keys")
+        
+        reasserting = true
+        
         AppKeyManager.shared.setNewKey { privateKey, ipAddress, presharedKey in
             guard let privateKey = privateKey, let ipAddress = ipAddress else {
                 completion(nil)
@@ -189,6 +192,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                     if let hexPresharedKey = presharedKey?.base64KeyToHex() {
                         self.updateWgConfig(key: "preshared_key", value: hexPresharedKey)
                     }
+                    
+                    self.reasserting = false
                     
                     completion(nil)
                 }
