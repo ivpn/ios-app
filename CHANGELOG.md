@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.12.5 - 2025-02-19  
+
+[FIXED] Potential DNS leak during automatic WireGuard key rotation  
+
 ## 2.12.4 - 2024-09-17  
 
 [NEW] Option to show/hide Account ID  
