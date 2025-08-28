@@ -293,6 +293,8 @@ class VPNManager {
             do {
                 var options: [String: NSObject]? = nil
                 if tunnelType == .wireguard && UserDefaults.shared.isV2ray {
+                    // Always refresh V2Ray settings before connecting
+                    Application.shared.connectionManager.updateV2RaySettings()
                     if let config = V2RayCore.shared.makeConfig() {
                         options = ["v2rayConfig": config.jsonString() as NSString]
                         

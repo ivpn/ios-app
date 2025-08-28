@@ -556,7 +556,7 @@ class ConnectionManager {
     
     // MARK: - V2Ray Settings Update
     
-    private func updateV2RaySettings() {
+    func updateV2RaySettings() {
         guard UserDefaults.shared.isV2ray else {
             log(.debug, message: "V2Ray obfuscation disabled, skipping settings update")
             return

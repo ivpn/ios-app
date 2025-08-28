@@ -46,6 +46,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     private var updatedSettings: String?
     private var v2rayHandle: Int32 = -1
     private var v2rayOutboundIp: String?
+    private var v2rayConfigJson: String?
     
     private var config: NETunnelProviderProtocol {
         return self.protocolConfiguration as! NETunnelProviderProtocol
@@ -80,6 +81,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             
             // -> outbound ip
             v2rayOutboundIp = options?["v2rayOutboundIp"] as? String
+            v2rayConfigJson = v2rayConfigString
             
             if let error = startV2Ray(jsonString: v2rayConfigString) {
                 wg_log(.error, message: "Failed to start V2Ray: \(error.localizedDescription)")
@@ -90,6 +92,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         } else {
             wg_log(.info, message: "No V2Ray config provided, starting WireGuard only")
             v2rayOutboundIp = nil
+            v2rayConfigJson = nil
         }
         
         guard let addresses = UserDefaults.shared.isIPv6 ? KeyChain.wgIpAddresses : KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
@@ -327,6 +330,18 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     private func pathUpdate(path: Network.NWPath) {
         guard let handle = handle else { return }
         wg_log(.info, message: "Network change detected: \(path.debugDescription)")
+        // If V2Ray is active, restart it to rebind sockets on the new path
+        if v2rayHandle >= 0 {
+            wg_log(.info, message: "Restarting V2Ray due to network change")
+            let _ = stopV2Ray()
+            if let json = v2rayConfigJson {
+                if let error = startV2Ray(jsonString: json) {
+                    wg_log(.error, message: "Failed to restart V2Ray after path change: \(error.localizedDescription)")
+                } else {
+                    wg_log(.info, message: "V2Ray restarted successfully after path change")
+                }
+            }
+        }
         wgSetConfig(handle, settings)
     }
     
