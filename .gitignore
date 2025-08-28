@@ -2,6 +2,7 @@
 build/
 DerivedData/
 Frameworks/
+.DS_Store
 
 ## Source / dependencies
 submodules/
