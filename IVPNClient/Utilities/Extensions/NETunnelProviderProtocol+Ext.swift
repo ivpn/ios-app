@@ -136,7 +136,7 @@ extension NETunnelProviderProtocol {
             endpoint = Peer.endpoint(host: Config.v2rayHost, port: Config.v2rayPort)
         }
         
-        let allowedIPs = UserDefaults.shared.isV2ray ? Config.wgPeerAllowedIPs : Config.wgPeerAllowedIPsWithoutV2Ray
+        let allowedIPs = Config.wgPeerAllowedIPs
         
         let peer = Peer(
             publicKey: publicKey,

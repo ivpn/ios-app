@@ -74,8 +74,7 @@ struct Config {
     
     // MARK: WireGuard
     
-    static let wgPeerAllowedIPs = "128.0.0.0/1, 0.0.0.0/1"
-    static let wgPeerAllowedIPsWithoutV2Ray = "0.0.0.0/0,::/0"
+    static let wgPeerAllowedIPs = "0.0.0.0/0,::/0"
     static let wgPeerPersistentKeepalive: Int32 = 25
     static let wgInterfaceListenPort = 51820
     static let wgKeyExpirationDays = 30

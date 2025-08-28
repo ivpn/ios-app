@@ -265,7 +265,16 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         if validatedIPv6Addresses.count > 0 {
             let ipv6Settings = NEIPv6Settings(addresses: validatedIPv6Addresses.map { $0.ipAddress }, networkPrefixLengths: validatedIPv6Addresses.map { NSNumber(value: $0.subnet) })
             ipv6Settings.includedRoutes = [NEIPv6Route.default()]
-            ipv6Settings.excludedRoutes = validatedEndpoints.filter { $0.addressType == .IPv6 }.map { NEIPv6Route(destinationAddress: $0.ipAddress, networkPrefixLength: 128) }
+            var excludedIPv6Routes = validatedEndpoints.filter { $0.addressType == .IPv6 }.map { NEIPv6Route(destinationAddress: $0.ipAddress, networkPrefixLength: 128) }
+
+            // Add V2Ray server IPv6 to bypass routes if device prefers IPv6 and outbound has AAAA
+            if let v2rayOutboundIp = v2rayOutboundIp, !v2rayOutboundIp.isEmpty, v2rayOutboundIp.contains(":") {
+                let v2rayIPv6Route = NEIPv6Route(destinationAddress: v2rayOutboundIp, networkPrefixLength: 128)
+                excludedIPv6Routes.append(v2rayIPv6Route)
+                wg_log(.info, message: "Added V2Ray IPv6 to bypass routes: \(v2rayOutboundIp)")
+            }
+
+            ipv6Settings.excludedRoutes = excludedIPv6Routes
             
             newSettings.ipv6Settings = ipv6Settings
         }

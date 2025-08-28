@@ -652,9 +652,9 @@ class ConnectionManager {
         
         switch v2rayProtocol {
         case "tcp":
-            return 80  // V2RAY_TCP_PORT (HTTP/VMess/TCP) -> Desktop App
+            return Config.v2rayTcpPort  // HTTP/VMess/TCP
         case "udp":
-            return 443 // V2RAY_QUIC_PORT (HTTPS/VMess/QUIC) -> Desktop App
+            return Config.v2rayQuicPort // HTTPS/VMess/QUIC
         default:
             return settings.connectionProtocol.port()
         }
