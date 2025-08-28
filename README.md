@@ -85,14 +85,6 @@ Rename and populate `OpenVPNConf.swift` file:
 cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
 ```
 
-### Build V2RayControl.xcframework
-
-Build `V2RayControl.xcframework`:
-
-```sh
-./build-v2ray.sh
-```
-
 ### Build liboqs.a
 
 To compile  [liboqs](https://github.com/open-quantum-safe/liboqs), additional packages are required:  
