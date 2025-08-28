@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E46608B2E606EC4000AB900 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E4660892E606EC4000AB900 /* libresolv.tbd */; };
+		4E46608C2E606EC4000AB900 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E46608A2E606EC4000AB900 /* libresolv.9.tbd */; };
+		4E46608D2E606EDC000AB900 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E46608A2E606EC4000AB900 /* libresolv.9.tbd */; };
+		4E46608E2E606EDC000AB900 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E4660892E606EC4000AB900 /* libresolv.tbd */; };
 		820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */; };
 		8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */; };
 		8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5032356536B008C83DB /* UpgradePlanViewController.swift */; };
@@ -458,6 +462,8 @@
 
 /* Begin PBXFileReference section */
 		042B1F5A4F38CCA3591AD441 /* Pods_openvpn_tunnel_provider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_openvpn_tunnel_provider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E4660892E606EC4000AB900 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		4E46608A2E606EC4000AB900 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		58126B967EB9B059871FD7AB /* Pods_wireguard_tunnel_provider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wireguard_tunnel_provider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		751AB84B8432BC3E6BEDD483 /* Pods_today_extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_today_extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoBoxView.swift; sourceTree = "<group>"; };
@@ -788,6 +794,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E46608B2E606EC4000AB900 /* libresolv.tbd in Frameworks */,
+				4E46608C2E606EC4000AB900 /* libresolv.9.tbd in Frameworks */,
 				82B6052F21708575004B40E6 /* NetworkExtension.framework in Frameworks */,
 				82BF79622A2F8DDC00061972 /* liboqs.a in Frameworks */,
 				824B86E126D42A5700D0101A /* WireGuardKit in Frameworks */,
@@ -827,6 +835,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E46608D2E606EDC000AB900 /* libresolv.9.tbd in Frameworks */,
+				4E46608E2E606EDC000AB900 /* libresolv.tbd in Frameworks */,
 				8234E0D72AB23E5C0015C9A2 /* V2RayControl.xcframework in Frameworks */,
 				82D598C621A6A5C7000FABDE /* SystemConfiguration.framework in Frameworks */,
 				9CB2CE311DAF9227007A4D2D /* CoreData.framework in Frameworks */,
@@ -850,6 +860,8 @@
 		584496306C3B9383149618CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E4660892E606EC4000AB900 /* libresolv.tbd */,
+				4E46608A2E606EC4000AB900 /* libresolv.9.tbd */,
 				8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */,
 				8294BC8D22A126C900328932 /* TunnelKit.framework */,
 				8294BC8B22A10F4100328932 /* TunnelKit.framework */,
@@ -3475,10 +3487,10 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		824B86DD26D42A4600D0101A /* XCRemoteSwiftPackageReference "wireguard-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://git.zx2c4.com/wireguard-apple";
+			repositoryURL = "https://github.com/codewithtamim/wireguard-apple";
 			requirement = {
-				kind = revision;
-				revision = ccc7472fd7d1c7c19584e6a30c45a56b8ba57790;
+				branch = master;
+				kind = branch;
 			};
 		};
 		82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */ = {

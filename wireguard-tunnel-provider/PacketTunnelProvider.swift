@@ -41,6 +41,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     private var networkMonitor: NWPathMonitor?
     private var ifname: String?
     private var updatedSettings: String?
+    private var v2rayHandle: Int32 = -1
     
     private var config: NETunnelProviderProtocol {
         return self.protocolConfiguration as! NETunnelProviderProtocol
@@ -122,6 +123,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
         wg_log(.info, message: "Stopping tunnel")
+        
+        // Stop V2Ray first
+        let _ = stopV2Ray()
         
         networkMonitor?.cancel()
         networkMonitor = nil
@@ -283,6 +287,40 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         guard let handle = handle else { return }
         wg_log(.info, message: "Network change detected: \(path.debugDescription)")
         wgSetConfig(handle, settings)
+    }
+    
+    // MARK: - V2Ray Control -> Exported
+    
+    func startV2Ray(jsonString: String) -> Error? {
+        let _ = stopV2Ray()
+        
+        var handle: Int32 = -1
+        jsonString.withCString { cstr in
+            handle = wgV2rayStart(cstr)
+        }
+        
+        if handle < 0 {
+            return NSError(domain: "wg.v2ray", code: Int(handle), userInfo: [NSLocalizedDescriptionKey: "Failed to start V2Ray"])
+        }
+        
+        v2rayHandle = handle
+        wg_log(.info, message: "V2Ray started with handle: \(handle)")
+        return nil
+    }
+    
+    func stopV2Ray() -> Error? {
+        if v2rayHandle >= 0 {
+            let rc = wgV2rayStop(v2rayHandle)
+            let oldHandle = v2rayHandle
+            v2rayHandle = -1
+            
+            if rc != 0 {
+                return NSError(domain: "wg.v2ray", code: Int(rc), userInfo: [NSLocalizedDescriptionKey: "Failed to stop V2Ray"])
+            }
+            
+            wg_log(.info, message: "V2Ray stopped for handle: \(oldHandle)")
+        }
+        return nil
     }
     
 }

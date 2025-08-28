@@ -108,6 +108,11 @@
             value = "YES"
             isEnabled = "YES">
          </EnvironmentVariable>
+          <EnvironmentVariable
+            key = "PATH"
+            value = "/opt/homebrew/opt/make/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin&#10;"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <StoreKitConfigurationFileReference
          identifier = "../../IVPNClient/Store.storekit">
