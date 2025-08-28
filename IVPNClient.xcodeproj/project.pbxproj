@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		4E46608B2E606EC4000AB900 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E4660892E606EC4000AB900 /* libresolv.tbd */; };
 		4E46608C2E606EC4000AB900 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E46608A2E606EC4000AB900 /* libresolv.9.tbd */; };
-		4E46608D2E606EDC000AB900 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E46608A2E606EC4000AB900 /* libresolv.9.tbd */; };
-		4E46608E2E606EDC000AB900 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E4660892E606EC4000AB900 /* libresolv.tbd */; };
 		820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */; };
 		8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */; };
 		8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5032356536B008C83DB /* UpgradePlanViewController.swift */; };
@@ -78,7 +76,6 @@
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF52240E40F006B81D2 /* Error+Ext.swift */; };
-		8234E0D72AB23E5C0015C9A2 /* V2RayControl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */; };
 		82351FCA241FA16600E6E0FD /* InfoAlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */; };
 		82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */; };
 		82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */; };
@@ -519,7 +516,6 @@
 		822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo-wireguard-tunnel-provider.xcprivacy"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		8232FBF52240E40F006B81D2 /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
-		8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = V2RayControl.xcframework; path = Frameworks/V2RayControl.xcframework; sourceTree = "<group>"; };
 		82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerView.swift; sourceTree = "<group>"; };
@@ -835,9 +831,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E46608D2E606EDC000AB900 /* libresolv.9.tbd in Frameworks */,
-				4E46608E2E606EDC000AB900 /* libresolv.tbd in Frameworks */,
-				8234E0D72AB23E5C0015C9A2 /* V2RayControl.xcframework in Frameworks */,
 				82D598C621A6A5C7000FABDE /* SystemConfiguration.framework in Frameworks */,
 				9CB2CE311DAF9227007A4D2D /* CoreData.framework in Frameworks */,
 				9C6942251DD0CBF800F9A801 /* NetworkExtension.framework in Frameworks */,
@@ -862,7 +855,6 @@
 			children = (
 				4E4660892E606EC4000AB900 /* libresolv.tbd */,
 				4E46608A2E606EC4000AB900 /* libresolv.9.tbd */,
-				8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */,
 				8294BC8D22A126C900328932 /* TunnelKit.framework */,
 				8294BC8B22A10F4100328932 /* TunnelKit.framework */,
 				824F56072233FE6F00BCDD5C /* libwg-go.a */,
