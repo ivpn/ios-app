@@ -132,20 +132,16 @@ extension NETunnelProviderProtocol {
             KeyChain.wgIpv6Host = ipv6.localIP
         }
         
-        if UserDefaults.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
+        if UserDefaults.shared.isV2ray {
             endpoint = Peer.endpoint(host: Config.v2rayHost, port: Config.v2rayPort)
-            v2raySettings?.inboundIp = v2rayInboundIp
-            v2raySettings?.inboundPort = v2rayInboundPort
-            v2raySettings?.outboundIp = v2rayOutboundIp
-            v2raySettings?.outboundPort = v2rayOutboundPort
-            v2raySettings?.dnsName = v2rayDnsName
-            v2raySettings?.save()
         }
+        
+        let allowedIPs = UserDefaults.shared.isV2ray ? Config.wgPeerAllowedIPs : Config.wgPeerAllowedIPsWithoutV2Ray
         
         let peer = Peer(
             publicKey: publicKey,
             presharedKey: KeyChain.wgPresharedKey,
-            allowedIPs: Config.wgPeerAllowedIPs,
+            allowedIPs: allowedIPs,
             endpoint: endpoint,
             persistentKeepalive: Config.wgPeerPersistentKeepalive
         )

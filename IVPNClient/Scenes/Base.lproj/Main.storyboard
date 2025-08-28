@@ -1184,7 +1184,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Obfuscation" id="6LH-u0-MKt">
-                                <string key="footerTitle">VPN obfuscation is a technique that masks VPN traffic to make it appear like standard internet traffic, helping to evade detection and bypass internet restrictions or censorship. Enable V2Ray only when connected to WiFi network. Manually reconnect VPN when switching WiFi networks. Learn more</string>
+                                <string key="footerTitle">VPN obfuscation is a technique that masks VPN traffic to make it appear like standard internet traffic, helping to evade detection and bypass internet restrictions or censorship. Learn more</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="QHp-Ae-a81">
                                         <rect key="frame" x="0.0" y="206.5" width="414" height="43.5"/>
@@ -1209,31 +1209,13 @@
                                                         <action selector="toggleV2ray:" destination="cNW-I9-ie7" eventType="valueChanged" id="ugU-fh-B04"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd7-6O-Ich">
-                                                    <rect key="frame" x="75" y="14" width="32" height="16"/>
-                                                    <color key="backgroundColor" name="ivpnGray2"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="32" id="JHD-8Z-Wmu"/>
-                                                        <constraint firstAttribute="height" constant="16" id="tzT-s5-5sB"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
+
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="SDH-0C-siS" firstAttribute="centerY" secondItem="xoX-Ra-ju2" secondAttribute="centerY" id="05O-Ec-eek"/>
                                                 <constraint firstItem="3O9-H5-CkI" firstAttribute="centerY" secondItem="xoX-Ra-ju2" secondAttribute="centerY" id="6qN-Q1-2Q6"/>
                                                 <constraint firstItem="SDH-0C-siS" firstAttribute="leading" secondItem="xoX-Ra-ju2" secondAttribute="leading" constant="16" id="7Y0-7b-tqV"/>
-                                                <constraint firstItem="hd7-6O-Ich" firstAttribute="centerY" secondItem="xoX-Ra-ju2" secondAttribute="centerY" id="9yL-vP-BYi"/>
                                                 <constraint firstAttribute="trailing" secondItem="3O9-H5-CkI" secondAttribute="trailing" constant="16" id="OEA-b9-ckz"/>
-                                                <constraint firstItem="hd7-6O-Ich" firstAttribute="leading" secondItem="SDH-0C-siS" secondAttribute="trailing" constant="10" id="oDJ-Tb-LzH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -4975,3 +4957,4 @@
         </systemColor>
     </resources>
 </document>
+

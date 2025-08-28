@@ -78,12 +78,15 @@ struct Interface {
         }
         
         guard let ipv6 = ipv6 else {
-            return ipv4
+            return "\(ipv4)/32"
         }
         
-        let ipv6Address = IPv6Address("\(ipv6.components(separatedBy: "/")[0])\(ipv4)")
+        //first extract the ipv6 prefix and combine it with ipv4 for full ipv6 addr
+        let ipv6Prefix = ipv6.components(separatedBy: "/")[0]
+        let ipv6Address = IPv6Address("\(ipv6Prefix)\(ipv4)")
         
-        return "\(ipv4),\(ipv6Address?.debugDescription ?? "")/64"
+        // return both IPv4 as /32 and IPv6 as /128 same as android
+        return "\(ipv4)/32,\(ipv6Address?.debugDescription ?? "")/128"
     }
     
 }

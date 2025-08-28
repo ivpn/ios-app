@@ -291,7 +291,23 @@ class VPNManager {
             manager.isEnabled = true
             
             do {
-                try manager.connection.startVPNTunnel()
+                var options: [String: NSObject]? = nil
+                if tunnelType == .wireguard && UserDefaults.shared.isV2ray {
+                    if let config = V2RayCore.shared.makeConfig() {
+                        options = ["v2rayConfig": config.jsonString() as NSString]
+                        
+                        // -> Pass outboundip
+                        if let v2raySettings = V2RaySettings.load(), !v2raySettings.outboundIp.isEmpty {
+                            options!["v2rayOutboundIp"] = v2raySettings.outboundIp as NSString
+                        }
+                        
+                        log(.info, message: "Passing V2Ray config and settings to WireGuard tunnel provider")
+                    } else {
+                        log(.error, message: "Failed to create V2Ray configuration")
+                    }
+                }
+                
+                try manager.connection.startVPNTunnel(options: options)
             } catch NEVPNError.configurationInvalid {
                 log(.error, message: "Error connecting to VPN: configuration is invalid")
                 manager.isOnDemandEnabled = false

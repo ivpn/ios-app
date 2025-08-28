@@ -22,49 +22,16 @@
 //
 
 import Foundation
-import V2RayControl
 
 class V2RayCore {
     
     // MARK: - Properties -
     
     static let shared = V2RayCore()
-    var instance: V2rayControlInstance?
-    var reconnectWithV2ray = false
     
     // MARK: - Methods -
     
-    func start() -> Error? {
-        let _ = close()
-        var error: Error?
-        
-        guard let config = makeConfig() else {
-            return NSError(domain: "", code: 99, userInfo: [NSLocalizedDescriptionKey: "V2Ray configuration cannot be loaded"])
-        }
-        
-        var startError: NSError?
-        instance = V2rayControlStart(config.jsonString(), &startError)
-        if startError != nil {
-            error = startError as Error?
-        }
-        
-        return error
-    }
-    
-    func close() -> Error? {
-        var error: Error?
-        
-        if let instance = instance {
-            var stopError: NSError?
-            V2rayControlStop(instance, &stopError)
-            if stopError != nil {
-                error = stopError as Error?
-            }
-            self.instance = nil
-        }
 
-        return error
-    }
     
     func makeConfig() -> V2RayConfig? {
         guard let settings = V2RaySettings.load() else {

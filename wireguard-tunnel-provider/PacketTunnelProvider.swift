@@ -27,6 +27,9 @@ import WireGuardKit
 import os
 import WidgetKit
 
+
+
+
 enum PacketTunnelProviderError: String, Error {
     case savedProtocolConfigurationIsInvalid
     case dnsResolutionFailure
@@ -42,6 +45,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     private var ifname: String?
     private var updatedSettings: String?
     private var v2rayHandle: Int32 = -1
+    private var v2rayOutboundIp: String?
     
     private var config: NETunnelProviderProtocol {
         return self.protocolConfiguration as! NETunnelProviderProtocol
@@ -70,6 +74,24 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+        // Extract V2Ray settings from options
+        if let v2rayConfigString = options?["v2rayConfig"] as? String {
+            wg_log(.info, message: "V2Ray config detected, starting V2Ray first")
+            
+            // -> outbound ip
+            v2rayOutboundIp = options?["v2rayOutboundIp"] as? String
+            
+            if let error = startV2Ray(jsonString: v2rayConfigString) {
+                wg_log(.error, message: "Failed to start V2Ray: \(error.localizedDescription)")
+                completionHandler(error)
+                return
+            }
+            wg_log(.info, message: "V2Ray started successfully, proceeding with WireGuard")
+        } else {
+            wg_log(.info, message: "No V2Ray config provided, starting WireGuard only")
+            v2rayOutboundIp = nil
+        }
+        
         guard let addresses = UserDefaults.shared.isIPv6 ? KeyChain.wgIpAddresses : KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
             tunnelSetupFailed()
             completionHandler(PacketTunnelProviderError.couldNotStartBackend)
@@ -220,13 +242,23 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         // IPv4 settings
         let validatedIPv4Addresses = validatedAddresses.filter { $0.addressType == .IPv4 }
         if validatedIPv4Addresses.count > 0 {
-            let ipv4Settings = NEIPv4Settings(addresses: validatedIPv4Addresses.map { $0.ipAddress }, subnetMasks: validatedIPv4Addresses.map { $0.subnetString })
-            ipv4Settings.includedRoutes = [NEIPv4Route.default()]
-            ipv4Settings.excludedRoutes = validatedEndpoints.filter { $0.addressType == .IPv4 }.map {
-                NEIPv4Route(destinationAddress: $0.ipAddress, subnetMask: "255.255.255.255")}
-            
-            newSettings.ipv4Settings = ipv4Settings
-        }
+                  let ipv4Settings = NEIPv4Settings(addresses: validatedIPv4Addresses.map { $0.ipAddress }, subnetMasks: validatedIPv4Addresses.map { $0.subnetString })
+                  ipv4Settings.includedRoutes = [NEIPv4Route.default()]
+                  var excludedIPv4Routes = validatedEndpoints.filter { $0.addressType == .IPv4 }.map {
+                      NEIPv4Route(destinationAddress: $0.ipAddress, subnetMask: "255.255.255.255")}
+                  
+                  // Add V2Ray server IP to bypass routes (prevents circular routing) -> similar to android impl
+                  if let v2rayOutboundIp = v2rayOutboundIp, !v2rayOutboundIp.isEmpty {
+                      // add V2Ray server IP as /32 route that bypasses the VPN tunnel
+                      let v2rayRoute = NEIPv4Route(destinationAddress: v2rayOutboundIp, subnetMask: "255.255.255.255")
+                      excludedIPv4Routes.append(v2rayRoute)
+                      wg_log(.info, message: "Added V2Ray server IP to bypass routes: \(v2rayOutboundIp)")
+                  }
+                  
+                  ipv4Settings.excludedRoutes = excludedIPv4Routes
+                  
+                  newSettings.ipv4Settings = ipv4Settings
+              }
         
         // IPv6 settings
         let validatedIPv6Addresses = validatedAddresses.filter { $0.addressType == .IPv6 }
@@ -322,5 +354,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         return nil
     }
+    
+
     
 }
