@@ -595,9 +595,9 @@ class ConnectionManager {
         if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop) {
             if let exitHost = getExitHost() {
                 finalInboundIp = exitHost.host
-                //use v2ray outbound port,like android does,
-                finalInboundPort = v2rayOutboundPort
-                log(.info, message: "Multi-hop V2Ray override: inbound=\(exitHost.host):\(v2rayOutboundPort)")
+                // -> use wg inbound port for multi-hop (fix-from-android)
+                finalInboundPort = Application.shared.settings.connectionProtocol.port()
+                log(.info, message: "Multi-hop V2Ray override: inbound=\(exitHost.host):\(finalInboundPort)")
             } else {
                 log(.error, message: "Multi-hop enabled but no exit server available")
                 return
