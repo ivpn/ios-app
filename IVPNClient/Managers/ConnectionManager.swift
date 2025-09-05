@@ -588,7 +588,7 @@ class ConnectionManager {
         let v2rayOutboundPort = getV2RayOutboundPort()
         let v2rayDnsName = !entryHost.dnsName.isEmpty ? entryHost.dnsName : entryHost.hostName
         
-        // Handle multi-hop configuration
+        // -> handle multi-hop conf
         var finalInboundIp = v2rayInboundIp
         var finalInboundPort = v2rayInboundPort
         

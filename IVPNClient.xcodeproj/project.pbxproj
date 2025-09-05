@@ -3479,7 +3479,7 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		824B86DD26D42A4600D0101A /* XCRemoteSwiftPackageReference "wireguard-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/codewithtamim/wireguard-apple";
+			repositoryURL = "https://github.com/ivpn/wireguard-apple";
 			requirement = {
 				branch = master;
 				kind = branch;
