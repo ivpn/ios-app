@@ -1,10 +1,10 @@
 //
-//  V2RayCore.swift
+//  V2RayConfigBuilder.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-08-23.
-//  Copyright (c) 2023 IVPN Limited.
+//  Created by Tamim Hossain on 2025-09-05.
+//  Copyright (c) 2025 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -23,15 +23,13 @@
 
 import Foundation
 
-class V2RayCore {
+class V2RayConfigBuilder {
     
     // MARK: - Properties -
     
-    static let shared = V2RayCore()
+    static let shared = V2RayConfigBuilder()
     
     // MARK: - Methods -
-    
-
     
     func makeConfig() -> V2RayConfig? {
         guard let settings = V2RaySettings.load() else {

@@ -295,7 +295,7 @@ class VPNManager {
                 if tunnelType == .wireguard && UserDefaults.shared.isV2ray {
                     // Always refresh V2Ray settings before connecting
                     Application.shared.connectionManager.updateV2RaySettings()
-                    if let config = V2RayCore.shared.makeConfig() {
+                    if let config = V2RayConfigBuilder.shared.makeConfig() {
                         options = ["v2rayConfig": config.jsonString() as NSString]
                         
                         // -> Pass outboundip
