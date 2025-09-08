@@ -628,8 +628,8 @@ class ConnectionManager {
             return selectedHost
         }
         
-        if let randomHost = Application.shared.settings.selectedServer.hosts.randomElement() {
-            return randomHost
+        if let firstHost = Application.shared.settings.selectedServer.hosts.first {
+            return firstHost
         }
         
         return nil
@@ -640,8 +640,8 @@ class ConnectionManager {
             return selectedHost
         }
         
-        if let randomHost = Application.shared.settings.selectedExitServer.hosts.randomElement() {
-            return randomHost
+        if let firstHost = Application.shared.settings.selectedExitServer.hosts.first {
+            return firstHost
         }
         
         return nil
@@ -652,9 +652,9 @@ class ConnectionManager {
         
         switch v2rayProtocol {
         case "tcp":
-            return Config.v2rayTcpPort  // HTTP/VMess/TCP
+            return Config.v2rayTcpPort  // HTTP/VMess/TCP -> desktop
         case "udp":
-            return Config.v2rayQuicPort // HTTPS/VMess/QUIC
+            return Config.v2rayQuicPort // HTTPS/VMess/QUIC -> desktop
         default:
             return settings.connectionProtocol.port()
         }

@@ -182,8 +182,8 @@ extension NETunnelProviderProtocol {
             return selectedHost
         }
         
-        if let randomHost = Application.shared.settings.selectedServer.hosts.randomElement() {
-            return randomHost
+        if let firstHost = Application.shared.settings.selectedServer.hosts.first {
+            return firstHost
         }
         
         return nil
@@ -194,8 +194,8 @@ extension NETunnelProviderProtocol {
             return selectedHost
         }
         
-        if let randomHost = Application.shared.settings.selectedExitServer.hosts.randomElement() {
-            return randomHost
+        if let firstHost = Application.shared.settings.selectedExitServer.hosts.first {
+            return firstHost
         }
         
         return nil
