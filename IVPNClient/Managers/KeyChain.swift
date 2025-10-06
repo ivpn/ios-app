@@ -40,7 +40,7 @@ class KeyChain {
     private static let deviceNameKey = "deviceName"
     
     static let bundle: Keychain = {
-        return Keychain(service: "net.ivpn.clients.ios", accessGroup: "WQXXM75BYN.net.ivpn.IVPN-Client").accessibility(.afterFirstUnlockThisDeviceOnly)
+        return Keychain(service: "net.ivpn.clients.ios", accessGroup: "WQXXM75BYN.net.ivpn.IVPN-Client").accessibility(.whenPasscodeSetThisDeviceOnly)
     }()
     
     class var username: String? {
@@ -178,14 +178,6 @@ class KeyChain {
         vpnUsername = nil
         vpnPassword = nil
         deviceName = nil
-    }
-    
-    static func migrateAccessibilityIfNeeded() {
-        if let value = wgPrivateKey { wgPrivateKey = value }
-        if let value = wgPublicKey { wgPublicKey = value }
-        if let value = wgIpAddress { wgIpAddress = value }
-        if let value = wgIpAddresses { wgIpAddresses = value }
-        if let value = wgPresharedKey { wgPresharedKey = value }
     }
     
 }
