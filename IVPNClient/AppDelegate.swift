@@ -281,7 +281,6 @@ extension AppDelegate: UIApplicationDelegate {
         createLogFiles()
         resetLastPingTimestamp()
         clearURLCache()
-        KeyChain.migrateAccessibilityIfNeeded()
         startPurchaseObserver()
         DNSManager.shared.loadProfile { _ in }
         
