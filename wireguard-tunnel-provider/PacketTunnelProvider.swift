@@ -75,12 +75,25 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        // Extract V2Ray settings from options
-        if let v2rayConfigString = options?["v2rayConfig"] as? String {
+        // Extract V2Ray settings from options or fallback to saved values for on-demand after reboot
+        var v2rayConfigString: String? = options?["v2rayConfig"] as? String
+        var v2rayOutboundIpOption: String? = options?["v2rayOutboundIp"] as? String
+        if v2rayConfigString == nil, UserDefaults.shared.isV2ray {
+            // Fallback to persisted values saved by the host app
+            let savedJson = UserDefaults.shared.string(forKey: UserDefaults.Key.v2rayConfigJson)
+            let savedOutbound = UserDefaults.shared.string(forKey: UserDefaults.Key.v2rayOutboundIpLast)
+            if let json = savedJson, !json.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                v2rayConfigString = json
+                v2rayOutboundIpOption = savedOutbound
+                wg_log(.info, message: "Using persisted V2Ray config due to missing options (on-demand)")
+            }
+        }
+
+        if let v2rayConfigString = v2rayConfigString {
             wg_log(.info, message: "V2Ray config detected, starting V2Ray first")
             
             // -> outbound ip
-            v2rayOutboundIp = options?["v2rayOutboundIp"] as? String
+            v2rayOutboundIp = v2rayOutboundIpOption
             v2rayConfigJson = v2rayConfigString
             
             if let error = startV2Ray(jsonString: v2rayConfigString) {

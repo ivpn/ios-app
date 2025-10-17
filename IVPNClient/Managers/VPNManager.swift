@@ -304,6 +304,13 @@ class VPNManager {
                         }
                         
                         log(.info, message: "Passing V2Ray config and settings to WireGuard tunnel provider")
+
+                        // Persist for on-demand restarts (e.g.,, after reboot)
+                        UserDefaults.shared.set(config.jsonString(), forKey: UserDefaults.Key.v2rayConfigJson)
+                        if let outbound = V2RaySettings.load()?.outboundIp, !outbound.isEmpty {
+                            UserDefaults.shared.set(outbound, forKey: UserDefaults.Key.v2rayOutboundIpLast)
+                        }
+                        UserDefaults.shared.synchronize()
                     } else {
                         log(.error, message: "Failed to create V2Ray configuration")
                     }
