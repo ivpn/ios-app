@@ -94,10 +94,11 @@ class CustomDNSViewController: UITableViewController {
     
     @objc func saveTapped() {
         saveAddress()
+        saveURL()
         view.endEditing(true)
     }
     
-    func saveIPAddress() {
+    func saveAddress() {
         guard let address = customDNSIPTextField.text else {
             return
         }
@@ -115,7 +116,7 @@ class CustomDNSViewController: UITableViewController {
         }
     }
     
-    func saveAddress() {
+    func saveURL() {
         guard var server = customDNSTextField.text else {
             return
         }
@@ -211,12 +212,12 @@ extension CustomDNSViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == customDNSIPTextField {
             textField.resignFirstResponder()
-            saveIPAddress()
+            saveAddress()
         }
         
         if textField == customDNSTextField {
             textField.resignFirstResponder()
-            saveAddress()
+            saveURL()
         }
         
         return true
