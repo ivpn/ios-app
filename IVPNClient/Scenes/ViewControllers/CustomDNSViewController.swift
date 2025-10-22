@@ -26,6 +26,7 @@ import UIKit
 class CustomDNSViewController: UITableViewController {
     
     @IBOutlet weak var customDNSSwitch: UISwitch!
+    @IBOutlet weak var customDNSIPTextField: UITextField!
     @IBOutlet weak var customDNSTextField: UITextField!
     @IBOutlet weak var secureDNSSwitch: UISwitch!
     @IBOutlet weak var resolvedIPLabel: UILabel!
@@ -97,6 +98,24 @@ class CustomDNSViewController: UITableViewController {
         view.endEditing(true)
     }
     
+    func saveIPAddress() {
+        guard var address = customDNSIPTextField.text else {
+            return
+        }
+        
+        UserDefaults.shared.set(address.commaSeparatedToArray(), forKey: UserDefaults.Key.resolvedDNSInsideVPN)
+        
+        if address.isEmpty {
+            UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
+            UserDefaults.shared.set("", forKey: UserDefaults.Key.customDNS)
+            customDNSSwitch.setOn(false, animated: true)
+        }
+        
+        if UserDefaults.shared.isCustomDNS {
+            evaluateReconnect(sender: customDNSTextField)
+        }
+    }
+    
     func saveAddress() {
         guard var server = customDNSTextField.text else {
             return
@@ -105,35 +124,16 @@ class CustomDNSViewController: UITableViewController {
         server = DNSProtocolType.sanitizeServer(address: server)
         customDNSTextField.text = server
         
-        let serverToResolve = DNSProtocolType.getServerToResolve(address: server)
-        DNSManager.saveResolvedDNS(server: serverToResolve, key: UserDefaults.Key.resolvedDNSInsideVPN)
-        
         UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
-        
-        if server.isEmpty {
-            UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
-            UserDefaults.shared.set([String](), forKey: UserDefaults.Key.resolvedDNSInsideVPN)
-            customDNSSwitch.setOn(false, animated: true)
-        }
-        
-        setupView()
         
         if UserDefaults.shared.isCustomDNS {
             evaluateReconnect(sender: customDNSTextField)
         }
     }
     
-    @objc func updateResolvedDNS() {
-        let resolvedDNS = UserDefaults.shared.value(forKey: UserDefaults.Key.resolvedDNSInsideVPN) as? [String]
-            ?? []
-        resolvedIPLabel.text = resolvedDNS.map { String($0) }.joined(separator: ",")
-    }
-    
     // MARK: - Private methods -
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateResolvedDNS), name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(resolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setupView), name: Notification.Name.CustomDNSUpdated, object: nil)
     }
     
@@ -142,6 +142,7 @@ class CustomDNSViewController: UITableViewController {
         let customDNS = UserDefaults.shared.customDNS
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         customDNSSwitch.isOn = UserDefaults.shared.isCustomDNS
+        customDNSIPTextField.text = UserDefaults.shared.resolvedDNSInsideVPN.joined(separator: ",")
         customDNSTextField.text = customDNS
         customDNSTextField.delegate = self
         serverURLLabel.text = DNSProtocolType.getServerURL(address: customDNS)
@@ -149,16 +150,6 @@ class CustomDNSViewController: UITableViewController {
         secureDNSSwitch.isOn = preferred != .plain
         typeControl.isEnabled = preferred != .plain
         typeControl.selectedSegmentIndex = preferred == .dot ? 1 : 0
-        updateResolvedDNS()
-    }
-    
-    @objc private func resolvedDNSError() {
-        customDNSTextField.text = ""
-        UserDefaults.shared.set("", forKey: UserDefaults.Key.customDNS)
-        UserDefaults.shared.set(false, forKey: UserDefaults.Key.isCustomDNS)
-        customDNSSwitch.setOn(false, animated: true)
-        setupView()
-        showResolvedDNSError()
     }
     
 }
@@ -182,8 +173,6 @@ extension CustomDNSViewController {
             if type == .plain && indexPath.row == 5 {
                 return 0
             }
-            
-            return UITableView.automaticDimension
         }
         
         return UITableView.automaticDimension
@@ -212,6 +201,11 @@ extension CustomDNSViewController {
 extension CustomDNSViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == customDNSIPTextField {
+            textField.resignFirstResponder()
+            saveIPAddress()
+        }
+        
         if textField == customDNSTextField {
             textField.resignFirstResponder()
             saveAddress()
@@ -230,6 +224,7 @@ extension CustomDNSViewController: UITextFieldDelegate {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
         DispatchQueue.async {
+            self.customDNSIPTextField.text = UserDefaults.shared.resolvedDNSInsideVPN.joined(separator: ",")
             self.customDNSTextField.text = UserDefaults.shared.customDNS
         }
     }
