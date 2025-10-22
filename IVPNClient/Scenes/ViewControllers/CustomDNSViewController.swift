@@ -29,7 +29,6 @@ class CustomDNSViewController: UITableViewController {
     @IBOutlet weak var customDNSIPTextField: UITextField!
     @IBOutlet weak var customDNSTextField: UITextField!
     @IBOutlet weak var secureDNSSwitch: UISwitch!
-    @IBOutlet weak var resolvedIPLabel: UILabel!
     @IBOutlet weak var serverURLLabel: UILabel!
     @IBOutlet weak var serverNameLabel: UILabel!
     @IBOutlet weak var typeControl: UISegmentedControl!
@@ -99,7 +98,7 @@ class CustomDNSViewController: UITableViewController {
     }
     
     func saveIPAddress() {
-        guard var address = customDNSIPTextField.text else {
+        guard let address = customDNSIPTextField.text else {
             return
         }
         
@@ -158,19 +157,28 @@ class CustomDNSViewController: UITableViewController {
 
 extension CustomDNSViewController {
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        let type = DNSProtocolType.preferredSettings()
+        if type == .plain {
+            return 3
+        }
+        
+        return 4
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 1 && indexPath.row > 0 {
+        if indexPath.section == 3 {
             let type = DNSProtocolType.preferredSettings()
             
-            if type != .doh && indexPath.row == 3 {
+            if type != .doh && indexPath.row == 1 {
                 return 0
             }
             
-            if type != .dot && indexPath.row == 4 {
+            if type != .dot && indexPath.row == 2 {
                 return 0
             }
             
-            if type == .plain && indexPath.row == 5 {
+            if type == .plain {
                 return 0
             }
         }
