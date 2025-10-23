@@ -139,7 +139,7 @@ class SecureDNSViewController: UITableViewController {
             return
         }
         
-        UserDefaults.standard.set(address, forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
+        UserDefaults.standard.set(address.commaSeparatedToArray(), forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
         secureDNSView.setupView(model: model)
         
         if address.isEmpty {
@@ -167,11 +167,11 @@ extension SecureDNSViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let type = DNSProtocolType.init(rawValue: model.type)
         
-        if type == .dot && indexPath.section == 1 && indexPath.row == 2 {
+        if type == .dot && indexPath.section == 2 && indexPath.row == 1 {
             return 0
         }
         
-        if type == .doh && indexPath.section == 1 && indexPath.row == 3 {
+        if type == .doh && indexPath.section == 2 && indexPath.row == 2 {
             return 0
         }
         
