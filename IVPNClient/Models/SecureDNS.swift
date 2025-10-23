@@ -30,7 +30,7 @@ struct SecureDNS: Codable {
             if let address = address {
                 serverURL = DNSProtocolType.getServerURL(address: address)
                 serverName = DNSProtocolType.getServerName(address: address)
-                DNSManager.saveResolvedDNS(server: DNSProtocolType.getServerToResolve(address: address), key: UserDefaults.Key.resolvedDNSOutsideVPN)
+                UserDefaults.standard.set(address, forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
             } else {
                 serverURL = nil
                 serverName = nil

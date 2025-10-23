@@ -73,7 +73,6 @@ class SecureDNSViewController: UITableViewController {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         secureDNSView.setupView(model: model)
-        addObservers()
         hideKeyboardOnTap()
     }
     
@@ -90,11 +89,6 @@ class SecureDNSViewController: UITableViewController {
     }
     
     // MARK: - Private methods -
-    
-    private func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateDNSProfile), name: Notification.Name.UpdateResolvedDNS, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(resolvedDNSError), name: Notification.Name.ResolvedDNSError, object: nil)
-    }
     
     private func saveDNSProfile() {
         let validation = model.validation()
@@ -141,29 +135,27 @@ class SecureDNSViewController: UITableViewController {
     }
     
     private func saveAddress() {
+        guard var address = secureDNSView.serverIPField.text else {
+            return
+        }
+        
+        UserDefaults.standard.set(address, forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
+        secureDNSView.setupView(model: model)
+        
+        if address.isEmpty {
+            removeDNSProfile()
+            secureDNSView.enableSwitch.setOn(false, animated: true)
+        }
+    }
+    
+    private func saveURL() {
         guard var server = secureDNSView.serverField.text else {
             return
         }
         
         server = DNSProtocolType.sanitizeServer(address: server)
         model.address = server
-        
-        if server.isEmpty {
-            UserDefaults.standard.set([], forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
-            removeDNSProfile()
-            secureDNSView.enableSwitch.setOn(false, animated: true)
-        }
-        
         secureDNSView.setupView(model: model)
-    }
-    
-    @objc private func resolvedDNSError() {
-        secureDNSView.serverField.text = ""
-        model.address = ""
-        removeDNSProfile()
-        secureDNSView.enableSwitch.setOn(false, animated: true)
-        secureDNSView.setupView(model: model)
-        showResolvedDNSError()
     }
     
 }
@@ -209,9 +201,14 @@ extension SecureDNSViewController {
 extension SecureDNSViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == secureDNSView.serverField {
+        if textField == secureDNSView.serverIPField {
             textField.resignFirstResponder()
             saveAddress()
+        }
+        
+        if textField == secureDNSView.serverField {
+            textField.resignFirstResponder()
+            saveURL()
         }
         
         return true
