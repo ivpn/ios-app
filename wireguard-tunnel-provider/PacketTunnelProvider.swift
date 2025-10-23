@@ -109,13 +109,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         
         guard let addresses = UserDefaults.shared.isIPv6 ? KeyChain.wgIpAddresses : KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
-            tunnelSetupFailed()
+            tunnelSetupFailed(reason: "Cannot read WGIpAddressKey or WGPrivateKey from KeyChain")
             completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
         
         guard let tunnelSettings = getTunnelSettings(ipAddress: addresses) else {
-            tunnelSetupFailed()
+            tunnelSetupFailed(reason: "getTunnelSettings() error")
             completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
@@ -125,7 +125,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         networkMonitor!.start(queue: DispatchQueue(label: "NetworkMonitor"))
         
         guard let privateKeyHex = wgPrivateKey.base64KeyToHex() else {
-            tunnelSetupFailed()
+            tunnelSetupFailed(reason: "base64KeyToHex() error")
             completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
@@ -134,7 +134,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         let handle = wgTurnOn(settings, tunnelFileDescriptor ?? 0)
         
         guard handle >= 0 else {
-            tunnelSetupFailed()
+            tunnelSetupFailed(reason: "handle = wgTurnOn error")
             completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             return
         }
@@ -150,7 +150,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         setTunnelNetworkSettings(tunnelSettings) { error in
             if error != nil {
-                self.tunnelSetupFailed()
+                self.tunnelSetupFailed(reason: "setTunnelNetworkSettings() error: \(error.debugDescription)")
                 completionHandler(PacketTunnelProviderError.couldNotStartBackend)
             } else {
                 WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
@@ -180,8 +180,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         networkMonitor?.cancel()
     }
     
-    private func tunnelSetupFailed() {
-        wg_log(.error, message: "Tunnel setup failed")
+    private func tunnelSetupFailed(reason: String) {
+        wg_log(.error, message: "Tunnel setup failed: \(reason)")
         UserDefaults.shared.set(".tunnelSetupFailed", forKey: UserDefaults.Key.wireguardTunnelProviderError)
         UserDefaults.shared.synchronize()
     }
