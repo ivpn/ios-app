@@ -54,6 +54,7 @@ class ObfuscationViewController: UITableViewController {
         }
         
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isV2ray)
+        setupView()
         evaluateReconnect(sender: sender as UIView)
         WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
     }
@@ -82,6 +83,7 @@ class ObfuscationViewController: UITableViewController {
         tableView.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundQuaternary)
         v2raySwitch.setOn(UserDefaults.shared.isV2ray, animated: false)
         v2rayProtocolControl.selectedSegmentIndex = UserDefaults.shared.v2rayProtocol == "tcp" ? 1 : 0
+        v2rayProtocolControl.isEnabled = UserDefaults.shared.isV2ray
     }
 
 }
