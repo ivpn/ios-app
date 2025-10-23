@@ -85,6 +85,7 @@ class SecureDNSViewController: UITableViewController {
     
     @objc func saveTapped() {
         saveAddress()
+        saveURL()
         view.endEditing(true)
     }
     
@@ -140,7 +141,6 @@ class SecureDNSViewController: UITableViewController {
         }
         
         UserDefaults.standard.set(address.commaSeparatedToArray(), forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
-        secureDNSView.setupView(model: model)
         
         if address.isEmpty {
             removeDNSProfile()
@@ -155,7 +155,6 @@ class SecureDNSViewController: UITableViewController {
         
         server = DNSProtocolType.sanitizeServer(address: server)
         model.address = server
-        secureDNSView.setupView(model: model)
     }
     
 }

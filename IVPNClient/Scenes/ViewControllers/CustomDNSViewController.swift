@@ -88,6 +88,7 @@ class CustomDNSViewController: UITableViewController {
     // MARK: - Methods -
     
     @objc func cancelTapped() {
+        customDNSIPTextField.text = UserDefaults.shared.resolvedDNSInsideVPN.joined(separator: ",")
         customDNSTextField.text = UserDefaults.shared.customDNS
         view.endEditing(true)
     }
@@ -125,6 +126,8 @@ class CustomDNSViewController: UITableViewController {
         customDNSTextField.text = server
         
         UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
+        
+        setupView()
         
         if UserDefaults.shared.isCustomDNS {
             evaluateReconnect(sender: customDNSTextField)

@@ -99,6 +99,11 @@ struct SecureDNS: Codable {
     }
     
     func validation() -> (Bool, String?) {
+        let servers = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNSOutsideVPN) as? [String] ?? []
+        if servers.isEmpty {
+            return (false, "Please enter DNS server info")
+        }
+        
         guard let address = address, !address.isEmpty else {
             return (false, "Please enter DNS server info")
         }
