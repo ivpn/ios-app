@@ -43,7 +43,7 @@ class CustomDNSViewController: UITableViewController {
             return
         }
         
-        guard let server = customDNSTextField.text, !server.isEmpty else {
+        guard let server = customDNSIPTextField.text, !server.isEmpty else {
             showAlert(title: "", message: "Please enter DNS server info") { _ in
                 sender.setOn(false, animated: true)
             }
@@ -111,6 +111,8 @@ class CustomDNSViewController: UITableViewController {
             UserDefaults.shared.set("", forKey: UserDefaults.Key.customDNS)
             customDNSSwitch.setOn(false, animated: true)
         }
+        
+        setupView()
         
         if UserDefaults.shared.isCustomDNS {
             evaluateReconnect(sender: customDNSTextField)
