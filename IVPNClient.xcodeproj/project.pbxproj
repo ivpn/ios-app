@@ -80,6 +80,7 @@
 		82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */; };
 		82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */; };
 		82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */; };
+		82364E9D2EAA58EB004FCBE1 /* ObfuscationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82364E9C2EAA58EB004FCBE1 /* ObfuscationViewController.swift */; };
 		82365E7F2AB86020006434C3 /* V2RaySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82365E7E2AB86020006434C3 /* V2RaySettings.swift */; };
 		823ACC292626E69F006F69AB /* GeoLookupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC282626E69F006F69AB /* GeoLookupTests.swift */; };
 		823ACC312626FF3E006F69AB /* IpProtocolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC302626FF3E006F69AB /* IpProtocolView.swift */; };
@@ -520,6 +521,7 @@
 		82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerView.swift; sourceTree = "<group>"; };
 		82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoPopupView.swift; sourceTree = "<group>"; };
+		82364E9C2EAA58EB004FCBE1 /* ObfuscationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObfuscationViewController.swift; sourceTree = "<group>"; };
 		82365E7E2AB86020006434C3 /* V2RaySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V2RaySettings.swift; sourceTree = "<group>"; };
 		823ACC282626E69F006F69AB /* GeoLookupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLookupTests.swift; sourceTree = "<group>"; };
 		823ACC302626FF3E006F69AB /* IpProtocolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpProtocolView.swift; sourceTree = "<group>"; };
@@ -1283,6 +1285,7 @@
 				82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */,
 				82052E5529C1D83700227CF9 /* MTUViewController.swift */,
 				829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */,
+				82364E9C2EAA58EB004FCBE1 /* ObfuscationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2407,6 +2410,7 @@
 				8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */,
 				9CBFF0302102254800FE1757 /* Settings.swift in Sources */,
 				9C3031371DB4307D00C38B0C /* SettingsViewController.swift in Sources */,
+				82364E9D2EAA58EB004FCBE1 /* ObfuscationViewController.swift in Sources */,
 				82EEB6C625F9398600915837 /* DNSProtocolType.swift in Sources */,
 				821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */,
 				82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */,
@@ -2834,7 +2838,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2852,7 +2856,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
-				MARKETING_VERSION = 2.12.5;
+				MARKETING_VERSION = 2.13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -3323,7 +3327,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3341,7 +3345,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
-				MARKETING_VERSION = 2.12.5;
+				MARKETING_VERSION = 2.13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -3362,7 +3366,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3380,7 +3384,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
-				MARKETING_VERSION = 2.12.5;
+				MARKETING_VERSION = 2.13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D RELEASE";

@@ -75,37 +75,6 @@ class DNSManager {
         }
     }
     
-    static func saveResolvedDNS(server: String, key: String) {
-        guard !server.trim().isEmpty else {
-            return
-        }
-        
-        DNSResolver.resolve(host: server) { list in
-            var addresses: [String] = []
-            
-            for ip in list {
-                if let host = ip.host {
-                    addresses.append(host)
-                }
-            }
-            
-            switch key {
-            case UserDefaults.Key.resolvedDNSOutsideVPN:
-                UserDefaults.standard.set(addresses, forKey: UserDefaults.Key.resolvedDNSOutsideVPN)
-                NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNS, object: nil)
-            case UserDefaults.Key.resolvedDNSInsideVPN:
-                UserDefaults.shared.set(addresses, forKey: UserDefaults.Key.resolvedDNSInsideVPN)
-                NotificationCenter.default.post(name: Notification.Name.UpdateResolvedDNSInsideVPN, object: nil)
-            default:
-                break
-            }
-            
-            if addresses.isEmpty {
-                NotificationCenter.default.post(name: Notification.Name.ResolvedDNSError, object: nil)
-            }
-        }
-    }
-    
     // MARK: - Private methods -
     
     private func getDnsSettings(model: SecureDNS) -> NEDNSSettings {
