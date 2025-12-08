@@ -1,10 +1,10 @@
 //
-//  V2RayCore.swift
+//  V2RayConfigBuilder.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2023-08-23.
-//  Copyright (c) 2023 IVPN Limited.
+//  Created by Tamim Hossain on 2025-09-05.
+//  Copyright (c) 2025 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
 //
@@ -22,49 +22,14 @@
 //
 
 import Foundation
-import V2RayControl
 
-class V2RayCore {
+class V2RayConfigBuilder {
     
     // MARK: - Properties -
     
-    static let shared = V2RayCore()
-    var instance: V2rayControlInstance?
-    var reconnectWithV2ray = false
+    static let shared = V2RayConfigBuilder()
     
     // MARK: - Methods -
-    
-    func start() -> Error? {
-        let _ = close()
-        var error: Error?
-        
-        guard let config = makeConfig() else {
-            return NSError(domain: "", code: 99, userInfo: [NSLocalizedDescriptionKey: "V2Ray configuration cannot be loaded"])
-        }
-        
-        var startError: NSError?
-        instance = V2rayControlStart(config.jsonString(), &startError)
-        if startError != nil {
-            error = startError as Error?
-        }
-        
-        return error
-    }
-    
-    func close() -> Error? {
-        var error: Error?
-        
-        if let instance = instance {
-            var stopError: NSError?
-            V2rayControlStop(instance, &stopError)
-            if stopError != nil {
-                error = stopError as Error?
-            }
-            self.instance = nil
-        }
-
-        return error
-    }
     
     func makeConfig() -> V2RayConfig? {
         guard let settings = V2RaySettings.load() else {

@@ -27,6 +27,9 @@ import WireGuardKit
 import os
 import WidgetKit
 
+
+
+
 enum PacketTunnelProviderError: String, Error {
     case savedProtocolConfigurationIsInvalid
     case dnsResolutionFailure
@@ -41,6 +44,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     private var networkMonitor: NWPathMonitor?
     private var ifname: String?
     private var updatedSettings: String?
+    private var v2rayHandle: Int32 = -1
+    private var v2rayOutboundIp: String?
+    private var v2rayConfigJson: String?
     
     private var config: NETunnelProviderProtocol {
         return self.protocolConfiguration as! NETunnelProviderProtocol
@@ -69,6 +75,39 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+        // Extract V2Ray settings from options or fallback to saved values for on-demand after reboot
+        var v2rayConfigString: String? = options?["v2rayConfig"] as? String
+        var v2rayOutboundIpOption: String? = options?["v2rayOutboundIp"] as? String
+        if v2rayConfigString == nil, UserDefaults.shared.isV2ray {
+            // Fallback to persisted values saved by the host app
+            let savedJson = UserDefaults.shared.string(forKey: UserDefaults.Key.v2rayConfigJson)
+            let savedOutbound = UserDefaults.shared.string(forKey: UserDefaults.Key.v2rayOutboundIpLast)
+            if let json = savedJson, !json.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                v2rayConfigString = json
+                v2rayOutboundIpOption = savedOutbound
+                wg_log(.info, message: "Using persisted V2Ray config due to missing options (on-demand)")
+            }
+        }
+
+        if let v2rayConfigString = v2rayConfigString {
+            wg_log(.info, message: "V2Ray config detected, starting V2Ray first")
+            
+            // -> outbound ip
+            v2rayOutboundIp = v2rayOutboundIpOption
+            v2rayConfigJson = v2rayConfigString
+            
+            if let error = startV2Ray(jsonString: v2rayConfigString) {
+                wg_log(.error, message: "Failed to start V2Ray: \(error.localizedDescription)")
+                completionHandler(error)
+                return
+            }
+            wg_log(.info, message: "V2Ray started successfully, proceeding with WireGuard")
+        } else {
+            wg_log(.info, message: "No V2Ray config provided, starting WireGuard only")
+            v2rayOutboundIp = nil
+            v2rayConfigJson = nil
+        }
+        
         guard let addresses = UserDefaults.shared.isIPv6 ? KeyChain.wgIpAddresses : KeyChain.wgIpAddress, let wgPrivateKey = KeyChain.wgPrivateKey else {
             tunnelSetupFailed()
             completionHandler(PacketTunnelProviderError.couldNotStartBackend)
@@ -122,6 +161,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
         wg_log(.info, message: "Stopping tunnel")
+        
+        // Stop V2Ray first
+        let _ = stopV2Ray()
         
         networkMonitor?.cancel()
         networkMonitor = nil
@@ -216,20 +258,39 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         // IPv4 settings
         let validatedIPv4Addresses = validatedAddresses.filter { $0.addressType == .IPv4 }
         if validatedIPv4Addresses.count > 0 {
-            let ipv4Settings = NEIPv4Settings(addresses: validatedIPv4Addresses.map { $0.ipAddress }, subnetMasks: validatedIPv4Addresses.map { $0.subnetString })
-            ipv4Settings.includedRoutes = [NEIPv4Route.default()]
-            ipv4Settings.excludedRoutes = validatedEndpoints.filter { $0.addressType == .IPv4 }.map {
-                NEIPv4Route(destinationAddress: $0.ipAddress, subnetMask: "255.255.255.255")}
-            
-            newSettings.ipv4Settings = ipv4Settings
-        }
+                  let ipv4Settings = NEIPv4Settings(addresses: validatedIPv4Addresses.map { $0.ipAddress }, subnetMasks: validatedIPv4Addresses.map { $0.subnetString })
+                  ipv4Settings.includedRoutes = [NEIPv4Route.default()]
+                  var excludedIPv4Routes = validatedEndpoints.filter { $0.addressType == .IPv4 }.map {
+                      NEIPv4Route(destinationAddress: $0.ipAddress, subnetMask: "255.255.255.255")}
+                  
+                  // Add V2Ray server IP to bypass routes (prevents circular routing) -> similar to android impl
+                  if let v2rayOutboundIp = v2rayOutboundIp, !v2rayOutboundIp.isEmpty {
+                      // add V2Ray server IP as /32 route that bypasses the VPN tunnel
+                      let v2rayRoute = NEIPv4Route(destinationAddress: v2rayOutboundIp, subnetMask: "255.255.255.255")
+                      excludedIPv4Routes.append(v2rayRoute)
+                      wg_log(.info, message: "Added V2Ray server IP to bypass routes: \(v2rayOutboundIp)")
+                  }
+                  
+                  ipv4Settings.excludedRoutes = excludedIPv4Routes
+                  
+                  newSettings.ipv4Settings = ipv4Settings
+              }
         
         // IPv6 settings
         let validatedIPv6Addresses = validatedAddresses.filter { $0.addressType == .IPv6 }
         if validatedIPv6Addresses.count > 0 {
             let ipv6Settings = NEIPv6Settings(addresses: validatedIPv6Addresses.map { $0.ipAddress }, networkPrefixLengths: validatedIPv6Addresses.map { NSNumber(value: $0.subnet) })
             ipv6Settings.includedRoutes = [NEIPv6Route.default()]
-            ipv6Settings.excludedRoutes = validatedEndpoints.filter { $0.addressType == .IPv6 }.map { NEIPv6Route(destinationAddress: $0.ipAddress, networkPrefixLength: 128) }
+            var excludedIPv6Routes = validatedEndpoints.filter { $0.addressType == .IPv6 }.map { NEIPv6Route(destinationAddress: $0.ipAddress, networkPrefixLength: 128) }
+
+            // Add V2Ray server IPv6 to bypass routes if device prefers IPv6 and outbound has AAAA
+            if let v2rayOutboundIp = v2rayOutboundIp, !v2rayOutboundIp.isEmpty, v2rayOutboundIp.contains(":") {
+                let v2rayIPv6Route = NEIPv6Route(destinationAddress: v2rayOutboundIp, networkPrefixLength: 128)
+                excludedIPv6Routes.append(v2rayIPv6Route)
+                wg_log(.info, message: "Added V2Ray IPv6 to bypass routes: \(v2rayOutboundIp)")
+            }
+
+            ipv6Settings.excludedRoutes = excludedIPv6Routes
             
             newSettings.ipv6Settings = ipv6Settings
         }
@@ -282,7 +343,55 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     private func pathUpdate(path: Network.NWPath) {
         guard let handle = handle else { return }
         wg_log(.info, message: "Network change detected: \(path.debugDescription)")
+        // If V2Ray is active, restart it to rebind sockets on the new path
+        if v2rayHandle >= 0 {
+            wg_log(.info, message: "Restarting V2Ray due to network change")
+            let _ = stopV2Ray()
+            if let json = v2rayConfigJson {
+                if let error = startV2Ray(jsonString: json) {
+                    wg_log(.error, message: "Failed to restart V2Ray after path change: \(error.localizedDescription)")
+                } else {
+                    wg_log(.info, message: "V2Ray restarted successfully after path change")
+                }
+            }
+        }
         wgSetConfig(handle, settings)
     }
+    
+    // MARK: - V2Ray Control -> Exported
+    
+    func startV2Ray(jsonString: String) -> Error? {
+        let _ = stopV2Ray()
+        
+        var handle: Int32 = -1
+        jsonString.withCString { cstr in
+            handle = wgV2rayStart(cstr)
+        }
+        
+        if handle < 0 {
+            return NSError(domain: "wg.v2ray", code: Int(handle), userInfo: [NSLocalizedDescriptionKey: "Failed to start V2Ray"])
+        }
+        
+        v2rayHandle = handle
+        wg_log(.info, message: "V2Ray started with handle: \(handle)")
+        return nil
+    }
+    
+    func stopV2Ray() -> Error? {
+        if v2rayHandle >= 0 {
+            let rc = wgV2rayStop(v2rayHandle)
+            let oldHandle = v2rayHandle
+            v2rayHandle = -1
+            
+            if rc != 0 {
+                return NSError(domain: "wg.v2ray", code: Int(rc), userInfo: [NSLocalizedDescriptionKey: "Failed to stop V2Ray"])
+            }
+            
+            wg_log(.info, message: "V2Ray stopped for handle: \(oldHandle)")
+        }
+        return nil
+    }
+    
+
     
 }
