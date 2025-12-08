@@ -85,6 +85,12 @@ struct Config {
     static let v2rayHost = "127.0.0.1"
     static let v2rayPort = 16661
     
+    // HTTP/VMess/TCP (According to desktop-app)
+    static let v2rayTcpPort = 80
+       
+    // HTTPS/VMess/QUIC (According to desktop-app)
+    static let v2rayQuicPort = 443
+    
     // MARK: ENV variables
     
     static var Environment: String {

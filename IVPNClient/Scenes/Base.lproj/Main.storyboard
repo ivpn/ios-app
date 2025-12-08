@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23091" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rTE-KQ-hdG">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23079"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -21,7 +21,7 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zK0-8u-72W">
-                            <rect key="frame" x="0.0" y="1287.5" width="414" height="65"/>
+                            <rect key="frame" x="0.0" y="1365.5" width="414" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION 0.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBW-V1-BW0">
@@ -1136,6 +1136,104 @@
             </objects>
             <point key="canvasLocation" x="3650.4000000000001" y="-734.48275862068965"/>
         </scene>
+        <!--Obfuscation-->
+        <scene sceneID="0co-8t-e37">
+            <objects>
+                <tableViewController id="Pkh-hq-gTM" customClass="ObfuscationViewController" customModule="IVPNClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="vow-1p-krU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Obfuscation" id="WzV-16-Oct">
+                                <string key="footerTitle">VPN obfuscation is a technique that masks VPN traffic to make it appear like standard internet traffic, helping to evade detection and bypass internet restrictions or censorship. Learn more</string>
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="vVu-6h-XeL">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vVu-6h-XeL" id="S6o-aU-XBz">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V2Ray" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7S-BN-brr">
+                                                    <rect key="frame" x="16" y="11.5" width="49" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="rrf-mg-0Ad"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pdI-he-0m3">
+                                                    <rect key="frame" x="349" y="6.5" width="51" height="31"/>
+                                                    <color key="onTintColor" name="ivpnBlue"/>
+                                                    <connections>
+                                                        <action selector="toggleV2ray:" destination="Pkh-hq-gTM" eventType="valueChanged" id="zzD-pJ-mx6"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pdI-he-0m3" firstAttribute="centerY" secondItem="S6o-aU-XBz" secondAttribute="centerY" id="49H-KC-XzQ"/>
+                                                <constraint firstItem="g7S-BN-brr" firstAttribute="leading" secondItem="S6o-aU-XBz" secondAttribute="leading" constant="16" id="Fg6-jE-rq6"/>
+                                                <constraint firstAttribute="trailing" secondItem="pdI-he-0m3" secondAttribute="trailing" constant="16" id="V0y-EV-SLn"/>
+                                                <constraint firstItem="g7S-BN-brr" firstAttribute="centerY" secondItem="S6o-aU-XBz" secondAttribute="centerY" id="a2I-W6-gKu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="BeP-2I-Ezs">
+                                        <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BeP-2I-Ezs" id="Lhy-tw-CXq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkN-7z-ez6">
+                                                    <rect key="frame" x="16" y="11" width="100" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="6cS-lh-Kfm"/>
+                                                        <constraint firstAttribute="width" constant="100" id="Ed9-6X-g8D"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UtV-Sv-6aF">
+                                                    <rect key="frame" x="197" y="6.5" width="201" height="32"/>
+                                                    <segments>
+                                                        <segment title="VMESS/QUIC"/>
+                                                        <segment title="VMESS/TCP"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="selectV2rayProtocol:" destination="Pkh-hq-gTM" eventType="valueChanged" id="TgH-xg-kFg"/>
+                                                    </connections>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UtV-Sv-6aF" firstAttribute="centerY" secondItem="Lhy-tw-CXq" secondAttribute="centerY" id="Eo6-uo-rWR"/>
+                                                <constraint firstItem="tkN-7z-ez6" firstAttribute="leading" secondItem="Lhy-tw-CXq" secondAttribute="leading" constant="16" id="Xa3-Tg-fxm"/>
+                                                <constraint firstAttribute="trailing" secondItem="UtV-Sv-6aF" secondAttribute="trailing" constant="16" id="eb1-UQ-hlG"/>
+                                                <constraint firstItem="tkN-7z-ez6" firstAttribute="centerY" secondItem="Lhy-tw-CXq" secondAttribute="centerY" id="uBc-xy-DdU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Pkh-hq-gTM" id="msA-vR-qiw"/>
+                            <outlet property="delegate" destination="Pkh-hq-gTM" id="wwd-Mh-jQB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Obfuscation" id="ZNB-cP-P9Q"/>
+                    <connections>
+                        <outlet property="v2rayProtocolControl" destination="UtV-Sv-6aF" id="QLi-Ef-1Uc"/>
+                        <outlet property="v2raySwitch" destination="pdI-he-0m3" id="eJu-Ye-UCf"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hQ3-1d-EHg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4532" y="838"/>
+        </scene>
         <!--Advanced-->
         <scene sceneID="JUu-4L-Hfg">
             <objects>
@@ -1183,102 +1281,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Obfuscation" id="6LH-u0-MKt">
-                                <string key="footerTitle">VPN obfuscation is a technique that masks VPN traffic to make it appear like standard internet traffic, helping to evade detection and bypass internet restrictions or censorship. Enable V2Ray only when connected to WiFi network. Manually reconnect VPN when switching WiFi networks. Learn more</string>
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="QHp-Ae-a81">
-                                        <rect key="frame" x="0.0" y="206.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QHp-Ae-a81" id="xoX-Ra-ju2">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V2Ray" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDH-0C-siS">
-                                                    <rect key="frame" x="16" y="11.5" width="49" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="nED-3J-nRG"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3O9-H5-CkI">
-                                                    <rect key="frame" x="349" y="6.5" width="51" height="31"/>
-                                                    <color key="onTintColor" name="ivpnBlue"/>
-                                                    <connections>
-                                                        <action selector="toggleV2ray:" destination="cNW-I9-ie7" eventType="valueChanged" id="ugU-fh-B04"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd7-6O-Ich">
-                                                    <rect key="frame" x="75" y="14" width="32" height="16"/>
-                                                    <color key="backgroundColor" name="ivpnGray2"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="32" id="JHD-8Z-Wmu"/>
-                                                        <constraint firstAttribute="height" constant="16" id="tzT-s5-5sB"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="SDH-0C-siS" firstAttribute="centerY" secondItem="xoX-Ra-ju2" secondAttribute="centerY" id="05O-Ec-eek"/>
-                                                <constraint firstItem="3O9-H5-CkI" firstAttribute="centerY" secondItem="xoX-Ra-ju2" secondAttribute="centerY" id="6qN-Q1-2Q6"/>
-                                                <constraint firstItem="SDH-0C-siS" firstAttribute="leading" secondItem="xoX-Ra-ju2" secondAttribute="leading" constant="16" id="7Y0-7b-tqV"/>
-                                                <constraint firstItem="hd7-6O-Ich" firstAttribute="centerY" secondItem="xoX-Ra-ju2" secondAttribute="centerY" id="9yL-vP-BYi"/>
-                                                <constraint firstAttribute="trailing" secondItem="3O9-H5-CkI" secondAttribute="trailing" constant="16" id="OEA-b9-ckz"/>
-                                                <constraint firstItem="hd7-6O-Ich" firstAttribute="leading" secondItem="SDH-0C-siS" secondAttribute="trailing" constant="10" id="oDJ-Tb-LzH"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="5f9-m5-BQE">
-                                        <rect key="frame" x="0.0" y="250" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5f9-m5-BQE" id="8Q2-Vn-aJR">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wq4-cb-VvA">
-                                                    <rect key="frame" x="16" y="11" width="100" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="R9f-j4-BJZ"/>
-                                                        <constraint firstAttribute="width" constant="100" id="WG1-Qh-cbP"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qz8-eP-5C1">
-                                                    <rect key="frame" x="197" y="6.5" width="201" height="32"/>
-                                                    <segments>
-                                                        <segment title="VMESS/QUIC"/>
-                                                        <segment title="VMESS/TCP"/>
-                                                    </segments>
-                                                    <connections>
-                                                        <action selector="selectV2rayProtocol:" destination="cNW-I9-ie7" eventType="valueChanged" id="YQB-3R-84w"/>
-                                                    </connections>
-                                                </segmentedControl>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Wq4-cb-VvA" firstAttribute="centerY" secondItem="8Q2-Vn-aJR" secondAttribute="centerY" id="BFh-Qf-5WM"/>
-                                                <constraint firstAttribute="trailing" secondItem="Qz8-eP-5C1" secondAttribute="trailing" constant="16" id="Upw-tr-NNF"/>
-                                                <constraint firstItem="Qz8-eP-5C1" firstAttribute="centerY" secondItem="8Q2-Vn-aJR" secondAttribute="centerY" id="i7j-gZ-Yn4"/>
-                                                <constraint firstItem="Wq4-cb-VvA" firstAttribute="leading" secondItem="8Q2-Vn-aJR" secondAttribute="leading" constant="16" id="oVC-rZ-F3e"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="Alerts" id="aVc-A8-2Hy">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NetworkProtectionHeaderTableViewCell" rowHeight="80" id="skx-Ms-4mF">
-                                        <rect key="frame" x="0.0" y="441.5" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="199" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="skx-Ms-4mF" id="rUf-E7-Q91">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -1321,7 +1327,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NetworkProtectionHeaderTableViewCell" rowHeight="80" id="vNk-Oo-IiC">
-                                        <rect key="frame" x="0.0" y="521.5" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="279" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vNk-Oo-IiC" id="wVB-RY-pui">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -1364,7 +1370,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NetworkProtectionHeaderTableViewCell" rowHeight="80" id="8fq-Nk-KYi">
-                                        <rect key="frame" x="0.0" y="601.5" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="359" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8fq-Nk-KYi" id="Ejf-j1-mNu">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -1407,7 +1413,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NetworkProtectionHeaderTableViewCell" rowHeight="80" id="bOt-4p-lhc">
-                                        <rect key="frame" x="0.0" y="681.5" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="439" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bOt-4p-lhc" id="EOw-vM-m9y">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -1454,7 +1460,7 @@
                             <tableViewSection headerTitle="Diagnostic logs" id="sUb-ri-naL">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="60" id="71h-Rn-GiM">
-                                        <rect key="frame" x="0.0" y="817.5" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="575" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="71h-Rn-GiM" id="no5-dR-veT">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -1499,7 +1505,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="OOg-Pf-x1z">
-                                        <rect key="frame" x="0.0" y="877.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="635" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OOg-Pf-x1z" id="6Oa-Do-RYN">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1540,8 +1546,6 @@
                         <outlet property="preventSameCountryMultiHopSwitch" destination="qLy-5L-tSL" id="e7Q-2p-1Rt"/>
                         <outlet property="preventSameISPMultiHopSwitch" destination="Wu9-JY-b9t" id="wEY-jh-j26"/>
                         <outlet property="sendLogsLabel" destination="Jpg-3d-dAU" id="OKr-90-Yxf"/>
-                        <outlet property="v2rayProtocolControl" destination="Qz8-eP-5C1" id="V5g-i0-mWH"/>
-                        <outlet property="v2raySwitch" destination="3O9-H5-CkI" id="Iig-EI-FvY"/>
                         <outlet property="widgetPromptSwitch" destination="qhD-Kj-XVq" id="egI-AG-deN"/>
                     </connections>
                 </tableViewController>
@@ -1596,16 +1600,48 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="DNS Server" id="OQ8-aZ-hVK">
+                            <tableViewSection headerTitle="IP Address" id="YbR-dH-6Xy">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="e5a-17-XWm">
+                                        <rect key="frame" x="0.0" y="161.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e5a-17-XWm" id="1a7-Bu-A4m">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="x.x.x.x" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gGH-6k-DpT">
+                                                    <rect key="frame" x="16" y="0.0" width="382" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43.670000000000002" id="j3Y-dD-iOu"/>
+                                                    </constraints>
+                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" textContentType="url"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="7IF-sv-8mt" id="klN-Vm-Uta"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="gGH-6k-DpT" secondAttribute="bottom" id="04W-82-db5"/>
+                                                <constraint firstItem="gGH-6k-DpT" firstAttribute="leading" secondItem="1a7-Bu-A4m" secondAttribute="leading" constant="16" id="HR0-Vx-9vS"/>
+                                                <constraint firstItem="gGH-6k-DpT" firstAttribute="top" secondItem="1a7-Bu-A4m" secondAttribute="top" id="KeP-NV-hIt"/>
+                                                <constraint firstAttribute="trailing" secondItem="gGH-6k-DpT" secondAttribute="trailing" constant="16" id="cDP-gP-MlW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="DoH/DoT URL" id="OQ8-aZ-hVK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="RJ8-eD-KBE">
-                                        <rect key="frame" x="0.0" y="161.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="261.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RJ8-eD-KBE" id="olY-FS-DO7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="example.net or x.x.x.x" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Knr-db-CpJ">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="example.net" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Knr-db-CpJ">
                                                     <rect key="frame" x="16" y="0.0" width="382" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="43.670000000000002" id="ewM-XV-cOT"/>
@@ -1626,44 +1662,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="e84-Lm-viQ">
-                                        <rect key="frame" x="0.0" y="205.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e84-Lm-viQ" id="M8d-6Z-ikM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resolved IP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhS-qh-iyi">
-                                                    <rect key="frame" x="16" y="11.5" width="100" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="7Z9-N2-fhK"/>
-                                                        <constraint firstAttribute="height" constant="21" id="zv1-OD-fUo"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xae-UY-x9E">
-                                                    <rect key="frame" x="131" y="11.5" width="263" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="Wkv-Kn-n3s"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="ivpnGray16"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="lhS-qh-iyi" firstAttribute="leading" secondItem="M8d-6Z-ikM" secondAttribute="leading" constant="16" id="EVf-lT-XY6"/>
-                                                <constraint firstItem="xae-UY-x9E" firstAttribute="leading" secondItem="lhS-qh-iyi" secondAttribute="trailing" constant="15" id="Ip0-FY-qKm"/>
-                                                <constraint firstAttribute="trailing" secondItem="xae-UY-x9E" secondAttribute="trailing" constant="20" id="Ved-eg-npT"/>
-                                                <constraint firstItem="xae-UY-x9E" firstAttribute="centerY" secondItem="M8d-6Z-ikM" secondAttribute="centerY" id="h45-Yu-d9l"/>
-                                                <constraint firstItem="lhS-qh-iyi" firstAttribute="centerY" secondItem="M8d-6Z-ikM" secondAttribute="centerY" id="zao-Tm-Opk"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="eVZ-84-Z0Q">
-                                        <rect key="frame" x="0.0" y="249" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="305.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eVZ-84-Z0Q" id="9lf-BC-BOt">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1699,7 +1699,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="HaW-3w-1r3">
-                                        <rect key="frame" x="0.0" y="292.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="349" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HaW-3w-1r3" id="0G5-ie-xuB">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1735,7 +1735,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="KQF-Ze-Pqo">
-                                        <rect key="frame" x="0.0" y="336" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="392.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KQF-Ze-Pqo" id="QQD-1U-eEW">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1778,7 +1778,7 @@
                             <tableViewSection headerTitle="Network Configuration" id="ySq-QM-FY0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="GKw-9G-Cde">
-                                        <rect key="frame" x="0.0" y="435.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="492" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GKw-9G-Cde" id="jvX-Z9-aaD">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1811,7 +1811,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="1wd-rA-9Mq">
-                                        <rect key="frame" x="0.0" y="479" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="535.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1wd-rA-9Mq" id="wxh-Rp-aPC">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1851,8 +1851,8 @@
                             <outlet property="delegate" destination="7IF-sv-8mt" id="KM6-9b-nyf"/>
                             <outlet property="enableSwitch" destination="BQv-Oq-mTJ" id="cv6-EJ-9Rd"/>
                             <outlet property="mobileNetworkSwitch" destination="eeH-ED-8OF" id="gav-sw-XTt"/>
-                            <outlet property="resolvedIPLabel" destination="xae-UY-x9E" id="km4-nB-P5e"/>
-                            <outlet property="serverField" destination="Knr-db-CpJ" id="Hlh-nZ-Eok"/>
+                            <outlet property="serverField" destination="Knr-db-CpJ" id="WZu-mz-tuS"/>
+                            <outlet property="serverIPField" destination="gGH-6k-DpT" id="tSk-6g-hoz"/>
                             <outlet property="serverNameLabel" destination="2js-gp-J1U" id="FZd-wQ-nvf"/>
                             <outlet property="serverURLLabel" destination="cGI-Ba-1AA" id="JlN-49-sFp"/>
                             <outlet property="typeControl" destination="CVv-lc-hOs" id="aoC-kh-89z"/>
@@ -2021,14 +2021,14 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProtocolTableViewCell" id="HtI-Zu-PMl" customClass="ProtocolTableViewCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HtI-Zu-PMl" id="xBM-uI-V8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="383.5" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383.5" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weu-7I-qbg">
-                                            <rect key="frame" x="16" y="14" width="361.5" height="16"/>
+                                            <rect key="frame" x="16" y="13.5" width="361.5" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="K4t-rv-8Rj"/>
                                             </constraints>
@@ -2037,7 +2037,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ9-eM-bEA">
-                                            <rect key="frame" x="16" y="11" width="359.5" height="21.5"/>
+                                            <rect key="frame" x="16" y="11" width="359.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                             <nil key="highlightedColor"/>
@@ -2059,7 +2059,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WireGuardRegenerationRateCell" rowHeight="60" id="JLp-oZ-cVy" customClass="WireGuardRegenerationRateCell" customModule="IVPNClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="98.5" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JLp-oZ-cVy" id="Y7T-PJ-VmA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -2122,6 +2122,7 @@
                     <connections>
                         <segue destination="BYK-jY-KqR" kind="show" identifier="WireGuardSettings" id="hDT-b3-Uin"/>
                         <segue destination="eVs-kn-pzh" kind="show" identifier="PortSettings" id="lsf-YK-hSM"/>
+                        <segue destination="Pkh-hq-gTM" kind="show" identifier="WireGuardObfuscation" id="gqX-IV-sPy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f3i-Jg-Jr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3129,13 +3130,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="E3R-Ez-ZjT">
                                                             <rect key="frame" x="0.0" y="0.0" width="338.5" height="34.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol, Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBm-y5-gNO">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Protocol, Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBm-y5-gNO">
                                                                     <rect key="frame" x="0.0" y="0.0" width="338.5" height="14.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" name="ivpnLabel5"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfE-oo-iTV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfE-oo-iTV">
                                                                     <rect key="frame" x="0.0" y="17.5" width="338.5" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
@@ -3813,23 +3814,95 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="DNS Server" footerTitle="When specified, VPN Client will use provided DNS server when connected to the VPN." id="ltg-v6-6QJ">
+                            <tableViewSection headerTitle="IP Address" footerTitle="When specified, VPN Client will use provided DNS server when connected to the VPN." id="kRl-Yv-PU3">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="KBV-eW-s1o">
+                                        <rect key="frame" x="0.0" y="169" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KBV-eW-s1o" id="wSC-mb-bCr">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="x.x.x.x" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czW-y8-TUs">
+                                                    <rect key="frame" x="16" y="0.0" width="382" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43.670000000000002" id="67t-pK-nl2"/>
+                                                    </constraints>
+                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" textContentType="url"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="veS-Vd-4Hc" id="Oig-RB-Pyb"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="czW-y8-TUs" firstAttribute="top" secondItem="wSC-mb-bCr" secondAttribute="top" id="LvV-ZK-6en"/>
+                                                <constraint firstAttribute="trailing" secondItem="czW-y8-TUs" secondAttribute="trailing" constant="16" id="Piz-1l-WSi"/>
+                                                <constraint firstItem="czW-y8-TUs" firstAttribute="leading" secondItem="wSC-mb-bCr" secondAttribute="leading" constant="16" id="dlN-xb-cbc"/>
+                                                <constraint firstAttribute="bottom" secondItem="czW-y8-TUs" secondAttribute="bottom" id="lve-nR-23v"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="DNS Encryption" id="zxI-Yq-6O3">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="orr-km-z4t">
+                                        <rect key="frame" x="0.0" y="297" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="orr-km-z4t" id="M94-NM-82t">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS over HTTPS/TLS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBs-ez-H6x">
+                                                    <rect key="frame" x="16" y="11.5" width="325" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="d5G-8j-cmj"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="ivpnLabelPrimary"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7fk-go-b7A">
+                                                    <rect key="frame" x="349" y="6.5" width="51" height="31"/>
+                                                    <color key="onTintColor" name="ivpnBlue"/>
+                                                    <connections>
+                                                        <action selector="enableSecureDNS:" destination="veS-Vd-4Hc" eventType="valueChanged" id="RnM-3R-6b7"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="7fk-go-b7A" secondAttribute="trailing" constant="16" id="9tz-Yd-4wP"/>
+                                                <constraint firstItem="7fk-go-b7A" firstAttribute="centerY" secondItem="M94-NM-82t" secondAttribute="centerY" id="G8F-RH-e1Y"/>
+                                                <constraint firstItem="PBs-ez-H6x" firstAttribute="leading" secondItem="M94-NM-82t" secondAttribute="leading" constant="16" id="UZn-Ei-5br"/>
+                                                <constraint firstItem="7fk-go-b7A" firstAttribute="leading" secondItem="PBs-ez-H6x" secondAttribute="trailing" constant="8" id="gfj-nr-G1J"/>
+                                                <constraint firstItem="PBs-ez-H6x" firstAttribute="centerY" secondItem="M94-NM-82t" secondAttribute="centerY" id="sVR-fO-pZa"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="DoH/DoT URL" id="ltg-v6-6QJ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Nid-d8-erU">
-                                        <rect key="frame" x="0.0" y="169" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="396.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nid-d8-erU" id="xI4-A3-BKE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="example.net or x.x.x.x" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eHv-MZ-qyH">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="example.net" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eHv-MZ-qyH">
                                                     <rect key="frame" x="16" y="0.0" width="382" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="43.670000000000002" id="cNy-s9-8gF"/>
                                                     </constraints>
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" textContentType="url"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="veS-Vd-4Hc" id="Cme-97-Yqg"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -3840,77 +3913,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="sCq-Hn-5tr">
-                                        <rect key="frame" x="0.0" y="213" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sCq-Hn-5tr" id="uHR-Ou-dtR">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resolved IP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YI2-DK-5fe">
-                                                    <rect key="frame" x="16" y="11.5" width="100" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="8Lc-rH-yYg"/>
-                                                        <constraint firstAttribute="height" constant="21" id="tvm-VW-22x"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JV-8m-EU7">
-                                                    <rect key="frame" x="131" y="11.5" width="263" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="Hd1-co-74P"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="ivpnGray16"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="4JV-8m-EU7" firstAttribute="leading" secondItem="YI2-DK-5fe" secondAttribute="trailing" constant="15" id="3PE-wH-9Pv"/>
-                                                <constraint firstItem="YI2-DK-5fe" firstAttribute="centerY" secondItem="uHR-Ou-dtR" secondAttribute="centerY" id="N5e-6x-UhG"/>
-                                                <constraint firstItem="4JV-8m-EU7" firstAttribute="centerY" secondItem="uHR-Ou-dtR" secondAttribute="centerY" id="O9d-3u-7Oy"/>
-                                                <constraint firstItem="YI2-DK-5fe" firstAttribute="leading" secondItem="uHR-Ou-dtR" secondAttribute="leading" constant="16" id="rFl-nM-lsW"/>
-                                                <constraint firstAttribute="trailing" secondItem="4JV-8m-EU7" secondAttribute="trailing" constant="20" id="v57-OO-GPM"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="b1p-CC-tMb">
-                                        <rect key="frame" x="0.0" y="256.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b1p-CC-tMb" id="sbO-xj-pJ3">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS over HTTPS/TLS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkK-SD-Zzh">
-                                                    <rect key="frame" x="16" y="11.5" width="325" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="vGr-lf-3rn"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" name="ivpnLabelPrimary"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="u4T-qg-N9a">
-                                                    <rect key="frame" x="349" y="6.5" width="51" height="31"/>
-                                                    <color key="onTintColor" name="ivpnBlue"/>
-                                                    <connections>
-                                                        <action selector="enableSecureDNS:" destination="veS-Vd-4Hc" eventType="valueChanged" id="grU-E7-KgO"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="u4T-qg-N9a" firstAttribute="centerY" secondItem="sbO-xj-pJ3" secondAttribute="centerY" id="2qz-XR-uiF"/>
-                                                <constraint firstItem="u4T-qg-N9a" firstAttribute="leading" secondItem="wkK-SD-Zzh" secondAttribute="trailing" constant="8" id="YT8-k4-jwq"/>
-                                                <constraint firstAttribute="trailing" secondItem="u4T-qg-N9a" secondAttribute="trailing" constant="16" id="a0B-HN-NiM"/>
-                                                <constraint firstItem="wkK-SD-Zzh" firstAttribute="centerY" secondItem="sbO-xj-pJ3" secondAttribute="centerY" id="c5P-l0-hBl"/>
-                                                <constraint firstItem="wkK-SD-Zzh" firstAttribute="leading" secondItem="sbO-xj-pJ3" secondAttribute="leading" constant="16" id="iwN-j8-X1x"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="RPM-pc-A5v">
-                                        <rect key="frame" x="0.0" y="300" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="440.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RPM-pc-A5v" id="CGI-Xx-hju">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -3926,12 +3930,12 @@
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSB-cz-MTe">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSB-cz-MTe">
                                                     <rect key="frame" x="131" y="11.5" width="263" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="sng-5a-dM0"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="ivpnGray16"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3946,7 +3950,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="hIf-i8-Rm0">
-                                        <rect key="frame" x="0.0" y="343.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="484" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hIf-i8-Rm0" id="7ps-YA-l1T">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -3962,12 +3966,12 @@
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q32-Rq-wvf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q32-Rq-wvf">
                                                     <rect key="frame" x="131" y="11.5" width="263" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="hDt-el-nsf"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="ivpnGray16"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3982,7 +3986,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="rBE-K1-f9E">
-                                        <rect key="frame" x="0.0" y="387" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="527.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rBE-K1-f9E" id="XO8-H6-knQ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -4030,10 +4034,10 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Custom DNS for VPN" id="hMU-Xj-iVs"/>
                     <connections>
+                        <outlet property="customDNSIPTextField" destination="czW-y8-TUs" id="zx6-pO-vDZ"/>
                         <outlet property="customDNSSwitch" destination="oqt-Zd-omX" id="bTt-HX-EOq"/>
-                        <outlet property="customDNSTextField" destination="eHv-MZ-qyH" id="VNR-ZW-fju"/>
-                        <outlet property="resolvedIPLabel" destination="4JV-8m-EU7" id="w0g-ZH-2Mb"/>
-                        <outlet property="secureDNSSwitch" destination="u4T-qg-N9a" id="qDc-Qr-7Bb"/>
+                        <outlet property="customDNSTextField" destination="eHv-MZ-qyH" id="yu6-vY-gK9"/>
+                        <outlet property="secureDNSSwitch" destination="7fk-go-b7A" id="4h9-c2-OhT"/>
                         <outlet property="serverNameLabel" destination="Q32-Rq-wvf" id="Ful-ju-o2X"/>
                         <outlet property="serverURLLabel" destination="wSB-cz-MTe" id="5oG-Xi-rVQ"/>
                         <outlet property="typeControl" destination="y7o-Vz-3L5" id="P14-oN-nae"/>

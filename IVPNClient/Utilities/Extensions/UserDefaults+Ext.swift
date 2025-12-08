@@ -94,6 +94,8 @@ extension UserDefaults {
         static let v2raySettings = "v2raySettings"
         static let v2rayProtocol = "v2rayProtocol"
         static let isV2ray = "isV2ray"
+        static let v2rayConfigJson = "v2rayConfigJson"
+        static let v2rayOutboundIpLast = "v2rayOutboundIpLast"
         static let disableWidgetPrompt = "disableWidgetPrompt"
     }
     
@@ -301,6 +303,8 @@ extension UserDefaults {
         shared.removeObject(forKey: Key.v2raySettings)
         shared.removeObject(forKey: Key.v2rayProtocol)
         shared.removeObject(forKey: Key.isV2ray)
+        shared.removeObject(forKey: Key.v2rayConfigJson)
+        shared.removeObject(forKey: Key.v2rayOutboundIpLast)
         shared.removeObject(forKey: Key.disableWidgetPrompt)
         standard.removeObject(forKey: Key.serviceStatus)
         standard.removeObject(forKey: Key.selectedHost)

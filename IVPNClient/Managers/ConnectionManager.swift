@@ -97,14 +97,6 @@ class ConnectionManager {
                     self.updateWireGuardLogFile()
                     self.reconnectAutomatically = false
                 }
-                DispatchQueue.delay(2.5) {
-                    if UserDefaults.shared.isV2ray && !V2RayCore.shared.reconnectWithV2ray {
-                        V2RayCore.shared.reconnectWithV2ray = true
-                        self.reconnect()
-                    } else {
-                        V2RayCore.shared.reconnectWithV2ray = false
-                    }
-                }
             } else {
                 self.connected = false
             }
@@ -147,7 +139,7 @@ class ConnectionManager {
                 return
             }
             
-            self.vpnManager.disable(tunnelType: tunnelType) { _ in 
+            self.vpnManager.disable(tunnelType: tunnelType) { _ in
                 completion()
             }
         }
@@ -249,15 +241,9 @@ class ConnectionManager {
                 return
             }
             
-            if UserDefaults.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
-                DispatchQueue.global(qos: .userInitiated).async {
-                    let error = V2RayCore.shared.start()
-                    if error != nil {
-                        log(.error, message: error?.localizedDescription ?? "")
-                    } else {
-                        log(.info, message: "V2Ray start OK")
-                    }
-                }
+            // Update V2Ray settings if V2Ray is enabled -> similar to android ;)
+            if UserDefaults.shared.isV2ray {
+                self.updateV2RaySettings()
             }
             
             self.vpnManager.connect(tunnelType: self.settings.connectionProtocol.tunnelType())
@@ -277,16 +263,7 @@ class ConnectionManager {
             }
         }
         
-        if UserDefaults.shared.isV2ray {
-            DispatchQueue.global(qos: .userInitiated).async {
-                let error = V2RayCore.shared.close()
-                if error != nil {
-                    log(.error, message: error?.localizedDescription ?? "")
-                } else {
-                    log(.info, message: "V2Ray stop OK")
-                }
-            }
-        }
+
     }
     
     func installOnDemandRules() {
@@ -505,6 +482,8 @@ class ConnectionManager {
     }
     
     func reconnect() {
+        log(.info, message: "Reconnecting to VPN server")
+    
         getStatus { tunnelType, status in
             if status == .connected || status == .connecting {
                 self.reconnectAutomatically = true
@@ -572,6 +551,112 @@ class ConnectionManager {
         if closeApp {
             closeApp = false
             UIControl().sendAction(#selector(NSXPCConnection.suspend), to: UIApplication.shared, for: nil)
+        }
+    }
+    
+    // MARK: - V2Ray Settings Update
+    
+    func updateV2RaySettings() {
+        guard UserDefaults.shared.isV2ray else {
+            log(.debug, message: "V2Ray obfuscation disabled, skipping settings update")
+            return
+        }
+        
+        guard let currentV2RaySettings = V2RaySettings.load() else {
+            log(.error, message: "V2Ray base configuration not found")
+            return
+        }
+        
+        if currentV2RaySettings.id.isEmpty {
+            log(.error, message: "V2Ray user ID is empty, authentication will fail")
+            return
+        }
+        
+        guard let entryHost = getEntryHost() else {
+            log(.error, message: "Entry server not available, cannot configure V2Ray")
+            return
+        }
+        
+        let v2rayOutboundIp = entryHost.v2ray
+        guard !v2rayOutboundIp.isEmpty else {
+            log(.error, message: "Entry host missing V2Ray configuration")
+            return
+        }
+        
+        let v2rayInboundIp = entryHost.host
+        let v2rayInboundPort = currentV2RaySettings.singleHopInboundPort
+        let v2rayOutboundPort = getV2RayOutboundPort()
+        let v2rayDnsName = !entryHost.dnsName.isEmpty ? entryHost.dnsName : entryHost.hostName
+        
+        // -> handle multi-hop conf
+        var finalInboundIp = v2rayInboundIp
+        var finalInboundPort = v2rayInboundPort
+        
+        if UserDefaults.shared.isMultiHop, Application.shared.serviceStatus.isEnabled(capability: .multihop) {
+            if let exitHost = getExitHost() {
+                finalInboundIp = exitHost.host
+                // -> use wg inbound port for multi-hop (fix-from-android)
+                finalInboundPort = Application.shared.settings.connectionProtocol.port()
+                log(.info, message: "Multi-hop V2Ray override: inbound=\(exitHost.host):\(finalInboundPort)")
+            } else {
+                log(.error, message: "Multi-hop enabled but no exit server available")
+                return
+            }
+        }
+        
+        if finalInboundIp.isEmpty || v2rayOutboundIp.isEmpty {
+            log(.error, message: "Critical V2Ray IPs are empty - inbound: '\(finalInboundIp)', outbound: '\(v2rayOutboundIp)'")
+            return
+        }
+        
+        let updatedV2RaySettings = V2RaySettings(
+            id: currentV2RaySettings.id,
+            outboundIp: v2rayOutboundIp,
+            outboundPort: v2rayOutboundPort,
+            inboundIp: finalInboundIp,
+            inboundPort: finalInboundPort,
+            dnsName: v2rayDnsName,
+            wireguard: currentV2RaySettings.wireguard
+        )
+        
+        updatedV2RaySettings.save()
+        log(.info, message: "V2Ray settings updated successfully - inbound: \(finalInboundIp):\(finalInboundPort), outbound: \(v2rayOutboundIp):\(v2rayOutboundPort)")
+    }
+    
+    private func getEntryHost() -> Host? {
+        if let selectedHost = Application.shared.settings.selectedHost {
+            return selectedHost
+        }
+        
+        if let firstHost = Application.shared.settings.selectedServer.hosts.first {
+            return firstHost
+        }
+        
+        return nil
+    }
+    
+    private func getExitHost() -> Host? {
+        if let selectedHost = Application.shared.settings.selectedExitHost {
+            return selectedHost
+        }
+        
+        if let firstHost = Application.shared.settings.selectedExitServer.hosts.first {
+            return firstHost
+        }
+        
+        return nil
+    }
+    
+    private func getV2RayOutboundPort() -> Int {
+        let v2rayProtocol = UserDefaults.shared.v2rayProtocol
+        
+        switch v2rayProtocol {
+        case "tcp":
+            return Config.v2rayTcpPort  // HTTP/VMess/TCP -> desktop
+        case "udp":
+            return Config.v2rayQuicPort // HTTPS/VMess/QUIC -> desktop
+        default:
+            return settings.connectionProtocol.port()
         }
     }
     

@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.13.0 - 2025-12-06  
+
+[IMPROVED] Enhanced connectivity and stability for V2Ray obfuscation  
+[IMPROVED] Added support for multiple custom DNS servers  
+
 ## 2.12.5 - 2025-02-19  
 
 [FIXED] Potential DNS leak during automatic WireGuard key rotation  

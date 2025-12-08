@@ -70,9 +70,9 @@ class ProtocolViewController: UITableViewController {
         
         if connectionProtocol.tunnelType() == .wireguard {
             if UserDefaults.shared.isMultiHop && !UserDefaults.shared.isV2ray {
-                collection.append([.wireguard(.udp, 1), .wireguard(.udp, 2)])
+                collection.append([.wireguard(.udp, 1), .wireguard(.udp, 2), .wireguard(.udp, 3)])
             } else {
-                collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2)])
+                collection.append([.wireguard(.udp, 0), .wireguard(.udp, 1), .wireguard(.udp, 2), .wireguard(.udp, 3)])
             }
         }
         
@@ -274,6 +274,11 @@ extension ProtocolViewController {
         }
         
         if connectionProtocol == .wireguard(.udp, 2) {
+            performSegue(withIdentifier: "WireGuardObfuscation", sender: self)
+            return
+        }
+        
+        if connectionProtocol == .wireguard(.udp, 3) {
             performSegue(withIdentifier: "WireGuardSettings", sender: self)
             return
         }

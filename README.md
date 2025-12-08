@@ -5,7 +5,9 @@
 ![Lint Code Base](https://github.com/ivpn/ios-app/workflows/Lint%20Code%20Base/badge.svg)
 
 **IVPN for iOS** is a native app built using Swift language. Some of the features include: multiple protocols (IKEv2, OpenVPN, WireGuard), Kill-switch, Multi-Hop, Trusted Networks, AntiTracker, Custom DNS, Dark mode and more.  
-IVPN iOS app is distributed on the [App Store](https://apps.apple.com/us/app/ivpn-serious-privacy-protection/id1193122683?mt=8).  
+IVPN iOS app is distributed on the [App Store](https://apps.apple.com/us/app/ivpn-serious-privacy-protection/id1193122683?mt=8).
+
+**Note:** This project uses a fork of [wireguard-apple](https://github.com/ivpn/wireguard-apple) which includes upstream changes from the official WireGuard Apple implementation and adds V2Ray extension support for enhanced connectivity options.  
 
 * [About this Repo](#about-repo)
 * [Installation](#installation)
@@ -56,7 +58,7 @@ Dependencies are installed with [Swift Package Manager](https://swift.org/packag
 
 Project dependencies:  
 
-* [WireGuardKit](https://github.com/WireGuard/wireguard-apple)  
+* [WireGuardKit](https://github.com/ivpn/wireguard-apple) (fork with V2Ray extension)  
 * [TunnelKit](https://github.com/passepartoutvpn/tunnelkit)  
 * [SnapKit](https://github.com/SnapKit/SnapKit)  
 * [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)  
@@ -83,14 +85,6 @@ Rename and populate `OpenVPNConf.swift` file:
 
 ```sh
 cp IVPNClient/Config/OpenVPNConf.template.swift IVPNClient/Config/OpenVPNConf.swift
-```
-
-### Build V2RayControl.xcframework
-
-Build `V2RayControl.xcframework`:
-
-```sh
-./build-v2ray.sh
 ```
 
 ### Build liboqs.a

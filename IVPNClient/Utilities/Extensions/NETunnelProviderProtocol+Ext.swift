@@ -132,20 +132,16 @@ extension NETunnelProviderProtocol {
             KeyChain.wgIpv6Host = ipv6.localIP
         }
         
-        if UserDefaults.shared.isV2ray && V2RayCore.shared.reconnectWithV2ray {
+        if UserDefaults.shared.isV2ray {
             endpoint = Peer.endpoint(host: Config.v2rayHost, port: Config.v2rayPort)
-            v2raySettings?.inboundIp = v2rayInboundIp
-            v2raySettings?.inboundPort = v2rayInboundPort
-            v2raySettings?.outboundIp = v2rayOutboundIp
-            v2raySettings?.outboundPort = v2rayOutboundPort
-            v2raySettings?.dnsName = v2rayDnsName
-            v2raySettings?.save()
         }
+        
+        let allowedIPs = Config.wgPeerAllowedIPs
         
         let peer = Peer(
             publicKey: publicKey,
             presharedKey: KeyChain.wgPresharedKey,
-            allowedIPs: Config.wgPeerAllowedIPs,
+            allowedIPs: allowedIPs,
             endpoint: endpoint,
             persistentKeepalive: Config.wgPeerPersistentKeepalive
         )
@@ -186,8 +182,8 @@ extension NETunnelProviderProtocol {
             return selectedHost
         }
         
-        if let randomHost = Application.shared.settings.selectedServer.hosts.randomElement() {
-            return randomHost
+        if let firstHost = Application.shared.settings.selectedServer.hosts.first {
+            return firstHost
         }
         
         return nil
@@ -198,8 +194,8 @@ extension NETunnelProviderProtocol {
             return selectedHost
         }
         
-        if let randomHost = Application.shared.settings.selectedExitServer.hosts.randomElement() {
-            return randomHost
+        if let firstHost = Application.shared.settings.selectedExitServer.hosts.first {
+            return firstHost
         }
         
         return nil

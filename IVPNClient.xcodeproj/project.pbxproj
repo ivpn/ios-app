@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E46608B2E606EC4000AB900 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E4660892E606EC4000AB900 /* libresolv.tbd */; };
+		4E46608C2E606EC4000AB900 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E46608A2E606EC4000AB900 /* libresolv.9.tbd */; };
+		4ED68D7A2E6F70FE009A6D96 /* V2rayConfigBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED68D792E6F70F8009A6D96 /* V2rayConfigBuilder.swift */; };
 		820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */; };
 		8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */; };
 		8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5032356536B008C83DB /* UpgradePlanViewController.swift */; };
@@ -46,7 +49,6 @@
 		821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2D6287C5AB20067F70D /* PortViewController.swift */; };
 		821CA2DB288039670067F70D /* PortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DA288039670067F70D /* PortTableViewCell.swift */; };
 		821CA2DF288143470067F70D /* PortRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821CA2DE288143470067F70D /* PortRange.swift */; };
-		821E35582A95DCD200AEE5C7 /* V2RayCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E35572A95DCD200AEE5C7 /* V2RayCore.swift */; };
 		821E355A2A95F77700AEE5C7 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 821E35592A95F77700AEE5C7 /* config.json */; };
 		821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F1C7D21FF544200107311 /* VPNServerViewModel.swift */; };
 		821F604A240D21E3008072D7 /* ControlPanelViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */; };
@@ -74,11 +76,11 @@
 		822EE96C215CE0E300BE77F6 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A43FC215CCFE70076131F /* UserDefaults+Ext.swift */; };
 		8232FBF42240DE19006B81D2 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF32240DE19006B81D2 /* ErrorResult.swift */; };
 		8232FBF62240E40F006B81D2 /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232FBF52240E40F006B81D2 /* Error+Ext.swift */; };
-		8234E0D72AB23E5C0015C9A2 /* V2RayControl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */; };
 		82351FCA241FA16600E6E0FD /* InfoAlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */; };
 		82351FCC241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */; };
 		82351FCE2420CE6800E6E0FD /* MapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */; };
 		82351FD224222F7700E6E0FD /* ConnectionInfoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */; };
+		82364E9D2EAA58EB004FCBE1 /* ObfuscationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82364E9C2EAA58EB004FCBE1 /* ObfuscationViewController.swift */; };
 		82365E7F2AB86020006434C3 /* V2RaySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82365E7E2AB86020006434C3 /* V2RaySettings.swift */; };
 		823ACC292626E69F006F69AB /* GeoLookupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC282626E69F006F69AB /* GeoLookupTests.swift */; };
 		823ACC312626FF3E006F69AB /* IpProtocolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823ACC302626FF3E006F69AB /* IpProtocolView.swift */; };
@@ -458,6 +460,9 @@
 
 /* Begin PBXFileReference section */
 		042B1F5A4F38CCA3591AD441 /* Pods_openvpn_tunnel_provider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_openvpn_tunnel_provider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E4660892E606EC4000AB900 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		4E46608A2E606EC4000AB900 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
+		4ED68D792E6F70F8009A6D96 /* V2rayConfigBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2rayConfigBuilder.swift; sourceTree = "<group>"; };
 		58126B967EB9B059871FD7AB /* Pods_wireguard_tunnel_provider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wireguard_tunnel_provider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		751AB84B8432BC3E6BEDD483 /* Pods_today_extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_today_extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoBoxView.swift; sourceTree = "<group>"; };
@@ -493,7 +498,6 @@
 		821CA2D6287C5AB20067F70D /* PortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortViewController.swift; sourceTree = "<group>"; };
 		821CA2DA288039670067F70D /* PortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortTableViewCell.swift; sourceTree = "<group>"; };
 		821CA2DE288143470067F70D /* PortRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortRange.swift; sourceTree = "<group>"; };
-		821E35572A95DCD200AEE5C7 /* V2RayCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V2RayCore.swift; sourceTree = "<group>"; };
 		821E35592A95F77700AEE5C7 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		821F1C7D21FF544200107311 /* VPNServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNServerViewModel.swift; sourceTree = "<group>"; };
 		821F6049240D21E3008072D7 /* ControlPanelViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPanelViewController+Ext.swift"; sourceTree = "<group>"; };
@@ -513,11 +517,11 @@
 		822EBCA72C91AB5900E708F6 /* PrivacyInfo-wireguard-tunnel-provider.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo-wireguard-tunnel-provider.xcprivacy"; sourceTree = "<group>"; };
 		8232FBF32240DE19006B81D2 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		8232FBF52240E40F006B81D2 /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
-		8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = V2RayControl.xcframework; path = Frameworks/V2RayControl.xcframework; sourceTree = "<group>"; };
 		82351FC9241FA16600E6E0FD /* InfoAlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCB241FBC8E00E6E0FD /* VPNStatusViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusViewModelTests.swift; sourceTree = "<group>"; };
 		82351FCD2420CE6800E6E0FD /* MapMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerView.swift; sourceTree = "<group>"; };
 		82351FD124222F7700E6E0FD /* ConnectionInfoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoPopupView.swift; sourceTree = "<group>"; };
+		82364E9C2EAA58EB004FCBE1 /* ObfuscationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObfuscationViewController.swift; sourceTree = "<group>"; };
 		82365E7E2AB86020006434C3 /* V2RaySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V2RaySettings.swift; sourceTree = "<group>"; };
 		823ACC282626E69F006F69AB /* GeoLookupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLookupTests.swift; sourceTree = "<group>"; };
 		823ACC302626FF3E006F69AB /* IpProtocolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpProtocolView.swift; sourceTree = "<group>"; };
@@ -788,6 +792,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E46608B2E606EC4000AB900 /* libresolv.tbd in Frameworks */,
+				4E46608C2E606EC4000AB900 /* libresolv.9.tbd in Frameworks */,
 				82B6052F21708575004B40E6 /* NetworkExtension.framework in Frameworks */,
 				82BF79622A2F8DDC00061972 /* liboqs.a in Frameworks */,
 				824B86E126D42A5700D0101A /* WireGuardKit in Frameworks */,
@@ -827,7 +833,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8234E0D72AB23E5C0015C9A2 /* V2RayControl.xcframework in Frameworks */,
 				82D598C621A6A5C7000FABDE /* SystemConfiguration.framework in Frameworks */,
 				9CB2CE311DAF9227007A4D2D /* CoreData.framework in Frameworks */,
 				9C6942251DD0CBF800F9A801 /* NetworkExtension.framework in Frameworks */,
@@ -850,7 +855,8 @@
 		584496306C3B9383149618CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8234E0D62AB23E5C0015C9A2 /* V2RayControl.xcframework */,
+				4E4660892E606EC4000AB900 /* libresolv.tbd */,
+				4E46608A2E606EC4000AB900 /* libresolv.9.tbd */,
 				8294BC8D22A126C900328932 /* TunnelKit.framework */,
 				8294BC8B22A10F4100328932 /* TunnelKit.framework */,
 				824F56072233FE6F00BCDD5C /* libwg-go.a */,
@@ -942,9 +948,9 @@
 		821BB5C32A7CF198005D9D64 /* V2Ray */ = {
 			isa = PBXGroup;
 			children = (
+				4ED68D792E6F70F8009A6D96 /* V2rayConfigBuilder.swift */,
 				8247C05F2A7CF54300A7C02F /* V2RayConfig.swift */,
 				82365E7E2AB86020006434C3 /* V2RaySettings.swift */,
-				821E35572A95DCD200AEE5C7 /* V2RayCore.swift */,
 				821E35592A95F77700AEE5C7 /* config.json */,
 			);
 			path = V2Ray;
@@ -1279,6 +1285,7 @@
 				82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */,
 				82052E5529C1D83700227CF9 /* MTUViewController.swift */,
 				829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */,
+				82364E9C2EAA58EB004FCBE1 /* ObfuscationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2379,12 +2386,12 @@
 				828772FB221C28E000D5E330 /* FlagImageView.swift in Sources */,
 				8228C8D22B1DE906005977D3 /* PurchaseManager.swift in Sources */,
 				82E7880C22B0DA0D00A98D76 /* NETunnelProviderProtocol+Ext.swift in Sources */,
+				4ED68D7A2E6F70FE009A6D96 /* V2rayConfigBuilder.swift in Sources */,
 				82968A35298A98C300077E0A /* KeyChain.swift in Sources */,
 				82F638C2217DA89000410318 /* AddressType.swift in Sources */,
 				82E0E9072A90CB110008BD3F /* AdvancedViewController.swift in Sources */,
 				822920A02480FA3600476FC1 /* ServersSort.swift in Sources */,
 				826E61482428F8E60064F195 /* AccountViewController.swift in Sources */,
-				821E35582A95DCD200AEE5C7 /* V2RayCore.swift in Sources */,
 				820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */,
 				821429BB22FC36100056B8FF /* ApiRequestDI.swift in Sources */,
 				82AB0877291A6B9C0084625A /* CustomPort+CoreDataClass.swift in Sources */,
@@ -2403,6 +2410,7 @@
 				8285D253246D28FA0088C00F /* AnimatedCircleLayer.swift in Sources */,
 				9CBFF0302102254800FE1757 /* Settings.swift in Sources */,
 				9C3031371DB4307D00C38B0C /* SettingsViewController.swift in Sources */,
+				82364E9D2EAA58EB004FCBE1 /* ObfuscationViewController.swift in Sources */,
 				82EEB6C625F9398600915837 /* DNSProtocolType.swift in Sources */,
 				821F1C7E21FF544200107311 /* VPNServerViewModel.swift in Sources */,
 				82F189A2225CE8A90038ABA0 /* UIView+Ext.swift in Sources */,
@@ -2830,7 +2838,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2848,7 +2856,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
-				MARKETING_VERSION = 2.12.5;
+				MARKETING_VERSION = 2.13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -3319,7 +3327,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3337,7 +3345,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
-				MARKETING_VERSION = 2.12.5;
+				MARKETING_VERSION = 2.13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -3358,7 +3366,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = IVPNClient/IVPNClient.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = WQXXM75BYN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3376,7 +3384,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IVPNClient/liboqs",
 				);
-				MARKETING_VERSION = 2.12.5;
+				MARKETING_VERSION = 2.13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
@@ -3475,10 +3483,10 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		824B86DD26D42A4600D0101A /* XCRemoteSwiftPackageReference "wireguard-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://git.zx2c4.com/wireguard-apple";
+			repositoryURL = "https://github.com/ivpn/wireguard-apple";
 			requirement = {
-				kind = revision;
-				revision = ccc7472fd7d1c7c19584e6a30c45a56b8ba57790;
+				branch = master;
+				kind = branch;
 			};
 		};
 		82968A30298A970500077E0A /* XCRemoteSwiftPackageReference "Tunnelkit" */ = {

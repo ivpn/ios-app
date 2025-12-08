@@ -30,7 +30,6 @@ struct SecureDNS: Codable {
             if let address = address {
                 serverURL = DNSProtocolType.getServerURL(address: address)
                 serverName = DNSProtocolType.getServerName(address: address)
-                DNSManager.saveResolvedDNS(server: DNSProtocolType.getServerToResolve(address: address), key: UserDefaults.Key.resolvedDNSOutsideVPN)
             } else {
                 serverURL = nil
                 serverName = nil
@@ -100,8 +99,15 @@ struct SecureDNS: Codable {
     }
     
     func validation() -> (Bool, String?) {
+        // Validate DNS IP address
+        let servers = UserDefaults.standard.value(forKey: UserDefaults.Key.resolvedDNSOutsideVPN) as? [String] ?? []
+        if servers.isEmpty {
+            return (false, "Please enter DNS IP address")
+        }
+        
+        // Validate DNS DoH/DoT URL
         guard let address = address, !address.isEmpty else {
-            return (false, "Please enter DNS server info")
+            return (false, "Please enter DNS DoH/DoT URL")
         }
         
         return (true, nil)

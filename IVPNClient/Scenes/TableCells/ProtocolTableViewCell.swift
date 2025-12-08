@@ -70,6 +70,8 @@ class ProtocolTableViewCell: UITableViewCell {
         } else if connectionProtocol == .openvpn(.udp, 0) || connectionProtocol == .wireguard(.udp, 0) {
             setupSelectAction(title: protocolLabelText)
         } else if connectionProtocol == .wireguard(.udp, 2) {
+            setupAction(title: "Obfuscation")
+        } else if connectionProtocol == .wireguard(.udp, 3) {
             setupAction(title: "WireGuard details")
         } else {
             updateLabel(title: title, isChecked: isChecked)
