@@ -93,12 +93,6 @@ class NavigationManager {
         return storyBoard.instantiateViewController(withIdentifier: "termsOfServiceView")
     }
     
-    static func getUpgradePlanViewController() -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        
-        return storyBoard.instantiateViewController(withIdentifier: "upgradePlanView")
-    }
-    
     static func getSettingsViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         

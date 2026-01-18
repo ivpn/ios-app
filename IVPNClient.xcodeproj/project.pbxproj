@@ -12,7 +12,6 @@
 		4ED68D7A2E6F70FE009A6D96 /* V2rayConfigBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED68D792E6F70F8009A6D96 /* V2rayConfigBuilder.swift */; };
 		820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */; };
 		8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */; };
-		8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5032356536B008C83DB /* UpgradePlanViewController.swift */; };
 		820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */; };
 		82052E5629C1D83700227CF9 /* MTUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82052E5529C1D83700227CF9 /* MTUViewController.swift */; };
 		820535282302B9D7007BDD58 /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
@@ -467,7 +466,6 @@
 		751AB84B8432BC3E6BEDD483 /* Pods_today_extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_today_extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoBoxView.swift; sourceTree = "<group>"; };
 		8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResultSessionNew.swift; sourceTree = "<group>"; };
-		8201A5032356536B008C83DB /* UpgradePlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradePlanViewController.swift; sourceTree = "<group>"; };
 		820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardSettingsViewController.swift; sourceTree = "<group>"; };
 		82052E5529C1D83700227CF9 /* MTUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUViewController.swift; sourceTree = "<group>"; };
 		820535272302B9D7007BDD58 /* APIAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManager.swift; sourceTree = "<group>"; };
@@ -1280,7 +1278,6 @@
 				8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */,
 				8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */,
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
-				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
 				821CA2D6287C5AB20067F70D /* PortViewController.swift */,
 				82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */,
 				82052E5529C1D83700227CF9 /* MTUViewController.swift */,
@@ -2279,7 +2276,6 @@
 				829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */,
 				82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */,
 				8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */,
-				8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */,
 				823ACC312626FF3E006F69AB /* IpProtocolView.swift in Sources */,
 				8208525C23FD64160008C112 /* MainViewController+Ext.swift in Sources */,
 				82C1D5BF23FE8C6D0059A915 /* ControlPanelViewController.swift in Sources */,
