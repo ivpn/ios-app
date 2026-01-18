@@ -43,11 +43,11 @@ struct Service {
     var durationText: String {
         switch duration {
         case .week:
-            return "Week"
+            return "1 Week"
         case .month:
-            return "Month"
+            return "1 Month"
         case .year:
-            return "Year"
+            return "1 Year"
         case .twoYears:
             return "2 years"
         case .threeYears:

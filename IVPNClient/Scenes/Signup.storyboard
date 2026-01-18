@@ -399,7 +399,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSt-lx-3LK" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN STANDARD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-hH-oiJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Standard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-hH-oiJ">
                                                     <rect key="frame" x="17" y="17" width="150" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="EZR-5y-hs6"/>
@@ -409,25 +409,11 @@
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3sP-4K-ZXY">
-                                                    <rect key="frame" x="333" y="17" width="60" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="2SK-6t-3ni"/>
-                                                        <constraint firstAttribute="width" constant="60" id="8F2-EF-UWD"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <state key="normal" title="Change"/>
-                                                    <connections>
-                                                        <action selector="goBack" destination="GbE-hF-jVK" eventType="touchUpInside" id="wrY-Y6-g9z"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="4C3-hH-oiJ" firstAttribute="leading" secondItem="RSt-lx-3LK" secondAttribute="leading" constant="17" id="Obo-Ik-YXV"/>
                                                 <constraint firstItem="4C3-hH-oiJ" firstAttribute="centerY" secondItem="RSt-lx-3LK" secondAttribute="centerY" id="SF0-ir-Nel"/>
-                                                <constraint firstItem="3sP-4K-ZXY" firstAttribute="centerY" secondItem="RSt-lx-3LK" secondAttribute="centerY" id="fiZ-wj-OcB"/>
-                                                <constraint firstAttribute="trailing" secondItem="3sP-4K-ZXY" secondAttribute="trailing" constant="21" id="lXS-jL-j19"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -439,7 +425,6 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="changeButton" destination="3sP-4K-ZXY" id="xoD-y4-Eeq"/>
                                     <outlet property="titleLabel" destination="4C3-hH-oiJ" id="FhQ-XD-0Kv"/>
                                 </connections>
                             </tableViewCell>
