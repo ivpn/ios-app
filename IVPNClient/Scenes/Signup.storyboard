@@ -290,7 +290,7 @@
                                 <action selector="dismissViewController:" destination="spu-nQ-a1v" id="jB9-lx-nfH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1" style="done" id="ewI-as-s10"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1-1" style="done" id="ewI-as-s10"/>
                     </navigationItem>
                     <connections>
                         <outlet property="createAccountView" destination="zFS-Rd-d7a" id="RiB-fh-HFd"/>
@@ -539,7 +539,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Payment" id="Pcw-dt-qz8">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="done" id="QSt-8p-kF2"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1-2" style="done" id="QSt-8p-kF2"/>
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionLabel" destination="TnB-3p-pAb" id="hbn-63-098"/>
@@ -1016,14 +1016,14 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uYX-O5-UET"/>
+        <segue reference="pYJ-5c-vQB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon-check" width="24" height="24"/>
         <image name="icon-copy" width="66" height="91"/>
         <image name="icon-qr-code" width="24" height="24"/>
-        <image name="icon-step-1" width="48" height="8"/>
-        <image name="icon-step-3" width="48" height="8"/>
+        <image name="icon-step-1-1" width="28" height="8"/>
+        <image name="icon-step-1-2" width="28" height="8"/>
         <namedColor name="ivpnBackgroundBase">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
