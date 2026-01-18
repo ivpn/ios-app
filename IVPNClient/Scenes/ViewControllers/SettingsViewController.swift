@@ -155,10 +155,6 @@ class SettingsViewController: UITableViewController {
         present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
     }
     
-    @IBAction func changePlan(_ sender: Any) {
-        present(NavigationManager.getChangePlanViewController(), animated: true, completion: nil)
-    }
-    
     @IBAction func authenticate(_ sender: Any) {
         present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
     }

@@ -311,7 +311,7 @@ extension LoginViewController {
         KeyChain.tempUsername = (self.userName.text ?? "").trim()
         Application.shared.authentication.removeStoredCredentials()
         
-        let viewController = NavigationManager.getSelectPlanViewController()
+        let viewController = NavigationManager.getSubscriptionViewController()
         viewController.presentationController?.delegate = self
         present(viewController, animated: true, completion: nil)
         
