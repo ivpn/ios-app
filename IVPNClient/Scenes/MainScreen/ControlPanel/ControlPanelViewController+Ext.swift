@@ -248,7 +248,7 @@ extension ControlPanelViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Retry",
-                "Switch to IVPN Pro"
+                "Upgrade your subscription"
             ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:

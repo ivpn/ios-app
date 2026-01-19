@@ -408,7 +408,7 @@ extension LoginViewController {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Retry",
-                "Switch to IVPN Pro"
+                "Upgrade your subscription"
             ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
@@ -478,7 +478,7 @@ extension LoginViewController {
                 "Log out from all devices",
                 "Visit Device Management",
                 "Retry",
-                "Switch to IVPN Pro"
+                "Upgrade your subscription"
             ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
@@ -503,7 +503,7 @@ extension LoginViewController {
                 "Log out from all devices",
                 "Enable Device Management",
                 "Retry",
-                "Switch to IVPN Pro"
+                "Upgrade your subscription"
             ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
