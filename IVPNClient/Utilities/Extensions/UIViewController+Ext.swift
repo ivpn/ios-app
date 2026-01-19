@@ -323,15 +323,6 @@ extension UIViewController {
         return true
     }
     
-    func evaluateMultiHopCapability(_ sender: Any) -> Bool {
-        guard Application.shared.serviceStatus.isEnabled(capability: .multihop) else {
-            showAlert(title: "", message: "MultiHop is supported only on IVPN Pro plan")
-            return false
-        }
-        
-        return true
-    }
-    
     func evaluateProtocolForMultiHop() -> Bool {
         if Application.shared.settings.connectionProtocol.tunnelType() == .ipsec {
             showAlert(title: "Change protocol to WireGuard or OpenVPN", message: "For Multi-Hop connection you must select WireGuard or OpenVPN protocol.") { _ in
