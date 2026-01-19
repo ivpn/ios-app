@@ -128,14 +128,6 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    @IBAction func extendSubscription(_ sender: Any) {
-        guard !Application.shared.serviceStatus.isLegacyAccount() else {
-            return
-        }
-        
-        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
-    }
-    
     @IBAction func authenticate(_ sender: Any) {
         present(NavigationManager.getLoginViewController(), animated: true, completion: nil)
     }
