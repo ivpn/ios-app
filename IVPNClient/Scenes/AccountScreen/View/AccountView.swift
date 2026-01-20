@@ -68,7 +68,7 @@ class AccountView: UITableView {
         altTitleTwoLabel.text = viewModel.serviceType.getAltTitleTwo()
         altDescTwoLabel.text = viewModel.serviceType.getAltDescTwo()
         addTimeButton.isHidden = viewModel.serviceType != .standard
-        let headerHeight = viewModel.showDeviceName ? 270 : 210
+        let headerHeight = viewModel.showDeviceName ? 245 : 210
         header.frame = CGRect(x: 0, y: 0, width: Int(header.frame.width), height: headerHeight)
         reloadData()
         layoutIfNeeded()

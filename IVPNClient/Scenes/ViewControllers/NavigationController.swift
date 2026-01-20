@@ -29,7 +29,7 @@ class NavigationController: UINavigationController {
         super.viewDidLoad()
         
         UINavigationBar.appearance().tintColor = UIColor.init(named: Theme.ivpnBlue)
-        navigationBar.prefersLargeTitles = true
+        navigationBar.prefersLargeTitles = false
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
