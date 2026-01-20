@@ -23,11 +23,91 @@
 
 import Foundation
 
+let StandardTitle = "IVPN Standard"
+let StandardDesc = "IVPN on 5 devices"
+let PlusTitle = "IVPN Plus"
+let PlusDesc = "IVPN on 10 devices, modDNS, Mailx"
+let ProTitle = "IVPN Pro Suite"
+let ProDesc = "IVPN on 10 devices, modDNS, Mailx, Portmaster Pro"
+
 enum ServiceType {
     case standard
+    case plus
     case pro
     
-    static func getType(currentPlan: String?) -> ServiceType {
-        return currentPlan?.hasPrefix("IVPN Pro") ?? false ? .pro : .standard
+    static func getType(currentPlan: String) -> ServiceType {
+        if currentPlan.contains("plus") {
+            return .plus
+        } else if currentPlan.contains("pro") == true {
+            return .pro
+        } else {
+            return .standard
+        }
+    }
+
+    static func getTitle(type: ServiceType) -> String {
+        switch type {
+        case .standard:
+            return StandardTitle
+        case .plus:
+            return PlusTitle
+        case .pro:
+            return ProTitle
+        }
+    }
+
+    static func getDesc(type: ServiceType) -> String {
+        switch type {
+        case .standard:
+            return StandardDesc
+        case .plus:
+            return PlusDesc
+        case .pro:
+            return ProDesc
+        }
+    }
+
+    static func getAltTitleOne(type: ServiceType) -> String {
+        switch type {
+        case .standard:
+            return PlusTitle
+        case .plus:
+            return StandardTitle
+        case .pro:
+            return StandardTitle
+        }
+    }
+
+    static func getAltDescOne(type: ServiceType) -> String {
+        switch type {
+        case .standard:
+            return PlusDesc
+        case .plus:
+            return StandardDesc
+        case .pro:
+            return StandardDesc
+        }
+    }
+
+    static func getAltTitleTwo(type: ServiceType) -> String {
+        switch type {
+        case .standard:
+            return ProTitle
+        case .plus:
+            return ProTitle
+        case .pro:
+            return PlusTitle
+        }
+    }
+
+    static func getAltDescTwo(type: ServiceType) -> String {
+        switch type {
+        case .standard:
+            return ProDesc
+        case .plus:
+            return ProDesc
+        case .pro:
+            return PlusDesc
+        }
     }
 }
