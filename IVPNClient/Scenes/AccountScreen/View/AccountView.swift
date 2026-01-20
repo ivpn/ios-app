@@ -30,7 +30,6 @@ class AccountView: UITableView {
     @IBOutlet weak var qrCodeImage: UIImageView!
     @IBOutlet weak var accountIdLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
     @IBOutlet weak var activeUntilCell: UITableViewCell!
@@ -38,6 +37,13 @@ class AccountView: UITableView {
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var header: UIView!
     @IBOutlet weak var hideAccountButton: UIButton!
+    @IBOutlet weak var subscriptionLabel: UILabel!
+    @IBOutlet weak var subscriptionDescLabel: UILabel!
+    @IBOutlet weak var altTitleOneLabel: UILabel!
+    @IBOutlet weak var altDescOneLabel: UILabel!
+    @IBOutlet weak var altTitleTwoLabel: UILabel!
+    @IBOutlet weak var altDescTwoLabel: UILabel!
+    @IBOutlet weak var addTimeButton: UIButton!
     
     // MARK: - Properties -
     
