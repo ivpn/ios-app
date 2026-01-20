@@ -75,6 +75,7 @@ extension UIViewController {
         }
         
         alert.addAction(cancelAction)
+        alert.modalPresentationStyle = .overFullScreen
         
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = sourceView
@@ -85,11 +86,7 @@ extension UIViewController {
             }
         }
 
-        present(alert, animated: true) {
-            if disableDismiss && UIDevice.current.userInterfaceIdiom == .phone {
-                alert.view.superview?.subviews[0].isUserInteractionEnabled = false
-            }
-        }
+        present(alert, animated: true)
     }
     
     func showFlashNotification(message: String, presentInView: UIView = UIView(), dismissAfter: TimeInterval = 2) {
