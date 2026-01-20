@@ -45,8 +45,8 @@ enum ServiceType {
         }
     }
 
-    static func getTitle(type: ServiceType) -> String {
-        switch type {
+    func getTitle() -> String {
+        switch self {
         case .standard:
             return StandardTitle
         case .plus:
@@ -56,8 +56,8 @@ enum ServiceType {
         }
     }
 
-    static func getDesc(type: ServiceType) -> String {
-        switch type {
+    func getDesc() -> String {
+        switch self {
         case .standard:
             return StandardDesc
         case .plus:
@@ -67,8 +67,8 @@ enum ServiceType {
         }
     }
 
-    static func getAltTitleOne(type: ServiceType) -> String {
-        switch type {
+    func getAltTitleOne() -> String {
+        switch self {
         case .standard:
             return PlusTitle
         case .plus:
@@ -78,8 +78,8 @@ enum ServiceType {
         }
     }
 
-    static func getAltDescOne(type: ServiceType) -> String {
-        switch type {
+    func getAltDescOne() -> String {
+        switch self {
         case .standard:
             return PlusDesc
         case .plus:
@@ -89,8 +89,8 @@ enum ServiceType {
         }
     }
 
-    static func getAltTitleTwo(type: ServiceType) -> String {
-        switch type {
+    func getAltTitleTwo() -> String {
+        switch self {
         case .standard:
             return ProTitle
         case .plus:
@@ -100,8 +100,8 @@ enum ServiceType {
         }
     }
 
-    static func getAltDescTwo(type: ServiceType) -> String {
-        switch type {
+    func getAltDescTwo() -> String {
+        switch self {
         case .standard:
             return ProDesc
         case .plus:
