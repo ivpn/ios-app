@@ -146,14 +146,6 @@ class AccountViewController: UITableViewController {
 
 extension AccountViewController {
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 245
-        }
-
-        return 71
-    }
-    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textColor = UIColor.init(named: Theme.ivpnLabel6)
