@@ -56,12 +56,18 @@ class AccountView: UITableView {
         accountIdLabel.text = viewModel.accountId
         statusLabel.text = viewModel.statusText
         statusLabel.backgroundColor = viewModel.statusColor
-        subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
         activeUntilCell.isHidden = Application.shared.serviceStatus.isLegacyAccount()
         deviceName.text = viewModel.deviceName
         deviceNameTitle.isHidden = !viewModel.showDeviceName
         deviceName.isHidden = !viewModel.showDeviceName
+        subscriptionLabel.text = viewModel.subscriptionText
+        subscriptionDescLabel.text = viewModel.serviceType.getDesc()
+        altTitleOneLabel.text = viewModel.serviceType.getAltTitleOne()
+        altDescOneLabel.text = viewModel.serviceType.getAltDescOne()
+        altTitleTwoLabel.text = viewModel.serviceType.getAltTitleTwo()
+        altDescTwoLabel.text = viewModel.serviceType.getAltDescTwo()
+        addTimeButton.isHidden = viewModel.serviceType != .standard
         let headerHeight = viewModel.showDeviceName ? 270 : 210
         header.frame = CGRect(x: 0, y: 0, width: Int(header.frame.width), height: headerHeight)
         reloadData()

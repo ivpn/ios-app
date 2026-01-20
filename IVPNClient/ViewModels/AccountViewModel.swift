@@ -28,6 +28,7 @@ struct AccountViewModel {
     // MARK: - Properties -
     
     var serviceStatus: ServiceStatus
+    var serviceType: ServiceType
     var authentication: Authentication
     
     var accountId: String {
@@ -67,6 +68,7 @@ struct AccountViewModel {
     init(serviceStatus: ServiceStatus, authentication: Authentication) {
         self.serviceStatus = serviceStatus
         self.authentication = authentication
+        self.serviceType = ServiceType.getType(currentPlan: serviceStatus.currentPlan)
     }
     
 }
