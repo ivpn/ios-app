@@ -36,9 +36,9 @@ enum ServiceType {
     case pro
     
     static func getType(currentPlan: String) -> ServiceType {
-        if currentPlan.contains("plus") {
+        if currentPlan.contains("Plus") {
             return .plus
-        } else if currentPlan.contains("pro") == true {
+        } else if currentPlan.contains("Pro") == true {
             return .pro
         } else {
             return .standard

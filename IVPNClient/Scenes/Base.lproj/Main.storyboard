@@ -4362,13 +4362,15 @@
                                 <constraint firstItem="hky-B3-yLX" firstAttribute="leading" secondItem="Ih4-NF-SZy" secondAttribute="leading" id="8xW-Ot-gnu"/>
                                 <constraint firstAttribute="trailing" secondItem="sab-r6-VYm" secondAttribute="trailing" constant="16" id="ExF-45-fQY"/>
                                 <constraint firstItem="LDZ-oO-5ye" firstAttribute="top" secondItem="8cm-8U-jrW" secondAttribute="top" constant="17" id="FN3-iG-Du6"/>
-                                <constraint firstItem="aiI-Bc-SA3" firstAttribute="top" secondItem="wIx-tg-Wv3" secondAttribute="bottom" constant="68" id="I4J-0E-sIN"/>
+                                <constraint firstItem="wIx-tg-Wv3" firstAttribute="top" secondItem="8cm-8U-jrW" secondAttribute="top" constant="49" id="HCN-YT-KWb"/>
                                 <constraint firstItem="wIx-tg-Wv3" firstAttribute="centerY" secondItem="LDZ-oO-5ye" secondAttribute="centerY" id="KSp-2n-wRd"/>
                                 <constraint firstItem="wIx-tg-Wv3" firstAttribute="baseline" secondItem="c74-BR-YIO" secondAttribute="firstBaseline" id="QgL-Op-Rwd"/>
                                 <constraint firstItem="aiI-Bc-SA3" firstAttribute="leading" secondItem="TIt-eF-ZjP" secondAttribute="leading" id="Rx7-1F-Vq2"/>
                                 <constraint firstItem="sab-r6-VYm" firstAttribute="leading" secondItem="TIt-eF-ZjP" secondAttribute="trailing" constant="20" id="WXr-ZX-LZ1"/>
                                 <constraint firstItem="c74-BR-YIO" firstAttribute="leading" secondItem="hky-B3-yLX" secondAttribute="leading" id="XP4-s3-7CQ"/>
+                                <constraint firstAttribute="bottom" secondItem="TIt-eF-ZjP" secondAttribute="bottom" constant="25" id="YLF-P5-GMU"/>
                                 <constraint firstItem="TIt-eF-ZjP" firstAttribute="top" secondItem="aiI-Bc-SA3" secondAttribute="bottom" constant="13" id="ZJt-KL-F9O"/>
+                                <constraint firstItem="uMT-Cg-UIi" firstAttribute="top" secondItem="8cm-8U-jrW" secondAttribute="top" constant="23" id="aB6-B4-ZPE"/>
                                 <constraint firstItem="LDZ-oO-5ye" firstAttribute="trailing" secondItem="sab-r6-VYm" secondAttribute="trailing" id="bNC-0Q-zRJ"/>
                                 <constraint firstItem="uMT-Cg-UIi" firstAttribute="leading" secondItem="8cm-8U-jrW" secondAttribute="leading" constant="16" id="gkb-Rb-4da"/>
                                 <constraint firstItem="TIt-eF-ZjP" firstAttribute="baseline" secondItem="sab-r6-VYm" secondAttribute="baseline" id="i8f-XQ-zTt"/>
@@ -4380,7 +4382,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="NhI-pa-20D">
-                            <rect key="frame" x="0.0" y="654.5" width="414" height="70"/>
+                            <rect key="frame" x="0.0" y="634.5" width="414" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVS-Nm-wlG">
@@ -4400,30 +4402,24 @@
                         <sections>
                             <tableViewSection headerTitle="Subscription details" id="paZ-ei-HWE">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="265" id="ixh-Fo-hUB">
-                                        <rect key="frame" x="0.0" y="300.5" width="414" height="265"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="245" id="ixh-Fo-hUB">
+                                        <rect key="frame" x="0.0" y="300.5" width="414" height="245"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ixh-Fo-hUB" id="psO-yp-sfg">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="265"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="245"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subscription" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42W-3S-3Wa">
-                                                    <rect key="frame" x="16" y="14" width="382" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" name="ivpnLabel5"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Standard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUv-Dn-k2p">
-                                                    <rect key="frame" x="16" y="34" width="382" height="20"/>
+                                                    <rect key="frame" x="16" y="15" width="382" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="zWp-qi-iM2"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TG1-7N-vHz">
-                                                    <rect key="frame" x="16" y="90" width="382" height="152"/>
+                                                    <rect key="frame" x="16" y="71" width="382" height="152"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available on IVPN website:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqp-5W-sxv">
                                                             <rect key="frame" x="13" y="16" width="361" height="16"/>
@@ -4497,31 +4493,27 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN on 5 devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kl-1m-D5X">
-                                                    <rect key="frame" x="16" y="56" width="382" height="20"/>
+                                                    <rect key="frame" x="16" y="40" width="382" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="ivpnLabel5"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="TG1-7N-vHz" firstAttribute="top" secondItem="7kl-1m-D5X" secondAttribute="bottom" constant="14" id="1Li-1s-yvk"/>
                                                 <constraint firstItem="TG1-7N-vHz" firstAttribute="trailing" secondItem="7kl-1m-D5X" secondAttribute="trailing" id="3mq-aw-amS"/>
-                                                <constraint firstItem="TG1-7N-vHz" firstAttribute="leading" secondItem="42W-3S-3Wa" secondAttribute="leading" id="9Tg-mD-2JW"/>
-                                                <constraint firstItem="TG1-7N-vHz" firstAttribute="trailing" secondItem="42W-3S-3Wa" secondAttribute="trailing" id="BVZ-Jg-Cg3"/>
-                                                <constraint firstItem="TUv-Dn-k2p" firstAttribute="top" secondItem="42W-3S-3Wa" secondAttribute="bottom" constant="4" id="DQ5-Ok-jZY"/>
-                                                <constraint firstItem="7kl-1m-D5X" firstAttribute="top" secondItem="TUv-Dn-k2p" secondAttribute="bottom" constant="2" id="MpY-w6-dtA"/>
+                                                <constraint firstItem="7kl-1m-D5X" firstAttribute="top" secondItem="TUv-Dn-k2p" secondAttribute="bottom" constant="5" id="MpY-w6-dtA"/>
+                                                <constraint firstItem="TG1-7N-vHz" firstAttribute="top" secondItem="7kl-1m-D5X" secondAttribute="bottom" constant="15" id="Xg2-hP-nes"/>
                                                 <constraint firstItem="TG1-7N-vHz" firstAttribute="trailing" secondItem="TUv-Dn-k2p" secondAttribute="trailing" id="Y0k-Cm-pN7"/>
                                                 <constraint firstItem="TG1-7N-vHz" firstAttribute="leading" secondItem="TUv-Dn-k2p" secondAttribute="leading" id="a9U-5p-OxH"/>
-                                                <constraint firstItem="TUv-Dn-k2p" firstAttribute="top" secondItem="psO-yp-sfg" secondAttribute="top" constant="34" id="ac9-KO-otr"/>
+                                                <constraint firstItem="TUv-Dn-k2p" firstAttribute="top" secondItem="psO-yp-sfg" secondAttribute="top" constant="15" id="ac9-KO-otr"/>
                                                 <constraint firstItem="TG1-7N-vHz" firstAttribute="leading" secondItem="7kl-1m-D5X" secondAttribute="leading" id="dkI-Jf-6R3"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="TG1-7N-vHz" secondAttribute="bottom" constant="8" id="hFG-5J-Foj"/>
                                                 <constraint firstItem="TG1-7N-vHz" firstAttribute="leading" secondItem="psO-yp-sfg" secondAttribute="leadingMargin" constant="-4" id="k6E-yG-AUm"/>
                                                 <constraint firstItem="TG1-7N-vHz" firstAttribute="centerX" secondItem="psO-yp-sfg" secondAttribute="centerX" id="kf7-ni-ozj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="71" id="d4r-dE-4nQ">
-                                        <rect key="frame" x="0.0" y="565.5" width="414" height="71"/>
+                                        <rect key="frame" x="0.0" y="545.5" width="414" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d4r-dE-4nQ" id="JfI-ra-dIa">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="71"/>
