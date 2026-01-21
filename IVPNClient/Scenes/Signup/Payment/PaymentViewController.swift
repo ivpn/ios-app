@@ -145,7 +145,7 @@ class PaymentViewController: UITableViewController {
     // MARK: - Private methods -
     
     private func initNavigation() {
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         if extendingService {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
@@ -233,7 +233,6 @@ extension PaymentViewController {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceTitleTableViewCell", for: indexPath) as! ServiceTitleTableViewCell
             cell.service = service.collection[0]
-            cell.changeButton.isHidden = extendingService
             cell.selectionStyle = .none
             return cell
         }
