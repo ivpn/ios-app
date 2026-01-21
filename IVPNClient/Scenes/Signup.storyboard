@@ -200,7 +200,7 @@
                                     <constraint firstAttribute="width" constant="280" id="zag-Hk-zdT"/>
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Select your plan to continue">
+                                <state key="normal" title="Continue to payment">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -209,6 +209,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="GbE-hF-jVK" kind="show" id="iRM-A5-7vq"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGe-se-bbf">
                                 <rect key="frame" x="17" y="338" width="380" height="220"/>
@@ -290,11 +293,10 @@
                                 <action selector="dismissViewController:" destination="spu-nQ-a1v" id="jB9-lx-nfH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1-1" style="done" id="ewI-as-s10"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" image="icon-step-1-1" style="plain" id="ewI-as-s10"/>
                     </navigationItem>
                     <connections>
                         <outlet property="createAccountView" destination="zFS-Rd-d7a" id="RiB-fh-HFd"/>
-                        <segue destination="GbE-hF-jVK" kind="show" id="pYJ-5c-vQB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pqK-FQ-x5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -524,7 +526,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Payment" id="Pcw-dt-qz8">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1-2" style="done" id="QSt-8p-kF2"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-1-2" style="plain" id="QSt-8p-kF2"/>
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionLabel" destination="TnB-3p-pAb" id="hbn-63-098"/>
@@ -1001,7 +1003,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="pYJ-5c-vQB"/>
+        <segue reference="iRM-A5-7vq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon-check" width="24" height="24"/>
