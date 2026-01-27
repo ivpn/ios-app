@@ -268,8 +268,8 @@ extension ControlPanelViewController {
         let service = ServiceType.getType(currentPlan: data.currentPlan)
         let deviceManagement = data.deviceManagement
         
-        // Device Management enabled, Pro plan
-        if deviceManagement && service == .pro {
+        // Device Management enabled, Plus|Pro plan
+        if deviceManagement && service != .standard {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
@@ -290,8 +290,8 @@ extension ControlPanelViewController {
             return
         }
         
-        // Device Management disabled, Pro plan
-        if !deviceManagement && service == .pro {
+        // Device Management disabled, Plus|Pro plan
+        if !deviceManagement && service != .standard {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Enable Device Management",
