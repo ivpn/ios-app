@@ -239,8 +239,10 @@ extension UIViewController {
 extension UIViewController {
     
     func evaluateIsServiceActive() -> Bool {
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        
         guard Application.shared.serviceStatus.isActive else {
-            if !Application.shared.serviceStatus.isLegacyAccount() {
+            if !Application.shared.serviceStatus.isLegacyAccount() && serviceType == .standard {
                 let viewController = NavigationManager.getSubscriptionViewController()
                 viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
                 present(viewController, animated: true, completion: nil)

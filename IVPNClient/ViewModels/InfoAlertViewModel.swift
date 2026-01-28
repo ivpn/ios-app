@@ -54,6 +54,11 @@ class InfoAlertViewModel {
     }
     
     var actionText: String {
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        guard serviceType == .standard else {
+            return ""
+        }
+        
         switch infoAlert {
         case .subscriptionExpiration:
             return "RENEW"

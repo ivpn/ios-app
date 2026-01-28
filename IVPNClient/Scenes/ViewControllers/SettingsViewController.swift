@@ -67,13 +67,6 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        guard evaluateIsServiceActive() else {
-            DispatchQueue.delay(0.5) {
-                sender.setOn(false, animated: true)
-            }
-            return
-        }
-        
         guard evaluateProtocolForMultiHop() else {
             DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
@@ -211,12 +204,6 @@ class SettingsViewController: UITableViewController {
                 deselectRow(sender: sender)
                 return false
             }
-            
-            if !Application.shared.serviceStatus.isActive && !Application.shared.serviceStatus.isLegacyAccount() {
-                present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
-                deselectRow(sender: sender)
-                return false
-            }
         }
         
         return true
@@ -240,6 +227,11 @@ class SettingsViewController: UITableViewController {
     
     @objc fileprivate func agreedToTermsOfService() {
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            return
+        }
+        
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        guard serviceType == .standard else {
             return
         }
         
@@ -367,10 +359,6 @@ extension SettingsViewController {
             tableView.deselectRow(at: indexPath, animated: true)
             
             guard evaluateIsLoggedIn() else {
-                return
-            }
-            
-            guard evaluateIsServiceActive() else {
                 return
             }
             

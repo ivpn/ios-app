@@ -283,6 +283,12 @@ extension LoginViewController {
     }
     
     override func createSessionServiceNotActive() {
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        guard serviceType == .standard else {
+            createSessionSuccess()
+            return
+        }
+        
         hud.dismiss()
         loginProcessStarted = false
         loginConfirmation.clear()
@@ -304,6 +310,12 @@ extension LoginViewController {
     }
     
     override func createSessionAccountNotActivated(error: Any?) {
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        guard serviceType == .standard else {
+            createSessionSuccess()
+            return
+        }
+        
         hud.dismiss()
         loginProcessStarted = false
         loginConfirmation.clear()
