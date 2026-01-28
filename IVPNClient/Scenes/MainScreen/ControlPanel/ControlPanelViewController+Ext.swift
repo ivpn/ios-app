@@ -90,6 +90,10 @@ extension ControlPanelViewController {
                 return
             }
             
+            guard evaluateIsServiceActive() else {
+                return
+            }
+            
             Application.shared.connectionManager.isOnDemandEnabled { [self] enabled in
                 if enabled, Application.shared.connectionManager.status.isDisconnected() {
                     showDisableVPNPrompt(sourceView: controlPanelView.protocolLabel) { [self] in

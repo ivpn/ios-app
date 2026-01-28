@@ -67,6 +67,13 @@ class SettingsViewController: UITableViewController {
             return
         }
         
+        guard evaluateIsServiceActive() else {
+            DispatchQueue.delay(0.5) {
+                sender.setOn(false, animated: true)
+            }
+            return
+        }
+        
         guard evaluateProtocolForMultiHop() else {
             DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
@@ -359,6 +366,10 @@ extension SettingsViewController {
             tableView.deselectRow(at: indexPath, animated: true)
             
             guard evaluateIsLoggedIn() else {
+                return
+            }
+            
+            guard evaluateIsServiceActive() else {
                 return
             }
             

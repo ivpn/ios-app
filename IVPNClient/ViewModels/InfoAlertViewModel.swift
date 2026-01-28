@@ -55,7 +55,7 @@ class InfoAlertViewModel {
     
     var actionText: String {
         let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-        guard serviceType == .standard else {
+        if serviceType != .standard {
             return ""
         }
         
