@@ -283,6 +283,11 @@ extension LoginViewController {
     }
     
     override func createSessionServiceNotActive() {
+        guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            createSessionSuccess()
+            return
+        }
+        
         let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
         guard serviceType == .standard else {
             createSessionSuccess()
@@ -295,13 +300,6 @@ extension LoginViewController {
         
         KeyChain.username = (self.userName.text ?? "").trim()
         
-        guard !Application.shared.serviceStatus.isLegacyAccount() else {
-            navigationController?.dismiss(animated: true, completion: {
-                NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
-            })
-            return
-        }
-        
         let viewController = NavigationManager.getSubscriptionViewController()
         viewController.presentationController?.delegate = self
         present(viewController, animated: true, completion: nil)
@@ -310,6 +308,11 @@ extension LoginViewController {
     }
     
     override func createSessionAccountNotActivated(error: Any?) {
+        guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            createSessionSuccess()
+            return
+        }
+        
         let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
         guard serviceType == .standard else {
             createSessionSuccess()

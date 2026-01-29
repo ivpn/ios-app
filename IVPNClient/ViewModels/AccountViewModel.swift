@@ -63,6 +63,10 @@ struct AccountViewModel {
         return deviceManagement && deviceName != nil
     }
     
+    var showAddMoreTime: Bool {
+        return serviceType == .standard && !Application.shared.serviceStatus.isLegacyAccount()
+    }
+    
     // MARK: - Initialize -
     
     init(serviceStatus: ServiceStatus, authentication: Authentication) {

@@ -240,19 +240,26 @@ extension UIViewController {
     
     func evaluateIsServiceActive() -> Bool {
         guard Application.shared.serviceStatus.isActive else {
-            let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-            if serviceType == .standard && !Application.shared.serviceStatus.isLegacyAccount() {
-                let viewController = NavigationManager.getSubscriptionViewController()
-                viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
-                present(viewController, animated: true, completion: nil)
-            } else {
-                showAlert(title: "Your account is expired", message: "Please renew your account to use this feature.")
-            }
-            
+            handleInactiveService()
             return false
         }
         
         return true
+    }
+    
+    private func handleInactiveService() {
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        if serviceType == .standard && !Application.shared.serviceStatus.isLegacyAccount() {
+            presentSubscriptionViewController()
+        } else {
+            showAlert(title: "Your account is expired", message: "Please renew your account to use this feature.")
+        }
+    }
+    
+    func presentSubscriptionViewController() {
+        let viewController = NavigationManager.getSubscriptionViewController()
+        viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+        present(viewController, animated: true, completion: nil)
     }
     
     func deviceCanMakePurchases() -> Bool {
