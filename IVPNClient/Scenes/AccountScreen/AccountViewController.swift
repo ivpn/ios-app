@@ -162,6 +162,13 @@ extension AccountViewController {
         cell.backgroundColor = UIColor.init(named: Theme.ivpnBackgroundPrimary)
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 && !Application.shared.serviceStatus.isLegacyAccount() {
+            return 245
+        }
+        return 71
+    }
+    
 }
 
 // MARK: - SessionManagerDelegate -
@@ -197,9 +204,9 @@ extension AccountViewController {
     }
     
     override func deleteSessionSkip() {
-        tableView.reloadData()
         showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out") { _ in
             self.navigationController?.dismiss(animated: true)
+            self.tableView.reloadData()
         }
     }
     
@@ -219,9 +226,9 @@ extension AccountViewController {
 extension AccountViewController: JGProgressHUDDelegate {
     
     func progressHUD(_ progressHUD: JGProgressHUD, didDismissFrom view: UIView) {
-        tableView.reloadData()
         showAlert(title: "Session removed from IVPN server", message: "You are successfully logged out") { _ in
             self.navigationController?.dismiss(animated: true)
+            self.tableView.reloadData()
         }
     }
     

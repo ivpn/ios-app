@@ -57,7 +57,6 @@ class AccountView: UITableView {
         statusLabel.text = viewModel.statusText
         statusLabel.backgroundColor = viewModel.statusColor
         activeUntilLabel.text = viewModel.activeUntilText
-        activeUntilCell.isHidden = Application.shared.serviceStatus.isLegacyAccount()
         deviceName.text = viewModel.deviceName
         deviceNameTitle.isHidden = !viewModel.showDeviceName
         deviceName.isHidden = !viewModel.showDeviceName
