@@ -128,4 +128,9 @@ struct ServiceStatus: Codable {
         return accountId.hasPrefix("ivpn")
     }
     
+    func isLegacyTeamAccount() -> Bool {
+        let accountId = KeyChain.username ?? ""
+        return accountId.hasPrefix("ivpn") && currentPlan.contains("Member")
+    }
+    
 }

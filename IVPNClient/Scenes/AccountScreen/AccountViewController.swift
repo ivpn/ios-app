@@ -169,6 +169,10 @@ extension AccountViewController {
         return 71
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Application.shared.serviceStatus.isLegacyTeamAccount() ? 1 : 2
+    }
+    
 }
 
 // MARK: - SessionManagerDelegate -

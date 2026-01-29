@@ -62,6 +62,7 @@ class AccountView: UITableView {
         deviceName.isHidden = !viewModel.showDeviceName
         subscriptionLabel.text = viewModel.subscriptionText
         subscriptionDescLabel.text = viewModel.serviceType.getDesc()
+        subscriptionDescLabel.isHidden = Application.shared.serviceStatus.isLegacyAccount()
         altTitleOneLabel.text = viewModel.serviceType.getAltTitleOne()
         altDescOneLabel.text = viewModel.serviceType.getAltDescOne()
         altTitleTwoLabel.text = viewModel.serviceType.getAltTitleTwo()
