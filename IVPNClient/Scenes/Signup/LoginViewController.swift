@@ -422,16 +422,13 @@ extension LoginViewController {
         guard isNewStyleAccount else {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
-                "Retry",
-                "Upgrade your subscription"
+                "Retry"
             ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
                 case 1:
                     newSession()
-                case 2:
-                    openWebPageInBrowser(data.upgradeToUrl)
                 default:
                     break
                 }
