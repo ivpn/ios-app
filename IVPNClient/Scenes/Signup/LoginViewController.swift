@@ -283,6 +283,12 @@ extension LoginViewController {
     }
     
     override func createSessionServiceNotActive() {
+        hud.dismiss()
+        loginProcessStarted = false
+        loginConfirmation.clear()
+        
+        KeyChain.username = (self.userName.text ?? "").trim()
+        
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
             createSessionSuccess()
             return
@@ -293,12 +299,6 @@ extension LoginViewController {
             createSessionSuccess()
             return
         }
-        
-        hud.dismiss()
-        loginProcessStarted = false
-        loginConfirmation.clear()
-        
-        KeyChain.username = (self.userName.text ?? "").trim()
         
         let viewController = NavigationManager.getSubscriptionViewController()
         viewController.presentationController?.delegate = self
@@ -308,6 +308,13 @@ extension LoginViewController {
     }
     
     override func createSessionAccountNotActivated(error: Any?) {
+        hud.dismiss()
+        loginProcessStarted = false
+        loginConfirmation.clear()
+        
+        KeyChain.tempUsername = (self.userName.text ?? "").trim()
+        Application.shared.authentication.removeStoredCredentials()
+        
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
             createSessionSuccess()
             return
@@ -318,13 +325,6 @@ extension LoginViewController {
             createSessionSuccess()
             return
         }
-        
-        hud.dismiss()
-        loginProcessStarted = false
-        loginConfirmation.clear()
-        
-        KeyChain.tempUsername = (self.userName.text ?? "").trim()
-        Application.shared.authentication.removeStoredCredentials()
         
         let viewController = NavigationManager.getSubscriptionViewController()
         viewController.presentationController?.delegate = self
