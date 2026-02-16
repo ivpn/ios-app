@@ -222,9 +222,6 @@ extension SecureDNSViewController: UITextFieldDelegate {
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
-        DispatchQueue.async {
-            self.secureDNSView.setupView(model: self.model)
-        }
     }
     
 }
