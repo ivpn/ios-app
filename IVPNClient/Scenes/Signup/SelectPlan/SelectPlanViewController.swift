@@ -156,7 +156,7 @@ class SelectPlanViewController: UITableViewController {
     // MARK: - Private methods -
     
     private func initNavigation() {
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         if changingPlan {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissViewController))

@@ -145,7 +145,7 @@ class PaymentViewController: UITableViewController {
     // MARK: - Private methods -
     
     private func initNavigation() {
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         if extendingService {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
