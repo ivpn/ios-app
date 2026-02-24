@@ -174,7 +174,7 @@ extension SecureDNSViewController {
             return 0
         }
         
-        return 45
+        return UITableView.automaticDimension
     }
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
