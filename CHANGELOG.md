@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.13.1 - 2026-02-27  
+
+[FIXED] "Save" button not working in Custom DNS settings  
+[IMPROVED] UI optimised for iOS 26  
+
 ## 2.13.0 - 2025-12-06  
 
 [IMPROVED] Enhanced connectivity and stability for V2Ray obfuscation  
