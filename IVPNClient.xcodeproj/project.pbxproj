@@ -1810,6 +1810,7 @@
 				9C7840B420CD8A8A00335736 /* Embed Foundation Extensions */,
 				9CB2CE481DB28B8B007A4D2D /* Fetch servers.json */,
 				821E355D2A96227E00AEE5C7 /* Embed Frameworks */,
+				82137DD72F27BDB000604624 /* Strip arm64e */,
 			);
 			buildRules = (
 			);
@@ -2029,6 +2030,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		82137DD72F27BDB000604624 /* Strip arm64e */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Strip arm64e";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\nOPENSSL_BIN=\"${APP_PATH}/Frameworks/openssl.framework/openssl\"\n\necho \"🔍 App path: $APP_PATH\"\necho \"🔍 Checking OpenSSL at: $OPENSSL_BIN\"\n\nif [ ! -f \"$OPENSSL_BIN\" ]; then\n  echo \"⚠️ OpenSSL binary not found — skipping\"\n  exit 0\nfi\n\necho \"Before stripping:\"\nlipo -info \"$OPENSSL_BIN\"\n\nif lipo -info \"$OPENSSL_BIN\" | grep -q arm64e; then\n  echo \"✂️ Stripping arm64e from OpenSSL\"\n  lipo -remove arm64e \"$OPENSSL_BIN\" -output \"$OPENSSL_BIN\"\nfi\n\necho \"After stripping:\"\nlipo -info \"$OPENSSL_BIN\"\n";
+		};
 		9CB2CE481DB28B8B007A4D2D /* Fetch servers.json */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;

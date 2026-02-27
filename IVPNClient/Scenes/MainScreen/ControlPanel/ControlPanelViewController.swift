@@ -107,7 +107,6 @@ class ControlPanelViewController: UITableViewController {
         UserDefaults.shared.set(sender.isOn, forKey: UserDefaults.Key.isAntiTracker)
         WidgetCenter.shared.reloadTimelines(ofKind: "IVPNWidget")
         evaluateReconnect(sender: sender as UIView)
-        controlPanelView.updateAntiTracker(viewModel: vpnStatusViewModel)
     }
     
     @IBAction func selectIpProtocol(_ sender: UISegmentedControl) {
