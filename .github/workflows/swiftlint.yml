@@ -9,10 +9,13 @@ on:
       - '.swiftlint.yml'
       - '**/*.swift'
 
+permissions:
+  contents: read
+
 jobs:
   SwiftLint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.1.0
+        uses: norio-nomura/action-swiftlint@f3d1a1dab62b6f107450590dc94e845efa244c7e # 3.1.0
