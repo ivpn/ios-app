@@ -57,7 +57,7 @@ class ServerTableViewCell: UITableViewCell {
                 contentView.alpha = 0.55
                 return
             }
-            guard VPNServer.validMultiHopISP(viewModel.server, serverToValidate) else {
+            guard VPNServer.validHostMultiHopISP(viewModel.server, serverToValidate, host, hostToValidate) else {
                 contentView.alpha = 0.55
                 return
             }
@@ -69,6 +69,9 @@ class ServerTableViewCell: UITableViewCell {
             contentView.alpha = 1
         }
     }
+    
+    var host: Host?
+    var hostToValidate: Host?
     
     var indexPath: IndexPath! {
         didSet {

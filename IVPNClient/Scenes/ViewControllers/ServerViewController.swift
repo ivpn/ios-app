@@ -409,8 +409,19 @@ extension ServerViewController {
         cell.isFavorite = isFavorite
         cell.indexPath = indexPath
         cell.viewModel = VPNServerViewModel(server: server)
-        cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         cell.expandedGateways = expandedGateways
+        
+        if server.isHost {
+            if let serverByCity = Application.shared.serverList.getServer(byCity: server.city) {
+                cell.host = serverByCity.getHost(hostName: server.gateway)
+                cell.hostToValidate = isExitServer ? Application.shared.settings.selectedHost : Application.shared.settings.selectedExitHost
+            }
+        } else {
+            cell.host = nil
+            cell.hostToValidate = nil
+        }
+        
+        cell.serverToValidate = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
         
         return cell
     }

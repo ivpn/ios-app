@@ -192,11 +192,13 @@ class VPNServer {
         }
         
         if let firstHost = firstHost, let secondHost = secondHost {
-            guard firstHost.host != secondHost.host else {
+            guard firstHost.isp != secondHost.isp else {
                 return false
             }
-        } else if first.isp == second.isp {
-            return false
+        } else {
+            guard first.isp != second.isp else {
+                return false
+            }
         }
         
         return true
