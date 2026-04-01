@@ -91,16 +91,16 @@ class VPNServer {
         return gateway.components(separatedBy: CharacterSet.decimalDigits).joined()
     }
     
-    private (set) var gateway: String
-    private (set) var countryCode: String
-    private (set) var country: String
-    private (set) var city: String
-    private (set) var latitude: Double
-    private (set) var longitude: Double
-    private (set) var isp: String
-    private (set) var hosts: [Host]
-    private (set) var load: Double?
-    private (set) var ipv6: IPv6?
+    private(set) var gateway: String
+    private(set) var countryCode: String
+    private(set) var country: String
+    private(set) var city: String
+    private(set) var latitude: Double
+    private(set) var longitude: Double
+    private(set) var isp: String
+    private(set) var hosts: [Host]
+    private(set) var load: Double?
+    private(set) var ipv6: IPv6?
     var dnsName: String?
     
     // MARK: - Initialize -
@@ -177,6 +177,25 @@ class VPNServer {
             return true
         }
         guard first.isp != second.isp else {
+            return false
+        }
+        
+        return true
+    }
+    
+    static func validHostMultiHopISP(_ first: VPNServer, _ second: VPNServer, _ firstHost: Host?, _ secondHost: Host?, ignoreSettings: Bool = false) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard UserDefaults.standard.preventSameISPMultiHop || ignoreSettings else {
+            return true
+        }
+        
+        if let firstHost = firstHost, let secondHost = secondHost {
+            guard firstHost.host != secondHost.host else {
+                return false
+            }
+        } else if first.isp == second.isp {
             return false
         }
         

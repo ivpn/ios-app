@@ -274,12 +274,13 @@ class ServerViewController: UITableViewController {
         return false
     }
     
-    private func validMultiHop(server: VPNServer, indexPath: IndexPath, force: Bool) -> Bool {
+    private func validMultiHop(server: VPNServer, host: Host?, indexPath: IndexPath, force: Bool) -> Bool {
         guard !force else {
             return true
         }
         
         let secondServer = isExitServer ? Application.shared.settings.selectedServer : Application.shared.settings.selectedExitServer
+        let secondHost = isExitServer ? Application.shared.settings.selectedHost : Application.shared.settings.selectedExitHost
         
         guard VPNServer.validMultiHop(server, secondServer) else {
             showAlert(title: "Entry and exit servers are the same", message: "Please select a different entry or exit server.")
@@ -295,7 +296,7 @@ class ServerViewController: UITableViewController {
             return false
         }
         
-        guard VPNServer.validMultiHopISP(server, secondServer) else {
+        guard VPNServer.validHostMultiHopISP(server, secondServer, host, secondHost) else {
             showActionAlert(title: VPNServer.validMultiHopISPTitle, message: VPNServer.validMultiHopISPMessage, action: "Continue", cancel: "Cancel", actionHandler: { [self] _ in
                 selected(indexPath: indexPath, force: true)
             })
@@ -371,7 +372,7 @@ class ServerViewController: UITableViewController {
             }
         }
         
-        guard validMultiHop(server: selectedServer, indexPath: indexPath, force: force) else {
+        guard validMultiHop(server: selectedServer, host: selectedHost, indexPath: indexPath, force: force) else {
             return
         }
         

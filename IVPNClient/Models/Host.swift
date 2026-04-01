@@ -35,6 +35,7 @@ struct Host: Codable {
     var publicKey: String
     var localIP: String
     var ipv6: IPv6?
+    var isp: String
     var multihopPort: Int
     var load: Double
     var v2ray: String
