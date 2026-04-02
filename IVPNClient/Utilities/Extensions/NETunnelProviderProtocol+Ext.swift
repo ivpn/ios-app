@@ -183,11 +183,11 @@ extension NETunnelProviderProtocol {
         }
         
         if UserDefaults.shared.isMultiHop, UserDefaults.standard.preventSameISPMultiHop {
-            let allHosts = Application.shared.settings.selectedServer.hosts
+            let hosts = Application.shared.settings.selectedServer.hosts
             let secondServer = Application.shared.settings.selectedExitServer
             var filteredHosts: [Host] = []
             
-            for host in allHosts {
+            for host in hosts {
                 if host.isp != secondServer.isp {
                     filteredHosts.append(host)
                 }
@@ -211,11 +211,11 @@ extension NETunnelProviderProtocol {
         }
         
         if UserDefaults.shared.isMultiHop, UserDefaults.standard.preventSameISPMultiHop {
-            let allHosts = Application.shared.settings.selectedExitServer.hosts
+            let hosts = Application.shared.settings.selectedExitServer.hosts
             let secondServer = Application.shared.settings.selectedServer
             var filteredHosts: [Host] = []
             
-            for host in allHosts {
+            for host in hosts {
                 if host.isp != secondServer.isp {
                     filteredHosts.append(host)
                 }
