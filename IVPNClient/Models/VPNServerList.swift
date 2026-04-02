@@ -404,6 +404,7 @@ class VPNServerList {
                         dnsName: host["dns_name"] as? String ?? "",
                         publicKey: host["public_key"] as? String ?? "",
                         localIP: host["local_ip"] as? String ?? "",
+                        isp: host["isp"] as? String ?? "",
                         multihopPort: host["multihop_port"] as? Int ?? 0,
                         load: host["load"] as? Double ?? 0,
                         v2ray: host["v2ray"] as? String ?? ""

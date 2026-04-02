@@ -91,16 +91,16 @@ class VPNServer {
         return gateway.components(separatedBy: CharacterSet.decimalDigits).joined()
     }
     
-    private (set) var gateway: String
-    private (set) var countryCode: String
-    private (set) var country: String
-    private (set) var city: String
-    private (set) var latitude: Double
-    private (set) var longitude: Double
-    private (set) var isp: String
-    private (set) var hosts: [Host]
-    private (set) var load: Double?
-    private (set) var ipv6: IPv6?
+    private(set) var gateway: String
+    private(set) var countryCode: String
+    private(set) var country: String
+    private(set) var city: String
+    private(set) var latitude: Double
+    private(set) var longitude: Double
+    private(set) var isp: String
+    private(set) var hosts: [Host]
+    private(set) var load: Double?
+    private(set) var ipv6: IPv6?
     var dnsName: String?
     
     // MARK: - Initialize -
@@ -181,6 +181,53 @@ class VPNServer {
         }
         
         return true
+    }
+    
+    static func validHostMultiHopISP(_ first: VPNServer, _ second: VPNServer, _ firstHost: Host?, _ secondHost: Host?) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard UserDefaults.standard.preventSameISPMultiHop else {
+            return true
+        }
+        
+        if let firstHost = firstHost, let secondHost = secondHost {
+            guard firstHost.isp != secondHost.isp else {
+                return false
+            }
+        } else {
+            guard first.isp != second.isp else {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    static func validHostsMultiHopISP(_ first: VPNServer, _ second: VPNServer, _ hosts: [Host]) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard UserDefaults.standard.preventSameISPMultiHop else {
+            return true
+        }
+        guard hasHostWithDifferentISP(second, hosts) else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private static func hasHostWithDifferentISP(_ server: VPNServer, _ hosts: [Host]) -> Bool {
+        for host in hosts {
+            guard host.isp != server.isp else {
+                continue
+            }
+            
+            return true
+        }
+        
+        return false
     }
 
 }
