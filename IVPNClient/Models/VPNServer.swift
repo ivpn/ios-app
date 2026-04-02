@@ -183,11 +183,11 @@ class VPNServer {
         return true
     }
     
-    static func validHostMultiHopISP(_ first: VPNServer, _ second: VPNServer, _ firstHost: Host?, _ secondHost: Host?, ignoreSettings: Bool = false) -> Bool {
+    static func validHostMultiHopISP(_ first: VPNServer, _ second: VPNServer, _ firstHost: Host?, _ secondHost: Host?) -> Bool {
         guard UserDefaults.shared.isMultiHop else {
             return true
         }
-        guard UserDefaults.standard.preventSameISPMultiHop || ignoreSettings else {
+        guard UserDefaults.standard.preventSameISPMultiHop else {
             return true
         }
         
@@ -202,6 +202,32 @@ class VPNServer {
         }
         
         return true
+    }
+    
+    static func validHostsMultiHopISP(_ first: VPNServer, _ second: VPNServer, _ hosts: [Host]) -> Bool {
+        guard UserDefaults.shared.isMultiHop else {
+            return true
+        }
+        guard UserDefaults.standard.preventSameISPMultiHop else {
+            return true
+        }
+        guard hasHostWithDifferentISP(second, hosts) else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private static func hasHostWithDifferentISP(_ server: VPNServer, _ hosts: [Host]) -> Bool {
+        for host in hosts {
+            guard host.isp != server.isp else {
+                continue
+            }
+            
+            return true
+        }
+        
+        return false
     }
 
 }
