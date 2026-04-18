@@ -43,20 +43,8 @@ enum ServiceType {
     }
     
     func getDeviceLimit(plan: String, plans: [ServicePlan]) -> Int {
-        if plan.contains("Standard") {
-            for plan in plans where plan.name.contains("Standard") {
-                return plan.deviceLimit
-            }
-        }
-        if plan.contains("Plus") {
-            for plan in plans where plan.name.contains("Plus") {
-                return plan.deviceLimit
-            }
-        }
-        if plan.contains("Pro") {
-            for plan in plans where plan.name.contains("Pro") {
-                return plan.deviceLimit
-            }
+        for avaliablePlan in plans where avaliablePlan.name.contains(plan) {
+            return avaliablePlan.deviceLimit
         }
         
         return 0
