@@ -61,12 +61,12 @@ class AccountView: UITableView {
         deviceNameTitle.isHidden = !viewModel.showDeviceName
         deviceName.isHidden = !viewModel.showDeviceName
         subscriptionLabel.text = viewModel.subscriptionText
-        subscriptionDescLabel.text = viewModel.serviceType.getDesc()
+        subscriptionDescLabel.text = viewModel.serviceType.getDesc(plans: viewModel.serviceStatus.availablePlans ?? [])
         subscriptionDescLabel.isHidden = Application.shared.serviceStatus.isLegacyAccount()
         altTitleOneLabel.text = viewModel.serviceType.getAltTitleOne()
-        altDescOneLabel.text = viewModel.serviceType.getAltDescOne()
+        altDescOneLabel.text = viewModel.serviceType.getAltDescOne(plans: viewModel.serviceStatus.availablePlans ?? [])
         altTitleTwoLabel.text = viewModel.serviceType.getAltTitleTwo()
-        altDescTwoLabel.text = viewModel.serviceType.getAltDescTwo()
+        altDescTwoLabel.text = viewModel.serviceType.getAltDescTwo(plans: viewModel.serviceStatus.availablePlans ?? [])
         addTimeButton.isHidden = !viewModel.showAddMoreTime
         let headerHeight = viewModel.showDeviceName ? 245 : 210
         header.frame = CGRect(x: 0, y: 0, width: Int(header.frame.width), height: headerHeight)

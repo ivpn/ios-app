@@ -23,6 +23,11 @@
 
 import Foundation
 
+struct ServicePlan: Codable {
+    var name: String
+    var deviceLimit: Int
+}
+
 struct ServiceStatus: Codable {
     
     // MARK: - Properties -
@@ -36,6 +41,7 @@ struct ServiceStatus: Codable {
     let paymentMethod: String?
     let capabilities: [String]?
     let deviceManagement: Bool?
+    var availablePlans: [ServicePlan]?
     
     // MARK: - Initialize -
     

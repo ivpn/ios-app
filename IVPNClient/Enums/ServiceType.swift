@@ -24,11 +24,8 @@
 import Foundation
 
 let StandardTitle = "IVPN Standard"
-let StandardDesc = "IVPN on 5 devices"
 let PlusTitle = "IVPN Plus"
-let PlusDesc = "IVPN on 10 devices, modDNS, Mailx"
 let ProTitle = "IVPN Pro Suite"
-let ProDesc = "IVPN on 10 devices, modDNS, Mailx, Portmaster Pro"
 
 enum ServiceType {
     case standard
@@ -44,6 +41,26 @@ enum ServiceType {
             return .standard
         }
     }
+    
+    func getDeviceLimit(plan: String, plans: [ServicePlan]) -> Int {
+        if plan.contains("Standard") {
+            for plan in plans where plan.name.contains("Standard") {
+                return plan.deviceLimit
+            }
+        }
+        if plan.contains("Plus") {
+            for plan in plans where plan.name.contains("Plus") {
+                return plan.deviceLimit
+            }
+        }
+        if plan.contains("Pro") {
+            for plan in plans where plan.name.contains("Pro") {
+                return plan.deviceLimit
+            }
+        }
+        
+        return 0
+    }
 
     func getTitle() -> String {
         switch self {
@@ -56,14 +73,17 @@ enum ServiceType {
         }
     }
 
-    func getDesc() -> String {
+    func getDesc(plans: [ServicePlan]) -> String {
         switch self {
         case .standard:
-            return StandardDesc
+            let deviceLimit = getDeviceLimit(plan: "Standard", plans: plans)
+            return getStandardDesc(deviceLimit: deviceLimit)
         case .plus:
-            return PlusDesc
+            let deviceLimit = getDeviceLimit(plan: "Plus", plans: plans)
+            return getPlusDesc(deviceLimit: deviceLimit)
         case .pro:
-            return ProDesc
+            let deviceLimit = getDeviceLimit(plan: "Pro", plans: plans)
+            return getProDesc(deviceLimit: deviceLimit)
         }
     }
 
@@ -78,14 +98,17 @@ enum ServiceType {
         }
     }
 
-    func getAltDescOne() -> String {
+    func getAltDescOne(plans: [ServicePlan]) -> String {
         switch self {
         case .standard:
-            return PlusDesc
+            let deviceLimit = getDeviceLimit(plan: "Plus", plans: plans)
+            return getPlusDesc(deviceLimit: deviceLimit)
         case .plus:
-            return StandardDesc
+            let deviceLimit = getDeviceLimit(plan: "Standard", plans: plans)
+            return getStandardDesc(deviceLimit: deviceLimit)
         case .pro:
-            return StandardDesc
+            let deviceLimit = getDeviceLimit(plan: "Standard", plans: plans)
+            return getStandardDesc(deviceLimit: deviceLimit)
         }
     }
 
@@ -100,14 +123,29 @@ enum ServiceType {
         }
     }
 
-    func getAltDescTwo() -> String {
+    func getAltDescTwo(plans: [ServicePlan]) -> String {
         switch self {
         case .standard:
-            return ProDesc
+            let deviceLimit = getDeviceLimit(plan: "Pro", plans: plans)
+            return getProDesc(deviceLimit: deviceLimit)
         case .plus:
-            return ProDesc
+            let deviceLimit = getDeviceLimit(plan: "Pro", plans: plans)
+            return getProDesc(deviceLimit: deviceLimit)
         case .pro:
-            return PlusDesc
+            let deviceLimit = getDeviceLimit(plan: "Plus", plans: plans)
+            return getPlusDesc(deviceLimit: deviceLimit)
         }
+    }
+    
+    func getStandardDesc(deviceLimit: Int) -> String {
+        "IVPN on \(deviceLimit) devices"
+    }
+    
+    func getPlusDesc(deviceLimit: Int) -> String {
+        "IVPN on \(deviceLimit) devices, modDNS, Mailx"
+    }
+    
+    func getProDesc(deviceLimit: Int) -> String {
+        "IVPN on \(deviceLimit) devices, modDNS, Mailx, Portmaster Pro"
     }
 }
