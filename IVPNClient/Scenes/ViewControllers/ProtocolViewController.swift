@@ -453,7 +453,7 @@ extension ProtocolViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let connectionProtocol = collection[indexPath.section][indexPath.row]
         if connectionProtocol == .wireguard(.udp, 1) { return 60 }
-        return 44
+        return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

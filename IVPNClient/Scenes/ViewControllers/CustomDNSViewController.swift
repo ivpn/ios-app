@@ -112,8 +112,6 @@ class CustomDNSViewController: UITableViewController {
             customDNSSwitch.setOn(false, animated: true)
         }
         
-        setupView()
-        
         if UserDefaults.shared.isCustomDNS {
             evaluateReconnect(sender: customDNSTextField)
         }
@@ -128,8 +126,6 @@ class CustomDNSViewController: UITableViewController {
         customDNSTextField.text = server
         
         UserDefaults.shared.set(server, forKey: UserDefaults.Key.customDNS)
-        
-        setupView()
         
         if UserDefaults.shared.isCustomDNS {
             evaluateReconnect(sender: customDNSTextField)
@@ -237,10 +233,6 @@ extension CustomDNSViewController: UITextFieldDelegate {
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
-        DispatchQueue.async {
-            self.customDNSIPTextField.text = UserDefaults.shared.resolvedDNSInsideVPN.joined(separator: ",")
-            self.customDNSTextField.text = UserDefaults.shared.customDNS
-        }
     }
     
 }

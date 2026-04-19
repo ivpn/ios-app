@@ -174,7 +174,7 @@ extension SecureDNSViewController {
             return 0
         }
         
-        return 45
+        return UITableView.automaticDimension
     }
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -222,9 +222,6 @@ extension SecureDNSViewController: UITextFieldDelegate {
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
-        DispatchQueue.async {
-            self.secureDNSView.setupView(model: self.model)
-        }
     }
     
 }
