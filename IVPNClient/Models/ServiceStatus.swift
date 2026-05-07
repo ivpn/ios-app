@@ -23,6 +23,11 @@
 
 import Foundation
 
+struct ServicePlan: Codable {
+    var name: String
+    var deviceLimit: Int
+}
+
 struct ServiceStatus: Codable {
     
     // MARK: - Properties -
@@ -36,6 +41,7 @@ struct ServiceStatus: Codable {
     let paymentMethod: String?
     let capabilities: [String]?
     let deviceManagement: Bool?
+    var availablePlans: [ServicePlan]?
     
     // MARK: - Initialize -
     
@@ -125,12 +131,12 @@ struct ServiceStatus: Codable {
     
     func isLegacyAccount() -> Bool {
         let accountId = KeyChain.username ?? ""
-        
-        if accountId.hasPrefix("ivpn") && currentPlan.contains("VPN Pro") && currentPlan != "IVPN Pro" {
-            return true
-        }
-        
-        return false
+        return accountId.hasPrefix("ivpn")
+    }
+    
+    func isLegacyTeamAccount() -> Bool {
+        let accountId = KeyChain.username ?? ""
+        return accountId.hasPrefix("ivpn") && currentPlan.contains("Member")
     }
     
 }

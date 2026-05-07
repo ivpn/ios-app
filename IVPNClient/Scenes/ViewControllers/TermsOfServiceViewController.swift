@@ -85,9 +85,9 @@ class TermsOfServiceViewController: UIViewController {
         formattedString.bold("Created at: ", fontSize: 14)
         formattedString.regular("2020-09-21 05:03:13\n", fontSize: 14)
         formattedString.bold("Product: ", fontSize: 14)
-        formattedString.regular("IVPN Pro\n", fontSize: 14)
+        formattedString.regular("IVPN Standard\n", fontSize: 14)
         formattedString.bold("Max devices: ", fontSize: 14)
-        formattedString.regular("7", fontSize: 14)
+        formattedString.regular("5", fontSize: 14)
         textView.attributedText = formattedString
         textView.textColor = UIColor.init(named: Theme.ivpnLabelPrimary)
         

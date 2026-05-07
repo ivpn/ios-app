@@ -43,11 +43,11 @@ struct Service {
     var durationText: String {
         switch duration {
         case .week:
-            return "Week"
+            return "1 Week"
         case .month:
-            return "Month"
+            return "1 Month"
         case .year:
-            return "Year"
+            return "1 Year"
         case .twoYears:
             return "2 years"
         case .threeYears:
@@ -56,84 +56,40 @@ struct Service {
     }
     
     var discountText: String? {
-        switch type {
-        case .standard:
-            switch duration {
-            case .week:
-                return nil
-            case .month:
-                return nil
-            case .year:
-                return "-16%"
-            case .twoYears:
-                return "-30%"
-            case .threeYears:
-                return "-35%"
-            }
-        case .pro:
-            switch duration {
-            case .week:
-                return nil
-            case .month:
-                return nil
-            case .year:
-                return "-16%"
-            case .twoYears:
-                return "-33%"
-            case .threeYears:
-                return "-38%"
-            }
+        switch duration {
+        case .week:
+            return nil
+        case .month:
+            return nil
+        case .year:
+            return "-16%"
+        case .twoYears:
+            return "-30%"
+        case .threeYears:
+            return "-35%"
         }
     }
     
     var productId: String {
-        switch type {
-        case .standard:
-            switch duration {
-            case .week:
-                return ProductId.standardWeek
-            case .month:
-                return ProductId.standardMonth
-            case .year:
-                return ProductId.standardYear
-            case .twoYears:
-                return ProductId.standardTwoYears
-            case .threeYears:
-                return ProductId.standardThreeYears
-            }
-        case .pro:
-            switch duration {
-            case .week:
-                return ProductId.proWeek
-            case .month:
-                return ProductId.proMonth
-            case .year:
-                return ProductId.proYear
-            case .twoYears:
-                return ProductId.proTwoYears
-            case .threeYears:
-                return ProductId.proThreeYears
-            }
+        switch duration {
+        case .week:
+            return ProductId.standardWeek
+        case .month:
+            return ProductId.standardMonth
+        case .year:
+            return ProductId.standardYear
+        case .twoYears:
+            return ProductId.standardTwoYears
+        case .threeYears:
+            return ProductId.standardThreeYears
         }
     }
     
     var typeText: String {
-        switch type {
-        case .standard:
-            return "Standard"
-        case .pro:
-            return "Pro"
-        }
+        return "Standard"
     }
     
     var collection: [Service] {
-        if Application.shared.authentication.isLoggedIn && !Application.shared.serviceStatus.isNewStyleAccount() {
-            return [
-                Service(type: type, duration: .month),
-                Service(type: type, duration: .year)
-            ]
-        }
-        
         return ServiceDuration.allCases.map { Service(type: type, duration: $0) }
     }
     

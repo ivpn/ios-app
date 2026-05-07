@@ -74,25 +74,6 @@ class SettingsViewController: UITableViewController {
             return
         }
         
-        guard evaluateMultiHopCapability(sender) else {
-            DispatchQueue.delay(0.5) {
-                sender.setOn(false, animated: true)
-            }
-            
-            showActionSheet(title: "MultiHop is supported only on IVPN Pro plan", actions: ["Switch plan"], sourceView: sender) { index in
-                switch index {
-                case 0:
-                    sender.setOn(false, animated: true)
-                    let upgradeToUrl = Application.shared.serviceStatus.upgradeToUrl ?? ""
-                    self.openWebPage(upgradeToUrl)
-                default:
-                    sender.setOn(false, animated: true)
-                }
-            }
-            
-            return
-        }
-        
         guard evaluateProtocolForMultiHop() else {
             DispatchQueue.delay(0.5) {
                 sender.setOn(false, animated: true)
@@ -145,18 +126,6 @@ class SettingsViewController: UITableViewController {
             Application.shared.settings.selectedExitHost = nil
             updateSelectedServer()
         }
-    }
-    
-    @IBAction func extendSubscription(_ sender: Any) {
-        guard !Application.shared.serviceStatus.isLegacyAccount() else {
-            return
-        }
-        
-        present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
-    }
-    
-    @IBAction func changePlan(_ sender: Any) {
-        present(NavigationManager.getChangePlanViewController(), animated: true, completion: nil)
     }
     
     @IBAction func authenticate(_ sender: Any) {
@@ -242,12 +211,6 @@ class SettingsViewController: UITableViewController {
                 deselectRow(sender: sender)
                 return false
             }
-            
-            if !Application.shared.serviceStatus.isActive && !Application.shared.serviceStatus.isLegacyAccount() {
-                present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
-                deselectRow(sender: sender)
-                return false
-            }
         }
         
         return true
@@ -271,6 +234,11 @@ class SettingsViewController: UITableViewController {
     
     @objc fileprivate func agreedToTermsOfService() {
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            return
+        }
+        
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        guard serviceType == .standard else {
             return
         }
         

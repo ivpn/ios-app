@@ -247,16 +247,13 @@ extension ControlPanelViewController {
         guard isNewStyleAccount else {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
-                "Retry",
-                "Switch to IVPN Pro"
+                "Retry"
             ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
                 case 1:
                     newSession()
-                case 2:
-                    openWebPageInBrowser(data.upgradeToUrl)
                 default:
                     break
                 }
@@ -268,8 +265,8 @@ extension ControlPanelViewController {
         let service = ServiceType.getType(currentPlan: data.currentPlan)
         let deviceManagement = data.deviceManagement
         
-        // Device Management enabled, Pro plan
-        if deviceManagement && service == .pro {
+        // Device Management enabled, Plus|Pro plan
+        if deviceManagement && service != .standard {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
@@ -290,8 +287,8 @@ extension ControlPanelViewController {
             return
         }
         
-        // Device Management disabled, Pro plan
-        if !deviceManagement && service == .pro {
+        // Device Management disabled, Plus|Pro plan
+        if !deviceManagement && service != .standard {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Enable Device Management",
@@ -318,7 +315,7 @@ extension ControlPanelViewController {
                 "Log out from all devices",
                 "Visit Device Management",
                 "Retry",
-                "Upgrade for 7 devices"
+                "Upgrade your subscription"
             ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
                 switch index {
                 case 0:
@@ -343,7 +340,7 @@ extension ControlPanelViewController {
                 "Log out from all devices",
                 "Enable Device Management",
                 "Retry",
-                "Upgrade for 7 devices"
+                "Upgrade your subscription"
             ], cancelAction: "Cancel login", sourceView: self.controlPanelView.connectSwitch) { [self] index in
                 switch index {
                 case 0:
