@@ -28,6 +28,7 @@ struct AccountViewModel {
     // MARK: - Properties -
     
     var serviceStatus: ServiceStatus
+    var serviceType: ServiceType
     var authentication: Authentication
     
     var accountId: String {
@@ -62,11 +63,16 @@ struct AccountViewModel {
         return deviceManagement && deviceName != nil
     }
     
+    var showAddMoreTime: Bool {
+        return serviceType == .standard && !Application.shared.serviceStatus.isLegacyAccount()
+    }
+    
     // MARK: - Initialize -
     
     init(serviceStatus: ServiceStatus, authentication: Authentication) {
         self.serviceStatus = serviceStatus
         self.authentication = authentication
+        self.serviceType = ServiceType.getType(currentPlan: serviceStatus.currentPlan)
     }
     
 }

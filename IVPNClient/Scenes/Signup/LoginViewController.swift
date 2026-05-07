@@ -290,9 +290,13 @@ extension LoginViewController {
         KeyChain.username = (self.userName.text ?? "").trim()
         
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
-            navigationController?.dismiss(animated: true, completion: {
-                NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
-            })
+            createSessionSuccess()
+            return
+        }
+        
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        guard serviceType == .standard else {
+            createSessionSuccess()
             return
         }
         
@@ -311,7 +315,18 @@ extension LoginViewController {
         KeyChain.tempUsername = (self.userName.text ?? "").trim()
         Application.shared.authentication.removeStoredCredentials()
         
-        let viewController = NavigationManager.getSelectPlanViewController()
+        guard !Application.shared.serviceStatus.isLegacyAccount() else {
+            createSessionSuccess()
+            return
+        }
+        
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        guard serviceType == .standard else {
+            createSessionSuccess()
+            return
+        }
+        
+        let viewController = NavigationManager.getSubscriptionViewController()
         viewController.presentationController?.delegate = self
         present(viewController, animated: true, completion: nil)
         
@@ -407,16 +422,13 @@ extension LoginViewController {
         guard isNewStyleAccount else {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
-                "Retry",
-                "Switch to IVPN Pro"
+                "Retry"
             ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
                     forceNewSession()
                 case 1:
                     newSession()
-                case 2:
-                    openWebPageInBrowser(data.upgradeToUrl)
                 default:
                     break
                 }
@@ -428,8 +440,8 @@ extension LoginViewController {
         let service = ServiceType.getType(currentPlan: data.currentPlan)
         let deviceManagement = data.deviceManagement
         
-        // Device Management enabled, Pro plan
-        if deviceManagement && service == .pro {
+        // Device Management enabled, Plus|Pro plan
+        if deviceManagement && service != .standard {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Visit Device Management",
@@ -450,8 +462,8 @@ extension LoginViewController {
             return
         }
         
-        // Device Management disabled, Pro plan
-        if !deviceManagement && service == .pro {
+        // Device Management disabled, Plus|Pro plan
+        if !deviceManagement && service != .standard {
             showActionSheet(title: message, actions: [
                 "Log out from all devices",
                 "Enable Device Management",
@@ -478,7 +490,7 @@ extension LoginViewController {
                 "Log out from all devices",
                 "Visit Device Management",
                 "Retry",
-                "Switch to IVPN Pro"
+                "Upgrade your subscription"
             ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:
@@ -503,7 +515,7 @@ extension LoginViewController {
                 "Log out from all devices",
                 "Enable Device Management",
                 "Retry",
-                "Switch to IVPN Pro"
+                "Upgrade your subscription"
             ], cancelAction: "Cancel login", sourceView: self.userName, permittedArrowDirections: [.up]) { [self] index in
                 switch index {
                 case 0:

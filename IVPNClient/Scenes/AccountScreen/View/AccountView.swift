@@ -30,7 +30,6 @@ class AccountView: UITableView {
     @IBOutlet weak var qrCodeImage: UIImageView!
     @IBOutlet weak var accountIdLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var activeUntilLabel: UILabel!
     @IBOutlet weak var logOutActionButton: UIButton!
     @IBOutlet weak var activeUntilCell: UITableViewCell!
@@ -38,6 +37,13 @@ class AccountView: UITableView {
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var header: UIView!
     @IBOutlet weak var hideAccountButton: UIButton!
+    @IBOutlet weak var subscriptionLabel: UILabel!
+    @IBOutlet weak var subscriptionDescLabel: UILabel!
+    @IBOutlet weak var altTitleOneLabel: UILabel!
+    @IBOutlet weak var altDescOneLabel: UILabel!
+    @IBOutlet weak var altTitleTwoLabel: UILabel!
+    @IBOutlet weak var altDescTwoLabel: UILabel!
+    @IBOutlet weak var addTimeButton: UIButton!
     
     // MARK: - Properties -
     
@@ -50,13 +56,19 @@ class AccountView: UITableView {
         accountIdLabel.text = viewModel.accountId
         statusLabel.text = viewModel.statusText
         statusLabel.backgroundColor = viewModel.statusColor
-        subscriptionLabel.text = viewModel.subscriptionText
         activeUntilLabel.text = viewModel.activeUntilText
-        activeUntilCell.isHidden = Application.shared.serviceStatus.isLegacyAccount()
         deviceName.text = viewModel.deviceName
         deviceNameTitle.isHidden = !viewModel.showDeviceName
         deviceName.isHidden = !viewModel.showDeviceName
-        let headerHeight = viewModel.showDeviceName ? 270 : 210
+        subscriptionLabel.text = viewModel.subscriptionText
+        subscriptionDescLabel.text = viewModel.serviceType.getDesc(plans: viewModel.serviceStatus.availablePlans ?? [])
+        subscriptionDescLabel.isHidden = Application.shared.serviceStatus.isLegacyAccount()
+        altTitleOneLabel.text = viewModel.serviceType.getAltTitleOne()
+        altDescOneLabel.text = viewModel.serviceType.getAltDescOne(plans: viewModel.serviceStatus.availablePlans ?? [])
+        altTitleTwoLabel.text = viewModel.serviceType.getAltTitleTwo()
+        altDescTwoLabel.text = viewModel.serviceType.getAltDescTwo(plans: viewModel.serviceStatus.availablePlans ?? [])
+        addTimeButton.isHidden = !viewModel.showAddMoreTime
+        let headerHeight = viewModel.showDeviceName ? 245 : 210
         header.frame = CGRect(x: 0, y: 0, width: Int(header.frame.width), height: headerHeight)
         reloadData()
         layoutIfNeeded()

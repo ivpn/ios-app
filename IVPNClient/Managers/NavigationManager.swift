@@ -47,32 +47,6 @@ class NavigationManager {
         return navController!
     }
     
-    static func getChangePlanViewController() -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        let navController = storyBoard.instantiateViewController(withIdentifier: "selectPlanView") as? UINavigationController
-        navController?.modalPresentationStyle = .formSheet
-        
-        if let viewController = navController?.topViewController as? SelectPlanViewController {
-            let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-            viewController.changingPlan = true
-            viewController.service = Service(type: serviceType, duration: .month)
-        }
-        
-        return navController!
-    }
-    
-    static func getSelectPlanViewController() -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
-        let navController = storyBoard.instantiateViewController(withIdentifier: "selectPlanView") as? UINavigationController
-        navController?.modalPresentationStyle = .formSheet
-        
-        if let viewController = navController?.topViewController as? SelectPlanViewController {
-            viewController.selectingPlan = true
-        }
-        
-        return navController!
-    }
-    
     static func getSubscriptionViewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Signup", bundle: nil)
         let navController = storyBoard.instantiateViewController(withIdentifier: "subscriptionView") as? UINavigationController
@@ -91,12 +65,6 @@ class NavigationManager {
         let storyBoard = UIStoryboard(name: "Initial", bundle: nil)
         
         return storyBoard.instantiateViewController(withIdentifier: "termsOfServiceView")
-    }
-    
-    static func getUpgradePlanViewController() -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        
-        return storyBoard.instantiateViewController(withIdentifier: "upgradePlanView")
     }
     
     static func getSettingsViewController() -> UIViewController {

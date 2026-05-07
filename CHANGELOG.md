@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.14.0 - 2026-05-07  
+
+[NEW] Added support for the new signup flow  
+
 ## 2.13.1 - 2026-02-27  
 
 [FIXED] "Save" button not working in Custom DNS settings  

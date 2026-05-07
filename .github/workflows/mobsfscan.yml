@@ -5,13 +5,16 @@ on:
     branches: [ "main", "develop" ]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     name: mobsfscan
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
     - name: mobsfscan
-      uses: MobSF/mobsfscan@main
+      uses: MobSF/mobsfscan@ec2927a8cfab6626a67f26b223be3aba52a34b70 # main
       with:
         args: '. --json'

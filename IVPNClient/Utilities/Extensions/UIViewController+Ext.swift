@@ -240,15 +240,26 @@ extension UIViewController {
     
     func evaluateIsServiceActive() -> Bool {
         guard Application.shared.serviceStatus.isActive else {
-            if !Application.shared.serviceStatus.isLegacyAccount() {
-                let viewController = NavigationManager.getSubscriptionViewController()
-                viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
-                present(viewController, animated: true, completion: nil)
-            }
+            handleInactiveService()
             return false
         }
         
         return true
+    }
+    
+    private func handleInactiveService() {
+        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+        if serviceType == .standard && !Application.shared.serviceStatus.isLegacyAccount() {
+            presentSubscriptionViewController()
+        } else {
+            showAlert(title: "Your account is expired", message: "Please renew your account to use this feature.")
+        }
+    }
+    
+    func presentSubscriptionViewController() {
+        let viewController = NavigationManager.getSubscriptionViewController()
+        viewController.presentationController?.delegate = self as? UIAdaptivePresentationControllerDelegate
+        present(viewController, animated: true, completion: nil)
     }
     
     func deviceCanMakePurchases() -> Bool {
@@ -317,15 +328,6 @@ extension UIViewController {
     func evaluateHasUserConsent() -> Bool {
         guard UserDefaults.shared.hasUserConsent else {
             present(NavigationManager.getTermsOfServiceViewController(), animated: true, completion: nil)
-            return false
-        }
-        
-        return true
-    }
-    
-    func evaluateMultiHopCapability(_ sender: Any) -> Bool {
-        guard Application.shared.serviceStatus.isEnabled(capability: .multihop) else {
-            showAlert(title: "", message: "MultiHop is supported only on IVPN Pro plan")
             return false
         }
         

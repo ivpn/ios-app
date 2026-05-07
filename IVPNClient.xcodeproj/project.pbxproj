@@ -12,7 +12,6 @@
 		4ED68D7A2E6F70FE009A6D96 /* V2rayConfigBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED68D792E6F70F8009A6D96 /* V2rayConfigBuilder.swift */; };
 		820079F42407D96D00EC2062 /* ConnectionInfoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */; };
 		8201A5022354A32F008C83DB /* ErrorResultSessionNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */; };
-		8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201A5032356536B008C83DB /* UpgradePlanViewController.swift */; };
 		820203932186EE0E00D756AA /* WireGuardSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */; };
 		82052E5629C1D83700227CF9 /* MTUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82052E5529C1D83700227CF9 /* MTUViewController.swift */; };
 		820535282302B9D7007BDD58 /* APIAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820535272302B9D7007BDD58 /* APIAccessManager.swift */; };
@@ -176,8 +175,6 @@
 		82989FDE2188981900F7EBE0 /* AppKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82989FDD2188981900F7EBE0 /* AppKeyManager.swift */; };
 		829AA4732267372A00037198 /* Designable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AA4722267372A00037198 /* Designable+Ext.swift */; };
 		829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829D2C8121664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift */; };
-		829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27B2497949A000DC2DB /* PlanLabel.swift */; };
-		829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF27C2497949A000DC2DB /* SelectPlanView.swift */; };
 		829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DF2812497953C000DC2DB /* UIButton+Ext.swift */; };
 		829F5EAF2A56E067005919AF /* AntiTrackerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */; };
 		829F5EB02A570322005919AF /* AntiTrackerDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825ECB2B2A5582570032E986 /* AntiTrackerDns.swift */; };
@@ -277,7 +274,6 @@
 		82DEF01E244714D900CCB5CD /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF01D244714D900CCB5CD /* ScannerViewController.swift */; };
 		82DEF021244714F000CCB5CD /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF020244714F000CCB5CD /* ScannerView.swift */; };
 		82DEF0262447285F00CCB5CD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */; };
-		82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */; };
 		82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0292447288100CCB5CD /* PaymentViewController.swift */; };
 		82DEFFA62452DE5100ECB482 /* MapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEFFA52452DE5100ECB482 /* MapConstants.swift */; };
 		82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */; };
@@ -467,7 +463,6 @@
 		751AB84B8432BC3E6BEDD483 /* Pods_today_extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_today_extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		820079F32407D96D00EC2062 /* ConnectionInfoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoBoxView.swift; sourceTree = "<group>"; };
 		8201A5012354A32F008C83DB /* ErrorResultSessionNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResultSessionNew.swift; sourceTree = "<group>"; };
-		8201A5032356536B008C83DB /* UpgradePlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradePlanViewController.swift; sourceTree = "<group>"; };
 		820203922186EE0E00D756AA /* WireGuardSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardSettingsViewController.swift; sourceTree = "<group>"; };
 		82052E5529C1D83700227CF9 /* MTUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUViewController.swift; sourceTree = "<group>"; };
 		820535272302B9D7007BDD58 /* APIAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManager.swift; sourceTree = "<group>"; };
@@ -612,8 +607,6 @@
 		82989FE121898E4400F7EBE0 /* JGProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JGProgressHUD.framework; path = ../Carthage/Build/iOS/JGProgressHUD.framework; sourceTree = "<group>"; };
 		829AA4722267372A00037198 /* Designable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Designable+Ext.swift"; sourceTree = "<group>"; };
 		829D2C8121664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Ext.swift"; sourceTree = "<group>"; };
-		829DF27B2497949A000DC2DB /* PlanLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanLabel.swift; sourceTree = "<group>"; };
-		829DF27C2497949A000DC2DB /* SelectPlanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPlanView.swift; sourceTree = "<group>"; };
 		829DF2812497953C000DC2DB /* UIButton+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		829F5EAE2A56E067005919AF /* AntiTrackerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiTrackerListViewController.swift; sourceTree = "<group>"; };
 		82A160B8221C4E2000730577 /* Server+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -690,7 +683,6 @@
 		82DEF01D244714D900CCB5CD /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		82DEF020244714F000CCB5CD /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlanViewController.swift; sourceTree = "<group>"; };
 		82DEF0292447288100CCB5CD /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		82DEFFA52452DE5100ECB482 /* MapConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConstants.swift; sourceTree = "<group>"; };
 		82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManagerTests.swift; sourceTree = "<group>"; };
@@ -1230,15 +1222,6 @@
 			path = WireGuard;
 			sourceTree = "<group>";
 		};
-		829DF27A2497949A000DC2DB /* View */ = {
-			isa = PBXGroup;
-			children = (
-				829DF27B2497949A000DC2DB /* PlanLabel.swift */,
-				829DF27C2497949A000DC2DB /* SelectPlanView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		829FBF702431E69300C84246 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1280,7 +1263,6 @@
 				8221377A2227E75E001E1BF5 /* CustomDNSViewController.swift */,
 				8269CAC22264962F00CF488A /* AntiTrackerViewController.swift */,
 				82F917382344861A0025ED3A /* TermsOfServiceViewController.swift */,
-				8201A5032356536B008C83DB /* UpgradePlanViewController.swift */,
 				821CA2D6287C5AB20067F70D /* PortViewController.swift */,
 				82AB0874291A6B5F0084625A /* AddCustomPortViewController.swift */,
 				82052E5529C1D83700227CF9 /* MTUViewController.swift */,
@@ -1476,7 +1458,6 @@
 			children = (
 				82DEF01C244714B300CCB5CD /* Scanner */,
 				82DEF0222447280300CCB5CD /* CreateAccount */,
-				82DEF0232447281900CCB5CD /* SelectPlan */,
 				82DEF0242447282E00CCB5CD /* Payment */,
 				9C2833751D9D3F060024C553 /* LoginViewController.swift */,
 				828D8A6C258245AD00CB0E5B /* TwoFactorViewController.swift */,
@@ -1509,15 +1490,6 @@
 				82DEF0252447285F00CCB5CD /* CreateAccountViewController.swift */,
 			);
 			path = CreateAccount;
-			sourceTree = "<group>";
-		};
-		82DEF0232447281900CCB5CD /* SelectPlan */ = {
-			isa = PBXGroup;
-			children = (
-				829DF27A2497949A000DC2DB /* View */,
-				82DEF0272447287000CCB5CD /* SelectPlanViewController.swift */,
-			);
-			path = SelectPlan;
 			sourceTree = "<group>";
 		};
 		82DEF0242447282E00CCB5CD /* Payment */ = {
@@ -2273,7 +2245,6 @@
 				8292E1A72174C10700123538 /* Peer.swift in Sources */,
 				820EA86E232264EC00E16B2D /* SuccessResult.swift in Sources */,
 				82D6AA1B215E167C00F21CAA /* UIViewController+Ext.swift in Sources */,
-				829DF27D2497949A000DC2DB /* PlanLabel.swift in Sources */,
 				826C56D222FD4F2600D2B76A /* ServiceStatus.swift in Sources */,
 				82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */,
 				8206F32324367A240056B465 /* VPNErrorObserver.swift in Sources */,
@@ -2282,7 +2253,6 @@
 				8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */,
 				82D598C021A6991B000FABDE /* NetworkManager.swift in Sources */,
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
-				82DEF0282447287000CCB5CD /* SelectPlanViewController.swift in Sources */,
 				826C1F8425DBEF1800314C4B /* DNSManager.swift in Sources */,
 				8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */,
 				82F917392344861A0025ED3A /* TermsOfServiceViewController.swift in Sources */,
@@ -2295,10 +2265,8 @@
 				822BC68A2A7CF3A700C733DF /* Decodable+Ext.swift in Sources */,
 				829D2C8221664D5E004FA2B3 /* NSMutableAttributedString+Ext.swift in Sources */,
 				820535282302B9D7007BDD58 /* APIAccessManager.swift in Sources */,
-				829DF27E2497949A000DC2DB /* SelectPlanView.swift in Sources */,
 				82BBF27121AECC8100589766 /* UILabel+Ext.swift in Sources */,
 				8252747E21F1F80400D4B8B5 /* ServerViewController.swift in Sources */,
-				8201A5042356536B008C83DB /* UpgradePlanViewController.swift in Sources */,
 				823ACC312626FF3E006F69AB /* IpProtocolView.swift in Sources */,
 				8208525C23FD64160008C112 /* MainViewController+Ext.swift in Sources */,
 				82C1D5BF23FE8C6D0059A915 /* ControlPanelViewController.swift in Sources */,
