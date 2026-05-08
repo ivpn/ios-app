@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.14.1 - 2026-05-07  
+
+[FIXED] In-app purchases not displayed on the signup screen  
+
 ## 2.14.0 - 2026-05-07  
 
 [NEW] Added support for the new signup flow  
