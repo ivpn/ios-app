@@ -137,9 +137,9 @@ class PaymentViewController: UITableViewController {
                 let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
                 service = Service(type: serviceType, duration: .year)
             }
-            
-            load()
         }
+        
+        load()
     }
     
     // MARK: - Private methods -
