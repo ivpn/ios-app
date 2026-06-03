@@ -290,13 +290,9 @@ extension LoginViewController {
         KeyChain.username = (self.userName.text ?? "").trim()
         
         guard !Application.shared.serviceStatus.isLegacyAccount() else {
-            createSessionSuccess()
-            return
-        }
-        
-        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-        guard serviceType == .standard else {
-            createSessionSuccess()
+            navigationController?.dismiss(animated: true, completion: {
+               NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+           })
             return
         }
         
@@ -315,18 +311,7 @@ extension LoginViewController {
         KeyChain.tempUsername = (self.userName.text ?? "").trim()
         Application.shared.authentication.removeStoredCredentials()
         
-        guard !Application.shared.serviceStatus.isLegacyAccount() else {
-            createSessionSuccess()
-            return
-        }
-        
-        let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-        guard serviceType == .standard else {
-            createSessionSuccess()
-            return
-        }
-        
-        let viewController = NavigationManager.getSubscriptionViewController()
+        let viewController = NavigationManager.getSelectPlanViewController()
         viewController.presentationController?.delegate = self
         present(viewController, animated: true, completion: nil)
         

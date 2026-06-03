@@ -249,7 +249,7 @@ extension UIViewController {
     
     private func handleInactiveService() {
         let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-        if serviceType == .standard && !Application.shared.serviceStatus.isLegacyAccount() {
+        if (serviceType == .standard || serviceType == .pro) && !Application.shared.serviceStatus.isLegacyAccount() {
             presentSubscriptionViewController()
         } else {
             showAlert(title: "Your account is expired", message: "Please renew your account to use this feature.")

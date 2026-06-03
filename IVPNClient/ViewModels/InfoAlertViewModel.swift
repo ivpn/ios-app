@@ -57,7 +57,7 @@ class InfoAlertViewModel {
         switch infoAlert {
         case .subscriptionExpiration:
             let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-            if serviceType != .standard || Application.shared.serviceStatus.isLegacyAccount() {
+            if serviceType == .plus || Application.shared.serviceStatus.isLegacyAccount() {
                 return ""
             }
             return "RENEW"

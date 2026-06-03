@@ -238,7 +238,7 @@ class SettingsViewController: UITableViewController {
         }
         
         let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-        guard serviceType == .standard else {
+        guard (serviceType == .standard || serviceType == .pro) else {
             return
         }
         

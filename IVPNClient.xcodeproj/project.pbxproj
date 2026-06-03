@@ -287,6 +287,9 @@
 		82E3B21E29DDD32B00998F67 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E3B21D29DDD32B00998F67 /* MainView.swift */; };
 		82E4FCB023D71FDF00BEBA1A /* UIApplication+ExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */; };
 		82E5449224EE584E006DEF8D /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */; };
+		82E6C0382FD06C550024F094 /* SelectPlanViewController.swift‎.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E6C0372FD06C530024F094 /* SelectPlanViewController.swift‎.swift */; };
+		82E6C03A2FD06C750024F094 /* SelectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E6C0392FD06C720024F094 /* SelectPlanView.swift */; };
+		82E6C03C2FD06C840024F094 /* PlanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E6C03B2FD06C830024F094 /* PlanLabel.swift */; };
 		82E7167E2181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
 		82E716812181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
 		82E716822181E8AF00D6B7C2 /* TunnelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */; };
@@ -697,6 +700,9 @@
 		82E3B21D29DDD32B00998F67 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		82E4FCAF23D71FDF00BEBA1A /* UIApplication+ExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ExtTests.swift"; sourceTree = "<group>"; };
 		82E5449124EE584E006DEF8D /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
+		82E6C0372FD06C530024F094 /* SelectPlanViewController.swift‎.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectPlanViewController.swift‎.swift"; sourceTree = "<group>"; };
+		82E6C0392FD06C720024F094 /* SelectPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlanView.swift; sourceTree = "<group>"; };
+		82E6C03B2FD06C830024F094 /* PlanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanLabel.swift; sourceTree = "<group>"; };
 		82E7167D2181E8AF00D6B7C2 /* TunnelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunnelType.swift; sourceTree = "<group>"; };
 		82E716832181E8E100D6B7C2 /* ProviderConfigurationKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderConfigurationKeys.swift; sourceTree = "<group>"; };
 		82E716892181E8E900D6B7C2 /* WireGuardProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WireGuardProtocol.swift; sourceTree = "<group>"; };
@@ -1456,6 +1462,7 @@
 		82DEF01B2447149000CCB5CD /* Signup */ = {
 			isa = PBXGroup;
 			children = (
+				82E6C0352FD06C370024F094 /* SelectPlan */,
 				82DEF01C244714B300CCB5CD /* Scanner */,
 				82DEF0222447280300CCB5CD /* CreateAccount */,
 				82DEF0242447282E00CCB5CD /* Payment */,
@@ -1539,6 +1546,24 @@
 				82E3B21D29DDD32B00998F67 /* MainView.swift */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		82E6C0352FD06C370024F094 /* SelectPlan */ = {
+			isa = PBXGroup;
+			children = (
+				82E6C0372FD06C530024F094 /* SelectPlanViewController.swift‎.swift */,
+				82E6C0362FD06C420024F094 /* View */,
+			);
+			path = SelectPlan;
+			sourceTree = "<group>";
+		};
+		82E6C0362FD06C420024F094 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82E6C03B2FD06C830024F094 /* PlanLabel.swift */,
+				82E6C0392FD06C720024F094 /* SelectPlanView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		82E81AE52449C42C00D81FB7 /* View */ = {
@@ -2252,6 +2277,7 @@
 				822B85D921B941A200715691 /* NotificationName+Ext.swift in Sources */,
 				8290195F243CB27500777B6E /* ControlPanelView.swift in Sources */,
 				82D598C021A6991B000FABDE /* NetworkManager.swift in Sources */,
+				82E6C03A2FD06C750024F094 /* SelectPlanView.swift in Sources */,
 				82D598AC21A566CD000FABDE /* NetworkProtectionTableViewCell.swift in Sources */,
 				826C1F8425DBEF1800314C4B /* DNSManager.swift in Sources */,
 				8208525623FD56870008C112 /* FloatingPanelMainLayout.swift in Sources */,
@@ -2286,6 +2312,7 @@
 				82FF0D442315587000440E5D /* UITextFieldPadding.swift in Sources */,
 				8243584425DAA7BD005FDEBB /* SecureDNSViewController.swift in Sources */,
 				82BBF26D21AE95C000589766 /* UIApplication+Ext.swift in Sources */,
+				82E6C03C2FD06C840024F094 /* PlanLabel.swift in Sources */,
 				82B329CB29F7C9F400F3ED9B /* UIWindow+Ext.swift in Sources */,
 				82C973A0217DFA9C00CE06D4 /* Host.swift in Sources */,
 				82A160BA221C4E2000730577 /* Server+CoreDataClass.swift in Sources */,
@@ -2390,6 +2417,7 @@
 				821CA2D7287C5AB20067F70D /* PortViewController.swift in Sources */,
 				82061F66238D2730009DDF4D /* ICMPHeader.swift in Sources */,
 				824BC466240906ED00A61B29 /* VPNStatusViewModel.swift in Sources */,
+				82E6C0382FD06C550024F094 /* SelectPlanViewController.swift‎.swift in Sources */,
 				8247E1DE22687C28006C0C08 /* ProductId.swift in Sources */,
 				829DF2822497953C000DC2DB /* UIButton+Ext.swift in Sources */,
 				82234B6721BA7F3500B082DE /* Logger.swift in Sources */,
