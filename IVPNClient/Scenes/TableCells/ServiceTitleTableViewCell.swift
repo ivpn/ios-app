@@ -26,6 +26,7 @@ import UIKit
 class ServiceTitleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var changeButton: UIButton!
     
     var service: Service! {
         didSet {
