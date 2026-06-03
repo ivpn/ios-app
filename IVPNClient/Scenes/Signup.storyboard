@@ -346,7 +346,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uO8-pu-q5K">
                                                             <rect key="frame" x="0.0" y="0.0" width="380" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN STANDARD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zA-L8-EEN">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Standard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zA-L8-EEN">
                                                                     <rect key="frame" x="0.0" y="0.0" width="140" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="Jk7-wY-NV8"/>
@@ -495,7 +495,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Pv0-Ty-bKE">
                                                             <rect key="frame" x="0.0" y="0.0" width="380" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN PRO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x86-70-UiG">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Pro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x86-70-UiG">
                                                                     <rect key="frame" x="0.0" y="0.0" width="86" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="WDS-6C-OkV"/>
@@ -670,7 +670,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select IVPN Plan" id="GNb-Zt-1xj">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-2" style="done" id="ThM-nh-AQD"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-2" style="plain" id="ThM-nh-AQD"/>
                     </navigationItem>
                     <connections>
                         <outlet property="selectPlanView" destination="WSh-pq-wUH" id="sou-WB-jAQ"/>
@@ -780,7 +780,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSt-lx-3LK" customClass="PaymentComponentView" customModule="IVPNClient" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN STANDARD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-hH-oiJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Standard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-hH-oiJ">
                                                     <rect key="frame" x="17" y="17" width="150" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="EZR-5y-hs6"/>
@@ -920,7 +920,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Payment" id="Pcw-dt-qz8">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="done" id="QSt-8p-kF2"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon-step-3" style="plain" id="QSt-8p-kF2"/>
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionLabel" destination="TnB-3p-pAb" id="hbn-63-098"/>
