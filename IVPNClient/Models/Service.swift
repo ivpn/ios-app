@@ -126,7 +126,7 @@ struct Service {
         case .standard:
             return "Standard"
         case .pro:
-            return "Pro"
+            return "Pro Suite"
         case .plus:
             return "Plus"
         }

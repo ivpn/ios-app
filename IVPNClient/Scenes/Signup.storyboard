@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -23,10 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="mLW-w8-CLX">
-                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
+                                <rect key="frame" x="0.0" y="150" width="414" height="678"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYK-dw-X2I" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="678"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wsH-wX-xZq">
                                                 <rect key="frame" x="69" y="62" width="276" height="50"/>
@@ -120,7 +120,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34F-JE-p7Q">
-                                                <rect key="frame" x="127" y="690" width="160" height="50"/>
+                                                <rect key="frame" x="127" y="598" width="160" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="160" id="q4A-Lk-rxj"/>
                                                     <constraint firstAttribute="height" constant="50" id="raU-x7-jT2"/>
@@ -193,7 +193,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5og-hw-zWP">
-                                <rect key="frame" x="67" y="782" width="280" height="50"/>
+                                <rect key="frame" x="67" y="748" width="280" height="50"/>
                                 <color key="backgroundColor" name="ivpnBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xTT-8z-OBG"/>
@@ -333,15 +333,15 @@
                         <sections>
                             <tableViewSection id="Lj8-rs-5LY">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="226" id="88p-3D-F4q">
-                                        <rect key="frame" x="0.0" y="115" width="414" height="226"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="240" id="88p-3D-F4q">
+                                        <rect key="frame" x="0.0" y="115" width="414" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="88p-3D-F4q" id="Grr-60-n61">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="226"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qOY-q9-zA8">
-                                                    <rect key="frame" x="17" y="24" width="380" height="178"/>
+                                                    <rect key="frame" x="17" y="24" width="380" height="192"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uO8-pu-q5K">
                                                             <rect key="frame" x="0.0" y="0.0" width="380" height="20"/>
@@ -383,7 +383,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bIs-mY-bng">
-                                                            <rect key="frame" x="0.0" y="39.5" width="380" height="74"/>
+                                                            <rect key="frame" x="0.0" y="46.5" width="380" height="74"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ioU-uK-8Jj">
                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="18"/>
@@ -411,7 +411,7 @@
                                                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng0-0q-gPT" customClass="PlanLabel" customModule="IVPNClient" customModuleProvider="target">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng0-0q-gPT" customClass="PlanLabel" customModule="IVPNClient" customModuleProvider="target">
                                                                             <rect key="frame" x="190" y="0.0" width="190" height="18"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <color key="textColor" name="ivpnLabel5"/>
@@ -423,15 +423,9 @@
                                                                     <rect key="frame" x="0.0" y="56" width="380" height="18"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0 / year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwG-Vp-sA9">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="18"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="18"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                                             <color key="textColor" name="ivpnLabelPrimary"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AntiTracker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxI-T3-HbU" customClass="PlanLabel" customModule="IVPNClient" customModuleProvider="target">
-                                                                            <rect key="frame" x="190" y="0.0" width="190" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <color key="textColor" name="ivpnLabel5"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -439,7 +433,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XD2-I9-v30">
-                                                            <rect key="frame" x="0.0" y="133" width="380" height="45"/>
+                                                            <rect key="frame" x="0.0" y="147" width="380" height="45"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tf-CF-xHh">
                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="45"/>
@@ -482,31 +476,31 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="260" id="GrT-ru-LnQ">
-                                        <rect key="frame" x="0.0" y="341" width="414" height="260"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="240" id="GrT-ru-LnQ">
+                                        <rect key="frame" x="0.0" y="355" width="414" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GrT-ru-LnQ" id="Uc3-Xd-uPE">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2Ea-Dw-ewM">
-                                                    <rect key="frame" x="17" y="24" width="380" height="212"/>
+                                                    <rect key="frame" x="17" y="24" width="380" height="192"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Pv0-Ty-bKE">
                                                             <rect key="frame" x="0.0" y="0.0" width="380" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Pro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x86-70-UiG">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="86" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVPN Pro Suite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x86-70-UiG">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="WDS-6C-OkV"/>
-                                                                        <constraint firstAttribute="width" constant="86" id="dmz-TG-Oqb"/>
+                                                                        <constraint firstAttribute="width" constant="130" id="dmz-TG-Oqb"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                                     <color key="textColor" name="ivpnLabelPrimary"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILU-Ae-FAb">
-                                                                    <rect key="frame" x="86" y="1.5" width="62" height="17"/>
+                                                                    <rect key="frame" x="130" y="1.5" width="62" height="17"/>
                                                                     <color key="backgroundColor" name="ivpnGreen"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="62" id="LU0-db-Pfo"/>
@@ -523,7 +517,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FsA-xt-tNM">
-                                                                    <rect key="frame" x="86" y="0.0" width="294" height="20"/>
+                                                                    <rect key="frame" x="130" y="0.0" width="250" height="20"/>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="Bbl-85-GTS"/>
@@ -532,7 +526,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="geM-T7-F4m">
-                                                            <rect key="frame" x="0.0" y="42.5" width="380" height="102"/>
+                                                            <rect key="frame" x="0.0" y="46.5" width="380" height="74"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="epz-Iv-Q9C">
                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="18"/>
@@ -560,7 +554,7 @@
                                                                             <color key="textColor" name="ivpnLabelPrimary"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7 devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uev-ti-byI" customClass="PlanLabel" customModule="IVPNClient" customModuleProvider="target">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uev-ti-byI" customClass="PlanLabel" customModule="IVPNClient" customModuleProvider="target">
                                                                             <rect key="frame" x="190" y="0.0" width="190" height="18"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <color key="textColor" name="ivpnLabel5"/>
@@ -572,32 +566,9 @@
                                                                     <rect key="frame" x="0.0" y="56" width="380" height="18"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0 / year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5la-gi-OJq">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="18"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="18"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                                             <color key="textColor" name="ivpnLabelPrimary"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AntiTracker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVv-vL-GVN" customClass="PlanLabel" customModule="IVPNClient" customModuleProvider="target">
-                                                                            <rect key="frame" x="190" y="0.0" width="190" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <color key="textColor" name="ivpnLabel5"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                </stackView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="azR-f3-BQq">
-                                                                    <rect key="frame" x="0.0" y="84" width="380" height="18"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljz-zI-7wS">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                                            <color key="textColor" name="ivpnLabelPrimary"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Multi-Hop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDd-tx-ybQ" customClass="PlanLabel" customModule="IVPNClient" customModuleProvider="target">
-                                                                            <rect key="frame" x="190" y="0.0" width="190" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <color key="textColor" name="ivpnLabel5"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -605,7 +576,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXs-j3-QlD">
-                                                            <rect key="frame" x="0.0" y="167" width="380" height="45"/>
+                                                            <rect key="frame" x="0.0" y="147" width="380" height="45"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bka-2j-C1Y">
                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="45"/>
@@ -938,7 +909,7 @@
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rHQ-EK-bSh">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -963,7 +934,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find the QR Code in the client area of the IVPN website or in another IVPN client App." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWI-gs-0Hz">
-                                <rect key="frame" x="57" y="120" width="300" height="90"/>
+                                <rect key="frame" x="57" y="178" width="300" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="9K0-5D-rbb"/>
                                     <constraint firstAttribute="width" constant="300" id="laf-pe-L4Y"/>
@@ -973,7 +944,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQa-b7-cZc">
-                                <rect key="frame" x="0.0" y="255" width="414" height="641"/>
+                                <rect key="frame" x="0.0" y="313" width="414" height="583"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JUN-Az-Acd"/>
@@ -1013,7 +984,7 @@
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2DR-73-ZHo">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1032,7 +1003,7 @@
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="E9p-k0-02K">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1052,7 +1023,7 @@
                     <navigationItem key="navigationItem" id="510-bm-h3Z"/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CwZ-xv-Dyg">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1072,7 +1043,7 @@
                     <navigationItem key="navigationItem" id="5p8-uh-4A4"/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fwt-Vh-aQ1">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1097,10 +1068,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="aFo-4M-4x3">
-                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
+                                <rect key="frame" x="0.0" y="150" width="414" height="678"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inu-6x-BUa" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="678"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWX-2b-S2y">
                                                 <rect key="frame" x="69" y="82" width="276" height="50"/>
@@ -1218,10 +1189,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="AOo-dY-xFe">
-                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
+                                <rect key="frame" x="0.0" y="150" width="414" height="678"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Wc-44-z61" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="678"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnO-Pm-4Fi">
                                                 <rect key="frame" x="69" y="168" width="276" height="50"/>
@@ -1365,7 +1336,7 @@
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wHZ-yq-cXd">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1384,7 +1355,7 @@
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1P7-QA-y66">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1403,7 +1374,7 @@
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="540" height="700"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9l-K7-EBj">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
