@@ -256,11 +256,7 @@ extension SelectPlanViewController {
             return 0
         }
         
-        if indexPath.row == 1 {
-            return 260
-        }
-        
-        return 226
+        return 240
     }
     
 }
