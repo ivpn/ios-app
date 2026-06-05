@@ -101,7 +101,7 @@ class PurchaseManager: NSObject {
         case .userCancelled:
             // ^^^
             log(.info, message: "[Store] Purchase \(productId): userCancelled")
-            delegate?.purchaseError(error: ErrorResult(status: 500, message: "User canelled the purchase."))
+            delegate?.purchaseError(error: ErrorResult(status: 500, message: "User cancelled the purchase."))
             break
         @unknown default:
             break
