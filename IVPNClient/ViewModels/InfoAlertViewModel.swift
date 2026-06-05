@@ -117,6 +117,11 @@ extension InfoAlertViewModel: InfoAlertViewDelegate {
         
         switch infoAlert {
         case .subscriptionExpiration:
+            let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
+            if serviceType == .plus || Application.shared.serviceStatus.isLegacyAccount() {
+                return
+            }
+            
             if let topViewController = UIApplication.topViewController() as? MainViewController {
                 topViewController.present(NavigationManager.getSubscriptionViewController(), animated: true, completion: nil)
             }
