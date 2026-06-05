@@ -168,7 +168,9 @@ class PurchaseManager: NSObject {
         ApiService.shared.requestCustomError(request) { (result: ResultCustomError<SessionStatus, ErrorResult>) in
             switch result {
             case .success(let sessionStatus):
-                Application.shared.serviceStatus = sessionStatus.serviceStatus
+                Application.shared.serviceStatus.isActive = sessionStatus.serviceStatus.isActive
+                Application.shared.serviceStatus.activeUntil = sessionStatus.serviceStatus.activeUntil
+                Application.shared.serviceStatus.currentPlan = sessionStatus.serviceStatus.currentPlan
                 Task {
                     await transaction.finish()
                     self.delegate?.purchaseSuccess(activeUntil: sessionStatus.serviceStatus.activeUntilString(), extended: sessionStatus.extended ?? !sessionStatus.serviceStatus.isNewStyleAccount())
