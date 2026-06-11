@@ -295,8 +295,11 @@ extension LoginViewController {
         }
         
         let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-        guard serviceType == .standard else {
+        guard (serviceType == .standard || serviceType == .pro) else {
             createSessionSuccess()
+            navigationController?.dismiss(animated: true, completion: {
+               NotificationCenter.default.post(name: Notification.Name.UpdateFloatingPanelLayout, object: nil)
+           })
             return
         }
         
@@ -321,12 +324,12 @@ extension LoginViewController {
         }
         
         let serviceType = ServiceType.getType(currentPlan: Application.shared.serviceStatus.currentPlan)
-        guard serviceType == .standard else {
+        guard (serviceType == .standard || serviceType == .pro) else {
             createSessionSuccess()
             return
         }
         
-        let viewController = NavigationManager.getSubscriptionViewController()
+        let viewController = NavigationManager.getSelectPlanViewController()
         viewController.presentationController?.delegate = self
         present(viewController, animated: true, completion: nil)
         

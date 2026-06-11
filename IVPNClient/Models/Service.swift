@@ -56,40 +56,90 @@ struct Service {
     }
     
     var discountText: String? {
-        switch duration {
-        case .week:
+        switch type {
+        case .standard:
+            switch duration {
+            case .week:
+                return nil
+            case .month:
+                return nil
+            case .year:
+                return "-16%"
+            case .twoYears:
+                return "-30%"
+            case .threeYears:
+                return "-35%"
+            }
+        case .pro:
+            switch duration {
+            case .week:
+                return nil
+            case .month:
+                return nil
+            case .year:
+                return "-16%"
+            case .twoYears:
+                return "-33%"
+            case .threeYears:
+                return "-38%"
+            }
+        case .plus:
             return nil
-        case .month:
-            return nil
-        case .year:
-            return "-16%"
-        case .twoYears:
-            return "-30%"
-        case .threeYears:
-            return "-35%"
         }
     }
     
     var productId: String {
-        switch duration {
-        case .week:
-            return ProductId.standardWeek
-        case .month:
-            return ProductId.standardMonth
-        case .year:
-            return ProductId.standardYear
-        case .twoYears:
-            return ProductId.standardTwoYears
-        case .threeYears:
-            return ProductId.standardThreeYears
+        switch type {
+        case .standard:
+            switch duration {
+            case .week:
+                return ProductId.standardWeek
+            case .month:
+                return ProductId.standardMonth
+            case .year:
+                return ProductId.standardYear
+            case .twoYears:
+                return ProductId.standardTwoYears
+            case .threeYears:
+                return ProductId.standardThreeYears
+            }
+        case .pro:
+            switch duration {
+            case .week:
+                return ProductId.proWeek
+            case .month:
+                return ProductId.proMonth
+            case .year:
+                return ProductId.proYear
+            case .twoYears:
+                return ProductId.proTwoYears
+            case .threeYears:
+                return ProductId.proThreeYears
+            }
+        case .plus:
+            return ""
         }
     }
     
     var typeText: String {
-        return "Standard"
+        switch type {
+        case .standard:
+            return "Standard"
+        case .pro:
+            return "Pro Suite"
+        case .plus:
+            return "Plus"
+        }
     }
     
     var collection: [Service] {
+        if Application.shared.authentication.isLoggedIn && !Application.shared.serviceStatus.isNewStyleAccount() {
+            return [
+                Service(type: type, duration: .month),
+                Service(type: type, duration: .year)
+            ]
+        }
+        
         return ServiceDuration.allCases.map { Service(type: type, duration: $0) }
     }
     

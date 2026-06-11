@@ -1,9 +1,9 @@
 //
-//  ServiceTitleTableViewCell.swift
+//  PlanLabel.swift
 //  IVPN iOS app
 //  https://github.com/ivpn/ios-app
 //
-//  Created by Juraj Hilje on 2020-04-27.
+//  Created by Juraj Hilje on 2020-04-16.
 //  Copyright (c) 2023 IVPN Limited.
 //
 //  This file is part of the IVPN iOS app.
@@ -23,15 +23,10 @@
 
 import UIKit
 
-class ServiceTitleTableViewCell: UITableViewCell {
+class PlanLabel: UILabel {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var changeButton: UIButton!
-    
-    var service: Service! {
-        didSet {
-            titleLabel.text = "IVPN \(service.typeText)"
-        }
+    override func awakeFromNib() {
+        icon(text: text!, imageName: "icon-check-grey-small", alignment: .left)
     }
     
 }
