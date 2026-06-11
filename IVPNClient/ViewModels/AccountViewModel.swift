@@ -64,7 +64,7 @@ struct AccountViewModel {
     }
     
     var showAddMoreTime: Bool {
-        return serviceType == .standard && !Application.shared.serviceStatus.isLegacyAccount()
+        return (serviceType == .standard || serviceType == .pro) && !Application.shared.serviceStatus.isLegacyAccount()
     }
     
     // MARK: - Initialize -

@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.14.2 - 2026-06-11  
+
+[IMPROVED] Support for both IVPN Standard and IVPN Pro plans in the in-app purchase flow  
+
 ## 2.14.1 - 2026-05-07  
 
 [FIXED] In-app purchases not displayed on the signup screen  
