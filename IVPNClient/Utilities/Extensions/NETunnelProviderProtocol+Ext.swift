@@ -182,6 +182,22 @@ extension NETunnelProviderProtocol {
             return selectedHost
         }
         
+        if UserDefaults.shared.isMultiHop, UserDefaults.standard.preventSameISPMultiHop {
+            let hosts = Application.shared.settings.selectedServer.hosts
+            let secondServer = Application.shared.settings.selectedExitServer
+            var filteredHosts: [Host] = []
+            
+            for host in hosts {
+                if host.isp != secondServer.isp {
+                    filteredHosts.append(host)
+                }
+            }
+            
+            if let firstHost = filteredHosts.first {
+                return firstHost
+            }
+        }
+        
         if let firstHost = Application.shared.settings.selectedServer.hosts.first {
             return firstHost
         }
@@ -192,6 +208,22 @@ extension NETunnelProviderProtocol {
     private static func getExitHost() -> Host? {
         if let selectedHost = Application.shared.settings.selectedExitHost {
             return selectedHost
+        }
+        
+        if UserDefaults.shared.isMultiHop, UserDefaults.standard.preventSameISPMultiHop {
+            let hosts = Application.shared.settings.selectedExitServer.hosts
+            let secondServer = Application.shared.settings.selectedServer
+            var filteredHosts: [Host] = []
+            
+            for host in hosts {
+                if host.isp != secondServer.isp {
+                    filteredHosts.append(host)
+                }
+            }
+            
+            if let firstHost = filteredHosts.first {
+                return firstHost
+            }
         }
         
         if let firstHost = Application.shared.settings.selectedExitServer.hosts.first {

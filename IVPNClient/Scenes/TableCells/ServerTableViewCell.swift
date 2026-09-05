@@ -53,11 +53,15 @@ class ServerTableViewCell: UITableViewCell {
     
     var serverToValidate: VPNServer! {
         didSet {
-            guard VPNServer.validMultiHopCountry(viewModel.server, serverToValidate) else {
+            if !VPNServer.validMultiHopCountry(viewModel.server, serverToValidate) {
                 contentView.alpha = 0.55
                 return
             }
-            guard VPNServer.validMultiHopISP(viewModel.server, serverToValidate) else {
+            if !viewModel.server.isHost, !VPNServer.validHostsMultiHopISP(viewModel.server, serverToValidate, viewModel.server.hosts) {
+                contentView.alpha = 0.55
+                return
+            }
+            if viewModel.server.isHost, !VPNServer.validHostMultiHopISP(viewModel.server, serverToValidate, host, hostToValidate) {
                 contentView.alpha = 0.55
                 return
             }
@@ -69,6 +73,9 @@ class ServerTableViewCell: UITableViewCell {
             contentView.alpha = 1
         }
     }
+    
+    var host: Host?
+    var hostToValidate: Host?
     
     var indexPath: IndexPath! {
         didSet {
