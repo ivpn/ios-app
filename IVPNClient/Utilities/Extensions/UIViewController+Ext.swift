@@ -185,7 +185,7 @@ extension UIViewController {
     }
     
     func showDisableVPNPrompt(sourceView: UIView, confirmed: @escaping () -> Void) {
-        showActionSheet(title: "VPN connection is active. Changing this setting will turn off the current VPN connection.", actions: ["Continue"], sourceView: sourceView, disableDismiss: true) { index in
+        showActionSheet(title: "IVPN auto-connect (Connect On Demand) is enabled. Changing this setting will turn it off until you connect again.", actions: ["Continue"], sourceView: sourceView, disableDismiss: true) { index in
             switch index {
             case 0:
                 confirmed()
