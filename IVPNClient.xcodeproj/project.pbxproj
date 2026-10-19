@@ -277,6 +277,7 @@
 		82DEF02A2447288100CCB5CD /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEF0292447288100CCB5CD /* PaymentViewController.swift */; };
 		82DEFFA62452DE5100ECB482 /* MapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEFFA52452DE5100ECB482 /* MapConstants.swift */; };
 		82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */; };
+		39971EE2F431823AF934CAF0 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA536AAD4A42C346160D32AF /* APIClientTests.swift */; };
 		82E0E9072A90CB110008BD3F /* AdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E0E9062A90CB110008BD3F /* AdvancedViewController.swift */; };
 		82E3B20B29DDCC6300998F67 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82E3B1EF29DDC91C00998F67 /* WidgetKit.framework */; };
 		82E3B20C29DDCC6300998F67 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82E3B1F129DDC91C00998F67 /* SwiftUI.framework */; };
@@ -689,6 +690,7 @@
 		82DEF0292447288100CCB5CD /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		82DEFFA52452DE5100ECB482 /* MapConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConstants.swift; sourceTree = "<group>"; };
 		82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessManagerTests.swift; sourceTree = "<group>"; };
+		FA536AAD4A42C346160D32AF /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		82E0E9062A90CB110008BD3F /* AdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedViewController.swift; sourceTree = "<group>"; };
 		82E3B1EF29DDC91C00998F67 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		82E3B1F129DDC91C00998F67 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -1515,6 +1517,7 @@
 				82EA857921DCF0C300EB0EC9 /* StorageManager+OnDemandRuleTests.swift */,
 				82F81A50224CFC0B00CB778B /* VPNManagerTests.swift */,
 				82E01648230BE683008B0AC0 /* APIAccessManagerTests.swift */,
+				FA536AAD4A42C346160D32AF /* APIClientTests.swift */,
 				82B81E39235ED845005986E8 /* KeyChainTests.swift */,
 				82B81E38235ED845005986E8 /* SessionManagerTests.swift */,
 			);
@@ -2076,6 +2079,7 @@
 				82F81A3E224CF69900CB778B /* AddressTypeTests.swift in Sources */,
 				82E4FCB023D71FDF00BEBA1A /* UIApplication+ExtTests.swift in Sources */,
 				82E01649230BE683008B0AC0 /* APIAccessManagerTests.swift in Sources */,
+				39971EE2F431823AF934CAF0 /* APIClientTests.swift in Sources */,
 				826D182921D3DAFF0045A570 /* StorageManagerTests.swift in Sources */,
 				82DB75EE239E766A0073E846 /* NEVPNStatusTests.swift in Sources */,
 				826C1F8C25DD528400314C4B /* SecureDNSTests.swift in Sources */,

@@ -154,23 +154,7 @@ class APIClient: NSObject {
             hostName = nextHost
         }
         
-        var urlComponents = URLComponents()
-        urlComponents.scheme = baseURL.scheme
-        urlComponents.host = hostName
-        urlComponents.path = baseURL.path
-        urlComponents.queryItems = request.queryItems
-        
-        // TODO: Remove when fixed in future iOS versions
-        // https://github.com/ivpn/ios-app/issues/276
-        if #available(iOS 16.0, *), let addressType = request.addressType, addressType == .IPv6 {
-            urlComponents.host = "[\(hostName)]"
-        }
-        
-        if request.method == .post {
-            urlComponents.queryItems = []
-        }
-        
-        guard let url = urlComponents.url?.appendingPathComponent(request.path) else {
+        guard let url = buildRequestURL(for: request, hostName: hostName) else {
             completion(.failure(.invalidURL))
             return
         }
@@ -226,6 +210,26 @@ class APIClient: NSObject {
             completion(.success(APIResponse<Data?>(statusCode: httpResponse.statusCode, body: data)))
         }
         task.resume()
+    }
+    
+    // POST params go in the HTTP body, not the URL query, so omit queryItems there to avoid a trailing "?"
+    func buildRequestURL(for request: APIRequest, hostName: String) -> URL? {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = baseURL.scheme
+        urlComponents.host = hostName
+        urlComponents.path = baseURL.path
+        
+        // TODO: Remove when fixed in future iOS versions
+        // https://github.com/ivpn/ios-app/issues/276
+        if #available(iOS 16.0, *), let addressType = request.addressType, addressType == .IPv6 {
+            urlComponents.host = "[\(hostName)]"
+        }
+        
+        if request.method != .post, let queryItems = request.queryItems, !queryItems.isEmpty {
+            urlComponents.queryItems = queryItems
+        }
+        
+        return urlComponents.url?.appendingPathComponent(request.path)
     }
     
     func retry(_ request: APIRequest, nextHost: String, addressType: AddressType? = nil, _ completion: @escaping APIClientCompletion) {
