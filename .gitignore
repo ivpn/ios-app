@@ -74,3 +74,6 @@ OpenVPNConf.swift
 fastlane/test_output
 fastlane/report.xml
 fastlane/Appfile
+
+# Documentation
+/docs/
