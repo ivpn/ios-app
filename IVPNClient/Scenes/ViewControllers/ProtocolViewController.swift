@@ -376,7 +376,7 @@ extension ProtocolViewController {
         
         guard validateSecureDNS(connectionProtocol: connectionProtocol) else {
             if let cell = tableView.cellForRow(at: indexPath) {
-                showActionSheet(title: "To use IKEv2 protocol you must disable DNS over HTTTPS/TLS", actions: ["Disable"], sourceView: cell as UIView) { index in
+                showActionSheet(title: "To use IKEv2 protocol you must disable DNS over HTTPS/TLS", actions: ["Disable"], sourceView: cell as UIView) { index in
                     switch index {
                     case 0:
                         DNSManager.shared.removeProfile { _ in
